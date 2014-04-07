@@ -1,0 +1,355 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
+
+nml:AdaptationService
+    a :Class ;
+    rdfs:subClassOf nml:Service .
+
+nml:BidirectionalLink
+    a :Class ;
+    rdfs:subClassOf nml:Group .
+
+nml:BidirectionalPort
+    a :Class ;
+    rdfs:subClassOf nml:Group .
+
+nml:DeadaptationService
+    a :Class ;
+    rdfs:subClassOf nml:Service .
+
+nml:Group
+    a :Class ;
+    rdfs:subClassOf nml:NetworkObject .
+
+nml:Label
+    a :Class .
+
+nml:LabelGroup
+    a :Class ;
+    rdfs:subClassOf :Thing .
+
+nml:Lifetime
+    a :Class .
+
+nml:Link
+    a :Class ;
+    rdfs:subClassOf nml:NetworkObject .
+
+nml:LinkGroup
+    a :Class ;
+    rdfs:subClassOf nml:Group .
+
+nml:List
+    a :Class .
+
+nml:Location
+    a :Class ;
+    rdfs:subClassOf :Thing .
+
+nml:NetworkObject
+    a :Class .
+
+nml:Node
+    a :Class ;
+    rdfs:subClassOf nml:NetworkObject .
+
+nml:Port
+    a :Class ;
+    rdfs:subClassOf nml:NetworkObject .
+
+nml:PortGroup
+    a :Class ;
+    rdfs:subClassOf nml:Group .
+
+nml:Service
+    a :Class ;
+    rdfs:subClassOf nml:NetworkObject .
+
+nml:SwitchingService
+    a :Class ;
+    rdfs:subClassOf nml:Service .
+
+nml:Topology
+    a :Class ;
+    rdfs:subClassOf nml:Group .
+
+nml:adaptationfunction
+    a :DatatypeProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:AdaptationService
+            nml:DeadaptationService
+        )
+    ] ;
+    rdfs:range xsd:string .
+
+nml:address
+    a :DatatypeProperty ;
+    rdfs:domain nml:Location ;
+    rdfs:range xsd:string .
+
+nml:alt
+    a :DatatypeProperty ;
+    rdfs:domain nml:Location ;
+    rdfs:range xsd:float .
+
+nml:encoding
+    a :DatatypeProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Port
+            nml:PortGroup
+        )
+    ] ;
+    rdfs:range xsd:string .
+
+nml:endtime
+    a :DatatypeProperty ;
+    rdfs:domain nml:Lifetime ;
+    rdfs:range xsd:dateTime .
+
+nml:existsDuring
+    a :ObjectProperty ;
+    rdfs:domain nml:NetworkObject ;
+    rdfs:range nml:Lifetime .
+
+nml:hasInboundPort
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Node
+            nml:SwitchingService
+            nml:Topology
+        )
+    ] ;
+    rdfs:range nml:Port ;
+    rdfs:subPropertyOf :topObjectProperty .
+
+nml:hasLabel
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Link
+            nml:Port
+        )
+    ] ;
+    rdfs:range nml:Label .
+
+nml:hasLabelGroup
+    a :ObjectProperty ;
+    rdfs:domain nml:PortGroup ;
+    rdfs:range nml:LabelGroup .
+
+nml:hasLink
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:BidirectionalLink
+            nml:LinkGroup
+        )
+    ] ;
+    rdfs:range [
+        a :Class ;
+        :unionOf (nml:Link
+            nml:LinkGroup
+        )
+    ] .
+
+nml:hasNode
+    a :ObjectProperty ;
+    rdfs:domain nml:Topology ;
+    rdfs:range nml:Node .
+
+nml:hasOutboundPort
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Node
+            nml:SwitchingService
+            nml:Topology
+        )
+    ] ;
+    rdfs:range nml:Port .
+
+nml:hasPort
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:BidirectionalPort
+            nml:PortGroup
+        )
+    ] ;
+    rdfs:range nml:Port .
+
+nml:hasService
+    a :ObjectProperty ;
+    rdfs:domain nml:NetworkObject ;
+    rdfs:range nml:Service .
+
+nml:hasSink
+    a :ObjectProperty ;
+    rdfs:domain nml:Link ;
+    rdfs:range nml:Port .
+
+nml:hasSource
+    a :ObjectProperty ;
+    rdfs:domain nml:Link ;
+    rdfs:range nml:Port .
+
+nml:hasTopology
+    a :ObjectProperty ;
+    rdfs:domain nml:Topology ;
+    rdfs:range nml:Topology .
+
+nml:implementedBy
+    a :ObjectProperty ;
+    rdfs:domain nml:Node ;
+    rdfs:range nml:Node .
+
+nml:isAlias
+    a :ObjectProperty ;
+    rdfs:domain nml:NetworkObject ;
+    rdfs:range nml:NetworkObject .
+
+nml:isSerialCompoundLink
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Link
+            nml:LinkGroup
+        )
+    ] ;
+    rdfs:range nml:List .
+
+nml:isSink
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Port
+            nml:PortGroup
+        )
+    ] ;
+    rdfs:range [
+        a :Class ;
+        :unionOf (nml:Link
+            nml:LinkGroup
+        )
+    ] .
+
+nml:isSource
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Port
+            nml:PortGroup
+        )
+    ] ;
+    rdfs:range [
+        a :Class ;
+        :unionOf (nml:Link
+            nml:LinkGroup
+        )
+    ] .
+
+nml:labeltype
+    a :DatatypeProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Label
+            nml:LabelGroup
+        )
+    ] ;
+    rdfs:range xsd:string .
+
+nml:labelvalue
+    a :DatatypeProperty ;
+    rdfs:domain nml:Label ;
+    rdfs:range xsd:string .
+
+nml:labelvalues
+    a :DatatypeProperty ;
+    rdfs:domain nml:LabelGroup ;
+    rdfs:range xsd:string .
+
+nml:lat
+    a :DatatypeProperty ;
+    rdfs:domain nml:Location ;
+    rdfs:range xsd:float .
+
+nml:locatedAt
+    a :ObjectProperty ;
+    rdfs:domain nml:Node ;
+    rdfs:range nml:Location .
+
+nml:long
+    a :DatatypeProperty ;
+    rdfs:domain nml:Location ;
+    rdfs:range xsd:float .
+
+nml:name
+    a :DatatypeProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:Location
+            nml:NetworkObject
+        )
+    ] ;
+    rdfs:range xsd:string .
+
+nml:providesLink
+    a :ObjectProperty ;
+    rdfs:domain nml:SwitchingService ;
+    rdfs:range [
+        a :Class ;
+        :unionOf (nml:Link
+            nml:LinkGroup
+        )
+    ] .
+
+nml:providesPort
+    a :ObjectProperty ;
+    rdfs:domain [
+        a :Class ;
+        :unionOf (nml:AdaptationService
+            nml:DeadaptationService
+        )
+    ] ;
+    rdfs:range [
+        a :Class ;
+        :unionOf (nml:Port
+            nml:PortGroup
+        )
+    ] .
+
+nml:starttime
+    a :DatatypeProperty ;
+    rdfs:domain nml:Lifetime ;
+    rdfs:range xsd:dateTime .
+
+nml:time
+    a :DatatypeProperty ;
+    rdfs:domain nml:Lifetime ;
+    rdfs:range xsd:string .
+
+nml:unlocode
+    a :DatatypeProperty ;
+    rdfs:domain nml:Location ;
+    rdfs:range xsd:string .
+
+nml:version
+    a :DatatypeProperty ;
+    rdfs:domain nml:Topology ;
+    rdfs:range xsd:string .
+
+<http://schemas.ogf.org/nml/base/2013/02/>
+    a :Ontology .
+
+:Thing
+    a :Class .
+
+:topObjectProperty
+    a :ObjectProperty .
+

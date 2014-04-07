@@ -1,0 +1,345 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://schemas.ogf.org/nml/2013/05/base#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://schemas.ogf.org/nml/2013/05/base#>
+    a owl:Ontology ;
+    rdfs:label "NML Schema" .
+
+:AdaptationService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:BidirectionalLink
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:BidirectionalPort
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:DeadaptationService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:Group
+    a owl:Class ;
+    rdfs:subClassOf :NetworkObject .
+
+:Label
+    a owl:Class .
+
+:LabelGroup
+    a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+:Lifetime
+    a owl:Class .
+
+:Link
+    a owl:Class ;
+    rdfs:subClassOf :NetworkObject .
+
+:LinkGroup
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:ListItem
+    a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+:Location
+    a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+:NetworkObject
+    a owl:Class .
+
+:Node
+    a owl:Class ;
+    rdfs:subClassOf :NetworkObject .
+
+:Port
+    a owl:Class ;
+    rdfs:subClassOf :NetworkObject .
+
+:PortGroup
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:Service
+    a owl:Class ;
+    rdfs:subClassOf :NetworkObject .
+
+:SwitchingService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:Topology
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:adaptationFunction
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:AdaptationService
+            :DeadaptationService
+        )
+    ] .
+
+:address
+    a owl:ObjectProperty ;
+    rdfs:domain :Location .
+
+:alt
+    a owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:canProvidePort
+    a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Port
+            :PortGroup
+        )
+    ] .
+
+:encoding
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :LinkGroup
+            :Port
+            :PortGroup
+            :SwitchingService
+        )
+    ] .
+
+:end
+    a owl:DatatypeProperty ;
+    rdfs:domain :Lifetime ;
+    rdfs:range xsd:dateTime .
+
+:existsDuring
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :Lifetime .
+
+:hasInboundPort
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Port
+            :PortGroup
+        )
+    ] .
+
+:hasLabel
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :Port
+        )
+    ] ;
+    rdfs:range :Label .
+
+:hasLabelGroup
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:LinkGroup
+            :PortGroup
+        )
+    ] ;
+    rdfs:range :LabelGroup .
+
+:hasLink
+    a owl:ObjectProperty ;
+    rdfs:domain :Group ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :LinkGroup
+        )
+    ] .
+
+:hasNode
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :Node .
+
+:hasOutboundPort
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Port
+            :PortGroup
+        )
+    ] .
+
+:hasPort
+    a owl:ObjectProperty ;
+    rdfs:domain :Group ;
+    rdfs:range :Port .
+
+:hasService
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :Service .
+
+:hasTopology
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :Topology .
+
+:implementedBy
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :NetworkObject .
+
+:isAlias
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :NetworkObject .
+
+:isSerialCompoundLink
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :LinkGroup
+        )
+    ] ;
+    rdfs:range :ListItem .
+
+:isSink
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :LinkGroup
+        )
+    ] .
+
+:isSource
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :LinkGroup
+        )
+    ] .
+
+:item
+    a owl:ObjectProperty ;
+    rdfs:domain :ListItem .
+
+:labelSwapping
+    a owl:DatatypeProperty ;
+    rdfs:domain :SwitchingService ;
+    rdfs:range xsd:boolean .
+
+:labeltype
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Label
+            :LabelGroup
+        )
+    ] .
+
+:lat
+    a owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:locatedAt
+    a owl:ObjectProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range :Location .
+
+:long
+    a owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:name
+    a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Location
+            :NetworkObject
+        )
+    ] ;
+    rdfs:range xsd:string .
+
+:next
+    a owl:ObjectProperty ;
+    rdfs:domain :ListItem ;
+    rdfs:range :ListItem .
+
+:noReturnTraffic
+    a owl:DatatypeProperty ;
+    rdfs:domain :Link ;
+    rdfs:range xsd:boolean .
+
+:parameter
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+:providesLink
+    a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :LinkGroup
+        )
+    ] .
+
+:providesPort
+    a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Port
+            :PortGroup
+        )
+    ] .
+
+:start
+    a owl:DatatypeProperty ;
+    rdfs:domain :Lifetime ;
+    rdfs:range xsd:dateTime .
+
+:unlocode
+    a owl:DatatypeProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:string .
+
+:value
+    a owl:DatatypeProperty ;
+    rdfs:domain :Label ;
+    rdfs:range xsd:string .
+
+:values
+    a owl:DatatypeProperty ;
+    rdfs:domain :LabelGroup ;
+    rdfs:range xsd:string .
+
+:version
+    a owl:DatatypeProperty ;
+    rdfs:domain :NetworkObject ;
+    rdfs:range xsd:dateTime .
+

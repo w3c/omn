@@ -1,0 +1,509 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://fp7-novi.eu/im.owl#> .
+@prefix unit: <http://fp7-novi.eu/unit.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix protege: <http://protege.stanford.edu/plugins/owl/protege#> .
+@prefix xsp: <http://www.owl-ontologies.com/2005/08/07/xsp.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix fp7-novi: <http://fp7-novi.eu/> .
+
+<http://fp7-novi.eu/im.owl>
+    a owl:Ontology ;
+    owl:imports <http://fp7-novi.eu/unit.owl> .
+
+:BidirectionalInterface
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:BidirectionalLink
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:CPU
+    a owl:Class ;
+    rdfs:subClassOf :NodeComponent .
+
+:DiskImage
+    a owl:Class ;
+    rdfs:subClassOf :NodeComponent .
+
+:Federica
+    a :Platform, owl:NamedIndividual .
+
+:Group
+    a owl:Class .
+
+:Interface
+    a owl:Class ;
+    rdfs:subClassOf :NetworkElement .
+
+:Lifetime
+    a owl:Class .
+
+:Link
+    a owl:Class ;
+    rdfs:subClassOf :NetworkElement .
+
+:Location
+    a owl:Class .
+
+:LoginComponent
+    a owl:Class ;
+    rdfs:subClassOf :NodeComponent .
+
+:LoginService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:Memory
+    a owl:Class ;
+    rdfs:subClassOf :NodeComponent .
+
+:MemoryService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:NSwitch
+    a owl:Class ;
+    rdfs:subClassOf :Link .
+
+:NetworkElement
+    a owl:Class ;
+    rdfs:subClassOf :Resource .
+
+:Node
+    a owl:Class ;
+    rdfs:subClassOf :Resource .
+
+:NodeComponent
+    a owl:Class ;
+    rdfs:subClassOf :Resource .
+
+:Path
+    a owl:Class ;
+    rdfs:subClassOf :NetworkElement .
+
+:PlanetLab
+    a :Platform, owl:NamedIndividual .
+
+:Platform
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:ProcessingService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:Reservation
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:Resource
+    a owl:Class .
+
+:Service
+    a owl:Class .
+
+:Storage
+    a owl:Class ;
+    rdfs:subClassOf :NodeComponent .
+
+:StorageService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:SwitchingMatrix
+    a owl:Class ;
+    rdfs:subClassOf :NodeComponent .
+
+:SwitchingService
+    a owl:Class ;
+    rdfs:subClassOf :Service .
+
+:Topology
+    a owl:Class ;
+    rdfs:subClassOf :Group .
+
+:VirtualLink
+    a owl:Class ;
+    rdfs:subClassOf :Link .
+
+:connectedTo
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Interface
+            :Node
+        )
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Interface
+            :Node
+        )
+    ] .
+
+:contains
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Group
+            :Path
+        )
+    ] ;
+    rdfs:range :Resource .
+
+:diskImage
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:anyURI .
+
+:endTime
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Lifetime ;
+    rdfs:range xsd:dateTime .
+
+:exclusive
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Resource ;
+    rdfs:range xsd:boolean .
+
+:hardwareType
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Node ;
+    rdfs:range xsd:string .
+
+:hasAvailableCapacity
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :NetworkElement ;
+    rdfs:range xsd:float .
+
+:hasAvailableCores
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :CPU ;
+    rdfs:range xsd:integer .
+
+:hasAvailableLogicalRouters
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Node ;
+    rdfs:range xsd:integer .
+
+:hasAvailableMemorySize
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Memory ;
+    rdfs:range xsd:float .
+
+:hasAvailableStorageSize
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Storage ;
+    rdfs:range xsd:float .
+
+:hasCPUSpeed
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :CPU ;
+    rdfs:range xsd:float .
+
+:hasCapacity
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :NetworkElement ;
+    rdfs:range xsd:float .
+
+:hasComponent
+    a owl:ObjectProperty ;
+    rdfs:domain :Node ;
+    rdfs:range :NodeComponent .
+
+:hasCores
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :CPU ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf owl:topDataProperty .
+
+:hasGRETunnelID
+    a owl:DatatypeProperty ;
+    rdfs:domain :NSwitch ;
+    rdfs:range xsd:string .
+
+:hasIPv4Address
+    a owl:ObjectProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range unit:IPAddress .
+
+:hasInboundInterface
+    a owl:ObjectProperty ;
+    rdfs:domain :Node ;
+    rdfs:range :Interface ;
+    owl:inverseOf :isInboundInterfaceOf .
+
+:hasLifetime
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Group
+            :Resource
+        )
+    ] ;
+    rdfs:range :Lifetime .
+
+:hasLogicalRouters
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Node ;
+    rdfs:range xsd:integer .
+
+:hasLoginIPv4Address
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:LoginComponent
+            :LoginService
+        )
+    ] ;
+    rdfs:range unit:IPAddress .
+
+:hasLoginProtocol
+    a owl:DatatypeProperty ;
+    rdfs:comment "values are for example SSHv1, SSHv2, Telnet, etc." ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:LoginComponent
+            :LoginService
+        )
+    ] .
+
+:hasMemorySize
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Memory ;
+    rdfs:range xsd:float .
+
+:hasName
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+
+:hasNetmask
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range xsd:string .
+
+:hasOS
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+
+:hasOutboundInterface
+    a owl:ObjectProperty ;
+    rdfs:domain :Node ;
+    rdfs:range :Interface ;
+    owl:inverseOf :isOutboundInterfaceOf .
+
+:hasPrivateSinkAddress
+    a owl:ObjectProperty ;
+    rdfs:domain :NSwitch ;
+    rdfs:range unit:IPAddress .
+
+:hasPrivateSourceAddress
+    a owl:ObjectProperty ;
+    rdfs:domain :NSwitch ;
+    rdfs:range unit:IPAddress .
+
+:hasService
+    a owl:ObjectProperty ;
+    rdfs:domain :Node ;
+    rdfs:range :Service .
+
+:hasSink
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :Path
+        )
+    ] ;
+    rdfs:range :Interface ;
+    owl:inverseOf :isSink .
+
+:hasSource
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :Path
+        )
+    ] ;
+    rdfs:range :Interface ;
+    owl:inverseOf :isSource .
+
+:hasStorageSize
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Storage ;
+    rdfs:range xsd:float .
+
+:hasVLANID
+    a owl:DatatypeProperty ;
+    rdfs:domain :NSwitch ;
+    rdfs:range xsd:string .
+
+:hasVXLANID
+    a owl:DatatypeProperty ;
+    rdfs:domain :NSwitch ;
+    rdfs:range xsd:string .
+
+:hasVendor
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+
+:hasVirtualizationEnvironment
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+
+:hostname
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Node ;
+    rdfs:range xsd:string .
+
+:hrn
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Node ;
+    rdfs:range xsd:string .
+
+:id
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:anyURI .
+
+:implementedBy
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Interface
+            :Node
+        )
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Interface
+            :Node
+        )
+    ] ;
+    owl:inverseOf :implements .
+
+:implements
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Interface
+            :Node
+        )
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Interface
+            :Node
+        )
+    ] .
+
+:inPath
+    a owl:ObjectProperty ;
+    rdfs:comment "Should be reconsidered." ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:NetworkElement
+            :Node
+        )
+    ] ;
+    rdfs:range :Path .
+
+:isContainedIn
+    a owl:ObjectProperty ;
+    rdfs:domain :Resource ;
+    rdfs:range :Group ;
+    owl:inverseOf :contains .
+
+:isInboundInterfaceOf
+    a owl:ObjectProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range :Node .
+
+:isOutboundInterfaceOf
+    a owl:ObjectProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range :Node .
+
+:isSink
+    a owl:ObjectProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :Path
+        )
+    ] .
+
+:isSource
+    a owl:ObjectProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :Path
+        )
+    ] .
+
+:latitude
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:locatedAt
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Node
+            :Service
+        )
+    ] ;
+    rdfs:range :Location .
+
+:longitude
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Location ;
+    rdfs:range xsd:float .
+
+:next
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:NetworkElement
+            :Node
+        )
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:NetworkElement
+            :Node
+        )
+    ] .
+
+:provisionedBy
+    a owl:ObjectProperty ;
+    rdfs:domain :Link ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (:Link
+            :Path
+        )
+    ] .
+
+:startTime
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Lifetime ;
+    rdfs:range xsd:dateTime .
+
+:switchedTo
+    a owl:ObjectProperty ;
+    rdfs:domain :Interface ;
+    rdfs:range :Interface .
+
+:virtualRole
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+

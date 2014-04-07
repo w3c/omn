@@ -1,0 +1,576 @@
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://creativecommons.org/ns#attributionName
+
+cc:attributionName rdf:type owl:AnnotationProperty ;
+                   
+                   rdfs:domain cc:Work .
+
+
+
+###  http://creativecommons.org/ns#attributionURL
+
+cc:attributionURL rdf:type owl:AnnotationProperty ;
+                  
+                  rdfs:domain cc:Work .
+
+
+
+###  http://creativecommons.org/ns#deprecatedOn
+
+cc:deprecatedOn rdf:type owl:AnnotationProperty ;
+                
+                rdfs:label """deprecated
+		  on"""@en-us ;
+                
+                rdfs:domain cc:License .
+
+
+
+###  http://creativecommons.org/ns#jurisdiction
+
+cc:jurisdiction rdf:type owl:AnnotationProperty ;
+                
+                rdfs:label "jurisdiction"@en-us ;
+                
+                rdfs:domain cc:License .
+
+
+
+###  http://creativecommons.org/ns#legalcode
+
+cc:legalcode rdf:type owl:AnnotationProperty ;
+             
+             rdfs:domain cc:License .
+
+
+
+###  http://creativecommons.org/ns#license
+
+cc:license rdf:type owl:AnnotationProperty ;
+           
+           rdfs:label """has
+		  license"""@en-us ;
+           
+           rdfs:domain cc:Work ;
+           
+           rdfs:subPropertyOf <http://purl.org/dc/terms/license> .
+
+
+
+###  http://creativecommons.org/ns#morePermissions
+
+cc:morePermissions rdf:type owl:AnnotationProperty ;
+                   
+                   rdfs:domain cc:Work ;
+                   
+                   rdfs:subPropertyOf <http://purl.org/dc/terms/relation> .
+
+
+
+###  http://creativecommons.org/ns#permits
+
+cc:permits rdf:type owl:AnnotationProperty ;
+           
+           rdfs:label "permits"@en-us ;
+           
+           rdfs:domain cc:License .
+
+
+
+###  http://creativecommons.org/ns#prohibits
+
+cc:prohibits rdf:type owl:AnnotationProperty ;
+             
+             rdfs:label "prohibits"@en-us ;
+             
+             rdfs:domain cc:License .
+
+
+
+###  http://creativecommons.org/ns#requires
+
+cc:requires rdf:type owl:AnnotationProperty ;
+            
+            rdfs:label "requires"@en-us ;
+            
+            rdfs:domain cc:License .
+
+
+
+###  http://creativecommons.org/ns#useGuidelines
+
+cc:useGuidelines rdf:type owl:AnnotationProperty ;
+                 
+                 rdfs:domain cc:Work ;
+                 
+                 rdfs:subPropertyOf <http://purl.org/dc/terms/relation> .
+
+
+
+###  http://purl.org/dc/terms/license
+
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
+
+
+
+###  http://purl.org/dc/terms/relation
+
+<http://purl.org/dc/terms/relation> rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://creativecommons.org/ns#attributionURL
+
+cc:attributionURL rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:range rdfs:Resource .
+
+
+
+###  http://creativecommons.org/ns#deprecatedOn
+
+cc:deprecatedOn rdf:type owl:ObjectProperty ;
+                
+                rdfs:label """deprecated
+		  on"""@en-us ;
+                
+                rdfs:range <http://www.w3.org/2001/XMLSchema-datatypes#date> .
+
+
+
+###  http://creativecommons.org/ns#jurisdiction
+
+cc:jurisdiction rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "jurisdiction"@en-us ;
+                
+                rdfs:range cc:Jurisdiction .
+
+
+
+###  http://creativecommons.org/ns#legalcode
+
+cc:legalcode rdf:type owl:ObjectProperty ;
+             
+             rdfs:range rdfs:Resource .
+
+
+
+###  http://creativecommons.org/ns#license
+
+cc:license rdf:type owl:ObjectProperty ;
+           
+           rdfs:label """has
+		  license"""@en-us ;
+           
+           rdfs:range cc:License .
+
+
+
+###  http://creativecommons.org/ns#morePermissions
+
+cc:morePermissions rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:range rdfs:Resource .
+
+
+
+###  http://creativecommons.org/ns#permits
+
+cc:permits rdf:type owl:ObjectProperty ;
+           
+           rdfs:label "permits"@en-us ;
+           
+           rdfs:range cc:Permission .
+
+
+
+###  http://creativecommons.org/ns#prohibits
+
+cc:prohibits rdf:type owl:ObjectProperty ;
+             
+             rdfs:label "prohibits"@en-us ;
+             
+             rdfs:range cc:Prohibition .
+
+
+
+###  http://creativecommons.org/ns#requires
+
+cc:requires rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "requires"@en-us ;
+            
+            rdfs:range cc:Requirement .
+
+
+
+###  http://creativecommons.org/ns#useGuidelines
+
+cc:useGuidelines rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:range rdfs:Resource .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://creativecommons.org/ns#attributionName
+
+cc:attributionName rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:range rdfs:Literal .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://creativecommons.org/ns#Jurisdiction
+
+cc:Jurisdiction rdf:type owl:Class ;
+                
+                rdfs:label "Jurisdiction"@en-us ;
+                
+                rdfs:comment """the legal jurisdiction
+		    of a license"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#License
+
+cc:License rdf:type owl:Class ;
+           
+           rdfs:label "License"@en-us ;
+           
+           owl:equivalentClass <http://web.resource.org/cc/License> ;
+           
+           rdfs:subClassOf <http://purl.org/dc/terms/LicenseDocument> ;
+           
+           rdfs:comment """a set of
+		    requests/permissions to users of a Work, e.g. a
+		    copyright license, the public domain, information
+		    for distributors"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Permission
+
+cc:Permission rdf:type owl:Class ;
+              
+              rdfs:label "Permission"@en-us ;
+              
+              owl:equivalentClass <http://web.resource.org/cc/Permission> ;
+              
+              rdfs:comment """an action that may or
+		    may not be allowed or desired"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Prohibition
+
+cc:Prohibition rdf:type owl:Class ;
+               
+               rdfs:label "Prohibition"@en-us ;
+               
+               owl:equivalentClass <http://web.resource.org/cc/Prohibition> ;
+               
+               rdfs:comment """something you may be
+		    asked not to do"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Requirement
+
+cc:Requirement rdf:type owl:Class ;
+               
+               rdfs:label "Requirement"@en-us ;
+               
+               owl:equivalentClass <http://web.resource.org/cc/Requirement> ;
+               
+               rdfs:comment """an action that may or
+		    may not be requested of you"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Work
+
+cc:Work rdf:type owl:Class ;
+        
+        rdfs:label "Work"@en-us ;
+        
+        owl:equivalentClass <http://web.resource.org/cc/Work> ;
+        
+        rdfs:comment """a potentially
+		    copyrightable work"""@en-us .
+
+
+
+###  http://purl.org/dc/terms/LicenseDocument
+
+<http://purl.org/dc/terms/LicenseDocument> rdf:type owl:Class .
+
+
+
+###  http://web.resource.org/cc/License
+
+<http://web.resource.org/cc/License> rdf:type owl:Class .
+
+
+
+###  http://web.resource.org/cc/Permission
+
+<http://web.resource.org/cc/Permission> rdf:type owl:Class .
+
+
+
+###  http://web.resource.org/cc/Prohibition
+
+<http://web.resource.org/cc/Prohibition> rdf:type owl:Class .
+
+
+
+###  http://web.resource.org/cc/Requirement
+
+<http://web.resource.org/cc/Requirement> rdf:type owl:Class .
+
+
+
+###  http://web.resource.org/cc/Work
+
+<http://web.resource.org/cc/Work> rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2000/01/rdf-schema#Resource
+
+rdfs:Resource rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2001/XMLSchema-datatypes#date
+
+<http://www.w3.org/2001/XMLSchema-datatypes#date> rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://creativecommons.org/ns#Attribution
+
+cc:Attribution rdf:type cc:Requirement ,
+                        owl:NamedIndividual ;
+               
+               rdfs:label "Attribution"@en-us ;
+               
+               rdfs:comment """credit be given to
+		    copyright holder and/or author"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#CommercialUse
+
+cc:CommercialUse rdf:type cc:Prohibition ,
+                          owl:NamedIndividual ;
+                 
+                 rdfs:label "Commercial Use"@en-us ;
+                 
+                 rdfs:comment """exercising rights for
+		    commercial purposes"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Copyleft
+
+cc:Copyleft rdf:type cc:Requirement ,
+                     owl:NamedIndividual ;
+            
+            rdfs:label "Copyleft"@en-us ;
+            
+            rdfs:comment """derivative and
+		    combined works must be licensed under specified
+		    terms, similar to those on the original
+		    work"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#DerivativeWorks
+
+cc:DerivativeWorks rdf:type cc:Permission ,
+                            owl:NamedIndividual ;
+                   
+                   rdfs:label "Derivative Works"@en-us ;
+                   
+                   rdfs:comment """distribution of
+		    derivative works"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Distribution
+
+cc:Distribution rdf:type cc:Permission ,
+                         owl:NamedIndividual ;
+                
+                rdfs:label "Distribution"@en-us ;
+                
+                rdfs:comment """distribution, public
+		    display, and publicly performance"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#HighIncomeNationUse
+
+cc:HighIncomeNationUse rdf:type cc:Prohibition ,
+                                owl:NamedIndividual ;
+                       
+                       rdfs:label "High Income Nation Use"@en-us ;
+                       
+                       rdfs:comment """use in a
+		    non-developing country"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#LesserCopyleft
+
+cc:LesserCopyleft rdf:type cc:Requirement ,
+                           owl:NamedIndividual ;
+                  
+                  rdfs:label "Lesser Copyleft"@en-us ;
+                  
+                  rdfs:comment """derivative works must
+		    be licensed under specified terms, with at least
+		    the same conditions as the original work;
+		    combinations with the work may be licensed under
+		    different terms"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Notice
+
+cc:Notice rdf:type cc:Requirement ,
+                   owl:NamedIndividual ;
+          
+          rdfs:label "Notice"@en-us ;
+          
+          rdfs:comment """copyright and license
+		    notices be kept intact"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Reproduction
+
+cc:Reproduction rdf:type cc:Permission ,
+                         owl:NamedIndividual ;
+                
+                rdfs:label "Reproduction"@en-us ;
+                
+                rdfs:comment """making multiple
+		    copies"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#ShareAlike
+
+cc:ShareAlike rdf:type cc:Requirement ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "Share Alike"@en-us ;
+              
+              rdfs:comment """derivative works be
+		    licensed under the same terms or compatible terms
+		    as the original work"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#Sharing
+
+cc:Sharing rdf:type cc:Permission ,
+                    owl:NamedIndividual ;
+           
+           rdfs:label "Sharing"@en-us ;
+           
+           rdfs:comment """permits commercial
+		    derivatives, but only non-commercial
+		    distribution"""@en-us .
+
+
+
+###  http://creativecommons.org/ns#SourceCode
+
+cc:SourceCode rdf:type cc:Requirement ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "Source Code"@en-us ;
+              
+              rdfs:comment """source code (the
+		    preferred form for making modifications) must be
+		    provided when exercising some rights granted by
+		    the license."""@en-us .
+
+
+
+###  http://creativecommons.org/ns#license
+
+cc:license rdf:type owl:NamedIndividual ;
+           
+           rdfs:label """has
+		  license"""@en-us ;
+           
+           owl:sameAs <http://www.w3.org/1999/xhtml/vocab#license> .
+
+
+
+###  http://www.w3.org/1999/xhtml/vocab#license
+
+<http://www.w3.org/1999/xhtml/vocab#license> rdf:type owl:NamedIndividual .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+

@@ -1,0 +1,171 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://purl.org/dc/elements/1.1/author
+
+dc:author rdf:type owl:AnnotationProperty .
+
+
+
+###  http://purl.org/dc/elements/1.1/description
+
+dc:description rdf:type owl:AnnotationProperty .
+
+
+
+###  http://purl.org/dc/elements/1.1/title
+
+dc:title rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.perceive.net/schemas/relationship/acquaintanceOf
+
+<http://www.perceive.net/schemas/relationship/acquaintanceOf> rdf:type owl:AnnotationProperty ;
+                                                              
+                                                              rdfs:label "Acquaintance Of" ;
+                                                              
+                                                              rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/ambivalentOf
+
+<http://www.perceive.net/schemas/relationship/ambivalentOf> rdf:type owl:AnnotationProperty ;
+                                                            
+                                                            rdfs:label "Ambivalent Of" ;
+                                                            
+                                                            rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/antagonistOf
+
+<http://www.perceive.net/schemas/relationship/antagonistOf> rdf:type owl:AnnotationProperty ;
+                                                            
+                                                            rdfs:label "Antagonist Of" ;
+                                                            
+                                                            rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/childOf
+
+<http://www.perceive.net/schemas/relationship/childOf> rdf:type owl:AnnotationProperty ;
+                                                       
+                                                       rdfs:label "Child Of" ;
+                                                       
+                                                       rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/enemyOf
+
+<http://www.perceive.net/schemas/relationship/enemyOf> rdf:type owl:AnnotationProperty ;
+                                                       
+                                                       rdfs:label "Enemy Of" ;
+                                                       
+                                                       rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/friendOf
+
+<http://www.perceive.net/schemas/relationship/friendOf> rdf:type owl:AnnotationProperty ;
+                                                        
+                                                        rdfs:label "Friend Of" ;
+                                                        
+                                                        rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/grandchildOf
+
+<http://www.perceive.net/schemas/relationship/grandchildOf> rdf:type owl:AnnotationProperty ;
+                                                            
+                                                            rdfs:label "Grandchild Of" ;
+                                                            
+                                                            rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/parentOf
+
+<http://www.perceive.net/schemas/relationship/parentOf> rdf:type owl:AnnotationProperty ;
+                                                        
+                                                        rdfs:label "Parent Of" ;
+                                                        
+                                                        rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/siblingOf
+
+<http://www.perceive.net/schemas/relationship/siblingOf> rdf:type owl:AnnotationProperty ;
+                                                         
+                                                         rdfs:label "Sibling Of" ;
+                                                         
+                                                         rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://www.perceive.net/schemas/relationship/spouseOf
+
+<http://www.perceive.net/schemas/relationship/spouseOf> rdf:type owl:AnnotationProperty ;
+                                                        
+                                                        rdfs:label "Spouse Of" ;
+                                                        
+                                                        rdfs:subPropertyOf foaf:knows .
+
+
+
+###  http://xmlns.com/foaf/0.1/knows
+
+foaf:knows rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/wot/0.1/assurance
+
+wot:assurance rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Annotations
+#
+#################################################################
+
+
+<http://www.perceive.net/schemas/20031015/relationship> dc:title "Relationships Schema" ;
+                                                        
+                                                        dc:description "Schema for Defining Relationships in FOAF" ;
+                                                        
+                                                        dc:author "Eric Vitiello Jr" ;
+                                                        
+                                                        wot:assurance <http://www.perceive.net/schemas/20031015/relationship.asc> .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+

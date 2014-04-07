@@ -1,0 +1,743 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://fp7-novi.eu/unit.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://fp7-novi.eu/unit.owl>
+    a owl:Ontology .
+
+:BaseDimension
+    a owl:Class ;
+    rdfs:subClassOf :Dimension ;
+    owl:disjointWith :DerivedDimension .
+
+:BaseUnit
+    a owl:Class ;
+    rdfs:comment "Base units are the simplest unit forms, independent of each other, and they are the profound building blocks for derived units." ;
+    rdfs:subClassOf :Unit .
+
+:BinaryPrefix
+    a owl:Class ;
+    rdfs:comment """In computing, a binary prefix is a specifier or mnemonic that is prepended to the units of digital information, the bit and the byte, to indicate multiplication by a power of 2. In practice the powers used are multiples of 10, so the prefixes denote powers of 1024 = 2^10.
+
+Starting in about 1998, a number of standards and trade organizations approved standards and recommendations for a new set of binary prefixes, proposed earlier by the International Electrotechnical Commission (IEC), that would refer unambiguously to powers of 1024. According to these, the SI prefixes would only be used in the decimal sense, even when referring to data storage capacities: kilobyte and megabyte would denote one thousand bytes and one million bytes respectively (consistent with SI), while new terms such as kibibyte, mebibyte and gibibyte, abbreviated KiB, MiB, and GiB, would denote 1024 bytes, 1048576 bytes, and 1073741824 bytes respectively.""" ;
+    rdfs:subClassOf :Prefix, [
+        a owl:Restriction ;
+        owl:hasValue 2 ;
+        owl:onProperty :base
+    ] ;
+    owl:disjointWith :DecimalPrefix .
+
+:Byte
+    :derivedFrom :bit ;
+    :possiblePrefix :Gibi, :Kibi, :Mebi, :Tebi, :giga, :kilo, :mega ;
+    :scale "8" ;
+    :symbol "B" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:Bytepersecond
+    :derivedFrom :bitpersecond ;
+    :possiblePrefix :giga, :kilo, :mega ;
+    :scale "8" ;
+    :symbol "Bps" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:Cardinal
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :NominalLevel, [
+        a owl:Restriction ;
+        owl:hasValue :unitless ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:Countable
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :piece ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:DecimalPrefix
+    a owl:Class ;
+    rdfs:comment """A prefix that precedes a basic unit of measure to indicate a decadic multiple or fraction of the unit.
+
+The prefix kilo-, for example, may be added to gram to indicate multiplication by one thousand; one kilogram is equal to one thousand grams (1 km = 1000 m). The prefix centi-, likewise, may be added to metre to indicate division by one hundred; one centimetre is equal to one hundredth of a metre (1 cm = 0.01 m).""" ;
+    rdfs:subClassOf :Prefix, [
+        a owl:Restriction ;
+        owl:hasValue 10 ;
+        owl:onProperty :base
+    ] .
+
+:DerivedDimension
+    a owl:Class ;
+    rdfs:subClassOf :Dimension .
+
+:DifferenceDimension
+    a owl:Class ;
+    rdfs:subClassOf :DerivedDimension, [
+        a owl:Restriction ;
+        owl:onClass :IntervalLevel ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger
+    ] .
+
+:Dimension
+    a owl:Class ;
+    rdfs:comment """Numbers are meaningless for the physicist without the correct use of units. It makes no sense to say \"the distance from my house to school is two\", unless we follow that statement with \"miles\" or \"kilometers\", or whichever unit makes the statement true. 
+
+We will distinguish between dimension, the abstract quality of a measurement without scale (ie., length), and unit, the quality of a number which specifies a previously agreed upon scale (ie., meters). While dimensional arguments are of primary importance in understanding the qualitative behavior of systems, the use of units are necessary for the predictions we seek.""" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass :Prefix ;
+        owl:onProperty :hasPrefix
+    ], [
+        a owl:Restriction ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasValue
+    ], [
+        a owl:Restriction ;
+        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass :Unit ;
+        owl:onProperty :hasUnit
+    ], [
+        a owl:Restriction ;
+        owl:onClass :Unit ;
+        owl:onProperty :defaultUnit ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:Frequency
+    a owl:Class ;
+    rdfs:subClassOf :PowerDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:onClass :TimeInterval ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:hasValue :persecond ;
+        owl:onProperty :defaultUnit
+    ], [
+        a owl:Restriction ;
+        owl:hasValue -1 ;
+        owl:onProperty :exponent
+    ] .
+
+:GeoPosition
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :NominalLevel, [
+        a owl:Restriction ;
+        owl:hasValue :radian ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:Gibi
+    :base "2" ;
+    :exponent "30" ;
+    :symbol "Gi" ;
+    a :BinaryPrefix, owl:NamedIndividual .
+
+:IPAddress
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :NominalLevel, [
+        a owl:Restriction ;
+        owl:hasValue :ipv4dotted ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:InformationLossRatio
+    a owl:Class ;
+    rdfs:subClassOf :RatioDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :unitless ;
+        owl:onProperty :defaultUnit
+    ], [
+        a owl:Restriction ;
+        owl:onClass :InformationSize ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:InformationRate
+    a owl:Class ;
+    rdfs:subClassOf :ProductDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :bitpersecond ;
+        owl:onProperty :defaultUnit
+    ], [
+        a owl:Restriction ;
+        owl:onClass :Frequency ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:onClass :InformationSize ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:InformationSize
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :bit ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:IntervalLevel
+    a owl:Class ;
+    rdfs:comment """Quantitative attributes are all measurable on interval scales, as any difference between the levels of an attribute can be multiplied by any real number to exceed or equal another difference. A highly familiar example of interval scale measurement is temperature with the Celsius scale. In this particular scale, the unit of measurement is 1/100 of the temperature difference between the freezing and boiling points of water under a pressure of 1 atmosphere. The \"zero point\" on an interval scale is arbitrary; and negative values can be used. The formal mathematical term is an affine space (in this case an affine line). Variables measured at the interval level are called \"interval variables\" or sometimes \"scaled variables\" as they have units of measurement.
+
+Ratios between numbers on the scale are not meaningful, so operations such as multiplication and division cannot be carried out directly. But ratios of differences can be expressed; for example, one difference can be twice another.
+
+The central tendency of a variable measured at the interval level can be represented by its mode, its median, or its arithmetic mean. Statistical dispersion can be measured in most of the usual ways, which just involved differences or averaging, such as range, interquartile range, and standard deviation. Since one cannot divide, one cannot define measures that require a ratio, such as studentized range or coefficient of variation. More subtly, while one can define moments about the origin, only central moments are useful, since the choice of origin is arbitrary and not meaningful. One can define standardized moments, since ratios of differences are meaningful, but one cannot define coefficient of variation, since the mean is a moment about the origin, unlike the standard deviation, which is (the square root of) a central moment.""" ;
+    rdfs:subClassOf :OrdinalLevel .
+
+:Kibi
+    :base "2" ;
+    :exponent "10" ;
+    :symbol "K" ;
+    a :BinaryPrefix, owl:NamedIndividual .
+
+:LinearTransformedUnit
+    a owl:Class ;
+    rdfs:comment """LTU = scale * U + offset,
+
+where LTU stands for the linear transformed unit derived from U.""" ;
+    rdfs:subClassOf :UnaryUnit, [
+        a owl:Restriction ;
+        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onDataRange xsd:double ;
+        owl:onProperty :offset
+    ], [
+        a owl:Restriction ;
+        owl:onDataRange xsd:double ;
+        owl:onProperty :scale ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:MeasurementLevel
+    a owl:Class ;
+    rdfs:comment "The \"levels of measurement\" or scales of measure are expressions that typically refer to the theory of scale types developed by the psychologist Stanley Smith Stevens. Stevens proposed his theory in a 1946 Science article titled \"On the theory of scales of measurement\". In that article, Stevens claimed that all measurement in science was conducted using four different types of scales that he called \"nominal\", \"ordinal\", \"interval\" and \"ratio\"." .
+
+:Mebi
+    :base "2" ;
+    :exponent "20" ;
+    :symbol "Mi" ;
+    a :BinaryPrefix, owl:NamedIndividual .
+
+:N_aryUnit
+    a owl:Class ;
+    rdfs:comment "N-ary units are derived from more than one unit." ;
+    rdfs:subClassOf :Unit .
+
+:NameOfSomething
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :NominalLevel, [
+        a owl:Restriction ;
+        owl:hasValue :unitless ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:NominalLevel
+    a owl:Class ;
+    rdfs:comment """At the nominal scale, i.e., for a nominal category, one uses labels; for example, rocks can be generally categorized as igneous, sedimentary and metamorphic. For this scale, some valid operations are equivalence and set membership. Nominal measures offer names or labels for certain characteristics.
+
+Variables assessed on a nominal scale are called categorical variables. We can use a simple example of a nominal category: the destination port of an IP packet captured. For instance, looking at the destination port values we might find one or more of IP packets with a value 7777. In this scenario 7777 is their label. We can only check whether two packets' destination ports have the same label (equivalence) or whether a given label is in on a certain list of labels (set membership), but it is impossible to say which label is greater or less than another (comparison) or to measure the difference between two labels.
+
+Given a set of destination port numbers, we can describe the set by its most common label (the mode), but cannot provide an \"average label\" or even the \"middle label\" among all the names. However, if we decide to sort our labels numerically (or to sort them by how many times they appear in a measurement log), we will begin to turn this nominal scale into an ordinal scale.""" ;
+    rdfs:subClassOf :MeasurementLevel .
+
+:OrdinalLevel
+    a owl:Class ;
+    rdfs:comment """Rank-ordering data simply puts the data on an ordinal scale. Ordinal measurements describe order, but not relative size or degree of difference between the items measured. In this scale type, the numbers assigned to objects or events represent the rank order (1st, 2nd, 3rd, etc.) of the entities assessed. An example of an ordinal scale is the result of a horse race, which says only which horses arrived first, second, or third but include no information about race times. 
+
+When using an ordinal scale, the central tendency of a group of items can be described by using the group's mode (or most common item) or its median (the middle-ranked item), but the mean (or average) cannot be defined. Thus it is an error to write that an IQ of 160 is just as different from an IQ of 130 as an IQ of 100 is different from an IQ of 70.""" ;
+    rdfs:subClassOf :NominalLevel .
+
+:PointInTime
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :IntervalLevel, [
+        a owl:Restriction ;
+        owl:hasValue :unixtimestamp ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:PowerDimension
+    a owl:Class ;
+    rdfs:subClassOf :DerivedDimension, [
+        a owl:Restriction ;
+        owl:onClass :RatioLevel ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:onDataRange xsd:integer ;
+        owl:onProperty :exponent ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:PowerUnit
+    a owl:Class ;
+    rdfs:comment """PU = U^exponent,
+
+where PU power unit is derived from U unit.""" ;
+    rdfs:subClassOf :UnaryUnit, [
+        a owl:Restriction ;
+        owl:onDataRange xsd:integer ;
+        owl:onProperty :exponent ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:Prefix
+    a owl:Class ;
+    rdfs:comment """A metric prefix or SI prefix is a unit prefix that precedes a basic unit of measure to indicate a decadic multiple or fraction or or binary multiple of the unit. Each prefix has a unique symbol that is prepended to the unit symbol. 
+
+The use of multiple prefixes are disallowed.""" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onDataRange xsd:integer ;
+        owl:onProperty :base ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:onDataRange xsd:integer ;
+        owl:onProperty :exponent ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:Probability
+    a owl:Class ;
+    rdfs:subClassOf :RatioDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :unitless ;
+        owl:onProperty :defaultUnit
+    ], [
+        a owl:Restriction ;
+        owl:onClass :Countable ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:ProductDimension
+    a owl:Class ;
+    rdfs:subClassOf :DerivedDimension, [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onClass [
+            a owl:Class ;
+            owl:unionOf (:BaseDimension
+                :PowerDimension
+            )
+        ] ;
+        owl:onProperty :derivedFrom
+    ] .
+
+:ProductUnit
+    a owl:Class ;
+    rdfs:comment """ProdU = U1 * U2 [... * Ui],
+
+where ProdU product unit is derived from multiplying units Ui.""" ;
+    rdfs:subClassOf :N_aryUnit, [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onClass :Unit ;
+        owl:onProperty :derivedFrom
+    ] .
+
+:RatioDimension
+    a owl:Class ;
+    rdfs:subClassOf :DerivedDimension, [
+        a owl:Restriction ;
+        owl:onClass :RatioLevel ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:RatioLevel
+    a owl:Class ;
+    rdfs:comment """Most measurement in the physical sciences and engineering is done on ratio scales. Mass, length, time, plane angle, energy and electric charge are examples of physical measures that are ratio scales. The scale type takes its name from the fact that measurement is the estimation of the ratio between a magnitude of a continuous quantity and a unit magnitude of the same kind (Michell, 1997, 1999). Informally, the distinguishing feature of a ratio scale is the possession of a zero value. For example, the Kelvin temperature scale has a non-arbitrary zero point of absolute zero, which is denoted 0K and is equal to -273.15 degrees Celsius. This zero point is accuracy representing the particles that compose matter at this temperature having zero kinetic energy.
+
+All statistical measures can be used for a variable measured at the ratio level, as all necessary mathematical operations are defined. The central tendency of a variable measured at the ratio level can be represented by, in addition to its mode, its median, or its arithmetic mean, also its geometric mean or harmonic mean. In addition to the measures of statistical dispersion defined for interval variables, such as range and standard deviation, for ratio variables one can also define measures that require a ratio, such as studentized range or coefficient of variation.""" ;
+    rdfs:subClassOf :IntervalLevel .
+
+:RegexpTransformedUnit
+    a owl:Class ;
+    rdfs:comment """This kind of unit is a made-up unary type. The idea behind is that most of the complex functions can be represented as a series of operations based on regular expressions.
+
+RTU = Fforward(U)
+U = Finverse(RTU)""" ;
+    rdfs:subClassOf :UnaryUnit, [
+        a owl:Restriction ;
+        owl:onDataRange xsd:string ;
+        owl:onProperty :forwardExpression ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:onDataRange xsd:string ;
+        owl:onProperty :inverseExpression ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:Tebi
+    :base "2" ;
+    :exponent "40" ;
+    :symbol "Ti" ;
+    a :BinaryPrefix, owl:NamedIndividual .
+
+:Temperature
+    a owl:Class ;
+    rdfs:subClassOf :BaseDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :kelvin ;
+        owl:onProperty :defaultUnit
+    ] .
+
+:TimeInterval
+    a owl:Class ;
+    rdfs:subClassOf :DifferenceDimension, :RatioLevel, [
+        a owl:Restriction ;
+        owl:hasValue :second ;
+        owl:onProperty :defaultUnit
+    ], [
+        a owl:Restriction ;
+        owl:onClass :PointInTime ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger
+    ] .
+
+:UnaryUnit
+    a owl:Class ;
+    rdfs:comment "Unary unit is a derivative of a single unit." ;
+    rdfs:subClassOf :Unit, [
+        a owl:Restriction ;
+        owl:onClass :Unit ;
+        owl:onProperty :derivedFrom ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:Unit
+    a owl:Class .
+
+:base
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Prefix ;
+    rdfs:range xsd:integer .
+
+:bit
+    :possiblePrefix :giga, :kilo, :mega ;
+    :symbol "bit" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:bitpersecond
+    :derivedFrom :bit, :persecond ;
+    :possiblePrefix :giga, :kilo, :mega ;
+    :symbol "bps" ;
+    a :ProductUnit, owl:NamedIndividual .
+
+:celsius
+    :derivedFrom :kelvin ;
+    :offset "273.15" ;
+    :scale "1" ;
+    :symbol "C" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:day
+    :derivedFrom :second ;
+    :scale "86400" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:deco
+    :base "10" ;
+    :exponent "1" ;
+    :symbol "da" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:defaultUnit
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:domain :Dimension ;
+    rdfs:range :Unit .
+
+:derivedFrom
+    a owl:ObjectProperty .
+
+:dozen
+    :derivedFrom :piece ;
+    :scale "12" ;
+    :symbol "dozen" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:exponent
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:PowerDimension
+            :PowerUnit
+            :Prefix
+        )
+    ] ;
+    rdfs:range xsd:integer .
+
+:forwardExpression
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:subPropertyOf :regexp .
+
+:fraction
+    :symbol "" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:giga
+    :base "10" ;
+    :exponent "9" ;
+    :symbol "G" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:hasPrefix
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:range :Prefix .
+
+:hasUnit
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:range :Unit .
+
+:hasValue
+    a owl:DatatypeProperty .
+
+:hecto
+    :base "10" ;
+    :exponent "2" ;
+    :symbol "h" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:hour
+    :derivedFrom :second ;
+    :scale "3600" ;
+    :symbol "h" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:inverseExpression
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:subPropertyOf :regexp .
+
+:ipv4dotted
+    :symbol "" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:ipv4int
+    :derivedFrom :ipv4dotted ;
+    :forwardExpression "/evalIntegerAsString/([0-9]*)/((\\g<1>) & (255 << 24)) >> 24/./((\\g<1>) & (255 << 16)) >> 16/./((\\g<1>) & (255 << 8)) >> 8/./(\\g<1>) & 255//" ;
+    :inverseExpression "/evalInteger/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(\\g<1>) << 24 | (\\g<2>) << 16 | (\\g<3>) << 8 | (\\g<4>)/" ;
+    a :RegexpTransformedUnit, owl:NamedIndividual .
+
+:ipv6dotted
+    :symbol "" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:ipv6int
+    :derivedFrom :ipv6dotted ;
+    :forwardExpression "/evalIntegerAsString/([0-9]*)/hex(((\\g<1>) & 0xFFFF0000000000000000000000000000) >> 112)/:/hex(((\\g<1>) & 0xFFFF000000000000000000000000) >> 96)/:/hex(((\\g<1>) & 0xFFFF00000000000000000000) >> 80)/:/hex(((\\g<1>) & 0xFFFF0000000000000000) >> 64)/:/hex(((\\g<1>) & 0xFFFF000000000000) >> 48)/:/hex(((\\g<1>) & 0xFFFF00000000) >> 32)/:/hex(((\\g<1>) & 0xFFFF0000) >> 16)/:/hex((\\g<1>) & 0xFFFF)//" ;
+    :inverseExpression "/evalInteger/([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4}):([0-9a-fA-F]{0,4})/(0x\\g<1>)<<112|(0x\\g<2>)<<96|(0x\\g<3>)<<80|(0x\\g<4>)<<64|(0x\\g<5>)<<48|(0x\\g<6>)<<32|(0x\\g<7>)<<16|(0x\\g<8>)/" ;
+    a :RegexpTransformedUnit, owl:NamedIndividual .
+
+:kelvin
+    :symbol "K" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:kilo
+    :base "10" ;
+    :exponent "3" ;
+    :symbol "k" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:mega
+    :base "10" ;
+    :exponent "6" ;
+    :symbol "M" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:micro
+    :base "10" ;
+    :exponent "-6" ;
+    :symbol "mu" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:milli
+    :base "10" ;
+    :exponent "-3" ;
+    :symbol "m" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:minute
+    :derivedFrom :second ;
+    :scale "60" ;
+    :symbol "min" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:month
+    :derivedFrom :second ;
+    :scale "1814400" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:nano
+    :base "10" ;
+    :exponent "-9" ;
+    :symbol "n" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:offset
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :LinearTransformedUnit ;
+    rdfs:range xsd:double .
+
+:percent
+    :derivedFrom :fraction ;
+    :scale "100" ;
+    :symbol "%" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:permil
+    :derivedFrom :fraction ;
+    :scale "1000" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:persecond
+    :derivedFrom :second ;
+    :exponent "-1" ;
+    :possiblePrefix :giga, :kilo, :mega ;
+    :symbol "Hz" ;
+    a :PowerUnit, owl:NamedIndividual .
+
+:pico
+    :base "10" ;
+    :exponent "-12" ;
+    :symbol "p" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:piece
+    :symbol "(1)" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:possiblePrefix
+    a owl:ObjectProperty ;
+    rdfs:domain :Unit ;
+    rdfs:range :Prefix .
+
+:radian
+    a :BaseUnit, owl:NamedIndividual .
+
+:regexp
+    a owl:DatatypeProperty ;
+    rdfs:comment """An abstraction of any arbitrary function that can be expressed by regular expressions. The format can be of the following two forms:
+
+  I.   /evalInteger/expresion/operation/
+  II.  /evalIntegerAsString/expression/operation/separator/[...],
+
+where [...] stands for a series of operation/separator/ with n repetition.
+
+\"expression\": is a regular expression, which contains grouping eclosed by parenthesis, like \"([0-9]*)\". These groups are referenced by \"\\g<?>\" within the operation field, where question mark represents the sequence number of the group referenced, starting with 1.
+
+\"operation\": is a mathematical form that may contain operations understood by eval method. For instance: \"+, -, *, /, >>\", etc. 
+
+\"separator\": is the piece of string to be appended to the result of an evaluation, which is already transformed a string.
+
+An example:
+Given a function that maps: {apple1 |-> 10, apple2 |-> 20, ...} can be expressed as follows:
+
+/evalInteger/alma([0-9]*)/10*(\\g<1>)/
+
+
+
+Another example:
+Given a function that maps: { 11 |-> 1d2u, 32 |-> 3d4u, ...} can be expressed as follows:
+
+/evalIntegerAsString/([0-9])([0-9])/(\\g<1>)/d/2*(\\g<2>)/u/""" ;
+    rdfs:domain :RegexpTransformedUnit ;
+    rdfs:range xsd:string .
+
+:scale
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:LinearTransformedUnit
+            :Prefix
+        )
+    ] ;
+    rdfs:range xsd:double .
+
+:second
+    :possiblePrefix :micro, :milli, :nano, :pico ;
+    :symbol "s" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:symbol
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (:Prefix
+            :Unit
+        )
+    ] ;
+    rdfs:range xsd:string .
+
+:tera
+    :base "10" ;
+    :exponent "12" ;
+    :symbol "T" ;
+    a :DecimalPrefix, owl:NamedIndividual .
+
+:unitless
+    :symbol "" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:unixtimestamp
+    :possiblePrefix :nano ;
+    :symbol "s" ;
+    a :BaseUnit, owl:NamedIndividual .
+
+:week
+    :derivedFrom :second ;
+    :scale "604800" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+:year
+    :derivedFrom :second ;
+    :scale "6622560000" ;
+    a :LinearTransformedUnit, owl:NamedIndividual .
+
+[]
+    a owl:AllDisjointClasses ;
+    owl:members (:BaseUnit
+        :N_aryUnit
+        :UnaryUnit
+    ) .
+
+[]
+    a owl:AllDisjointClasses ;
+    owl:members (:LinearTransformedUnit
+        :PowerUnit
+        :RegexpTransformedUnit
+    ) .
+
+[]
+    a owl:AllDisjointClasses ;
+    owl:members (:Cardinal
+        :Countable
+        :GeoPosition
+        :IPAddress
+        :InformationSize
+        :NameOfSomething
+        :PointInTime
+        :Temperature
+    ) .
+
+[]
+    a owl:AllDisjointClasses ;
+    owl:members (:DifferenceDimension
+        :PowerDimension
+        :ProductDimension
+        :RatioDimension
+    ) .
+
