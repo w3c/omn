@@ -7,6 +7,7 @@ prefix omn: <http://open-multinet.info/ontology#>
 
 SELECT ?resource ?start ?stop WHERE{
     ?resource omn:partOfGroup ?reservation .
-    ?reservation novi:startTime ?start .
-    ?reservation novi:endTime ?stop .
+    ?reservation novi:startTime ?start ;
+                 novi:endTime ?stop .
+    FILTER(?start > "2010-01-19T16:00:00Z"^^xsd:dateTime )
 }
