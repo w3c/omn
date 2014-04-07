@@ -21,6 +21,7 @@ Directory Layout
 ----------------
  * bin: executables
  * data: example data to work with (to help validating and discussing the ontologies)
+ * import: related ontologies to be reused (second main focus)
  * ontologies: upper ontologies (to main focus)
  * queries: example queries to work with (to help validating and discussing the ontologies)
 
