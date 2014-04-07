@@ -1,5 +1,5 @@
-Ontology Descriptions for the Open MultiNet
-===========================================
+Ontology Discussions
+====================
 
 Abstract
 --------
