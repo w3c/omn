@@ -9,11 +9,12 @@ Temporary working space for ontology related tasks within http://open-multinet.i
 
 Suggested Setup
 ---------------
- * sparql command line tool (e.g. 'brew install jena')
+ * sparql (command line tool from jena to query data)
  * Protégé (graphical ontology editor)
  * Eclipse Xturtle (text based ontology editor with code completion and simple validation)
  * rdf.sh (command line ontology tools)
  * OwlToUml (to visualize simple ontologies as plantuml diagrams)
+ * rapper (command line tool to convert and check ontologies)
  
 
 Directory Layout
