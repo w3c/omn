@@ -16,8 +16,12 @@ example2=( "data:advertisement-fp"
         "query:getnodes"
         "description:Get the nodes published in the FUSECO Playground example"
         "command:example2" )
+example3=( "data:advertisement-fp"
+        "query:getreservations"
+        "description:Get nodes with reservations"
+        "command:example3" )
 
-commands=( example1 example2 )
+commands=( example1 example2 example3 )
 ##########################################################################################
 
 
