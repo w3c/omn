@@ -1,0 +1,325 @@
+@prefix : <http://fuseco.fokus.fraunhofer.de/ontology#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
+@prefix omn: <http://open-multinet.info/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geni: <http://geni.net/ontology#> .
+@prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://fuseco.fokus.fraunhofer.de/ontology#> .
+
+<http://fuseco.fokus.fraunhofer.de/ontology> rdf:type owl:Ontology ;
+                                             
+                                             rdfs:seeAlso "http://fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
+                                             
+                                             rdfs:comment """FUSECO Playground Ontology Advertisement.
+
+Alexander Willner <alexander.willner@tu-berlin.de>"""@en ;
+                                             
+                                             owl:imports <http://open-multinet.info/ontology> .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://geni.net/ontology#expires
+
+geni:expires rdf:type owl:AnnotationProperty .
+
+
+
+###  http://geni.net/ontology#generated
+
+geni:generated rdf:type owl:AnnotationProperty .
+
+
+
+###  http://geni.net/ontology#manager
+
+geni:manager rdf:type owl:AnnotationProperty .
+
+
+
+###  http://geni.net/ontology#type
+
+geni:type rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+
+geo:lat rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+
+geo:long rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/Image
+
+foaf:Image rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/based_near
+
+foaf:based_near rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#Attenuator
+
+:Attenuator rdf:type owl:Class ;
+            
+            rdfs:subClassOf :EpcNode .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#EpcClient
+
+:EpcClient rdf:type owl:Class ;
+           
+           rdfs:subClassOf :EpcNode .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#EpcLink
+
+:EpcLink rdf:type owl:Class ;
+         
+         rdfs:subClassOf nml:Link .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#EpcNode
+
+:EpcNode rdf:type owl:Class ;
+         
+         rdfs:subClassOf nml:Node .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#EpcPCRFService
+
+:EpcPCRFService rdf:type owl:Class ;
+                
+                rdfs:subClassOf :EpcService .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#EpcService
+
+:EpcService rdf:type owl:Class ;
+            
+            rdfs:subClassOf nml:Service .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#GPRS
+
+:GPRS rdf:type owl:Class ;
+      
+      rdfs:subClassOf :EpcLink .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#ImsService
+
+:ImsService rdf:type owl:Class ;
+            
+            rdfs:subClassOf nml:Service .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#LTE
+
+:LTE rdf:type owl:Class ;
+     
+     rdfs:subClassOf :EpcLink .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#MmeComponent
+
+:MmeComponent rdf:type owl:Class ;
+              
+              rdfs:subClassOf omn:SoftwareComponent .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#MmeHandoverService
+
+:MmeHandoverService rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf nml:Service .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer
+
+:OpenStackServer rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf nml:Node .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#Shieldbox
+
+:Shieldbox rdf:type owl:Class ;
+           
+           rdfs:subClassOf :EpcNode .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#UMTS
+
+:UMTS rdf:type owl:Class ;
+      
+      rdfs:subClassOf :EpcLink .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#WIFI
+
+:WIFI rdf:type owl:Class ;
+      
+      rdfs:subClassOf :EpcLink .
+
+
+
+###  http://geni.net/ontology#AggregateManager
+
+geni:AggregateManager rdf:type owl:Class .
+
+
+
+###  http://geni.net/ontology#Message
+
+geni:Message rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#Point
+
+geo:Point rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground
+
+:FusecoPlayground rdf:type omn:Testbed ,
+                           owl:NamedIndividual ;
+                  
+                  rdfs:label "FUSECO"@en ;
+                  
+                  foaf:Image "http://testbeds.eu/images/fuseco.png"^^xsd:anyURI ;
+                  
+                  rdfs:seeAlso "http://www.fuseco-playground.org"^^xsd:anyURI ;
+                  
+                  omn:certificate "https://fuseco.fokus.fraunhofer.de/api/fed4fire/v1/certificates/download/ca.fiteagle-fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
+                  
+                  foaf:based_near :location .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#am
+
+:am rdf:type geni:AggregateManager ,
+             owl:NamedIndividual ;
+    
+    geni:manager "urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm"^^xsd:anyURI ;
+    
+    omn:endpoint "https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3" ;
+    
+    omn:version "3.0" ;
+    
+    omn:partOfGroup :FusecoPlayground .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#location
+
+:location rdf:type owl:NamedIndividual ,
+                   geo:Point ;
+          
+          geo:lat "52.5258083" ;
+          
+          geo:long "13.3172764" .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#message
+
+:message rdf:type geni:Message ,
+                  owl:NamedIndividual ;
+         
+         geni:expires "2013-07-24T06:20:19Z"^^xsd:dateTime ;
+         
+         geni:generated "2013-07-24T06:20:19Z"^^xsd:dateTime ;
+         
+         geni:type geni:Advertisement .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#vmserver1
+
+:vmserver1 rdf:type :OpenStackServer ,
+                    owl:NamedIndividual ;
+           
+           rdfs:label "vmserver1"@en ;
+           
+           omn:exclusive "false"^^xsd:boolean ;
+           
+           omn:monitoringsupport "true"^^xsd:boolean ;
+           
+           omn:partOfGroup :FusecoPlayground ;
+           
+           omn:up "true"^^xsd:boolean ;
+           
+           foaf:based_near :location .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#vmserver2
+
+:vmserver2 rdf:type :OpenStackServer ,
+                    owl:NamedIndividual ;
+                    
+           omn:up "false"^^xsd:boolean ;
+           
+           omn:partOfGroup :FusecoPlayground .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+

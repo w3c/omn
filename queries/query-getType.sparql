@@ -1,0 +1,2 @@
+prefix geni: <http://geni.net/ontology#> 
+SELECT ?type WHERE { ?message geni:type ?type }

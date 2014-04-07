@@ -1,0 +1,14 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geni: <http://geni.net/ontology#>
+prefix nml: <http://schemas.ogf.org/nml/base/2013/02#>
+prefix omn: <http://open-multinet.info/ontology#>
+
+SELECT ?node ?testbed ?manager
+	WHERE { 
+?node rdf:type [ rdfs:subClassOf nml:Node ] .
+?node omn:partOfGroup ?testbed .
+?am omn:partOfGroup ?testbed .
+?am rdf:type geni:AggregateManager .
+?am geni:manager ?manager
+}

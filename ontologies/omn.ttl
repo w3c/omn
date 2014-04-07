@@ -1,0 +1,278 @@
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geni: <http://geni.net/ontology#> .
+@prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://open-multinet.info/ontology> .
+
+<http://open-multinet.info/ontology> rdf:type owl:Ontology ;
+                                     
+                                     owl:imports nml: ,
+                                                 <http://www.science.uva.nl/research/sne/indl> .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology#endpoint
+
+<http://open-multinet.info/ontology#endpoint> rdf:type owl:AnnotationProperty ;
+                                              
+                                              rdfs:domain nml:Service .
+
+
+
+###  http://open-multinet.info/ontology#partOfGroup
+
+<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#version
+
+<http://open-multinet.info/ontology#version> rdf:type owl:AnnotationProperty ;
+                                             
+                                             rdfs:comment "todo: find an ontology for semantic versioning" ;
+                                             
+                                             rdfs:domain nml:Service .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology#partOfGroup
+
+<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:ObjectProperty ;
+                                                 
+                                                 rdfs:range nml:Group ;
+                                                 
+                                                 rdfs:domain nml:NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology#status
+
+<http://open-multinet.info/ontology#status> rdf:type owl:ObjectProperty ;
+                                            
+                                            rdfs:range <http://open-multinet.info/ontology#Status> ;
+                                            
+                                            rdfs:domain nml:Node .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology#certificate
+
+<http://open-multinet.info/ontology#certificate> rdf:type owl:DatatypeProperty ;
+                                                 
+                                                 rdfs:domain <http://open-multinet.info/ontology#Testbed> ;
+                                                 
+                                                 rdfs:range xsd:anyURI .
+
+
+
+###  http://open-multinet.info/ontology#endpoint
+
+<http://open-multinet.info/ontology#endpoint> rdf:type owl:DatatypeProperty ;
+                                              
+                                              rdfs:range xsd:anyURI .
+
+
+
+###  http://open-multinet.info/ontology#exclusive
+
+<http://open-multinet.info/ontology#exclusive> rdf:type owl:DatatypeProperty ;
+                                               
+                                               rdfs:domain nml:Node ;
+                                               
+                                               rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology#expires
+
+<http://open-multinet.info/ontology#expires> rdf:type owl:DatatypeProperty ;
+                                             
+                                             rdfs:domain <http://open-multinet.info/ontology#Slice> ,
+                                                         nml:Node ;
+                                             
+                                             rdfs:range xsd:dateTime .
+
+
+
+###  http://open-multinet.info/ontology#monitoringsupport
+
+<http://open-multinet.info/ontology#monitoringsupport> rdf:type owl:DatatypeProperty ;
+                                                       
+                                                       rdfs:domain nml:Node ;
+                                                       
+                                                       rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology#up
+
+<http://open-multinet.info/ontology#up> rdf:type owl:DatatypeProperty ;
+                                        
+                                        rdfs:domain nml:Node ;
+                                        
+                                        rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology#urn
+
+<http://open-multinet.info/ontology#urn> rdf:type owl:DatatypeProperty ;
+                                         
+                                         rdfs:domain <http://open-multinet.info/ontology#Slice> ,
+                                                     nml:Node ;
+                                         
+                                         rdfs:range xsd:anyURI .
+
+
+
+###  http://open-multinet.info/ontology#version
+
+<http://open-multinet.info/ontology#version> rdf:type owl:DatatypeProperty ;
+                                             
+                                             rdfs:comment "todo: find an ontology for semantic versioning" ;
+                                             
+                                             rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology#Allocated
+
+<http://open-multinet.info/ontology#Allocated> rdf:type owl:Class ;
+                                               
+                                               rdfs:subClassOf <http://open-multinet.info/ontology#AllocationStatus> .
+
+
+
+###  http://open-multinet.info/ontology#AllocationStatus
+
+<http://open-multinet.info/ontology#AllocationStatus> rdf:type owl:Class ;
+                                                      
+                                                      rdfs:subClassOf <http://open-multinet.info/ontology#Status> .
+
+
+
+###  http://open-multinet.info/ontology#ComputeNode
+
+<http://open-multinet.info/ontology#ComputeNode> rdf:type owl:Class ;
+                                                 
+                                                 rdfs:subClassOf nml:Node .
+
+
+
+###  http://open-multinet.info/ontology#OperationalStatus
+
+<http://open-multinet.info/ontology#OperationalStatus> rdf:type owl:Class ;
+                                                       
+                                                       rdfs:subClassOf <http://open-multinet.info/ontology#Status> .
+
+
+
+###  http://open-multinet.info/ontology#Pending
+
+<http://open-multinet.info/ontology#Pending> rdf:type owl:Class ;
+                                             
+                                             rdfs:subClassOf <http://open-multinet.info/ontology#OperationalStatus> .
+
+
+
+###  http://open-multinet.info/ontology#Provisioned
+
+<http://open-multinet.info/ontology#Provisioned> rdf:type owl:Class ;
+                                                 
+                                                 rdfs:subClassOf <http://open-multinet.info/ontology#AllocationStatus> .
+
+
+
+###  http://open-multinet.info/ontology#Ready
+
+<http://open-multinet.info/ontology#Ready> rdf:type owl:Class ;
+                                           
+                                           rdfs:subClassOf <http://open-multinet.info/ontology#OperationalStatus> .
+
+
+
+###  http://open-multinet.info/ontology#Slice
+
+<http://open-multinet.info/ontology#Slice> rdf:type owl:Class ;
+                                           
+                                           rdfs:subClassOf nml:Group .
+
+
+
+###  http://open-multinet.info/ontology#SoftwareComponent
+
+<http://open-multinet.info/ontology#SoftwareComponent> rdf:type owl:Class ;
+                                                       
+                                                       rdfs:subClassOf indl:NodeComponent .
+
+
+
+###  http://open-multinet.info/ontology#Started
+
+<http://open-multinet.info/ontology#Started> rdf:type owl:Class ;
+                                             
+                                             rdfs:subClassOf <http://open-multinet.info/ontology#OperationalStatus> .
+
+
+
+###  http://open-multinet.info/ontology#Status
+
+<http://open-multinet.info/ontology#Status> rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology#Testbed
+
+<http://open-multinet.info/ontology#Testbed> rdf:type owl:Class ;
+                                             
+                                             rdfs:subClassOf nml:Group .
+
+
+
+###  http://schemas.ogf.org/nml/base/2013/02#Group
+
+nml:Group rdf:type owl:Class .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
