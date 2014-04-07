@@ -13,7 +13,8 @@ Suggested Setup
  * Protégé (graphical ontology editor)
  * Eclipse Xturtle (text based ontology editor with code completion and simple validation)
  * rdf.sh (command line ontology tools)
-
+ * OwlToUml (to visualize simple ontologies as plantuml diagrams)
+ 
 
 Directory Layout
 ----------------
