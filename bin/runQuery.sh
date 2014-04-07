@@ -20,8 +20,20 @@ example3=( "data:advertisement-fp"
         "query:getreservations"
         "description:Get nodes with reservations"
         "command:example3" )
+example4=( "data:advertisement-fp"
+        "query:getnodes-with-mon"
+        "description:get resources with monitoring capabilities"
+        "command:example4" )
+example5=( "data:manifest-fp"
+        "query:getinstances-with-oml"
+        "description:get instances that exports to OML server"
+        "command:example5" )
+example6=( "data:advertisement-fp"
+        "query:gettestbedinfo"
+        "description:get information about the testbeds"
+        "command:example6" )
 
-commands=( example1 example2 example3 )
+commands=( example1 example2 example3 example4 example5 example6 )
 ##########################################################################################
 
 
@@ -85,6 +97,8 @@ function checkEnvironment {
 function runQuery {
   data="data/example-$1.ttl"
   query="queries/query-$2.sparql"
+  echo "Data file: '$data'"
+  echo "Query file: '$query'"
   echo "Query:";
   echo "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
   cat "${query}"
@@ -92,7 +106,7 @@ function runQuery {
   echo
   echo "Result:";
   echo "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-  sparql --data="${data}" --query="${query}"
+  sparql --time --results csv --data="${data}" --query="${query}"
   echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 }
 

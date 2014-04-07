@@ -1,0 +1,22 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix omn: <http://open-multinet.info/ontology#>
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> 
+prefix geni: <http://geni.net/ontology#> 
+
+SELECT ?label ?url ?image ?lat ?long ?amendpoint ?amversion ?cert WHERE {
+?testbed rdf:type omn:Testbed ;
+		 rdfs:label ?label ;
+		 foaf:Image ?image ;
+		 foaf:homepage ?url ;
+		 foaf:based_near [
+		     geo:lat ?lat ;
+		     geo:long ?long
+		 ] ;
+		 omn:certificate ?cert .
+?am rdf:type geni:AggregateManager ;
+	omn:partOfGroup ?testbed ;
+	omn:endpoint ?amendpoint ;
+	omn:version ?amversion .
+}

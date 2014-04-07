@@ -244,7 +244,9 @@ geo:Point rdf:type owl:Class .
                   
                   foaf:Image "http://testbeds.eu/images/fuseco.png"^^xsd:anyURI ;
                   
-                  rdfs:seeAlso "http://www.fuseco-playground.org"^^xsd:anyURI ;
+                  foaf:homepage "http://www.fuseco-playground.org"^^xsd:anyURI ;
+                  
+                  rdfs:comment "The Future Seamless Communication (FUSECO) Playground - located in Berlin - is a pioneering reference testbed, integrating various state of the art wireless broadband networks into a 3GPP Evolved Packet Core (EPC) prototype platform, allowing the rapid validation of new networking paradigms, and prototyping of innovative Future Internet and smart city applications."@en ;
                   
                   omn:certificate "https://fuseco.fokus.fraunhofer.de/api/fed4fire/v1/certificates/download/ca.fiteagle-fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
                   
@@ -315,7 +317,16 @@ geo:Point rdf:type owl:Class .
 :vmserver2 rdf:type :OpenStackServer ,
                     owl:NamedIndividual ;
                     
+           omn:up "true"^^xsd:boolean ;
+
+           omn:partOfGroup :FusecoPlayground .
+
+:vmserver3 rdf:type :OpenStackServer ,
+                    owl:NamedIndividual ;
+                    
            omn:up "false"^^xsd:boolean ;
+           
+           omn:monitoringsupport "false"^^xsd:boolean ;
 
            omn:partOfGroup :FusecoPlayground .
 

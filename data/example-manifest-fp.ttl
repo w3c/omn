@@ -15,6 +15,8 @@
 
 :boundvm4 rdf:type indl:VirtualNode ;
           nml:implementedBy fp:vmserver1 ;
+          omn:exportsToOML "http://myexperiment.example.org:54321"^^xsd:anyURI ;
+          omn:exportsToOML "http://myexperiment2.example.org:54321"^^xsd:anyURI ;
           omn:status omn:Allocated .
 
 :boundvm24 rdf:type indl:VirtualNode ;
