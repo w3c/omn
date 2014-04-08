@@ -32,8 +32,12 @@ example6=( "data:advertisement-fp"
         "query:gettestbedinfo"
         "description:get information about the testbeds"
         "command:example6" )
+example7=( "data:request-vm"
+        "query:getnodestatus"
+        "description:request a bound and an unbound virtual machine"
+        "command:example7" )
 
-commands=( example1 example2 example3 example4 example5 example6 )
+commands=( example1 example2 example3 example4 example5 example6 example7 )
 ##########################################################################################
 
 

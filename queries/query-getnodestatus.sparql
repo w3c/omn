@@ -1,10 +1,12 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix omn: <http://open-multinet.info/ontology#> 
+prefix geni: <http://geni.net/ontology#> 
+prefix indl: <http://www.science.uva.nl/research/sne/indl#>
+prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> 
 
-SELECT ?resource ?testbed ?up WHERE{
-    ?resource omn:up ?up .
-    ?resource omn:partOfGroup ?testbed
+SELECT ?type ?resource ?vmserver WHERE {
+    ?message geni:type ?type .
+    ?resource rdf:type indl:VirtualNode .
+    OPTIONAL {?resource nml:implementedBy ?vmserver} .
 }
