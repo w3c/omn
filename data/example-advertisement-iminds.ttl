@@ -1,0 +1,3220 @@
+@prefix : <http://jfed.iminds.be/owl/compute.owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl2: <http://jfed.iminds.be/owl/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix storage: <http://jfed.iminds.be/owl/storage.owl#> .
+@prefix compute2: <http://jfed.iminds.be/owl/compute.owl#64> .
+@prefix compute3: <http://jfed.iminds.be/owl/compute.owl#32> .
+@prefix collections: <http://jfed.iminds.be/owl/collections.owl#> .
+@base <http://jfed.iminds.be/owl/compute.owl> .
+
+<http://jfed.iminds.be/owl/compute.owl> rdf:type owl:Ontology ;
+                                        
+                                        rdfs:comment "Compute element ontology - GENI-Fed4FIRE 2nd proposal by iMinds" ,
+                                                     """Copyright (c) Thijs Walcarius <thijs.walcarius@intec.ugent.be>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+\"Software\"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""@en ;
+                                        
+                                        dc:contributor """Original: Yufeng Xin, Ilia Baldine
+Modified: Thijs Walcarius, Brecht Vermeulen, Wim Vandenberghe""" ;
+                                        
+                                        rdfs:isDefinedBy """iMinds - University of Ghent
+thijs.walcarius@intec.ugent.be
+		
+Based on:
+- INDL, University of Amsterdam
+
+- the GENI-ORCA Ontology by RENCI
+UNC-Chapel Hill
+Nov. 10 2009
+yxin@renci.org""" ;
+                                        
+                                        owl:imports nml: .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://purl.org/dc/elements/1.1/contributor
+
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+
+###  http://schemas.ogf.org/nml/2013/05/base#lat
+
+nml:lat rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Feature
+
+:Feature rdf:type owl:ObjectProperty .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VM-in-Server
+
+:VM-in-Server rdf:type owl:ObjectProperty ;
+              
+              rdfs:domain :ComputeElement ;
+              
+              rdfs:subPropertyOf nml:adaptationFunction .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#computeElementType
+
+:computeElementType rdf:type owl:FunctionalProperty ,
+                             owl:ObjectProperty ;
+                    
+                    rdfs:comment "A blade, a mote, a server, a laptop?" ;
+                    
+                    rdfs:domain :ComputeElement ;
+                    
+                    rdfs:range :ComputeElementType ;
+                    
+                    rdfs:subPropertyOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#cpu
+
+:cpu rdf:type owl:FunctionalProperty ,
+              owl:ObjectProperty ;
+     
+     rdfs:domain :ComputeElement ;
+     
+     rdfs:subPropertyOf :Feature ;
+     
+     rdfs:range :ProcessorComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#cpuArchitecture
+
+:cpuArchitecture rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:comment "x86, x86-64 or other" ;
+                 
+                 rdfs:range :CPUArchitecture ;
+                 
+                 rdfs:domain :ComputeElement ;
+                 
+                 rdfs:subPropertyOf :Feature ;
+                 
+                 rdfs:domain :ProcessorComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#diskImage
+
+:diskImage rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :ComputeElement ;
+           
+           rdfs:range :DiskImage ;
+           
+           rdfs:subPropertyOf :Feature ;
+           
+           rdfs:domain :StorageComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasHost
+
+:hasHost rdf:type owl:FunctionalProperty ,
+                  owl:ObjectProperty ;
+         
+         rdfs:domain :ComputeElement ;
+         
+         rdfs:range :ComputeElement ;
+         
+         rdfs:subPropertyOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasInputInterface
+
+:hasInputInterface rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:subPropertyOf :hasInterface ;
+                   
+                   owl:inverseOf :inputInterfaceOf .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasInterface
+
+:hasInterface rdf:type owl:ObjectProperty ,
+                       owl:TransitiveProperty ;
+              
+              rdfs:range :Interface .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasServerSize
+
+:hasServerSize rdf:type owl:ObjectProperty ;
+               
+               rdfs:comment "What is the difference with computeElementType? What is the correct range? I currently set this to ComputeElementType, is this correct? - Thijs" ;
+               
+               rdfs:range :ComputeElementType ;
+               
+               rdfs:subPropertyOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasUnitServer
+
+:hasUnitServer rdf:type owl:ObjectProperty ;
+               
+               rdfs:comment "What is this used for? - Thijs" ;
+               
+               rdfs:subPropertyOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#inputInterfaceOf
+
+:inputInterfaceOf rdf:type owl:ObjectProperty .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#memory
+
+:memory rdf:type owl:FunctionalProperty ,
+                 owl:ObjectProperty ;
+        
+        rdfs:domain :ComputeElement ;
+        
+        rdfs:subPropertyOf :Feature ;
+        
+        rdfs:range :MemoryComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#os
+
+:os rdf:type owl:ObjectProperty ;
+    
+    rdfs:subPropertyOf :Feature ;
+    
+    rdfs:range :OS ;
+    
+    rdfs:domain [ rdf:type owl:Class ;
+                  owl:unionOf ( :ComputeElement
+                                :DiskImage
+                              )
+                ] .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ram
+
+:ram rdf:type owl:FunctionalProperty ,
+              owl:ObjectProperty ;
+     
+     rdfs:domain :ComputeElement ;
+     
+     rdfs:subPropertyOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ramType
+
+:ramType rdf:type owl:FunctionalProperty ,
+                  owl:ObjectProperty ;
+         
+         rdfs:domain :ComputeElement ;
+         
+         rdfs:subPropertyOf :Feature ;
+         
+         rdfs:range :RAMTypeInstance .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#specificCE
+
+:specificCE rdf:type owl:FunctionalProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:comment "Allows specify what specific CE this is e.g. in a request - a ComputeElement <ceInstance specificCE EucaC1Medium>" ;
+            
+            rdfs:domain :ComputeElement ;
+            
+            rdfs:subPropertyOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#storage
+
+:storage rdf:type owl:ObjectProperty ;
+         
+         rdfs:subPropertyOf :Feature ;
+         
+         rdfs:range :StorageComponent ;
+         
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :ComputeElement
+                                     :ComputeElementType
+                                   )
+                     ] .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#vendor
+
+:vendor rdf:type owl:ObjectProperty ;
+        
+        rdfs:subPropertyOf :Feature ;
+        
+        rdfs:range :Vendor ;
+        
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :ComputeElementComponent
+                                    nml:Node
+                                  )
+                    ] .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#virtualize
+
+:virtualize rdf:type owl:ObjectProperty ;
+            
+            rdfs:domain :ComputeElement ;
+            
+            rdfs:range :VirtualComputeElement .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#vmm
+
+:vmm rdf:type owl:ObjectProperty ;
+     
+     rdfs:domain :ComputeElement ;
+     
+     rdfs:subPropertyOf :Feature ;
+     
+     rdfs:range :VMM .
+
+
+
+###  http://schemas.ogf.org/nml/2013/05/base#adaptationFunction
+
+nml:adaptationFunction rdf:type owl:ObjectProperty .
+
+
+
+###  http://www.w3.org/2002/07/owl#versionIRI
+
+owl:versionIRI rdf:type owl:ObjectProperty .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://jfed.iminds.be/owl/compute.owl#clockFrequency
+
+:clockFrequency rdf:type owl:DatatypeProperty ;
+                
+                rdfs:domain :MemoryComponent ,
+                            :ProcessorComponent ;
+                
+                rdfs:subPropertyOf :metric ;
+                
+                rdfs:range rdfs:Literal .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#cpuFamily
+
+:cpuFamily rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :ComputeElement ,
+                       :ProcessorComponent ;
+           
+           rdfs:range rdfs:Literal .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#cpuModel
+
+:cpuModel rdf:type owl:DatatypeProperty ;
+          
+          rdfs:domain :ProcessorComponent ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasMac
+
+:hasMac rdf:type owl:DatatypeProperty .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hasRequestGroupURL
+
+:hasRequestGroupURL rdf:type owl:DatatypeProperty .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hostInterfaceName
+
+:hostInterfaceName rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:domain :Interface ;
+                   
+                   rdfs:range rdfs:Literal .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#hostName
+
+:hostName rdf:type owl:DatatypeProperty ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#memoryCapacity
+
+:memoryCapacity rdf:type owl:DatatypeProperty ;
+                
+                rdfs:subPropertyOf :metric ;
+                
+                rdfs:range rdfs:Literal .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#metric
+
+:metric rdf:type owl:DatatypeProperty ;
+        
+        rdfs:comment "Individual performance metrics" .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#numCPUCores
+
+:numCPUCores rdf:type owl:DatatypeProperty ;
+             
+             rdfs:domain :ComputeElement ,
+                         :ProcessorComponent ;
+             
+             rdfs:subPropertyOf :metric ;
+             
+             rdfs:range xsd:integer .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#numCPUs
+
+:numCPUs rdf:type owl:DatatypeProperty ;
+         
+         rdfs:domain :ComputeElement ;
+         
+         rdfs:subPropertyOf :metric ;
+         
+         rdfs:range xsd:integer .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#osDistribution
+
+:osDistribution rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                
+                rdfs:domain :OS ;
+                
+                rdfs:range rdfs:Literal .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#osVersion
+
+:osVersion rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           
+           rdfs:domain :OS ;
+           
+           rdfs:range rdfs:Literal .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ramMemory
+
+:ramMemory rdf:type owl:DatatypeProperty .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#serverSize
+
+:serverSize rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            
+            rdfs:range xsd:integer .
+
+
+
+###  http://jfed.iminds.be/owl/topology.owl#hasName
+
+<http://jfed.iminds.be/owl/topology.owl#hasName> rdf:type owl:DatatypeProperty ;
+                                                 
+                                                 rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://jfed.iminds.be/owl/collections.owl#Item
+
+collections:Item rdf:type owl:Class .
+
+
+
+###  http://jfed.iminds.be/owl/collections.owl#Set
+
+collections:Set rdf:type owl:Class .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#CPUArchitecture
+
+:CPUArchitecture rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ComputeElement
+
+:ComputeElement rdf:type owl:Class ;
+                
+                rdfs:subClassOf nml:Node .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ComputeElementComponent
+
+:ComputeElementComponent rdf:type owl:Class ;
+                         
+                         rdfs:subClassOf owl:Thing .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ComputeElementType
+
+:ComputeElementType rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#DiskImage
+
+:DiskImage rdf:type owl:Class ;
+           
+           rdfs:subClassOf :ComputeElementComponent ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty <http://jfed.iminds.be/owl/topology.owl#hasName> ;
+                             owl:someValuesFrom rdfs:Literal
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :os ;
+                             owl:someValuesFrom :OS
+                           ] .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Feature
+
+:Feature rdf:type owl:Class .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Interface
+
+:Interface rdf:type owl:Class ;
+           
+           rdfs:subClassOf collections:Item ,
+                           :NetworkComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#LabelSet
+
+:LabelSet rdf:type owl:Class ;
+          
+          rdfs:subClassOf collections:Set .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#MemoryComponent
+
+:MemoryComponent rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :ComputeElementComponent ;
+                 
+                 rdfs:comment "Parent class of various RAMs" .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#NetworkComponent
+
+:NetworkComponent rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf :ComputeElementComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#OS
+
+:OS rdf:type owl:Class ;
+    
+    rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ProcessorComponent
+
+:ProcessorComponent rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf :ComputeElementComponent ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :cpuArchitecture ;
+                                      owl:someValuesFrom :CPUArchitecture
+                                    ] ;
+                    
+                    rdfs:comment "Parent class of various CPU types" .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#RAMType
+
+:RAMType rdf:type owl:Class ;
+         
+         rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#RAMTypeInstance
+
+:RAMTypeInstance rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ReconfigurableInterface
+
+:ReconfigurableInterface rdf:type owl:Class ;
+                         
+                         rdfs:subClassOf :Interface .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#StaticInterface
+
+:StaticInterface rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Interface .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#StorageComponent
+
+:StorageComponent rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf :ComputeElementComponent .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VMM
+
+:VMM rdf:type owl:Class ;
+     
+     rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Vendor
+
+:Vendor rdf:type owl:Class ;
+        
+        rdfs:subClassOf :Feature .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VirtualComputeElement
+
+:VirtualComputeElement rdf:type owl:Class ;
+                       
+                       rdfs:subClassOf :ComputeElement ,
+                                       :VirtualNode .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VirtualNode
+
+:VirtualNode rdf:type owl:Class ;
+             
+             rdfs:subClassOf nml:Node .
+
+
+
+###  http://schemas.ogf.org/nml/2013/05/base#Node
+
+nml:Node rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2002/07/owl#Thing
+
+owl:Thing rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://jfed.iminds.be/owl/compute.owl#AMD
+
+:AMD rdf:type :Vendor ,
+              owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ARM2
+
+:ARM2 rdf:type :CPUArchitecture ,
+               owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ARM6
+
+:ARM6 rdf:type :CPUArchitecture ,
+               owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#AppleInc
+
+:AppleInc rdf:type :Vendor ,
+                   owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Atmel
+
+:Atmel rdf:type :Vendor ,
+                owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#BareMetalCE
+
+:BareMetalCE rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Blade
+
+:Blade rdf:type :ComputeElementType ,
+                owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#CentOS-5.5
+
+:CentOS-5.5 rdf:type owl:NamedIndividual ;
+            
+            :osVersion "5.5" ;
+            
+            :osDistribution "CentOS" ;
+            
+            :vendor :CentOSFoundation .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#CentOSFoundation
+
+:CentOSFoundation rdf:type :Vendor ,
+                           owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#DDR1066
+
+:DDR1066 rdf:type :RAMTypeInstance ,
+                  owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#DDR2-1066
+
+:DDR2-1066 rdf:type :RAMTypeInstance ,
+                    owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#DDR2-400
+
+:DDR2-400 rdf:type :RAMTypeInstance ,
+                   owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#DDR266
+
+:DDR266 rdf:type :RAMTypeInstance ,
+                 owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Debian
+
+:Debian rdf:type :Vendor ,
+                 owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#ESX
+
+:ESX rdf:type :VMM ,
+              owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#GenericRam
+
+:GenericRam rdf:type :RAMType ,
+                     owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#GenericX86
+
+:GenericX86 rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#GenericX86-64
+
+:GenericX86-64 rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#GenuineIntel
+
+:GenuineIntel rdf:type :Vendor ,
+                       owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#IA-64
+
+:IA-64 rdf:type :CPUArchitecture ,
+                owl:NamedIndividual ;
+       
+       rdfs:comment "Server-class 64-bit x64 from Intel" .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Intel
+
+:Intel rdf:type :Vendor ,
+                owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Intel-Xeon
+
+:Intel-Xeon rdf:type :ComputeElement ,
+                     owl:NamedIndividual ;
+            
+            :clockFrequency "1600.000"^^xsd:string ;
+            
+            :numCPUCores 6 ;
+            
+            :cpuFamily "6"^^xsd:string ;
+            
+            :vendor :GenuineIntel .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#KVM
+
+:KVM rdf:type :VMM ,
+              owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Laptop
+
+:Laptop rdf:type :ComputeElementType ,
+                 owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Microsoft
+
+:Microsoft rdf:type :Vendor ,
+                    owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#None
+
+:None rdf:type :VMM ,
+               owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#OpenVZ
+
+:OpenVZ rdf:type :VMM ,
+                 owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#OpenVZCE
+
+:OpenVZCE rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#PC133-SDRAM
+
+:PC133-SDRAM rdf:type :RAMTypeInstance ,
+                      owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Pentium3
+
+:Pentium3 rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#QuadNehalem24
+
+:QuadNehalem24 rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#RackedServer
+
+:RackedServer rdf:type :ComputeElementType ,
+                       owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#RedHat-6
+
+:RedHat-6 rdf:type owl:NamedIndividual ;
+          
+          :osVersion "6" ;
+          
+          :osDistribution "RHEL" ;
+          
+          :vendor :RedHatInc .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#RedHatInc
+
+:RedHatInc rdf:type :Vendor ,
+                    owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Ubuntu-10.04
+
+:Ubuntu-10.04 rdf:type owl:NamedIndividual ;
+              
+              :osDistribution "Ubuntu" ;
+              
+              :osVersion "10.04" ;
+              
+              :vendor :UbuntuFoundation .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#UbuntuFoundation
+
+:UbuntuFoundation rdf:type :Vendor ,
+                           owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VMWare
+
+:VMWare rdf:type :VMM ,
+                 owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VServer
+
+:VServer rdf:type :VMM ,
+                  owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VServerCE
+
+:VServerCE rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#VirtualBox
+
+:VirtualBox rdf:type :VMM ,
+                     owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Windows7
+
+:Windows7 rdf:type owl:NamedIndividual ;
+          
+          nml:lat "51.01" ;
+          
+          :osVersion "7" ;
+          
+          :osDistribution "Windows" ;
+          
+          :vendor :Microsoft .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Xen
+
+:Xen rdf:type :VMM ,
+              owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#Xeon3
+
+:Xeon3 rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#d710RAM
+
+:d710RAM rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01a
+
+:n095-01a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon ;
+          
+          :hasInterface :n095-01a-eth0 ,
+                        :n095-01a-eth1 ,
+                        :n095-01a-eth2 ,
+                        :n095-01a-eth3 .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01a-eth0
+
+:n095-01a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:77:e6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01a-eth1
+
+:n095-01a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:77:e7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01a-eth2
+
+:n095-01a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a2:74  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01a-eth3
+
+:n095-01a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a2:75  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01b
+
+:n095-01b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon ;
+          
+          :hasInterface :n095-01b-eth0 ,
+                        :n095-01b-eth1 ,
+                        :n095-01b-eth2 ,
+                        :n095-01b-eth3 .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01b-eth0
+
+:n095-01b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:77:e8  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01b-eth1
+
+:n095-01b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:77:e9  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01b-eth2
+
+:n095-01b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:a8  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-01b-eth3
+
+:n095-01b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:a9  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-02a
+
+:n095-02a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-02b
+
+:n095-02b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-03a
+
+:n095-03a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-03a-eth0
+
+:n095-03a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:54  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-03a-eth1
+
+:n095-03a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:55  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-03a-eth2
+
+:n095-03a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:ec  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-03a-eth3
+
+:n095-03a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:ed  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-03b
+
+:n095-03b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-04a
+
+:n095-04a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-04a-eth0
+
+:n095-04a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:a0  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-04a-eth1
+
+:n095-04a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:a1  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-04a-eth2
+
+:n095-04a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:b6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-04a-eth3
+
+:n095-04a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:b7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-04b
+
+:n095-04b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05a
+
+:n095-05a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05a-eth0
+
+:n095-05a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:5c  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05a-eth1
+
+:n095-05a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:5d  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05a-eth2
+
+:n095-05a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:3e  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05a-eth3
+
+:n095-05a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:3f  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05b
+
+:n095-05b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05b-eth0
+
+:n095-05b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:60  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05b-eth1
+
+:n095-05b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:61  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05b-eth2
+
+:n095-05b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:ae  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-05b-eth3
+
+:n095-05b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:af  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-06a
+
+:n095-06a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-06a-eth0
+
+:n095-06a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e0  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-06a-eth1
+
+:n095-06a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e1  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-06a-eth2
+
+:n095-06a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:78  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-06a-eth3
+
+:n095-06a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:79  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-06b
+
+:n095-06b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07a
+
+:n095-07a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07a-eth0
+
+:n095-07a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:a6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07a-eth1
+
+:n095-07a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:a7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07a-eth2
+
+:n095-07a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:f8  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07a-eth3
+
+:n095-07a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a1:f9  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07b
+
+:n095-07b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07b-eth0
+
+:n095-07b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07b-eth1
+
+:n095-07b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07b-eth2
+
+:n095-07b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a2:b6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-07b-eth3
+
+:n095-07b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a2:b7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-08a
+
+:n095-08a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-08b
+
+:n095-08b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09a
+
+:n095-09a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09a-eth0
+
+:n095-09a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:8a  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09a-eth1
+
+:n095-09a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:8b  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09a-eth2
+
+:n095-09a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:b6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09a-eth3
+
+:n095-09a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:b7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09b
+
+:n095-09b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09b-eth0
+
+:n095-09b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:71:86  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09b-eth1
+
+:n095-09b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:71:87  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09b-eth2
+
+:n095-09b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:c8  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-09b-eth3
+
+:n095-09b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:c9  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10a
+
+:n095-10a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10a-eth0
+
+:n095-10a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:94  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10a-eth1
+
+:n095-10a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:76:95  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10a-eth2
+
+:n095-10a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:64  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10a-eth3
+
+:n095-10a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:65  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10b
+
+:n095-10b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10b-eth0
+
+:n095-10b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:72:d6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10b-eth1
+
+:n095-10b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:72:d7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10b-eth2
+
+:n095-10b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:d8  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-10b-eth3
+
+:n095-10b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:a0:d9  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-11a
+
+:n095-11a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-11b
+
+:n095-11b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-11b-eth0
+
+:n095-11b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e2  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-11b-eth1
+
+:n095-11b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e3  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-11b-eth2
+
+:n095-11b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:9f:02  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-11b-eth3
+
+:n095-11b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:9f:03  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-12a
+
+:n095-12a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-12a-eth0
+
+:n095-12a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e4  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-12a-eth1
+
+:n095-12a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:75:e5  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-12a-eth2
+
+:n095-12a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:9e:90  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-12a-eth3
+
+:n095-12a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:9e:91  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-12b
+
+:n095-12b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-13a
+
+:n095-13a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-13a-eth0
+
+:n095-13a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:73:34  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-13a-eth1
+
+:n095-13a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:73:35  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-13a-eth2
+
+:n095-13a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:9e:46  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-13a-eth3
+
+:n095-13a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "90:e2:ba:00:9e:47  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-13b
+
+:n095-13b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-14a
+
+:n095-14a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-14b
+
+:n095-14b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-15a
+
+:n095-15a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-15b
+
+:n095-15b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-16a
+
+:n095-16a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-16b
+
+:n095-16b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a
+
+:n095-17a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a-eth0
+
+:n095-17a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:71:64  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a-eth1
+
+:n095-17a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:71:65  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a-eth2
+
+:n095-17a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:69:77:44  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a-eth3
+
+:n095-17a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:69:77:45  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a-eth4
+
+:n095-17a-eth4 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:69:77:46  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17a-eth5
+
+:n095-17a-eth5 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:69:77:47  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-17b
+
+:n095-17b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-18a
+
+:n095-18a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-18b
+
+:n095-18b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-19a
+
+:n095-19a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-19b
+
+:n095-19b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-20a
+
+:n095-20a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-20b
+
+:n095-20b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-21a
+
+:n095-21a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-21b
+
+:n095-21b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-26
+
+:n095-26 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-27
+
+:n095-27 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n095-28
+
+:n095-28 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-02
+
+:n096-02 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-03
+
+:n096-03 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-04
+
+:n096-04 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-05
+
+:n096-05 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-06a
+
+:n096-06a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-06b
+
+:n096-06b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-07b
+
+:n096-07b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a
+
+:n096-08a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 19.48 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a-eth0
+
+:n096-08a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:84:17:6e  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a-eth1
+
+:n096-08a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:84:17:6f  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a-eth2
+
+:n096-08a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:ba:f4  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a-eth3
+
+:n096-08a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:ba:f5  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a-eth4
+
+:n096-08a-eth4 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:ba:f6  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08a-eth5
+
+:n096-08a-eth5 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:ba:f7  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-08b
+
+:n096-08b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09a
+
+:n096-09a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b
+
+:n096-09b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b-eth0
+
+:n096-09b-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:84:36:26  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b-eth1
+
+:n096-09b-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:84:36:27  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b-eth2
+
+:n096-09b-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:bc:8c  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b-eth3
+
+:n096-09b-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:bc:8d  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b-eth4
+
+:n096-09b-eth4 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:bc:8e  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-09b-eth5
+
+:n096-09b-eth5 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:bc:8f  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-10a
+
+:n096-10a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-10b
+
+:n096-10b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-11a
+
+:n096-11a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n096-11b
+
+:n096-11b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-01b
+
+:n097-01b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-02a
+
+:n097-02a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-02b
+
+:n097-02b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-03a
+
+:n097-03a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-03b
+
+:n097-03b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-04a
+
+:n097-04a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-04b
+
+:n097-04b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-05a
+
+:n097-05a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-05b
+
+:n097-05b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-06a
+
+:n097-06a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-06b
+
+:n097-06b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-07a
+
+:n097-07a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-07b
+
+:n097-07b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-08a
+
+:n097-08a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-08b
+
+:n097-08b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-09a
+
+:n097-09a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-09b
+
+:n097-09b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-10a
+
+:n097-10a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-10b
+
+:n097-10b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-11a
+
+:n097-11a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-11b
+
+:n097-11b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-12a
+
+:n097-12a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-12b
+
+:n097-12b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-13a
+
+:n097-13a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-13b
+
+:n097-13b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-14a
+
+:n097-14a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-14b
+
+:n097-14b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-15a
+
+:n097-15a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-15b
+
+:n097-15b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-16a
+
+:n097-16a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-16b
+
+:n097-16b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a
+
+:n097-17a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a-eth0
+
+:n097-17a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:be  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a-eth1
+
+:n097-17a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:bf  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a-eth2
+
+:n097-17a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:6c  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a-eth3
+
+:n097-17a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:6d  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a-eth4
+
+:n097-17a-eth4 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:6e  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17a-eth5
+
+:n097-17a-eth5 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:6f  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-17b
+
+:n097-17b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-18a
+
+:n097-18a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-18b
+
+:n097-18b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a
+
+:n097-19a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a-eth0
+
+:n097-19a-eth0 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:bc  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a-eth1
+
+:n097-19a-eth1 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:4c:74:bd  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a-eth2
+
+:n097-19a-eth2 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:5c  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a-eth3
+
+:n097-19a-eth3 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:5d  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a-eth4
+
+:n097-19a-eth4 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:5e  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19a-eth5
+
+:n097-19a-eth5 rdf:type :Interface ,
+                        owl:NamedIndividual ;
+               
+               :hasMac "00:25:90:65:be:5f  "^^xsd:string .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-19b
+
+:n097-19b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-20a
+
+:n097-20a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-20b
+
+:n097-20b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-21a
+
+:n097-21a rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-21b
+
+:n097-21b rdf:type owl:NamedIndividual ;
+          
+          :ramMemory 23.41 ;
+          
+          :memoryCapacity 250.1 ;
+          
+          :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-26
+
+:n097-26 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-27
+
+:n097-27 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#n097-28
+
+:n097-28 rdf:type owl:NamedIndividual ;
+         
+         :ramMemory 23.41 ;
+         
+         :memoryCapacity 250.1 ;
+         
+         :cpu :Intel-Xeon .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#pc3000RAM
+
+:pc3000RAM rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#pc850RAM
+
+:pc850RAM rdf:type owl:NamedIndividual .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#x86
+
+:x86 rdf:type :CPUArchitecture ,
+              owl:NamedIndividual ;
+     
+     rdfs:comment "32-bit x86" .
+
+
+
+###  http://jfed.iminds.be/owl/compute.owl#x86-64
+
+:x86-64 rdf:type :CPUArchitecture ,
+                 owl:NamedIndividual ;
+        
+        rdfs:comment "64-bit x86" .
+
+
+
+
+
+#################################################################
+#
+#    Annotations
+#
+#################################################################
+
+
+nml:parameter rdfs:comment "What is this used for? - Thijs" .
+
+
+
+nml:isAlias rdfs:comment "What is the advantage of using this property over stating that two Individuals are equal to each other? - Thijs" .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
