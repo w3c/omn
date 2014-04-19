@@ -1,11 +1,10 @@
-Ontology Discussions
-====================
+Open-Multinet Ontology Playground
+=================================
 
 Abstract
 --------
 
-Temporary working space for ontology related tasks within http://open-multinet.info and http://www.fed4fire.eu.
-
+Playground for the ontology work focussing on putting ontologies in RSpecs.
 
 Suggested Setup
 ---------------
@@ -15,7 +14,7 @@ Suggested Setup
  * rdf.sh (command line ontology tools)
  * OwlToUml (to visualize simple ontologies as plantuml diagrams)
  * rapper (command line tool to convert and check ontologies)
- 
+ * [lodlive](http://en.lodlive.it) (user friendly vizualization of the data)
 
 Directory Layout
 ----------------
