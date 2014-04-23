@@ -242,7 +242,9 @@ geo:Point rdf:type owl:Class .
                   
                   rdfs:label "FUSECO Playground"@en ;
                   
-                  foaf:depiction <http://testbeds.eu/images/fuseco.png> ;
+                  foaf:depiction <http://www.fokus.fraunhofer.de/en/fokus_testbeds/fuseco_playground/_logos/FUSECO_Playground_Logo.jpg> ;
+                  
+                  foaf:mbox         <mailto:info@fuseco-playground.org> ;
                   
                   rdfs:isDefinedBy <http://www.fuseco-playground.org> ;
                   
