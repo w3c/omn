@@ -14,7 +14,8 @@ Suggested Setup
  * rdf.sh (command line ontology tools)
  * OwlToUml (to visualize simple ontologies as plantuml diagrams)
  * rapper (command line tool to convert and check ontologies)
- * [lodlive](http://en.lodlive.it) (user friendly vizualization of the data)
+ * [lodlive](http://en.lodlive.it) (user friendly vizualization of a sparql endpoint)
+ * [yasgui](http://yasgui.laurensrietveld.nl) (user friendly query of a sparql endpoint)
  * [LODE](http://www.essepuntato.it/lode) (documentation generator for OWL files)
 
 Directory Layout
