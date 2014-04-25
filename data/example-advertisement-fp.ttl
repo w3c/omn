@@ -1,14 +1,14 @@
 @prefix : <http://fuseco.fokus.fraunhofer.de/ontology#> .
+
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix omn: <http://open-multinet.info/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix geni: <http://geni.net/ontology#> .
-@prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @base <http://fuseco.fokus.fraunhofer.de/ontology#> .
@@ -17,11 +17,21 @@
                                              
                                              rdfs:seeAlso "http://fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
                                              
-                                             rdfs:comment """FUSECO Playground Ontology Advertisement.
-
-Alexander Willner <alexander.willner@tu-berlin.de>"""@en ;
+                                             rdfs:comment "FUSECO Playground Ontology Advertisement."@en ;
                                              
-                                             owl:imports <http://open-multinet.info/ontology> .
+                                             dc:title "FUSECO Playground Ontology Advertisement Example"@en ;
+                                             
+                                             dc:date "2014-04-25" ;
+                                             
+                                             owl:versionInfo "0.1" ;
+                                             
+                                             dc:creator "Alexander Willner <alexander.willner@tu-berlin.de>";
+                                             
+                                             dc:rights "Creative Commons Attribution Licence"@en ;
+                                             
+                                             dc:description "Initial example."@en ;
+                                             
+                                             dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/screenshots/example-advertisement-fp.png> .
 
 
 #################################################################
