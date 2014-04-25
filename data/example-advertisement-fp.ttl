@@ -254,6 +254,8 @@ geo:Point rdf:type owl:Class .
                   
                   foaf:depiction <http://www.fokus.fraunhofer.de/en/fokus_testbeds/fuseco_playground/_logos/FUSECO_Playground_Logo.jpg> ;
                   
+                  foaf:homepage <http://fuseco-playground.org> ;
+                  
                   foaf:mbox         <mailto:info@fuseco-playground.org> ;
                   
                   rdfs:isDefinedBy <http://www.fuseco-playground.org> ;

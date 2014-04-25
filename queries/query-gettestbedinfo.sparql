@@ -8,7 +8,7 @@ prefix geni: <http://geni.net/ontology#>
 SELECT ?label ?url ?image ?lat ?long ?amendpoint ?amversion ?cert WHERE {
 ?testbed rdf:type omn:Testbed ;
 		 rdfs:label ?label ;
-		 foaf:Image ?image ;
+		 foaf:depiction ?image ;
 		 foaf:homepage ?url ;
 		 foaf:based_near [
 		     geo:lat ?lat ;
