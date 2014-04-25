@@ -15,15 +15,16 @@ Suggested Setup
  * OwlToUml (to visualize simple ontologies as plantuml diagrams)
  * rapper (command line tool to convert and check ontologies)
  * [lodlive](http://en.lodlive.it) (user friendly vizualization of the data)
+ * [LODE](http://www.essepuntato.it/lode) (documentation generator for OWL files)
 
 Directory Layout
 ----------------
  * bin: executables
  * data: example data to work with (to help validating and discussing the ontologies)
+ * generated: auto generated files based (e.g. documentation, graphical representation, other serializations)
  * import: related ontologies to be reused (second main focus)
  * ontologies: upper ontologies (to main focus)
  * queries: example queries to work with (to help validating and discussing the ontologies)
-
  
 How To
 ------
