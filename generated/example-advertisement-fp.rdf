@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:geni="http://geni.net/ontology#" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:nml="http://schemas.ogf.org/nml/base/2013/02#" xmlns:novi="http://fp7-novi.eu/im.owl#" xmlns:omn="http://open-multinet.info/ontology#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns="http://fuseco.fokus.fraunhofer.de/ontology#">
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://fuseco.fokus.fraunhofer.de</rdfs:seeAlso>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <rdfs:comment xml:lang="en">FUSECO Playground Ontology Advertisement.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <dc:title xml:lang="en">FUSECO Playground Ontology Advertisement Example</dc:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <dc:date>2014-04-25</dc:date>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <owl:versionInfo>0.1</owl:versionInfo>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <dc:creator>Alexander Willner &lt;alexander.willner@tu-berlin.de&gt;</dc:creator>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <dc:rights xml:lang="en">Creative Commons Attribution Licence</dc:rights>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <dc:description xml:lang="en">Initial example.</dc:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
+    <dc:description rdf:resource="https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/screenshots/example-advertisement-fp.png"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://geni.net/ontology#expires">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://geni.net/ontology#generated">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://geni.net/ontology#manager">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://geni.net/ontology#type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#lat">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#long">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Image">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/based_near">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#Attenuator">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#Attenuator">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcNode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcClient">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcClient">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcNode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcLink">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcLink">
+    <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/base/2013/02#Link"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcNode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcNode">
+    <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/base/2013/02#Node"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcPCRFService">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcPCRFService">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcService"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcService">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#EpcService">
+    <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/base/2013/02#Service"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#GPRS">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#GPRS">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcLink"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#ImsService">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#ImsService">
+    <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/base/2013/02#Service"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#LTE">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#LTE">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcLink"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#MmeComponent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#MmeComponent">
+    <rdfs:subClassOf rdf:resource="http://open-multinet.info/ontology#SoftwareComponent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#MmeHandoverService">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#MmeHandoverService">
+    <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/base/2013/02#Service"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer">
+    <rdfs:label xml:lang="en">Open Stack Server</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer">
+    <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/base/2013/02#Node"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#Shieldbox">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#Shieldbox">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcNode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#UMTS">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#UMTS">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcLink"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#WIFI">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#WIFI">
+    <rdfs:subClassOf rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcLink"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://geni.net/ontology#AggregateManager">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://geni.net/ontology#Message">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#Point">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <rdf:type rdf:resource="http://open-multinet.info/ontology#Testbed"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <rdfs:label xml:lang="en">FUSECO Playground</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <foaf:depiction rdf:resource="http://www.fokus.fraunhofer.de/en/fokus_testbeds/fuseco_playground/_logos/FUSECO_Playground_Logo.jpg"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <foaf:mbox rdf:resource="mailto:info@fuseco-playground.org"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <rdfs:isDefinedBy rdf:resource="http://www.fuseco-playground.org"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <rdfs:comment xml:lang="en">The Future Seamless Communication (FUSECO) Playground - located in Berlin - is a pioneering reference testbed, integrating various state of the art wireless broadband networks into a 3GPP Evolved Packet Core (EPC) prototype platform, allowing the rapid validation of new networking paradigms, and prototyping of innovative Future Internet and smart city applications.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <omn:certificate rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://fuseco.fokus.fraunhofer.de/api/fed4fire/v1/certificates/download/ca.fiteagle-fuseco.fokus.fraunhofer.de</omn:certificate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
+    <foaf:based_near rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <rdf:type rdf:resource="http://geni.net/ontology#AggregateManager"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <rdfs:label xml:lang="en">GENI SFA Aggregate Manager v3</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <geni:manager rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm</geni:manager>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <omn:endpoint>https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3</omn:endpoint>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <omn:version>3.0</omn:version>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#am">
+    <omn:partOfGroup rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#location">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#location">
+    <rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#location">
+    <rdfs:label xml:lang="en">Fraunhofer FOKUS</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#location">
+    <geo:lat>52.5258083</geo:lat>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#location">
+    <geo:long>13.3172764</geo:long>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#message">
+    <rdf:type rdf:resource="http://geni.net/ontology#Message"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#message">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#message">
+    <geni:expires rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-24T06:20:19Z</geni:expires>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#message">
+    <geni:generated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-07-24T06:20:19Z</geni:generated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#message">
+    <geni:type rdf:resource="http://geni.net/ontology#Advertisement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <rdf:type rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <rdfs:label xml:lang="en">VM Server 1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <omn:exclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</omn:exclusive>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <omn:monitoringsupport rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</omn:monitoringsupport>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <omn:partOfGroup rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <omn:up rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</omn:up>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver1">
+    <foaf:based_near rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver2">
+    <ns0:mysuperinfo xmlns:ns0="http://wu.example.org/ontology#" xml:lang="en">bla</ns0:mysuperinfo>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver2">
+    <rdf:type rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver2">
+    <rdfs:label xml:lang="en">VM Server 2</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver2">
+    <omn:up rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</omn:up>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver2">
+    <omn:partOfGroup rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver3">
+    <rdf:type rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver3">
+    <rdfs:label xml:lang="en">VM Server 3</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver3">
+    <omn:up rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</omn:up>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver3">
+    <omn:monitoringsupport rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</omn:monitoringsupport>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#vmserver3">
+    <omn:partOfGroup rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#reservation1">
+    <rdf:type rdf:resource="http://fp7-novi.eu/im.owl#Reservation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#reservation1">
+    <rdfs:label>MyReservation1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#reservation1">
+    <rdfs:comment>a future reservation</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#reservation1">
+    <novi:startTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-01-01T00:00:00-02:00</novi:startTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#reservation1">
+    <novi:endTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-01-01T01:00:00-02:00</novi:endTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#epcservice1">
+    <rdf:type rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#EpcService"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#epcservice1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#epcservice1">
+    <rdfs:label xml:lang="en">EPC Service</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#epcservice1">
+    <omn:monitoringsupport rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</omn:monitoringsupport>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#epcservice1">
+    <omn:partOfGroup rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#reservation1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#epcservice1">
+    <omn:partOfGroup rdf:resource="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground"/>
+  </rdf:Description>
+</rdf:RDF>
