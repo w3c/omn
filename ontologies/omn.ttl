@@ -1,19 +1,18 @@
 @prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix geni: <http://geni.net/ontology#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://open-multinet.info/ontology#> .
+@base <http://open-multinet.info/ontology> .
 
 <http://open-multinet.info/ontology> rdf:type owl:Ontology ;
                                      
-                                     owl:imports 
-                                                 <http://www.science.uva.nl/research/sne/indl> .
+                                     owl:imports <http://www.science.uva.nl/research/sne/indl> .
 
 
 #################################################################
@@ -31,9 +30,19 @@
 
 
 
+###  http://open-multinet.info/ontology#exportsToOML
+
+<http://open-multinet.info/ontology#exportsToOML> rdf:type owl:AnnotationProperty ;
+                                                  
+                                                  rdfs:domain nml:NetworkObject .
+
+
+
 ###  http://open-multinet.info/ontology#partOfGroup
 
-<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:AnnotationProperty .
+<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:AnnotationProperty ;
+                                                 
+                                                 rdfs:domain nml:NetworkObject .
 
 
 
@@ -56,13 +65,19 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology#groupContains
+
+<http://open-multinet.info/ontology#groupContains> rdf:type owl:ObjectProperty ;
+                                                   
+                                                   owl:inverseOf <http://open-multinet.info/ontology#partOfGroup> .
+
+
+
 ###  http://open-multinet.info/ontology#partOfGroup
 
 <http://open-multinet.info/ontology#partOfGroup> rdf:type owl:ObjectProperty ;
                                                  
-                                                 rdfs:range nml:Group ;
-                                                 
-                                                 rdfs:domain nml:NetworkObject .
+                                                 rdfs:range nml:Group .
 
 
 
@@ -135,8 +150,6 @@
 <http://open-multinet.info/ontology#exportsToOML> rdf:type owl:DatatypeProperty ;
                                                   
                                                   rdfs:subPropertyOf <http://open-multinet.info/ontology#exportsTo> ;
-                                                  
-                                                  rdfs:domain nml:NetworkObject ;
                                                   
                                                   rdfs:range xsd:anyURI .
 
@@ -297,6 +310,18 @@ novi:Reservation rdf:type owl:Class ;
 ###  http://schemas.ogf.org/nml/base/2013/02#Group
 
 nml:Group rdf:type owl:Class .
+
+
+
+###  http://schemas.ogf.org/nml/base/2013/02#Node
+
+nml:Node rdf:type owl:Class .
+
+
+
+###  http://www.science.uva.nl/research/sne/indl#NodeComponent
+
+indl:NodeComponent rdf:type owl:Class .
 
 
 
