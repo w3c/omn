@@ -237,6 +237,14 @@ novi:Reservation rdf:type owl:Class ;
 
 
 
+###  http://open-multinet.info/ontology#Federation
+
+<http://open-multinet.info/ontology#Federation> rdf:type owl:Class ;
+                                                
+                                                rdfs:subClassOf nml:Group .
+
+
+
 ###  http://open-multinet.info/ontology#OperationalStatus
 
 <http://open-multinet.info/ontology#OperationalStatus> rdf:type owl:Class ;
