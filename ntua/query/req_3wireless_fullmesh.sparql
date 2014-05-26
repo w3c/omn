@@ -1,0 +1,479 @@
+PREFIX nml: <http://schemas.ogf.org/nml/2013/05/base#>PREFIX indl: <http://www.science.uva.nl/research/sne/indl#>PREFIX indl_wireless: <http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#>SELECT *  where { ?phnode001 rdf:type nml:Node.
+FILTER EXISTS {?phnode001 nml:locatedAt ?phnode001Location.
+?phnode001Location rdf:type nml:Location.
+?phnode001Location nml:long ?phnode001Locationlong.
+FILTER (?phnode001Locationlong = "39.360839"^^xsd:float).
+?phnode001Location nml:lat ?phnode001Locationlat.
+FILTER (?phnode001Locationlat = "22.949989"^^xsd:float).
+?phnode001 nml:hasOutboundPort ?phnode001controloutcha.
+?phnode001controloutcha indl_wireless:hasWirelessFeatures ?phnode001controloutchawireless.
+?phnode001controloutchawireless rdf:type indl_wireless:WirelessFeatures.
+?phnode001controloutchawireless indl_wireless:hasChannel ?phnode001controloutchawireless0.
+?phnode001controloutchawireless0 indl_wireless:ChannelNo ?phnode001controloutchawireless0ChannelNo.
+FILTER (?phnode001controloutchawireless0ChannelNo = "36"^^xsd:integer).
+?phnode001controloutchawireless0 indl_wireless:frequency ?phnode001controloutchawireless0frequency.
+FILTER (?phnode001controloutchawireless0frequency = "5180.0"^^xsd:string).
+?phnode001controloutchawireless0 indl_wireless:protocol ?phnode001controloutchawireless0protocol.
+FILTER (?phnode001controloutchawireless0protocol = "IEEE802_11a"^^xsd:string).
+?phnode001controloutchawireless indl_wireless:hasChannel ?phnode001controloutchawireless1.
+?phnode001controloutchawireless1 indl_wireless:ChannelNo ?phnode001controloutchawireless1ChannelNo.
+FILTER (?phnode001controloutchawireless1ChannelNo = "40"^^xsd:integer).
+?phnode001controloutchawireless1 indl_wireless:frequency ?phnode001controloutchawireless1frequency.
+FILTER (?phnode001controloutchawireless1frequency = "5200.0"^^xsd:string).
+?phnode001controloutchawireless1 indl_wireless:protocol ?phnode001controloutchawireless1protocol.
+FILTER (?phnode001controloutchawireless1protocol = "IEEE802_11a"^^xsd:string).
+?phnode001controloutchawireless indl_wireless:hasChannel ?phnode001controloutchawireless2.
+?phnode001controloutchawireless2 indl_wireless:ChannelNo ?phnode001controloutchawireless2ChannelNo.
+FILTER (?phnode001controloutchawireless2ChannelNo = "44"^^xsd:integer).
+?phnode001controloutchawireless2 indl_wireless:frequency ?phnode001controloutchawireless2frequency.
+FILTER (?phnode001controloutchawireless2frequency = "5220.0"^^xsd:string).
+?phnode001controloutchawireless2 indl_wireless:protocol ?phnode001controloutchawireless2protocol.
+FILTER (?phnode001controloutchawireless2protocol = "IEEE802_11a"^^xsd:string).
+?phnode001controloutchawireless indl_wireless:hasChannel ?phnode001controloutchawireless3.
+?phnode001controloutchawireless3 indl_wireless:ChannelNo ?phnode001controloutchawireless3ChannelNo.
+FILTER (?phnode001controloutchawireless3ChannelNo = "48"^^xsd:integer).
+?phnode001controloutchawireless3 indl_wireless:frequency ?phnode001controloutchawireless3frequency.
+FILTER (?phnode001controloutchawireless3frequency = "5240.0"^^xsd:string).
+?phnode001controloutchawireless3 indl_wireless:protocol ?phnode001controloutchawireless3protocol.
+FILTER (?phnode001controloutchawireless3protocol = "IEEE802_11a"^^xsd:string).
+?phnode001 nml:hasOutboundPort ?phnode001controlAoutcha.
+?phnode001controlAoutcha indl_wireless:hasWirelessFeatures ?phnode001controlAoutchawireless.
+?phnode001controlAoutchawireless rdf:type indl_wireless:WirelessFeatures.
+?phnode001controlAoutchawireless indl_wireless:hasChannel ?phnode001controlAoutchawireless0.
+?phnode001controlAoutchawireless0 indl_wireless:ChannelNo ?phnode001controlAoutchawireless0ChannelNo.
+FILTER (?phnode001controlAoutchawireless0ChannelNo = "36"^^xsd:integer).
+?phnode001controlAoutchawireless0 indl_wireless:frequency ?phnode001controlAoutchawireless0frequency.
+FILTER (?phnode001controlAoutchawireless0frequency = "5180.0"^^xsd:string).
+?phnode001controlAoutchawireless0 indl_wireless:protocol ?phnode001controlAoutchawireless0protocol.
+FILTER (?phnode001controlAoutchawireless0protocol = "IEEE802_11a"^^xsd:string).
+?phnode001controlAoutchawireless indl_wireless:hasChannel ?phnode001controlAoutchawireless1.
+?phnode001controlAoutchawireless1 indl_wireless:ChannelNo ?phnode001controlAoutchawireless1ChannelNo.
+FILTER (?phnode001controlAoutchawireless1ChannelNo = "40"^^xsd:integer).
+?phnode001controlAoutchawireless1 indl_wireless:frequency ?phnode001controlAoutchawireless1frequency.
+FILTER (?phnode001controlAoutchawireless1frequency = "5200.0"^^xsd:string).
+?phnode001controlAoutchawireless1 indl_wireless:protocol ?phnode001controlAoutchawireless1protocol.
+FILTER (?phnode001controlAoutchawireless1protocol = "IEEE802_11a"^^xsd:string).
+?phnode001controlAoutchawireless indl_wireless:hasChannel ?phnode001controlAoutchawireless2.
+?phnode001controlAoutchawireless2 indl_wireless:ChannelNo ?phnode001controlAoutchawireless2ChannelNo.
+FILTER (?phnode001controlAoutchawireless2ChannelNo = "44"^^xsd:integer).
+?phnode001controlAoutchawireless2 indl_wireless:frequency ?phnode001controlAoutchawireless2frequency.
+FILTER (?phnode001controlAoutchawireless2frequency = "5220.0"^^xsd:string).
+?phnode001controlAoutchawireless2 indl_wireless:protocol ?phnode001controlAoutchawireless2protocol.
+FILTER (?phnode001controlAoutchawireless2protocol = "IEEE802_11a"^^xsd:string).
+?phnode001controlAoutchawireless indl_wireless:hasChannel ?phnode001controlAoutchawireless3.
+?phnode001controlAoutchawireless3 indl_wireless:ChannelNo ?phnode001controlAoutchawireless3ChannelNo.
+FILTER (?phnode001controlAoutchawireless3ChannelNo = "48"^^xsd:integer).
+?phnode001controlAoutchawireless3 indl_wireless:frequency ?phnode001controlAoutchawireless3frequency.
+FILTER (?phnode001controlAoutchawireless3frequency = "5240.0"^^xsd:string).
+?phnode001controlAoutchawireless3 indl_wireless:protocol ?phnode001controlAoutchawireless3protocol.
+FILTER (?phnode001controlAoutchawireless3protocol = "IEEE802_11a"^^xsd:string).
+FILTER (?phnode001controloutcha != ?phnode001controlAoutcha).
+} FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlout.
+?phnode001controlout nml:isSource ?linkcontrolANDcontrol21.
+?phnode001controlout rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrolANDcontrol21phnode002.
+?linkcontrolANDcontrol21phnode002 nml:isSink ?linkcontrolANDcontrol21.
+?linkcontrolANDcontrol21phnode002 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlout.
+?phnode001controlout nml:isSource ?linkcontrolANDcontrol2A1.
+?phnode001controlout rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrolANDcontrol2A1phnode002.
+?linkcontrolANDcontrol2A1phnode002 nml:isSink ?linkcontrolANDcontrol2A1.
+?linkcontrolANDcontrol2A1phnode002 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlout.
+?phnode001controlout nml:isSource ?linkcontrolANDcontrol31.
+?phnode001controlout rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrolANDcontrol31phnode003.
+?linkcontrolANDcontrol31phnode003 nml:isSink ?linkcontrolANDcontrol31.
+?linkcontrolANDcontrol31phnode003 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode003).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlout.
+?phnode001controlout nml:isSource ?linkcontrolANDcontrol3A1.
+?phnode001controlout rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrolANDcontrol3A1phnode003.
+?linkcontrolANDcontrol3A1phnode003 nml:isSink ?linkcontrolANDcontrol3A1.
+?linkcontrolANDcontrol3A1phnode003 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode003).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlAout.
+?phnode001controlAout nml:isSource ?linkcontrolAANDcontrol21.
+?phnode001controlAout rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrolAANDcontrol21phnode002.
+?linkcontrolAANDcontrol21phnode002 nml:isSink ?linkcontrolAANDcontrol21.
+?linkcontrolAANDcontrol21phnode002 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlAout.
+?phnode001controlAout nml:isSource ?linkcontrolAANDcontrol2A1.
+?phnode001controlAout rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrolAANDcontrol2A1phnode002.
+?linkcontrolAANDcontrol2A1phnode002 nml:isSink ?linkcontrolAANDcontrol2A1.
+?linkcontrolAANDcontrol2A1phnode002 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlAout.
+?phnode001controlAout nml:isSource ?linkcontrolAANDcontrol31.
+?phnode001controlAout rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrolAANDcontrol31phnode003.
+?linkcontrolAANDcontrol31phnode003 nml:isSink ?linkcontrolAANDcontrol31.
+?linkcontrolAANDcontrol31phnode003 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode003).
+} 
+} 
+ FILTER EXISTS { { ?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasOutboundPort ?phnode001controlAout.
+?phnode001controlAout nml:isSource ?linkcontrolAANDcontrol3A1.
+?phnode001controlAout rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrolAANDcontrol3A1phnode003.
+?linkcontrolAANDcontrol3A1phnode003 nml:isSink ?linkcontrolAANDcontrol3A1.
+?linkcontrolAANDcontrol3A1phnode003 rdf:type nml:Port.
+FILTER (?phnode001 != ?phnode003).
+} 
+} 
+?phnode002 rdf:type nml:Node.
+FILTER EXISTS {?phnode002 nml:locatedAt ?phnode002Location.
+?phnode002Location rdf:type nml:Location.
+?phnode002Location nml:long ?phnode002Locationlong.
+FILTER (?phnode002Locationlong = "39.360839"^^xsd:float).
+?phnode002Location nml:lat ?phnode002Locationlat.
+FILTER (?phnode002Locationlat = "22.949989"^^xsd:float).
+?phnode002 nml:hasOutboundPort ?phnode002control2outcha.
+?phnode002control2outcha indl_wireless:hasWirelessFeatures ?phnode002control2outchawireless.
+?phnode002control2outchawireless rdf:type indl_wireless:WirelessFeatures.
+?phnode002control2outchawireless indl_wireless:hasChannel ?phnode002control2outchawireless0.
+?phnode002control2outchawireless0 indl_wireless:ChannelNo ?phnode002control2outchawireless0ChannelNo.
+FILTER (?phnode002control2outchawireless0ChannelNo = "36"^^xsd:integer).
+?phnode002control2outchawireless0 indl_wireless:frequency ?phnode002control2outchawireless0frequency.
+FILTER (?phnode002control2outchawireless0frequency = "5180.0"^^xsd:string).
+?phnode002control2outchawireless0 indl_wireless:protocol ?phnode002control2outchawireless0protocol.
+FILTER (?phnode002control2outchawireless0protocol = "IEEE802_11a"^^xsd:string).
+?phnode002control2outchawireless indl_wireless:hasChannel ?phnode002control2outchawireless1.
+?phnode002control2outchawireless1 indl_wireless:ChannelNo ?phnode002control2outchawireless1ChannelNo.
+FILTER (?phnode002control2outchawireless1ChannelNo = "40"^^xsd:integer).
+?phnode002control2outchawireless1 indl_wireless:frequency ?phnode002control2outchawireless1frequency.
+FILTER (?phnode002control2outchawireless1frequency = "5200.0"^^xsd:string).
+?phnode002control2outchawireless1 indl_wireless:protocol ?phnode002control2outchawireless1protocol.
+FILTER (?phnode002control2outchawireless1protocol = "IEEE802_11a"^^xsd:string).
+?phnode002control2outchawireless indl_wireless:hasChannel ?phnode002control2outchawireless2.
+?phnode002control2outchawireless2 indl_wireless:ChannelNo ?phnode002control2outchawireless2ChannelNo.
+FILTER (?phnode002control2outchawireless2ChannelNo = "44"^^xsd:integer).
+?phnode002control2outchawireless2 indl_wireless:frequency ?phnode002control2outchawireless2frequency.
+FILTER (?phnode002control2outchawireless2frequency = "5220.0"^^xsd:string).
+?phnode002control2outchawireless2 indl_wireless:protocol ?phnode002control2outchawireless2protocol.
+FILTER (?phnode002control2outchawireless2protocol = "IEEE802_11a"^^xsd:string).
+?phnode002control2outchawireless indl_wireless:hasChannel ?phnode002control2outchawireless3.
+?phnode002control2outchawireless3 indl_wireless:ChannelNo ?phnode002control2outchawireless3ChannelNo.
+FILTER (?phnode002control2outchawireless3ChannelNo = "48"^^xsd:integer).
+?phnode002control2outchawireless3 indl_wireless:frequency ?phnode002control2outchawireless3frequency.
+FILTER (?phnode002control2outchawireless3frequency = "5240.0"^^xsd:string).
+?phnode002control2outchawireless3 indl_wireless:protocol ?phnode002control2outchawireless3protocol.
+FILTER (?phnode002control2outchawireless3protocol = "IEEE802_11a"^^xsd:string).
+?phnode002 nml:hasOutboundPort ?phnode002control2Aoutcha.
+?phnode002control2Aoutcha indl_wireless:hasWirelessFeatures ?phnode002control2Aoutchawireless.
+?phnode002control2Aoutchawireless rdf:type indl_wireless:WirelessFeatures.
+?phnode002control2Aoutchawireless indl_wireless:hasChannel ?phnode002control2Aoutchawireless0.
+?phnode002control2Aoutchawireless0 indl_wireless:ChannelNo ?phnode002control2Aoutchawireless0ChannelNo.
+FILTER (?phnode002control2Aoutchawireless0ChannelNo = "36"^^xsd:integer).
+?phnode002control2Aoutchawireless0 indl_wireless:frequency ?phnode002control2Aoutchawireless0frequency.
+FILTER (?phnode002control2Aoutchawireless0frequency = "5180.0"^^xsd:string).
+?phnode002control2Aoutchawireless0 indl_wireless:protocol ?phnode002control2Aoutchawireless0protocol.
+FILTER (?phnode002control2Aoutchawireless0protocol = "IEEE802_11a"^^xsd:string).
+?phnode002control2Aoutchawireless indl_wireless:hasChannel ?phnode002control2Aoutchawireless1.
+?phnode002control2Aoutchawireless1 indl_wireless:ChannelNo ?phnode002control2Aoutchawireless1ChannelNo.
+FILTER (?phnode002control2Aoutchawireless1ChannelNo = "40"^^xsd:integer).
+?phnode002control2Aoutchawireless1 indl_wireless:frequency ?phnode002control2Aoutchawireless1frequency.
+FILTER (?phnode002control2Aoutchawireless1frequency = "5200.0"^^xsd:string).
+?phnode002control2Aoutchawireless1 indl_wireless:protocol ?phnode002control2Aoutchawireless1protocol.
+FILTER (?phnode002control2Aoutchawireless1protocol = "IEEE802_11a"^^xsd:string).
+?phnode002control2Aoutchawireless indl_wireless:hasChannel ?phnode002control2Aoutchawireless2.
+?phnode002control2Aoutchawireless2 indl_wireless:ChannelNo ?phnode002control2Aoutchawireless2ChannelNo.
+FILTER (?phnode002control2Aoutchawireless2ChannelNo = "44"^^xsd:integer).
+?phnode002control2Aoutchawireless2 indl_wireless:frequency ?phnode002control2Aoutchawireless2frequency.
+FILTER (?phnode002control2Aoutchawireless2frequency = "5220.0"^^xsd:string).
+?phnode002control2Aoutchawireless2 indl_wireless:protocol ?phnode002control2Aoutchawireless2protocol.
+FILTER (?phnode002control2Aoutchawireless2protocol = "IEEE802_11a"^^xsd:string).
+?phnode002control2Aoutchawireless indl_wireless:hasChannel ?phnode002control2Aoutchawireless3.
+?phnode002control2Aoutchawireless3 indl_wireless:ChannelNo ?phnode002control2Aoutchawireless3ChannelNo.
+FILTER (?phnode002control2Aoutchawireless3ChannelNo = "48"^^xsd:integer).
+?phnode002control2Aoutchawireless3 indl_wireless:frequency ?phnode002control2Aoutchawireless3frequency.
+FILTER (?phnode002control2Aoutchawireless3frequency = "5240.0"^^xsd:string).
+?phnode002control2Aoutchawireless3 indl_wireless:protocol ?phnode002control2Aoutchawireless3protocol.
+FILTER (?phnode002control2Aoutchawireless3protocol = "IEEE802_11a"^^xsd:string).
+FILTER (?phnode002control2outcha != ?phnode002control2Aoutcha).
+} FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2out.
+?phnode002control2out nml:isSource ?linkcontrol2ANDcontrol1.
+?phnode002control2out rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol2ANDcontrol1phnode001.
+?linkcontrol2ANDcontrol1phnode001 nml:isSink ?linkcontrol2ANDcontrol1.
+?linkcontrol2ANDcontrol1phnode001 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2out.
+?phnode002control2out nml:isSource ?linkcontrol2ANDcontrolA1.
+?phnode002control2out rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol2ANDcontrolA1phnode001.
+?linkcontrol2ANDcontrolA1phnode001 nml:isSink ?linkcontrol2ANDcontrolA1.
+?linkcontrol2ANDcontrolA1phnode001 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2out.
+?phnode002control2out nml:isSource ?linkcontrol2ANDcontrol31.
+?phnode002control2out rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrol2ANDcontrol31phnode003.
+?linkcontrol2ANDcontrol31phnode003 nml:isSink ?linkcontrol2ANDcontrol31.
+?linkcontrol2ANDcontrol31phnode003 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode003).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2out.
+?phnode002control2out nml:isSource ?linkcontrol2ANDcontrol3A1.
+?phnode002control2out rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrol2ANDcontrol3A1phnode003.
+?linkcontrol2ANDcontrol3A1phnode003 nml:isSink ?linkcontrol2ANDcontrol3A1.
+?linkcontrol2ANDcontrol3A1phnode003 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode003).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2Aout.
+?phnode002control2Aout nml:isSource ?linkcontrol2AANDcontrol1.
+?phnode002control2Aout rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol2AANDcontrol1phnode001.
+?linkcontrol2AANDcontrol1phnode001 nml:isSink ?linkcontrol2AANDcontrol1.
+?linkcontrol2AANDcontrol1phnode001 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2Aout.
+?phnode002control2Aout nml:isSource ?linkcontrol2AANDcontrolA1.
+?phnode002control2Aout rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol2AANDcontrolA1phnode001.
+?linkcontrol2AANDcontrolA1phnode001 nml:isSink ?linkcontrol2AANDcontrolA1.
+?linkcontrol2AANDcontrolA1phnode001 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2Aout.
+?phnode002control2Aout nml:isSource ?linkcontrol2AANDcontrol31.
+?phnode002control2Aout rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrol2AANDcontrol31phnode003.
+?linkcontrol2AANDcontrol31phnode003 nml:isSink ?linkcontrol2AANDcontrol31.
+?linkcontrol2AANDcontrol31phnode003 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode003).
+} 
+} 
+ FILTER EXISTS { { ?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasOutboundPort ?phnode002control2Aout.
+?phnode002control2Aout nml:isSource ?linkcontrol2AANDcontrol3A1.
+?phnode002control2Aout rdf:type nml:Port.
+?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasInboundPort ?linkcontrol2AANDcontrol3A1phnode003.
+?linkcontrol2AANDcontrol3A1phnode003 nml:isSink ?linkcontrol2AANDcontrol3A1.
+?linkcontrol2AANDcontrol3A1phnode003 rdf:type nml:Port.
+FILTER (?phnode002 != ?phnode003).
+} 
+} 
+?phnode003 rdf:type nml:Node.
+FILTER EXISTS {?phnode003 nml:locatedAt ?phnode003Location.
+?phnode003Location rdf:type nml:Location.
+?phnode003Location nml:long ?phnode003Locationlong.
+FILTER (?phnode003Locationlong = "39.360839"^^xsd:float).
+?phnode003Location nml:lat ?phnode003Locationlat.
+FILTER (?phnode003Locationlat = "22.949989"^^xsd:float).
+?phnode003 nml:hasOutboundPort ?phnode003control3outcha.
+?phnode003control3outcha indl_wireless:hasWirelessFeatures ?phnode003control3outchawireless.
+?phnode003control3outchawireless rdf:type indl_wireless:WirelessFeatures.
+?phnode003control3outchawireless indl_wireless:hasChannel ?phnode003control3outchawireless0.
+?phnode003control3outchawireless0 indl_wireless:ChannelNo ?phnode003control3outchawireless0ChannelNo.
+FILTER (?phnode003control3outchawireless0ChannelNo = "36"^^xsd:integer).
+?phnode003control3outchawireless0 indl_wireless:frequency ?phnode003control3outchawireless0frequency.
+FILTER (?phnode003control3outchawireless0frequency = "5180.0"^^xsd:string).
+?phnode003control3outchawireless0 indl_wireless:protocol ?phnode003control3outchawireless0protocol.
+FILTER (?phnode003control3outchawireless0protocol = "IEEE802_11a"^^xsd:string).
+?phnode003control3outchawireless indl_wireless:hasChannel ?phnode003control3outchawireless1.
+?phnode003control3outchawireless1 indl_wireless:ChannelNo ?phnode003control3outchawireless1ChannelNo.
+FILTER (?phnode003control3outchawireless1ChannelNo = "40"^^xsd:integer).
+?phnode003control3outchawireless1 indl_wireless:frequency ?phnode003control3outchawireless1frequency.
+FILTER (?phnode003control3outchawireless1frequency = "5200.0"^^xsd:string).
+?phnode003control3outchawireless1 indl_wireless:protocol ?phnode003control3outchawireless1protocol.
+FILTER (?phnode003control3outchawireless1protocol = "IEEE802_11a"^^xsd:string).
+?phnode003control3outchawireless indl_wireless:hasChannel ?phnode003control3outchawireless2.
+?phnode003control3outchawireless2 indl_wireless:ChannelNo ?phnode003control3outchawireless2ChannelNo.
+FILTER (?phnode003control3outchawireless2ChannelNo = "44"^^xsd:integer).
+?phnode003control3outchawireless2 indl_wireless:frequency ?phnode003control3outchawireless2frequency.
+FILTER (?phnode003control3outchawireless2frequency = "5220.0"^^xsd:string).
+?phnode003control3outchawireless2 indl_wireless:protocol ?phnode003control3outchawireless2protocol.
+FILTER (?phnode003control3outchawireless2protocol = "IEEE802_11a"^^xsd:string).
+?phnode003control3outchawireless indl_wireless:hasChannel ?phnode003control3outchawireless3.
+?phnode003control3outchawireless3 indl_wireless:ChannelNo ?phnode003control3outchawireless3ChannelNo.
+FILTER (?phnode003control3outchawireless3ChannelNo = "48"^^xsd:integer).
+?phnode003control3outchawireless3 indl_wireless:frequency ?phnode003control3outchawireless3frequency.
+FILTER (?phnode003control3outchawireless3frequency = "5240.0"^^xsd:string).
+?phnode003control3outchawireless3 indl_wireless:protocol ?phnode003control3outchawireless3protocol.
+FILTER (?phnode003control3outchawireless3protocol = "IEEE802_11a"^^xsd:string).
+?phnode003 nml:hasOutboundPort ?phnode003control3Aoutcha.
+?phnode003control3Aoutcha indl_wireless:hasWirelessFeatures ?phnode003control3Aoutchawireless.
+?phnode003control3Aoutchawireless rdf:type indl_wireless:WirelessFeatures.
+?phnode003control3Aoutchawireless indl_wireless:hasChannel ?phnode003control3Aoutchawireless0.
+?phnode003control3Aoutchawireless0 indl_wireless:ChannelNo ?phnode003control3Aoutchawireless0ChannelNo.
+FILTER (?phnode003control3Aoutchawireless0ChannelNo = "36"^^xsd:integer).
+?phnode003control3Aoutchawireless0 indl_wireless:frequency ?phnode003control3Aoutchawireless0frequency.
+FILTER (?phnode003control3Aoutchawireless0frequency = "5180.0"^^xsd:string).
+?phnode003control3Aoutchawireless0 indl_wireless:protocol ?phnode003control3Aoutchawireless0protocol.
+FILTER (?phnode003control3Aoutchawireless0protocol = "IEEE802_11a"^^xsd:string).
+?phnode003control3Aoutchawireless indl_wireless:hasChannel ?phnode003control3Aoutchawireless1.
+?phnode003control3Aoutchawireless1 indl_wireless:ChannelNo ?phnode003control3Aoutchawireless1ChannelNo.
+FILTER (?phnode003control3Aoutchawireless1ChannelNo = "40"^^xsd:integer).
+?phnode003control3Aoutchawireless1 indl_wireless:frequency ?phnode003control3Aoutchawireless1frequency.
+FILTER (?phnode003control3Aoutchawireless1frequency = "5200.0"^^xsd:string).
+?phnode003control3Aoutchawireless1 indl_wireless:protocol ?phnode003control3Aoutchawireless1protocol.
+FILTER (?phnode003control3Aoutchawireless1protocol = "IEEE802_11a"^^xsd:string).
+?phnode003control3Aoutchawireless indl_wireless:hasChannel ?phnode003control3Aoutchawireless2.
+?phnode003control3Aoutchawireless2 indl_wireless:ChannelNo ?phnode003control3Aoutchawireless2ChannelNo.
+FILTER (?phnode003control3Aoutchawireless2ChannelNo = "44"^^xsd:integer).
+?phnode003control3Aoutchawireless2 indl_wireless:frequency ?phnode003control3Aoutchawireless2frequency.
+FILTER (?phnode003control3Aoutchawireless2frequency = "5220.0"^^xsd:string).
+?phnode003control3Aoutchawireless2 indl_wireless:protocol ?phnode003control3Aoutchawireless2protocol.
+FILTER (?phnode003control3Aoutchawireless2protocol = "IEEE802_11a"^^xsd:string).
+?phnode003control3Aoutchawireless indl_wireless:hasChannel ?phnode003control3Aoutchawireless3.
+?phnode003control3Aoutchawireless3 indl_wireless:ChannelNo ?phnode003control3Aoutchawireless3ChannelNo.
+FILTER (?phnode003control3Aoutchawireless3ChannelNo = "48"^^xsd:integer).
+?phnode003control3Aoutchawireless3 indl_wireless:frequency ?phnode003control3Aoutchawireless3frequency.
+FILTER (?phnode003control3Aoutchawireless3frequency = "5240.0"^^xsd:string).
+?phnode003control3Aoutchawireless3 indl_wireless:protocol ?phnode003control3Aoutchawireless3protocol.
+FILTER (?phnode003control3Aoutchawireless3protocol = "IEEE802_11a"^^xsd:string).
+FILTER (?phnode003control3outcha != ?phnode003control3Aoutcha).
+} FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3out.
+?phnode003control3out nml:isSource ?linkcontrol3ANDcontrol1.
+?phnode003control3out rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol3ANDcontrol1phnode001.
+?linkcontrol3ANDcontrol1phnode001 nml:isSink ?linkcontrol3ANDcontrol1.
+?linkcontrol3ANDcontrol1phnode001 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3out.
+?phnode003control3out nml:isSource ?linkcontrol3ANDcontrolA1.
+?phnode003control3out rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol3ANDcontrolA1phnode001.
+?linkcontrol3ANDcontrolA1phnode001 nml:isSink ?linkcontrol3ANDcontrolA1.
+?linkcontrol3ANDcontrolA1phnode001 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3out.
+?phnode003control3out nml:isSource ?linkcontrol3ANDcontrol21.
+?phnode003control3out rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrol3ANDcontrol21phnode002.
+?linkcontrol3ANDcontrol21phnode002 nml:isSink ?linkcontrol3ANDcontrol21.
+?linkcontrol3ANDcontrol21phnode002 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3out.
+?phnode003control3out nml:isSource ?linkcontrol3ANDcontrol2A1.
+?phnode003control3out rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrol3ANDcontrol2A1phnode002.
+?linkcontrol3ANDcontrol2A1phnode002 nml:isSink ?linkcontrol3ANDcontrol2A1.
+?linkcontrol3ANDcontrol2A1phnode002 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3Aout.
+?phnode003control3Aout nml:isSource ?linkcontrol3AANDcontrol1.
+?phnode003control3Aout rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol3AANDcontrol1phnode001.
+?linkcontrol3AANDcontrol1phnode001 nml:isSink ?linkcontrol3AANDcontrol1.
+?linkcontrol3AANDcontrol1phnode001 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3Aout.
+?phnode003control3Aout nml:isSource ?linkcontrol3AANDcontrolA1.
+?phnode003control3Aout rdf:type nml:Port.
+?phnode001 rdf:type nml:Node.
+?phnode001 nml:hasInboundPort ?linkcontrol3AANDcontrolA1phnode001.
+?linkcontrol3AANDcontrolA1phnode001 nml:isSink ?linkcontrol3AANDcontrolA1.
+?linkcontrol3AANDcontrolA1phnode001 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode001).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3Aout.
+?phnode003control3Aout nml:isSource ?linkcontrol3AANDcontrol21.
+?phnode003control3Aout rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrol3AANDcontrol21phnode002.
+?linkcontrol3AANDcontrol21phnode002 nml:isSink ?linkcontrol3AANDcontrol21.
+?linkcontrol3AANDcontrol21phnode002 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode002).
+} 
+} 
+ FILTER EXISTS { { ?phnode003 rdf:type nml:Node.
+?phnode003 nml:hasOutboundPort ?phnode003control3Aout.
+?phnode003control3Aout nml:isSource ?linkcontrol3AANDcontrol2A1.
+?phnode003control3Aout rdf:type nml:Port.
+?phnode002 rdf:type nml:Node.
+?phnode002 nml:hasInboundPort ?linkcontrol3AANDcontrol2A1phnode002.
+?linkcontrol3AANDcontrol2A1phnode002 nml:isSink ?linkcontrol3AANDcontrol2A1.
+?linkcontrol3AANDcontrol2A1phnode002 rdf:type nml:Port.
+FILTER (?phnode003 != ?phnode002).
+} 
+} 
+FILTER (?phnode001 != ?phnode002).
+FILTER (?phnode001 != ?phnode003).
+FILTER (?phnode002 != ?phnode003).
+}  LIMIT 1
+
