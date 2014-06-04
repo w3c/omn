@@ -1,0 +1,539 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY wireless "http://iminds.be/owl/wireless.owl#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY compute "http://geni-orca.renci.org/owl/compute.owl#" >
+    <!ENTITY wireless2 "http://geni-orca.renci.org/owl/wireless.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:wireless="http://iminds.be/owl/wireless.owl#"
+     xmlns:wireless2="http://geni-orca.renci.org/owl/wireless.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:compute="http://geni-orca.renci.org/owl/compute.owl#">
+    <Ontology rdf:about="http://geni-orca.renci.org/owl/wireless.owl">
+        <versionIRI rdf:resource="http://geni-orca.renci.org/owl/compute-iminds-draft.owl"/>
+        <imports rdf:resource="http://geni-orca.renci.org/owl/compute.owl"/>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#unit -->
+
+    <AnnotationProperty rdf:about="&compute;unit"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#feature -->
+
+    <ObjectProperty rdf:about="&compute;feature"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#hasAntenna -->
+
+    <ObjectProperty rdf:about="&wireless2;hasAntenna">
+        <rdfs:domain rdf:resource="&compute;WirelessInterface"/>
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless2;Antenna"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#hasAntennaBandSupport -->
+
+    <ObjectProperty rdf:about="&wireless2;hasAntennaBandSupport">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless2;AntennaBandSupport"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#hasMicroController -->
+
+    <ObjectProperty rdf:about="&wireless2;hasMicroController">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless2;MicroController"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#hasSensor -->
+
+    <ObjectProperty rdf:about="&wireless2;hasSensor">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#hasSensorModule -->
+
+    <ObjectProperty rdf:about="&wireless2;hasSensorModule">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless2;SensorModule"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#hasTransceiver -->
+
+    <ObjectProperty rdf:about="&wireless2;hasTransceiver">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless2;Transceiver"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#isAntennaType -->
+
+    <ObjectProperty rdf:about="&wireless2;isAntennaType">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless2;AntennaType"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#usesFrequency -->
+
+    <ObjectProperty rdf:about="&wireless2;usesFrequency">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#metric -->
+
+    <DatatypeProperty rdf:about="&compute;metric"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#antennaCount -->
+
+    <DatatypeProperty rdf:about="&wireless2;antennaCount">
+        <rdfs:range rdf:resource="&xsd;integer"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#antenuation -->
+
+    <DatatypeProperty rdf:about="&wireless2;antenuation">
+        <compute:unit>dB</compute:unit>
+        <rdfs:subPropertyOf rdf:resource="&compute;metric"/>
+        <rdfs:range rdf:resource="&xsd;double"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#lowerBoundFrequency -->
+
+    <DatatypeProperty rdf:about="&wireless2;lowerBoundFrequency">
+        <compute:unit>Hz</compute:unit>
+        <rdfs:domain rdf:resource="&wireless2;Frequency"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#upperBoundFrequency -->
+
+    <DatatypeProperty rdf:about="&wireless2;upperBoundFrequency">
+        <compute:unit>Hz</compute:unit>
+        <rdfs:domain rdf:resource="&wireless2;Frequency"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://iminds.be/owl/wilab.owl#x -->
+
+    <DatatypeProperty rdf:about="http://iminds.be/owl/wilab.owl#x">
+        <compute:unit>cm</compute:unit>
+        <rdfs:domain rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://iminds.be/owl/wilab.owl#y -->
+
+    <DatatypeProperty rdf:about="http://iminds.be/owl/wilab.owl#y">
+        <compute:unit>cm</compute:unit>
+        <rdfs:domain rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://iminds.be/owl/wilab.owl#z -->
+
+    <DatatypeProperty rdf:about="http://iminds.be/owl/wilab.owl#z">
+        <compute:unit>cm</compute:unit>
+        <rdfs:domain rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#ComputeElementComponent -->
+
+    <Class rdf:about="&compute;ComputeElementComponent"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#Feature -->
+
+    <Class rdf:about="&compute;Feature"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#Interface -->
+
+    <Class rdf:about="&compute;Interface"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#WiredInterface -->
+
+    <Class rdf:about="&compute;WiredInterface">
+        <rdfs:subClassOf rdf:resource="&compute;Interface"/>
+        <disjointWith rdf:resource="&compute;WirelessInterface"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/compute.owl#WirelessInterface -->
+
+    <Class rdf:about="&compute;WirelessInterface">
+        <rdfs:subClassOf rdf:resource="&compute;Interface"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Antenna -->
+
+    <Class rdf:about="&wireless2;Antenna">
+        <rdfs:subClassOf rdf:resource="&compute;Feature"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#AntennaBandSupport -->
+
+    <Class rdf:about="&wireless2;AntennaBandSupport">
+        <rdfs:subClassOf rdf:resource="&compute;Feature"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#AntennaType -->
+
+    <Class rdf:about="&wireless2;AntennaType">
+        <rdfs:subClassOf rdf:resource="&compute;Feature"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Frequency -->
+
+    <Class rdf:about="&wireless2;Frequency">
+        <rdfs:subClassOf rdf:resource="&compute;Feature"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#MicroController -->
+
+    <Class rdf:about="&wireless2;MicroController">
+        <rdfs:subClassOf rdf:resource="&compute;ComputeElementComponent"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Sensor -->
+
+    <Class rdf:about="&wireless2;Sensor">
+        <rdfs:subClassOf rdf:resource="&compute;ComputeElementComponent"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#SensorModule -->
+
+    <Class rdf:about="&wireless2;SensorModule">
+        <rdfs:subClassOf rdf:resource="&compute;ComputeElementComponent"/>
+    </Class>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Standard -->
+
+    <Class rdf:about="&wireless2;Standard"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Transceiver -->
+
+    <Class rdf:about="&wireless2;Transceiver">
+        <rdfs:subClassOf rdf:resource="&compute;ComputeElementComponent"/>
+    </Class>
+    
+
+
+    <!-- http://iminds.be/owl/wilab.owl#XYZLocation -->
+
+    <Class rdf:about="http://iminds.be/owl/wilab.owl#XYZLocation">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://schemas.ogf.org/nml/2013/05/base#Location"/>
+                    <Restriction>
+                        <onProperty rdf:resource="http://iminds.be/owl/wilab.owl#x"/>
+                        <someValuesFrom rdf:resource="&xsd;integer"/>
+                    </Restriction>
+                    <Restriction>
+                        <onProperty rdf:resource="http://iminds.be/owl/wilab.owl#y"/>
+                        <someValuesFrom rdf:resource="&xsd;integer"/>
+                    </Restriction>
+                    <Restriction>
+                        <onProperty rdf:resource="http://iminds.be/owl/wilab.owl#z"/>
+                        <someValuesFrom rdf:resource="&xsd;integer"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location"/>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#2.4Ghz-band -->
+
+    <NamedIndividual rdf:about="&wireless2;2.4Ghz-band">
+        <rdf:type rdf:resource="&wireless2;Frequency"/>
+        <wireless2:lowerBoundFrequency rdf:datatype="&xsd;integer">2400000</wireless2:lowerBoundFrequency>
+        <wireless2:upperBoundFrequency rdf:datatype="&xsd;integer">2483500</wireless2:upperBoundFrequency>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#802.11a -->
+
+    <NamedIndividual rdf:about="&wireless2;802.11a">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#802.11b -->
+
+    <NamedIndividual rdf:about="&wireless2;802.11b">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#802.11g -->
+
+    <NamedIndividual rdf:about="&wireless2;802.11g">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#802.11n -->
+
+    <NamedIndividual rdf:about="&wireless2;802.11n">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#802.15.4 -->
+
+    <NamedIndividual rdf:about="&wireless2;802.15.4">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#868Mhz-band -->
+
+    <NamedIndividual rdf:about="&wireless2;868Mhz-band">
+        <rdf:type rdf:resource="&wireless2;Frequency"/>
+        <wireless2:lowerBoundFrequency rdf:datatype="&xsd;integer">863000</wireless2:lowerBoundFrequency>
+        <wireless2:upperBoundFrequency rdf:datatype="&xsd;integer">870000</wireless2:upperBoundFrequency>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#BluetoothV2.1 -->
+
+    <NamedIndividual rdf:about="&wireless2;BluetoothV2.1">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#BluetoothV3.0 -->
+
+    <NamedIndividual rdf:about="&wireless2;BluetoothV3.0">
+        <rdf:type rdf:resource="&wireless2;Standard"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#DirectionalAntenna -->
+
+    <NamedIndividual rdf:about="&wireless2;DirectionalAntenna">
+        <rdf:type rdf:resource="&wireless2;AntennaType"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#DualBandSupport -->
+
+    <NamedIndividual rdf:about="&wireless2;DualBandSupport">
+        <rdf:type rdf:resource="&wireless2;AntennaBandSupport"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#HumiditySensor -->
+
+    <NamedIndividual rdf:about="&wireless2;HumiditySensor">
+        <rdf:type rdf:resource="&wireless2;Sensor"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#LightSensor -->
+
+    <NamedIndividual rdf:about="&wireless2;LightSensor">
+        <rdf:type rdf:resource="&wireless2;Sensor"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#MultiBandSupport -->
+
+    <NamedIndividual rdf:about="&wireless2;MultiBandSupport">
+        <rdf:type rdf:resource="&wireless2;AntennaBandSupport"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#OmniDirectionalAntenna -->
+
+    <NamedIndividual rdf:about="&wireless2;OmniDirectionalAntenna">
+        <rdf:type rdf:resource="&wireless2;AntennaType"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#SingleBandSupport -->
+
+    <NamedIndividual rdf:about="&wireless2;SingleBandSupport">
+        <rdf:type rdf:resource="&wireless2;AntennaBandSupport"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#TemperatureSensor -->
+
+    <NamedIndividual rdf:about="&wireless2;TemperatureSensor">
+        <rdf:type rdf:resource="&wireless2;Sensor"/>
+    </NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="&wireless2;802.11a"/>
+            <rdf:Description rdf:about="&wireless2;802.11b"/>
+            <rdf:Description rdf:about="&wireless2;802.11g"/>
+            <rdf:Description rdf:about="&wireless2;802.11n"/>
+        </distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
