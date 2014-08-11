@@ -18,7 +18,7 @@
                                      
                                      dc:date "2014-08-08"^^xsd:dateTime ;
                                      
-                                     rdfs:seeAlso "http://open-multinet.info"^^xsd:anyURI ;
+                                     rdfs:seeAlso <http://open-multinet.info> ;
                                      
                                      owl:versionInfo "0.1" ;
                                      
@@ -29,8 +29,6 @@
                                      rdfs:comment "Open-Multinet Upper Ontology."@en ;
                                      
                                      dc:title "Open-Multinet Upper Ontology."@en ;
-                                     
-                                     owl:imports <http://open-multinet.info/ontology> ;
                                      
                                      dc:creator :AlexanderWillner .
 
