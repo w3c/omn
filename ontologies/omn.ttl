@@ -5,10 +5,10 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix geni: <http://geni.net/ontology#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <http://open-multinet.info/ontology> .
 
@@ -17,8 +17,6 @@
                                      rdfs:label "Open-Multinet"@en ;
                                      
                                      dc:date "2014-08-08"^^xsd:dateTime ;
-                                     
-                                     rdfs:seeAlso <http://open-multinet.info> ;
                                      
                                      owl:versionInfo "0.1" ;
                                      
@@ -29,6 +27,8 @@
                                      rdfs:comment "Open-Multinet Upper Ontology."@en ;
                                      
                                      dc:title "Open-Multinet Upper Ontology."@en ;
+                                     
+                                     rdfs:seeAlso <http://open-multinet.info> ;
                                      
                                      dc:creator :AlexanderWillner .
 
@@ -43,8 +43,6 @@
 ###  http://open-multinet.info/ontology#inverseOf
 
 :inverseOf rdf:type owl:AnnotationProperty .
-
-
 
 
 
@@ -72,8 +70,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 ###  http://open-multinet.info/ontology#hasInfrastructure
 
 :hasInfrastructure rdf:type owl:ObjectProperty ;
-
-                rdfs:label "has infrastructure" ;
+                   
+                   rdfs:label "has infrastructure" ;
                    
                    rdfs:domain :Federation ;
                    
@@ -86,8 +84,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 ###  http://open-multinet.info/ontology#hasService
 
 :hasService rdf:type owl:ObjectProperty ;
-
-                rdfs:label "has service" ;
+            
+            rdfs:label "has service" ;
             
             rdfs:domain nml:Group ;
             
@@ -99,11 +97,11 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 :partOfFederation rdf:type owl:ObjectProperty ;
                   
-                                  rdfs:label "is part of federation" ;
-
-                  rdfs:domain :Infrastructure ;
+                  rdfs:label "is part of federation" ;
                   
                   rdfs:range :Federation ;
+                  
+                  rdfs:domain :Infrastructure ;
                   
                   :inverseOf :hasInfrastructure .
 
@@ -122,8 +120,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 :hasURI rdf:type owl:DatatypeProperty ;
         
-                        rdfs:label "has URI" ;
-
+        rdfs:label "has URI" ;
+        
         rdfs:domain :Service ;
         
         rdfs:range xsd:anyURI .
@@ -147,12 +145,22 @@ novi:Platform rdf:type owl:Class ;
 
 
 
+###  http://open-multinet.info/ontology#CloudInfrastructure
+
+:CloudInfrastructure rdf:type owl:Class ;
+                     
+                     rdfs:label "Cloud Infrastructure" ;
+                     
+                     rdfs:subClassOf :Infrastructure .
+
+
+
 ###  http://open-multinet.info/ontology#Federation
 
 :Federation rdf:type owl:Class ;
             
-                            rdfs:label "Federation" ;
-
+            rdfs:label "Federation" ;
+            
             rdfs:subClassOf :Group .
 
 
@@ -160,8 +168,8 @@ novi:Platform rdf:type owl:Class ;
 ###  http://open-multinet.info/ontology#FederationService
 
 :FederationService rdf:type owl:Class ;
-
-                rdfs:label "Federation Service" ;
+                   
+                   rdfs:label "Federation Service" ;
                    
                    rdfs:subClassOf :Service .
 
@@ -171,8 +179,8 @@ novi:Platform rdf:type owl:Class ;
 
 :Group rdf:type owl:Class ;
        
-                       rdfs:label "Group" ;
-
+       rdfs:label "Group" ;
+       
        owl:equivalentClass nml:Group .
 
 
@@ -181,8 +189,8 @@ novi:Platform rdf:type owl:Class ;
 
 :IdentityProvider rdf:type owl:Class ;
                   
-                                  rdfs:label "Identity Provider" ;
-
+                  rdfs:label "Identity Provider" ;
+                  
                   rdfs:subClassOf :FederationService .
 
 
@@ -190,42 +198,28 @@ novi:Platform rdf:type owl:Class ;
 ###  http://open-multinet.info/ontology#Infrastructure
 
 :Infrastructure rdf:type owl:Class ;
-
-                                  rdfs:label "Infrastructure" ;
-
+                
+                rdfs:label "Infrastructure" ;
+                
                 rdfs:subClassOf :Group .
 
-:WiredInfrastructure rdf:type owl:Class ;
 
-                                  rdfs:label "Wired Infrastructure" ;
 
-                rdfs:subClassOf :Infrastructure .
-
-:WirelessInfrastructure rdf:type owl:Class ;
-
-                                  rdfs:label "Wireless Infrastructure" ;
-
-                rdfs:subClassOf :Infrastructure .
+###  http://open-multinet.info/ontology#OpenFlowInfrastructure
 
 :OpenFlowInfrastructure rdf:type owl:Class ;
-
-                                  rdfs:label "OpenFlow Infrastructure" ;
-
-                rdfs:subClassOf :Infrastructure .
-
-:CloudInfrastructure rdf:type owl:Class ;
-
-                                  rdfs:label "Cloud Infrastructure" ;
-
-                rdfs:subClassOf :Infrastructure .
+                        
+                        rdfs:label "OpenFlow Infrastructure" ;
+                        
+                        rdfs:subClassOf :Infrastructure .
 
 
 
 ###  http://open-multinet.info/ontology#Service
 
 :Service rdf:type owl:Class ;
-
-                                  rdfs:label "Service" ;
+         
+         rdfs:label "Service" ;
          
          owl:equivalentClass nml:Service .
 
@@ -234,25 +228,46 @@ novi:Platform rdf:type owl:Class ;
 ###  http://open-multinet.info/ontology#SingleSignOnPortal
 
 :SingleSignOnPortal rdf:type owl:Class ;
-                                                      rdfs:label "Single Sign-On Portal" ;
-
+                    
+                    rdfs:label "Single Sign-On Portal" ;
+                    
                     rdfs:subClassOf :FederationService .
+
+
+
+###  http://open-multinet.info/ontology#WiredInfrastructure
+
+:WiredInfrastructure rdf:type owl:Class ;
+                     
+                     rdfs:label "Wired Infrastructure" ;
+                     
+                     rdfs:subClassOf :Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology#WirelessInfrastructure
+
+:WirelessInfrastructure rdf:type owl:Class ;
+                        
+                        rdfs:label "Wireless Infrastructure" ;
+                        
+                        rdfs:subClassOf :Infrastructure .
 
 
 
 ###  http://schemas.ogf.org/nml/base/2013/02#Group
 
 nml:Group rdf:type owl:Class ;
-
-                                  rdfs:label "NML Group" .
-
+          
+          rdfs:label "NML Group" .
 
 
 
 ###  http://schemas.ogf.org/nml/base/2013/02#Service
 
 nml:Service rdf:type owl:Class ;
-                                  rdfs:label "NML Service" .
+            
+            rdfs:label "NML Service" .
 
 
 
@@ -278,9 +293,11 @@ foaf:Person rdf:type owl:Class .
                   
                   foaf:name "Alexander Willner" ;
                   
-                  foaf:mbox <mailto:alexander.willner@tu-berlin.de> ;
+                  rdfs:isDefinedBy <http://alex.willner.ws> ;
                   
-                  rdfs:isDefinedBy <http://alex.willner.ws> .
+                  foaf:mbox <mailto:alexander.willner@tu-berlin.de> .
+
+
 
 
 ###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
