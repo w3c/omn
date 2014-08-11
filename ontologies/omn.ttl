@@ -101,9 +101,9 @@ foaf:name rdf:type owl:AnnotationProperty .
                   
                                   rdfs:label "is part of federation" ;
 
-                  rdfs:domain :Federation ;
+                  rdfs:domain :Infrastructure ;
                   
-                  rdfs:range :Infrastructure ;
+                  rdfs:range :Federation ;
                   
                   :inverseOf :hasInfrastructure .
 
