@@ -69,7 +69,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://open-multinet.info/ontology#hasInfrastructure
 
-:hasInfrastructure rdf:type owl:IrreflexiveProperty ,
+:hasInfrastructure rdf:type owl:AsymmetricProperty ,
+                            owl:IrreflexiveProperty ,
                             owl:ObjectProperty ;
                    
                    rdfs:label "has infrastructure" ;
@@ -96,7 +97,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://open-multinet.info/ontology#partOfFederation
 
-:partOfFederation rdf:type owl:IrreflexiveProperty ,
+:partOfFederation rdf:type owl:AsymmetricProperty ,
+                           owl:IrreflexiveProperty ,
                            owl:ObjectProperty ;
                   
                   rdfs:label "is part of federation" ;
