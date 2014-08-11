@@ -1,9 +1,11 @@
-@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix : <http://open-multinet.info/ontology#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix geni: <http://geni.net/ontology#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
@@ -12,7 +14,25 @@
 
 <http://open-multinet.info/ontology> rdf:type owl:Ontology ;
                                      
-                                     owl:imports <http://www.science.uva.nl/research/sne/indl> .
+                                     rdfs:label "Open-Multinet"@en ;
+                                     
+                                     dc:date "2014-08-08"^^xsd:dateTime ;
+                                     
+                                     rdfs:seeAlso "http://open-multinet.info"^^xsd:anyURI ;
+                                     
+                                     owl:versionInfo "0.1" ;
+                                     
+                                     dc:description "An upper ontology based on the work conducted at Open-Multinet.org."@en ;
+                                     
+                                     dc:rights "Creative Commons Attribution Licence"@en ;
+                                     
+                                     rdfs:comment "Open-Multinet Upper Ontology."@en ;
+                                     
+                                     dc:title "Open-Multinet Upper Ontology."@en ;
+                                     
+                                     owl:imports <http://open-multinet.info/ontology> ;
+                                     
+                                     dc:creator :AlexanderWillner .
 
 
 #################################################################
@@ -22,37 +42,33 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology#endpoint
+###  http://open-multinet.info/ontology#inverseOf
 
-<http://open-multinet.info/ontology#endpoint> rdf:type owl:AnnotationProperty ;
-                                              
-                                              rdfs:domain nml:Service .
+:inverseOf rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#exportsToOML
+###  http://xmlns.com/foaf/0.1/depiction
 
-<http://open-multinet.info/ontology#exportsToOML> rdf:type owl:AnnotationProperty ;
-                                                  
-                                                  rdfs:domain nml:NetworkObject .
+foaf:depiction rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#partOfGroup
+###  http://xmlns.com/foaf/0.1/homepage
 
-<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:AnnotationProperty ;
-                                                 
-                                                 rdfs:domain nml:NetworkObject .
+foaf:homepage rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#version
+###  http://xmlns.com/foaf/0.1/mbox
 
-<http://open-multinet.info/ontology#version> rdf:type owl:AnnotationProperty ;
-                                             
-                                             rdfs:comment "todo: find an ontology for semantic versioning" ;
-                                             
-                                             rdfs:domain nml:Service .
+foaf:mbox rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/name
+
+foaf:name rdf:type owl:AnnotationProperty .
 
 
 
@@ -65,29 +81,43 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology#groupContains
+###  http://open-multinet.info/ontology#hasInfrastructure
 
-<http://open-multinet.info/ontology#groupContains> rdf:type owl:ObjectProperty ;
-                                                   
-                                                   owl:inverseOf <http://open-multinet.info/ontology#partOfGroup> .
+:hasInfrastructure rdf:type owl:ObjectProperty ;
 
-
-
-###  http://open-multinet.info/ontology#partOfGroup
-
-<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:ObjectProperty ;
-                                                 
-                                                 rdfs:range nml:Group .
+                rdfs:label "has infrastructure" ;
+                   
+                   rdfs:domain :Federation ;
+                   
+                   rdfs:range :Infrastructure ;
+                   
+                   :inverseOf :partOfFederation .
 
 
 
-###  http://open-multinet.info/ontology#status
+###  http://open-multinet.info/ontology#hasService
 
-<http://open-multinet.info/ontology#status> rdf:type owl:ObjectProperty ;
-                                            
-                                            rdfs:range <http://open-multinet.info/ontology#Status> ;
-                                            
-                                            rdfs:domain nml:Node .
+:hasService rdf:type owl:ObjectProperty ;
+
+                rdfs:label "has service" ;
+            
+            rdfs:domain nml:Group ;
+            
+            rdfs:range nml:Service .
+
+
+
+###  http://open-multinet.info/ontology#partOfFederation
+
+:partOfFederation rdf:type owl:ObjectProperty ;
+                  
+                                  rdfs:label "is part of federation" ;
+
+                  rdfs:domain :Federation ;
+                  
+                  rdfs:range :Infrastructure ;
+                  
+                  :inverseOf :hasInfrastructure .
 
 
 
@@ -100,99 +130,15 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology#certificate
+###  http://open-multinet.info/ontology#hasURI
 
-<http://open-multinet.info/ontology#certificate> rdf:type owl:DatatypeProperty ;
-                                                 
-                                                 rdfs:domain <http://open-multinet.info/ontology#Testbed> ;
-                                                 
-                                                 rdfs:range xsd:anyURI .
+:hasURI rdf:type owl:DatatypeProperty ;
+        
+                        rdfs:label "has URI" ;
 
-
-
-###  http://open-multinet.info/ontology#endpoint
-
-<http://open-multinet.info/ontology#endpoint> rdf:type owl:DatatypeProperty ;
-                                              
-                                              rdfs:range xsd:anyURI .
-
-
-
-###  http://open-multinet.info/ontology#exclusive
-
-<http://open-multinet.info/ontology#exclusive> rdf:type owl:DatatypeProperty ;
-                                               
-                                               rdfs:domain nml:Node ;
-                                               
-                                               rdfs:range xsd:boolean .
-
-
-
-###  http://open-multinet.info/ontology#expires
-
-<http://open-multinet.info/ontology#expires> rdf:type owl:DatatypeProperty ;
-                                             
-                                             rdfs:domain <http://open-multinet.info/ontology#Slice> ,
-                                                         nml:Node ;
-                                             
-                                             rdfs:range xsd:dateTime .
-
-
-
-###  http://open-multinet.info/ontology#exportsTo
-
-<http://open-multinet.info/ontology#exportsTo> rdf:type owl:DatatypeProperty .
-
-
-
-###  http://open-multinet.info/ontology#exportsToOML
-
-<http://open-multinet.info/ontology#exportsToOML> rdf:type owl:DatatypeProperty ;
-                                                  
-                                                  rdfs:subPropertyOf <http://open-multinet.info/ontology#exportsTo> ;
-                                                  
-                                                  rdfs:range xsd:anyURI .
-
-
-
-###  http://open-multinet.info/ontology#monitoringsupport
-
-<http://open-multinet.info/ontology#monitoringsupport> rdf:type owl:DatatypeProperty ;
-                                                       
-                                                       rdfs:domain nml:Node ;
-                                                       
-                                                       rdfs:range xsd:boolean .
-
-
-
-###  http://open-multinet.info/ontology#up
-
-<http://open-multinet.info/ontology#up> rdf:type owl:DatatypeProperty ;
-                                        
-                                        rdfs:domain nml:Node ;
-                                        
-                                        rdfs:range xsd:boolean .
-
-
-
-###  http://open-multinet.info/ontology#urn
-
-<http://open-multinet.info/ontology#urn> rdf:type owl:DatatypeProperty ;
-                                         
-                                         rdfs:domain <http://open-multinet.info/ontology#Slice> ,
-                                                     nml:Node ;
-                                         
-                                         rdfs:range xsd:anyURI .
-
-
-
-###  http://open-multinet.info/ontology#version
-
-<http://open-multinet.info/ontology#version> rdf:type owl:DatatypeProperty ;
-                                             
-                                             rdfs:comment "todo: find an ontology for semantic versioning" ;
-                                             
-                                             rdfs:range xsd:string .
+        rdfs:domain :Service ;
+        
+        rdfs:range xsd:anyURI .
 
 
 
@@ -205,133 +151,146 @@
 #################################################################
 
 
-###  http://fp7-novi.eu/im.owl#Reservation
+###  http://fp7-novi.eu/im.owl#Platform
 
-novi:Reservation rdf:type owl:Class ;
-                 
-                 rdfs:subClassOf nml:Group .
-
-
-
-###  http://open-multinet.info/ontology#Allocated
-
-<http://open-multinet.info/ontology#Allocated> rdf:type owl:Class ;
-                                               
-                                               rdfs:subClassOf <http://open-multinet.info/ontology#AllocationStatus> .
-
-
-
-###  http://open-multinet.info/ontology#AllocationStatus
-
-<http://open-multinet.info/ontology#AllocationStatus> rdf:type owl:Class ;
-                                                      
-                                                      rdfs:subClassOf <http://open-multinet.info/ontology#Status> .
-
-
-
-###  http://open-multinet.info/ontology#ComputeNode
-
-<http://open-multinet.info/ontology#ComputeNode> rdf:type owl:Class ;
-                                                 
-                                                 rdfs:subClassOf nml:Node .
+novi:Platform rdf:type owl:Class ;
+              
+              owl:equivalentClass :Infrastructure .
 
 
 
 ###  http://open-multinet.info/ontology#Federation
 
-<http://open-multinet.info/ontology#Federation> rdf:type owl:Class ;
-                                                
-                                                rdfs:subClassOf nml:Group .
+:Federation rdf:type owl:Class ;
+            
+                            rdfs:label "Federation" ;
+
+            rdfs:subClassOf :Group .
 
 
 
-###  http://open-multinet.info/ontology#OperationalStatus
+###  http://open-multinet.info/ontology#FederationService
 
-<http://open-multinet.info/ontology#OperationalStatus> rdf:type owl:Class ;
-                                                       
-                                                       rdfs:subClassOf <http://open-multinet.info/ontology#Status> .
+:FederationService rdf:type owl:Class ;
 
-
-
-###  http://open-multinet.info/ontology#Pending
-
-<http://open-multinet.info/ontology#Pending> rdf:type owl:Class ;
-                                             
-                                             rdfs:subClassOf <http://open-multinet.info/ontology#OperationalStatus> .
+                rdfs:label "Federation Service" ;
+                   
+                   rdfs:subClassOf :Service .
 
 
 
-###  http://open-multinet.info/ontology#Provisioned
+###  http://open-multinet.info/ontology#Group
 
-<http://open-multinet.info/ontology#Provisioned> rdf:type owl:Class ;
-                                                 
-                                                 rdfs:subClassOf <http://open-multinet.info/ontology#AllocationStatus> .
+:Group rdf:type owl:Class ;
+       
+                       rdfs:label "Group" ;
 
-
-
-###  http://open-multinet.info/ontology#Ready
-
-<http://open-multinet.info/ontology#Ready> rdf:type owl:Class ;
-                                           
-                                           rdfs:subClassOf <http://open-multinet.info/ontology#OperationalStatus> .
+       owl:equivalentClass nml:Group .
 
 
 
-###  http://open-multinet.info/ontology#Slice
+###  http://open-multinet.info/ontology#IdentityProvider
 
-<http://open-multinet.info/ontology#Slice> rdf:type owl:Class ;
-                                           
-                                           rdfs:subClassOf nml:Group .
+:IdentityProvider rdf:type owl:Class ;
+                  
+                                  rdfs:label "Identity Provider" ;
 
-
-
-###  http://open-multinet.info/ontology#SoftwareComponent
-
-<http://open-multinet.info/ontology#SoftwareComponent> rdf:type owl:Class ;
-                                                       
-                                                       rdfs:subClassOf indl:NodeComponent .
+                  rdfs:subClassOf :FederationService .
 
 
 
-###  http://open-multinet.info/ontology#Started
+###  http://open-multinet.info/ontology#Infrastructure
 
-<http://open-multinet.info/ontology#Started> rdf:type owl:Class ;
-                                             
-                                             rdfs:subClassOf <http://open-multinet.info/ontology#OperationalStatus> .
+:Infrastructure rdf:type owl:Class ;
+
+                                  rdfs:label "Infrastructure" ;
+
+                rdfs:subClassOf :Group .
+
+:WiredInfrastructure rdf:type owl:Class ;
+
+                                  rdfs:label "Wired Infrastructure" ;
+
+                rdfs:subClassOf :Infrastructure .
+
+:WirelessInfrastructure rdf:type owl:Class ;
+
+                                  rdfs:label "Wireless Infrastructure" ;
+
+                rdfs:subClassOf :Infrastructure .
+
+:OpenFlowInfrastructure rdf:type owl:Class ;
+
+                                  rdfs:label "OpenFlow Infrastructure" ;
+
+                rdfs:subClassOf :Infrastructure .
+
+:CloudInfrastructure rdf:type owl:Class ;
+
+                                  rdfs:label "Cloud Infrastructure" ;
+
+                rdfs:subClassOf :Infrastructure .
 
 
 
-###  http://open-multinet.info/ontology#Status
+###  http://open-multinet.info/ontology#Service
 
-<http://open-multinet.info/ontology#Status> rdf:type owl:Class .
+:Service rdf:type owl:Class ;
+
+                                  rdfs:label "Service" ;
+         
+         owl:equivalentClass nml:Service .
 
 
 
-###  http://open-multinet.info/ontology#Testbed
+###  http://open-multinet.info/ontology#SingleSignOnPortal
 
-<http://open-multinet.info/ontology#Testbed> rdf:type owl:Class ;
-                                             
-                                             rdfs:subClassOf nml:Group .
+:SingleSignOnPortal rdf:type owl:Class ;
+                                                      rdfs:label "Single Sign-On Portal" ;
+
+                    rdfs:subClassOf :FederationService .
 
 
 
 ###  http://schemas.ogf.org/nml/base/2013/02#Group
 
-nml:Group rdf:type owl:Class .
+nml:Group rdf:type owl:Class ;
+
+                                  rdfs:label "NML Group" .
 
 
 
-###  http://schemas.ogf.org/nml/base/2013/02#Node
 
-nml:Node rdf:type owl:Class .
+###  http://schemas.ogf.org/nml/base/2013/02#Service
 
-
-
-###  http://www.science.uva.nl/research/sne/indl#NodeComponent
-
-indl:NodeComponent rdf:type owl:Class .
+nml:Service rdf:type owl:Class ;
+                                  rdfs:label "NML Service" .
 
 
+
+###  http://xmlns.com/foaf/0.1/Person
+
+foaf:Person rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology#AlexanderWillner
+
+:AlexanderWillner rdf:type owl:NamedIndividual ,
+                           foaf:Person ;
+                  
+                  foaf:name "Alexander Willner" ;
+                  
+                  foaf:mbox "alexander.willner@tu-berlin.de" .
 
 
 ###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
