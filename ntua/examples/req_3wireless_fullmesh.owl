@@ -1,0 +1,378 @@
+<?xml version="1.0"?> 
+ <rdf:RDF xmlns="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#" 
+     xml:base="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:nml="http://schemas.ogf.org/nml/2013/05/base#"
+     xmlns:indl="http://www.science.uva.nl/research/sne/indl#"
+     xmlns:indl_wireless="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#"><owl:Ontology rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#locatedAt" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#hasInboundPort" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Port" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#hasOutboundPort" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#existsDuring" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Lifetime" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Node" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#isSink" />
+<owl:ObjectProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasWirelessFeatures" />
+<owl:ObjectProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasChannel" />
+<owl:Class rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#isSource" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Location" />
+<owl:DatatypeProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#long" />
+<owl:DatatypeProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#lat" />
+<owl:DatatypeProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#start" />
+<owl:DatatypeProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#end" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Link" />
+<owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelNo" />
+<owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#frequency" />
+<owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#protocol" />
+<owl:Class rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel" />
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node001">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Node" />
+  <nml:locatedAt rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location_node001" />
+  <nml:hasInboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control-in" />
+  <nml:hasInboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#controlA-in" />
+  <nml:hasOutboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control-out" />
+  <nml:hasOutboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#controlA-out" />
+  <nml:existsDuring rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime0_node001" />
+  <nml:existsDuring rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime2_node001" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node002">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Node" />
+  <nml:locatedAt rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location_node002" />
+  <nml:hasInboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2-in" />
+  <nml:hasInboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2A-in" />
+  <nml:hasOutboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2-out" />
+  <nml:hasOutboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2A-out" />
+  <nml:existsDuring rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime0_node002" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node003">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Node" />
+  <nml:locatedAt rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location_node003" />
+  <nml:hasInboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3-in" />
+  <nml:hasInboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3A-in" />
+  <nml:hasOutboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3-out" />
+  <nml:hasOutboundPort rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3A-out" />
+  <nml:existsDuring rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime0_node003" />
+  <nml:existsDuring rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime2_node003" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control-in">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control_in" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control_in">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#controlA-in">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrolA" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrolA" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrolA" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrolA" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_controlA_in" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_controlA_in">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2-in">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol2" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol2" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol2" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol2" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2_in" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2_in">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2A-in">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol2A" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol2A" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol2A" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol2A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2A_in" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2A_in">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3-in">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol3" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol3" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol3" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol3" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3_in" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3_in">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3A-in">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol3A" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol3A" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol3A" />
+  <nml:isSink rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol3A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3A_in" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3A_in">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control-out">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol2" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol2A" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol3" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol3A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control_out" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control_out">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#controlA-out">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol2" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol2A" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol3" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol3A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_controlA_out" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_controlA_out">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2-out">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrolA" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol3" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol3A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2_out" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2_out">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control2A-out">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrolA" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol3" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol3A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2A_out" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control2A_out">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3-out">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrolA" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol2" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol2A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3_out" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3_out">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#control3A-out">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrolA" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol2" />
+  <nml:isSource rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol2A" />
+  <indl_wireless:hasWirelessFeatures rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3A_out" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#wirelessfeatures_control3A_out">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44" />
+  <indl_wireless:hasChannel rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48" />
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location_node001">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location" />
+  <nml:long rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.360839</nml:long>
+  <nml:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">22.949989</nml:lat>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime0_node001">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Lifetime" />
+  <nml:start rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-01-01T02:00:00+02:00</nml:start>
+  <nml:end rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-29T22:30:00+02:00</nml:end>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime2_node001">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Lifetime" />
+  <nml:start rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-30T00:00:00+02:00</nml:start>
+  <nml:end rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">4000-01-01T02:00:00+02:00</nml:end>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location_node002">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location" />
+  <nml:long rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.360839</nml:long>
+  <nml:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">22.949989</nml:lat>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime0_node002">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Lifetime" />
+  <nml:start rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-01-01T02:00:00+02:00</nml:start>
+  <nml:end rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">4000-01-01T02:00:00+02:00</nml:end>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location_node003">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location" />
+  <nml:long rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.360839</nml:long>
+  <nml:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">22.949989</nml:lat>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime0_node003">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Lifetime" />
+  <nml:start rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-01-01T02:00:00+02:00</nml:start>
+  <nml:end rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-29T22:31:40+02:00</nml:end>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Lifetime2_node003">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Lifetime" />
+  <nml:start rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-11-29T23:31:40+02:00</nml:start>
+  <nml:end rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">4000-01-01T02:00:00+02:00</nml:end>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol2">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol2A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol3">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlANDcontrol3A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol2">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol2A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol3">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-controlAANDcontrol3A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrolA">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol3">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2ANDcontrol3A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrolA">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol3">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control2AANDcontrol3A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrolA">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol2">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3ANDcontrol2A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrolA">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol2">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#link-control3AANDcontrol2A">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Link" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_36">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel" />
+  <indl_wireless:ChannelNo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">36</indl_wireless:ChannelNo>
+  <indl_wireless:frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5180.0</indl_wireless:frequency>
+  <indl_wireless:protocol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IEEE802_11a</indl_wireless:protocol>
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_40">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel" />
+  <indl_wireless:ChannelNo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</indl_wireless:ChannelNo>
+  <indl_wireless:frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5200.0</indl_wireless:frequency>
+  <indl_wireless:protocol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IEEE802_11a</indl_wireless:protocol>
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_44">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel" />
+  <indl_wireless:ChannelNo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">44</indl_wireless:ChannelNo>
+  <indl_wireless:frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5220.0</indl_wireless:frequency>
+  <indl_wireless:protocol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IEEE802_11a</indl_wireless:protocol>
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_48">
+  <rdf:type rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel" />
+  <indl_wireless:ChannelNo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">48</indl_wireless:ChannelNo>
+  <indl_wireless:frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5240.0</indl_wireless:frequency>
+  <indl_wireless:protocol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IEEE802_11a</indl_wireless:protocol>
+</owl:NamedIndividual>
+</rdf:RDF>

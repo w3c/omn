@@ -1,0 +1,127 @@
+<?xml version="1.0"?> 
+ <rdf:RDF xmlns="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#" 
+     xml:base="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:nml="http://schemas.ogf.org/nml/2013/05/base#"
+     xmlns:novi="http://fp7-novi.eu/im.owl#"
+  xmlns:compute="http://geni-orca.renci.org/owl/compute.owl#"
+     xmlns:wireless="http://geni-orca.renci.org/owl/wireless.owl#"><owl:Ontology rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65" />
+<owl:DatatypeProperty rdf:about="http://fp7-novi.eu/im.owl#hostname" />
+<owl:ObjectProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#locatedAt" />
+<owl:DatatypeProperty rdf:about="http://fp7-novi.eu/im.owl#exclusive" />
+<owl:DatatypeProperty rdf:about="http://fp7-novi.eu/im.owl#hardwareType" />
+<owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/wireless.owl#upperBoundFrequency" />
+<owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/wireless.owl#lowerBoundFrequency" />
+<owl:ObjectProperty rdf:about="http://fp7-novi.eu/im.owl#hasLifetime" />
+<owl:ObjectProperty rdf:about="http://fp7-novi.eu/im.owl#contains" />
+<owl:Class rdf:about="http://fp7-novi.eu/im.owl#Lifetime" />
+<owl:Class rdf:about="http://fp7-novi.eu/im.owl#Reservation" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Node" />
+<owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/wireless.owl#channel_No" />
+<owl:ObjectProperty rdf:about="http://geni-orca.renci.org/owl/wireless.owl#usesFrequency" />
+<owl:ObjectProperty rdf:about="http://geni-orca.renci.org/owl/wireless.owl#supportsStandard" />
+<owl:Class rdf:about="http://geni-orca.renci.org/owl/wireless.owl#Channel" />
+<owl:Class rdf:about="http://schemas.ogf.org/nml/2013/05/base#Location" />
+<owl:DatatypeProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#long" />
+<owl:DatatypeProperty rdf:about="http://schemas.ogf.org/nml/2013/05/base#lat" />
+<owl:DatatypeProperty rdf:about="http://fp7-novi.eu/im.owl#startTime" />
+<owl:DatatypeProperty rdf:about="http://fp7-novi.eu/im.owl#endTime" />
+<owl:Class rdf:about="http://geni-orca.renci.org/owl/wireless.owl#Frequency" />
+<owl:Class rdf:about="http://geni-orca.renci.org/owl/wireless.owl#Standard" />
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node001">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Node" />
+  <novi:hostname>node001</novi:hostname>
+  <nml:locatedAt rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location4_node001" />
+  <novi:exclusive>TRUE</novi:exclusive>
+  <novi:hardwareType>orbit</novi:hardwareType>
+  </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node002">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Node" />
+  <novi:hostname>node002</novi:hostname>
+  <nml:locatedAt rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location4_node002" />
+  <novi:exclusive>TRUE</novi:exclusive>
+  <novi:hardwareType>orbit</novi:hardwareType>
+  </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#slice">
+  <rdf:type rdf:resource="http://fp7-novi.eu/im.owl#Reservation" />
+  <novi:hasLifetime rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#lifetime_slice" />
+  <novi:contains rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node001" />
+  <novi:contains rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_1" />
+  <novi:contains rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_2" />
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#larabi">
+  <rdf:type rdf:resource="http://fp7-novi.eu/im.owl#Reservation" />
+  <novi:hasLifetime rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#lifetime_larabi" />
+  <novi:contains rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#node001" />
+  <novi:contains rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_1" />
+  <novi:contains rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_2" />
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_1">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Channel" />
+  <wireless:channel_No rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</wireless:channel_No>
+  <wireless:usesFrequency rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#frequency2_Channel_1" />
+  <wireless:supportsStandard rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11b" />
+  <wireless:supportsStandard rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11g" />
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_2">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Channel" />
+  <wireless:channel_No rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</wireless:channel_No>
+  <wireless:usesFrequency rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#frequency2_Channel_2" />
+  <wireless:supportsStandard rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11b" />
+  <wireless:supportsStandard rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11g" />
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#Channel_3">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Channel" />
+  <wireless:channel_No rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</wireless:channel_No>
+  <wireless:usesFrequency rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#frequency2_Channel_3" />
+  <wireless:supportsStandard rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11b" />
+  <wireless:supportsStandard rdf:resource="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11g" />
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location4_node001">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location" />
+  <nml:long rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.360839</nml:long>
+  <nml:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">22.949989</nml:lat>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#lifetime_slice">
+  <rdf:type rdf:resource="http://fp7-novi.eu/im.owl#Lifetime" />
+  <novi:startTime rdf:datatype="http://www.w3.org/2001/XMLSchema#String">1354221000</novi:startTime>
+<novi:endTime rdf:datatype="http://www.w3.org/2001/XMLSchema#String">1354226400</novi:endTime>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#lifetime_larabi">
+  <rdf:type rdf:resource="http://fp7-novi.eu/im.owl#Lifetime" />
+  <novi:startTime rdf:datatype="http://www.w3.org/2001/XMLSchema#String">1354226400</novi:startTime>
+<novi:endTime rdf:datatype="http://www.w3.org/2001/XMLSchema#String">1354231800</novi:endTime>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#location4_node002">
+  <rdf:type rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Location" />
+  <nml:long rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.360839</nml:long>
+  <nml:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">22.949989</nml:lat>
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#frequency2_Channel_1">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Frequency" />
+<wireless:lowerBoundFrequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2401</wireless:lowerBoundFrequency>
+<wireless:upperBoundFrequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2423</wireless:upperBoundFrequency>
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#frequency2_Channel_2">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Frequency" />
+<wireless:lowerBoundFrequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2406</wireless:lowerBoundFrequency>
+<wireless:upperBoundFrequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2428</wireless:upperBoundFrequency>
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#frequency2_Channel_3">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Frequency" />
+<wireless:lowerBoundFrequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2411</wireless:lowerBoundFrequency>
+<wireless:upperBoundFrequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2433</wireless:upperBoundFrequency>
+</owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11a">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Standard" />
+</owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11b">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Standard" />
+</owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#802.11g">
+  <rdf:type rdf:resource="http://geni-orca.renci.org/owl/wireless.owl#Standard" />
+</owl:NamedIndividual>
+</rdf:RDF>

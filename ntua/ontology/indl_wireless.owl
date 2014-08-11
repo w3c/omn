@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#"
+     xml:base="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16">
+        <owl:imports rdf:resource="http://schemas.ogf.org/nml/2013/05/base#"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasChannel -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasChannel">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelGroup"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasChannelGroup -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasChannelGroup">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelGroup"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasWirelessFeatures -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#hasWirelessFeatures">
+        <rdfs:domain rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Port"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#frequency -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#frequency">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#offset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#offset">
+        <rdfs:domain rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Lifetime"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#protocol -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#protocol">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#Channel">
+        <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/2013/05/base#NetworkObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelGroup -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#ChannelGroup">
+        <rdfs:subClassOf rdf:resource="http://schemas.ogf.org/nml/2013/05/base#Group"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mgiatili/ontologies/2014/2/untitled-ontology-16#WirelessFeatures"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<RSpec type="SFA" expires="2012-10-04T09:05:48Z" generated="2012-10-04T08:05:48Z">
+  <statistics call="ListResources">
+    <aggregate status="success" name="ple" elapsed="0.165371894836"/>
+    <aggregate status="success" name="omf" elapsed="1.21071004868"/>
+  </statistics>
+  <network name="omf">
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node001" component_name="node001" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node001</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="1" z="5"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node002" component_name="node002" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node002</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="2" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node003" component_name="node003" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node003</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="3" z="4"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node004" component_name="node004" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node004</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="4" z="4"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node005" component_name="node005" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node005</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="5" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node006" component_name="node006" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node006</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="6" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node007" component_name="node007" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node007</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="7" z="4"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node008" component_name="node008" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node008</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="8" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node009" component_name="node009" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node009</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="9" z="4"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node010" component_name="node010" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node010</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="10" z="5"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>orbit</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node013" component_name="node013" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node013</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="13" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>diskless</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node012" component_name="node012" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node012</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="12" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>diskless</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node011" component_name="node011" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node011</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="11" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>diskless</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node016" component_name="node016" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node016</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="16" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node017" component_name="node017" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node017</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="17" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node019" component_name="node019" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node019</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="19" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node020" component_name="node020" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node020</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="20" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node021" component_name="node021" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node021</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="21" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node022" component_name="node022" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node022</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="22" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node023" component_name="node023" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node023</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="23" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node024" component_name="node024" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node024</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="24" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node025" component_name="node025" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node025</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="25" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node027" component_name="node027" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node027</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="27" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node028" component_name="node028" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node028</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="28" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node029" component_name="node029" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node029</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="29" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node030" component_name="node030" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node030</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="30" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node031" component_name="node031" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node031</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="31" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node032" component_name="node032" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node032</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="32" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node033" component_name="node033" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node033</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="33" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node034" component_name="node034" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node034</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="34" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <node component_manager_id="urn:publicid:IDN+omf+authority+cm" component_id="urn:publicid:IDN+omf:nitos+node+node035" component_name="node035" site_id="urn:publicid:IDN+omf:nitos+authority+sa">
+      <hostname>node035</hostname>
+      <location country="unknown" longitude="39.360839" latitude="22.949989"/>
+      <position_3d x="1" y="35" z="6"/>
+      <exclusive>TRUE</exclusive>
+      <gateway>nitlab.inf.uth.gr</gateway>
+      <granularity>1800</granularity>
+      <hardware_type>commel</hardware_type>
+    </node>
+    <spectrum>
+      <channel channel_num="36" frequency="5180.0" standard="IEEE802_11a"/>
+      <channel channel_num="40" frequency="5200.0" standard="IEEE802_11a"/>
+      <channel channel_num="44" frequency="5220.0" standard="IEEE802_11a"/>
+      <channel channel_num="48" frequency="5240.0" standard="IEEE802_11a"/>
+      <channel channel_num="52" frequency="5260.0" standard="IEEE802_11a"/>
+      <channel channel_num="56" frequency="5280.0" standard="IEEE802_11a"/>
+      <channel channel_num="60" frequency="5300.0" standard="IEEE802_11a"/>
+      <channel channel_num="64" frequency="5320.0" standard="IEEE802_11a"/>
+      <channel channel_num="100" frequency="5500.0" standard="IEEE802_11a"/>
+      <channel channel_num="104" frequency="5520.0" standard="IEEE802_11a"/>
+      <channel channel_num="108" frequency="5540.0" standard="IEEE802_11a"/>
+      <channel channel_num="112" frequency="5560.0" standard="IEEE802_11a"/>
+      <channel channel_num="116" frequency="5580.0" standard="IEEE802_11a"/>
+      <channel channel_num="120" frequency="5600.0" standard="IEEE802_11a"/>
+      <channel channel_num="124" frequency="5620.0" standard="IEEE802_11a"/>
+      <channel channel_num="128" frequency="5640.0" standard="IEEE802_11a"/>
+      <channel channel_num="132" frequency="5660.0" standard="IEEE802_11a"/>
+      <channel channel_num="136" frequency="5680.0" standard="IEEE802_11a"/>
+      <channel channel_num="140" frequency="5700.0" standard="IEEE802_11a"/>
+      <channel channel_num="1" frequency="2412.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="2" frequency="2417.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="3" frequency="2422.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="4" frequency="2427.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="5" frequency="2432.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="6" frequency="2437.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="7" frequency="2442.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="8" frequency="2447.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="9" frequency="2452.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="10" frequency="2457.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="11" frequency="2462.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="12" frequency="2467.0" standard="IEEE802_11b_g"/>
+      <channel channel_num="13" frequency="2472.0" standard="IEEE802_11b_g"/>
+    </spectrum>
+    <lease slice_id="urn:publicid:IDN+omf:nitos+slice+slice" start_time="1354221000" duration="3">
+      <node component_id="urn:publicid:IDN+omf:nitos+node+node001"/>
+      <channel channel_num="1"/>
+      <channel channel_num="2"/>
+    </lease>
+    <lease slice_id="urn:publicid:IDN+omf:nitos+slice+larabi" start_time="1354226400" duration="3">
+      <node component_id="urn:publicid:IDN+omf:nitos+node+node001"/>
+      <channel channel_num="1"/>
+      <channel channel_num="2"/>
+    </lease>
+    <lease slice_id="urn:publicid:IDN+omf:nitos+slice+quereilhac" start_time="1349337600" duration="8">
+      <node component_id="urn:publicid:IDN+omf:nitos+node+node017"/>
+      <node component_id="urn:publicid:IDN+omf:nitos+node+node019"/>
+      <node component_id="urn:publicid:IDN+omf:nitos+node+node020"/>
+      <channel channel_num="1"/>
+      <channel channel_num="2"/>
+    </lease>
+  </network>
+</RSpec>
