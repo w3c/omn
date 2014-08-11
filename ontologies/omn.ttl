@@ -75,6 +75,8 @@ foaf:name rdf:type owl:AnnotationProperty .
                    
                    rdfs:label "has infrastructure" ;
                    
+                   rdfs:comment "Defines which infrastructures (aka testbeds) are part of a federation."@en ;
+                   
                    rdfs:domain :Federation ;
                    
                    rdfs:range :Infrastructure ;
@@ -91,6 +93,8 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:label "has service" ;
             
+            rdfs:comment "Defines which services a group (e.g. federation or infrastructure) offers (e.g. an GENI SFA Aggregate Manager)."@en ;
+            
             rdfs:domain nml:Group ;
             
             rdfs:range nml:Service .
@@ -104,6 +108,8 @@ foaf:name rdf:type owl:AnnotationProperty .
                            owl:ObjectProperty ;
                   
                   rdfs:label "is part of federation" ;
+                  
+                  rdfs:comment "Defines which federations an infrastructure belongs to."@en ;
                   
                   rdfs:range :Federation ;
                   
@@ -127,6 +133,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 :hasURI rdf:type owl:DatatypeProperty ;
         
         rdfs:label "has URI" ;
+        
+        rdfs:comment "An endpoint where the service can be reached."@en ;
         
         rdfs:domain :Service ;
         
@@ -167,7 +175,9 @@ novi:Platform rdf:type owl:Class ;
             
             rdfs:label "Federation" ;
             
-            rdfs:subClassOf :Group .
+            rdfs:subClassOf :Group ;
+            
+            rdfs:comment "A group of autonomous infrastructure/service providers agreeing upon standards of operation in a collective fashion."@en .
 
 
 
@@ -207,7 +217,9 @@ novi:Platform rdf:type owl:Class ;
                 
                 rdfs:label "Infrastructure" ;
                 
-                rdfs:subClassOf :Group .
+                rdfs:subClassOf :Group ;
+                
+                rdfs:comment "An autonomous infrastrucure that offers resources/services to others within a federation."@en .
 
 
 
