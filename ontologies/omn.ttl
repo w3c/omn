@@ -111,6 +111,34 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
+:partOfInfrastructure rdf:type owl:AsymmetricProperty ,
+                           owl:IrreflexiveProperty ,
+                           owl:ObjectProperty ;
+                  
+                  rdfs:label "is part of an infrastructure" ;
+                  
+                  rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
+                  
+                  rdfs:range :Infrastructure ;
+                  
+                  rdfs:domain :Node .
+
+
+:hasNode rdf:type owl:AsymmetricProperty ,
+                            owl:IrreflexiveProperty ,
+                            owl:ObjectProperty ;
+                   
+                   rdfs:label "has a node" ;
+                   
+                  rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
+                   
+                   rdfs:domain :Infrastructure ;
+                   
+                   rdfs:range :Node ;
+                   
+                   owl:inverseOf :partOfInfrastructure .
+
+
 
 
 #################################################################
@@ -204,6 +232,15 @@ novi:Platform rdf:type owl:Class ;
        owl:equivalentClass nml:Group .
 
 
+
+:Node rdf:type owl:Class ;
+       
+       rdfs:label "Node" ;
+       
+       rdfs:comment "In general any kind of resource or service." ;
+       
+       owl:equivalentClass nml:Node .
+       
 
 ###  http://open-multinet.info/ontology#IdentityProvider
 
