@@ -16,9 +16,9 @@
                                      
                                      rdfs:label "Open-Multinet"@en ;
                                      
-                                     dc:date "2014-08-08"^^xsd:dateTime ;
+                                     dc:date "2014-08-13"^^xsd:dateTime ;
                                      
-                                     owl:versionInfo "0.1" ;
+                                     owl:versionInfo "0.2" ;
                                      
                                      dc:description "An upper ontology based on the work conducted at Open-Multinet.org."@en ;
                                      
