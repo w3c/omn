@@ -301,9 +301,10 @@ To extract the semantic information, you can either use online tools like the <a
 and <a href="http://yasgui.laurensrietveld.nl/?contentTypeConstruct=text%2Fturtle&amp;contentTypeSelect=application%2Fsparql-results%2Bxml&amp;endpoint=http%3A%2F%2Ffederation.av.tu-berlin.de%3A3030%2Fomn%2Fsparql&amp;outputFormat=table&amp;query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+omn%3A+%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%23%3E%0A%0ASELECT++%3FtestbedName+%3FtestbedComment+%3FtestbedService+%3FtestbedServiceURL+WHERE+%7B%0A++%3Ftestbed+omn%3ApartOfFederation+%3Chttp%3A%2F%2Ffed4fire.eu%2Fresources%23federation%3E%3B%0A++++rdfs%3Alabel+%3FtestbedName%3B%0A++++rdfs%3Acomment+%3FtestbedComment+%3B%0A++++OPTIONAL+%7B%0A++++++%3Ftestbed+omn%3AhasService+%3Fservice+.%0A++++++%3Fservice+rdfs%3Alabel+%3FtestbedService+%3B%0A+++++++++omn%3AhasURI+%3FtestbedServiceURL+.%0A++++++%7D%0A%7D+LIMIT+50%0A&amp;requestMethod=POST&amp;tabTitle=Find+Testbeds">Yet Another SPARQL GUI</a>
 or offline tools like <a href="http://librdf.org/raptor/">Raptor</a>:
   <code><pre>
-$ rapper -i rdfa http://federation.av.tu-berlin.de/fed4fire/ -o turtle
-rapper: Parsing URI http://federation.av.tu-berlin.de/fed4fire with parser rdfa
+$ rapper -i rdfa -o turtle http://federation.av.tu-berlin.de/fed4fire/resources
+rapper: Parsing URI http://federation.av.tu-berlin.de/fed4fire/resources with parser rdfa
 rapper: Serializing with serializer turtle
+
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : &lt;http://www.w3.org/1999/xhtml> .
 @prefix omn: &lt;http://open-multinet.info/ontology#> .
@@ -316,80 +317,95 @@ rapper: Serializing with serializer turtle
 
 &lt;http://fed4fire.eu/resources#bonfire>
     a omn:CloudInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "EPCC and Inria cloud sites"@en-EN ;
-    rdfs:label "EPCC"@en-EN .
+    rdfs:comment "EPCC and Inria cloud sites"@en ;
+    rdfs:label "EPCC"@en .
 
 &lt;http://fed4fire.eu/resources#cl>
     a omn:WiredInfrastructure, omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "Community-lab (UPC)"@en-EN ;
-    rdfs:label "Community-lab"@en-EN .
+    rdfs:comment "Community-lab (UPC)"@en ;
+    rdfs:label "Community-lab"@en .
 
 &lt;http://fed4fire.eu/resources#federation>
     omn:hasInfrastructure &lt;http://fed4fire.eu/resources#bonfire>, &lt;http://fed4fire.eu/resources#cl>, &lt;http://fed4fire.eu/resources#fp>, &lt;http://fed4fire.eu/resources#i2cat>, &lt;http://fed4fire.eu/resources#koren>, &lt;http://fed4fire.eu/resources#netmode>, &lt;http://fed4fire.eu/resources#nitos>, &lt;http://fed4fire.eu/resources#norbit>, &lt;http://fed4fire.eu/resources#ple>, &lt;http://fed4fire.eu/resources#sc>, &lt;http://fed4fire.eu/resources#ub>, &lt;http://fed4fire.eu/resources#vw>, &lt;http://fed4fire.eu/resources#wilabt> ;
+    omn:hasService &lt;http://fed4fire.eu/resources#portal> ;
     doap:homepage &lt;http://www.fed4fire.eu/> ;
-    doap:label "Fed4FIRE"@en-EN ;
-    rdf:comment "Fed4FIRE is an Integrating Project under the European Union’s Seventh Framework Programme (FP7) addressing the work programme topic Future Internet Research and Experimentation. The project is performed by a consortium of 17 partner organisations from 8 countries, and is coordinated by iMinds, Belgium. It started in October 2012 and will run for 48 months, until the end of September 2016."@en-EN ;
-    a omn:federation, owl:NamedIndividual ;
-    rdfs:label "Fed4FIRE"@en-EN ;
+    doap:label "Fed4FIRE"@en ;
+    a omn:Federation, owl:NamedIndividual ;
+    rdfs:comment "Fed4FIRE is an Integrating Project under the European Union’s Seventh Framework Programme (FP7) addressing the work programme topic Future Internet Research and Experimentation. The project is performed by a consortium of 17 partner organisations from 8 countries, and is coordinated by iMinds, Belgium. It started in October 2012 and will run for 48 months, until the end of September 2016."@en ;
+    rdfs:label "Fed4FIRE"@en ;
     foaf:depiction &lt;http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> ;
     foaf:homepage &lt;http://www.fed4fire.eu/> ;
     foaf:mbox &lt;mailto:contact@fed4fire.eu> .
 
 &lt;http://fed4fire.eu/resources#fp>
+    omn:hasService [
+        omn:hasURI &lt;https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3> ;
+        a omn:AggregateManager ;
+        rdfs:label "Aggregate Manager API"@en
+    ], [
+        omn:hasURI &lt;https://fuseco.fokus.fraunhofer.de/api/sfa/registry/v1> ;
+        a omn:SliceAuthority ;
+        rdfs:label "Slice Authority API"@en
+    ] ;
     a omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "FUSECO (FOKUS)"@en-EN ;
-    rdfs:label "FUSECO"@en-EN .
+    rdfs:comment "FUSECO (FOKUS)"@en ;
+    rdfs:label "FUSECO"@en ;
+    owl:sameAs &lt;http://fuseco.fokus.fraunhofer.de/about#infrastructure> .
 
 &lt;http://fed4fire.eu/resources#i2cat>
     a omn:OpenFlowInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "i2CAT OFELIA island"@en-EN ;
-    rdfs:label "i2CAT OFELIA"@en-EN .
+    rdfs:comment "i2CAT OFELIA island"@en ;
+    rdfs:label "i2CAT OFELIA"@en .
 
 &lt;http://fed4fire.eu/resources#koren>
     a omn:OpenFlowInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "Koren testbed (NIA)"@en-EN ;
-    rdfs:label "Koren"@en-EN .
+    rdfs:comment "Koren testbed (NIA)"@en ;
+    rdfs:label "Koren"@en .
 
 &lt;http://fed4fire.eu/resources#netmode>
     a omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "Netmode (NTUA)"@en-EN ;
-    rdfs:label "Netmode"@en-EN .
+    rdfs:comment "Netmode (NTUA)"@en ;
+    rdfs:label "Netmode"@en .
 
 &lt;http://fed4fire.eu/resources#nitos>
     a omn:OpenFlowInfrastructure, omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "NITOS (UTH)"@en-EN, "NITOS testbed (see wireless testbeds)"@en-EN ;
-    rdfs:label "NITOS"@en-EN .
+    rdfs:comment "NITOS (UTH)"@en, "NITOS testbed (see wireless testbeds)"@en ;
+    rdfs:label "NITOS"@en .
 
 &lt;http://fed4fire.eu/resources#norbit>
     a omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "Norbit (NICTA)"@en-EN ;
-    rdfs:label "Norbit"@en-EN .
+    rdfs:comment "Norbit (NICTA)"@en ;
+    rdfs:label "Norbit"@en .
 
 &lt;http://fed4fire.eu/resources#ple>
     a omn:WiredInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "PlanetLab Europe (UPMC)"@en-EN ;
-    rdfs:label "PlanetLab Europe"@en-EN .
+    rdfs:comment "PlanetLab Europe (UPMC)"@en ;
+    rdfs:label "PlanetLab Europe"@en .
+
+&lt;http://fed4fire.eu/resources#portal>
+    omn:hasURI &lt;http://portal.fed4fire.eu> ;
+    a omn:SingleSignOnPortal, owl:NamedIndividual ;
+    rdfs:label "Fed4FIRE Single Sign-On Portal"@en .
 
 &lt;http://fed4fire.eu/resources#sc>
     a omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "SmartSantander (UC)"@en-EN ;
-    rdfs:label "SmartSantander"@en-EN .
+    rdfs:comment "SmartSantander (UC)"@en ;
+    rdfs:label "SmartSantander"@en .
 
 &lt;http://fed4fire.eu/resources#ub>
     a omn:OpenFlowInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "UBristol OFELIA island"@en-EN ;
-    rdfs:label "UBristol OFELIA"@en-EN .
+    rdfs:comment "UBristol OFELIA island"@en ;
+    rdfs:label "UBristol OFELIA"@en .
 
 &lt;http://fed4fire.eu/resources#vw>
     a omn:CloudInfrastructure, omn:WiredInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "Virtual Wall (iMinds)"@en-EN, "iMinds Virtual Wall testbed for emulated networks"@en-EN ;
-    rdfs:label "Virtual Wall"@en-EN, "iMinds Virtual Wall"@en-EN .
+    rdfs:comment "Virtual Wall (iMinds)"@en, "iMinds Virtual Wall testbed for emulated networks"@en ;
+    rdfs:label "Virtual Wall"@en, "iMinds Virtual Wall"@en .
 
-&lt;http://fed4fire.eu/resources#wirapper: Parsing returned 97 triples
-labt>
+&lt;http://fed4fire.eu/resources#wilabt>
     a omn:WirelessInfrastructure, owl:NamedIndividual ;
-    rdfs:comment "w-iLab.t (iMinds)"@en-EN ;
-    rdfs:label "w-iLab.t"@en-EN .
+    rdfs:comment "w-iLab.t (iMinds)"@en ;
+    rdfs:label "w-iLab.t"@en .
 
 &lt;http://www.fed4fire.eu/>
     &lt;http://www.fed4fire.eu/alternate> &lt;http://www.fed4fire.eu/rss.xml> ;
@@ -397,7 +413,8 @@ labt>
     &lt;http://www.fed4fire.eu/shortcut> &lt;http://fed4fire.eu/fileadmin/images/favicon_BB.ico> ;
     &lt;http://www.fed4fire.eu/stylesheet> &lt;http://www.fed4fire.eu/fileadmin/styles/01_layouts_basics/css/layout_3col_standard.css>, &lt;http://www.fed4fire.eu/fileadmin/styles/superfish.css>, &lt;http://www.fed4fire.eu/typo3temp/stylesheet_6a39f51a9f.css?1349948780>, &lt;http://www.fed4fire.eu/typo3temp/stylesheet_dc31d4713a.css?1349948780> .
 
-rapper: Parsing returned 97 triples
+rapper: Parsing returned 111 triples
+
   </pre></code>
   
 
