@@ -40,11 +40,6 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology#inverseOf
-
-:inverseOf rdf:type owl:AnnotationProperty .
-
-
 
 ###  http://xmlns.com/foaf/0.1/mbox
 
@@ -81,7 +76,7 @@ foaf:name rdf:type owl:AnnotationProperty .
                    
                    rdfs:range :Infrastructure ;
                    
-                   :inverseOf :partOfFederation .
+                   owl:inverseOf :partOfFederation .
 
 
 
@@ -115,7 +110,7 @@ foaf:name rdf:type owl:AnnotationProperty .
                   
                   rdfs:domain :Infrastructure ;
                   
-                  :inverseOf :hasInfrastructure .
+                  owl:inverseOf :hasInfrastructure .
 
 
 
