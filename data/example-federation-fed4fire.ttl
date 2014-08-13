@@ -36,9 +36,21 @@ omn:hasService rdf:type owl:AnnotationProperty .
 
 
 
+###  http://open-multinet.info/ontology#hasURI
+
+omn:hasURI rdf:type owl:AnnotationProperty .
+
+
+
 ###  http://usefulinc.com/ns/doap#homepage
 
 doap:homepage rdf:type owl:AnnotationProperty .
+
+
+
+###  http://usefulinc.com/ns/doap#label
+
+doap:label rdf:type owl:AnnotationProperty .
 
 
 
@@ -73,6 +85,12 @@ foaf:mbox rdf:type owl:AnnotationProperty .
 #    Classes
 #
 #################################################################
+
+
+###  http://open-multinet.info/ontology#AggregateManager
+
+omn:AggregateManager rdf:type owl:Class .
+
 
 
 ###  http://open-multinet.info/ontology#CloudInfrastructure
@@ -151,11 +169,16 @@ omn:WirelessInfrastructure rdf:type owl:Class .
 :federation rdf:type omn:Federation ,
                      owl:NamedIndividual ;
             
-            rdfs:label "Fed4FIRE" ;
+            rdfs:label "Fed4FIRE" ,
+                       "Fed4FIRE"@en-en ;
             
             doap:name "Fed4FIRE" ;
             
             rdfs:comment "Fed4FIRE is an Integrating Project under the European Union’s Seventh Framework Programme (FP7) addressing the work programme topic Future Internet Research and Experimentation. The project is performed by a consortium of 17 partner organisations from 8 countries, and is coordinated by iMinds, Belgium. It started in October 2012 and will run for 48 months, until the end of September 2016."@en ;
+            
+            doap:label "Fed4FIRE"@en-en ;
+            
+            rdfs:comment "Fed4FIRE is an Integrating Project under the European Union’s Seventh Framework Programme (FP7) addressing the work programme topic Future Internet Research and Experimentation. The project is performed by a consortium of 17 partner organisations from 8 countries, and is coordinated by iMinds, Belgium. It started in October 2012 and will run for 48 months, until the end of September 2016."@en-en ;
             
             doap:homepage <http://fed4fire.eu> ;
             
@@ -164,19 +187,30 @@ omn:WirelessInfrastructure rdf:type owl:Class .
             omn:hasService :Portal ;
             
             omn:hasInfrastructure :bonfire ,
+                                  :cl ,
                                   :fp ,
                                   :i2cat ,
+                                  :koren ,
                                   :netmode ,
                                   :nia ,
                                   :nitos ,
                                   :norbit ,
-                                  :ple ,
-                                  :sc ,
+                                  :ple ;
+            
+            omn:hasService :portal ;
+            
+            omn:hasInfrastructure :sc ,
+                                  :ub ,
                                   :ubristol ,
                                   :uc ,
                                   :upc ,
                                   :vw ,
-                                  :w-ilabt ;
+                                  :w-ilabt ,
+                                  :wilabt ;
+            
+            doap:homepage <http://www.fed4fire.eu/> ;
+            
+            foaf:homepage <http://www.fed4fire.eu/> ;
             
             foaf:depiction <http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> ;
             
@@ -189,9 +223,13 @@ omn:WirelessInfrastructure rdf:type owl:Class .
 :fp rdf:type omn:WirelessInfrastructure ,
              owl:NamedIndividual ;
     
-    rdfs:label "FUSECO (FOKUS)" ;
+    rdfs:label "FUSECO Playground (FOKUS)" ;
     
-    rdfs:isDefinedBy <https://fuseco.fokus.fraunhofer.de/resources/infrastructure> .
+    rdfs:isDefinedBy <https://fuseco.fokus.fraunhofer.de/resources/infrastructure> ;
+    
+    omn:hasService [ rdf:type omn:AggregateManager ;
+                     omn:hasURI <https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3>
+                   ] .
 
 
 
