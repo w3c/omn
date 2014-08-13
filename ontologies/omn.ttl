@@ -40,7 +40,6 @@
 #################################################################
 
 
-
 ###  http://xmlns.com/foaf/0.1/mbox
 
 foaf:mbox rdf:type owl:AnnotationProperty .
@@ -108,9 +107,7 @@ foaf:name rdf:type owl:AnnotationProperty .
                   
                   rdfs:range :Federation ;
                   
-                  rdfs:domain :Infrastructure ;
-                  
-                  owl:inverseOf :hasInfrastructure .
+                  rdfs:domain :Infrastructure .
 
 
 
@@ -151,6 +148,18 @@ foaf:name rdf:type owl:AnnotationProperty .
 novi:Platform rdf:type owl:Class ;
               
               owl:equivalentClass :Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology#AggregateManager
+
+:AggregateManager rdf:type owl:Class ;
+                  
+                  rdfs:label "Aggregate Manager"@en ;
+                  
+                  rdfs:subClassOf :FederationService ;
+                  
+                  rdfs:comment "An instance of an Aggregate Manager satisfying the Aggregate Manager API."@en .
 
 
 
@@ -245,6 +254,18 @@ novi:Platform rdf:type owl:Class ;
                     rdfs:label "Single Sign-On Portal" ;
                     
                     rdfs:subClassOf :FederationService .
+
+
+
+###  http://open-multinet.info/ontology#SliceAuthority
+
+:SliceAuthority rdf:type owl:Class ;
+                
+                rdfs:label "Slice Authority"@en ;
+                
+                rdfs:subClassOf :FederationService ;
+                
+                rdfs:comment "The Slice Authority API provides services to manage slices and their associated permissions."@en .
 
 
 
