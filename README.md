@@ -6,6 +6,11 @@ Abstract
 
 Playground for the ontology work focussing on putting ontologies in RSpecs.
 
+Live Ontology
+-------------
+ * [HTML Documentation](http://federation.av.tu-berlin.de/omn/ontology.html)
+ * LodLive (to be done)
+
 Suggested Setup
 ---------------
  * [sparql](http://jena.apache.org/documentation/tools/) (command line tool from jena to query data)
