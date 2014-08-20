@@ -16,7 +16,7 @@
                                      
                                      rdfs:label "Open-Multinet"@en ;
                                      
-                                     dc:date "2014-08-13"^^xsd:dateTime ;
+                                     dc:date "2014-08-20"^^xsd:dateTime ;
                                      
                                      owl:versionInfo "0.2" ;
                                      
