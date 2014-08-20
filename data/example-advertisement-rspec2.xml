@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec:rspec
+xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
+xmlns:xhtml="http://www.w3.org/1999/xhtml"
+xmlns:omn="http://open-multinet.info/ontology#"
+xmlns:owl="http://www.w3.org/2002/07/owl#"
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:xml="http://www.w3.org/XML/1998/namespace"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+xmlns:doap="http://usefulinc.com/ns/doap#"
+xmlns:foaf="http://xmlns.com/foaf/0.1/"
+xmlns:dc="http://purl.org/dc/terms/"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:rspec="http://www.geni.net/resources/rspec/3"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+type="request"
+generated="2014-02-23T20:01:56.848+01:00">
+  <rspec:node
+   client_id="node0"
+   component_manager_id="urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm"
+   component_id="urn:publicid:IDN+fuseco.fokus.fraunhofer.de+node+n323"
+   exclusive="true"
+   xhtml:about="http://fuseco.fokus.fraunhofer.de/resources#n323"
+   xhtml:typeof="omn:Node"
+   xhtml:property="geni:exclusive"
+   xhtml:content="true"
+   >
+      <xhtml:a rel="geni:component_manager_id" href="urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm" />
+      <xhtml:a rel="geni:component_id" href="urn:publicid:IDN+fuseco.fokus.fraunhofer.de+node+n323" />
+      <xhtml:a rel="omn:partOfInfrastructure" href="http://fuseco.fokus.fraunhofer.de/about#infrastructure" />
+      <xhtml:div property="rdfs:comment">A GENI RSpec v3 node is a omn:Node (and therefore a nml:Node).</xhtml:div>
+      <rspec:sliver_type
+       name="raw-pc" 
+       xhtml:property="geni:sliver_type"
+       xhtml:content="raw-pc"
+       />
+  </rspec:node>
+</rspec:rspec>
