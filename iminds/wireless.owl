@@ -22,8 +22,8 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:compute="http://geni-orca.renci.org/owl/compute.owl#">
     <Ontology rdf:about="http://geni-orca.renci.org/owl/wireless.owl">
-        <versionIRI rdf:resource="http://geni-orca.renci.org/owl/compute-iminds-draft.owl"/>
         <imports rdf:resource="http://geni-orca.renci.org/owl/compute.owl"/>
+        <versionIRI rdf:resource="http://geni-orca.renci.org/owl/wireless-iminds-draft.owl"/>
     </Ontology>
     
 
