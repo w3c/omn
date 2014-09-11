@@ -6,13 +6,11 @@
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY wireless-ntua-extension "http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#" >
 ]>
 
 
 <rdf:RDF xmlns="http://geni-orca.renci.org/owl/reservation.owl#"
      xml:base="http://geni-orca.renci.org/owl/reservation.owl"
-     xmlns:wireless-ntua-extension="http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
@@ -51,15 +49,15 @@
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#contains -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#contains -->
 
-    <owl:ObjectProperty rdf:about="&wireless-ntua-extension;contains"/>
+    <owl:ObjectProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#contains"/>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#hasLifetime -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#hasLifetime -->
 
-    <owl:ObjectProperty rdf:about="&wireless-ntua-extension;hasLifetime"/>
+    <owl:ObjectProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#hasLifetime"/>
     
 
 
@@ -74,15 +72,15 @@
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#endTime -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#endTime -->
 
-    <owl:DatatypeProperty rdf:about="&wireless-ntua-extension;endTime"/>
+    <owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#endTime"/>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#startTime -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#startTime -->
 
-    <owl:DatatypeProperty rdf:about="&wireless-ntua-extension;startTime"/>
+    <owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#startTime"/>
     
 
 
@@ -97,15 +95,15 @@
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Lifetime -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Lifetime -->
 
-    <owl:Class rdf:about="&wireless-ntua-extension;Lifetime"/>
+    <owl:Class rdf:about="http://geni-orca.renci.org/owl/reservation.owl#Lifetime"/>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Reservation -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Reservation -->
 
-    <owl:Class rdf:about="&wireless-ntua-extension;Reservation"/>
+    <owl:Class rdf:about="http://geni-orca.renci.org/owl/reservation.owl#Reservation"/>
     
 
 
@@ -120,64 +118,64 @@
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Channel_1 -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Channel_1 -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;Channel_1"/>
+    <owl:NamedIndividual rdf:about="Channel_1"/>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Channel_2 -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Channel_2 -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;Channel_2"/>
+    <owl:NamedIndividual rdf:about="Channel_2"/>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#larabi -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#larabi -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;larabi">
-        <rdf:type rdf:resource="&wireless-ntua-extension;Reservation"/>
-        <wireless-ntua-extension:contains rdf:resource="&wireless-ntua-extension;Channel_1"/>
-        <wireless-ntua-extension:contains rdf:resource="&wireless-ntua-extension;Channel_2"/>
-        <wireless-ntua-extension:hasLifetime rdf:resource="&wireless-ntua-extension;lifetime_larabi"/>
-        <wireless-ntua-extension:contains rdf:resource="&wireless-ntua-extension;node001"/>
+    <owl:NamedIndividual rdf:about="larabi">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Reservation"/>
+        <contains rdf:resource="Channel_1"/>
+        <contains rdf:resource="Channel_2"/>
+        <hasLifetime rdf:resource="lifetime_larabi"/>
+        <contains rdf:resource="node001"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#lifetime_larabi -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#lifetime_larabi -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;lifetime_larabi">
-        <rdf:type rdf:resource="&wireless-ntua-extension;Lifetime"/>
-        <wireless-ntua-extension:startTime rdf:datatype="&xsd;String">1354226400</wireless-ntua-extension:startTime>
-        <wireless-ntua-extension:endTime rdf:datatype="&xsd;String">1354231800</wireless-ntua-extension:endTime>
+    <owl:NamedIndividual rdf:about="lifetime_larabi">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Lifetime"/>
+        <startTime rdf:datatype="&xsd;String">1354226400</startTime>
+        <endTime rdf:datatype="&xsd;String">1354231800</endTime>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#lifetime_slice -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#lifetime_slice -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;lifetime_slice">
-        <rdf:type rdf:resource="&wireless-ntua-extension;Lifetime"/>
-        <wireless-ntua-extension:startTime rdf:datatype="&xsd;String">1354221000</wireless-ntua-extension:startTime>
-        <wireless-ntua-extension:endTime rdf:datatype="&xsd;String">1354226400</wireless-ntua-extension:endTime>
+    <owl:NamedIndividual rdf:about="lifetime_slice">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Lifetime"/>
+        <startTime rdf:datatype="&xsd;String">1354221000</startTime>
+        <endTime rdf:datatype="&xsd;String">1354226400</endTime>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#node001 -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#node001 -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;node001"/>
+    <owl:NamedIndividual rdf:about="node001"/>
     
 
 
-    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#slice -->
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#slice -->
 
-    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;slice">
-        <rdf:type rdf:resource="&wireless-ntua-extension;Reservation"/>
-        <wireless-ntua-extension:contains rdf:resource="&wireless-ntua-extension;Channel_1"/>
-        <wireless-ntua-extension:contains rdf:resource="&wireless-ntua-extension;Channel_2"/>
-        <wireless-ntua-extension:hasLifetime rdf:resource="&wireless-ntua-extension;lifetime_slice"/>
-        <wireless-ntua-extension:contains rdf:resource="&wireless-ntua-extension;node001"/>
+    <owl:NamedIndividual rdf:about="slice">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Reservation"/>
+        <contains rdf:resource="Channel_1"/>
+        <contains rdf:resource="Channel_2"/>
+        <hasLifetime rdf:resource="lifetime_slice"/>
+        <contains rdf:resource="node001"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 
