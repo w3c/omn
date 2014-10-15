@@ -17,14 +17,13 @@
                                            
                                            dc:date "2014-10-14"^^xsd:dateTime ;
                                            
-                                           dc:description "A higher level ontology describing federated future internet infrastructures, based on work conducted at Open Multinet (http://open-multinet.info), OFG (http://www.ogf.org/documents/GFD.206.pdf), Novi (http://www.semantic-web-journal.net/system/files/swj580.pdf), INDL (https://ivi.fnwi.uva.nl/sne/ndl/), NDL-OWL (https://geni-orca.renci.org/trac/wiki/NDL-OWL) and the Infinity Project (http://www.fi-infinity.eu)."^^xsd:string ;
+                                           dc:description "A higher level ontology describing federated future internet infrastructures, based on work conducted at Open Multinet (http://open-multinet.info), OFG (NML; http://www.ogf.org/documents/GFD.206.pdf), Novi (http://www.semantic-web-journal.net/system/files/swj580.pdf), INDL (https://ivi.fnwi.uva.nl/sne/ndl/), NDL-OWL (https://geni-orca.renci.org/trac/wiki/NDL-OWL) and the Infinity Project (http://www.fi-infinity.eu)."^^xsd:string ;
                                            
                                            dc:title "Federated Infrastructure Description and Discovery Language"^^xsd:string ;
                                            
                                            dc:license <http://creativecommons.org/licenses/by/4.0/> ;
                                            
                                            dc:creator :AlexanderWillner .
-
 
 
 #################################################################
@@ -127,22 +126,56 @@ foaf:mbox rdf:type owl:ObjectProperty .
 #################################################################
 
 
-###  http://federation.av.tu-berlin.de/fiddle#hasURI
+###  http://federation.av.tu-berlin.de/fiddle#infraMontoring
 
-:hasURI rdf:type owl:DatatypeProperty ;
-        
-        rdfs:label "has URI" ;
-        
-        rdfs:comment "An endpoint where the service can be reached."@en ;
-        
-        rdfs:domain nml:Service ;
-        
-        rdfs:range xsd:anyURI .
+:infraMontoring rdf:type owl:DatatypeProperty ;
+                
+                rdfs:label "has infra monitoring" ;
+                
+                rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> ;
+                
+                rdfs:range [ rdf:type rdfs:Datatype ;
+                             owl:oneOf [ rdf:type rdf:List ;
+                                         rdf:first "no" ;
+                                         rdf:rest [ rdf:type rdf:List ;
+                                                    rdf:first "yes" ;
+                                                    rdf:rest rdf:nil
+                                                  ]
+                                       ]
+                           ] .
+
+
+
+###  http://federation.av.tu-berlin.de/fiddle#omlServer
+
+:omlServer rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> ;
+           
+           rdfs:range xsd:anyURI .
+
+
+
+###  http://federation.av.tu-berlin.de/fiddle#serviceURI
+
+:serviceURI rdf:type owl:DatatypeProperty ;
+            
+            rdfs:label "has service URI" ;
+            
+            rdfs:comment "An endpoint where the service can be reached."@en ;
+            
+            rdfs:domain nml:Service ;
+            
+            rdfs:range xsd:anyURI .
+
 
 
 ###  http://xmlns.com/foaf/0.1/name
 
 foaf:name rdf:type owl:DatatypeProperty .
+
+
+
 
 
 #################################################################
@@ -160,7 +193,7 @@ foaf:name rdf:type owl:DatatypeProperty .
                        
                        rdfs:subClassOf nml:Service ;
                        
-                       rdfs:isDefinedBy <http://groups.geni.net/geni/wiki/GeniClearinghouse> .
+                       rdfs:comment "\"The Clearinghouse provides services that log transactions (successful or failed) between user tools and aggregates to support real-time and post-facto forensics analytics.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
 
 
@@ -184,17 +217,19 @@ foaf:name rdf:type owl:DatatypeProperty .
                       
                       rdfs:subClassOf nml:Service ;
                       
-                      rdfs:isDefinedBy <http://groups.geni.net/geni/wiki/GeniClearinghouse> .
+                      rdfs:comment "\"The Clearinghouse provides services to determine whether particular actions (within the Clearinghouse or with respect to a particular Aggregate) are permitted by federation policy.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
 
 
-###  http://federation.av.tu-berlin.de/fiddle#CloudInfrastructure
+###  http://federation.av.tu-berlin.de/fiddle#CloudComputing
 
-:CloudInfrastructure rdf:type owl:Class ;
-                     
-                     rdfs:label "Cloud Infrastructure" ;
-                     
-                     rdfs:subClassOf :TechnicalInfrastructure .
+:CloudComputing rdf:type owl:Class ;
+                
+                rdfs:label "Cloud Computing" ;
+                
+                rdfs:subClassOf :TechnicalInfrastructure ;
+                
+                rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -342,23 +377,25 @@ foaf:name rdf:type owl:DatatypeProperty .
 
 
 
-###  http://federation.av.tu-berlin.de/fiddle#WiredInfrastructure
+###  http://federation.av.tu-berlin.de/fiddle#WiredAccessNetwork
 
-:WiredInfrastructure rdf:type owl:Class ;
-                     
-                     rdfs:label "Wired Infrastructure" ;
-                     
-                     rdfs:subClassOf :TechnicalInfrastructure .
+:WiredAccessNetwork rdf:type owl:Class ;
+                    
+                    rdfs:label "Wired Access Network" ;
+                    
+                    rdfs:subClassOf :TechnicalInfrastructure ;
+                    
+                    rdfs:seeAlso <http://www.fi-infinity.eu/portal/resources/deliverable/d36> .
 
 
 
-###  http://federation.av.tu-berlin.de/fiddle#WirelessInfrastructure
+###  http://federation.av.tu-berlin.de/fiddle#WirelessAccessNetwork
 
-:WirelessInfrastructure rdf:type owl:Class ;
-                        
-                        rdfs:label "Wireless Infrastructure" ;
-                        
-                        rdfs:subClassOf :TechnicalInfrastructure .
+:WirelessAccessNetwork rdf:type owl:Class ;
+                       
+                       rdfs:label "Wireless Infrastructure" ;
+                       
+                       rdfs:subClassOf :TechnicalInfrastructure .
 
 
 
@@ -398,7 +435,9 @@ nml:Service rdf:type owl:Class ;
 
 ###  http://schemas.ogf.org/nml/base/2013/02#Node
 
-<http://schemas.ogf.org/nml/base/2013/02#Node> rdf:type owl:Class .
+<http://schemas.ogf.org/nml/base/2013/02#Node> rdf:type owl:Class ;
+                                               
+                                               rdfs:comment "\"A Node is generally a device connected to, or part of, the network. A Node does not necessarily correspond to a physical machine.\" http://www.ogf.org/documents/GFD.206.pdf" .
 
 
 
@@ -438,9 +477,15 @@ foaf:Person rdf:type owl:Class .
                   
                   foaf:homepage <http://alex.willner.ws> ;
                   
-                  foaf:mbox <mailto:alexander.willner@tu-berlin.de> ;
+                  rdfs:seeAlso <https://www.av.tu-berlin.de/menue/team/willner/> ;
                   
-                  rdfs:seeAlso <https://www.av.tu-berlin.de/menue/team/willner/> .
+                  foaf:mbox <mailto:alexander.willner@tu-berlin.de> .
+
+
+
+###  mailto:alexander.willner@tu-berlin.de
+
+<mailto:alexander.willner@tu-berlin.de> rdf:type owl:NamedIndividual .
 
 
 
