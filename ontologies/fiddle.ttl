@@ -55,11 +55,15 @@
          
          rdfs:label "has a node" ;
          
-         rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
+         rdfs:comment "Defines which resources/services belongs to which infrastructure. Similar but not identical to NML hasNode (http://www.ogf.org/documents/GFD.206.pdf)."@en ;
          
          rdfs:domain :Infrastructure ;
          
-         owl:inverseOf :partOfInfrastructure .
+         owl:inverseOf :partOfInfrastructure ;
+         
+         rdfs:seeAlso nml:hasNode ;
+         
+         rdfs:range <http://schemas.ogf.org/nml/base/2013/02#Node> .
 
 
 
@@ -71,9 +75,9 @@
             
             rdfs:seeAlso "http://schemas.ogf.org/nml/2013/05/base#hasService" ;
             
-            rdfs:comment "Defines which services a group (e.g. federation or infrastructure) offers (e.g. an GENI SFA Aggregate Manager)."@en ;
+            rdfs:comment "Defines which services a group (e.g. federation or infrastructure) offers (e.g. an GENI SFA Aggregate Manager). Similar but not identical to NML hasService (http://www.ogf.org/documents/GFD.206.pdf)."@en ;
             
-            rdfs:domain nml:Group ;
+            rdfs:domain :Infrastructure ;
             
             rdfs:range nml:Service .
 
@@ -101,7 +105,9 @@
                       
                       rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
                       
-                      rdfs:range :Infrastructure .
+                      rdfs:range :Infrastructure ;
+                      
+                      rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> .
 
 
 
@@ -149,6 +155,8 @@ foaf:mbox rdf:type owl:ObjectProperty .
 ###  http://federation.av.tu-berlin.de/fiddle#omlServer
 
 :omlServer rdf:type owl:DatatypeProperty ;
+           
+           rdfs:label "OML Server" ;
            
            rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> ;
            
