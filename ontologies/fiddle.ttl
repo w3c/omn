@@ -389,13 +389,13 @@ foaf:name rdf:type owl:DatatypeProperty .
 
 
 
-###  http://federation.av.tu-berlin.de/fiddle#WirelessAccessNetwork
+###  http://federation.av.tu-berlin.de/fiddle#WirelessInfrastructure
 
-:WirelessAccessNetwork rdf:type owl:Class ;
-                       
-                       rdfs:label "Wireless Infrastructure" ;
-                       
-                       rdfs:subClassOf :TechnicalInfrastructure .
+:WirelessInfrastructure rdf:type owl:Class ;
+                        
+                        rdfs:label "Wireless Infrastructure" ;
+                        
+                        rdfs:subClassOf :TechnicalInfrastructure .
 
 
 
