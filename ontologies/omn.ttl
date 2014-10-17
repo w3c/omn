@@ -309,7 +309,7 @@ novi:Platform rdf:type owl:Class ;
             
             rdfs:label "Federation" ;
             
-            rdfs:subClassOf nml:Group ;
+            rdfs:subClassOf <http://schema.org/Organization> ;
             
             rdfs:comment "A group of autonomous infrastructure/service providers agreeing upon standards of operation in a collective fashion."@en .
 
@@ -505,6 +505,12 @@ novi:Platform rdf:type owl:Class ;
 
 
 
+###  http://schema.org/Organization
+
+<http://schema.org/Organization> rdf:type owl:Class .
+
+
+
 ###  http://schemas.ogf.org/nml/2013/05/base#Group
 
 nml:Group rdf:type owl:Class ;
@@ -537,7 +543,9 @@ nml:Service rdf:type owl:Class ;
             
             rdfs:subClassOf nml:NetworkObject ;
             
-            rdfs:comment "\"Service describes an ability of the network. That is, it describes how the behavior can be changed dynamically.\" http://www.ogf.org/documents/GFD.206.pdf" .
+            rdfs:comment "\"Service describes an ability of the network. That is, it describes how the behavior can be changed dynamically.\" http://www.ogf.org/documents/GFD.206.pdf" ;
+            
+            rdfs:seeAlso novi:Service .
 
 
 
