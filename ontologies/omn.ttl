@@ -23,7 +23,9 @@
                                                     
                                                     dc:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                     
-                                                    dc:creator :AlexanderWillner .
+                                                    dc:creator :AlexanderWillner ;
+                                                    
+                                                    owl:imports foaf: .
 
 
 #################################################################
@@ -107,7 +109,8 @@
                       
                       rdfs:range :Infrastructure ;
                       
-                      rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> .
+                      rdfs:domain nml:Service ,
+                                  <http://schemas.ogf.org/nml/base/2013/02#Node> .
 
 
 
@@ -309,7 +312,7 @@ novi:Platform rdf:type owl:Class ;
             
             rdfs:label "Federation" ;
             
-            rdfs:subClassOf <http://schema.org/Organization> ;
+            rdfs:subClassOf foaf:Organization ;
             
             rdfs:comment "A group of autonomous infrastructure/service providers agreeing upon standards of operation in a collective fashion."@en .
 
@@ -502,12 +505,6 @@ novi:Platform rdf:type owl:Class ;
                         rdfs:label "Wireless Network" ;
                         
                         rdfs:subClassOf :TechnicalInfrastructure .
-
-
-
-###  http://schema.org/Organization
-
-<http://schema.org/Organization> rdf:type owl:Class .
 
 
 
