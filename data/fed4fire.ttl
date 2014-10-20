@@ -6,7 +6,6 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
 @base <http://federation.av.tu-berlin.de/fed4fire> .
 
 <http://federation.av.tu-berlin.de/fed4fire> rdf:type owl:Ontology ;
@@ -42,12 +41,6 @@ omn:partOfFederation rdf:type owl:ObjectProperty .
 ###  http://open-multinet.info/ontology/omn-federation#serviceURI
 
 omn:serviceURI rdf:type owl:ObjectProperty .
-
-
-
-###  http://schema.org/logo
-
-schema:logo rdf:type owl:ObjectProperty .
 
 
 
@@ -180,7 +173,7 @@ omn:WirelessInfrastructure rdf:type owl:Class .
                                   :vw ,
                                   :wilabt ;
             
-            schema:logo <http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> .
+            foaf:logo <http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> .
 
 
 
