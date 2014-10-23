@@ -13,19 +13,17 @@
 
 <http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ;
                                                     
-                                                    owl:versionInfo "0.1"^^xsd:string ;
+                                                    owl:versionInfo "0.4"^^xsd:string ;
                                                     
-                                                    dc:date "2014-10-15"^^xsd:dateTime ;
+                                                    dc:date "2014-10-23"^^xsd:date ;
                                                     
-                                                    dc:description "A higher level ontology describing federated future internet infrastructures, based on work conducted at Open Multinet (http://open-multinet.info), OFG (NML; http://www.ogf.org/documents/GFD.206.pdf), Novi (http://www.semantic-web-journal.net/system/files/swj580.pdf), INDL (https://ivi.fnwi.uva.nl/sne/ndl/), NDL-OWL (https://geni-orca.renci.org/trac/wiki/NDL-OWL) and the Infinity Project (http://www.fi-infinity.eu)."^^xsd:string ;
+                                                    dc:description "A higher level ontology describing federated future internet infrastructures, based on work conducted at Open Multinet (http://open-multinet.info), OFG (NML; http://www.ogf.org/documents/GFD.206.pdf), Novi (http://www.fp7-novi.eu), INDL (https://ivi.fnwi.uva.nl/sne/ndl/), NDL-OWL (https://geni-orca.renci.org/trac/wiki/NDL-OWL) and the Infinity Project (http://www.fi-infinity.eu)."^^xsd:string ;
                                                     
                                                     dc:title "Federated Infrastructure Description and Discovery Language"^^xsd:string ;
                                                     
                                                     dc:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                     
-                                                    dc:creator :AlexanderWillner ;
-                                                    
-                                                    owl:imports foaf: .
+                                                    dc:creator :AlexanderWillner .
 
 
 #################################################################
@@ -45,9 +43,9 @@
                    
                    rdfs:domain :Federation ;
                    
-                   rdfs:range :Infrastructure ;
+                   owl:inverseOf :partOfFederation ;
                    
-                   owl:inverseOf :partOfFederation .
+                   rdfs:range nml:Infrastructure .
 
 
 
@@ -57,15 +55,11 @@
          
          rdfs:label "has a node" ;
          
-         rdfs:comment "Defines which resources/services belongs to which infrastructure. Similar but not identical to NML hasNode (http://www.ogf.org/documents/GFD.206.pdf)."@en ;
+         rdfs:comment "Defines which resources belongs to which infrastructure."@en ;
          
-         rdfs:domain :Infrastructure ;
+         rdfs:range nml:Node ;
          
-         owl:inverseOf :partOfInfrastructure ;
-         
-         rdfs:seeAlso nml:hasNode ;
-         
-         rdfs:range <http://schemas.ogf.org/nml/base/2013/02#Node> .
+         rdfs:domain nml:Topology .
 
 
 
@@ -79,9 +73,56 @@
             
             rdfs:seeAlso "http://schemas.ogf.org/nml/2013/05/base#hasService" ;
             
-            rdfs:domain :Infrastructure ;
+            rdfs:domain :Federation ,
+                        nml:Infrastructure ;
             
             rdfs:range nml:Service .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#implementedBy
+
+:implementedBy rdf:type owl:ObjectProperty ;
+               
+               rdfs:comment "See http://dx.doi.org/10.1016/j.compeleceng.2013.08.011" ;
+               
+               rdfs:domain novi:VirtualNode ;
+               
+               rdfs:range nml:Node .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#implements
+
+:implements rdf:type owl:ObjectProperty ;
+            
+            rdfs:comment "See http://dx.doi.org/10.1016/j.compeleceng.2013.08.011" ;
+            
+            rdfs:range novi:VirtualNode ;
+            
+            owl:inverseOf :implementedBy ;
+            
+            rdfs:domain nml:Node .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#instantiates
+
+:instantiates rdf:type owl:ObjectProperty ;
+              
+              rdfs:subPropertyOf :implements .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+
+:isAdministeredBy rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:label "is administered by" ;
+                  
+                  rdfs:domain nml:Infrastructure ;
+                  
+                  rdfs:range foaf:Organization .
 
 
 
@@ -95,7 +136,7 @@
                   
                   rdfs:range :Federation ;
                   
-                  rdfs:domain :Infrastructure .
+                  rdfs:domain nml:Infrastructure .
 
 
 
@@ -107,10 +148,10 @@
                       
                       rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
                       
-                      rdfs:range :Infrastructure ;
+                      rdfs:domain nml:Node ,
+                                  nml:Service ;
                       
-                      rdfs:domain nml:Service ,
-                                  <http://schemas.ogf.org/nml/base/2013/02#Node> .
+                      rdfs:range nml:Topology .
 
 
 
@@ -141,29 +182,9 @@ foaf:mbox rdf:type owl:ObjectProperty .
                 
                 rdfs:label "has infra monitoring" ;
                 
-                rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> ;
+                rdfs:domain nml:Node ;
                 
-                rdfs:range [ rdf:type rdfs:Datatype ;
-                             owl:oneOf [ rdf:type rdf:List ;
-                                         rdf:first "no" ;
-                                         rdf:rest [ rdf:type rdf:List ;
-                                                    rdf:first "yes" ;
-                                                    rdf:rest rdf:nil
-                                                  ]
-                                       ]
-                           ] .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#omlServer
-
-:omlServer rdf:type owl:DatatypeProperty ;
-           
-           rdfs:label "OML Server" ;
-           
-           rdfs:domain <http://schemas.ogf.org/nml/base/2013/02#Node> ;
-           
-           rdfs:range xsd:anyURI .
+                rdfs:range xsd:boolean .
 
 
 
@@ -200,13 +221,37 @@ foaf:name rdf:type owl:DatatypeProperty .
 
 novi:Platform rdf:type owl:Class ;
               
-              owl:equivalentClass :Infrastructure ;
+              owl:equivalentClass nml:Infrastructure ;
               
-              rdfs:subClassOf nml:Group ;
+              rdfs:subClassOf nml:Topology ;
               
               rdfs:comment "\"A Platform describes a particular testbed in the NOVI federation.\" http://www.semantic-web-journal.net/system/files/swj580.pdf"@en ;
               
               rdfs:seeAlso :Infrastructure .
+
+
+
+###  http://fp7-novi.eu/im.owl#VirtualNode
+
+novi:VirtualNode rdf:type owl:Class ;
+                 
+                 rdfs:label "Virtual Node" ;
+                 
+                 rdfs:subClassOf nml:Node ;
+                 
+                 rdfs:seeAlso "http://dx.doi.org/10.1016/j.compeleceng.2013.08.011" .
+
+
+
+###  http://geni.net/ontology#AggregateManager
+
+<http://geni.net/ontology#AggregateManager> rdf:type owl:Class ;
+                                            
+                                            rdfs:label "Aggregate Manager"@en ;
+                                            
+                                            rdfs:subClassOf nml:Service ;
+                                            
+                                            rdfs:comment "\"An instance of an Aggregate Manager satisfying the Aggregate Manager API.\" http://groups.geni.net/geni/wiki/CommonFederationAPIv2"@en .
 
 
 
@@ -222,18 +267,6 @@ novi:Platform rdf:type owl:Class ;
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#AggregateManager
-
-:AggregateManager rdf:type owl:Class ;
-                  
-                  rdfs:label "Aggregate Manager"@en ;
-                  
-                  rdfs:subClassOf nml:Service ;
-                  
-                  rdfs:comment "An instance of an Aggregate Manager satisfying the Aggregate Manager API."@en .
-
-
-
 ###  http://open-multinet.info/ontology/omn-federation#ApplicationServiceDelivery
 
 :ApplicationServiceDelivery rdf:type owl:Class ;
@@ -242,7 +275,7 @@ novi:Platform rdf:type owl:Class ;
                             
                             rdfs:subClassOf :TechnicalInfrastructure ;
                             
-                            rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                            rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -266,7 +299,7 @@ novi:Platform rdf:type owl:Class ;
                  
                  rdfs:subClassOf :TechnicalInfrastructure ;
                  
-                 rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                 rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -278,7 +311,7 @@ novi:Platform rdf:type owl:Class ;
                 
                 rdfs:subClassOf :TechnicalInfrastructure ;
                 
-                rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36 for further discussion." .
+                rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -290,7 +323,7 @@ novi:Platform rdf:type owl:Class ;
                 
                 rdfs:subClassOf :TechnicalInfrastructure ;
                 
-                rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -302,7 +335,7 @@ novi:Platform rdf:type owl:Class ;
                        
                        rdfs:subClassOf :TechnicalInfrastructure ;
                        
-                       rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                       rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -326,7 +359,7 @@ novi:Platform rdf:type owl:Class ;
                    
                    rdfs:subClassOf nml:Service ;
                    
-                   rdfs:comment "See http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+                   rdfs:seeAlso "http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
 
 
@@ -339,18 +372,6 @@ novi:Platform rdf:type owl:Class ;
                   rdfs:subClassOf :FederationService ;
                   
                   rdfs:comment "\"An Identity Provider (IdP) provides certificates and PKI key materials to human users, registering them with the GENI federation as GENI users.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#Infrastructure
-
-:Infrastructure rdf:type owl:Class ;
-                
-                rdfs:label "Infrastructure" ;
-                
-                rdfs:subClassOf nml:Group ;
-                
-                rdfs:comment "An autonomous infrastrucure that offers resources/services to others within a federation. See also http://www.fi-infinity.eu/portal/resources/deliverable/d36 for discussion of what constitutes an ICT infrastructure."@en .
 
 
 
@@ -398,7 +419,7 @@ novi:Platform rdf:type owl:Class ;
                   
                   rdfs:subClassOf :TechnicalInfrastructure ;
                   
-                  rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                  rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -410,7 +431,7 @@ novi:Platform rdf:type owl:Class ;
                
                rdfs:subClassOf :TechnicalInfrastructure ;
                
-               rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+               rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -456,7 +477,7 @@ novi:Platform rdf:type owl:Class ;
                          
                          rdfs:label "Technical Infrastructure" ;
                          
-                         rdfs:subClassOf :Infrastructure ;
+                         rdfs:subClassOf nml:Infrastructure ;
                          
                          rdfs:comment "\"[T]echnical infrastructures as technical systems built up of technical artifacts like 'tools', 'machines', 'programs', 'buildings', etc.\" See also CDF's definition of Information and Communication Technology Infrastructure. http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
@@ -470,7 +491,7 @@ novi:Platform rdf:type owl:Class ;
                    
                    rdfs:subClassOf :WirelessInfrastructure ;
                    
-                   rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                   rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -482,7 +503,7 @@ novi:Platform rdf:type owl:Class ;
              
              rdfs:subClassOf :WirelessInfrastructure ;
              
-             rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+             rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -494,7 +515,7 @@ novi:Platform rdf:type owl:Class ;
                     
                     rdfs:subClassOf :TechnicalInfrastructure ;
                     
-                    rdfs:comment "See http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
+                    rdfs:seeAlso "http://www.fi-infinity.eu/portal/resources/deliverable/d36" .
 
 
 
@@ -520,6 +541,18 @@ nml:Group rdf:type owl:Class ;
 
 
 
+###  http://schemas.ogf.org/nml/2013/05/base#Infrastructure
+
+nml:Infrastructure rdf:type owl:Class ;
+                   
+                   rdfs:label "Infrastructure" ;
+                   
+                   rdfs:subClassOf nml:Topology ;
+                   
+                   rdfs:comment "An autonomous infrastrucure that offers resources/services to others within a federation. See also http://www.fi-infinity.eu/portal/resources/deliverable/d36 for discussion of what constitutes an ICT infrastructure."@en .
+
+
+
 ###  http://schemas.ogf.org/nml/2013/05/base#NetworkObject
 
 nml:NetworkObject rdf:type owl:Class ;
@@ -529,6 +562,18 @@ nml:NetworkObject rdf:type owl:Class ;
                   rdfs:comment "\"The basic abstract class of the schema is the Network Object.\" http://www.ogf.org/documents/GFD.206.pdf" ;
                   
                   rdfs:seeAlso novi:Resource .
+
+
+
+###  http://schemas.ogf.org/nml/2013/05/base#Node
+
+nml:Node rdf:type owl:Class ;
+         
+         rdfs:subClassOf nml:NetworkObject ;
+         
+         rdfs:comment "\"A Node is generally a device connected to, or part of, the network. A Node does not necessarily correspond to a physical machine.\" http://www.ogf.org/documents/GFD.206.pdf" ;
+         
+         rdfs:seeAlso novi:Node .
 
 
 
@@ -546,15 +591,17 @@ nml:Service rdf:type owl:Class ;
 
 
 
-###  http://schemas.ogf.org/nml/base/2013/02#Node
+###  http://schemas.ogf.org/nml/2013/05/base#Topology
 
-<http://schemas.ogf.org/nml/base/2013/02#Node> rdf:type owl:Class ;
-                                               
-                                               rdfs:subClassOf nml:NetworkObject ;
-                                               
-                                               rdfs:comment "\"A Node is generally a device connected to, or part of, the network. A Node does not necessarily correspond to a physical machine.\" http://www.ogf.org/documents/GFD.206.pdf" ;
-                                               
-                                               rdfs:seeAlso novi:Node .
+nml:Topology rdf:type owl:Class ;
+             
+             rdfs:subClassOf nml:Group .
+
+
+
+###  http://xmlns.com/foaf/0.1/Organization
+
+foaf:Organization rdf:type owl:Class .
 
 
 
