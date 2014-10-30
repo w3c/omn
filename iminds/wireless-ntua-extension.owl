@@ -1,0 +1,351 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY novi "http://fp7-novi.eu/im.owl#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY nml "http://schemas.ogf.org/nml/2013/05/base#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY compute "http://geni-orca.renci.org/owl/compute.owl#" >
+    <!ENTITY wireless "http://geni-orca.renci.org/owl/wireless.owl#" >
+    <!ENTITY wireless-ntua-extension "http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65#"
+     xml:base="http://www.semanticweb.org/mary/ontologies/2014/2/untitled-ontology-65"
+     xmlns:wireless-ntua-extension="http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:wireless="http://geni-orca.renci.org/owl/wireless.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:novi="http://fp7-novi.eu/im.owl#"
+     xmlns:compute="http://geni-orca.renci.org/owl/compute.owl#"
+     xmlns:nml="http://schemas.ogf.org/nml/2013/05/base#">
+    <owl:Ontology rdf:about="http://geni-orca.renci.org/owl/wireless-ntua-extension.owl">
+        <owl:imports rdf:resource="http://geni-orca.renci.org/owl/wireless-iminds-draft.owl"/>
+        <owl:versionIRI rdf:resource="http://geni-orca.renci.org/owl/wireless-ntua-extension-draft.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#String -->
+
+    <rdfs:Datatype rdf:about="&xsd;String"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#supportsStandard -->
+
+    <owl:ObjectProperty rdf:about="&wireless;supportsStandard">
+        <rdfs:subPropertyOf rdf:resource="&compute;feature"/>
+        <rdfs:range rdf:resource="&wireless;Standard"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#usesFrequency -->
+
+    <owl:ObjectProperty rdf:about="&wireless;usesFrequency">
+        <rdfs:range rdf:resource="&wireless;Frequency"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://schemas.ogf.org/nml/2013/05/base#locatedAt -->
+
+    <owl:ObjectProperty rdf:about="&nml;locatedAt"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#exclusive -->
+
+    <owl:DatatypeProperty rdf:about="&wireless-ntua-extension;exclusive">
+        <rdfs:domain rdf:resource="&nml;Node"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#hardwareType -->
+
+    <owl:DatatypeProperty rdf:about="&wireless-ntua-extension;hardwareType">
+        <rdfs:domain rdf:resource="&compute;ComputeElement"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#hostname -->
+
+    <owl:DatatypeProperty rdf:about="&wireless-ntua-extension;hostname"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#channel_No -->
+
+    <owl:DatatypeProperty rdf:about="&wireless;channel_No">
+        <rdfs:domain rdf:resource="&wireless;Channel"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#lowerBoundFrequency -->
+
+    <owl:DatatypeProperty rdf:about="&wireless;lowerBoundFrequency"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#upperBoundFrequency -->
+
+    <owl:DatatypeProperty rdf:about="&wireless;upperBoundFrequency"/>
+    
+
+
+    <!-- http://schemas.ogf.org/nml/2013/05/base#lat -->
+
+    <owl:DatatypeProperty rdf:about="&nml;lat"/>
+    
+
+
+    <!-- http://schemas.ogf.org/nml/2013/05/base#long -->
+
+    <owl:DatatypeProperty rdf:about="&nml;long"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Channel -->
+
+    <owl:Class rdf:about="&wireless;Channel"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Frequency -->
+
+    <owl:Class rdf:about="&wireless;Frequency"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless.owl#Standard -->
+
+    <owl:Class rdf:about="&wireless;Standard"/>
+    
+
+
+    <!-- http://schemas.ogf.org/nml/2013/05/base#Location -->
+
+    <owl:Class rdf:about="&nml;Location"/>
+    
+
+
+    <!-- http://schemas.ogf.org/nml/2013/05/base#Node -->
+
+    <owl:Class rdf:about="&nml;Node"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#802.11a -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;802.11a">
+        <rdf:type rdf:resource="&wireless;Standard"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#802.11b -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;802.11b">
+        <rdf:type rdf:resource="&wireless;Standard"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#802.11g -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;802.11g">
+        <rdf:type rdf:resource="&wireless;Standard"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Channel_1 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;Channel_1">
+        <rdf:type rdf:resource="&wireless;Channel"/>
+        <wireless:channel_No rdf:datatype="&xsd;integer">1</wireless:channel_No>
+        <wireless:supportsStandard rdf:resource="&wireless-ntua-extension;802.11b"/>
+        <wireless:supportsStandard rdf:resource="&wireless-ntua-extension;802.11g"/>
+        <wireless:usesFrequency rdf:resource="&wireless-ntua-extension;frequency2_Channel_1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Channel_2 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;Channel_2">
+        <rdf:type rdf:resource="&wireless;Channel"/>
+        <wireless:channel_No rdf:datatype="&xsd;integer">2</wireless:channel_No>
+        <wireless:supportsStandard rdf:resource="&wireless-ntua-extension;802.11b"/>
+        <wireless:supportsStandard rdf:resource="&wireless-ntua-extension;802.11g"/>
+        <wireless:usesFrequency rdf:resource="&wireless-ntua-extension;frequency2_Channel_2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#Channel_3 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;Channel_3">
+        <rdf:type rdf:resource="&wireless;Channel"/>
+        <wireless:channel_No rdf:datatype="&xsd;integer">3</wireless:channel_No>
+        <wireless:supportsStandard rdf:resource="&wireless-ntua-extension;802.11b"/>
+        <wireless:supportsStandard rdf:resource="&wireless-ntua-extension;802.11g"/>
+        <wireless:usesFrequency rdf:resource="&wireless-ntua-extension;frequency2_Channel_3"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#frequency2_Channel_1 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;frequency2_Channel_1">
+        <rdf:type rdf:resource="&wireless;Frequency"/>
+        <wireless:lowerBoundFrequency rdf:datatype="&xsd;integer">2401</wireless:lowerBoundFrequency>
+        <wireless:upperBoundFrequency rdf:datatype="&xsd;integer">2423</wireless:upperBoundFrequency>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#frequency2_Channel_2 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;frequency2_Channel_2">
+        <rdf:type rdf:resource="&wireless;Frequency"/>
+        <wireless:lowerBoundFrequency rdf:datatype="&xsd;integer">2406</wireless:lowerBoundFrequency>
+        <wireless:upperBoundFrequency rdf:datatype="&xsd;integer">2428</wireless:upperBoundFrequency>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#frequency2_Channel_3 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;frequency2_Channel_3">
+        <rdf:type rdf:resource="&wireless;Frequency"/>
+        <wireless:lowerBoundFrequency rdf:datatype="&xsd;integer">2411</wireless:lowerBoundFrequency>
+        <wireless:upperBoundFrequency rdf:datatype="&xsd;integer">2433</wireless:upperBoundFrequency>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#larabi -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;larabi"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#location4_node001 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;location4_node001">
+        <rdf:type rdf:resource="&nml;Location"/>
+        <nml:lat rdf:datatype="&xsd;float">22.94999</nml:lat>
+        <nml:long rdf:datatype="&xsd;float">39.36084</nml:long>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#location4_node002 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;location4_node002">
+        <rdf:type rdf:resource="&nml;Location"/>
+        <nml:lat rdf:datatype="&xsd;float">22.94999</nml:lat>
+        <nml:long rdf:datatype="&xsd;float">39.36084</nml:long>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#node001 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;node001">
+        <rdf:type rdf:resource="&nml;Node"/>
+        <wireless-ntua-extension:hostname>node001</wireless-ntua-extension:hostname>
+        <wireless-ntua-extension:hardwareType>orbit</wireless-ntua-extension:hardwareType>
+        <wireless-ntua-extension:exclusive>TRUE</wireless-ntua-extension:exclusive>
+        <nml:locatedAt rdf:resource="&wireless-ntua-extension;location4_node001"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#node002 -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;node002">
+        <rdf:type rdf:resource="&nml;Node"/>
+        <wireless-ntua-extension:exclusive>TRUE</wireless-ntua-extension:exclusive>
+        <wireless-ntua-extension:hostname>node002</wireless-ntua-extension:hostname>
+        <wireless-ntua-extension:hardwareType>orbit</wireless-ntua-extension:hardwareType>
+        <nml:locatedAt rdf:resource="&wireless-ntua-extension;location4_node002"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/wireless-ntua-extension.owl#slice -->
+
+    <owl:NamedIndividual rdf:about="&wireless-ntua-extension;slice"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://geni-orca.renci.org/owl/reservation.owl#"
+     xml:base="http://geni-orca.renci.org/owl/reservation.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://geni-orca.renci.org/owl/reservation.owl">
+        <owl:versionIRI rdf:resource="http://geni-orca.renci.org/owl/reservation-draft.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#String -->
+
+    <rdfs:Datatype rdf:about="&xsd;String"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#contains -->
+
+    <owl:ObjectProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#contains"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#hasLifetime -->
+
+    <owl:ObjectProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#hasLifetime"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#endTime -->
+
+    <owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#endTime"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#startTime -->
+
+    <owl:DatatypeProperty rdf:about="http://geni-orca.renci.org/owl/reservation.owl#startTime"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Lifetime -->
+
+    <owl:Class rdf:about="http://geni-orca.renci.org/owl/reservation.owl#Lifetime"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Reservation -->
+
+    <owl:Class rdf:about="http://geni-orca.renci.org/owl/reservation.owl#Reservation"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Channel_1 -->
+
+    <owl:NamedIndividual rdf:about="Channel_1"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#Channel_2 -->
+
+    <owl:NamedIndividual rdf:about="Channel_2"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#larabi -->
+
+    <owl:NamedIndividual rdf:about="larabi">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Reservation"/>
+        <contains rdf:resource="Channel_1"/>
+        <contains rdf:resource="Channel_2"/>
+        <hasLifetime rdf:resource="lifetime_larabi"/>
+        <contains rdf:resource="node001"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#lifetime_larabi -->
+
+    <owl:NamedIndividual rdf:about="lifetime_larabi">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Lifetime"/>
+        <startTime rdf:datatype="&xsd;String">1354226400</startTime>
+        <endTime rdf:datatype="&xsd;String">1354231800</endTime>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#lifetime_slice -->
+
+    <owl:NamedIndividual rdf:about="lifetime_slice">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Lifetime"/>
+        <startTime rdf:datatype="&xsd;String">1354221000</startTime>
+        <endTime rdf:datatype="&xsd;String">1354226400</endTime>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#node001 -->
+
+    <owl:NamedIndividual rdf:about="node001"/>
+    
+
+
+    <!-- http://geni-orca.renci.org/owl/reservation.owl#slice -->
+
+    <owl:NamedIndividual rdf:about="slice">
+        <rdf:type rdf:resource="http://geni-orca.renci.org/owl/reservation.owl#Reservation"/>
+        <contains rdf:resource="Channel_1"/>
+        <contains rdf:resource="Channel_2"/>
+        <hasLifetime rdf:resource="lifetime_slice"/>
+        <contains rdf:resource="node001"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
