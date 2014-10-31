@@ -1,0 +1,198 @@
+@prefix : <http://open-multinet.info/ontology/cdf.ttl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix omn: <http://open-multinet.info/ontology/omn-federation.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix novi: <http://fp7-novi.eu/im.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://open-multinet.info/ontology/cdf.ttl> .
+
+<http://open-multinet.info/ontology/cdf.ttl> rdf:type owl:Ontology ;
+                                             
+                                             dc:date "2014-10-31"^^xsd:date ;
+                                             
+                                             rdfs:seeAlso "http://www.fi-infinity.eu" ;
+                                             
+                                             dc:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                             
+                                             dc:creator :RobynLoughnane .
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#ApplicationAndServiceDelivery
+
+:ApplicationAndServiceDelivery rdf:type owl:Class ;
+                               
+                               rdfs:label "Application and Service Delivery"@en ;
+                               
+                               rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#BackboneNetwork
+
+:BackboneNetwork rdf:type owl:Class ;
+                 
+                 rdfs:label "Backbone Network"@en ;
+                 
+                 rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#CloudComputing
+
+:CloudComputing rdf:type owl:Class ;
+                
+                rdfs:label "Cloud Computing"@en ;
+                
+                rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#CustomerDevice
+
+:CustomerDevice rdf:type owl:Class ;
+                
+                rdfs:label "Customer Device"@en ;
+                
+                rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#DataAndContentManagement
+
+:DataAndContentManagement rdf:type owl:Class ;
+                          
+                          rdfs:label "Data and Content Management"@en ;
+                          
+                          rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#IaaS
+
+:IaaS rdf:type owl:Class ;
+      
+      rdfs:label "IaaS"@en ;
+      
+      rdfs:subClassOf :CloudComputing ;
+      
+      rdfs:comment "Infrastructure as a Service"@en .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#PaaS
+
+:PaaS rdf:type owl:Class ;
+      
+      rdfs:label "PaaS"@en ;
+      
+      rdfs:subClassOf :CloudComputing ;
+      
+      rdfs:comment "Platform as a Service"@en .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#SaaS
+
+:SaaS rdf:type owl:Class ;
+      
+      rdfs:label "SaaS"@en ;
+      
+      rdfs:subClassOf :CloudComputing ;
+      
+      rdfs:comment "Software as a Service"@en .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#SatelliteNetwork
+
+:SatelliteNetwork rdf:type owl:Class ;
+                  
+                  rdfs:label "Satellite Network"@en ;
+                  
+                  rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#SensorNetwork
+
+:SensorNetwork rdf:type owl:Class ;
+               
+               rdfs:label "Sensor Network"@en ;
+               
+               rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#ThreeGFourGNetwork
+
+:ThreeGFourGNetwork rdf:type owl:Class ;
+                    
+                    rdfs:label "3G/4G Network"@en ;
+                    
+                    rdfs:subClassOf :WirelessAccessNetwork .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#WIFINetwork
+
+:WIFINetwork rdf:type owl:Class ;
+             
+             rdfs:label "WIFI Network"@en ;
+             
+             rdfs:subClassOf :WirelessAccessNetwork .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#WiredAccessNetwork
+
+:WiredAccessNetwork rdf:type owl:Class ;
+                    
+                    rdfs:label "Wired Access Network"@en ;
+                    
+                    rdfs:subClassOf omn:Infrastructure .
+
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#WirelessAccessNetwork
+
+:WirelessAccessNetwork rdf:type owl:Class ;
+                       
+                       rdfs:label "Wireless Access Network"@en ;
+                       
+                       rdfs:subClassOf omn:Infrastructure .
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/cdf.ttl#RobynLoughnane
+
+:RobynLoughnane rdf:type owl:NamedIndividual ;
+                
+                foaf:firstName "Robyn" ;
+                
+                foaf:familyName "Loughnane" .
+
+
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
+
