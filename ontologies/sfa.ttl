@@ -1,0 +1,254 @@
+@prefix : <http://open-multinet.info/ontology/sfa#> .
+@prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
+@prefix omn: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://open-multinet.info/ontology/sfa#> .
+
+<http://open-multinet.info/ontology/sfa> rdf:type owl:Ontology ;
+
+                            owl:imports <http://open-multinet.info/ontology/omn-federation> ;
+                           
+                            rdfs:comment "Ontology to support SFA related terminologies in the Open Multinet Ontology."@en .
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/sfa#type
+
+:type rdf:type owl:ObjectProperty ;
+      
+      rdfs:domain :Message ;
+      
+      rdfs:range :MessageType .
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/sfa#expires
+
+:expires rdf:type owl:DatatypeProperty ;
+         
+         rdfs:range xsd:dateTime .
+
+
+
+###  http://open-multinet.info/ontology/sfa#generated
+
+:generated rdf:type owl:DatatypeProperty ;
+           
+           rdfs:range xsd:dateTime .
+
+
+
+###  http://open-multinet.info/ontology/sfa#generatedBy
+
+:generatedBy rdf:type owl:DatatypeProperty ;
+             
+             rdfs:domain :Message ;
+             
+             rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/sfa#manager
+
+:manager rdf:type owl:DatatypeProperty ;
+         
+         rdfs:range xsd:anyURI .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#serviceURI
+
+:serviceURI   rdf:type owl:DatatypeProperty ;
+
+              rdfs:domain omn:Service ;
+         
+              rdfs:range xsd:anyURI .
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/sfa#Advertisement
+
+:Advertisement rdf:type owl:Class ;
+               
+               rdfs:subClassOf :MessageType .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#Manifest
+
+:Manifest rdf:type owl:Class ;
+          
+          rdfs:subClassOf :MessageType .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#Message
+
+:Message rdf:type owl:Class .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#MessageType
+
+:MessageType rdf:type owl:Class .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#Request
+
+:Request rdf:type owl:Class ;
+         
+         rdfs:subClassOf :MessageType .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#ProjectAuthority
+
+:ProjectAuthority rdf:type owl:Class ;
+                  
+                  rdfs:label "Project Authority" ;
+                  
+                  rdfs:subClassOf :Service ;
+                  
+                  rdfs:comment "\"A Project Authority asserts the existence of projects and the roles of members (e.g. PI, Experimenter).\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#IdentityProvider
+
+:IdentityProvider rdf:type owl:Class ;
+                  
+                  rdfs:label "Identity Provider" ;
+                  
+                  rdfs:subClassOf :Service ;
+                  
+                  rdfs:comment "\"An Identity Provider (IdP) provides certificates and PKI key materials to human users, registering them with the GENI federation as GENI users.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#LoggingService
+
+:LoggingService rdf:type owl:Class ;
+                
+                rdfs:label "Logging Service" ;
+                
+                rdfs:subClassOf :AccountabilityService ;
+                
+                rdfs:comment "The Logging Service provides the traceability between slivers and slices." ;
+                
+                rdfs:isDefinedBy <http://groups.geni.net/geni/wiki/GeniClearinghouse> .
+
+
+
+###  http://open-multinet.info/ontology/sfa#AuthorizationService
+
+:AuthorizationService rdf:type owl:Class ;
+                      
+                      rdfs:label "Authorization Service" ;
+                      
+                      rdfs:subClassOf omn:Service ;
+                      
+                      rdfs:comment "\"The Clearinghouse provides services to determine whether particular actions (within the Clearinghouse or with respect to a particular Aggregate) are permitted by federation policy.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+
+
+
+
+###  http://open-multinet.info/ontology/sfa#AccountabilityService
+
+:AccountabilityService rdf:type owl:Class ;
+                       
+                       rdfs:label "Accountability Service" ;
+                       
+                       rdfs:subClassOf omn:Service ;
+                       
+                       rdfs:comment "\"The Clearinghouse provides services that log transactions (successful or failed) between user tools and aggregates to support real-time and post-facto forensics analytics.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+
+
+
+###  http://open-multinet.info/ontology/sfa#AggregateManager
+
+:AggregateManager   rdf:type owl:Class ;
+                                            
+                    rdfs:label "Aggregate Manager"@en ;
+                                            
+                    rdfs:subClassOf omn:Service ;
+                                            
+                    rdfs:comment "\"An instance of an Aggregate Manager satisfying the Aggregate Manager API.\" http://groups.geni.net/geni/wiki/CommonFederationAPIv2"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#ServiceRegistry
+
+:ServiceRegistry rdf:type owl:Class ;
+                 
+                 rdfs:label "Service Registry" ;
+                 
+                 rdfs:subClassOf :Service ;
+                 
+                 rdfs:comment "\"A Service Registry provides experimenters with a ‘yellow pages’ of URL’s of all trusted services of different kinds. In particular, the list of all available aggregate managers trusted by GENI (possibly satisfying particular criteria) are provided.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#SliceAuthority
+
+:SliceAuthority rdf:type owl:Class ;
+                
+                rdfs:label "Slice Authority"@en ;
+                
+                rdfs:subClassOf :Service ;
+                
+                rdfs:comment "\"A Slice Authority provides experimenters with slice credentials by which to invoke AM (Aggregate Manger) API calls on federation aggregates.\" http://groups.geni.net/geni/wiki/GeniClearinghouse"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#SingleSignOnPortal
+
+:SingleSignOnPortal rdf:type owl:Class ;
+                    
+                    rdfs:label "Single Sign-On Portal" ;
+                    
+                    rdfs:subClassOf :Service ;
+                    
+                    rdfs:comment "\"A Single-Sign-on Portal, which provides web-based authentication and access to the authorized Clearinghouse services and other GENI user tools.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
