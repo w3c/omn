@@ -1,6 +1,6 @@
 @prefix : <http://open-multinet.info/ontology/cdf.ttl#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn-federation.ttl#> .
+@prefix omn: <http://open-multinet.info/ontology/omn-federation#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -15,6 +15,8 @@
                                              dc:date "2014-10-31"^^xsd:date ;
                                              
                                              rdfs:seeAlso "http://www.fi-infinity.eu" ;
+
+                                             owl:imports <http://open-multinet.info/ontology/omn-federation> ;
                                              
                                              dc:license <http://creativecommons.org/licenses/by/4.0/> ;
                                              
