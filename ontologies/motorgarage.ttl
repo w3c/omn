@@ -105,6 +105,7 @@
 
 
 
+
 ###  http://open-multinet.info/ontology/resource/motorgarage#MotorGarage
 
 :MotorGarage  rdf:type  owl:Class ;
