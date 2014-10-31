@@ -6,6 +6,8 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cdf: <http://open-multinet.info/ontology/cdf.ttl#> .
+@prefix motorgarage: <http://open-multinet.info/ontology/resource/motorgarage#> .
+@prefix motors: <http://open-multinet.info/ontology/resource/motor-individuals#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix fed4fire: <http://federation.av.tu-berlin.de/fed4fire#> .
@@ -20,6 +22,7 @@
                                                                
                                                                owl:imports  <http://rdfs.org/ns/void> ,
                                                                             <http://open-multinet.info/ontology/cdf.ttl> ,
+                                                                            <http://open-multinet.info/ontology/resource/motorgarage.ttl> ,
                                                                             <http://open-multinet.info/ontology/omn-federation> .
 
 
@@ -58,6 +61,12 @@
 
                 omn:isAdministeredBy  :FraunhoferFOKUS ;
 
+                omn:hasResource :MotorGarage1 ;
+
+                omn:hasService :Motor1 ;
+
+                omn:hasService :Motor2 ;
+
                 omn:describedBy :fpDataset ;
 
                 owl:sameAs fed4fire:fusecoPlayground ;
@@ -82,6 +91,39 @@
 :fpDataset  rdf:type void:Dataset ;
 
             void:sparqlEndpoint <http://federation.av.tu-berlin.de:3030> .
+
+
+
+
+
+###  http://open-multinet.info/ontology/ngn-federation-playground#MotorGarage1
+
+:MotorGarage1  rdf:type motorgarage:MotorGarage ;
+
+            omn:resourceOf :fusecoPlayground ;
+
+            owl:sameAs motors:MotorGarage1 .
+
+
+
+
+###  http://open-multinet.info/ontology/ngn-federation-playground#Motor1
+
+:Motor1  rdf:type motorgarage:Motor ;
+
+            omn:serves :fusecoPlayground ;
+
+            owl:sameAs motors:Motor1 .
+
+
+
+###  http://open-multinet.info/ontology/ngn-federation-playground#Motor2
+
+:Motor2  rdf:type motorgarage:Motor ;
+
+            omn:serves :fusecoPlayground ;
+
+            owl:sameAs motors:Motor2 .
 
 
 
