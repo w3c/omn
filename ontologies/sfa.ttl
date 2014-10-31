@@ -141,7 +141,7 @@
                   
                   rdfs:label "Project Authority" ;
                   
-                  rdfs:subClassOf :Service ;
+                  rdfs:subClassOf omn:Service ;
                   
                   rdfs:comment "\"A Project Authority asserts the existence of projects and the roles of members (e.g. PI, Experimenter).\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
@@ -154,7 +154,7 @@
                   
                   rdfs:label "Identity Provider" ;
                   
-                  rdfs:subClassOf :Service ;
+                  rdfs:subClassOf omn:Service ;
                   
                   rdfs:comment "\"An Identity Provider (IdP) provides certificates and PKI key materials to human users, registering them with the GENI federation as GENI users.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
@@ -219,7 +219,7 @@
                  
                  rdfs:label "Service Registry" ;
                  
-                 rdfs:subClassOf :Service ;
+                 rdfs:subClassOf omn:Service ;
                  
                  rdfs:comment "\"A Service Registry provides experimenters with a ‘yellow pages’ of URL’s of all trusted services of different kinds. In particular, the list of all available aggregate managers trusted by GENI (possibly satisfying particular criteria) are provided.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
@@ -231,7 +231,7 @@
                 
                 rdfs:label "Slice Authority"@en ;
                 
-                rdfs:subClassOf :Service ;
+                rdfs:subClassOf omn:Service ;
                 
                 rdfs:comment "\"A Slice Authority provides experimenters with slice credentials by which to invoke AM (Aggregate Manger) API calls on federation aggregates.\" http://groups.geni.net/geni/wiki/GeniClearinghouse"@en .
 
@@ -244,7 +244,7 @@
                     
                     rdfs:label "Single Sign-On Portal" ;
                     
-                    rdfs:subClassOf :Service ;
+                    rdfs:subClassOf omn:Service ;
                     
                     rdfs:comment "\"A Single-Sign-on Portal, which provides web-based authentication and access to the authorized Clearinghouse services and other GENI user tools.\" http://groups.geni.net/geni/wiki/GeniClearinghouse" .
 
