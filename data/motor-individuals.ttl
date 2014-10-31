@@ -4,7 +4,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix fuseco: <http://open-multinet.info/ontology/ngn-federation-playground#>
+@prefix fuseco: <http://open-multinet.info/ontology/ngn-federation-playground#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -19,7 +19,7 @@
                                                            
                                                            owl:imports  <http://open-multinet.info/ontology/omn-federation> ,
                                                                         <http://fp7-novi.eu/im.owl> ,
-                                                                        <http://open-multinet.info/ontology/ngn-federation-playground#> ,
+                                                                        <http://open-multinet.info/ontology/ngn-federation-playground> ,
                                                                         <http://open-multinet.info/ontology/resource/motorgarage> .
 
 
@@ -39,7 +39,7 @@
                                                                  
                       motor:rpm "11"^^xsd:int ;
 
-                      omn:serves :fusecoPlayground ;
+                      omn:serves fuseco:fusecoPlayground ;
                                                                  
                       novi:implementedBy :MotorGarage1 .
 
@@ -54,7 +54,7 @@
                                                                  
                     motor:rpm "33"^^xsd:int ;
 
-                    omn:serves :fusecoPlayground ;
+                    omn:serves fuseco:fusecoPlayground ;
                                                                  
                     novi:implementedBy :MotorGarage1 .
 
@@ -71,7 +71,7 @@
                                                                        
                           geo:lat 48.8794 ;
 
-                          omn:resourceOf :fusecoPlayground ;
+                          omn:resourceOf fuseco:fusecoPlayground ;
                                                                        
                           rdfs:comment "A resource that can produce motors."@en .
 
