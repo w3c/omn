@@ -1,8 +1,10 @@
 @prefix : <http://federation.av.tu-berlin.de/fed4fire#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/creator> .
 @prefix omn: <http://open-multinet.info/ontology/omn-federation#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix sfa: <http://open-multinet.info/ontology/sfa#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,96 +12,13 @@
 
 <http://federation.av.tu-berlin.de/fed4fire> rdf:type owl:Ontology ;
                                              
-                                             owl:imports <http://open-multinet.info/ontology/omn-federation> .
+                                             rdfs:label "Fed4FIRE" ;
+                                             
+                                             owl:imports <http://open-multinet.info/ontology/omn-federation> ;
 
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-###  http://open-multinet.info/ontology/omn-federation#hasInfrastructure
-
-omn:hasInfrastructure rdf:type owl:ObjectProperty .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#hasService
-
-omn:hasService rdf:type owl:ObjectProperty .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#partOfFederation
-
-omn:partOfFederation rdf:type owl:ObjectProperty .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#serviceURI
-
-omn:serviceURI rdf:type owl:ObjectProperty .
-
-
-
-
-
-#################################################################
-#
-#    Classes
-#
-#################################################################
-
-
-###  http://open-multinet.info/ontology/omn-federation#AggregateManager
-
-omn:AggregateManager rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#CloudComputing
-
-omn:CloudComputing rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#Federation
-
-omn:Federation rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#OpenFlowInfrastructure
-
-omn:OpenFlowInfrastructure rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#SingleSignOnPortal
-
-omn:SingleSignOnPortal rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#SliceAuthority
-
-omn:SliceAuthority rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#WiredAccessNetwork
-
-omn:WiredAccessNetwork rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-federation#WirelessInfrastructure
-
-omn:WirelessInfrastructure rdf:type owl:Class .
-
-
+                                             owl:imports <http://open-multinet.info/ontology/sfa> ;
+                                             
+                                             dc:creator omn:AlexanderWillner .
 
 
 
@@ -110,333 +29,157 @@ omn:WirelessInfrastructure rdf:type owl:Class .
 #################################################################
 
 
-###  http://portal.fed4fire.eu
+###  http://federation.av.tu-berlin.de/fed4fire#fed4fire
 
-<http://portal.fed4fire.eu> rdf:type owl:NamedIndividual .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#bonfire
-
-:bonfire rdf:type omn:CloudComputing ,
-                  owl:NamedIndividual ;
-         
-         rdfs:label "EPCC"@en ;
-         
-         rdfs:comment "EPCC and Inria cloud sites"@en ;
-         
-         omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#cl
-
-:cl rdf:type omn:WiredAccessNetwork ,
-             omn:WirelessInfrastructure ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "Community-lab"@en ;
-    
-    rdfs:comment "Community Networks Testbed by the CONFINE project: a global facility for experimentation with network technologies and services for community networks"@en ;
-    
-    rdfs:seeAlso <http://community-lab.net> ;
-    
-    omn:partOfFederation :federation .
+:fed4fire rdf:type omn:Federation ,
+                   owl:NamedIndividual ;
+          
+          rdfs:label "Fed4FIRE" ;
+          
+          rdfs:seeAlso <http://www.fed4fire.eu> ;
+          
+          omn:hasFederationMember   :FraunhoferFOKUS ,
+                                    :iMinds  ;
+          
+          omn:administers :fed4firePortalInfrastructure ;
+          
+          foaf:logo <http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> .
 
 
 
-###  http://federation.av.tu-berlin.de/fed4fire#federation
 
-:federation rdf:type omn:Federation ,
-                     owl:NamedIndividual ;
-            
-            rdfs:label "Fed4FIRE" ;
-            
-            rdfs:comment "Fed4FIRE is an Integrating Project under the European Union’s Seventh Framework Programme (FP7) addressing the work programme topic Future Internet Research and Experimentation. The project is performed by a consortium of 17 partner organisations from 8 countries, and is coordinated by iMinds, Belgium. It started in October 2012 and will run for 48 months, until the end of September 2016."@en ;
-            
-            rdfs:seeAlso <http://www.fed4fire.eu> ;
-            
-            omn:hasInfrastructure :bonfire ,
-                                  :cl ,
-                                  :fp ,
-                                  :i2cat ,
-                                  :koren ,
-                                  :netmode ,
-                                  :nitos ,
-                                  :norbit ,
-                                  :ple ;
-            
-            omn:hasService :portal ;
-            
-            omn:hasInfrastructure :sc ,
-                                  :ub ,
-                                  :vw ,
-                                  :wilabt ;
-            
-            foaf:logo <http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> .
+
+###  http://federation.av.tu-berlin.de/fed4fire#fed4firePortalInfrastructure
+
+:fed4firePortalInfrastructure rdf:type omn:Infrastructure ,
+                         owl:NamedIndividual ;
+                
+                rdfs:label "Fed4FIRE Portal Infrastructure"@en ;
+
+                omn:hasService  :fed4firePortal ;
+
+                omn:isAdministeredBy :fed4fire .
+
+                
+
+
+###  http://federation.av.tu-berlin.de/fed4fire#fed4firePortal
+
+:fed4firePortal rdf:type sfa:SingleSignOnPortal ,
+                         owl:NamedIndividual ;
+                
+                rdfs:label "Fed4FIRE Single Sign-On Portal"@en ;
+
+                omn:serves :fed4firePortalInfrastructure ;
+                
+                sfa:serviceURI <http://portal.fed4fire.eu> .
 
 
 
-###  http://federation.av.tu-berlin.de/fed4fire#fp
 
-:fp rdf:type omn:WirelessInfrastructure ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "FUSECO"@en ;
-    
-    rdfs:comment "FUSECO (FOKUS)"@en ;
-    
-    omn:partOfFederation :federation ;
-    
-    omn:hasService :fpAggregateManager ,
-                   :fpSliceAuthority ;
-    
-    owl:sameAs <http://fuseco.fokus.fraunhofer.de/about#infrastructure> .
+
+###  http://federation.av.tu-berlin.de/fed4fire#FraunhoferFOKUS
+
+:FraunhoferFOKUS  rdf:type owl:NamedIndividual ,
+                omn:FederationMember ;
+
+        omn:partOfFederation  :fed4fire;
+       
+        omn:administers :fusecoPlayground .
+
+
+
+
+
+###  http://federation.av.tu-berlin.de/fed4fire#fusecoPlayground
+
+:fusecoPlayground rdf:type omn:Infrastructure ,
+                           owl:NamedIndividual ;
+                  
+                  rdfs:label "FUSECO"@en ;
+                  
+                  omn:isAdministeredBy  :FraunhoferFOKUS;
+                  
+                  omn:hasService :fpAggregateManager ,
+                                 :fpSliceAuthority ;
+                  
+                  owl:sameAs <http://fuseco.fokus.fraunhofer.de/about#infrastructure> .
+
+
 
 
 
 ###  http://federation.av.tu-berlin.de/fed4fire#fpAggregateManager
 
-:fpAggregateManager rdf:type omn:AggregateManager ,
+:fpAggregateManager rdf:type sfa:AggregateManager ,
                              owl:NamedIndividual ;
                     
-                    omn:serviceURI <https://fuseco.fokus.fraunhofer.de:8443/sfa/api/am/v3> .
+                    sfa:serviceURI <https://fuseco.fokus.fraunhofer.de:8443/sfa/api/am/v3> .
+
+
 
 
 
 ###  http://federation.av.tu-berlin.de/fed4fire#fpSliceAuthority
 
-:fpSliceAuthority rdf:type omn:SliceAuthority ,
+:fpSliceAuthority rdf:type sfa:SliceAuthority ,
                            owl:NamedIndividual ;
                   
-                  omn:serviceURI <https://fuseco.fokus.fraunhofer.de/api/sfa/registry/v1> .
+                  sfa:serviceURI <https://fuseco.fokus.fraunhofer.de/api/sfa/registry/v1> .
 
 
 
-###  http://federation.av.tu-berlin.de/fed4fire#i2cat
 
-:i2cat rdf:type omn:OpenFlowInfrastructure ,
-                owl:NamedIndividual ;
+
+###  http://federation.av.tu-berlin.de/fed4fire#iMinds
+
+:iMinds rdf:type owl:NamedIndividual ,
+                omn:FederationMember ;
+
+        omn:partOfFederation  :fed4fire;
        
-       rdfs:label "i2CAT OFELIA"@en ;
-       
-       rdfs:comment "i2CAT OFELIA island. Barcelona, Spain (i2CAT) – L2 (NEC) switches and optical equipment (ROADM ring)"@en ;
-       
-       rdfs:seeAlso <http://www.fp7-ofelia.eu> ;
-       
-       omn:partOfFederation :federation .
+        omn:administers :virtualWall .
 
 
 
-###  http://federation.av.tu-berlin.de/fed4fire#koren
-
-:koren rdf:type omn:OpenFlowInfrastructure ,
-                owl:NamedIndividual ;
-       
-       rdfs:label "Koren"@en ;
-       
-       rdfs:comment "Koren testbed (NIA)"@en ;
-       
-       omn:partOfFederation :federation .
 
 
+###  http://federation.av.tu-berlin.de/fed4fire#virtualWall
 
-###  http://federation.av.tu-berlin.de/fed4fire#netmode
+:virtualWall rdf:type omn:Infrastructure ,
+                      owl:NamedIndividual ;
+             
+             rdfs:label "Virtual Wall"@en ;
+             
+             omn:isAdministeredBy :iMinds ;
+             
+             omn:hasService :vwAggregateManager ,
+                            :vwSliceAuthority ;
+             
+             rdfs:seeAlso <http://www.iminds.be/en/succeed-with-digital-research/technical-testing> ;
+             
+             owl:sameAs <http://www.wall2.ilabt.iminds.be/about#infrastructure> .
 
-:netmode rdf:type omn:WirelessInfrastructure ,
-                  owl:NamedIndividual ;
-         
-         rdfs:label "Netmode"@en ;
-         
-         rdfs:comment "Netmode (NTUA)"@en ;
-         
-         omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#nitos
-
-:nitos rdf:type omn:OpenFlowInfrastructure ,
-                omn:WirelessInfrastructure ,
-                owl:NamedIndividual ;
-       
-       rdfs:label "NITOS"@en ;
-       
-       rdfs:comment "NITOS (UTH)"@en ,
-                    "NITOS testbed (see wireless testbeds)"@en ;
-       
-       omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#norbit
-
-:norbit rdf:type omn:WirelessInfrastructure ,
-                 owl:NamedIndividual ;
-        
-        rdfs:label "Norbit"@en ;
-        
-        rdfs:comment "Norbit (NICTA)"@en ;
-        
-        omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#ple
-
-:ple rdf:type omn:WiredAccessNetwork ,
-              owl:NamedIndividual ;
-     
-     rdfs:label "PlanetLab Europe"@en ;
-     
-     rdfs:comment "PlanetLab Europe (UPMC)"@en ;
-     
-     rdfs:seeAlso <http://www.planet-lab.eu> ;
-     
-     omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#portal
-
-:portal rdf:type omn:SingleSignOnPortal ,
-                 owl:NamedIndividual ;
-        
-        rdfs:label "Fed4FIRE Single Sign-On Portal"@en ;
-        
-        omn:serviceURI <http://portal.fed4fire.eu> .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#sc
-
-:sc rdf:type omn:WirelessInfrastructure ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "SmartSantander"@en ;
-    
-    rdfs:comment "SmartSantander (UC)"@en ;
-    
-    omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#ub
-
-:ub rdf:type omn:OpenFlowInfrastructure ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "UBristol OFELIA"@en ;
-    
-    rdfs:comment "UBristol OFELIA island"@en ;
-    
-    omn:partOfFederation :federation .
-
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#vw
-
-:vw rdf:type omn:CloudComputing ,
-             omn:WiredAccessNetwork ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "Virtual Wall"@en ;
-    
-    rdfs:comment "iMinds Virtual Wall testbed for emulated networks"@en ;
-    
-    omn:partOfFederation :federation ;
-    
-    omn:hasService :vwAggregateManager ,
-                   :vwSliceAuthority ;
-    
-    rdfs:seeAlso <http://www.iminds.be/en/succeed-with-digital-research/technical-testing> ;
-    
-    owl:sameAs <http://www.wall2.ilabt.iminds.be/about#infrastructure> .
 
 
 
 ###  http://federation.av.tu-berlin.de/fed4fire#vwAggregateManager
 
-:vwAggregateManager rdf:type omn:AggregateManager ,
+:vwAggregateManager rdf:type sfa:AggregateManager ,
                              owl:NamedIndividual ;
                     
-                    omn:serviceURI <https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/am/3.0> .
+                    sfa:serviceURI <https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/am/3.0> .
+
 
 
 
 ###  http://federation.av.tu-berlin.de/fed4fire#vwSliceAuthority
 
-:vwSliceAuthority rdf:type omn:SliceAuthority ,
+:vwSliceAuthority rdf:type sfa:SliceAuthority ,
                            owl:NamedIndividual ;
                   
-                  omn:serviceURI <https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/sa> .
+                  sfa:serviceURI <https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/sa> .
 
-
-
-###  http://federation.av.tu-berlin.de/fed4fire#wilabt
-
-:wilabt rdf:type omn:WirelessInfrastructure ,
-                 owl:NamedIndividual ;
-        
-        rdfs:label "w-iLab.t"@en ;
-        
-        rdfs:comment "w-iLab.t (iMinds)"@en ;
-        
-        omn:partOfFederation :federation .
-
-
-
-###  http://fuseco.fokus.fraunhofer.de/about#infrastructure
-
-<http://fuseco.fokus.fraunhofer.de/about#infrastructure> rdf:type owl:NamedIndividual .
-
-
-
-###  http://www.fed4fire.eu/
-
-<http://www.fed4fire.eu/> rdf:type owl:NamedIndividual .
-
-
-
-###  http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg
-
-<http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> rdf:type owl:NamedIndividual .
-
-
-
-###  http://www.wall2.ilabt.iminds.be/about#infrastructure
-
-<http://www.wall2.ilabt.iminds.be/about#infrastructure> rdf:type owl:NamedIndividual .
-
-
-
-###  https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3
-
-<https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3> rdf:type owl:NamedIndividual .
-
-
-
-###  https://fuseco.fokus.fraunhofer.de/api/sfa/registry/v1
-
-<https://fuseco.fokus.fraunhofer.de/api/sfa/registry/v1> rdf:type owl:NamedIndividual .
-
-
-
-###  https://fuseco.fokus.fraunhofer.de:8443/sfa/api/am/v3
-
-<https://fuseco.fokus.fraunhofer.de:8443/sfa/api/am/v3> rdf:type owl:NamedIndividual .
-
-
-
-###  https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/sa
-
-<https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/sa> rdf:type owl:NamedIndividual .
-
-
-
-###  https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/am/3.0
-
-<https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/am/3.0> rdf:type owl:NamedIndividual .
 
 
 
