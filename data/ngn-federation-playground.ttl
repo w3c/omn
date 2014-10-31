@@ -41,7 +41,7 @@
 
                  omn:administers  :fusecoPlayground ;
 
-                 owl:equivalentClass fed4fire:FraunhoferFOKUS ;
+                 owl:sameAs fed4fire:FraunhoferFOKUS ;
 
                  omn:partOfFederation  fed4fire:fed4fire;
                  
@@ -60,7 +60,7 @@
 
                 omn:describedBy :fpDataset ;
 
-                owl:equivalentClass fed4fire:fusecoPlayground ;
+                owl:sameAs fed4fire:fusecoPlayground ;
                 
                 foaf:based_near :p1 .
 
