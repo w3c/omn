@@ -1,56 +1,28 @@
-@prefix : <http://open-multinet.info/ontology#> .
+@prefix : <http://open-multinet.info/ontology/omn-federation#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
+@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix geni: <http://geni.net/ontology#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://open-multinet.info/ontology> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@base <http://open-multinet.info/ontology/omn-federation> .
 
-<http://open-multinet.info/ontology> rdf:type owl:Ontology ;
-                                     
-                                     rdfs:label "Open-Multinet"@en ;
-                                     
-                                     dc:date "2014-08-20"^^xsd:dateTime ;
-                                     
-                                     owl:versionInfo "0.3" ;
-                                     
-                                     dc:description "An upper ontology based on the work conducted at Open-Multinet.org."@en ;
-                                     
-                                     dc:rights "Creative Commons Attribution Licence"@en ;
-                                     
-                                     rdfs:comment "Open-Multinet Upper Ontology."@en ;
-                                     
-                                     dc:title "Open-Multinet Upper Ontology."@en ;
-                                     
-                                     rdfs:seeAlso <http://open-multinet.info> ;
-                                     
-                                     dc:creator :AlexanderWillner .
-
-
-#################################################################
-#
-#    Annotation properties
-#
-#################################################################
-
-
-###  http://xmlns.com/foaf/0.1/mbox
-
-foaf:mbox rdf:type owl:AnnotationProperty .
-
-
-
-###  http://xmlns.com/foaf/0.1/name
-
-foaf:name rdf:type owl:AnnotationProperty .
-
-
+<http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ;
+                                                    
+                                                    owl:versionInfo "0.5"^^xsd:string ;
+                                                    
+                                                    dc:date "2014-10-31"^^xsd:string ;
+                                                    
+                                                    dc:title "Open Multinet Infrastructure Description"^^xsd:string ;
+                                                    
+                                                    dc:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                    
+                                                    dc:creator :AlexanderWillner .
 
 
 
@@ -61,106 +33,135 @@ foaf:name rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology#hasInfrastructure
+###  http://open-multinet.info/ontology/omn-federation#hasFederationMember
 
-:hasInfrastructure rdf:type owl:AsymmetricProperty ,
-                            owl:IrreflexiveProperty ,
-                            owl:ObjectProperty ;
-                   
-                   rdfs:label "has infrastructure" ;
-                   
-                   rdfs:comment "Defines which infrastructures (aka testbeds) are part of a federation."@en ;
-                   
-                   rdfs:domain :Federation ;
-                   
-                   rdfs:range :Infrastructure ;
-                   
-                   owl:inverseOf :partOfFederation .
+:hasFederationMember rdf:type owl:ObjectProperty ;
+                     
+                     rdfs:label "has federation member" ;
+                     
+                     rdfs:domain :Federation ;
+
+                     owl:inverseOf :partOfFederation ;
+                     
+                     rdfs:range :FederationMember .
 
 
 
-###  http://open-multinet.info/ontology#hasService
 
-:hasService rdf:type owl:AsymmetricProperty ,
-                     owl:IrreflexiveProperty ,
-                     owl:ObjectProperty ;
-            
-            rdfs:label "has service" ;
-            
-            rdfs:comment "Defines which services a group (e.g. federation or infrastructure) offers (e.g. an GENI SFA Aggregate Manager)."@en ;
-            
-            rdfs:domain nml:Group ;
-            
-            rdfs:range nml:Service .
+###  http://open-multinet.info/ontology/omn-federation#partOfFederation
 
-
-
-###  http://open-multinet.info/ontology#partOfFederation
-
-:partOfFederation rdf:type owl:AsymmetricProperty ,
-                           owl:IrreflexiveProperty ,
-                           owl:ObjectProperty ;
+:partOfFederation rdf:type owl:ObjectProperty ;
                   
                   rdfs:label "is part of federation" ;
                   
-                  rdfs:comment "Defines which federations an infrastructure belongs to."@en ;
-                  
                   rdfs:range :Federation ;
+
+                  owl:inverseOf :hasFederationMember ;
                   
-                  rdfs:domain :Infrastructure .
+                  rdfs:domain :FederationMember .
 
 
 
-:partOfInfrastructure rdf:type owl:AsymmetricProperty ,
-                           owl:IrreflexiveProperty ,
-                           owl:ObjectProperty ;
+
+###  http://open-multinet.info/ontology/omn-federation#administers
+
+:administers rdf:type owl:ObjectProperty ;
+             
+             rdfs:label "administers" ;
+             
+             rdfs:range :Infrastructure ;
+
+              owl:inverseOf :isAdministeredBy ;
+             
+             rdfs:domain foaf:Organization .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+
+:isAdministeredBy rdf:type owl:ObjectProperty ;
                   
-                  rdfs:label "is part of an infrastructure" ;
+                  rdfs:label "is administered by" ;
                   
-                  rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
+                  rdfs:domain :Infrastructure ;
                   
-                  rdfs:range :Infrastructure ;
+                  owl:inverseOf :administers ;
                   
-                  rdfs:domain :Node .
-
-
-:hasNode rdf:type owl:AsymmetricProperty ,
-                            owl:IrreflexiveProperty ,
-                            owl:ObjectProperty ;
-                   
-                   rdfs:label "has a node" ;
-                   
-                  rdfs:comment "Defines which resources/services belongs to which infrastructure."@en ;
-                   
-                   rdfs:domain :Infrastructure ;
-                   
-                   rdfs:range :Node ;
-                   
-                   owl:inverseOf :partOfInfrastructure .
+                  rdfs:range foaf:Organization .
 
 
 
 
-#################################################################
-#
-#    Data properties
-#
-#################################################################
+###  http://open-multinet.info/ontology/omn-federation#serves
+
+:serves   rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "serves an infrastructure" ;
+                      
+                      rdfs:range :Infrastructure ;
+                      
+                      owl:inverseOf :hasService ;
+
+                      rdfs:domain :Service .
 
 
-###  http://open-multinet.info/ontology#hasURI
-
-:hasURI rdf:type owl:DatatypeProperty ;
-        
-        rdfs:label "has URI" ;
-        
-        rdfs:comment "An endpoint where the service can be reached."@en ;
-        
-        rdfs:domain :Service ;
-        
-        rdfs:range xsd:anyURI .
 
 
+###  http://open-multinet.info/ontology/omn-federation#hasService
+
+:hasService   rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "has service" ;
+                      
+                      rdfs:domain :Infrastructure ;
+
+                      owl:inverseOf :serves ;
+                      
+                      rdfs:range :Service .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#resourceOf
+
+:resourceOf    rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "is resource of an infrastructure" ;
+                      
+                      rdfs:range :Infrastructure ;
+
+                      owl:inverseOf :hasResource ;
+                      
+                      rdfs:domain :Resource .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#hasResource
+
+:hasResource   rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "has resource" ;
+                      
+                      rdfs:domain :Infrastructure ;
+
+                      owl:inverseOf :resourceOf ;
+                      
+                      rdfs:range :Resource .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#describedBy
+
+:describedBy   rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "described by" ;
+                      
+                      rdfs:domain :Infrastructure ;
+                      
+                      rdfs:range void:Dataset .
 
 
 
@@ -171,181 +172,73 @@ foaf:name rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://fp7-novi.eu/im.owl#Platform
 
-novi:Platform rdf:type owl:Class ;
-              
-              owl:equivalentClass :Infrastructure .
-
-
-
-###  http://open-multinet.info/ontology#AggregateManager
-
-:AggregateManager rdf:type owl:Class ;
-                  
-                  rdfs:label "Aggregate Manager"@en ;
-                  
-                  rdfs:subClassOf :FederationService ;
-                  
-                  rdfs:comment "An instance of an Aggregate Manager satisfying the Aggregate Manager API."@en .
-
-
-
-###  http://open-multinet.info/ontology#CloudInfrastructure
-
-:CloudInfrastructure rdf:type owl:Class ;
-                     
-                     rdfs:label "Cloud Infrastructure" ;
-                     
-                     rdfs:subClassOf :Infrastructure .
-
-
-
-###  http://open-multinet.info/ontology#Federation
+###  http://open-multinet.info/ontology/omn-federation#Federation
 
 :Federation rdf:type owl:Class ;
             
             rdfs:label "Federation" ;
             
-            rdfs:subClassOf :Group ;
-            
-            rdfs:comment "A group of autonomous infrastructure/service providers agreeing upon standards of operation in a collective fashion."@en .
+            rdfs:subClassOf foaf:Organization .
 
 
 
-###  http://open-multinet.info/ontology#FederationService
 
-:FederationService rdf:type owl:Class ;
-                   
-                   rdfs:label "Federation Service" ;
-                   
-                   rdfs:subClassOf :Service .
+###  http://open-multinet.info/ontology/omn-federation#FederationMember
 
-
-
-###  http://open-multinet.info/ontology#Group
-
-:Group rdf:type owl:Class ;
-       
-       rdfs:label "Group" ;
-       
-       owl:equivalentClass nml:Group .
-
-
-
-:Node rdf:type owl:Class ;
-       
-       rdfs:label "Node" ;
-       
-       rdfs:comment "In general any kind of resource or service." ;
-       
-       owl:equivalentClass nml:Node .
-       
-
-###  http://open-multinet.info/ontology#IdentityProvider
-
-:IdentityProvider rdf:type owl:Class ;
+:FederationMember rdf:type owl:Class ;
                   
-                  rdfs:label "Identity Provider" ;
+                  rdfs:label "member of a federation" ;
                   
-                  rdfs:subClassOf :FederationService .
+                  rdfs:subClassOf foaf:Organization .
 
 
 
-###  http://open-multinet.info/ontology#Infrastructure
+
+###  http://open-multinet.info/ontology/omn-federation#Group
+
+:Group       rdf:type owl:Class ;
+                
+                rdfs:label "Group" ;
+
+                owl:equivalentClass novi:Group ;
+
+                rdfs:seeAlso nml:Group .
+
+
+                
+
+###  http://open-multinet.info/ontology/omn-federation#Infrastructure
 
 :Infrastructure rdf:type owl:Class ;
                 
-                rdfs:label "Infrastructure" ;
+                rdfs:label "ICT infrastructure" ;
+
+                owl:equivalentClass novi:Platform ;
                 
-                rdfs:subClassOf :Group ;
+                rdfs:subClassOf :Group .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#Resource
+
+:Resource       rdf:type owl:Class ;
                 
-                rdfs:comment "An autonomous infrastrucure that offers resources/services to others within a federation."@en .
+                rdfs:label "Resource" ;
 
-
-
-###  http://open-multinet.info/ontology#OpenFlowInfrastructure
-
-:OpenFlowInfrastructure rdf:type owl:Class ;
-                        
-                        rdfs:label "OpenFlow Infrastructure" ;
-                        
-                        rdfs:subClassOf :Infrastructure .
-
-
-
-###  http://open-multinet.info/ontology#Service
-
-:Service rdf:type owl:Class ;
-         
-         rdfs:label "Service" ;
-         
-         owl:equivalentClass nml:Service .
-
-
-
-###  http://open-multinet.info/ontology#SingleSignOnPortal
-
-:SingleSignOnPortal rdf:type owl:Class ;
-                    
-                    rdfs:label "Single Sign-On Portal" ;
-                    
-                    rdfs:subClassOf :FederationService .
-
-
-
-###  http://open-multinet.info/ontology#SliceAuthority
-
-:SliceAuthority rdf:type owl:Class ;
+                owl:equivalentClass novi:Resource ;
                 
-                rdfs:label "Slice Authority"@en ;
+                rdfs:seeAlso nml:NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#Service
+
+:Service       rdf:type owl:Class ;
                 
-                rdfs:subClassOf :FederationService ;
-                
-                rdfs:comment "The Slice Authority API provides services to manage slices and their associated permissions."@en .
+                rdfs:label "Service" ;
 
-
-
-###  http://open-multinet.info/ontology#WiredInfrastructure
-
-:WiredInfrastructure rdf:type owl:Class ;
-                     
-                     rdfs:label "Wired Infrastructure" ;
-                     
-                     rdfs:subClassOf :Infrastructure .
-
-
-
-###  http://open-multinet.info/ontology#WirelessInfrastructure
-
-:WirelessInfrastructure rdf:type owl:Class ;
-                        
-                        rdfs:label "Wireless Infrastructure" ;
-                        
-                        rdfs:subClassOf :Infrastructure .
-
-
-
-###  http://schemas.ogf.org/nml/base/2013/02#Group
-
-nml:Group rdf:type owl:Class ;
-          
-          rdfs:label "NML Group" .
-
-
-
-###  http://schemas.ogf.org/nml/base/2013/02#Service
-
-nml:Service rdf:type owl:Class ;
-            
-            rdfs:label "NML Service" .
-
-
-
-###  http://xmlns.com/foaf/0.1/Person
-
-foaf:Person rdf:type owl:Class .
-
+                owl:equivalentClass novi:Service .
 
 
 
@@ -357,19 +250,16 @@ foaf:Person rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology#AlexanderWillner
+###  http://open-multinet.info/ontology/omn-federation#AlexanderWillner
 
 :AlexanderWillner rdf:type owl:NamedIndividual ,
                            foaf:Person ;
                   
-                  foaf:name "Alexander Willner" ;
+                  foaf:name "Alexander Willner"^^xsd:string ;
                   
-                  rdfs:isDefinedBy <http://alex.willner.ws> ;
+                  foaf:homepage <http://alex.willner.ws> ;
+                  
+                  rdfs:seeAlso <https://www.av.tu-berlin.de/menue/team/willner/> ;
                   
                   foaf:mbox <mailto:alexander.willner@tu-berlin.de> .
-
-
-
-
-###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
-
+                  
