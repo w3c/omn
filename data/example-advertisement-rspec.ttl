@@ -1,0 +1,21 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance> .
+@prefix xhtml: <http://www.w3.org/1999/xhtml> .
+@prefix geni: <http://www.geni.net/resources/rspec/3> .
+
+<http://fuseco.fokus.fraunhofer.de/resource/alex4GBusinessConsulting>
+    <http://xipi.eu/ontology#area> <http://xipi.eu/ontology#4G> .
+
+<http://fuseco.fokus.fraunhofer.de/resource/alex5GBusinessConsulting>
+    <http://xipi.eu/ontology#area> <http://xipi.eu/ontology#5G> .
+
+<http://fuseco.fokus.fraunhofer.de/resource/alexBusinessConsulting>
+    a <http://testbeds.eu/ontology#AdvancedBusinessConsulting>, <http://xipi.eu/ontology#BusinessConsulting> ;
+    <http://xipi.eu/ontology#type> <http://fuseco.fokus.fraunhofer.de/resource/alex5GBusinessConsulting> .
+
+<http://fuseco.fokus.fraunhofer.de/resource/alexanderwillner>
+    a <http://xmlns.com/foaf/0.1/Person> ;
+    <http://xipi.eu/ontology#offers> <http://fuseco.fokus.fraunhofer.de/resource/alexBusinessConsulting> ;
+    <http://xmlns.com/foaf/0.1/email> "alexander.willner@tu-berlin.de" ;
+    <http://xmlns.com/foaf/0.1/name> "Alexander Willner" .
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<geni:rspec
+type="advertisement"
+generated="2014-07-11T10:20:39Z"
+xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd "
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xhtml="http://www.w3.org/1999/xhtml"
+xmlns:geni="http://www.geni.net/resources/rspec/3"
+xhtml:prefix="
+  fp: http://fuseco.fokus.fraunhofer.de/resource/
+  foaf: http://xmlns.com/foaf/0.1/
+  xipi: http://xipi.eu/ontology#
+  fantaastic: http://testbeds.eu/ontology#
+  ">
+  <geni:node
+  component_manager_id="urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm"
+  component_id="urn:publicid:IDN+fuseco.fokus.fraunhofer.de+person+alexanderwillner"
+  exclusive="true"
+  xhtml:resource="fp:alexanderwillner"
+  xhtml:typeof="foaf:Person">
+    <xhtml:a property="foaf:name" content="Alexander Willner" />
+    <xhtml:a property="foaf:email" content="alexander.willner@tu-berlin.de" />
+    <xhtml:a property="xipi:offers" href="http://fuseco.fokus.fraunhofer.de/resource/alexBusinessConsulting" />
+    <geni:sliver_type
+        name="BusinessConsulting"
+        xhtml:resource="fp:alexBusinessConsulting"
+        xhtml:typeof="xipi:BusinessConsulting fantaastic:ServiceOffer">
+        <xhtml:a xhtml:property="xipi:type" href="http://fuseco.fokus.fraunhofer.de/resource/alex5GBusinessConsulting"/>
+      <geni:disk_image
+        name="5G"
+        xhtml:resource="fp:alex5GBusinessConsulting">
+        <xhtml:a xhtml:property="xipi:area" href="http://xipi.eu/ontology#5G"/>
+      </geni:disk_image>
+      <geni:disk_image
+        name="4G"
+        xhtml:resource="fp:alex4GBusinessConsulting">
+        <xhtml:a xhtml:property="xipi:area" href="http://xipi.eu/ontology#4G"/>
+      </geni:disk_image>
+    </geni:sliver_type>
+  </geni:node>
+</geni:rspec>
+
+
+
+

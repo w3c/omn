@@ -1,35 +1,39 @@
 @prefix : <http://fuseco.fokus.fraunhofer.de/ontology#> .
-
-@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix omn: <http://open-multinet.info/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix geni: <http://geni.net/ontology#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
-@base <http://fuseco.fokus.fraunhofer.de/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xipi: <http://xipi.eu/ontology#> .
+@prefix cifire: <http://ci-fire.org/ontology#> .
+@base <http://fuseco.fokus.fraunhofer.de/ontology> .
 
 <http://fuseco.fokus.fraunhofer.de/ontology> rdf:type owl:Ontology ;
                                              
                                              rdfs:seeAlso "http://fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
                                              
-                                             rdfs:comment "FUSECO Playground Ontology Advertisement."@en ;
+                                             dc:date "2014-05-25" ;
                                              
-                                             dc:title "FUSECO Playground Ontology Advertisement Example"@en ;
+                                             dc:creator "Alexander Willner <alexander.willner@tu-berlin.de>" ;
                                              
-                                             dc:date "2014-04-25" ;
-                                             
-                                             owl:versionInfo "0.1" ;
-                                             
-                                             dc:creator "Alexander Willner <alexander.willner@tu-berlin.de>";
+                                             owl:versionInfo "0.2" ;
                                              
                                              dc:rights "Creative Commons Attribution Licence"@en ;
                                              
-                                             dc:description "Initial example."@en ;
+                                             dc:title "FUSECO Playground Resource Advertisement."@en ;
+                                             
+                                             rdfs:comment "FUSECO Playground Resource Advertisement."@en ;
+                                             
+                                             dc:description "The services and resources offered by the Fraunhofer FUSECO Playground."@en ;
+                                             
+                                             owl:imports <http://xipi.eu/ontology> ;
                                              
                                              dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/screenshots/example-advertisement-fp.png> .
 
@@ -39,6 +43,18 @@
 #    Annotation properties
 #
 #################################################################
+
+
+###  http://fp7-novi.eu/im.owl#endTime
+
+novi:endTime rdf:type owl:AnnotationProperty .
+
+
+
+###  http://fp7-novi.eu/im.owl#startTime
+
+novi:startTime rdf:type owl:AnnotationProperty .
+
 
 
 ###  http://geni.net/ontology#expires
@@ -62,6 +78,60 @@ geni:manager rdf:type owl:AnnotationProperty .
 ###  http://geni.net/ontology#type
 
 geni:type rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#certificate
+
+omn:certificate rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#endpoint
+
+omn:endpoint rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#exclusive
+
+omn:exclusive rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#monitoringsupport
+
+omn:monitoringsupport rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#partOfGroup
+
+omn:partOfGroup rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#related
+
+omn:related rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#up
+
+omn:up rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology#version
+
+omn:version rdf:type owl:AnnotationProperty .
+
+
+
+###  http://wu.example.org/ontology#mysuperinfo
+
+<http://wu.example.org/ontology#mysuperinfo> rdf:type owl:AnnotationProperty .
 
 
 
@@ -96,6 +166,18 @@ foaf:based_near rdf:type owl:AnnotationProperty .
 #    Classes
 #
 #################################################################
+
+
+###  http://ci-fire.org/ontology#Analysis
+
+cifire:Analysis rdf:type owl:Class .
+
+
+
+###  http://fp7-novi.eu/im.owl#Reservation
+
+novi:Reservation rdf:type owl:Class .
+
 
 
 ###  http://fuseco.fokus.fraunhofer.de/ontology#Attenuator
@@ -189,8 +271,19 @@ foaf:based_near rdf:type owl:AnnotationProperty .
 ###  http://fuseco.fokus.fraunhofer.de/ontology#OpenStackServer
 
 :OpenStackServer rdf:type owl:Class ;
+                 
                  rdfs:label "Open Stack Server"@en ;
-                 rdfs:subClassOf nml:Node .
+                 
+                 rdfs:subClassOf nml:Node ,
+                                 xipi:Cloud_Network ;
+                 
+                 rdfs:comment """
+Features: Supporting multiple OS, of different flavors.
+What can controlled remotely: root privileges of own VMs, so theoretically everything (up to experimenter)
+Remote Access: SSH access with SSH-key to virtual machine
+Measurements: up to experimenter
+Monitoring: Nagios/Zabbix
+"""@en .
 
 
 
@@ -230,6 +323,36 @@ geni:Message rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology#SoftwareComponent
+
+omn:SoftwareComponent rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology#Testbed
+
+omn:Testbed rdf:type owl:Class .
+
+
+
+###  http://schemas.ogf.org/nml/base/2013/02#Link
+
+nml:Link rdf:type owl:Class .
+
+
+
+###  http://schemas.ogf.org/nml/base/2013/02#Node
+
+nml:Node rdf:type owl:Class .
+
+
+
+###  http://schemas.ogf.org/nml/base/2013/02#Service
+
+nml:Service rdf:type owl:Class .
+
+
+
 ###  http://www.w3.org/2003/01/geo/wgs84_pos#Point
 
 geo:Point rdf:type owl:Class .
@@ -245,26 +368,83 @@ geo:Point rdf:type owl:Class .
 #################################################################
 
 
+###  http://fuseco.fokus.fraunhofer.de/ontology#Cloud_Testbed
+
+:Cloud_Testbed rdf:type owl:NamedIndividual ,
+                        xipi:Cloud_Network ;
+               
+               rdfs:comment """Features: Supporting multiple OS, of different flavors.
+What can controlled remotely: root privileges of own VMs, so theoretically everything (up to experimenter).
+Remote Access: SSH access with SSH-key to virtual machine.
+Measurements: up to experimenter.
+Monitoring: Nagios/Zabbix.
+"""@en .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#Feasibility_Analysis
+
+:Feasibility_Analysis rdf:type cifire:Analysis ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "Feasibility Analysis"@en ;
+                      
+                      rdfs:comment "Analysis of the feasibility of a product idea with respect to M2M, Mobile or Cloud technologies."@en ;
+                      
+                      omn:related :IMS_Testbed ,
+                                  :M2M_Testbed ,
+                                  :Wireless_Mobile_Broadband_Testbed .
+
+
+
 ###  http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground
 
 :FusecoPlayground rdf:type omn:Testbed ,
-                           owl:NamedIndividual ;
+                           owl:NamedIndividual ,
+                           xipi:Research_Project ;
                   
                   rdfs:label "FUSECO Playground"@en ;
                   
-                  foaf:depiction <http://www.fokus.fraunhofer.de/en/fokus_testbeds/fuseco_playground/_logos/FUSECO_Playground_Logo.jpg> ;
-                  
-                  foaf:homepage <http://fuseco-playground.org> ;
-                  
-                  foaf:mbox         <mailto:info@fuseco-playground.org> ;
-                  
-                  rdfs:isDefinedBy <http://www.fuseco-playground.org> ;
+                  omn:certificate "https://fuseco.fokus.fraunhofer.de/api/fed4fire/v1/certificates/download/ca.fiteagle-fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
                   
                   rdfs:comment "The Future Seamless Communication (FUSECO) Playground - located in Berlin - is a pioneering reference testbed, integrating various state of the art wireless broadband networks into a 3GPP Evolved Packet Core (EPC) prototype platform, allowing the rapid validation of new networking paradigms, and prototyping of innovative Future Internet and smart city applications."@en ;
                   
-                  omn:certificate "https://fuseco.fokus.fraunhofer.de/api/fed4fire/v1/certificates/download/ca.fiteagle-fuseco.fokus.fraunhofer.de"^^xsd:anyURI ;
+                  foaf:homepage <http://fuseco-playground.org> ;
                   
-                  foaf:based_near :location .
+                  rdfs:isDefinedBy <http://www.fuseco-playground.org> ;
+                  
+                  foaf:based_near :location ;
+                  
+                  foaf:depiction <http://www.fokus.fraunhofer.de/en/fokus_testbeds/fuseco_playground/_logos/FUSECO_Playground_Logo.jpg> ;
+                  
+                  foaf:mbox <mailto:info@fuseco-playground.org> .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#IMS_Testbed
+
+:IMS_Testbed rdf:type owl:NamedIndividual ,
+                      xipi:Mobile_Network ;
+             
+             rdfs:comment "IMS + IMS Enabler and IMS Clients fixed, mobile."@en .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#M2M_Testbed
+
+:M2M_Testbed rdf:type owl:NamedIndividual ,
+                      xipi:Sensor_Network ;
+             
+             rdfs:comment "OneM2M, ETSI M2M Platform, Zigbee, Bluetooth, Arduino, Temp, Humidiy, Energy, Light, eHealth Sensors."@en .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#Wireless_Mobile_Broadband_Testbed
+
+:Wireless_Mobile_Broadband_Testbed rdf:type owl:NamedIndividual ,
+                                            xipi:Mobile_Network ;
+                                   
+                                   rdfs:comment "EPC-based 2G, 3G, LTE and Clients."@en .
 
 
 
@@ -272,9 +452,9 @@ geo:Point rdf:type owl:Class .
 
 :am rdf:type geni:AggregateManager ,
              owl:NamedIndividual ;
-             
+    
     rdfs:label "GENI SFA Aggregate Manager v3"@en ;
- 
+    
     geni:manager "urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm"^^xsd:anyURI ;
     
     omn:endpoint "https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3" ;
@@ -285,11 +465,27 @@ geo:Point rdf:type owl:Class .
 
 
 
+###  http://fuseco.fokus.fraunhofer.de/ontology#epcservice1
+
+:epcservice1 rdf:type :EpcService ,
+                      owl:NamedIndividual ;
+             
+             rdfs:label "EPC Service"@en ;
+             
+             omn:monitoringsupport "true"^^xsd:boolean ;
+             
+             omn:partOfGroup :FusecoPlayground ,
+                             :reservation1 .
+
+
+
 ###  http://fuseco.fokus.fraunhofer.de/ontology#location
 
 :location rdf:type owl:NamedIndividual ,
                    geo:Point ;
+          
           rdfs:label "Fraunhofer FOKUS"@en ;
+          
           geo:lat "52.5258083" ;
           
           geo:long "13.3172764" .
@@ -309,6 +505,21 @@ geo:Point rdf:type owl:Class .
 
 
 
+###  http://fuseco.fokus.fraunhofer.de/ontology#reservation1
+
+:reservation1 rdf:type novi:Reservation ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "MyReservation1" ;
+              
+              novi:startTime "2015-01-01T00:00:00-02:00"^^xsd:dateTime ;
+              
+              novi:endTime "2015-01-01T01:00:00-02:00"^^xsd:dateTime ;
+              
+              rdfs:comment "a future reservation" .
+
+
+
 ###  http://fuseco.fokus.fraunhofer.de/ontology#vmserver1
 
 :vmserver1 rdf:type :OpenStackServer ,
@@ -320,51 +531,44 @@ geo:Point rdf:type owl:Class .
            
            omn:monitoringsupport "true"^^xsd:boolean ;
            
+           omn:up "true"^^xsd:boolean ;
+           
            omn:partOfGroup :FusecoPlayground ;
            
-           omn:up "true"^^xsd:boolean ;
-                      
            foaf:based_near :location .
-
-
 
 
 
 ###  http://fuseco.fokus.fraunhofer.de/ontology#vmserver2
 
-:vmserver2 <http://wu.example.org/ontology#mysuperinfo> "bla"@en .
-
-
 :vmserver2 rdf:type :OpenStackServer ,
                     owl:NamedIndividual ;
+           
            rdfs:label "VM Server 2"@en ;
-                    
+           
            omn:up "true"^^xsd:boolean ;
-
+           
+           <http://wu.example.org/ontology#mysuperinfo> "bla"@en ;
+           
            omn:partOfGroup :FusecoPlayground .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/ontology#vmserver3
 
 :vmserver3 rdf:type :OpenStackServer ,
                     owl:NamedIndividual ;
+           
            rdfs:label "VM Server 3"@en ;
-                    
-           omn:up "false"^^xsd:boolean ;
            
            omn:monitoringsupport "false"^^xsd:boolean ;
-
+           
+           omn:up "false"^^xsd:boolean ;
+           
            omn:partOfGroup :FusecoPlayground .
 
-:reservation1 rdf:type novi:Reservation ;
-			  rdfs:label "MyReservation1" ;
-			  rdfs:comment "a future reservation" ;
-			  novi:startTime "2015-01-01T00:00:00-02:00"^^xsd:dateTime ;
-			  novi:endTime "2015-01-01T01:00:00-02:00"^^xsd:dateTime .
 
-:epcservice1 rdf:type :EpcService ,
-                    owl:NamedIndividual ;
-                  rdfs:label "EPC Service"@en ;
-           omn:monitoringsupport "true"^^xsd:boolean ;
-           omn:partOfGroup :reservation1 ;
-           omn:partOfGroup :FusecoPlayground .
+
 
 ###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
 
