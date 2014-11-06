@@ -1,6 +1,6 @@
 @prefix : <http://open-multinet.info/ontology/sfa#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
-@prefix omn: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -9,27 +9,9 @@
 @base <http://open-multinet.info/ontology/sfa#> .
 
 <http://open-multinet.info/ontology/sfa> rdf:type owl:Ontology ;
-
-                            owl:imports <http://open-multinet.info/ontology/omn-federation> ;
                            
-                            rdfs:comment "Ontology to support SFA related terminologies in the Open Multinet Ontology."@en .
+                            rdfs:comment "Ontology to support GENI SFA related terminologies in the Open Multinet Ontology."@en .
 
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-###  http://open-multinet.info/ontology/sfa#type
-
-:type rdf:type owl:ObjectProperty ;
-      
-      rdfs:domain :Message ;
-      
-      rdfs:range :MessageType .
 
 
 

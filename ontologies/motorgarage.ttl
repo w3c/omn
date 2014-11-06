@@ -1,10 +1,10 @@
 @prefix : <http://open-multinet.info/ontology/resource/motorgarage#> .
+
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
@@ -17,7 +17,7 @@
                                                            
                                                             rdfs:comment "Sample description of a resource, in this case a motorgarage, which can create motors." ;
 
-                                                            dc:creator omn:AlexanderWillner ;
+                                                            dc:creator <http://alex.willner.ws/about#me> ;
                                                            
                                                             owl:imports <http://fp7-novi.eu/im.owl#> ,
                                                                         <http://open-multinet.info/ontology/omn-federation> .
@@ -101,7 +101,7 @@
 
 :Motor   rdf:type  owl:Class ;
                                                                 
-          rdfs:subClassOf novi:VirtualNode .
+          rdfs:subClassOf omn:VirtualResource .
 
 
 
