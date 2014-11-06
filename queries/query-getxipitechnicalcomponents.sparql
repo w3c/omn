@@ -1,0 +1,11 @@
+PREFIX cifire: <http://ci-fire.org/ontology#>
+PREFIX xipi: <http://xipi.eu/ontology#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?component ?label
+FROM <http://localhost:3030/public/data?default>
+WHERE {
+  ?component rdfs:subClassOf xipi:Technical_Component .
+  ?component rdfs:label ?label .
+}
+

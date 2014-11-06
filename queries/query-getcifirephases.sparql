@@ -1,0 +1,9 @@
+PREFIX cifire: <http://ci-fire.org/ontology#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?phase ?label
+FROM <http://localhost:3030/public/data?default>
+WHERE {
+  ?phase rdfs:subClassOf cifire:Phase .
+  ?phase rdfs:label ?label .
+}

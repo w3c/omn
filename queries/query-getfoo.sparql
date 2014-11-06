@@ -1,0 +1,16 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix omn: <http://open-multinet.info/ontology#> 
+prefix geni: <http://geni.net/ontology#> 
+prefix indl: <http://www.science.uva.nl/research/sne/indl#>
+prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> 
+prefix fp: <http://fuseco.fokus.fraunhofer.de/resource/> 
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix xipi: <http://xipi.eu/ontology#> 
+
+SELECT ?name ?offer ?type WHERE {
+    ?person rdf:type foaf:Person .
+    ?person foaf:name ?name .
+    ?person xipi:offers ?offer .
+    ?offer rdf:type ?type .
+}
