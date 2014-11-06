@@ -15,15 +15,15 @@
 
 <http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ;
                                                     
-                                                    owl:versionInfo "0.5"^^xsd:string ;
+                                                    owl:versionInfo "2014-11-06"^^xsd:string ;
                                                     
-                                                    dc:date "2014-10-31"^^xsd:string ;
+                                                    dc:date "2014-11-06"^^xsd:string ;
                                                     
-                                                    dc:title "Open Multinet Infrastructure Description"^^xsd:string ;
+                                                    dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
                                                     
                                                     dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                     
-                                                    dc:creator :AlexanderWillner .
+                                                    dc:creator <http://alex.willner.ws/about#me> .
 
 
 
@@ -240,27 +240,3 @@
                 rdfs:label "Service" ;
 
                 owl:equivalentClass novi:Service .
-
-
-
-
-#################################################################
-#
-#    Individuals
-#
-#################################################################
-
-
-###  http://open-multinet.info/ontology/omn-federation#AlexanderWillner
-
-:AlexanderWillner rdf:type owl:NamedIndividual ,
-                           foaf:Person ;
-                  
-                  foaf:name "Alexander Willner"^^xsd:string ;
-                  
-                  foaf:homepage <http://alex.willner.ws> ;
-                  
-                  rdfs:seeAlso <https://www.av.tu-berlin.de/menue/team/willner/> ;
-                  
-                  foaf:mbox <mailto:alexander.willner@tu-berlin.de> .
-                  
