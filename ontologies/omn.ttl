@@ -11,9 +11,9 @@
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix void: <http://rdfs.org/ns/void#> .
-@base <http://open-multinet.info/ontology/omn-federation> .
+@base <http://open-multinet.info/ontology/omn#> .
 
-<http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ;
+<http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
                                                     
                                                     owl:versionInfo "2014-11-06"^^xsd:string ;
                                                     
@@ -40,6 +40,8 @@
                      
                      rdfs:label "has federation member" ;
                      
+                     rdfs:comment "a federation can have an organization as a member" ;
+                     
                      rdfs:domain :Federation ;
 
                      owl:inverseOf :partOfFederation ;
@@ -54,6 +56,8 @@
 :partOfFederation rdf:type owl:ObjectProperty ;
                   
                   rdfs:label "is part of federation" ;
+                  
+                  rdfs:comment "an organization can be part of a federation" ;
                   
                   rdfs:range :Federation ;
 
@@ -70,9 +74,11 @@
              
              rdfs:label "administers" ;
              
+             rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure" ;
+
              rdfs:range :Infrastructure ;
 
-              owl:inverseOf :isAdministeredBy ;
+             owl:inverseOf :isAdministeredBy ;
              
              rdfs:domain foaf:Organization .
 
@@ -84,6 +90,8 @@
 :isAdministeredBy rdf:type owl:ObjectProperty ;
                   
                   rdfs:label "is administered by" ;
+
+                  rdfs:comment "an infrastructure can be administered by an organization (e.g. a federation member)" ;
                   
                   rdfs:domain :Infrastructure ;
                   
@@ -213,7 +221,9 @@
 
 :Infrastructure rdf:type owl:Class ;
                 
-                rdfs:label "ICT infrastructure" ;
+                rdfs:label "Infrastructure" ;
+
+                rdfs:comment "an infrastructure such as a testbed or cloud facility" ;
 
                 owl:equivalentClass novi:Platform ;
                 
