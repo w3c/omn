@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/sfa#> .
+@prefix : <http://open-multinet.info/ontology/gen#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -6,9 +6,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://open-multinet.info/ontology/sfa#> .
+@base <http://open-multinet.info/ontology/gen#> .
 
-<http://open-multinet.info/ontology/sfa> rdf:type owl:Ontology ;
+<http://open-multinet.info/ontology/gen> rdf:type owl:Ontology ;
                            
                             rdfs:comment "Ontology to support GENI SFA related terminologies in the Open Multinet Ontology."@en .
 
@@ -23,7 +23,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/sfa#expires
+###  http://open-multinet.info/ontology/gen#expires
 
 :expires rdf:type owl:DatatypeProperty ;
          
@@ -31,7 +31,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#generated
+###  http://open-multinet.info/ontology/gen#generated
 
 :generated rdf:type owl:DatatypeProperty ;
            
@@ -39,7 +39,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#generatedBy
+###  http://open-multinet.info/ontology/gen#generatedBy
 
 :generatedBy rdf:type owl:DatatypeProperty ;
              
@@ -49,7 +49,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#manager
+###  http://open-multinet.info/ontology/gen#manager
 
 :manager rdf:type owl:DatatypeProperty ;
          
@@ -58,7 +58,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#serviceURI
+###  http://open-multinet.info/ontology/gen#serviceURI
 
 :serviceURI   rdf:type owl:DatatypeProperty ;
 
@@ -76,7 +76,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/sfa#Advertisement
+###  http://open-multinet.info/ontology/gen#Advertisement
 
 :Advertisement rdf:type owl:Class ;
                
@@ -85,7 +85,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#Manifest
+###  http://open-multinet.info/ontology/gen#Manifest
 
 :Manifest rdf:type owl:Class ;
           
@@ -94,21 +94,21 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#Message
+###  http://open-multinet.info/ontology/gen#Message
 
 :Message rdf:type owl:Class .
 
 
 
 
-###  http://open-multinet.info/ontology/sfa#MessageType
+###  http://open-multinet.info/ontology/gen#MessageType
 
 :MessageType rdf:type owl:Class .
 
 
 
 
-###  http://open-multinet.info/ontology/sfa#Request
+###  http://open-multinet.info/ontology/gen#Request
 
 :Request rdf:type owl:Class ;
          
@@ -117,7 +117,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#ProjectAuthority
+###  http://open-multinet.info/ontology/gen#ProjectAuthority
 
 :ProjectAuthority rdf:type owl:Class ;
                   
@@ -130,7 +130,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#IdentityProvider
+###  http://open-multinet.info/ontology/gen#IdentityProvider
 
 :IdentityProvider rdf:type owl:Class ;
                   
@@ -143,7 +143,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#LoggingService
+###  http://open-multinet.info/ontology/gen#LoggingService
 
 :LoggingService rdf:type owl:Class ;
                 
@@ -157,7 +157,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#AuthorizationService
+###  http://open-multinet.info/ontology/gen#AuthorizationService
 
 :AuthorizationService rdf:type owl:Class ;
                       
@@ -170,7 +170,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#AccountabilityService
+###  http://open-multinet.info/ontology/gen#AccountabilityService
 
 :AccountabilityService rdf:type owl:Class ;
                        
@@ -182,7 +182,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#AggregateManager
+###  http://open-multinet.info/ontology/gen#AggregateManager
 
 :AggregateManager   rdf:type owl:Class ;
                                             
