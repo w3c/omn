@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://geni-orca.renci.org/owl/app-color.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://geni-orca.renci.org/owl/app-color.owl>
+    a owl:Ontology ;
+    rdfs:comment "Application-specific annotation for slice requests" ;
+    rdfs:isDefinedBy """RENCI/UNC Chapel Hill
+
+Ilya Baldin ibaldin@renci.org""" ;
+    owl:imports <http://geni-orca.renci.org/owl/topology.owl> .
+
+:Color
+    a owl:Class .
+
+:ColorAttribute
+    a owl:Class .
+
+:colorDependency
+    a owl:ObjectProperty .
+
+:fromColorDependency
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:comment "Directed edge from color to network element. Only one network element is allowed for a given color, so this is functional." ;
+    rdfs:domain :Color ;
+    rdfs:range <http://geni-orca.renci.org/owl/topology.owl#NetworkElement> ;
+    rdfs:subPropertyOf :colorDependency .
+
+:hasColorAttribute
+    a owl:FunctionalProperty, owl:InverseFunctionalProperty, owl:ObjectProperty ;
+    rdfs:domain :Color ;
+    rdfs:range :ColorAttribute .
+
+:hasColorBlob
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Color ;
+    rdfs:range rdfs:Literal .
+
+:hasColorKey
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :ColorAttribute ;
+    rdfs:range rdfs:Literal .
+
+:hasColorLabel
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Color ;
+    rdfs:range rdfs:Literal .
+
+:hasColorValue
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :ColorAttribute ;
+    rdfs:range rdfs:Literal .
+
+:hasColorXMLBlob
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain :Color ;
+    rdfs:range rdf:XMLLiteral .
+
+:toColorDependency
+    a owl:InverseFunctionalProperty, owl:ObjectProperty ;
+    rdfs:comment "directed edge from network element to color. only one network element can correspond to given color, so this is inverse functional." ;
+    rdfs:domain <http://geni-orca.renci.org/owl/topology.owl#NetworkElement> ;
+    rdfs:range :Color ;
+    rdfs:subPropertyOf :colorDependency .
+
