@@ -2,69 +2,27 @@
 @prefix : <http://www.w3.org/2002/07/owl#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix base: <http://schemas.ogf.org/nml/base/2013/02#> .
 
-base:Node
+nml:Node
     a :Class .
 
-base:implementedBy
-    a :ObjectProperty ;
-    rdfs:domain indl:VirtualNode ;
-    rdfs:range base:Node .
+nml:implementedBy
+    a :ObjectProperty .
 
 <http://www.science.uva.nl/research/sne/indl>
-    a :Ontology .
-
-indl:Architecture
-    a :Class .
-
-indl:Capability
-    a :Class .
-
-indl:Core-i7
-    indl:clockSpeed "2.0"^^xsd:float ;
-    indl:cores "4"^^xsd:int ;
-    indl:hasArchitecture indl:IntelCore ;
-    indl:hasInstructionSet indl:X86_64 ;
-    a indl:ProcessorComponent, :NamedIndividual .
-
-indl:Fermi
-    a indl:Architecture, :NamedIndividual .
-
-indl:GTX580
-    indl:clockSpeed "0.772"^^xsd:float ;
-    indl:cores "512"^^xsd:int ;
-    indl:hasArchitecture indl:Fermi ;
-    indl:hasInstructionSet indl:PTX ;
-    indl:size "4.0"^^xsd:float ;
-    a indl:GraphicsComponent, :NamedIndividual .
-
-indl:GraphicsComponent
-    a :Class ;
-    rdfs:subClassOf indl:NodeComponent .
-
-indl:InstructionSet
-    a :Class .
-
-indl:IntelCore
-    a indl:Architecture, :NamedIndividual .
+    a :Ontology ;
+    :imports <file:nml-base.owl> .
 
 indl:MemoryComponent
     a :Class ;
     rdfs:subClassOf indl:NodeComponent .
 
-indl:Node1
-    indl:hasComponent indl:Core-i7, indl:GTX580 ;
-    a base:Node, :NamedIndividual .
-
 indl:NodeComponent
     a :Class .
 
-indl:PTX
-    a indl:InstructionSet, :NamedIndividual .
-
-indl:ProcessorComponent
+indl:ProcessingComponent
     a :Class ;
     rdfs:subClassOf indl:NodeComponent .
 
@@ -74,100 +32,50 @@ indl:StorageComponent
 
 indl:VirtualNode
     a :Class ;
-    rdfs:subClassOf base:Node .
-
-indl:X86_64
-    a indl:InstructionSet, :NamedIndividual .
-
-indl:clockSpeed
-    a :DatatypeProperty, :FunctionalProperty ;
-    rdfs:comment "per core clock speed in GHz" ;
-    rdfs:domain [
-        a :Class ;
-        :unionOf (indl:GraphicsComponent
-            indl:ProcessorComponent
-        )
-    ] ;
-    rdfs:range xsd:float .
+    rdfs:subClassOf nml:Node .
 
 indl:cores
-    a :DatatypeProperty, :FunctionalProperty ;
-    rdfs:comment "the number of physical cores" ;
-    rdfs:domain [
-        a :Class ;
-        :unionOf (indl:GraphicsComponent
-            indl:ProcessorComponent
-        )
-    ] ;
+    a :DatatypeProperty ;
+    rdfs:comment "the number of cores on a CPU" ;
+    rdfs:domain indl:ProcessingComponent ;
     rdfs:range xsd:int .
 
-indl:hasArchitecture
-    a :FunctionalProperty, :ObjectProperty ;
-    rdfs:domain [
-        a :Class ;
-        :unionOf (indl:GraphicsComponent
-            indl:ProcessorComponent
-        )
-    ] ;
-    rdfs:range indl:Architecture .
+indl:cpuarch
+    a :DatatypeProperty ;
+    rdfs:comment "cpu architecture" ;
+    rdfs:domain indl:ProcessingComponent ;
+    rdfs:range xsd:string .
+
+indl:cpuspeed
+    a :DatatypeProperty ;
+    rdfs:comment "the speed per core in GHz" ;
+    rdfs:domain indl:ProcessingComponent ;
+    rdfs:range xsd:float .
 
 indl:hasComponent
     a :ObjectProperty ;
-    rdfs:domain base:Node ;
+    rdfs:domain nml:Node ;
     rdfs:range indl:NodeComponent .
-
-indl:hasInstructionSet
-    a :ObjectProperty ;
-    rdfs:domain [
-        a :Class ;
-        :unionOf (indl:GraphicsComponent
-            indl:ProcessorComponent
-        )
-    ] ;
-    rdfs:range indl:InstructionSet .
 
 indl:implements
     a :ObjectProperty ;
-    rdfs:domain base:Node ;
+    rdfs:domain nml:Node ;
     rdfs:range indl:VirtualNode ;
-    :inverseOf base:implementedBy .
+    :inverseOf nml:implementedBy .
 
 indl:partOf
-    a :ObjectProperty ;
+    a :InverseFunctionalProperty, :ObjectProperty ;
     rdfs:domain indl:NodeComponent ;
-    rdfs:range base:Node ;
+    rdfs:range nml:Node ;
     :inverseOf indl:hasComponent .
 
 indl:size
-    a :DatatypeProperty, :FunctionalProperty ;
+    a :DatatypeProperty ;
     rdfs:comment "size of storage or memory in GB" ;
     rdfs:domain [
         a :Class ;
-        :unionOf (indl:GraphicsComponent
-            indl:MemoryComponent
+        :unionOf (indl:MemoryComponent
             indl:StorageComponent
-        )
-    ] ;
-    rdfs:range xsd:float .
-
-indl:supportedBy
-    a :ObjectProperty ;
-    rdfs:domain indl:Capability ;
-    rdfs:range indl:NodeComponent ;
-    :inverseOf indl:supports .
-
-indl:supports
-    a :ObjectProperty ;
-    rdfs:domain indl:NodeComponent ;
-    rdfs:range indl:Capability .
-
-indl:tdp
-    a :DatatypeProperty, :FunctionalProperty ;
-    rdfs:comment "thermal design power in Watts" ;
-    rdfs:domain [
-        a :Class ;
-        :unionOf (indl:GraphicsComponent
-            indl:ProcessorComponent
         )
     ] ;
     rdfs:range xsd:float .
