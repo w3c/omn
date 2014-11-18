@@ -33,6 +33,7 @@
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                          
                                          dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
+                                                        <mailto:jorge.lopez_vergara@uam.es> ,
                                                         <mailto:chrisap@noc.ntua.gr> ,
                                                         <mailto:ibaldin@renci.org> ,
                                                         <mailto:yahya.al-hazmi@tu-berlin.de> ,
