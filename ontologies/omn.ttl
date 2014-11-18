@@ -12,6 +12,7 @@
 @prefix schema: <http://schema.org/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
+@prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
 @base <http://open-multinet.info/ontology/omn> .
 
 <http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
@@ -460,6 +461,10 @@
            rdfs:comment "Examples: CPU, Sensor, Core, Port, Image"@en ,
                         "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en ;
            
+           rdfs:seeAlso dcterms:isPartOf ;
+
+           rdfs:seeAlso move:formsPartOf ;
+
            rdfs:seeAlso schema:partOfSystem .
 
 
