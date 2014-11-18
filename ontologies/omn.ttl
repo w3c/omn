@@ -16,9 +16,9 @@
 
 <http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
                                          
-                                         rdfs:label "omn"^^xsd:string ;
+                                         rdfs:label "omn"@en ;
                                          
-                                         dc:date "2014-11-11"^^xsd:string ;
+                                         dc:date "2014-11-11"^^xsd:date ;
                                          
                                          owl:versionInfo "2014-11-11"^^xsd:string ;
                                          
@@ -35,8 +35,11 @@
                                          dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
                                                         <mailto:jorge.lopez_vergara@uam.es> ,
                                                         <mailto:chrisap@noc.ntua.gr> ,
-                                                        <mailto:ibaldin@renci.org> ,
                                                         <mailto:yahya.al-hazmi@tu-berlin.de> ,
+                                                        <mailto:loughnane@campus.tu-berlin.de> ,
+                                                        <mailto:p.grosso@uva.nl> ,
+                                                        <mailto:m.morsey@uva.nl> , 
+                                                        <mailto:ibaldin@renci.org> ,
                                                         <mailto:yxin@renci.org> .
 
 
@@ -51,7 +54,7 @@
 
 :adaptableFrom rdf:type owl:ObjectProperty ;
                
-               rdfs:label "adaptable from" ;
+               rdfs:label "adaptable from"@en ;
                
                rdfs:range :Layer ;
                
@@ -65,9 +68,11 @@
 
 :adaptableTo rdf:type owl:ObjectProperty ;
              
-             rdfs:label "adaptable to" ;
+             rdfs:label "adaptable to"@en ;
              
              rdfs:range :Layer ;
+
+             owl:inverseOf :adaptableFrom ;
              
              rdfs:domain :Layer .
 
@@ -78,9 +83,11 @@
 :adaptsFrom rdf:type owl:IrreflexiveProperty ,
                      owl:ObjectProperty ;
             
-            rdfs:label "adapts from" ;
+            rdfs:label "adapts from"@en ;
+
+            owl:inverseOf :adaptsTo ;
             
-            rdfs:comment "todo: domain and range must not be of the same type" ;
+            rdfs:comment "todo: domain and range must not be of the same type"@en ;
             
             rdfs:range [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
@@ -105,9 +112,9 @@
 :adaptsTo rdf:type owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
           
-          rdfs:label "adapts to" ;
+          rdfs:label "adapts to"@en ;
           
-          rdfs:comment "todo: domain and range must not be of the same type" ;
+          rdfs:comment "todo: domain and range must not be of the same type"@en ;
           
           owl:inverseOf :adaptsFrom ;
           
@@ -129,11 +136,11 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#depentsOn
+###  http://open-multinet.info/ontology/omn#dependsOn
 
-:depentsOn rdf:type owl:ObjectProperty ;
+:dependsOn rdf:type owl:ObjectProperty ;
            
-           rdfs:label "depents on" ;
+           rdfs:label "depends on"@en ;
            
            rdfs:domain [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
@@ -157,7 +164,7 @@
 
 :fromDependency rdf:type owl:ObjectProperty ;
                 
-                rdfs:label "from dependency" ;
+                rdfs:label "from dependency"@en ;
                 
                 rdfs:domain :Dependency ;
                 
@@ -177,7 +184,7 @@
 
 :hasAttribute rdf:type owl:ObjectProperty ;
               
-              rdfs:label "has attribute" ;
+              rdfs:label "has attribute"@en ;
               
               rdfs:range :Attribute ;
               
@@ -197,7 +204,9 @@
 
 :hasComponent rdf:type owl:ObjectProperty ;
               
-              rdfs:label "has component" ;
+              rdfs:label "has component"@en ;
+
+              owl:inverseOf :isComponentOf ;
               
               rdfs:seeAlso novi:hasComponent ;
               
@@ -216,15 +225,13 @@
 
 :hasGroup rdf:type owl:ObjectProperty ;
           
-          rdfs:label "has group" ;
+          rdfs:label "has group"@en ;
           
           rdfs:domain :Group ;
           
           rdfs:range :Group ;
           
-          owl:inverseOf :isGroupOf ;
-          
-          rdfs:subPropertyOf owl:topObjectProperty .
+          owl:inverseOf :isGroupOf .
 
 
 
@@ -232,7 +239,7 @@
 
 :hasResource rdf:type owl:ObjectProperty ;
              
-             rdfs:label "has resource" ;
+             rdfs:label "has resource"@en ;
              
              rdfs:seeAlso novi:contains ;
              
@@ -248,7 +255,7 @@
 
 :hasService rdf:type owl:ObjectProperty ;
             
-            rdfs:label "has service" ;
+            rdfs:label "has service"@en ;
             
             rdfs:range :Service ;
             
@@ -265,9 +272,11 @@
 
 :isAttributeOf rdf:type owl:ObjectProperty ;
                
-               rdfs:label "is attribute of" ;
+               rdfs:label "is attribute of"@en ;
                
                rdfs:domain :Attribute ;
+
+               owl:inverseOf :hasAttribute ;
                
                rdfs:range [ rdf:type owl:Class ;
                             owl:unionOf ( :Component
@@ -283,14 +292,9 @@
 
 :isComponentOf rdf:type owl:ObjectProperty ;
                
-               rdfs:label "is component of a resource" ,
-                          "is component of" ;
+               rdfs:label "is component of"@en ;
                
                rdfs:domain :Component ;
-               
-               rdfs:range :Component ;
-               
-               rdfs:domain :Resource ;
                
                owl:inverseOf :hasComponent ;
                
@@ -307,7 +311,7 @@
 
 :isGroupOf rdf:type owl:ObjectProperty ;
            
-           rdfs:label "is group of" ;
+           rdfs:label "is group of"@en ;
            
            rdfs:range :Group ;
            
@@ -319,7 +323,7 @@
 
 :isResourceOf rdf:type owl:ObjectProperty ;
               
-              rdfs:label "is resource of" ;
+              rdfs:label "is resource of"@en ;
               
               rdfs:seeAlso novi:contains ;
               
@@ -333,7 +337,7 @@
 
 :isServiceOf rdf:type owl:ObjectProperty ;
              
-             rdfs:label "is service of" ;
+             rdfs:label "is service of"@en ;
              
              rdfs:domain :Service ;
              
@@ -352,7 +356,7 @@
 
 :toDependency rdf:type owl:ObjectProperty ;
               
-              rdfs:label "to dependency" ;
+              rdfs:label "to dependency"@en ;
               
               rdfs:range :Dependency ;
               
@@ -370,7 +374,7 @@
 
 :withinEnvironment rdf:type owl:ObjectProperty ;
                    
-                   rdfs:label "within environment" ;
+                   rdfs:label "within environment"@en ;
                    
                    rdfs:range :Environment ;
                    
@@ -398,9 +402,9 @@
 :hasEndpoint rdf:type owl:DatatypeProperty ,
                       owl:FunctionalProperty ;
              
-             rdfs:label "has endpoint" ;
+             rdfs:label "has endpoint"@en ;
              
-             rdfs:comment "The URL of the API of a service" ;
+             rdfs:comment "The URL of the API of a service"@en ;
              
              rdfs:domain :Service ;
              
@@ -413,9 +417,9 @@
 :isReadonly rdf:type owl:DatatypeProperty ,
                      owl:FunctionalProperty ;
             
-            rdfs:label "is read only" ;
+            rdfs:label "is read only"@en ;
             
-            rdfs:comment "information/attribute that is not writable" ;
+            rdfs:comment "information/attribute that is not writable"@en ;
             
             rdfs:domain :Attribute ;
             
@@ -436,10 +440,10 @@
 
 :Attribute rdf:type owl:Class ;
            
-           rdfs:label "Attribute" ;
+           rdfs:label "Attribute"@en ;
            
-           rdfs:comment "Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail" ,
-                        "Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, ..." ;
+           rdfs:comment "Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail"@en ,
+                        "Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, ..."@en ;
            
            rdfs:seeAlso color:ColorAttribute ,
                         nml:Location .
@@ -450,10 +454,10 @@
 
 :Component rdf:type owl:Class ;
            
-           rdfs:label "Component" ;
+           rdfs:label "Component"@en ;
            
-           rdfs:comment "Examples: CPU, Sensor, Core, Port, Image" ,
-                        "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself." ;
+           rdfs:comment "Examples: CPU, Sensor, Core, Port, Image"@en ,
+                        "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en ;
            
            rdfs:seeAlso schema:partOfSystem .
 
@@ -463,10 +467,10 @@
 
 :Dependency rdf:type owl:Class ;
             
-            rdfs:label "Dependency" ;
+            rdfs:label "Dependency"@en ;
             
-            rdfs:comment "Examples: application coloring (in GENI context), orchestration needs dependencies" ,
-                         "Helps to defines a directional relationship between omn:Resource, omn:Group, omn:Component or omn:Service. It makes it possible to annotate the dependencies with additional properties." ;
+            rdfs:comment "Examples: application coloring (in GENI context), orchestration needs dependencies"@en ,
+                         "Helps to defines a directional relationship between omn:Resource, omn:Group, omn:Component or omn:Service. It makes it possible to annotate the dependencies with additional properties."@en ;
             
             rdfs:seeAlso novi:implements ,
                          color:ColorAttribute ,
@@ -478,10 +482,10 @@
 
 :Environment rdf:type owl:Class ;
              
-             rdfs:label "Environment" ;
+             rdfs:label "Environment"@en ;
              
-             rdfs:comment "Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, ..." ,
-                          "The operating conditions under which a omn:Resource, omn:Group, omn:Service is operating." ;
+             rdfs:comment "Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, ..."@en ,
+                          "The operating conditions under which a omn:Resource, omn:Group, omn:Service is operating."@en ;
              
              rdfs:seeAlso schema:Place .
 
@@ -491,10 +495,10 @@
 
 :Group rdf:type owl:Class ;
        
-       rdfs:label "Group" ;
+       rdfs:label "Group"@en ;
        
-       rdfs:comment "Examples: Infrastructure, Reservation, Bi-directional Link, Slice, ..." ,
-                    "A collection of omn:Resource, omn:Service or omn:Group" ;
+       rdfs:comment "Examples: Infrastructure, Reservation, Bi-directional Link, Slice, ..."@en ,
+                    "A collection of omn:Resource, omn:Service or omn:Group"@en ;
        
        rdfs:seeAlso novi:Group ,
                     collections:Collection ,
@@ -506,10 +510,10 @@
 
 :Layer rdf:type owl:Class ;
        
-       rdfs:label "Layer" ;
+       rdfs:label "Layer"@en ;
        
-       rdfs:comment "Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to." ,
-                    "Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version" ;
+       rdfs:comment "Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to."@en ,
+                    "Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version"@en ;
        
        rdfs:seeAlso nml:AdaptationService ,
                     indl:VirtualNode .
@@ -520,10 +524,10 @@
 
 :Resource rdf:type owl:Class ;
           
-          rdfs:label "Resource" ;
+          rdfs:label "Resource"@en ;
           
-          rdfs:comment "Examples: Node, Link, People, ..." ,
-                       "An Entity that can be provisioned/controlled/measured by APIs" ;
+          rdfs:comment "Examples: Node, Link, People, ..."@en ,
+                       "An Entity that can be provisioned/controlled/measured by APIs"@en ;
           
           rdfs:seeAlso novi:Node ,
                        nml:Node .
@@ -534,10 +538,10 @@
 
 :Service rdf:type owl:Class ;
          
-         rdfs:label "Service" ;
+         rdfs:label "Service"@en ;
          
-         rdfs:comment "An Entity that has an API to use it, it may depend on an omn:Resource" ,
-                      "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..." ;
+         rdfs:comment "An Entity that has an API to use it, it may depend on an omn:Resource"@en ,
+                      "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..."@en ;
          
          rdfs:seeAlso novi:Service ,
                       nml:Service ,
