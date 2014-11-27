@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-template#> .
+@prefix : <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -6,7 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-template> .
+@base <http://open-multinet.info/ontology/omn-lifecycle> .
 
 <http://open-multinet.info/ontology/omn-template> rdf:type owl:Ontology ;
                                          
@@ -18,7 +18,7 @@
                                          
                                          dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
                                          
-                                         dc:description "This ontology defines how we communicate with SFA-like systems and the state of resources."^^xsd:string ;
+                                         dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
                                          
                                          dc:publisher <http://open-multinet.org> ;
                                          
@@ -34,6 +34,7 @@
 
 
 
+				
 
 
 #################################################################
@@ -45,8 +46,6 @@
 
 
 
-
-
 #################################################################
 #
 #    Classes
@@ -54,6 +53,65 @@
 #################################################################
 
 
+# Name	Description	Example	Parent	See also
+# State	The current state of the resource		omn:Attribute	
+# Offering	A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies.		omn:Group	SFA ListResources
+# Request	A collection (group) of resources/services/groups requested by the user		omn:Group	
+# Confirmation	A collection (group) of resources/services/groups  confirmed to be allocated for the user.		omn:Group	
+# Manifest	A collection (group) of resources/services/groups  allocated for the user.		omn:Group	
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#State
+
+:State 		rdf:type owl:Class ;
+
+			rdfs:comment "The current state of the resource"@en ;
+         
+         	rdfs:subClassOf :Attribute .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Offering
+
+:Offering 	rdf:type owl:Class ;
+
+			rdfs:comment "A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies."@en ;
+
+			# rdfs:seeAlso sfa:ListResources ;
+          
+          	rdfs:subClassOf :Group .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Request
+
+:Request 	rdf:type owl:Class ;
+	
+			rdfs:comment "A collection (group) of resources/services/groups requested by the user"@en ;
+         
+         	rdfs:subClassOf :Group .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Confirmation
+
+:Confirmation 	rdf:type owl:Class ;
+
+			rdfs:comment "A collection (group) of resources/services/groups confirmed to be allocated for the user."@en ;
+         
+         	rdfs:subClassOf :Group .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
+
+:Manifest 	rdf:type owl:Class ;
+
+			rdfs:comment "A collection (group) of resources/services/groups allocated for the user."@en ;
+         
+         	rdfs:subClassOf :Group .
 
 
 
