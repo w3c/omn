@@ -16,7 +16,7 @@
                                          
                                          owl:versionInfo "2014-11-27"^^xsd:string ;
                                          
-                                         dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
+                                         dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
                                          
                                          dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
                                          
