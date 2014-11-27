@@ -108,6 +108,14 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn-federation#Topology
+
+:Topology rdf:type owl:Class ;
+            
+            rdfs:subClassOf omn:Group .
+
+
+
 ###  http://open-multinet.info/ontology/omn-federation#Federation
 
 :Federation rdf:type owl:Class ;
@@ -137,6 +145,10 @@
                 rdfs:subClassOf omn:Group ;
                 
                 rdfs:comment "an infrastructure such as a testbed or cloud facility" ;
+
+                rdfs:comment "Example: FUESCO Playground" ;
+
+                # rdfs:seeAlso sfa:GetVersion ;
                 
                 rdfs:seeAlso novi:Platform .
 
