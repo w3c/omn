@@ -19,6 +19,8 @@
                                          dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
                                          
                                          dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
+
+                                         dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-lifecycle.png> ;
                                          
                                          dc:publisher <http://open-multinet.org> ;
                                          
