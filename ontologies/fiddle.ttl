@@ -124,6 +124,8 @@
 
 
 
+###  http://open-multinet.info/ontology/omn#requires
+
 :requires rdf:type owl:ObjectProperty ;
              
              rdfs:label "requires an object" ;
@@ -135,6 +137,7 @@
              owl:inverseOf :requiredBy .
 
 
+###  http://open-multinet.info/ontology/omn#requiredBy
 
 :requiredBy rdf:type owl:ObjectProperty ;
              
