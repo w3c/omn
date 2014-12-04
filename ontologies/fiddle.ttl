@@ -55,9 +55,9 @@
              
              rdfs:label "is component of a resource" ;
              
-             rdfs:range :Component ;
+             rdfs:domain :Component ;
              
-             rdfs:domain :Resource ;
+             rdfs:range :Resource ;
              
              owl:inverseOf :hasComponent .
 
