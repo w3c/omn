@@ -12,9 +12,9 @@
                                          
                                          rdfs:label "omn-lifecycle"@en ;
                                          
-                                         dc:date "2014-11-27"^^xsd:date ;
+                                         dc:date "2014-12-7"^^xsd:date ;
                                          
-                                         owl:versionInfo "2014-11-27"^^xsd:string ;
+                                         owl:versionInfo "2014-12-7"^^xsd:string ;
                                          
                                          dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
                                          
