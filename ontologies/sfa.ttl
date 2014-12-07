@@ -1,6 +1,7 @@
 @prefix : <http://open-multinet.info/ontology/sfa#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -74,6 +75,27 @@
 #    Classes
 #
 #################################################################
+
+###  http://open-multinet.info/ontology/sfa#Slice
+
+:Slice rdf:type owl:Class ;
+               
+               rdfs:subClassOf omn-lifecycle:Confirmation .
+
+
+
+###  http://open-multinet.info/ontology/sfa#Sliver
+
+:Sliver rdf:type owl:Class ;
+               
+               rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/sfa#Ticket
+
+:Ticket rdf:type owl:Class .
+
 
 
 ###  http://open-multinet.info/ontology/sfa#Advertisement
