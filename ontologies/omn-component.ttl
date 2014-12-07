@@ -96,7 +96,7 @@
 
 :CPU rdf:type owl:Class ;
         
-        rdfs:label "Memory Component" ;
+        rdfs:label "CPU" ;
 
         rdfs:subClassOf :ProcessingComponent .
 
