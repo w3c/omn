@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-template#> .
+@prefix : <http://open-multinet.info/ontology/omn-policy#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -6,19 +6,19 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-template> .
+@base <http://open-multinet.info/ontology/omn-policy> .
 
-<http://open-multinet.info/ontology/omn-template> rdf:type owl:Ontology ;
+<http://open-multinet.info/ontology/omn-policy> rdf:type owl:Ontology ;
                                          
-                                         rdfs:label "omn"@en ;
+                                         rdfs:label "omn-policy"@en ;
                                          
                                          dc:date "2014-12-7"^^xsd:date ;
                                          
                                          owl:versionInfo "2014-12-7"^^xsd:string ;
                                          
-                                         dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
+                                         dc:title "Open-Multinet Upper Policy Ontology"^^xsd:string ;
                                          
-                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."^^xsd:string ;
+                                         dc:description "This ontology defines policy."^^xsd:string ;
                                          
                                          dc:publisher <http://open-multinet.org> ;
                                          
