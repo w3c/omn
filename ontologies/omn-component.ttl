@@ -21,7 +21,7 @@
                                          
                                          dc:description "This ontology expands the notion of component as defined in the main OMN ontology. A component is an Entity that is part of a Resource/Service. It does not need to be a Resource or a Service itself."^^xsd:string ;
 
-                                          dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-component.png> ;
+                                         dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-component.png> ;
                                          
                                          dc:publisher <http://open-multinet.org> ;
                                          
