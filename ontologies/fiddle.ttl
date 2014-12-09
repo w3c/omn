@@ -189,7 +189,7 @@
              
              rdfs:seeAlso novi:contains ;
              
-             rdfs:domain :Group ;
+             rdfs:domain :Infrastructure ;
              
              rdfs:range :Resource ;
              
@@ -204,7 +204,7 @@
             
             rdfs:label "is resource of an infrastructure" ;
             
-            rdfs:range :Group ;
+            rdfs:range :Infrastructure ;
             
             rdfs:domain :Resource .
 
@@ -217,7 +217,7 @@
             
             rdfs:label "has service" ;
             
-            rdfs:domain :Group ;
+            rdfs:domain :Infrastructure ;
             
             rdfs:range :Service .
 
@@ -230,7 +230,7 @@
              
              rdfs:label "serves an infrastructure" ;
              
-             rdfs:range :Group ;
+             rdfs:range :Infrastructure ;
              
              rdfs:domain :Service ;
              
