@@ -35,7 +35,30 @@
 #
 #################################################################
 
+###  http://open-multinet.info/ontology/omn#requires
 
+:requires rdf:type owl:ObjectProperty ;
+             
+             rdfs:label "requires an ICT object" ;
+             
+             rdfs:range :Object ;
+             
+             rdfs:domain :Object ;
+             
+             owl:inverseOf :requiredBy .
+
+
+###  http://open-multinet.info/ontology/omn#requiredBy
+
+:requiredBy rdf:type owl:ObjectProperty ;
+             
+             rdfs:label "is required by an ICT object" ;
+             
+             rdfs:range :Object ;
+             
+             rdfs:domain :Object ;
+             
+             owl:inverseOf :requires .
 
 
 
