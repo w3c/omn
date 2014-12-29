@@ -41,9 +41,9 @@
              
              rdfs:label "requires an ICT object" ;
              
-             rdfs:range :Object ;
+             rdfs:range :NetworkObject ;
              
-             rdfs:domain :Object ;
+             rdfs:domain :NetworkObject ;
              
              owl:inverseOf :requiredBy .
 
@@ -54,9 +54,9 @@
              
              rdfs:label "is required by an ICT object" ;
              
-             rdfs:range :Object ;
+             rdfs:range :NetworkObject ;
              
-             rdfs:domain :Object ;
+             rdfs:domain :NetworkObject ;
              
              owl:inverseOf :requires .
 
