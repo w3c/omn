@@ -1,0 +1,199 @@
+@prefix : <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <http://open-multinet.info/ontology/omn-lifecycle> .
+
+<http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology ;
+                                                   
+                                                   rdfs:label "omn-lifecycle"@en ;
+                                                   
+                                                   dc:date "2014-12-7"^^xsd:date ;
+                                                   
+                                                   owl:versionInfo "2014-12-7"^^xsd:string ;
+                                                   
+                                                   dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
+                                                   
+                                                   dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
+                                                   
+                                                   dc:publisher <http://open-multinet.org> ;
+                                                   
+                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                   
+                                                   owl:imports <http://open-multinet.info/ontology/omn> ;
+                                                   
+                                                   dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-lifecycle.png> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
+
+:implementedBy rdf:type owl:ObjectProperty ;
+               
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( omn:Component
+                                          omn:Group
+                                          omn:Resource
+                                          omn:Service
+                                        )
+                          ] ;
+               
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( omn:Component
+                                           omn:Group
+                                           omn:Resource
+                                           omn:Service
+                                         )
+                           ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#implements
+
+:implements rdf:type owl:ObjectProperty ;
+            
+            owl:inverseOf :implementedBy ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( omn:Component
+                                       omn:Group
+                                       omn:Resource
+                                       omn:Service
+                                     )
+                       ] ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Component
+                                        omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#parentOf
+
+:parentOf rdf:type owl:ObjectProperty ;
+          
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( omn:Component
+                                     omn:Group
+                                     omn:Resource
+                                     omn:Service
+                                   )
+                     ] ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#parentTo
+
+:parentTo rdf:type owl:ObjectProperty ;
+          
+          owl:inverseOf :parentOf ;
+          
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( omn:Component
+                                     omn:Group
+                                     omn:Resource
+                                     omn:Service
+                                   )
+                     ] ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Attribute
+
+:Attribute rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Confirmation
+
+:Confirmation rdf:type owl:Class ;
+              
+              rdfs:subClassOf omn:Group ;
+              
+              rdfs:comment "A collection (group) of resources/services/groups confirmed to be allocated for the user."@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
+
+:Manifest rdf:type owl:Class ;
+          
+          rdfs:subClassOf omn:Group ;
+          
+          rdfs:comment "A collection (group) of resources/services/groups allocated for the user."@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Offering
+
+:Offering rdf:type owl:Class ;
+          
+          rdfs:subClassOf omn:Group ;
+          
+          rdfs:comment "A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies."@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Request
+
+:Request rdf:type owl:Class ;
+         
+         rdfs:subClassOf omn:Group ;
+         
+         rdfs:comment "A collection (group) of resources/services/groups requested by the user"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#State
+
+:State rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Attribute ;
+       
+       rdfs:comment "The current state of the resource"@en .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
