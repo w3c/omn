@@ -29,6 +29,10 @@
 		<url>https://github.com/open-multinet/playground-rspecs-ontology</url>
 	</issueManagement>
 
+	<build>
+		<finalName>omnlib</finalName>
+	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
