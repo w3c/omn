@@ -50,7 +50,7 @@
 :namedTopology3 rdf:type omn-lifecycle:Request ,
                          owl:NamedIndividual ;
                 
-                rdfs:comment "Also known as a TOSCA topolgoy, Teagle virtual customer testbed, or GENI Slice. Not sure if this shouldn't be rather a omn:Topology."^^xsd:string ;
+                rdfs:comment "Also known as a TOSCA topology, Teagle virtual customer testbed, or GENI Slice. Not sure if this shouldn't be rather a omn:Topology."^^xsd:string ;
                 
                 omn:hasResource :boundMotor7 ,
                                 :unboundMotor3 .
