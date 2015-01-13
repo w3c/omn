@@ -15,27 +15,6 @@
 
 #################################################################
 #
-#    Classes
-#
-#################################################################
-
-
-###  http://fiteagle.org/ontology/resource/motor#Motor
-
-motor:Motor rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#Request
-
-omn-lifecycle:Request rdf:type owl:Class .
-
-
-
-
-
-#################################################################
-#
 #    Individuals
 #
 #################################################################
