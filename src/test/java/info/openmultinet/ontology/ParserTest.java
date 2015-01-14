@@ -1,7 +1,8 @@
 package info.openmultinet.ontology;
 
-import info.openmultinet.ontology.vocabulary.OMN;
-import info.openmultinet.ontology.vocabulary.OMN_LIFECYCLE;
+
+import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +52,7 @@ public class ParserTest {
 			parser.printStatements(requestedGroupDetails, null, null);
 
 			Property requestedResourceDetails = parser.getModel().getProperty(
-					OMN.hasResource.getURI());
+					Omn.hasResource.getURI());
 			parser.printStatements(null, requestedResourceDetails, null);
 		}
 	}
@@ -65,9 +66,16 @@ public class ParserTest {
 	@Test
 	public void testModelQuery() throws IOException {
 		Model model = this.parser.getModel();
-		ResIterator requests = model
-				.listSubjectsWithProperty(RDF.type, OMN_LIFECYCLE.Request);
-		Assert.assertTrue("expecting to find a request (or a group via reasoning)",
+		ResIterator requests;
+		
+		requests = model
+				.listSubjectsWithProperty(RDF.type, Omn_lifecycle.Request);
+		Assert.assertTrue("expecting to find a request",
+				requests.hasNext());
+		
+		requests = model
+				.listSubjectsWithProperty(RDF.type, Omn.Group);
+		Assert.assertTrue("expecting to find a group via reasoning",
 				requests.hasNext());
 		
 		while (requests.hasNext()) {
@@ -76,7 +84,7 @@ public class ParserTest {
 			System.out.println("The request URI: " + request);
 			while (statements.hasNext()) {
 				Statement statement = statements.next();
-				if (statement.getPredicate().equals(OMN.hasResource))
+				if (statement.getPredicate().equals(Omn.hasResource))
 					System.out.println("Requested Resource: " + statement.getObject());
 				else if (statement.getPredicate().equals(RDFS.comment))
 					System.out.println("Comment: " + statement.getObject());

@@ -1,7 +1,7 @@
 package info.openmultinet.ontology;
 
-import info.openmultinet.ontology.vocabulary.OMN;
-import info.openmultinet.ontology.vocabulary.OMN_LIFECYCLE;
+import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -21,6 +21,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.ValidityReport.Report;
 import com.hp.hpl.jena.util.PrintUtil;
@@ -34,20 +35,21 @@ public class Parser {
 	
 	private Reasoner reasoner;
 
-	private InfModel model;
+	protected InfModel model;
 	
 	//@todo: add support for all serializations, not only TTL
 	public Parser(InputStream input) {
 		Model data = ModelFactory.createDefaultModel().read(input, null, "TTL");
-		Model schema = parse("/omn-lifecycle.ttl");
+		Model schema = ModelFactory.createDefaultModel(); 
+		schema.add(parse("/omn.ttl"));
+		schema.add(parse("/omn-federation.ttl"));
+		schema.add(parse("/omn-lifecycle.ttl"));
+		schema.add(parse("/omn-resource.ttl"));
+		schema.add(parse("/omn-service.ttl"));
+		schema.add(parse("/omn-component.ttl"));
 
-		this.model = ModelFactory.createRDFSModel(schema, data);
-
-		//@fixme: this doesn't reason over e.g. rdfs:subclassof - why?
-		//@todo: add all schemas
-		//this.reasoner = ReasonerRegistry.getOWLReasoner();
-		//this.reasoner.bindSchema(schema);
-		//this.model = ModelFactory.createInfModel(reasoner, data);
+        reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
+        model = ModelFactory.createInfModel(reasoner, data);
 	}
 
 	public static Model parse(String filename) {
@@ -67,8 +69,8 @@ public class Parser {
 	}
 
 	public static String getDefaultPrefixes() {
-		return createPrefix("omn", OMN.getURI())
-				+ createPrefix("omn-lifecycle", OMN_LIFECYCLE.getURI())
+		return createPrefix("omn", Omn.getURI())
+				+ createPrefix("omn-lifecycle", Omn_lifecycle.getURI())
 				+ createPrefix("rdf", RDF.getURI())
 				+ createPrefix("rdfs", RDFS.getURI())
 				+ createPrefix("owl", OWL.getURI());
