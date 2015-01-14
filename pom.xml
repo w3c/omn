@@ -43,9 +43,14 @@
 					<fileOptions>
 						<source>
 							<input>default</input>
+							<output>src/main/java/</output>
 							<package-name>info.openmultinet.ontology.vocabulary</package-name>
+							<ontology>true</ontology>
 						</source>
 					</fileOptions>
+                    <owl>true</owl>
+					<inference>true</inference>
+					<noheader>true</noheader> <!-- doesn't work -->
 				</configuration>
 				<executions>
 					<execution>
