@@ -2,21 +2,23 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-service> .
+@base <http://open-multinet.info/ontology/omn-service#> .
 
 <http://open-multinet.info/ontology/omn-service> rdf:type owl:Ontology ;
                                          
                                          rdfs:label "omn-service"@en ;
                                          
-                                         dc:date "2014-12-7"^^xsd:date ;
+                                         dcterms:created "2014-11-11"^^xsd:date ;
                                          
-                                         owl:versionInfo "2014-12-7"^^xsd:string ;
+                                         dcterms:modified "2015-01-15"^^xsd:date ;
                                          
+                                         owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                                                  
                                          dc:title "Open-Multinet Upper Service Ontology"^^xsd:string ;
                                          
                                          dc:description "This ontology extends the definition of Service as defined in the main OMN ontology. A Service is an Entitiy that has an API to use it, it may depend on a Resource."^^xsd:string ;

@@ -9,16 +9,18 @@
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-federation> .
+@base <http://open-multinet.info/ontology/omn-federation#> .
 
 <http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ;
                                                     
                                                     rdfs:label "omn-federation"@en ;
                                                     
-                                                    dc:date "2014-12-7"^^xsd:date ;
-                                                    
-                                                    owl:versionInfo "2014-12-7"^^xsd:string ;
-                                                    
+                                                    dcterms:created "2014-11-11"^^xsd:date ;
+                                         
+                                                    dcterms:modified "2015-01-15"^^xsd:date ;
+                                             
+                                                    owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                                                                        
                                                     dc:title "Open-Multinet Upper Federation Ontology"^^xsd:string ;
                                                     
                                                     dc:description "This ontology defines concepts related to federation of internet infrastructures."^^xsd:string ;

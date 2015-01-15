@@ -14,10 +14,12 @@
                                          
                                          rdfs:label "omn-resource"@en ;
                                          
-                                         dc:date "2014-12-7"^^xsd:date ;
+                                         dcterms:created "2014-11-11"^^xsd:date ;
                                          
-                                         owl:versionInfo "2014-12-7"^^xsd:string ;
+                                         dcterms:modified "2015-01-15"^^xsd:date ;
                                          
+                                         owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                                                 
                                          dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
                                          
                                          dc:description "This ontology expands definitions of types of resources as described in the main OMN upper ontology. Resources are defined as entities that can be provisioned/controlled/measured by APIs."^^xsd:string ;

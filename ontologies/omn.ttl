@@ -19,9 +19,11 @@
                                          
                                          rdfs:label "omn"@en ;
                                          
-                                         dc:date "2014-11-11"^^xsd:date ;
+                                         dcterms:created "2014-11-11"^^xsd:date ;
                                          
-                                         owl:versionInfo "2014-11-11"^^xsd:string ;
+                                         dcterms:modified "2015-01-15"^^xsd:date ;
+                                         
+                                         owl:versionInfo "2015-01-15"^^xsd:string ;
                                          
                                          dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
                                          
