@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  
+  GENIPUBLIC-COPYRIGHT
+  Copyright (c) 2011 University of Utah and the Flux Group.
+  All rights reserved.
+  
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and/or hardware specification (the "Work") to
+  deal in the Work without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense,
+  and/or sell copies of the Work, and to permit persons to whom the Work
+  is furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Work.
+  
+  THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+  IN THE WORK.
+-->
+<!--
+  
+  Prototype of a request RSpec, to be used by GENI
+  Version 3
+  
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.geni.net/resources/rspec/3" xmlns:rspec="http://www.geni.net/resources/rspec/3">
+  <xs:include schemaLocation="request-common.xsd"/>
+  <!-- The ComponentName will only be available after an assignment -->
+  <xs:complexType name="InstallServiceContents">
+    <xs:group ref="rspec:AnyExtension"/>
+    <xs:attributeGroup ref="rspec:AnyExtension"/>
+    <xs:attribute name="url" use="required"/>
+    <xs:attribute name="install_path" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ExecuteServiceContents">
+    <xs:group ref="rspec:AnyExtension"/>
+    <xs:attributeGroup ref="rspec:AnyExtension"/>
+    <xs:attribute name="shell" use="required"/>
+    <xs:attribute name="command" use="required"/>
+  </xs:complexType>
+  <!-- The LinkMapping will only be available after an assignment -->
+  <!-- The ComponentInterfaceDeclName will only be available after an assignment -->
+  <!-- The ComponentInterfaceRefName will only be available after an assignment -->
+  <xs:simpleType name="RspecTypeContents">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="request"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--
+    A request link is mapped to an arbitrary topology which represents
+    the virtual LAN/link which embodies it. Note that nodes do not
+    provide any additional information and can be derived from the
+    interface mapping.
+  -->
+  <xs:complexType name="ComponentHopContents">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="rspec:AnyExtension"/>
+      <xs:element ref="rspec:component_manager"/>
+      <xs:group ref="rspec:InterfaceMapping"/>
+    </xs:choice>
+    <xs:attributeGroup ref="rspec:AnyExtension"/>
+    <xs:attribute name="component_id"/>
+  </xs:complexType>
+  <xs:element name="component_manager">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    Each interface represents a particular physical interface. If that
+    interface is one of the link end points, it is also mapped to that
+    virtual interface name.
+  -->
+  <xs:group name="InterfaceMapping">
+    <xs:sequence>
+      <xs:element name="interface_ref">
+        <xs:complexType>
+          <xs:group ref="rspec:AnyExtension"/>
+          <xs:attributeGroup ref="rspec:AnyExtension"/>
+          <xs:attribute name="component_id" use="required"/>
+          <xs:attribute name="component_manager_id" use="required"/>
+          <xs:attribute name="client_id"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+</xs:schema>

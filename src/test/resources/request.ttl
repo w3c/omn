@@ -9,7 +9,7 @@
 @prefix motor: <http://fiteagle.org/ontology/resource/motor#> .
 @prefix motorgarage: <http://fiteagle.org/ontology/resource/motorgarage#> .
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@base <http://open-multinet.info/ontology/examples> .
+@base <http://open-multinet.info/ontology/examples#> .
 
 <http://open-multinet.info/ontology/examples> rdf:type owl:Ontology .
 

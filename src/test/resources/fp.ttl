@@ -1,0 +1,52 @@
+@prefix : <http://fuseco.fokus.fraunhofer.de/about#> .
+@prefix motor: <http://fiteagle.org/ontology/resource/motor#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geni: <http://open-multinet.info/ontology/sfa#> .
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://fuseco.fokus.fraunhofer.de/about#infrastructure
+
+:me rdf:type omn:Infrastructure ,
+                         owl:NamedIndividual ;
+                rdfs:label "FUSECO Playground" ;
+                rdfs:comment "The FUSECO Playground is..." ;
+                foaf:depiction <http://fusecoplayground.org/logo.png> ;
+                foaf:mbox <mailto:info@fuseco-playground.org> ;
+                foaf:homepage <http://fuseco-playground.org> ;
+                foaf:based_near :location ;
+                omn:isAdministeredBy <http://www.fokus.fraunhofer.de/about#me> ;
+                omn:hasService :am, :sa .
+
+:am rdf:type geni:AggregateManager ;
+    omn:hasEndpoint <https://fuseco.fokus.fraunhofer.de/api/sfa/am/v3> .
+
+:sa rdf:type geni:SliceAuthority ;
+    omn:hasEndpoint <https://fuseco.fokus.fraunhofer.de/api/sfa/sa/v1> .
+
+:MotorGarage13 rdf:type owl:NamedIndividual ,
+                        motor:MotorGarage .
+
+###  http://fuseco.fokus.fraunhofer.de/about#location
+
+:location rdf:type owl:NamedIndividual ,
+                   geo:Point ;
+          
+          rdfs:label "Fraunhofer FOKUS"@en ;
+          
+          geo:lat "52.5258083" ;
+          
+          geo:long "13.3172764" .
+
