@@ -4,6 +4,7 @@
 	<groupId>info.open-multinet</groupId>
 	<artifactId>ontology</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>Open-Multinet Ontology</name>
 	<description>Tools for ontology based RSpecs</description>
 	<url>http://open-multinet.info</url>
@@ -13,6 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
+		<wildfly.version>1.0.2.Final</wildfly.version>
 	</properties>
 
 	<developers>
@@ -32,6 +34,24 @@
 	<build>
 		<finalName>omnlib</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-a-jar</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>${wildfly.version}</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.jena</groupId>
 				<artifactId>jena-maven-tools</artifactId>
@@ -75,7 +95,7 @@
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.advertisement</packageName>
 							<schemaDirectory>src/main/resources/geni/advertisement</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
-						<outputDirectory>src/main/java</outputDirectory>
+							<outputDirectory>src/main/java</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -109,6 +129,12 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-arq</artifactId>

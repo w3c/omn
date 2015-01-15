@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+                           http://www.geni.net/resources/rspec/3/request.xsd
+                           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+       xmlns="http://www.geni.net/resources/rspec/3" expires="2013-05-17T19:55:00Z">
+<node client_id="geni1" component_manager_id="urn:publicid:IDN+uncvmsite+authority+cm">
+<sliver_type name="m1.small">
+  <disk_image
+name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.7.xml"
+version="ba15fa6f56cc00d354e505259b9cb3804e1bcb73" />
+</sliver_type>
+<interface client_id="geni1:0">
+   <ip address="172.16.22.1" netmask="255.255.255.0" />
+</interface>
+</node>
+<node client_id="geni2" component_manager_id="urn:publicid:IDN+uncvmsite+authority+cm">
+<sliver_type name="m1.small">
+  <disk_image
+name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.7.xml"
+version="ba15fa6f56cc00d354e505259b9cb3804e1bcb73" />
+</sliver_type>
+<interface client_id="geni2:0" >
+  <ip address="172.16.22.2" netmask="255.255.255.0" />
+</interface>
+</node>
+<link client_id="center">
+ <interface_ref client_id="geni1:0" />
+ <interface_ref client_id="geni2:0" />
+</link>
+</rspec>
+

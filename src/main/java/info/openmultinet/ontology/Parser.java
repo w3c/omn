@@ -6,6 +6,7 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 import com.hp.hpl.jena.query.Query;
@@ -34,15 +35,22 @@ public class Parser {
 
 	private static String NL = System.getProperty("line.separator");
 
-	private Reasoner reasoner;
 
 	protected InfModel model;
 
 	// @todo: add support for all serializations, not only TTL
 	public Parser(InputStream input) throws InvalidModelException {
-		Model data = ModelFactory.createDefaultModel().read(input, null, "TTL");
+		Model data = ModelFactory.createDefaultModel().read(input, StandardCharsets.UTF_8.toString(), "TTL");
 		if (!isValid(data))
 			throw new InvalidModelException(getValidationReport(data));
+		model = createInfModel(data);
+	}
+
+	public static InfModel createInfModel() throws InvalidModelException {	
+		return createInfModel(ModelFactory.createDefaultModel());
+	}
+
+	public static InfModel createInfModel(Model data) throws InvalidModelException {
 		Model schema = ModelFactory.createDefaultModel();
 		schema.add(parse("/omn.ttl"));
 		schema.add(parse("/omn-federation.ttl"));
@@ -53,14 +61,19 @@ public class Parser {
 		if (!isValid(schema))
 			throw new InvalidModelException(getValidationReport(schema));
 
-		reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
-		model = ModelFactory.createInfModel(reasoner, data);
+		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
+		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
+		infModel.setNsPrefix("omn", Omn.getURI());
+		infModel.setNsPrefix("omn-lifecycle", Omn_lifecycle.getURI());
+		infModel.setNsPrefix("rdf", RDF.getURI());
+		infModel.setNsPrefix("rdfs", RDFS.getURI());
+		infModel.setNsPrefix("owl", OWL.getURI());
+		return infModel;
 	}
 
 	public static Model parse(String filename) {
-		URL stream = Parser.class.getResource(filename);
-		Model model = ModelFactory.createDefaultModel().read(stream.toString(),
-				"TTL");
+		InputStream stream = Parser.class.getResourceAsStream(filename);
+		Model model = ModelFactory.createDefaultModel().read(stream, StandardCharsets.UTF_8.toString(), "TTL");
 		return model;
 	}
 
@@ -92,6 +105,15 @@ public class Parser {
 		}
 	}
 
+	public static String toString(Model model) {
+		String result = "";
+		for (StmtIterator i = model.listStatements(); i.hasNext();) {
+			Statement stmt = i.nextStatement();
+			result += PrintUtil.print(stmt);
+		}
+		return result;
+	}
+	
 	public InfModel getModel() {
 		return this.model;
 	}
@@ -129,4 +151,6 @@ public class Parser {
 	public String getValidationReport() {
 		return Parser.getValidationReport(this.model);
 	}
+
+	
 }

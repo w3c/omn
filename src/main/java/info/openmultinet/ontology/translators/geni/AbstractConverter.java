@@ -9,6 +9,10 @@ import com.hp.hpl.jena.rdf.model.Resource;
 public abstract class AbstractConverter {
 
 	protected final static String VENDOR = "omnlib";
+	public final static String TTL = "ttl";
+	public final static String RSPEC_REQUEST = "rspec_request";
+	public final static String RSPEC_MANIFEST = "rspec_manifest";
+	public final static String RSPEC_ADVERTISEMENT = "rspec_advertisement";
 	
 	protected static void validateModel(List<Resource> groups) throws InvalidModelException {
 		if (groups.isEmpty())

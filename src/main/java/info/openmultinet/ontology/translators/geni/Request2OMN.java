@@ -1,12 +1,15 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
+import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -22,8 +25,10 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class Request2OMN {
 
-	public static Model getModel(InputStream input) throws JAXBException {
-		
+	private static final Logger LOG = Logger.getLogger(Request2OMN.class.getName());
+
+	public static Model getModel(InputStream input) throws JAXBException, InvalidModelException {
+	
 		JAXBContext context = JAXBContext.newInstance(RSpecContents.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		JAXBElement<RSpecContents> rspec = unmarshaller.unmarshal(new StreamSource(input), RSpecContents.class);
@@ -33,18 +38,30 @@ public class Request2OMN {
 		Resource topology = model.createResource("http://open-multinet.info/example#request");
 		topology.addProperty(RDF.type, Omn_lifecycle.Request);
 		
-		
-		//@todo: on purpose clean and small - have to check exceptions to get links and others
-		List<JAXBElement<NodeContents>> nodes = (List) request.getAnyOrNodeOrLink();
-		for (JAXBElement<NodeContents> nodeObject : nodes) {
-			NodeContents node = nodeObject.getValue();
-			model.createResource(node.getClientId());
-		}
+		extractNodes(request, topology);
 		
 		return model;
 	}
 
-	private static String toString(Object jaxbObject) throws JAXBException {
+	private static void extractNodes(RSpecContents request, Resource topology) {
+		
+		List<JAXBElement<NodeContents>> nodes;
+		try {
+			nodes = (List) request.getAnyOrNodeOrLink();
+			for (JAXBElement<NodeContents> nodeObject : nodes) {
+				NodeContents node = nodeObject.getValue();
+				Resource n = topology.getModel().createResource(node.getClientId());
+				n.addProperty(RDF.type, Omn.Resource);
+				n.addLiteral(Omn.isResourceOf, topology.getURI());
+				topology.addProperty(Omn.hasResource, n.getURI());
+			}	
+		} catch (ClassCastException e) {
+			LOG.finer(e.getMessage());
+		}
+		
+	}
+
+	public static String toString(Object jaxbObject) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext
 				.newInstance("info.openmultinet.ontology.translators.geni.jaxb.request");
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
