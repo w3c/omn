@@ -1,6 +1,7 @@
 package info.openmultinet.ontology;
 
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
@@ -29,7 +30,7 @@ public class ParserTest {
 	private Parser parser;
 
 	@Before
-	public void setup() {
+	public void setup() throws InvalidModelException {
 		this.input = ParserTest.class.getResourceAsStream("/request.ttl");
 		this.parser = new Parser(input);
 	}

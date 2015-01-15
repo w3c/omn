@@ -1,5 +1,7 @@
 package info.openmultinet.ontology;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,7 +20,7 @@ public class TopologyParserTest {
 	private TopologyParser parser;
 
 	@Before
-	public void setup() {
+	public void setup() throws InvalidModelException {
 		this.input = ParserTest.class.getResourceAsStream("/request.ttl");
 		this.parser = new TopologyParser(input);
 	}

@@ -1,5 +1,6 @@
 package info.openmultinet.ontology;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 
 import java.io.InputStream;
@@ -11,7 +12,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class TopologyParser extends Parser {
 
-	public TopologyParser(InputStream input) {
+	public TopologyParser(InputStream input) throws InvalidModelException {
 		super(input);
 	}
 

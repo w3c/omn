@@ -2,7 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.ParserTest;
-import info.openmultinet.ontology.translators.geni.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 
 import java.io.InputStream;
 
@@ -20,7 +20,7 @@ public class Omn4GeniTest {
 	private Parser parser;
 
 	@Before
-	public void setup() {
+	public void setup() throws InvalidModelException {
 		this.input = ParserTest.class.getResourceAsStream("/request.ttl");
 		this.parser = new Parser(input);
 	}

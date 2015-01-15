@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni.exceptions;
+package info.openmultinet.ontology.exceptions;
 
 public class InvalidModelException extends Exception {
 

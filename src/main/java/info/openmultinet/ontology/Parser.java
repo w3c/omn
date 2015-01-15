@@ -1,5 +1,6 @@
 package info.openmultinet.ontology;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
@@ -32,24 +33,28 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class Parser {
 
 	private static String NL = System.getProperty("line.separator");
-	
+
 	private Reasoner reasoner;
 
 	protected InfModel model;
-	
-	//@todo: add support for all serializations, not only TTL
-	public Parser(InputStream input) {
+
+	// @todo: add support for all serializations, not only TTL
+	public Parser(InputStream input) throws InvalidModelException {
 		Model data = ModelFactory.createDefaultModel().read(input, null, "TTL");
-		Model schema = ModelFactory.createDefaultModel(); 
+		if (!isValid(data))
+			throw new InvalidModelException(getValidationReport(data));
+		Model schema = ModelFactory.createDefaultModel();
 		schema.add(parse("/omn.ttl"));
 		schema.add(parse("/omn-federation.ttl"));
 		schema.add(parse("/omn-lifecycle.ttl"));
 		schema.add(parse("/omn-resource.ttl"));
 		schema.add(parse("/omn-service.ttl"));
 		schema.add(parse("/omn-component.ttl"));
+		if (!isValid(schema))
+			throw new InvalidModelException(getValidationReport(schema));
 
-        reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
-        model = ModelFactory.createInfModel(reasoner, data);
+		reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
+		model = ModelFactory.createInfModel(reasoner, data);
 	}
 
 	public static Model parse(String filename) {
@@ -91,17 +96,37 @@ public class Parser {
 		return this.model;
 	}
 
-	public boolean isValid() {
-		ValidityReport validity = this.model.validate();
+	public static boolean isValid(InfModel model) {
+		ValidityReport validity = model.validate();
 		return validity.isValid();
 	}
 
-	public String getValidationReport() {
+	public static boolean isValid(Model model) {
+		InfModel infModel = ModelFactory.createInfModel(
+				ReasonerRegistry.getOWLMiniReasoner(), model);
+		return isValid(infModel);
+	}
+
+	public static String getValidationReport(Model model) {
+		InfModel infModel = ModelFactory.createInfModel(
+				ReasonerRegistry.getOWLMiniReasoner(), model);
+		return getValidationReport(infModel);
+	}
+
+	public static String getValidationReport(InfModel model) {
 		String report = "";
-		ValidityReport validity = this.model.validate();
-		for (Iterator<Report> i = validity.getReports(); i.hasNext(); ) {
-	        report += " - " + i.next() + NL;
-	    }
+		ValidityReport validity = model.validate();
+		for (Iterator<Report> i = validity.getReports(); i.hasNext();) {
+			report += " - " + i.next() + NL;
+		}
 		return report;
+	}
+
+	public boolean isValid() {
+		return Parser.isValid(this.model);
+	}
+
+	public String getValidationReport() {
+		return Parser.getValidationReport(this.model);
 	}
 }

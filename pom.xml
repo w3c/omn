@@ -38,7 +38,7 @@
 				<version>0.7</version>
 				<configuration>
 					<includes>
-						<include>src/main/resources/*.ttl</include>
+						<include>src/main/resources/omn*.ttl</include>
 					</includes>
 					<fileOptions>
 						<source>
@@ -48,7 +48,7 @@
 							<ontology>true</ontology>
 						</source>
 					</fileOptions>
-                    <owl>true</owl>
+					<owl>true</owl>
 					<inference>true</inference>
 					<noheader>true</noheader> <!-- doesn't work -->
 				</configuration>
@@ -61,6 +61,50 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>xjc-advertisement</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<packageName>info.openmultinet.ontology.translators.geni.jaxb.advertisement</packageName>
+							<schemaDirectory>src/main/resources/geni/advertisement</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+						<outputDirectory>src/main/java</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-manifest</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<packageName>info.openmultinet.ontology.translators.geni.jaxb.manifest</packageName>
+							<schemaDirectory>src/main/resources/geni/manifest</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-request</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<packageName>info.openmultinet.ontology.translators.geni.jaxb.request</packageName>
+							<schemaDirectory>src/main/resources/geni/request</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
