@@ -92,7 +92,7 @@
 
         rdfs:subClassOf omn:Resource ;
         
-        owl:seeAlso nml:NetworkObject .
+        rdfs:seeAlso nml:NetworkObject .
 
 
 

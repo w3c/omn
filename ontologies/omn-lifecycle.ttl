@@ -2,11 +2,12 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-lifecycle> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@base <http://open-multinet.info/ontology/omn-lifecycle#> .
 
 <http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology ;
                                          
@@ -74,7 +75,7 @@
 
 			# rdfs:seeAlso sfa:ListResources ;
           
-          	rdfs:subClassOf :Group .
+          	rdfs:subClassOf omn:Group .
 
 
 
@@ -84,7 +85,7 @@
 	
 			rdfs:comment "A collection (group) of resources/services/groups requested by the user"@en ;
          
-         	rdfs:subClassOf :Group .
+         	rdfs:subClassOf omn:Group .
 
 
 
@@ -95,7 +96,7 @@
 
 			rdfs:comment "A collection (group) of resources/services/groups confirmed to be allocated for the user."@en ;
          
-         	rdfs:subClassOf :Group .
+         	rdfs:subClassOf omn:Group .
 
 
 
@@ -105,7 +106,7 @@
 
 			rdfs:comment "A collection (group) of resources/services/groups allocated for the user."@en ;
          
-         	rdfs:subClassOf :Group .
+         	rdfs:subClassOf omn:Group .
 
 
 
