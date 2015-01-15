@@ -6,6 +6,12 @@ Abstract
 
 Playground for the ontology work focussing on putting ontologies in RSpecs.
 
+Java omnlib
+-------------
+ 1. Checkout the code
+ 2. Run "mvn test" to auto generate binding files
+ 3. Open with IDE (e.g. Eclipse)
+
 Live Ontology
 -------------
  * [HTML Documentation](http://federation.av.tu-berlin.de/omn/ontology.html)
