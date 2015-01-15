@@ -36,19 +36,95 @@
 #
 #################################################################
 
+###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
+
+:implementedBy rdf:type owl:ObjectProperty ;
+               
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( omn:Component
+                                          omn:Group
+                                          omn:Resource
+                                          omn:Service
+                                        )
+                          ] ;
+               
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( omn:Component
+                                           omn:Group
+                                           omn:Resource
+                                           omn:Service
+                                         )
+                           ] .
 
 
 
-				
+###  http://open-multinet.info/ontology/omn-lifecycle#implements
+
+:implements rdf:type owl:ObjectProperty ;
+            
+            owl:inverseOf :implementedBy ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( omn:Component
+                                       omn:Group
+                                       omn:Resource
+                                       omn:Service
+                                     )
+                       ] ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Component
+                                        omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] .
 
 
-#################################################################
-#
-#    Data properties
-#
-#################################################################
+
+###  http://open-multinet.info/ontology/omn-lifecycle#parentOf
+
+:parentOf rdf:type owl:ObjectProperty ;
+          
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( omn:Component
+                                     omn:Group
+                                     omn:Resource
+                                     omn:Service
+                                   )
+                     ] ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
 
 
+
+###  http://open-multinet.info/ontology/omn-lifecycle#parentTo
+
+:parentTo rdf:type owl:ObjectProperty ;
+          
+          owl:inverseOf :parentOf ;
+          
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( omn:Component
+                                     omn:Group
+                                     omn:Resource
+                                     omn:Service
+                                   )
+                     ] ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
 
 
 #################################################################
