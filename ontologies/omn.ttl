@@ -507,7 +507,7 @@
        
        rdfs:label "Group"@en ;
        
-       rdfs:comment "Examples: Infrastructure, Reservation, Bi-directional Link, Slice, ..."@en ,
+       rdfs:comment "Examples: Bi-directional Link, ..."@en ,
                     "A collection of omn:Resource, omn:Service or omn:Group"@en ;
        
        rdfs:seeAlso novi:Group ,
@@ -515,6 +515,16 @@
                     nml:Group .
 
 
+###  http://open-multinet.info/ontology/omn-federation#Topology
+
+:Topology rdf:type owl:Class ;
+
+       rdfs:label "Topology"@en ;
+
+       rdfs:comment "Examples: Infrastructure, Reservation, Slice, ..."@en ,
+                    "A collection of omn:Resource, omn:Service or omn:Group"@en ;
+
+       rdfs:subClassOf :Group .
 
 ###  http://open-multinet.info/ontology/omn#Layer
 

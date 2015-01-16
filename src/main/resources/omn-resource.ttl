@@ -1,34 +1,34 @@
 @prefix : <http://open-multinet.info/ontology/omn-resource#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @base <http://open-multinet.info/ontology/omn-resource> .
 
 <http://open-multinet.info/ontology/omn-resource> rdf:type owl:Ontology ;
-                                         
-                                         rdfs:label "omn-resource"@en ;
-                                         
-                                         dcterms:created "2014-11-11"^^xsd:date ;
-                                         
-                                         dcterms:modified "2015-01-15"^^xsd:date ;
-                                         
-                                         owl:versionInfo "2015-01-15"^^xsd:string ;
-                                                                                 
-                                         dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
-                                         
-                                         dc:description "This ontology expands definitions of types of resources as described in the main OMN upper ontology. Resources are defined as entities that can be provisioned/controlled/measured by APIs."^^xsd:string ;
-
-                                         dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-resoure.png> ;
-                                         
-                                         dc:publisher <http://open-multinet.org> ;
-                                         
-                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+                                                  
+                                                  rdfs:label "omn-resource"@en ;
+                                                  
+                                                  dcterms:created "2014-11-11"^^xsd:date ;
+                                                  
+                                                  dcterms:modified "2015-01-15"^^xsd:date ;
+                                                  
+                                                  owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                  
+                                                  dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
+                                                  
+                                                  dc:description "This ontology expands definitions of types of resources as described in the main OMN upper ontology. Resources are defined as entities that can be provisioned/controlled/measured by APIs."^^xsd:string ;
+                                                  
+                                                  dc:publisher <http://open-multinet.org> ;
+                                                  
+                                                  dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                  
+                                                  dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-resoure.png> .
 
 
 #################################################################
@@ -37,32 +37,49 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/omn#requires
 
-:requires rdf:type owl:ObjectProperty ;
-             
-             rdfs:label "requires an ICT object" ;
-             
-             rdfs:range :NetworkObject ;
-             
-             rdfs:domain :NetworkObject ;
-             
-             owl:inverseOf :requiredBy .
-
-
-###  http://open-multinet.info/ontology/omn#requiredBy
+###  http://open-multinet.info/ontology/omn-resource#requiredBy
 
 :requiredBy rdf:type owl:ObjectProperty ;
-             
-             rdfs:label "is required by an ICT object" ;
-             
-             rdfs:range :NetworkObject ;
-             
-             rdfs:domain :NetworkObject ;
-             
-             owl:inverseOf :requires .
+            
+            rdfs:label "is required by an ICT object" ;
+            
+            rdfs:domain :NetworkObject ;
+            
+            rdfs:range :NetworkObject .
 
 
+
+###  http://open-multinet.info/ontology/omn-resource#requires
+
+:requires rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "requires an ICT object" ;
+          
+          rdfs:domain :NetworkObject ;
+          
+          rdfs:range :NetworkObject ;
+          
+          owl:inverseOf :requiredBy .
+
+
+:hasInterface rdf:type owl:ObjectProperty ;
+             
+             rdfs:label "has interface"@en ;
+                          
+             rdfs:domain :Node ;
+             
+             rdfs:range :Interface ;
+             
+             owl:inverseOf :isInterfaceOf .
+
+:isInterfaceOf rdf:type owl:ObjectProperty ;
+              
+              rdfs:label "is interface of"@en ;
+              
+              rdfs:range :Node ;
+              
+              rdfs:domain :Interface .
 
 
 #################################################################
@@ -71,6 +88,14 @@
 #
 #################################################################
 
+
+###  http://open-multinet.info/ontology/omn-resource#isExclusive
+
+:isExclusive rdf:type owl:DatatypeProperty ;
+             
+             rdfs:domain omn:Resource ;
+             
+             rdfs:range xsd:boolean .
 
 
 
@@ -83,59 +108,67 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Interface
+
+:Interface rdf:type owl:Class ;
+           
+           rdfs:label "Interface" ;
+           
+           rdfs:subClassOf :NetworkObject ;
+           
+           rdfs:comment "todo: omn-resource:NetworkObject or omn:Component??"@en ;
+           
+           rdfs:seeAlso nml:Port .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Link
+
+:Link rdf:type owl:Class ;
+      
+      rdfs:label "Link" ;
+      
+      rdfs:subClassOf :NetworkObject ;
+      
+      rdfs:comment "todo: still to decide if also at this level there is an equivalence to nml concepts with the same name"@en ;
+      
+      rdfs:seeAlso nml:Link .
+
+
 
 ###  http://open-multinet.info/ontology/omn-resource#NetworkObject
 
 :NetworkObject rdf:type owl:Class ;
-
-        rdfs:comment "example: ports, paths, links, node, physical machine,machine, VM"@en ;
-        
-        rdfs:label "Network Object" ;
-
-        rdfs:subClassOf omn:Resource ;
-        
-        rdfs:seeAlso nml:NetworkObject .
-
+               
+               rdfs:label "Network Object" ;
+               
+               rdfs:subClassOf omn:Resource ;
+               
+               rdfs:comment "example: ports, paths, links, node, physical machine,machine, VM"@en ;
+               
+               rdfs:seeAlso nml:NetworkObject .
 
 
 
 ###  http://open-multinet.info/ontology/omn-resource#Node
 
 :Node rdf:type owl:Class ;
-
-        rdfs:comment "todo: still to decide if also at this level there is an equivalence to nml concepts with the same name"@en ;
-        
-        rdfs:label "Node" ;
-
-        rdfs:seeAlso nml:Node ;
-
-        rdfs:subClassOf :NetworkObject .
-
-
-###  http://open-multinet.info/ontology/omn-resource#Link
-
-:Link rdf:type owl:Class ;
-
-        rdfs:comment "todo: still to decide if also at this level there is an equivalence to nml concepts with the same name"@en ;
-        
-        rdfs:label "Link" ;
-
-        rdfs:seeAlso nml:Link ;
-
-        rdfs:subClassOf :NetworkObject .
+      
+      rdfs:label "Node" ;
+      
+      rdfs:subClassOf :NetworkObject ;
+      
+      rdfs:comment "todo: still to decide if also at this level there is an equivalence to nml concepts with the same name"@en ;
+      
+      rdfs:seeAlso nml:Node .
 
 
-###  http://open-multinet.info/ontology/omn-resource#Interface
-
-:Interface rdf:type owl:Class ;
-
-        rdfs:comment "todo: omn-resource:NetworkObject or omn:Component??"@en ;
-        
-        rdfs:label "Interface" ;
-
-        rdfs:seeAlso nml:Port ;
-
-        rdfs:subClassOf :NetworkObject .
 
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
