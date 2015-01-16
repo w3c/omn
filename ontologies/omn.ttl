@@ -1,4 +1,5 @@
 @prefix : <http://open-multinet.info/ontology/omn#> .
+
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -13,6 +14,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
 @prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @base <http://open-multinet.info/ontology/omn#> .
 
 <http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
@@ -273,6 +275,19 @@
                         ] .
 
 
+:hasReservation rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has reservation"@en ;
+            
+            rdfs:range :Reservation ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :Group
+                                        :Resource
+                                        :Service
+                                      )
+                        ] .
+
 
 ###  http://open-multinet.info/ontology/omn#isAttributeOf
 
@@ -356,6 +371,21 @@
                                       )
                         ] .
 
+
+:isReservationOf rdf:type owl:ObjectProperty ;
+             
+             rdfs:label "is reservation of"@en ;
+             
+             rdfs:domain :Reservation ;
+             
+             owl:inverseOf :hasReservation ;
+             
+             rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( :Group
+                                        :Resource
+                                        :Service
+                                      )
+                        ] .
 
 
 ###  http://open-multinet.info/ontology/omn#toDependency
@@ -567,7 +597,16 @@
                       nml:Service .
 
 
+:Reservation rdf:type owl:Class ;
+         
+         rdfs:label "Reservation"@en ;
+         
+         rdfs:comment "A specification of a guarantee"@en ,
+                      "Examples: (Earliest) Start and (lates) end time, data volume, ..."@en ;
+         
+         rdfs:seeAlso time:Interval .
 
+time:Interval rdfs:subClassOf :Reservation .
 
 
 #################################################################

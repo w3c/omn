@@ -141,7 +141,7 @@
 
 			rdfs:comment "The current state of the resource"@en ;
          
-         	rdfs:subClassOf :Attribute .
+         	rdfs:subClassOf omn:Attribute .
 
 
 
