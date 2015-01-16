@@ -43,4 +43,12 @@ public class Omn4GeniTest {
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
 
+	@Test
+	public void testNTUAAdvertisement() throws JAXBException, InvalidModelException {
+		Model model = new Parser("/ntua_offer.ttl").getModel();
+		String rspec = OMN2Advertisement.getRSpec(model);
+		System.out.println(rspec);
+		Assert.assertTrue("should be an advertisement", rspec.contains("type=\"advertisement\""));
+		Assert.assertTrue("should be exclusive", rspec.contains("exclusive=\"true"));
+	}
 }

@@ -7,6 +7,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecConte
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.io.StringWriter;
 import java.util.Date;
@@ -75,6 +76,8 @@ public class OMN2Advertisement extends AbstractConverter {
 			NodeContents node) {
 		node.setComponentId(resource.getResource().getURI());
 		node.setComponentName(resource.getResource().getLocalName());
+		if (resource.getResource().hasProperty(Omn_resource.isExclusive))
+			node.setExclusive(resource.getResource().getProperty(Omn_resource.isExclusive).getBoolean());
 	}
 
 	private static void setComponentManagerId(Statement resource,
