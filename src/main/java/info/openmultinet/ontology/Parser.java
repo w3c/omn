@@ -40,6 +40,15 @@ public class Parser {
 
 	// @todo: add support for all serializations, not only TTL
 	public Parser(InputStream input) throws InvalidModelException {
+		init(input);
+	}
+	
+	public Parser(String filename) throws InvalidModelException {
+		InputStream input = Parser.class.getResourceAsStream(filename);
+		init(input);
+	}
+	
+	public void init(InputStream input) throws InvalidModelException {
 		Model data = ModelFactory.createDefaultModel().read(input, StandardCharsets.UTF_8.toString(), "TTL");
 		if (!isValid(data))
 			throw new InvalidModelException(getValidationReport(data));
