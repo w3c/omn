@@ -1,0 +1,67 @@
+@prefix : <http://noc.ntua.gr/ontology/examples#> .
+@prefix fp: <http://fuseco.fokus.fraunhofer.de/about#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix motor: <http://fiteagle.org/ontology/resource/motor#> .
+@prefix motorgarage: <http://fiteagle.org/ontology/resource/motorgarage#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@base <http://noc.ntua.gr/ontology/examples#> .
+
+<http://noc.ntua.gr/ontology/examples> rdf:type owl:Ontology .
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://noc.ntua.gr/ontology/examples#boundMotor7
+
+
+:namedOffering rdf:type omn:Topology,
+                         owl:NamedIndividual ;
+                
+                rdfs:comment "Also known as a TOSCA topology, Teagle virtual customer testbed, or GENI Slice. Not sure if this should be an omn:Topology or an omn-lifecycle:Offering."^^xsd:string ;
+                omn:hasResource <urn:netmode:omf:netmode.node1> ,
+                <urn:netmode:omf:netmode.node2> ,
+                <urn:netmode:omf:netmode.node3> .
+
+<urn:netmode:omf:netmode.node1> rdf:type omn-resource:Node ,
+                      owl:NamedIndividual ;
+             omn-resource:isExclusive true ;
+             rdfs:label "An example node from NTUA"^^xsd:string ;
+             rdfs:seeAlso "GENI component_id attribute."^^xsd:string ;
+             rdfs:comment "some more human readable information about the node" ;
+             omn-resource:hasInterface <urn:netmode:if1> .
+
+<urn:netmode:if1> rdf:type omn-resource:Interface ,
+                      owl:NamedIndividual .
+
+<urn:netmode:omf:netmode.node2> rdf:type omn-resource:Node ,
+                      owl:NamedIndividual ;
+             omn-resource:isExclusive true ;
+             rdfs:label "An example node from NTUA"^^xsd:string ;
+             rdfs:seeAlso "GENI component_id attribute."^^xsd:string ;
+             rdfs:comment "some more human readable information about the node" ;
+             omn-resource:hasInterface <urn:netmode:if2> .
+
+<urn:netmode:if2> rdf:type omn-resource:Interface ,
+                      owl:NamedIndividual .
+
+<urn:netmode:omf:netmode.node3> rdf:type omn-resource:Node ,
+                      owl:NamedIndividual ;
+             omn-resource:isExclusive true ;
+             rdfs:label "An example node from NTUA"^^xsd:string ;
+             rdfs:seeAlso "GENI component_id attribute."^^xsd:string ;
+             rdfs:comment "some more human readable information about the node" ;
+             omn-resource:hasInterface <urn:netmode:if3> .
+
+<urn:netmode:if3> rdf:type omn-resource:Interface ,
+                      owl:NamedIndividual .
+
