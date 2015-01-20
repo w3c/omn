@@ -1,15 +1,9 @@
 @prefix : <http://open-multinet.info/ontology/examples#> .
-@prefix fp: <http://fuseco.fokus.fraunhofer.de/about#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix motor: <http://fiteagle.org/ontology/resource/motor#> .
-@prefix motorgarage: <http://fiteagle.org/ontology/resource/motorgarage#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix osco: <http://opensdncore.org/ontology/services#> .
+@prefix osco: <http://opensdncore.org/ontology/> .
 @base <http://open-multinet.info/ontology/examples#> .
 
 <http://open-multinet.info/ontology/examples> rdf:type owl:Ontology .
@@ -26,7 +20,6 @@
                          owl:NamedIndividual ;
                                 
                 omn:hasResource :dummy1 .
-
 
 :dummy1 rdf:type osco:Dummy ,
                       owl:NamedIndividual ;

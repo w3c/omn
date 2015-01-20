@@ -60,6 +60,8 @@
 				<configuration>
 					<includes>
 						<include>src/main/resources/omn*.ttl</include>
+						<include>src/main/resources/osco.ttl</include>
+						<include>src/main/resources/tosca.ttl</include>
 					</includes>
 					<fileOptions>
 						<source>

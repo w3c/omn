@@ -3,9 +3,10 @@ package info.openmultinet.ontology;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Osco;
+import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
@@ -67,6 +68,8 @@ public class Parser {
 		schema.add(parse("/omn-resource.ttl"));
 		schema.add(parse("/omn-service.ttl"));
 		schema.add(parse("/omn-component.ttl"));
+		schema.add(parse("/osco.ttl"));
+		schema.add(parse("/tosca.ttl"));
 		if (!isValid(schema))
 			throw new InvalidModelException(getValidationReport(schema));
 
@@ -77,6 +80,8 @@ public class Parser {
 		infModel.setNsPrefix("rdf", RDF.getURI());
 		infModel.setNsPrefix("rdfs", RDFS.getURI());
 		infModel.setNsPrefix("owl", OWL.getURI());
+		infModel.setNsPrefix("tosca", Tosca.getURI());
+		infModel.setNsPrefix("osco", Osco.getURI());
 		return infModel;
 	}
 
@@ -100,7 +105,9 @@ public class Parser {
 				+ createPrefix("omn-lifecycle", Omn_lifecycle.getURI())
 				+ createPrefix("rdf", RDF.getURI())
 				+ createPrefix("rdfs", RDFS.getURI())
-				+ createPrefix("owl", OWL.getURI());
+				+ createPrefix("owl", OWL.getURI())
+		    + createPrefix("osco", Osco.getURI())
+		    + createPrefix("tosca", Tosca.getURI());
 	}
 
 	public static String createPrefix(String name, String URI) {
