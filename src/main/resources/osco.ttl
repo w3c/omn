@@ -1,12 +1,12 @@
-@prefix : <http://www.opensdncore.org/ontology/> .
+@prefix : <http://opensdncore.org/ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.opensdncore.org/ontology/> .
+@base <http://opensdncore.org/ontology/> .
 
-<http://www.opensdncore.org/ontology/> rdf:type owl:Ontology .
+<http://opensdncore.org/ontology/> rdf:type owl:Ontology .
 
 
 #################################################################
