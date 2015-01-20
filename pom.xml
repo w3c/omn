@@ -122,6 +122,18 @@
 							<outputDirectory>src/main/java</outputDirectory>
 						</configuration>
 					</execution>
+					<execution>
+						<id>xjc-tosca</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<packageName>info.openmultinet.ontology.translators.tosca.jaxb</packageName>
+							<schemaDirectory>src/main/resources/tosca</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 

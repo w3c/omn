@@ -6,6 +6,7 @@ import info.openmultinet.ontology.translators.geni.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
 import info.openmultinet.ontology.translators.geni.OMN2Manifest;
 import info.openmultinet.ontology.translators.geni.Request2OMN;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -50,8 +51,11 @@ public class RESTConverter {
 		try {
 			if (AbstractConverter.RSPEC_REQUEST.equals(from)) {
 				model = Request2OMN.getModel(stream);
+			} else if (AbstractConverter.TTL.equals(from)) {
+				model = new Parser(stream).getModel(); 
 			} else {
-				model = new Parser(stream).getModel();
+				throw new RuntimeException("unknown");
+				//@todo throw meaningful exception (web application exception)
 			}
 
 			if (AbstractConverter.RSPEC_ADVERTISEMENT.equals(to)) {
@@ -60,8 +64,13 @@ public class RESTConverter {
 			} else if (AbstractConverter.RSPEC_MANIFEST.equals(to)) {
 				String rspec = OMN2Manifest.getRSpec(model);
 				baos.write(rspec.getBytes());
-			} else {
+			} else if (AbstractConverter.TOSCA.equals(to)) {
+				String toplogy = OMN2Tosca.getTopology(model);
+				baos.write(toplogy.getBytes());
+			} else if (AbstractConverter.TTL.equals(to)) {
 				RDFDataMgr.write(baos, model, Lang.TTL);
+			} else {
+				//@todo throw meaningful exception				
 			}
 		} catch (RiotException e) {
 			throw new BadRequestException(e);
@@ -72,3 +81,4 @@ public class RESTConverter {
 		return baos.toString();
 	}
 }
+	

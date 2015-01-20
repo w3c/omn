@@ -9,16 +9,13 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeConten
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
-import java.io.StringWriter;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -41,7 +38,7 @@ public class OMN2Manifest extends AbstractConverter {
 		model2rspec(model, manifest);
 		JAXBElement<RSpecContents> rspec = new ObjectFactory()
 				.createRspec(manifest);
-		return toString(rspec);
+		return toString(rspec, "info.openmultinet.ontology.translators.geni.jaxb.manifest");
 	}
 
 	private static void setGeneratedTime(RSpecContents manifest) {
@@ -93,16 +90,5 @@ public class OMN2Manifest extends AbstractConverter {
 		for (Statement implementer : implementedBy) {
 			node.setComponentManagerId(implementer.getResource().getURI());
 		}
-	}
-
-	private static String toString(Object jaxbObject) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext
-				.newInstance("info.openmultinet.ontology.translators.geni.jaxb.manifest");
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		StringWriter stringWriter = new StringWriter();
-		jaxbMarshaller.marshal(jaxbObject, stringWriter);
-
-		return stringWriter.toString();
 	}
 }
