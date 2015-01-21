@@ -4,6 +4,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix osco: <http://opensdncore.org/ontology/> .
+@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> .
 @base <http://open-multinet.info/ontology/examples#> .
 
 <http://open-multinet.info/ontology/examples> rdf:type owl:Ontology .
@@ -24,7 +25,9 @@
 :dummy1 rdf:type osco:Dummy ,
                       owl:NamedIndividual ;
 
-             osco:name "requested-dummy-1" ;
+             tosca:name "requested-dummy-1" ;
+             
+             tosca:type "dummy" ;
 
              osco:test_param "foo"^^xsd:string ;
              

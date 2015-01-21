@@ -26,10 +26,10 @@ public class OMN2ToscaTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException {
+	public void testGetTopology() throws JAXBException, InvalidModelException {
 		InfModel model = this.parser.getModel();
 		String topology = OMN2Tosca.getTopology(model);
-		System.out.println("Topo: " + topology);
+		System.out.println(topology);
 		Assert.assertTrue("Should be a tosca XML", topology.contains("<Definitions"));
 	}
 

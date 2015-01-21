@@ -1,5 +1,4 @@
 @prefix : <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> .
-
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -18,8 +17,29 @@
 #################################################################
 
 
+###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#ServiceProperty
+
+:ServiceProperty rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:domain omn:Service ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#name
 
 :name rdf:type owl:DatatypeProperty ;
+      
+      rdfs:domain :Service ;
+      
+      rdfs:range xsd:string .
+
+
+
+###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#type
+
+:type rdf:type owl:DatatypeProperty ;
       
       rdfs:domain :Service ;
       
@@ -36,11 +56,18 @@
 #################################################################
 
 
-
+###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#Service
 
 :Service rdf:type owl:Class ;
          
          rdfs:subClassOf omn:Service .
+
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
+
 
 
 
