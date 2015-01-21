@@ -37,10 +37,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
 				<executions>
 					<execution>
 						<id>make-a-jar</id>
-						<phase>compile</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -59,6 +60,8 @@
 				<configuration>
 					<includes>
 						<include>src/main/resources/omn*.ttl</include>
+						<include>src/main/resources/osco.ttl</include>
+						<include>src/main/resources/tosca.ttl</include>
 					</includes>
 					<fileOptions>
 						<source>
@@ -118,6 +121,18 @@
 						<configuration>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.request</packageName>
 							<schemaDirectory>src/main/resources/geni/request</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-tosca</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<packageName>info.openmultinet.ontology.translators.tosca.jaxb</packageName>
+							<schemaDirectory>src/main/resources/tosca</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
 							<outputDirectory>src/main/java</outputDirectory>
 						</configuration>

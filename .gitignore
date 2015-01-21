@@ -2,6 +2,8 @@
 catalog-*.xml
 /target/
 .classpath
+.project
 .settings/
 src/main/java/info/openmultinet/ontology/vocabulary/
 src/main/java/info/openmultinet/ontology/translators/geni/jaxb/
+src/main/java/info/openmultinet/ontology/translators/tosca/jaxb/
