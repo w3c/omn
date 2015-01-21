@@ -43,6 +43,7 @@ public class Request2OMN {
 		return model;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static void extractNodes(RSpecContents request, Resource topology) {
 		
 		List<JAXBElement<NodeContents>> nodes;

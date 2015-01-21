@@ -23,7 +23,6 @@ public class RESTTest {
 	}
 	
 	@Test
-	@SuppressWarnings("resource")
 	public void testConvertToGraph() throws JAXBException, IOException, InvalidModelException {
 		String content = getFilecontent("/request2.rspec");
 
@@ -34,7 +33,6 @@ public class RESTTest {
 	}
 
 	@Test
-	@SuppressWarnings("resource")
 	public void testConvertToRspec() throws JAXBException, IOException, InvalidModelException {
 		String content = getFilecontent("/request.ttl");
 		
@@ -48,6 +46,7 @@ public class RESTTest {
 	public String getFilecontent(String filename) {
 		InputStream rspec = RESTTest.class
 				.getResourceAsStream(filename);
+		@SuppressWarnings("resource")
 		String content = new Scanner(rspec, "UTF-8").useDelimiter("\\A").next();
 		return content;
 	}
