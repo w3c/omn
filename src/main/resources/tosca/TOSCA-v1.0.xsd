@@ -787,20 +787,4 @@
  <xs:simpleType name="importedURI">
   <xs:restriction base="xs:anyURI"/>
  </xs:simpleType>
- <xs:complexType name="Parameter">
-  <xs:attribute name="key" type="xs:string" use="required"/>
-  <xs:attribute name="value" type="xs:string" use="required"/>
- </xs:complexType>
- <xs:complexType name="Parameters">
-  <xs:sequence>
-   <xs:element name="Parameter" type="Parameter" maxOccurs="unbounded"/>
-  </xs:sequence>
- </xs:complexType>
- <xs:element name="ServiceProperties">
-  <xs:complexType>
-	 <xs:sequence>
-	  <xs:element name="Parameters" type="Parameters" minOccurs="1" />
-	 </xs:sequence>
-  </xs:complexType>
- </xs:element>
 </xs:schema>

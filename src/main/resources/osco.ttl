@@ -17,11 +17,6 @@
 #################################################################
 
 
-###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#ServiceProperty
-
-tosca:ServiceProperty rdf:type owl:DatatypeProperty .
-
-
 
 ###  http://opensdncore.org/ontology/parameter1
 
@@ -29,7 +24,7 @@ tosca:ServiceProperty rdf:type owl:DatatypeProperty .
             
             rdfs:subPropertyOf tosca:ServiceProperty ;
             
-            rdfs:domain :Dummy ;
+            rdfs:domain :dummy ;
             
             rdfs:range xsd:string .
 
@@ -41,10 +36,9 @@ tosca:ServiceProperty rdf:type owl:DatatypeProperty .
             
             rdfs:subPropertyOf tosca:ServiceProperty ;
             
-            rdfs:domain :Dummy ;
+            rdfs:domain :dummy ;
             
             rdfs:range xsd:string .
-
 
 
 ###  http://opensdncore.org/ontology/port
@@ -53,7 +47,7 @@ tosca:ServiceProperty rdf:type owl:DatatypeProperty .
       
       rdfs:subPropertyOf tosca:ServiceProperty ;
       
-      rdfs:domain :Dummy ;
+      rdfs:domain :dummy ;
       
       rdfs:range xsd:integer .
 
@@ -65,12 +59,9 @@ tosca:ServiceProperty rdf:type owl:DatatypeProperty .
             
             rdfs:subPropertyOf tosca:ServiceProperty ;
             
-            rdfs:domain :Dummy ;
+            rdfs:domain :dummy ;
             
             rdfs:range xsd:string .
-
-
-
 
 
 #################################################################
@@ -82,19 +73,13 @@ tosca:ServiceProperty rdf:type owl:DatatypeProperty .
 
 ###  http://opensdncore.org/ontology/Dummy
 
-:Dummy rdf:type owl:Class ;
+:dummy rdf:type owl:Class ;
        
-       rdfs:subClassOf :Service ;
+       rdfs:subClassOf tosca:Service ;
        
        rdfs:comment "This is a dummy adapter from the OpenSDNCore platform"^^xsd:string ;
        
        rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
-
-
-
-###  http://opensdncore.org/ontology/Service
-
-:Service rdf:type owl:Class .
 
 
 

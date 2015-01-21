@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.dm;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.geni.AbstractConverter;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +24,7 @@ public class RESTTest {
 	}
 	
 	@Test
-	public void testConvertToGraph() throws JAXBException, IOException, InvalidModelException {
+	public void testConvertToGraph() throws JAXBException, IOException, InvalidModelException, ServiceTypeNotFoundException {
 		String content = getFilecontent("/request2.rspec");
 
 		String result = converter.convert(AbstractConverter.RSPEC_REQUEST,
@@ -33,7 +34,7 @@ public class RESTTest {
 	}
 
 	@Test
-	public void testConvertToRspec() throws JAXBException, IOException, InvalidModelException {
+	public void testConvertToRspec() throws JAXBException, IOException, InvalidModelException, ServiceTypeNotFoundException {
 		String content = getFilecontent("/request.ttl");
 		
 		String result = converter.convert(AbstractConverter.TTL, 

@@ -22,13 +22,11 @@
                                 
                 omn:hasResource :dummy1 .
 
-:dummy1 rdf:type osco:Dummy ,
+:dummy1 rdf:type osco:dummy ,
                       owl:NamedIndividual ;
 
              tosca:name "requested-dummy-1" ;
              
-             tosca:type "dummy" ;
-
              osco:test_param "foo"^^xsd:string ;
              
              osco:port 8088 ;

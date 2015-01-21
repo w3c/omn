@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.tosca;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.InputStream;
 
@@ -26,11 +27,22 @@ public class OMN2ToscaTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException {
+	public void testGetTopology() throws JAXBException, InvalidModelException, ServiceTypeNotFoundException {
 		InfModel model = this.parser.getModel();
 		String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
-		Assert.assertTrue("Should be a tosca XML", topology.contains("<Definitions"));
+		testToscaDefinitions(topology);
+		Assert.assertTrue("Should contain the properties set", topology.contains("<parameter2>bar</parameter2>"));
+		Assert.assertTrue("Should contain the properties set", topology.contains("<port>8088</port>"));
+		Assert.assertTrue("Should contain the properties set", topology.contains("<test_param>foo</test_param>"));
+		Assert.assertTrue("Should contain type definitions for parameters", topology.contains("<xs:element name=\"port\" type=\"xs:integer\"/>"));
+	}
+	
+	private static void testToscaDefinitions(String topology){
+	  Assert.assertTrue("Should be a tosca XML", topology.contains("<Definitions"));
+	  Assert.assertTrue("Should contain a targetNamespace", topology.contains("targetNamespace="));
+	  Assert.assertTrue("Should contain a NodeType element", topology.contains("<NodeType"));
+    Assert.assertTrue("Should contain a Types element", topology.contains("<Types"));
 	}
 
 }

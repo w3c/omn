@@ -7,6 +7,7 @@ import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
 import info.openmultinet.ontology.translators.geni.OMN2Manifest;
 import info.openmultinet.ontology.translators.geni.Request2OMN;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,7 +41,7 @@ public class RESTConverter {
 	@Path("{from}/{to}")
 	@Produces("text/plain")
 	public String convert(@PathParam("from") String from,
-			@PathParam("to") String to, @FormParam("content") String content) {
+			@PathParam("to") String to, @FormParam("content") String content) throws ServiceTypeNotFoundException {
 		LOG.info("Converting from '" + from + "' to '" + to + "'...");
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
