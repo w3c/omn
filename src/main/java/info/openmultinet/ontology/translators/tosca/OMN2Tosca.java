@@ -82,7 +82,7 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void setTargetNamespaceAndVendor(Model model, Definitions definitions){
-    String targetNamespace = getTargetNamespace(model);
+    String targetNamespace = getXMLTargetNamespace(model);
     String targetNamespacePrefix = getTargetNamespacePrefix(targetNamespace);
     definitions.setTargetNamespace(targetNamespace);
     definitions.getOtherAttributes().put(new QName(targetNamespace,"vendor", targetNamespacePrefix), VENDOR);
@@ -90,11 +90,11 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static String getTargetNamespacePrefix(String targetNamespace){
     String[] splitted = targetNamespace.split("/");
-    return splitted[splitted.length-1].replace("#", "");
+    return splitted[splitted.length-1];
   }
   
-  private static String getTargetNamespace(Model model){
-    return getTopologyResource(model).getNameSpace();
+  private static String getXMLTargetNamespace(Model model){
+    return getTopologyResource(model).getNameSpace().replace("#", "");
   }
   
   private static Resource getTopologyResource(Model model){
@@ -179,7 +179,7 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static void setNodeTypeProperties(Resource serviceType, TNodeType nodeType){
     PropertiesDefinition nodeTypeProperties = objFactory.createTEntityTypePropertiesDefinition();
-    String targetNameSpace = getTargetNamespace(serviceType.getModel());
+    String targetNameSpace = getXMLTargetNamespace(serviceType.getModel());
     QName propertiesReference = new QName(targetNameSpace,getServiceTypePropertiesName(serviceType));
     nodeTypeProperties.setElement(propertiesReference);
     nodeType.setPropertiesDefinition(nodeTypeProperties);
@@ -213,7 +213,7 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static void setNameAndTypeAndID(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) {
     nodeTemplate.setName(service.getRequiredProperty(Tosca.name).getString());
-    String targetNameSpace = getTargetNamespace(service.getModel());
+    String targetNameSpace = getXMLTargetNamespace(service.getModel());
     QName type = new QName(targetNameSpace, serviceType.getLocalName());
     nodeTemplate.setId(service.getURI());
     nodeTemplate.setType(type);
@@ -222,18 +222,20 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setServiceProperties(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) throws ServiceTypeNotFoundException {
     Document doc = createDocument();
     
-    Element serviceProperties = doc.createElement(getServiceTypePropertiesName(serviceType));
-    String targetNamespace = getTargetNamespace(service.getModel());
-    serviceProperties.setAttribute("xmlns", targetNamespace);
+    String targetNamespace = getXMLTargetNamespace(service.getModel());
+    String targetNamespacePrefix = getTargetNamespacePrefix(targetNamespace);
+    Element serviceProperties = doc.createElement(targetNamespacePrefix+":"+getServiceTypePropertiesName(serviceType));
+    serviceProperties.setAttribute("xmlns:"+targetNamespacePrefix, targetNamespace);
     doc.appendChild(serviceProperties);
     
     StmtIterator propertiesIterator = service.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
       if(propertyStatement.getPredicate().hasProperty(RDFS.subPropertyOf, Tosca.ServiceProperty) && !propertyStatement.getPredicate().equals(Tosca.ServiceProperty)){
-        
-        Element parameter = doc.createElement(propertyStatement.getPredicate().getLocalName());
+        //TODO: check if parameter is in serviceType
+        Element parameter = doc.createElement(targetNamespacePrefix+":"+propertyStatement.getPredicate().getLocalName());
         parameter.setTextContent(propertyStatement.getLiteral().getString());
+        parameter.setAttribute("xmlns:"+targetNamespacePrefix, targetNamespace);
         serviceProperties.appendChild(parameter);
       }
     }
