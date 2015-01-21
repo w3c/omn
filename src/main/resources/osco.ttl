@@ -16,8 +16,6 @@
 #
 #################################################################
 
-
-
 ###  http://opensdncore.org/ontology/parameter1
 
 :parameter1 rdf:type owl:DatatypeProperty ;
@@ -39,6 +37,7 @@
             rdfs:domain :dummy ;
             
             rdfs:range xsd:string .
+
 
 
 ###  http://opensdncore.org/ontology/port
@@ -64,6 +63,7 @@
             rdfs:range xsd:string .
 
 
+
 #################################################################
 #
 #    Classes
@@ -71,7 +71,119 @@
 #################################################################
 
 
-###  http://opensdncore.org/ontology/Dummy
+###  http://opensdncore.org/ontology/Active
+
+:Active rdf:type owl:Class ;
+        
+        rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Cleaned
+
+:Cleaned rdf:type owl:Class ;
+         
+         rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Error
+
+:Error rdf:type owl:Class ;
+       
+       rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Initialized
+
+:Initialized rdf:type owl:Class ;
+             
+             rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Installed
+
+:Installed rdf:type owl:Class ;
+           
+           rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/NotYetInitialized
+
+:NotYetInitialized rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Pending
+
+:Pending rdf:type owl:Class ;
+         
+         rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Preinit
+
+:Preinit rdf:type owl:Class ;
+         
+         rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Ready
+
+:Ready rdf:type owl:Class ;
+       
+       rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Removing
+
+:Removing rdf:type owl:Class ;
+          
+          rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Started
+
+:Started rdf:type owl:Class ;
+         
+         rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Stopped
+
+:Stopped rdf:type owl:Class ;
+         
+         rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Uncompleted
+
+:Uncompleted rdf:type owl:Class ;
+             
+             rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Updating
+
+:Updating rdf:type owl:Class ;
+          
+          rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/dummy
 
 :dummy rdf:type owl:Class ;
        

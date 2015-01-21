@@ -12,6 +12,8 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TExtensibleElements;
 import info.openmultinet.ontology.translators.tosca.jaxb.TNodeTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TNodeType;
 import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
+import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates;
+import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Tosca;
@@ -167,9 +169,10 @@ public class OMN2Tosca extends AbstractConverter {
     TNodeType nodeType = objFactory.createTNodeType();
     setName(serviceType, nodeType);
     setNodeTypeProperties(serviceType, nodeType);
+    setInstanceStates(serviceType, nodeType);
     return nodeType;
   }
-  
+
   private static void setName(Resource serviceType, TNodeType nodeType) {
     nodeType.setName(serviceType.getLocalName());
   }
@@ -180,6 +183,21 @@ public class OMN2Tosca extends AbstractConverter {
     QName propertiesReference = new QName(targetNameSpace,getServiceTypePropertiesName(serviceType));
     nodeTypeProperties.setElement(propertiesReference);
     nodeType.setPropertiesDefinition(nodeTypeProperties);
+  }
+  
+  private static void setInstanceStates(Resource serviceType, TNodeType nodeType) {
+    TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
+    
+    StmtIterator stateIterator = serviceType.getModel().listStatements(null, RDFS.subClassOf, Tosca.State);
+    while(stateIterator.hasNext()){
+      Resource state = stateIterator.next().getSubject();
+      if(!state.equals(Tosca.State)){
+        InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
+        instanceState.setState(state.getLocalName());
+        instanceStates.getInstanceState().add(instanceState);
+      }
+    }
+    nodeType.setInstanceStates(instanceStates);
   }
   
   private static String getServiceTypePropertiesName(Resource serviceType){

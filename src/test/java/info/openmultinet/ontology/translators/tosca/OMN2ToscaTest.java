@@ -36,6 +36,7 @@ public class OMN2ToscaTest {
 		Assert.assertTrue("Should contain the properties set", topology.contains("<port>8088</port>"));
 		Assert.assertTrue("Should contain the properties set", topology.contains("<test_param>foo</test_param>"));
 		Assert.assertTrue("Should contain type definitions for parameters", topology.contains("<xs:element name=\"port\" type=\"xs:integer\"/>"));
+		Assert.assertTrue("Should contain state definitions", topology.contains("<InstanceState state=\"Ready\"/>"));
 	}
 	
 	private static void testToscaDefinitions(String topology){
