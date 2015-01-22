@@ -1,6 +1,8 @@
 Open-Multinet Ontology Playground
 =================================
 
+[![Build Status](https://travis-ci.org/open-multinet/playground-rspecs-ontology.svg)](https://travis-ci.org/open-multinet/playground-rspecs-ontology)
+
 Abstract
 --------
 
