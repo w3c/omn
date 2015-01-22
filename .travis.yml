@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - oraclejdk7
+script:
+  - travis_retry mvn clean compile
+  - travis_retry mvn test
+notifications:
+  slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
+  email:
+    - alexander.willner@tu-berlin.de
+    - fiteagle.dev@av.tu-berlin.de
+cache:
+  directories:
+  - $HOME/.m2
+
