@@ -49,6 +49,7 @@ public class RESTConverter {
 		LOG.log(Level.INFO, "Converting from '" + from + "' to '" + to + "'...");
 		
 		if ((null == content) || (0 == content.length())) {
+			//@todo: doesn't work - curl does not get the HTTP error :/
 			throw new WebApplicationException("empty input", Response.Status.NOT_ACCEPTABLE.getStatusCode());
 		}
 		
