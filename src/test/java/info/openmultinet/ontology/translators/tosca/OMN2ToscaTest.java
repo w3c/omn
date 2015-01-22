@@ -1,7 +1,6 @@
 package info.openmultinet.ontology.translators.tosca;
 
 import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
@@ -23,7 +22,7 @@ public class OMN2ToscaTest {
 
 	@Before
 	public void setup() throws InvalidModelException {
-		this.input = ParserTest.class.getResourceAsStream("/tosca-request.ttl");
+		this.input = getClass().getResourceAsStream("/tosca-request.ttl");
 		this.parser = new Parser(input);
 	}
 

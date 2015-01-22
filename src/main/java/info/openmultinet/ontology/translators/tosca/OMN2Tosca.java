@@ -219,7 +219,7 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void setNameAndTypeAndID(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) {
-    nodeTemplate.setName(service.getRequiredProperty(Tosca.name).getString());
+    nodeTemplate.setName(service.getLocalName());
     String serviceTypeNameSpace = getXMLNamespace(serviceType);
     String serviceTypePrefix = getNSPrefix(serviceType);
     QName type = new QName(serviceTypeNameSpace, serviceType.getLocalName(), serviceTypePrefix);

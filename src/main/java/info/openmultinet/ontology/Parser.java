@@ -24,7 +24,6 @@ import com.hp.hpl.jena.rdf.model.RDFReader;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.rdf.model.impl.RDFReaderFImpl;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.reasoner.ValidityReport;
@@ -51,15 +50,24 @@ public class Parser {
 		init(input);
 	}
 	
+	public Parser(Model model) throws InvalidModelException{
+	  init(model);
+	}
+	
 	public void init(InputStream input) throws InvalidModelException {
 		Model data = ModelFactory.createDefaultModel();
 		RDFReader arp = data.getReader("TTL");
-		arp.read(data, input,null);
-		model = createInfModel(data);
-		if (!isValid(model))
-			throw new InvalidModelException(getValidationReport(model));
+		arp.read(data, input, null);
+		
+		init(data);
 	}
-
+	
+	public void init(Model model) throws InvalidModelException {
+    this.model = createInfModel(model);
+    if (!isValid(this.model))
+      throw new InvalidModelException(getValidationReport(this.model));
+  }
+	
 	public static InfModel createInfModel() throws InvalidModelException {	
 		return createInfModel(ModelFactory.createDefaultModel());
 	}
@@ -77,14 +85,18 @@ public class Parser {
 		
 		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
 		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
-		infModel.setNsPrefix("omn", Omn.getURI());
-		infModel.setNsPrefix("omn-lifecycle", Omn_lifecycle.getURI());
-		infModel.setNsPrefix("rdf", RDF.getURI());
-		infModel.setNsPrefix("rdfs", RDFS.getURI());
-		infModel.setNsPrefix("owl", OWL.getURI());
-		infModel.setNsPrefix("tosca", Tosca.getURI());
-		infModel.setNsPrefix("osco", Osco.getURI());
+		setCommonPrefixes(infModel);
 		return infModel;
+	}
+	
+	public static void setCommonPrefixes(Model model){
+	  model.setNsPrefix("omn", Omn.getURI());
+	  model.setNsPrefix("omn-lifecycle", Omn_lifecycle.getURI());
+	  model.setNsPrefix("rdf", RDF.getURI());
+	  model.setNsPrefix("rdfs", RDFS.getURI());
+	  model.setNsPrefix("owl", OWL.getURI());
+	  model.setNsPrefix("tosca", Tosca.getURI());
+	  model.setNsPrefix("osco", Osco.getURI());
 	}
 
 	public static Model parse(String filename) {

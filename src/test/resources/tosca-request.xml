@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions targetNamespace="http://open-multinet.info/ontology/examples" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
+    <Types>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="dummyProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="port" type="xs:integer"/>
+                        <xs:element name="parameter1" type="xs:string"/>
+                        <xs:element name="test_param" type="xs:string"/>
+                        <xs:element name="parameter2" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </Types>
+    <ServiceTemplate id="http://open-multinet.info/ontology/examples#namedTopology3">
+        <TopologyTemplate>
+            <NodeTemplate name="requested-dummy-1" id="http://open-multinet.info/ontology/examples#dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
+                <Properties>
+                    <osco:dummyProperties>
+                        <osco:parameter2>bar</osco:parameter2>
+                        <osco:port>8088</osco:port>
+                        <osco:test_param>foo</osco:test_param>
+                    </osco:dummyProperties>
+                </Properties>
+            </NodeTemplate>
+        </TopologyTemplate>
+    </ServiceTemplate>
+    <NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:dummyProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="Ready"/>
+            <InstanceState state="Pending"/>
+            <InstanceState state="Uncompleted"/>
+            <InstanceState state="Updating"/>
+            <InstanceState state="Stopped"/>
+            <InstanceState state="Initialized"/>
+            <InstanceState state="Installed"/>
+            <InstanceState state="Active"/>
+            <InstanceState state="Started"/>
+            <InstanceState state="NotYetInitialized"/>
+            <InstanceState state="Error"/>
+            <InstanceState state="Cleaned"/>
+            <InstanceState state="Preinit"/>
+            <InstanceState state="Removing"/>
+        </InstanceStates>
+    </NodeType>
+</Definitions>

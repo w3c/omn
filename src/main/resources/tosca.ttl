@@ -19,8 +19,9 @@
 
 ###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#state
 
-:state rdf:type owl:ObjectProperty ;
-       
+:state rdf:type owl:ObjectProperty ,
+                owl:FunctionalProperty ;
+                
        rdfs:range :State ;
        
        rdfs:domain omn:Service .
@@ -42,19 +43,6 @@
                           owl:FunctionalProperty ;
                  
                  rdfs:domain omn:Service .
-
-
-
-###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#name
-
-:name rdf:type owl:DatatypeProperty ;
-      
-      rdfs:domain :Service ;
-      
-      rdfs:range xsd:string .
-
-
-
 
 
 #################################################################
