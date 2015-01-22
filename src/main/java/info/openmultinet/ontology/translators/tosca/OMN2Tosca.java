@@ -19,6 +19,7 @@ import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
@@ -82,19 +83,23 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void setTargetNamespaceAndVendor(Model model, Definitions definitions){
-    String targetNamespace = getXMLTargetNamespace(model);
-    String targetNamespacePrefix = getTargetNamespacePrefix(targetNamespace);
+    String targetNamespace = getXMLNamespace(getTopologyResource(model));
     definitions.setTargetNamespace(targetNamespace);
-    definitions.getOtherAttributes().put(new QName(targetNamespace,"vendor", targetNamespacePrefix), VENDOR);
   }
   
-  private static String getTargetNamespacePrefix(String targetNamespace){
-    String[] splitted = targetNamespace.split("/");
-    return splitted[splitted.length-1];
+  private static String getXMLNamespace(Resource resource){
+    return resource.getNameSpace().replace("#", "");
   }
   
-  private static String getXMLTargetNamespace(Model model){
-    return getTopologyResource(model).getNameSpace().replace("#", "");
+  private static String getNSPrefix(Resource resource){
+    Map<String, String> prefixMap = resource.getModel().getNsPrefixMap();
+    for(Map.Entry<String, String> mapping : prefixMap.entrySet()){
+      if(mapping.getValue().equals(resource.getNameSpace())){
+        return mapping.getKey();
+      }
+    }
+    //TODO:
+    return "";
   }
   
   private static Resource getTopologyResource(Model model){
@@ -116,6 +121,7 @@ public class OMN2Tosca extends AbstractConverter {
     schema.setAttribute("xmlns:xs", "http://www.w3.org/2001/XMLSchema");
     schema.setAttribute("elementFormDefault", "qualified");
     schema.setAttribute("attributeFormDefault", "unqualified");
+    schema.setAttribute("targetNamespace", getXMLNamespace(serviceType));
     types.appendChild(schema);
     
     Element element = types.createElement("xs:element");
@@ -175,12 +181,14 @@ public class OMN2Tosca extends AbstractConverter {
 
   private static void setName(Resource serviceType, TNodeType nodeType) {
     nodeType.setName(serviceType.getLocalName());
+    nodeType.setTargetNamespace(getXMLNamespace(serviceType));
   }
   
   private static void setNodeTypeProperties(Resource serviceType, TNodeType nodeType){
     PropertiesDefinition nodeTypeProperties = objFactory.createTEntityTypePropertiesDefinition();
-    String targetNameSpace = getXMLTargetNamespace(serviceType.getModel());
-    QName propertiesReference = new QName(targetNameSpace,getServiceTypePropertiesName(serviceType));
+    String serviceTypeNameSpace = getXMLNamespace(serviceType);
+    String serviceTypePrefix = getNSPrefix(serviceType);
+    QName propertiesReference = new QName(serviceTypeNameSpace, getServiceTypePropertiesName(serviceType), serviceTypePrefix);
     nodeTypeProperties.setElement(propertiesReference);
     nodeType.setPropertiesDefinition(nodeTypeProperties);
   }
@@ -213,8 +221,9 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static void setNameAndTypeAndID(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) {
     nodeTemplate.setName(service.getRequiredProperty(Tosca.name).getString());
-    String targetNameSpace = getXMLTargetNamespace(service.getModel());
-    QName type = new QName(targetNameSpace, serviceType.getLocalName());
+    String serviceTypeNameSpace = getXMLNamespace(serviceType);
+    String serviceTypePrefix = getNSPrefix(serviceType);
+    QName type = new QName(serviceTypeNameSpace, serviceType.getLocalName(), serviceTypePrefix);
     nodeTemplate.setId(service.getURI());
     nodeTemplate.setType(type);
   }
@@ -222,10 +231,9 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setServiceProperties(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) throws ServiceTypeNotFoundException {
     Document doc = createDocument();
     
-    String targetNamespace = getXMLTargetNamespace(service.getModel());
-    String targetNamespacePrefix = getTargetNamespacePrefix(targetNamespace);
-    Element serviceProperties = doc.createElement(targetNamespacePrefix+":"+getServiceTypePropertiesName(serviceType));
-    serviceProperties.setAttribute("xmlns:"+targetNamespacePrefix, targetNamespace);
+    String serviceTypeNamespace = getXMLNamespace(serviceType);
+    String serviceTypePrefix = getNSPrefix(serviceType);
+    Element serviceProperties = doc.createElementNS(serviceTypeNamespace, serviceTypePrefix+":"+getServiceTypePropertiesName(serviceType));
     doc.appendChild(serviceProperties);
     
     StmtIterator propertiesIterator = service.listProperties();
@@ -233,9 +241,8 @@ public class OMN2Tosca extends AbstractConverter {
       Statement propertyStatement = propertiesIterator.next();
       if(propertyStatement.getPredicate().hasProperty(RDFS.subPropertyOf, Tosca.ServiceProperty) && !propertyStatement.getPredicate().equals(Tosca.ServiceProperty)){
         //TODO: check if parameter is in serviceType
-        Element parameter = doc.createElement(targetNamespacePrefix+":"+propertyStatement.getPredicate().getLocalName());
+        Element parameter = doc.createElementNS(serviceTypeNamespace, serviceTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
         parameter.setTextContent(propertyStatement.getLiteral().getString());
-        parameter.setAttribute("xmlns:"+targetNamespacePrefix, targetNamespace);
         serviceProperties.appendChild(parameter);
       }
     }
