@@ -20,9 +20,11 @@ import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFReader;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.rdf.model.impl.RDFReaderFImpl;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.reasoner.ValidityReport;
@@ -50,19 +52,21 @@ public class Parser {
 	}
 	
 	public void init(InputStream input) throws InvalidModelException {
-		Model data = ModelFactory.createDefaultModel().read(input, StandardCharsets.UTF_8.toString(), "TTL");
-		if (!isValid(data))
-			throw new InvalidModelException(getValidationReport(data));
+		Model data = ModelFactory.createDefaultModel();
+		RDFReader arp = data.getReader("TTL");
+		arp.read(data, input,null);
 		model = createInfModel(data);
+		if (!isValid(model))
+			throw new InvalidModelException(getValidationReport(model));
 	}
 
 	public static InfModel createInfModel() throws InvalidModelException {	
 		return createInfModel(ModelFactory.createDefaultModel());
 	}
 
-	public static InfModel createInfModel(Model data) throws InvalidModelException {
+	public static InfModel createInfModel(Model data) throws InvalidModelException {		
 		Model schema = ModelFactory.createDefaultModel();
-		schema.add(parse("/omn.ttl"));
+		schema.add(parse("/omn.ttl"));		
 		schema.add(parse("/omn-federation.ttl"));
 		schema.add(parse("/omn-lifecycle.ttl"));
 		schema.add(parse("/omn-resource.ttl"));
@@ -70,9 +74,7 @@ public class Parser {
 		schema.add(parse("/omn-component.ttl"));
 		schema.add(parse("/osco.ttl"));
 		schema.add(parse("/tosca.ttl"));
-		if (!isValid(schema))
-			throw new InvalidModelException(getValidationReport(schema));
-
+		
 		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
 		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
 		infModel.setNsPrefix("omn", Omn.getURI());

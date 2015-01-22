@@ -1,7 +1,7 @@
 package info.openmultinet.ontology.translators.tosca;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.translators.geni.AbstractConverter;
+import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.jaxb.Definitions;
 import info.openmultinet.ontology.translators.tosca.jaxb.ObjectFactory;
 import info.openmultinet.ontology.translators.tosca.jaxb.TDefinitions.Types;

@@ -1,7 +1,7 @@
 package info.openmultinet.ontology.translators.geni.dm;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.translators.geni.AbstractConverter;
+import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.IOException;

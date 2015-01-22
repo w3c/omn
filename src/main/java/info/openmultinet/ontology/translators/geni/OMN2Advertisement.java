@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
@@ -9,16 +10,13 @@ import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
-import java.io.StringWriter;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -43,7 +41,7 @@ public class OMN2Advertisement extends AbstractConverter {
 		model2rspec(model, advertisement);
 		JAXBElement<RSpecContents> rspec = new ObjectFactory()
 				.createRspec(advertisement);
-		return toString(rspec);
+		return toString(rspec, "info.openmultinet.ontology.translators.geni.jaxb.advertisement");
 	}
 
 	private static void model2rspec(Model model, RSpecContents manifest)
@@ -101,14 +99,4 @@ public class OMN2Advertisement extends AbstractConverter {
 		}
 	}
 
-	private static String toString(Object jaxbObject) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext
-				.newInstance("info.openmultinet.ontology.translators.geni.jaxb.advertisement");
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		StringWriter stringWriter = new StringWriter();
-		jaxbMarshaller.marshal(jaxbObject, stringWriter);
-
-		return stringWriter.toString();
-	}
 }

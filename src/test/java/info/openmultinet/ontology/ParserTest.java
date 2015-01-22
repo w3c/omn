@@ -36,6 +36,11 @@ public class ParserTest {
 	}
 
 	@Test
+	public void testPerformance() throws IOException {
+	
+	
+	}
+	@Test
 	public void testSPARQLQuery() throws IOException {
 		String queryString = "SELECT ?group WHERE {?group a omn:Group}";
 		ResultSet result = parser.query(queryString);

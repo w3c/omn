@@ -41,9 +41,7 @@
 :ServiceProperty rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
                  
-                 rdfs:domain omn:Service ;
-                 
-                 rdfs:range xsd:string .
+                 rdfs:domain omn:Service .
 
 
 

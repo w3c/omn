@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni;
+package info.openmultinet.ontology.translators;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 
@@ -15,9 +15,9 @@ public abstract class AbstractConverter {
 
 	protected final static String VENDOR = "omnlib";
 	public final static String TTL = "ttl";
-	public final static String RSPEC_REQUEST = "rspec_request";
-	public final static String RSPEC_MANIFEST = "rspec_manifest";
-	public final static String RSPEC_ADVERTISEMENT = "rspec_advertisement";
+	public final static String RSPEC_REQUEST = "request";
+	public final static String RSPEC_MANIFEST = "manifest";
+	public final static String RSPEC_ADVERTISEMENT = "advertisement";
 	public static final String TOSCA = "tosca";
 	
 	protected static void validateModel(List<Resource> groups) throws InvalidModelException {

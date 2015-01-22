@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.open-multinet</groupId>
-	<artifactId>ontology</artifactId>
+	<artifactId>omnlib</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Open-Multinet Ontology</name>
@@ -33,6 +33,14 @@
 
 	<build>
 		<finalName>omnlib</finalName>
+		<resources>
+     <resource>
+       <directory>ontologies</directory>
+     </resource>
+     <resource>
+       <directory>src/main/resources</directory>
+     </resource>
+   </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -59,7 +67,7 @@
 				<version>0.7</version>
 				<configuration>
 					<includes>
-						<include>src/main/resources/omn*.ttl</include>
+						<include>ontologies/omn*.ttl</include>
 						<include>src/main/resources/osco.ttl</include>
 						<include>src/main/resources/tosca.ttl</include>
 					</includes>

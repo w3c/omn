@@ -1,8 +1,9 @@
 package info.openmultinet.ontology.translators.geni.dm;
 
 import info.openmultinet.ontology.Parser;
+
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.translators.geni.AbstractConverter;
+import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
 import info.openmultinet.ontology.translators.geni.OMN2Manifest;
 import info.openmultinet.ontology.translators.geni.Request2OMN;
