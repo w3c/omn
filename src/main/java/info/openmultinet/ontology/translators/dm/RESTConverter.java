@@ -7,6 +7,7 @@ import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
 import info.openmultinet.ontology.translators.geni.OMN2Manifest;
 import info.openmultinet.ontology.translators.geni.Request2OMN;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.ByteArrayInputStream;
@@ -17,16 +18,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.ServerErrorException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBException;
 
 import org.apache.jena.riot.Lang;
@@ -38,33 +37,28 @@ import com.hp.hpl.jena.rdf.model.Model;
 @Path("/convert")
 public class RESTConverter {
 
-	private static final Logger LOG = Logger.getLogger(RESTConverter.class
-			.getName());
+	private static final Logger LOG = Logger.getLogger(RESTConverter.class.getName());
 
 	@POST
 	@Path("{from}/{to}")
 	@Produces("text/plain")
-	public String convert(@PathParam("from") String from,
-			@PathParam("to") String to, @FormParam("content") String content) throws ServiceTypeNotFoundException {
+	public String convert(@PathParam("from") String from,	@PathParam("to") String to, @FormParam("content") String content) {
 		LOG.log(Level.INFO, "Converting from '" + from + "' to '" + to + "'...");
 		
 		if ((null == content) || (0 == content.length())) {
-			//@todo: doesn't work - curl does not get the HTTP error :/
-			throw new WebApplicationException("empty input", Response.Status.NOT_ACCEPTABLE.getStatusCode());
+		  throw new ConverterWebApplicationException(Response.Status.NOT_ACCEPTABLE, "empty input");
 		}
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		InputStream stream = new ByteArrayInputStream(
-				content.getBytes(StandardCharsets.UTF_8));
+		InputStream stream = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
 		Model model;
-
 		try {
 			if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 				model = Request2OMN.getModel(stream);
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
 			} else {
-				throw new WebApplicationException("unknown input '"+from+"'", Response.Status.NOT_ACCEPTABLE.getStatusCode());
+			  throw new ConverterWebApplicationException(Response.Status.NOT_ACCEPTABLE, "unknown input '"+from+"'");
 			}
 
 			if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
@@ -79,15 +73,28 @@ public class RESTConverter {
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 				RDFDataMgr.write(baos, model, Lang.TTL);
 			} else {
-				throw new WebApplicationException("unknown output '"+to+"'", Response.Status.NOT_ACCEPTABLE.getStatusCode());
+			  throw new ConverterWebApplicationException(Response.Status.NOT_ACCEPTABLE, "unknown output '"+to+"'");
 			}
-		} catch (RiotException e) {
-			throw new BadRequestException(e);
+		} catch (RiotException | ServiceTypeNotFoundException | RequiredResourceNotFoundException e) {
+			throw new ConverterWebApplicationException(Response.Status.BAD_REQUEST, e);
 		} catch (JAXBException | InvalidModelException | IOException e) {
-			throw new InternalServerErrorException(e);
-		}
+		  throw new ConverterWebApplicationException(Response.Status.INTERNAL_SERVER_ERROR, e);
+    }
 
 		return baos.toString();
 	}
+	
+  public static class ConverterWebApplicationException extends WebApplicationException {
+    private static final long serialVersionUID = 7535158521225194221L;
+    
+    public ConverterWebApplicationException(Status status, Throwable cause) {
+      super(Response.status(status).entity(cause).build());
+    }
+    
+    public ConverterWebApplicationException(Status status, String message) {
+      super(Response.status(status).entity(message).build());
+    }
+  }
+	  
 }
 	

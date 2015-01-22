@@ -42,7 +42,7 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static ObjectFactory objFactory = new ObjectFactory();
   
-  public static String getTopology(Model model) throws JAXBException, InvalidModelException, ServiceTypeNotFoundException {
+  public static String getTopology(Model model) throws JAXBException, InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
     Definitions definitions = objFactory.createDefinitions();
     
     model2Tosca(model, definitions);
@@ -50,7 +50,7 @@ public class OMN2Tosca extends AbstractConverter {
     return toString(definitions, "info.openmultinet.ontology.translators.tosca.jaxb");
   }
   
-  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, ServiceTypeNotFoundException {
+  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
     setTargetNamespaceAndVendor(model, definitions);
     
     List<TExtensibleElements> templatesAndNodeTypes = definitions.getServiceTemplateOrNodeTypeOrNodeTypeImplementation();
@@ -82,7 +82,7 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  private static void setTargetNamespaceAndVendor(Model model, Definitions definitions){
+  private static void setTargetNamespaceAndVendor(Model model, Definitions definitions) throws RequiredResourceNotFoundException{
     String targetNamespace = getXMLNamespace(getTopologyResource(model));
     definitions.setTargetNamespace(targetNamespace);
   }
@@ -102,7 +102,7 @@ public class OMN2Tosca extends AbstractConverter {
     return "";
   }
   
-  private static Resource getTopologyResource(Model model){
+  private static Resource getTopologyResource(Model model) throws RequiredResourceNotFoundException{
     ResIterator iter = model.listResourcesWithProperty(RDF.type, Omn.Topology);
     if(iter.hasNext()){
       return iter.next();
@@ -110,8 +110,7 @@ public class OMN2Tosca extends AbstractConverter {
     if(iter.hasNext()){
       //TODO: allow multiple topologies in 1 request?
     }
-    //TODO: throw exception
-    return null;   
+    throw new RequiredResourceNotFoundException("No Resource of type "+Omn.Topology.getURI()+" could be found");
   }
   
   private static Element createTypes(Resource service, Resource serviceType) throws ServiceTypeNotFoundException{
@@ -268,6 +267,15 @@ public class OMN2Tosca extends AbstractConverter {
     private static final long serialVersionUID = -6079715571448444400L;
     
     public ServiceTypeNotFoundException(String message){
+      super(message);
+    }
+  }
+  
+  public static class RequiredResourceNotFoundException extends Exception{
+
+    private static final long serialVersionUID = -6296855743962011943L;
+
+    public RequiredResourceNotFoundException(String message){
       super(message);
     }
   }

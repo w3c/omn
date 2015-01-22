@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.tosca;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.InputStream;
@@ -27,7 +28,7 @@ public class OMN2ToscaTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException, ServiceTypeNotFoundException {
+	public void testGetTopology() throws JAXBException, InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
 		InfModel model = this.parser.getModel();
 		String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
