@@ -24,6 +24,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.xml.bind.JAXBException;
 
 import org.apache.jena.riot.Lang;
@@ -31,6 +32,7 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RiotException;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.sun.mail.iap.Response;
 
 @Path("/convert")
 public class RESTConverter {
@@ -56,8 +58,7 @@ public class RESTConverter {
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
 			} else {
-				throw new RuntimeException("unknown input");
-				//@todo throw meaningful exception (web application exception)
+				throw new WebApplicationException("unknown input '"+from+"'", Response.BAD);
 			}
 
 			if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
@@ -72,8 +73,7 @@ public class RESTConverter {
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 				RDFDataMgr.write(baos, model, Lang.TTL);
 			} else {
-				throw new RuntimeException("unknown output");
-				//@todo throw meaningful exception				
+				throw new WebApplicationException("unknown output '"+to+"'", Response.BAD);
 			}
 		} catch (RiotException e) {
 			throw new BadRequestException(e);
