@@ -1,7 +1,6 @@
 package info.openmultinet.ontology.translators.geni.dm;
 
 import info.openmultinet.ontology.Parser;
-
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
@@ -15,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.BadRequestException;
@@ -43,7 +43,7 @@ public class RESTConverter {
 	@Produces("text/plain")
 	public String convert(@PathParam("from") String from,
 			@PathParam("to") String to, @FormParam("content") String content) throws ServiceTypeNotFoundException {
-		LOG.info("Converting from '" + from + "' to '" + to + "'...");
+		LOG.log(Level.INFO, "Converting from '" + from + "' to '" + to + "'...");
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		InputStream stream = new ByteArrayInputStream(
@@ -51,27 +51,28 @@ public class RESTConverter {
 		Model model;
 
 		try {
-			if (AbstractConverter.RSPEC_REQUEST.equals(from)) {
+			if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 				model = Request2OMN.getModel(stream);
-			} else if (AbstractConverter.TTL.equals(from)) {
+			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
 			} else {
-				throw new RuntimeException("unknown");
+				throw new RuntimeException("unknown input");
 				//@todo throw meaningful exception (web application exception)
 			}
 
-			if (AbstractConverter.RSPEC_ADVERTISEMENT.equals(to)) {
+			if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
 				String rspec = OMN2Advertisement.getRSpec(model);
 				baos.write(rspec.getBytes());
-			} else if (AbstractConverter.RSPEC_MANIFEST.equals(to)) {
+			} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(to)) {
 				String rspec = OMN2Manifest.getRSpec(model);
 				baos.write(rspec.getBytes());
-			} else if (AbstractConverter.TOSCA.equals(to)) {
+			} else if (AbstractConverter.TOSCA.equalsIgnoreCase(to)) {
 				String toplogy = OMN2Tosca.getTopology(model);
 				baos.write(toplogy.getBytes());
-			} else if (AbstractConverter.TTL.equals(to)) {
+			} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 				RDFDataMgr.write(baos, model, Lang.TTL);
 			} else {
+				throw new RuntimeException("unknown output");
 				//@todo throw meaningful exception				
 			}
 		} catch (RiotException e) {
