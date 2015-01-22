@@ -31,6 +31,17 @@
 		<url>https://github.com/open-multinet/playground-rspecs-ontology</url>
 	</issueManagement>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
 		<finalName>omnlib</finalName>
 		<resources>
@@ -103,6 +114,7 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
+							<strict>false</strict>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.advertisement</packageName>
 							<schemaDirectory>src/main/resources/geni/advertisement</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
@@ -115,6 +127,7 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
+							<strict>false</strict>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.manifest</packageName>
 							<schemaDirectory>src/main/resources/geni/manifest</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
@@ -127,6 +140,7 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
+							<strict>false</strict>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.request</packageName>
 							<schemaDirectory>src/main/resources/geni/request</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
@@ -139,6 +153,7 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
+							<strict>false</strict>
 							<packageName>info.openmultinet.ontology.translators.tosca.jaxb</packageName>
 							<schemaDirectory>src/main/resources/tosca</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
