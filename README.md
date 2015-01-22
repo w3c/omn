@@ -4,20 +4,24 @@ Open-Multinet Ontology Playground
 Abstract
 --------
 
-Playground for the ontology work focussing on putting ontologies in RSpecs.
+Java library (omnlib) and playground for the ontology work conducted in the [Open-Mutltinet](http://open-multinet.info) context.
 
 Java omnlib
 -------------
+
+The Java library helps developers to work wiht Open-Multinet related ontologies and includes a translator to convert between RDF, GENI RSpec XMLs, and TOSCA XML.
+
  1. Checkout the code
  2. Run "mvn clean compile" to auto generate binding files
  3. Open with IDE (e.g. Eclipse)
 
-Live Ontology
--------------
- * [HTML Documentation](http://federation.av.tu-berlin.de/omn/ontology.html)
- * LodLive (to be done)
+Ontology
+--------
 
-Suggested Setup
+* [Upper Ontology (omn)](http://open-multinet.info/ontology/omn)
+* [Further information](http://federation.av.tu-berlin.de/omn/ontology.html)
+ 
+Suggested Tools
 ---------------
  * [sparql](http://jena.apache.org/documentation/tools/) (command line tool from jena to query data)
  * [Protégé](http://protege.stanford.edu) (graphical ontology editor)
@@ -37,9 +41,10 @@ Directory Layout
  * import: related ontologies to be reused (second main focus)
  * ontologies: upper ontologies (to main focus)
  * queries: example queries to work with (to help validating and discussing the ontologies)
+ * src: omnlib (Java implementation and tests)
  
-How To
-------
+How To (rather old approach)
+----------------------------
 
 ### Run example Queries
 
