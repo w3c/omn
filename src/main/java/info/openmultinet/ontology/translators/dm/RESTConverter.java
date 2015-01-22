@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni.dm;
+package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
@@ -24,7 +24,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.ServerErrorException;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 
 import org.apache.jena.riot.Lang;
@@ -32,7 +34,6 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RiotException;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.sun.mail.iap.Response;
 
 @Path("/convert")
 public class RESTConverter {
@@ -46,7 +47,11 @@ public class RESTConverter {
 	public String convert(@PathParam("from") String from,
 			@PathParam("to") String to, @FormParam("content") String content) throws ServiceTypeNotFoundException {
 		LOG.log(Level.INFO, "Converting from '" + from + "' to '" + to + "'...");
-
+		
+		if ((null == content) || (0 == content.length())) {
+			throw new WebApplicationException("empty input", Response.Status.NOT_ACCEPTABLE.getStatusCode());
+		}
+		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
@@ -58,7 +63,7 @@ public class RESTConverter {
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
 			} else {
-				throw new WebApplicationException("unknown input '"+from+"'", Response.BAD);
+				throw new WebApplicationException("unknown input '"+from+"'", Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 
 			if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
@@ -73,7 +78,7 @@ public class RESTConverter {
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 				RDFDataMgr.write(baos, model, Lang.TTL);
 			} else {
-				throw new WebApplicationException("unknown output '"+to+"'", Response.BAD);
+				throw new WebApplicationException("unknown output '"+to+"'", Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 		} catch (RiotException e) {
 			throw new BadRequestException(e);
