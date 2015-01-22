@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 public class Tosca2OMNTest {
   
@@ -28,7 +27,6 @@ public class Tosca2OMNTest {
   @Test
   public void testGetTopology() throws JAXBException, InvalidModelException {
     Model model = Tosca2OMN.getModel(input);
-    StmtIterator iter = model.listStatements();
     
     String serializedModel = serializeModel(model, "TTL");
     System.out.println(serializedModel);
