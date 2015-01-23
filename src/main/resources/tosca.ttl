@@ -24,11 +24,11 @@
 #################################################################
 
 
-###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#Service
+###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#Node
 
-:Service rdf:type owl:Class ;
+:Node rdf:type owl:Class ;
          
-         rdfs:subClassOf omn:Service .
+         rdfs:subClassOf omn:Resource .
 
 
 

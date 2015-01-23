@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 public class Tosca2OMNTest {
   
@@ -31,8 +33,12 @@ public class Tosca2OMNTest {
     String serializedModel = serializeModel(model, "TTL");
     System.out.println(serializedModel);
     
-    Assert.assertTrue("Should contain a service resource", model.containsResource(Tosca.Service));
+    Assert.assertTrue("Should contain the dummy node resource", model.contains(Osco.dummy, RDFS.subClassOf, Tosca.Node));
     Assert.assertTrue("Should contain state resources", model.containsResource(Tosca.State));
+    Assert.assertTrue("Should contain state resources", model.containsResource(Osco.Active));
+    Assert.assertTrue("Should contain parameter resources", model.containsResource(Osco.parameter1));
+    Assert.assertTrue("port should be of range int", model.contains(Osco.port, RDFS.range, XSD.xint));
+    Assert.assertTrue("parameter1 should be of range string", model.contains(Osco.parameter1, RDFS.range, XSD.xstring));
     Assert.assertTrue("Should contain the service type", model.containsResource(Osco.dummy));
     Assert.assertTrue("Should contain the service properties", model.containsResource(Osco.test_param));
   }

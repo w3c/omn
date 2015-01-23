@@ -177,7 +177,7 @@
 
 :dummy rdf:type owl:Class ;
        
-       rdfs:subClassOf tosca:Service ;
+       rdfs:subClassOf tosca:Node ;
        
        rdfs:comment "This is a dummy adapter from the OpenSDNCore platform"^^xsd:string ;
        

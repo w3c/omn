@@ -66,7 +66,7 @@ public class OMN2Tosca extends AbstractConverter {
     serviceTemplate.setTopologyTemplate(topologyTemplate);
     
     List<TEntityTemplate> nodeTemplates = topologyTemplate.getNodeTemplateOrRelationshipTemplate();
-    ResIterator serviceIterator = model.listResourcesWithProperty(RDF.type, Tosca.Service);
+    ResIterator serviceIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
     while(serviceIterator.hasNext()){
       Resource service = serviceIterator.next();
       Resource serviceType = getServiceType(service);
@@ -252,8 +252,8 @@ public class OMN2Tosca extends AbstractConverter {
     StmtIterator propertiesIterator = service.listProperties(RDF.type);
     while (propertiesIterator.hasNext()) {
       Resource serviceType = propertiesIterator.next().getResource();
-      if (serviceType.hasProperty(RDFS.subClassOf, Tosca.Service)
-          && !serviceType.equals(Tosca.Service)) {
+      if (serviceType.hasProperty(RDFS.subClassOf, Tosca.Node)
+          && !serviceType.equals(Tosca.Node)) {
         return serviceType;
       }
     }

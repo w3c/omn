@@ -196,7 +196,7 @@ public class Tosca2OMN extends AbstractConverter {
   private static Resource createServiceType(TNodeType nodeType, Model model) {
     String namespace = nodeType.getTargetNamespace();
     Resource serviceType = model.getResource(namespace+nodeType.getName());
-    serviceType.addProperty(RDF.type, Tosca.Service);
+    serviceType.addProperty(RDFS.subClassOf, Tosca.Node);
     PropertiesDefinition propertiesDefinition = nodeType.getPropertiesDefinition();
     Resource properties = createResourceFromQName(propertiesDefinition.getElement(), model);
     properties.addProperty(RDFS.domain, serviceType);
