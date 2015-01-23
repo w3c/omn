@@ -55,10 +55,12 @@ public class Parser {
 	}
 	
 	public void init(InputStream input) throws InvalidModelException {
+		//@fixme: this is a slow/expensive operation
 		Model data = ModelFactory.createDefaultModel();
 		RDFReader arp = data.getReader("TTL");
+		//@fixme: this is a slow/expensive operation
 		arp.read(data, input, null);
-		
+
 		init(data);
 	}
 	
@@ -66,14 +68,15 @@ public class Parser {
     this.model = createInfModel(model);
     if (!isValid(this.model))
       throw new InvalidModelException(getValidationReport(this.model));
-  }
+	}
 	
 	public static InfModel createInfModel() throws InvalidModelException {	
 		return createInfModel(ModelFactory.createDefaultModel());
 	}
 
-	public static InfModel createInfModel(Model data) throws InvalidModelException {		
+	public static InfModel createInfModel(Model data) throws InvalidModelException {
 		Model schema = ModelFactory.createDefaultModel();
+
 		schema.add(parse("/omn.ttl"));		
 		schema.add(parse("/omn-federation.ttl"));
 		schema.add(parse("/omn-lifecycle.ttl"));
@@ -83,9 +86,14 @@ public class Parser {
 		schema.add(parse("/osco.ttl"));
 		schema.add(parse("/tosca.ttl"));
 		
-		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner().bindSchema(schema);
+		
+		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
+		//@fixme: this is a slow/expensive operation
+		reasoner = reasoner.bindSchema(schema);
+
 		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
 		setCommonPrefixes(infModel);
+
 		return infModel;
 	}
 	
