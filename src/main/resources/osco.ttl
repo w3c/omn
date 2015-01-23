@@ -196,7 +196,7 @@
 
 :deployedOn rdf:type owl:ObjectProperty ;
           
-          rdfs:subPropertyOf tosca:dependsOn ;
+          rdfs:subPropertyOf tosca:relatesTo ;
           
           rdfs:range      :ServiceContainer ;
  

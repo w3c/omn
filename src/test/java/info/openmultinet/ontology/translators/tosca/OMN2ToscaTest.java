@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.tosca;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.NodeTypeNotFoundException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 
 import java.io.InputStream;
@@ -27,7 +28,7 @@ public class OMN2ToscaTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException, NodeTypeNotFoundException, RequiredResourceNotFoundException {
+	public void testGetTopology() throws JAXBException, InvalidModelException, NodeTypeNotFoundException, MultipleNamespacesException, RequiredResourceNotFoundException {
 		InfModel model = this.parser.getModel();
 		String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
@@ -36,7 +37,7 @@ public class OMN2ToscaTest {
 	  testTypes(topology);
 		testNodeTypes(topology);
 		testNodeTemplates(topology);
-//		testRelationshipTypes(topology);
+		testRelationshipTemplates(topology);
 	}
 	
 	private static void testGeneralToscaDefinitions(String topology){
@@ -64,8 +65,11 @@ public class OMN2ToscaTest {
     Assert.assertTrue("Should contain the properties set", topology.contains("<osco:test_param>foo</osco:test_param>"));
 	}
 	
-	private static void testRelationshipTypes(String topology){
-	  Assert.assertTrue("Should contain a relationship type element", topology.contains("RelationshipType"));
+	private static void testRelationshipTemplates(String topology){
+	  Assert.assertTrue("Should contain a relationship template element", topology.contains("<RelationshipTemplate"));
+	  Assert.assertTrue("relationship template should have the right name", topology.contains("<RelationshipTemplate name=\"deployedOnContainer1\""));
+	  Assert.assertTrue("relationship template should have the right source", topology.contains("<SourceElement ref=\"http://open-multinet.info/ontology/examples#dummy1\"/>"));
+	  Assert.assertTrue("relationship template should have the right target", topology.contains("<TargetElement ref=\"http://open-multinet.info/ontology/examples#container1\"/>"));
 	}
 
 }

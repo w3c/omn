@@ -20,12 +20,13 @@
 :namedTopology3 rdf:type omn:Topology ,
                          owl:NamedIndividual ;
                                 
-                omn:hasResource :dummy1 .
+                omn:hasResource :dummy1 ,
+                                  :container1 .
 
 :dummy1 rdf:type osco:dummy ,
                       owl:NamedIndividual ;
                       
-             osco:deployedOn :dummy1 ;
+             :deployedOnContainer1 :container1 ;
 
              osco:test_param "foo"^^xsd:string ;
              
@@ -33,6 +34,8 @@
  
              osco:parameter2 "bar"^^xsd:string .
 
+:deployedOnContainer1 rdf:type osco:deployedOn ,
+                        owl:NamedIndividual .
 
 :container1 rdf:type osco:ServiceContainer ,
                 owl:NamedIndividual .

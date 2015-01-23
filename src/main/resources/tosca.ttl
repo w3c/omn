@@ -16,10 +16,8 @@
 #
 #################################################################
 
-:dependsOn rdf:type owl:ObjectProperty ;
+:relatesTo rdf:type owl:ObjectProperty ;
 
-           rdfs:subPropertyOf omn:dependsOn ;
-           
            rdfs:domain :Node ;
         
            rdfs:range  :Node .
