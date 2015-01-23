@@ -13,7 +13,6 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
-import info.openmultinet.ontology.vocabulary.Osco;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
@@ -190,7 +189,7 @@ public class Tosca2OMN extends AbstractConverter {
     String namespace = nodeType.getTargetNamespace();
     for (InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()){
       Resource state = model.createResource(namespace+instanceState.getState());
-      state.addProperty(RDF.type, Osco.State);
+      state.addProperty(RDF.type, Tosca.State);
     }
   }
 

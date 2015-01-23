@@ -16,7 +16,6 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanc
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
-import info.openmultinet.ontology.vocabulary.Osco;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.util.List;
@@ -195,10 +194,10 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setInstanceStates(Resource serviceType, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    StmtIterator stateIterator = serviceType.getModel().listStatements(null, RDFS.subClassOf, Osco.State);
+    StmtIterator stateIterator = serviceType.getModel().listStatements(null, RDFS.subClassOf, Tosca.State);
     while(stateIterator.hasNext()){
       Resource state = stateIterator.next().getSubject();
-      if(!state.equals(Osco.State)){
+      if(!state.equals(Tosca.State)){
         InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
         instanceState.setState(state.getLocalName());
         instanceStates.getInstanceState().add(instanceState);
