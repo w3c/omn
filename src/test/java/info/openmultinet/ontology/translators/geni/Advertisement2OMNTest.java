@@ -19,15 +19,11 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class Advertisement2OMNTest {
 
 	@Test
-	public void test() throws JAXBException, InvalidModelException {
+	public void testAdv2omn() throws JAXBException, InvalidModelException {
 		InputStream rspec = Advertisement2OMNTest.class.getResourceAsStream("/advertisement_vwall1.xml");
 		Model model = Advertisement2OMN.getModel(rspec);
 		ResIterator topology = model.listResourcesWithProperty(RDF.type, Omn_lifecycle.Offering);
 		Assert.assertTrue("should have a topology", topology.hasNext());
-		System.out.println(Parser.toString(model));
-		InfModel infModel = new Parser(model).getModel();
-		String advertisement = OMN2Advertisement.getRSpec(infModel);
-		System.out.println(advertisement);
 	}
 
 }
