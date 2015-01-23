@@ -1,33 +1,32 @@
 @prefix : <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @base <http://open-multinet.info/ontology/omn-lifecycle#> .
 
 <http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology ;
-                                         
-                                         rdfs:label "omn-lifecycle"@en ;
-                                         
-                                         dcterms:created "2014-11-11"^^xsd:date ;
-                                         
-                                         dcterms:modified "2015-01-15"^^xsd:date ;
-                                         
-                                         owl:versionInfo "2015-01-15"^^xsd:string ;
-                                                                                  
-                                         dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
-                                         
-                                         dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
-
-                                         dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-lifecycle.png> ;
-                                         
-                                         dc:publisher <http://open-multinet.org> ;
-                                         
-                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+                                                   
+                                                   rdfs:label "omn-lifecycle"@en ;
+                                                   
+                                                   dcterms:created "2014-11-11"^^xsd:date ;
+                                                   
+                                                   dcterms:modified "2015-01-15"^^xsd:date ;
+                                                   
+                                                   owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                   
+                                                   dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
+                                                   
+                                                   dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
+                                                   
+                                                   dc:publisher <http://open-multinet.org> ;
+                                                   
+                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                   
+                                                   dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-lifecycle.png> .
 
 
 #################################################################
@@ -35,6 +34,23 @@
 #    Object Properties
 #
 #################################################################
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasState
+
+:hasState rdf:type owl:ObjectProperty ;
+          
+          rdfs:range :State ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
+
+
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
 
@@ -64,21 +80,39 @@
             
             owl:inverseOf :implementedBy ;
             
-            rdfs:range [ rdf:type owl:Class ;
-                         owl:unionOf ( omn:Component
-                                       omn:Group
-                                       omn:Resource
-                                       omn:Service
-                                     )
-                       ] ;
-            
             rdfs:domain [ rdf:type owl:Class ;
                           owl:unionOf ( omn:Component
                                         omn:Group
                                         omn:Resource
                                         omn:Service
                                       )
-                        ] .
+                        ] ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( omn:Component
+                                       omn:Group
+                                       omn:Resource
+                                       omn:Service
+                                     )
+                       ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#isStateOf
+
+:isStateOf rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :State ;
+           
+           owl:inverseOf :hasState ;
+           
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
 
 
 
@@ -127,6 +161,33 @@
                       ] .
 
 
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+:hasID rdf:type owl:DatatypeProperty ;
+       
+       rdfs:comment "A unique identifier set by the management system"@en ;
+       
+       rdfs:seeAlso "GENI Manifest RSpec v3: component_id"@en ;
+       
+       rdfs:domain omn:Resource ,
+                   omn:Service ;
+       
+       rdfs:range xsd:string .
+
+
+
+
+
 #################################################################
 #
 #    Classes
@@ -134,57 +195,339 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn#Attribute
 
-###  http://open-multinet.info/ontology/omn-lifecycle#State
+omn:Attribute rdf:type owl:Class .
 
-:State 		rdf:type owl:Class ;
 
-			rdfs:comment "The current state of the resource"@en ;
+
+###  http://open-multinet.info/ontology/omn#Component
+
+omn:Component rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Group
+
+omn:Group rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Topology
+
+omn:Topology rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Active
+
+:Active rdf:type owl:Class ;
+        
+        rdfs:label "Active" ;
+        
+        rdfs:subClassOf :State ;
+        
+        rdfs:seeAlso "GENI geni_ready_busy operational state"@en ;
+        
+        rdfs:comment "The related resource/service is actively performing an action"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Allocated
+
+:Allocated rdf:type owl:Class ;
+           
+           rdfs:label "Allocated" ;
+           
+           rdfs:subClassOf :ReservationState ;
+           
+           rdfs:seeAlso "GENI geni_allocated allocation state"@en ;
+           
+           rdfs:comment "The related resources/services are reserved"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Cleaned
+
+:Cleaned rdf:type owl:Class ;
          
-         	rdfs:subClassOf omn:Attribute .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#Offering
-
-:Offering 	rdf:type owl:Class ;
-
-			rdfs:comment "A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies."@en ;
-
-			# rdfs:seeAlso sfa:ListResources ;
-          
-          	rdfs:subClassOf omn:Group .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#Request
-
-:Request 	rdf:type owl:Class ;
-	
-			rdfs:comment "A collection (group) of resources/services/groups requested by the user"@en ;
+         rdfs:label "Cleaned" ;
          
-         	rdfs:subClassOf omn:Group .
-
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "The related resource/service has been cleaned"@en .
 
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#Confirmation
 
-:Confirmation 	rdf:type owl:Class ;
+:Confirmation rdf:type owl:Class ;
+              
+              rdfs:subClassOf omn:Topology ;
+              
+              rdfs:comment "A collection (group) of resources/services/groups confirmed to be allocated for the user."@en .
 
-			rdfs:comment "A collection (group) of resources/services/groups confirmed to be allocated for the user."@en ;
-         
-         	rdfs:subClassOf omn:Group .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Error
+
+:Error rdf:type owl:Class ;
+       
+       rdfs:label "Error" ;
+       
+       rdfs:subClassOf :State ;
+       
+       rdfs:seeAlso "GENI geni_failed operational state"@en ;
+       
+       rdfs:comment "The related resource/service is in an error state"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
+
+:Initialized rdf:type owl:Class ;
+             
+             rdfs:label "Initialized" ;
+             
+             rdfs:subClassOf :State ;
+             
+             rdfs:comment "The related resource/service has been initialized"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Installed
+
+:Installed rdf:type owl:Class ;
+           
+           rdfs:label "Installed" ;
+           
+           rdfs:subClassOf :State ;
+           
+           rdfs:comment "The related resource/service has been installed"@en .
 
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
 
-:Manifest 	rdf:type owl:Class ;
+:Manifest rdf:type owl:Class ;
+          
+          rdfs:subClassOf omn:Topology ;
+          
+          rdfs:comment "A collection (group) of resources/services/groups allocated for the user."@en .
 
-			rdfs:comment "A collection (group) of resources/services/groups allocated for the user."@en ;
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized
+
+:NotYetInitialized rdf:type owl:Class ;
+                   
+                   rdfs:label "NotYetInitialized" ;
+                   
+                   rdfs:subClassOf :State ;
+                   
+                   rdfs:seeAlso "GENI geni_instantiating operational state"@en ;
+                   
+                   rdfs:comment "The related resource/service are not yet active/ready"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Offering
+
+:Offering rdf:type owl:Class ;
+          
+          rdfs:subClassOf omn:Topology ;
+          
+          rdfs:comment "A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies."@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Pending
+
+:Pending rdf:type owl:Class ;
          
-         	rdfs:subClassOf omn:Group .
+         rdfs:label "Pending" ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:seeAlso "GENI geni_pending_allocation operational state"@en ;
+         
+         rdfs:comment "The related resource/service is not yet provisioned"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Preinit
+
+:Preinit rdf:type owl:Class ;
+         
+         rdfs:label "Preinit" ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:seeAlso "GENI geni_configuring operational state"@en ;
+         
+         rdfs:comment "The related resource/service is currently configuring"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+
+:Provisioned rdf:type owl:Class ;
+             
+             rdfs:label "Provisioned" ;
+             
+             rdfs:subClassOf :ReservationState ;
+             
+             rdfs:seeAlso "GENI geni_provisioned allocation state"@en ;
+             
+             rdfs:comment "The related resources/services are provisioned"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Ready
+
+:Ready rdf:type owl:Class ;
+       
+       rdfs:label "Ready" ;
+       
+       rdfs:subClassOf :State ;
+       
+       rdfs:seeAlso "GENI geni_ready operational state"@en ;
+       
+       rdfs:comment "The related resource/service is ready"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Removing
+
+:Removing rdf:type owl:Class ;
+          
+          rdfs:label "Removing" ;
+          
+          rdfs:subClassOf :State ;
+          
+          rdfs:comment "The related resource/service gets removed"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Request
+
+:Request rdf:type owl:Class ;
+         
+         rdfs:subClassOf omn:Topology ;
+         
+         rdfs:comment "A collection (group) of resources/services/groups requested by the user"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#ReservationState
+
+:ReservationState rdf:type owl:Class ;
+                  
+                  rdfs:label "Reservation State" ;
+                  
+                  rdfs:subClassOf omn:Attribute ;
+                  
+                  rdfs:comment "The current state of a reservation"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Started
+
+:Started rdf:type owl:Class ;
+         
+         rdfs:label "Started" ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "The related resource/service has been started"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#State
+
+:State rdf:type owl:Class ;
+       
+       rdfs:label "State" ;
+       
+       rdfs:subClassOf omn:Attribute ;
+       
+       rdfs:comment "The current state of the resource, service or group"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Stopped
+
+:Stopped rdf:type owl:Class ;
+         
+         rdfs:label "Stopped" ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "The related resource/service is stopped"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Stopping
+
+:Stopping rdf:type owl:Class ;
+          
+          rdfs:label "Stopping" ;
+          
+          rdfs:subClassOf :State ;
+          
+          rdfs:seeAlso "GENI geni_stopping operational state"@en ;
+          
+          rdfs:comment "The related resource/service is stopping"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
+
+:Unallocated rdf:type owl:Class ;
+             
+             rdfs:label "Unallocated" ;
+             
+             rdfs:subClassOf :ReservationState ;
+             
+             rdfs:seeAlso "GENI geni_unallocated allocation state"@en ;
+             
+             rdfs:comment "The related resources/services are not reserved"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Uncompleted
+
+:Uncompleted rdf:type owl:Class ;
+             
+             rdfs:label "Uncompleted" ;
+             
+             rdfs:subClassOf :State ;
+             
+             rdfs:comment "The related resource/service is not complete"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Updating
+
+:Updating rdf:type owl:Class ;
+          
+          rdfs:label "Updating" ;
+          
+          rdfs:subClassOf :State ;
+          
+          rdfs:comment "The related resource/service is getting updated"@en .
 
 
 
