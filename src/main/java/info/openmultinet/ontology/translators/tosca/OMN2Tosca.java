@@ -16,6 +16,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanc
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Osco;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.util.List;
@@ -89,7 +90,7 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static String getXMLNamespace(Resource resource){
-    return resource.getNameSpace().replace("#", "");
+    return resource.getNameSpace().replace("#", "/");
   }
   
   private static String getNSPrefix(Resource resource){
@@ -137,10 +138,8 @@ public class OMN2Tosca extends AbstractConverter {
     StmtIterator propertiesIterator = serviceType.getModel().listStatements(null, RDFS.domain, serviceType);
     while(propertiesIterator.hasNext()){
       Resource property = propertiesIterator.next().getSubject();
-      if(property.hasProperty(RDFS.subPropertyOf, Tosca.ServiceProperty)){
-        Element type = createType(types, property);
-        sequence.appendChild(type);
-      }
+      Element type = createType(types, property);
+      sequence.appendChild(type);
     }
     
     return types.getDocumentElement();
@@ -196,10 +195,10 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setInstanceStates(Resource serviceType, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    StmtIterator stateIterator = serviceType.getModel().listStatements(null, RDFS.subClassOf, Tosca.State);
+    StmtIterator stateIterator = serviceType.getModel().listStatements(null, RDFS.subClassOf, Osco.State);
     while(stateIterator.hasNext()){
       Resource state = stateIterator.next().getSubject();
-      if(!state.equals(Tosca.State)){
+      if(!state.equals(Osco.State)){
         InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
         instanceState.setState(state.getLocalName());
         instanceStates.getInstanceState().add(instanceState);
@@ -239,8 +238,7 @@ public class OMN2Tosca extends AbstractConverter {
     StmtIterator propertiesIterator = service.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
-      if(propertyStatement.getPredicate().hasProperty(RDFS.subPropertyOf, Tosca.ServiceProperty) && !propertyStatement.getPredicate().equals(Tosca.ServiceProperty)){
-        //TODO: check if parameter is in serviceType
+      if(propertyStatement.getPredicate().hasProperty(RDFS.domain, serviceType)) {
         Element parameter = doc.createElementNS(serviceTypeNamespace, serviceTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
         parameter.setTextContent(propertyStatement.getLiteral().getString());
         serviceProperties.appendChild(parameter);

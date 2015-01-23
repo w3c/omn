@@ -32,7 +32,7 @@ public class Tosca2OMNTest {
     System.out.println(serializedModel);
     
     Assert.assertTrue("Should contain a service resource", model.containsResource(Tosca.Service));
-    Assert.assertTrue("Should contain state resources", model.containsResource(Tosca.State));
+    Assert.assertTrue("Should contain state resources", model.containsResource(Osco.State));
     Assert.assertTrue("Should contain the service type", model.containsResource(Osco.dummy));
     Assert.assertTrue("Should contain the service properties", model.containsResource(Osco.test_param));
   }

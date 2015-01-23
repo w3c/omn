@@ -13,6 +13,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
+import info.openmultinet.ontology.vocabulary.Osco;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
@@ -78,7 +79,6 @@ public class Tosca2OMN extends AbstractConverter {
             Node elementNode = schemaElement.getChildNodes().item(i);
             String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
             Property superProperty = model.createProperty(namespace+superPropertyName);
-            superProperty.addProperty(RDFS.subPropertyOf, Tosca.ServiceProperty);
             for(int j = 0; j < schemaElement.getChildNodes().getLength()-1; j++){
               Node typesNode = elementNode.getChildNodes().item(j);
               if(typesNode.getLocalName().equals("complexType")){
@@ -190,7 +190,7 @@ public class Tosca2OMN extends AbstractConverter {
     String namespace = nodeType.getTargetNamespace();
     for (InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()){
       Resource state = model.createResource(namespace+instanceState.getState());
-      state.addProperty(RDF.type, Tosca.State);
+      state.addProperty(RDF.type, Osco.State);
     }
   }
 
