@@ -115,6 +115,7 @@
 						</goals>
 						<configuration>
 							<strict>false</strict>
+							<nv>true</nv>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.advertisement</packageName>
 							<schemaDirectory>src/main/resources/geni/advertisement</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
@@ -128,6 +129,7 @@
 						</goals>
 						<configuration>
 							<strict>false</strict>
+							<nv>true</nv>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.manifest</packageName>
 							<schemaDirectory>src/main/resources/geni/manifest</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
@@ -141,6 +143,7 @@
 						</goals>
 						<configuration>
 							<strict>false</strict>
+							<nv>true</nv>
 							<packageName>info.openmultinet.ontology.translators.geni.jaxb.request</packageName>
 							<schemaDirectory>src/main/resources/geni/request</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
@@ -154,6 +157,7 @@
 						</goals>
 						<configuration>
 							<strict>false</strict>
+							<nv>true</nv>
 							<packageName>info.openmultinet.ontology.translators.tosca.jaxb</packageName>
 							<schemaDirectory>src/main/resources/tosca</schemaDirectory>
 							<clearOutputDir>false</clearOutputDir>
