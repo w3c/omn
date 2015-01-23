@@ -60,11 +60,10 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, NodeTypeNotFoundException, MultipleNamespacesException, RequiredResourceNotFoundException {
     setTargetNamespaceAndName(definitions, model);
-    createNodeTypesNodeTemplatesAndTypes(definitions, model);
-    
+    createServiceTemplates(definitions, model);
   }
   
-  private static void createNodeTypesNodeTemplatesAndTypes(TDefinitions definitions, Model model) throws MultipleNamespacesException, NodeTypeNotFoundException, RequiredResourceNotFoundException{
+  private static void createServiceTemplates(TDefinitions definitions, Model model) throws MultipleNamespacesException, NodeTypeNotFoundException, RequiredResourceNotFoundException{
     List<TExtensibleElements> definitionsContent = definitions.getServiceTemplateOrNodeTypeOrNodeTypeImplementation();
 
     Types definitionsTypes = objFactory.createTDefinitionsTypes();
