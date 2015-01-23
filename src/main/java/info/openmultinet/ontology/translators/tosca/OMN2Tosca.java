@@ -4,6 +4,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.jaxb.Definitions;
 import info.openmultinet.ontology.translators.tosca.jaxb.ObjectFactory;
+import info.openmultinet.ontology.translators.tosca.jaxb.TDefinitions;
 import info.openmultinet.ontology.translators.tosca.jaxb.TDefinitions.Types;
 import info.openmultinet.ontology.translators.tosca.jaxb.TEntityTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TEntityTemplate.Properties;
@@ -20,6 +21,8 @@ import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
@@ -40,9 +43,11 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class OMN2Tosca extends AbstractConverter {
   
+  private static final Logger LOG = Logger.getLogger(OMN2Tosca.class.getName());
+  
   private static ObjectFactory objFactory = new ObjectFactory();
   
-  public static String getTopology(Model model) throws JAXBException, InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
+  public static String getTopology(Model model) throws JAXBException, InvalidModelException, NodeTypeNotFoundException, RequiredResourceNotFoundException {
     Definitions definitions = objFactory.createDefinitions();
     
     model2Tosca(model, definitions);
@@ -50,11 +55,15 @@ public class OMN2Tosca extends AbstractConverter {
     return toString(definitions, "info.openmultinet.ontology.translators.tosca.jaxb");
   }
   
-  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
+  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, NodeTypeNotFoundException, RequiredResourceNotFoundException {
     setTargetNamespaceAndName(model, definitions);
-    
+    createNodeTypesNodeTemplatesAndTypes(definitions, model);
+    createRelationshipTypes(definitions, model);
+  }
+  
+  private static void createNodeTypesNodeTemplatesAndTypes(TDefinitions definitions, Model model) throws RequiredResourceNotFoundException, NodeTypeNotFoundException{
     List<TExtensibleElements> templatesAndNodeTypes = definitions.getServiceTemplateOrNodeTypeOrNodeTypeImplementation();
-
+    
     Types types = objFactory.createTDefinitionsTypes();
     definitions.setTypes(types);
     
@@ -65,19 +74,23 @@ public class OMN2Tosca extends AbstractConverter {
     TTopologyTemplate topologyTemplate = objFactory.createTTopologyTemplate();
     serviceTemplate.setTopologyTemplate(topologyTemplate);
     
-    List<TEntityTemplate> nodeTemplates = topologyTemplate.getNodeTemplateOrRelationshipTemplate();
-    ResIterator serviceIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
-    while(serviceIterator.hasNext()){
-      Resource service = serviceIterator.next();
-      Resource serviceType = getServiceType(service);
+    List<TEntityTemplate> nodeTemplates= topologyTemplate.getNodeTemplateOrRelationshipTemplate();
+    ResIterator nodeIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
+    while(nodeIterator.hasNext()){
+      Resource nodeResource = nodeIterator.next();
+      Resource nodeTypeResource = getNodeType(nodeResource);
       
-      Element doc = createTypes(service, serviceType);
-      types.getAny().add(doc);
+      try {
+        Element doc = createTypes(nodeTypeResource);
+        types.getAny().add(doc);
+      } catch (NoPropertiesFoundException e) {
+        LOG.log(Level.INFO, "No properties found for node type "+nodeTypeResource.getURI());
+      }
       
-      TNodeType nodeType = createNodeType(serviceType);
+      TNodeType nodeType = createNodeType(nodeTypeResource);
       templatesAndNodeTypes.add(nodeType);
       
-      TNodeTemplate nodeTemplate = createNodeTemplate(service, serviceType);
+      TNodeTemplate nodeTemplate = createNodeTemplate(nodeResource, nodeTypeResource);
       nodeTemplates.add(nodeTemplate);
     }
   }
@@ -114,19 +127,19 @@ public class OMN2Tosca extends AbstractConverter {
     throw new RequiredResourceNotFoundException("No Resource of type "+Omn.Topology.getURI()+" could be found");
   }
   
-  private static Element createTypes(Resource service, Resource serviceType) throws ServiceTypeNotFoundException{
+  private static Element createTypes(Resource nodeType) throws NodeTypeNotFoundException, NoPropertiesFoundException{
     Document types = createDocument();
     
     Element schema = types.createElement("xs:schema");
     schema.setAttribute("xmlns:xs", "http://www.w3.org/2001/XMLSchema");
     schema.setAttribute("elementFormDefault", "qualified");
     schema.setAttribute("attributeFormDefault", "unqualified");
-    schema.setAttribute("targetNamespace", getXMLNamespace(serviceType));
+    schema.setAttribute("targetNamespace", getXMLNamespace(nodeType));
     types.appendChild(schema);
     
     Element element = types.createElement("xs:element");
     schema.appendChild(element);
-    element.setAttribute("name", getServiceTypePropertiesName(serviceType));
+    element.setAttribute("name", getNodeTypePropertiesName(nodeType));
     
     Element complexType = types.createElement("xs:complexType");
     element.appendChild(complexType);
@@ -134,7 +147,10 @@ public class OMN2Tosca extends AbstractConverter {
     Element sequence = types.createElement("xs:sequence");
     complexType.appendChild(sequence);
     
-    StmtIterator propertiesIterator = serviceType.getModel().listStatements(null, RDFS.domain, serviceType);
+    StmtIterator propertiesIterator = nodeType.getModel().listStatements(null, RDFS.domain, nodeType);
+    if(!propertiesIterator.hasNext()){
+      throw new NoPropertiesFoundException();
+    }
     while(propertiesIterator.hasNext()){
       Resource property = propertiesIterator.next().getSubject();
       Element type = createType(types, property);
@@ -169,32 +185,32 @@ public class OMN2Tosca extends AbstractConverter {
     return docBuilder.newDocument();
   }
   
-  private static TNodeType createNodeType(Resource serviceType){
+  private static TNodeType createNodeType(Resource nodeTypeResource){
     TNodeType nodeType = objFactory.createTNodeType();
-    setName(serviceType, nodeType);
-    setNodeTypeProperties(serviceType, nodeType);
-    setInstanceStates(serviceType, nodeType);
+    setName(nodeTypeResource, nodeType);
+    setNodeTypeProperties(nodeTypeResource, nodeType);
+    setInstanceStates(nodeTypeResource, nodeType);
     return nodeType;
   }
 
-  private static void setName(Resource serviceType, TNodeType nodeType) {
-    nodeType.setName(serviceType.getLocalName());
-    nodeType.setTargetNamespace(getXMLNamespace(serviceType));
+  private static void setName(Resource nodeTypeResource, TNodeType nodeType) {
+    nodeType.setName(nodeTypeResource.getLocalName());
+    nodeType.setTargetNamespace(getXMLNamespace(nodeTypeResource));
   }
   
-  private static void setNodeTypeProperties(Resource serviceType, TNodeType nodeType){
+  private static void setNodeTypeProperties(Resource nodeTypeResource, TNodeType nodeType){
     PropertiesDefinition nodeTypeProperties = objFactory.createTEntityTypePropertiesDefinition();
-    String serviceTypeNameSpace = getXMLNamespace(serviceType);
-    String serviceTypePrefix = getNSPrefix(serviceType);
-    QName propertiesReference = new QName(serviceTypeNameSpace, getServiceTypePropertiesName(serviceType), serviceTypePrefix);
+    String nodeTypeNameSpace = getXMLNamespace(nodeTypeResource);
+    String nodeTypePrefix = getNSPrefix(nodeTypeResource);
+    QName propertiesReference = new QName(nodeTypeNameSpace, getNodeTypePropertiesName(nodeTypeResource), nodeTypePrefix);
     nodeTypeProperties.setElement(propertiesReference);
     nodeType.setPropertiesDefinition(nodeTypeProperties);
   }
   
-  private static void setInstanceStates(Resource serviceType, TNodeType nodeType) {
+  private static void setInstanceStates(Resource nodeTypeResource, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    StmtIterator stateIterator = serviceType.getModel().listStatements(null, RDFS.subClassOf, Tosca.State);
+    StmtIterator stateIterator = nodeTypeResource.getModel().listStatements(null, RDFS.subClassOf, Tosca.State);
     while(stateIterator.hasNext()){
       Resource state = stateIterator.next().getSubject();
       if(!state.equals(Tosca.State)){
@@ -206,65 +222,84 @@ public class OMN2Tosca extends AbstractConverter {
     nodeType.setInstanceStates(instanceStates);
   }
   
-  private static String getServiceTypePropertiesName(Resource serviceType){
-    return serviceType.getLocalName()+"Properties";
+  private static String getNodeTypePropertiesName(Resource nodeTypeResource){
+    return nodeTypeResource.getLocalName()+"Properties";
   }
   
-  private static TNodeTemplate createNodeTemplate(Resource service, Resource serviceType) throws ServiceTypeNotFoundException{
+  private static TNodeTemplate createNodeTemplate(Resource node, Resource nodeTypeResource) throws NodeTypeNotFoundException{
     TNodeTemplate nodeTemplate = objFactory.createTNodeTemplate();
-    setNameAndTypeAndID(service, serviceType, nodeTemplate);
-    setServiceProperties(service, serviceType, nodeTemplate);
+    setNameAndTypeAndID(node, nodeTypeResource, nodeTemplate);
+    
+    try {
+      Properties properties = objFactory.createTEntityTemplateProperties();
+      Element nodeProperties = createNodeProperties(node, nodeTypeResource, nodeTemplate);
+      properties.setAny(nodeProperties);
+      nodeTemplate.setProperties(properties);
+    } catch (NoPropertiesFoundException e) {
+      LOG.log(Level.INFO, "No properties found for node "+node.getURI());
+    }
+    
     return nodeTemplate;
   }
   
-  private static void setNameAndTypeAndID(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) {
-    nodeTemplate.setName(service.getLocalName());
-    String serviceTypeNameSpace = getXMLNamespace(serviceType);
-    String serviceTypePrefix = getNSPrefix(serviceType);
-    QName type = new QName(serviceTypeNameSpace, serviceType.getLocalName(), serviceTypePrefix);
-    nodeTemplate.setId(service.getURI());
+  private static void setNameAndTypeAndID(Resource node, Resource nodeTypeResource, TNodeTemplate nodeTemplate) {
+    nodeTemplate.setName(node.getLocalName());
+    String nodeTypeNameSpace = getXMLNamespace(nodeTypeResource);
+    String nodeTypePrefix = getNSPrefix(nodeTypeResource);
+    QName type = new QName(nodeTypeNameSpace, nodeTypeResource.getLocalName(), nodeTypePrefix);
+    nodeTemplate.setId(node.getURI());
     nodeTemplate.setType(type);
   }
   
-  private static void setServiceProperties(Resource service, Resource serviceType, TNodeTemplate nodeTemplate) throws ServiceTypeNotFoundException {
+  private static Element createNodeProperties(Resource node, Resource nodeTypeResource, TNodeTemplate nodeTemplate) throws NodeTypeNotFoundException, NoPropertiesFoundException {
     Document doc = createDocument();
     
-    String serviceTypeNamespace = getXMLNamespace(serviceType);
-    String serviceTypePrefix = getNSPrefix(serviceType);
-    Element serviceProperties = doc.createElementNS(serviceTypeNamespace, serviceTypePrefix+":"+getServiceTypePropertiesName(serviceType));
-    doc.appendChild(serviceProperties);
+    String nodeTypeNamespace = getXMLNamespace(nodeTypeResource);
+    String nodeTypePrefix = getNSPrefix(nodeTypeResource);
+    Element nodeProperties = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+getNodeTypePropertiesName(nodeTypeResource));
+    doc.appendChild(nodeProperties);
     
-    StmtIterator propertiesIterator = service.listProperties();
+    StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
-      if(propertyStatement.getPredicate().hasProperty(RDFS.domain, serviceType)) {
-        Element parameter = doc.createElementNS(serviceTypeNamespace, serviceTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
+      if(propertyStatement.getPredicate().hasProperty(RDFS.domain, nodeTypeResource)) {
+        Element parameter = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
         parameter.setTextContent(propertyStatement.getLiteral().getString());
-        serviceProperties.appendChild(parameter);
+        nodeProperties.appendChild(parameter);
       }
     }
-    Properties properties = objFactory.createTEntityTemplateProperties();
-    properties.setAny(doc.getDocumentElement());
-    nodeTemplate.setProperties(properties);
+    if(0 == nodeProperties.getChildNodes().getLength()){
+      throw new NoPropertiesFoundException();
+    }
+    return doc.getDocumentElement();
   }
   
-  private static Resource getServiceType(Resource service) throws ServiceTypeNotFoundException {
-    StmtIterator propertiesIterator = service.listProperties(RDF.type);
+  private static Resource getNodeType(Resource node) throws NodeTypeNotFoundException {
+    StmtIterator propertiesIterator = node.listProperties(RDF.type);
     while (propertiesIterator.hasNext()) {
-      Resource serviceType = propertiesIterator.next().getResource();
-      if (serviceType.hasProperty(RDFS.subClassOf, Tosca.Node)
-          && !serviceType.equals(Tosca.Node)) {
-        return serviceType;
+      Resource nodeTypeResource = propertiesIterator.next().getResource();
+      if (nodeTypeResource.hasProperty(RDFS.subClassOf, Tosca.Node)
+          && !nodeTypeResource.equals(Tosca.Node)) {
+        return nodeTypeResource;
       }
     }
-    throw new ServiceTypeNotFoundException("no service type found for: "+service.getURI());
+    throw new NodeTypeNotFoundException("no node type found for: "+node.getURI());
   }
   
-  public static class ServiceTypeNotFoundException extends Exception{
+ private static void createRelationshipTypes(Definitions definitions, Model model) {
+   ResIterator relationIterator = model.listResourcesWithProperty(RDFS.subPropertyOf, Tosca.dependsOn);
+   while(relationIterator.hasNext()){
+     Resource relation = relationIterator.next();
+     System.out.println(relation);
+   }
+  }
+
+  
+  public static class NodeTypeNotFoundException extends Exception{
 
     private static final long serialVersionUID = -6079715571448444400L;
     
-    public ServiceTypeNotFoundException(String message){
+    public NodeTypeNotFoundException(String message){
       super(message);
     }
   }
@@ -275,6 +310,15 @@ public class OMN2Tosca extends AbstractConverter {
 
     public RequiredResourceNotFoundException(String message){
       super(message);
+    }
+  }
+  
+  public static class NoPropertiesFoundException extends Exception{
+
+    private static final long serialVersionUID = -4379252875775867346L;
+
+    public NoPropertiesFoundException(){
+      super();
     }
   }
   

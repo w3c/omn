@@ -2,8 +2,8 @@ package info.openmultinet.ontology.translators.tosca;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.NodeTypeNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 
 import java.io.InputStream;
 
@@ -27,23 +27,45 @@ public class OMN2ToscaTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
+	public void testGetTopology() throws JAXBException, InvalidModelException, NodeTypeNotFoundException, RequiredResourceNotFoundException {
 		InfModel model = this.parser.getModel();
 		String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
-		testToscaDefinitions(topology);
-		Assert.assertTrue("Should contain the properties set", topology.contains("<osco:parameter2>bar</osco:parameter2>"));
-		Assert.assertTrue("Should contain the properties set", topology.contains("<osco:port>8088</osco:port>"));
-		Assert.assertTrue("Should contain the properties set", topology.contains("<osco:test_param>foo</osco:test_param>"));
-		Assert.assertTrue("Should contain type definitions for parameters", topology.contains("<xs:element name=\"port\" type=\"xs:integer\"/>"));
-		Assert.assertTrue("Should contain state definitions", topology.contains("<InstanceState state=\"Ready\"/>"));
+		
+		testGeneralToscaDefinitions(topology);
+	  testTypes(topology);
+		testNodeTypes(topology);
+		testNodeTemplates(topology);
+//		testRelationshipTypes(topology);
 	}
 	
-	private static void testToscaDefinitions(String topology){
+	private static void testGeneralToscaDefinitions(String topology){
 	  Assert.assertTrue("Should be a tosca XML", topology.contains("<Definitions"));
 	  Assert.assertTrue("Should contain a targetNamespace", topology.contains("targetNamespace="));
 	  Assert.assertTrue("Should contain a NodeType element", topology.contains("<NodeType"));
     Assert.assertTrue("Should contain a Types element", topology.contains("<Types"));
+	}
+	
+	private static void testTypes(String topology){
+	  Assert.assertTrue("Should contain type definitions for parameters", topology.contains("<xs:element name=\"port\" type=\"xs:integer\"/>"));
+	}
+	
+	private static void testNodeTypes(String topology){
+	  Assert.assertTrue("Should contain a ServiceContainer NodeType element", topology.contains("<NodeType name=\"ServiceContainer\""));
+	  Assert.assertTrue("Should contain a dummy NodeType element", topology.contains("<NodeType name=\"dummy\""));
+	  Assert.assertTrue("Should contain property definitions", topology.contains("<PropertiesDefinition element=\"osco:dummyProperties\" xmlns:osco=\"http://opensdncore.org/ontology/\"/>"));
+	  Assert.assertTrue("Should contain state definitions", topology.contains("<InstanceState state=\"Ready\"/>"));
+	}
+	
+	private static void testNodeTemplates(String topology){
+	  Assert.assertTrue("Should contain a container NodeTemplate element", topology.contains("<NodeTemplate name=\"container1\""));
+	  Assert.assertTrue("Should contain the properties set", topology.contains("<osco:parameter2>bar</osco:parameter2>"));
+    Assert.assertTrue("Should contain the properties set", topology.contains("<osco:port>8088</osco:port>"));
+    Assert.assertTrue("Should contain the properties set", topology.contains("<osco:test_param>foo</osco:test_param>"));
+	}
+	
+	private static void testRelationshipTypes(String topology){
+	  Assert.assertTrue("Should contain a relationship type element", topology.contains("RelationshipType"));
 	}
 
 }

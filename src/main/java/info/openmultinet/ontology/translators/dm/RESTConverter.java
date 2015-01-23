@@ -8,8 +8,8 @@ import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
 import info.openmultinet.ontology.translators.geni.OMN2Manifest;
 import info.openmultinet.ontology.translators.geni.Request2OMN;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.NodeTypeNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
 import info.openmultinet.ontology.translators.tosca.Tosca2OMN;
 
 import java.io.ByteArrayInputStream;
@@ -81,7 +81,7 @@ public class RESTConverter {
 			} else {
 			  throw new ConverterWebApplicationException(Response.Status.NOT_ACCEPTABLE, "unknown output '"+to+"'");
 			}
-		} catch (RiotException | ServiceTypeNotFoundException | RequiredResourceNotFoundException e) {
+		} catch (RiotException | NodeTypeNotFoundException | RequiredResourceNotFoundException e) {
 			throw new ConverterWebApplicationException(Response.Status.BAD_REQUEST, e);
 		} catch (JAXBException | InvalidModelException | IOException e) {
 		  throw new ConverterWebApplicationException(Response.Status.INTERNAL_SERVER_ERROR, e);
