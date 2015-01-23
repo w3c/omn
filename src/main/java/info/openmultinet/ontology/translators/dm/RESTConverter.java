@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.dm;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.Advertisement2OMN;
 import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
 import info.openmultinet.ontology.translators.geni.OMN2Manifest;
 import info.openmultinet.ontology.translators.geni.Request2OMN;
@@ -56,6 +57,8 @@ public class RESTConverter {
 		try {
 			if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 				model = Request2OMN.getModel(stream);
+			} else if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)) {
+				model = Advertisement2OMN.getModel(stream);
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
 			} else if (AbstractConverter.TOSCA.equalsIgnoreCase(from)) {
