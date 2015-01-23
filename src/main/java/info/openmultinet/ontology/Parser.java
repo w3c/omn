@@ -36,9 +36,8 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class Parser {
 
 	private static String NL = System.getProperty("line.separator");
-
-
 	protected InfModel model;
+	private static Reasoner reasoner;
 
 	// @todo: add support for all serializations, not only TTL
 	public Parser(InputStream input) throws InvalidModelException {
@@ -65,7 +64,8 @@ public class Parser {
 	}
 	
 	public void init(Model model) throws InvalidModelException {
-    this.model = createInfModel(model);
+		Parser.reasoner = createReasoner();
+		this.model = createInfModel(model);
     if (!isValid(this.model))
       throw new InvalidModelException(getValidationReport(this.model));
 	}
@@ -75,6 +75,12 @@ public class Parser {
 	}
 
 	public static InfModel createInfModel(Model data) throws InvalidModelException {
+		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
+		setCommonPrefixes(infModel);
+		return infModel;
+	}
+
+	public static Reasoner createReasoner() {
 		Model schema = ModelFactory.createDefaultModel();
 
 		schema.add(parse("/omn.ttl"));		
@@ -90,11 +96,7 @@ public class Parser {
 		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
 		//@fixme: this is a slow/expensive operation
 		reasoner = reasoner.bindSchema(schema);
-
-		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
-		setCommonPrefixes(infModel);
-
-		return infModel;
+		return reasoner;
 	}
 	
 	public static void setCommonPrefixes(Model model){
