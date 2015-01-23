@@ -97,6 +97,7 @@ public class Parser {
 	  model.setNsPrefix("owl", OWL.getURI());
 	  model.setNsPrefix("tosca", Tosca.getURI());
 	  model.setNsPrefix("osco", Osco.getURI());
+	  model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 	}
 
 	public static Model parse(String filename) {

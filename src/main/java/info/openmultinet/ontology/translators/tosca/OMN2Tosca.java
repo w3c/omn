@@ -51,7 +51,7 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, ServiceTypeNotFoundException, RequiredResourceNotFoundException {
-    setTargetNamespaceAndVendor(model, definitions);
+    setTargetNamespaceAndName(model, definitions);
     
     List<TExtensibleElements> templatesAndNodeTypes = definitions.getServiceTemplateOrNodeTypeOrNodeTypeImplementation();
 
@@ -82,9 +82,10 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  private static void setTargetNamespaceAndVendor(Model model, Definitions definitions) throws RequiredResourceNotFoundException{
+  private static void setTargetNamespaceAndName(Model model, Definitions definitions) throws RequiredResourceNotFoundException{
     String targetNamespace = getXMLNamespace(getTopologyResource(model));
     definitions.setTargetNamespace(targetNamespace);
+    definitions.setName(targetNamespace);
   }
   
   private static String getXMLNamespace(Resource resource){

@@ -9,6 +9,7 @@ import info.openmultinet.ontology.translators.geni.Request2OMN;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
+import info.openmultinet.ontology.translators.tosca.Tosca2OMN;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -57,6 +58,8 @@ public class RESTConverter {
 				model = Request2OMN.getModel(stream);
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
+			} else if (AbstractConverter.TOSCA.equalsIgnoreCase(from)) {
+			  model = Tosca2OMN.getModel(stream);
 			} else {
 			  throw new ConverterWebApplicationException(Response.Status.NOT_ACCEPTABLE, "unknown input '"+from+"'");
 			}
