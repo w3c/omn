@@ -22,6 +22,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -49,8 +50,8 @@ public class OMN2Advertisement extends AbstractConverter {
 		List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Group).toList();
 		validateModel(groups);
-
 		Resource group = groups.iterator().next();
+
 		List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
@@ -60,6 +61,7 @@ public class OMN2Advertisement extends AbstractConverter {
 	private static void convertStatementsToNodesAndLinks(
 			RSpecContents manifest, List<Statement> resources) {
 		for (Statement resource : resources) {
+			//@todo: check type of resource here and not only generate nodes
 			NodeContents node = new NodeContents();
 
 			setComponentDetails(resource, node);

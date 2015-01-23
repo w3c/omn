@@ -140,7 +140,7 @@ public class Parser {
 		String result = "";
 		for (StmtIterator i = model.listStatements(); i.hasNext();) {
 			Statement stmt = i.nextStatement();
-			result += PrintUtil.print(stmt);
+			result += PrintUtil.print(stmt) + NL;
 		}
 		return result;
 	}
