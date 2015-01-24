@@ -315,14 +315,14 @@ public class OMN2Tosca extends AbstractConverter {
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
-      Resource property = propertyStatement.getPredicate();
+      Property property = propertyStatement.getPredicate();
+      
       if(property.hasProperty(RDFS.domain, nodeTypeResource)) {
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
-          //TODO handle object properties
+          createObjectProperty(node, propertyStatement, nodeProperties, nodeTypeNamespace, nodeTypePrefix);
         }
         else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
-          Element parameter = createDatatypeProperty(propertyStatement, doc, nodeTypeNamespace, nodeTypePrefix);
-          nodeProperties.appendChild(parameter);
+          createDatatypeProperty(propertyStatement, nodeProperties, nodeTypeNamespace, nodeTypePrefix);
         }
       }
     }
@@ -332,10 +332,54 @@ public class OMN2Tosca extends AbstractConverter {
     return doc.getDocumentElement();
   }
   
-  private static Element createDatatypeProperty(Statement propertyStatement, Document doc, String nodeTypeNamespace, String nodeTypePrefix){
-    Element parameter = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
+  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String nodeTypeNamespace, String nodeTypePrefix){
+    Element parameter = nodeProperties.getOwnerDocument().createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
+    
+    StmtIterator propertyValuesIterator = node.listProperties(propertyStatement.getPredicate());
+    while(propertyValuesIterator.hasNext()){
+      propertyStatement = propertyValuesIterator.next();
+      
+      Element subNode = nodeProperties.getOwnerDocument().createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getResource().getLocalName());
+      parameter.appendChild(subNode);
+      
+      StmtIterator propertiesIterator = propertyStatement.getResource().listProperties();
+      while(propertiesIterator.hasNext()){
+        propertyStatement = propertiesIterator.next();
+        Property property = propertyStatement.getPredicate();
+        node = propertyStatement.getSubject();
+        
+        Resource propertyType = getPropertyResourceType(node);
+        if(property.hasProperty(RDFS.domain, propertyType)) {
+          if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
+            createObjectProperty(node, propertyStatement, subNode, nodeTypeNamespace, nodeTypePrefix);
+          }
+          else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
+            createDatatypeProperty(propertyStatement, subNode, nodeTypeNamespace, nodeTypePrefix);
+          }
+        }
+      }
+      
+    }
+    nodeProperties.appendChild(parameter);
+  }
+  
+  private static Resource getPropertyResourceType(Resource resource){
+    StmtIterator typeIterator = resource.listProperties(RDF.type);
+    while(typeIterator.hasNext()){
+      Resource type = typeIterator.next().getResource();
+      //TODO: not so nice check..
+      if(!type.equals(RDFS.Resource) && !type.equals(OWL.Thing) && !type.getURI().equals("http://www.w3.org/2002/07/owl#NamedIndividual")){
+        return type;
+      }
+    }
+    //TODO: exception
+    return null;
+  }
+  
+  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String nodeTypeNamespace, String nodeTypePrefix){
+    Element parameter = nodeProperties.getOwnerDocument().createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
     parameter.setTextContent(propertyStatement.getLiteral().getString());
-    return parameter;
+    nodeProperties.appendChild(parameter);
   }
   
   private static Resource getNodeType(Resource node) throws NodeTypeNotFoundException {
