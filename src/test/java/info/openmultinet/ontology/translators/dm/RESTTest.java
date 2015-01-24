@@ -19,40 +19,41 @@ public class RESTTest {
 	public void setup() {
 		this.converter = new RESTConverter();
 	}
-	
+
 	@Test
 	public void testConvertToGraph() {
-		String content = getFilecontent("/request2.rspec");
+		final String content = this.getFilecontent("/request2.rspec");
 
-		String result = converter.convert(AbstractConverter.RSPEC_REQUEST,
-				AbstractConverter.TTL, content);
+		final String result = this.converter
+				.convert(AbstractConverter.RSPEC_REQUEST,
+						AbstractConverter.TTL, content);
 		System.out.println(result);
-		Assert.assertTrue("should contain a request", result.contains("#Request"));
+		Assert.assertTrue("should contain a request",
+				result.contains("#Request"));
 	}
 
 	@Test
-	public void testConvertToRspec(){
-		String content = getFilecontent("/request.ttl");
-		
-		String result = converter.convert(AbstractConverter.TTL, 
-				AbstractConverter.RSPEC_ADVERTISEMENT,
-				content);
+	public void testConvertToRspec() {
+		final String content = this.getFilecontent("/request.ttl");
+
+		final String result = this.converter.convert(AbstractConverter.TTL,
+				AbstractConverter.RSPEC_ADVERTISEMENT, content);
 		System.out.println(result);
-		Assert.assertTrue("should contain an advertisement rspec", result.contains("type=\"advertisement"));
+		Assert.assertTrue("should contain an advertisement rspec",
+				result.contains("type=\"advertisement"));
 	}
 
-	@Test (expected=WebApplicationException.class)
-	public void testWrongParam(){
-		converter.convert("a",  "b", null);
+	@Test(expected = WebApplicationException.class)
+	public void testWrongParam() {
+		this.converter.convert("a", "b", null);
 	}
 
-	public String getFilecontent(String filename) {
-		InputStream rspec = RESTTest.class
-				.getResourceAsStream(filename);
+	public String getFilecontent(final String filename) {
+		final InputStream rspec = RESTTest.class.getResourceAsStream(filename);
 		@SuppressWarnings("resource")
-		String content = new Scanner(rspec, "UTF-8").useDelimiter("\\A").next();
+		final String content = new Scanner(rspec, "UTF-8").useDelimiter("\\A")
+				.next();
 		return content;
 	}
 
-	
 }

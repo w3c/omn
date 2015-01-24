@@ -2,6 +2,10 @@ package info.openmultinet.ontology.translators;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -19,24 +23,40 @@ public abstract class AbstractConverter {
 	public final static String RSPEC_MANIFEST = "manifest";
 	public final static String RSPEC_ADVERTISEMENT = "advertisement";
 	public static final String TOSCA = "tosca";
-	
-	protected static void validateModel(List<Resource> groups) throws InvalidModelException {
-		if (groups.isEmpty())
+	protected static final String NAMESPACE = "http://open-multinet.info/example#";
+
+	protected static void validateModel(final List<Resource> groups)
+			throws InvalidModelException {
+		if (groups.isEmpty()) {
 			throw new InvalidModelException("No group in model found");
-		if (groups.size() > 1)
-			throw new InvalidModelException("More than one group in model found");
+		}
+		if (groups.size() > 1) {
+			throw new InvalidModelException(
+					"More than one group in model found");
+		}
 	}
 
-	protected static String toString(Object jaxbObject, String namespaces)
-			throws JAXBException {
-				JAXBContext jaxbContext = JAXBContext
-						.newInstance(namespaces);
-				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-				StringWriter stringWriter = new StringWriter();
-				jaxbMarshaller.marshal(jaxbObject, stringWriter);
-			
-				return stringWriter.toString();
-			}
+	public static String toString(final Object jaxbObject,
+			final String namespaces) throws JAXBException {
+		final JAXBContext jaxbContext = JAXBContext.newInstance(namespaces);
+		final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		final StringWriter stringWriter = new StringWriter();
+		jaxbMarshaller.marshal(jaxbObject, stringWriter);
 
+		return stringWriter.toString();
+	}
+
+	public static String toString(final String filename) throws IOException {
+		String result = "";
+		final InputStream inputStream = AbstractConverter.class
+				.getResourceAsStream(filename);
+		final BufferedReader br = new BufferedReader(new InputStreamReader(
+				inputStream));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			result += line + "\n";
+		}
+		return result;
+	}
 }

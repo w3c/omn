@@ -40,147 +40,154 @@ public class Parser {
 	private static Reasoner reasoner;
 
 	// @todo: add support for all serializations, not only TTL
-	public Parser(InputStream input) throws InvalidModelException {
-		init(input);
+	public Parser(final InputStream input) throws InvalidModelException {
+		this.init(input);
 	}
-	
-	public Parser(String filename) throws InvalidModelException {
-		InputStream input = Parser.class.getResourceAsStream(filename);
-		init(input);
+
+	public Parser(final String filename) throws InvalidModelException {
+		final InputStream input = Parser.class.getResourceAsStream(filename);
+		this.init(input);
 	}
-	
-	public Parser(Model model) throws InvalidModelException{
-	  init(model);
+
+	public Parser(final Model model) throws InvalidModelException {
+		this.init(model);
 	}
-	
-	public void init(InputStream input) throws InvalidModelException {
-		//@fixme: this is a slow/expensive operation
-		Model data = ModelFactory.createDefaultModel();
-		RDFReader arp = data.getReader("TTL");
-		//@fixme: this is a slow/expensive operation
+
+	public void init(final InputStream input) throws InvalidModelException {
+		// @fixme: this is a slow/expensive operation
+		final Model data = ModelFactory.createDefaultModel();
+		final RDFReader arp = data.getReader("TTL");
+		// @fixme: this is a slow/expensive operation
 		arp.read(data, input, null);
 
-		init(data);
-	}
-	
-	public void init(Model model) throws InvalidModelException {
-		Parser.reasoner = createReasoner();
-		this.model = createInfModel(model);
-    if (!isValid(this.model))
-      throw new InvalidModelException(getValidationReport(this.model));
-	}
-	
-	public static InfModel createInfModel() throws InvalidModelException {	
-		return createInfModel(ModelFactory.createDefaultModel());
+		this.init(data);
 	}
 
-	public static InfModel createInfModel(Model data) throws InvalidModelException {
-		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
-		setCommonPrefixes(infModel);
+	public void init(final Model model) throws InvalidModelException {
+		Parser.reasoner = Parser.createReasoner();
+		this.model = Parser.createInfModel(model);
+		if (!Parser.isValid(this.model)) {
+			throw new InvalidModelException(
+					Parser.getValidationReport(this.model));
+		}
+	}
+
+	public static InfModel createInfModel() throws InvalidModelException {
+		return Parser.createInfModel(ModelFactory.createDefaultModel());
+	}
+
+	public static InfModel createInfModel(final Model data)
+			throws InvalidModelException {
+		final InfModel infModel = ModelFactory.createInfModel(Parser.reasoner,
+				data);
+		Parser.setCommonPrefixes(infModel);
 		return infModel;
 	}
 
 	public static Reasoner createReasoner() {
-		Model schema = ModelFactory.createDefaultModel();
+		final Model schema = ModelFactory.createDefaultModel();
 
-		schema.add(parse("/omn.ttl"));		
-		schema.add(parse("/omn-federation.ttl"));
-		schema.add(parse("/omn-lifecycle.ttl"));
-		schema.add(parse("/omn-resource.ttl"));
-		schema.add(parse("/omn-service.ttl"));
-		schema.add(parse("/omn-component.ttl"));
-		schema.add(parse("/osco.ttl"));
-		schema.add(parse("/tosca.ttl"));
-		
-		
+		schema.add(Parser.parse("/omn.ttl"));
+		schema.add(Parser.parse("/omn-federation.ttl"));
+		schema.add(Parser.parse("/omn-lifecycle.ttl"));
+		schema.add(Parser.parse("/omn-resource.ttl"));
+		schema.add(Parser.parse("/omn-service.ttl"));
+		schema.add(Parser.parse("/omn-component.ttl"));
+		schema.add(Parser.parse("/osco.ttl"));
+		schema.add(Parser.parse("/tosca.ttl"));
+
 		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
-		//@fixme: this is a slow/expensive operation
+		// @fixme: this is a slow/expensive operation
 		reasoner = reasoner.bindSchema(schema);
 		return reasoner;
 	}
-	
-	public static void setCommonPrefixes(Model model){
-	  model.setNsPrefix("omn", Omn.getURI());
-	  model.setNsPrefix("omn-lifecycle", Omn_lifecycle.getURI());
-	  model.setNsPrefix("rdf", RDF.getURI());
-	  model.setNsPrefix("rdfs", RDFS.getURI());
-	  model.setNsPrefix("owl", OWL.getURI());
-	  model.setNsPrefix("tosca", Tosca.getURI());
-	  model.setNsPrefix("osco", Osco.getURI());
-	  model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+
+	public static void setCommonPrefixes(final Model model) {
+		model.setNsPrefix("omn", Omn.getURI());
+		model.setNsPrefix("omn-lifecycle", Omn_lifecycle.getURI());
+		model.setNsPrefix("rdf", RDF.getURI());
+		model.setNsPrefix("rdfs", RDFS.getURI());
+		model.setNsPrefix("owl", OWL.getURI());
+		model.setNsPrefix("tosca", Tosca.getURI());
+		model.setNsPrefix("osco", Osco.getURI());
+		model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 	}
 
-	public static Model parse(String filename) {
-		InputStream stream = Parser.class.getResourceAsStream(filename);
-		Model model = ModelFactory.createDefaultModel().read(stream, StandardCharsets.UTF_8.toString(), "TTL");
+	public static Model parse(final String filename) {
+		final InputStream stream = Parser.class.getResourceAsStream(filename);
+		final Model model = ModelFactory.createDefaultModel().read(stream,
+				StandardCharsets.UTF_8.toString(), "TTL");
 		return model;
 	}
 
 	public ResultSetRewindable query(String queryString) {
-		queryString = getDefaultPrefixes() + queryString;
-		Query query = QueryFactory.create(queryString);
-		QueryExecution qexec = QueryExecutionFactory.create(query, this.model);
-		ResultSetRewindable rewindable = ResultSetFactory.makeRewindable(qexec
-				.execSelect());
+		queryString = Parser.getDefaultPrefixes() + queryString;
+		final Query query = QueryFactory.create(queryString);
+		final QueryExecution qexec = QueryExecutionFactory.create(query,
+				this.model);
+		final ResultSetRewindable rewindable = ResultSetFactory
+				.makeRewindable(qexec.execSelect());
 		return rewindable;
 	}
 
 	public static String getDefaultPrefixes() {
-		return createPrefix("omn", Omn.getURI())
-				+ createPrefix("omn-lifecycle", Omn_lifecycle.getURI())
-				+ createPrefix("rdf", RDF.getURI())
-				+ createPrefix("rdfs", RDFS.getURI())
-				+ createPrefix("owl", OWL.getURI())
-		    + createPrefix("osco", Osco.getURI())
-		    + createPrefix("tosca", Tosca.getURI());
+		return Parser.createPrefix("omn", Omn.getURI())
+				+ Parser.createPrefix("omn-lifecycle", Omn_lifecycle.getURI())
+				+ Parser.createPrefix("rdf", RDF.getURI())
+				+ Parser.createPrefix("rdfs", RDFS.getURI())
+				+ Parser.createPrefix("owl", OWL.getURI())
+				+ Parser.createPrefix("osco", Osco.getURI())
+				+ Parser.createPrefix("tosca", Tosca.getURI());
 	}
 
-	public static String createPrefix(String name, String URI) {
-		return "PREFIX " + name + ": <" + URI + ">" + NL;
+	public static String createPrefix(final String name, final String URI) {
+		return "PREFIX " + name + ": <" + URI + ">" + Parser.NL;
 	}
 
-	public void printStatements(Resource s, Property p, Resource o) {
-		for (StmtIterator i = model.listStatements(s, p, o); i.hasNext();) {
-			Statement stmt = i.nextStatement();
+	public void printStatements(final Resource s, final Property p,
+			final Resource o) {
+		for (final StmtIterator i = this.model.listStatements(s, p, o); i
+				.hasNext();) {
+			final Statement stmt = i.nextStatement();
 			System.out.println(" - " + PrintUtil.print(stmt));
 		}
 	}
 
-	public static String toString(Model model) {
+	public static String toString(final Model model) {
 		String result = "";
-		for (StmtIterator i = model.listStatements(); i.hasNext();) {
-			Statement stmt = i.nextStatement();
-			result += PrintUtil.print(stmt) + NL;
+		for (final StmtIterator i = model.listStatements(); i.hasNext();) {
+			final Statement stmt = i.nextStatement();
+			result += PrintUtil.print(stmt) + Parser.NL;
 		}
 		return result;
 	}
-	
+
 	public InfModel getModel() {
 		return this.model;
 	}
 
-	public static boolean isValid(InfModel model) {
-		ValidityReport validity = model.validate();
+	public static boolean isValid(final InfModel model) {
+		final ValidityReport validity = model.validate();
 		return validity.isValid();
 	}
 
-	public static boolean isValid(Model model) {
-		InfModel infModel = ModelFactory.createInfModel(
+	public static boolean isValid(final Model model) {
+		final InfModel infModel = ModelFactory.createInfModel(
 				ReasonerRegistry.getOWLMiniReasoner(), model);
-		return isValid(infModel);
+		return Parser.isValid(infModel);
 	}
 
-	public static String getValidationReport(Model model) {
-		InfModel infModel = ModelFactory.createInfModel(
+	public static String getValidationReport(final Model model) {
+		final InfModel infModel = ModelFactory.createInfModel(
 				ReasonerRegistry.getOWLMiniReasoner(), model);
-		return getValidationReport(infModel);
+		return Parser.getValidationReport(infModel);
 	}
 
-	public static String getValidationReport(InfModel model) {
+	public static String getValidationReport(final InfModel model) {
 		String report = "";
-		ValidityReport validity = model.validate();
-		for (Iterator<Report> i = validity.getReports(); i.hasNext();) {
-			report += " - " + i.next() + NL;
+		final ValidityReport validity = model.validate();
+		for (final Iterator<Report> i = validity.getReports(); i.hasNext();) {
+			report += " - " + i.next() + Parser.NL;
 		}
 		return report;
 	}
@@ -193,5 +200,4 @@ public class Parser {
 		return Parser.getValidationReport(this.model);
 	}
 
-	
 }
