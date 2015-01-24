@@ -13,6 +13,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TExtensibleElements;
 import info.openmultinet.ontology.translators.tosca.jaxb.TNodeTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TNodeType;
 import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipTemplate;
+import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipType;
 import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
@@ -106,7 +107,14 @@ public class OMN2Tosca extends AbstractConverter {
     nodeIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
     while(nodeIterator.hasNext()){
       Resource nodeResource = nodeIterator.next();
-      nodesAndRelationshipTemplates.addAll(createRelationshipTypes(nodeResource, nodesAndRelationshipTemplates));
+      
+      List<TRelationshipTemplate> relationshipTemplates = createRelationshipTemplates(nodeResource, nodesAndRelationshipTemplates);      
+      for(TRelationshipTemplate relationshipTemplate : relationshipTemplates){
+        nodesAndRelationshipTemplates.add(relationshipTemplate);
+        
+        TRelationshipType relationshipType = createRelationshipType(relationshipTemplate, model);
+        definitionsContent.add(relationshipType);
+      }
     }
   }
   
@@ -307,7 +315,7 @@ public class OMN2Tosca extends AbstractConverter {
     throw new NodeTypeNotFoundException("no node type found for: "+node.getURI());
   }
   
-  private static List<TRelationshipTemplate> createRelationshipTypes(Resource nodeResource, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException {
+  private static List<TRelationshipTemplate> createRelationshipTemplates(Resource nodeResource, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException {
     List<TRelationshipTemplate> relationshipTemplates = new ArrayList<>();
     
     StmtIterator relationIterator = nodeResource.listProperties();
@@ -319,19 +327,20 @@ public class OMN2Tosca extends AbstractConverter {
       while(relationTypeIterator.hasNext()){
         Resource relationType = relationTypeIterator.next().getResource();
         if (relationType.hasProperty(RDFS.subPropertyOf, Tosca.relatesTo)) {
-          relationshipTemplates.add(createRelationshipType(relationStatement, nodesAndRelationshipTemplates));
+          relationshipTemplates.add(createRelationshipTemplate(relationStatement, nodesAndRelationshipTemplates, relationType));
         }
       }
     }
     return relationshipTemplates;
   }
 
-  private static TRelationshipTemplate createRelationshipType(Statement relationStatement, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException {
+  private static TRelationshipTemplate createRelationshipTemplate(Statement relationStatement, List<TEntityTemplate> nodesAndRelationshipTemplates, Resource relationType) throws RequiredResourceNotFoundException {
     TRelationshipTemplate relationshipTemplate = objFactory.createTRelationshipTemplate();
     
     relationshipTemplate.setId(relationStatement.getPredicate().getURI());
     relationshipTemplate.setName(relationStatement.getPredicate().getLocalName());
-    //TODO: relationshipTemplate.setType(type);
+    
+    setType(relationshipTemplate, relationType);
     
     TRelationshipTemplate.SourceElement sourceElement = objFactory.createTRelationshipTemplateSourceElement();
     TNodeTemplate sourceNode = getNodeTemplateByID(relationStatement.getSubject().getURI(), nodesAndRelationshipTemplates);
@@ -344,6 +353,58 @@ public class OMN2Tosca extends AbstractConverter {
     relationshipTemplate.setTargetElement(targetElement);
     
     return relationshipTemplate;
+  }
+  
+  private static void setType(TRelationshipTemplate relationshipTemplate, Resource relationType){
+    String namespace = getXMLNamespace(relationType);
+    String prefix = getNSPrefix(relationType);
+    QName type = new QName(namespace, relationType.getLocalName(), prefix);
+    relationshipTemplate.setType(type);
+  }
+  
+  private static TRelationshipType createRelationshipType(TRelationshipTemplate relationshipTemplate, Model model) {
+    TRelationshipType relationshipType = objFactory.createTRelationshipType();
+    
+    QName type = relationshipTemplate.getType();
+    relationshipType.setName(type.getLocalPart());
+    relationshipType.setTargetNamespace(type.getNamespaceURI());
+    
+    Resource relationshipTypeResource = model.getResource(type.getNamespaceURI()+type.getLocalPart());
+    setValidSource(relationshipType, relationshipTypeResource);
+    setValidTarget(relationshipType, relationshipTypeResource);
+    return relationshipType;
+  }
+
+  private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) {
+    StmtIterator rangeIter = relationshipTypeResource.listProperties(RDFS.domain);
+    while(rangeIter.hasNext()){
+      Resource target = rangeIter.next().getResource();
+      if(target.hasProperty(RDFS.subClassOf, Tosca.Node) && !target.equals(Tosca.Node)){
+        String namespace = getXMLNamespace(target);
+        String prefix = getNSPrefix(target);
+        QName typeRef = new QName(namespace, target.getLocalName(), prefix);
+        
+        TRelationshipType.ValidSource validSource = objFactory.createTRelationshipTypeValidSource();
+        validSource.setTypeRef(typeRef);
+        relationshipType.setValidSource(validSource);
+      }
+    }
+  }
+
+  private static void setValidTarget(TRelationshipType relationshipType, Resource relationshipTypeResource) {
+    StmtIterator rangeIter = relationshipTypeResource.listProperties(RDFS.range);
+    while(rangeIter.hasNext()){
+      Resource target = rangeIter.next().getResource();
+      if(target.hasProperty(RDFS.subClassOf, Tosca.Node) && !target.equals(Tosca.Node)){
+        String namespace = getXMLNamespace(target);
+        String prefix = getNSPrefix(target);
+        QName typeRef = new QName(namespace, target.getLocalName(), prefix);
+        
+        TRelationshipType.ValidTarget validTarget = objFactory.createTRelationshipTypeValidTarget();
+        validTarget.setTypeRef(typeRef);
+        relationshipType.setValidTarget(validTarget);
+      }
+    }
   }
   
   private static TNodeTemplate getNodeTemplateByID(String id, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException{

@@ -38,9 +38,10 @@ public class OMN2ToscaTest {
 		testNodeTypes(topology);
 		testNodeTemplates(topology);
 		testRelationshipTemplates(topology);
+		testRelationshipTypes(topology);
 	}
 	
-	private static void testGeneralToscaDefinitions(String topology){
+  private static void testGeneralToscaDefinitions(String topology){
 	  Assert.assertTrue("Should be a tosca XML", topology.contains("<Definitions"));
 	  Assert.assertTrue("Should contain a targetNamespace", topology.contains("targetNamespace="));
 	  Assert.assertTrue("Should contain a NodeType element", topology.contains("<NodeType"));
@@ -71,5 +72,10 @@ public class OMN2ToscaTest {
 	  Assert.assertTrue("relationship template should have the right source", topology.contains("<SourceElement ref=\"http://open-multinet.info/ontology/examples#dummy1\"/>"));
 	  Assert.assertTrue("relationship template should have the right target", topology.contains("<TargetElement ref=\"http://open-multinet.info/ontology/examples#container1\"/>"));
 	}
+	
+	private void testRelationshipTypes(String topology) {
+	  Assert.assertTrue("Should contain a relationship type element", topology.contains("<RelationshipType"));
+	  Assert.assertTrue("relationship type should have the right name", topology.contains("<RelationshipType name=\"deployedOn\""));
+  }
 
 }
