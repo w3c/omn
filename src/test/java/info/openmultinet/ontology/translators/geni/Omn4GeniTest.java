@@ -28,7 +28,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testModel2Manifest() throws JAXBException, InvalidModelException {
 		Model model = parser.getModel();
-		String rspec = OMN2Manifest.getRSpec(model);
+		String rspec = ManifestConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be a manifest", rspec.contains("type=\"manifest\""));
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
@@ -37,7 +37,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testModel2Advertisement() throws JAXBException, InvalidModelException {
 		Model model = parser.getModel();
-		String rspec = OMN2Advertisement.getRSpec(model);
+		String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be an advertisement", rspec.contains("type=\"advertisement\""));
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
@@ -46,7 +46,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testNTUAAdvertisement() throws JAXBException, InvalidModelException {
 		Model model = new Parser("/ntua_offer.ttl").getModel();
-		String rspec = OMN2Advertisement.getRSpec(model);
+		String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be an advertisement", rspec.contains("type=\"advertisement\""));
 		Assert.assertTrue("should be exclusive", rspec.contains("exclusive=\"true"));

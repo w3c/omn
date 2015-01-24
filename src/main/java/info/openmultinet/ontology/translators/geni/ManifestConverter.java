@@ -10,26 +10,30 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeConten
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.transform.stream.StreamSource;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class OMN2Manifest extends AbstractConverter {
+public class ManifestConverter extends AbstractConverter {
 
-	private static final Logger LOG = Logger.getLogger(OMN2Manifest.class.getName());
-	
+	private static final Logger LOG = Logger.getLogger(ManifestConverter.class.getName());
 	public static String getRSpec(Model model) throws JAXBException, InvalidModelException {
 		RSpecContents manifest = new RSpecContents();
 		manifest.setType(RspecTypeContents.MANIFEST);
@@ -91,5 +95,36 @@ public class OMN2Manifest extends AbstractConverter {
 		for (Statement implementer : implementedBy) {
 			node.setComponentManagerId(implementer.getResource().getURI());
 		}
+	}
+
+	public static Model getModel(InputStream stream) throws JAXBException {
+		Model model = createModelTemplate();
+		RSpecContents manifest = getManifest(stream);
+		
+		convertManifest2Model(manifest, model);
+		
+		return model;
+	}
+
+	private static void convertManifest2Model(RSpecContents manifest,
+			Model model) {
+		// TODO add the core stuff here
+	}
+
+	public static RSpecContents getManifest(InputStream stream) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(RSpecContents.class);
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+		JAXBElement<RSpecContents> rspec = unmarshaller.unmarshal(
+				new StreamSource(stream), RSpecContents.class);
+		return rspec.getValue();
+	}
+
+	public static Model createModelTemplate()
+			throws JAXBException {
+		Model model = ModelFactory.createDefaultModel();
+		Resource topology = model
+				.createResource(NAMESPACE + "manifest");
+		topology.addProperty(RDF.type, Omn_lifecycle.Manifest);
+		return model;
 	}
 }

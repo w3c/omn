@@ -29,13 +29,13 @@ public class RoundtripTest {
 		System.out.println("Converting to omn graph...");
 		System.out.println(System.currentTimeMillis());
 		
-		Model model = Advertisement2OMN.getModel(rspec);
+		Model model = AdvertisementConverter.getModel(rspec);
 		
 		System.out.println("Converting to large advertisement RSpec again...");
 		System.out.println(System.currentTimeMillis());
 		
 		InfModel infModel = new Parser(model).getModel();
-		String advertisement = OMN2Advertisement.getRSpec(infModel);
+		String advertisement = AdvertisementConverter.getRSpec(infModel);
 		
 		System.out.println("This is the result:");
 		System.out.println(System.currentTimeMillis());

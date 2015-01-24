@@ -1,7 +1,14 @@
 package info.openmultinet.ontology.translators;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.geni.RequestConverterTest;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -19,6 +26,7 @@ public abstract class AbstractConverter {
 	public final static String RSPEC_MANIFEST = "manifest";
 	public final static String RSPEC_ADVERTISEMENT = "advertisement";
 	public static final String TOSCA = "tosca";
+	protected static final String NAMESPACE = "http://open-multinet.info/example#";
 	
 	protected static void validateModel(List<Resource> groups) throws InvalidModelException {
 		if (groups.isEmpty())
@@ -27,7 +35,7 @@ public abstract class AbstractConverter {
 			throw new InvalidModelException("More than one group in model found");
 	}
 
-	protected static String toString(Object jaxbObject, String namespaces)
+	public static String toString(Object jaxbObject, String namespaces)
 			throws JAXBException {
 				JAXBContext jaxbContext = JAXBContext
 						.newInstance(namespaces);
@@ -39,4 +47,14 @@ public abstract class AbstractConverter {
 				return stringWriter.toString();
 			}
 
+	public static String toString(String filename) throws IOException {
+		String result = "";
+		InputStream inputStream = AbstractConverter.class.getResourceAsStream(filename);
+		BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+		 String line = null;
+		 while ((line = br.readLine()) != null) {
+			 result += line + "\n";
+		 }
+		 return result;
+	}
 }

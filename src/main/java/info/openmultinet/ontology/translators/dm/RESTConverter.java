@@ -3,10 +3,9 @@ package info.openmultinet.ontology.translators.dm;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.Advertisement2OMN;
-import info.openmultinet.ontology.translators.geni.OMN2Advertisement;
-import info.openmultinet.ontology.translators.geni.OMN2Manifest;
-import info.openmultinet.ontology.translators.geni.Request2OMN;
+import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
+import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.ServiceTypeNotFoundException;
@@ -56,9 +55,11 @@ public class RESTConverter {
 		Model model;
 		try {
 			if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
-				model = Request2OMN.getModel(stream);
+				model = RequestConverter.getModel(stream);
 			} else if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)) {
-				model = Advertisement2OMN.getModel(stream);
+				model = AdvertisementConverter.getModel(stream);
+			} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
+				model = ManifestConverter.getModel(stream);
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 				model = new Parser(stream).getModel(); 
 			} else if (AbstractConverter.TOSCA.equalsIgnoreCase(from)) {
@@ -68,10 +69,10 @@ public class RESTConverter {
 			}
 
 			if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
-				String rspec = OMN2Advertisement.getRSpec(model);
+				String rspec = AdvertisementConverter.getRSpec(model);
 				baos.write(rspec.getBytes());
 			} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(to)) {
-				String rspec = OMN2Manifest.getRSpec(model);
+				String rspec = ManifestConverter.getRSpec(model);
 				baos.write(rspec.getBytes());
 			} else if (AbstractConverter.TOSCA.equalsIgnoreCase(to)) {
 				String toplogy = OMN2Tosca.getTopology(model);
