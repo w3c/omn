@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                                          http://www.geni.net/resources/rspec/3/request.xsd"
+       xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="exclusive-0" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <sliver_type name="raw-pc">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops//FEDORA10-STD"/>
+    </sliver_type>
+  </node>
+</rspec>

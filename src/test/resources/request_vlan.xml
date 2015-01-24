@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                           http://www.geni.net/resources/rspec/3/request.xsd"
+       type="request" >
+  <node client_id="left"
+        exclusive="true">
+    <sliver_type name="raw-pc" />
+    <interface client_id="left:if0" />
+  </node>
+  <node client_id="right"
+        exclusive="true">
+    <sliver_type name="raw-pc" />
+    <interface client_id="right:if0" />
+  </node>
+  <link client_id="center">
+    <interface_ref client_id="left:if0" />
+    <interface_ref client_id="right:if0" />
+  </link>
+</rspec>

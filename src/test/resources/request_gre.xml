@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+http://www.geni.net/resources/rspec/3/request.xsd"
+       type="request">
+  <node client_id="left"
+        exclusive="true"
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm">
+    <sliver_type name="raw-pc" />
+    <interface client_id="left:if0">
+      <ip address="192.168.44.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="right"
+        exclusive="true"
+        component_manager_id="urn:publicid:IDN+uky.emulab.net+authority+cm">
+    <sliver_type name="raw-pc" />
+    <interface client_id="right:if0">
+      <ip address="192.168.44.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="center">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm" />
+    <component_manager name="urn:publicid:IDN+uky.emulab.net+authority+cm" />
+    <link_type name="gre-tunnel" />
+    <interface_ref client_id="left:if0" />
+    <interface_ref client_id="right:if0" />
+  </link>
+</rspec>
