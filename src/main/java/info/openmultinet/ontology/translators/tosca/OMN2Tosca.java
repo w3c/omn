@@ -173,12 +173,12 @@ public class OMN2Tosca extends AbstractConverter {
     Element sequence = types.createElement("xs:sequence");
     complexType.appendChild(sequence);
     
-    createProperties(nodeType, sequence);
+    createPropertyTypes(nodeType, sequence);
     
     return types.getDocumentElement();
   }
   
-  private static void createProperties(Resource nodeType, Element sequence){
+  private static void createPropertyTypes(Resource nodeType, Element sequence){
     ResIterator propertiesIterator = nodeType.getModel().listSubjectsWithProperty(RDFS.domain, nodeType);
     while(propertiesIterator.hasNext()){
       Resource property = propertiesIterator.next();
@@ -207,7 +207,7 @@ public class OMN2Tosca extends AbstractConverter {
       Resource nodeType = rangesIterator.next().getResource();
       //TODO: not so nice yet..
       if(!nodeType.equals(OWL.Thing) && !nodeType.equals(RDFS.Resource)){
-        createProperties(nodeType, subSequence);
+        createPropertyTypes(nodeType, subSequence);
       }
     }
     sequence.appendChild(element);
@@ -279,7 +279,7 @@ public class OMN2Tosca extends AbstractConverter {
     return nodeTypeResource.getLocalName()+"Properties";
   }
   
-  private static TNodeTemplate createNodeTemplate(Resource node, Resource nodeTypeResource) throws NodeTypeNotFoundException{
+  private static TNodeTemplate createNodeTemplate(Resource node, Resource nodeTypeResource) throws NodeTypeNotFoundException, RequiredResourceNotFoundException{
     TNodeTemplate nodeTemplate = objFactory.createTNodeTemplate();
     setNameAndTypeAndID(node, nodeTypeResource, nodeTemplate);
     
@@ -304,66 +304,57 @@ public class OMN2Tosca extends AbstractConverter {
     nodeTemplate.setType(type);
   }
   
-  private static Element createNodeProperties(Resource node, Resource nodeTypeResource, TNodeTemplate nodeTemplate) throws NodeTypeNotFoundException, NoPropertiesFoundException {
+  private static Element createNodeProperties(Resource node, Resource nodeType, TNodeTemplate nodeTemplate) throws NodeTypeNotFoundException, NoPropertiesFoundException, RequiredResourceNotFoundException {
     Document doc = createDocument();
     
-    String nodeTypeNamespace = getXMLNamespace(nodeTypeResource);
-    String nodeTypePrefix = getNSPrefix(nodeTypeResource);
-    Element nodeProperties = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+getNodeTypePropertiesName(nodeTypeResource));
+    String nodeTypeNamespace = getXMLNamespace(nodeType);
+    String nodeTypePrefix = getNSPrefix(nodeType);
+    Element nodeProperties = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+getNodeTypePropertiesName(nodeType));
     doc.appendChild(nodeProperties);
     
+    createProperties(node, nodeType, nodeProperties, nodeTypeNamespace, nodeTypePrefix);    
+    if(0 == nodeProperties.getChildNodes().getLength()){
+      throw new NoPropertiesFoundException();
+    }
+    
+    return doc.getDocumentElement();
+  }
+  
+  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, String prefix) throws RequiredResourceNotFoundException{
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
       Property property = propertyStatement.getPredicate();
       
-      if(property.hasProperty(RDFS.domain, nodeTypeResource)) {
+      if(property.hasProperty(RDFS.domain, nodeType)) {
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
-          createObjectProperty(node, propertyStatement, nodeProperties, nodeTypeNamespace, nodeTypePrefix);
+          createObjectProperty(node, propertyStatement, element, namespace, prefix);
         }
         else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
-          createDatatypeProperty(propertyStatement, nodeProperties, nodeTypeNamespace, nodeTypePrefix);
+          createDatatypeProperty(propertyStatement, element, namespace, prefix);
         }
       }
     }
-    if(0 == nodeProperties.getChildNodes().getLength()){
-      throw new NoPropertiesFoundException();
-    }
-    return doc.getDocumentElement();
   }
   
-  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String nodeTypeNamespace, String nodeTypePrefix){
-    Element parameter = nodeProperties.getOwnerDocument().createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
+  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, String prefix) throws RequiredResourceNotFoundException{
+    Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
     
     StmtIterator propertyValuesIterator = node.listProperties(propertyStatement.getPredicate());
     while(propertyValuesIterator.hasNext()){
       propertyStatement = propertyValuesIterator.next();
       
-      Element subNode = nodeProperties.getOwnerDocument().createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getResource().getLocalName());
+      Element subNode = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getResource().getLocalName());
       parameter.appendChild(subNode);
       
-      StmtIterator propertiesIterator = propertyStatement.getResource().listProperties();
-      while(propertiesIterator.hasNext()){
-        propertyStatement = propertiesIterator.next();
-        Property property = propertyStatement.getPredicate();
-        node = propertyStatement.getSubject();
-        
-        Resource propertyType = getPropertyResourceType(node);
-        if(property.hasProperty(RDFS.domain, propertyType)) {
-          if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
-            createObjectProperty(node, propertyStatement, subNode, nodeTypeNamespace, nodeTypePrefix);
-          }
-          else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
-            createDatatypeProperty(propertyStatement, subNode, nodeTypeNamespace, nodeTypePrefix);
-          }
-        }
-      }
-      
+      node = propertyStatement.getResource();
+      Resource nodeType = getPropertyResourceType(node);
+      createProperties(propertyStatement.getResource(), nodeType, subNode, namespace, prefix);
     }
     nodeProperties.appendChild(parameter);
   }
   
-  private static Resource getPropertyResourceType(Resource resource){
+  private static Resource getPropertyResourceType(Resource resource) throws RequiredResourceNotFoundException{
     StmtIterator typeIterator = resource.listProperties(RDF.type);
     while(typeIterator.hasNext()){
       Resource type = typeIterator.next().getResource();
@@ -372,12 +363,11 @@ public class OMN2Tosca extends AbstractConverter {
         return type;
       }
     }
-    //TODO: exception
-    return null;
+    throw new RequiredResourceNotFoundException("No applicable resource type could be found for resource "+resource);
   }
   
-  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String nodeTypeNamespace, String nodeTypePrefix){
-    Element parameter = nodeProperties.getOwnerDocument().createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
+  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, String prefix){
+    Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
     parameter.setTextContent(propertyStatement.getLiteral().getString());
     nodeProperties.appendChild(parameter);
   }
