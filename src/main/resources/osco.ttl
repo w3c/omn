@@ -28,6 +28,29 @@
             rdfs:range :ServiceContainer .
 
 
+
+###  http://opensdncore.org/ontology/image
+
+:image rdf:type owl:ObjectProperty ;
+       
+       rdfs:range :Image ;
+       
+       rdfs:domain :ServiceContainer .
+
+
+
+###  http://opensdncore.org/ontology/subnet
+
+:subnet rdf:type owl:ObjectProperty ;
+        
+        rdfs:domain :ServiceContainer ;
+        
+        rdfs:range :Subnet .
+
+
+
+
+
 #################################################################
 #
 #    Data properties
@@ -35,9 +58,96 @@
 #################################################################
 
 
+###  http://opensdncore.org/ontology/datacenter
+
+:datacenter rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            
+            rdfs:domain :Image ;
+            
+            rdfs:range xsd:string .
+
+
+
+###  http://opensdncore.org/ontology/flavour
+
+:flavour rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         
+         rdfs:domain :ServiceContainer ;
+         
+         rdfs:range xsd:string .
+
+
+
+###  http://opensdncore.org/ontology/floatingIp
+
+:floatingIp rdf:type owl:DatatypeProperty ;
+            
+            rdfs:domain :Subnet ;
+            
+            rdfs:range xsd:string .
+
+
+
+###  http://opensdncore.org/ontology/id
+
+:id rdf:type owl:DatatypeProperty ,
+             owl:FunctionalProperty ;
+    
+    rdfs:domain :Image ;
+    
+    rdfs:range xsd:string .
+
+
+
+###  http://opensdncore.org/ontology/location
+
+:location rdf:type owl:DatatypeProperty ;
+          
+          rdfs:domain :ServiceContainer ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://opensdncore.org/ontology/maxNumInst
+
+:maxNumInst rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            
+            rdfs:domain :ServiceContainer ;
+            
+            rdfs:range xsd:integer .
+
+
+
+###  http://opensdncore.org/ontology/mgmt
+
+:mgmt rdf:type owl:DatatypeProperty ,
+               owl:FunctionalProperty ;
+      
+      rdfs:domain :Subnet ;
+      
+      rdfs:range xsd:boolean .
+
+
+
+###  http://opensdncore.org/ontology/minNumInst
+
+:minNumInst rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            
+            rdfs:domain :ServiceContainer ;
+            
+            rdfs:range xsd:integer .
+
+
+
 ###  http://opensdncore.org/ontology/parameter1
 
-:parameter1 rdf:type owl:DatatypeProperty ;
+:parameter1 rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
             
             rdfs:domain :dummy ;
             
@@ -47,7 +157,8 @@
 
 ###  http://opensdncore.org/ontology/parameter2
 
-:parameter2 rdf:type owl:DatatypeProperty ;
+:parameter2 rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
             
             rdfs:domain :dummy ;
             
@@ -57,7 +168,8 @@
 
 ###  http://opensdncore.org/ontology/port
 
-:port rdf:type owl:DatatypeProperty ;
+:port rdf:type owl:DatatypeProperty ,
+               owl:FunctionalProperty ;
       
       rdfs:domain :dummy ;
       
@@ -67,7 +179,8 @@
 
 ###  http://opensdncore.org/ontology/test_param
 
-:test_param rdf:type owl:DatatypeProperty ;
+:test_param rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
             
             rdfs:domain :dummy ;
             
@@ -82,6 +195,7 @@
 #    Classes
 #
 #################################################################
+
 
 ###  http://opensdncore.org/ontology/Active
 
@@ -104,6 +218,12 @@
 :Error rdf:type owl:Class ;
        
        rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Image
+
+:Image rdf:type owl:Class .
 
 
 
@@ -188,6 +308,12 @@
 :Stopped rdf:type owl:Class ;
          
          rdfs:subClassOf tosca:State .
+
+
+
+###  http://opensdncore.org/ontology/Subnet
+
+:Subnet rdf:type owl:Class .
 
 
 
