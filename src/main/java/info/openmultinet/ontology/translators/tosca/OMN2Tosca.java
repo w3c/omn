@@ -42,6 +42,7 @@ import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -93,11 +94,7 @@ public class OMN2Tosca extends AbstractConverter {
       Resource nodeResource = nodeIterator.next();
       Resource nodeTypeResource = getNodeType(nodeResource);
       
-      try {
-        types.add(createTypes(nodeTypeResource));
-      } catch (NoPropertiesFoundException e) {
-        LOG.log(Level.INFO, "No properties found for node type "+nodeTypeResource.getURI());
-      }
+      types.add(createTypes(nodeTypeResource));
       
       definitionsContent.add(createNodeType(nodeTypeResource));
       
@@ -156,7 +153,7 @@ public class OMN2Tosca extends AbstractConverter {
     return targetNamespace;
   }
   
-  private static Element createTypes(Resource nodeType) throws NodeTypeNotFoundException, NoPropertiesFoundException{
+  private static Element createTypes(Resource nodeType) throws NodeTypeNotFoundException{
     Document types = createDocument();
     
     Element schema = types.createElement("xs:schema");
@@ -176,21 +173,48 @@ public class OMN2Tosca extends AbstractConverter {
     Element sequence = types.createElement("xs:sequence");
     complexType.appendChild(sequence);
     
-    StmtIterator propertiesIterator = nodeType.getModel().listStatements(null, RDFS.domain, nodeType);
-    if(!propertiesIterator.hasNext()){
-      throw new NoPropertiesFoundException();
-    }
-    while(propertiesIterator.hasNext()){
-      Resource property = propertiesIterator.next().getSubject();
-      Element type = createType(types, property);
-      sequence.appendChild(type);
-    }
+    createProperties(nodeType, sequence);
     
     return types.getDocumentElement();
   }
+  
+  private static void createProperties(Resource nodeType, Element sequence){
+    ResIterator propertiesIterator = nodeType.getModel().listSubjectsWithProperty(RDFS.domain, nodeType);
+    while(propertiesIterator.hasNext()){
+      Resource property = propertiesIterator.next();
+      if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
+        createObjectPropertyType(property, sequence);
+      }
+      else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
+        createDatatypePropertyType(property, sequence);
+      }
+    }
+  }
 
-  private static Element createType(Document types, Resource property) {
-    Element type = types.createElement("xs:element");
+  private static void createObjectPropertyType(Resource property, Element sequence) {
+    Element element = sequence.getOwnerDocument().createElement("xs:element");
+    sequence.appendChild(element);
+    element.setAttribute("name", property.getLocalName());
+    
+    Element complexType = sequence.getOwnerDocument().createElement("xs:complexType");
+    element.appendChild(complexType);
+    
+    Element subSequence = sequence.getOwnerDocument().createElement("xs:sequence");
+    complexType.appendChild(subSequence);
+    
+    StmtIterator rangesIterator = property.listProperties(RDFS.range);
+    while(rangesIterator.hasNext()){
+      Resource nodeType = rangesIterator.next().getResource();
+      //TODO: not so nice yet..
+      if(!nodeType.equals(OWL.Thing) && !nodeType.equals(RDFS.Resource)){
+        createProperties(nodeType, subSequence);
+      }
+    }
+    sequence.appendChild(element);
+  }
+
+  private static void createDatatypePropertyType(Resource property, Element sequence) {
+    Element type = sequence.getOwnerDocument().createElement("xs:element");
     type.setAttribute("name", property.getLocalName());
     Resource range = property.getRequiredProperty(RDFS.range).getResource();
     
@@ -200,7 +224,7 @@ public class OMN2Tosca extends AbstractConverter {
     else{
       type.setAttribute("type", range.getURI());
     }
-    return type;
+    sequence.appendChild(type);
   }
   
   private static Document createDocument(){
@@ -291,16 +315,27 @@ public class OMN2Tosca extends AbstractConverter {
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
-      if(propertyStatement.getPredicate().hasProperty(RDFS.domain, nodeTypeResource)) {
-        Element parameter = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
-        parameter.setTextContent(propertyStatement.getLiteral().getString());
-        nodeProperties.appendChild(parameter);
+      Resource property = propertyStatement.getPredicate();
+      if(property.hasProperty(RDFS.domain, nodeTypeResource)) {
+        if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
+          //TODO handle object properties
+        }
+        else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
+          Element parameter = createDatatypeProperty(propertyStatement, doc, nodeTypeNamespace, nodeTypePrefix);
+          nodeProperties.appendChild(parameter);
+        }
       }
     }
     if(0 == nodeProperties.getChildNodes().getLength()){
       throw new NoPropertiesFoundException();
     }
     return doc.getDocumentElement();
+  }
+  
+  private static Element createDatatypeProperty(Statement propertyStatement, Document doc, String nodeTypeNamespace, String nodeTypePrefix){
+    Element parameter = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+propertyStatement.getPredicate().getLocalName());
+    parameter.setTextContent(propertyStatement.getLiteral().getString());
+    return parameter;
   }
   
   private static Resource getNodeType(Resource node) throws NodeTypeNotFoundException {
