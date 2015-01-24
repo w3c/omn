@@ -19,10 +19,14 @@ public class ManifestConverterTest {
 
 	@Test
 	@Ignore
-	public void testSimpleManifest() throws JAXBException, InvalidModelException {
-		InputStream rspec = ManifestConverterTest.class.getResourceAsStream("/manifest_tobedefined.xml");
-		Model model = ManifestConverter.getModel(rspec);
-		ResIterator topology = model.listResourcesWithProperty(RDF.type, Omn_lifecycle.Manifest);
-		Assert.assertTrue("should have a topology (manifest)", topology.hasNext());
-	}	
+	public void testSimpleManifest() throws JAXBException,
+			InvalidModelException {
+		final InputStream rspec = ManifestConverterTest.class
+				.getResourceAsStream("/manifest_tobedefined.xml");
+		final Model model = ManifestConverter.getModel(rspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Manifest);
+		Assert.assertTrue("should have a topology (manifest)",
+				topology.hasNext());
+	}
 }

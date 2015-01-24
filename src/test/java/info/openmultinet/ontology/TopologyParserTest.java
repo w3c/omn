@@ -22,31 +22,33 @@ public class TopologyParserTest {
 	@Before
 	public void setup() throws InvalidModelException {
 		this.input = ParserTest.class.getResourceAsStream("/request.ttl");
-		this.parser = new TopologyParser(input);
+		this.parser = new TopologyParser(this.input);
 	}
 
 	@Test
 	public void testGetTopologies() throws IOException {
-		ResIterator groups = this.parser.getGroups();
+		final ResIterator groups = this.parser.getGroups();
 		Assert.assertTrue("expecting to find a group via reasoning",
 				groups.hasNext());
 
-		ResIterator resourcesInGraph = this.parser.getResources();
+		final ResIterator resourcesInGraph = this.parser.getResources();
 		Assert.assertTrue(
 				"expecting to find at least one resource in the graph",
 				resourcesInGraph.hasNext());
 
-		Resource topology = groups.next();
-		StmtIterator resourcesInTopology = this.parser.getResources(topology);
+		final Resource topology = groups.next();
+		final StmtIterator resourcesInTopology = this.parser
+				.getResources(topology);
 		Assert.assertTrue(
 				"expecting to find at least one resource in the topology",
 				resourcesInTopology.hasNext());
 
 		boolean hasMotor = false;
 		while (resourcesInTopology.hasNext()) {
-			Statement resource = resourcesInTopology.next();
-			if (resource.getResource().getURI().contains("Motor"))
+			final Statement resource = resourcesInTopology.next();
+			if (resource.getResource().getURI().contains("Motor")) {
 				hasMotor = true;
+			}
 		}
 		Assert.assertTrue("expecting to find at least one motor", hasMotor);
 	}

@@ -22,37 +22,41 @@ public class RequestConverterTest {
 
 	@Test
 	public void test() throws JAXBException, InvalidModelException {
-		InputStream rspec = RequestConverterTest.class.getResourceAsStream("/request.rspec");
-		Model model = RequestConverter.getModel(rspec);
-		ResIterator topology = model.listResourcesWithProperty(RDF.type, Omn_lifecycle.Request);
+		final InputStream rspec = RequestConverterTest.class
+				.getResourceAsStream("/request.rspec");
+		final Model model = RequestConverter.getModel(rspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Request);
 		Assert.assertTrue("should have a topology", topology.hasNext());
-		
+
 	}
 
 	@Test
-	public void testUnboundRequest() throws JAXBException, InvalidModelException, IOException {
-		String filename = "/request_unbound.xml";
-		InputStream inputRspec = RequestConverterTest.class.getResourceAsStream(filename);
-		System.out.println("Converting this input from '"+filename+"':");
+	public void testUnboundRequest() throws JAXBException,
+			InvalidModelException, IOException {
+		final String filename = "/request_unbound.xml";
+		final InputStream inputRspec = RequestConverterTest.class
+				.getResourceAsStream(filename);
+		System.out.println("Converting this input from '" + filename + "':");
 		System.out.println("===============================");
 		System.out.println(AbstractConverter.toString(filename));
 		System.out.println("===============================");
-		
-		Model model = RequestConverter.getModel(inputRspec);
-		ResIterator topology = model.listResourcesWithProperty(RDF.type, Omn_lifecycle.Request);
+
+		final Model model = RequestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Request);
 		Assert.assertTrue("should have a topology", topology.hasNext());
 		System.out.println("Generated this graph:");
 		System.out.println("===============================");
 		System.out.println(Parser.toString(model));
 		System.out.println("===============================");
-		
-		
-		InfModel infModel = new Parser(model).getModel();
-		String outputRspec = RequestConverter.getRSpec(infModel);
+
+		final InfModel infModel = new Parser(model).getModel();
+		final String outputRspec = RequestConverter.getRSpec(infModel);
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);
 		System.out.println("===============================");
 	}
-	
+
 }

@@ -39,136 +39,144 @@ public class AdvertisementConverter extends AbstractConverter {
 			.getLogger(AdvertisementConverter.class.getName());
 
 	@SuppressWarnings("rawtypes")
-	public static Model getModel(InputStream input) throws JAXBException,
-			InvalidModelException {
+	public static Model getModel(final InputStream input) throws JAXBException,
+	InvalidModelException {
 
-		RSpecContents rspecRequest = getRspec(input);
+		final RSpecContents rspecRequest = AdvertisementConverter
+				.getRspec(input);
 
-		Model model = ModelFactory.createDefaultModel();
-		Resource topology = model.createResource(PREFIX + "#advertisement");
+		final Model model = ModelFactory.createDefaultModel();
+		final Resource topology = model
+				.createResource(AdvertisementConverter.PREFIX
+						+ "#advertisement");
 		topology.addProperty(RDF.type, Omn_lifecycle.Offering);
 
 		@SuppressWarnings("unchecked")
-		List<JAXBElement<?>> rspecObjects = (List) rspecRequest
-				.getAnyOrNodeOrLink();
-		for (Object rspecObject : rspecObjects) {
-			tryExtractNode(rspecObject, topology);
-			tryExtractLink(rspecObject, topology);
+		final List<JAXBElement<?>> rspecObjects = (List) rspecRequest
+		.getAnyOrNodeOrLink();
+		for (final Object rspecObject : rspecObjects) {
+			AdvertisementConverter.tryExtractNode(rspecObject, topology);
+			AdvertisementConverter.tryExtractLink(rspecObject, topology);
 		}
 
 		return model;
 	}
 
-	private static RSpecContents getRspec(InputStream input)
+	private static RSpecContents getRspec(final InputStream input)
 			throws JAXBException {
-		JAXBContext context = JAXBContext.newInstance(RSpecContents.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		JAXBElement<RSpecContents> rspec = unmarshaller.unmarshal(
+		final JAXBContext context = JAXBContext
+				.newInstance(RSpecContents.class);
+		final Unmarshaller unmarshaller = context.createUnmarshaller();
+		final JAXBElement<RSpecContents> rspec = unmarshaller.unmarshal(
 				new StreamSource(input), RSpecContents.class);
-		RSpecContents request = rspec.getValue();
+		final RSpecContents request = rspec.getValue();
 		return request;
 	}
 
-	private static void tryExtractLink(Object rspecObject, Resource topology) {
+	private static void tryExtractLink(final Object rspecObject,
+			final Resource topology) {
 		try {
 			@SuppressWarnings("unchecked")
-			JAXBElement<LinkContents> nodeJaxb = (JAXBElement<LinkContents>) rspecObject;
-			LinkContents rspecLink = nodeJaxb.getValue();
-			Resource omnLink = topology.getModel().createResource(
+			final JAXBElement<LinkContents> nodeJaxb = (JAXBElement<LinkContents>) rspecObject;
+			final LinkContents rspecLink = nodeJaxb.getValue();
+			final Resource omnLink = topology.getModel().createResource(
 					rspecLink.getComponentId());
 			omnLink.addProperty(RDF.type, Omn_resource.Link);
 			omnLink.addProperty(Omn.isResourceOf, topology);
 			topology.addProperty(Omn.hasResource, omnLink);
-		} catch (ClassCastException e) {
-			LOG.finer(e.getMessage());
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
 	}
 
-	private static void tryExtractNode(Object object, Resource topology) {
+	private static void tryExtractNode(final Object object,
+			final Resource topology) {
 		try {
 			@SuppressWarnings("unchecked")
-			JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
-			NodeContents rspecNode = nodeJaxb.getValue();
-			Resource omnNode = topology.getModel().createResource(
+			final JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
+			final NodeContents rspecNode = nodeJaxb.getValue();
+			final Resource omnNode = topology.getModel().createResource(
 					rspecNode.getComponentId());
 			omnNode.addProperty(RDF.type, Omn_resource.Node);
 			omnNode.addProperty(Omn.isResourceOf, topology);
 			topology.addProperty(Omn.hasResource, omnNode);
-		} catch (ClassCastException e) {
-			LOG.finer(e.getMessage());
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
 	}
 
 	private static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.advertisement";
 
-	public static String getRSpec(Model model) throws JAXBException,
-			InvalidModelException {
-		RSpecContents advertisement = new RSpecContents();
+	public static String getRSpec(final Model model) throws JAXBException,
+	InvalidModelException {
+		final RSpecContents advertisement = new RSpecContents();
 		advertisement.setType(RspecTypeContents.ADVERTISEMENT);
-		advertisement.setGeneratedBy(VENDOR);
-		setGeneratedTime(advertisement);
+		advertisement.setGeneratedBy(AbstractConverter.VENDOR);
+		AdvertisementConverter.setGeneratedTime(advertisement);
 
-		model2rspec(model, advertisement);
-		JAXBElement<RSpecContents> rspec = new ObjectFactory()
-				.createRspec(advertisement);
-		return toString(rspec, JAXB);
+		AdvertisementConverter.model2rspec(model, advertisement);
+		final JAXBElement<RSpecContents> rspec = new ObjectFactory()
+		.createRspec(advertisement);
+		return AbstractConverter.toString(rspec, AdvertisementConverter.JAXB);
 	}
 
-	private static void model2rspec(Model model, RSpecContents manifest)
-			throws InvalidModelException {
-		List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
+	private static void model2rspec(final Model model,
+			final RSpecContents manifest) throws InvalidModelException {
+		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Group).toList();
-		validateModel(groups);
-		Resource group = groups.iterator().next();
+		AbstractConverter.validateModel(groups);
+		final Resource group = groups.iterator().next();
 
-		List<Statement> resources = group.listProperties(Omn.hasResource)
+		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
-		convertStatementsToNodesAndLinks(manifest, resources);
+		AdvertisementConverter.convertStatementsToNodesAndLinks(manifest,
+				resources);
 	}
 
 	private static void convertStatementsToNodesAndLinks(
-			RSpecContents manifest, List<Statement> resources) {
-		for (Statement resource : resources) {
+			final RSpecContents manifest, final List<Statement> resources) {
+		for (final Statement resource : resources) {
 			// @todo: check type of resource here and not only generate nodes
-			NodeContents node = new NodeContents();
+			final NodeContents node = new NodeContents();
 
-			setComponentDetails(resource, node);
-			setComponentManagerId(resource, node);
+			AdvertisementConverter.setComponentDetails(resource, node);
+			AdvertisementConverter.setComponentManagerId(resource, node);
 
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
 		}
 	}
 
-	private static void setComponentDetails(Statement resource,
-			NodeContents node) {
+	private static void setComponentDetails(final Statement resource,
+			final NodeContents node) {
 		node.setComponentId(resource.getResource().getURI());
 		node.setComponentName(resource.getResource().getLocalName());
-		if (resource.getResource().hasProperty(Omn_resource.isExclusive))
+		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
 			node.setExclusive(resource.getResource()
 					.getProperty(Omn_resource.isExclusive).getBoolean());
+		}
 	}
 
-	private static void setComponentManagerId(Statement resource,
-			NodeContents node) {
-		List<Statement> implementedBy = resource.getResource()
+	private static void setComponentManagerId(final Statement resource,
+			final NodeContents node) {
+		final List<Statement> implementedBy = resource.getResource()
 				.listProperties(Omn_lifecycle.implementedBy).toList();
-		for (Statement implementer : implementedBy) {
+		for (final Statement implementer : implementedBy) {
 			node.setComponentManagerId(implementer.getResource().getURI());
 		}
 	}
 
-	private static void setGeneratedTime(RSpecContents manifest) {
-		GregorianCalendar gregorianCalendar = new GregorianCalendar();
+	private static void setGeneratedTime(final RSpecContents manifest) {
+		final GregorianCalendar gregorianCalendar = new GregorianCalendar();
 		gregorianCalendar.setTime(new Date(System.currentTimeMillis()));
 		XMLGregorianCalendar xmlGrogerianCalendar;
 		try {
 			xmlGrogerianCalendar = DatatypeFactory.newInstance()
 					.newXMLGregorianCalendar(gregorianCalendar);
 			manifest.setGenerated(xmlGrogerianCalendar);
-		} catch (DatatypeConfigurationException e) {
-			LOG.info(e.getMessage());
+		} catch (final DatatypeConfigurationException e) {
+			AdvertisementConverter.LOG.info(e.getMessage());
 		}
 	}
 

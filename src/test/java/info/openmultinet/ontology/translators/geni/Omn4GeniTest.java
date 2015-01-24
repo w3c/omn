@@ -21,34 +21,42 @@ public class Omn4GeniTest {
 
 	@BeforeClass
 	public static void setup() throws InvalidModelException {
-		input = ParserTest.class.getResourceAsStream("/request.ttl");
-		parser = new Parser(input);
+		Omn4GeniTest.input = ParserTest.class
+				.getResourceAsStream("/request.ttl");
+		Omn4GeniTest.parser = new Parser(Omn4GeniTest.input);
 	}
 
 	@Test
-	public void testModel2Manifest() throws JAXBException, InvalidModelException {
-		Model model = parser.getModel();
-		String rspec = ManifestConverter.getRSpec(model);
+	public void testModel2Manifest() throws JAXBException,
+			InvalidModelException {
+		final Model model = Omn4GeniTest.parser.getModel();
+		final String rspec = ManifestConverter.getRSpec(model);
 		System.out.println(rspec);
-		Assert.assertTrue("should be a manifest", rspec.contains("type=\"manifest\""));
+		Assert.assertTrue("should be a manifest",
+				rspec.contains("type=\"manifest\""));
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
 
 	@Test
-	public void testModel2Advertisement() throws JAXBException, InvalidModelException {
-		Model model = parser.getModel();
-		String rspec = AdvertisementConverter.getRSpec(model);
+	public void testModel2Advertisement() throws JAXBException,
+			InvalidModelException {
+		final Model model = Omn4GeniTest.parser.getModel();
+		final String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
-		Assert.assertTrue("should be an advertisement", rspec.contains("type=\"advertisement\""));
+		Assert.assertTrue("should be an advertisement",
+				rspec.contains("type=\"advertisement\""));
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
 
 	@Test
-	public void testNTUAAdvertisement() throws JAXBException, InvalidModelException {
-		Model model = new Parser("/ntua_offer.ttl").getModel();
-		String rspec = AdvertisementConverter.getRSpec(model);
+	public void testNTUAAdvertisement() throws JAXBException,
+			InvalidModelException {
+		final Model model = new Parser("/ntua_offer.ttl").getModel();
+		final String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
-		Assert.assertTrue("should be an advertisement", rspec.contains("type=\"advertisement\""));
-		Assert.assertTrue("should be exclusive", rspec.contains("exclusive=\"true"));
+		Assert.assertTrue("should be an advertisement",
+				rspec.contains("type=\"advertisement\""));
+		Assert.assertTrue("should be exclusive",
+				rspec.contains("exclusive=\"true"));
 	}
 }
