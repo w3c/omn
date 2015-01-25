@@ -29,7 +29,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testModel2Manifest() throws JAXBException,
 			InvalidModelException {
-		final Model model = Omn4GeniTest.parser.getModel();
+		final Model model = Omn4GeniTest.parser.getInfModel();
 		final String rspec = ManifestConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be a manifest",
@@ -40,7 +40,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testModel2Advertisement() throws JAXBException,
 			InvalidModelException {
-		final Model model = Omn4GeniTest.parser.getModel();
+		final Model model = Omn4GeniTest.parser.getInfModel();
 		final String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be an advertisement",
@@ -51,7 +51,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testNTUAAdvertisement() throws JAXBException,
 			InvalidModelException {
-		final Model model = new Parser("/ntua_offer.ttl").getModel();
+		final Model model = new Parser("/ntua_offer.ttl").getInfModel();
 		final String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be an advertisement",

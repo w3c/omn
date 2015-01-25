@@ -12,7 +12,6 @@ import java.io.StringWriter;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -21,16 +20,12 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 public class Tosca2OMNTest {
 
-	private InputStream input;
-
-	@Before
-	public void setup() throws InvalidModelException {
-		this.input = this.getClass().getResourceAsStream("/tosca-request.xml");
-	}
 
 	@Test
 	public void testGetTopology() throws JAXBException, InvalidModelException, UnsupportedException {
-		final Model model = Tosca2OMN.getModel(this.input);
+	  InputStream input = this.getClass().getResourceAsStream("/tosca-request.xml");
+	  
+	  final Model model = Tosca2OMN.getModel(input);
 
 		final String serializedModel = Tosca2OMNTest.serializeModel(model,
 				"TTL");

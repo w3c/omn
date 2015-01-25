@@ -36,7 +36,8 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class Parser {
 
 	private static String NL = System.getProperty("line.separator");
-	protected InfModel model;
+	private Model model;
+	protected InfModel infModel;
 	private static Reasoner reasoner;
 
 	// @todo: add support for all serializations, not only TTL
@@ -64,11 +65,12 @@ public class Parser {
 	}
 
 	public void init(final Model model) throws InvalidModelException {
+	  this.model = model;
 		Parser.reasoner = Parser.createReasoner();
-		this.model = Parser.createInfModel(model);
-		if (!Parser.isValid(this.model)) {
+		this.infModel = Parser.createInfModel(model);
+		if (!Parser.isValid(this.infModel)) {
 			throw new InvalidModelException(
-					Parser.getValidationReport(this.model));
+					Parser.getValidationReport(this.infModel));
 		}
 	}
 
@@ -124,7 +126,7 @@ public class Parser {
 		queryString = Parser.getDefaultPrefixes() + queryString;
 		final Query query = QueryFactory.create(queryString);
 		final QueryExecution qexec = QueryExecutionFactory.create(query,
-				this.model);
+				this.infModel);
 		final ResultSetRewindable rewindable = ResultSetFactory
 				.makeRewindable(qexec.execSelect());
 		return rewindable;
@@ -146,7 +148,7 @@ public class Parser {
 
 	public void printStatements(final Resource s, final Property p,
 			final Resource o) {
-		for (final StmtIterator i = this.model.listStatements(s, p, o); i
+		for (final StmtIterator i = this.infModel.listStatements(s, p, o); i
 				.hasNext();) {
 			final Statement stmt = i.nextStatement();
 			System.out.println(" - " + PrintUtil.print(stmt));
@@ -162,10 +164,14 @@ public class Parser {
 		return result;
 	}
 
-	public InfModel getModel() {
-		return this.model;
+	public InfModel getInfModel() {
+		return this.infModel;
 	}
 
+	public Model getModel(){
+	  return this.model;
+	}
+	
 	public static boolean isValid(final InfModel model) {
 		final ValidityReport validity = model.validate();
 		return validity.isValid();
@@ -193,11 +199,11 @@ public class Parser {
 	}
 
 	public boolean isValid() {
-		return Parser.isValid(this.model);
+		return Parser.isValid(this.infModel);
 	}
 
 	public String getValidationReport() {
-		return Parser.getValidationReport(this.model);
+		return Parser.getValidationReport(this.infModel);
 	}
 
 }

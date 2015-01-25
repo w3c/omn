@@ -70,7 +70,7 @@ public class RESTConverter {
 			} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
 				model = ManifestConverter.getModel(stream);
 			} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
-				model = new Parser(stream).getModel();
+				model = new Parser(stream).getInfModel();
 			} else if (AbstractConverter.TOSCA.equalsIgnoreCase(from)) {
 				model = Tosca2OMN.getModel(stream);
 			} else {

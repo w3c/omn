@@ -51,7 +51,7 @@ public class RequestConverterTest {
 		System.out.println(Parser.toString(model));
 		System.out.println("===============================");
 
-		final InfModel infModel = new Parser(model).getModel();
+		final InfModel infModel = new Parser(model).getInfModel();
 		final String outputRspec = RequestConverter.getRSpec(infModel);
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");

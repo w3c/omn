@@ -17,11 +17,11 @@ public class TopologyParser extends Parser {
 	}
 
 	public ResIterator getGroups() {
-		return this.model.listSubjectsWithProperty(RDF.type, Omn.Group);
+		return this.infModel.listSubjectsWithProperty(RDF.type, Omn.Group);
 	}
 
 	public ResIterator getResources() {
-		return this.model.listSubjectsWithProperty(Omn.hasResource);
+		return this.infModel.listSubjectsWithProperty(Omn.hasResource);
 	}
 
 	public StmtIterator getResources(final Resource group) {

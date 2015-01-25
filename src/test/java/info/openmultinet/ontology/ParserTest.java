@@ -52,11 +52,11 @@ public class ParserTest {
 			final String groupURI = node.asNode().getURI();
 			System.out
 			.println("Details about the requested group: " + groupURI);
-			final Resource requestedGroupDetails = this.parser.getModel()
+			final Resource requestedGroupDetails = this.parser.getInfModel()
 					.getResource(groupURI);
 			this.parser.printStatements(requestedGroupDetails, null, null);
 
-			final Property requestedResourceDetails = this.parser.getModel()
+			final Property requestedResourceDetails = this.parser.getInfModel()
 					.getProperty(Omn.hasResource.getURI());
 			this.parser.printStatements(null, requestedResourceDetails, null);
 		}
@@ -71,7 +71,7 @@ public class ParserTest {
 
 	@Test
 	public void testModelQuery() throws IOException {
-		final Model model = this.parser.getModel();
+		final Model model = this.parser.getInfModel();
 		ResIterator requests;
 
 		requests = model.listSubjectsWithProperty(RDF.type,

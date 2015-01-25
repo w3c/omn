@@ -11,26 +11,19 @@ import java.io.InputStream;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 
 public class OMN2ToscaTest {
 
-	private InputStream input;
-	private Parser parser;
-
-	@Before
-	public void setup() throws InvalidModelException {
-		this.input = this.getClass().getResourceAsStream("/tosca-request.ttl");
-		this.parser = new Parser(this.input);
-	}
-
 	@Test
 	public void testGetTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException {
-		final InfModel model = this.parser.getModel();
+	  InputStream input = this.getClass().getResourceAsStream("/tosca-request.ttl");
+	  Parser parser = new Parser(input);
+	  
+		final InfModel model = parser.getInfModel();
 		final String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
 

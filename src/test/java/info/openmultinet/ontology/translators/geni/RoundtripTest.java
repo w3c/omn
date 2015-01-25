@@ -32,7 +32,7 @@ public class RoundtripTest {
 		System.out.println("Converting to large advertisement RSpec again...");
 		System.out.println(System.currentTimeMillis());
 
-		final InfModel infModel = new Parser(model).getModel();
+		final InfModel infModel = new Parser(model).getInfModel();
 		final String advertisement = AdvertisementConverter.getRSpec(infModel);
 
 		System.out.println("This is the result:");

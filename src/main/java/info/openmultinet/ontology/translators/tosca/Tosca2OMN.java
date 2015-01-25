@@ -184,6 +184,7 @@ public class Tosca2OMN extends AbstractConverter {
   private static Resource createTopology(Model model, TServiceTemplate serviceTemplate){
     Resource topologyResource = model.createResource(serviceTemplate.getId());
     topologyResource.addProperty(RDF.type, Omn.Topology);
+    topologyResource.addProperty(RDF.type, OWL2.NamedIndividual);
     return topologyResource;
   }
   
@@ -213,8 +214,9 @@ public class Tosca2OMN extends AbstractConverter {
       
       Node childElement = propertyNode.getChildNodes().item(0);
       if(childElement.getNodeType() == Node.ELEMENT_NODE){
-        Resource propertyValue = model.createResource(namespace + childElement.getLocalName());
+        Resource propertyValue = model.createResource(node.getNameSpace() + childElement.getLocalName());
         propertyValue.addProperty(RDF.type, propertyRange);
+        propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
         processPropertiesElement(propertyValue, model, childElement);
         node.addProperty(property, propertyValue);
         
@@ -242,6 +244,7 @@ public class Tosca2OMN extends AbstractConverter {
     final QName type = nodeTemplate.getType();
     final Resource nodeType = createResourceFromQName(type, model);
     node.addProperty(RDF.type, nodeType);
+    node.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void createRelationship(TRelationshipTemplate relationshipTemplate, Definitions definitions, Model model) throws UnsupportedException {
@@ -282,6 +285,7 @@ public class Tosca2OMN extends AbstractConverter {
     final QName type = relationshipTemplate.getType();
     final Resource relationshipType = createResourceFromQName(type, model);
     relationship.addProperty(RDF.type, relationshipType);
+    relationship.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void createStates(final TNodeType nodeType, final Model model) {
