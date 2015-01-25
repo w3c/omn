@@ -10,6 +10,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TExtensibleElements;
 import info.openmultinet.ontology.translators.tosca.jaxb.TNodeTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TNodeType;
 import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipTemplate;
+import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipType;
 import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
@@ -58,6 +59,7 @@ public class Tosca2OMN extends AbstractConverter {
     final Model model = ModelFactory.createDefaultModel();
     
     processNodeTypes(definitions, model);
+    processRelationshipTypes(definitions, model);
     processTypes(definitions, model);
     processTemplates(definitions, model);
     
@@ -249,6 +251,30 @@ public class Tosca2OMN extends AbstractConverter {
     return nodeTypeResource;
   }
   
+  private static void processRelationshipTypes(final Definitions definitions, final Model model) {
+    for (final TExtensibleElements element : definitions
+        .getServiceTemplateOrNodeTypeOrNodeTypeImplementation()) {
+      if (element instanceof TRelationshipType) {
+        createRelationshipType((TRelationshipType) element, model);
+      }
+    }
+  }
+  
+  private static void createRelationshipType(TRelationshipType relationshipType, Model model) {
+    String namespace = relationshipType.getTargetNamespace();
+    Resource relationshipTypeResource = model.createResource(namespace + relationshipType.getName());
+    relationshipTypeResource.addProperty(RDF.type, OWL2.ObjectProperty);
+    relationshipTypeResource.addProperty(RDFS.subPropertyOf, Tosca.relatesTo);
+    
+    QName validSource = relationshipType.getValidSource().getTypeRef();
+    Resource source = createResourceFromQName(validSource, model);
+    relationshipTypeResource.addProperty(RDFS.domain, source);
+    
+    QName validTarget = relationshipType.getValidTarget().getTypeRef();
+    Resource target = createResourceFromQName(validTarget, model);
+    relationshipTypeResource.addProperty(RDFS.range, target);
+  }
+
   private static Resource createResourceFromQName(final QName qname, final Model model) {
     return model.createResource(qname.getNamespaceURI() + qname.getLocalPart());
   }

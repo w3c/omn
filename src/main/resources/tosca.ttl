@@ -1,4 +1,4 @@
-@prefix : <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> .
+@prefix : <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -6,9 +6,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@base <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> .
+@base <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
 
-<http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> rdf:type owl:Ontology .
+<http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> rdf:type owl:Ontology .
 
 
 #################################################################

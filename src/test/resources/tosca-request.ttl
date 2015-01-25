@@ -5,7 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix osco: <http://opensdncore.org/ontology/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#> .
+@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
 
 <http://open-multinet.info/ontology/examples> rdf:type owl:Ontology .
 
