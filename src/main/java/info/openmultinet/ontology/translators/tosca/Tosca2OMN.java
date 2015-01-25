@@ -14,6 +14,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TRelationshipType;
 import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
+import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
@@ -164,24 +165,35 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
   
-  private static void processServiceTemplate(final TServiceTemplate serviceTemplate, final Definitions definitions,
-      final Model model) throws UnsupportedException {
+  private static void processServiceTemplate(TServiceTemplate serviceTemplate, Definitions definitions, Model model) throws UnsupportedException {
     final TTopologyTemplate topologyTemplate = serviceTemplate.getTopologyTemplate();
+    
+    Resource topologyResource = createTopology(model, serviceTemplate);
+    
     for (final TEntityTemplate entityTemplate : topologyTemplate.getNodeTemplateOrRelationshipTemplate()) {
       if (entityTemplate instanceof TNodeTemplate) {
-        createNode((TNodeTemplate) entityTemplate, definitions, model);
+        Resource node = createNode((TNodeTemplate) entityTemplate, definitions, model);
+        topologyResource.addProperty(Omn.hasResource, node);
+        
       } else if (entityTemplate instanceof TRelationshipTemplate) {
         createRelationship((TRelationshipTemplate) entityTemplate, definitions, model);
       }
     }
   }
   
-  private static void createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
+  private static Resource createTopology(Model model, TServiceTemplate serviceTemplate){
+    Resource topologyResource = model.createResource(serviceTemplate.getId());
+    topologyResource.addProperty(RDF.type, Omn.Topology);
+    return topologyResource;
+  }
+  
+  private static Resource createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
       final Model model) throws UnsupportedException {
     final String namespace = definitions.getTargetNamespace();
     final Resource node = model.createResource(namespace + nodeTemplate.getName());
     setNodeType(nodeTemplate, node, model);
     setNodeProperties(nodeTemplate, node, model);
+    return node;
   }
   
   private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) throws UnsupportedException {
