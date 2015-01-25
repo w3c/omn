@@ -197,13 +197,16 @@ public class OMN2Tosca extends AbstractConverter {
     sequence.appendChild(element);
     element.setAttribute("name", property.getLocalName());
     
+    Resource range = calculateInferredPropertyValue(property, RDFS.range);
+    element.setAttribute("type", range.getLocalName());
+    
     Element complexType = sequence.getOwnerDocument().createElement("xs:complexType");
     element.appendChild(complexType);
     
     Element subSequence = sequence.getOwnerDocument().createElement("xs:sequence");
     complexType.appendChild(subSequence);
     
-    Resource range = calculateInferredPropertyValue(property, RDFS.range);
+    
     createPropertyTypes(range, subSequence);
     
     sequence.appendChild(element);
@@ -483,7 +486,7 @@ public class OMN2Tosca extends AbstractConverter {
     try {
       docBuilder = docFactory.newDocumentBuilder();
     } catch (ParserConfigurationException e) {
-      e.printStackTrace();
+      LOG.log(Level.SEVERE, e.getMessage());
     }
     return docBuilder.newDocument();
   }
