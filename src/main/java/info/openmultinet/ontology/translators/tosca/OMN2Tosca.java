@@ -43,6 +43,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.OWL;
+import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -52,7 +53,7 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static ObjectFactory objFactory = new ObjectFactory();
   
-  public static String getTopology(Model model) throws JAXBException, InvalidModelException, NodeTypeNotFoundException, MultipleNamespacesException, RequiredResourceNotFoundException {
+  public static String getTopology(Model model) throws JAXBException, InvalidModelException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Definitions definitions = objFactory.createDefinitions();
     
     model2Tosca(model, definitions);
@@ -60,12 +61,12 @@ public class OMN2Tosca extends AbstractConverter {
     return toString(definitions, "info.openmultinet.ontology.translators.tosca.jaxb");
   }
   
-  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, NodeTypeNotFoundException, MultipleNamespacesException, RequiredResourceNotFoundException {
+  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
     setTargetNamespaceAndName(definitions, model);
     createServiceTemplates(definitions, model);
   }
   
-  private static void createServiceTemplates(TDefinitions definitions, Model model) throws MultipleNamespacesException, NodeTypeNotFoundException, RequiredResourceNotFoundException{
+  private static void createServiceTemplates(TDefinitions definitions, Model model) throws MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException{
     List<TExtensibleElements> definitionsContent = definitions.getServiceTemplateOrNodeTypeOrNodeTypeImplementation();
 
     Types definitionsTypes = objFactory.createTDefinitionsTypes();
@@ -79,7 +80,7 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
 
-  private static void createServiceTemplate(Model model, List<TExtensibleElements> definitionsContent, List<Object> types, Resource topologyResource) throws NodeTypeNotFoundException, RequiredResourceNotFoundException {
+  private static void createServiceTemplate(Model model, List<TExtensibleElements> definitionsContent, List<Object> types, Resource topologyResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     TServiceTemplate serviceTemplate = objFactory.createTServiceTemplate();
     definitionsContent.add(serviceTemplate);
     serviceTemplate.setId(topologyResource.getURI());
@@ -92,7 +93,7 @@ public class OMN2Tosca extends AbstractConverter {
     ResIterator nodeIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
     while(nodeIterator.hasNext()){
       Resource nodeResource = nodeIterator.next();
-      Resource nodeTypeResource = getNodeType(nodeResource);
+      Resource nodeTypeResource = calculateInferredPropertyValue(nodeResource, RDF.type);
       
       types.add(createTypes(nodeTypeResource));
       
@@ -146,14 +147,14 @@ public class OMN2Tosca extends AbstractConverter {
     while(iter.hasNext()){
       String namespace = iter.next().getNameSpace();
       if(!targetNamespace.isEmpty() && !targetNamespace.equals(namespace)){
-        throw new MultipleNamespacesException("Multiple topology namespaces are found: "+targetNamespace+" and "+namespace+" . This is not supported by TOSCA");
+        throw new MultipleNamespacesException("Multiple topology namespaces are found: "+targetNamespace+" and "+namespace+" . This is not supported by TOSCA.");
       }
       targetNamespace = namespace;
     }
     return targetNamespace;
   }
   
-  private static Element createTypes(Resource nodeType) throws NodeTypeNotFoundException{
+  private static Element createTypes(Resource nodeType) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     Document types = createDocument();
     
     Element schema = types.createElement("xs:schema");
@@ -178,7 +179,7 @@ public class OMN2Tosca extends AbstractConverter {
     return types.getDocumentElement();
   }
   
-  private static void createPropertyTypes(Resource nodeType, Element sequence){
+  private static void createPropertyTypes(Resource nodeType, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     ResIterator propertiesIterator = nodeType.getModel().listSubjectsWithProperty(RDFS.domain, nodeType);
     while(propertiesIterator.hasNext()){
       Resource property = propertiesIterator.next();
@@ -191,7 +192,7 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
 
-  private static void createObjectPropertyType(Resource property, Element sequence) {
+  private static void createObjectPropertyType(Resource property, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Element element = sequence.getOwnerDocument().createElement("xs:element");
     sequence.appendChild(element);
     element.setAttribute("name", property.getLocalName());
@@ -202,21 +203,16 @@ public class OMN2Tosca extends AbstractConverter {
     Element subSequence = sequence.getOwnerDocument().createElement("xs:sequence");
     complexType.appendChild(subSequence);
     
-    StmtIterator rangesIterator = property.listProperties(RDFS.range);
-    while(rangesIterator.hasNext()){
-      Resource nodeType = rangesIterator.next().getResource();
-      //TODO: not so nice yet..
-      if(!nodeType.equals(OWL.Thing) && !nodeType.equals(RDFS.Resource)){
-        createPropertyTypes(nodeType, subSequence);
-      }
-    }
+    Resource range = calculateInferredPropertyValue(property, RDFS.range);
+    createPropertyTypes(range, subSequence);
+    
     sequence.appendChild(element);
   }
-
-  private static void createDatatypePropertyType(Resource property, Element sequence) {
+  
+  private static void createDatatypePropertyType(Resource property, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Element type = sequence.getOwnerDocument().createElement("xs:element");
     type.setAttribute("name", property.getLocalName());
-    Resource range = property.getRequiredProperty(RDFS.range).getResource();
+    Resource range = calculateInferredPropertyValue(property, RDFS.range);
     
     if(range.getNameSpace().equals("http://www.w3.org/2001/XMLSchema#")){
       type.setAttribute("type", "xs:"+range.getLocalName());
@@ -225,17 +221,6 @@ public class OMN2Tosca extends AbstractConverter {
       type.setAttribute("type", range.getURI());
     }
     sequence.appendChild(type);
-  }
-  
-  private static Document createDocument(){
-    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder docBuilder = null;
-    try {
-      docBuilder = docFactory.newDocumentBuilder();
-    } catch (ParserConfigurationException e) {
-      e.printStackTrace();
-    }
-    return docBuilder.newDocument();
   }
   
   private static TNodeType createNodeType(Resource nodeTypeResource){
@@ -263,14 +248,14 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setInstanceStates(Resource nodeTypeResource, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    StmtIterator stateIterator = nodeTypeResource.getModel().listStatements(null, RDFS.subClassOf, Tosca.State);
-    while(stateIterator.hasNext()){
-      Resource state = stateIterator.next().getSubject();
-      if(!state.equals(Tosca.State)){
-        InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
-        instanceState.setState(state.getLocalName());
-        instanceStates.getInstanceState().add(instanceState);
-      }
+    List<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDFS.subClassOf, Tosca.State).toList();    
+    List<Resource> redundantStates = calculateRedundantResources(states);
+    states.removeAll(redundantStates);
+    
+    for(Resource state : states){
+      InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
+      instanceState.setState(state.getLocalName());
+      instanceStates.getInstanceState().add(instanceState);
     }
     nodeType.setInstanceStates(instanceStates);
   }
@@ -279,7 +264,7 @@ public class OMN2Tosca extends AbstractConverter {
     return nodeTypeResource.getLocalName()+"Properties";
   }
   
-  private static TNodeTemplate createNodeTemplate(Resource node, Resource nodeTypeResource) throws NodeTypeNotFoundException, RequiredResourceNotFoundException{
+  private static TNodeTemplate createNodeTemplate(Resource node, Resource nodeTypeResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     TNodeTemplate nodeTemplate = objFactory.createTNodeTemplate();
     setNameAndTypeAndID(node, nodeTypeResource, nodeTemplate);
     
@@ -304,7 +289,7 @@ public class OMN2Tosca extends AbstractConverter {
     nodeTemplate.setType(type);
   }
   
-  private static Element createNodeProperties(Resource node, Resource nodeType, TNodeTemplate nodeTemplate) throws NodeTypeNotFoundException, NoPropertiesFoundException, RequiredResourceNotFoundException {
+  private static Element createNodeProperties(Resource node, Resource nodeType, TNodeTemplate nodeTemplate) throws NoPropertiesFoundException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Document doc = createDocument();
     
     String nodeTypeNamespace = getXMLNamespace(nodeType);
@@ -320,7 +305,7 @@ public class OMN2Tosca extends AbstractConverter {
     return doc.getDocumentElement();
   }
   
-  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, String prefix) throws RequiredResourceNotFoundException{
+  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, String prefix) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
@@ -337,7 +322,7 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, String prefix) throws RequiredResourceNotFoundException{
+  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, String prefix) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
     
     StmtIterator propertyValuesIterator = node.listProperties(propertyStatement.getPredicate());
@@ -348,40 +333,16 @@ public class OMN2Tosca extends AbstractConverter {
       parameter.appendChild(subNode);
       
       node = propertyStatement.getResource();
-      Resource nodeType = getPropertyResourceType(node);
+      Resource nodeType = calculateInferredPropertyValue(node, RDF.type);
       createProperties(propertyStatement.getResource(), nodeType, subNode, namespace, prefix);
     }
     nodeProperties.appendChild(parameter);
-  }
-  
-  private static Resource getPropertyResourceType(Resource resource) throws RequiredResourceNotFoundException{
-    StmtIterator typeIterator = resource.listProperties(RDF.type);
-    while(typeIterator.hasNext()){
-      Resource type = typeIterator.next().getResource();
-      //TODO: not so nice check..
-      if(!type.equals(RDFS.Resource) && !type.equals(OWL.Thing) && !type.getURI().equals("http://www.w3.org/2002/07/owl#NamedIndividual")){
-        return type;
-      }
-    }
-    throw new RequiredResourceNotFoundException("No applicable resource type could be found for resource "+resource);
   }
   
   private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, String prefix){
     Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
     parameter.setTextContent(propertyStatement.getLiteral().getString());
     nodeProperties.appendChild(parameter);
-  }
-  
-  private static Resource getNodeType(Resource node) throws NodeTypeNotFoundException {
-    StmtIterator propertiesIterator = node.listProperties(RDF.type);
-    while (propertiesIterator.hasNext()) {
-      Resource nodeTypeResource = propertiesIterator.next().getResource();
-      if (nodeTypeResource.hasProperty(RDFS.subClassOf, Tosca.Node)
-          && !nodeTypeResource.equals(Tosca.Node)) {
-        return nodeTypeResource;
-      }
-    }
-    throw new NodeTypeNotFoundException("no node type found for: "+node.getURI());
   }
   
   private static List<TRelationshipTemplate> createRelationshipTemplates(Resource nodeResource, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException {
@@ -431,7 +392,7 @@ public class OMN2Tosca extends AbstractConverter {
     relationshipTemplate.setType(type);
   }
   
-  private static TRelationshipType createRelationshipType(TRelationshipTemplate relationshipTemplate, Model model) {
+  private static TRelationshipType createRelationshipType(TRelationshipTemplate relationshipTemplate, Model model) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     TRelationshipType relationshipType = objFactory.createTRelationshipType();
     
     QName type = relationshipTemplate.getType();
@@ -444,36 +405,27 @@ public class OMN2Tosca extends AbstractConverter {
     return relationshipType;
   }
 
-  private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) {
-    StmtIterator rangeIter = relationshipTypeResource.listProperties(RDFS.domain);
-    while(rangeIter.hasNext()){
-      Resource target = rangeIter.next().getResource();
-      if(target.hasProperty(RDFS.subClassOf, Tosca.Node) && !target.equals(Tosca.Node)){
-        String namespace = getXMLNamespace(target);
-        String prefix = getNSPrefix(target);
-        QName typeRef = new QName(namespace, target.getLocalName(), prefix);
-        
-        TRelationshipType.ValidSource validSource = objFactory.createTRelationshipTypeValidSource();
-        validSource.setTypeRef(typeRef);
-        relationshipType.setValidSource(validSource);
-      }
-    }
+  private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
+    Resource source = calculateInferredPropertyValue(relationshipTypeResource, (RDFS.domain));
+    String namespace = getXMLNamespace(source);
+    String prefix = getNSPrefix(source);
+    QName typeRef = new QName(namespace, source.getLocalName(), prefix);
+    
+    TRelationshipType.ValidSource validSource = objFactory.createTRelationshipTypeValidSource();
+    validSource.setTypeRef(typeRef);
+    relationshipType.setValidSource(validSource);
   }
 
-  private static void setValidTarget(TRelationshipType relationshipType, Resource relationshipTypeResource) {
-    StmtIterator rangeIter = relationshipTypeResource.listProperties(RDFS.range);
-    while(rangeIter.hasNext()){
-      Resource target = rangeIter.next().getResource();
-      if(target.hasProperty(RDFS.subClassOf, Tosca.Node) && !target.equals(Tosca.Node)){
-        String namespace = getXMLNamespace(target);
-        String prefix = getNSPrefix(target);
-        QName typeRef = new QName(namespace, target.getLocalName(), prefix);
-        
-        TRelationshipType.ValidTarget validTarget = objFactory.createTRelationshipTypeValidTarget();
-        validTarget.setTypeRef(typeRef);
-        relationshipType.setValidTarget(validTarget);
-      }
-    }
+  private static void setValidTarget(TRelationshipType relationshipType, Resource relationshipTypeResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
+    Resource target = calculateInferredPropertyValue(relationshipTypeResource, (RDFS.range));
+    
+    String namespace = getXMLNamespace(target);
+    String prefix = getNSPrefix(target);
+    QName typeRef = new QName(namespace, target.getLocalName(), prefix);
+    
+    TRelationshipType.ValidTarget validTarget = objFactory.createTRelationshipTypeValidTarget();
+    validTarget.setTypeRef(typeRef);
+    relationshipType.setValidTarget(validTarget);
   }
   
   private static TNodeTemplate getNodeTemplateByID(String id, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException{
@@ -487,6 +439,55 @@ public class OMN2Tosca extends AbstractConverter {
     throw new RequiredResourceNotFoundException("The relationship source or target element with id "+id+" was not found");
   }
   
+  private static Resource calculateInferredPropertyValue(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    List<Resource> inferredProperties = calculateInferredPropertyValues(resource, property);
+    if(inferredProperties.size() == 0){
+      throw new RequiredResourceNotFoundException("No property "+property+" found for: "+resource);
+    } else if(inferredProperties.size() == 1){
+      return inferredProperties.get(0);
+    } else {
+      throw new MultiplePropertyValuesException("Multiple values where found but only one was expected for property "+property+" of "+resource);
+    }
+  }
+  
+  private static List<Resource> calculateInferredPropertyValues(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    List<Resource> allProperties = new ArrayList<>();
+    for(Statement propertyStatement : resource.listProperties(property).toList()){
+      allProperties.add(propertyStatement.getResource());
+    }
+
+    List<Resource> redundantResources = calculateRedundantResources(allProperties);
+  
+    allProperties.removeAll(redundantResources);
+    return allProperties;
+  }
+  
+  private static List<Resource> calculateRedundantResources(List<Resource> resources){
+    List<Resource> redundantResources = new ArrayList<>();
+    for(Resource resource : resources){
+      for(Resource resource2 : resources){
+        if(resource.hasProperty(RDFS.subClassOf, resource2) && !resource.equals(resource2)){
+          redundantResources.add(resource2);
+        }
+      }
+      if(resource.equals(OWL2.NamedIndividual)){
+        redundantResources.add(resource);
+      }
+    }
+    return redundantResources;
+  }
+  
+  private static Document createDocument(){
+    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder docBuilder = null;
+    try {
+      docBuilder = docFactory.newDocumentBuilder();
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+    }
+    return docBuilder.newDocument();
+  }
+  
   public static class RequiredResourceNotFoundException extends Exception{
 
     private static final long serialVersionUID = 3219300357589016712L;
@@ -496,11 +497,11 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  public static class NodeTypeNotFoundException extends Exception{
+  public static class MultiplePropertyValuesException extends Exception{
 
-    private static final long serialVersionUID = -6079715571448444400L;
-    
-    public NodeTypeNotFoundException(String message){
+    private static final long serialVersionUID = -8968550173858347068L;
+
+    public MultiplePropertyValuesException(String message){
       super(message);
     }
   }

@@ -8,7 +8,7 @@ import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.NodeTypeNotFoundException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.Tosca2OMN;
 
@@ -94,9 +94,10 @@ public class RESTConverter {
 						Response.Status.NOT_ACCEPTABLE, "unknown output '" + to
 								+ "'");
 			}
-		} catch (RiotException | NodeTypeNotFoundException
+		} catch (RiotException
 				| MultipleNamespacesException
-				| RequiredResourceNotFoundException e) {
+				| RequiredResourceNotFoundException
+				| MultiplePropertyValuesException e) {
 			throw new ConverterWebApplicationException(
 					Response.Status.BAD_REQUEST, e);
 		} catch (JAXBException | InvalidModelException | IOException e) {

@@ -3,7 +3,7 @@ package info.openmultinet.ontology.translators.tosca;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.NodeTypeNotFoundException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 
 import java.io.InputStream;
@@ -28,9 +28,8 @@ public class OMN2ToscaTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException,
-			NodeTypeNotFoundException, MultipleNamespacesException,
-			RequiredResourceNotFoundException {
+	public void testGetTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
+			RequiredResourceNotFoundException, MultiplePropertyValuesException {
 		final InfModel model = this.parser.getModel();
 		final String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
