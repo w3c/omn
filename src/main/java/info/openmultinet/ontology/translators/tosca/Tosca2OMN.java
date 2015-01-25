@@ -126,6 +126,14 @@ public class Tosca2OMN extends AbstractConverter {
         return XSD.xstring;
       case "xs:integer":
         return XSD.xint;
+      case "xs:boolean":
+        return XSD.xboolean;
+      case "xs:long":
+        return XSD.xlong;
+      case "xs:double":
+        return XSD.xdouble;
+      case "xs:float":
+        return XSD.xfloat;     
     }
     return model.createResource(type);
   }
@@ -175,28 +183,46 @@ public class Tosca2OMN extends AbstractConverter {
     return node;
   }
   
-  private static void setNodeProperties(final TNodeTemplate nodeTemplate, final Resource node, final Model model) {
+  private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) {
     final Object properties = nodeTemplate.getProperties().getAny();
-    if (properties instanceof Element) {
-      final Element propertiesElement = (Element) properties;
-      for (int i = 0; i < (propertiesElement.getChildNodes().getLength() - 1); i++) {
-        final Node propertyNode = propertiesElement.getChildNodes().item(i);
-        final String namespace = propertyNode.getNamespaceURI();
-        final Property property = model.getProperty(namespace + propertyNode.getLocalName());
-        Resource propertyRange;
-        try {
-          propertyRange = property.getRequiredProperty(RDFS.range).getResource();
-        } catch (final PropertyNotFoundException e) {
-          LOG.log(Level.INFO, "No property range for property " + property.getURI()
-              + " found, storing as string.");
-          propertyRange = XSD.xstring;
-        }
+    if (properties instanceof Node) {
+      Node propertiesElement = (Node) properties;
+      processPropertiesElement(node, model, propertiesElement);
+    }
+  }
+
+  private static void processPropertiesElement(Resource node, Model model, Node propertiesElement) {
+    for (int i = 0; i < (propertiesElement.getChildNodes().getLength() - 1); i++) {
+      Node propertyNode = propertiesElement.getChildNodes().item(i);
+      String namespace = propertyNode.getNamespaceURI();
+      Property property = model.getProperty(namespace + propertyNode.getLocalName());      
+      Resource propertyRange = getPropertyRange(property);
+      
+      Node childElement = propertyNode.getChildNodes().item(0);
+      if(childElement.getNodeType() == Node.ELEMENT_NODE){
+        Resource propertyValue = model.createResource(namespace + childElement.getLocalName());
+        propertyValue.addProperty(RDF.type, propertyRange);
+        processPropertiesElement(propertyValue, model, childElement);
+        node.addProperty(property, propertyValue);
+        
+      } else if(childElement.getNodeType() == Node.TEXT_NODE){
         final Literal literal = model.createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
         node.addLiteral(property, literal);
+      } else{
+        //TODO: unsupported exception
       }
-    } else {
-      // TODO
     }
+  }
+  
+  private static Resource getPropertyRange(Resource property){
+    Resource propertyRange;
+    try {
+      propertyRange = property.getRequiredProperty(RDFS.range).getResource();
+    } catch (final PropertyNotFoundException e) {
+      LOG.log(Level.INFO, "No property range for property " + property.getURI() + " found, storing as string.");
+      propertyRange = XSD.xstring;
+    }
+    return propertyRange;
   }
   
   private static void setNodeType(final TNodeTemplate nodeTemplate, final Resource node, final Model model) {
