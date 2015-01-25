@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.tosca;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedException;
 import info.openmultinet.ontology.vocabulary.Osco;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
@@ -27,7 +28,7 @@ public class Tosca2OMNTest {
 	}
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException {
+	public void testGetTopology() throws JAXBException, InvalidModelException, UnsupportedException {
 		final Model model = Tosca2OMN.getModel(this.input);
 
 		final String serializedModel = Tosca2OMNTest.serializeModel(model,

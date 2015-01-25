@@ -11,6 +11,7 @@ import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespaces
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.Tosca2OMN;
+import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -97,7 +98,8 @@ public class RESTConverter {
 		} catch (RiotException
 				| MultipleNamespacesException
 				| RequiredResourceNotFoundException
-				| MultiplePropertyValuesException e) {
+				| MultiplePropertyValuesException
+				| UnsupportedException e) {
 			throw new ConverterWebApplicationException(
 					Response.Status.BAD_REQUEST, e);
 		} catch (JAXBException | InvalidModelException | IOException e) {

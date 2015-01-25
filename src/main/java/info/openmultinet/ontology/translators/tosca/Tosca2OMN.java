@@ -44,7 +44,7 @@ public class Tosca2OMN extends AbstractConverter {
   
   private static final Logger LOG = Logger.getLogger(Tosca2OMN.class.getName());
   
-  public static Model getModel(final InputStream input) throws JAXBException, InvalidModelException {
+  public static Model getModel(final InputStream input) throws JAXBException, InvalidModelException, UnsupportedException {
     final JAXBContext context = JAXBContext.newInstance(Definitions.class);
     final Unmarshaller unmarshaller = context.createUnmarshaller();
     final Definitions definitions = unmarshaller.unmarshal(new StreamSource(input), Definitions.class).getValue();
@@ -54,7 +54,7 @@ public class Tosca2OMN extends AbstractConverter {
     return model;
   }
   
-  private static Model tosca2Model(final Definitions definitions) {
+  private static Model tosca2Model(final Definitions definitions) throws UnsupportedException {
     final Model model = ModelFactory.createDefaultModel();
     
     processNodeTypes(definitions, model);
@@ -153,7 +153,7 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
   
-  private static void processTemplates(final Definitions definitions, final Model model) {
+  private static void processTemplates(final Definitions definitions, final Model model) throws UnsupportedException {
     for (final TExtensibleElements templateOrNodeType : definitions
         .getServiceTemplateOrNodeTypeOrNodeTypeImplementation()) {
       if (templateOrNodeType instanceof TServiceTemplate) {
@@ -163,7 +163,7 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static void processServiceTemplate(final TServiceTemplate serviceTemplate, final Definitions definitions,
-      final Model model) {
+      final Model model) throws UnsupportedException {
     final TTopologyTemplate topologyTemplate = serviceTemplate.getTopologyTemplate();
     for (final TEntityTemplate entityTemplate : topologyTemplate.getNodeTemplateOrRelationshipTemplate()) {
       if (entityTemplate instanceof TNodeTemplate) {
@@ -175,7 +175,7 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static Resource createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
-      final Model model) {
+      final Model model) throws UnsupportedException {
     final String namespace = definitions.getTargetNamespace();
     final Resource node = model.createResource(namespace + nodeTemplate.getName());
     setNodeType(nodeTemplate, node, model);
@@ -183,7 +183,7 @@ public class Tosca2OMN extends AbstractConverter {
     return node;
   }
   
-  private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) {
+  private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) throws UnsupportedException {
     final Object properties = nodeTemplate.getProperties().getAny();
     if (properties instanceof Node) {
       Node propertiesElement = (Node) properties;
@@ -191,7 +191,7 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
 
-  private static void processPropertiesElement(Resource node, Model model, Node propertiesElement) {
+  private static void processPropertiesElement(Resource node, Model model, Node propertiesElement) throws UnsupportedException {
     for (int i = 0; i < (propertiesElement.getChildNodes().getLength() - 1); i++) {
       Node propertyNode = propertiesElement.getChildNodes().item(i);
       String namespace = propertyNode.getNamespaceURI();
@@ -209,7 +209,7 @@ public class Tosca2OMN extends AbstractConverter {
         final Literal literal = model.createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
         node.addLiteral(property, literal);
       } else{
-        //TODO: unsupported exception
+        throw new UnsupportedException("Expected an element or text node in the properties");
       }
     }
   }
@@ -251,6 +251,15 @@ public class Tosca2OMN extends AbstractConverter {
   
   private static Resource createResourceFromQName(final QName qname, final Model model) {
     return model.createResource(qname.getNamespaceURI() + qname.getLocalPart());
+  }
+  
+  public static class UnsupportedException extends Exception{
+
+    private static final long serialVersionUID = -7910873917548269970L;
+
+    public UnsupportedException(String message){
+      super(message);
+    }
   }
   
 }
