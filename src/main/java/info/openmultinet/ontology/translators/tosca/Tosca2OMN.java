@@ -171,18 +171,17 @@ public class Tosca2OMN extends AbstractConverter {
       if (entityTemplate instanceof TNodeTemplate) {
         createNode((TNodeTemplate) entityTemplate, definitions, model);
       } else if (entityTemplate instanceof TRelationshipTemplate) {
-        // TODO process relationship templates
+        createRelationship((TRelationshipTemplate) entityTemplate, definitions, model);
       }
     }
   }
   
-  private static Resource createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
+  private static void createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
       final Model model) throws UnsupportedException {
     final String namespace = definitions.getTargetNamespace();
     final Resource node = model.createResource(namespace + nodeTemplate.getName());
     setNodeType(nodeTemplate, node, model);
     setNodeProperties(nodeTemplate, node, model);
-    return node;
   }
   
   private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) throws UnsupportedException {
@@ -231,6 +230,46 @@ public class Tosca2OMN extends AbstractConverter {
     final QName type = nodeTemplate.getType();
     final Resource nodeType = createResourceFromQName(type, model);
     node.addProperty(RDF.type, nodeType);
+  }
+  
+  private static void createRelationship(TRelationshipTemplate relationshipTemplate, Definitions definitions, Model model) throws UnsupportedException {
+    final String namespace = definitions.getTargetNamespace();
+    final Property relationship = model.createProperty(namespace + relationshipTemplate.getName());
+    setRelationshipType(relationshipTemplate, relationship, model);
+    
+    Resource source = getRelationshipSource(relationshipTemplate, model, namespace);
+    Resource target = getRelationshipTarget(relationshipTemplate, model, namespace);
+    source.addProperty(relationship, target);
+  }
+  
+  private static Resource getRelationshipSource(TRelationshipTemplate relationshipTemplate, Model model, String namespace) throws UnsupportedException {
+    Object sourceElement = relationshipTemplate.getSourceElement().getRef();
+    if(sourceElement instanceof TNodeTemplate){
+      TNodeTemplate sourceNode = (TNodeTemplate) sourceElement;
+      String sourceName = sourceNode.getName();
+      return model.getResource(namespace + sourceName);
+    }
+    else{
+      throw new UnsupportedException("The source element of a RelationshipTemplate must refer to a NodeTemplate.");
+    }
+  }
+  
+  private static Resource getRelationshipTarget(TRelationshipTemplate relationshipTemplate, Model model, String namespace) throws UnsupportedException {
+    Object targetElement = relationshipTemplate.getTargetElement().getRef();
+    if(targetElement instanceof TNodeTemplate){
+      TNodeTemplate targetNode = (TNodeTemplate) targetElement;
+      String targetName = targetNode.getName();
+      return model.getResource(namespace + targetName);
+    }
+    else{
+      throw new UnsupportedException("The target element of a RelationshipTemplate must refer to a NodeTemplate.");
+    }
+  }
+
+  private static void setRelationshipType(TRelationshipTemplate relationshipTemplate, Property relationship, Model model) {
+    final QName type = relationshipTemplate.getType();
+    final Resource relationshipType = createResourceFromQName(type, model);
+    relationship.addProperty(RDF.type, relationshipType);
   }
   
   private static void createStates(final TNodeType nodeType, final Model model) {
