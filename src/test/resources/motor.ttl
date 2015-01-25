@@ -36,8 +36,23 @@
         rdfs:range xsd:string .
 
 
+:throttle rdf:type owl:DatatypeProperty ;
+        
+        rdfs:domain :Motor ;
+        
+        rdfs:range xsd:long .
 
+:rpm rdf:type owl:DatatypeProperty ;
+        
+        rdfs:domain :Motor ;
+        
+        rdfs:range xsd:long .
 
+:isDynamic rdf:type owl:DatatypeProperty ;
+        
+        rdfs:domain :Motor ;
+        
+        rdfs:range xsd:boolean .
 
 #################################################################
 #
