@@ -5,11 +5,17 @@
             <xs:element name="ServiceContainerProperties">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="location" type="xs:string"/>
+                        <xs:element name="location" type="Location">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                         <xs:element name="minNumInst" type="xs:integer"/>
                         <xs:element name="flavour" type="xs:string"/>
                         <xs:element name="maxNumInst" type="xs:integer"/>
-                        <xs:element name="subnets" type="Subnet">
+                        <xs:element name="subnet" type="Subnet">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="mgmt" type="xs:boolean"/>
@@ -17,7 +23,7 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="images" type="Image">
+                        <xs:element name="image" type="Image">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="id" type="xs:string"/>
@@ -47,22 +53,26 @@
             <NodeTemplate name="container1" id="http://open-multinet.info/ontology/examples/container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties>
-                        <osco:location>Berlin</osco:location>
                         <osco:maxNumInst>1</osco:maxNumInst>
                         <osco:minNumInst>1</osco:minNumInst>
                         <osco:flavour>1024MB_10GB</osco:flavour>
-                        <osco:subnets>
+                        <osco:location>
+                            <osco:Container1Location>
+                                <osco:name>Berlin</osco:name>
+                            </osco:Container1Location>
+                        </osco:location>
+                        <osco:subnet>
                             <osco:trescimo-net>
                                 <osco:floatingIp>random</osco:floatingIp>
                                 <osco:mgmt>true</osco:mgmt>
                             </osco:trescimo-net>
-                        </osco:subnets>
-                        <osco:images>
+                        </osco:subnet>
+                        <osco:image>
                             <osco:Image1>
                                 <osco:id>ffb9a89e-3a00-4a1b-a1f8-f4e135122994</osco:id>
                                 <osco:datacenter>AV-Openstack</osco:datacenter>
                             </osco:Image1>
-                        </osco:images>
+                        </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>

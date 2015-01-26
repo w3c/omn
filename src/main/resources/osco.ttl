@@ -31,7 +31,7 @@
 
 ###  http://opensdncore.org/ontology/image
 
-:images rdf:type owl:ObjectProperty ;
+:image rdf:type owl:ObjectProperty ;
        
        rdfs:range :Image ;
        
@@ -41,7 +41,7 @@
 
 ###  http://opensdncore.org/ontology/subnet
 
-:subnets rdf:type owl:ObjectProperty ;
+:subnet rdf:type owl:ObjectProperty ;
         
         rdfs:domain :ServiceContainer ;
         
@@ -49,6 +49,13 @@
 
 
 
+###  http://opensdncore.org/ontology/location
+
+:location rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :ServiceContainer ;
+          
+          rdfs:range :Location .
 
 
 #################################################################
@@ -89,6 +96,15 @@
             rdfs:range xsd:string .
 
 
+###  http://opensdncore.org/ontology/name
+
+:name rdf:type owl:DatatypeProperty ,
+               owl:FunctionalProperty ;
+            
+            rdfs:domain :Location ;
+            
+            rdfs:range xsd:string .
+
 
 ###  http://opensdncore.org/ontology/id
 
@@ -98,16 +114,6 @@
     rdfs:domain :Image ;
     
     rdfs:range xsd:string .
-
-
-
-###  http://opensdncore.org/ontology/location
-
-:location rdf:type owl:DatatypeProperty ;
-          
-          rdfs:domain :ServiceContainer ;
-          
-          rdfs:range xsd:string .
 
 
 
@@ -315,6 +321,10 @@
 
 :Subnet rdf:type owl:Class .
 
+
+###  http://opensdncore.org/ontology/Location
+
+:Location rdf:type owl:Class .
 
 
 ###  http://opensdncore.org/ontology/Uncompleted

@@ -25,17 +25,23 @@
 :container1 rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
                      
-            osco:images :Image1 ;
+            osco:image :Image1 ;
             
-            osco:subnets :trescimo-net ;
+            osco:subnet :trescimo-net ;
+            
+            osco:location :Container1Location ;
             
             osco:flavour "1024MB_10GB"^^xsd:string ;
             
             osco:minNumInst 1 ;
             
-            osco:maxNumInst 1 ;
-            
-            osco:location "Berlin"^^xsd:string .
+            osco:maxNumInst 1 .
+
+
+:Container1Location rdf:type osco:Location ,
+                        owl:NamedIndividual ;
+                        
+                     osco:name "Berlin"^^xsd:string .
 
 
 :Image1 rdf:type osco:Image ,
