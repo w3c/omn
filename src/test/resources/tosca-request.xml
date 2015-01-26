@@ -42,9 +42,9 @@
             </xs:element>
         </xs:schema>
     </Types>
-    <ServiceTemplate id="http://open-multinet.info/ontology/examples#namedTopology3">
+    <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3">
         <TopologyTemplate>
-            <NodeTemplate name="container1" id="http://open-multinet.info/ontology/examples#container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="container1" id="http://open-multinet.info/ontology/examples/container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties>
                         <osco:location>Berlin</osco:location>
@@ -66,7 +66,7 @@
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="dummy1" id="http://open-multinet.info/ontology/examples#dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="dummy1" id="http://open-multinet.info/ontology/examples/dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:dummyProperties>
                         <osco:test_param>foo</osco:test_param>
@@ -75,9 +75,9 @@
                     </osco:dummyProperties>
                 </Properties>
             </NodeTemplate>
-            <RelationshipTemplate name="deployedOnContainer1" id="http://open-multinet.info/ontology/examples#deployedOnContainer1" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="http://open-multinet.info/ontology/examples#dummy1"/>
-                <TargetElement ref="http://open-multinet.info/ontology/examples#container1"/>
+            <RelationshipTemplate name="deployedOnContainer1" id="http://open-multinet.info/ontology/examples/deployedOnContainer1" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="http://open-multinet.info/ontology/examples/dummy1"/>
+                <TargetElement ref="http://open-multinet.info/ontology/examples/container1"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>
@@ -86,16 +86,16 @@
         <InstanceStates>
             <InstanceState state="Started"/>
             <InstanceState state="Updating"/>
+            <InstanceState state="NotYetInitialized"/>
             <InstanceState state="Stopped"/>
             <InstanceState state="Active"/>
-            <InstanceState state="NotYetInitialized"/>
             <InstanceState state="Pending"/>
             <InstanceState state="Removing"/>
             <InstanceState state="Uncompleted"/>
             <InstanceState state="Cleaned"/>
             <InstanceState state="Ready"/>
-            <InstanceState state="Initialized"/>
             <InstanceState state="Error"/>
+            <InstanceState state="Initialized"/>
             <InstanceState state="Preinit"/>
             <InstanceState state="Installed"/>
         </InstanceStates>
@@ -105,16 +105,16 @@
         <InstanceStates>
             <InstanceState state="Started"/>
             <InstanceState state="Updating"/>
+            <InstanceState state="NotYetInitialized"/>
             <InstanceState state="Stopped"/>
             <InstanceState state="Active"/>
-            <InstanceState state="NotYetInitialized"/>
             <InstanceState state="Pending"/>
             <InstanceState state="Removing"/>
             <InstanceState state="Uncompleted"/>
             <InstanceState state="Cleaned"/>
             <InstanceState state="Ready"/>
-            <InstanceState state="Initialized"/>
             <InstanceState state="Error"/>
+            <InstanceState state="Initialized"/>
             <InstanceState state="Preinit"/>
             <InstanceState state="Installed"/>
         </InstanceStates>
