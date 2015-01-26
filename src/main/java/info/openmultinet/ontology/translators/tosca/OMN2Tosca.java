@@ -38,10 +38,13 @@ import org.w3c.dom.Element;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFList;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -180,9 +183,8 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void createPropertyTypes(Resource nodeType, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    ResIterator propertiesIterator = nodeType.getModel().listSubjectsWithProperty(RDFS.domain, nodeType);
-    while(propertiesIterator.hasNext()){
-      Resource property = propertiesIterator.next();
+    List<Resource> properties = getResourcesWithDomain(nodeType);
+    for(Resource property : properties){
       if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
         createObjectPropertyType(property, sequence);
       }
@@ -191,7 +193,52 @@ public class OMN2Tosca extends AbstractConverter {
       }
     }
   }
-
+  
+  private static List<Resource> getResourcesWithDomain(Resource domainResource){
+    List<Resource> properties = new ArrayList<>();
+    StmtIterator iter = domainResource.getModel().listStatements(null, RDFS.domain, (Resource) null);
+    while(iter.hasNext()){
+      Statement st = iter.next();
+      if(!properties.contains(st.getSubject())){
+        if(isValidDomain(st.getSubject(), domainResource)){
+          properties.add(st.getSubject());
+        }
+      }
+    }
+    return properties;
+  }
+  
+  private static boolean isValidDomain(Resource property, Resource domain){
+    StmtIterator iter = property.listProperties(RDFS.domain);
+    while(iter.hasNext()){
+      Statement st = iter.next();
+      if(resourceIsInUnionOfResource(domain, st.getResource())){
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  private static boolean resourceIsInUnionOfResource(Resource resource, Resource unionResource){
+    if(resource.equals(unionResource)){
+      return true;
+    }
+    else if(unionResource.isAnon()){
+      if(unionResource.hasProperty(OWL2.disjointUnionOf)){
+        Statement unionStatement = unionResource.getProperty(OWL2.disjointUnionOf);
+        RDFList classList = unionStatement.getResource().as(RDFList.class);
+        ExtendedIterator<RDFNode> classesIter = classList.iterator();
+        while (classesIter.hasNext()) {
+          Resource property = classesIter.next().asResource();
+          if(resource.equals(property)){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+  
   private static void createObjectPropertyType(Resource property, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Element element = sequence.getOwnerDocument().createElement("xs:element");
     sequence.appendChild(element);
@@ -314,7 +361,7 @@ public class OMN2Tosca extends AbstractConverter {
       Statement propertyStatement = propertiesIterator.next();
       Property property = propertyStatement.getPredicate();
       
-      if(property.hasProperty(RDFS.domain, nodeType)) {
+      if(isValidDomain(property, nodeType)){
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
           createObjectProperty(node, propertyStatement, element, namespace, prefix);
         }
@@ -326,20 +373,19 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, String prefix) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
-    
     StmtIterator propertyValuesIterator = node.listProperties(propertyStatement.getPredicate());
     while(propertyValuesIterator.hasNext()){
       propertyStatement = propertyValuesIterator.next();
       
-      Element subNode = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getResource().getLocalName());
-      parameter.appendChild(subNode);
+      Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
+      parameter.setAttribute("name", propertyStatement.getResource().getLocalName());
       
       node = propertyStatement.getResource();
       Resource nodeType = calculateInferredPropertyValue(node, RDF.type);
-      createProperties(propertyStatement.getResource(), nodeType, subNode, namespace, prefix);
+      createProperties(propertyStatement.getResource(), nodeType, parameter, namespace, prefix);
+      
+      nodeProperties.appendChild(parameter);
     }
-    nodeProperties.appendChild(parameter);
   }
   
   private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, String prefix){
@@ -456,7 +502,9 @@ public class OMN2Tosca extends AbstractConverter {
   private static List<Resource> calculateInferredPropertyValues(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     List<Resource> allProperties = new ArrayList<>();
     for(Statement propertyStatement : resource.listProperties(property).toList()){
-      allProperties.add(propertyStatement.getResource());
+      if(!propertyStatement.getResource().isAnon()){
+        allProperties.add(propertyStatement.getResource());
+      }
     }
 
     List<Resource> redundantResources = calculateRedundantResources(allProperties);
@@ -469,13 +517,14 @@ public class OMN2Tosca extends AbstractConverter {
     List<Resource> redundantResources = new ArrayList<>();
     for(Resource resource : resources){
       for(Resource resource2 : resources){
-        if(resource.hasProperty(RDFS.subClassOf, resource2) && !resource.equals(resource2)){
+        if(resource.equals(OWL2.NamedIndividual)){
+          redundantResources.add(resource);
+        }
+        else if(resource.hasProperty(RDFS.subClassOf, resource2) && !resource.equals(resource2)){
           redundantResources.add(resource2);
         }
       }
-      if(resource.equals(OWL2.NamedIndividual)){
-        redundantResources.add(resource);
-      }
+      
     }
     return redundantResources;
   }

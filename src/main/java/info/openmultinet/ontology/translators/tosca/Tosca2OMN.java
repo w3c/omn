@@ -212,19 +212,30 @@ public class Tosca2OMN extends AbstractConverter {
       Property property = model.getProperty(namespace + propertyNode.getLocalName());      
       Resource propertyRange = getPropertyRange(property);
       
-      Node childElement = propertyNode.getChildNodes().item(0);
-      if(childElement.getNodeType() == Node.ELEMENT_NODE){
-        Resource propertyValue = model.createResource(node.getNameSpace() + childElement.getLocalName());
-        propertyValue.addProperty(RDF.type, propertyRange);
-        propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
-        processPropertiesElement(propertyValue, model, childElement);
-        node.addProperty(property, propertyValue);
-        
-      } else if(childElement.getNodeType() == Node.TEXT_NODE){
-        final Literal literal = model.createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
-        node.addLiteral(property, literal);
-      } else{
-        throw new UnsupportedException("Expected an element or text node in the properties");
+      if(propertyNode.getChildNodes().getLength() == 1){
+        Node childElement = propertyNode.getChildNodes().item(0);
+        if(childElement.getNodeType() == Node.TEXT_NODE){
+          final Literal literal = model.createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
+          node.addLiteral(property, literal);
+        }
+        else{
+          throw new UnsupportedException("Expected a text node in the properties");
+        }
+      }
+      else{
+        Node propertyValueName = propertyNode.getAttributes().getNamedItem("name");
+        if(propertyValueName != null){
+          String propertyValueNameString = propertyValueName.getNodeValue();
+          Resource propertyValue = model.createResource(node.getNameSpace() + propertyValueNameString);
+          propertyValue.addProperty(RDF.type, propertyRange);
+          propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
+          node.addProperty(property, propertyValue);
+          
+          processPropertiesElement(propertyValue, model, propertyNode);
+        }
+        else{
+          throw new UnsupportedException("The property node "+propertyNode+" needs to have a \"name\" attribute");
+        }
       }
     }
   }

@@ -27,7 +27,7 @@
                      
             osco:image :Image1 ;
             
-            osco:subnet :trescimo-net ;
+            osco:subnet :Subnet1 ;
             
             osco:location :Container1Location ;
             
@@ -52,8 +52,10 @@
          osco:id "ffb9a89e-3a00-4a1b-a1f8-f4e135122994" .
 
 
-:trescimo-net rdf:type osco:Subnet ,
+:Subnet1 rdf:type osco:Subnet ,
                       owl:NamedIndividual ;
+                      
+         osco:name "trescimo-net"^^xsd:string ;
                       
          osco:mgmt "true"^^xsd:boolean ;
          

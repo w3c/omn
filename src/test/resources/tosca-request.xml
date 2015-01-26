@@ -12,25 +12,26 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="minNumInst" type="xs:integer"/>
-                        <xs:element name="flavour" type="xs:string"/>
-                        <xs:element name="maxNumInst" type="xs:integer"/>
                         <xs:element name="subnet" type="Subnet">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="mgmt" type="xs:boolean"/>
+                                    <xs:element name="name" type="xs:string"/>
                                     <xs:element name="floatingIp" type="xs:string"/>
+                                    <xs:element name="mgmt" type="xs:boolean"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
                         <xs:element name="image" type="Image">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="id" type="xs:string"/>
                                     <xs:element name="datacenter" type="xs:string"/>
+                                    <xs:element name="id" type="xs:string"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
+                        <xs:element name="minNumInst" type="xs:integer"/>
+                        <xs:element name="flavour" type="xs:string"/>
+                        <xs:element name="maxNumInst" type="xs:integer"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -40,8 +41,8 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="parameter2" type="xs:string"/>
-                        <xs:element name="parameter1" type="xs:string"/>
                         <xs:element name="test_param" type="xs:string"/>
+                        <xs:element name="parameter1" type="xs:string"/>
                         <xs:element name="port" type="xs:integer"/>
                     </xs:sequence>
                 </xs:complexType>
@@ -56,22 +57,17 @@
                         <osco:maxNumInst>1</osco:maxNumInst>
                         <osco:minNumInst>1</osco:minNumInst>
                         <osco:flavour>1024MB_10GB</osco:flavour>
-                        <osco:location>
-                            <osco:Container1Location>
-                                <osco:name>Berlin</osco:name>
-                            </osco:Container1Location>
+                        <osco:location name="Container1Location">
+                            <osco:name>Berlin</osco:name>
                         </osco:location>
-                        <osco:subnet>
-                            <osco:trescimo-net>
-                                <osco:floatingIp>random</osco:floatingIp>
-                                <osco:mgmt>true</osco:mgmt>
-                            </osco:trescimo-net>
+                        <osco:subnet name="Subnet1">
+                            <osco:floatingIp>random</osco:floatingIp>
+                            <osco:mgmt>true</osco:mgmt>
+                            <osco:name>trescimo-net</osco:name>
                         </osco:subnet>
-                        <osco:image>
-                            <osco:Image1>
-                                <osco:id>ffb9a89e-3a00-4a1b-a1f8-f4e135122994</osco:id>
-                                <osco:datacenter>AV-Openstack</osco:datacenter>
-                            </osco:Image1>
+                        <osco:image name="Image1">
+                            <osco:id>ffb9a89e-3a00-4a1b-a1f8-f4e135122994</osco:id>
+                            <osco:datacenter>AV-Openstack</osco:datacenter>
                         </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
