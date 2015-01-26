@@ -56,6 +56,8 @@
                       owl:NamedIndividual ;
                       
          osco:name "trescimo-net"^^xsd:string ;
+         
+         osco:datacenter "AV-Openstack" ;
                       
          osco:mgmt "true"^^xsd:boolean ;
          

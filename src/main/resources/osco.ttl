@@ -70,7 +70,13 @@
 :datacenter rdf:type owl:DatatypeProperty ,
                      owl:FunctionalProperty ;
             
-            rdfs:domain :Image ;
+               rdfs:domain [ rdf:type owl:Class ;
+                        owl:disjointUnionOf (
+                                             :Image
+                                             :Subnet
+                                             )
+                        ] ;
+            
             
             rdfs:range xsd:string .
 

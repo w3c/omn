@@ -16,6 +16,7 @@
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="name" type="xs:string"/>
+                                    <xs:element name="datacenter" type="xs:string"/>
                                     <xs:element name="floatingIp" type="xs:string"/>
                                     <xs:element name="mgmt" type="xs:boolean"/>
                                 </xs:sequence>
@@ -63,6 +64,7 @@
                         <osco:subnet name="Subnet1">
                             <osco:floatingIp>random</osco:floatingIp>
                             <osco:mgmt>true</osco:mgmt>
+                            <osco:datacenter>AV-Openstack</osco:datacenter>
                             <osco:name>trescimo-net</osco:name>
                         </osco:subnet>
                         <osco:image name="Image1">
