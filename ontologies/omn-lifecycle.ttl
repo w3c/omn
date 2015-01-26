@@ -3,10 +3,11 @@
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-lifecycle#> .
+@base <http://open-multinet.info/ontology/omn-lifecycle> .
 
 <http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology ;
                                                    
@@ -34,6 +35,18 @@
 #    Object Properties
 #
 #################################################################
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasReservationState
+
+:hasReservationState rdf:type owl:ObjectProperty ;
+                     
+                     rdfs:domain omn:Reservation ;
+                     
+                     rdfs:range :ReservationState ;
+                     
+                     rdfs:subPropertyOf :hasState .
+
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasState
@@ -80,21 +93,33 @@
             
             owl:inverseOf :implementedBy ;
             
-            rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( omn:Component
-                                        omn:Group
-                                        omn:Resource
-                                        omn:Service
-                                      )
-                        ] ;
-            
             rdfs:range [ rdf:type owl:Class ;
                          owl:unionOf ( omn:Component
                                        omn:Group
                                        omn:Resource
                                        omn:Service
                                      )
-                       ] .
+                       ] ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Component
+                                        omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#isReservationStateOf
+
+:isReservationStateOf rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:range omn:Reservation ;
+                      
+                      rdfs:domain :ReservationState ;
+                      
+                      rdfs:subPropertyOf :isStateOf .
 
 
 
@@ -120,21 +145,21 @@
 
 :parentOf rdf:type owl:ObjectProperty ;
           
-          rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( omn:Component
-                                     omn:Group
-                                     omn:Resource
-                                     omn:Service
-                                   )
-                     ] ;
-          
           rdfs:domain [ rdf:type owl:Class ;
                         owl:unionOf ( omn:Component
                                       omn:Group
                                       omn:Resource
                                       omn:Service
                                     )
-                      ] .
+                      ] ;
+          
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( omn:Component
+                                     omn:Group
+                                     omn:Resource
+                                     omn:Service
+                                   )
+                     ] .
 
 
 
@@ -144,21 +169,21 @@
           
           owl:inverseOf :parentOf ;
           
-          rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( omn:Component
-                                     omn:Group
-                                     omn:Resource
-                                     omn:Service
-                                   )
-                     ] ;
-          
           rdfs:domain [ rdf:type owl:Class ;
                         owl:unionOf ( omn:Component
                                       omn:Group
                                       omn:Resource
                                       omn:Service
                                     )
-                      ] .
+                      ] ;
+          
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( omn:Component
+                                     omn:Group
+                                     omn:Resource
+                                     omn:Service
+                                   )
+                     ] .
 
 
 
@@ -210,6 +235,12 @@ omn:Component rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn#Group
 
 omn:Group rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Reservation
+
+omn:Reservation rdf:type owl:Class .
 
 
 
