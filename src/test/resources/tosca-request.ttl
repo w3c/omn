@@ -25,9 +25,9 @@
 :container1 rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
                      
-            osco:image :Image1 ;
+            osco:images :Image1 ;
             
-            osco:subnet :trescimo-net ;
+            osco:subnets :trescimo-net ;
             
             osco:flavour "1024MB_10GB"^^xsd:string ;
             

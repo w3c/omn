@@ -31,7 +31,7 @@
 
 ###  http://opensdncore.org/ontology/image
 
-:image rdf:type owl:ObjectProperty ;
+:images rdf:type owl:ObjectProperty ;
        
        rdfs:range :Image ;
        
@@ -41,7 +41,7 @@
 
 ###  http://opensdncore.org/ontology/subnet
 
-:subnet rdf:type owl:ObjectProperty ;
+:subnets rdf:type owl:ObjectProperty ;
         
         rdfs:domain :ServiceContainer ;
         

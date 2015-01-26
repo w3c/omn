@@ -9,7 +9,7 @@
                         <xs:element name="minNumInst" type="xs:integer"/>
                         <xs:element name="flavour" type="xs:string"/>
                         <xs:element name="maxNumInst" type="xs:integer"/>
-                        <xs:element name="subnet" type="Subnet">
+                        <xs:element name="subnets" type="Subnet">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="mgmt" type="xs:boolean"/>
@@ -17,7 +17,7 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="image" type="Image">
+                        <xs:element name="images" type="Image">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="id" type="xs:string"/>
@@ -51,18 +51,18 @@
                         <osco:maxNumInst>1</osco:maxNumInst>
                         <osco:minNumInst>1</osco:minNumInst>
                         <osco:flavour>1024MB_10GB</osco:flavour>
-                        <osco:subnet>
+                        <osco:subnets>
                             <osco:trescimo-net>
                                 <osco:floatingIp>random</osco:floatingIp>
                                 <osco:mgmt>true</osco:mgmt>
                             </osco:trescimo-net>
-                        </osco:subnet>
-                        <osco:image>
+                        </osco:subnets>
+                        <osco:images>
                             <osco:Image1>
                                 <osco:id>ffb9a89e-3a00-4a1b-a1f8-f4e135122994</osco:id>
                                 <osco:datacenter>AV-Openstack</osco:datacenter>
                             </osco:Image1>
-                        </osco:image>
+                        </osco:images>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
