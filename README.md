@@ -4,7 +4,7 @@
 
 ## Abstract
 
-Java library (omnlib) and playground for the ontology work conducted in the [Open-Mutltinet](http://open-multinet.info) context. The goal is to offer a converter between [GENI v3 RSpecs](http://www.geni.net/resources/rspec/3/) and selected [extensions](http://www.geni.net/resources/rspec/ext/), the Open-Multinet Ontology, and [OASIS TOSCA](http://docs.oasis-open.org/tosca/TOSCA/v1.0/os/TOSCA-v1.0-os.html).
+Java library (omnlib) and playground for the ontology work conducted in the [Open-Multinet](http://open-multinet.info) context. The goal is to offer a converter between [GENI v3 RSpecs](http://www.geni.net/resources/rspec/3/) and selected [extensions](http://www.geni.net/resources/rspec/ext/), the Open-Multinet Ontology, and [OASIS TOSCA](http://docs.oasis-open.org/tosca/TOSCA/v1.0/os/TOSCA-v1.0-os.html).
 
 ## Ontology
 
