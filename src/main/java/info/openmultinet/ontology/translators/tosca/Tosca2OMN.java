@@ -74,7 +74,10 @@ public class Tosca2OMN extends AbstractConverter {
         if (schema instanceof Element) {
           final Element schemaElement = (Element) schema;
           if (isXMLSchemaElement(schemaElement)) {
-            final String namespace = getRDFNamespace(schemaElement.getAttribute("targetNamespace"));
+            String namespace = getRDFNamespace(schemaElement.getAttribute("targetNamespace"));
+            if(namespace.isEmpty() || namespace.equals("/")){
+              namespace = getRDFNamespace(definitions.getTargetNamespace());
+            }
             for (int i = 0; i < (schemaElement.getChildNodes().getLength() - 1); i++) {
               final Node elementNode = schemaElement.getChildNodes().item(i);
               final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
@@ -82,12 +85,10 @@ public class Tosca2OMN extends AbstractConverter {
               Resource domain = null;
               try{
                 domain = superProperty.getRequiredProperty(RDFS.domain).getResource();
-              } catch(PropertyNotFoundException e){
-                LOG.log(Level.WARNING, "No domain found for property "+superProperty+" . Setting as string.");
-                domain = XSD.xstring;
-              } finally{
                 createTypeProperty(model, namespace, elementNode, domain);
-              }
+              } catch(PropertyNotFoundException e){
+                LOG.log(Level.WARNING, "No domain found for property "+superProperty+" .");
+              } 
             }
           }
         }
