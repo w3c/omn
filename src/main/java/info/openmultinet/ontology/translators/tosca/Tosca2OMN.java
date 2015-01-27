@@ -68,18 +68,27 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static void processTypes(final Definitions definitions, final Model model) {
-    final List<Object> types = definitions.getTypes().getAny();
-    for (final Object schema : types) {
-      if (schema instanceof Element) {
-        final Element schemaElement = (Element) schema;
-        if (isXMLSchemaElement(schemaElement)) {
-          final String namespace = schemaElement.getAttribute("targetNamespace");
-          for (int i = 0; i < (schemaElement.getChildNodes().getLength() - 1); i++) {
-            final Node elementNode = schemaElement.getChildNodes().item(i);
-            final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
-            final Resource superProperty = model.getResource(namespace+superPropertyName);
-            final Resource domain = superProperty.getRequiredProperty(RDFS.domain).getResource();
-            createTypeProperty(model, namespace, elementNode, domain);
+    if(definitions.getTypes() != null){
+      final List<Object> types = definitions.getTypes().getAny();
+      for (final Object schema : types) {
+        if (schema instanceof Element) {
+          final Element schemaElement = (Element) schema;
+          if (isXMLSchemaElement(schemaElement)) {
+            final String namespace = getRDFNamespace(schemaElement.getAttribute("targetNamespace"));
+            for (int i = 0; i < (schemaElement.getChildNodes().getLength() - 1); i++) {
+              final Node elementNode = schemaElement.getChildNodes().item(i);
+              final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
+              final Resource superProperty = model.getResource(namespace+superPropertyName);
+              Resource domain = null;
+              try{
+                domain = superProperty.getRequiredProperty(RDFS.domain).getResource();
+              } catch(PropertyNotFoundException e){
+                LOG.log(Level.WARNING, "No domain found for property "+superProperty+" . Setting as string.");
+                domain = XSD.xstring;
+              } finally{
+                createTypeProperty(model, namespace, elementNode, domain);
+              }
+            }
           }
         }
       }
@@ -190,7 +199,7 @@ public class Tosca2OMN extends AbstractConverter {
   
   private static Resource createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
       final Model model) throws UnsupportedException {
-    final String namespace = definitions.getTargetNamespace();
+    final String namespace = getRDFNamespace(definitions.getTargetNamespace());
     final Resource node = model.createResource(namespace + nodeTemplate.getName());
     setNodeType(nodeTemplate, node, model);
     setNodeProperties(nodeTemplate, node, model);
@@ -198,17 +207,19 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) throws UnsupportedException {
-    final Object properties = nodeTemplate.getProperties().getAny();
-    if (properties instanceof Node) {
-      Node propertiesElement = (Node) properties;
-      processPropertiesElement(node, model, propertiesElement);
+    if(nodeTemplate.getProperties() != null){
+      final Object properties = nodeTemplate.getProperties().getAny();
+      if (properties instanceof Node) {
+        Node propertiesElement = (Node) properties;
+        processPropertiesElement(node, model, propertiesElement);
+      }
     }
   }
 
   private static void processPropertiesElement(Resource node, Model model, Node propertiesElement) throws UnsupportedException {
     for (int i = 0; i < (propertiesElement.getChildNodes().getLength() - 1); i++) {
       Node propertyNode = propertiesElement.getChildNodes().item(i);
-      String namespace = propertyNode.getNamespaceURI();
+      String namespace = getRDFNamespace(propertyNode.getNamespaceURI());
       Property property = model.getProperty(namespace + propertyNode.getLocalName());      
       Resource propertyRange = getPropertyRange(property);
       
@@ -245,21 +256,24 @@ public class Tosca2OMN extends AbstractConverter {
     try {
       propertyRange = property.getRequiredProperty(RDFS.range).getResource();
     } catch (final PropertyNotFoundException e) {
-      LOG.log(Level.INFO, "No property range for property " + property.getURI() + " found, storing as string.");
+      LOG.log(Level.WARNING, "No property range for property " + property.getURI() + " found, storing as string.");
       propertyRange = XSD.xstring;
     }
     return propertyRange;
   }
   
-  private static void setNodeType(final TNodeTemplate nodeTemplate, final Resource node, final Model model) {
+  private static void setNodeType(final TNodeTemplate nodeTemplate, final Resource node, final Model model) throws UnsupportedException {
     final QName type = nodeTemplate.getType();
+    if(type == null){
+      throw new UnsupportedException("No type for nodeTemplate "+nodeTemplate.getName()+" found");
+    }
     final Resource nodeType = createResourceFromQName(type, model);
     node.addProperty(RDF.type, nodeType);
     node.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void createRelationship(TRelationshipTemplate relationshipTemplate, Definitions definitions, Model model) throws UnsupportedException {
-    final String namespace = definitions.getTargetNamespace();
+    final String namespace = getRDFNamespace(definitions.getTargetNamespace());
     final Property relationship = model.createProperty(namespace + relationshipTemplate.getName());
     setRelationshipType(relationshipTemplate, relationship, model);
     
@@ -276,7 +290,7 @@ public class Tosca2OMN extends AbstractConverter {
       return model.getResource(namespace + sourceName);
     }
     else{
-      throw new UnsupportedException("The source element of a RelationshipTemplate must refer to a NodeTemplate.");
+      throw new UnsupportedException("The source element of relationshipTemplate "+relationshipTemplate.getName()+" must refer to a NodeTemplate.");
     }
   }
   
@@ -292,28 +306,35 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
 
-  private static void setRelationshipType(TRelationshipTemplate relationshipTemplate, Property relationship, Model model) {
+  private static void setRelationshipType(TRelationshipTemplate relationshipTemplate, Property relationship, Model model) throws UnsupportedException {
     final QName type = relationshipTemplate.getType();
+    if(type == null){
+      throw new UnsupportedException("No type for relationshipTemplate "+relationshipTemplate.getName()+" found");
+    }
     final Resource relationshipType = createResourceFromQName(type, model);
     relationship.addProperty(RDF.type, relationshipType);
     relationship.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void createStates(final TNodeType nodeType, final Model model) {
-    final String namespace = nodeType.getTargetNamespace();
-    for (final InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()) {
-      final Resource state = model.createResource(namespace + instanceState.getState());
-      state.addProperty(RDF.type, Tosca.State);
+    final String namespace = getRDFNamespace(nodeType.getTargetNamespace());
+    if(nodeType.getInstanceStates() != null){
+      for (final InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()) {
+        final Resource state = model.createResource(namespace + instanceState.getState());
+        state.addProperty(RDF.type, Tosca.State);
+      }
     }
   }
   
   private static Resource createNodeType(TNodeType nodeType, Model model) {
-    final String namespace = nodeType.getTargetNamespace();
+    final String namespace = getRDFNamespace(nodeType.getTargetNamespace());
     final Resource nodeTypeResource = model.getResource(namespace + nodeType.getName());
     nodeTypeResource.addProperty(RDFS.subClassOf, Tosca.Node);
     final PropertiesDefinition propertiesDefinition = nodeType.getPropertiesDefinition();
-    final Resource properties = createResourceFromQName(propertiesDefinition.getElement(), model);
-    properties.addProperty(RDFS.domain, nodeTypeResource);
+    if(propertiesDefinition != null){
+      final Resource properties = createResourceFromQName(propertiesDefinition.getElement(), model);
+      properties.addProperty(RDFS.domain, nodeTypeResource);
+    }
     return nodeTypeResource;
   }
   
@@ -327,22 +348,44 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static void createRelationshipType(TRelationshipType relationshipType, Model model) {
-    String namespace = relationshipType.getTargetNamespace();
+    String namespace = getRDFNamespace(relationshipType.getTargetNamespace());
     Resource relationshipTypeResource = model.createResource(namespace + relationshipType.getName());
     relationshipTypeResource.addProperty(RDF.type, OWL2.ObjectProperty);
     relationshipTypeResource.addProperty(RDFS.subPropertyOf, Tosca.relatesTo);
     
-    QName validSource = relationshipType.getValidSource().getTypeRef();
-    Resource source = createResourceFromQName(validSource, model);
-    relationshipTypeResource.addProperty(RDFS.domain, source);
-    
-    QName validTarget = relationshipType.getValidTarget().getTypeRef();
-    Resource target = createResourceFromQName(validTarget, model);
-    relationshipTypeResource.addProperty(RDFS.range, target);
+    setValidSource(relationshipType, relationshipTypeResource);
+    setValidTarget(relationshipType, relationshipTypeResource);
+  }
+
+  private static void setValidTarget(TRelationshipType relationshipType, Resource relationshipTypeResource) {
+    if(relationshipType.getValidTarget() != null){
+      QName validTarget = relationshipType.getValidTarget().getTypeRef();
+      Resource target = createResourceFromQName(validTarget, relationshipTypeResource.getModel());
+      relationshipTypeResource.addProperty(RDFS.range, target);
+    }
+  }
+
+  private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) {
+    if(relationshipType.getValidSource() != null){
+      QName validSource = relationshipType.getValidSource().getTypeRef();
+      Resource source = createResourceFromQName(validSource, relationshipTypeResource.getModel());
+      relationshipTypeResource.addProperty(RDFS.domain, source);
+    }
+  }
+  
+  private static String getRDFNamespace(String namespace){
+    if(namespace == null){
+      return "";
+    }
+    if(!(namespace.endsWith("/") || namespace.endsWith("#"))){
+      namespace = namespace.concat("/");
+    }
+    return namespace;
   }
 
   private static Resource createResourceFromQName(final QName qname, final Model model) {
-    return model.createResource(qname.getNamespaceURI() + qname.getLocalPart());
+    String namespace = getRDFNamespace(qname.getNamespaceURI());
+    return model.createResource(namespace + qname.getLocalPart());
   }
   
   public static class UnsupportedException extends Exception{

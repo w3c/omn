@@ -1,0 +1,85 @@
+<Definitions name="IMSMRFServiceTemplateDefinition"
+	targetNamespace="http://www.etsi.org/sample" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
+	<Tags>
+		<Tag name="author" value="someone@example.com" />
+	</Tags>
+	<Types>
+		<xs:schema elementFormDefault="qualified"
+			attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="ApplicationProperties">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Vendor" type="xs:string" />
+						<xs:element name="VNFD" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</Types>
+	<ServiceTemplate id="IMSMRFServiceTemplate">
+		<TopologyTemplate id="IMSMRFService">
+			<NodeTemplate id="MyMRB" name="MyMRB" type="MRBNode">
+				<Properties>
+					<ApplicationProperties>
+						<Vendor>VendorX</Vendor>
+						<VNFD>IMS_MRB_x2</VNFD>
+					</ApplicationProperties>
+				</Properties>
+			</NodeTemplate>
+			<NodeTemplate id="MyMRF" name="MyMRF" type="MRFNode" />
+			<RelationshipTemplate name="MyDeploymentRelationship"
+				id="MyDeploymentRelationship" type="dependOn">
+				<SourceElement ref="MyMRF" />
+				<TargetElement ref="MyMRB" />
+			</RelationshipTemplate>
+		</TopologyTemplate>
+		<Plans>
+			<Plan id="InstantiateMRB"
+				planType="http://docs.oasis-open.org/tosca/ns/2011/12/PlanTypes/InstantiatePlan"
+				planLanguage="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+				<PlanModelReference reference="prj:InitiateMRB" />
+			</Plan>
+			<Plan id="InstantiateMRF "
+				planType="http://docs.oasis-open.org/tosca/ns/2011/12/PlanTypes/TerminationPlan"
+				planLanguage="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+				<PlanModelReference reference="prj:InitiateMRF" />
+			</Plan>
+		</Plans>
+	</ServiceTemplate>
+	<NodeType name="MRBNode" targetNamespace="http://www.example.com/sample">
+		<documentation xml:lang="EN">
+			A reusable definition of a MRB
+			node type representing an MRB VNF that can be deployed.
+		</documentation>
+		<PropertiesDefinition element="ApplicationProperties" />
+		<Interfaces>
+			<Interface name="InstantiationInterface">
+				<Operation name="InstantiateMRB">
+					<InputParameters>
+						<InputParamter name="InstanceName" type="xs:string" />
+						<InputParamter name="NumberOfInstance" type="xs:integer" />
+					</InputParameters>
+				</Operation>
+			</Interface>
+		</Interfaces>
+	</NodeType>
+	<NodeType name="MRFNode" targetNamespace="http://www.example.com/sample">
+		<PropertiesDefinition element="ApplicationProperties" />
+		<Interfaces>
+			<Interface name="InstantiationInterface">
+				<Operation name="InstantiateMRB" />
+				<InputParameters>
+					<InputParamter name="InstanceName" type="xs:string" />
+					<InputParamter name="NumberOfInstance" type="xs:integer" />
+				</InputParameters>
+			</Interface>
+		</Interfaces>
+	</NodeType>
+	<RelationshipType name="dependOn">
+		<documentation xml:lang="EN">
+			A reusable definition of
+			relation that expresses dependencies between
+			two VNF in NFV Service..
+		</documentation>
+	</RelationshipType>
+</Definitions>
