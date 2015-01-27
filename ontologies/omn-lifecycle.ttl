@@ -170,7 +170,7 @@
           owl:inverseOf :parentOf ;
           
           rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( omn:Component
+                        owl:disjointUnionOf ( omn:Component
                                       omn:Group
                                       omn:Resource
                                       omn:Service
@@ -210,6 +210,23 @@
        rdfs:range xsd:string .
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+:hasAuthenticationInformation rdf:type owl:DatatypeProperty ;
+       
+       rdfs:comment "A specific authentification information for the management system"@en ;
+       
+       rdfs:seeAlso "GENI Slice X.509 certificates"@en ;
+       
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:disjointUnionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] ;
+       
+       rdfs:range xsd:string .
 
 
 
