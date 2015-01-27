@@ -26,47 +26,6 @@
 
 ###  http://open-multinet.info/ontology/sfa#expires
 
-:expires rdf:type owl:DatatypeProperty ;
-         
-         rdfs:range xsd:dateTime .
-
-
-
-###  http://open-multinet.info/ontology/sfa#generated
-
-:generated rdf:type owl:DatatypeProperty ;
-           
-           rdfs:range xsd:dateTime .
-
-
-
-###  http://open-multinet.info/ontology/sfa#generatedBy
-
-:generatedBy rdf:type owl:DatatypeProperty ;
-             
-             rdfs:domain :Message ;
-             
-             rdfs:range xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/sfa#manager
-
-:manager rdf:type owl:DatatypeProperty ;
-         
-         rdfs:range xsd:anyURI .
-
-
-
-
-###  http://open-multinet.info/ontology/sfa#serviceURI
-
-:serviceURI   rdf:type owl:DatatypeProperty ;
-
-              rdfs:domain omn:Service ;
-         
-              rdfs:range xsd:anyURI .
-
 
 
 
