@@ -13,11 +13,11 @@ import org.junit.Test;
 
 public class RESTTest {
 
-	private RESTConverter converter;
+	private REST converter;
 
 	@Before
 	public void setup() {
-		this.converter = new RESTConverter();
+		this.converter = new REST();
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class RESTTest {
 		final String content = this.getFilecontent("/request2.rspec");
 
 		final String result = this.converter
-				.convert(AbstractConverter.RSPEC_REQUEST,
+				.post(AbstractConverter.RSPEC_REQUEST,
 						AbstractConverter.TTL, content);
 		System.out.println(result);
 		Assert.assertTrue("should contain a request",
@@ -36,7 +36,7 @@ public class RESTTest {
 	public void testConvertToRspec() {
 		final String content = this.getFilecontent("/request.ttl");
 
-		final String result = this.converter.convert(AbstractConverter.TTL,
+		final String result = this.converter.post(AbstractConverter.TTL,
 				AbstractConverter.RSPEC_ADVERTISEMENT, content);
 		System.out.println(result);
 		Assert.assertTrue("should contain an advertisement rspec",
@@ -45,7 +45,7 @@ public class RESTTest {
 
 	@Test(expected = WebApplicationException.class)
 	public void testWrongParam() {
-		this.converter.convert("a", "b", null);
+		this.converter.post("a", "b", null);
 	}
 
 	public String getFilecontent(final String filename) {
