@@ -37,6 +37,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.shared.PropertyNotFoundException;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -53,15 +54,16 @@ public class Tosca2OMN extends AbstractConverter {
     final Model model = tosca2Model(definitions);
     
     Parser.setCommonPrefixes(model);
+    model.setNsPrefix("target", getRDFNamespace(definitions.getTargetNamespace()));
     return model;
   }
   
   private static Model tosca2Model(final Definitions definitions) throws UnsupportedException {
     final Model model = ModelFactory.createDefaultModel();
     
+    processTypes(definitions, model);
     processNodeTypes(definitions, model);
     processRelationshipTypes(definitions, model);
-    processTypes(definitions, model);
     processTemplates(definitions, model);
     
     return model;
@@ -81,11 +83,9 @@ public class Tosca2OMN extends AbstractConverter {
             for (int i = 0; i < (schemaElement.getChildNodes().getLength() - 1); i++) {
               final Node elementNode = schemaElement.getChildNodes().item(i);
               final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
-              final Resource superProperty = model.getResource(namespace+superPropertyName);
-              Resource domain = null;
+              final Resource superProperty = model.createResource(namespace+superPropertyName);
               try{
-                domain = superProperty.getRequiredProperty(RDFS.domain).getResource();
-                createTypeProperty(model, namespace, elementNode, domain);
+                createTypeProperty(model, namespace, elementNode, superProperty, null);
               } catch(PropertyNotFoundException e){
                 LOG.log(Level.WARNING, "No domain found for property "+superProperty+" .");
               } 
@@ -96,16 +96,16 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
 
-  private static void createTypeProperty(Model model, String namespace, Node elementNode, Resource domain) {
+  private static void createTypeProperty(Model model, String namespace, Node elementNode, Resource superProperty, Resource domain) {
     for (int j = 0; j < (elementNode.getChildNodes().getLength() - 1); j++) {
       final Node typesNode = elementNode.getChildNodes().item(j);
       if (typesNode.getLocalName().equals("complexType")) {
-        createType(model, namespace, domain, typesNode);
+        createType(model, namespace, superProperty, typesNode, domain);
       }
     }
   }
 
-  private static void createType(Model model, String namespace, Resource domain, Node typesNode) {
+  private static void createType(Model model, String namespace, Resource superProperty, Node typesNode, Resource domain) {
     for (int k = 0; k < (typesNode.getChildNodes().getLength() - 1); k++) {
       final Node sequenceNode = typesNode.getChildNodes().item(k);
       if (sequenceNode.getLocalName().equals("sequence")) {
@@ -115,17 +115,24 @@ public class Tosca2OMN extends AbstractConverter {
             final String name = typeNode.getAttributes().getNamedItem("name").getNodeValue();
             final String type = typeNode.getAttributes().getNamedItem("type").getNodeValue();
             
+            Property property = model.createProperty(namespace + name);
             Resource propertyRangeClass;
             if(type.startsWith("xs:")){
               propertyRangeClass = getXSDType(type, model);
+              property.addProperty(RDF.type, OWL.DatatypeProperty);
             }
             else{
               propertyRangeClass = model.createResource(namespace + type);
               propertyRangeClass.addProperty(RDF.type, OWL2.Class);
-              createTypeProperty(model, namespace, typeNode, propertyRangeClass);
+              property.addProperty(RDF.type, OWL.ObjectProperty);
+              createTypeProperty(model, namespace, typeNode, null, propertyRangeClass);
             }
-            Property property = model.createProperty(namespace + name);
-            domain.addProperty(Tosca.supportsProperty, property);
+            if(superProperty != null){
+              property.addProperty(RDFS.subPropertyOf, superProperty);
+            }
+            if(domain != null){
+              domain.addProperty(Tosca.supportsProperty, property);
+            }
             property.addProperty(RDFS.range, propertyRangeClass);
           }
         }
@@ -176,31 +183,29 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static void processServiceTemplate(TServiceTemplate serviceTemplate, Definitions definitions, Model model) throws UnsupportedException {
+    String namespace = getRDFNamespace(definitions.getTargetNamespace());
+    Resource topologyResource = createTopology(model, serviceTemplate, namespace);
+    
     final TTopologyTemplate topologyTemplate = serviceTemplate.getTopologyTemplate();
-    
-    Resource topologyResource = createTopology(model, serviceTemplate);
-    
     for (final TEntityTemplate entityTemplate : topologyTemplate.getNodeTemplateOrRelationshipTemplate()) {
       if (entityTemplate instanceof TNodeTemplate) {
-        Resource node = createNode((TNodeTemplate) entityTemplate, definitions, model);
+        Resource node = createNode((TNodeTemplate) entityTemplate, namespace, model);
         topologyResource.addProperty(Omn.hasResource, node);
         
       } else if (entityTemplate instanceof TRelationshipTemplate) {
-        createRelationship((TRelationshipTemplate) entityTemplate, definitions, model);
+        createRelationship((TRelationshipTemplate) entityTemplate, namespace, model);
       }
     }
   }
   
-  private static Resource createTopology(Model model, TServiceTemplate serviceTemplate){
-    Resource topologyResource = model.createResource(serviceTemplate.getId());
+  private static Resource createTopology(Model model, TServiceTemplate serviceTemplate, String namespace){
+    Resource topologyResource = model.createResource(namespace+serviceTemplate.getId());
     topologyResource.addProperty(RDF.type, Omn.Topology);
     topologyResource.addProperty(RDF.type, OWL2.NamedIndividual);
     return topologyResource;
   }
   
-  private static Resource createNode(final TNodeTemplate nodeTemplate, final Definitions definitions,
-      final Model model) throws UnsupportedException {
-    final String namespace = getRDFNamespace(definitions.getTargetNamespace());
+  private static Resource createNode(final TNodeTemplate nodeTemplate, String namespace, final Model model) throws UnsupportedException {
     final Resource node = model.createResource(namespace + nodeTemplate.getName());
     setNodeType(nodeTemplate, node, model);
     setNodeProperties(nodeTemplate, node, model);
@@ -273,8 +278,7 @@ public class Tosca2OMN extends AbstractConverter {
     node.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
-  private static void createRelationship(TRelationshipTemplate relationshipTemplate, Definitions definitions, Model model) throws UnsupportedException {
-    final String namespace = getRDFNamespace(definitions.getTargetNamespace());
+  private static void createRelationship(TRelationshipTemplate relationshipTemplate, String namespace, Model model) throws UnsupportedException {
     final Property relationship = model.createProperty(namespace + relationshipTemplate.getName());
     setRelationshipType(relationshipTemplate, relationship, model);
     
@@ -333,10 +337,17 @@ public class Tosca2OMN extends AbstractConverter {
     nodeTypeResource.addProperty(RDFS.subClassOf, Tosca.Node);
     final PropertiesDefinition propertiesDefinition = nodeType.getPropertiesDefinition();
     if(propertiesDefinition != null){
-      final Resource properties = createResourceFromQName(propertiesDefinition.getElement(), model);
-      properties.addProperty(RDFS.domain, nodeTypeResource);
+      final Resource property = createResourceFromQName(propertiesDefinition.getElement(), model);
+      for(Resource subProperty : getSubProperties(property)){
+        nodeTypeResource.addProperty(Tosca.supportsProperty, subProperty);
+      }
     }
     return nodeTypeResource;
+  }
+  
+  private static List<Resource> getSubProperties(Resource property){
+    List<Resource> subProperties = property.getModel().listSubjectsWithProperty(RDFS.subPropertyOf, property).toList();
+    return subProperties;
   }
   
   private static void processRelationshipTypes(final Definitions definitions, final Model model) {

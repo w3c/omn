@@ -18,17 +18,17 @@
 	</Types>
 	<ServiceTemplate id="IMSMRFServiceTemplate">
 		<TopologyTemplate id="IMSMRFService">
-			<NodeTemplate id="MyMRB" name="MyMRB" type="MRBNode">
+			<NodeTemplate id="MyMRB" name="MyMRB" type="sample:MRBNode" xmlns:sample="http://www.etsi.org/sample">
 				<Properties>
-					<ApplicationProperties>
-						<Vendor>VendorX</Vendor>
-						<VNFD>IMS_MRB_x2</VNFD>
-					</ApplicationProperties>
+					<sample:ApplicationProperties>
+						<sample:Vendor>VendorX</sample:Vendor>
+						<sample:VNFD>IMS_MRB_x2</sample:VNFD>
+					</sample:ApplicationProperties>
 				</Properties>
 			</NodeTemplate>
-			<NodeTemplate id="MyMRF" name="MyMRF" type="MRFNode" />
+			<NodeTemplate id="MyMRF" name="MyMRF" type="sample:MRFNode" xmlns:sample="http://www.etsi.org/sample" />
 			<RelationshipTemplate name="MyDeploymentRelationship"
-				id="MyDeploymentRelationship" type="dependOn">
+				id="MyDeploymentRelationship" type="sample:dependOn" xmlns:sample="http://www.etsi.org/sample">
 				<SourceElement ref="MyMRF" />
 				<TargetElement ref="MyMRB" />
 			</RelationshipTemplate>
@@ -46,12 +46,12 @@
 			</Plan>
 		</Plans>
 	</ServiceTemplate>
-	<NodeType name="MRBNode" targetNamespace="http://www.example.com/sample">
+	<NodeType name="MRBNode" targetNamespace="http://www.etsi.org/sample">
 		<documentation xml:lang="EN">
 			A reusable definition of a MRB
 			node type representing an MRB VNF that can be deployed.
 		</documentation>
-		<PropertiesDefinition element="ApplicationProperties" />
+		<PropertiesDefinition element="sample:ApplicationProperties"  xmlns:sample="http://www.etsi.org/sample" />
 		<Interfaces>
 			<Interface name="InstantiationInterface">
 				<Operation name="InstantiateMRB">
@@ -63,8 +63,8 @@
 			</Interface>
 		</Interfaces>
 	</NodeType>
-	<NodeType name="MRFNode" targetNamespace="http://www.example.com/sample">
-		<PropertiesDefinition element="ApplicationProperties" />
+	<NodeType name="MRFNode" targetNamespace="http://www.etsi.org/sample">
+		<PropertiesDefinition element="sample:ApplicationProperties"  xmlns:sample="http://www.etsi.org/sample" />
 		<Interfaces>
 			<Interface name="InstantiationInterface">
 				<Operation name="InstantiateMRB" />
@@ -75,7 +75,7 @@
 			</Interface>
 		</Interfaces>
 	</NodeType>
-	<RelationshipType name="dependOn">
+	<RelationshipType name="dependOn" targetNamespace="http://www.etsi.org/sample">
 		<documentation xml:lang="EN">
 			A reusable definition of
 			relation that expresses dependencies between

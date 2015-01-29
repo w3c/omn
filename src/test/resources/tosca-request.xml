@@ -5,6 +5,7 @@
             <xs:element name="ServiceContainerProperties">
                 <xs:complexType>
                     <xs:sequence>
+                        <xs:element name="flavour" type="xs:string"/>
                         <xs:element name="location" type="Location">
                             <xs:complexType>
                                 <xs:sequence>
@@ -12,6 +13,8 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
+                        <xs:element name="minNumInst" type="xs:integer"/>
+                        <xs:element name="maxNumInst" type="xs:integer"/>
                         <xs:element name="subnet" type="Subnet">
                             <xs:complexType>
                                 <xs:sequence>
@@ -25,14 +28,12 @@
                         <xs:element name="image" type="Image">
                             <xs:complexType>
                                 <xs:sequence>
+                                    <xs:element name="name" type="xs:string"/>
                                     <xs:element name="datacenter" type="xs:string"/>
                                     <xs:element name="id" type="xs:string"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="minNumInst" type="xs:integer"/>
-                        <xs:element name="flavour" type="xs:string"/>
-                        <xs:element name="maxNumInst" type="xs:integer"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -42,15 +43,15 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="parameter2" type="xs:string"/>
-                        <xs:element name="test_param" type="xs:string"/>
                         <xs:element name="parameter1" type="xs:string"/>
+                        <xs:element name="test_param" type="xs:string"/>
                         <xs:element name="port" type="xs:integer"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:schema>
     </Types>
-    <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3">
+    <ServiceTemplate id="namedTopology3">
         <TopologyTemplate>
             <NodeTemplate name="container1" id="http://open-multinet.info/ontology/examples/container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>

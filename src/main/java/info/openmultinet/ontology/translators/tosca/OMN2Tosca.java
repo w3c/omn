@@ -83,7 +83,7 @@ public class OMN2Tosca extends AbstractConverter {
   private static void createServiceTemplate(Model model, List<TExtensibleElements> definitionsContent, List<Object> types, Resource topologyResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     TServiceTemplate serviceTemplate = objFactory.createTServiceTemplate();
     definitionsContent.add(serviceTemplate);
-    serviceTemplate.setId(topologyResource.getURI());
+    serviceTemplate.setId(topologyResource.getLocalName());
     
     TTopologyTemplate topologyTemplate = objFactory.createTTopologyTemplate();
     serviceTemplate.setTopologyTemplate(topologyTemplate);
