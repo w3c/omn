@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+jar="target/omnlib-jar-with-dependencies.jar"
+pom="pom.xml"
+
+if [ ! -f ${pom} ]; then
+  echo "The file '${pom}' not found. Wrong directory."
+  exit 1
+fi
+
+if [ ! -f ${jar} ]; then
+  echo "JAR not found. Compiling..."
+  mvn clean compile assembly:single
+fi
+
+echo "Running omnlib..."
+echo "Usage example: $0 -o ttl -i src/test/resources/request_bound.xml"
+echo ""
+java -jar ${jar} $@
+

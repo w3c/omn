@@ -18,6 +18,25 @@ The Java library helps developers to work wiht Open-Multinet related ontologies 
 
 ### Using it
 
+#### CLI
+
+    ./src/main/bin/omnlib -o ttl -i src/test/resources/request_bound.xml
+
+#### Web Service
+
+Assuming you have a running WildFly instance
+
+ 1. mvn clean compile
+ 2. mvn wildfly:deploy
+ 
+Then convert the file
+
+  curl --data-urlencode content@src/test/resources/request_bound.xml http://127.0.0.1:8080/omnlib/convert/request/ttl
+
+### Developing it
+
+#### Using it in your own project
+
 Add this repository to your pom.xml file:
 
     <project>
@@ -39,11 +58,11 @@ Add this repository to your pom.xml file:
       ...
     </project>
 
-### Developing it
+#### Enhancing the library
 
  1. Checkout the code
  2. Run "mvn clean compile" to auto generate binding files
- 3. Open with IDE (e.g. Eclipse)
+ 3. Open with IDE (e.g. Eclipse or IntelliJ)
 
 ## Directory Layout
 
