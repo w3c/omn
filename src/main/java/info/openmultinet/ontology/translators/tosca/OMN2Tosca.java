@@ -38,13 +38,10 @@ import org.w3c.dom.Element;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFList;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -183,7 +180,7 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void createPropertyTypes(Resource nodeType, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    List<Resource> properties = getResourcesWithDomain(nodeType);
+    List<Resource> properties = getSupportedProperties(nodeType);
     for(Resource property : properties){
       if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
         createObjectPropertyType(property, sequence);
@@ -194,49 +191,13 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  private static List<Resource> getResourcesWithDomain(Resource domainResource){
+  private static List<Resource> getSupportedProperties(Resource resource){
     List<Resource> properties = new ArrayList<>();
-    StmtIterator iter = domainResource.getModel().listStatements(null, RDFS.domain, (Resource) null);
+    StmtIterator iter = resource.listProperties(Tosca.supportsProperty);
     while(iter.hasNext()){
-      Statement st = iter.next();
-      if(!properties.contains(st.getSubject())){
-        if(isValidDomain(st.getSubject(), domainResource)){
-          properties.add(st.getSubject());
-        }
-      }
+      properties.add(iter.next().getResource());
     }
     return properties;
-  }
-  
-  private static boolean isValidDomain(Resource property, Resource domain){
-    StmtIterator iter = property.listProperties(RDFS.domain);
-    while(iter.hasNext()){
-      Statement st = iter.next();
-      if(resourceIsInUnionOfResource(domain, st.getResource())){
-        return true;
-      }
-    }
-    return false;
-  }
-  
-  private static boolean resourceIsInUnionOfResource(Resource resource, Resource unionResource){
-    if(resource.equals(unionResource)){
-      return true;
-    }
-    else if(unionResource.isAnon()){
-      if(unionResource.hasProperty(OWL2.disjointUnionOf)){
-        Statement unionStatement = unionResource.getProperty(OWL2.disjointUnionOf);
-        RDFList classList = unionStatement.getResource().as(RDFList.class);
-        ExtendedIterator<RDFNode> classesIter = classList.iterator();
-        while (classesIter.hasNext()) {
-          Resource property = classesIter.next().asResource();
-          if(resource.equals(property)){
-            return true;
-          }
-        }
-      }
-    }
-    return false;
   }
   
   private static void createObjectPropertyType(Resource property, Element sequence) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
@@ -356,12 +317,13 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, String prefix) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    List<Resource> supportedProperties = getSupportedProperties(nodeType);
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
       Property property = propertyStatement.getPredicate();
       
-      if(isValidDomain(property, nodeType)){
+      if(supportedProperties.contains(property)){
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
           createObjectProperty(node, propertyStatement, element, namespace, prefix);
         }
@@ -495,7 +457,7 @@ public class OMN2Tosca extends AbstractConverter {
     } else if(inferredProperties.size() == 1){
       return inferredProperties.get(0);
     } else {
-      throw new MultiplePropertyValuesException("Multiple values where found but only one was expected for property "+property+" of "+resource);
+      throw new MultiplePropertyValuesException("Multiple values where found but only one was expected for property "+property+" of "+resource+": "+inferredProperties);
     }
   }
   

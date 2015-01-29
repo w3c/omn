@@ -35,9 +35,6 @@ public class RoundtripTest {
     InputStream topologyStream = new ByteArrayInputStream(toscaDefinitions.getBytes());
     Model resultModel = Tosca2OMN.getModel(topologyStream);
     
-    final String serializedModel = Tosca2OMNTest.serializeModel(resultModel,"TTL");
-    System.out.println(serializedModel);
-    
     for(Statement st : parser.getModel().listStatements().toList()){
       Assert.assertTrue("Model should contain statement "+st, resultModel.contains(st));
     }

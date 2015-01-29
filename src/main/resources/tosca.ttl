@@ -22,10 +22,18 @@
 
 :relatesTo rdf:type owl:ObjectProperty ;
            
-           rdfs:range :Node ;
+           rdfs:domain :Node ;
            
-           rdfs:domain :Node .
+           rdfs:range :Node .
 
+
+###  http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology#supportsProperty
+
+:supportsProperty rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain owl:Class ;
+           
+           rdfs:range rdf:Property .
 
 #################################################################
 #

@@ -125,7 +125,7 @@ public class Tosca2OMN extends AbstractConverter {
               createTypeProperty(model, namespace, typeNode, propertyRangeClass);
             }
             Property property = model.createProperty(namespace + name);
-            property.addProperty(RDFS.domain, domain);
+            domain.addProperty(Tosca.supportsProperty, property);
             property.addProperty(RDFS.range, propertyRangeClass);
           }
         }
