@@ -23,7 +23,7 @@ public class Tosca2OMNTest {
 
 	@Test
 	public void testGetTopology() throws JAXBException, InvalidModelException, UnsupportedException {
-	  InputStream input = this.getClass().getResourceAsStream("/tosca-request.xml");
+	  InputStream input = this.getClass().getResourceAsStream("/tosca/tosca-request.xml");
 	  
 	  final Model model = Tosca2OMN.getModel(input);
 

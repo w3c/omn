@@ -20,7 +20,7 @@ public class OMN2ToscaTest {
 	@Test
 	public void testGetTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException {
-	  InputStream input = this.getClass().getResourceAsStream("/tosca-request.ttl");
+	  InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request.ttl");
 	  Parser parser = new Parser(input);
 	  
 		final InfModel model = parser.getInfModel();

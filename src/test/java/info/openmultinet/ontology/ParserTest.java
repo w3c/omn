@@ -30,7 +30,7 @@ public class ParserTest {
 
 	@Before
 	public void setup() throws InvalidModelException {
-		this.input = ParserTest.class.getResourceAsStream("/request.ttl");
+		this.input = ParserTest.class.getResourceAsStream("/omn/request.ttl");
 		this.parser = new Parser(this.input);
 	}
 

@@ -22,7 +22,7 @@ public class ManifestConverterTest {
 	public void testSimpleManifest() throws JAXBException,
 			InvalidModelException {
 		final InputStream rspec = ManifestConverterTest.class
-				.getResourceAsStream("/manifest_tobedefined.xml");
+				.getResourceAsStream("/geni/manifest/manifest_tobedefined.xml");
 		final Model model = ManifestConverter.getModel(rspec);
 		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
 				Omn_lifecycle.Manifest);

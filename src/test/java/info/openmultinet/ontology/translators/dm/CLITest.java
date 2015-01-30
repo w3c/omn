@@ -16,7 +16,7 @@ public class CLITest {
 
 	@Test
 	public void testMain() throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
-        CLI.main(new String[] {"-i", "src/test/resources/request_bound.xml", "-o" ,"ttl"});
+        CLI.main(new String[] {"-i", "src/test/resources/geni/request/request_bound.xml", "-o" ,"ttl"});
 	}
 
 }
