@@ -22,7 +22,7 @@ public class Omn4GeniTest {
 	@BeforeClass
 	public static void setup() throws InvalidModelException {
 		Omn4GeniTest.input = ParserTest.class
-				.getResourceAsStream("/request.ttl");
+				.getResourceAsStream("/omn/request.ttl");
 		Omn4GeniTest.parser = new Parser(Omn4GeniTest.input);
 	}
 
@@ -51,7 +51,7 @@ public class Omn4GeniTest {
 	@Test
 	public void testNTUAAdvertisement() throws JAXBException,
 			InvalidModelException {
-		final Model model = new Parser("/ntua_offer.ttl").getInfModel();
+		final Model model = new Parser("/omn/ntua_offer.ttl").getInfModel();
 		final String rspec = AdvertisementConverter.getRSpec(model);
 		System.out.println(rspec);
 		Assert.assertTrue("should be an advertisement",

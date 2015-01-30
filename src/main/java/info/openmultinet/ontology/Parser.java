@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
+import javax.validation.constraints.NotNull;
+
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -54,7 +56,11 @@ public class Parser {
 		this.init(model);
 	}
 
-	public void init(final InputStream input) throws InvalidModelException {
+	
+	public void init(@NotNull final InputStream input) throws InvalidModelException {
+		if (null == input)
+	        throw new IllegalArgumentException("input must not be null");
+		
 		// @fixme: this is a slow/expensive operation
 		final Model data = ModelFactory.createDefaultModel();
 		final RDFReader arp = data.getReader("TTL");

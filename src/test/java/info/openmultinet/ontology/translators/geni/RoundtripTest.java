@@ -22,7 +22,7 @@ public class RoundtripTest {
 		System.out.println(System.currentTimeMillis());
 
 		final InputStream rspec = RoundtripTest.class
-				.getResourceAsStream("/advertisement_vwall1.xml");
+				.getResourceAsStream("/geni/advertisement/advertisement_vwall1.xml");
 
 		System.out.println("Converting to omn graph...");
 		System.out.println(System.currentTimeMillis());

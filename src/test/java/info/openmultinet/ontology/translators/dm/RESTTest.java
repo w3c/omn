@@ -22,7 +22,7 @@ public class RESTTest {
 
 	@Test
 	public void testConvertToGraph() {
-		final String content = this.getFilecontent("/request2.rspec");
+		final String content = this.getFilecontent("/geni/request/request2.xml");
 
 		final String result = this.converter
 				.post(AbstractConverter.RSPEC_REQUEST,
@@ -34,7 +34,7 @@ public class RESTTest {
 
 	@Test
 	public void testConvertToRspec() {
-		final String content = this.getFilecontent("/request.ttl");
+		final String content = this.getFilecontent("/omn/request.ttl");
 
 		final String result = this.converter.post(AbstractConverter.TTL,
 				AbstractConverter.RSPEC_ADVERTISEMENT, content);

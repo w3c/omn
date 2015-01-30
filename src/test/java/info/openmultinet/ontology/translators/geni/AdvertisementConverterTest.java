@@ -19,7 +19,7 @@ public class AdvertisementConverterTest {
 	@Test
 	public void testAdv2omn() throws JAXBException, InvalidModelException {
 		final InputStream rspec = AdvertisementConverterTest.class
-				.getResourceAsStream("/advertisement_vwall1.xml");
+				.getResourceAsStream("/geni/advertisement/advertisement_vwall1.xml");
 		final Model model = AdvertisementConverter.getModel(rspec);
 		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
 				Omn_lifecycle.Offering);

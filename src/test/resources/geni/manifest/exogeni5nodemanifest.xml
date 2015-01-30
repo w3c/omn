@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec type="manifest" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1/slice_info.xsd?format=raw http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1/sliver_info.xsd?format=raw" xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:ns3="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#nodeA" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="nodeA">
+        <sliver_type name="m1.small">
+            <disk_image version="de35e71b31771870bcdfcccb4dee11657ba145b8" name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.2.xml"/>
+        </sliver_type>
+        <services/>
+        <interface client_id="VM-0:if0">
+            <ip type="ipv4" address="192.168.4.11"/>
+        </interface>
+        <interface client_id="VM-0:if1">
+            <ip type="ipv4" address="192.168.5.11"/>
+        </interface>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#nodeE" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="nodeE">
+        <sliver_type name="m1.small">
+            <disk_image version="de35e71b31771870bcdfcccb4dee11657ba145b8" name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.2.xml"/>
+        </sliver_type>
+        <services/>
+        <interface client_id="VM-3:if0">
+            <ip type="ipv4" address="192.168.6.14"/>
+        </interface>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#nodeC" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="nodeC">
+        <sliver_type name="m1.small">
+            <disk_image version="de35e71b31771870bcdfcccb4dee11657ba145b8" name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.2.xml"/>
+        </sliver_type>
+        <services/>
+        <interface client_id="VM-2:if0">
+            <ip type="ipv4" address="192.168.3.12"/>
+        </interface>
+        <interface client_id="VM-2:if3">
+            <ip type="ipv4" address="192.168.2.12"/>
+        </interface>
+        <interface client_id="VM-2:if1">
+            <ip type="ipv4" address="192.168.5.12"/>
+        </interface>
+        <interface client_id="VM-2:if2">
+            <ip type="ipv4" address="192.168.6.12"/>
+        </interface>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#nodeB" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="nodeB">
+        <sliver_type name="m1.small">
+            <disk_image version="de35e71b31771870bcdfcccb4dee11657ba145b8" name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.2.xml"/>
+        </sliver_type>
+        <services/>
+        <interface client_id="VM:if0">
+            <ip type="ipv4" address="192.168.4.10"/>
+        </interface>
+        <interface client_id="VM:if1">
+            <ip type="ipv4" address="192.168.1.10"/>
+        </interface>
+        <interface client_id="VM:if2">
+            <ip type="ipv4" address="192.168.2.10"/>
+        </interface>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#nodeD" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="nodeD">
+        <sliver_type name="m1.small">
+            <disk_image version="de35e71b31771870bcdfcccb4dee11657ba145b8" name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.2.xml"/>
+        </sliver_type>
+        <services/>
+        <interface client_id="VM-1:if1">
+            <ip type="ipv4" address="192.168.3.13"/>
+        </interface>
+        <interface client_id="VM-1:if0">
+            <ip type="ipv4" address="192.168.1.13"/>
+        </interface>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </node>
+    <link vlantag="unknown" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#link3" client_id="link3">
+        <interface_ref client_id="VM-2:if1"/>
+        <interface_ref client_id="VM-0:if1"/>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </link>
+    <link vlantag="unknown" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#link2" client_id="link2">
+        <interface_ref client_id="VM-1:if1"/>
+        <interface_ref client_id="VM-2:if0"/>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </link>
+    <link vlantag="unknown" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#link0" client_id="link0">
+        <interface_ref client_id="VM-0:if0"/>
+        <interface_ref client_id="VM:if0"/>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </link>
+    <link vlantag="unknown" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#link4" client_id="link4">
+        <interface_ref client_id="VM-2:if2"/>
+        <interface_ref client_id="VM-3:if0"/>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </link>
+    <link vlantag="unknown" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#link1" client_id="link1">
+        <interface_ref client_id="VM-1:if0"/>
+        <interface_ref client_id="VM:if1"/>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </link>
+    <link vlantag="unknown" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+0faa1d2e-0c95-4422-b52f-03ac5ce9c92d#link5" client_id="link5">
+        <interface_ref client_id="VM-2:if3"/>
+        <interface_ref client_id="VM:if2"/>
+        <ns4:geni_sliver_info state="Nascent" start_time="2013-05-21T15:59:27.596Z" expiration_time="2013-05-22T15:59:27.596Z" creation_time="2013-05-21T15:59:27.596Z" creator_urn="dbhat@engin.umass.edu, urn:publicid:IDN+panther+user+dbhat"/>
+    </link>
+    <ns3:geni_slice_info state="configuring" uuid="2127113a-474f-4a9e-aad0-d4e7b22267ca" urn="urn:publicid:IDN+panther:GIMITesting+slice+dbhatexo5node"/>
+</rspec>

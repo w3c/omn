@@ -23,7 +23,7 @@ public class RequestConverterTest {
 	@Test
 	public void test() throws JAXBException, InvalidModelException {
 		final InputStream rspec = RequestConverterTest.class
-				.getResourceAsStream("/request.rspec");
+				.getResourceAsStream("/geni/request/request1.xml");
 		final Model model = RequestConverter.getModel(rspec);
 		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
 				Omn_lifecycle.Request);
@@ -34,7 +34,7 @@ public class RequestConverterTest {
 	@Test
 	public void testUnboundRequest() throws JAXBException,
 			InvalidModelException, IOException {
-		final String filename = "/request_unbound.xml";
+		final String filename = "/geni/request/request_unbound.xml";
 		final InputStream inputRspec = RequestConverterTest.class
 				.getResourceAsStream(filename);
 		System.out.println("Converting this input from '" + filename + "':");
