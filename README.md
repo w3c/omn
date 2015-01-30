@@ -10,7 +10,8 @@ Java library (omnlib) and playground for the ontology work conducted in the [Ope
 
 * [Upper Ontology (omn)](http://open-multinet.info/ontology/omn)
 * [Further information](http://federation.av.tu-berlin.de/omn/ontology.html)
-* [GENI RSpecs](http://groups.geni.net/geni/wiki/GENIExperimenter/RSpecs)
+* [GENI RSpec Description](http://groups.geni.net/geni/wiki/GENIExperimenter/RSpecs)
+* [GENI RSpec Examples](http://groups.geni.net/geni/browser/trunk)
 
 ## Java omnlib
 
