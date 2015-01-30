@@ -32,7 +32,7 @@ public abstract class AbstractConverter {
 		}
 		if (groups.size() > 1) {
 			throw new InvalidModelException(
-					"More than one group in model found");
+					"Found '" + groups.size() + "' groups, which is more than one");
 		}
 	}
 

@@ -48,6 +48,7 @@
 ###  http://open-multinet.info/ontology/examples#namedTopology3
 
 :namedTopology3 rdf:type omn-lifecycle:Request ,
+                         omn-lifecycle:Offering ,
                          owl:NamedIndividual ;
                 
                 rdfs:comment "Also known as a TOSCA topology, Teagle virtual customer testbed, or GENI Slice. Not sure if this shouldn't be rather a omn:Topology."^^xsd:string ;

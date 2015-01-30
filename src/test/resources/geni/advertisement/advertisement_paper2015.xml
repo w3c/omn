@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd "
+	type="advertisement"
+    generated="2015-01-22T13:44:44Z"
+    expires="2015-01-22T13:44:44Z">
+	<node 
+	    component_manager_id="urn:publicid:IDN+test.bed.name+authority+cm"
+	    component_name="component-name"
+        component_id="urn:publicid:IDN+test.bed.name+node+component-name"
+		exclusive="true">
+		<hardware_type name="http://open-multinet.info/ontology/resources/motorgarage#MotorGarage" />
+		<hardware_type name="openstack-pc" />
+		<sliver_type name="http://open-multinet.info/ontology/resources/motor#Motor" />
+        <sliver_type name="large-vm" />
+		<available now="true" />
+		<location longitude="3.734761" latitude="51.036145" />
+	</node>
+</rspec>

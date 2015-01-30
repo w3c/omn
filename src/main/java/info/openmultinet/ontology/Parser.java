@@ -5,11 +5,15 @@ import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Osco;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 import javax.validation.constraints.NotNull;
+
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -158,12 +162,9 @@ public class Parser {
 	}
 
 	public static String toString(final Model model) {
-		String result = "";
-		for (final StmtIterator i = model.listStatements(); i.hasNext();) {
-			final Statement stmt = i.nextStatement();
-			result += PrintUtil.print(stmt) + Parser.NL;
-		}
-		return result;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		RDFDataMgr.write(baos , model, Lang.TTL);
+		return baos.toString();
 	}
 
 	public InfModel getInfModel() {

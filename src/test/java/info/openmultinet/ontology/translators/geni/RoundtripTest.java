@@ -17,23 +17,29 @@ public class RoundtripTest {
 	@Test
 	public void testAdvertismentRoundtrip() throws JAXBException,
 			InvalidModelException {
-
-		System.out.println("Reading large advertisement RSpec...");
-		System.out.println(System.currentTimeMillis());
-
+		long start ;
+		
+		System.out.println("Operation: Reading reference advertisement RSpec");
+		start = System.currentTimeMillis();
 		final InputStream rspec = RoundtripTest.class
-				.getResourceAsStream("/geni/advertisement/advertisement_vwall1.xml");
-
-		System.out.println("Converting to omn graph...");
-		System.out.println(System.currentTimeMillis());
-
+				.getResourceAsStream("/geni/advertisement/advertisement_paper2015.xml");
+		System.out.println("Duration: " + (System.currentTimeMillis() - start));
+		
+		
+		System.out.println("Operation: Converting to omn graph");
+		start = System.currentTimeMillis();
 		final Model model = AdvertisementConverter.getModel(rspec);
-
-		System.out.println("Converting to large advertisement RSpec again...");
-		System.out.println(System.currentTimeMillis());
-
+		System.out.println("Duration: " + (System.currentTimeMillis() - start));
+		System.out.println("Result:"); 
+		System.out.println(Parser.toString(model));
+		
+		
+		System.out.println("Converting to reference advertisement RSpec again...");
+		start = System.currentTimeMillis();
 		final InfModel infModel = new Parser(model).getInfModel();
+		System.out.println("Duration: " + (System.currentTimeMillis() - start));
 		final String advertisement = AdvertisementConverter.getRSpec(infModel);
+		System.out.println("Duration: " + (System.currentTimeMillis() - start));
 
 		System.out.println("This is the result:");
 		System.out.println(System.currentTimeMillis());
