@@ -1,0 +1,150 @@
+<rspec xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" type="manifest" generated_by="Flack" generated="2013-05-20T01:22:34Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd " expires="2013-05-26T09:11:32Z">
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="nodeB" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+node+pc1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4538">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+instageni.gpolab.bbn.com+image+emulab-net//GIMIomf"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /local/postboot_script.sh" shell="sh"/>
+      <install install_path="/local" url="http://emmy9.casa.umass.edu/InstaGENI_Images/install-script.tar.gz"/>
+    <login authentication="ssh-keys" hostname="pc1.instageni.gpolab.bbn.com" port="30779" username="dbhat"/></services>
+    <interface client_id="VM:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4545" mac_address="0226ad94606d">
+      <ip address="192.168.4.10" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="VM:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4547" mac_address="02b197e58375">
+      <ip address="192.168.1.10" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="nodeB:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4559" mac_address="020cb099b697">
+      <ip address="192.168.2.10" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="327" y="67" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm1-3"/><host name="nodeB.dbhatinstageni5.panther.instageni.gpolab.bbn.com"/></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="nodeA" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+node+pc1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4537">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+instageni.gpolab.bbn.com+image+emulab-net//GIMIomf"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /local/postboot_script.sh" shell="sh"/>
+      <install install_path="/local" url="http://emmy9.casa.umass.edu/InstaGENI_Images/install-script.tar.gz"/>
+    <login authentication="ssh-keys" hostname="pc1.instageni.gpolab.bbn.com" port="30778" username="dbhat"/></services>
+    <interface client_id="VM-0:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4544" mac_address="02245bc31345">
+      <ip address="192.168.4.11" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="VM-0:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4553" mac_address="02b9bd7bb529">
+      <ip address="192.168.5.11" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="140" y="164" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm1-1"/><host name="nodeA.dbhatinstageni5.panther.instageni.gpolab.bbn.com"/></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="nodeD" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+node+pc1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4540">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+instageni.gpolab.bbn.com+image+emulab-net//GIMIomf"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /local/postboot_script.sh" shell="sh"/>
+      <install install_path="/local" url="http://emmy9.casa.umass.edu/InstaGENI_Images/install-script.tar.gz"/>
+    <login authentication="ssh-keys" hostname="pc1.instageni.gpolab.bbn.com" port="30781" username="dbhat"/></services>
+    <interface client_id="VM-1:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4548" mac_address="024fd26ba21c">
+      <ip address="192.168.1.13" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="VM-1:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4550" mac_address="0212bfd4b742">
+      <ip address="192.168.3.13" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="564" y="168" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm1-8"/><host name="nodeD.dbhatinstageni5.panther.instageni.gpolab.bbn.com"/></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="nodeC" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+node+pc1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4539">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+instageni.gpolab.bbn.com+image+emulab-net//GIMIomf"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /local/postboot_script.sh" shell="sh"/>
+      <install install_path="/local" url="http://emmy9.casa.umass.edu/InstaGENI_Images/install-script.tar.gz"/>
+    <login authentication="ssh-keys" hostname="pc1.instageni.gpolab.bbn.com" port="30780" username="dbhat"/></services>
+    <interface client_id="VM-2:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4551" mac_address="028d9467cc62">
+      <ip address="192.168.3.12" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="VM-2:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4554" mac_address="02e9e343d2be">
+      <ip address="192.168.5.12" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="VM-2:if2" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4556" mac_address="02bc58fc56c1">
+      <ip address="192.168.6.12" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="nodeC:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4560" mac_address="0248d66a8ce1">
+      <ip address="192.168.2.12" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="352" y="252" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm1-6"/><host name="nodeC.dbhatinstageni5.panther.instageni.gpolab.bbn.com"/></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="nodeE" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+node+pc1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4541">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+instageni.gpolab.bbn.com+image+emulab-net//GIMIomf"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /local/postboot_script.sh" shell="sh"/>
+      <install install_path="/local" url="http://emmy9.casa.umass.edu/InstaGENI_Images/install-script.tar.gz"/>
+    <login authentication="ssh-keys" hostname="pc1.instageni.gpolab.bbn.com" port="30782" username="dbhat"/></services>
+    <interface client_id="VM-3:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4557" mac_address="027d3d62dc5d">
+      <ip address="192.168.6.14" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="364" y="389" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm1-9"/><host name="nodeE.dbhatinstageni5.panther.instageni.gpolab.bbn.com"/></node>
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4543">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="VM-0:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4544"/>
+    <interface_ref client_id="VM:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4545"/>
+    <property source_id="VM-0:if0" dest_id="VM:if0"/>
+    <property source_id="VM:if0" dest_id="VM-0:if0"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4546">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="VM:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4547"/>
+    <interface_ref client_id="VM-1:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4548"/>
+    <property source_id="VM:if1" dest_id="VM-1:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM:if1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link2" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4549">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="VM-1:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4550"/>
+    <interface_ref client_id="VM-2:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4551"/>
+    <property source_id="VM-1:if1" dest_id="VM-2:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-1:if1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link3" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4552">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="VM-0:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4553"/>
+    <interface_ref client_id="VM-2:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4554"/>
+    <property source_id="VM-0:if1" dest_id="VM-2:if1"/>
+    <property source_id="VM-2:if1" dest_id="VM-0:if1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link4" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4555">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="VM-2:if2" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4556"/>
+    <interface_ref client_id="VM-3:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4557"/>
+    <property source_id="VM-2:if2" dest_id="VM-3:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-2:if2"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link5" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4558">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="nodeB:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4559"/>
+    <interface_ref client_id="nodeC:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4560"/>
+    <property source_id="nodeB:if0" dest_id="nodeC:if0"/>
+    <property source_id="nodeC:if0" dest_id="nodeB:if0"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <client:client_info name="Flack" environment="Flash Version: LNX 11,2,202,273, OS: Linux 3.2.0-38-generic-pae, Arch: x86, Screen: 1366x664 @ 72 DPI with touchscreen type none" version="v14.91" url="https://www.emulab.net/protogeni/flack2/flack.swf"/>
+  <flack:slice_info view="graph"/>
+</rspec>
