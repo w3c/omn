@@ -19,6 +19,7 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,6 +47,8 @@ import com.hp.hpl.jena.vocabulary.XSD;
 public class Tosca2OMN extends AbstractConverter {
   
   private static final Logger LOG = Logger.getLogger(Tosca2OMN.class.getName());
+  
+  private static Random random = new Random();
   
   public static Model getModel(final InputStream input) throws JAXBException, InvalidModelException, UnsupportedException {
     final JAXBContext context = JAXBContext.newInstance(Definitions.class);
@@ -236,20 +239,21 @@ public class Tosca2OMN extends AbstractConverter {
           throw new UnsupportedException("Expected a text node in the properties");
         }
       }
-      else{
+      else if(propertyNode.getChildNodes().getLength() > 1){
         Node propertyValueName = propertyNode.getAttributes().getNamedItem("name");
-        if(propertyValueName != null){
-          String propertyValueNameString = propertyValueName.getNodeValue();
-          Resource propertyValue = model.createResource(node.getNameSpace() + propertyValueNameString);
-          propertyValue.addProperty(RDF.type, propertyRange);
-          propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
-          node.addProperty(property, propertyValue);
-          
-          processPropertiesElement(propertyValue, model, propertyNode);
+        String propertyValueNameString;
+        if(propertyValueName == null){
+          propertyValueNameString = propertyNode.getLocalName()+String.valueOf(random.nextInt());
         }
         else{
-          throw new UnsupportedException("The property node "+propertyNode+" needs to have a \"name\" attribute");
+          propertyValueNameString = propertyValueName.getNodeValue();
         }
+        Resource propertyValue = model.createResource(node.getNameSpace() + propertyValueNameString);
+        propertyValue.addProperty(RDF.type, propertyRange);
+        propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
+        node.addProperty(property, propertyValue);
+        
+        processPropertiesElement(propertyValue, model, propertyNode);
       }
     }
   }
