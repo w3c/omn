@@ -24,7 +24,7 @@
 ###  http://noc.ntua.gr/ontology/examples#boundMotor7
 
 
-:namedOffering rdf:type omn:Topology,
+:namedOffering rdf:type omn-lifecycle:Offering,
                          owl:NamedIndividual ;
                 
                 rdfs:comment "Also known as a TOSCA topology, Teagle virtual customer testbed, or GENI Slice. Not sure if this should be an omn:Topology or an omn-lifecycle:Offering."^^xsd:string ;

@@ -1,0 +1,42 @@
+@prefix : <http://open-multinet.info/ontology/examples#> .
+@prefix fp: <http://fuseco.fokus.fraunhofer.de/about#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix motor: <http://fiteagle.org/ontology/resource/motor#> .
+@prefix motorgarage: <http://fiteagle.org/ontology/resource/motorgarage#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@base <http://open-multinet.info/ontology/examples#> .
+
+<http://open-multinet.info/ontology/examples> rdf:type owl:Ontology .
+
+fp:me rdf:type omn-federation:Infrastructure .
+
+:namedOffering rdf:type omn-lifecycle:Offering,
+                         owl:NamedIndividual ;
+                rdfs:comment "All resources that can be 'slivered'."@en ;
+                omn:hasResource :motorgarage1 ,
+                                :motorgarage2 .
+
+:motorgarage1 rdf:type motorgarage:MotorGarage,
+                      owl:NamedIndividual ;
+             omn-resource:isExclusive true ;
+             rdfs:label "Motor Garage 1"^^xsd:string ;
+             rdfs:comment "some more human readable information about the garage" ;
+             omn-lifecycle:implements motor:Motor .
+
+:motorgarage2 rdf:type motorgarage:MotorGarage,
+                      owl:NamedIndividual ;
+             omn:isResourceOf fp:me;
+             rdfs:label "Motor Garage 2"^^xsd:string ;
+             rdfs:comment "some more human readable information about the garage" ;
+             geo:lat "52.5258083" ;
+             geo:long "13.3172764" ;
+             omn-lifecycle:implements motor:Motor .
+             

@@ -2,12 +2,15 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
@@ -28,8 +31,12 @@ import javax.xml.transform.stream.StreamSource;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class AdvertisementConverter extends AbstractConverter {
@@ -97,9 +104,42 @@ public class AdvertisementConverter extends AbstractConverter {
 			final NodeContents rspecNode = nodeJaxb.getValue();
 			final Resource omnNode = topology.getModel().createResource(
 					rspecNode.getComponentId());
+			
 			omnNode.addProperty(RDF.type, Omn_resource.Node);
 			omnNode.addProperty(Omn.isResourceOf, topology);
+			
+			for (Object rspecNodeObject : rspecNode.getAnyOrRelationOrLocation()) {
+				tryExtractHardwareType(rspecNodeObject, omnNode);
+				tryExtractSliverType(rspecNodeObject, omnNode);
+			}
+			
 			topology.addProperty(Omn.hasResource, omnNode);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private static void tryExtractHardwareType(Object rspecNodeObject, Resource omnNode) {
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<HardwareTypeContents> hwJaxb = (JAXBElement<HardwareTypeContents>) rspecNodeObject;
+			final HardwareTypeContents hw = hwJaxb.getValue();
+			
+			RDFNode type = ResourceFactory.createProperty(hw.getName());
+			omnNode.addProperty(RDF.type, type);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private static void tryExtractSliverType(Object rspecNodeObject, Resource omnNode) {
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<SliverType> sliverJaxb = (JAXBElement<SliverType>) rspecNodeObject;
+			SliverType sliver = sliverJaxb.getValue();
+			
+			RDFNode type = ResourceFactory.createProperty(sliver.getName());
+			omnNode.addProperty(Omn_lifecycle.parentOf, type);
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -112,18 +152,19 @@ public class AdvertisementConverter extends AbstractConverter {
 		final RSpecContents advertisement = new RSpecContents();
 		advertisement.setType(RspecTypeContents.ADVERTISEMENT);
 		advertisement.setGeneratedBy(AbstractConverter.VENDOR);
-		AdvertisementConverter.setGeneratedTime(advertisement);
-
+		AdvertisementConverter.setTimeInformation(advertisement);
+		
 		AdvertisementConverter.model2rspec(model, advertisement);
 		final JAXBElement<RSpecContents> rspec = new ObjectFactory()
 		.createRspec(advertisement);
+		
 		return AbstractConverter.toString(rspec, AdvertisementConverter.JAXB);
 	}
 
 	private static void model2rspec(final Model model,
 			final RSpecContents manifest) throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
-				Omn.Group).toList();
+				Omn_lifecycle.Offering).toList();
 		AbstractConverter.validateModel(groups);
 		final Resource group = groups.iterator().next();
 
@@ -135,16 +176,60 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private static void convertStatementsToNodesAndLinks(
-			final RSpecContents manifest, final List<Statement> resources) {
-		for (final Statement resource : resources) {
+			final RSpecContents manifest, final List<Statement> omnResources) {
+		for (final Statement omnResource : omnResources) {
 			// @todo: check type of resource here and not only generate nodes
-			final NodeContents node = new NodeContents();
+			final NodeContents geniNode = new NodeContents();
 
-			AdvertisementConverter.setComponentDetails(resource, node);
-			AdvertisementConverter.setComponentManagerId(resource, node);
+			AdvertisementConverter.setComponentDetails(omnResource, geniNode);
+			AdvertisementConverter.setComponentManagerId(omnResource, geniNode);
+			AdvertisementConverter.setHardwareTypes(omnResource, geniNode);
+			AdvertisementConverter.setSliverTypes(omnResource, geniNode);
+			
+			ResIterator infrastructures = omnResource.getModel().listResourcesWithProperty(Omn.isResourceOf, Omn_federation.Infrastructure);
+			if (infrastructures.hasNext()) {
+				Resource infrastructure = infrastructures.next();
+				geniNode.setComponentManagerId(infrastructure.getURI());
+			}			
 
 			manifest.getAnyOrNodeOrLink().add(
-					new ObjectFactory().createNode(node));
+					new ObjectFactory().createNode(geniNode));
+		}
+	}
+
+	private static void setSliverTypes(Statement omnResource,
+			NodeContents geniNode) {
+		
+		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
+		
+		StmtIterator parentOf = omnResource.getResource().listProperties(Omn_lifecycle.parentOf);
+		ObjectFactory of = new ObjectFactory();
+		SliverType sliver;
+		
+		while (parentOf.hasNext()) {
+			String parentURI = parentOf.next().getResource().getURI();
+			sliver = of.createNodeContentsSliverType();
+			sliver.setName(parentURI);
+			if (null != parentURI)
+				geniNodeDetails.add(of.createNodeContentsSliverType(sliver));
+		}
+	}
+
+	private static void setHardwareTypes(Statement omnResource,
+			NodeContents geniNode) {
+		
+		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
+		
+		StmtIterator types = omnResource.getResource().listProperties(RDF.type);
+		ObjectFactory of = new ObjectFactory();
+		HardwareTypeContents hwType;
+		
+		while (types.hasNext()) {
+			String rdfType = types.next().getResource().getURI();
+			hwType = of.createHardwareTypeContents();
+			hwType.setName(rdfType);
+			if (null != rdfType)
+				geniNodeDetails.add(of.createHardwareType(hwType));
 		}
 	}
 
@@ -167,17 +252,19 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private static void setGeneratedTime(final RSpecContents manifest) {
+	private static void setTimeInformation(final RSpecContents manifest) {
 		final GregorianCalendar gregorianCalendar = new GregorianCalendar();
 		gregorianCalendar.setTime(new Date(System.currentTimeMillis()));
-		XMLGregorianCalendar xmlGrogerianCalendar;
+		XMLGregorianCalendar xmlGrogerianCalendar = null;
 		try {
 			xmlGrogerianCalendar = DatatypeFactory.newInstance()
-					.newXMLGregorianCalendar(gregorianCalendar);
-			manifest.setGenerated(xmlGrogerianCalendar);
+					.newXMLGregorianCalendar(gregorianCalendar);			
 		} catch (final DatatypeConfigurationException e) {
 			AdvertisementConverter.LOG.info(e.getMessage());
 		}
+		manifest.setGenerated(xmlGrogerianCalendar);
+		manifest.setExpires(xmlGrogerianCalendar);
 	}
+
 
 }
