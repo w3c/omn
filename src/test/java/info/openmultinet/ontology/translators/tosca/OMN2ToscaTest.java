@@ -20,19 +20,19 @@ public class OMN2ToscaTest {
 	@Test
 	public void testGetTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException {
-	  InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request.ttl");
+	  InputStream input = getClass().getResourceAsStream("/omn/tosca-request.ttl");
 	  Parser parser = new Parser(input);
 	  
 		final InfModel model = parser.getInfModel();
 		final String topology = OMN2Tosca.getTopology(model);
 		System.out.println(topology);
 
-		OMN2ToscaTest.testGeneralToscaDefinitions(topology);
-		OMN2ToscaTest.testTypes(topology);
-		OMN2ToscaTest.testNodeTypes(topology);
-		OMN2ToscaTest.testNodeTemplates(topology);
-		OMN2ToscaTest.testRelationshipTemplates(topology);
-		this.testRelationshipTypes(topology);
+		testGeneralToscaDefinitions(topology);
+		testTypes(topology);
+		testNodeTypes(topology);
+		testNodeTemplates(topology);
+		testRelationshipTemplates(topology);
+		testRelationshipTypes(topology);
 	}
 
 	private static void testGeneralToscaDefinitions(final String topology) {
@@ -89,7 +89,7 @@ public class OMN2ToscaTest {
 				topology.contains("<TargetElement ref=\"http://open-multinet.info/ontology/examples/container1\"/>"));
 	}
 
-	private void testRelationshipTypes(final String topology) {
+	private static void testRelationshipTypes(final String topology) {
 		Assert.assertTrue("Should contain a relationship type element",
 				topology.contains("<RelationshipType"));
 		Assert.assertTrue("relationship type should have the right name",

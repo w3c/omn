@@ -23,7 +23,7 @@ public class Tosca2OMNTest {
 
 	@Test
 	public void testGetTopology() throws JAXBException, InvalidModelException, UnsupportedException {
-	  InputStream input = this.getClass().getResourceAsStream("/tosca/tosca-request.xml");
+	  InputStream input = getClass().getResourceAsStream("/tosca/tosca-request.xml");
 	  
 	  final Model model = Tosca2OMN.getModel(input);
 
@@ -47,8 +47,6 @@ public class Tosca2OMNTest {
 				model.contains(Osco.parameter2, RDFS.range, XSD.xstring));
 		Assert.assertTrue("post should be of range int",
         model.contains(Osco.port, RDFS.range, XSD.xint));
-		Assert.assertTrue("Should contain the service type",
-				model.containsResource(Osco.dummy));
 		Assert.assertTrue("Should contain the service properties",
 				model.containsResource(Osco.test_param));
 	}
