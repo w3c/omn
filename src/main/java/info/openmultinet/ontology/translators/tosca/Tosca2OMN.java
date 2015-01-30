@@ -230,13 +230,12 @@ public class Tosca2OMN extends AbstractConverter {
       Resource propertyRange = getPropertyRange(property);
       
       if(propertyNode.getChildNodes().getLength() == 1){
-        Node childElement = propertyNode.getChildNodes().item(0);
-        if(childElement.getNodeType() == Node.TEXT_NODE){
+        if(propertyNode.getTextContent() != null){
           final Literal literal = model.createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
           node.addLiteral(property, literal);
         }
         else{
-          throw new UnsupportedException("Expected a text node in the properties");
+          throw new UnsupportedException("Expected text content in property: "+propertyNode.getLocalName());
         }
       }
       else if(propertyNode.getChildNodes().getLength() > 1){

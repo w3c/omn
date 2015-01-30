@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" id="2675157096" targetNamespace="http://open-multinet.info/ontology/examples/">
+   <ServiceTemplate id="2316792584" name="container1">
+      <TopologyTemplate>
+         <NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="container1" type="ns2:ServiceContainer">
+            <Properties>
+               <osco:ServiceContainerProperties xmlns:osco="http://opensdncore.org/ontology/">
+                  <osco:maxNumInst>1</osco:maxNumInst>
+                  <osco:minNumInst>1</osco:minNumInst>
+                  <osco:flavour>1024MB_10GB</osco:flavour>
+                  <osco:location>
+                     <osco:name>Berlin</osco:name>
+                  </osco:location>
+                  <osco:subnet>
+                     <osco:name>trescimo-net</osco:name>
+                     <osco:floatingIP>random</osco:floatingIP>
+                     <osco:fixedIP />
+                     <osco:datacenter>AV-Openstack</osco:datacenter>
+                     <osco:mgmt>true</osco:mgmt>
+                  </osco:subnet>
+                  <osco:image>
+                     <osco:id>ffb9a89e-3a00-4a1b-a1f8-f4e135122994</osco:id>
+                     <osco:datacenter>AV-Openstack</osco:datacenter>
+                  </osco:image>
+               </osco:ServiceContainerProperties>
+            </Properties>
+         </NodeTemplate>
+         <NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="dummy1" id="2612804756" type="ns2:dummy">
+            <Properties>
+               <osco:dummyProperties xmlns:osco="http://opensdncore.org/ontology/">
+                  <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                  <osco:PORT>80</osco:PORT>
+                  <osco:nameserver>10.147.9.3</osco:nameserver>
+                  <osco:ORCHESTRATOR_IP>127.0.0.1</osco:ORCHESTRATOR_IP>
+                  <osco:port>8088</osco:port>
+                  <osco:test_param>foo</osco:test_param>
+                  <osco:TEST_PARAM>test</osco:TEST_PARAM>
+                  <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                  <osco:parameter1>test</osco:parameter1>
+                  <osco:parameter2>bar</osco:parameter2>
+               </osco:dummyProperties>
+            </Properties>
+         </NodeTemplate>
+      </TopologyTemplate>
+   </ServiceTemplate>
+   <Locations />
+</Definitions>

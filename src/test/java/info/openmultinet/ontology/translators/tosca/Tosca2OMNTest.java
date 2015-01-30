@@ -22,7 +22,7 @@ public class Tosca2OMNTest {
 
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException, UnsupportedException {
+	public void testConvertToscaRequest() throws JAXBException, InvalidModelException, UnsupportedException {
 	  InputStream input = getClass().getResourceAsStream("/tosca/tosca-request.xml");
 	  
 	  final Model model = Tosca2OMN.getModel(input);
@@ -50,6 +50,23 @@ public class Tosca2OMNTest {
 		Assert.assertTrue("Should contain the service properties",
 				model.containsResource(Osco.test_param));
 	}
+	
+	@Test
+  public void testConvertToscaResponse() throws JAXBException, InvalidModelException, UnsupportedException {
+    InputStream input = getClass().getResourceAsStream("/tosca/tosca-response.xml");
+    
+    final Model model = Tosca2OMN.getModel(input);
+
+    final String serializedModel = Tosca2OMNTest.serializeModel(model, "TTL");
+    System.out.println(serializedModel);
+
+    Assert.assertTrue("Should contain a topology resource",
+        model.containsResource(Omn.Topology));
+    Assert.assertTrue("Should contain the dummy node resource",
+        model.containsResource(Osco.dummy));
+    Assert.assertTrue("Should contain parameter resources",
+        model.containsResource(Osco.parameter2));
+  }
 
 	public static String serializeModel(final Model rdfModel,
 			final String serialization) {
