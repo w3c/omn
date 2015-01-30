@@ -150,6 +150,31 @@
            
            rdfs:label "depends on"@en ;
            
+           rdfs:subPropertyOf :relatesTo ;
+           
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Component
+                                       :Group
+                                       :Resource
+                                       :Service
+                                     )
+                       ] ;
+           
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( :Component
+                                      :Group
+                                      :Resource
+                                      :Service
+                                    )
+                      ] .
+
+
+###  http://open-multinet.info/ontology/omn#relatesTo
+
+:relatesTo rdf:type owl:ObjectProperty ;
+           
+           rdfs:label "relates to"@en ;
+           
            rdfs:domain [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
                                        :Group
