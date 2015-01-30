@@ -322,10 +322,9 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static void createStates(final TNodeType nodeType, final Model model) {
-    final String namespace = getRDFNamespace(nodeType.getTargetNamespace());
     if(nodeType.getInstanceStates() != null){
       for (final InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()) {
-        final Resource state = model.createResource(namespace + instanceState.getState());
+        final Resource state = model.createResource(instanceState.getState());
         state.addProperty(RDF.type, Tosca.State);
       }
     }

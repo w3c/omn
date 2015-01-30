@@ -93,39 +93,39 @@
     <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
         <PropertiesDefinition element="osco:ServiceContainerProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
         <InstanceStates>
-            <InstanceState state="Started"/>
-            <InstanceState state="Updating"/>
-            <InstanceState state="NotYetInitialized"/>
-            <InstanceState state="Stopped"/>
-            <InstanceState state="Active"/>
-            <InstanceState state="Pending"/>
-            <InstanceState state="Removing"/>
-            <InstanceState state="Uncompleted"/>
-            <InstanceState state="Cleaned"/>
-            <InstanceState state="Ready"/>
-            <InstanceState state="Error"/>
-            <InstanceState state="Initialized"/>
-            <InstanceState state="Preinit"/>
-            <InstanceState state="Installed"/>
+            <InstanceState state="http://opensdncore.org/ontology/Started"/>
+            <InstanceState state="http://opensdncore.org/ontology/Updating"/>
+            <InstanceState state="http://opensdncore.org/ontology/NotYetInitialized"/>
+            <InstanceState state="http://opensdncore.org/ontology/Stopped"/>
+            <InstanceState state="http://opensdncore.org/ontology/Active"/>
+            <InstanceState state="http://opensdncore.org/ontology/Pending"/>
+            <InstanceState state="http://opensdncore.org/ontology/Removing"/>
+            <InstanceState state="http://opensdncore.org/ontology/Uncompleted"/>
+            <InstanceState state="http://opensdncore.org/ontology/Cleaned"/>
+            <InstanceState state="http://opensdncore.org/ontology/Ready"/>
+            <InstanceState state="http://opensdncore.org/ontology/Error"/>
+            <InstanceState state="http://opensdncore.org/ontology/Initialized"/>
+            <InstanceState state="http://opensdncore.org/ontology/Preinit"/>
+            <InstanceState state="http://opensdncore.org/ontology/Installed"/>
         </InstanceStates>
     </NodeType>
     <NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
         <PropertiesDefinition element="osco:dummyProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
         <InstanceStates>
-            <InstanceState state="Started"/>
-            <InstanceState state="Updating"/>
-            <InstanceState state="NotYetInitialized"/>
-            <InstanceState state="Stopped"/>
-            <InstanceState state="Active"/>
-            <InstanceState state="Pending"/>
-            <InstanceState state="Removing"/>
-            <InstanceState state="Uncompleted"/>
-            <InstanceState state="Cleaned"/>
-            <InstanceState state="Ready"/>
-            <InstanceState state="Error"/>
-            <InstanceState state="Initialized"/>
-            <InstanceState state="Preinit"/>
-            <InstanceState state="Installed"/>
+            <InstanceState state="http://opensdncore.org/ontology/Started"/>
+            <InstanceState state="http://opensdncore.org/ontology/Updating"/>
+            <InstanceState state="http://opensdncore.org/ontology/NotYetInitialized"/>
+            <InstanceState state="http://opensdncore.org/ontology/Stopped"/>
+            <InstanceState state="http://opensdncore.org/ontology/Active"/>
+            <InstanceState state="http://opensdncore.org/ontology/Pending"/>
+            <InstanceState state="http://opensdncore.org/ontology/Removing"/>
+            <InstanceState state="http://opensdncore.org/ontology/Uncompleted"/>
+            <InstanceState state="http://opensdncore.org/ontology/Cleaned"/>
+            <InstanceState state="http://opensdncore.org/ontology/Ready"/>
+            <InstanceState state="http://opensdncore.org/ontology/Error"/>
+            <InstanceState state="http://opensdncore.org/ontology/Initialized"/>
+            <InstanceState state="http://opensdncore.org/ontology/Preinit"/>
+            <InstanceState state="http://opensdncore.org/ontology/Installed"/>
         </InstanceStates>
     </NodeType>
     <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">

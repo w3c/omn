@@ -265,7 +265,7 @@ public class OMN2Tosca extends AbstractConverter {
     
     for(Resource state : states){
       InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
-      instanceState.setState(state.getLocalName());
+      instanceState.setState(state.getURI());
       instanceStates.getInstanceState().add(instanceState);
     }
     nodeType.setInstanceStates(instanceStates);
