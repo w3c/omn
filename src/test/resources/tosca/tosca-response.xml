@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Definitions xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" id="2675157096" targetNamespace="http://open-multinet.info/ontology/examples/">
-   <ServiceTemplate id="2316792584" name="container1">
+<Definitions xmlns="http://docs.oasis-open.org/tosca/ns/2011/12" id="1006758238" targetNamespace="http://open-multinet.info/ontology/examples/">
+   <ServiceTemplate id="1573434003" name="Service1573434003">
       <TopologyTemplate>
-         <NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="container1" type="ns2:ServiceContainer">
+         <NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="container1" id="1573434003" type="ns2:ServiceContainer">
             <Properties>
                <osco:ServiceContainerProperties xmlns:osco="http://opensdncore.org/ontology/">
                   <osco:maxNumInst>1</osco:maxNumInst>
@@ -25,22 +25,26 @@
                </osco:ServiceContainerProperties>
             </Properties>
          </NodeTemplate>
-         <NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="dummy1" id="2612804756" type="ns2:dummy">
+         <NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="dummy1" id="1638647691" type="ns2:dummy">
             <Properties>
                <osco:dummyProperties xmlns:osco="http://opensdncore.org/ontology/">
-                  <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
-                  <osco:PORT>80</osco:PORT>
-                  <osco:nameserver>10.147.9.3</osco:nameserver>
-                  <osco:ORCHESTRATOR_IP>127.0.0.1</osco:ORCHESTRATOR_IP>
-                  <osco:port>8088</osco:port>
-                  <osco:test_param>foo</osco:test_param>
                   <osco:TEST_PARAM>test</osco:TEST_PARAM>
                   <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
-                  <osco:parameter1>test</osco:parameter1>
                   <osco:parameter2>bar</osco:parameter2>
+                  <osco:nameserver>10.147.9.3</osco:nameserver>
+                  <osco:ORCHESTRATOR_IP>127.0.0.1</osco:ORCHESTRATOR_IP>
+                  <osco:test_param>foo</osco:test_param>
+                  <osco:parameter1>test</osco:parameter1>
+                  <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                  <osco:port>8088</osco:port>
+                  <osco:PORT>80</osco:PORT>
                </osco:dummyProperties>
             </Properties>
          </NodeTemplate>
+         <RelationshipTemplate xmlns:ns2="http://opensdncore.org/ontology/" name="deployedOncontainer1" type="ns2:deployedOn">
+            <SourceElement ref="1638647691" />
+            <TargetElement ref="1573434003" />
+         </RelationshipTemplate>
       </TopologyTemplate>
    </ServiceTemplate>
    <Locations />
