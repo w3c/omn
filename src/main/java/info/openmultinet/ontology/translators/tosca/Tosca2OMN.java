@@ -16,7 +16,6 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanc
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
-import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
 import java.util.List;
@@ -86,7 +85,7 @@ public class Tosca2OMN extends AbstractConverter {
               final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
               final Resource superProperty = model.createResource(namespace+superPropertyName);
               try{
-                createTypeProperty(model, namespace, elementNode, superProperty, null);
+                createTypeProperty(model, namespace, elementNode, superProperty);
               } catch(PropertyNotFoundException e){
                 LOG.log(Level.WARNING, "No domain found for property "+superProperty+" .");
               } 
@@ -97,16 +96,16 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
 
-  private static void createTypeProperty(Model model, String namespace, Node elementNode, Resource superProperty, Resource domain) {
+  private static void createTypeProperty(Model model, String namespace, Node elementNode, Resource superProperty) {
     for (int j = 0; j < (elementNode.getChildNodes().getLength() - 1); j++) {
       final Node typesNode = elementNode.getChildNodes().item(j);
       if (typesNode.getLocalName().equals("complexType")) {
-        createType(model, namespace, superProperty, typesNode, domain);
+        createType(model, namespace, superProperty, typesNode);
       }
     }
   }
 
-  private static void createType(Model model, String namespace, Resource superProperty, Node typesNode, Resource domain) {
+  private static void createType(Model model, String namespace, Resource superProperty, Node typesNode) {
     for (int k = 0; k < (typesNode.getChildNodes().getLength() - 1); k++) {
       final Node sequenceNode = typesNode.getChildNodes().item(k);
       if (sequenceNode.getLocalName().equals("sequence")) {
@@ -126,13 +125,10 @@ public class Tosca2OMN extends AbstractConverter {
               propertyRangeClass = model.createResource(namespace + type);
               propertyRangeClass.addProperty(RDF.type, OWL2.Class);
               property.addProperty(RDF.type, OWL.ObjectProperty);
-              createTypeProperty(model, namespace, typeNode, null, propertyRangeClass);
+              createTypeProperty(model, namespace, typeNode, null);
             }
             if(superProperty != null){
               property.addProperty(RDFS.subPropertyOf, superProperty);
-            }
-            if(domain != null){
-              domain.addProperty(Tosca.supportsProperty, property);
             }
             property.addProperty(RDFS.range, propertyRangeClass);
           }
@@ -337,17 +333,9 @@ public class Tosca2OMN extends AbstractConverter {
     nodeTypeResource.addProperty(RDFS.subClassOf, Omn.Resource);
     final PropertiesDefinition propertiesDefinition = nodeType.getPropertiesDefinition();
     if(propertiesDefinition != null){
-      final Resource property = createResourceFromQName(propertiesDefinition.getElement(), model);
-      for(Resource subProperty : getSubProperties(property)){
-        nodeTypeResource.addProperty(Tosca.supportsProperty, subProperty);
-      }
+      createResourceFromQName(propertiesDefinition.getElement(), model);
     }
     return nodeTypeResource;
-  }
-  
-  private static List<Resource> getSubProperties(Resource property){
-    List<Resource> subProperties = property.getModel().listSubjectsWithProperty(RDFS.subPropertyOf, property).toList();
-    return subProperties;
   }
   
   private static void processRelationshipTypes(final Definitions definitions, final Model model) {

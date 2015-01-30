@@ -225,10 +225,8 @@
 
 ###  http://opensdncore.org/ontology/Image
 
-:Image rdf:type owl:Class ;
+:Image rdf:type owl:Class .
                   
-       tosca:supportsProperty :name, :datacenter, :id .
-
 
 ###  http://opensdncore.org/ontology/Initialized
 
@@ -292,8 +290,6 @@
                   
                   rdfs:subClassOf omn:Resource ;
                   
-                  tosca:supportsProperty :location, :subnet, :image, :maxNumInst, :minNumInst, :flavour ;
-                  
                   rdfs:comment "This is a service container from the OpenSDNCore platform"^^xsd:string ;
                   
                   rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
@@ -318,17 +314,13 @@
 
 ###  http://opensdncore.org/ontology/Subnet
 
-:Subnet rdf:type owl:Class ;
+:Subnet rdf:type owl:Class .
                   
-        tosca:supportsProperty :name, :datacenter, :floatingIp, :mgmt .
-
 
 ###  http://opensdncore.org/ontology/Location
 
-:Location rdf:type owl:Class ;
+:Location rdf:type owl:Class .
                   
-          tosca:supportsProperty :name .
-
 
 ###  http://opensdncore.org/ontology/Uncompleted
 
@@ -351,8 +343,6 @@
        
        rdfs:subClassOf omn:Resource ;
                   
-       tosca:supportsProperty :parameter2, :parameter1, :test_param, :port ; 
-       
        rdfs:comment "This is a dummy service from the OpenSDNCore platform"^^xsd:string ;
        
        rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .

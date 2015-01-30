@@ -4,7 +4,6 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Osco;
-import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -102,7 +101,6 @@ public class Parser {
 		schema.add(Parser.parse("/omn-service.ttl"));
 		schema.add(Parser.parse("/omn-component.ttl"));
 		schema.add(Parser.parse("/osco.ttl"));
-		schema.add(Parser.parse("/tosca.ttl"));
 
 		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
 		// @fixme: this is a slow/expensive operation
@@ -116,7 +114,6 @@ public class Parser {
 		model.setNsPrefix("rdf", RDF.getURI());
 		model.setNsPrefix("rdfs", RDFS.getURI());
 		model.setNsPrefix("owl", OWL.getURI());
-		model.setNsPrefix("tosca", Tosca.getURI());
 		model.setNsPrefix("osco", Osco.getURI());
 		model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 	}
@@ -144,8 +141,7 @@ public class Parser {
 				+ Parser.createPrefix("rdf", RDF.getURI())
 				+ Parser.createPrefix("rdfs", RDFS.getURI())
 				+ Parser.createPrefix("owl", OWL.getURI())
-				+ Parser.createPrefix("osco", Osco.getURI())
-				+ Parser.createPrefix("tosca", Tosca.getURI());
+				+ Parser.createPrefix("osco", Osco.getURI());
 	}
 
 	public static String createPrefix(final String name, final String URI) {

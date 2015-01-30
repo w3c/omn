@@ -40,11 +40,13 @@ public class Tosca2OMNTest {
 		Assert.assertTrue("Should contain state resources",
 				model.containsResource(Osco.Active));
 		Assert.assertTrue("Should contain parameter resources",
-				model.containsResource(Osco.parameter1));
+				model.containsResource(Osco.parameter2));
 		Assert.assertTrue("port should be of range int",
 				model.contains(Osco.port, RDFS.range, XSD.xint));
-		Assert.assertTrue("parameter1 should be of range string",
-				model.contains(Osco.parameter1, RDFS.range, XSD.xstring));
+		Assert.assertTrue("parameter2 should be of range string",
+				model.contains(Osco.parameter2, RDFS.range, XSD.xstring));
+		Assert.assertTrue("post should be of range int",
+        model.contains(Osco.port, RDFS.range, XSD.xint));
 		Assert.assertTrue("Should contain the service type",
 				model.containsResource(Osco.dummy));
 		Assert.assertTrue("Should contain the service properties",
