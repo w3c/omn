@@ -49,7 +49,7 @@
             </xs:element>
         </xs:schema>
     </Types>
-    <ServiceTemplate id="namedTopology3">
+    <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3" name="namedTopology3">
         <TopologyTemplate>
             <NodeTemplate name="container1" id="http://open-multinet.info/ontology/examples/container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>

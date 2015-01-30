@@ -199,7 +199,7 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   private static Resource createTopology(Model model, TServiceTemplate serviceTemplate, String namespace){
-    Resource topologyResource = model.createResource(namespace+serviceTemplate.getId());
+    Resource topologyResource = model.createResource(namespace+serviceTemplate.getName());
     topologyResource.addProperty(RDF.type, Omn.Topology);
     topologyResource.addProperty(RDF.type, OWL2.NamedIndividual);
     return topologyResource;
