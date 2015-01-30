@@ -3,8 +3,8 @@ package info.openmultinet.ontology.translators.tosca;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedException;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Osco;
-import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -34,9 +34,9 @@ public class Tosca2OMNTest {
 		Assert.assertTrue("Should contain a topology resource",
         model.containsResource(Omn.Topology));
 		Assert.assertTrue("Should contain the dummy node resource",
-				model.contains(Osco.dummy, RDFS.subClassOf, Tosca.Node));
+				model.contains(Osco.dummy, RDFS.subClassOf, Omn.Resource));
 		Assert.assertTrue("Should contain state resources",
-				model.containsResource(Tosca.State));
+				model.containsResource(Omn_lifecycle.State));
 		Assert.assertTrue("Should contain state resources",
 				model.containsResource(Osco.Active));
 		Assert.assertTrue("Should contain parameter resources",

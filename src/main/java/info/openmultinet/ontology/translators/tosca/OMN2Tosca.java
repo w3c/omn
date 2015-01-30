@@ -19,6 +19,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanc
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class OMN2Tosca extends AbstractConverter {
     
     List<TEntityTemplate> nodesAndRelationshipTemplates = topologyTemplate.getNodeTemplateOrRelationshipTemplate();
     
-    ResIterator nodeIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
+    ResIterator nodeIterator = model.listResourcesWithProperty(RDF.type, Omn.Resource);
     while(nodeIterator.hasNext()){
       Resource nodeResource = nodeIterator.next();
       Resource nodeTypeResource = calculateInferredPropertyValue(nodeResource, RDF.type);
@@ -102,7 +103,7 @@ public class OMN2Tosca extends AbstractConverter {
       nodesAndRelationshipTemplates.add(createNodeTemplate(nodeResource, nodeTypeResource));
     }
     
-    nodeIterator = model.listResourcesWithProperty(RDF.type, Tosca.Node);
+    nodeIterator = model.listResourcesWithProperty(RDF.type, Omn.Resource);
     while(nodeIterator.hasNext()){
       Resource nodeResource = nodeIterator.next();
       
@@ -259,7 +260,7 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setInstanceStates(Resource nodeTypeResource, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    List<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDFS.subClassOf, Tosca.State).toList();    
+    List<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDFS.subClassOf, Omn_lifecycle.State).toList();    
     List<Resource> redundantStates = calculateRedundantResources(states);
     states.removeAll(redundantStates);
     
@@ -367,7 +368,7 @@ public class OMN2Tosca extends AbstractConverter {
       StmtIterator relationTypeIterator = relation.listProperties(RDF.type);
       while(relationTypeIterator.hasNext()){
         Resource relationType = relationTypeIterator.next().getResource();
-        if (relationType.hasProperty(RDFS.subPropertyOf, Tosca.relatesTo)) {
+        if (relationType.hasProperty(RDFS.subPropertyOf, Omn.relatesTo)) {
           relationshipTemplates.add(createRelationshipTemplate(relationStatement, nodesAndRelationshipTemplates, relationType));
         }
       }

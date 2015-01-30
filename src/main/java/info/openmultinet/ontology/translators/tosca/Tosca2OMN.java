@@ -15,6 +15,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TServiceTemplate;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanceStates.InstanceState;
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Tosca;
 
 import java.io.InputStream;
@@ -325,7 +326,7 @@ public class Tosca2OMN extends AbstractConverter {
     if(nodeType.getInstanceStates() != null){
       for (final InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()) {
         final Resource state = model.createResource(instanceState.getState());
-        state.addProperty(RDF.type, Tosca.State);
+        state.addProperty(RDF.type, Omn_lifecycle.State);
       }
     }
   }
@@ -333,7 +334,7 @@ public class Tosca2OMN extends AbstractConverter {
   private static Resource createNodeType(TNodeType nodeType, Model model) {
     final String namespace = getRDFNamespace(nodeType.getTargetNamespace());
     final Resource nodeTypeResource = model.getResource(namespace + nodeType.getName());
-    nodeTypeResource.addProperty(RDFS.subClassOf, Tosca.Node);
+    nodeTypeResource.addProperty(RDFS.subClassOf, Omn.Resource);
     final PropertiesDefinition propertiesDefinition = nodeType.getPropertiesDefinition();
     if(propertiesDefinition != null){
       final Resource property = createResourceFromQName(propertiesDefinition.getElement(), model);
@@ -362,7 +363,7 @@ public class Tosca2OMN extends AbstractConverter {
     String namespace = getRDFNamespace(relationshipType.getTargetNamespace());
     Resource relationshipTypeResource = model.createResource(namespace + relationshipType.getName());
     relationshipTypeResource.addProperty(RDF.type, OWL2.ObjectProperty);
-    relationshipTypeResource.addProperty(RDFS.subPropertyOf, Tosca.relatesTo);
+    relationshipTypeResource.addProperty(RDFS.subPropertyOf, Omn.relatesTo);
     
     setValidSource(relationshipType, relationshipTypeResource);
     setValidTarget(relationshipType, relationshipTypeResource);

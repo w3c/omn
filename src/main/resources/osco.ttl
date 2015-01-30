@@ -4,6 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @base <http://opensdncore.org/ontology/> .
 
@@ -23,10 +24,9 @@
             
             rdfs:comment "This relation describes that a service is deployed on a container"^^xsd:string ;
             
-            rdfs:subPropertyOf tosca:relatesTo ;
+            rdfs:subPropertyOf omn:relatesTo ;
             
             rdfs:range :ServiceContainer .
-
 
 
 ###  http://opensdncore.org/ontology/image
@@ -203,7 +203,7 @@
 
 :Active rdf:type owl:Class ;
         
-        rdfs:subClassOf tosca:State .
+        rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -211,7 +211,7 @@
 
 :Cleaned rdf:type owl:Class ;
          
-         rdfs:subClassOf tosca:State .
+         rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -219,7 +219,7 @@
 
 :Error rdf:type owl:Class ;
        
-       rdfs:subClassOf tosca:State .
+       rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -234,7 +234,7 @@
 
 :Initialized rdf:type owl:Class ;
              
-             rdfs:subClassOf tosca:State .
+             rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -242,7 +242,7 @@
 
 :Installed rdf:type owl:Class ;
            
-           rdfs:subClassOf tosca:State .
+           rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -250,7 +250,7 @@
 
 :NotYetInitialized rdf:type owl:Class ;
                    
-                   rdfs:subClassOf tosca:State .
+                   rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -258,7 +258,7 @@
 
 :Pending rdf:type owl:Class ;
          
-         rdfs:subClassOf tosca:State .
+         rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -266,7 +266,7 @@
 
 :Preinit rdf:type owl:Class ;
          
-         rdfs:subClassOf tosca:State .
+         rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -274,7 +274,7 @@
 
 :Ready rdf:type owl:Class ;
        
-       rdfs:subClassOf tosca:State .
+       rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -282,7 +282,7 @@
 
 :Removing rdf:type owl:Class ;
           
-          rdfs:subClassOf tosca:State .
+          rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -290,7 +290,7 @@
 
 :ServiceContainer rdf:type owl:Class ;
                   
-                  rdfs:subClassOf tosca:Node ;
+                  rdfs:subClassOf omn:Resource ;
                   
                   tosca:supportsProperty :location, :subnet, :image, :maxNumInst, :minNumInst, :flavour ;
                   
@@ -304,7 +304,7 @@
 
 :Started rdf:type owl:Class ;
          
-         rdfs:subClassOf tosca:State .
+         rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -312,7 +312,7 @@
 
 :Stopped rdf:type owl:Class ;
          
-         rdfs:subClassOf tosca:State .
+         rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -334,14 +334,14 @@
 
 :Uncompleted rdf:type owl:Class ;
              
-             rdfs:subClassOf tosca:State .
+             rdfs:subClassOf omn-lifecycle:State .
 
 
 ###  http://opensdncore.org/ontology/Updating
 
 :Updating rdf:type owl:Class ;
           
-          rdfs:subClassOf tosca:State .
+          rdfs:subClassOf omn-lifecycle:State .
 
 
 
@@ -349,7 +349,7 @@
 
 :dummy rdf:type owl:Class ;
        
-       rdfs:subClassOf tosca:Node ;
+       rdfs:subClassOf omn:Resource ;
                   
        tosca:supportsProperty :parameter2, :parameter1, :test_param, :port ; 
        
