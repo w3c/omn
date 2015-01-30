@@ -38,7 +38,7 @@ public class Tosca2OMNTest {
 		Assert.assertTrue("Should contain state resources",
 				model.containsResource(Omn_lifecycle.State));
 		Assert.assertTrue("Should contain state resources",
-				model.containsResource(Osco.Active));
+				model.containsResource(Omn_lifecycle.Ready));
 		Assert.assertTrue("Should contain parameter resources",
 				model.containsResource(Osco.parameter2));
 		Assert.assertTrue("port should be of range int",

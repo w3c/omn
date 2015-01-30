@@ -199,90 +199,10 @@
 #################################################################
 
 
-###  http://opensdncore.org/ontology/Active
-
-:Active rdf:type owl:Class ;
-        
-        rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Cleaned
-
-:Cleaned rdf:type owl:Class ;
-         
-         rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Error
-
-:Error rdf:type owl:Class ;
-       
-       rdfs:subClassOf omn-lifecycle:State .
-
-
-
 ###  http://opensdncore.org/ontology/Image
 
 :Image rdf:type owl:Class .
                   
-
-###  http://opensdncore.org/ontology/Initialized
-
-:Initialized rdf:type owl:Class ;
-             
-             rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Installed
-
-:Installed rdf:type owl:Class ;
-           
-           rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/NotYetInitialized
-
-:NotYetInitialized rdf:type owl:Class ;
-                   
-                   rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Pending
-
-:Pending rdf:type owl:Class ;
-         
-         rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Preinit
-
-:Preinit rdf:type owl:Class ;
-         
-         rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Ready
-
-:Ready rdf:type owl:Class ;
-       
-       rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Removing
-
-:Removing rdf:type owl:Class ;
-          
-          rdfs:subClassOf omn-lifecycle:State .
-
-
 
 ###  http://opensdncore.org/ontology/ServiceContainer
 
@@ -295,23 +215,6 @@
                   rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
 
 
-
-###  http://opensdncore.org/ontology/Started
-
-:Started rdf:type owl:Class ;
-         
-         rdfs:subClassOf omn-lifecycle:State .
-
-
-
-###  http://opensdncore.org/ontology/Stopped
-
-:Stopped rdf:type owl:Class ;
-         
-         rdfs:subClassOf omn-lifecycle:State .
-
-
-
 ###  http://opensdncore.org/ontology/Subnet
 
 :Subnet rdf:type owl:Class .
@@ -321,21 +224,6 @@
 
 :Location rdf:type owl:Class .
                   
-
-###  http://opensdncore.org/ontology/Uncompleted
-
-:Uncompleted rdf:type owl:Class ;
-             
-             rdfs:subClassOf omn-lifecycle:State .
-
-
-###  http://opensdncore.org/ontology/Updating
-
-:Updating rdf:type owl:Class ;
-          
-          rdfs:subClassOf omn-lifecycle:State .
-
-
 
 ###  http://opensdncore.org/ontology/dummy
 

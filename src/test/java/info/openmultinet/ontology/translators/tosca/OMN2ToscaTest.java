@@ -61,7 +61,7 @@ public class OMN2ToscaTest {
 				"Should contain property definitions",
 				topology.contains("<PropertiesDefinition element=\"osco:dummyProperties\" xmlns:osco=\"http://opensdncore.org/ontology/\"/>"));
 		Assert.assertTrue("Should contain state definitions",
-				topology.contains("<InstanceState state=\"http://opensdncore.org/ontology/Ready\"/>"));
+				topology.contains("<InstanceState state=\"http://open-multinet.info/ontology/omn-lifecycle#Active\"/>"));
 	}
 
 	private static void testNodeTemplates(final String topology) {
