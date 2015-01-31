@@ -20,6 +20,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 
 import org.apache.jena.riot.RiotException;
 
@@ -54,7 +55,7 @@ public class REST extends DeliveryMechanism {
 		} catch (UnknownFormatConversionException e) {
 			throw new ConverterWebApplicationException(
 					Response.Status.NOT_ACCEPTABLE, e.getMessage());
-		} catch (JAXBException | InvalidModelException | IOException e) {
+		} catch (XMLStreamException | JAXBException | InvalidModelException | IOException e) {
 			throw new ConverterWebApplicationException(
 					Response.Status.INTERNAL_SERVER_ERROR, e);
 		}

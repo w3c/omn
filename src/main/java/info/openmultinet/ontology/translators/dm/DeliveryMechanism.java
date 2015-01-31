@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.UnknownFormatConversionException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -32,7 +33,7 @@ public class DeliveryMechanism {
 	public static String convert(String from, String to, String content)
 			throws JAXBException, InvalidModelException, UnsupportedException,
 			IOException, MultipleNamespacesException,
-			RequiredResourceNotFoundException, MultiplePropertyValuesException {
+			RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
@@ -41,7 +42,7 @@ public class DeliveryMechanism {
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 			model = RequestConverter.getModel(stream);
 		} else if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)) {
-			model = AdvertisementConverter.getModel(stream);
+			model = new AdvertisementConverter().getModel(stream);
 		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
 			model = ManifestConverter.getModel(stream);
 		} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
@@ -54,7 +55,7 @@ public class DeliveryMechanism {
 		}
 
 		if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
-			final String rspec = AdvertisementConverter.getRSpec(model);
+			final String rspec = new AdvertisementConverter().getRSpec(model);
 			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(to)) {
 			final String rspec = ManifestConverter.getRSpec(model);

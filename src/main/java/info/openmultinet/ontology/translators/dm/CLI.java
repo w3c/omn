@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -26,7 +27,7 @@ import org.apache.commons.io.FileUtils;
 public class CLI {
 	private static final String NAME = CLI.class.getCanonicalName();
 
-	public static void main(String[] args) throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
+	public static void main(String[] args) throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
 
 		CommandLine lvCmd = null;
 		HelpFormatter lvFormater = new HelpFormatter();

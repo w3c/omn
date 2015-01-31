@@ -7,6 +7,7 @@ import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.nio.MappedByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
@@ -43,37 +44,44 @@ public class Parser {
 	private static String NL = System.getProperty("line.separator");
 	private Model model;
 	protected InfModel infModel;
+	private Model data;
 	private static Reasoner reasoner;
 
 	// @todo: add support for all serializations, not only TTL
 	public Parser(final InputStream input) throws InvalidModelException {
-		this.init(input);
+		this.read(input);
 	}
 
 	public Parser(final String filename) throws InvalidModelException {
-		final InputStream input = Parser.class.getResourceAsStream(filename);
-		this.init(input);
+		this.read(filename);
 	}
 
 	public Parser(final Model model) throws InvalidModelException {
-		this.init(model);
+		this.read(model);
 	}
 
 	
-	public void init(@NotNull final InputStream input) throws InvalidModelException {
+	public Parser() {
+		this.init();
+	}
+
+	private void init() {
+		// @fixme: this is a slow/expensive operation
+		this.data = ModelFactory.createDefaultModel();		
+	}
+
+	public void read(@NotNull final InputStream input) throws InvalidModelException {
+		init();
 		if (null == input)
 	        throw new IllegalArgumentException("input must not be null");
 		
-		// @fixme: this is a slow/expensive operation
-		final Model data = ModelFactory.createDefaultModel();
 		final RDFReader arp = data.getReader("TTL");
 		// @fixme: this is a slow/expensive operation
 		arp.read(data, input, null);
-
-		this.init(data);
+		this.read(data);
 	}
 
-	public void init(final Model model) throws InvalidModelException {
+	public void read(@NotNull final Model model) throws InvalidModelException {
 	  this.model = model;
 		Parser.reasoner = Parser.createReasoner();
 		this.infModel = Parser.createInfModel(model);
@@ -207,6 +215,11 @@ public class Parser {
 
 	public String getValidationReport() {
 		return Parser.getValidationReport(this.infModel);
+	}
+
+	public void read(String filename) throws InvalidModelException {
+		final InputStream input = Parser.class.getResourceAsStream(filename);
+		read(input);
 	}
 
 }

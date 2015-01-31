@@ -98,6 +98,13 @@
              rdfs:range xsd:boolean .
 
 
+###  http://open-multinet.info/ontology/omn-resource#isExclusive
+
+:isAvailable rdf:type owl:DatatypeProperty ;
+             
+             rdfs:domain :NetworkObject ;
+             
+             rdfs:range xsd:boolean .
 
 
 

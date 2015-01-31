@@ -1,5 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -26,7 +28,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ManifestConverterTest {
 
 	@Test
-	public void testSimpleManifest() throws JAXBException,
+	public void testConvertingSimpleRSpecToGraph() throws JAXBException,
 			InvalidModelException {
 		final InputStream rspec = ManifestConverterTest.class
 				.getResourceAsStream("/geni/manifest/exogeni5nodemanifest.xml");
@@ -35,5 +37,20 @@ public class ManifestConverterTest {
 				Omn_lifecycle.Manifest);
 		Assert.assertTrue("should have a topology (manifest)",
 				topology.hasNext());
+	}
+
+	@Test
+	public void testConvertingGraph2RSpec() throws JAXBException,
+			InvalidModelException {
+		InputStream input = ParserTest.class
+				.getResourceAsStream("/omn/request.ttl");
+		Parser parser = new Parser(input);
+		
+		final Model model = parser.getInfModel();
+		final String rspec = ManifestConverter.getRSpec(model);
+		System.out.println(rspec);
+		Assert.assertTrue("should be a manifest",
+				rspec.contains("type=\"manifest\""));
+		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
 }

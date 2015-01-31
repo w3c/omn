@@ -48,15 +48,15 @@ public abstract class AbstractConverter {
 	}
 
 	public static String toString(final String filename) throws IOException {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		final InputStream inputStream = AbstractConverter.class
 				.getResourceAsStream(filename);
 		final BufferedReader br = new BufferedReader(new InputStreamReader(
 				inputStream));
 		String line = null;
 		while ((line = br.readLine()) != null) {
-			result += line + "\n";
+			result.append(line).append("\n");
 		}
-		return result;
+		return result.toString();
 	}
 }

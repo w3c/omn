@@ -102,6 +102,7 @@
 				<configuration>
 					<includes>
 						<include>ontologies/omn*.ttl</include>
+						<include>import/geo.ttl</include>
 						<include>src/main/resources/osco.ttl</include>
 					</includes>
 					<fileOptions>

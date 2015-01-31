@@ -21,7 +21,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class RequestConverterTest {
 
 	@Test
-	public void test() throws JAXBException, InvalidModelException {
+	public void testConvertingRSpecToGraph() throws JAXBException, InvalidModelException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request1.xml");
 		final Model model = RequestConverter.getModel(rspec);
@@ -32,7 +32,7 @@ public class RequestConverterTest {
 	}
 
 	@Test
-	public void testUnboundRequest() throws JAXBException,
+	public void testConvertingUnboundRspec2Graph() throws JAXBException,
 			InvalidModelException, IOException {
 		final String filename = "/geni/request/request_unbound.xml";
 		final InputStream inputRspec = RequestConverterTest.class

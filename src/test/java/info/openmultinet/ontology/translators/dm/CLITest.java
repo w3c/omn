@@ -9,13 +9,14 @@ import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedExcepti
 import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 
 import org.junit.Test;
 
 public class CLITest {
 
 	@Test
-	public void testMain() throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
+	public void testMain() throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
         CLI.main(new String[] {"-i", "src/test/resources/geni/request/request_bound.xml", "-o" ,"ttl"});
 	}
 
