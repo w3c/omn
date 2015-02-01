@@ -26,7 +26,7 @@ public class RoundtripTest {
   
   @Test
   public void testOMN2Tosca2OMN() throws InvalidModelException, JAXBException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, UnsupportedException {
-    InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request.ttl");
+    InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request-dummy.ttl");
     Parser parser = new Parser(input);
     
     final InfModel model = parser.getInfModel();

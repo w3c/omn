@@ -189,6 +189,14 @@
             rdfs:range xsd:string .
 
 
+###  http://opensdncore.org/ontology/key
+
+:key rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            
+            rdfs:domain :ssh ;
+            
+            rdfs:range xsd:string .
 
 
 
@@ -235,6 +243,16 @@
        
        rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
 
+
+###  http://opensdncore.org/ontology/ssh
+
+:ssh rdf:type owl:Class ;
+       
+       rdfs:subClassOf omn:Resource ;
+                  
+       rdfs:comment "This is a ssh service from the OpenSDNCore platform"^^xsd:string ;
+       
+       rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
 
 #################################################################
 #

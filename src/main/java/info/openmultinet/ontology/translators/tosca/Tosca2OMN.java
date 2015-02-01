@@ -223,7 +223,7 @@ public class Tosca2OMN extends AbstractConverter {
   }
 
   private static void processPropertiesElement(Resource node, Model model, Node propertiesElement) throws UnsupportedException {
-    for (int i = 0; i < (propertiesElement.getChildNodes().getLength() - 1); i++) {
+    for (int i = 0; i < (propertiesElement.getChildNodes().getLength()); i++) {
       Node propertyNode = propertiesElement.getChildNodes().item(i);
       String namespace = getRDFNamespace(propertyNode.getNamespaceURI());
       Property property = model.getProperty(namespace + propertyNode.getLocalName());      

@@ -18,9 +18,9 @@ import com.hp.hpl.jena.rdf.model.InfModel;
 public class OMN2ToscaTest {
 
 	@Test
-	public void testGetTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
+	public void testConvertDummyTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException {
-	  InputStream input = getClass().getResourceAsStream("/omn/tosca-request.ttl");
+	  InputStream input = getClass().getResourceAsStream("/omn/tosca-request-dummy.ttl");
 	  Parser parser = new Parser(input);
 	  
 		final InfModel model = parser.getInfModel();
@@ -34,6 +34,19 @@ public class OMN2ToscaTest {
 		testRelationshipTemplates(topology);
 		testRelationshipTypes(topology);
 	}
+	
+	@Test
+  public void testConvertSSHTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
+      RequiredResourceNotFoundException, MultiplePropertyValuesException {
+    InputStream input = getClass().getResourceAsStream("/omn/tosca-request-ssh.ttl");
+    Parser parser = new Parser(input);
+    
+    final InfModel model = parser.getInfModel();
+    final String topology = OMN2Tosca.getTopology(model);
+    System.out.println(topology);
+
+    testGeneralToscaDefinitions(topology);
+  }
 
 	private static void testGeneralToscaDefinitions(final String topology) {
 		Assert.assertTrue("Should be a tosca XML",

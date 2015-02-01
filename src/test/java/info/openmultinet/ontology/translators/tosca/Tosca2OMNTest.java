@@ -62,10 +62,12 @@ public class Tosca2OMNTest {
 
     Assert.assertTrue("Should contain a topology resource",
         model.containsResource(Omn.Topology));
-    Assert.assertTrue("Should contain the dummy node resource",
-        model.containsResource(Osco.dummy));
+    Assert.assertTrue("Should contain the ssh node resource",
+        model.containsResource(Osco.ssh));
     Assert.assertTrue("Should contain parameter resources",
-        model.containsResource(Osco.parameter2));
+        model.containsResource(Osco.key));
+    Assert.assertTrue("Should contain the floating IP",
+        serializedModel.contains("130.149.247.218"));
   }
 
 	public static String serializeModel(final Model rdfModel,

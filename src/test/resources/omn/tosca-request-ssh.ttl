@@ -1,0 +1,68 @@
+@prefix : <http://open-multinet.info/ontology/examples/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix osco: <http://opensdncore.org/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
+
+:namedTopology3 rdf:type omn:Topology ,
+                         owl:NamedIndividual ;
+                
+                omn:hasResource :container1 ,
+                                :ssh1 .
+
+
+:container1 rdf:type osco:ServiceContainer ,
+                     owl:NamedIndividual ;
+                     
+            osco:image :Image1 ;
+            
+            osco:subnet :Subnet1 ;
+            
+            osco:location :Container1Location ;
+            
+            osco:flavour "1024MB_10GB"^^xsd:string ;
+            
+            osco:minNumInst 1 ;
+            
+            osco:maxNumInst 1 .
+
+
+:Container1Location rdf:type osco:Location ,
+                        owl:NamedIndividual ;
+                        
+                     osco:name "Berlin"^^xsd:string .
+
+
+:Image1 rdf:type osco:Image ,
+                      owl:NamedIndividual ;
+                      
+         osco:datacenter "AV-Openstack"^^xsd:string ;
+         
+         osco:id "ffb9a89e-3a00-4a1b-a1f8-f4e135122994"^^xsd:string .
+
+
+:Subnet1 rdf:type osco:Subnet ,
+                      owl:NamedIndividual ;
+                      
+         osco:name "trescimo-net"^^xsd:string ;
+         
+         osco:datacenter "AV-Openstack"^^xsd:string ;
+                      
+         osco:mgmt "true"^^xsd:boolean ;
+         
+         osco:floatingIp "random"^^xsd:string .
+
+
+:deployedOnContainer1 rdf:type osco:deployedOn ,
+                               owl:NamedIndividual .
+
+
+:ssh1 rdf:type osco:ssh ,
+                 owl:NamedIndividual ;
+        
+        osco:key "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnoogBCzdExUWu74nqt68cbRdTFKiieLapshL83+rpoFw4pJVDfVu/+I15sZ77KVxetgfYxvOGAPDjr/8xTO8A32hqXXMxWoLGUgVyhV0smUbSIX+hDc0xudbRl/Isl8St/0JylM0uiruhETDkMuAqCXBXZZHqZyu4PfV1tetmOA1gPI7l6Iy7HotCVu6lmz562ovYA0zUWIyn/oakjGD4Z2+gtaJjZSooBzn4XSMgcWGb8ayuk5tirxR+TNlycu0xXe9v4voRAoNzukSNZvAQ/b6TCjHG1+B8eNnBCNipnJPb+IPIwr09YAoZCLhaBH/L3IBbHL2YVmUOBQH30/bX mitja@mitja-thinkpad"^^xsd:string ;
+        
+        :deployedOnContainer1 :container1 .
