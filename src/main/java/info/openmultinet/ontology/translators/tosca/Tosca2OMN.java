@@ -184,13 +184,20 @@ public class Tosca2OMN extends AbstractConverter {
   
   private static void processServiceTemplate(TServiceTemplate serviceTemplate, Definitions definitions, Model model) throws UnsupportedException {
     String namespace = getRDFNamespace(definitions.getTargetNamespace());
-    Resource topologyResource = createTopology(model, serviceTemplate, namespace);
+    Resource topologyResource = null;
+    try{
+      topologyResource = createTopology(model, serviceTemplate, namespace);
+    } catch(UnsupportedException e){
+      LOG.log(Level.WARNING, "No id for service template found, thus no topology will be created");
+    }
     
     final TTopologyTemplate topologyTemplate = serviceTemplate.getTopologyTemplate();
     for (final TEntityTemplate entityTemplate : topologyTemplate.getNodeTemplateOrRelationshipTemplate()) {
       if (entityTemplate instanceof TNodeTemplate) {
         Resource node = createNode((TNodeTemplate) entityTemplate, namespace, model);
-        topologyResource.addProperty(Omn.hasResource, node);
+        if(topologyResource != null){
+          topologyResource.addProperty(Omn.hasResource, node);
+        }
         
       } else if (entityTemplate instanceof TRelationshipTemplate) {
         createRelationship((TRelationshipTemplate) entityTemplate, namespace, model);
