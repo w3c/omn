@@ -98,8 +98,6 @@ public class OMN2Tosca extends AbstractConverter {
       Resource nodeResource = nodeIterator.next();
       Resource nodeTypeResource = calculateInferredPropertyValue(nodeResource, RDF.type);
       
-//      types.add(createTypes(nodeTypeResource));
-      
       definitionsContent.add(createNodeType(nodeTypeResource));
       
       nodesAndRelationshipTemplates.add(createNodeTemplate(nodeResource, nodeTypeResource, types));
