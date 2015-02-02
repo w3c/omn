@@ -1,0 +1,228 @@
+@prefix : <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix netmode: <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@base <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157> .
+
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157> rdf:type owl:Ontology ;
+                                                                          
+                                                                          owl:imports <http://ontology/omn> ,
+                                                                                      <http://ontology/omn-lifecycle> ,
+                                                                                      <http://ontology/omn-resource> ,
+                                                                                      <http://www.w3.org/2006/time> .
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#allocated
+
+:allocated rdf:type omn-lifecycle:Allocated ,
+                    owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#lfeend1
+
+:lfeend1 rdf:type owl:NamedIndividual ,
+                  time:Instant ;
+         
+         time:xsdDateTime "2015-01-19T19:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#life1
+
+:life1 rdf:type owl:NamedIndividual ,
+                time:Interval ;
+       
+       omn-lifecycle:hasReservationState :allocated ;
+       
+       time:hasEnd :lfeend1 ;
+       
+       time:hasBeginning :lifestart1 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#life2
+
+:life2 rdf:type owl:NamedIndividual ,
+                time:Interval ;
+       
+       time:hasEnd :lifeend2 ;
+       
+       time:hasBeginning :lifestart2 ;
+       
+       omn-lifecycle:hasReservationState :provisioned .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#life3
+
+:life3 rdf:type owl:NamedIndividual ,
+                time:Interval ;
+       
+       omn-lifecycle:hasReservationState :allocated ;
+       
+       time:hasEnd :lifeend3 ;
+       
+       time:hasBeginning :lifestart3 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#lifeend2
+
+:lifeend2 rdf:type owl:NamedIndividual ,
+                   time:Instant ;
+          
+          time:xsdDateTime "2015-01-28T19:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#lifeend3
+
+:lifeend3 rdf:type owl:NamedIndividual ,
+                   time:Instant ;
+          
+          time:xsdDateTime "2015-02-19T19:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#lifestart1
+
+:lifestart1 rdf:type owl:NamedIndividual ,
+                     time:Instant ;
+            
+            time:xsdDateTime "2015-01-19T17:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#lifestart2
+
+:lifestart2 rdf:type owl:NamedIndividual ,
+                     time:Instant ;
+            
+            time:xsdDateTime "2015-01-28T17:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#lifestart3
+
+:lifestart3 rdf:type owl:NamedIndividual ,
+                     time:Instant ;
+            
+            time:xsdDateTime "2015-02-19T17:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#offering1
+
+:offering1 rdf:type omn-lifecycle:Offering ,
+                    owl:NamedIndividual ;
+           
+           omn:hasResource :omf.netmode.node1 ,
+                           :omf.netmode.node1_if1 ,
+                           :omf.netmode.node2 ,
+                           :omf.netmode.node2_if2 ,
+                           :omf.netmode.node3 ,
+                           :omf.netmode.node3_if3 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1
+
+:omf.netmode.node1 rdf:type omn-resource:Node ,
+                            owl:NamedIndividual ;
+                   
+                   omn-resource:isExclusive "true" ;
+                   
+                   omn-lifecycle:hasID "urn:publicid:IDN+omf:netmode+node+omf.netmode.node1" ;
+                   
+                   omn:hasReservation :life1 ,
+                                      :life2 ;
+                   
+                   omn-resource:hasInterface :omf.netmode.node1_if1 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1
+
+:omf.netmode.node1_if1 rdf:type omn-resource:Interface ,
+                                owl:NamedIndividual ;
+                       
+                       omn-lifecycle:hasID "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node1_if1" ;
+                       
+                       omn:hasReservation :life1 ,
+                                          :life2 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2
+
+:omf.netmode.node2 rdf:type omn-resource:Node ,
+                            owl:NamedIndividual ;
+                   
+                   omn-resource:isExclusive "true" ;
+                   
+                   omn-lifecycle:hasID "urn:publicid:IDN+omf:netmode+node+omf.netmode.node2" ;
+                   
+                   omn-resource:hasInterface :omf.netmode.node2_if2 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2
+
+:omf.netmode.node2_if2 rdf:type omn-resource:Interface ,
+                                owl:NamedIndividual ;
+                       
+                       omn-lifecycle:hasID "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node2_if2" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node3
+
+:omf.netmode.node3 rdf:type omn-resource:Node ,
+                            owl:NamedIndividual ;
+                   
+                   omn-lifecycle:hasID "urn:publicid:IDN+omf:netmode+node+omf.netmode.node3" ;
+                   
+                   omn-resource:isExclusive "true" ;
+                   
+                   omn:hasReservation :life3 ;
+                   
+                   omn-resource:hasInterface :omf.netmode.node3_if3 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node3_if3
+
+:omf.netmode.node3_if3 rdf:type omn-resource:Interface ,
+                                owl:NamedIndividual ;
+                       
+                       omn-lifecycle:hasID "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node3_if3" ;
+                       
+                       omn:hasReservation :life3 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#provisioned
+
+:provisioned rdf:type omn-lifecycle:Provisioned ,
+                      owl:NamedIndividual .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+

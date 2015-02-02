@@ -1,0 +1,168 @@
+@prefix : <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix req: <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@base <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156> .
+
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156> rdf:type owl:Ontology ;
+                                                                          
+                                                                          owl:imports <http://ontology/omn> ,
+                                                                                      <http://ontology/omn-lifecycle> ,
+                                                                                      <http://ontology/omn-resource> ,
+                                                                                      <http://www.w3.org/2006/time> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.w3.org/2006/time#hasDateTimeDescription
+
+time:hasDateTimeDescription rdfs:subPropertyOf time:hasEnd .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#Request1
+
+:Request1 rdf:type omn-lifecycle:Request ,
+                   owl:NamedIndividual ;
+          
+          omn:hasResource :unboundInterface1 ,
+                          :unboundInterface2 ,
+                          :unboundNode1 ,
+                          :unboundNode2 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1
+
+:reservation1 rdf:type owl:NamedIndividual ,
+                       time:Interval ;
+              
+              time:hasEnd :reservation1endtime ;
+              
+              time:hasBeginning :reservation1starttime ;
+              
+              omn-lifecycle:hasReservationState :unallocated .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1endtime
+
+:reservation1endtime rdf:type owl:NamedIndividual ,
+                              time:Instant ;
+                     
+                     time:inXSDDateTime "2015-01-20T19:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1starttime
+
+:reservation1starttime rdf:type owl:NamedIndividual ,
+                                time:Instant ;
+                       
+                       time:inXSDDateTime "2015-01-20T17:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2
+
+:reservation2 rdf:type owl:NamedIndividual ,
+                       time:Interval ;
+              
+              time:hasEnd :reservation2endtime ;
+              
+              time:hasBeginning :reservation2starttime ;
+              
+              omn-lifecycle:hasReservationState :unallocated .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2endtime
+
+:reservation2endtime rdf:type owl:NamedIndividual ,
+                              time:Instant ;
+                     
+                     time:inXSDDateTime "2015-01-20T19:53:24+01:00" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2starttime
+
+:reservation2starttime rdf:type owl:NamedIndividual ,
+                                time:Instant ;
+                       
+                       time:inXSDDateTime """2015-01-20T17:53:24+01:00
+""" .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unallocated
+
+:unallocated rdf:type omn-lifecycle:Unallocated ,
+                      owl:NamedIndividual .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1
+
+:unboundInterface1 rdf:type omn-resource:Interface ,
+                            owl:NamedIndividual ;
+                   
+                   omn:hasReservation :reservation1 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2
+
+:unboundInterface2 rdf:type omn-resource:Interface ,
+                            owl:NamedIndividual ;
+                   
+                   omn:hasReservation :reservation2 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode1
+
+:unboundNode1 rdf:type omn-resource:Node ,
+                       owl:NamedIndividual ;
+              
+              omn:hasReservation :reservation1 ;
+              
+              omn-resource:hasInterface :unboundInterface1 .
+
+
+
+###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode2
+
+:unboundNode2 rdf:type omn-resource:Node ,
+                       owl:NamedIndividual ;
+              
+              omn:hasReservation :reservation2 ;
+              
+              omn-resource:hasInterface :unboundInterface2 .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
