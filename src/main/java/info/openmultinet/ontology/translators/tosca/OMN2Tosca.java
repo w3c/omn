@@ -51,6 +51,8 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static final Logger LOG = Logger.getLogger(OMN2Tosca.class.getName());
   
+  public static final String JAXB_PACKAGE_NAME = "info.openmultinet.ontology.translators.tosca.jaxb";
+  
   private static ObjectFactory objFactory = new ObjectFactory();
   
   public static String getTopology(Model model) throws JAXBException, InvalidModelException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
@@ -58,7 +60,7 @@ public class OMN2Tosca extends AbstractConverter {
     
     model2Tosca(model, definitions);
     
-    return toString(definitions, "info.openmultinet.ontology.translators.tosca.jaxb");
+    return toString(definitions, JAXB_PACKAGE_NAME);
   }
   
   private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
