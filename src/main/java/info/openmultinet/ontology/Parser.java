@@ -7,7 +7,6 @@ import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.nio.MappedByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 

@@ -184,13 +184,20 @@ public class Tosca2OMN extends AbstractConverter {
   
   private static void processServiceTemplate(TServiceTemplate serviceTemplate, Definitions definitions, Model model) throws UnsupportedException {
     String namespace = getRDFNamespace(definitions.getTargetNamespace());
-    Resource topologyResource = createTopology(model, serviceTemplate, namespace);
+    Resource topologyResource = null;
+    try{
+      topologyResource = createTopology(model, serviceTemplate, namespace);
+    } catch(UnsupportedException e){
+      LOG.log(Level.WARNING, "No id for service template found, thus no topology will be created");
+    }
     
     final TTopologyTemplate topologyTemplate = serviceTemplate.getTopologyTemplate();
     for (final TEntityTemplate entityTemplate : topologyTemplate.getNodeTemplateOrRelationshipTemplate()) {
       if (entityTemplate instanceof TNodeTemplate) {
         Resource node = createNode((TNodeTemplate) entityTemplate, namespace, model);
-        topologyResource.addProperty(Omn.hasResource, node);
+        if(topologyResource != null){
+          topologyResource.addProperty(Omn.hasResource, node);
+        }
         
       } else if (entityTemplate instanceof TRelationshipTemplate) {
         createRelationship((TRelationshipTemplate) entityTemplate, namespace, model);
@@ -198,40 +205,41 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
   
-  private static Resource createTopology(Model model, TServiceTemplate serviceTemplate, String namespace){
-    Resource topologyResource = model.createResource(namespace+serviceTemplate.getName());
+  private static Resource createTopology(Model model, TServiceTemplate serviceTemplate, String namespace) throws UnsupportedException{
+    Resource topologyResource = model.createResource(getURI(serviceTemplate, namespace));
     topologyResource.addProperty(RDF.type, Omn.Topology);
     topologyResource.addProperty(RDF.type, OWL2.NamedIndividual);
     return topologyResource;
   }
   
-  private static Resource createNode(final TNodeTemplate nodeTemplate, String namespace, final Model model) throws UnsupportedException {
-    final Resource node = model.createResource(namespace + nodeTemplate.getName());
-    setNodeType(nodeTemplate, node, model);
-    setNodeProperties(nodeTemplate, node, model);
+  private static Resource createNode(TNodeTemplate nodeTemplate, String namespace, Model model) throws UnsupportedException {
+    Resource node = model.createResource(getURI(nodeTemplate, namespace));
+    
+    setNodeType(nodeTemplate, node);
+    setNodeProperties(nodeTemplate, node, namespace);
     return node;
   }
   
-  private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, Model model) throws UnsupportedException {
+  private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, String namespace) throws UnsupportedException {
     if(nodeTemplate.getProperties() != null){
       final Object properties = nodeTemplate.getProperties().getAny();
       if (properties instanceof Node) {
         Node propertiesElement = (Node) properties;
-        processPropertiesElement(node, model, propertiesElement);
+        processPropertiesElement(node, propertiesElement, namespace);
       }
     }
   }
 
-  private static void processPropertiesElement(Resource node, Model model, Node propertiesElement) throws UnsupportedException {
+  private static void processPropertiesElement(Resource node, Node propertiesElement, String targetNamespace) throws UnsupportedException {
     for (int i = 0; i < (propertiesElement.getChildNodes().getLength()); i++) {
       Node propertyNode = propertiesElement.getChildNodes().item(i);
       String namespace = getRDFNamespace(propertyNode.getNamespaceURI());
-      Property property = model.getProperty(namespace + propertyNode.getLocalName());      
+      Property property = node.getModel().getProperty(namespace + propertyNode.getLocalName());      
       Resource propertyRange = getPropertyRange(property);
       
       if(propertyNode.getChildNodes().getLength() == 1){
         if(propertyNode.getTextContent() != null){
-          final Literal literal = model.createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
+          final Literal literal = node.getModel().createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
           node.addLiteral(property, literal);
         }
         else{
@@ -247,12 +255,12 @@ public class Tosca2OMN extends AbstractConverter {
         else{
           propertyValueNameString = propertyValueName.getNodeValue();
         }
-        Resource propertyValue = model.createResource(node.getNameSpace() + propertyValueNameString);
+        Resource propertyValue = node.getModel().createResource(targetNamespace + propertyValueNameString);
         propertyValue.addProperty(RDF.type, propertyRange);
         propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
         node.addProperty(property, propertyValue);
         
-        processPropertiesElement(propertyValue, model, propertyNode);
+        processPropertiesElement(propertyValue, propertyNode, targetNamespace);
       }
     }
   }
@@ -268,19 +276,19 @@ public class Tosca2OMN extends AbstractConverter {
     return propertyRange;
   }
   
-  private static void setNodeType(final TNodeTemplate nodeTemplate, final Resource node, final Model model) throws UnsupportedException {
+  private static void setNodeType(TNodeTemplate nodeTemplate, Resource node) throws UnsupportedException {
     final QName type = nodeTemplate.getType();
     if(type == null){
       throw new UnsupportedException("No type for nodeTemplate "+nodeTemplate.getName()+" found");
     }
-    final Resource nodeType = createResourceFromQName(type, model);
+    final Resource nodeType = createResourceFromQName(type, node.getModel());
     node.addProperty(RDF.type, nodeType);
     node.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void createRelationship(TRelationshipTemplate relationshipTemplate, String namespace, Model model) throws UnsupportedException {
-    final Property relationship = model.createProperty(namespace + relationshipTemplate.getName());
-    setRelationshipType(relationshipTemplate, relationship, model);
+    Property relationship = model.createProperty(getURI(relationshipTemplate, namespace));
+    setRelationshipType(relationshipTemplate, relationship);
     
     Resource source = getRelationshipSource(relationshipTemplate, model, namespace);
     Resource target = getRelationshipTarget(relationshipTemplate, model, namespace);
@@ -291,8 +299,7 @@ public class Tosca2OMN extends AbstractConverter {
     Object sourceElement = relationshipTemplate.getSourceElement().getRef();
     if(sourceElement instanceof TNodeTemplate){
       TNodeTemplate sourceNode = (TNodeTemplate) sourceElement;
-      String sourceName = sourceNode.getName();
-      return model.getResource(namespace + sourceName);
+      return model.getResource(getURI(sourceNode, namespace));
     }
     else{
       throw new UnsupportedException("The source element of relationshipTemplate "+relationshipTemplate.getName()+" must refer to a NodeTemplate.");
@@ -303,25 +310,24 @@ public class Tosca2OMN extends AbstractConverter {
     Object targetElement = relationshipTemplate.getTargetElement().getRef();
     if(targetElement instanceof TNodeTemplate){
       TNodeTemplate targetNode = (TNodeTemplate) targetElement;
-      String targetName = targetNode.getName();
-      return model.getResource(namespace + targetName);
+      return model.getResource(getURI(targetNode, namespace));
     }
     else{
       throw new UnsupportedException("The target element of a RelationshipTemplate must refer to a NodeTemplate.");
     }
   }
 
-  private static void setRelationshipType(TRelationshipTemplate relationshipTemplate, Property relationship, Model model) throws UnsupportedException {
+  private static void setRelationshipType(TRelationshipTemplate relationshipTemplate, Property relationship) throws UnsupportedException {
     final QName type = relationshipTemplate.getType();
     if(type == null){
       throw new UnsupportedException("No type for relationshipTemplate "+relationshipTemplate.getName()+" found");
     }
-    final Resource relationshipType = createResourceFromQName(type, model);
+    final Resource relationshipType = createResourceFromQName(type, relationship.getModel());
     relationship.addProperty(RDF.type, relationshipType);
     relationship.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
-  private static void createStates(final TNodeType nodeType, final Model model) {
+  private static void createStates(TNodeType nodeType, Model model) {
     if(nodeType.getInstanceStates() != null){
       for (final InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()) {
         final Resource state = model.createResource(instanceState.getState());
@@ -341,7 +347,7 @@ public class Tosca2OMN extends AbstractConverter {
     return nodeTypeResource;
   }
   
-  private static void processRelationshipTypes(final Definitions definitions, final Model model) {
+  private static void processRelationshipTypes(Definitions definitions, Model model) {
     for (final TExtensibleElements element : definitions
         .getServiceTemplateOrNodeTypeOrNodeTypeImplementation()) {
       if (element instanceof TRelationshipType) {
@@ -389,6 +395,31 @@ public class Tosca2OMN extends AbstractConverter {
   private static Resource createResourceFromQName(final QName qname, final Model model) {
     String namespace = getRDFNamespace(qname.getNamespaceURI());
     return model.createResource(namespace + qname.getLocalPart());
+  }
+  
+  private static String getURI(TEntityTemplate entityTemplate, String namespace) throws UnsupportedException{
+    if(isURI(entityTemplate.getId())){
+      return entityTemplate.getId();
+    }
+    else{
+     return namespace + entityTemplate.getId();
+    }
+  }
+  
+  private static String getURI(TServiceTemplate serviceTemplate, String namespace) throws UnsupportedException{
+    if(isURI(serviceTemplate.getId())){
+      return serviceTemplate.getId();
+    }
+    else{
+     return namespace + serviceTemplate.getId();
+    }
+  }
+  
+  private static boolean isURI(String id) throws UnsupportedException{
+    if(id == null){
+      throw new UnsupportedException("Every node, relationship and service template needs to have an id set");
+    }
+    return id.startsWith("http://");
   }
   
   public static class UnsupportedException extends Exception{

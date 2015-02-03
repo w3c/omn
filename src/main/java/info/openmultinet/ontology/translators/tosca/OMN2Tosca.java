@@ -58,14 +58,10 @@ public class OMN2Tosca extends AbstractConverter {
   public static String getTopology(Model model) throws JAXBException, InvalidModelException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Definitions definitions = objFactory.createDefinitions();
     
-    model2Tosca(model, definitions);
-    
-    return toString(definitions, JAXB_PACKAGE_NAME);
-  }
-  
-  private static void model2Tosca(Model model, Definitions definitions) throws InvalidModelException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
     setTargetNamespaceAndName(definitions, model);
     createServiceTemplates(definitions, model);
+    
+    return toString(definitions, JAXB_PACKAGE_NAME);
   }
   
   private static void createServiceTemplates(TDefinitions definitions, Model model) throws MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException{
@@ -93,21 +89,19 @@ public class OMN2Tosca extends AbstractConverter {
     
     List<TEntityTemplate> nodesAndRelationshipTemplates = topologyTemplate.getNodeTemplateOrRelationshipTemplate();
     
-    ResIterator nodeIterator = model.listResourcesWithProperty(RDF.type, Omn.Resource);
-    while(nodeIterator.hasNext()){
-      Resource nodeResource = nodeIterator.next();
+    StmtIterator resourceIterator = topologyResource.listProperties(Omn.hasResource);
+    while(resourceIterator.hasNext()){
+      Resource nodeResource = resourceIterator.next().getResource();
       Resource nodeTypeResource = calculateInferredPropertyValue(nodeResource, RDF.type);
-      
-//      types.add(createTypes(nodeTypeResource));
       
       definitionsContent.add(createNodeType(nodeTypeResource));
       
       nodesAndRelationshipTemplates.add(createNodeTemplate(nodeResource, nodeTypeResource, types));
     }
     
-    nodeIterator = model.listResourcesWithProperty(RDF.type, Omn.Resource);
-    while(nodeIterator.hasNext()){
-      Resource nodeResource = nodeIterator.next();
+    resourceIterator = topologyResource.listProperties(Omn.hasResource);
+    while(resourceIterator.hasNext()){
+      Resource nodeResource = resourceIterator.next().getResource();
       
       List<TRelationshipTemplate> relationshipTemplates = createRelationshipTemplates(nodeResource, nodesAndRelationshipTemplates);      
       for(TRelationshipTemplate relationshipTemplate : relationshipTemplates){

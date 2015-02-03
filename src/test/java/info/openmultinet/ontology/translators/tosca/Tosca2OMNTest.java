@@ -69,6 +69,25 @@ public class Tosca2OMNTest {
     Assert.assertTrue("Should contain the floating IP",
         serializedModel.contains("130.149.247.218"));
   }
+	
+	@Test
+  public void testConvertToscaSingleNodeResponse() throws JAXBException, InvalidModelException, UnsupportedException {
+    InputStream input = getClass().getResourceAsStream("/tosca/response-single-node.xml");
+    
+    final Model model = Tosca2OMN.getModel(input);
+
+    final String serializedModel = Tosca2OMNTest.serializeModel(model, "TTL");
+    System.out.println(serializedModel);
+
+    Assert.assertFalse("Should not contain a topology resource",
+        model.containsResource(Omn.Topology));
+    Assert.assertTrue("Should contain the ssh node resource",
+        model.containsResource(Osco.ssh));
+    Assert.assertTrue("Should contain parameter resources",
+        model.containsResource(Osco.key));
+    Assert.assertTrue("Should contain the floating IP",
+        serializedModel.contains("130.149.247.218"));
+  }
 
 	public static String serializeModel(final Model rdfModel,
 			final String serialization) {
