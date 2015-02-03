@@ -65,7 +65,7 @@ public class ManifestConverter extends AbstractConverter {
 	private static void model2rspec(final Model model,
 			final RSpecContents manifest) throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
-				Omn.Group).toList();
+				Omn.Topology).toList();
 		AbstractConverter.validateModel(groups);
 
 		final Resource group = groups.iterator().next();
