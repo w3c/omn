@@ -257,7 +257,9 @@ public class Tosca2OMN extends AbstractConverter {
             propertyValueNameString = propertyValueName.getNodeValue();
           }
           Resource propertyValue = node.getModel().createResource(targetNamespace + propertyValueNameString);
-          propertyValue.addProperty(RDF.type, propertyRange);
+          if(!propertyRange.equals(XSD.xstring)){
+            propertyValue.addProperty(RDF.type, propertyRange);
+          }
           propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
           node.addProperty(property, propertyValue);
           
@@ -272,7 +274,7 @@ public class Tosca2OMN extends AbstractConverter {
     try {
       propertyRange = property.getRequiredProperty(RDFS.range).getResource();
     } catch (final PropertyNotFoundException e) {
-      LOG.log(Level.WARNING, "No property range for property " + property.getURI() + " found, storing as string.");
+      LOG.log(Level.WARNING, "No property range for property " + property.getURI() + " found, storing as string if it is a datatype property.");
       propertyRange = XSD.xstring;
     }
     return propertyRange;
