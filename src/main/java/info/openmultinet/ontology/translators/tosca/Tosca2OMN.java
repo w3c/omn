@@ -234,33 +234,35 @@ public class Tosca2OMN extends AbstractConverter {
     for (int i = 0; i < (propertiesElement.getChildNodes().getLength()); i++) {
       Node propertyNode = propertiesElement.getChildNodes().item(i);
       String namespace = getRDFNamespace(propertyNode.getNamespaceURI());
-      Property property = node.getModel().getProperty(namespace + propertyNode.getLocalName());      
-      Resource propertyRange = getPropertyRange(property);
-      
-      if(propertyNode.getChildNodes().getLength() == 1){
-        if(propertyNode.getTextContent() != null){
-          final Literal literal = node.getModel().createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
-          node.addLiteral(property, literal);
-        }
-        else{
-          throw new UnsupportedException("Expected text content in property: "+propertyNode.getLocalName());
-        }
-      }
-      else if(propertyNode.getChildNodes().getLength() > 1){
-        Node propertyValueName = propertyNode.getAttributes().getNamedItem("name");
-        String propertyValueNameString;
-        if(propertyValueName == null){
-          propertyValueNameString = propertyNode.getLocalName()+String.valueOf(random.nextInt());
-        }
-        else{
-          propertyValueNameString = propertyValueName.getNodeValue();
-        }
-        Resource propertyValue = node.getModel().createResource(targetNamespace + propertyValueNameString);
-        propertyValue.addProperty(RDF.type, propertyRange);
-        propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
-        node.addProperty(property, propertyValue);
+      if(propertyNode.getLocalName() != null){
+        Property property = node.getModel().getProperty(namespace + propertyNode.getLocalName());  
+        Resource propertyRange = getPropertyRange(property);
         
-        processPropertiesElement(propertyValue, propertyNode, targetNamespace);
+        if(propertyNode.getChildNodes().getLength() == 1){
+          if(propertyNode.getTextContent() != null){
+            final Literal literal = node.getModel().createTypedLiteral(propertyNode.getTextContent(), propertyRange.getURI());
+            node.addLiteral(property, literal);
+          }
+          else{
+            throw new UnsupportedException("Expected text content in property: "+propertyNode.getLocalName());
+          }
+        }
+        else if(propertyNode.getChildNodes().getLength() > 1){
+          Node propertyValueName = propertyNode.getAttributes().getNamedItem("name");
+          String propertyValueNameString;
+          if(propertyValueName == null){
+            propertyValueNameString = propertyNode.getLocalName()+String.valueOf(random.nextInt());
+          }
+          else{
+            propertyValueNameString = propertyValueName.getNodeValue();
+          }
+          Resource propertyValue = node.getModel().createResource(targetNamespace + propertyValueNameString);
+          propertyValue.addProperty(RDF.type, propertyRange);
+          propertyValue.addProperty(RDF.type, OWL2.NamedIndividual);
+          node.addProperty(property, propertyValue);
+          
+          processPropertiesElement(propertyValue, propertyNode, targetNamespace);
+        }
       }
     }
   }
