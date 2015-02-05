@@ -22,7 +22,7 @@ public class RESTTest {
 
 	@Test
 	public void testConvertToGraph() {
-		final String content = this.getFilecontent("/geni/request/request2.xml");
+		final String content = this.getFilecontent("/geni/request/request_unbound2.xml");
 
 		final String result = this.converter
 				.post(AbstractConverter.RSPEC_REQUEST,

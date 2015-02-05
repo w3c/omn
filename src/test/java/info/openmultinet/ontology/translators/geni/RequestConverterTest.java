@@ -23,7 +23,7 @@ public class RequestConverterTest {
 	@Test
 	public void testConvertingRSpecToGraph() throws JAXBException, InvalidModelException {
 		final InputStream rspec = RequestConverterTest.class
-				.getResourceAsStream("/geni/request/request1.xml");
+				.getResourceAsStream("/geni/request/request_unbound2.xml");
 		final Model model = RequestConverter.getModel(rspec);
 		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
 				Omn_lifecycle.Request);
