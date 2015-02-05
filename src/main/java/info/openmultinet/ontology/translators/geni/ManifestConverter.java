@@ -8,6 +8,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -91,7 +92,17 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setComponentDetails(final Statement resource,
 			final NodeContents node) {
-		node.setComponentId(resource.getResource().getURI());
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
+			node.setClientId(resource.getResource().getProperty(Omn_lifecycle.hasID).getString());
+		}
+		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
+			node.setComponentId(resource.getResource().getProperty(Omn_lifecycle.implementedBy).getObject().toString());
+		}
+		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
+			node.setExclusive(resource.getResource().getProperty(Omn_resource.isExclusive).getBoolean());
+		}
+		
+		node.setSliverId(resource.getResource().getURI());
 		node.setComponentName(resource.getResource().getLocalName());
 	}
 

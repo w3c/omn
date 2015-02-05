@@ -27,6 +27,8 @@
              
              rdfs:label "My Super Motor"^^xsd:string ;
              
+             omn-lifecycle:hasID "local-identifier";
+             
              motor:maxRPM 123 ;
              
              rdfs:seeAlso "GENI component_id attribute."^^xsd:string ;

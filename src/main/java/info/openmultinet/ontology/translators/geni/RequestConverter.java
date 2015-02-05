@@ -97,16 +97,16 @@ public class RequestConverter extends AbstractConverter {
 
 	private static void setComponentDetails(final Statement resource,
 			final NodeContents node) {
-		// node.setComponentId(resource.getResource().getURI());
-		node.setClientId(resource.getResource().getLocalName());
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
+			node.setClientId(resource.getResource().getProperty(Omn_lifecycle.hasID).getString());	
+		}
+		
 	}
 
 	private static void setComponentManagerId(final Statement resource,
 			final NodeContents node) {
-		final List<Statement> implementedBy = resource.getResource()
-				.listProperties(Omn_lifecycle.implementedBy).toList();
-		for (final Statement implementer : implementedBy) {
-			node.setComponentManagerId(implementer.getResource().getURI());
+		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
+			node.setComponentManagerId(resource.getResource().getProperty(Omn_lifecycle.implementedBy).getString());
 		}
 	}
 
@@ -144,13 +144,17 @@ public class RequestConverter extends AbstractConverter {
 						.createResource(AbstractConverter.NAMESPACE
 								+ node.getClientId());
 				omnResource.addProperty(RDF.type, Omn_resource.Node);
-				omnResource.addProperty(RDFS.label, node.getClientId());
+				omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
+				if (null != node.getComponentId() && ! node.getComponentId().isEmpty())
+					omnResource.addProperty(Omn_lifecycle.implementedBy, model.createResource(node.getComponentId()));
 				omnResource.addProperty(Omn.isResourceOf, topology);
 				if (null != node.isExclusive()) {
 					omnResource.addProperty(Omn_resource.isExclusive,
 							model.createTypedLiteral(node.isExclusive()));
 				}
 				topology.addProperty(Omn.hasResource, omnResource);
+				//todo: details such as sliver type
+				//List<Object> details = node.getAnyOrRelationOrLocation();
 			}
 		} catch (final ClassCastException e) {
 			RequestConverter.LOG.finer(e.getMessage());
