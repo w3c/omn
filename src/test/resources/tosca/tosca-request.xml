@@ -2,6 +2,17 @@
 <Definitions name="http://open-multinet.info/ontology/examples/" targetNamespace="http://open-multinet.info/ontology/examples/" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
     <Types>
         <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="dummyProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="test_param" type="xs:string"/>
+                        <xs:element name="parameter2" type="xs:string"/>
+                        <xs:element name="port" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xs:element name="ServiceContainerProperties">
                 <xs:complexType>
                     <xs:sequence>
@@ -37,21 +48,19 @@
                 </xs:complexType>
             </xs:element>
         </xs:schema>
-        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-            <xs:element name="dummyProperties">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="test_param" type="xs:string"/>
-                        <xs:element name="parameter2" type="xs:string"/>
-                        <xs:element name="port" type="xs:integer"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:schema>
     </Types>
     <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3" name="namedTopology3">
         <TopologyTemplate>
-            <NodeTemplate name="container1" id="http://open-multinet.info/ontology/examples/container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="dummy1" id="dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
+                <Properties>
+                    <osco:dummyProperties>
+                        <osco:test_param>foo</osco:test_param>
+                        <osco:parameter2>bar</osco:parameter2>
+                        <osco:port>8088</osco:port>
+                    </osco:dummyProperties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="container1" id="container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties>
                         <osco:maxNumInst>1</osco:maxNumInst>
@@ -73,23 +82,14 @@
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="dummy1" id="http://open-multinet.info/ontology/examples/dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
-                <Properties>
-                    <osco:dummyProperties>
-                        <osco:test_param>foo</osco:test_param>
-                        <osco:parameter2>bar</osco:parameter2>
-                        <osco:port>8088</osco:port>
-                    </osco:dummyProperties>
-                </Properties>
-            </NodeTemplate>
             <RelationshipTemplate name="deployedOnContainer1" id="http://open-multinet.info/ontology/examples/deployedOnContainer1" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="http://open-multinet.info/ontology/examples/dummy1"/>
-                <TargetElement ref="http://open-multinet.info/ontology/examples/container1"/>
+                <SourceElement ref="dummy1"/>
+                <TargetElement ref="container1"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>
-    <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
-        <PropertiesDefinition element="osco:ServiceContainerProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+    <NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:dummyProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
         <InstanceStates>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Active"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized"/>
@@ -108,8 +108,8 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
         </InstanceStates>
     </NodeType>
-    <NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
-        <PropertiesDefinition element="osco:dummyProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+    <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:ServiceContainerProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
         <InstanceStates>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Active"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized"/>

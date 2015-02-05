@@ -96,10 +96,10 @@ public class OMN2ToscaTest {
 				topology.contains("<RelationshipTemplate name=\"deployedOnContainer1\""));
 		Assert.assertTrue(
 				"relationship template should have the right source",
-				topology.contains("<SourceElement ref=\"http://open-multinet.info/ontology/examples/dummy1\"/>"));
+				topology.contains("<SourceElement ref=\"dummy1\"/>"));
 		Assert.assertTrue(
 				"relationship template should have the right target",
-				topology.contains("<TargetElement ref=\"http://open-multinet.info/ontology/examples/container1\"/>"));
+				topology.contains("<TargetElement ref=\"container1\"/>"));
 	}
 
 	private static void testRelationshipTypes(final String topology) {

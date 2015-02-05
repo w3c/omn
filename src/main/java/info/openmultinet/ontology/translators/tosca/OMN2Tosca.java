@@ -268,12 +268,28 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void setNameAndTypeAndID(Resource node, Resource nodeTypeResource, TNodeTemplate nodeTemplate) {
-    nodeTemplate.setName(node.getLocalName());
+    String name = getName(node);
+    nodeTemplate.setName(name);
+    nodeTemplate.setId(name);
+    
     String nodeTypeNameSpace = getXMLNamespace(nodeTypeResource);
     String nodeTypePrefix = getNSPrefix(nodeTypeResource);
     QName type = new QName(nodeTypeNameSpace, nodeTypeResource.getLocalName(), nodeTypePrefix);
-    nodeTemplate.setId(node.getURI());
     nodeTemplate.setType(type);
+  }
+  
+  private static String getName(Resource resource){
+    if(resource.hasProperty(Omn_lifecycle.hasID)){
+      return resource.getProperty(Omn_lifecycle.hasID).getLiteral().getString();
+    }
+    else{
+      if(resource.isAnon()){
+        return resource.getId().getLabelString();
+      }
+      else{
+        return resource.getURI();
+      }
+    }
   }
   
   private static Element createNodePropertiesAndTypes(Resource node, Resource nodeType, TNodeTemplate nodeTemplate, List<Object> types) throws NoPropertiesFoundException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
@@ -299,6 +315,7 @@ public class OMN2Tosca extends AbstractConverter {
     irrelevantProperties.add(OWL.sameAs);
     irrelevantProperties.add(RDF.type);
     irrelevantProperties.add(Omn.isResourceOf);
+    irrelevantProperties.add(Omn_lifecycle.hasID);
   }
   
   private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, String prefix, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
@@ -368,12 +385,12 @@ public class OMN2Tosca extends AbstractConverter {
     setType(relationshipTemplate, relationType);
     
     TRelationshipTemplate.SourceElement sourceElement = objFactory.createTRelationshipTemplateSourceElement();
-    TNodeTemplate sourceNode = getNodeTemplateByID(relationStatement.getSubject().getURI(), nodesAndRelationshipTemplates);
+    TNodeTemplate sourceNode = getNodeTemplateByName(getName(relationStatement.getSubject()), nodesAndRelationshipTemplates);
     sourceElement.setRef(sourceNode);
     relationshipTemplate.setSourceElement(sourceElement);
     
     TRelationshipTemplate.TargetElement targetElement = objFactory.createTRelationshipTemplateTargetElement();
-    TNodeTemplate targetNode = getNodeTemplateByID(relationStatement.getResource().getURI(), nodesAndRelationshipTemplates);
+    TNodeTemplate targetNode = getNodeTemplateByName(getName(relationStatement.getResource()), nodesAndRelationshipTemplates);
     targetElement.setRef(targetNode);
     relationshipTemplate.setTargetElement(targetElement);
     
@@ -423,15 +440,15 @@ public class OMN2Tosca extends AbstractConverter {
     relationshipType.setValidTarget(validTarget);
   }
   
-  private static TNodeTemplate getNodeTemplateByID(String id, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException{
+  private static TNodeTemplate getNodeTemplateByName(String name, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException{
     for(TEntityTemplate entitiyTemplate : nodesAndRelationshipTemplates){
       if(entitiyTemplate instanceof TNodeTemplate){
-        if(id.equals(entitiyTemplate.getId())){
+        if(name.equals(((TNodeTemplate) entitiyTemplate).getName())){
           return (TNodeTemplate) entitiyTemplate;
         }
       }
     }
-    throw new RequiredResourceNotFoundException("The relationship source or target element with id "+id+" was not found");
+    throw new RequiredResourceNotFoundException("The relationship source or target element with name "+name+" was not found");
   }
   
   private static Resource calculateInferredPropertyValue(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
@@ -463,7 +480,7 @@ public class OMN2Tosca extends AbstractConverter {
     List<Resource> redundantResources = new ArrayList<>();
     for(Resource resource : resources){
       for(Resource resource2 : resources){
-        if(resource.equals(OWL2.NamedIndividual)){
+        if(resource.equals(OWL2.NamedIndividual) || resource.equals(Omn.Service)){
           redundantResources.add(resource);
         }
         else if(resource.hasProperty(RDFS.subClassOf, resource2) && !resource.equals(resource2)){

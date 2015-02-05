@@ -1,5 +1,6 @@
 @prefix : <http://open-multinet.info/ontology/examples/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -10,13 +11,15 @@
 :namedTopology3 rdf:type omn:Topology ,
                          owl:NamedIndividual ;
                 
-                omn:hasResource :container1 ,
-                                :dummy1 .
+                omn:hasResource _:container1 ,
+                                _:dummy1 .
 
 
-:container1 rdf:type osco:ServiceContainer ,
+_:container1 rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
                      
+            omn-lifecycle:hasID "container1"^^xsd:string ;     
+            
             osco:image :Image1 ;
             
             osco:subnet :Subnet1 ;
@@ -60,8 +63,10 @@
                                owl:NamedIndividual .
 
 
-:dummy1 rdf:type osco:dummy ,
+_:dummy1 rdf:type osco:dummy ,
                  owl:NamedIndividual ;
+        
+        omn-lifecycle:hasID "dummy1"^^xsd:string ;     
         
         osco:port 8088 ;
         
@@ -69,4 +74,4 @@
         
         osco:test_param "foo"^^xsd:string ;
         
-        :deployedOnContainer1 :container1 .
+        :deployedOnContainer1 _:container1 .

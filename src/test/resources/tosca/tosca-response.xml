@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Definitions id="1149646245" targetNamespace="http://open-multinet.info/ontology/examples/" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
+<Definitions id="3285403580" targetNamespace="http://open-multinet.info/ontology/examples/" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
     <Locations/>
-    <ServiceTemplate id="Topology1899137977" name="Topology1899137977">
+    <ServiceTemplate id="Topology1137039352" name="Topology1137039352">
         <TopologyTemplate>
-            <NodeTemplate name="container1" id="1899137977" type="ns2:ServiceContainer" xmlns:ns2="http://opensdncore.org/ontology/">
+            <NodeTemplate name="container1" id="1137039352" type="ns2:ServiceContainer" xmlns:ns2="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties xmlns:osco="http://opensdncore.org/ontology/">
                         <osco:maxNumInst>1</osco:maxNumInst>
@@ -26,21 +26,21 @@
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="ssh1" id="240804612" type="ns2:ssh" xmlns:ns2="http://opensdncore.org/ontology/">
+            <NodeTemplate name="ssh1" id="3906635215" type="ns2:ssh" xmlns:ns2="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:sshProperties xmlns:osco="http://opensdncore.org/ontology/">
-                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
-                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
-                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
                         <osco:key>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnoogBCzdExUWu74nqt68cbRdTFKiieLapshL83+rpoFw4pJVDfVu/+I15sZ77KVxetgfYxvOGAPDjr/8xTO8A32hqXXMxWoLGUgVyhV0smUbSIX+hDc0xudbRl/Isl8St/0JylM0uiruhETDkMuAqCXBXZZHqZyu4PfV1tetmOA1gPI7l6Iy7HotCVu6lmz562ovYA0zUWIyn/oakjGD4Z2+gtaJjZSooBzn4XSMgcWGb8ayuk5tirxR+TNlycu0xXe9v4voRAoNzukSNZvAQ/b6TCjHG1+B8eNnBCNipnJPb+IPIwr09YAoZCLhaBH/L3IBbHL2YVmUOBQH30/bX mitja@mitja-thinkpad</osco:key>
+                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
                         <osco:floatingIP>130.149.247.218</osco:floatingIP>
                     </osco:sshProperties>
                 </Properties>
             </NodeTemplate>
-            <RelationshipTemplate name="deployedOncontainer1" id="2408046121899137977" type="ns2:deployedOn" xmlns:ns2="http://opensdncore.org/ontology/">
-                <SourceElement ref="240804612"/>
-                <TargetElement ref="1899137977"/>
+            <RelationshipTemplate name="deployedOncontainer1" id="39066352151137039352" type="ns2:deployedOn" xmlns:ns2="http://opensdncore.org/ontology/">
+                <SourceElement ref="3906635215"/>
+                <TargetElement ref="1137039352"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>

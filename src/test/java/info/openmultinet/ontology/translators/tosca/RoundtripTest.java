@@ -20,6 +20,8 @@ import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
 public class RoundtripTest {
@@ -36,7 +38,15 @@ public class RoundtripTest {
     Model resultModel = Tosca2OMN.getModel(topologyStream);
     
     for(Statement st : parser.getModel().listStatements().toList()){
-      Assert.assertTrue("Model should contain statement "+st, resultModel.contains(st));
+      Resource subject = null;
+      RDFNode object = null;
+      if(!st.getSubject().isAnon()){
+        subject = st.getSubject();
+      }
+      if(!st.getObject().isAnon()){
+        object = st.getObject();
+      }
+      Assert.assertTrue("Model should contain statement: "+st, resultModel.contains(subject, st.getPredicate(), object));
     }
   }
   

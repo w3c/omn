@@ -215,9 +215,24 @@ public class Tosca2OMN extends AbstractConverter {
   private static Resource createNode(TNodeTemplate nodeTemplate, String namespace, Model model) throws UnsupportedException {
     Resource node = model.createResource(getURI(nodeTemplate, namespace));
     
+    setNodeId(nodeTemplate, node);
     setNodeType(nodeTemplate, node);
     setNodeProperties(nodeTemplate, node, namespace);
     return node;
+  }
+  
+  private static void setNodeId(TNodeTemplate nodeTemplate, Resource node) {
+    node.addProperty(Omn_lifecycle.hasID, nodeTemplate.getName());
+  }
+
+  private static void setNodeType(TNodeTemplate nodeTemplate, Resource node) throws UnsupportedException {
+    final QName type = nodeTemplate.getType();
+    if(type == null){
+      throw new UnsupportedException("No type for nodeTemplate "+nodeTemplate.getName()+" found");
+    }
+    final Resource nodeType = createResourceFromQName(type, node.getModel());
+    node.addProperty(RDF.type, nodeType);
+    node.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, String namespace) throws UnsupportedException {
@@ -278,16 +293,6 @@ public class Tosca2OMN extends AbstractConverter {
       propertyRange = XSD.xstring;
     }
     return propertyRange;
-  }
-  
-  private static void setNodeType(TNodeTemplate nodeTemplate, Resource node) throws UnsupportedException {
-    final QName type = nodeTemplate.getType();
-    if(type == null){
-      throw new UnsupportedException("No type for nodeTemplate "+nodeTemplate.getName()+" found");
-    }
-    final Resource nodeType = createResourceFromQName(type, node.getModel());
-    node.addProperty(RDF.type, nodeType);
-    node.addProperty(RDF.type, OWL2.NamedIndividual);
   }
   
   private static void createRelationship(TRelationshipTemplate relationshipTemplate, String namespace, Model model) throws UnsupportedException {

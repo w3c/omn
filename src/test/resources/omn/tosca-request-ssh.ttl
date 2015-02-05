@@ -1,5 +1,6 @@
 @prefix : <http://open-multinet.info/ontology/examples/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -10,12 +11,14 @@
 :namedTopology3 rdf:type omn:Topology ,
                          owl:NamedIndividual ;
                 
-                omn:hasResource :container1 ,
-                                :ssh1 .
+                omn:hasResource _:container1 ,
+                                _:ssh1 .
 
 
-:container1 rdf:type osco:ServiceContainer ,
+_:container1 rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
+                     
+            omn-lifecycle:hasID "container1"^^xsd:string ;     
                      
             osco:image :Image1 ;
             
@@ -60,9 +63,11 @@
                                owl:NamedIndividual .
 
 
-:ssh1 rdf:type osco:ssh ,
+_:ssh1 rdf:type osco:ssh ,
                  owl:NamedIndividual ;
+                 
+        omn-lifecycle:hasID "ssh1"^^xsd:string ;   
         
         osco:key "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnoogBCzdExUWu74nqt68cbRdTFKiieLapshL83+rpoFw4pJVDfVu/+I15sZ77KVxetgfYxvOGAPDjr/8xTO8A32hqXXMxWoLGUgVyhV0smUbSIX+hDc0xudbRl/Isl8St/0JylM0uiruhETDkMuAqCXBXZZHqZyu4PfV1tetmOA1gPI7l6Iy7HotCVu6lmz562ovYA0zUWIyn/oakjGD4Z2+gtaJjZSooBzn4XSMgcWGb8ayuk5tirxR+TNlycu0xXe9v4voRAoNzukSNZvAQ/b6TCjHG1+B8eNnBCNipnJPb+IPIwr09YAoZCLhaBH/L3IBbHL2YVmUOBQH30/bX mitja@mitja-thinkpad"^^xsd:string ;
         
-        :deployedOnContainer1 :container1 .
+        :deployedOnContainer1 _:container1 .
