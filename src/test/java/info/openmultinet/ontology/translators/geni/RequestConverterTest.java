@@ -3,11 +3,13 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.validation.constraints.AssertTrue;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
@@ -58,5 +60,21 @@ public class RequestConverterTest {
 		System.out.println(outputRspec);
 		System.out.println("===============================");
 	}
+
+    @Test
+    public void testSliverTypeEqualsRDFType() throws IOException, JAXBException, InvalidModelException {
+        final String filename = "/geni/request/request_unbound.xml";
+        final InputStream inputRspec = RequestConverterTest.class
+                .getResourceAsStream(filename);
+        System.out.println("Converting this input from '" + filename + "':");
+        System.out.println("===============================");
+        System.out.println(AbstractConverter.toString(filename));
+        System.out.println("===============================");
+
+        final Model model = RequestConverter.getModel(inputRspec);
+        final ResIterator resourceIterator = model.listResourcesWithProperty(Omn.isResourceOf);
+
+        Assert.assertEquals(resourceIterator.nextResource().getProperty(RDF.type).getObject().asResource().getURI(), "raw-pc");
+    }
 
 }
