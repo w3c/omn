@@ -143,7 +143,24 @@ public class RequestConverter extends AbstractConverter {
 				final Resource omnResource = model
 						.createResource(AbstractConverter.NAMESPACE
 								+ node.getClientId());
-				omnResource.addProperty(RDF.type, Omn_resource.Node);
+
+                List<Object> anyOrRelationOrLocation = node.getAnyOrRelationOrLocation();
+                if(anyOrRelationOrLocation.size()>0) {
+                    for (Object o : anyOrRelationOrLocation) {
+                        if (o instanceof JAXBElement) {
+                            JAXBElement element = (JAXBElement) o;
+                            if (element.getDeclaredType().equals(NodeContents.SliverType.class)) {
+                                NodeContents.SliverType sliverType = (NodeContents.SliverType) element.getValue();
+                                omnResource.addProperty(RDF.type, model.createResource(sliverType.getName()));
+                            }
+
+
+                        }
+                    }
+                }else{
+                    omnResource.addProperty(RDF.type, Omn_resource.Node);
+                }
+
 				omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
 				if (null != node.getComponentId() && ! node.getComponentId().isEmpty())
 					omnResource.addProperty(Omn_lifecycle.implementedBy, model.createResource(node.getComponentId()));
