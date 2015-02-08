@@ -1,6 +1,7 @@
 # Open-Multinet Ontology Playground
 
 [![Build Status](https://travis-ci.org/open-multinet/playground-rspecs-ontology.svg)](https://travis-ci.org/open-multinet/playground-rspecs-ontology)
+[![Coverage Status](https://coveralls.io/repos/open-multinet/playground-rspecs-ontology/badge.svg)](https://coveralls.io/r/open-multinet/playground-rspecs-ontology)
 
 ## Abstract
 
