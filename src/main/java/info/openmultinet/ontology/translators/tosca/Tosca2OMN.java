@@ -1,7 +1,6 @@
 package info.openmultinet.ontology.translators.tosca;
 
 import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.jaxb.Definitions;
 import info.openmultinet.ontology.translators.tosca.jaxb.TEntityTemplate;
@@ -50,18 +49,15 @@ public class Tosca2OMN extends AbstractConverter {
   
   private static Random random = new Random();
   
-  public static Model getModel(final InputStream input) throws JAXBException, InvalidModelException, UnsupportedException {
+  public static Model getModel(final InputStream input) throws JAXBException, UnsupportedException {
     final JAXBContext context = JAXBContext.newInstance(Definitions.class);
     final Unmarshaller unmarshaller = context.createUnmarshaller();
     final Definitions definitions = unmarshaller.unmarshal(new StreamSource(input), Definitions.class).getValue();
-    final Model model = tosca2Model(definitions);
     
-    Parser.setCommonPrefixes(model);
-    model.setNsPrefix("target", getRDFNamespace(definitions.getTargetNamespace()));
-    return model;
+    return getModel(definitions);
   }
   
-  private static Model tosca2Model(final Definitions definitions) throws UnsupportedException {
+  public static Model getModel(final Definitions definitions) throws UnsupportedException {
     final Model model = ModelFactory.createDefaultModel();
     
     processTypes(definitions, model);
@@ -69,6 +65,8 @@ public class Tosca2OMN extends AbstractConverter {
     processRelationshipTypes(definitions, model);
     processTemplates(definitions, model);
     
+    Parser.setCommonPrefixes(model);
+    model.setNsPrefix("target", getRDFNamespace(definitions.getTargetNamespace()));
     return model;
   }
   
@@ -83,15 +81,17 @@ public class Tosca2OMN extends AbstractConverter {
             if(namespace.isEmpty() || namespace.equals("/")){
               namespace = getRDFNamespace(definitions.getTargetNamespace());
             }
-            for (int i = 0; i < (schemaElement.getChildNodes().getLength() - 1); i++) {
+            for (int i = 0; i < (schemaElement.getChildNodes().getLength()); i++) {
               final Node elementNode = schemaElement.getChildNodes().item(i);
-              final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
-              final Resource superProperty = model.createResource(namespace+superPropertyName);
-              try{
-                createTypeProperty(model, namespace, elementNode, superProperty);
-              } catch(PropertyNotFoundException e){
-                LOG.log(Level.WARNING, "No domain found for property "+superProperty+" .");
-              } 
+              if(elementNode.getAttributes() != null && elementNode.getAttributes().getNamedItem("name") != null){
+                final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
+                final Resource superProperty = model.createResource(namespace+superPropertyName);
+                try{
+                  createTypeProperty(model, namespace, elementNode, superProperty);
+                } catch(PropertyNotFoundException e){
+                  LOG.log(Level.WARNING, "No domain found for property "+superProperty+" .");
+                } 
+              }
             }
           }
         }
@@ -100,21 +100,21 @@ public class Tosca2OMN extends AbstractConverter {
   }
 
   private static void createTypeProperty(Model model, String namespace, Node elementNode, Resource superProperty) {
-    for (int j = 0; j < (elementNode.getChildNodes().getLength() - 1); j++) {
+    for (int j = 0; j < (elementNode.getChildNodes().getLength()); j++) {
       final Node typesNode = elementNode.getChildNodes().item(j);
-      if (typesNode.getLocalName().equals("complexType")) {
+      if ("complexType".equals(typesNode.getLocalName())) {
         createType(model, namespace, superProperty, typesNode);
       }
     }
   }
 
   private static void createType(Model model, String namespace, Resource superProperty, Node typesNode) {
-    for (int k = 0; k < (typesNode.getChildNodes().getLength() - 1); k++) {
+    for (int k = 0; k < (typesNode.getChildNodes().getLength()); k++) {
       final Node sequenceNode = typesNode.getChildNodes().item(k);
-      if (sequenceNode.getLocalName().equals("sequence")) {
-        for (int l = 0; l < (sequenceNode.getChildNodes().getLength() - 1); l++) {
+      if ("sequence".equals(sequenceNode.getLocalName())) {
+        for (int l = 0; l < (sequenceNode.getChildNodes().getLength()); l++) {
           final Node typeNode = sequenceNode.getChildNodes().item(l);
-          if (typeNode.getLocalName().equals("element")) {
+          if ("element".equals(typeNode.getLocalName())) {
             final String name = typeNode.getAttributes().getNamedItem("name").getNodeValue();
             final String type = typeNode.getAttributes().getNamedItem("type").getNodeValue();
             

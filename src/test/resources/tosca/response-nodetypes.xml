@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
+	<Types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://opensdncore.org/ontology/">
+			<xs:element name="ServiceContainerProperties">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="subnet" type="Subnet">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="floatingIp" type="xs:string" />
+									<xs:element name="fixedIp" type="xs:string" />
+									<xs:element name="mgmt" type="xs:boolean" />
+									<xs:element name="datacenter" type="xs:string" />
+									<xs:element name="name" type="xs:string" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="image" type="Image">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="datacenter" type="xs:string" />
+									<xs:element name="id" type="xs:string" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="location" type="Location">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="xs:string" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="maxNumInst" type="xs:integer" />
+						<xs:element name="minNumInst" type="xs:integer" />
+						<xs:element name="name" type="xs:integer" />
+						<xs:element name="flavour" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://opensdncore.org/ontology/">
+			<xs:element name="sshProperties">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MGMT_INTF" type="xs:string" />
+						<xs:element name="key" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</Types>
+	<NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
+		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
+			element="osco:ServiceContainerProperties" />
+	</NodeType>
+	<NodeType name="ssh" targetNamespace="http://opensdncore.org/ontology/">
+		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
+			element="osco:sshProperties" />
+	</NodeType>
+	<Locations />
+</Definitions>

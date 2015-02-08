@@ -15,6 +15,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
@@ -23,7 +24,7 @@ public class Tosca2OMNTest {
 
 	@Test
 	public void testConvertToscaRequest() throws JAXBException, InvalidModelException, UnsupportedException {
-	  InputStream input = getClass().getResourceAsStream("/tosca/tosca-request.xml");
+	  InputStream input = getClass().getResourceAsStream("/tosca/request-ssh.xml");
 	  
 	  final Model model = Tosca2OMN.getModel(input);
 
@@ -52,22 +53,26 @@ public class Tosca2OMNTest {
 	}
 	
 	@Test
-  public void testConvertToscaResponse() throws JAXBException, InvalidModelException, UnsupportedException {
-    InputStream input = getClass().getResourceAsStream("/tosca/tosca-response.xml");
+  public void testConvertToscaResponseNodeTypes() throws JAXBException, InvalidModelException, UnsupportedException {
+    InputStream input = getClass().getResourceAsStream("/tosca/response-nodetypes.xml");
     
     final Model model = Tosca2OMN.getModel(input);
 
     final String serializedModel = Tosca2OMNTest.serializeModel(model, "TTL");
     System.out.println(serializedModel);
 
-    Assert.assertTrue("Should contain a topology resource",
+    Assert.assertFalse("Should not contain a topology resource",
         model.containsResource(Omn.Topology));
+    Assert.assertTrue("Should contain resources",
+        model.containsResource(Omn.Resource));
     Assert.assertTrue("Should contain the ssh node resource",
         model.containsResource(Osco.ssh));
-    Assert.assertTrue("Should contain parameter resources",
+    Assert.assertTrue("Should contain key parameter resource",
         model.containsResource(Osco.key));
-    Assert.assertTrue("Should contain the floating IP",
-        serializedModel.contains("130.149.247.218"));
+    Assert.assertTrue("Should contain datatype properties",
+        model.containsResource(OWL.DatatypeProperty));
+    Assert.assertTrue("Should contain object properties",
+        model.containsResource(OWL.ObjectProperty));
   }
 	
 	@Test
