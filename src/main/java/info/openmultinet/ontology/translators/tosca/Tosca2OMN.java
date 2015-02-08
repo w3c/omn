@@ -84,13 +84,7 @@ public class Tosca2OMN extends AbstractConverter {
             for (int i = 0; i < (schemaElement.getChildNodes().getLength()); i++) {
               final Node elementNode = schemaElement.getChildNodes().item(i);
               if(elementNode.getAttributes() != null && elementNode.getAttributes().getNamedItem("name") != null){
-                final String superPropertyName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
-                final Resource superProperty = model.createResource(namespace+superPropertyName);
-                try{
-                  createTypeProperty(model, namespace, elementNode, superProperty);
-                } catch(PropertyNotFoundException e){
-                  LOG.log(Level.WARNING, "No domain found for property "+superProperty+" .");
-                } 
+                  createTypeProperty(model, namespace, elementNode);
               }
             }
           }
@@ -99,16 +93,16 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
 
-  private static void createTypeProperty(Model model, String namespace, Node elementNode, Resource superProperty) {
+  private static void createTypeProperty(Model model, String namespace, Node elementNode) {
     for (int j = 0; j < (elementNode.getChildNodes().getLength()); j++) {
       final Node typesNode = elementNode.getChildNodes().item(j);
       if ("complexType".equals(typesNode.getLocalName())) {
-        createType(model, namespace, superProperty, typesNode);
+        createType(model, namespace, typesNode);
       }
     }
   }
 
-  private static void createType(Model model, String namespace, Resource superProperty, Node typesNode) {
+  private static void createType(Model model, String namespace, Node typesNode) {
     for (int k = 0; k < (typesNode.getChildNodes().getLength()); k++) {
       final Node sequenceNode = typesNode.getChildNodes().item(k);
       if ("sequence".equals(sequenceNode.getLocalName())) {
@@ -128,10 +122,7 @@ public class Tosca2OMN extends AbstractConverter {
               propertyRangeClass = model.createResource(namespace + type);
               propertyRangeClass.addProperty(RDF.type, OWL2.Class);
               property.addProperty(RDF.type, OWL.ObjectProperty);
-              createTypeProperty(model, namespace, typeNode, null);
-            }
-            if(superProperty != null){
-              property.addProperty(RDFS.subPropertyOf, superProperty);
+              createTypeProperty(model, namespace, typeNode);
             }
             property.addProperty(RDFS.range, propertyRangeClass);
           }
