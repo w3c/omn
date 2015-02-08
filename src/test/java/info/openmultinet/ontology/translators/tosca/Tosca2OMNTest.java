@@ -53,8 +53,8 @@ public class Tosca2OMNTest {
 	}
 	
 	@Test
-  public void testConvertToscaResponseNodeTypes() throws JAXBException, InvalidModelException, UnsupportedException {
-    InputStream input = getClass().getResourceAsStream("/tosca/response-nodetypes.xml");
+  public void testConvertToscaResponseTypes() throws JAXBException, InvalidModelException, UnsupportedException {
+    InputStream input = getClass().getResourceAsStream("/tosca/response-types.xml");
     
     final Model model = Tosca2OMN.getModel(input);
 
