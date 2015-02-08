@@ -24,7 +24,7 @@ public class Tosca2OMNTest {
 
 	@Test
 	public void testConvertToscaRequest() throws JAXBException, InvalidModelException, UnsupportedException {
-	  InputStream input = getClass().getResourceAsStream("/tosca/request-ssh.xml");
+	  InputStream input = getClass().getResourceAsStream("/tosca/request-dummy.xml");
 	  
 	  final Model model = Tosca2OMN.getModel(input);
 

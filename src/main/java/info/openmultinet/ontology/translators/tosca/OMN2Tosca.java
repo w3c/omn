@@ -338,7 +338,10 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, String prefix, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
-    parameter.setAttribute("name", propertyStatement.getResource().getLocalName());
+    
+    if(!propertyStatement.getResource().isAnon()){
+      parameter.setAttribute("name", propertyStatement.getResource().getLocalName());
+    }
     
     Element subSequence = createObjectPropertyType(propertyStatement.getPredicate(), propertiesSeq);
     

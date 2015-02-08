@@ -20,11 +20,11 @@ _:container1 rdf:type osco:ServiceContainer ,
                      
             omn-lifecycle:hasID "container1"^^xsd:string ;     
             
-            osco:image :Image1 ;
+            osco:image _:image1 ;
             
-            osco:subnet :Subnet1 ;
+            osco:subnet _:subnet1 ;
             
-            osco:location :Container1Location ;
+            osco:location _:berlin ;
             
             osco:flavour "1024MB_10GB"^^xsd:string ;
             
@@ -33,13 +33,13 @@ _:container1 rdf:type osco:ServiceContainer ,
             osco:maxNumInst 1 .
 
 
-:Container1Location rdf:type osco:Location ,
+_:berlin rdf:type osco:Location ,
                         owl:NamedIndividual ;
                         
                      osco:name "Berlin"^^xsd:string .
 
 
-:Image1 rdf:type osco:Image ,
+_:image1 rdf:type osco:Image ,
                       owl:NamedIndividual ;
                       
          osco:datacenter "AV-Openstack"^^xsd:string ;
@@ -47,7 +47,7 @@ _:container1 rdf:type osco:ServiceContainer ,
          osco:id "ffb9a89e-3a00-4a1b-a1f8-f4e135122994"^^xsd:string .
 
 
-:Subnet1 rdf:type osco:Subnet ,
+_:subnet1 rdf:type osco:Subnet ,
                       owl:NamedIndividual ;
                       
          osco:name "trescimo-net"^^xsd:string ;
