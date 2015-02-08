@@ -367,19 +367,21 @@ public class Tosca2OMN extends AbstractConverter {
   }
 
   private static void setValidTarget(TRelationshipType relationshipType, Resource relationshipTypeResource) {
+    Resource target = Omn.Resource;
     if(relationshipType.getValidTarget() != null){
       QName validTarget = relationshipType.getValidTarget().getTypeRef();
-      Resource target = createResourceFromQName(validTarget, relationshipTypeResource.getModel());
-      relationshipTypeResource.addProperty(RDFS.range, target);
+      target = createResourceFromQName(validTarget, relationshipTypeResource.getModel());
     }
+    relationshipTypeResource.addProperty(RDFS.range, target);
   }
 
   private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) {
+    Resource source = Omn.Resource;
     if(relationshipType.getValidSource() != null){
       QName validSource = relationshipType.getValidSource().getTypeRef();
-      Resource source = createResourceFromQName(validSource, relationshipTypeResource.getModel());
-      relationshipTypeResource.addProperty(RDFS.domain, source);
+      source = createResourceFromQName(validSource, relationshipTypeResource.getModel());
     }
+    relationshipTypeResource.addProperty(RDFS.domain, source);
   }
   
   private static String getRDFNamespace(String namespace){
