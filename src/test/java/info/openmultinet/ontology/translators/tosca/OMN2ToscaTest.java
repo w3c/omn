@@ -7,21 +7,32 @@ import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyVa
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 
 public class OMN2ToscaTest {
 
+  static ArrayList<String> additionalOntologies;
+  
+  @BeforeClass
+  public static void createAdditionalOntologiesList(){
+    additionalOntologies = new ArrayList<String>();
+    additionalOntologies.add("/ontologies/osco.ttl");
+  }
+  
 	@Test
 	public void testConvertDummyTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException {
 	  InputStream input = getClass().getResourceAsStream("/omn/tosca-request-dummy.ttl");
-	  Parser parser = new Parser(input);
+	  
+	  Parser parser = new Parser(input, additionalOntologies);
 	  
 		final InfModel model = parser.getInfModel();
 		final String topology = OMN2Tosca.getTopology(model);
@@ -39,7 +50,7 @@ public class OMN2ToscaTest {
   public void testConvertSSHTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
       RequiredResourceNotFoundException, MultiplePropertyValuesException {
     InputStream input = getClass().getResourceAsStream("/omn/tosca-request-ssh.ttl");
-    Parser parser = new Parser(input);
+    Parser parser = new Parser(input, additionalOntologies);
     
     final InfModel model = parser.getInfModel();
     final String topology = OMN2Tosca.getTopology(model);

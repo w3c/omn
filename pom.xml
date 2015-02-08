@@ -161,7 +161,7 @@
 					<includes>
 						<include>ontologies/omn*.ttl</include>
 						<include>import/geo.ttl</include>
-						<include>src/main/resources/osco.ttl</include>
+						<include>src/test/resources/ontologies/osco.ttl</include>
 					</includes>
 					<fileOptions>
 						<source>
@@ -170,6 +170,12 @@
 							<package-name>info.openmultinet.ontology.vocabulary</package-name>
 							<ontology>true</ontology>
 						</source>
+						<source>
+              <input>src/test/resources/ontologies/osco.ttl</input>
+              <output>src/test/java/</output>
+              <package-name>info.openmultinet.ontology.vocabulary</package-name>
+              <ontology>true</ontology>
+            </source>
 					</fileOptions>
 					<owl>true</owl>
 					<inference>true</inference>

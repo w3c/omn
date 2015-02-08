@@ -10,12 +10,14 @@ import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedExcepti
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBException;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -26,10 +28,18 @@ import com.hp.hpl.jena.rdf.model.Statement;
 
 public class RoundtripTest {
   
+ static ArrayList<String> additionalOntologies;
+  
+  @BeforeClass
+  public static void createAdditionalOntologiesList(){
+    additionalOntologies = new ArrayList<String>();
+    additionalOntologies.add("/ontologies/osco.ttl");
+  }
+  
   @Test
   public void testOMN2Tosca2OMN() throws InvalidModelException, JAXBException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, UnsupportedException {
     InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request-dummy.ttl");
-    Parser parser = new Parser(input);
+    Parser parser = new Parser(input, additionalOntologies);
     
     final InfModel model = parser.getInfModel();
     final String toscaDefinitions = OMN2Tosca.getTopology(model);
@@ -62,7 +72,7 @@ public class RoundtripTest {
     System.out.println(serializedModel);
     
     InputStream modelStream = new ByteArrayInputStream(serializedModel.getBytes());
-    Parser parser = new Parser(modelStream);
+    Parser parser = new Parser(modelStream, additionalOntologies);
     InfModel infModel = parser.getInfModel();
     String toscaDefinitions = OMN2Tosca.getTopology(infModel);
     System.out.println(toscaDefinitions);

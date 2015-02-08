@@ -3,12 +3,13 @@ package info.openmultinet.ontology;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
-import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -50,16 +51,24 @@ public class Parser {
 	public Parser(final InputStream input) throws InvalidModelException {
 		this.read(input);
 	}
+	public Parser(final InputStream input, List<String> additionalOntologies) throws InvalidModelException {
+    this.read(input, additionalOntologies);
+  }
 
 	public Parser(final String filename) throws InvalidModelException {
 		this.read(filename);
 	}
+	public Parser(final String filename, List<String> additionalOntologies) throws InvalidModelException {
+    this.read(filename,  additionalOntologies);
+  }
 
 	public Parser(final Model model) throws InvalidModelException {
-		this.read(model);
+		this.read(model, new ArrayList<String>());
 	}
+	public Parser(final Model model, List<String> additionalOntologies) throws InvalidModelException {
+    this.read(model, additionalOntologies);
+  }
 
-	
 	public Parser() {
 		this.init();
 	}
@@ -69,7 +78,7 @@ public class Parser {
 		this.data = ModelFactory.createDefaultModel();		
 	}
 
-	public void read(@NotNull final InputStream input) throws InvalidModelException {
+	public void read(@NotNull final InputStream input, List<String> additionalOntologies) throws InvalidModelException {
 		init();
 		if (null == input)
 	        throw new IllegalArgumentException("input must not be null");
@@ -77,18 +86,31 @@ public class Parser {
 		final RDFReader arp = data.getReader("TTL");
 		// @fixme: this is a slow/expensive operation
 		arp.read(data, input, null);
-		this.read(data);
+		this.read(data, additionalOntologies);
 	}
+	
+	public void read(@NotNull final InputStream input) throws InvalidModelException {
+    read(input, new ArrayList<String>());
+  }
 
-	public void read(@NotNull final Model model) throws InvalidModelException {
+	public void read(@NotNull final Model model, List<String> additionalOntologies) throws InvalidModelException {
 	  this.model = model;
-		Parser.reasoner = Parser.createReasoner();
+		Parser.reasoner = Parser.createReasoner(additionalOntologies);
 		this.infModel = Parser.createInfModel(model);
 		if (!Parser.isValid(this.infModel)) {
 			throw new InvalidModelException(
 					Parser.getValidationReport(this.infModel));
 		}
 	}
+	
+	public void read(String filename, List<String> additionalOntologies) throws InvalidModelException {
+    final InputStream input = Parser.class.getResourceAsStream(filename);
+    read(input, additionalOntologies);
+  }
+	
+	public void read(String filename) throws InvalidModelException {
+	  read(filename, new ArrayList<String>());
+  }
 
 	public static InfModel createInfModel() throws InvalidModelException {
 		return Parser.createInfModel(ModelFactory.createDefaultModel());
@@ -103,21 +125,27 @@ public class Parser {
 	}
 
 	public static Reasoner createReasoner() {
-		final Model schema = ModelFactory.createDefaultModel();
-
-		schema.add(Parser.parse("/omn.ttl"));
-		schema.add(Parser.parse("/omn-federation.ttl"));
-		schema.add(Parser.parse("/omn-lifecycle.ttl"));
-		schema.add(Parser.parse("/omn-resource.ttl"));
-		schema.add(Parser.parse("/omn-service.ttl"));
-		schema.add(Parser.parse("/omn-component.ttl"));
-		schema.add(Parser.parse("/osco.ttl"));
-
-		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
-		// @fixme: this is a slow/expensive operation
-		reasoner = reasoner.bindSchema(schema);
-		return reasoner;
+		return createReasoner(new ArrayList<String>());
 	}
+	
+	public static Reasoner createReasoner(List<String> additionalFileNames) {
+    final Model schema = ModelFactory.createDefaultModel();
+
+    schema.add(Parser.parse("/omn.ttl"));
+    schema.add(Parser.parse("/omn-federation.ttl"));
+    schema.add(Parser.parse("/omn-lifecycle.ttl"));
+    schema.add(Parser.parse("/omn-resource.ttl"));
+    schema.add(Parser.parse("/omn-service.ttl"));
+    schema.add(Parser.parse("/omn-component.ttl"));
+    for(String filename : additionalFileNames){
+      schema.add(Parser.parse(filename));
+    }
+
+    Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
+    // @fixme: this is a slow/expensive operation
+    reasoner = reasoner.bindSchema(schema);
+    return reasoner;
+  }
 
 	public static void setCommonPrefixes(final Model model) {
 		model.setNsPrefix("omn", Omn.getURI());
@@ -125,7 +153,6 @@ public class Parser {
 		model.setNsPrefix("rdf", RDF.getURI());
 		model.setNsPrefix("rdfs", RDFS.getURI());
 		model.setNsPrefix("owl", OWL.getURI());
-		model.setNsPrefix("osco", Osco.getURI());
 		model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 	}
 
@@ -151,8 +178,7 @@ public class Parser {
 				+ Parser.createPrefix("omn-lifecycle", Omn_lifecycle.getURI())
 				+ Parser.createPrefix("rdf", RDF.getURI())
 				+ Parser.createPrefix("rdfs", RDFS.getURI())
-				+ Parser.createPrefix("owl", OWL.getURI())
-				+ Parser.createPrefix("osco", Osco.getURI());
+				+ Parser.createPrefix("owl", OWL.getURI());
 	}
 
 	public static String createPrefix(final String name, final String URI) {
@@ -214,11 +240,6 @@ public class Parser {
 
 	public String getValidationReport() {
 		return Parser.getValidationReport(this.infModel);
-	}
-
-	public void read(String filename) throws InvalidModelException {
-		final InputStream input = Parser.class.getResourceAsStream(filename);
-		read(input);
 	}
 
 }
