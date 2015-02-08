@@ -339,6 +339,7 @@ public class Tosca2OMN extends AbstractConverter {
   private static Resource createNodeType(TNodeType nodeType, Model model) {
     final String namespace = getRDFNamespace(nodeType.getTargetNamespace());
     final Resource nodeTypeResource = model.getResource(namespace + nodeType.getName());
+    nodeTypeResource.addProperty(RDF.type, OWL.Class);
     nodeTypeResource.addProperty(RDFS.subClassOf, Omn.Resource);
     final PropertiesDefinition propertiesDefinition = nodeType.getPropertiesDefinition();
     if(propertiesDefinition != null){
