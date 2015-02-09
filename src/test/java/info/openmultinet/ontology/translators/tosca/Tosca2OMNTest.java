@@ -15,7 +15,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.RDFList;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.OWL;
+import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
@@ -55,12 +58,26 @@ public class Tosca2OMNTest {
     Assert.assertTrue("Should contain resources", model.containsResource(Omn.Resource));
     Assert.assertTrue("Should contain the ssh node resource", model.containsResource(Osco.ssh));
     Assert.assertTrue("Should contain key parameter resource", model.containsResource(Osco.key));
+    
+    Assert.assertNotNull("name parameter resource should have a domain", model.getProperty(Osco.name, RDFS.domain));
+    Resource nameDomain = model.getProperty(Osco.name, RDFS.domain).getResource();
+    Assert.assertNotNull("name parameter resource domain should be a union",
+        nameDomain.getProperty(OWL2.disjointUnionOf));
+    RDFList domainClassesList = nameDomain.getProperty(OWL2.disjointUnionOf).getResource().as(RDFList.class);
+    Assert.assertTrue("name parameter resource should be of domain Subnet", domainClassesList.contains(Osco.Subnet));
+    Assert.assertTrue("name parameter resource should be of domain Location", domainClassesList.contains(Osco.Location));
+    Assert.assertFalse("name parameter resource should be of domain Image", domainClassesList.contains(Osco.Image));
+    
+    Assert.assertFalse("floatingIp parameter resource should not be of domain Location",
+        model.contains(Osco.floatingIp, RDFS.domain, Osco.Location));
+    Assert.assertTrue("subnet parameter resource should be of domain ServiceContainer",
+        model.contains(Osco.subnet, RDFS.domain, Osco.ServiceContainer));
     Assert.assertTrue("Should contain datatype properties", model.containsResource(OWL.DatatypeProperty));
     Assert.assertTrue("Should contain object properties", model.containsResource(OWL.ObjectProperty));
     Assert.assertTrue("Should contain prefix mapping for osco",
         "http://opensdncore.org/ontology/".equals(model.getNsPrefixURI("osco")));
   }
-  
+
   @Test
   public void testConvertToscaSingleNodeResponse() throws JAXBException, InvalidModelException, UnsupportedException {
     InputStream input = getClass().getResourceAsStream("/tosca/response-single-node.xml");

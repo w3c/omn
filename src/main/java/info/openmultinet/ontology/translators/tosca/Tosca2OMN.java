@@ -17,8 +17,11 @@ import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +38,7 @@ import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFList;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.shared.PropertyNotFoundException;
 import com.hp.hpl.jena.vocabulary.OWL;
@@ -70,7 +74,7 @@ public class Tosca2OMN extends AbstractConverter {
     return model;
   }
   
-  private static void processTypes(final Definitions definitions, final Model model) {
+  private static void processTypes(Definitions definitions, Model model) {
     if(definitions.getTypes() != null){
       final List<Object> types = definitions.getTypes().getAny();
       for (final Object schema : types) {
@@ -84,7 +88,9 @@ public class Tosca2OMN extends AbstractConverter {
             for (int i = 0; i < (schemaElement.getChildNodes().getLength()); i++) {
               final Node elementNode = schemaElement.getChildNodes().item(i);
               if(elementNode.getAttributes() != null && elementNode.getAttributes().getNamedItem("name") != null){
-                  createTypeProperty(model, namespace, elementNode);
+                String propertyRef = elementNode.getAttributes().getNamedItem("name").getNodeValue();
+                Set<Resource> domainClasses = getAllNodeTypesWithProperyRef(definitions, model, namespace+propertyRef);
+                createTypeProperty(model, namespace, elementNode, domainClasses);
               }
             }
           }
@@ -92,17 +98,33 @@ public class Tosca2OMN extends AbstractConverter {
       }
     }
   }
+  
+  private static Set<Resource> getAllNodeTypesWithProperyRef(Definitions definitions, Model model, String propertyRef){
+    Set<Resource> types = new HashSet<Resource>();
+    for(TExtensibleElements element : definitions.getServiceTemplateOrNodeTypeOrNodeTypeImplementation()){
+      if(element instanceof TNodeType){
+        TNodeType nodeType = (TNodeType) element;
+        QName propertiesRef = nodeType.getPropertiesDefinition().getElement();
+        if(propertyRef.equals(propertiesRef.getNamespaceURI()+propertiesRef.getLocalPart())){
+          String namespace = getRDFNamespace(nodeType.getTargetNamespace());
+          Resource nodeTypeResource = model.createResource(namespace + nodeType.getName());
+          types.add(nodeTypeResource);
+        }
+      }
+    }
+    return types;    
+  }
 
-  private static void createTypeProperty(Model model, String namespace, Node elementNode) {
+  private static void createTypeProperty(Model model, String namespace, Node elementNode, Set<Resource> domainClasses) {
     for (int j = 0; j < (elementNode.getChildNodes().getLength()); j++) {
       final Node typesNode = elementNode.getChildNodes().item(j);
       if ("complexType".equals(typesNode.getLocalName())) {
-        createType(model, namespace, typesNode);
+        createType(model, namespace, typesNode, domainClasses);
       }
     }
   }
 
-  private static void createType(Model model, String namespace, Node typesNode) {
+  private static void createType(Model model, String namespace, Node typesNode, Set<Resource> domainClasses) {
     for (int k = 0; k < (typesNode.getChildNodes().getLength()); k++) {
       final Node sequenceNode = typesNode.getChildNodes().item(k);
       if ("sequence".equals(sequenceNode.getLocalName())) {
@@ -113,20 +135,57 @@ public class Tosca2OMN extends AbstractConverter {
             final String type = typeNode.getAttributes().getNamedItem("type").getNodeValue();
             
             Property property = model.createProperty(namespace + name);
-            Resource propertyRangeClass;
+            Resource rangeClass;
             if(type.startsWith("xs:")){
-              propertyRangeClass = getXSDType(type, model);
+              rangeClass = getXSDType(type, model);
               property.addProperty(RDF.type, OWL.DatatypeProperty);
             }
             else{
-              propertyRangeClass = model.createResource(namespace + type);
-              propertyRangeClass.addProperty(RDF.type, OWL2.Class);
+              rangeClass = model.createResource(namespace + type);
+              rangeClass.addProperty(RDF.type, OWL2.Class);
               property.addProperty(RDF.type, OWL.ObjectProperty);
-              createTypeProperty(model, namespace, typeNode);
+              Set<Resource> newDomainClasses = new HashSet<>();
+              newDomainClasses.add(rangeClass);
+              createTypeProperty(model, namespace, typeNode, newDomainClasses);
             }
-            property.addProperty(RDFS.range, propertyRangeClass);
+            property.addProperty(RDFS.range, rangeClass);
+            addDomainClassesToProperty(domainClasses, property);
           }
         }
+      }
+    }
+  }
+
+  private static void addDomainClassesToProperty(Set<Resource> domainClasses, Property property) {
+    if(property.getProperty(RDFS.domain) == null){
+      if(domainClasses.size() == 1){
+        property.addProperty(RDFS.domain, domainClasses.iterator().next());
+      }
+      else if(domainClasses.size() > 1){
+        Resource unionResource = property.getModel().createResource();
+        property.addProperty(RDFS.domain, unionResource);
+        
+        RDFList domainClassesList = property.getModel().createList(domainClasses.iterator());
+        unionResource.addProperty(OWL2.disjointUnionOf, domainClassesList);
+      }
+    }
+    else{
+      Resource existingDomainClass = property.getProperty(RDFS.domain).getResource();
+      if(existingDomainClass.isAnon()){
+        RDFList rangeClassesList = existingDomainClass.getProperty(OWL2.disjointUnionOf).getResource().as(RDFList.class);
+        Iterator<Resource> iter = domainClasses.iterator();
+        while(iter.hasNext()){
+          rangeClassesList.add(iter.next());
+        }
+      }
+      else{
+        domainClasses.add(existingDomainClass);
+        property.removeAll(RDFS.domain);        
+        Resource unionResource = property.getModel().createResource();
+        property.addProperty(RDFS.domain, unionResource);
+       
+        RDFList rangeClassesList = property.getModel().createList(domainClasses.iterator());
+        unionResource.addProperty(OWL2.disjointUnionOf, rangeClassesList);
       }
     }
   }
@@ -136,6 +195,8 @@ public class Tosca2OMN extends AbstractConverter {
       case "xs:string":
         return XSD.xstring;
       case "xs:integer":
+        return XSD.xint;
+      case "xs:int":
         return XSD.xint;
       case "xs:boolean":
         return XSD.xboolean;

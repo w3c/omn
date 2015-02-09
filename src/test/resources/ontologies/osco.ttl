@@ -1,273 +1,105 @@
-@prefix : <http://opensdncore.org/ontology/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix osco:  <http://opensdncore.org/ontology/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@base <http://opensdncore.org/ontology/> .
-
-<http://opensdncore.org/ontology/> rdf:type owl:Ontology .
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-###  http://opensdncore.org/ontology/deployedOn
-
-:deployedOn rdf:type owl:ObjectProperty ;
-            
-            rdfs:comment "This relation describes that a service is deployed on a container"^^xsd:string ;
-            
-            rdfs:subPropertyOf omn:relatesTo ;
-            
-            rdfs:range :ServiceContainer .
-
-
-###  http://opensdncore.org/ontology/image
-
-:image rdf:type owl:ObjectProperty ;
-       
-       rdfs:range :Image ;
-       
-       rdfs:domain :ServiceContainer .
-
-
-
-###  http://opensdncore.org/ontology/subnet
-
-:subnet rdf:type owl:ObjectProperty ;
-        
-        rdfs:domain :ServiceContainer ;
-        
-        rdfs:range :Subnet .
-
-
-
-###  http://opensdncore.org/ontology/location
-
-:location rdf:type owl:ObjectProperty ;
-          
-          rdfs:domain :ServiceContainer ;
-          
-          rdfs:range :Location .
-
-
-#################################################################
-#
-#    Data properties
-#
-#################################################################
-
-
-###  http://opensdncore.org/ontology/datacenter
-
-:datacenter rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:range xsd:string .
-
-
-
-###  http://opensdncore.org/ontology/flavour
-
-:flavour rdf:type owl:DatatypeProperty ,
-                  owl:FunctionalProperty ;
-         
-         rdfs:domain :ServiceContainer ;
-         
-         rdfs:range xsd:string .
-
-
-
-###  http://opensdncore.org/ontology/floatingIp
-
-:floatingIp rdf:type owl:DatatypeProperty ;
-            
-            rdfs:domain :Subnet ;
-            
-            rdfs:range xsd:string .
-
-
-###  http://opensdncore.org/ontology/name
-
-:name rdf:type owl:DatatypeProperty ,
-               owl:FunctionalProperty ;
-            
-            rdfs:range xsd:string .
-
-
-###  http://opensdncore.org/ontology/id
-
-:id rdf:type owl:DatatypeProperty ,
-             owl:FunctionalProperty ;
-    
-    rdfs:domain :Image ;
-    
-    rdfs:range xsd:string .
-
-
-
-###  http://opensdncore.org/ontology/maxNumInst
-
-:maxNumInst rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:domain :ServiceContainer ;
-            
-            rdfs:range xsd:integer .
-
-
-
-###  http://opensdncore.org/ontology/mgmt
-
-:mgmt rdf:type owl:DatatypeProperty ,
-               owl:FunctionalProperty ;
-      
-      rdfs:domain :Subnet ;
-      
-      rdfs:range xsd:boolean .
-
-
-
-###  http://opensdncore.org/ontology/minNumInst
-
-:minNumInst rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:domain :ServiceContainer ;
-            
-            rdfs:range xsd:integer .
-
-
-
-###  http://opensdncore.org/ontology/parameter1
-
-:parameter1 rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:domain :dummy ;
-            
-            rdfs:range xsd:string .
-
-
-
-###  http://opensdncore.org/ontology/parameter2
-
-:parameter2 rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:domain :dummy ;
-            
-            rdfs:range xsd:string .
-
-
-
-###  http://opensdncore.org/ontology/port
-
-:port rdf:type owl:DatatypeProperty ,
-               owl:FunctionalProperty ;
-      
-      rdfs:domain :dummy ;
-      
-      rdfs:range xsd:integer .
-
-
-
-###  http://opensdncore.org/ontology/test_param
-
-:test_param rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:domain :dummy ;
-            
-            rdfs:range xsd:string .
-
-
-###  http://opensdncore.org/ontology/key
-
-:key rdf:type owl:DatatypeProperty ,
-                     owl:FunctionalProperty ;
-            
-            rdfs:domain :ssh ;
-            
-            rdfs:range xsd:string .
-
-
-
-#################################################################
-#
-#    Classes
-#
-#################################################################
-
-
-###  http://opensdncore.org/ontology/Image
-
-:Image rdf:type owl:Class .
-                  
-
-###  http://opensdncore.org/ontology/ServiceContainer
-
-:ServiceContainer rdf:type owl:Class ;
-                  
-                  rdfs:subClassOf omn:Resource ;
-                  
-                  rdfs:comment "This is a service container from the OpenSDNCore platform"^^xsd:string ;
-                  
-                  rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
-
-
-###  http://opensdncore.org/ontology/Subnet
-
-:Subnet rdf:type owl:Class .
-                  
-
-###  http://opensdncore.org/ontology/Location
-
-:Location rdf:type owl:Class .
-                  
-
-###  http://opensdncore.org/ontology/dummy
-
-:dummy rdf:type owl:Class ;
-       
-       rdfs:subClassOf omn:Resource ;
-                  
-       rdfs:comment "This is a dummy service from the OpenSDNCore platform"^^xsd:string ;
-       
-       rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
-
-
-###  http://opensdncore.org/ontology/ssh
-
-:ssh rdf:type owl:Class ;
-       
-       rdfs:subClassOf omn:Resource ;
-                  
-       rdfs:comment "This is a ssh service from the OpenSDNCore platform"^^xsd:string ;
-       
-       rdfs:seeAlso "http://www.opensdncore.org"^^xsd:anyURI .
-
-#################################################################
-#
-#    General axioms
-#
-#################################################################
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Location
-                :ServiceContainer
-                :dummy
-                :Image
-                :Subnet
-              )
-] .
-
-###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
-
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+ 
+osco:parameter2  a   owl:DatatypeProperty ;
+         rdfs:domain osco:dummy ;
+         rdfs:range   xsd:string .
+ 
+osco:image  a        owl:ObjectProperty ;
+         rdfs:domain osco:ServiceContainer ;
+         rdfs:range  osco:Image .
+ 
+osco:Image  a   owl:Class .
+ 
+osco:Location  a  owl:Class .
+ 
+osco:name  a         owl:DatatypeProperty ;
+         rdfs:domain  [ owl:disjointUnionOf  (osco:Subnet osco:Location ) ] ;
+         rdfs:range   xsd:string .
+ 
+osco:mgmt  a         owl:DatatypeProperty ;
+         rdfs:domain osco:Subnet ;
+         rdfs:range   xsd:boolean .
+ 
+osco:TEST_PARAM  a   owl:DatatypeProperty ;
+         rdfs:domain osco:dummy ;
+         rdfs:range   xsd:string .
+ 
+osco:parameter1  a   owl:DatatypeProperty ;
+         rdfs:domain osco:dummy ;
+         rdfs:range   xsd:string .
+ 
+osco:PORT  a         owl:DatatypeProperty ;
+         rdfs:domain osco:dummy ;
+         rdfs:range   xsd:string .
+ 
+osco:flavour  a      owl:DatatypeProperty ;
+         rdfs:domain osco:ServiceContainer ;
+         rdfs:range   xsd:string .
+ 
+osco:maxNumInst  a   owl:DatatypeProperty ;
+         rdfs:domain osco:ServiceContainer ;
+         rdfs:range   xsd:int .
+ 
+osco:fixedIp  a      owl:DatatypeProperty ;
+         rdfs:domain osco:Subnet ;
+         rdfs:range   xsd:string .
+ 
+osco:Subnet  a  owl:Class .
+ 
+osco:id  a           owl:DatatypeProperty ;
+         rdfs:domain  [ owl:disjointUnionOf  (osco:Subnet osco:Image ) ] ;
+         rdfs:range   xsd:string .
+ 
+osco:subnet  a       owl:ObjectProperty ;
+         rdfs:domain osco:ServiceContainer ;
+         rdfs:range  osco:Subnet .
+ 
+osco:ServiceContainer
+         a                owl:Class ;
+         rdfs:subClassOf  omn:Resource .
+ 
+osco:nameserver  a   owl:DatatypeProperty ;
+         rdfs:domain osco:dummy ;
+         rdfs:range   xsd:string .
+ 
+osco:dummy  a            owl:Class ;
+         rdfs:subClassOf  omn:Resource .
+ 
+osco:key  a          owl:DatatypeProperty ;
+         rdfs:domain osco:ssh ;
+         rdfs:range   xsd:string .
+ 
+osco:floatingIp  a   owl:DatatypeProperty ;
+         rdfs:domain osco:Subnet ;
+         rdfs:range   xsd:string .
+ 
+osco:location  a     owl:ObjectProperty ;
+         rdfs:domain osco:ServiceContainer ;
+         rdfs:range  osco:Location .
+ 
+osco:MGMT_INTF  a    owl:DatatypeProperty ;
+         rdfs:domain osco:ssh ;
+         rdfs:range   xsd:string .
+ 
+osco:deployedOn  a          owl:ObjectProperty ;
+         rdfs:domain         omn:Resource ;
+         rdfs:range         osco:ServiceContainer ;
+         rdfs:subPropertyOf  omn:relatesTo .
+ 
+osco:minNumInst  a   owl:DatatypeProperty ;
+         rdfs:domain osco:ServiceContainer ;
+         rdfs:range   xsd:int .
+ 
+osco:ssh  a              owl:Class ;
+         rdfs:subClassOf  omn:Resource .
+ 
+osco:datacenter  a   owl:DatatypeProperty ;
+         rdfs:domain  [ owl:disjointUnionOf  (osco:Subnet osco:Image ) ] ;
+         rdfs:range   xsd:string .
+ 

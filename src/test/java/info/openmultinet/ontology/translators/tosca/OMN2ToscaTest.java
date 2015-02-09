@@ -73,7 +73,7 @@ public class OMN2ToscaTest {
 	private static void testTypes(final String topology) {
 		Assert.assertTrue(
 				"Should contain type definitions for parameters",
-				topology.contains("<xs:element name=\"port\" type=\"xs:integer\"/>"));
+				topology.contains("<xs:element name=\"parameter2\" type=\"xs:string\"/>"));
 	}
 
 	private static void testNodeTypes(final String topology) {
@@ -94,9 +94,9 @@ public class OMN2ToscaTest {
 		Assert.assertTrue("Should contain the properties set",
 				topology.contains("<osco:parameter2>bar</osco:parameter2>"));
 		Assert.assertTrue("Should contain the properties set",
-				topology.contains("<osco:port>8088</osco:port>"));
+				topology.contains("<osco:PORT>8088</osco:PORT>"));
 		Assert.assertTrue("Should contain the properties set",
-				topology.contains("<osco:test_param>foo</osco:test_param>"));
+				topology.contains("<osco:TEST_PARAM>foo</osco:TEST_PARAM>"));
 	}
 
 	private static void testRelationshipTemplates(final String topology) {

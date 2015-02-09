@@ -68,10 +68,10 @@ _:dummy1 rdf:type osco:dummy ,
         
         omn-lifecycle:hasID "dummy1"^^xsd:string ;     
         
-        osco:port 8088 ;
+        osco:PORT "8088"^^xsd:string ;
         
         osco:parameter2 "bar"^^xsd:string ;
         
-        osco:test_param "foo"^^xsd:string ;
+        osco:TEST_PARAM "foo"^^xsd:string ;
         
         :deployedOnContainer1 _:container1 .

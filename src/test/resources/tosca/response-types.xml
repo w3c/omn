@@ -43,11 +43,26 @@
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			attributeFormDefault="unqualified" elementFormDefault="qualified"
 			targetNamespace="http://opensdncore.org/ontology/">
+			<xs:element name="dummyProperties">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PORT" type="xs:string" />
+						<xs:element name="parameter2" type="xs:string" />
+						<xs:element name="parameter1" type="xs:string" />
+						<xs:element name="TEST_PARAM" type="xs:string" />
+						<xs:element name="nameserver" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://opensdncore.org/ontology/">
 			<xs:element name="sshProperties">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="key" type="xs:string" />
 						<xs:element name="MGMT_INTF" type="xs:string" />
+						<xs:element name="key" type="xs:string" />
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -62,6 +77,10 @@
 		<ValidTarget xmlns:osco="http://opensdncore.org/ontology/"
 			typeRef="osco:ServiceContainer" />
 	</RelationshipType>
+	<NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
+		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
+			element="osco:dummyProperties" />
+	</NodeType>
 	<NodeType name="ssh" targetNamespace="http://opensdncore.org/ontology/">
 		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
 			element="osco:sshProperties" />
