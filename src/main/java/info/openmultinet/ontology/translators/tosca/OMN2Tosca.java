@@ -22,8 +22,10 @@ import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -235,8 +237,8 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setInstanceStates(Resource nodeTypeResource, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    List<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDFS.subClassOf, Omn_lifecycle.State).toList();    
-    List<Resource> redundantStates = calculateRedundantResources(states);
+    Set<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDFS.subClassOf, Omn_lifecycle.State).toSet();
+    Set<Resource> redundantStates = calculateRedundantResources(states);
     states.removeAll(redundantStates);
     
     for(Resource state : states){
@@ -455,32 +457,32 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static Resource calculateInferredPropertyValue(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    List<Resource> inferredProperties = calculateInferredPropertyValues(resource, property);
+    Set<Resource> inferredProperties = calculateInferredPropertyValues(resource, property);
     if(inferredProperties.size() == 0){
       throw new RequiredResourceNotFoundException("No property "+property+" found for: "+resource);
     } else if(inferredProperties.size() == 1){
-      return inferredProperties.get(0);
+      return inferredProperties.iterator().next();
     } else {
       throw new MultiplePropertyValuesException("Multiple values where found but only one was expected for property "+property+" of "+resource+": "+inferredProperties);
     }
   }
   
-  private static List<Resource> calculateInferredPropertyValues(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    List<Resource> allProperties = new ArrayList<>();
+  private static Set<Resource> calculateInferredPropertyValues(Resource resource, Property property) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    Set<Resource> allProperties = new HashSet<Resource>();
     for(Statement propertyStatement : resource.listProperties(property).toList()){
       if(!propertyStatement.getResource().isAnon()){
         allProperties.add(propertyStatement.getResource());
       }
     }
 
-    List<Resource> redundantResources = calculateRedundantResources(allProperties);
+    Set<Resource> redundantResources = calculateRedundantResources(allProperties);
   
     allProperties.removeAll(redundantResources);
     return allProperties;
   }
   
-  private static List<Resource> calculateRedundantResources(List<Resource> resources){
-    List<Resource> redundantResources = new ArrayList<>();
+  private static Set<Resource> calculateRedundantResources(Set<Resource> resources){
+    Set<Resource> redundantResources = new HashSet<Resource>();
     for(Resource resource : resources){
       for(Resource resource2 : resources){
         if(resource.equals(OWL2.NamedIndividual) || resource.equals(Omn.Service)){
