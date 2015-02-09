@@ -39,10 +39,9 @@ public class Tosca2OMNTest {
     Assert.assertTrue("Should contain state resources", model.containsResource(Omn_lifecycle.State));
     Assert.assertTrue("Should contain state resources", model.containsResource(Omn_lifecycle.Ready));
     Assert.assertTrue("Should contain parameter resources", model.containsResource(Osco.parameter2));
-    Assert.assertTrue("port should be of range int", model.contains(Osco.port, RDFS.range, XSD.xint));
     Assert.assertTrue("parameter2 should be of range string", model.contains(Osco.parameter2, RDFS.range, XSD.xstring));
-    Assert.assertTrue("post should be of range int", model.contains(Osco.port, RDFS.range, XSD.xint));
-    Assert.assertTrue("Should contain the service properties", model.containsResource(Osco.test_param));
+    Assert.assertTrue("minNumInst should be of range int", model.contains(Osco.minNumInst, RDFS.range, XSD.xint));
+    Assert.assertTrue("Should contain the service properties", model.containsResource(Osco.TEST_PARAM));
   }
   
   @Test

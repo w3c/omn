@@ -5,9 +5,9 @@
             <xs:element name="dummyProperties">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="test_param" type="xs:string"/>
+                        <xs:element name="TEST_PARAM" type="xs:string"/>
                         <xs:element name="parameter2" type="xs:string"/>
-                        <xs:element name="port" type="xs:integer"/>
+                        <xs:element name="PORT" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -16,8 +16,8 @@
             <xs:element name="ServiceContainerProperties">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="maxNumInst" type="xs:integer"/>
-                        <xs:element name="minNumInst" type="xs:integer"/>
+                        <xs:element name="maxNumInst" type="xs:int"/>
+                        <xs:element name="minNumInst" type="xs:int"/>
                         <xs:element name="flavour" type="xs:string"/>
                         <xs:element name="location" type="Location">
                             <xs:complexType>
@@ -54,9 +54,9 @@
             <NodeTemplate name="dummy1" id="dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:dummyProperties>
-                        <osco:test_param>foo</osco:test_param>
+                        <osco:TEST_PARAM>foo</osco:TEST_PARAM>
                         <osco:parameter2>bar</osco:parameter2>
-                        <osco:port>8088</osco:port>
+                        <osco:PORT>8088</osco:PORT>
                     </osco:dummyProperties>
                 </Properties>
             </NodeTemplate>
@@ -102,10 +102,10 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Started"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Cleaned"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
         </InstanceStates>
     </NodeType>
     <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
@@ -122,14 +122,14 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Started"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Cleaned"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
         </InstanceStates>
     </NodeType>
     <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
-        <ValidSource typeRef="owl:Thing" xmlns:owl="http://www.w3.org/2002/07/owl/"/>
+        <ValidSource typeRef="omn:Resource" xmlns:omn="http://open-multinet.info/ontology/omn/"/>
         <ValidTarget typeRef="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
     </RelationshipType>
 </Definitions>
