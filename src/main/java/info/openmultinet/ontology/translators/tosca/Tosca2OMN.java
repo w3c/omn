@@ -396,8 +396,19 @@ public class Tosca2OMN extends AbstractConverter {
   }
 
   private static Resource createResourceFromQName(final QName qname, final Model model) {
+    createPrefixMappingFromQName(qname, model);
     String namespace = getRDFNamespace(qname.getNamespaceURI());
     return model.createResource(namespace + qname.getLocalPart());
+  }
+  
+  private static void createPrefixMappingFromQName(final QName qname, final Model model){
+    String prefix = qname.getPrefix();
+    String namespace = qname.getNamespaceURI();
+    if(prefix != null && !prefix.isEmpty()){
+      if(model.getNsPrefixURI(prefix) == null){
+        model.setNsPrefix(prefix, namespace);
+      }
+    }
   }
   
   private static String getURI(TEntityTemplate entityTemplate, String namespace) throws UnsupportedException{

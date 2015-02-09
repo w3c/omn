@@ -3,8 +3,8 @@
 	targetNamespace="http://open-multinet.info/ontology/examples/">
 	<ServiceTemplate>
 		<TopologyTemplate>
-			<NodeTemplate xmlns:ns2="http://opensdncore.org/ontology/"
-				name="ssh1" id="3287747968" type="ns2:ssh">
+			<NodeTemplate xmlns:osco="http://opensdncore.org/ontology/"
+				name="ssh1" id="3287747968" type="osco:ssh">
 				<Properties>
 					<osco:sshProperties xmlns:osco="http://opensdncore.org/ontology/">
 						<osco:MGMT_INTF>1</osco:MGMT_INTF>
