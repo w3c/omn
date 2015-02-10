@@ -58,7 +58,7 @@ public class DeliveryMechanism {
 			final String rspec = new AdvertisementConverter().getRSpec(model);
 			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(to)) {
-			final String rspec = ManifestConverter.getRSpec(model);
+			final String rspec = ManifestConverter.getRSpec(model, "localhost");
 			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.TOSCA.equalsIgnoreCase(to)) {
 			final String toplogy = OMN2Tosca.getTopology(model);

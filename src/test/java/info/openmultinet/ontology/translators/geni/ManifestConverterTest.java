@@ -62,7 +62,7 @@ public class ManifestConverterTest {
 		System.out.println("===============================");
 
 		final InfModel infModel = new Parser(model).getInfModel();
-		final String outputRspec = ManifestConverter.getRSpec(infModel);
+		final String outputRspec = ManifestConverter.getRSpec(infModel, "localhost");
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);
@@ -78,7 +78,7 @@ public class ManifestConverterTest {
 		Parser parser = new Parser(input);
 		
 		final Model model = parser.getInfModel();
-		final String rspec = ManifestConverter.getRSpec(model);
+		final String rspec = ManifestConverter.getRSpec(model, "localhost");
 		System.out.println(rspec);
 		Assert.assertTrue("should be a manifest",
 				rspec.contains("type=\"manifest\""));

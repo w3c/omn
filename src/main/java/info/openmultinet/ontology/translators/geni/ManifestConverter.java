@@ -11,6 +11,9 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -36,14 +39,14 @@ public class ManifestConverter extends AbstractConverter {
 	private static final Logger LOG = Logger.getLogger(ManifestConverter.class
 			.getName());
 
-	public static String getRSpec(final Model model) throws JAXBException,
+	public static String getRSpec(final Model model, String hostname) throws JAXBException,
 			InvalidModelException {
 		final RSpecContents manifest = new RSpecContents();
 		manifest.setType(RspecTypeContents.MANIFEST);
 		manifest.setGeneratedBy(AbstractConverter.VENDOR);
 		ManifestConverter.setGeneratedTime(manifest);
 
-		ManifestConverter.model2rspec(model, manifest);
+		ManifestConverter.model2rspec(model, manifest, hostname);
 		final JAXBElement<RSpecContents> rspec = new ObjectFactory()
 		.createRspec(manifest);
 		return AbstractConverter.toString(rspec,
@@ -64,7 +67,7 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void model2rspec(final Model model,
-			final RSpecContents manifest) throws InvalidModelException {
+			final RSpecContents manifest, String hostname) throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Topology).toList();
 		AbstractConverter.validateModel(groups);
@@ -73,16 +76,16 @@ public class ManifestConverter extends AbstractConverter {
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
-		ManifestConverter.convertStatementsToNodesAndLinks(manifest, resources);
+		ManifestConverter.convertStatementsToNodesAndLinks(manifest, resources, hostname);
 	}
 
 	private static void convertStatementsToNodesAndLinks(
-			final RSpecContents manifest, final List<Statement> resources) {
+			final RSpecContents manifest, final List<Statement> resources, String hostname) {
 
 		for (final Statement resource : resources) {
 			final NodeContents node = new NodeContents();
 
-			ManifestConverter.setComponentDetails(resource, node);
+			ManifestConverter.setComponentDetails(resource, node, hostname);
 			ManifestConverter.setComponentManagerId(resource, node);
 
 			manifest.getAnyOrNodeOrLink().add(
@@ -91,7 +94,7 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void setComponentDetails(final Statement resource,
-			final NodeContents node) {
+			final NodeContents node, String hostname) {
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
 			node.setClientId(resource.getResource().getProperty(Omn_lifecycle.hasID).getString());
 		}
@@ -102,8 +105,16 @@ public class ManifestConverter extends AbstractConverter {
 			node.setExclusive(resource.getResource().getProperty(Omn_resource.isExclusive).getBoolean());
 		}
 		
-		node.setSliverId(resource.getResource().getURI());
+		node.setSliverId(generateSliverID(hostname, resource.getResource().getURI()));
 		node.setComponentName(resource.getResource().getLocalName());
+	}
+	
+	public static String generateSliverID(String hostname, String uri) {
+		try {
+			return "urn:publicid:IDN+"+hostname+"+sliver+" + URLEncoder.encode(uri,StandardCharsets.UTF_8.toString());
+		} catch (UnsupportedEncodingException e) {
+			return uri;
+		}
 	}
 
 	private static void setComponentManagerId(final Statement resource,
