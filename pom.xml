@@ -169,15 +169,13 @@
 							<output>src/main/java/</output>
 							<package-name>info.openmultinet.ontology.vocabulary</package-name>
 							<ontology>true</ontology>
-						</source>
-						<!-- TODO: we might want to change this
+						</source>						
 						<source>
               <input>src/test/resources/ontologies/osco.ttl</input>
               <output>src/test/java/</output>
               <package-name>info.openmultinet.ontology.vocabulary</package-name>
               <ontology>true</ontology>
             </source>
-             -->
 					</fileOptions>
 					<owl>true</owl>
 					<inference>true</inference>
