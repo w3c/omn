@@ -11,14 +11,33 @@
 :namedTopology3 rdf:type omn:Topology ,
                          owl:NamedIndividual ;
                 
-                omn:hasResource _:container1 ,
-                                _:ssh1 .
+                omn:hasResource _:m2mGWContainer ,
+                                _:gw1 ,
+                                _:m2mServerContainer ,
+                                _:server1 .
 
 
-_:container1 rdf:type osco:ServiceContainer ,
+_:m2mGWContainer rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
                      
-            omn-lifecycle:hasID "container1"^^xsd:string ;     
+            omn-lifecycle:hasID "m2mGWContainer"^^xsd:string ;     
+                     
+            osco:image _:image1 ;
+            
+            osco:subnet _:subnet1 ;
+            
+            osco:location _:berlin ;
+            
+            osco:flavour "1024MB_10GB"^^xsd:string ;
+            
+            osco:minNumInst 1 ;
+            
+            osco:maxNumInst 1 .
+
+_:m2mServerContainer rdf:type osco:ServiceContainer ,
+                     owl:NamedIndividual ;
+                     
+            omn-lifecycle:hasID "m2mServerContainer"^^xsd:string ;     
                      
             osco:image _:image1 ;
             
@@ -59,15 +78,44 @@ _:subnet1 rdf:type osco:Subnet ,
          osco:floatingIp "random"^^xsd:string .
 
 
-:deployedOnContainer1 rdf:type osco:deployedOn ,
+:deployedOnGWContainer rdf:type osco:deployedOn ,
+                               owl:NamedIndividual .
+
+:deployedOnServerContainer rdf:type osco:deployedOn ,
                                owl:NamedIndividual .
 
 
-_:ssh1 rdf:type osco:ssh ,
+_:gw1 rdf:type osco:m2m_gateway ,
                  owl:NamedIndividual ;
                  
-        omn-lifecycle:hasID "ssh1"^^xsd:string ;   
+        omn-lifecycle:hasID "gw1"^^xsd:string ;   
         
-        osco:key "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnoogBCzdExUWu74nqt68cbRdTFKiieLapshL83+rpoFw4pJVDfVu/+I15sZ77KVxetgfYxvOGAPDjr/8xTO8A32hqXXMxWoLGUgVyhV0smUbSIX+hDc0xudbRl/Isl8St/0JylM0uiruhETDkMuAqCXBXZZHqZyu4PfV1tetmOA1gPI7l6Iy7HotCVu6lmz562ovYA0zUWIyn/oakjGD4Z2+gtaJjZSooBzn4XSMgcWGb8ayuk5tirxR+TNlycu0xXe9v4voRAoNzukSNZvAQ/b6TCjHG1+B8eNnBCNipnJPb+IPIwr09YAoZCLhaBH/L3IBbHL2YVmUOBQH30/bX mitja@mitja-thinkpad"^^xsd:string ;
+        osco:MGMT_INTF      "1"^^xsd:string ;   
+
+        osco:SERVICE_PORT   "0"^^xsd:string ;   
+
+        osco:APP_PORT       "12345"^^xsd:string ;   
+
+        osco:REQUIRE_AUTH   "false"^^xsd:string ;   
+
+        osco:LOGGING_FILE   "null"^^xsd:string ;   
+
+        :deployedOnGWContainer _:m2mGWContainer .
+
+
+_:server1 rdf:type osco:m2m_server ,
+                 owl:NamedIndividual ;
+                 
+        omn-lifecycle:hasID "server1"^^xsd:string ;   
         
-        :deployedOnContainer1 _:container1 .
+        osco:MGMT_INTF      "1"^^xsd:string ;   
+
+        osco:SERVICE_PORT   "0"^^xsd:string ;   
+
+        osco:APP_PORT       "15000"^^xsd:string ;   
+
+        osco:REQUIRE_AUTH   "false"^^xsd:string ;   
+
+        osco:LOGGING_FILE   "null"^^xsd:string ;   
+
+        :deployedOnServerContainer _:m2mServerContainer .
