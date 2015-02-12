@@ -84,4 +84,33 @@ public class ManifestConverterTest {
 				rspec.contains("type=\"manifest\""));
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
+
+	@Test
+	public void testPaperRoundtrip() throws JAXBException, IOException, InvalidModelException {
+		final String filename = "/geni/manifest/manifest_paper2015.xml";
+		final InputStream inputRspec = ManifestConverterTest.class
+				.getResourceAsStream(filename);
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(AbstractConverter.toString(filename));
+		System.out.println("===============================");
+
+		final Model model = ManifestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Manifest);
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
+		Assert.assertTrue("should have a topology", topology.hasNext());
+
+		final InfModel infModel = new Parser(model).getInfModel();
+		final String outputRspec = ManifestConverter.getRSpec(infModel, "localhost");
+		System.out.println("Generated this rspec:");
+		System.out.println("===============================");
+		System.out.println(outputRspec);
+		System.out.println("===============================");
+
+	}
+
 }

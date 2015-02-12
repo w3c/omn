@@ -30,6 +30,22 @@ public class RequestConverterTest {
 		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
 				Omn_lifecycle.Request);
 		Assert.assertTrue("should have a topology", topology.hasNext());
+	}
+
+	@Test
+	public void testConvertingBoundRspec2Graph() throws JAXBException, InvalidModelException {
+		final InputStream rspec = RequestConverterTest.class
+				.getResourceAsStream("/geni/request/request_bound.xml");
+		final Model model = RequestConverter.getModel(rspec);
+		final String rspecOut = Parser.toString(model);
+		
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(rspecOut);
+		System.out.println("===============================");
+		
+		Assert.assertTrue("should have an 'implementedBy' property", rspecOut.contains("implementedBy"));
+		Assert.assertTrue("should reflect the sliver type", rspecOut.contains("raw-pc"));
 
 	}
 
@@ -76,5 +92,34 @@ public class RequestConverterTest {
 
         Assert.assertEquals(resourceIterator.nextResource().getProperty(RDF.type).getObject().asResource().getURI(), "raw-pc");
     }
+
+	@Test
+	public void testConvertingPaperRspecRoundtrip() throws JAXBException,
+			InvalidModelException, IOException {
+		final String filename = "/geni/request/request_paper2015.xml";
+		final InputStream inputRspec = RequestConverterTest.class
+				.getResourceAsStream(filename);
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(AbstractConverter.toString(filename));
+		System.out.println("===============================");
+
+		final Model model = RequestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Request);
+		Assert.assertTrue("should have a topology", topology.hasNext());
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
+
+		final InfModel infModel = new Parser(model).getInfModel();
+		final String outputRspec = RequestConverter.getRSpec(infModel);
+		System.out.println("Generated this rspec:");
+		System.out.println("===============================");
+		System.out.println(outputRspec);
+		System.out.println("===============================");
+		Assert.assertTrue("Should have a sliver_type", outputRspec.contains("sliver_type"));
+	}
 
 }
