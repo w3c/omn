@@ -105,9 +105,10 @@ public class Tosca2OMN extends AbstractConverter {
       if(element instanceof TNodeType){
         TNodeType nodeType = (TNodeType) element;
         QName propertiesRef = nodeType.getPropertiesDefinition().getElement();
-        if(propertyRef.equals(propertiesRef.getNamespaceURI()+propertiesRef.getLocalPart())){
-          String namespace = getRDFNamespace(nodeType.getTargetNamespace());
-          Resource nodeTypeResource = model.createResource(namespace + nodeType.getName());
+        String propertiesNamespace = getRDFNamespace(propertiesRef.getNamespaceURI());
+        if(propertyRef.equals(propertiesNamespace+propertiesRef.getLocalPart())){
+          String nodeNamespace = getRDFNamespace(nodeType.getTargetNamespace());
+          Resource nodeTypeResource = model.createResource(nodeNamespace + nodeType.getName());
           types.add(nodeTypeResource);
         }
       }
