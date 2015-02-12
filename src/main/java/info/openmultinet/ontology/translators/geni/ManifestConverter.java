@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +32,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.stream.StreamSource;
+
+import org.apache.xerces.dom.ElementNSImpl;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -179,33 +182,44 @@ public class ManifestConverter extends AbstractConverter {
 
 		Resource topology = model.getResource(AbstractConverter.NAMESPACE + "manifest");
 		
-		
 		for (Object o : manifest.getAnyOrNodeOrLink()) {
-			JAXBElement<?> element = (JAXBElement<?>) o;
+			if (o instanceof JAXBElement) {
+				setDetails(model, topology, o);
+			} else {
+				ManifestConverter.LOG.log(Level.INFO, "Found unknown extsion: "+ o);
+			}
+		}
+
+	}
+
+	public static void setDetails(final Model model, Resource topology, Object o) {
+		JAXBElement<?> element = (JAXBElement<?>) o;
+		
+		if (element.getDeclaredType().equals(NodeContents.class)) {
+			NodeContents node = (NodeContents) element.getValue();
 			
-			if (element.getDeclaredType().equals(NodeContents.class)) {
-				NodeContents node = (NodeContents) element.getValue();
-				
-				final Resource omnResource = model
-						.createResource(parseSliverID(node.getSliverId()));
-				
-				omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
-				
-				
-				for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
+			final Resource omnResource = model
+					.createResource(parseSliverID(node.getSliverId()));
+			
+			omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
+			
+			
+			for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
+				if (nodeDetailObject instanceof JAXBElement) {
 					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
 					if (nodeDetailElement.getDeclaredType().equals(NodeContents.SliverType.class)) {
 						NodeContents.SliverType sliverType = (NodeContents.SliverType) nodeDetailElement.getValue();
 						omnResource.addProperty(RDF.type, sliverType.getName());
-					}
-						
+					}							
+				} else {
+					ManifestConverter.LOG.log(Level.INFO, "Found unknown extsion: "+ nodeDetailObject);
 				}
-				
-				Resource foo = model.createResource(node.getComponentId());
-				omnResource.addProperty(Omn_lifecycle.implementedBy, foo);
-				
-				topology.addProperty(Omn.hasResource, omnResource);
 			}
+			
+			Resource foo = model.createResource(node.getComponentId());
+			omnResource.addProperty(Omn_lifecycle.implementedBy, foo);
+			
+			topology.addProperty(Omn.hasResource, omnResource);
 		}
 	}
 
