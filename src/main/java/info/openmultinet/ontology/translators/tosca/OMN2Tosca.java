@@ -37,6 +37,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -96,7 +98,10 @@ public class OMN2Tosca extends AbstractConverter {
       Resource nodeResource = resourceIterator.next().getResource();
       Resource nodeTypeResource = calculateInferredPropertyValue(nodeResource, RDF.type);
       
-      definitionsContent.add(createNodeType(nodeTypeResource));
+      TNodeType nodeType = createNodeType(nodeTypeResource);
+      if(!containsNodeTypeWithName(definitionsContent, nodeType)){
+        definitionsContent.add(nodeType);
+      }
       
       nodesAndRelationshipTemplates.add(createNodeTemplate(nodeResource, nodeTypeResource, types));
     }
@@ -110,9 +115,29 @@ public class OMN2Tosca extends AbstractConverter {
         nodesAndRelationshipTemplates.add(relationshipTemplate);
         
         TRelationshipType relationshipType = createRelationshipType(relationshipTemplate, model);
-        definitionsContent.add(relationshipType);
+        if(!containsRelationshipTypeWithName(definitionsContent, relationshipType)){
+          definitionsContent.add(relationshipType);
+        }
       }
     }
+  }
+
+  private static boolean containsNodeTypeWithName(List<TExtensibleElements> definitionsContent, TNodeType nodeType) {
+    for(TExtensibleElements element : definitionsContent){
+      if(element instanceof TNodeType && nodeType.getName().equals(((TNodeType) element).getName())){
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  private static boolean containsRelationshipTypeWithName(List<TExtensibleElements> definitionsContent, TRelationshipType relationshipType) {
+    for(TExtensibleElements element : definitionsContent){
+      if(element instanceof TRelationshipType && relationshipType.getName().equals(((TRelationshipType) element).getName())){
+        return true;
+      }
+    }
+    return false;
   }
   
   private static void setTargetNamespaceAndName(TDefinitions definitions, Model model) throws MultipleNamespacesException{
@@ -153,7 +178,21 @@ public class OMN2Tosca extends AbstractConverter {
     return targetNamespace;
   }
   
-  private static Element createTypes(Resource nodeType, List<Object> types) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+  private static Element createTypes(Resource nodeType, List<Object> types) throws RequiredResourceNotFoundException, MultiplePropertyValuesException, PropertiesTypesAlreadyExistsException{
+    for(Object type : types){
+      if(type instanceof Element){
+        Element typeElement = (Element) type;
+        NodeList propertyElements = typeElement.getElementsByTagName("xs:element");
+        for(int i = 0; i < propertyElements.getLength(); i++){
+          Node propertyElement = propertyElements.item(i);
+          String propertiesName = propertyElement.getAttributes().getNamedItem("name").getNodeValue();
+          if(getNodeTypePropertiesName(nodeType).equals(propertiesName)){
+            throw new PropertiesTypesAlreadyExistsException();
+          }
+        }
+      }
+    }
+    
     Document doc = createDocument();
     
     Element schema = doc.createElement("xs:schema");
@@ -264,6 +303,7 @@ public class OMN2Tosca extends AbstractConverter {
       nodeTemplate.setProperties(properties);
     } catch (NoPropertiesFoundException e) {
       LOG.log(Level.INFO, "No properties found for node "+node.getURI());
+    } catch (PropertiesTypesAlreadyExistsException e) {
     }
     
     return nodeTemplate;
@@ -294,7 +334,7 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  private static Element createNodePropertiesAndTypes(Resource node, Resource nodeType, TNodeTemplate nodeTemplate, List<Object> types) throws NoPropertiesFoundException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
+  private static Element createNodePropertiesAndTypes(Resource node, Resource nodeType, TNodeTemplate nodeTemplate, List<Object> types) throws NoPropertiesFoundException, RequiredResourceNotFoundException, MultiplePropertyValuesException, PropertiesTypesAlreadyExistsException {
     Element propertiesSeq = createTypes(nodeType, types);
     
     Document doc = createDocument();
@@ -540,6 +580,15 @@ public class OMN2Tosca extends AbstractConverter {
     private static final long serialVersionUID = -4379252875775867346L;
 
     public NoPropertiesFoundException(){
+      super();
+    }
+  }
+  
+  public static class PropertiesTypesAlreadyExistsException extends Exception{
+    
+    private static final long serialVersionUID = 4552306313139023932L;
+
+    public PropertiesTypesAlreadyExistsException(){
       super();
     }
   }

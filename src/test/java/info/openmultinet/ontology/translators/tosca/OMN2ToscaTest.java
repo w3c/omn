@@ -59,6 +59,30 @@ public class OMN2ToscaTest {
     testGeneralToscaDefinitions(topology);
   }
 
+	@Test
+  public void testConvertOpenMTCTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
+      RequiredResourceNotFoundException, MultiplePropertyValuesException {
+    InputStream input = getClass().getResourceAsStream("/omn/tosca-request-m2m-gateway-and-server.ttl");
+    Parser parser = new Parser(input, additionalOntologies);
+    
+    final InfModel model = parser.getInfModel();
+    final String topology = OMN2Tosca.getTopology(model);
+    System.out.println(topology);
+
+    testGeneralToscaDefinitions(topology);
+    String containerTypes = "<xs:element name=\"ServiceContainerProperties\">";
+    Assert.assertTrue("Should contain the container node properties type", topology.contains(containerTypes));
+    Assert.assertTrue("Should not contain twice the same types", topology.lastIndexOf(containerTypes) == topology.indexOf(containerTypes));
+    
+    String containerNodeType = "<NodeType name=\"ServiceContainer\" targetNamespace=\"http://opensdncore.org/ontology/\"";
+    Assert.assertTrue("Should contain the container node type", topology.contains(containerNodeType));
+    Assert.assertTrue("Should not contain twice the same node type", topology.lastIndexOf(containerNodeType) == topology.indexOf(containerNodeType));
+    
+    String relationshipType = "<RelationshipType name=\"deployedOn\" targetNamespace=\"http://opensdncore.org/ontology/\">";
+    Assert.assertTrue("Should contain the deployedOn relationship type", topology.contains(relationshipType));
+    Assert.assertTrue("Should not contain twice the same relationship type", topology.lastIndexOf(relationshipType) == topology.indexOf(relationshipType));
+  }
+	
 	private static void testGeneralToscaDefinitions(final String topology) {
 		Assert.assertTrue("Should be a tosca XML",
 				topology.contains("<Definitions"));
