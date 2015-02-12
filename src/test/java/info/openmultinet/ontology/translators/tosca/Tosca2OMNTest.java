@@ -92,6 +92,16 @@ public class Tosca2OMNTest {
     Assert.assertTrue("Should contain the floating IP", serializedModel.contains("130.149.247.218"));
   }
   
+  @Test
+  public void testConvertOpenMTCRequest() throws JAXBException, InvalidModelException, UnsupportedException {
+    InputStream input = getClass().getResourceAsStream("/tosca/request-m2m-server-and-gw.xml");
+    
+    final Model model = Tosca2OMN.getModel(input);
+    
+    final String serializedModel = Tosca2OMNTest.serializeModel(model, "TTL");
+    System.out.println(serializedModel);
+  }
+  
   public static String serializeModel(final Model rdfModel, final String serialization) {
     final StringWriter writer = new StringWriter();
     rdfModel.write(writer, serialization);

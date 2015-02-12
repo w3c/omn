@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Definitions name="http://open-multinet.info/ontology/examples/" targetNamespace="http://open-multinet.info/ontology/examples/" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
+    <Types>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="m2m_serverProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LOGGING_FILE" type="xs:string"/>
+                        <xs:element name="REQUIRE_AUTH" type="xs:string"/>
+                        <xs:element name="APP_PORT" type="xs:string"/>
+                        <xs:element name="SERVICE_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="ServiceContainerProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="maxNumInst" type="xs:int"/>
+                        <xs:element name="minNumInst" type="xs:int"/>
+                        <xs:element name="flavour" type="xs:string"/>
+                        <xs:element name="location" type="Location">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="subnet" type="Subnet">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="floatingIp" type="xs:string"/>
+                                    <xs:element name="mgmt" type="xs:boolean"/>
+                                    <xs:element name="datacenter" type="xs:string"/>
+                                    <xs:element name="name" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="image" type="Image">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="id" type="xs:string"/>
+                                    <xs:element name="datacenter" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="m2m_gatewayProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LOGGING_FILE" type="xs:string"/>
+                        <xs:element name="REQUIRE_AUTH" type="xs:string"/>
+                        <xs:element name="APP_PORT" type="xs:string"/>
+                        <xs:element name="SERVICE_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </Types>
+    <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3" name="namedTopology3">
+        <TopologyTemplate>
+            <NodeTemplate name="server1" id="server1" type="osco:m2m_server" xmlns:osco="http://opensdncore.org/ontology/">
+                <Properties>
+                    <osco:m2m_serverProperties>
+                        <osco:LOGGING_FILE>null</osco:LOGGING_FILE>
+                        <osco:REQUIRE_AUTH>false</osco:REQUIRE_AUTH>
+                        <osco:APP_PORT>15000</osco:APP_PORT>
+                        <osco:SERVICE_PORT>0</osco:SERVICE_PORT>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                    </osco:m2m_serverProperties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="m2mServerContainer" id="m2mServerContainer" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+                <Properties>
+                    <osco:ServiceContainerProperties>
+                        <osco:maxNumInst>1</osco:maxNumInst>
+                        <osco:minNumInst>1</osco:minNumInst>
+                        <osco:flavour>1024MB_10GB</osco:flavour>
+                        <osco:location>
+                            <osco:name>Berlin</osco:name>
+                        </osco:location>
+                        <osco:subnet>
+                            <osco:floatingIp>random</osco:floatingIp>
+                            <osco:mgmt>true</osco:mgmt>
+                            <osco:datacenter>AV-Openstack</osco:datacenter>
+                            <osco:name>trescimo-net</osco:name>
+                        </osco:subnet>
+                        <osco:image>
+                            <osco:id>a498303c-5d09-4cd2-ab77-faf187eb9192</osco:id>
+                            <osco:datacenter>AV-Openstack</osco:datacenter>
+                        </osco:image>
+                    </osco:ServiceContainerProperties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="gw1" id="gw1" type="osco:m2m_gateway" xmlns:osco="http://opensdncore.org/ontology/">
+                <Properties>
+                    <osco:m2m_gatewayProperties>
+                        <osco:LOGGING_FILE>null</osco:LOGGING_FILE>
+                        <osco:REQUIRE_AUTH>false</osco:REQUIRE_AUTH>
+                        <osco:APP_PORT>12345</osco:APP_PORT>
+                        <osco:SERVICE_PORT>0</osco:SERVICE_PORT>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                    </osco:m2m_gatewayProperties>
+                </Properties>
+            </NodeTemplate>
+            <NodeTemplate name="m2mGWContainer" id="m2mGWContainer" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
+            <RelationshipTemplate name="deployedOnServerContainer" id="http://open-multinet.info/ontology/examples/deployedOnServerContainer" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="server1"/>
+                <TargetElement ref="m2mServerContainer"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="deployedOnGWContainer" id="http://open-multinet.info/ontology/examples/deployedOnGWContainer" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="gw1"/>
+                <TargetElement ref="m2mGWContainer"/>
+            </RelationshipTemplate>
+        </TopologyTemplate>
+    </ServiceTemplate>
+    <NodeType name="m2m_server" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:m2m_serverProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Active"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Ready"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Error"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Preinit"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Removing"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopped"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Updating"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Started"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Cleaned"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:ServiceContainerProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Active"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Ready"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Error"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Preinit"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Removing"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopped"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Updating"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Started"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Cleaned"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="m2m_gateway" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:m2m_gatewayProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Active"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Ready"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Error"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Preinit"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Removing"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopped"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Updating"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Started"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Cleaned"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+        </InstanceStates>
+    </NodeType>
+    <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
+        <ValidSource typeRef="omn:Resource" xmlns:omn="http://open-multinet.info/ontology/omn/"/>
+        <ValidTarget typeRef="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
+    </RelationshipType>
+</Definitions>
+
