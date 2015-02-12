@@ -31,7 +31,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ManifestConverterTest {
 
 	@Test
-	public void testConvertingSimpleRSpecToGraph() throws JAXBException,
+	public void testConvertingComplexRSpecToGraph() throws JAXBException,
 			InvalidModelException {
 		final InputStream rspec = ManifestConverterTest.class
 				.getResourceAsStream("/geni/manifest/exogeni5nodemanifest.xml");
@@ -40,6 +40,10 @@ public class ManifestConverterTest {
 				Omn_lifecycle.Manifest);
 		Assert.assertTrue("should have a topology (manifest)",
 				topology.hasNext());
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
 	}
 
 	@Test

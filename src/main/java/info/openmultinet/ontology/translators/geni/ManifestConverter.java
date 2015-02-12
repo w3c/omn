@@ -125,7 +125,7 @@ public class ManifestConverter extends AbstractConverter {
 		if (resource.getResource().hasProperty(RDF.type)) {
 			SliverType value = new ObjectFactory().createNodeContentsSliverType();
 			value.setName(resource.getResource()
-					.getProperty(RDF.type).getString());
+					.getProperty(RDF.type).getObject().toString());
 			
 			JAXBElement<SliverType> sliverType = new ObjectFactory().createNodeContentsSliverType(value );
 			node.getAnyOrRelationOrLocation().add(sliverType);
