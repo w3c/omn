@@ -66,6 +66,11 @@ osco:deployedOn  a          owl:ObjectProperty ;
         rdfs:range          osco:ServiceContainer ;
         rdfs:subPropertyOf  omn:relatesTo .
 
+osco:requires  a            owl:ObjectProperty ;
+        rdfs:domain         omn:Resource ;
+        rdfs:range          omn:Resource ;
+        rdfs:subPropertyOf  omn:relatesTo .
+
 osco:m2m_server  a       owl:Class ;
         rdfs:subClassOf  omn:Resource .
 

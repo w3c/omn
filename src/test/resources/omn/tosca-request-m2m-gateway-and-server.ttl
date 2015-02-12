@@ -84,6 +84,8 @@ _:subnet1 rdf:type osco:Subnet ,
 :deployedOnServerContainer rdf:type osco:deployedOn ,
                                owl:NamedIndividual .
 
+:requiresGW rdf:type osco:requires, 
+                             owl:NamedIndividual .
 
 _:gw1 rdf:type osco:m2m_gateway ,
                  owl:NamedIndividual ;
@@ -118,4 +120,8 @@ _:server1 rdf:type osco:m2m_server ,
 
         osco:LOGGING_FILE   "null"^^xsd:string ;   
 
+        :requiresGW         _:gw1 ;
+
         :deployedOnServerContainer _:m2mServerContainer .
+
+
