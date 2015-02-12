@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
@@ -12,12 +13,15 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -30,6 +34,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -89,7 +94,7 @@ public class ManifestConverter extends AbstractConverter {
 			final NodeContents node = new NodeContents();
 
 			ManifestConverter.setComponentDetails(resource, node, hostname);
-			ManifestConverter.setComponentManagerId(resource, node);
+			//ManifestConverter.setComponentManagerId(resource, node);
 
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
@@ -103,18 +108,29 @@ public class ManifestConverter extends AbstractConverter {
 					.getProperty(Omn_lifecycle.hasID).getString());
 		}
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
-			node.setComponentId(resource.getResource()
-					.getProperty(Omn_lifecycle.implementedBy).getObject()
-					.toString());
+			RDFNode implementedBy = resource.getResource()
+					.getProperty(Omn_lifecycle.implementedBy).getObject();
+			
+			node.setComponentId(implementedBy.toString());
+			node.setComponentName(implementedBy.asNode().getLocalName());
 		}
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
 			node.setExclusive(resource.getResource()
 					.getProperty(Omn_resource.isExclusive).getBoolean());
 		}
 
+		if (resource.getResource().hasProperty(RDF.type)) {
+			SliverType value = new ObjectFactory().createNodeContentsSliverType();
+			value.setName(resource.getResource()
+					.getProperty(RDF.type).getString());
+			
+			JAXBElement<SliverType> sliverType = new ObjectFactory().createNodeContentsSliverType(value );
+			node.getAnyOrRelationOrLocation().add(sliverType);
+		}
+		
 		node.setSliverId(generateSliverID(hostname, resource.getResource()
 				.getURI()));
-		node.setComponentName(resource.getResource().getLocalName());
+		
 	}
 
 	public static String generateSliverID(String hostname, String uri) {
@@ -123,6 +139,20 @@ public class ManifestConverter extends AbstractConverter {
 					+ URLEncoder.encode(uri, StandardCharsets.UTF_8.toString());
 		} catch (UnsupportedEncodingException e) {
 			return uri;
+		}
+	}
+
+	public static String parseSliverID(String sliverID) {
+		try {
+			Pattern pattern = Pattern.compile("\\+sliver\\+(.*)");
+			Matcher matcher = pattern.matcher(sliverID);
+			if (matcher.find()) {
+			    return URLDecoder.decode(matcher.group(1), StandardCharsets.UTF_8.toString());
+			} else {
+				return sliverID;
+			}
+		} catch (UnsupportedEncodingException e) {
+			return sliverID;
 		}
 	}
 
@@ -157,9 +187,23 @@ public class ManifestConverter extends AbstractConverter {
 				NodeContents node = (NodeContents) element.getValue();
 				
 				final Resource omnResource = model
-						.createResource(AbstractConverter.NAMESPACE
-								+ node.getClientId());
+						.createResource(parseSliverID(node.getSliverId()));
+				
 				omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
+				
+				
+				for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
+					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
+					if (nodeDetailElement.getDeclaredType().equals(NodeContents.SliverType.class)) {
+						NodeContents.SliverType sliverType = (NodeContents.SliverType) nodeDetailElement.getValue();
+						omnResource.addProperty(RDF.type, sliverType.getName());
+					}
+						
+				}
+				
+				Resource foo = model.createResource(node.getComponentId());
+				omnResource.addProperty(Omn_lifecycle.implementedBy, foo);
+				
 				topology.addProperty(Omn.hasResource, omnResource);
 			}
 		}

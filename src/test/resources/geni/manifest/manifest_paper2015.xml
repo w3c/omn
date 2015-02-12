@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd "
 	type="manifest">
 	<node 
-	    component_manager_id="urn:publicid:IDN+test.bed.name+authority+cm"
-        component_id="urn:publicid:IDN+test.bed.name+node+aMotorGarage"
+	    component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
+        component_id="http://testbed.example.org/resources/motorgarage-1"
 		client_id="myMotor"
-		sliver_id="urn:publicid:IDN+test.bed+sliver+theSliverID">
+		sliver_id="urn:publicid:IDN+testbed.example.org+sliver+http%3A%2F%2Ftestbed.example.org%2Fmotorgarage-1%2Fmotor-1">
 		<sliver_type name="http://open-multinet.info/ontology/resources/motor#Motor" />
 	</node>
 </rspec>
