@@ -447,12 +447,12 @@ public class Tosca2OMN extends AbstractConverter {
     relationshipTypeResource.addProperty(RDFS.domain, source);
   }
   
-  private static String getRDFNamespace(String namespace){
-    if(namespace == null){
+  protected static String getRDFNamespace(String namespace){
+    if(namespace == null || namespace.isEmpty()){
       return "";
     }
     if(!(namespace.endsWith("/") || namespace.endsWith("#"))){
-      namespace = namespace.concat("/");
+      namespace = namespace.concat("#");
     }
     return namespace;
   }
@@ -468,7 +468,7 @@ public class Tosca2OMN extends AbstractConverter {
     String namespace = qname.getNamespaceURI();
     if(prefix != null && !prefix.isEmpty()){
       if(model.getNsPrefixURI(prefix) == null){
-        model.setNsPrefix(prefix, namespace);
+        model.setNsPrefix(prefix, getRDFNamespace(namespace));
       }
     }
   }

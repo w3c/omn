@@ -147,7 +147,7 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static String getXMLNamespace(String namespace){
-    return namespace.replace("#", "/");
+    return namespace.replace("#", "");
   }
   
   private static String getXMLNamespace(Resource resource){
@@ -482,14 +482,15 @@ public class OMN2Tosca extends AbstractConverter {
     relationshipType.setName(type.getLocalPart());
     relationshipType.setTargetNamespace(type.getNamespaceURI());
     
-    Resource relationshipTypeResource = model.getResource(type.getNamespaceURI()+type.getLocalPart());
+    String namespace = Tosca2OMN.getRDFNamespace(type.getNamespaceURI());
+    Resource relationshipTypeResource = model.getResource(namespace+type.getLocalPart());
     setValidSource(relationshipType, relationshipTypeResource);
     setValidTarget(relationshipType, relationshipTypeResource);
     return relationshipType;
   }
 
   private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
-    Resource source = calculateInferredPropertyValue(relationshipTypeResource, (RDFS.domain));
+    Resource source = calculateInferredPropertyValue(relationshipTypeResource, RDFS.domain);
     String namespace = getXMLNamespace(source);
     QName typeRef;
     try {
