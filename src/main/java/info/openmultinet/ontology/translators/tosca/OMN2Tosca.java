@@ -154,15 +154,14 @@ public class OMN2Tosca extends AbstractConverter {
     return getXMLNamespace(resource.getNameSpace());
   }
   
-  private static String getNSPrefix(Resource resource){
+  private static String getNSPrefix(Resource resource) throws NoPrefixMappingFoundException{
     Map<String, String> prefixMap = resource.getModel().getNsPrefixMap();
     for(Map.Entry<String, String> mapping : prefixMap.entrySet()){
       if(mapping.getValue().equals(resource.getNameSpace())){
         return mapping.getKey();
       }
     }
-    //TODO:
-    return "";
+    throw new NoPrefixMappingFoundException();
   }
   
   private static String getTopologiesNamespace(Model model) throws MultipleNamespacesException{
@@ -267,8 +266,12 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setNodeTypeProperties(Resource nodeTypeResource, TNodeType nodeType){
     PropertiesDefinition nodeTypeProperties = objFactory.createTEntityTypePropertiesDefinition();
     String nodeTypeNameSpace = getXMLNamespace(nodeTypeResource);
-    String nodeTypePrefix = getNSPrefix(nodeTypeResource);
-    QName propertiesReference = new QName(nodeTypeNameSpace, getNodeTypePropertiesName(nodeTypeResource), nodeTypePrefix);
+    QName propertiesReference;
+    try {
+      propertiesReference = new QName(nodeTypeNameSpace, getNodeTypePropertiesName(nodeTypeResource), getNSPrefix(nodeTypeResource));
+    } catch (NoPrefixMappingFoundException e) {
+      propertiesReference = new QName(nodeTypeNameSpace, getNodeTypePropertiesName(nodeTypeResource));
+    }
     nodeTypeProperties.setElement(propertiesReference);
     nodeType.setPropertiesDefinition(nodeTypeProperties);
   }
@@ -315,8 +318,12 @@ public class OMN2Tosca extends AbstractConverter {
     nodeTemplate.setId(name);
     
     String nodeTypeNameSpace = getXMLNamespace(nodeTypeResource);
-    String nodeTypePrefix = getNSPrefix(nodeTypeResource);
-    QName type = new QName(nodeTypeNameSpace, nodeTypeResource.getLocalName(), nodeTypePrefix);
+    QName type;
+    try {
+      type = new QName(nodeTypeNameSpace, nodeTypeResource.getLocalName(), getNSPrefix(nodeTypeResource));
+    } catch (NoPrefixMappingFoundException e) {
+      type = new QName(nodeTypeNameSpace, nodeTypeResource.getLocalName());
+    }
     nodeTemplate.setType(type);
   }
   
@@ -340,11 +347,15 @@ public class OMN2Tosca extends AbstractConverter {
     Document doc = createDocument();
     
     String nodeTypeNamespace = getXMLNamespace(nodeType);
-    String nodeTypePrefix = getNSPrefix(nodeType);
-    Element nodeProperties = doc.createElementNS(nodeTypeNamespace, nodeTypePrefix+":"+getNodeTypePropertiesName(nodeType));
+    Element nodeProperties;
+    try {
+      nodeProperties = doc.createElementNS(nodeTypeNamespace, getNSPrefix(nodeType)+":"+getNodeTypePropertiesName(nodeType));
+    } catch (NoPrefixMappingFoundException e) {
+      nodeProperties = doc.createElementNS(nodeTypeNamespace, getNodeTypePropertiesName(nodeType));
+    }
     doc.appendChild(nodeProperties);
     
-    createProperties(node, nodeType, nodeProperties, nodeTypeNamespace, nodeTypePrefix, propertiesSeq);    
+    createProperties(node, nodeType, nodeProperties, nodeTypeNamespace, propertiesSeq);    
     if(0 == nodeProperties.getChildNodes().getLength()){
       throw new NoPropertiesFoundException();
     }
@@ -357,10 +368,11 @@ public class OMN2Tosca extends AbstractConverter {
     irrelevantProperties.add(OWL.sameAs);
     irrelevantProperties.add(RDF.type);
     irrelevantProperties.add(Omn.isResourceOf);
+    irrelevantProperties.add(Omn_lifecycle.implementedBy);
     irrelevantProperties.add(Omn_lifecycle.hasID);
   }
   
-  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, String prefix, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
@@ -369,17 +381,22 @@ public class OMN2Tosca extends AbstractConverter {
       
       if(!irrelevantProperties.contains(property)){
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
-          createObjectProperty(node, propertyStatement, element, namespace, prefix, propertiesSeq);
+          createObjectProperty(node, propertyStatement, element, namespace, nodeType, propertiesSeq);
         }
         else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
-          createDatatypeProperty(propertyStatement, element, namespace, prefix, propertiesSeq);
+          createDatatypeProperty(propertyStatement, element, namespace, nodeType, propertiesSeq);
         }
       }
     }
   }
   
-  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, String prefix, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
+  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, Resource nodeType, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    Element parameter;
+    try {
+      parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, getNSPrefix(nodeType)+":"+propertyStatement.getPredicate().getLocalName());
+    } catch (NoPrefixMappingFoundException e) {
+      parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, propertyStatement.getPredicate().getLocalName());
+    }
     
     if(!propertyStatement.getResource().isAnon()){
       parameter.setAttribute("name", propertyStatement.getResource().getLocalName());
@@ -388,14 +405,19 @@ public class OMN2Tosca extends AbstractConverter {
     Element subSequence = createObjectPropertyType(propertyStatement.getPredicate(), propertiesSeq);
     
     node = propertyStatement.getResource();
-    Resource nodeType = calculateInferredPropertyValue(node, RDF.type);
-    createProperties(propertyStatement.getResource(), nodeType, parameter, namespace, prefix, subSequence);
+    Resource newNodeType = calculateInferredPropertyValue(node, RDF.type);
+    createProperties(node, newNodeType, parameter, namespace, subSequence);
     
     nodeProperties.appendChild(parameter);
   }
   
-  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, String prefix, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    Element parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, prefix+":"+propertyStatement.getPredicate().getLocalName());
+  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, Resource nodeType, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    Element parameter;
+    try {
+      parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, getNSPrefix(nodeType)+":"+propertyStatement.getPredicate().getLocalName());
+    } catch (NoPrefixMappingFoundException e) {
+      parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, propertyStatement.getPredicate().getLocalName());
+    }
     parameter.setTextContent(propertyStatement.getLiteral().getString());
     nodeProperties.appendChild(parameter);
     
@@ -444,8 +466,12 @@ public class OMN2Tosca extends AbstractConverter {
   
   private static void setType(TRelationshipTemplate relationshipTemplate, Resource relationType){
     String namespace = getXMLNamespace(relationType);
-    String prefix = getNSPrefix(relationType);
-    QName type = new QName(namespace, relationType.getLocalName(), prefix);
+    QName type;
+    try {
+      type = new QName(namespace, relationType.getLocalName(), getNSPrefix(relationType));
+    } catch (NoPrefixMappingFoundException e) {
+      type = new QName(namespace, relationType.getLocalName());
+    }
     relationshipTemplate.setType(type);
   }
   
@@ -465,8 +491,12 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setValidSource(TRelationshipType relationshipType, Resource relationshipTypeResource) throws RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Resource source = calculateInferredPropertyValue(relationshipTypeResource, (RDFS.domain));
     String namespace = getXMLNamespace(source);
-    String prefix = getNSPrefix(source);
-    QName typeRef = new QName(namespace, source.getLocalName(), prefix);
+    QName typeRef;
+    try {
+      typeRef = new QName(namespace, source.getLocalName(), getNSPrefix(source));
+    } catch (NoPrefixMappingFoundException e) {
+      typeRef = new QName(namespace, source.getLocalName());
+    }
     
     TRelationshipType.ValidSource validSource = objFactory.createTRelationshipTypeValidSource();
     validSource.setTypeRef(typeRef);
@@ -477,8 +507,12 @@ public class OMN2Tosca extends AbstractConverter {
     Resource target = calculateInferredPropertyValue(relationshipTypeResource, (RDFS.range));
     
     String namespace = getXMLNamespace(target);
-    String prefix = getNSPrefix(target);
-    QName typeRef = new QName(namespace, target.getLocalName(), prefix);
+    QName typeRef;
+    try {
+      typeRef = new QName(namespace, target.getLocalName(), getNSPrefix(target));
+    } catch (NoPrefixMappingFoundException e) {
+      typeRef = new QName(namespace, target.getLocalName());
+    }
     
     TRelationshipType.ValidTarget validTarget = objFactory.createTRelationshipTypeValidTarget();
     validTarget.setTypeRef(typeRef);
@@ -589,6 +623,16 @@ public class OMN2Tosca extends AbstractConverter {
     private static final long serialVersionUID = 4552306313139023932L;
 
     public PropertiesTypesAlreadyExistsException(){
+      super();
+    }
+  }
+  
+
+  public static class NoPrefixMappingFoundException extends Exception{
+
+    private static final long serialVersionUID = 7286796960642767251L;
+
+    public NoPrefixMappingFoundException(){
       super();
     }
   }
