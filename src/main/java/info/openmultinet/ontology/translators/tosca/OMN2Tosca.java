@@ -177,7 +177,7 @@ public class OMN2Tosca extends AbstractConverter {
     return targetNamespace;
   }
   
-  private static Element createTypes(Resource nodeType, List<Object> types) throws RequiredResourceNotFoundException, MultiplePropertyValuesException, PropertiesTypesAlreadyExistsException{
+  private static boolean typesAlreadyExist(Resource nodeType, List<Object> types){
     for(Object type : types){
       if(type instanceof Element){
         Element typeElement = (Element) type;
@@ -186,12 +186,15 @@ public class OMN2Tosca extends AbstractConverter {
           Node propertyElement = propertyElements.item(i);
           String propertiesName = propertyElement.getAttributes().getNamedItem("name").getNodeValue();
           if(getNodeTypePropertiesName(nodeType).equals(propertiesName)){
-            throw new PropertiesTypesAlreadyExistsException();
+            return true;
           }
         }
       }
     }
-    
+    return false;
+  }
+  
+  private static Element createTypes(Resource nodeType, List<Object> types) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     Document doc = createDocument();
     
     Element schema = doc.createElement("xs:schema");
@@ -306,7 +309,6 @@ public class OMN2Tosca extends AbstractConverter {
       nodeTemplate.setProperties(properties);
     } catch (NoPropertiesFoundException e) {
       LOG.log(Level.INFO, "No properties found for node "+node.getURI());
-    } catch (PropertiesTypesAlreadyExistsException e) {
     }
     
     return nodeTemplate;
@@ -341,9 +343,7 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  private static Element createNodePropertiesAndTypes(Resource node, Resource nodeType, TNodeTemplate nodeTemplate, List<Object> types) throws NoPropertiesFoundException, RequiredResourceNotFoundException, MultiplePropertyValuesException, PropertiesTypesAlreadyExistsException {
-    Element propertiesSeq = createTypes(nodeType, types);
-    
+  private static Element createNodePropertiesAndTypes(Resource node, Resource nodeType, TNodeTemplate nodeTemplate, List<Object> types) throws NoPropertiesFoundException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
     Document doc = createDocument();
     
     String nodeTypeNamespace = getXMLNamespace(nodeType);
@@ -355,7 +355,13 @@ public class OMN2Tosca extends AbstractConverter {
     }
     doc.appendChild(nodeProperties);
     
-    createProperties(node, nodeType, nodeProperties, nodeTypeNamespace, propertiesSeq);    
+    if(!typesAlreadyExist(nodeType, types)){
+      Element propertiesSeq = createTypes(nodeType, types);
+      createPropertyTypes(node, propertiesSeq);
+    }
+    
+    createProperties(node, nodeType, nodeProperties, nodeTypeNamespace);  
+    
     if(0 == nodeProperties.getChildNodes().getLength()){
       throw new NoPropertiesFoundException();
     }
@@ -372,25 +378,43 @@ public class OMN2Tosca extends AbstractConverter {
     irrelevantProperties.add(Omn_lifecycle.hasID);
   }
   
-  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+  private static void createPropertyTypes(Resource node, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     StmtIterator propertiesIterator = node.listProperties();
     while(propertiesIterator.hasNext()){
       Statement propertyStatement = propertiesIterator.next();
-      
       Property property = propertyStatement.getPredicate();
       
       if(!irrelevantProperties.contains(property)){
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
-          createObjectProperty(node, propertyStatement, element, namespace, nodeType, propertiesSeq);
+          Element subSequence = createObjectPropertyType(property, propertiesSeq);
+          Resource subNode = propertyStatement.getResource();
+          createPropertyTypes(subNode, subSequence);
         }
         else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
-          createDatatypeProperty(propertyStatement, element, namespace, nodeType, propertiesSeq);
+          createDatatypePropertyType(property, propertiesSeq);
         }
       }
     }
   }
   
-  private static void createObjectProperty(Resource node, Statement propertyStatement, Element nodeProperties, String namespace, Resource nodeType, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+  private static void createProperties(Resource node, Resource nodeType, Element element, String namespace) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+    StmtIterator propertiesIterator = node.listProperties();
+    while(propertiesIterator.hasNext()){
+      Statement propertyStatement = propertiesIterator.next();
+      Property property = propertyStatement.getPredicate();
+      
+      if(!irrelevantProperties.contains(property)){
+        if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
+          createObjectProperty(propertyStatement, element, namespace, nodeType);
+        }
+        else if(property.hasProperty(RDF.type, OWL.DatatypeProperty)){
+          createDatatypeProperty(propertyStatement, element, namespace, nodeType);
+        }
+      }
+    }
+  }
+  
+  private static void createObjectProperty(Statement propertyStatement, Element nodeProperties, String namespace, Resource nodeType) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     Element parameter;
     try {
       parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, getNSPrefix(nodeType)+":"+propertyStatement.getPredicate().getLocalName());
@@ -402,16 +426,14 @@ public class OMN2Tosca extends AbstractConverter {
       parameter.setAttribute("name", propertyStatement.getResource().getLocalName());
     }
     
-    Element subSequence = createObjectPropertyType(propertyStatement.getPredicate(), propertiesSeq);
-    
     Resource subNode = propertyStatement.getResource();
     Resource newNodeType = calculateInferredPropertyValue(subNode, RDF.type);
-    createProperties(subNode, newNodeType, parameter, namespace, subSequence);
+    createProperties(subNode, newNodeType, parameter, namespace);
     
     nodeProperties.appendChild(parameter);
   }
   
-  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, Resource nodeType, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
+  private static void createDatatypeProperty(Statement propertyStatement, Element nodeProperties, String namespace, Resource nodeType) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{
     Element parameter;
     try {
       parameter = nodeProperties.getOwnerDocument().createElementNS(namespace, getNSPrefix(nodeType)+":"+propertyStatement.getPredicate().getLocalName());
@@ -420,8 +442,6 @@ public class OMN2Tosca extends AbstractConverter {
     }
     parameter.setTextContent(propertyStatement.getLiteral().getString());
     nodeProperties.appendChild(parameter);
-    
-    createDatatypePropertyType(propertyStatement.getPredicate(), propertiesSeq);
   }
   
   private static List<TRelationshipTemplate> createRelationshipTemplates(Resource nodeResource, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException {
@@ -619,16 +639,6 @@ public class OMN2Tosca extends AbstractConverter {
     }
   }
   
-  public static class PropertiesTypesAlreadyExistsException extends Exception{
-    
-    private static final long serialVersionUID = 4552306313139023932L;
-
-    public PropertiesTypesAlreadyExistsException(){
-      super();
-    }
-  }
-  
-
   public static class NoPrefixMappingFoundException extends Exception{
 
     private static final long serialVersionUID = 7286796960642767251L;
