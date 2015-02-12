@@ -3,16 +3,20 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
+import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.validation.constraints.AssertTrue;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -120,6 +124,35 @@ public class RequestConverterTest {
 		System.out.println(outputRspec);
 		System.out.println("===============================");
 		Assert.assertTrue("Should have a sliver_type", outputRspec.contains("sliver_type"));
+	}
+
+	@Test
+	@Ignore
+	public void testRSpecTOSCARoundtrip() throws JAXBException,
+			InvalidModelException, IOException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
+		final String filename = "/geni/request/request_paper2015.xml";
+		final InputStream inputRspec = RequestConverterTest.class
+				.getResourceAsStream(filename);
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(AbstractConverter.toString(filename));
+		System.out.println("===============================");
+
+		final Model model = RequestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Request);
+		Assert.assertTrue("should have a topology", topology.hasNext());
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
+
+		final InfModel infModel = new Parser(model).getInfModel();
+		final String outputTosca = OMN2Tosca.getTopology(infModel);
+		System.out.println("Generated this tosca:");
+		System.out.println("===============================");
+		System.out.println(outputTosca);
+		System.out.println("===============================");
 	}
 
 }
