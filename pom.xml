@@ -101,9 +101,10 @@
 					</execution>
 				</executions>
 				<configuration>
-    			    <excludes>
-                        <exclude>**/jaxb/**</exclude>
-                    </excludes>
+			    <excludes>
+             <exclude>**/jaxb/**</exclude>
+             <exclude>**/vocabulary/**</exclude>
+          </excludes>
 				</configuration>
 			</plugin>
             <plugin>
