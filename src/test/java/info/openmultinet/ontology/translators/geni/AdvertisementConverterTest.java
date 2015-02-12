@@ -76,7 +76,7 @@ public class AdvertisementConverterTest {
 	}
 
 	@Test
-	public void testRoundtripRSpecToRSpec() throws JAXBException,
+	public void testPaper2015Roundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException {
 		long start;
 		String inputFile = "/geni/advertisement/advertisement_paper2015.xml";

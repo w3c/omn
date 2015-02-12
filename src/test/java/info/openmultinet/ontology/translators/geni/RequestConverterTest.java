@@ -94,7 +94,7 @@ public class RequestConverterTest {
     }
 
 	@Test
-	public void testConvertingPaperRspecRoundtrip() throws JAXBException,
+	public void testPaper2015Roundtrip() throws JAXBException,
 			InvalidModelException, IOException {
 		final String filename = "/geni/request/request_paper2015.xml";
 		final InputStream inputRspec = RequestConverterTest.class

@@ -86,7 +86,7 @@ public class ManifestConverterTest {
 	}
 
 	@Test
-	public void testPaperRoundtrip() throws JAXBException, IOException, InvalidModelException {
+	public void testPaper2015Roundtrip() throws JAXBException, IOException, InvalidModelException {
 		final String filename = "/geni/manifest/manifest_paper2015.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
 				.getResourceAsStream(filename);
