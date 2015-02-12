@@ -12,11 +12,12 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -127,7 +128,6 @@ public class RequestConverterTest {
 	}
 
 	@Test
-	@Ignore
 	public void testRSpecTOSCARoundtrip() throws JAXBException,
 			InvalidModelException, IOException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException {
 		final String filename = "/geni/request/request_paper2015.xml";
@@ -147,7 +147,9 @@ public class RequestConverterTest {
 		System.out.println(Parser.toString(model));
 		System.out.println("===============================");
 
-		final InfModel infModel = new Parser(model).getInfModel();
+		List<String> additionalOntologies = new ArrayList<String>();
+		additionalOntologies.add("/ontologies/motor.ttl");
+		final InfModel infModel = new Parser(model, additionalOntologies).getInfModel();
 		final String outputTosca = OMN2Tosca.getTopology(infModel);
 		System.out.println("Generated this tosca:");
 		System.out.println("===============================");

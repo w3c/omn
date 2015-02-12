@@ -1,0 +1,46 @@
+@prefix rdfs:          <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:           <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:           <http://www.w3.org/2001/XMLSchema#> .
+@prefix omn:           <http://open-multinet.info/ontology/omn#> .
+@prefix motor:         <http://open-multinet.info/ontology/resources/motor#> .
+
+motor:Motor
+        a                            owl:Class ;
+        rdfs:label                   "Motor"@en ;
+        rdfs:subClassOf              omn:Resource .
+          
+motor:manufacturer
+        a            owl:DatatypeProperty ;
+        a            owl:FunctionalProperty ;
+        rdfs:domain  motor:Motor ;
+        rdfs:label   "manufacturer"@en ;
+        rdfs:range   xsd:string .
+
+motor:throttle
+        a            owl:DatatypeProperty ;
+        a            owl:FunctionalProperty ;
+        rdfs:domain  motor:Motor ;
+        rdfs:label   "throttle"@en ;
+        rdfs:range   xsd:integer .
+
+motor:isDynamic
+        a            owl:DatatypeProperty ;
+        a            owl:FunctionalProperty ;
+        rdfs:domain  motor:Motor ;
+        rdfs:label   "dynamic"@en ;
+        rdfs:range   xsd:boolean .
+
+motor:rpm
+        a            owl:DatatypeProperty ;
+        a            owl:FunctionalProperty ;
+        rdfs:domain  motor:Motor ;
+        rdfs:label   "rounds per minutes"@en ;
+        rdfs:range   xsd:integer .
+
+motor:maxRpm
+        a            owl:DatatypeProperty ;
+        a            owl:FunctionalProperty ;
+        rdfs:domain  motor:Motor ;
+        rdfs:label   "maximum rounds per minute"@en ;
+        rdfs:range   xsd:integer .
+
