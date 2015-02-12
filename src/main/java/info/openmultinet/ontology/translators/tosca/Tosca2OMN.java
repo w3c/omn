@@ -70,7 +70,9 @@ public class Tosca2OMN extends AbstractConverter {
     processTemplates(definitions, model);
     
     Parser.setCommonPrefixes(model);
-    model.setNsPrefix("target", getRDFNamespace(definitions.getTargetNamespace()));
+    if(definitions.getTargetNamespace() != null){
+      model.setNsPrefix("target", getRDFNamespace(definitions.getTargetNamespace()));
+    }
     return model;
   }
   
@@ -301,8 +303,8 @@ public class Tosca2OMN extends AbstractConverter {
   private static void processPropertiesElement(Resource node, Node propertiesElement, String targetNamespace) throws UnsupportedException {
     for (int i = 0; i < (propertiesElement.getChildNodes().getLength()); i++) {
       Node propertyNode = propertiesElement.getChildNodes().item(i);
-      String namespace = getRDFNamespace(propertyNode.getNamespaceURI());
       if(propertyNode.getLocalName() != null){
+        String namespace = getRDFNamespace(propertyNode.getNamespaceURI());
         Property property = node.getModel().getProperty(namespace + propertyNode.getLocalName());  
         Resource propertyRange = getPropertyRange(property);
         
@@ -448,9 +450,6 @@ public class Tosca2OMN extends AbstractConverter {
   }
   
   protected static String getRDFNamespace(String namespace){
-    if(namespace == null || namespace.isEmpty()){
-      return "";
-    }
     if(!(namespace.endsWith("/") || namespace.endsWith("#"))){
       namespace = namespace.concat("#");
     }
