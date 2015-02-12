@@ -39,8 +39,8 @@ public class ManifestConverter extends AbstractConverter {
 	private static final Logger LOG = Logger.getLogger(ManifestConverter.class
 			.getName());
 
-	public static String getRSpec(final Model model, String hostname) throws JAXBException,
-			InvalidModelException {
+	public static String getRSpec(final Model model, String hostname)
+			throws JAXBException, InvalidModelException {
 		final RSpecContents manifest = new RSpecContents();
 		manifest.setType(RspecTypeContents.MANIFEST);
 		manifest.setGeneratedBy(AbstractConverter.VENDOR);
@@ -48,7 +48,7 @@ public class ManifestConverter extends AbstractConverter {
 
 		ManifestConverter.model2rspec(model, manifest, hostname);
 		final JAXBElement<RSpecContents> rspec = new ObjectFactory()
-		.createRspec(manifest);
+				.createRspec(manifest);
 		return AbstractConverter.toString(rspec,
 				"info.openmultinet.ontology.translators.geni.jaxb.manifest");
 	}
@@ -67,7 +67,8 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void model2rspec(final Model model,
-			final RSpecContents manifest, String hostname) throws InvalidModelException {
+			final RSpecContents manifest, String hostname)
+			throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Topology).toList();
 		AbstractConverter.validateModel(groups);
@@ -76,11 +77,13 @@ public class ManifestConverter extends AbstractConverter {
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
-		ManifestConverter.convertStatementsToNodesAndLinks(manifest, resources, hostname);
+		ManifestConverter.convertStatementsToNodesAndLinks(manifest, resources,
+				hostname);
 	}
 
 	private static void convertStatementsToNodesAndLinks(
-			final RSpecContents manifest, final List<Statement> resources, String hostname) {
+			final RSpecContents manifest, final List<Statement> resources,
+			String hostname) {
 
 		for (final Statement resource : resources) {
 			final NodeContents node = new NodeContents();
@@ -96,22 +99,28 @@ public class ManifestConverter extends AbstractConverter {
 	private static void setComponentDetails(final Statement resource,
 			final NodeContents node, String hostname) {
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
-			node.setClientId(resource.getResource().getProperty(Omn_lifecycle.hasID).getString());
+			node.setClientId(resource.getResource()
+					.getProperty(Omn_lifecycle.hasID).getString());
 		}
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
-			node.setComponentId(resource.getResource().getProperty(Omn_lifecycle.implementedBy).getObject().toString());
+			node.setComponentId(resource.getResource()
+					.getProperty(Omn_lifecycle.implementedBy).getObject()
+					.toString());
 		}
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
-			node.setExclusive(resource.getResource().getProperty(Omn_resource.isExclusive).getBoolean());
+			node.setExclusive(resource.getResource()
+					.getProperty(Omn_resource.isExclusive).getBoolean());
 		}
-		
-		node.setSliverId(generateSliverID(hostname, resource.getResource().getURI()));
+
+		node.setSliverId(generateSliverID(hostname, resource.getResource()
+				.getURI()));
 		node.setComponentName(resource.getResource().getLocalName());
 	}
-	
+
 	public static String generateSliverID(String hostname, String uri) {
 		try {
-			return "urn:publicid:IDN+"+hostname+"+sliver+" + URLEncoder.encode(uri,StandardCharsets.UTF_8.toString());
+			return "urn:publicid:IDN+" + hostname + "+sliver+"
+					+ URLEncoder.encode(uri, StandardCharsets.UTF_8.toString());
 		} catch (UnsupportedEncodingException e) {
 			return uri;
 		}
@@ -137,7 +146,23 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void convertManifest2Model(final RSpecContents manifest,
 			final Model model) {
-		// TODO add the core stuff here
+
+		Resource topology = model.getResource(AbstractConverter.NAMESPACE + "manifest");
+		
+		
+		for (Object o : manifest.getAnyOrNodeOrLink()) {
+			JAXBElement<?> element = (JAXBElement<?>) o;
+			
+			if (element.getDeclaredType().equals(NodeContents.class)) {
+				NodeContents node = (NodeContents) element.getValue();
+				
+				final Resource omnResource = model
+						.createResource(AbstractConverter.NAMESPACE
+								+ node.getClientId());
+				omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
+				topology.addProperty(Omn.hasResource, omnResource);
+			}
+		}
 	}
 
 	public static RSpecContents getManifest(final InputStream stream)
