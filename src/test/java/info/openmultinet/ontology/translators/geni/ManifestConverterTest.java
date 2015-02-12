@@ -31,7 +31,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ManifestConverterTest {
 
 	@Test
-	public void testConvertingSimpleRSpecToGraph() throws JAXBException,
+	public void testConvertingComplexRSpecToGraph() throws JAXBException,
 			InvalidModelException {
 		final InputStream rspec = ManifestConverterTest.class
 				.getResourceAsStream("/geni/manifest/exogeni5nodemanifest.xml");
@@ -40,6 +40,10 @@ public class ManifestConverterTest {
 				Omn_lifecycle.Manifest);
 		Assert.assertTrue("should have a topology (manifest)",
 				topology.hasNext());
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
 	}
 
 	@Test
@@ -84,4 +88,33 @@ public class ManifestConverterTest {
 				rspec.contains("type=\"manifest\""));
 		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
+
+	@Test
+	public void testPaper2015Roundtrip() throws JAXBException, IOException, InvalidModelException {
+		final String filename = "/geni/manifest/manifest_paper2015.xml";
+		final InputStream inputRspec = ManifestConverterTest.class
+				.getResourceAsStream(filename);
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(AbstractConverter.toString(filename));
+		System.out.println("===============================");
+
+		final Model model = ManifestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Manifest);
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
+		Assert.assertTrue("should have a topology", topology.hasNext());
+
+		final InfModel infModel = new Parser(model).getInfModel();
+		final String outputRspec = ManifestConverter.getRSpec(infModel, "testbed.example.org");
+		System.out.println("Generated this rspec:");
+		System.out.println("===============================");
+		System.out.println(outputRspec);
+		System.out.println("===============================");
+
+	}
+
 }

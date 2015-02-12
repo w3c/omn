@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContents;
@@ -85,11 +86,18 @@ public class RequestConverter extends AbstractConverter {
 			final NodeContents node = new NodeContents();
 
 			RequestConverter.setComponentDetails(resource, node);
-			RequestConverter.setComponentManagerId(resource, node);
-			final boolean isExclusive = resource.getResource()
-					.getProperty(Omn_resource.isExclusive).getBoolean();
-			node.setExclusive(isExclusive);
-
+			RequestConverter.setComponentId(resource, node);
+			if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
+				final boolean isExclusive = resource.getResource()
+						.getProperty(Omn_resource.isExclusive).getBoolean();
+				node.setExclusive(isExclusive);	
+			}
+			
+			SliverType sliverType = new ObjectFactory().createNodeContentsSliverType();
+			sliverType.setName(resource.getProperty(RDF.type).getObject().toString());
+			JAXBElement<SliverType> sliver = new ObjectFactory ().createNodeContentsSliverType(sliverType );
+			node.getAnyOrRelationOrLocation().add(sliver);
+			
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
 		}
@@ -103,10 +111,10 @@ public class RequestConverter extends AbstractConverter {
 		
 	}
 
-	private static void setComponentManagerId(final Statement resource,
+	private static void setComponentId(final Statement resource,
 			final NodeContents node) {
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
-			node.setComponentManagerId(resource.getResource().getProperty(Omn_lifecycle.implementedBy).getString());
+			node.setComponentId(resource.getResource().getProperty(Omn_lifecycle.implementedBy).getObject().toString());
 		}
 	}
 
