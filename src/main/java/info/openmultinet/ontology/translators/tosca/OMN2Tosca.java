@@ -404,9 +404,9 @@ public class OMN2Tosca extends AbstractConverter {
     
     Element subSequence = createObjectPropertyType(propertyStatement.getPredicate(), propertiesSeq);
     
-    node = propertyStatement.getResource();
-    Resource newNodeType = calculateInferredPropertyValue(node, RDF.type);
-    createProperties(node, newNodeType, parameter, namespace, subSequence);
+    Resource subNode = propertyStatement.getResource();
+    Resource newNodeType = calculateInferredPropertyValue(subNode, RDF.type);
+    createProperties(subNode, newNodeType, parameter, namespace, subSequence);
     
     nodeProperties.appendChild(parameter);
   }
