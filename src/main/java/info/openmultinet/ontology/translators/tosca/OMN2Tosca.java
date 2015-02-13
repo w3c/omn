@@ -308,7 +308,7 @@ public class OMN2Tosca extends AbstractConverter {
       properties.setAny(nodeProperties);
       nodeTemplate.setProperties(properties);
     } catch (NoPropertiesFoundException e) {
-      LOG.log(Level.INFO, "No properties found for node "+node.getURI());
+      LOG.log(Level.INFO, "No properties found for node "+getName(node));
     }
     
     return nodeTemplate;
