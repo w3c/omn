@@ -2,11 +2,16 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.InstallServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.User;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
@@ -35,6 +40,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.xerces.dom.ElementNSImpl;
 
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -93,6 +99,7 @@ public class ManifestConverter extends AbstractConverter {
 			final RSpecContents manifest, final List<Statement> resources,
 			String hostname) {
 
+		int i = 0;
 		for (final Statement resource : resources) {
 			final NodeContents node = new NodeContents();
 
@@ -110,7 +117,8 @@ public class ManifestConverter extends AbstractConverter {
 			node.setClientId(resource.getResource()
 					.getProperty(Omn_lifecycle.hasID).getString());
 		}
-		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
+		
+		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {		
 			RDFNode implementedBy = resource.getResource()
 					.getProperty(Omn_lifecycle.implementedBy).getObject();
 			
@@ -129,6 +137,80 @@ public class ManifestConverter extends AbstractConverter {
 			
 			JAXBElement<SliverType> sliverType = new ObjectFactory().createNodeContentsSliverType(value );
 			node.getAnyOrRelationOrLocation().add(sliverType);
+		}
+		
+		// check if the statement has the property hasService 
+		ServiceContents serviceContents = null;
+		while (resource.getResource().hasProperty(Omn.hasService)) {
+			
+			if(serviceContents == null){ 
+				serviceContents = new ObjectFactory().createServiceContents();
+			}
+			// get the object resource of this relation
+			Statement hasService = resource.getResource().getProperty(Omn.hasService);
+			hasService.remove();
+			RDFNode service = hasService.getObject();			
+			Resource serviceResource = service.asResource();
+
+			if(serviceResource.hasProperty(RDF.type,Omn_lifecycle.LoginService)){
+				// get authentication
+				String authentication = "";			
+				if(serviceResource.hasProperty(Omn_lifecycle.authentication)){
+					authentication += serviceResource.getProperty(Omn_lifecycle.authentication).getObject().asLiteral().getString();
+				}
+			
+				// get hostname
+				String hostnameLogin = "";		
+				if(serviceResource.hasProperty(Omn_lifecycle.hostname)){
+					hostnameLogin += serviceResource.getProperty(Omn_lifecycle.hostname).getObject().asLiteral().getString();
+				}
+			
+				// get port
+				String port = "";		
+				if(serviceResource.hasProperty(Omn_lifecycle.port)){
+					port += serviceResource.getProperty(Omn_lifecycle.port).getObject().asLiteral().getString();
+				}
+				
+				// get username
+				String username = "";	
+				if(serviceResource.hasProperty(Omn_lifecycle.username)){
+					username += serviceResource.getProperty(Omn_lifecycle.username).getObject().asLiteral().getString();
+				}
+						
+				// create login 
+				LoginServiceContents loginServiceContent = new ObjectFactory().createLoginServiceContents();
+				loginServiceContent.setAuthentication(authentication); // required
+				if(hostnameLogin != ""){
+					loginServiceContent.setHostname(hostnameLogin);
+				}
+				if(port != ""){
+					loginServiceContent.setPort(port);
+				}
+				if(username != ""){
+					loginServiceContent.setUsername(username);
+				}
+				
+				JAXBElement<LoginServiceContents> loginService = new ObjectFactory().createLogin(loginServiceContent);			
+				serviceContents.getAnyOrLoginOrInstall().add(loginService);
+			}
+			
+			if(serviceResource.hasProperty(RDF.type,Omn_lifecycle.ExecuteService)){
+				// create execute 
+				ExecuteServiceContents excuteServiceContent = new ObjectFactory().createExecuteServiceContents();
+				JAXBElement<ExecuteServiceContents> executeService = new ObjectFactory().createExecute(excuteServiceContent);			
+				serviceContents.getAnyOrLoginOrInstall().add(executeService);
+			}
+			
+			if(serviceResource.hasProperty(RDF.type,Omn_lifecycle.InstallService)){
+				// create execute 
+				InstallServiceContents installServiceContent = new ObjectFactory().createInstallServiceContents();
+				JAXBElement<InstallServiceContents> installService = new ObjectFactory().createInstall(installServiceContent);			
+				serviceContents.getAnyOrLoginOrInstall().add(installService);
+			}
+		}	
+		if(serviceContents != null){ 
+			JAXBElement<ServiceContents> services = new ObjectFactory().createServices(serviceContents);
+			node.getAnyOrRelationOrLocation().add(services);
 		}
 		
 		node.setSliverId(generateSliverID(hostname, resource.getResource()
@@ -210,7 +292,70 @@ public class ManifestConverter extends AbstractConverter {
 					if (nodeDetailElement.getDeclaredType().equals(NodeContents.SliverType.class)) {
 						NodeContents.SliverType sliverType = (NodeContents.SliverType) nodeDetailElement.getValue();
 						omnResource.addProperty(RDF.type, sliverType.getName());
-					}							
+					}
+					
+					// check if type is Services
+					if (nodeDetailElement.getDeclaredType().equals(ServiceContents.class)) {
+						
+						// get value of the element
+						ServiceContents service = (ServiceContents) nodeDetailElement.getValue();
+						List<Object> services = service.getAnyOrLoginOrInstall();
+						
+						// iterate through the Services and add to model
+						for (int i = 0; i < services.size(); i++) {			
+								
+							Object serviceObject = services.get(i);
+							Resource omnService = null;
+							
+							// if login service
+							if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(LoginServiceContents.class)) {
+								
+								// create service resource
+								omnService = model.createResource();
+								omnService.addProperty(RDF.type, Omn_lifecycle.LoginService);	
+								LoginServiceContents serviceValue = (LoginServiceContents) ((JAXBElement<?>) serviceObject).getValue();
+								
+								// add authentication info
+								String authentication = serviceValue.getAuthentication();	
+								omnService.addProperty(Omn_lifecycle.authentication, authentication);
+								
+								// add hostname info
+								String hostname = serviceValue.getHostname();	
+								omnService.addProperty(Omn_lifecycle.hostname, hostname);
+								
+								// add port info
+								String port = serviceValue.getPort();	
+								omnService.addProperty(Omn_lifecycle.port, port);
+								
+								// add username info
+								String username = serviceValue.getUsername();	
+								omnService.addProperty(Omn_lifecycle.username, username);
+							}
+
+							// if execute service
+							if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(ExecuteServiceContents.class)) {
+								// create service resource
+								omnService = model.createResource();
+								omnService.addProperty(RDF.type, Omn_lifecycle.ExecuteService);
+								
+								// error in rspec manifest xsd, can't add attributes for execute service
+							}
+							
+							// if install service
+							if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(InstallServiceContents.class)) {
+								// create service resource
+								omnService = model.createResource();
+								omnService.addProperty(RDF.type, Omn_lifecycle.InstallService);
+								
+								// error in rspec manifest xsd, can't add attributes for install service
+							}
+							
+							// add service to node
+							if(omnService != null){
+								omnResource.addProperty(Omn.hasService, omnService);
+							}
+						}
+					}
 				} else {
 					ManifestConverter.LOG.log(Level.INFO, "Found unknown extsion: "+ nodeDetailObject);
 				}
