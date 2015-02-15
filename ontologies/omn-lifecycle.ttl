@@ -228,56 +228,7 @@
        
        rdfs:range xsd:string .
 
-###  http://open-multinet.info/ontology/omn-lifecycle#authentication
 
-:authentication rdf:type owl:DatatypeProperty ;
-       
-       rdfs:comment "Login Service authentication type, e.g. 'ssh-keys'"@en ;
-       
-       rdfs:seeAlso "GENI Manifest RSpec v3: authentication"@en ;
-       
-       rdfs:domain :LoginService ;
-       
-       rdfs:range xsd:string .
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#hostname
-
-:hostname rdf:type owl:DatatypeProperty ;
-       
-       rdfs:comment "Login Service hostname"@en ;
-       
-       rdfs:seeAlso "GENI Manifest RSpec v3: hostname"@en ;
-       
-       rdfs:domain :LoginService ;
-       
-       rdfs:range xsd:string .
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#port
-
-:port rdf:type owl:DatatypeProperty ;
-       
-       rdfs:comment "Login Service port"@en ;
-       
-       rdfs:seeAlso "GENI Manifest RSpec v3: port"@en ;
-       
-       rdfs:domain :LoginService ;
-       
-       rdfs:range xsd:string .
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#username
-
-:username rdf:type owl:DatatypeProperty ;
-       
-       rdfs:comment "Login Service username"@en ;
-       
-       rdfs:seeAlso "GENI Manifest RSpec v3: username"@en ;
-       
-       rdfs:domain :LoginService ;
-       
-       rdfs:range xsd:string .
 
 
 #################################################################
@@ -393,16 +344,6 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#ExecuteService
-
-:ExecuteService rdf:type owl:Class ;
-                   
-                   rdfs:label "Execute Service" ;
-                   
-                   rdfs:subClassOf omn:Service ;
-                   
-                   rdfs:seeAlso "GENI Manifest RSpec v3: ExecuteServiceContents"@en .
-
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
 
@@ -427,27 +368,6 @@ omn:Topology rdf:type owl:Class .
            rdfs:comment "The related resource/service has been installed"@en .
 
 
-
-###  http://open-multinet.info/ontology/omn-lifecycle#InstallService
-
-:InstallService rdf:type owl:Class ;
-                   
-                   rdfs:label "Install Service" ;
-                   
-                   rdfs:subClassOf omn:Service ;
-                   
-                   rdfs:seeAlso "GENI Manifest RSpec v3: InstallServiceContents"@en .
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#LoginService
-
-:LoginService rdf:type owl:Class ;
-                   
-                   rdfs:label "Login Service" ;
-                   
-                   rdfs:subClassOf omn:Service ;
-                   
-                   rdfs:seeAlso "GENI Manifest RSpec v3: LoginServiceContents"@en .
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
