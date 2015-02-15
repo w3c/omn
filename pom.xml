@@ -170,6 +170,8 @@
 							<output>src/main/java/</output>
 							<package-name>info.openmultinet.ontology.vocabulary</package-name>
 							<ontology>true</ontology>
+                            <no-strict>true</no-strict>
+                            <use-inf>false</use-inf>
 						</source>						
 						<source>
               <input>src/test/resources/ontologies/osco.ttl</input>
@@ -179,8 +181,6 @@
             </source>
 					</fileOptions>
 					<owl>true</owl>
-					<inference>true</inference>
-					<noheader>true</noheader> <!-- doesn't work -->
 				</configuration>
 				<executions>
 					<execution>
