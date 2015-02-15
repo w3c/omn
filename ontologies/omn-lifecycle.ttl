@@ -15,13 +15,13 @@
                                                    
                                                    dcterms:created "2014-11-11"^^xsd:date ;
                                                    
-                                                   dcterms:modified "2015-01-15"^^xsd:date ;
-                                                   
-                                                   owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                   owl:versionInfo "2015-02-15"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
+                                                   
+                                                   dcterms:modified "2015-02-15" ;
                                                    
                                                    dc:publisher <http://open-multinet.org> ;
                                                    
@@ -93,21 +93,21 @@
             
             owl:inverseOf :implementedBy ;
             
-            rdfs:range [ rdf:type owl:Class ;
-                         owl:unionOf ( omn:Component
-                                       omn:Group
-                                       omn:Resource
-                                       omn:Service
-                                     )
-                       ] ;
-            
             rdfs:domain [ rdf:type owl:Class ;
                           owl:unionOf ( omn:Component
                                         omn:Group
                                         omn:Resource
                                         omn:Service
                                       )
-                        ] .
+                        ] ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( omn:Component
+                                       omn:Group
+                                       omn:Resource
+                                       omn:Service
+                                     )
+                       ] .
 
 
 
@@ -145,21 +145,21 @@
 
 :parentOf rdf:type owl:ObjectProperty ;
           
-          rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( omn:Component
-                                      omn:Group
-                                      omn:Resource
-                                      omn:Service
-                                    )
-                      ] ;
-          
           rdfs:range [ rdf:type owl:Class ;
                        owl:unionOf ( omn:Component
                                      omn:Group
                                      omn:Resource
                                      omn:Service
                                    )
-                     ] .
+                     ] ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
 
 
 
@@ -169,13 +169,7 @@
           
           owl:inverseOf :parentOf ;
           
-          rdfs:domain [ rdf:type owl:Class ;
-                        owl:disjointUnionOf ( omn:Component
-                                      omn:Group
-                                      omn:Resource
-                                      omn:Service
-                                    )
-                      ] ;
+          rdfs:domain <http://org.semanticweb.owlapi/error#Error3> ;
           
           rdfs:range [ rdf:type owl:Class ;
                        owl:unionOf ( omn:Component
@@ -196,6 +190,20 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#hasAuthenticationInformation
+
+:hasAuthenticationInformation rdf:type owl:DatatypeProperty ;
+                              
+                              rdfs:comment "A specific authentification information for the management system"@en ;
+                              
+                              rdfs:seeAlso "GENI Slice X.509 certificates"@en ;
+                              
+                              rdfs:domain <http://org.semanticweb.owlapi/error#Error4> ;
+                              
+                              rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasID
 
 :hasID rdf:type owl:DatatypeProperty ;
@@ -209,24 +217,6 @@
        
        rdfs:range xsd:string .
 
-
-###  http://open-multinet.info/ontology/omn-lifecycle#hasAuthenticationInformation
-
-:hasAuthenticationInformation rdf:type owl:DatatypeProperty ;
-       
-       rdfs:comment "A specific authentification information for the management system"@en ;
-       
-       rdfs:seeAlso "GENI Slice X.509 certificates"@en ;
-       
-          rdfs:domain [ rdf:type owl:Class ;
-                        owl:disjointUnionOf ( omn:Component
-                                      omn:Group
-                                      omn:Resource
-                                      omn:Service
-                                    )
-                      ] ;
-       
-       rdfs:range xsd:string .
 
 
 
@@ -344,7 +334,6 @@ omn:Topology rdf:type owl:Class .
 
 
 
-
 ###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
 
 :Initialized rdf:type owl:Class ;
@@ -366,7 +355,6 @@ omn:Topology rdf:type owl:Class .
            rdfs:subClassOf :State ;
            
            rdfs:comment "The related resource/service has been installed"@en .
-
 
 
 
@@ -579,6 +567,153 @@ omn:Topology rdf:type owl:Class .
           rdfs:subClassOf :State ;
           
           rdfs:comment "The related resource/service is getting updated"@en .
+
+
+
+###  http://org.semanticweb.owlapi/error#Error3
+
+<http://org.semanticweb.owlapi/error#Error3> rdf:type owl:Class .
+
+
+
+###  http://org.semanticweb.owlapi/error#Error4
+
+<http://org.semanticweb.owlapi/error#Error4> rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Active
+
+:Active rdf:type :State ,
+                 owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Allocated
+
+:Allocated rdf:type :ReservationState ,
+                    owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Cleaned
+
+:Cleaned rdf:type :State ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Error
+
+:Error rdf:type :State ,
+                owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
+
+:Initialized rdf:type :State ,
+                      owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Installed
+
+:Installed rdf:type :State ,
+                    owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized
+
+:NotYetInitialized rdf:type :State ,
+                            owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Pending
+
+:Pending rdf:type :State ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Preinit
+
+:Preinit rdf:type :State ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+
+:Provisioned rdf:type :ReservationState ,
+                      owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Ready
+
+:Ready rdf:type :State ,
+                owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Removing
+
+:Removing rdf:type :State ,
+                   owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Started
+
+:Started rdf:type :State ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Stopped
+
+:Stopped rdf:type :State ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Stopping
+
+:Stopping rdf:type :State ,
+                   owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
+
+:Unallocated rdf:type :ReservationState ,
+                      owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Uncompleted
+
+:Uncompleted rdf:type :State ,
+                      owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Updating
+
+:Updating rdf:type :State ,
+                   owl:NamedIndividual .
 
 
 
