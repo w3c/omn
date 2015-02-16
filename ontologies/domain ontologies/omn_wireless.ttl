@@ -66,29 +66,6 @@ wireless2:hasOutputInterface rdf:type :ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#isSink
-
-wireless2:isSink rdf:type :ObjectProperty ;
-                 
-                 rdfs:comment "new property added" ;
-                 
-                 rdfs:range omn_resource:Link ;
-                 
-                 rdfs:domain omn_resource:NetworkObject .
-
-
-
-###  http://open-multinet.info/ontology/omn_wireless.owl#isSource
-
-wireless2:isSource rdf:type :ObjectProperty ;
-                   
-                   rdfs:comment "new property added" ;
-                   
-                   rdfs:range omn_resource:Link ;
-                   
-                   rdfs:domain omn_resource:NetworkObject .
-
-
 
 ###  http://open-multinet.info/ontology/omn_wireless.owl#supportsStandard
 
@@ -446,9 +423,9 @@ wireless2:valid_until2 rdf:type :NamedIndividual ,
                                                      
                                                      rdfs:label "node0" ;
                                                      
-                                                     omn_resource:isExclusive "true" ;
-                                                     
                                                      omn_resource:isAvailable "true" ;
+                                                     
+                                                     omn_resource:isExclusive "true" ;
                                                      
                                                      omn:hasReservation <http://open-multinet.info/ontology/omn_wireless.owl#8749d9cc-2a0c-452d-84fe-5601800cb55f> ;
                                                      
@@ -462,9 +439,9 @@ wireless2:valid_until2 rdf:type :NamedIndividual ,
                                                       
                                                       rdfs:label "node1" ;
                                                       
-                                                      omn_resource:isAvailable "true" ;
-                                                      
                                                       omn_resource:isExclusive "true" ;
+                                                      
+                                                      omn_resource:isAvailable "true" ;
                                                       
                                                       omn:hasReservation <http://open-multinet.info/ontology/omn_wireless.owl#8749d9cc-2a0c-452d-84fe-5601800cb55f> ,
                                                                          wireless2:eaba325f-27b8-44aa-baa2-dd4945c142cd ;
@@ -479,9 +456,9 @@ wireless2:valid_until2 rdf:type :NamedIndividual ,
                                                           
                                                           rdfs:label "node1:if1" ;
                                                           
-                                                          wireless2:isSink wireless2:link_node_node1 ;
+                                                          omn_resource:isSource wireless2:link_node_node1 ;
                                                           
-                                                          wireless2:isSource wireless2:link_node_node1 ;
+                                                          omn_resource:isSink wireless2:link_node_node1 ;
                                                           
                                                           omn:hasComponent <urn:publicid:IDN+omf:nitos+ol:channel+1> .
 
@@ -493,9 +470,9 @@ wireless2:valid_until2 rdf:type :NamedIndividual ,
                                                         
                                                         rdfs:label "node0:if1" ;
                                                         
-                                                        wireless2:isSink wireless2:link_node_node1 ;
+                                                        omn_resource:isSource wireless2:link_node_node1 ;
                                                         
-                                                        wireless2:isSource wireless2:link_node_node1 ;
+                                                        omn_resource:isSink wireless2:link_node_node1 ;
                                                         
                                                         omn:hasComponent <urn:publicid:IDN+omf:nitos+ol:channel+1> .
 
@@ -508,7 +485,7 @@ wireless2:valid_until2 rdf:type :NamedIndividual ,
                                           
                                           rdfs:label "1" ;
                                           
-                                          wireless2:usesFrequency <http://open-multinet.info/ontology/omn_wireless.owl#2.4Ghz-band> .
+                                          wireless2:usesFrequency <http://open-multinet.info/ontology/omn_wireless.owl#2.412Ghz-band> .
 
 
 

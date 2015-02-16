@@ -82,6 +82,29 @@
               rdfs:domain :Interface .
 
 
+###  http://open-multinet.info/ontology/omn-resource#isSink 
+
+:isSink rdf:type owl:ObjectProperty ;
+        
+                 rdfs:label "is sink"@en ;
+                                  
+                 rdfs:range :Link ;
+                 
+                 rdfs:domain :Interface .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isSource 
+
+:isSource rdf:type owl:ObjectProperty ;
+
+                   rdfs:label "is source"@en ;
+                                      
+                   rdfs:range :Link ;
+                   
+                   rdfs:domain :Interface .
+
+
 #################################################################
 #
 #    Data properties
