@@ -50,7 +50,7 @@ public class LoginManifestConverterTest {
 		Assert.assertTrue("should have a topology", topology.hasNext());
 
 		final InfModel infModel = new Parser(model).getInfModel();
-		final String outputRspec = ManifestConverter.getRSpec(infModel, "testbed.example.org");
+		final String outputRspec = ManifestConverter.getRSpec(infModel, "instageni.gpolab.bbn.com");
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);
