@@ -282,9 +282,7 @@ public class OMN2Tosca extends AbstractConverter {
   private static void setInstanceStates(Resource nodeTypeResource, TNodeType nodeType) {
     TTopologyElementInstanceStates instanceStates = objFactory.createTTopologyElementInstanceStates();
     
-    Set<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDFS.subClassOf, Omn_lifecycle.State).toSet();
-    Set<Resource> redundantStates = calculateRedundantResources(states);
-    states.removeAll(redundantStates);
+    Set<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDF.type, Omn_lifecycle.State).toSet();
     
     for(Resource state : states){
       InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
