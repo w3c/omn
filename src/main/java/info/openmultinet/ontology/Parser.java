@@ -3,6 +3,7 @@ package info.openmultinet.ontology;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -10,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
@@ -150,6 +152,7 @@ public class Parser {
 	public static void setCommonPrefixes(final Model model) {
 		model.setNsPrefix("omn", Omn.getURI());
 		model.setNsPrefix("omn-lifecycle", Omn_lifecycle.getURI());
+		model.setNsPrefix("omn-resource", Omn_resource.getURI());
 		model.setNsPrefix("rdf", RDF.getURI());
 		model.setNsPrefix("rdfs", RDFS.getURI());
 		model.setNsPrefix("owl", OWL.getURI());
@@ -196,7 +199,8 @@ public class Parser {
 
 	public static String toString(final Model model) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		RDFDataMgr.write(baos , model, Lang.TTL);
+		setCommonPrefixes(model);
+		RDFDataMgr.write(baos , model, Lang.TURTLE);
 		return baos.toString();
 	}
 

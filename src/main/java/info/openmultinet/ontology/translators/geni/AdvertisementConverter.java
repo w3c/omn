@@ -137,6 +137,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			RDFNode parent = ResourceFactory.createResource(rspecNode
 					.getComponentManagerId());
 			omnNode.addProperty(Omn_lifecycle.parentTo, parent);
+			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive, rspecNode.isExclusive());
 			omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
 
 			for (Object rspecNodeObject : rspecNode
