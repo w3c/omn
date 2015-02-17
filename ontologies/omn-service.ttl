@@ -60,6 +60,21 @@
        rdfs:range xsd:string .
 
 
+
+###  http://open-multinet.info/ontology/omn-lifecycle#command
+
+:command rdf:type owl:DatatypeProperty ;
+       
+       rdfs:comment "Execute Service command"@en ;
+       
+       rdfs:seeAlso "GENI Manifest RSpec v3: command"@en ;
+       
+       rdfs:domain :ExecuteService ;
+       
+       rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#hostname
 
 :hostname rdf:type owl:DatatypeProperty ;
@@ -73,6 +88,19 @@
        rdfs:range xsd:string .
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#installPath
+
+:installPath rdf:type owl:DatatypeProperty ;
+       
+       rdfs:comment "Install Service install path"@en ;
+       
+       rdfs:seeAlso "GENI Manifest RSpec v3: install_path"@en ;
+       
+       rdfs:domain :InstallService ;
+       
+       rdfs:range xsd:string.
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#port
 
 :port rdf:type owl:DatatypeProperty ;
@@ -83,7 +111,34 @@
        
        rdfs:domain :LoginService ;
        
+       rdfs:range xsd:integer .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#shell
+
+:shell rdf:type owl:DatatypeProperty ;
+       
+       rdfs:comment "Execute Service shell"@en ;
+       
+       rdfs:seeAlso "GENI Manifest RSpec v3: shell"@en ;
+       
+       rdfs:domain :ExecuteService ;
+       
        rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#url
+
+:url rdf:type owl:DatatypeProperty ;
+       
+       rdfs:comment "Install Service url"@en ;
+       
+       rdfs:seeAlso "GENI Manifest RSpec v3: url"@en ;
+       
+       rdfs:domain :InstallService ;
+       
+       rdfs:range xsd:anyURI.
+
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#username

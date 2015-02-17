@@ -19,6 +19,7 @@ import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -208,9 +209,28 @@ public class ManifestConverter extends AbstractConverter {
 
 			if (serviceResource.hasProperty(RDF.type,
 					Omn_service.ExecuteService)) {
+
+				// get command
+				String command = "";
+				if (serviceResource.hasProperty(Omn_service.command)) {
+					command += serviceResource.getProperty(Omn_service.command)
+							.getObject().asLiteral().getString();
+				}
+
+				// get shell
+				String shell = "";
+				if (serviceResource.hasProperty(Omn_service.shell)) {
+					shell += serviceResource.getProperty(Omn_service.shell)
+							.getObject().asLiteral().getString();
+				}
+
 				// create execute
 				ExecuteServiceContents excuteServiceContent = new ObjectFactory()
 						.createExecuteServiceContents();
+
+				excuteServiceContent.setCommand(command); // required
+				excuteServiceContent.setShell(shell); // required
+
 				JAXBElement<ExecuteServiceContents> executeService = new ObjectFactory()
 						.createExecute(excuteServiceContent);
 				serviceContents.getAnyOrLoginOrInstall().add(executeService);
@@ -218,9 +238,30 @@ public class ManifestConverter extends AbstractConverter {
 
 			if (serviceResource.hasProperty(RDF.type,
 					Omn_service.InstallService)) {
+				
+
+				// get install path
+				String installPath = "";
+				if (serviceResource.hasProperty(Omn_service.installPath)) {
+					installPath += serviceResource.getProperty(Omn_service.installPath)
+							.getObject().asLiteral().getString();
+				}
+
+				// get url
+				String url = "";
+				if (serviceResource.hasProperty(Omn_service.url)) {
+					url += serviceResource.getProperty(Omn_service.url)
+							.getObject().asLiteral().getString();
+				}
+
+				
 				// create execute
 				InstallServiceContents installServiceContent = new ObjectFactory()
 						.createInstallServiceContents();
+				
+				installServiceContent.setInstallPath(installPath); // required
+				installServiceContent.setUrl(url); // required
+				
 				JAXBElement<InstallServiceContents> installService = new ObjectFactory()
 						.createInstall(installServiceContent);
 				serviceContents.getAnyOrLoginOrInstall().add(installService);
@@ -348,22 +389,23 @@ public class ManifestConverter extends AbstractConverter {
 								// add authentication info
 								String authentication = serviceValue
 										.getAuthentication();
-								omnService.addProperty(
+								omnService.addLiteral(
 										Omn_service.authentication,
 										authentication);
 
 								// add hostname info
 								String hostname = serviceValue.getHostname();
-								omnService.addProperty(Omn_service.hostname,
+								omnService.addLiteral(Omn_service.hostname,
 										hostname);
 
 								// add port info
-								String port = serviceValue.getPort();
-								omnService.addProperty(Omn_service.port, port);
+								String portString = serviceValue.getPort();
+								int port = Integer.parseInt(portString);
+								omnService.addLiteral(Omn_service.port, port);
 
 								// add username info
 								String username = serviceValue.getUsername();
-								omnService.addProperty(Omn_service.username,
+								omnService.addLiteral(Omn_service.username,
 										username);
 							}
 
@@ -375,9 +417,18 @@ public class ManifestConverter extends AbstractConverter {
 								omnService = model.createResource();
 								omnService.addProperty(RDF.type,
 										Omn_service.ExecuteService);
+								ExecuteServiceContents serviceValue = (ExecuteServiceContents) ((JAXBElement<?>) serviceObject)
+										.getValue();
 
-								// NOTE: error in rspec manifest xsd, can't add
-								// attributes for execute service
+								// add command info
+								String command = serviceValue.getCommand();
+								omnService.addLiteral(Omn_service.command,
+										command);
+
+								// add shell info
+								String shell = serviceValue.getShell();
+								omnService
+										.addLiteral(Omn_service.shell, shell);
 							}
 
 							// if install service
@@ -388,9 +439,20 @@ public class ManifestConverter extends AbstractConverter {
 								omnService = model.createResource();
 								omnService.addProperty(RDF.type,
 										Omn_service.InstallService);
-
-								// NOTE: error in rspec manifest xsd, can't add
-								// attributes for install service
+								InstallServiceContents serviceValue = (InstallServiceContents) ((JAXBElement<?>) serviceObject)
+										.getValue();
+								
+								// add install path info
+								String installPath = serviceValue.getInstallPath();
+								omnService
+										.addLiteral(Omn_service.installPath, installPath);
+								
+								// add url path info
+								String url = serviceValue.getUrl();
+								URI urlURI = URI.create(url);
+								omnService
+										.addLiteral(Omn_service.url, urlURI);
+								
 							}
 
 							// add service to node
