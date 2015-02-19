@@ -157,6 +157,7 @@ public class Parser {
 		model.setNsPrefix("rdfs", RDFS.getURI());
 		model.setNsPrefix("owl", OWL.getURI());
 		model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+		model.setNsPrefix("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#");
 	}
 
 	public static Model parse(final String filename) {

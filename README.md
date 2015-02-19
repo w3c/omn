@@ -33,7 +33,7 @@ Assuming you have a running WildFly instance
  
 Then convert the file
 
-  curl --data-urlencode content@src/test/resources/request_bound.xml http://127.0.0.1:8080/omnlib/convert/request/ttl
+  curl --data-urlencode content@src/test/resources/geni/request/request_bound.xml http://127.0.0.1:8080/omnlib/convert/request/ttl
 
 ### Developing it
 
