@@ -178,13 +178,13 @@ rdfs:Literal
     rdfs:label "HTTP Version Not Supported"@en .
 
 <http://www.w3.org/2006/http#ConnectRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The CONNECT request"@en ;
     rdfs:label "Connect"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#Connection>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "An HTTP connection"@en ;
     rdfs:label "Connection"@en ;
     rdfs:subClassOf ([
@@ -196,25 +196,25 @@ rdfs:Literal
     ) .
 
 <http://www.w3.org/2006/http#DeleteRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The DELETE request"@en ;
     rdfs:label "Delete"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#GetRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The GET request"@en ;
     rdfs:label "Get"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#HeadRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The HEAD request"@en ;
     rdfs:label "Head"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#HeaderElement>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "An element of a comma-separated list in a field value"@en ;
     rdfs:label "Header element"@en ;
     rdfs:subClassOf ([
@@ -235,7 +235,7 @@ rdfs:Literal
     a owl:Class .
 
 <http://www.w3.org/2006/http#MessageHeader>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "A message header according to section 4.2 of HTTP 1.1"@en ;
     rdfs:label "Message header"@en ;
     rdfs:subClassOf ([
@@ -253,18 +253,18 @@ rdfs:Literal
     ) .
 
 <http://www.w3.org/2006/http#NewResponseCode>
-    a rdfs:Class, owl:Thing ;
+    a owl:Class, owl:Thing ;
     rdfs:comment "New HTTP Response Code. If you want to define new header names, subclass this stub."@en ;
     rdfs:label "New Response Code"@en .
 
 <http://www.w3.org/2006/http#OptionsRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The OPTIONS request"@en ;
     rdfs:label "Options"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#Param>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "A parameter for a header element"@en ;
     rdfs:label "Parameter"@en ;
     rdfs:subClassOf ([
@@ -282,24 +282,24 @@ rdfs:Literal
     ) .
 
 <http://www.w3.org/2006/http#PostRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The POST request"@en ;
     rdfs:label "Post"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#PutRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The PUT request"@en ;
     rdfs:label "Put"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
 
 <http://www.w3.org/2006/http#Request>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "An HTTP request"@en ;
     rdfs:label "Request"@en .
 
 <http://www.w3.org/2006/http#RequestURI>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The HTTP request URI"@en ;
     rdfs:label "Request URI"@en ;
     owl:oneOf (<http://www.w3.org/2006/http#asterisk>
@@ -307,12 +307,12 @@ rdfs:Literal
     ) .
 
 <http://www.w3.org/2006/http#Response>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The HTTP Response"@en ;
     rdfs:label "Response"@en .
 
 <http://www.w3.org/2006/http#ResponseCode>
-    a rdfs:Class, owl:Class ;
+    a owl:Class, owl:Class ;
     rdfs:comment "The HTTP Response Code"@en ;
     rdfs:label "Response code"@en ;
     owl:oneOf (<http://www.w3.org/2006/http#100>
@@ -360,7 +360,7 @@ rdfs:Literal
     ) .
 
 <http://www.w3.org/2006/http#TraceRequest>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:comment "The TRACE request"@en ;
     rdfs:label "Trace"@en ;
     rdfs:subClassOf <http://www.w3.org/2006/http#Request> .
@@ -419,7 +419,7 @@ rdfs:Literal
     rdfs:domain <http://www.w3.org/2006/http#MessageHeader> ;
     rdfs:label "Field name"@en ;
     rdfs:range [
-        a rdfs:Class ;
+        a owl:Class ;
         owl:unionOf (<http://www.w3.org/2006/http#HeaderName>
             rdfs:Literal
         )
