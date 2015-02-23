@@ -1,45 +1,130 @@
+@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
 @prefix omn:   <http://open-multinet.info/ontology/omn#> .
 @prefix osco:  <http://opensdncore.org/ontology/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-osco:subnet  a       owl:ObjectProperty ;
-        rdfs:domain  osco:ServiceContainer ;
-        rdfs:range   osco:Subnet .
+osco:MIN_NUM_INTF  a  owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
 
-osco:flavour  a      owl:DatatypeProperty ;
-        rdfs:domain  osco:ServiceContainer ;
+osco:VERSION  a      owl:DatatypeProperty ;
+        rdfs:domain  osco:hss ;
+        rdfs:range   xsd:string .
+
+osco:ssh  a              owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
+osco:key  a          owl:DatatypeProperty ;
+        rdfs:domain  osco:ssh ;
+        rdfs:range   xsd:string .
+
+osco:domain-name  a  owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:db-user  a      owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:id  a           owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:Subnet osco:Image ) ] ;
+        rdfs:range   xsd:string .
+
+osco:deployedOn  a          owl:ObjectProperty ;
+        rdfs:domain         omn:Resource ;
+        rdfs:range          osco:ServiceContainer ;
+        rdfs:subPropertyOf  omn:relatesTo .
+
+osco:ICSCF_PORT  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:DNS_INTF  a     owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:SCSCF_DIAMETER_PORT
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:DEFAULT_ROUTE_VIA
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:Image  a   owl:Class .
+
+osco:TEST_PARAM  a   owl:DatatypeProperty ;
+        rdfs:domain  osco:dummy ;
+        rdfs:range   xsd:string .
+
+osco:localDB  a      owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:requires  a            owl:ObjectProperty ;
+        rdfs:domain         omn:Resource ;
+        rdfs:range          omn:Resource ;
+        rdfs:subPropertyOf  omn:relatesTo .
+
+osco:additionals  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:dns ;
         rdfs:range   xsd:string .
 
 osco:REQUIRE_AUTH  a  owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
         rdfs:range   xsd:string .
 
-osco:ServiceContainer
-        a                owl:Class ;
-        rdfs:subClassOf  omn:Resource .
+osco:ICSCF_DIAMETER_PORT
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
 
-osco:Location  a  owl:Class .
+osco:datacenter  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:Subnet osco:Image ) ] ;
+        rdfs:range   xsd:string .
 
-osco:location  a     owl:ObjectProperty ;
+osco:DIAMETER_LISTEN_INTF
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:SCSCF_PORT  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:CONSOLE_PORT_BIND_ONE
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:CONSOLE_PORT_ONE
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:ICSCF_NAME  a   owl:DatatypeProperty ;
+        rdfs:domain  osco:cscfs ;
+        rdfs:range   xsd:string .
+
+osco:PCSCF_NAME  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:image  a        owl:ObjectProperty ;
         rdfs:domain  osco:ServiceContainer ;
-        rdfs:range   osco:Location .
+        rdfs:range   osco:Image .
 
-osco:nameserver  a   owl:DatatypeProperty ;
+osco:PORT  a         owl:DatatypeProperty ;
         rdfs:domain  osco:dummy ;
         rdfs:range   xsd:string .
 
-osco:minNumInst  a   owl:DatatypeProperty ;
-        rdfs:domain  osco:ServiceContainer ;
-        rdfs:range   xsd:int .
-
-osco:key  a          owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:ssh ) ] ;
-        rdfs:range   xsd:string .
-
-osco:PORT  a         owl:DatatypeProperty ;
+osco:parameter1  a   owl:DatatypeProperty ;
         rdfs:domain  osco:dummy ;
         rdfs:range   xsd:string .
 
@@ -47,43 +132,85 @@ osco:dummy  a            owl:Class ;
         rdfs:subClassOf  omn:Resource .
 
 osco:MGMT_INTF  a    owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:ssh osco:m2m_gateway ) ] ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:dns osco:m2m_server osco:m2m_gateway osco:cscfs osco:dns osco:hss osco:ssh ) ] ;
         rdfs:range   xsd:string .
 
-osco:TEST_PARAM  a   owl:DatatypeProperty ;
+osco:CONSOLE_PORT_BIND_TWO
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:nameserver  a   owl:DatatypeProperty ;
         rdfs:domain  osco:dummy ;
         rdfs:range   xsd:string .
 
-osco:fixedIp  a      owl:DatatypeProperty ;
+osco:CONSOLE_PORT_TWO
+        a            owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:APP_PORT  a     owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
+        rdfs:range   xsd:string .
+
+osco:floatingIp  a   owl:DatatypeProperty ;
         rdfs:domain  osco:Subnet ;
         rdfs:range   xsd:string .
 
-osco:m2m_gateway  a      owl:Class ;
-        rdfs:subClassOf  omn:Resource .
-
-osco:deployedOn  a          owl:ObjectProperty ;
-        rdfs:domain         omn:Resource ;
-        rdfs:range          osco:ServiceContainer ;
-        rdfs:subPropertyOf  omn:relatesTo .
-
-osco:requires  a            owl:ObjectProperty ;
-        rdfs:domain         omn:Resource ;
-        rdfs:range          omn:Resource ;
-        rdfs:subPropertyOf  omn:relatesTo .
-
-osco:m2m_server  a       owl:Class ;
-        rdfs:subClassOf  omn:Resource .
-
 osco:name  a         owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:Subnet osco:Location ) ] ;
+        rdfs:range   xsd:string .
+
+osco:location  a     owl:ObjectProperty ;
+        rdfs:domain  osco:ServiceContainer ;
+        rdfs:range   osco:Location .
+
+osco:fixedIp  a      owl:DatatypeProperty ;
+        rdfs:domain  osco:Subnet ;
         rdfs:range   xsd:string .
 
 osco:maxNumInst  a   owl:DatatypeProperty ;
         rdfs:domain  osco:ServiceContainer ;
         rdfs:range   xsd:int .
 
-osco:ssh  a              owl:Class ;
+osco:db-name  a      owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:subnet  a       owl:ObjectProperty ;
+        rdfs:domain  osco:ServiceContainer ;
+        rdfs:range   osco:Subnet .
+
+osco:m2m_gateway  a      owl:Class ;
         rdfs:subClassOf  omn:Resource .
+
+osco:SLF_PRESENCE  a  owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns osco:cscfs osco:hss ) ] ;
+        rdfs:range   xsd:string .
+
+osco:db-provi  a     owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:ServiceContainer
+        a                owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
+osco:PCSCF_PORT  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:SERVICE_PORT  a  owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
+        rdfs:range   xsd:string .
+
+osco:mgmt  a         owl:DatatypeProperty ;
+        rdfs:domain  osco:Subnet ;
+        rdfs:range   xsd:boolean .
+
+osco:minNumInst  a   owl:DatatypeProperty ;
+        rdfs:domain  osco:ServiceContainer ;
+        rdfs:range   xsd:int .
 
 osco:LOGGING_FILE  a  owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
@@ -93,38 +220,42 @@ osco:parameter2  a   owl:DatatypeProperty ;
         rdfs:domain  osco:dummy ;
         rdfs:range   xsd:string .
 
-osco:Image  a   owl:Class .
-
-osco:image  a        owl:ObjectProperty ;
-        rdfs:domain  osco:ServiceContainer ;
-        rdfs:range   osco:Image .
-
-osco:floatingIp  a   owl:DatatypeProperty ;
-        rdfs:domain  osco:Subnet ;
-        rdfs:range   xsd:string .
-
-osco:id  a           owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:Subnet osco:Image ) ] ;
-        rdfs:range   xsd:string .
-
 osco:Subnet  a  owl:Class .
 
-osco:mgmt  a         owl:DatatypeProperty ;
-        rdfs:domain  osco:Subnet ;
-        rdfs:range   xsd:boolean .
+osco:dns  a              owl:Class ;
+        rdfs:subClassOf  omn:Resource .
 
-osco:APP_PORT  a     owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
+osco:NET_A_INTF  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:dns ) ] ;
         rdfs:range   xsd:string .
 
-osco:datacenter  a   owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:Subnet osco:Image ) ] ;
+osco:cscfs  a            owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
+osco:port  a         owl:DatatypeProperty ;
+        rdfs:domain  osco:hss ;
         rdfs:range   xsd:string .
 
-osco:parameter1  a   owl:DatatypeProperty ;
-        rdfs:domain  osco:dummy ;
+osco:Location  a  owl:Class .
+
+osco:db-pw  a        owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:hss ) ] ;
         rdfs:range   xsd:string .
 
-osco:SERVICE_PORT  a  owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
+osco:SCSCF_NAME  a   owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:cscfs osco:dns ) ] ;
+        rdfs:range   xsd:string .
+
+osco:flavour  a      owl:DatatypeProperty ;
+        rdfs:domain  osco:ServiceContainer ;
+        rdfs:range   xsd:string .
+
+osco:m2m_server  a       owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
+osco:hss  a              owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
+osco:domain-ns  a    owl:DatatypeProperty ;
+        rdfs:domain  osco:dns ;
         rdfs:range   xsd:string .
