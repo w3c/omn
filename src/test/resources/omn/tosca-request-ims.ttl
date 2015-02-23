@@ -1,0 +1,133 @@
+@prefix : <http://open-multinet.info/ontology/examples/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix osco: <http://opensdncore.org/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tosca: <http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/> .
+
+:namedTopology3 rdf:type omn:Topology ,
+                         owl:NamedIndividual ;
+                
+                omn:hasResource _:dnsContainer ,
+                                _:dns1 ,
+                                _:imsContainer ,
+                                _:hss1 ,
+                                _:cscfs1 .
+
+
+_:imsContainer rdf:type osco:ServiceContainer ,
+                     owl:NamedIndividual ;
+                     
+            omn-lifecycle:hasID "imsContainer"^^xsd:string ;     
+                     
+            osco:image _:image1 ;
+            
+            osco:subnet _:subnet1 ;
+            
+            osco:location _:berlin ;
+            
+            osco:flavour "1024MB_10GB"^^xsd:string ;
+            
+            osco:minNumInst 1 ;
+            
+            osco:maxNumInst 1 .
+
+_:dnsContainer rdf:type osco:ServiceContainer ,
+                     owl:NamedIndividual ;
+                     
+            omn-lifecycle:hasID "dnsContainer"^^xsd:string ;     
+                     
+            osco:image _:image1 ;
+            
+            osco:subnet _:subnet1 ;
+            
+            osco:location _:berlin ;
+            
+            osco:flavour "1024MB_10GB"^^xsd:string ;
+            
+            osco:minNumInst 1 ;
+            
+            osco:maxNumInst 1 .
+
+
+_:berlin rdf:type osco:Location ,
+                        owl:NamedIndividual ;
+                        
+                     osco:name "Berlin"^^xsd:string .
+
+
+_:image1 rdf:type osco:Image ,
+                      owl:NamedIndividual ;
+                      
+         osco:datacenter "AV-Openstack"^^xsd:string ;
+         
+         osco:id "a498303c-5d09-4cd2-ab77-faf187eb9192"^^xsd:string .
+
+
+_:subnet1 rdf:type osco:Subnet ,
+                      owl:NamedIndividual ;
+                      
+         osco:name "trescimo-net"^^xsd:string ;
+         
+         osco:datacenter "AV-Openstack"^^xsd:string ;
+                      
+         osco:mgmt "true"^^xsd:boolean ;
+         
+         osco:floatingIp "random"^^xsd:string .
+
+
+:cscfsDeployedOnIMSContainer rdf:type osco:deployedOn ,
+                               owl:NamedIndividual .
+
+:hssDeployedOnIMSContainer rdf:type osco:deployedOn ,
+                               owl:NamedIndividual .
+
+:dnsDeployedOnDNSContainer rdf:type osco:deployedOn ,
+                               owl:NamedIndividual .
+
+:cscfsRequiresDNS rdf:type osco:requires, 
+                             owl:NamedIndividual .
+
+:cscfsRequiresHSS rdf:type osco:requires, 
+                             owl:NamedIndividual .
+
+:dnsRequiresHSS rdf:type osco:requires, 
+                             owl:NamedIndividual .
+
+_:dns1 rdf:type osco:dns ,
+                 owl:NamedIndividual ;
+                 
+        omn-lifecycle:hasID "dns1"^^xsd:string ;   
+        
+        osco:domain-ns      "ns.mitja.test"^^xsd:string ;   
+
+        osco:domain-name    "mitja.test"^^xsd:string ; 
+        
+        osco:additionals    "dns.mitja.test"^^xsd:string ; 
+
+        :dnsRequiresHSS     _:hss1 ;
+
+        :dnsDeployedOnDNSContainer _:dnsContainer .
+
+_:hss1 rdf:type osco:hss ,
+                 owl:NamedIndividual ;
+                 
+        omn-lifecycle:hasID "hss1"^^xsd:string ;   
+        
+        :hssDeployedOnIMSContainer _:imsContainer .
+
+
+_:cscfs1 rdf:type osco:cscfs ,
+                 owl:NamedIndividual ;
+                 
+        omn-lifecycle:hasID "cscfs1"^^xsd:string ;   
+        
+        :cscfsRequiresDNS         _:dns1 ;
+        
+        :cscfsRequiresHSS         _:hss1 ;
+
+        :cscfsDeployedOnIMSContainer _:imsContainer .
+
