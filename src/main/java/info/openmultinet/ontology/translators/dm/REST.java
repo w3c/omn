@@ -24,7 +24,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.jena.riot.RiotException;
 
-@Path("/convert")
+@Path("/")
 public class REST extends DeliveryMechanism {
 
 	private static final Logger LOG = Logger.getLogger(REST.class.getName());

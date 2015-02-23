@@ -209,16 +209,22 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	public String getRSpec(final Model model) throws JAXBException,
 			InvalidModelException {
+		final JAXBElement<RSpecContents> rspec = getRSpecObject(model);
+
+		return AbstractConverter.toString(rspec, AdvertisementConverter.JAXB);
+	}
+
+	public JAXBElement<RSpecContents> getRSpecObject(final Model model)
+			throws InvalidModelException {
 		final RSpecContents advertisement = new RSpecContents();
 		advertisement.setType(RspecTypeContents.ADVERTISEMENT);
 		advertisement.setGeneratedBy(AbstractConverter.VENDOR);
 		setTimeInformation(advertisement);
 
 		model2rspec(model, advertisement);
-		final JAXBElement<RSpecContents> rspec = new ObjectFactory()
+		final JAXBElement<RSpecContents> rspec = this.of
 				.createRspec(advertisement);
-
-		return AbstractConverter.toString(rspec, AdvertisementConverter.JAXB);
+		return rspec;
 	}
 
 	private void model2rspec(final Model model, final RSpecContents manifest)
@@ -256,7 +262,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			}
 
 			manifest.getAnyOrNodeOrLink().add(
-					new ObjectFactory().createNode(geniNode));
+					this.of.createNode(geniNode));
 		}
 	}
 
@@ -290,7 +296,6 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		StmtIterator parentOf = omnResource.getResource().listProperties(
 				Omn_lifecycle.parentOf);
-		ObjectFactory of = new ObjectFactory();
 		SliverType sliver;
 
 		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
@@ -308,7 +313,6 @@ public class AdvertisementConverter extends AbstractConverter {
 		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
 
 		StmtIterator types = omnResource.getResource().listProperties(RDF.type);
-		ObjectFactory of = new ObjectFactory();
 		HardwareTypeContents hwType;
 
 		while (types.hasNext()) {
@@ -352,6 +356,10 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 		manifest.setGenerated(xmlGrogerianCalendar);
 		manifest.setExpires(xmlGrogerianCalendar);
+	}
+
+	public static String toString(JAXBElement<RSpecContents> advertisement) throws JAXBException {
+		return toString (advertisement, JAXB);
 	}
 
 }
