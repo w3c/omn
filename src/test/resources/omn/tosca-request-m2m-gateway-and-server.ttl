@@ -63,7 +63,7 @@ _:image1 rdf:type osco:Image ,
                       
          osco:datacenter "AV-Openstack"^^xsd:string ;
          
-         osco:id "a498303c-5d09-4cd2-ab77-faf187eb9192"^^xsd:string .
+         osco:id "074b99ed-0e8a-4307-8e59-87ca9f22ca53"^^xsd:string .
 
 
 _:subnet1 rdf:type osco:Subnet ,
@@ -100,7 +100,7 @@ _:gw1 rdf:type osco:m2m_gateway ,
 
         osco:REQUIRE_AUTH   "false"^^xsd:string ;   
 
-        osco:LOGGING_FILE   "null"^^xsd:string ;   
+        osco:LOGGING_FILE   "/var/log/openmtc/gscl.log"^^xsd:string ;   
 
         :deployedOnGWContainer _:m2mGWContainer .
 
@@ -118,7 +118,7 @@ _:server1 rdf:type osco:m2m_server ,
 
         osco:REQUIRE_AUTH   "false"^^xsd:string ;   
 
-        osco:LOGGING_FILE   "null"^^xsd:string ;   
+        osco:LOGGING_FILE   "/var/log/openmtc/nscl.log"^^xsd:string ;   
 
         :requiresGW         _:gw1 ;
 
