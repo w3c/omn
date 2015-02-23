@@ -162,6 +162,7 @@
 					<includes>
 						<include>ontologies/omn*.ttl</include>
 						<include>import/geo.ttl</include>
+						<include>import/http.ttl</include>
 						<include>src/test/resources/ontologies/osco.ttl</include>
 					</includes>
 					<fileOptions>
