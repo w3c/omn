@@ -20,6 +20,7 @@ import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyElementInstanc
 import info.openmultinet.ontology.translators.tosca.jaxb.TTopologyTemplate;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -578,7 +579,7 @@ public class OMN2Tosca extends AbstractConverter {
     Set<Resource> redundantResources = new HashSet<Resource>();
     for(Resource resource : resources){
       for(Resource resource2 : resources){
-        if(resource.equals(OWL2.NamedIndividual) || resource.equals(Omn.Service)){
+        if(resource.equals(OWL2.NamedIndividual) || resource.equals(Omn.Service) || resource.equals(Omn_resource.Node) || resource.equals(Omn_resource.NetworkObject)){
           redundantResources.add(resource);
         }
         else if(resource.hasProperty(RDFS.subClassOf, resource2) && !resource.equals(resource2)){
