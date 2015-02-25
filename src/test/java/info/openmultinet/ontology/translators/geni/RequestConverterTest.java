@@ -95,7 +95,7 @@ public class RequestConverterTest {
         final Model model = RequestConverter.getModel(inputRspec);
         final ResIterator resourceIterator = model.listResourcesWithProperty(Omn.isResourceOf);
 
-        Assert.assertEquals(resourceIterator.nextResource().getProperty(RDF.type).getObject().asResource().getURI(), "raw-pc");
+        Assert.assertTrue(resourceIterator.nextResource().hasProperty(RDF.type, model.getResource("http://open-multinet.info/example#raw-pc")));
     }
 
 	@Test
