@@ -44,13 +44,13 @@ _:image1 rdf:type osco:Image ,
                       
          osco:datacenter "AV-Openstack"^^xsd:string ;
          
-         osco:id "ffb9a89e-3a00-4a1b-a1f8-f4e135122994"^^xsd:string .
+         osco:id "074b99ed-0e8a-4307-8e59-87ca9f22ca53"^^xsd:string .
 
 
 _:subnet1 rdf:type osco:Subnet ,
                       owl:NamedIndividual ;
                       
-         osco:name "trescimo-net"^^xsd:string ;
+         osco:name "av-net"^^xsd:string ;
          
          osco:datacenter "AV-Openstack"^^xsd:string ;
                       

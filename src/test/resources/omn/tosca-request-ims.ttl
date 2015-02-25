@@ -70,7 +70,7 @@ _:image1 rdf:type osco:Image ,
 _:subnet1 rdf:type osco:Subnet ,
                       owl:NamedIndividual ;
                       
-         osco:name "trescimo-net"^^xsd:string ;
+         osco:name "av-net"^^xsd:string ;
          
          osco:datacenter "AV-Openstack"^^xsd:string ;
                       

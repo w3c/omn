@@ -69,7 +69,7 @@ _:image1 rdf:type osco:Image ,
 _:subnet1 rdf:type osco:Subnet ,
                       owl:NamedIndividual ;
                       
-         osco:name "trescimo-net"^^xsd:string ;
+         osco:name "av-net"^^xsd:string ;
          
          osco:datacenter "AV-Openstack"^^xsd:string ;
                       
@@ -114,7 +114,7 @@ _:server1 rdf:type osco:m2m_server ,
 
         osco:SERVICE_PORT   "0"^^xsd:string ;   
 
-        osco:APP_PORT       "15000"^^xsd:string ;   
+        osco:APP_PORT       "15001"^^xsd:string ;   
 
         osco:REQUIRE_AUTH   "false"^^xsd:string ;   
 
