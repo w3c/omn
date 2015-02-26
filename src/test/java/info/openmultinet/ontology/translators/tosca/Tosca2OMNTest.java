@@ -25,7 +25,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 public class Tosca2OMNTest {
   
   @Test
-  public void testConvertToscaRequest() throws JAXBException, InvalidModelException, UnsupportedException {
+  public void testConvertToscaDummyRequest() throws JAXBException, InvalidModelException, UnsupportedException {
     InputStream input = getClass().getResourceAsStream("/tosca/request-dummy.xml");
     
     final Model model = Tosca2OMN.getModel(input);

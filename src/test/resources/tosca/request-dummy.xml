@@ -51,7 +51,7 @@
     </Types>
     <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3" name="namedTopology3">
         <TopologyTemplate>
-            <NodeTemplate name="dummy1" id="dummy1" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="dummy1" id="73852ea284016f835b7168bca89bfc60" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:dummyProperties>
                         <osco:TEST_PARAM>foo</osco:TEST_PARAM>
@@ -60,7 +60,7 @@
                     </osco:dummyProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="container1" id="container1" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="container1" id="836ba03dda5bc774e77f66d23e778c62" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties>
                         <osco:maxNumInst>1</osco:maxNumInst>
@@ -73,18 +73,18 @@
                             <osco:floatingIp>random</osco:floatingIp>
                             <osco:mgmt>true</osco:mgmt>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
-                            <osco:name>trescimo-net</osco:name>
+                            <osco:name>av-net</osco:name>
                         </osco:subnet>
                         <osco:image>
-                            <osco:id>ffb9a89e-3a00-4a1b-a1f8-f4e135122994</osco:id>
+                            <osco:id>074b99ed-0e8a-4307-8e59-87ca9f22ca53</osco:id>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                         </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
             <RelationshipTemplate name="deployedOnContainer1" id="http://open-multinet.info/ontology/examples/deployedOnContainer1" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="dummy1"/>
-                <TargetElement ref="container1"/>
+                <SourceElement ref="73852ea284016f835b7168bca89bfc60"/>
+                <TargetElement ref="836ba03dda5bc774e77f66d23e778c62"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>
@@ -104,8 +104,8 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
         </InstanceStates>
     </NodeType>
     <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
@@ -124,8 +124,8 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
         </InstanceStates>
     </NodeType>
     <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
