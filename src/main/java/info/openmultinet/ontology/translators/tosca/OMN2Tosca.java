@@ -314,9 +314,8 @@ public class OMN2Tosca extends AbstractConverter {
   }
   
   private static void setNameAndTypeAndID(Resource node, Resource nodeTypeResource, TNodeTemplate nodeTemplate) {
-    String name = getName(node);
-    nodeTemplate.setName(name);
-    nodeTemplate.setId(name);
+    nodeTemplate.setName(getName(node));
+    nodeTemplate.setId(getId(node));
     
     String nodeTypeNameSpace = getXMLNamespace(nodeTypeResource);
     QName type;
@@ -339,6 +338,15 @@ public class OMN2Tosca extends AbstractConverter {
       else{
         return resource.getURI();
       }
+    }
+  }
+  
+  private static String getId(Resource resource){
+    if(resource.isAnon()){
+      return resource.getId().getLabelString();
+    }
+    else{
+      return resource.getURI();
     }
   }
   
