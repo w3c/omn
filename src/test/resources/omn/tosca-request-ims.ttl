@@ -13,9 +13,12 @@
                 
                 omn:hasResource _:dnsContainer ,
                                 _:dns1 ,
-                                _:imsContainer ,
+                                _:hssContainer ,
                                 _:hss1 ,
-                                _:cscfs1 .
+                                _:imsContainer ,
+                                _:pcscf1 ,
+                                _:scscf1 ,
+                                _:icscf1 .
 
 
 _:imsContainer rdf:type osco:ServiceContainer ,
@@ -23,48 +26,84 @@ _:imsContainer rdf:type osco:ServiceContainer ,
                      
             omn-lifecycle:hasID "imsContainer"^^xsd:string ;     
                      
-            osco:image _:image1 ;
+            osco:image _:imsImage ;
             
             osco:subnet _:subnet1 ;
             
             osco:location _:berlin ;
             
-            osco:flavour "1024MB_10GB"^^xsd:string ;
+            osco:flavour "2048MB_20GB"^^xsd:string ;
             
             osco:minNumInst 1 ;
             
-            osco:maxNumInst 1 .
+            osco:maxNumInst 3 .
+
+
+_:imsImage rdf:type osco:Image ,
+                      owl:NamedIndividual ;
+                      
+         osco:datacenter "AV-Openstack"^^xsd:string ;
+         
+         osco:id "8c526897-b8b0-433e-9a0f-97e5b01c7824"^^xsd:string .
+
+
+
+_:hssContainer rdf:type osco:ServiceContainer ,
+                     owl:NamedIndividual ;
+                     
+            omn-lifecycle:hasID "hssContainer"^^xsd:string ;     
+                     
+            osco:image _:hssImage ;
+            
+            osco:subnet _:subnet1 ;
+            
+            osco:location _:berlin ;
+            
+            osco:flavour "2048MB_20GB"^^xsd:string ;
+            
+            osco:minNumInst 1 ;
+            
+            osco:maxNumInst 3 .
+
+
+_:hssImage rdf:type osco:Image ,
+                      owl:NamedIndividual ;
+                      
+         osco:datacenter "AV-Openstack"^^xsd:string ;
+         
+         osco:id "df8015e8-0011-4a70-bb7a-a9b5d8bc6bf1"^^xsd:string .
+
 
 _:dnsContainer rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
                      
             omn-lifecycle:hasID "dnsContainer"^^xsd:string ;     
                      
-            osco:image _:image1 ;
+            osco:image _:dnsImage ;
             
             osco:subnet _:subnet1 ;
             
             osco:location _:berlin ;
             
-            osco:flavour "1024MB_10GB"^^xsd:string ;
+            osco:flavour "2048MB_20GB"^^xsd:string ;
             
             osco:minNumInst 1 ;
             
             osco:maxNumInst 1 .
 
 
-_:berlin rdf:type osco:Location ,
-                        owl:NamedIndividual ;
-                        
-                     osco:name "Berlin"^^xsd:string .
-
-
-_:image1 rdf:type osco:Image ,
+_:dnsImage rdf:type osco:Image ,
                       owl:NamedIndividual ;
                       
          osco:datacenter "AV-Openstack"^^xsd:string ;
          
-         osco:id "a498303c-5d09-4cd2-ab77-faf187eb9192"^^xsd:string .
+         osco:id "b4a8a9cf-91ce-47ed-92e0-0f91512409b4"^^xsd:string .
+
+
+_:berlin rdf:type osco:Location ,
+                        owl:NamedIndividual ;
+                        
+                     osco:name "Berlin"^^xsd:string .
 
 
 _:subnet1 rdf:type osco:Subnet ,
@@ -79,55 +118,137 @@ _:subnet1 rdf:type osco:Subnet ,
          osco:floatingIp "random"^^xsd:string .
 
 
-:cscfsDeployedOnIMSContainer rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-:hssDeployedOnIMSContainer rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-:dnsDeployedOnDNSContainer rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-:cscfsRequiresDNS rdf:type osco:requires, 
-                             owl:NamedIndividual .
-
-:cscfsRequiresHSS rdf:type osco:requires, 
-                             owl:NamedIndividual .
-
-:dnsRequiresHSS rdf:type osco:requires, 
-                             owl:NamedIndividual .
-
-_:dns1 rdf:type osco:dns ,
-                 owl:NamedIndividual ;
+_:dns1 rdf:type osco:dns , owl:NamedIndividual ;
                  
-        omn-lifecycle:hasID "dns1"^^xsd:string ;   
+        omn-lifecycle:hasID "dns1"^^xsd:string ;  
         
-        osco:domain-ns      "ns.mitja.test"^^xsd:string ;   
-
-        osco:domain-name    "mitja.test"^^xsd:string ; 
+        osco:MIN_NUM_INTF   "1"^^xsd:string ; 
         
-        osco:additionals    "dns.mitja.test"^^xsd:string ; 
+        osco:NET_A_INTF     "2"^^xsd:string ;
+        
+        osco:domain-ns      "ns.openepc.test."^^xsd:string ;   
 
-        :dnsRequiresHSS     _:hss1 ;
+        osco:domain-name    "openepc.test."^^xsd:string ;
+        
+        osco:additionals    "dns.openepc.test."^^xsd:string ;
+        
+        osco:deployedOn     _:dnsContainer .
 
-        :dnsDeployedOnDNSContainer _:dnsContainer .
 
 _:hss1 rdf:type osco:hss ,
                  owl:NamedIndividual ;
                  
         omn-lifecycle:hasID "hss1"^^xsd:string ;   
         
-        :hssDeployedOnIMSContainer _:imsContainer .
+        osco:localDB                "1"^^xsd:string ;
+        
+        osco:db-provi               "1"^^xsd:string ;
+        
+        osco:db-user                "hss"^^xsd:string ;
+        
+        osco:db-pw                  "heslo"^^xsd:string ;
+          
+        osco:db-name                "hss_db_chess"^^xsd:string ;
+        
+        osco:domain-name            "openepc.test"^^xsd:string ;
+        
+        osco:port                   "3868"^^xsd:string ;
+        
+        osco:SLF_PRESENCE           "false"^^xsd:string ;
+        
+        osco:CONSOLE_PORT_ONE       "10003"^^xsd:string ;
+        
+        osco:CONSOLE_PORT_TWO       "10000"^^xsd:string ;
+        
+        osco:CONSOLE_PORT_BIND_ONE  "0.0.0.0"^^xsd:string ;
+        
+        osco:CONSOLE_PORT_BIND_TWO  "0.0.0.0"^^xsd:string ;
+        
+        osco:DIAMETER_LISTEN_INTF   "1"^^xsd:string ;
+        
+        osco:MGMT_INTF              "1"^^xsd:string ;
+        
+        osco:DNS_INTF               "1"^^xsd:string ;
+        
+        osco:DEFAULT_ROUTE_VIA      "slf"^^xsd:string ;
+        
+        osco:MIN_NUM_INTF           "1"^^xsd:string ;
+        
+        osco:requires  _:dns1 ;
+        
+        osco:deployedOn _:hssContainer .
 
 
-_:cscfs1 rdf:type osco:cscfs ,
+_:scscf1 rdf:type osco:scscf ,
+                  owl:NamedIndividual ;
+                  
+        omn-lifecycle:hasID         "scscf1"^^xsd:string ;   
+        
+        osco:SLF_PRESENCE           "false"^^xsd:string ;
+       
+        osco:DIAMETER_LISTEN_INTF   "1"^^xsd:string ;
+        
+        osco:DIAMETER_PORT          "3870"^^xsd:string ;
+        
+        osco:SCSCF_PORT             "6060"^^xsd:string ;
+        
+        osco:SCSCF_NAME             "scscf"^^xsd:string ;
+        
+        osco:MIN_NUM_INTF           "1"^^xsd:string ;
+        
+        osco:MGMT_INTF              "1"^^xsd:string ;
+        
+        osco:DNS_INTF               "1"^^xsd:string ;
+        
+        osco:requires               _:dns1 , _:hss1 ;
+        
+        osco:deployedOn             _:imsContainer .
+
+
+_:icscf1 rdf:type osco:icscf ,
+                  owl:NamedIndividual ;
+                  
+        omn-lifecycle:hasID         "icscf1"^^xsd:string ;   
+        
+        osco:SLF_PRESENCE           "false"^^xsd:string ;
+       
+        osco:DIAMETER_LISTEN_INTF   "1"^^xsd:string ;
+        
+        osco:MIN_NUM_INTF           "1"^^xsd:string ;
+        
+        osco:MGMT_INTF              "1"^^xsd:string ;
+        
+        osco:DNS_INTF               "1"^^xsd:string ;
+        
+        osco:DIAMETER_PORT          "3869"^^xsd:string ;
+        
+        osco:ICSCF_PORT             "5060"^^xsd:string ;
+        
+        osco:ICSCF_NAME             "icscf"^^xsd:string ;
+        
+        osco:requires               _:dns1 , _:hss1 , _:scscf1 ;
+        
+        osco:deployedOn             _:imsContainer .
+
+
+_:pcscf1 rdf:type osco:cscfs ,
                  owl:NamedIndividual ;
                  
-        omn-lifecycle:hasID "cscfs1"^^xsd:string ;   
+        omn-lifecycle:hasID         "pcscf1"^^xsd:string ;   
         
-        :cscfsRequiresDNS         _:dns1 ;
+        osco:DIAMETER_LISTEN_INTF   "1"^^xsd:string ;
         
-        :cscfsRequiresHSS         _:hss1 ;
-
-        :cscfsDeployedOnIMSContainer _:imsContainer .
+        osco:MIN_NUM_INTF           "1"^^xsd:string ;
+        
+        osco:MGMT_INTF              "1"^^xsd:string ;
+        
+        osco:DNS_INTF               "1"^^xsd:string ;
+        
+        osco:PCSCF_PORT             "4060"^^xsd:string ;
+        
+        osco:PCSCF_NAME             "pcscf"^^xsd:string ;
+        
+        osco:requires               _:dns1 ;
+        
+        osco:deployedOn _:imsContainer .
 

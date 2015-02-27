@@ -6,6 +6,8 @@ import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespaces
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedException;
+import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,7 +40,7 @@ public class RoundtripTest {
   
   @Test
   public void testOMN2Tosca2OMN() throws InvalidModelException, JAXBException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, UnsupportedException {
-    InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request-m2m-gateway-and-server.ttl");
+    InputStream input = this.getClass().getResourceAsStream("/omn/tosca-request-openmtc.ttl");
     Parser parser = new Parser(input, additionalOntologies);
     
     final InfModel model = parser.getInfModel();
@@ -62,7 +64,7 @@ public class RoundtripTest {
   
   @Test
   public void testTosca2OMN2Tosca() throws JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException{
-    InputStream input = this.getClass().getResourceAsStream("/tosca/response-openmtc.xml");
+    InputStream input = this.getClass().getResourceAsStream("/tosca/response-ims.xml");
     final Model model = Tosca2OMN.getModel(input);
     
     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -70,6 +72,13 @@ public class RoundtripTest {
     String serializedModel = baos.toString();
     
     System.out.println(serializedModel);
+    
+    Assert.assertTrue("Should contain a topology resource", model.containsResource(Omn.Topology));
+    Assert.assertTrue("Should contain a dns node resource", model.containsResource(Osco.dns));
+    Assert.assertTrue("Should contain a hss node resource", model.containsResource(Osco.hss));
+    Assert.assertTrue("Should contain a scscf node resource", model.containsResource(Osco.scscf));
+    Assert.assertTrue("Should contain a icscf node resource", model.containsResource(Osco.icscf));
+    Assert.assertTrue("Should contain a pcscf node resource", model.containsResource(Osco.cscfs));
     
     InputStream modelStream = new ByteArrayInputStream(serializedModel.getBytes());
     Parser parser = new Parser(modelStream, additionalOntologies);
