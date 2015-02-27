@@ -391,7 +391,7 @@ public class OMN2Tosca extends AbstractConverter {
       Statement propertyStatement = propertiesIterator.next();
       Property property = propertyStatement.getPredicate();
       
-      if(!irrelevantProperties.contains(property)){
+      if(!irrelevantProperties.contains(property) && !isRelationshipProperty(property)){
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
           Element subSequence = createObjectPropertyType(property, propertiesSeq);
           Resource subNode = propertyStatement.getResource();
@@ -410,7 +410,7 @@ public class OMN2Tosca extends AbstractConverter {
       Statement propertyStatement = propertiesIterator.next();
       Property property = propertyStatement.getPredicate();
       
-      if(!irrelevantProperties.contains(property)){
+      if(!irrelevantProperties.contains(property) && !isRelationshipProperty(property)){
         if(property.hasProperty(RDF.type, OWL.ObjectProperty)){
           createObjectProperty(propertyStatement, element, namespace, nodeType);
         }
@@ -459,24 +459,46 @@ public class OMN2Tosca extends AbstractConverter {
       Statement relationStatement = relationIterator.next();
       Property relation = relationStatement.getPredicate();
       
-      StmtIterator relationTypeIterator = relation.listProperties(RDF.type);
-      while(relationTypeIterator.hasNext()){
-        Resource relationType = relationTypeIterator.next().getResource();
-        if (relationType.hasProperty(RDFS.subPropertyOf, Omn.relatesTo)) {
-          relationshipTemplates.add(createRelationshipTemplate(relationStatement, nodesAndRelationshipTemplates, relationType));
-        }
+      if(isRelationshipProperty(relation)){
+        relationshipTemplates.add(createRelationshipTemplate(relationStatement, nodesAndRelationshipTemplates));
       }
     }
     return relationshipTemplates;
   }
+  
+  private static boolean isRelationshipProperty(Property property){
+    if(property.equals(Omn.relatesTo)){
+      return false;
+    }
+    try{
+      getRelationshipPropertyType(property);
+    } catch(RequiredResourceNotFoundException e){
+      return false;
+    }
+    return true;
+  }
+  
+  private static Resource getRelationshipPropertyType(Property property) throws RequiredResourceNotFoundException{
+    if(property.hasProperty(RDFS.subPropertyOf, Omn.relatesTo)){
+      return property;
+    }
+    StmtIterator relationTypeIterator = property.listProperties(RDF.type);
+    while(relationTypeIterator.hasNext()){
+      Resource relationType = relationTypeIterator.next().getResource();
+      if (relationType.hasProperty(RDFS.subPropertyOf, Omn.relatesTo)) {
+        return relationType;
+      }
+    }
+    throw new RequiredResourceNotFoundException("No relationship type found for relation: "+property);
+  }
 
-  private static TRelationshipTemplate createRelationshipTemplate(Statement relationStatement, List<TEntityTemplate> nodesAndRelationshipTemplates, Resource relationType) throws RequiredResourceNotFoundException {
+  private static TRelationshipTemplate createRelationshipTemplate(Statement relationStatement, List<TEntityTemplate> nodesAndRelationshipTemplates) throws RequiredResourceNotFoundException {
     TRelationshipTemplate relationshipTemplate = objFactory.createTRelationshipTemplate();
     
     relationshipTemplate.setId(relationStatement.getPredicate().getURI());
     relationshipTemplate.setName(relationStatement.getPredicate().getLocalName());
     
-    setType(relationshipTemplate, relationType);
+    setType(relationshipTemplate, getRelationshipPropertyType(relationStatement.getPredicate()));
     
     TRelationshipTemplate.SourceElement sourceElement = objFactory.createTRelationshipTemplateSourceElement();
     TNodeTemplate sourceNode = getNodeTemplateByName(getName(relationStatement.getSubject()), nodesAndRelationshipTemplates);

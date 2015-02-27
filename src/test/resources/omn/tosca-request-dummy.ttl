@@ -59,10 +59,6 @@ _:subnet1 rdf:type osco:Subnet ,
          osco:floatingIp "random"^^xsd:string .
 
 
-:deployedOnContainer1 rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-
 _:dummy1 rdf:type osco:dummy ,
                  owl:NamedIndividual ;
         
@@ -74,4 +70,4 @@ _:dummy1 rdf:type osco:dummy ,
         
         osco:TEST_PARAM "foo"^^xsd:string ;
         
-        :deployedOnContainer1 _:container1 .
+        osco:deployedOn _:container1 .
