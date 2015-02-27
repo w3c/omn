@@ -387,8 +387,11 @@ public class Tosca2OMN extends AbstractConverter {
       throw new UnsupportedException("No type for relationshipTemplate "+relationshipTemplate.getName()+" found");
     }
     final Resource relationshipType = createResourceFromQName(type, relationship.getModel());
-    relationship.addProperty(RDF.type, relationshipType);
-    relationship.addProperty(RDF.type, OWL2.NamedIndividual);
+    
+    if(!relationship.equals(relationshipType)){
+      relationship.addProperty(RDF.type, relationshipType);
+      relationship.addProperty(RDF.type, OWL2.NamedIndividual);
+    }
   }
   
   private static void createStates(TNodeType nodeType, Model model) {

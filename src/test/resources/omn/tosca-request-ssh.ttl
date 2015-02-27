@@ -59,10 +59,6 @@ _:subnet1 rdf:type osco:Subnet ,
          osco:floatingIp "random"^^xsd:string .
 
 
-:deployedOnContainer1 rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-
 _:ssh1 rdf:type osco:ssh ,
                  owl:NamedIndividual ;
                  
@@ -70,4 +66,4 @@ _:ssh1 rdf:type osco:ssh ,
         
         osco:key "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnoogBCzdExUWu74nqt68cbRdTFKiieLapshL83+rpoFw4pJVDfVu/+I15sZ77KVxetgfYxvOGAPDjr/8xTO8A32hqXXMxWoLGUgVyhV0smUbSIX+hDc0xudbRl/Isl8St/0JylM0uiruhETDkMuAqCXBXZZHqZyu4PfV1tetmOA1gPI7l6Iy7HotCVu6lmz562ovYA0zUWIyn/oakjGD4Z2+gtaJjZSooBzn4XSMgcWGb8ayuk5tirxR+TNlycu0xXe9v4voRAoNzukSNZvAQ/b6TCjHG1+B8eNnBCNipnJPb+IPIwr09YAoZCLhaBH/L3IBbHL2YVmUOBQH30/bX mitja@mitja-thinkpad"^^xsd:string ;
         
-        :deployedOnContainer1 _:container1 .
+        osco:deployedOn _:container1 .

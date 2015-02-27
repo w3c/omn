@@ -383,6 +383,7 @@ public class OMN2Tosca extends AbstractConverter {
     irrelevantProperties.add(Omn.isResourceOf);
     irrelevantProperties.add(Omn_lifecycle.implementedBy);
     irrelevantProperties.add(Omn_lifecycle.hasID);
+    irrelevantProperties.add(Omn.relatesTo);
   }
   
   private static void createPropertyTypes(Resource node, Element propertiesSeq) throws RequiredResourceNotFoundException, MultiplePropertyValuesException{

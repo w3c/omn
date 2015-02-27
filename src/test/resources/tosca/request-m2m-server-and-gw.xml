@@ -9,7 +9,6 @@
                         <xs:element name="REQUIRE_AUTH" type="xs:string"/>
                         <xs:element name="APP_PORT" type="xs:string"/>
                         <xs:element name="SERVICE_PORT" type="xs:string"/>
-                        <xs:element name="MGMT_INTF" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -58,7 +57,6 @@
                         <xs:element name="REQUIRE_AUTH" type="xs:string"/>
                         <xs:element name="APP_PORT" type="xs:string"/>
                         <xs:element name="SERVICE_PORT" type="xs:string"/>
-                        <xs:element name="MGMT_INTF" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -66,18 +64,17 @@
     </Types>
     <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3" name="namedTopology3">
         <TopologyTemplate>
-            <NodeTemplate name="server1" id="server1" type="osco:m2m_server" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="server1" id="e386fae6623cf0010707faa27cedf8af" type="osco:m2m_server" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:m2m_serverProperties>
-                        <osco:LOGGING_FILE>null</osco:LOGGING_FILE>
+                        <osco:LOGGING_FILE>/var/log/openmtc/nscl.log</osco:LOGGING_FILE>
                         <osco:REQUIRE_AUTH>false</osco:REQUIRE_AUTH>
-                        <osco:APP_PORT>15000</osco:APP_PORT>
+                        <osco:APP_PORT>15001</osco:APP_PORT>
                         <osco:SERVICE_PORT>0</osco:SERVICE_PORT>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
                     </osco:m2m_serverProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="m2mServerContainer" id="m2mServerContainer" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="m2mServerContainer" id="e0ab7b7af50cdd067758b231ba572690" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties>
                         <osco:maxNumInst>1</osco:maxNumInst>
@@ -90,34 +87,58 @@
                             <osco:floatingIp>random</osco:floatingIp>
                             <osco:mgmt>true</osco:mgmt>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
-                            <osco:name>trescimo-net</osco:name>
+                            <osco:name>av-net</osco:name>
                         </osco:subnet>
                         <osco:image>
-                            <osco:id>a498303c-5d09-4cd2-ab77-faf187eb9192</osco:id>
+                            <osco:id>074b99ed-0e8a-4307-8e59-87ca9f22ca53</osco:id>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                         </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="gw1" id="gw1" type="osco:m2m_gateway" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="gw1" id="4eeba1cfc6c80e10b8eabb89eb573dc0" type="osco:m2m_gateway" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:m2m_gatewayProperties>
-                        <osco:LOGGING_FILE>null</osco:LOGGING_FILE>
+                        <osco:LOGGING_FILE>/var/log/openmtc/gscl.log</osco:LOGGING_FILE>
                         <osco:REQUIRE_AUTH>false</osco:REQUIRE_AUTH>
                         <osco:APP_PORT>12345</osco:APP_PORT>
                         <osco:SERVICE_PORT>0</osco:SERVICE_PORT>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
                     </osco:m2m_gatewayProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="m2mGWContainer" id="m2mGWContainer" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
-            <RelationshipTemplate name="deployedOnServerContainer" id="http://open-multinet.info/ontology/examples/deployedOnServerContainer" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="server1"/>
-                <TargetElement ref="m2mServerContainer"/>
+            <NodeTemplate name="m2mGWContainer" id="a111022ffabc00969b2b424601f21453" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+                <Properties>
+                    <osco:ServiceContainerProperties>
+                        <osco:maxNumInst>1</osco:maxNumInst>
+                        <osco:minNumInst>1</osco:minNumInst>
+                        <osco:flavour>1024MB_10GB</osco:flavour>
+                        <osco:location>
+                            <osco:name>Berlin</osco:name>
+                        </osco:location>
+                        <osco:subnet>
+                            <osco:floatingIp>random</osco:floatingIp>
+                            <osco:mgmt>true</osco:mgmt>
+                            <osco:datacenter>AV-Openstack</osco:datacenter>
+                            <osco:name>av-net</osco:name>
+                        </osco:subnet>
+                        <osco:image>
+                            <osco:id>074b99ed-0e8a-4307-8e59-87ca9f22ca53</osco:id>
+                            <osco:datacenter>AV-Openstack</osco:datacenter>
+                        </osco:image>
+                    </osco:ServiceContainerProperties>
+                </Properties>
+            </NodeTemplate>
+            <RelationshipTemplate name="deployedOn" id="http://opensdncore.org/ontology/deployedOn" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="e386fae6623cf0010707faa27cedf8af"/>
+                <TargetElement ref="e0ab7b7af50cdd067758b231ba572690"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="deployedOnGWContainer" id="http://open-multinet.info/ontology/examples/deployedOnGWContainer" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="gw1"/>
-                <TargetElement ref="m2mGWContainer"/>
+            <RelationshipTemplate name="requires" id="http://opensdncore.org/ontology/requires" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="e386fae6623cf0010707faa27cedf8af"/>
+                <TargetElement ref="4eeba1cfc6c80e10b8eabb89eb573dc0"/>
+            </RelationshipTemplate>
+            <RelationshipTemplate name="deployedOn" id="http://opensdncore.org/ontology/deployedOn" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="4eeba1cfc6c80e10b8eabb89eb573dc0"/>
+                <TargetElement ref="a111022ffabc00969b2b424601f21453"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>
@@ -137,8 +158,8 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
         </InstanceStates>
     </NodeType>
     <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
@@ -157,8 +178,8 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
         </InstanceStates>
     </NodeType>
     <NodeType name="m2m_gateway" targetNamespace="http://opensdncore.org/ontology/">
@@ -177,13 +198,17 @@
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Initialized"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Stopping"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Pending"/>
-            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
             <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Uncompleted"/>
+            <InstanceState state="http://open-multinet.info/ontology/omn-lifecycle#Installed"/>
         </InstanceStates>
     </NodeType>
     <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
         <ValidSource typeRef="omn:Resource" xmlns:omn="http://open-multinet.info/ontology/omn"/>
         <ValidTarget typeRef="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
+    </RelationshipType>
+    <RelationshipType name="requires" targetNamespace="http://opensdncore.org/ontology/">
+        <ValidSource typeRef="omn:Resource" xmlns:omn="http://open-multinet.info/ontology/omn"/>
+        <ValidTarget typeRef="omn:Resource" xmlns:omn="http://open-multinet.info/ontology/omn"/>
     </RelationshipType>
 </Definitions>
 

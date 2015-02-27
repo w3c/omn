@@ -51,7 +51,7 @@
     </Types>
     <ServiceTemplate id="http://open-multinet.info/ontology/examples/namedTopology3" name="namedTopology3">
         <TopologyTemplate>
-            <NodeTemplate name="dummy1" id="73852ea284016f835b7168bca89bfc60" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="dummy1" id="092664b1645a78a6f96504fa30b8e4f4" type="osco:dummy" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:dummyProperties>
                         <osco:TEST_PARAM>foo</osco:TEST_PARAM>
@@ -60,7 +60,7 @@
                     </osco:dummyProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="container1" id="836ba03dda5bc774e77f66d23e778c62" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="container1" id="311fec7fff6ee680905eb4e03f114601" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
                 <Properties>
                     <osco:ServiceContainerProperties>
                         <osco:maxNumInst>1</osco:maxNumInst>
@@ -82,9 +82,9 @@
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <RelationshipTemplate name="deployedOnContainer1" id="http://open-multinet.info/ontology/examples/deployedOnContainer1" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="73852ea284016f835b7168bca89bfc60"/>
-                <TargetElement ref="836ba03dda5bc774e77f66d23e778c62"/>
+            <RelationshipTemplate name="deployedOn" id="http://opensdncore.org/ontology/deployedOn" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="092664b1645a78a6f96504fa30b8e4f4"/>
+                <TargetElement ref="311fec7fff6ee680905eb4e03f114601"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>

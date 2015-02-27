@@ -34,6 +34,7 @@ _:m2mGWContainer rdf:type osco:ServiceContainer ,
             
             osco:maxNumInst 1 .
 
+
 _:m2mServerContainer rdf:type osco:ServiceContainer ,
                      owl:NamedIndividual ;
                      
@@ -78,22 +79,11 @@ _:subnet1 rdf:type osco:Subnet ,
          osco:floatingIp "random"^^xsd:string .
 
 
-:deployedOnGWContainer rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-:deployedOnServerContainer rdf:type osco:deployedOn ,
-                               owl:NamedIndividual .
-
-:requiresGW rdf:type osco:requires, 
-                             owl:NamedIndividual .
-
 _:gw1 rdf:type osco:m2m_gateway ,
                  owl:NamedIndividual ;
                  
         omn-lifecycle:hasID "gw1"^^xsd:string ;   
         
-        osco:MGMT_INTF      "1"^^xsd:string ;   
-
         osco:SERVICE_PORT   "0"^^xsd:string ;   
 
         osco:APP_PORT       "12345"^^xsd:string ;   
@@ -102,7 +92,7 @@ _:gw1 rdf:type osco:m2m_gateway ,
 
         osco:LOGGING_FILE   "/var/log/openmtc/gscl.log"^^xsd:string ;   
 
-        :deployedOnGWContainer _:m2mGWContainer .
+        osco:deployedOn _:m2mGWContainer .
 
 
 _:server1 rdf:type osco:m2m_server ,
@@ -110,8 +100,6 @@ _:server1 rdf:type osco:m2m_server ,
                  
         omn-lifecycle:hasID "server1"^^xsd:string ;   
         
-        osco:MGMT_INTF      "1"^^xsd:string ;   
-
         osco:SERVICE_PORT   "0"^^xsd:string ;   
 
         osco:APP_PORT       "15001"^^xsd:string ;   
@@ -120,8 +108,8 @@ _:server1 rdf:type osco:m2m_server ,
 
         osco:LOGGING_FILE   "/var/log/openmtc/nscl.log"^^xsd:string ;   
 
-        :requiresGW         _:gw1 ;
+        osco:requires       _:gw1 ;
 
-        :deployedOnServerContainer _:m2mServerContainer .
+        osco:deployedOn _:m2mServerContainer .
 
 
