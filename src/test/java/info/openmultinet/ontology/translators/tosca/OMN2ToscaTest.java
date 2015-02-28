@@ -47,19 +47,6 @@ public class OMN2ToscaTest {
 	}
 	
 	@Test
-  public void testConvertSSHTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
-      RequiredResourceNotFoundException, MultiplePropertyValuesException {
-    InputStream input = getClass().getResourceAsStream("/omn/tosca-request-ims.ttl");
-    Parser parser = new Parser(input, additionalOntologies);
-    
-    final InfModel model = parser.getInfModel();
-    final String topology = OMN2Tosca.getTopology(model);
-    System.out.println(topology);
-
-    testGeneralToscaDefinitions(topology);
-  }
-
-	@Test
   public void testConvertOpenMTCTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
       RequiredResourceNotFoundException, MultiplePropertyValuesException {
     InputStream input = getClass().getResourceAsStream("/omn/tosca-request-openmtc.ttl");
