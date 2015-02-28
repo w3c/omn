@@ -31,6 +31,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.xerces.dom.ElementNSImpl;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -271,7 +272,7 @@ public class Tosca2OMN extends AbstractConverter {
     Resource node = model.createResource(getURI(nodeTemplate, namespace));
     
     setNodeId(nodeTemplate, node);
-    setNodeType(nodeTemplate, node);
+    setNodeTypeAndState(nodeTemplate, node);
     setNodeProperties(nodeTemplate, node, namespace);
     return node;
   }
@@ -280,7 +281,7 @@ public class Tosca2OMN extends AbstractConverter {
     node.addProperty(Omn_lifecycle.hasID, nodeTemplate.getName());
   }
 
-  private static void setNodeType(TNodeTemplate nodeTemplate, Resource node) throws UnsupportedException {
+  private static void setNodeTypeAndState(TNodeTemplate nodeTemplate, Resource node) throws UnsupportedException {
     final QName type = nodeTemplate.getType();
     if(type == null){
       throw new UnsupportedException("No type for nodeTemplate "+nodeTemplate.getName()+" found");
@@ -288,6 +289,22 @@ public class Tosca2OMN extends AbstractConverter {
     final Resource nodeType = createResourceFromQName(type, node.getModel());
     node.addProperty(RDF.type, nodeType);
     node.addProperty(RDF.type, OWL2.NamedIndividual);
+    
+    setNodeState(nodeTemplate, node, nodeType.getNameSpace());
+  }
+  
+  private static void setNodeState(TNodeTemplate nodeTemplate, Resource node, String namespace) {
+    for(Object any : nodeTemplate.getAny()){
+      if(any instanceof ElementNSImpl){
+        Element element = (ElementNSImpl) any;
+        if(element.getNodeName().equals(InstanceState.class.getSimpleName())){
+          if(element.getAttribute("state") != null){
+            Resource state = node.getModel().createResource(namespace+element.getAttribute("state"));
+            node.addProperty(Omn_lifecycle.hasState, state);
+          }
+        }
+      }
+    }
   }
   
   private static void setNodeProperties(TNodeTemplate nodeTemplate, Resource node, String namespace) throws UnsupportedException {

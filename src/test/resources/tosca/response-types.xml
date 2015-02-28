@@ -1,89 +1,412 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Definitions xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
-	<Types>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			attributeFormDefault="unqualified" elementFormDefault="qualified"
-			targetNamespace="http://opensdncore.org/ontology/">
-			<xs:element name="ServiceContainerProperties">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="subnet" type="Subnet">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="floatingIp" type="xs:string" />
-									<xs:element name="fixedIp" type="xs:string" />
-									<xs:element name="mgmt" type="xs:boolean" />
-									<xs:element name="datacenter" type="xs:string" />
-									<xs:element name="name" type="xs:string" />
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="image" type="Image">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="datacenter" type="xs:string" />
-									<xs:element name="id" type="xs:string" />
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="location" type="Location">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="name" type="xs:string" />
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="maxNumInst" type="xs:integer" />
-						<xs:element name="minNumInst" type="xs:integer" />
-						<xs:element name="flavour" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			attributeFormDefault="unqualified" elementFormDefault="qualified"
-			targetNamespace="http://opensdncore.org/ontology/">
-			<xs:element name="dummyProperties">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="PORT" type="xs:string" />
-						<xs:element name="parameter2" type="xs:string" />
-						<xs:element name="parameter1" type="xs:string" />
-						<xs:element name="TEST_PARAM" type="xs:string" />
-						<xs:element name="nameserver" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			attributeFormDefault="unqualified" elementFormDefault="qualified"
-			targetNamespace="http://opensdncore.org/ontology/">
-			<xs:element name="sshProperties">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="MGMT_INTF" type="xs:string" />
-						<xs:element name="key" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-	</Types>
-	<NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
-		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
-			element="osco:ServiceContainerProperties" />
-	</NodeType>
-	<RelationshipType name="deployedOn"
-		targetNamespace="http://opensdncore.org/ontology/">
-		<ValidTarget xmlns:osco="http://opensdncore.org/ontology/"
-			typeRef="osco:ServiceContainer" />
-	</RelationshipType>
-	<NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
-		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
-			element="osco:dummyProperties" />
-	</NodeType>
-	<NodeType name="ssh" targetNamespace="http://opensdncore.org/ontology/">
-		<PropertiesDefinition xmlns:osco="http://opensdncore.org/ontology/"
-			element="osco:sshProperties" />
-	</NodeType>
-	<Locations />
+    <Locations/>
+    <Types>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="ServiceContainerProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="subnet" type="Subnet">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="floatingIp" type="xs:string"/>
+                                    <xs:element name="fixedIp" type="xs:string"/>
+                                    <xs:element name="mgmt" type="xs:boolean"/>
+                                    <xs:element name="datacenter" type="xs:string"/>
+                                    <xs:element name="name" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="image" type="Image">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="datacenter" type="xs:string"/>
+                                    <xs:element name="id" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="location" type="Location">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="maxNumInst" type="xs:integer"/>
+                        <xs:element name="minNumInst" type="xs:integer"/>
+                        <xs:element name="flavour" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="cscfsProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PCSCF_NAME" type="xs:string"/>
+                        <xs:element name="ICSCF_PORT" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="SCSCF_DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="SCSCF_PORT" type="xs:string"/>
+                        <xs:element name="ICSCF_DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="SCSCF_NAME" type="xs:string"/>
+                        <xs:element name="ICSCF_NAME" type="xs:string"/>
+                        <xs:element name="PCSCF_PORT" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="dummyProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nameserver" type="xs:string"/>
+                        <xs:element name="parameter1" type="xs:string"/>
+                        <xs:element name="TEST_PARAM" type="xs:string"/>
+                        <xs:element name="PORT" type="xs:string"/>
+                        <xs:element name="parameter2" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="icscfProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="ICSCF_PORT" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="ICSCF_NAME" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="DIAMETER_PORT" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="hssProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="db-user" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_TWO" type="xs:string"/>
+                        <xs:element name="VERSION" type="xs:string"/>
+                        <xs:element name="domain-name" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="db-provi" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_ONE" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="db-pw" type="xs:string"/>
+                        <xs:element name="port" type="xs:string"/>
+                        <xs:element name="db-name" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_BIND_TWO" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_BIND_ONE" type="xs:string"/>
+                        <xs:element name="DEFAULT_ROUTE_VIA" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="localDB" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="m2m_serverProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="REQUIRE_AUTH" type="xs:string"/>
+                        <xs:element name="APP_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="LOGGING_FILE" type="xs:string"/>
+                        <xs:element name="SERVICE_PORT" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="m2m_gatewayProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="REQUIRE_AUTH" type="xs:string"/>
+                        <xs:element name="LOGGING_FILE" type="xs:string"/>
+                        <xs:element name="APP_PORT" type="xs:string"/>
+                        <xs:element name="SERVICE_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="dnsProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="additionals" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="domain-ns" type="xs:string"/>
+                        <xs:element name="NET_A_INTF" type="xs:string"/>
+                        <xs:element name="domain-name" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="sshProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="key" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="pcscfProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="PCSCF_NAME" type="xs:string"/>
+                        <xs:element name="PCSCF_PORT" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="scscfProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="SCSCF_NAME" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="SCSCF_PORT" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </Types>
+    <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:ServiceContainerProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
+        <ValidTarget typeRef="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
+    </RelationshipType>
+    <RelationshipType name="requires" targetNamespace="http://opensdncore.org/ontology/"/>
+    <NodeType name="cscfs" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:cscfsProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="dummy" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:dummyProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="icscf" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:icscfProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="hss" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:hssProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="m2m_server" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:m2m_serverProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="m2m_gateway" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:m2m_gatewayProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="dns" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:dnsProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="ssh" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:sshProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="pcscf" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:pcscfProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="scscf" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:scscfProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
 </Definitions>

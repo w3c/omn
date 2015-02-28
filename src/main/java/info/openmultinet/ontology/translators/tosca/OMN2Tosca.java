@@ -286,9 +286,11 @@ public class OMN2Tosca extends AbstractConverter {
     Set<Resource> states = nodeTypeResource.getModel().listSubjectsWithProperty(RDF.type, Omn_lifecycle.State).toSet();
     
     for(Resource state : states){
-      InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
-      instanceState.setState(state.getURI());
-      instanceStates.getInstanceState().add(instanceState);
+      if(state.getNameSpace().equals(nodeTypeResource.getNameSpace())){
+        InstanceState instanceState = objFactory.createTTopologyElementInstanceStatesInstanceState();
+        instanceState.setState(state.getURI());
+        instanceStates.getInstanceState().add(instanceState);
+      }
     }
     nodeType.setInstanceStates(instanceStates);
   }
@@ -383,6 +385,7 @@ public class OMN2Tosca extends AbstractConverter {
     irrelevantProperties.add(Omn.isResourceOf);
     irrelevantProperties.add(Omn_lifecycle.implementedBy);
     irrelevantProperties.add(Omn_lifecycle.hasID);
+    irrelevantProperties.add(Omn_lifecycle.hasState);
     irrelevantProperties.add(Omn.relatesTo);
   }
   

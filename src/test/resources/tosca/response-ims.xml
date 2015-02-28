@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Definitions id="topology-2989536212" targetNamespace="http://open-multinet.info/ontology/examples/" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
+<Definitions id="topology-2780865988" targetNamespace="http://open-multinet.info/ontology/examples/" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12">
     <Locations/>
     <Types>
         <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -40,66 +40,30 @@
             </xs:element>
         </xs:schema>
         <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-            <xs:element name="dnsProperties">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="domain-ns" type="xs:string"/>
-                        <xs:element name="domain-name" type="xs:string"/>
-                        <xs:element name="additionals" type="xs:string"/>
-                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
-                        <xs:element name="MGMT_INTF" type="xs:string"/>
-                        <xs:element name="ZABBIX_IP" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
-                        <xs:element name="NET_A_INTF" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:schema>
-        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xs:element name="hssProperties">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="ZABBIX_IP" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
-                        <xs:element name="db-name" type="xs:string"/>
                         <xs:element name="db-provi" type="xs:string"/>
-                        <xs:element name="CONSOLE_PORT_BIND_ONE" type="xs:string"/>
-                        <xs:element name="VERSION" type="xs:string"/>
-                        <xs:element name="port" type="xs:string"/>
-                        <xs:element name="CONSOLE_PORT_ONE" type="xs:string"/>
-                        <xs:element name="MGMT_INTF" type="xs:string"/>
-                        <xs:element name="DNS_INTF" type="xs:string"/>
-                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
-                        <xs:element name="domain-name" type="xs:string"/>
-                        <xs:element name="CONSOLE_PORT_BIND_TWO" type="xs:string"/>
-                        <xs:element name="localDB" type="xs:string"/>
-                        <xs:element name="db-pw" type="xs:string"/>
-                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
                         <xs:element name="db-user" type="xs:string"/>
-                        <xs:element name="DEFAULT_ROUTE_VIA" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
-                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
-                        <xs:element name="CONSOLE_PORT_TWO" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:schema>
-        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-            <xs:element name="scscfProperties">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="MGMT_INTF" type="xs:string"/>
-                        <xs:element name="SCSCF_NAME" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
-                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
-                        <xs:element name="ZABBIX_IP" type="xs:string"/>
-                        <xs:element name="DNS_INTF" type="xs:string"/>
-                        <xs:element name="SCSCF_PORT" type="xs:string"/>
-                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
-                        <xs:element name="DIAMETER_PORT" type="xs:string"/>
-                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="port" type="xs:string"/>
                         <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="localDB" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_BIND_ONE" type="xs:string"/>
+                        <xs:element name="db-pw" type="xs:string"/>
+                        <xs:element name="db-name" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_TWO" type="xs:string"/>
+                        <xs:element name="VERSION" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="ZABBIX_IP" type="xs:string"/>
+                        <xs:element name="domain-name" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_ONE" type="xs:string"/>
+                        <xs:element name="DEFAULT_ROUTE_VIA" type="xs:string"/>
+                        <xs:element name="CONSOLE_PORT_BIND_TWO" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -108,22 +72,41 @@
             <xs:element name="cscfsProperties">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="PCSCF_PORT" type="xs:string"/>
-                        <xs:element name="PCSCF_NAME" type="xs:string"/>
-                        <xs:element name="ICSCF_DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
                         <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
-                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="SCSCF_DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="SCSCF_PORT" type="xs:string"/>
+                        <xs:element name="ZABBIX_IP" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="ICSCF_PORT" type="xs:string"/>
                         <xs:element name="MIN_NUM_INTF" type="xs:string"/>
                         <xs:element name="ICSCF_NAME" type="xs:string"/>
-                        <xs:element name="ZABBIX_IP" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
-                        <xs:element name="DNS_INTF" type="xs:string"/>
-                        <xs:element name="SCSCF_DIAMETER_PORT" type="xs:string"/>
-                        <xs:element name="ICSCF_PORT" type="xs:string"/>
-                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
                         <xs:element name="SCSCF_NAME" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="PCSCF_NAME" type="xs:string"/>
+                        <xs:element name="ICSCF_DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="PCSCF_PORT" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="scscfProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
+                        <xs:element name="SCSCF_NAME" type="xs:string"/>
+                        <xs:element name="DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="ZABBIX_IP" type="xs:string"/>
                         <xs:element name="SCSCF_PORT" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -132,50 +115,164 @@
             <xs:element name="icscfProperties">
                 <xs:complexType>
                     <xs:sequence>
+                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
+                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
+                        <xs:element name="ICSCF_PORT" type="xs:string"/>
                         <xs:element name="ICSCF_NAME" type="xs:string"/>
                         <xs:element name="MGMT_INTF" type="xs:string"/>
-                        <xs:element name="DIAMETER_LISTEN_INTF" type="xs:string"/>
-                        <xs:element name="SLF_PRESENCE" type="xs:string"/>
-                        <xs:element name="ICSCF_PORT" type="xs:string"/>
                         <xs:element name="ZABBIX_IP" type="xs:string"/>
                         <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
-                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
-                        <xs:element name="DNS_INTF" type="xs:string"/>
-                        <xs:element name="DIAMETER_PORT" type="xs:string"/>
                         <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
+                        <xs:element name="DIAMETER_PORT" type="xs:string"/>
+                        <xs:element name="DNS_INTF" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://opensdncore.org/ontology/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="dnsProperties">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NET_A_INTF" type="xs:string"/>
+                        <xs:element name="MIN_NUM_INTF" type="xs:string"/>
+                        <xs:element name="additionals" type="xs:string"/>
+                        <xs:element name="MGMT_INTF" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_IP" type="xs:string"/>
+                        <xs:element name="ORCHESTRATOR_PORT" type="xs:string"/>
+                        <xs:element name="domain-name" type="xs:string"/>
+                        <xs:element name="ZABBIX_IP" type="xs:string"/>
+                        <xs:element name="domain-ns" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:schema>
     </Types>
-    <NodeType name="dns" targetNamespace="http://opensdncore.org/ontology/">
-        <PropertiesDefinition element="osco:dnsProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
-    </NodeType>
     <NodeType name="hss" targetNamespace="http://opensdncore.org/ontology/">
         <PropertiesDefinition element="osco:hssProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
-    </NodeType>
-    <NodeType name="cscfs" targetNamespace="http://opensdncore.org/ontology/">
-        <PropertiesDefinition element="osco:cscfsProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
-    </NodeType>
-    <NodeType name="icscf" targetNamespace="http://opensdncore.org/ontology/">
-        <PropertiesDefinition element="osco:icscfProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
     </NodeType>
     <NodeType name="scscf" targetNamespace="http://opensdncore.org/ontology/">
         <PropertiesDefinition element="osco:scscfProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="cscfs" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:cscfsProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="icscf" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:icscfProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
+    </NodeType>
+    <NodeType name="dns" targetNamespace="http://opensdncore.org/ontology/">
+        <PropertiesDefinition element="osco:dnsProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
     </NodeType>
     <RelationshipType name="requires" targetNamespace="http://opensdncore.org/ontology/"/>
     <NodeType name="ServiceContainer" targetNamespace="http://opensdncore.org/ontology/">
         <PropertiesDefinition element="osco:ServiceContainerProperties" xmlns:osco="http://opensdncore.org/ontology/"/>
+        <InstanceStates>
+            <InstanceState state="ERROR"/>
+            <InstanceState state="UNCOMPLETED"/>
+            <InstanceState state="NOTYETINITIALIZED"/>
+            <InstanceState state="PENDING"/>
+            <InstanceState state="CLEANED"/>
+            <InstanceState state="INITIALIZED"/>
+            <InstanceState state="REMOVING"/>
+            <InstanceState state="PREINIT"/>
+            <InstanceState state="UPDATING"/>
+            <InstanceState state="INSTALLED"/>
+            <InstanceState state="READY"/>
+            <InstanceState state="ACTIVE"/>
+            <InstanceState state="STARTED"/>
+            <InstanceState state="STOPPED"/>
+        </InstanceStates>
     </NodeType>
     <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
         <ValidTarget typeRef="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
     </RelationshipType>
-    <ServiceTemplate id="topology-2989536212">
+    <ServiceTemplate id="topology-2780865988">
         <TopologyTemplate>
-            <NodeTemplate name="dnsContainer" id="container-1570093955" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="hssContainer" id="container-2410718503" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
                 <Properties>
                     <osco:ServiceContainerProperties>
-                        <osco:maxNumInst>1</osco:maxNumInst>
+                        <osco:maxNumInst>3</osco:maxNumInst>
                         <osco:minNumInst>1</osco:minNumInst>
                         <osco:flavour>2048MB_20GB</osco:flavour>
                         <osco:location>
@@ -186,35 +283,49 @@
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                             <osco:mgmt>true</osco:mgmt>
                             <osco:floatingIp>130.149.247.222</osco:floatingIp>
-                            <osco:fixedIp>10.23.0.144</osco:fixedIp>
+                            <osco:fixedIp>10.23.0.176</osco:fixedIp>
                         </osco:subnet>
                         <osco:image>
-                            <osco:id>b4a8a9cf-91ce-47ed-92e0-0f91512409b4</osco:id>
+                            <osco:id>df8015e8-0011-4a70-bb7a-a9b5d8bc6bf1</osco:id>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                         </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="dns1" id="dns-2721737875" type="osco:dns" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="hss1" id="hss-184962872" type="osco:hss" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
                 <Properties>
-                    <osco:dnsProperties>
-                        <osco:domain-ns>ns.openepc.test.</osco:domain-ns>
-                        <osco:domain-name>openepc.test.</osco:domain-name>
-                        <osco:additionals>dns.openepc.test.</osco:additionals>
-                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
-                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                    <osco:hssProperties>
+                        <osco:db-provi>1</osco:db-provi>
+                        <osco:db-user>hss</osco:db-user>
+                        <osco:port>3868</osco:port>
                         <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
                         <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
-                        <osco:NET_A_INTF>2</osco:NET_A_INTF>
-                    </osco:dnsProperties>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                        <osco:localDB>1</osco:localDB>
+                        <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
+                        <osco:DNS_INTF>1</osco:DNS_INTF>
+                        <osco:CONSOLE_PORT_BIND_ONE>0.0.0.0</osco:CONSOLE_PORT_BIND_ONE>
+                        <osco:db-pw>heslo</osco:db-pw>
+                        <osco:db-name>hss_db_chess</osco:db-name>
+                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
+                        <osco:CONSOLE_PORT_TWO>10000</osco:CONSOLE_PORT_TWO>
+                        <osco:VERSION>5G</osco:VERSION>
+                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
+                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                        <osco:domain-name>openepc.test</osco:domain-name>
+                        <osco:CONSOLE_PORT_ONE>10003</osco:CONSOLE_PORT_ONE>
+                        <osco:DEFAULT_ROUTE_VIA>slf</osco:DEFAULT_ROUTE_VIA>
+                        <osco:CONSOLE_PORT_BIND_TWO>0.0.0.0</osco:CONSOLE_PORT_BIND_TWO>
+                    </osco:hssProperties>
                 </Properties>
             </NodeTemplate>
-            <RelationshipTemplate name="deployedOndnsContainer" id="deployedOn-dns-2721737875container-1570093955" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="dns-2721737875"/>
-                <TargetElement ref="container-1570093955"/>
+            <RelationshipTemplate name="deployedOnhssContainer" id="deployedOn-hss-184962872container-2410718503" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="hss-184962872"/>
+                <TargetElement ref="container-2410718503"/>
             </RelationshipTemplate>
-            <NodeTemplate name="hssContainer" id="container-3290453969" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="imsContainer" id="container-2818417516" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
                 <Properties>
                     <osco:ServiceContainerProperties>
                         <osco:maxNumInst>3</osco:maxNumInst>
@@ -228,50 +339,91 @@
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                             <osco:mgmt>true</osco:mgmt>
                             <osco:floatingIp>130.149.247.221</osco:floatingIp>
-                            <osco:fixedIp>10.23.0.146</osco:fixedIp>
+                            <osco:fixedIp>10.23.0.177</osco:fixedIp>
                         </osco:subnet>
                         <osco:image>
-                            <osco:id>df8015e8-0011-4a70-bb7a-a9b5d8bc6bf1</osco:id>
+                            <osco:id>8c526897-b8b0-433e-9a0f-97e5b01c7824</osco:id>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                         </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="hss1" id="hss-1418266227" type="osco:hss" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="scscf1" id="scscf-3757755309" type="osco:scscf" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
                 <Properties>
-                    <osco:hssProperties>
-                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
-                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
-                        <osco:db-name>hss_db_chess</osco:db-name>
-                        <osco:db-provi>1</osco:db-provi>
-                        <osco:CONSOLE_PORT_BIND_ONE>0.0.0.0</osco:CONSOLE_PORT_BIND_ONE>
-                        <osco:VERSION>5G</osco:VERSION>
-                        <osco:port>3868</osco:port>
-                        <osco:CONSOLE_PORT_ONE>10003</osco:CONSOLE_PORT_ONE>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
-                        <osco:DNS_INTF>1</osco:DNS_INTF>
-                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
-                        <osco:domain-name>openepc.test</osco:domain-name>
-                        <osco:CONSOLE_PORT_BIND_TWO>0.0.0.0</osco:CONSOLE_PORT_BIND_TWO>
-                        <osco:localDB>1</osco:localDB>
-                        <osco:db-pw>heslo</osco:db-pw>
-                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
-                        <osco:db-user>hss</osco:db-user>
-                        <osco:DEFAULT_ROUTE_VIA>slf</osco:DEFAULT_ROUTE_VIA>
-                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                    <osco:scscfProperties>
                         <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
-                        <osco:CONSOLE_PORT_TWO>10000</osco:CONSOLE_PORT_TWO>
-                    </osco:hssProperties>
+                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
+                        <osco:DNS_INTF>1</osco:DNS_INTF>
+                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
+                        <osco:SCSCF_NAME>scscf</osco:SCSCF_NAME>
+                        <osco:DIAMETER_PORT>3870</osco:DIAMETER_PORT>
+                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                        <osco:SCSCF_PORT>6060</osco:SCSCF_PORT>
+                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
+                    </osco:scscfProperties>
                 </Properties>
             </NodeTemplate>
-            <RelationshipTemplate name="deployedOnhssContainer" id="deployedOn-hss-1418266227container-3290453969" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="hss-1418266227"/>
-                <TargetElement ref="container-3290453969"/>
+            <RelationshipTemplate name="deployedOnimsContainer" id="deployedOn-scscf-3757755309container-2818417516" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="scscf-3757755309"/>
+                <TargetElement ref="container-2818417516"/>
             </RelationshipTemplate>
-            <NodeTemplate name="imsContainer" id="container-4254470548" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="pcscf1" id="cscfs-690568407" type="osco:cscfs" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
+                <Properties>
+                    <osco:cscfsProperties>
+                        <osco:DNS_INTF>1</osco:DNS_INTF>
+                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
+                        <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
+                        <osco:SCSCF_DIAMETER_PORT>3870</osco:SCSCF_DIAMETER_PORT>
+                        <osco:SCSCF_PORT>6060</osco:SCSCF_PORT>
+                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
+                        <osco:ICSCF_PORT>5060</osco:ICSCF_PORT>
+                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
+                        <osco:ICSCF_NAME>icscf</osco:ICSCF_NAME>
+                        <osco:SCSCF_NAME>scscf</osco:SCSCF_NAME>
+                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                        <osco:PCSCF_NAME>pcscf</osco:PCSCF_NAME>
+                        <osco:ICSCF_DIAMETER_PORT>3869</osco:ICSCF_DIAMETER_PORT>
+                        <osco:PCSCF_PORT>4060</osco:PCSCF_PORT>
+                    </osco:cscfsProperties>
+                </Properties>
+            </NodeTemplate>
+            <RelationshipTemplate name="deployedOnimsContainer" id="deployedOn-cscfs-690568407container-2818417516" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="cscfs-690568407"/>
+                <TargetElement ref="container-2818417516"/>
+            </RelationshipTemplate>
+            <NodeTemplate name="icscf1" id="icscf-3921625570" type="osco:icscf" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
+                <Properties>
+                    <osco:icscfProperties>
+                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
+                        <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
+                        <osco:ICSCF_PORT>5060</osco:ICSCF_PORT>
+                        <osco:ICSCF_NAME>icscf</osco:ICSCF_NAME>
+                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
+                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
+                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
+                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
+                        <osco:DIAMETER_PORT>3869</osco:DIAMETER_PORT>
+                        <osco:DNS_INTF>1</osco:DNS_INTF>
+                    </osco:icscfProperties>
+                </Properties>
+            </NodeTemplate>
+            <RelationshipTemplate name="deployedOnimsContainer" id="deployedOn-icscf-3921625570container-2818417516" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="icscf-3921625570"/>
+                <TargetElement ref="container-2818417516"/>
+            </RelationshipTemplate>
+            <NodeTemplate name="dnsContainer" id="container-98535949" type="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
                 <Properties>
                     <osco:ServiceContainerProperties>
-                        <osco:maxNumInst>3</osco:maxNumInst>
+                        <osco:maxNumInst>1</osco:maxNumInst>
                         <osco:minNumInst>1</osco:minNumInst>
                         <osco:flavour>2048MB_20GB</osco:flavour>
                         <osco:location>
@@ -282,110 +434,62 @@
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                             <osco:mgmt>true</osco:mgmt>
                             <osco:floatingIp>130.149.247.218</osco:floatingIp>
-                            <osco:fixedIp>10.23.0.145</osco:fixedIp>
+                            <osco:fixedIp>10.23.0.175</osco:fixedIp>
                         </osco:subnet>
                         <osco:image>
-                            <osco:id>8c526897-b8b0-433e-9a0f-97e5b01c7824</osco:id>
+                            <osco:id>b4a8a9cf-91ce-47ed-92e0-0f91512409b4</osco:id>
                             <osco:datacenter>AV-Openstack</osco:datacenter>
                         </osco:image>
                     </osco:ServiceContainerProperties>
                 </Properties>
             </NodeTemplate>
-            <NodeTemplate name="pcscf1" id="cscfs-349220802" type="osco:cscfs" xmlns:osco="http://opensdncore.org/ontology/">
+            <NodeTemplate name="dns1" id="dns-3244798458" type="osco:dns" xmlns:osco="http://opensdncore.org/ontology/">
+                <InstanceState state="INITIALIZED"/>
                 <Properties>
-                    <osco:cscfsProperties>
-                        <osco:PCSCF_PORT>4060</osco:PCSCF_PORT>
-                        <osco:PCSCF_NAME>pcscf</osco:PCSCF_NAME>
-                        <osco:ICSCF_DIAMETER_PORT>3869</osco:ICSCF_DIAMETER_PORT>
-                        <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
+                    <osco:dnsProperties>
+                        <osco:NET_A_INTF>2</osco:NET_A_INTF>
                         <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
-                        <osco:ICSCF_NAME>icscf</osco:ICSCF_NAME>
-                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
-                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
-                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
-                        <osco:DNS_INTF>1</osco:DNS_INTF>
-                        <osco:SCSCF_DIAMETER_PORT>3870</osco:SCSCF_DIAMETER_PORT>
-                        <osco:ICSCF_PORT>5060</osco:ICSCF_PORT>
-                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
-                        <osco:SCSCF_NAME>scscf</osco:SCSCF_NAME>
-                        <osco:SCSCF_PORT>6060</osco:SCSCF_PORT>
-                    </osco:cscfsProperties>
-                </Properties>
-            </NodeTemplate>
-            <RelationshipTemplate name="deployedOnimsContainer" id="deployedOn-cscfs-349220802container-4254470548" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="cscfs-349220802"/>
-                <TargetElement ref="container-4254470548"/>
-            </RelationshipTemplate>
-            <NodeTemplate name="icscf1" id="icscf-367556229" type="osco:icscf" xmlns:osco="http://opensdncore.org/ontology/">
-                <Properties>
-                    <osco:icscfProperties>
-                        <osco:ICSCF_NAME>icscf</osco:ICSCF_NAME>
+                        <osco:additionals>dns.openepc.test.</osco:additionals>
                         <osco:MGMT_INTF>1</osco:MGMT_INTF>
-                        <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
-                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
-                        <osco:ICSCF_PORT>5060</osco:ICSCF_PORT>
-                        <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
                         <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
                         <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
-                        <osco:DNS_INTF>1</osco:DNS_INTF>
-                        <osco:DIAMETER_PORT>3869</osco:DIAMETER_PORT>
-                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
-                    </osco:icscfProperties>
-                </Properties>
-            </NodeTemplate>
-            <RelationshipTemplate name="deployedOnimsContainer" id="deployedOn-icscf-367556229container-4254470548" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="icscf-367556229"/>
-                <TargetElement ref="container-4254470548"/>
-            </RelationshipTemplate>
-            <NodeTemplate name="scscf1" id="scscf-2785345585" type="osco:scscf" xmlns:osco="http://opensdncore.org/ontology/">
-                <Properties>
-                    <osco:scscfProperties>
-                        <osco:MGMT_INTF>1</osco:MGMT_INTF>
-                        <osco:SCSCF_NAME>scscf</osco:SCSCF_NAME>
-                        <osco:ORCHESTRATOR_PORT>8080</osco:ORCHESTRATOR_PORT>
-                        <osco:MIN_NUM_INTF>1</osco:MIN_NUM_INTF>
+                        <osco:domain-name>openepc.test.</osco:domain-name>
                         <osco:ZABBIX_IP>127.0.0.1</osco:ZABBIX_IP>
-                        <osco:DNS_INTF>1</osco:DNS_INTF>
-                        <osco:SCSCF_PORT>6060</osco:SCSCF_PORT>
-                        <osco:DIAMETER_LISTEN_INTF>1</osco:DIAMETER_LISTEN_INTF>
-                        <osco:DIAMETER_PORT>3870</osco:DIAMETER_PORT>
-                        <osco:SLF_PRESENCE>false</osco:SLF_PRESENCE>
-                        <osco:ORCHESTRATOR_IP>127.0.1.1</osco:ORCHESTRATOR_IP>
-                    </osco:scscfProperties>
+                        <osco:domain-ns>ns.openepc.test.</osco:domain-ns>
+                    </osco:dnsProperties>
                 </Properties>
             </NodeTemplate>
-            <RelationshipTemplate name="deployedOnimsContainer" id="deployedOn-scscf-2785345585container-4254470548" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="scscf-2785345585"/>
-                <TargetElement ref="container-4254470548"/>
+            <RelationshipTemplate name="deployedOndnsContainer" id="deployedOn-dns-3244798458container-98535949" type="osco:deployedOn" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="dns-3244798458"/>
+                <TargetElement ref="container-98535949"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requiresdns1" id="requires-3407125951" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="hss-1418266227"/>
-                <TargetElement ref="dns-2721737875"/>
+            <RelationshipTemplate name="requiresdns1" id="requires-2929622215" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="hss-184962872"/>
+                <TargetElement ref="dns-3244798458"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requiresdns1" id="requires-1788037614" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="cscfs-349220802"/>
-                <TargetElement ref="dns-2721737875"/>
+            <RelationshipTemplate name="requiresdns1" id="requires-849403072" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="scscf-3757755309"/>
+                <TargetElement ref="dns-3244798458"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requireshss1" id="requires-1796019576" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="icscf-367556229"/>
-                <TargetElement ref="hss-1418266227"/>
+            <RelationshipTemplate name="requireshss1" id="requires-2479230043" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="scscf-3757755309"/>
+                <TargetElement ref="hss-184962872"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requiresscscf1" id="requires-1455290479" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="icscf-367556229"/>
-                <TargetElement ref="scscf-2785345585"/>
+            <RelationshipTemplate name="requiresdns1" id="requires-3471375122" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="cscfs-690568407"/>
+                <TargetElement ref="dns-3244798458"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requiresdns1" id="requires-1092562979" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="icscf-367556229"/>
-                <TargetElement ref="dns-2721737875"/>
+            <RelationshipTemplate name="requiresdns1" id="requires-1391726192" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="icscf-3921625570"/>
+                <TargetElement ref="dns-3244798458"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requiresdns1" id="requires-3041364905" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="scscf-2785345585"/>
-                <TargetElement ref="dns-2721737875"/>
+            <RelationshipTemplate name="requiresscscf1" id="requires-935627413" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="icscf-3921625570"/>
+                <TargetElement ref="scscf-3757755309"/>
             </RelationshipTemplate>
-            <RelationshipTemplate name="requireshss1" id="requires-3655335118" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
-                <SourceElement ref="scscf-2785345585"/>
-                <TargetElement ref="hss-1418266227"/>
+            <RelationshipTemplate name="requireshss1" id="requires-1993753025" type="osco:requires" xmlns:osco="http://opensdncore.org/ontology/">
+                <SourceElement ref="icscf-3921625570"/>
+                <TargetElement ref="hss-184962872"/>
             </RelationshipTemplate>
         </TopologyTemplate>
     </ServiceTemplate>
