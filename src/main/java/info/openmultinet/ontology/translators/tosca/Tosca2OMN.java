@@ -218,7 +218,7 @@ public class Tosca2OMN extends AbstractConverter {
         && element.getLocalName().equals("schema");
   }
   
-  private static void processNodeTypes(final Definitions definitions, final Model model) {
+  private static void processNodeTypes(final Definitions definitions, final Model model) throws UnsupportedException {
     for (final TExtensibleElements templateOrNodeType : definitions
         .getServiceTemplateOrNodeTypeOrNodeTypeImplementation()) {
       if (templateOrNodeType instanceof TNodeType) {
@@ -394,10 +394,17 @@ public class Tosca2OMN extends AbstractConverter {
     }
   }
   
-  private static void createStates(TNodeType nodeType, Model model) {
+  private static void createStates(TNodeType nodeType, Model model) throws UnsupportedException {
     if(nodeType.getInstanceStates() != null){
       for (final InstanceState instanceState : nodeType.getInstanceStates().getInstanceState()) {
-        final Resource state = model.createResource(instanceState.getState());
+        Resource state;
+        if(isURI(instanceState.getState())){
+          state = model.createResource(instanceState.getState());
+        }
+        else{
+          String namespace = getRDFNamespace(nodeType.getTargetNamespace());
+          state = model.createResource(namespace+instanceState.getState());
+        }
         state.addProperty(RDF.type, Omn_lifecycle.State);
       }
     }
