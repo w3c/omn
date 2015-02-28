@@ -162,7 +162,7 @@ public class OMN2Tosca extends AbstractConverter {
         return mapping.getKey();
       }
     }
-    throw new NoPrefixMappingFoundException();
+    throw new NoPrefixMappingFoundException("No prefix mapping found for namespace: "+resource.getNameSpace());
   }
   
   private static String getTopologiesNamespace(Model model) throws MultipleNamespacesException{
@@ -309,7 +309,7 @@ public class OMN2Tosca extends AbstractConverter {
       properties.setAny(nodeProperties);
       nodeTemplate.setProperties(properties);
     } catch (NoPropertiesFoundException e) {
-      LOG.log(Level.INFO, "No properties found for node "+getName(node));
+      LOG.log(Level.INFO, e.getMessage());
     }
     
     return nodeTemplate;
@@ -372,7 +372,7 @@ public class OMN2Tosca extends AbstractConverter {
     createProperties(node, nodeType, nodeProperties, nodeTypeNamespace);  
     
     if(0 == nodeProperties.getChildNodes().getLength()){
-      throw new NoPropertiesFoundException();
+      throw new NoPropertiesFoundException("No properties found for node "+getName(node));
     }
     
     return doc.getDocumentElement();
@@ -667,8 +667,8 @@ public class OMN2Tosca extends AbstractConverter {
 
     private static final long serialVersionUID = -4379252875775867346L;
 
-    public NoPropertiesFoundException(){
-      super();
+    public NoPropertiesFoundException(String message){
+      super(message);
     }
   }
   
@@ -676,8 +676,8 @@ public class OMN2Tosca extends AbstractConverter {
 
     private static final long serialVersionUID = 7286796960642767251L;
 
-    public NoPrefixMappingFoundException(){
-      super();
+    public NoPrefixMappingFoundException(String message){
+      super(message);
     }
   }
   
