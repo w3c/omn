@@ -150,7 +150,7 @@ _:hss1 rdf:type osco:hss ,
           
         osco:db-name                "hss_db_chess"^^xsd:string ;
         
-        osco:domain-name            "openepc.test"^^xsd:string ;
+        osco:domain-name            "openepc.test."^^xsd:string ;
         
         osco:port                   "3868"^^xsd:string ;
         
