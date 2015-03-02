@@ -36,7 +36,7 @@ _:imsContainer rdf:type osco:ServiceContainer ,
             
             osco:minNumInst 1 ;
             
-            osco:maxNumInst 3 .
+            osco:maxNumInst 1 .
 
 
 _:imsImage rdf:type osco:Image ,
@@ -63,7 +63,7 @@ _:hssContainer rdf:type osco:ServiceContainer ,
             
             osco:minNumInst 1 ;
             
-            osco:maxNumInst 3 .
+            osco:maxNumInst 1 .
 
 
 _:hssImage rdf:type osco:Image ,
@@ -150,7 +150,7 @@ _:hss1 rdf:type osco:hss ,
           
         osco:db-name                "hss_db_chess"^^xsd:string ;
         
-        osco:domain-name            "openepc.test."^^xsd:string ;
+        osco:domain-name            "openepc.test"^^xsd:string ;
         
         osco:port                   "3868"^^xsd:string ;
         
@@ -231,7 +231,7 @@ _:icscf1 rdf:type osco:icscf ,
         osco:deployedOn             _:imsContainer .
 
 
-_:pcscf1 rdf:type osco:cscfs ,
+_:pcscf1 rdf:type osco:pcscf ,
                  owl:NamedIndividual ;
                  
         omn-lifecycle:hasID         "pcscf1"^^xsd:string ;   
