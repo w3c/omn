@@ -84,7 +84,7 @@ _:gw1 rdf:type osco:m2m_gateway ,
                  
         omn-lifecycle:hasID "gw1"^^xsd:string ;   
         
-        osco:SERVICE_PORT   "0"^^xsd:string ;   
+        osco:SERVICE_PORT   "23456"^^xsd:string ;   
 
         osco:APP_PORT       "12345"^^xsd:string ;   
 
@@ -100,9 +100,9 @@ _:server1 rdf:type osco:m2m_server ,
                  
         omn-lifecycle:hasID "server1"^^xsd:string ;   
         
-        osco:SERVICE_PORT   "0"^^xsd:string ;   
+        osco:SERVICE_PORT   "23456"^^xsd:string ;   
 
-        osco:APP_PORT       "15001"^^xsd:string ;   
+        osco:APP_PORT       "12345"^^xsd:string ;   
 
         osco:REQUIRE_AUTH   "false"^^xsd:string ;   
 
