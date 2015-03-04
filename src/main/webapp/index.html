@@ -52,7 +52,12 @@
         <b>Open-Multinet Translator</b> is a multi-format conversion tool for structured markup. 
         It provides translations between Open-Multinet-based graphs and XML-based GENI RSpecs and OASIS TOSCA data formats.
         The service allows for conversions triggered either by uploads or by direct text input.
-        Furthermore it comes with a straightforward REST API for developers.        
+        Furthermore it comes with a straightforward REST API for developers:
+        </p>
+        <p>
+            <code>
+            curl --data-urlencode content@<b>file.xml</b> 
+            http://open-multinet.info/omnlib/convert/to/<b>format</b></code>
         </p>
         <p><a class="btn btn-primary btn-lg" href="http://open-multinet.info" role="button">Learn more &raquo;</a></p>
       </div>
