@@ -48,14 +48,38 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Open-Multinet Converter</h1>
-        <p>This is ...</p>
+        <p>
+        <b>Open-Multinet Translator</b> is a multi-format conversion tool for structured markup. 
+        It provides translations between Open-Multinet-based graphs and XML-based GENI RSpecs and OASIS TOSCA data formats.
+        The service allows for conversions triggered either by uploads or by direct text input.
+        Furthermore it comes with a straightforward REST API for developers.        
+        </p>
         <p><a class="btn btn-primary btn-lg" href="http://open-multinet.info" role="button">Learn more &raquo;</a></p>
       </div>
     </div>
 
     <div class="container">
+<div class="row">
+  <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading"><strong>Upload Files</strong> <small>Bootstrap files upload</small></div>
+        <div class="panel-heading"><strong>Text Input</strong> <small>Just copy &amp; paste</small></div>
+        <div class="panel-body">
+
+          <!-- Drop Zone -->
+          <h4>Paste document below</h4>
+          <textarea style="width:100%; height:20.3em;">
+          </textarea>
+
+          <!-- Upload Finished -->
+          <div class="js-upload-finished">
+          </div>
+        </div>
+      </div>
+  
+  </div>
+  <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>Upload Files</strong> <small>Just drag &amp; drop</small></div>
         <div class="panel-body">
 
 
@@ -80,8 +104,16 @@
           <div class="js-upload-finished">
           </div>
         </div>
-      </div>
-    </div> <!-- /container -->
+      </div>  
+  </div>
+</div>
+    </div>
+
+    <div class="container">
+
+          <p><a class="btn btn-success btn-lg" href="#" role="button">Convert &raquo;</a></p>
+    </div>
+
 
       <hr>
 
