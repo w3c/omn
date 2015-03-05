@@ -53,6 +53,11 @@
 			</resource>
 		</resources>
 		<plugins>
+            <plugin>
+               <groupId>com.google.appengine</groupId>
+               <artifactId>appengine-maven-plugin</artifactId>
+               <version>1.9.18</version>
+            </plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
