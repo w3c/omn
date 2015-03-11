@@ -78,7 +78,7 @@ public class RoundtripTest {
     Assert.assertTrue("Should contain a hss node resource", model.containsResource(Osco.hss));
     Assert.assertTrue("Should contain a scscf node resource", model.containsResource(Osco.scscf));
     Assert.assertTrue("Should contain a icscf node resource", model.containsResource(Osco.icscf));
-    Assert.assertTrue("Should contain a pcscf node resource", model.containsResource(Osco.cscfs));
+    Assert.assertTrue("Should contain a pcscf node resource", model.containsResource(Osco.pcscf));
     
     InputStream modelStream = new ByteArrayInputStream(serializedModel.getBytes());
     Parser parser = new Parser(modelStream, additionalOntologies);
