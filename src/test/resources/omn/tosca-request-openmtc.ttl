@@ -64,13 +64,13 @@ _:image1 rdf:type osco:Image ,
                       
          osco:datacenter "AV-Openstack"^^xsd:string ;
          
-         osco:id "33a4767d-d3a9-403b-a4e4-c79c58cac353"^^xsd:string .
+         osco:id "2cf52d4f-175b-4afa-acf1-f3f9daf46cc3"^^xsd:string .
 
 
 _:subnet1 rdf:type osco:Subnet ,
                       owl:NamedIndividual ;
                       
-         osco:name "av-net"^^xsd:string ;
+         osco:name "trescimo-net"^^xsd:string ;
          
          osco:datacenter "AV-Openstack"^^xsd:string ;
                       
@@ -91,7 +91,19 @@ _:gw1 rdf:type osco:m2m_gateway ,
         osco:REQUIRE_AUTH   "false"^^xsd:string ;   
 
         osco:LOGGING_FILE   "/var/log/openmtc/gscl.log"^^xsd:string ;   
-
+        
+        osco:LOGGING_LEVEL "DEBUG" ;
+        
+        osco:COAP_DISABLED "true" ;
+        
+        osco:NOTIFY_DISABLED "false" ;
+        
+        osco:ANNC_DISABLED  "false" ;
+        
+        osco:ANNC_AUTO      "true" ;
+        
+        osco:NOTIFY_CHAN_DISABLED "true" ;
+        
         osco:deployedOn _:m2mGWContainer .
 
 
@@ -107,6 +119,18 @@ _:server1 rdf:type osco:m2m_server ,
         osco:REQUIRE_AUTH   "false"^^xsd:string ;   
 
         osco:LOGGING_FILE   "/var/log/openmtc/nscl.log"^^xsd:string ;   
+        
+        osco:LOGGING_LEVEL "DEBUG" ;
+        
+        osco:COAP_DISABLED "true" ;
+        
+        osco:NOTIFY_DISABLED "false" ;
+        
+        osco:ANNC_DISABLED  "false" ;
+        
+        osco:ANNC_AUTO      "true" ;
+        
+        osco:NOTIFY_CHAN_DISABLED "true" ;
 
         osco:requires       _:gw1 ;
 
