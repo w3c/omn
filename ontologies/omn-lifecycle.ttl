@@ -39,7 +39,9 @@
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasReservationState
 
-:hasReservationState rdf:type owl:ObjectProperty ;
+:hasReservationState rdf:type owl:FunctionalProperty ,
+                              owl:IrreflexiveProperty ,
+                              owl:ObjectProperty ;
                      
                      rdfs:domain omn:Reservation ;
                      
@@ -51,7 +53,9 @@
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasState
 
-:hasState rdf:type owl:ObjectProperty ;
+:hasState rdf:type owl:FunctionalProperty ,
+                   owl:IrreflexiveProperty ,
+                   owl:ObjectProperty ;
           
           rdfs:range :State ;
           
