@@ -77,6 +77,7 @@
           
           <http://open-multinet.info/ontology/omn#hasService> :myinstallcommand1 ,
                                                               :myinstallcommand2 ,
+                                                              :myloginservice1 ,
                                                               :myshellcommand1 .
 
 
