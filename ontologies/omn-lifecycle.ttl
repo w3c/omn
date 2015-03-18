@@ -15,19 +15,19 @@
                                                    
                                                    dcterms:created "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-02-15"^^xsd:string ;
+                                                   owl:versionInfo "2015-03-18"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
                                                    
-                                                   dcterms:modified "2015-02-15" ;
+                                                   dcterms:modified "2015-03-18" ;
                                                    
                                                    dc:publisher <http://open-multinet.org> ;
                                                    
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                    
-                                                   dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-lifecycle.png> .
+                                                   dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn-lifecycle.png> .
 
 
 #################################################################
