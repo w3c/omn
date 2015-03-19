@@ -53,23 +53,35 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#diskImageName
+###  http://open-multinet.info/ontology/omn-domain-pc#os
 
-:diskImageName rdf:type owl:DatatypeProperty ;
-               
-               rdfs:domain :PC ;
-               
-               rdfs:range xsd:string .
+:os rdf:type owl:DatatypeProperty ,
+             owl:FunctionalProperty ;
+    
+    rdfs:comment """Use dc:description for a GENI disk image description.
+Use rdfs:label for a GENI disk image name.
+Use owl:versionInfo for a GENI disk image version."""@en ;
+    
+    rdfs:domain :DiskImage ;
+    
+    rdfs:range xsd:string .
+[ rdf:type owl:Axiom ;
+  rdfs:comment "Should not be a String but an object here."@en ;
+  owl:annotatedSource :os ;
+  owl:annotatedProperty rdfs:range ;
+  owl:annotatedTarget xsd:string
+] .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#diskImageVersion
+###  http://open-multinet.info/ontology/omn-domain-pc#url
 
-:diskImageVersion rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:domain :PC ;
-                  
-                  rdfs:range xsd:string .
+:url rdf:type owl:DatatypeProperty ,
+              owl:FunctionalProperty ;
+     
+     rdfs:domain :DiskImage ;
+     
+     rdfs:range xsd:anyURI .
 
 
 

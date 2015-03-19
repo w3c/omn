@@ -4,12 +4,12 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://example.org> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@base <http://example.org#> .
 
 <http://example.org> rdf:type owl:Ontology ;
                      
                      owl:imports <http://open-multinet.info/ontology/omn> ,
-                                 <http://open-multinet.info/ontology/omn-domain-pc> ,
                                  <http://open-multinet.info/ontology/omn-service> .
 
 
@@ -25,11 +25,12 @@
 :mydiskimage1 rdf:type <http://open-multinet.info/ontology/omn-domain-pc#DiskImage> ,
                        owl:NamedIndividual ;
               
-              <http://open-multinet.info/ontology/omn-domain-pc#diskImageVersion> "ba15fa6f56cc00d354e505259b9cb3804e1bcb73"^^xsd:string ;
               
-              <http://open-multinet.info/ontology/omn-domain-pc#diskImageName> "http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.7.xml"^^xsd:string .
-
-
+dc:description "Debian 7.7 Wheezy (64 bit)"^^xsd:string ;
+rdfs:label "urn:publicid:IDN+wall1.ilabt.iminds.be+image+emulab-ops:DEB77-64-STD"^^xsd:string ;
+<http://open-multinet.info/ontology/omn-domain-pc#os> "Linux"^^xsd:string ;
+<http://open-multinet.info/ontology/omn-domain-pc#url> "https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=47472517-5d3c-11e4-bd9f-001517becdc1"^^xsd:anyURI ;
+owl:versionInfo "7.7"^^xsd:string .
 
 ###  http://example.org#myinstallcommand1
 
