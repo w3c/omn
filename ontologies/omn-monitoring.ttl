@@ -1,60 +1,74 @@
 @prefix : <http://open-multinet.info/ontology/omn-monitoring#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-monitoring#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@base <http://open-multinet.info/ontology/omn-monitoring> .
 
 <http://open-multinet.info/ontology/omn-monitoring> rdf:type owl:Ontology ;
-                                         
-                                         rdfs:label "omn-monitoring"@en ;
-                                         
-                                         dcterms:created "2014-11-11"^^xsd:date ;
-                                         
-                                         dcterms:modified "2015-01-15"^^xsd:date ;
-                                         
-                                         owl:versionInfo "2015-01-15"^^xsd:string ;
-                                         
-                                         dc:title "Open-Multinet Upper Monitoring Ontology"^^xsd:string ;
-                                         
-                                         dc:description "Open-Multinet Upper Monitoring Ontology"^^xsd:string ;
-
-                                         dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-monitoring.png> ;
-                                         
-                                         dc:publisher <http://open-multinet.org> ;
-                                         
-                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-
-
-
-
-#################################################################
-#
-#    Data properties
-#
-#################################################################
-
-
-
-
+                                                    
+                                                    rdfs:label "omn-monitoring"@en ;
+                                                    
+                                                    dcterms:created "2014-11-11"^^xsd:date ;
+                                                    
+                                                    dcterms:modified "2015-01-15"^^xsd:date ;
+                                                    
+                                                    owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                    
+                                                    dc:description "Open-Multinet Upper Monitoring Ontology"^^xsd:string ;
+                                                    
+                                                    dc:title "Open-Multinet Upper Monitoring Ontology"^^xsd:string ;
+                                                    
+                                                    vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring#" ;
+                                                    
+                                                    vann:preferredNamespacePrefix "omn-monitoring" ;
+                                                    
+                                                    dc:publisher <http://open-multinet.org> ;
+                                                    
+                                                    dc:creator <http://alex.willner.ws/about#me> ;
+                                                    
+                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                    
+                                                    dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-monitoring.png> .
 
 
 #################################################################
 #
 #    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#CollectorService
+
+:CollectorService rdf:type owl:Class ;
+                  
+                   rdfs:label "Collector Service" ;
+                   
+                   rdfs:subClassOf omn:Service .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#OMSPService
+
+:OMSPService rdf:type owl:Class ;
+                   rdfs:label "OMSP Collector Service" ;
+             
+             rdfs:subClassOf :CollectorService .
+
+
+
+
+#################################################################
+#
+#    Individuals
 #
 #################################################################
 

@@ -7,6 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
 @base <http://open-multinet.info/ontology/omn-lifecycle> .
 
 <http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology ;
@@ -15,15 +17,21 @@
                                                    
                                                    dcterms:created "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-03-18"^^xsd:string ;
+                                                   owl:versionInfo "2015-03-24"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
                                                    
-                                                   dcterms:modified "2015-03-18" ;
+                                                   dcterms:modified "2015-03-24" ;
                                                    
-                                                   dc:publisher <http://open-multinet.org> ;
+                                                    vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring#" ;
+                                                    
+                                                    vann:preferredNamespacePrefix "omn-monitoring" ;
+                                                    
+                                                    dc:publisher <http://open-multinet.org> ;
+                                                    
+                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                                    
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                    
@@ -67,6 +75,19 @@
                                     )
                       ] .
 
+:usesService rdf:type 
+                   owl:IrreflexiveProperty ,
+                   owl:ObjectProperty ;
+          
+          rdfs:range :Service ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy

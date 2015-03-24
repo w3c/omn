@@ -38,6 +38,56 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn-resource#hasInterface
+
+:hasInterface rdf:type owl:ObjectProperty ;
+              
+              rdfs:label "has interface"@en ;
+              
+              rdfs:range :Interface ;
+              
+              rdfs:domain :Node ;
+              
+              owl:inverseOf :isInterfaceOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isInterfaceOf
+
+:isInterfaceOf rdf:type owl:ObjectProperty ;
+               
+               rdfs:label "is interface of"@en ;
+               
+               rdfs:domain :Interface ;
+               
+               rdfs:range :Node .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isSink
+
+:isSink rdf:type owl:ObjectProperty ;
+        
+        rdfs:label "is sink"@en ;
+        
+        rdfs:domain :Interface ;
+        
+        rdfs:range :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isSource
+
+:isSource rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "is source"@en ;
+          
+          rdfs:domain :Interface ;
+          
+          rdfs:range :Link .
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#requiredBy
 
 :requiredBy rdf:type owl:ObjectProperty ;
@@ -63,46 +113,7 @@
           owl:inverseOf :requiredBy .
 
 
-:hasInterface rdf:type owl:ObjectProperty ;
-             
-             rdfs:label "has interface"@en ;
-                          
-             rdfs:domain :Node ;
-             
-             rdfs:range :Interface ;
-             
-             owl:inverseOf :isInterfaceOf .
 
-:isInterfaceOf rdf:type owl:ObjectProperty ;
-              
-              rdfs:label "is interface of"@en ;
-              
-              rdfs:range :Node ;
-              
-              rdfs:domain :Interface .
-
-
-###  http://open-multinet.info/ontology/omn-resource#isSink 
-
-:isSink rdf:type owl:ObjectProperty ;
-        
-                 rdfs:label "is sink"@en ;
-                                  
-                 rdfs:range :Link ;
-                 
-                 rdfs:domain :Interface .
-
-
-
-###  http://open-multinet.info/ontology/omn-resource#isSource 
-
-:isSource rdf:type owl:ObjectProperty ;
-
-                   rdfs:label "is source"@en ;
-                                      
-                   rdfs:range :Link ;
-                   
-                   rdfs:domain :Interface .
 
 
 #################################################################
@@ -110,6 +121,26 @@
 #    Data properties
 #
 #################################################################
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasID
+
+:hasID rdf:type owl:DatatypeProperty ;
+       
+       rdfs:domain omn:Resource ;
+       
+       rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isAvailable
+
+:isAvailable rdf:type owl:DatatypeProperty ;
+             
+             rdfs:domain :NetworkObject ;
+             
+             rdfs:range xsd:boolean .
+
 
 
 ###  http://open-multinet.info/ontology/omn-resource#isExclusive
@@ -121,13 +152,6 @@
              rdfs:range xsd:boolean .
 
 
-###  http://open-multinet.info/ontology/omn-resource#isExclusive
-
-:isAvailable rdf:type owl:DatatypeProperty ;
-             
-             rdfs:domain :NetworkObject ;
-             
-             rdfs:range xsd:boolean .
 
 
 
