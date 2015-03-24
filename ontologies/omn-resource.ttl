@@ -123,16 +123,6 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasID
-
-:hasID rdf:type owl:DatatypeProperty ;
-       
-       rdfs:domain omn:Resource ;
-       
-       rdfs:range xsd:string .
-
-
-
 ###  http://open-multinet.info/ontology/omn-resource#isAvailable
 
 :isAvailable rdf:type owl:DatatypeProperty ;

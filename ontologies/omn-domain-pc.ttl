@@ -25,9 +25,9 @@
                                                    
                                                    rdfs:label "omn-domain-pc"@en ;
                                                    
-                                                   dcterms:created "2015-03-15"^^xsd:date ;
-                                                   
                                                    dcterms:modified "2015-03-15"^^xsd:date ;
+                                                   
+                                                   dcterms:created "2015-03-15"^^xsd:date ;
                                                    
                                                    owl:versionInfo "2015-03-15"^^xsd:string ;
                                                    
@@ -35,15 +35,17 @@
                                                    
                                                    dc:description "This ontology defines the a common physical or virtual PC with SSH login."^^xsd:string ;
                                                    
-                                                   vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-domain-pc#" ;
-                                                   
                                                    vann:preferredNamespacePrefix "omn-domain-pc" ;
+                                                   
+                                                   vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-domain-pc#" ;
                                                    
                                                    dc:publisher <http://open-multinet.org> ;
                                                    
                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                                    
-                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                   
+                                                   owl:imports <http://open-multinet.info/ontology/omn-lifecycle> .
 
 
 #################################################################
@@ -53,35 +55,82 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#os
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription
 
-:os rdf:type owl:DatatypeProperty ,
-             owl:FunctionalProperty ;
-    
-    rdfs:comment """Use dc:description for a GENI disk image description.
-Use rdfs:label for a GENI disk image name.
-Use owl:versionInfo for a GENI disk image version."""@en ;
-    
-    rdfs:domain :DiskImage ;
-    
-    rdfs:range xsd:string .
+:hasDiskimageDescription rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+                         
+                         rdfs:domain :DiskImage ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel
+
+:hasDiskimageLabel rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   
+                   rdfs:domain :DiskImage ;
+                   
+                   rdfs:range xsd:string .
+[ rdf:type owl:AllDisjointProperties ;
+  owl:members ( :hasDiskimageLabel
+              )
+] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS
+
+:hasDiskimageOS rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                
+                rdfs:domain :DiskImage ;
+                
+                rdfs:range xsd:string .
 [ rdf:type owl:Axiom ;
   rdfs:comment "Should not be a String but an object here."@en ;
-  owl:annotatedSource :os ;
+  owl:annotatedSource :hasDiskimageOS ;
   owl:annotatedProperty rdfs:range ;
   owl:annotatedTarget xsd:string
 ] .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#url
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageURI
 
-:url rdf:type owl:DatatypeProperty ,
-              owl:FunctionalProperty ;
-     
-     rdfs:domain :DiskImage ;
-     
-     rdfs:range xsd:anyURI .
+:hasDiskimageURI rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 
+                 rdfs:domain :DiskImage ;
+                 
+                 rdfs:range xsd:anyURI .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageVersion
+
+:hasDiskimageVersion rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     
+                     rdfs:domain :DiskImage ;
+                     
+                     rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasVMID
+
+:hasVMID rdf:type owl:DatatypeProperty ;
+         
+         rdfs:comment "Unique identifier set by the management system of a virtual machine." ;
+         
+         rdfs:domain :VM ;
+         
+         rdfs:subPropertyOf <http://open-multinet.info/ontology/omn-lifecycle#hasID> ;
+         
+         rdfs:range xsd:string .
 
 
 
@@ -104,7 +153,19 @@ omn:Resource rdf:type owl:Class .
 
 :DiskImage rdf:type owl:Class ;
            
+           rdfs:label "Disk Image" ;
+           
            rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#OpenStack
+
+:OpenStack rdf:type owl:Class ;
+           
+           rdfs:label "Open Stack" ;
+           
+           rdfs:subClassOf :VM .
 
 
 
@@ -116,9 +177,37 @@ omn:Resource rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#VM
+
+:VM rdf:type owl:Class ;
+    
+    rdfs:label "Virtual Machine" ;
+    
+    rdfs:subClassOf :PC .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription
+
+:hasDiskimageDescription rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel
+
+:hasDiskimageLabel rdf:type owl:Class .
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#Node
 
 omn-resource:Node rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2002/07/owl#versionInfo
+
+owl:versionInfo rdf:type owl:Class .
 
 
 
