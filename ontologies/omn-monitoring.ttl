@@ -50,7 +50,7 @@
 
 :CollectorService rdf:type owl:Class ;
                   
-                   rdfs:label "Collector Service" ;
+                   rdfs:label "Collector Service"@en ;
                    
                    rdfs:subClassOf omn:Service .
 
@@ -59,7 +59,7 @@
 ###  http://open-multinet.info/ontology/omn-monitoring#OMSPService
 
 :OMSPService rdf:type owl:Class ;
-                   rdfs:label "OMSP Collector Service" ;
+                   rdfs:label "OMSP Collector Service"@en ;
              
              rdfs:subClassOf :CollectorService .
 

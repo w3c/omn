@@ -168,7 +168,7 @@ omn:Service rdf:type owl:Class .
 
 :ExecuteService rdf:type owl:Class ;
                 
-                rdfs:label "Execute Service" ;
+                rdfs:label "Execute Service"@en;
                 
                 rdfs:subClassOf omn:Service ;
                 
@@ -180,7 +180,7 @@ omn:Service rdf:type owl:Class .
 
 :InstallService rdf:type owl:Class ;
                 
-                rdfs:label "Install Service" ;
+                rdfs:label "Install Service"@en ;
                 
                 rdfs:subClassOf omn:Service ;
                 
@@ -192,7 +192,7 @@ omn:Service rdf:type owl:Class .
 
 :LoginService rdf:type owl:Class ;
               
-              rdfs:label "Login Service" ;
+              rdfs:label "Login Service"@en ;
               
               rdfs:subClassOf omn:Service ;
               

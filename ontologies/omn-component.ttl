@@ -63,7 +63,7 @@
 
 :ProcessingComponent rdf:type owl:Class ;
         
-        rdfs:label "Processing Component" ;
+        rdfs:label "Processing Component"@en ;
 
         rdfs:subClassOf omn:Component .
 
@@ -75,7 +75,7 @@
 
 :StorageComponent rdf:type owl:Class ;
         
-        rdfs:label "Storage Component" ;
+        rdfs:label "Storage Component"@en ;
 
         rdfs:subClassOf omn:Component .
 
@@ -87,7 +87,7 @@
 
 :MemoryComponent rdf:type owl:Class ;
         
-        rdfs:label "Memory Component" ;
+        rdfs:label "Memory Component"@en ;
 
         rdfs:subClassOf omn:Component .
 
@@ -98,7 +98,7 @@
 
 :CPU rdf:type owl:Class ;
         
-        rdfs:label "CPU" ;
+        rdfs:label "CPU"@en ;
 
         rdfs:subClassOf :ProcessingComponent .
 

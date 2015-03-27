@@ -45,9 +45,9 @@
 
 :administers rdf:type owl:ObjectProperty ;
              
-             rdfs:label "administers" ;
+             rdfs:label "administers"@en ;
              
-             rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure" ;
+             rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure"@en ;
              
              rdfs:range :Infrastructure ;
              
@@ -61,9 +61,9 @@
 
 :hasFederationMember rdf:type owl:ObjectProperty ;
                      
-                     rdfs:label "has federation member" ;
+                     rdfs:label "has federation member"@en ;
                      
-                     rdfs:comment "a federation can have an organization as a member" ;
+                     rdfs:comment "a federation can have an organization as a member"@en ;
                      
                      rdfs:domain :Federation ;
                      
@@ -75,9 +75,9 @@
 
 :isAdministeredBy rdf:type owl:ObjectProperty ;
                   
-                  rdfs:label "is administered by" ;
+                  rdfs:label "is administered by"@en ;
                   
-                  rdfs:comment "an infrastructure can be administered by an organization (e.g. a federation member)" ;
+                  rdfs:comment "an infrastructure can be administered by an organization (e.g. a federation member)"@en ;
                   
                   rdfs:domain :Infrastructure ;
                   
@@ -89,9 +89,9 @@
 
 :partOfFederation rdf:type owl:ObjectProperty ;
                   
-                  rdfs:label "is part of federation" ;
+                  rdfs:label "is part of federation"@en ;
                   
-                  rdfs:comment "an organization can be part of a federation" ;
+                  rdfs:comment "an organization can be part of a federation"@en ;
                   
                   rdfs:range :Federation ;
                   
@@ -115,7 +115,7 @@
 
 :Federation rdf:type owl:Class ;
             
-            rdfs:label "Federation" ;
+            rdfs:label "Federation"@en ;
             
             rdfs:subClassOf foaf:Organization .
 
@@ -125,7 +125,7 @@
 
 :FederationMember rdf:type owl:Class ;
                   
-                  rdfs:label "member of a federation" ;
+                  rdfs:label "member of a federation"@en ;
                   
                   rdfs:subClassOf foaf:Organization .
 
@@ -135,13 +135,13 @@
 
 :Infrastructure rdf:type owl:Class ;
                 
-                rdfs:label "Infrastructure" ;
+                rdfs:label "Infrastructure"@en ;
                 
                 rdfs:subClassOf omn:Group ;
                 
-                rdfs:comment "an infrastructure such as a testbed or cloud facility" ;
+                rdfs:comment "an infrastructure such as a testbed or cloud facility"@en ;
 
-                rdfs:comment "Example: FUESCO Playground" ;
+                rdfs:comment "Example: FUESCO Playground"@en ;
 
                 # rdfs:seeAlso sfa:GetVersion ;
                 

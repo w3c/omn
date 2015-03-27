@@ -25,13 +25,13 @@
                                                    
                                                    dcterms:modified "2015-03-24" ;
                                                    
-                                                    vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring#" ;
+                                                   vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-lifecycle#" ;
                                                     
-                                                    vann:preferredNamespacePrefix "omn-monitoring" ;
+                                                   vann:preferredNamespacePrefix "omn-lifecycle" ;
                                                     
-                                                    dc:publisher <http://open-multinet.org> ;
+                                                   dc:publisher <http://open-multinet.org> ;
                                                     
-                                                    dc:creator <http://alex.willner.ws/about#me> ;
+                                                   dc:creator <http://alex.willner.ws/about#me> ;
                                                    
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                    
@@ -299,7 +299,7 @@ omn:Topology rdf:type owl:Class .
 
 :Active rdf:type owl:Class ;
         
-        rdfs:label "Active" ;
+        rdfs:label "Active"@en ;
         
         rdfs:subClassOf :State ;
         
@@ -313,7 +313,7 @@ omn:Topology rdf:type owl:Class .
 
 :Allocated rdf:type owl:Class ;
            
-           rdfs:label "Allocated" ;
+           rdfs:label "Allocated"@en ;
            
            rdfs:subClassOf :ReservationState ;
            
@@ -327,7 +327,7 @@ omn:Topology rdf:type owl:Class .
 
 :Cleaned rdf:type owl:Class ;
          
-         rdfs:label "Cleaned" ;
+         rdfs:label "Cleaned"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -349,7 +349,7 @@ omn:Topology rdf:type owl:Class .
 
 :Error rdf:type owl:Class ;
        
-       rdfs:label "Error" ;
+       rdfs:label "Error"@en ;
        
        rdfs:subClassOf :State ;
        
@@ -363,7 +363,7 @@ omn:Topology rdf:type owl:Class .
 
 :Initialized rdf:type owl:Class ;
              
-             rdfs:label "Initialized" ;
+             rdfs:label "Initialized"@en ;
              
              rdfs:subClassOf :State ;
              
@@ -375,7 +375,7 @@ omn:Topology rdf:type owl:Class .
 
 :Installed rdf:type owl:Class ;
            
-           rdfs:label "Installed" ;
+           rdfs:label "Installed"@en ;
            
            rdfs:subClassOf :State ;
            
@@ -397,7 +397,7 @@ omn:Topology rdf:type owl:Class .
 
 :NotYetInitialized rdf:type owl:Class ;
                    
-                   rdfs:label "NotYetInitialized" ;
+                   rdfs:label "NotYetInitialized"@en ;
                    
                    rdfs:subClassOf :State ;
                    
@@ -421,7 +421,7 @@ omn:Topology rdf:type owl:Class .
 
 :Pending rdf:type owl:Class ;
          
-         rdfs:label "Pending" ;
+         rdfs:label "Pending"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -435,7 +435,7 @@ omn:Topology rdf:type owl:Class .
 
 :Preinit rdf:type owl:Class ;
          
-         rdfs:label "Preinit" ;
+         rdfs:label "Preinit"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -449,7 +449,7 @@ omn:Topology rdf:type owl:Class .
 
 :Provisioned rdf:type owl:Class ;
              
-             rdfs:label "Provisioned" ;
+             rdfs:label "Provisioned"@en ;
              
              rdfs:subClassOf :ReservationState ;
              
@@ -463,7 +463,7 @@ omn:Topology rdf:type owl:Class .
 
 :Ready rdf:type owl:Class ;
        
-       rdfs:label "Ready" ;
+       rdfs:label "Ready"@en ;
        
        rdfs:subClassOf :State ;
        
@@ -477,7 +477,7 @@ omn:Topology rdf:type owl:Class .
 
 :Removing rdf:type owl:Class ;
           
-          rdfs:label "Removing" ;
+          rdfs:label "Removing"@en ;
           
           rdfs:subClassOf :State ;
           
@@ -499,7 +499,7 @@ omn:Topology rdf:type owl:Class .
 
 :ReservationState rdf:type owl:Class ;
                   
-                  rdfs:label "Reservation State" ;
+                  rdfs:label "Reservation State"@en ;
                   
                   rdfs:subClassOf omn:Attribute ;
                   
@@ -511,7 +511,7 @@ omn:Topology rdf:type owl:Class .
 
 :Started rdf:type owl:Class ;
          
-         rdfs:label "Started" ;
+         rdfs:label "Started"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -523,7 +523,7 @@ omn:Topology rdf:type owl:Class .
 
 :State rdf:type owl:Class ;
        
-       rdfs:label "State" ;
+       rdfs:label "State"@en ;
        
        rdfs:subClassOf omn:Attribute ;
        
@@ -535,7 +535,7 @@ omn:Topology rdf:type owl:Class .
 
 :Stopped rdf:type owl:Class ;
          
-         rdfs:label "Stopped" ;
+         rdfs:label "Stopped"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -547,7 +547,7 @@ omn:Topology rdf:type owl:Class .
 
 :Stopping rdf:type owl:Class ;
           
-          rdfs:label "Stopping" ;
+          rdfs:label "Stopping"@en ;
           
           rdfs:subClassOf :State ;
           
@@ -561,7 +561,7 @@ omn:Topology rdf:type owl:Class .
 
 :Unallocated rdf:type owl:Class ;
              
-             rdfs:label "Unallocated" ;
+             rdfs:label "Unallocated"@en ;
              
              rdfs:subClassOf :ReservationState ;
              
@@ -575,7 +575,7 @@ omn:Topology rdf:type owl:Class .
 
 :Uncompleted rdf:type owl:Class ;
              
-             rdfs:label "Uncompleted" ;
+             rdfs:label "Uncompleted"@en ;
              
              rdfs:subClassOf :State ;
              
@@ -587,7 +587,7 @@ omn:Topology rdf:type owl:Class .
 
 :Updating rdf:type owl:Class ;
           
-          rdfs:label "Updating" ;
+          rdfs:label "Updating"@en ;
           
           rdfs:subClassOf :State ;
           

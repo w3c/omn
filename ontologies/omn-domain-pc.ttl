@@ -124,7 +124,7 @@
 
 :hasVMID rdf:type owl:DatatypeProperty ;
          
-         rdfs:comment "Unique identifier set by the management system of a virtual machine." ;
+         rdfs:comment "Unique identifier set by the management system of a virtual machine."@en ;
          
          rdfs:domain :VM ;
          
@@ -153,7 +153,7 @@ omn:Resource rdf:type owl:Class .
 
 :DiskImage rdf:type owl:Class ;
            
-           rdfs:label "Disk Image" ;
+           rdfs:label "Disk Image"@en ;
            
            rdfs:subClassOf omn:Resource .
 
@@ -163,7 +163,7 @@ omn:Resource rdf:type owl:Class .
 
 :OpenStack rdf:type owl:Class ;
            
-           rdfs:label "Open Stack" ;
+           rdfs:label "Open Stack"@en ;
            
            rdfs:subClassOf :VM .
 
@@ -181,7 +181,7 @@ omn:Resource rdf:type owl:Class .
 
 :VM rdf:type owl:Class ;
     
-    rdfs:label "Virtual Machine" ;
+    rdfs:label "Virtual Machine"@en ;
     
     rdfs:subClassOf :PC .
 
