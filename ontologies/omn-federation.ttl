@@ -1,4 +1,6 @@
 @prefix : <http://open-multinet.info/ontology/omn-federation#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -11,19 +13,24 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @base <http://open-multinet.info/ontology/omn-federation#> .
 
-<http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ;
+<http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ,
+                                                    voaf:Vocabulary ;
                                                     
                                                     rdfs:label "omn-federation"@en ;
+
+                                                    vann:preferredNamespacePrefix "omn-federation" ;
+                                                    
+                                                    vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-federation#> ;
                                                     
                                                     dcterms:created "2014-11-11"^^xsd:date ;
                                          
-                                                    dcterms:modified "2015-01-15"^^xsd:date ;
+                                                    dcterms:modified "2015-03-27"^^xsd:date ;
                                              
-                                                    owl:versionInfo "2015-01-15"^^xsd:string ;
+                                                    owl:versionInfo "2015-03-27"^^xsd:string ;
                                                                                                         
-                                                    dc:title "Open-Multinet Upper Federation Ontology"^^xsd:string ;
+                                                    dc:title "Open-Multinet Upper Federation Ontology"@en ;
                                                     
-                                                    dc:description "This ontology defines concepts related to federation of internet infrastructures."^^xsd:string ;
+                                                    dc:description "This ontology defines concepts related to federation of internet infrastructures."@en ;
 
                                                     dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-federation.png> ;
                                                     
