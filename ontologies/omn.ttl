@@ -19,22 +19,23 @@
 @base <http://open-multinet.info/ontology/omn#> .
 
 <http://open-multinet.info/ontology/omn> rdf:type owl:Ontology,
-                                        voaf:Vocabulary ;
+                                         voaf:Vocabulary ;
                                          
                                          rdfs:label "omn"@en ;
  
-                                            vann:preferredNamespacePrefix "omn" ;
-                                           vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn#" ;
+                                         vann:preferredNamespacePrefix "omn" ;
+
+                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn#> ;
                                         
                                          dcterms:created "2014-11-11"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-03-05"^^xsd:date ;
+                                         dcterms:modified "2015-03-27"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-03-05"^^xsd:string ;
+                                         owl:versionInfo "2015-03-27"^^xsd:string ;
                                          
-                                         dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
+                                         dc:title "Open-Multinet Upper Ontology"@en ;
                                          
-                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."^^xsd:string ;
+                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en ;
 
                                          dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn.png> ;
                                          
