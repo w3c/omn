@@ -7,6 +7,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.Sli
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
+import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class RequestConverter extends AbstractConverter {
 		RequestConverter.model2rspec(model, request);
 
 		final JAXBElement<RSpecContents> rspec = new ObjectFactory()
-		.createRspec(request);
+				.createRspec(request);
 		return AbstractConverter.toString(rspec, RequestConverter.JAXB);
 	}
 
@@ -87,14 +88,17 @@ public class RequestConverter extends AbstractConverter {
 			if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
 				final boolean isExclusive = resource.getResource()
 						.getProperty(Omn_resource.isExclusive).getBoolean();
-				node.setExclusive(isExclusive);	
+				node.setExclusive(isExclusive);
 			}
-			
-			SliverType sliverType = new ObjectFactory().createNodeContentsSliverType();
-			sliverType.setName(resource.getProperty(RDF.type).getObject().toString());
-			JAXBElement<SliverType> sliver = new ObjectFactory ().createNodeContentsSliverType(sliverType );
+
+			SliverType sliverType = new ObjectFactory()
+					.createNodeContentsSliverType();
+			sliverType.setName(resource.getProperty(RDF.type).getObject()
+					.toString());
+			JAXBElement<SliverType> sliver = new ObjectFactory()
+					.createNodeContentsSliverType(sliverType);
 			node.getAnyOrRelationOrLocation().add(sliver);
-			
+
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
 		}
@@ -103,20 +107,23 @@ public class RequestConverter extends AbstractConverter {
 	private static void setComponentDetails(final Statement resource,
 			final NodeContents node) {
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
-			node.setClientId(resource.getResource().getProperty(Omn_lifecycle.hasID).getString());	
+			node.setClientId(resource.getResource()
+					.getProperty(Omn_lifecycle.hasID).getString());
 		}
-		
+
 	}
 
 	private static void setComponentId(final Statement resource,
 			final NodeContents node) {
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
-			node.setComponentId(resource.getResource().getProperty(Omn_lifecycle.implementedBy).getObject().toString());
+			node.setComponentId(resource.getResource()
+					.getProperty(Omn_lifecycle.implementedBy).getObject()
+					.toString());
 		}
 	}
 
 	public static Model getModel(final InputStream input) throws JAXBException,
-	InvalidModelException {
+			InvalidModelException {
 
 		final JAXBContext context = JAXBContext
 				.newInstance(RSpecContents.class);
@@ -132,7 +139,7 @@ public class RequestConverter extends AbstractConverter {
 
 		RequestConverter.extractNodes(request, topology);
 
-        NetworkTopologyExtractor.extractTopologyInformation(request, topology);
+		NetworkTopologyExtractor.extractTopologyInformation(request, topology);
 
 		return model;
 	}
@@ -151,120 +158,212 @@ public class RequestConverter extends AbstractConverter {
 						.createResource(AbstractConverter.NAMESPACE
 								+ node.getClientId());
 
-                List<Object> anyOrRelationOrLocation = node.getAnyOrRelationOrLocation();
-                if(anyOrRelationOrLocation.size()>0) {
-                    for (Object o : anyOrRelationOrLocation) {
-                        if (o instanceof JAXBElement) {
-                            JAXBElement element = (JAXBElement) o;
-                            if (element.getDeclaredType().equals(NodeContents.SliverType.class)) {
-                                NodeContents.SliverType sliverType = (NodeContents.SliverType) element.getValue();
-//                                omnResource.addProperty(RDF.type, model.createResource(sliverType.getName()));
-                                if(sliverType.getName().contains(":"))
-                                    omnResource.addProperty(RDF.type, model.createResource(sliverType.getName()));
-                                else
-                                    omnResource.addProperty(RDF.type, model.createResource("http://open-multinet.info/example#"+
-                                            sliverType.getName()));
-                            }
+				List<Object> anyOrRelationOrLocation = node
+						.getAnyOrRelationOrLocation();
+				if (anyOrRelationOrLocation.size() > 0) {
+					extractRelationOrLocation(model, omnResource,
+							anyOrRelationOrLocation);
+				} else {
+					omnResource.addProperty(RDF.type, Omn_resource.Node);
+				}
 
-
-                        }
-                    }
-                }else{
-                    omnResource.addProperty(RDF.type, Omn_resource.Node);
-                }
-
-				omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
-				if (null != node.getComponentId() && ! node.getComponentId().isEmpty())
-					omnResource.addProperty(Omn_lifecycle.implementedBy, model.createResource(node.getComponentId()));
+				omnResource
+						.addProperty(Omn_lifecycle.hasID, node.getClientId());
+				if (null != node.getComponentId()
+						&& !node.getComponentId().isEmpty())
+					omnResource.addProperty(Omn_lifecycle.implementedBy,
+							model.createResource(node.getComponentId()));
 				omnResource.addProperty(Omn.isResourceOf, topology);
 				if (null != node.isExclusive()) {
 					omnResource.addProperty(Omn_resource.isExclusive,
 							model.createTypedLiteral(node.isExclusive()));
 				}
 				topology.addProperty(Omn.hasResource, omnResource);
-				//todo: details such as sliver type
-				//List<Object> details = node.getAnyOrRelationOrLocation();
+				// todo: details such as sliver type
+				// List<Object> details = node.getAnyOrRelationOrLocation();
 			}
 		} catch (final ClassCastException e) {
 			RequestConverter.LOG.finer(e.getMessage());
 		}
 	}
 
-    private static class NetworkTopologyExtractor {
+	public static void extractRelationOrLocation(final Model model,
+			final Resource omnResource, List<Object> anyOrRelationOrLocation) {
+		for (Object o : anyOrRelationOrLocation) {
+			if (o instanceof JAXBElement) {
+				JAXBElement element = (JAXBElement) o;
+				if (element.getDeclaredType().equals(
+						NodeContents.SliverType.class)) {
+					NodeContents.SliverType sliverType = (NodeContents.SliverType) element
+							.getValue();
+					// omnResource.addProperty(RDF.type,
+					// model.createResource(sliverType.getName()));
+					if (sliverType.getName().contains(":"))
+						omnResource.addProperty(RDF.type, model
+								.createResource(sliverType
+										.getName()));
+					else
+						omnResource
+								.addProperty(
+										RDF.type,
+										model.createResource("http://open-multinet.info/example#"
+												+ sliverType
+														.getName()));
+				}
+				if (element.getDeclaredType().equals(
+						ServiceContents.class)) {
+					ServiceContents serviceContents = (ServiceContents) element
+							.getValue();
+					for (Object service : serviceContents
+							.getAnyOrLoginOrInstall()) {
+						if (service instanceof JAXBElement) {
+							JAXBElement serviceElement = (JAXBElement) service;
+							extractInstallService(model, omnResource,
+									serviceElement);
+							extractExecuteService(model, omnResource,
+									serviceElement);
+						}
+					}
+				}
 
-        static void extractTopologyInformation(final RSpecContents request, final Resource topology) {
+			}
+		}
+	}
 
-            List<JAXBElement<NodeContents>> xmlElements;
-            Model outputModel = topology.getModel();
+	public static void extractExecuteService(final Model model,
+			final Resource omnResource, JAXBElement serviceElement) {
+		if (serviceElement
+				.getDeclaredType()
+				.equals(ExecuteServiceContents.class)) {
+			ExecuteServiceContents execObject = (ExecuteServiceContents) serviceElement
+					.getValue();
+			
+			Resource execService = model
+					.createResource(Omn_service.ExecuteService);
+			
+			execService.addProperty(Omn_service.command, execObject.getCommand());
+			execService.addProperty(Omn_service.shell, execObject.getShell());
 
-            try {
-                xmlElements = (List) request.getAnyOrNodeOrLink();
-                for (JAXBElement element : xmlElements) {
+			omnResource.addProperty(
+					Omn.hasService,
+					execService);
+		}
+	}
 
-                    //If it's a node, then extract the node information and its corresponding interfaces
-                    if (element.getDeclaredType() == NodeContents.class) {
-                        JAXBElement<NodeContents> nodeObject = (JAXBElement<NodeContents>) element;
+	public static void extractInstallService(final Model model,
+			final Resource omnResource, JAXBElement serviceElement) {
+		if (serviceElement
+				.getDeclaredType()
+				.equals(InstallServiceContents.class)) {
+			InstallServiceContents serviceObject = (InstallServiceContents) serviceElement
+					.getValue();
+			Resource loginService = model
+					.createResource(Omn_service.InstallService);
+			
+			loginService.addProperty(Omn_service.installPath, serviceObject.getInstallPath());
+			loginService.addProperty(Omn_service.url, serviceObject.getUrl());
 
-                        NodeContents node = nodeObject.getValue();
+			omnResource.addProperty(
+					Omn.hasService,
+					loginService);
+		}
+	}
 
+	private static class NetworkTopologyExtractor {
 
-                        Resource omnResource = outputModel
-                                .createResource("http://open-multinet.info/example#"
-                                        + node.getClientId());
-//                        omnResource.addProperty(RDF.type, Nml.Node);
-                        omnResource.addProperty(RDF.type, Omn_resource.Node);
+		static void extractTopologyInformation(final RSpecContents request,
+				final Resource topology) {
 
-                        List<JAXBElement<InterfaceContents>> interfaces = (List) node.getAnyOrRelationOrLocation();
-                        for (JAXBElement<InterfaceContents> interfaceContent : interfaces) {
-                            try {
-                                InterfaceContents content = interfaceContent.getValue();
-                                Resource interfaceResource = outputModel.createResource("http://open-multinet.info/example#" + content.getClientId());
-//                                interfaceResource.addProperty(RDF.type, Nml.Port);
-//                                omnResource.addProperty(Nml.hasPort, interfaceResource);
+			List<JAXBElement<NodeContents>> xmlElements;
+			Model outputModel = topology.getModel();
 
-                                interfaceResource.addProperty(RDF.type, Omn_resource.Interface);
-                                omnResource.addProperty(Omn_resource.hasInterface, interfaceResource);
-                            } catch (ClassCastException exp) {
+			try {
+				xmlElements = (List) request.getAnyOrNodeOrLink();
+				for (JAXBElement element : xmlElements) {
 
-                            }
-                        }
-                    }
-                    //If it's an interface, then extract the node information and its corresponding interfaces
-                    else if (element.getDeclaredType() == LinkContents.class) {
+					// If it's a node, then extract the node information and its
+					// corresponding interfaces
+					if (element.getDeclaredType() == NodeContents.class) {
+						JAXBElement<NodeContents> nodeObject = (JAXBElement<NodeContents>) element;
 
-                        JAXBElement<LinkContents> linkObject = (JAXBElement<LinkContents>) element;
-                        LinkContents link = linkObject.getValue();
+						NodeContents node = nodeObject.getValue();
 
-                        Resource linkResource = outputModel
-                                .createResource("http://open-multinet.info/example#"
-                                        + link.getClientId());
-//                        linkResource.addProperty(RDF.type, Nml.Link);
-                        linkResource.addProperty(RDF.type, Omn_resource.Link);
+						Resource omnResource = outputModel
+								.createResource("http://open-multinet.info/example#"
+										+ node.getClientId());
+						// omnResource.addProperty(RDF.type, Nml.Node);
+						omnResource.addProperty(RDF.type, Omn_resource.Node);
 
-                        //Get source and sink interfaces
-                        List<JAXBElement<InterfaceRefContents>> interfaces = (List) link.getAnyOrPropertyOrLinkType();
-                        for (JAXBElement<InterfaceRefContents> interfaceRefContents : interfaces) {
-                            try {
-                                InterfaceRefContents content = interfaceRefContents.getValue();
-                                Resource interfaceResource = outputModel.createResource("http://open-multinet.info/example#" + content.getClientId());
-//                                interfaceResource.addProperty(Nml.isSink, linkResource);
-//                                interfaceResource.addProperty(Nml.isSource, linkResource);
+						List<JAXBElement<InterfaceContents>> interfaces = (List) node
+								.getAnyOrRelationOrLocation();
+						for (JAXBElement<InterfaceContents> interfaceContent : interfaces) {
+							try {
+								InterfaceContents content = interfaceContent
+										.getValue();
+								Resource interfaceResource = outputModel
+										.createResource("http://open-multinet.info/example#"
+												+ content.getClientId());
+								// interfaceResource.addProperty(RDF.type,
+								// Nml.Port);
+								// omnResource.addProperty(Nml.hasPort,
+								// interfaceResource);
 
-                                interfaceResource.addProperty(Omn_resource.isSink, linkResource);
-                                interfaceResource.addProperty(Omn_resource.isSource, linkResource);
+								interfaceResource.addProperty(RDF.type,
+										Omn_resource.Interface);
+								omnResource.addProperty(
+										Omn_resource.hasInterface,
+										interfaceResource);
+							} catch (ClassCastException exp) {
 
-//                            linkResource.addProperty(Nml.hasPort, interfaceResource);
-                            } catch (ClassCastException exp) {
+							}
+						}
+					}
+					// If it's an interface, then extract the node information
+					// and its corresponding interfaces
+					else if (element.getDeclaredType() == LinkContents.class) {
 
-                            }
-                        }
+						JAXBElement<LinkContents> linkObject = (JAXBElement<LinkContents>) element;
+						LinkContents link = linkObject.getValue();
 
-                    }
-                }
-            } catch (ClassCastException e) {
-                LOG.warning(e.getMessage());
-            }
-        }
-    }
+						Resource linkResource = outputModel
+								.createResource("http://open-multinet.info/example#"
+										+ link.getClientId());
+						// linkResource.addProperty(RDF.type, Nml.Link);
+						linkResource.addProperty(RDF.type, Omn_resource.Link);
+
+						// Get source and sink interfaces
+						List<JAXBElement<InterfaceRefContents>> interfaces = (List) link
+								.getAnyOrPropertyOrLinkType();
+						for (JAXBElement<InterfaceRefContents> interfaceRefContents : interfaces) {
+							try {
+								InterfaceRefContents content = interfaceRefContents
+										.getValue();
+								Resource interfaceResource = outputModel
+										.createResource("http://open-multinet.info/example#"
+												+ content.getClientId());
+								// interfaceResource.addProperty(Nml.isSink,
+								// linkResource);
+								// interfaceResource.addProperty(Nml.isSource,
+								// linkResource);
+
+								interfaceResource.addProperty(
+										Omn_resource.isSink, linkResource);
+								interfaceResource.addProperty(
+										Omn_resource.isSource, linkResource);
+
+								// linkResource.addProperty(Nml.hasPort,
+								// interfaceResource);
+							} catch (ClassCastException exp) {
+
+							}
+						}
+
+					}
+				}
+			} catch (ClassCastException e) {
+				LOG.warning(e.getMessage());
+			}
+		}
+	}
 
 }

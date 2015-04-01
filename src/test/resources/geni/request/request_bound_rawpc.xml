@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                           http://www.geni.net/resources/rspec/3/request.xsd"
+       type="request">
+  <node component_id="https://localhost:8443/resource/physicalnode-1"
+        component_manager_id="urn:publicid:IDN+localhost+authority+cm"
+        client_id="my-raw-pc-1"
+        exclusive="true">
+    <sliver_type name="http://open-multinet.info/ontology/omn-domain-pc#PC" />
+    <services>
+      <install url="http://fiteagle.org/images/logo_fiteagle.png" install_path="~/logos"/>
+      <install url="http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg" install_path="~/logos"/>
+      <execute shell="sh" command="time"/>
+      <execute shell="sh" command="df -h ~/logos"/>
+    </services>
+  </node>
+</rspec>
