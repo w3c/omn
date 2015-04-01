@@ -1,0 +1,36 @@
+# Turn off MultiViews
+Options -MultiViews
+
+# Directive to ensure *.rdf files served as appropriate content type,
+# if not present in main apache config
+AddType application/rdf+xml .rdf
+AddType text/rdf+n3;charset=utf-8 .n3
+AddType application/x-turtle .ttl
+
+# Rewrite engine setup
+RewriteEngine On
+RewriteBase /ontology
+
+# Rewrite rule to serve HTML content from the vocabulary URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{REQUEST_URI} ^omn.html$ [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^omn-(.*)/?$ http://www.essepuntato.it/lode/owlapi/reasoner/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn-$1.ttl [NC,L,P]
+RewriteRule ^omn/?$ http://www.essepuntato.it/lode/owlapi/reasoner/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn.ttl [NC,L,P]
+#RewriteRule ^(.*)$ http://www.essepuntato.it/lode/owlapi/reasoner/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn.ttl [P]
+
+# Rewrite rule to serve RDF/XML content if requested
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [OR]
+RewriteCond %{REQUEST_URI} ^omn.rdf$ [OR]
+RewriteCond %{REQUEST_URI} ^omn.xml$
+RewriteRule ^omn-(.*)/?$ http://rdf-translator.appspot.com/convert/n3/pretty-xml/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn-$1.ttl [NC,L,P]
+RewriteRule ^omn/?$ http://rdf-translator.appspot.com/convert/n3/pretty-xml/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn.ttl [NC,L,P]
+
+# Choose the default response
+# ---------------------------
+
+# Rewrite rule to serve TTL content by default
+RewriteRule ^(.*)$ http://rdf-translator.appspot.com/convert/n3/n3/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn.ttl [P]
+
