@@ -38,7 +38,22 @@
                                                     
                                                     dc:creator <http://alex.willner.ws/about#me> ;
                                                     
-                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                                    dc:creator <http://alex.willner.ws/about#me> ;
+                                         
+                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                         
+                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
+                                                        <mailto:thijs.walcarius@intec.ugent.be> ,
+                                                        <mailto:jorge.lopez_vergara@uam.es> ,
+                                                        <mailto:chrisap@noc.ntua.gr> ,
+                                                        <mailto:yahya.al-hazmi@tu-berlin.de> ,
+                                                        <mailto:loughnane@campus.tu-berlin.de> ,
+                                                        <https://staff.fnwi.uva.nl/p.grosso> ,
+                                                        <http://www.commit-nl.nl/people/morsey> , 
+                                                        <mailto:ibaldin@renci.org> ,
+                                                        <mailto:yxin@renci.org> .
 
 
 #################################################################
