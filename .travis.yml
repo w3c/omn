@@ -4,6 +4,7 @@ jdk:
 script:
   - mvn clean compile
   - mvn test
+  - ./bin/rdflint.sh -check ontologies/omn.ttl -assume import/*.ttl
 notifications:
   slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
   email:
