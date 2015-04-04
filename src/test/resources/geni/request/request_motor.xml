@@ -1,0 +1,5 @@
+<rspec type="request" generated="2014-07-11T10:20:39Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="motor1" component_id="http://localhost/resource/MotorGarage-1" component_manager_id="http://localhost:8443/sfa/api/am/v3" exclusive="true">
+    <sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor"/>
+  </node>
+ </rspec>

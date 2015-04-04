@@ -55,6 +55,23 @@ public class RequestConverterTest {
 	}
 
 	@Test
+	public void testConvertingBoundMotorRspec2Graph() throws JAXBException, InvalidModelException {
+		final InputStream rspec = RequestConverterTest.class
+				.getResourceAsStream("/geni/request/request_motor.xml");
+		final Model model = RequestConverter.getModel(rspec);
+		final String rspecOut = Parser.toString(model);
+		
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(rspecOut);
+		System.out.println("===============================");
+		
+		Assert.assertTrue("should have an 'implementedBy' property", rspecOut.contains("implementedBy"));
+		Assert.assertTrue("should reflect the sliver type", rspecOut.contains("MotorGarage"));
+
+	}
+
+	@Test
 	public void testConvertingBoundRSpec4PhysicalNode2Graph() throws JAXBException, InvalidModelException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_bound_rawpc.xml");
