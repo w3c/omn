@@ -34,7 +34,7 @@
 
                                                     dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-federation.png> ;
                                                     
-                                                    dc:publisher <http://open-multinet.org> ;
+                                                    dc:publisher <http://open-multinet.org/> ;
                                                     
                                                     dc:creator <http://alex.willner.ws/about#me> ;
                                                     

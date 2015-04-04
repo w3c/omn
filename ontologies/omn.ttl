@@ -39,7 +39,7 @@
 
                                          dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn.png> ;
                                          
-                                         dcterms:publisher <http://open-multinet.org> ;
+                                         dcterms:publisher <http://open-multinet.org/> ;
                                          
                                          dc:creator <http://alex.willner.ws/about#me> ;
                                          
@@ -93,6 +93,10 @@
 
 
 ###  http://open-multinet.info/ontology/omn#adaptsFrom
+
+## Fixes for Apache Eyeball
+owl:IrreflexiveProperty rdf:type owl:Class .
+owl:AllDisjointClasses rdf:type owl:Class .
 
 :adaptsFrom rdf:type owl:IrreflexiveProperty ,
                      owl:ObjectProperty ;

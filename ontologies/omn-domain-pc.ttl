@@ -109,7 +109,9 @@
   owl:annotatedTarget xsd:string
 ] .
 
-
+### Fix for Apache Eyeball
+owl:Axiom rdf:type owl:Class .
+owl:AllDisjointProperties rdf:type owl:Class .
 
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageURI
 
