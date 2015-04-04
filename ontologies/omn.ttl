@@ -51,16 +51,16 @@
 
                                          cc:license <http://creativecommons.org/licenses/by/4.0/> ;
                                          
-                                         dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
-                                                        <mailto:thijs.walcarius@intec.ugent.be> ,
-                                                        <mailto:jorge.lopez_vergara@uam.es> ,
-                                                        <mailto:chrisap@noc.ntua.gr> ,
-                                                        <https://www.linkedin.com/in/yahyaalhazmi> ,
-                                                        <mailto:loughnane@campus.tu-berlin.de> ,
-                                                        <https://staff.fnwi.uva.nl/p.grosso> ,
-                                                        <http://www.commit-nl.nl/people/morsey> , 
-                                                        <mailto:ibaldin@renci.org> ,
-                                                        <mailto:yxin@renci.org> .
+                                         dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
+                                         dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
+                                         dc:contributor  <mailto:jorge.lopez_vergara@uam.es> ;
+                                         dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                         dc:contributor <https://www.linkedin.com/in/yahyaalhazmi> ;
+                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
+                                         dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+                                         dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                         dc:contributor <mailto:ibaldin@renci.org> ;
+                                         dc:contributor <mailto:yxin@renci.org> .
 
 
 #################################################################
@@ -98,11 +98,11 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#adaptsFrom
-
-## Fixes for Apache Eyeball
+### Fixes for Apache Eyeball
 owl:IrreflexiveProperty rdf:type owl:Class .
 owl:AllDisjointClasses rdf:type owl:Class .
+
+###  http://open-multinet.info/ontology/omn#adaptsFrom
 
 :adaptsFrom rdf:type owl:IrreflexiveProperty ,
                      owl:ObjectProperty ;
@@ -167,6 +167,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
            rdfs:label "depends on"@en ;
            
            rdfs:subPropertyOf :relatesTo ;
+
+           rdfs:comment "claims dependency"@en ;
            
            rdfs:domain [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
@@ -190,7 +192,9 @@ owl:AllDisjointClasses rdf:type owl:Class .
 :relatesTo rdf:type owl:ObjectProperty ;
            
            rdfs:label "relates to"@en ;
-           
+
+           rdfs:comment "claims a general dependency"@en ;
+                      
            rdfs:domain [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
                                        :Group
