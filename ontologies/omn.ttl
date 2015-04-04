@@ -16,6 +16,9 @@
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
 @prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
 @prefix time: <http://www.w3.org/2006/time#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix service: <http://purl.org/ontology/service#> .
 @base <http://open-multinet.info/ontology/omn#> .
 
 <http://open-multinet.info/ontology/omn> rdf:type owl:Ontology,
@@ -629,7 +632,11 @@ owl:AllDisjointClasses rdf:type owl:Class .
                       "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..."@en ;
          
          rdfs:seeAlso novi:Service ,
-                      nml:Service .
+                      nml:Service ,
+                      gr:ProductOrService,
+                      dctype:Service,
+                      schema:Service,
+                      service:Service .
 
 
 :Reservation rdf:type owl:Class ;
