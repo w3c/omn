@@ -410,7 +410,9 @@ owl:AllDisjointClasses rdf:type owl:Class .
                                         :Resource
                                         :Service
                                       )
-                        ] .
+                        ] ;
+            
+            rdfs:seeAlso service:providedBy .
 
 
 :isReservationOf rdf:type owl:ObjectProperty ;
