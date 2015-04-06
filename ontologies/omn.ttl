@@ -26,6 +26,8 @@
                                          voaf:Vocabulary ;
                                          
                                          rdfs:label "omn"@en ;
+
+                                         rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en ;
  
                                          vann:preferredNamespacePrefix "omn" ;
 
@@ -76,6 +78,8 @@
                
                rdfs:label "adaptable from"@en ;
                
+               rdfs:comment "determines the resource from which this resource can be adapted from - e.g. from an Ethernet to a FDDI port."@en ;
+
                rdfs:range :Layer ;
                
                rdfs:domain :Layer ;
@@ -89,6 +93,8 @@
 :adaptableTo rdf:type owl:ObjectProperty ;
              
              rdfs:label "adaptable to"@en ;
+
+             rdfs:comment "determines to which resource this resource can adapts to - e.g. from an Ethernet to a FDDI port."@en ;
              
              rdfs:range :Layer ;
 
@@ -110,9 +116,10 @@ owl:AllDisjointClasses rdf:type owl:Class .
             rdfs:label "adapts from"@en ;
 
             owl:inverseOf :adaptsTo ;
+
+            rdfs:comment "determines from which resource this resource adapts - e.g. from an Ethernet to a FDDI port."@en ;
             
-            rdfs:comment "todo: domain and range must not be of the same type"@en ;
-            
+            #todo: domain and range must not be of the same type
             rdfs:range [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
                                        :Group
@@ -138,7 +145,7 @@ owl:AllDisjointClasses rdf:type owl:Class .
           
           rdfs:label "adapts to"@en ;
           
-          rdfs:comment "todo: domain and range must not be of the same type"@en ;
+          rdfs:comment "determines to which resource this resource adapts - e.g. from an Ethernet to a FDDI port."@en ;
           
           owl:inverseOf :adaptsFrom ;
           
@@ -218,6 +225,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
 :fromDependency rdf:type owl:ObjectProperty ;
                 
                 rdfs:label "from dependency"@en ;
+
+                rdfs:comment "claims dependency"@en ;
                 
                 rdfs:domain :Dependency ;
                 
@@ -238,6 +247,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
 :hasAttribute rdf:type owl:ObjectProperty ;
               
               rdfs:label "has attribute"@en ;
+
+              rdfs:comment "link to a general attribute of the resource - e.g. to a ReadOnly class"@en ;
               
               rdfs:range :Attribute ;
               
@@ -259,6 +270,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
               
               rdfs:label "has component"@en ;
 
+              rdfs:comment "component of the resource - e.g. a CPU"@en ;
+
               owl:inverseOf :isComponentOf ;
               
               rdfs:seeAlso novi:hasComponent ;
@@ -279,6 +292,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
 :hasGroup rdf:type owl:ObjectProperty ;
           
           rdfs:label "has group"@en ;
+
+          rdfs:comment "a group that is related to this resource - e.g. a reserved topology within an infrastructure"@en ;
           
           rdfs:domain :Group ;
           
@@ -294,6 +309,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
              
              rdfs:label "has resource"@en ;
              
+             rdfs:comment "a resource that this resource contains - e.g. a node within a reserved topology"@en ;
+
              rdfs:seeAlso novi:contains ;
              
              rdfs:domain :Group ;
@@ -309,6 +326,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
 :hasService rdf:type owl:ObjectProperty ;
             
             rdfs:label "has service"@en ;
+
+            rdfs:comment "a service that this resource contains - e.g. a Hadoop instance within a reserved topology"@en ;
             
             rdfs:range :Service ;
             
@@ -323,6 +342,8 @@ owl:AllDisjointClasses rdf:type owl:Class .
 :hasReservation rdf:type owl:ObjectProperty ;
             
             rdfs:label "has reservation"@en ;
+
+            rdfs:comment "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en ;
             
             rdfs:range :Reservation ;
             
