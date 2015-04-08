@@ -153,7 +153,7 @@
 
 :username rdf:type owl:DatatypeProperty ;
           
-          rdfs:seeAlso "GENI Manifest RSpec v3: username"@en ;
+          rdfs:seeAlso "GENI SFA Request username via x509 certificate"@en ;
           
           rdfs:comment "Login Service username"@en ;
           
@@ -161,6 +161,17 @@
           
           rdfs:range xsd:string .
 
+###  http://open-multinet.info/ontology/omn-service#publickey
+
+:publickey rdf:type owl:DatatypeProperty ;
+          
+          rdfs:seeAlso "GENI SFA Request public key via x509 certificate"@en ;
+          
+          rdfs:comment "Login Service public key"@en ;
+          
+          rdfs:domain :LoginService ;
+          
+          rdfs:range xsd:string .
 
 
 
