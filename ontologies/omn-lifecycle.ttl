@@ -1,45 +1,49 @@
 @prefix : <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @base <http://open-multinet.info/ontology/omn-lifecycle#> .
 
-<http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology ;
+<http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology, voaf:Vocabulary ;
                                                    
                                                    rdfs:label "omn-lifecycle"@en ;
                                                    
                                                    dcterms:created "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-03-24"^^xsd:string ;
+                                                   owl:versionInfo "2015-04-08"^^xsd:string ;
                                                    
-                                                   dc:title "Open-Multinet Upper Lifecycle Ontology"^^xsd:string ;
+                                                   dc:title "Open-Multinet Upper Lifecycle Ontology"@en ;
                                                    
-                                                   dc:description "This ontology defines generic concepts related to different types of lifecycle."^^xsd:string ;
+                                                   dc:description "This ontology defines generic concepts related to the life cycle of resource or service."@en ;
                                                    
-                                                   dcterms:modified "2015-03-24" ;
+                                                   dcterms:modified "2015-04-08"^^xsd:date ;
                                                    
-                                                   vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-lifecycle#" ;
+                                                   vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
                                                     
-                                                   vann:preferredNamespacePrefix "omn-lifecycle" ;
+                                                   vann:preferredNamespacePrefix "omn-lifecycle"^^xsd:string ;
                                                     
-                                                   dc:publisher <http://open-multinet.org> ;
+                                                   dc:publisher <http://open-multinet.org/> ;
                                                     
                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                                    
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
-                                                   
+
                                                    dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn-lifecycle.png> ;
 
                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                          
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                                   cc:license <http://creativecommons.org/licenses/by/4.0/> ;
                                          
                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
                                                         <mailto:thijs.walcarius@intec.ugent.be> ,
@@ -51,7 +55,6 @@
                                                         <http://www.commit-nl.nl/people/morsey> , 
                                                         <mailto:ibaldin@renci.org> ,
                                                         <mailto:yxin@renci.org> .
-
 
 #################################################################
 #
@@ -209,8 +212,14 @@
           
           owl:inverseOf :parentOf ;
           
-          rdfs:domain <http://org.semanticweb.owlapi/error#Error3> ;
-          
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ];
+                                
           rdfs:range [ rdf:type owl:Class ;
                        owl:unionOf ( omn:Component
                                      omn:Group
@@ -238,8 +247,9 @@
                               
                               rdfs:seeAlso "GENI Slice X.509 certificates"@en ;
                               
-                              rdfs:domain <http://org.semanticweb.owlapi/error#Error4> ;
-                              
+                              rdfs:domain omn:Resource ,
+                                   omn:Service ;
+
                               rdfs:range xsd:string .
 
 
@@ -609,21 +619,6 @@ omn:Topology rdf:type owl:Class .
           rdfs:comment "The related resource/service is getting updated"@en .
 
 
-
-###  http://org.semanticweb.owlapi/error#Error3
-
-<http://org.semanticweb.owlapi/error#Error3> rdf:type owl:Class .
-
-
-
-###  http://org.semanticweb.owlapi/error#Error4
-
-<http://org.semanticweb.owlapi/error#Error4> rdf:type owl:Class .
-
-
-
-
-
 #################################################################
 #
 #    Individuals
@@ -755,9 +750,11 @@ omn:Topology rdf:type owl:Class .
 :Updating rdf:type :State ,
                    owl:NamedIndividual .
 
-### Fix for Apache Eyeball
+### Fix for validation
 owl:NamedIndividual rdf:type owl:Class .
-
+owl:IrreflexiveProperty rdf:type owl:Class .
+owl:AllDisjointClasses rdf:type owl:Class .
+<http://alex.willner.ws/about#me> a foaf:Person .
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
 
