@@ -22,7 +22,7 @@ The Java library helps developers to work wiht Open-Multinet related ontologies 
 
 #### CLI
 
-    ./src/main/bin/omnlib -o ttl -i src/test/resources/request_bound.xml
+    ./src/main/bin/omnlib -o ttl -i src/test/resources/geni/request/request_bound.xml
 
 #### Web Service
 
