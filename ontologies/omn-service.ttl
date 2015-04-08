@@ -23,7 +23,7 @@
                                                  
                                                  owl:versionInfo "2015-03-24" ;
                                                  
-                                                 dc:publisher <http://open-multinet.org> ;
+                                                 dc:publisher <http://open-multinet.org/> ;
                                                  
                                                  dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                  

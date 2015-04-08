@@ -35,8 +35,6 @@
                                                     
                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                                    
-                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
-
                                                    dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn-lifecycle.png> ;
 
                                                    dc:creator <http://alex.willner.ws/about#me> ;
@@ -44,7 +42,9 @@
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 
                                                    cc:license <http://creativecommons.org/licenses/by/4.0/> ;
-                                         
+
+                                                   dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
                                                         <mailto:thijs.walcarius@intec.ugent.be> ,
                                                         <mailto:jorge.lopez_vergara@uam.es> ,
@@ -750,7 +750,7 @@ omn:Topology rdf:type owl:Class .
 :Updating rdf:type :State ,
                    owl:NamedIndividual .
 
-### Fix for validation
+### Fixes for validation
 owl:NamedIndividual rdf:type owl:Class .
 owl:IrreflexiveProperty rdf:type owl:Class .
 owl:AllDisjointClasses rdf:type owl:Class .

@@ -24,7 +24,7 @@
                                                   
                                                   dc:description "This ontology expands definitions of types of resources as described in the main OMN upper ontology. Resources are defined as entities that can be provisioned/controlled/measured by APIs."^^xsd:string ;
                                                   
-                                                  dc:publisher <http://open-multinet.org> ;
+                                                  dc:publisher <http://open-multinet.org/> ;
                                                   
                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                   

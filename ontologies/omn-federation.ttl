@@ -41,7 +41,11 @@
 
                                                     cc:license <http://creativecommons.org/licenses/by/4.0/> ;
 
+                                                    dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
                                                     dc:creator <http://alex.willner.ws/about#me> ;
+
+                                                    owl:imports <http://open-multinet.info/ontology/omn#> ;
                                                                                   
                                                     dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
                                                         <mailto:thijs.walcarius@intec.ugent.be> ,

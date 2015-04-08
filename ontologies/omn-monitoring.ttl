@@ -29,7 +29,7 @@
                                                     
                                                     vann:preferredNamespacePrefix "omn-monitoring" ;
                                                     
-                                                    dc:publisher <http://open-multinet.org> ;
+                                                    dc:publisher <http://open-multinet.org/> ;
                                                     
                                                     dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                     
