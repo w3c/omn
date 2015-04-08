@@ -43,7 +43,7 @@
 
                                                    cc:license <http://creativecommons.org/licenses/by/4.0/> ;
 
-                                                   dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+                                                   dc:rights "This ontology is distributed under a Creative Commons Attribute License - http://creativecommons.org/licenses/by/4.0/"@en ;
 
                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
                                                         <mailto:thijs.walcarius@intec.ugent.be> ,
