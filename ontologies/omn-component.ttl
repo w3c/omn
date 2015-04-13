@@ -25,7 +25,7 @@
 
                                          dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-component.png> ;
                                          
-                                         dc:publisher <http://open-multinet.org/> ;
+                                         dc:publisher <http://open-multinet.info/> ;
                                          
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 
