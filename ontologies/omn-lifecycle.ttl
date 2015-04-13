@@ -31,7 +31,7 @@
                                                     
                                                    vann:preferredNamespacePrefix "omn-lifecycle"^^xsd:string ;
                                                     
-                                                   dc:publisher <http://open-multinet.org/> ;
+                                                   dc:publisher <http://open-multinet.info/> ;
                                                     
                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                                    
