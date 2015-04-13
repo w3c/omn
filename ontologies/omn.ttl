@@ -47,7 +47,7 @@
 
                                          dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> ;
                                          
-                                         dc:publisher <http://open-multinet.org/> ;
+                                         dc:publisher <http://open-multinet.info/> ;
                                          
                                          dc:creator <http://alex.willner.ws/about#me> ;
                                          
