@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://www.geni.net/resources/rspec/3" 
-	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd "
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd "
 	type="request">
 	<node 
 	    component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
