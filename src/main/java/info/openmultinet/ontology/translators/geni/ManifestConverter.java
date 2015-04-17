@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
@@ -13,6 +14,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeConten
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.User;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
@@ -49,6 +51,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class ManifestConverter extends AbstractConverter {
 
@@ -131,16 +134,56 @@ public class ManifestConverter extends AbstractConverter {
 					.getProperty(Omn_resource.isExclusive).getBoolean());
 		}
 
+		// check if the statement has sliver type
 		if (resource.getResource().hasProperty(RDF.type)) {
-			SliverType value = new ObjectFactory()
-					.createNodeContentsSliverType();
-			value.setName(resource.getResource().getProperty(RDF.type)
-					.getObject().toString());
 
-			JAXBElement<SliverType> sliverType = new ObjectFactory()
-					.createNodeContentsSliverType(value);
-			node.getAnyOrRelationOrLocation().add(sliverType);
+			RDFNode sliverNode = resource.getResource().getProperty(RDF.type)
+					.getObject();
+			Resource sliverResource = sliverNode.asResource();
+			SliverType sliverName = new ObjectFactory()
+					.createNodeContentsSliverType();
+
+			if (sliverResource.hasProperty(RDFS.label)) {
+				sliverName.setName(sliverResource.getProperty(RDFS.label)
+						.getObject().toString());
+			}
+
+			// get resource
+			if (sliverResource.hasProperty(Omn.hasResource)) {
+
+				RDFNode resourceNode = sliverResource.getProperty(
+						Omn.hasResource).getObject();
+				Resource resourceResource = resourceNode.asResource();
+				
+				// check if the resource is a disk image
+				if (resourceResource.hasProperty(RDF.type,
+						Omn_domain_pc.DiskImage)) {
+
+					String diskName = "";
+					if (resourceResource
+							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+						diskName += resourceResource
+								.getProperty(Omn_domain_pc.hasDiskimageLabel)
+								.getObject().asLiteral().getString();
+					}
+
+					DiskImageContents diskImageContents = new ObjectFactory()
+							.createDiskImageContents();
+					if (diskName != "") {
+						diskImageContents.setName(diskName);
+					}
+					JAXBElement<DiskImageContents> diskImage = new ObjectFactory()
+							.createDiskImage(diskImageContents);
+					sliverName.getAnyOrDiskImage().add(diskImage);
+				}
+			}
+			
+			JAXBElement<SliverType> sliver = new ObjectFactory()
+					.createNodeContentsSliverType(sliverName);
+			node.getAnyOrRelationOrLocation().add(sliver);
+
 		}
+
 
 		// check if the statement has the property hasService
 		ServiceContents serviceContents = null;
@@ -353,9 +396,41 @@ public class ManifestConverter extends AbstractConverter {
 					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
 					if (nodeDetailElement.getDeclaredType().equals(
 							NodeContents.SliverType.class)) {
+
 						NodeContents.SliverType sliverType = (NodeContents.SliverType) nodeDetailElement
 								.getValue();
-						omnResource.addProperty(RDF.type, sliverType.getName());
+
+						Resource sliver = model.createResource();
+						sliver.addProperty(RDFS.label, sliverType.getName());
+						List<Object> sliverContents = sliverType
+								.getAnyOrDiskImage();
+
+						for (int i = 0; i < sliverContents.size(); i++) {
+							Object sliverObject = sliverContents.get(i);
+
+							// check if disk_image
+							if (((JAXBElement<?>) sliverObject)
+									.getDeclaredType().equals(
+											DiskImageContents.class)) {
+
+								Resource diskImage = model.createResource();
+								diskImage.addProperty(RDF.type,
+										Omn_domain_pc.DiskImage);
+								DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) sliverObject)
+										.getValue();
+
+								// add name info
+								String name = diskImageContents.getName();
+								diskImage.addLiteral(
+										Omn_domain_pc.hasDiskimageLabel, name);
+								sliver.addProperty(Omn.hasResource, diskImage);
+							}
+
+						}
+
+						omnResource.addProperty(RDF.type, sliver);
+						// omnResource.addProperty(RDF.type,
+						// sliverType.getName());
 					}
 
 					// check if type is Services
