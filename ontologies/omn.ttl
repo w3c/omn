@@ -47,9 +47,11 @@
 
                                          dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> ;
                                          
-                                         dc:publisher <http://open-multinet.org/> ;
-                                         
                                          dc:creator <http://alex.willner.ws/about#me> ;
+
+                                         dc:publisher <http://open-multinet.org/> ;
+
+                                         foaf:homepage <http://open-multinet.org/> ;
                                          
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 
@@ -58,16 +60,24 @@
                                          dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
 
                                          dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
+                                         
                                          dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
+                                         
                                          dc:contributor  <mailto:jorge.lopez_vergara@uam.es> ;
+                                         
                                          dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                         
                                          dc:contributor <https://www.linkedin.com/in/yahyaalhazmi> ;
+                                         
                                          dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
+                                         
                                          dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+                                         
                                          dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                         
                                          dc:contributor <mailto:ibaldin@renci.org> ;
+                                         
                                          dc:contributor <mailto:yxin@renci.org> .
-
 
 #################################################################
 #
