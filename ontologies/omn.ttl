@@ -49,9 +49,9 @@
                                          
                                          dc:creator <http://alex.willner.ws/about#me> ;
 
-                                         dc:publisher <http://open-multinet.org/> ;
+                                         dc:publisher <http://open-multinet.info/> ;
 
-                                         foaf:homepage <http://open-multinet.org/> ;
+                                         foaf:homepage <http://open-multinet.info/> ;
                                          
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 

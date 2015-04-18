@@ -97,7 +97,7 @@
     </interface>
     <flack:node_info x="364" y="389" unbound="true"/>
   <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm1-9"/><host name="nodeE.dbhatinstageni5.panther.instageni.gpolab.bbn.com"/></node>
-  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4543">
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4543" vlantag="">
     <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
     <interface_ref client_id="VM-0:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4544"/>
     <interface_ref client_id="VM:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4545"/>
@@ -105,7 +105,7 @@
     <property source_id="VM:if0" dest_id="VM-0:if0"/>
     <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
   </link>
-  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4546">
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link1" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4546" vlantag="" >
     <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
     <interface_ref client_id="VM:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4547"/>
     <interface_ref client_id="VM-1:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4548"/>
@@ -113,7 +113,7 @@
     <property source_id="VM-1:if0" dest_id="VM:if1"/>
     <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
   </link>
-  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link2" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4549">
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link2" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4549" vlantag="" >
     <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
     <interface_ref client_id="VM-1:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4550"/>
     <interface_ref client_id="VM-2:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4551"/>
@@ -121,7 +121,7 @@
     <property source_id="VM-2:if0" dest_id="VM-1:if1"/>
     <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
   </link>
-  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link3" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4552">
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link3" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4552" vlantag="" >
     <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
     <interface_ref client_id="VM-0:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4553"/>
     <interface_ref client_id="VM-2:if1" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4554"/>
@@ -129,7 +129,7 @@
     <property source_id="VM-2:if1" dest_id="VM-0:if1"/>
     <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
   </link>
-  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link4" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4555">
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link4" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4555" vlantag="" >
     <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
     <interface_ref client_id="VM-2:if2" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4556"/>
     <interface_ref client_id="VM-3:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4557"/>
@@ -137,7 +137,7 @@
     <property source_id="VM-3:if0" dest_id="VM-2:if2"/>
     <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
   </link>
-  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link5" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4558">
+  <link xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="link5" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4558" vlantag="">
     <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
     <interface_ref client_id="nodeB:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4559"/>
     <interface_ref client_id="nodeC:if0" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc1:lo0" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+4560"/>

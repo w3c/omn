@@ -35,7 +35,7 @@
 
                                                     dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn-federation.png> ;
 
-                                                    dc:publisher <http://open-multinet.org/> ;
+                                                    dc:publisher <http://open-multinet.info/> ;
                                                     
                                                     dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 

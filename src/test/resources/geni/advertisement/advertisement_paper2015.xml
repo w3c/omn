@@ -13,6 +13,6 @@
 		<hardware_type name="http://open-multinet.info/ontology/resources/motorgarage#MotorGarage" />
 		<sliver_type name="http://open-multinet.info/ontology/resources/motor#Motor" />
 		<available now="true" />
-		<location longitude="3.734761" latitude="51.036145" />
+		<location longitude="3.734761" latitude="51.036145" country="" />
 	</node>
 </rspec>

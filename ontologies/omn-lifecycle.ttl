@@ -32,7 +32,7 @@
                                                     
                                                    vann:preferredNamespacePrefix "omn-lifecycle"^^xsd:string ;
                                                     
-                                                   dc:publisher <http://open-multinet.org/> ;
+                                                   dc:publisher <http://open-multinet.info/> ;
                                                     
                                                    dc:creator <http://alex.willner.ws/about#me> ;
                                                    
@@ -94,6 +94,7 @@
                                     )
                       ] .
 
+###  http://open-multinet.info/ontology/omn-lifecycle#usesService
 :usesService rdf:type 
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
@@ -107,6 +108,54 @@
                                       omn:Service
                                     )
                       ] .
+                      
+                      
+###  http://open-multinet.info/ontology/omn-lifecycle#canImplement
+
+:canImplement rdf:type owl:ObjectProperty ;
+
+            rdfs:comment "That which does not currently implement, but can potentially implement a resource, service, component or group."@en ;
+            
+            owl:inverseOf :canBeImplementedBy ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Component
+                                        omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( omn:Component
+                                       omn:Group
+                                       omn:Resource
+                                       omn:Service
+                                     )
+                       ] .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#canBeImplementedBy
+
+:canBeImplementedBy rdf:type owl:ObjectProperty ;
+
+               rdfs:comment "That which is not currently implemented, but can potentially be implemented by a resource, service, component or group."@en ;
+               
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( omn:Component
+                                          omn:Group
+                                          omn:Resource
+                                          omn:Service
+                                        )
+                          ] ;
+               
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( omn:Component
+                                           omn:Group
+                                           omn:Resource
+                                           omn:Service
+                                         )
+                           ] .
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
