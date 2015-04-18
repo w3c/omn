@@ -1,0 +1,130 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.daml.org/services/owl-s/1.0DL/Service.owl#> .
+
+<http://www.daml.org/services/owl-s/1.0DL/Service.owl>
+    a owl:Ontology ;
+    rdfs:comment """
+    Top level of OWL ontology for services.
+    Part of the OWL-S ontology; see http://www.daml.org/services/.  
+  """ ;
+    owl:versionInfo """
+    $Id: Service.owl,v 1.25 2004/05/05 16:48:23 martin Exp $
+  """ .
+
+:Service
+    a owl:Class ;
+    rdfs:comment """ 
+    A service has 0 or 1 models.  (But note that a service with 0 models 
+    does not provide automated online access; it exists only for
+    discovery purposes; that is, it exists so as to provide a Profile.)
+  """, "See comments above" ;
+    rdfs:label "Service" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:maxCardinality "1" ;
+        owl:onProperty :describedBy
+    ] .
+
+:ServiceGrounding
+    a owl:Class ;
+    rdfs:comment """ 
+    A Grounding must be associated with exactly one service.
+    (Also, that service must have a model - but that constraint
+    isn't expressed here.)
+  """, "See comments above" ;
+    rdfs:label "ServiceGrounding" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:cardinality "1" ;
+        owl:onProperty :supportedBy
+    ] .
+
+:ServiceModel
+    a owl:Class ;
+    rdfs:comment "See comments above" ;
+    rdfs:label "ServiceModel" .
+
+:ServiceProfile
+    a owl:Class ;
+    rdfs:comment "See comments above" ;
+    rdfs:label "ServiceProfile" .
+
+:describedBy
+    a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :ServiceModel ;
+    owl:inverseOf :describes .
+
+:describes
+    a owl:ObjectProperty ;
+    rdfs:comment """ 
+    There are no cardinality restrictions on this property. That is,
+    the same service model can be used by many different services.
+  """ ;
+    rdfs:domain :ServiceModel ;
+    rdfs:range :Service ;
+    owl:inverseOf :describedBy .
+
+:isDescribedBy
+    a owl:ObjectProperty ;
+    rdfs:comment "deprecated form" ;
+    owl:equivalentProperty :describedBy .
+
+:isPresentedBy
+    a owl:ObjectProperty ;
+    rdfs:comment "deprecated form" ;
+    owl:equivalentProperty :presentedBy .
+
+:isSupportedBy
+    a owl:ObjectProperty ;
+    rdfs:comment "deprecated form" ;
+    owl:equivalentProperty :supportedBy .
+
+:presentedBy
+    a owl:ObjectProperty ;
+    rdfs:comment """ 
+    There are no cardinality restrictions on this property. 
+  """ ;
+    rdfs:domain :ServiceProfile ;
+    rdfs:range :Service ;
+    owl:inverseOf :presents .
+
+:presents
+    a owl:ObjectProperty ;
+    rdfs:comment """ 
+    There are no cardinality restrictions on this property. 
+  """ ;
+    rdfs:domain :Service ;
+    rdfs:range :ServiceProfile ;
+    owl:inverseOf :presentedBy .
+
+:providedBy
+    a owl:ObjectProperty ;
+    rdfs:comment """A service is provided by a Resource, such as a WebSite.
+  """ ;
+    rdfs:domain :Service ;
+    owl:inverseOf :provides .
+
+:provides
+    a owl:ObjectProperty ;
+    rdfs:comment """
+    OWL-S is completely agnostic at present about what kind of thing
+    provides a service (hence, no domain declared here).
+  """ ;
+    rdfs:range :Service ;
+    owl:inverseOf :providedBy .
+
+:supportedBy
+    a owl:ObjectProperty ;
+    rdfs:domain :ServiceGrounding ;
+    rdfs:range :Service ;
+    owl:inverseOf :supports .
+
+:supports
+    a owl:ObjectProperty ;
+    rdfs:domain :Service ;
+    rdfs:range :ServiceGrounding ;
+    owl:inverseOf :supportedBy .
+

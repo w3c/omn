@@ -21,6 +21,7 @@
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix service: <http://purl.org/ontology/service#> .
 @prefix cc: <http://creativecommons.org/ns#> .
+@prefix owl-s: <http://www.daml.org/services/owl-s/1.0DL/Service.owl#> .
 @base <http://open-multinet.info/ontology/omn#> .
 
 <http://open-multinet.info/ontology/omn> rdf:type owl:Ontology,
@@ -37,9 +38,9 @@
                                         
                                          dcterms:created "2014-11-11"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-04-04"^^xsd:date ;
+                                         dcterms:modified "2015-04-18"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-04-04"^^xsd:string ;
+                                         owl:versionInfo "2015-04-18"^^xsd:string ;
                                          
                                          dc:title "Open-Multinet Upper Ontology"@en ;
                                          
@@ -63,7 +64,7 @@
                                          
                                          dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
                                          
-                                         dc:contributor  <mailto:jorge.lopez_vergara@uam.es> ;
+                                         dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
                                          
                                          dc:contributor <mailto:chrisap@noc.ntua.gr> ;
                                          
@@ -676,7 +677,8 @@
                       gr:ProductOrService,
                       dctype:Service,
                       schema:Service,
-                      service:Service .
+                      service:Service,
+                      owl-s:Service .
 
 
 :Reservation rdf:type owl:Class ;
