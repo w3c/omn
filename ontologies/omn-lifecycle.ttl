@@ -106,6 +106,8 @@
                                       omn:Service
                                     )
                       ] .
+                      
+                      
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
