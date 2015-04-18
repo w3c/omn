@@ -490,7 +490,7 @@ omn:Topology rdf:type owl:Class .
           
           rdfs:comment "A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies."@en ;
           
-          rdfs:seeAlso gr:Offering ;
+          rdfs:seeAlso gr:Offering .
 
 
 
