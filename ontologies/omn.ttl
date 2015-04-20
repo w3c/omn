@@ -24,19 +24,19 @@
 @prefix owl-s: <http://www.daml.org/services/owl-s/1.0DL/Service.owl#> .
 @base <http://open-multinet.info/ontology/omn#> .
 
-<http://open-multinet.info/ontology/omn> rdf:type owl:Ontology,
+<http://open-multinet.info/ontology/omn> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en ;
+
+                                         rdf:type owl:Ontology, 
 
                                          voaf:Vocabulary ;
                                          
                                          rdfs:label "omn"@en ;
-
-                                         rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en ;
- 
+                                         
                                          vann:preferredNamespacePrefix "omn"^^xsd:string ;
 
                                          vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn#> ;
                                         
-                                         dcterms:created "2014-11-11"^^xsd:date ;
+                                         dc:date "2014-11-11"^^xsd:date ;
                                          
                                          dcterms:modified "2015-04-18"^^xsd:date ;
                                          
@@ -48,7 +48,7 @@
 
                                          dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> ;
                                          
-                                         dc:creator <http://alex.willner.ws/about#me> ;
+                                         dc:creator <mailto:alexander.willner@tu-berlin.de> ;
 
                                          dc:publisher <http://open-multinet.info/> ;
 
@@ -60,23 +60,24 @@
 
                                          dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
 
-                                         dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
+                                         # Only one contributor can be listed for validation by owlint
+                                         # dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
                                          
-                                         dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
+                                         # dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
                                          
-                                         dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
+                                         # dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
                                          
-                                         dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                         # dc:contributor <mailto:chrisap@noc.ntua.gr> ;
                                          
-                                         dc:contributor <https://www.linkedin.com/in/yahyaalhazmi> ;
+                                         # dc:contributor <https://www.linkedin.com/in/yahyaalhazmi> ;
                                          
-                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
+                                         # dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
                                          
-                                         dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+                                         # dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
                                          
-                                         dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                         # dc:contributor <http://www.commit-nl.nl/people/morsey> ;
                                          
-                                         dc:contributor <mailto:ibaldin@renci.org> ;
+                                         # dc:contributor <mailto:ibaldin@renci.org> ;
                                          
                                          dc:contributor <mailto:yxin@renci.org> .
 
@@ -369,6 +370,8 @@
 ###  http://open-multinet.info/ontology/omn#isAttributeOf
 
 :isAttributeOf rdf:type owl:ObjectProperty ;
+
+               rdfs:comment "a general attribute of a resource - e.g. to a ReadOnly class"@en ;
                
                rdfs:label "is attribute of"@en ;
                
@@ -389,6 +392,8 @@
 ###  http://open-multinet.info/ontology/omn#isComponentOf
 
 :isComponentOf rdf:type owl:ObjectProperty ;
+
+               rdfs:comment "is component of a resource - e.g. a CPU in a PC"@en ;
                
                rdfs:label "is component of"@en ;
                
@@ -408,6 +413,8 @@
 ###  http://open-multinet.info/ontology/omn#isGroupOf
 
 :isGroupOf rdf:type owl:ObjectProperty ;
+
+           rdfs:comment "a group that is related to a resource - e.g. a reserved topology within an infrastructure"@en ;
            
            rdfs:label "is group of"@en ;
            
@@ -422,6 +429,8 @@
 :isResourceOf rdf:type owl:ObjectProperty ;
               
               rdfs:label "is resource of"@en ;
+
+              rdfs:comment "a resource that another resource contains - e.g. a node within a reserved topology"@en ;
               
               rdfs:seeAlso novi:contains ;
               
@@ -436,6 +445,8 @@
 :isServiceOf rdf:type owl:ObjectProperty ;
              
              rdfs:label "is service of"@en ;
+
+             rdfs:comment "a service of a resource - e.g. a Hadoop instance within a reserved topology"@en ;
              
              rdfs:domain :Service ;
              
@@ -454,6 +465,8 @@
 :isReservationOf rdf:type owl:ObjectProperty ;
              
              rdfs:label "is reservation of"@en ;
+
+             rdfs:comment "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en ;
              
              rdfs:domain :Reservation ;
              
@@ -472,6 +485,8 @@
 :toDependency rdf:type owl:ObjectProperty ;
               
               rdfs:label "to dependency"@en ;
+
+              rdfs:comment "claims dependency"@en ;
               
               rdfs:range :Dependency ;
               
@@ -490,6 +505,8 @@
 :withinEnvironment rdf:type owl:ObjectProperty ;
                    
                    rdfs:label "within environment"@en ;
+
+                   rdfs:comment "within environment"@en ;
                    
                    rdfs:range :Environment ;
                    
@@ -555,8 +572,6 @@
 
 :Attribute rdf:type owl:Class ;
            
-           rdfs:label "Attribute"@en ;
-           
            rdfs:comment "Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail"@en ,
                         "Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, ..."@en ;
            
@@ -568,8 +583,6 @@
 ###  http://open-multinet.info/ontology/omn#Component
 
 :Component rdf:type owl:Class ;
-           
-           rdfs:label "Component"@en ;
            
            rdfs:comment "Examples: CPU, Sensor, Core, Port, Image"@en ,
                         "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en ;
@@ -586,8 +599,6 @@
 
 :Dependency rdf:type owl:Class ;
             
-            rdfs:label "Dependency"@en ;
-            
             rdfs:comment "Examples: application coloring (in GENI context), orchestration needs dependencies"@en ,
                          "Helps to defines a directional relationship between omn:Resource, omn:Group, omn:Component or omn:Service. It makes it possible to annotate the dependencies with additional properties."@en ;
             
@@ -601,8 +612,6 @@
 
 :Environment rdf:type owl:Class ;
              
-             rdfs:label "Environment"@en ;
-             
              rdfs:comment "Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, ..."@en ,
                           "The operating conditions under which a omn:Resource, omn:Group, omn:Service is operating."@en ;
              
@@ -614,8 +623,6 @@
 
 :Group rdf:type owl:Class ;
        
-       rdfs:label "Group"@en ;
-       
        rdfs:comment "Examples: Bi-directional Link, ..."@en ,
                     "A collection of omn:Resource, omn:Service or omn:Group"@en ;
        
@@ -624,11 +631,9 @@
                     nml:Group .
 
 
-###  http://open-multinet.info/ontology/omn-federation#Topology
+###  http://open-multinet.info/ontology/omn#Topology
 
 :Topology rdf:type owl:Class ;
-
-       rdfs:label "Topology"@en ;
 
        rdfs:comment "Examples: Infrastructure, Reservation, Slice, ..."@en ,
                     "A collection of omn:Resource, omn:Service or omn:Group"@en ;
@@ -638,8 +643,6 @@
 ###  http://open-multinet.info/ontology/omn#Layer
 
 :Layer rdf:type owl:Class ;
-       
-       rdfs:label "Layer"@en ;
        
        rdfs:comment "Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to."@en ,
                     "Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version"@en ;
@@ -653,8 +656,6 @@
 
 :Resource rdf:type owl:Class ;
           
-          rdfs:label "Resource"@en ;
-          
           rdfs:comment "Examples: Node, Link, People, ..."@en ,
                        "An Entity that can be provisioned/controlled/measured by APIs"@en ;
           
@@ -666,8 +667,6 @@
 ###  http://open-multinet.info/ontology/omn#Service
 
 :Service rdf:type owl:Class ;
-         
-         rdfs:label "Service"@en ;
          
          rdfs:comment "An Entity that has an API/capability to use it, it may depend on an omn:Resource"@en ,
                       "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..."@en ;
@@ -681,9 +680,8 @@
                       owl-s:Service .
 
 
+###  http://open-multinet.info/ontology/omn#Reservation
 :Reservation rdf:type owl:Class ;
-         
-         rdfs:label "Reservation"@en ;
          
          rdfs:comment "A specification of a guarantee"@en ,
                       "Examples: (Earliest) Start and (lates) end time, data volume, ..."@en ;
@@ -717,8 +715,6 @@ time:Interval rdfs:subClassOf :Reservation .
 owl:NamedIndividual rdf:type owl:Class .
 owl:IrreflexiveProperty rdf:type owl:Class .
 owl:AllDisjointClasses rdf:type owl:Class .
-<http://alex.willner.ws/about#me> a foaf:Person .
 
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
-
