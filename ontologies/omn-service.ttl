@@ -15,13 +15,11 @@
                                                  
                                                  dc:date "2014-11-11"^^xsd:date ;
                                                  
-                                                 owl:versionInfo "2015-03-24"^^xsd:string ;
+                                                 owl:versionInfo "2015-04-20"^^xsd:string ;
                                                  
                                                  dc:title "Open-Multinet Upper Service Ontology"^^xsd:string ;
                                                  
                                                  dc:description "This ontology extends the definition of Service as defined in the main OMN ontology. A Service is an Entitiy that has an API to use it, it may depend on a Resource."^^xsd:string ;
-                                                 
-                                                 owl:versionInfo "2015-03-24" ;
                                                  
                                                  dc:publisher <http://open-multinet.info/> ;
                                                  
