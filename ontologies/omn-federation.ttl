@@ -27,9 +27,9 @@
                                                     
                                                     dc:date "2014-11-11"^^xsd:date ;
                                          
-                                                    dcterms:modified "2015-04-04"^^xsd:date ;
+                                                    dcterms:modified "2015-04-20"^^xsd:date ;
                                              
-                                                    owl:versionInfo "2015-04-04"^^xsd:string ;
+                                                    owl:versionInfo "2015-04-20"^^xsd:string ;
                                                                                                         
                                                     dc:title "Open-Multinet Upper Federation Ontology"@en ;
                                                     
