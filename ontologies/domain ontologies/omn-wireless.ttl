@@ -1,0 +1,525 @@
+@prefix : <http://www.w3.org/2002/07/owl#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix omn_resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn_wireless: <http://open-multinet.info/ontology/omn_wireless.owl#> .
+@prefix omn_component: <http://open-multinet.info/ontology/omn-component#> .
+@prefix omn_lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@base <http://open-multinet.info/ontology/omn_wireless.owl> .
+
+<http://open-multinet.info/ontology/omn_wireless.owl> rdf:type :Ontology ;
+                                                      
+                                                      :imports <http://open-multinet.info/ontology/omn> ,
+                                                               <http://www.w3.org/2006/time> ,
+                                                               <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn-lifecycle.ttl> ,
+                                                               <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/omn-resource.ttl> .
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#hasComponent
+
+omn:hasComponent rdf:type :ObjectProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn#hasReservation
+
+omn:hasReservation rdf:type :ObjectProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasInterface
+
+omn_resource:hasInterface rdf:type :ObjectProperty ;
+                          
+                          rdfs:comment """same as : http://open-multinet.info/ontology/omn-resource#hasInterface 
+""" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#feature
+
+omn_wireless:feature rdf:type :ObjectProperty ;
+                     
+                     rdfs:comment "same as http://geni-orca.renci.org/owl/compute.owl#feature" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#hasInputInterface
+
+omn_wireless:hasInputInterface rdf:type :ObjectProperty ;
+                               
+                               rdfs:comment "same as http://geni-orca.renci.org/owl/compute.owl#hasInputInterface " ;
+                               
+                               rdfs:subPropertyOf omn_resource:hasInterface ;
+                               
+                               :inverseOf omn_wireless:hasOutputInterface .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#hasOutputInterface
+
+omn_wireless:hasOutputInterface rdf:type :ObjectProperty ;
+                                
+                                rdfs:comment "new property added" ;
+                                
+                                rdfs:subPropertyOf omn_resource:hasInterface .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#supportsStandard
+
+omn_wireless:supportsStandard rdf:type :ObjectProperty ;
+                              
+                              rdfs:comment "new property: taken by old iminds wireless version" ;
+                              
+                              rdfs:range omn_wireless:Standard ;
+                              
+                              rdfs:subPropertyOf omn_wireless:feature .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#usesFrequency
+
+omn_wireless:usesFrequency rdf:type :ObjectProperty ;
+                           
+                           rdfs:comment "same as http://geni-orca.renci.org/owl/wireless.owl#usesFrequency" ;
+                           
+                           rdfs:range omn_wireless:Frequency ;
+                           
+                           rdfs:subPropertyOf omn_wireless:feature .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#channelNum
+
+omn_wireless:channelNum rdf:type :DatatypeProperty ;
+                        
+                        rdfs:comment "new property added" ;
+                        
+                        rdfs:domain omn_wireless:Channel ;
+                        
+                        rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#hardwareType
+
+omn_wireless:hardwareType rdf:type :DatatypeProperty ;
+                          
+                          rdfs:domain omn_resource:Node ;
+                          
+                          rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#hostName
+
+omn_wireless:hostName rdf:type :DatatypeProperty ;
+                      
+                      rdfs:comment "new property added" ;
+                      
+                      rdfs:domain omn_resource:Node ;
+                      
+                      rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#lowerBoundFrequency
+
+omn_wireless:lowerBoundFrequency rdf:type :DatatypeProperty ;
+                                 
+                                 rdfs:comment "same as http://geni-orca.renci.org/owl/wireless.owl#lowerBoundFrequency " ;
+                                 
+                                 rdfs:domain omn_wireless:Frequency ;
+                                 
+                                 rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#upperBoundFrequency
+
+omn_wireless:upperBoundFrequency rdf:type :DatatypeProperty ;
+                                 
+                                 rdfs:comment "same as http://geni-orca.renci.org/owl/wireless.owl#upperBoundFrequency" ;
+                                 
+                                 rdfs:domain omn_wireless:Frequency ;
+                                 
+                                 rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#x
+
+omn_wireless:x rdf:type :DatatypeProperty ;
+               
+               rdfs:domain <http://open-multinet.info/ontology/omn_wireless.owl#Location> ;
+               
+               rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#y
+
+omn_wireless:y rdf:type :DatatypeProperty ;
+               
+               rdfs:domain <http://open-multinet.info/ontology/omn_wireless.owl#Location> ;
+               
+               rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#z
+
+omn_wireless:z rdf:type :DatatypeProperty ;
+               
+               rdfs:domain <http://open-multinet.info/ontology/omn_wireless.owl#Location> ;
+               
+               rdfs:range xsd:integer .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-resource#Interface
+
+omn_resource:Interface rdf:type :Class .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#Channel
+
+omn_wireless:Channel rdf:type :Class ;
+                     
+                     rdfs:subClassOf omn:Component ;
+                     
+                     rdfs:comment "new class added" .
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#Location
+omn_wireless:Location rdf:type :Class .
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#Feature
+
+omn_wireless:Feature rdf:type :Class ;
+                     
+                     rdfs:comment "same as  http://geni-orca.renci.org/owl/compute.owl#Feature " .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#Frequency
+
+omn_wireless:Frequency rdf:type :Class ;
+                       
+                       rdfs:subClassOf omn_wireless:Feature ;
+                       
+                       rdfs:comment "same as http://geni-orca.renci.org/owl/wireless.owl#Frequency " .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#Standard
+
+omn_wireless:Standard rdf:type :Class ;
+                      
+                      :equivalentClass [ rdf:type :Class ;
+                                         :oneOf ( <http://open-multinet.info/ontology/omn_wireless.owl#802.11g>
+                                                  <http://open-multinet.info/ontology/omn_wireless.owl#802.11b>
+                                                  <http://open-multinet.info/ontology/omn_wireless.owl#802.11a>
+                                                  <http://open-multinet.info/ontology/omn_wireless.owl#802.11n>
+                                                )
+                                       ] ;
+                      
+                      rdfs:subClassOf omn_wireless:Feature ;
+                      
+                      rdfs:comment "same as http://geni-orca.renci.org/owl/wireless.owl#Standard" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#WiredInterface
+
+omn_wireless:WiredInterface rdf:type :Class ;
+                            
+                            rdfs:subClassOf omn_resource:Interface ;
+                            
+                            :disjointWith omn_wireless:WirelessInterface ;
+                            
+                            rdfs:comment "same as http://geni-orca.renci.org/owl/compute.owl#WiredInterface " .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#WirelessInterface
+
+omn_wireless:WirelessInterface rdf:type :Class ;
+                               
+                               rdfs:subClassOf omn_resource:Interface ;
+                               
+                               rdfs:comment "same as http://geni-orca.renci.org/owl/compute.owl#WirelessInterface" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#xyzCartesianCoordinate
+
+omn_wireless:xyzCartesianCoordinate rdf:type :Class ;
+                                    
+                                    :equivalentClass [ rdf:type :Class ;
+                                                       :intersectionOf ( [ rdf:type :Restriction ;
+                                                                           :onProperty omn_wireless:x ;
+                                                       :qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                       :onDataRange xsd:integer
+                                                                         ]
+                                                                         [ rdf:type :Restriction ;
+                                                                           :onProperty omn_wireless:y ;
+                                                       :qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                       :onDataRange xsd:integer
+
+                                                                         ]
+                                                                         [ rdf:type :Restriction ;
+                                                                           :onProperty omn_wireless:z ;
+                                                       :qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                       :onDataRange xsd:integer
+
+                                                                         ]
+                                                                       )
+                                                     ] ;
+                                    
+                                    rdfs:subClassOf <http://open-multinet.info/ontology/omn_wireless.owl#Location> .
+
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#2.412GHZ
+
+<http://open-multinet.info/ontology/omn_wireless.owl#2.412GHZ> rdf:type omn_wireless:Frequency ,
+                                                                        :NamedIndividual ;
+                                                               
+                                                               omn_wireless:lowerBoundFrequency 2401000 ;
+                                                               
+                                                               omn_wireless:upperBoundFrequency 2423000 .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#802.11a
+
+<http://open-multinet.info/ontology/omn_wireless.owl#802.11a> rdf:type omn_wireless:Standard ,
+                                                                       :NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#802.11b
+
+<http://open-multinet.info/ontology/omn_wireless.owl#802.11b> rdf:type omn_wireless:Standard ,
+                                                                       :NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#802.11g
+
+<http://open-multinet.info/ontology/omn_wireless.owl#802.11g> rdf:type omn_wireless:Standard ,
+                                                                       :NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#802.11n
+
+<http://open-multinet.info/ontology/omn_wireless.owl#802.11n> rdf:type omn_wireless:Standard ,
+                                                                       :NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#8749d9cc-2a0c-452d-84fe-5601800cb55f
+
+<http://open-multinet.info/ontology/omn_wireless.owl#8749d9cc-2a0c-452d-84fe-5601800cb55f> rdf:type :NamedIndividual ,
+                                                                                                    time:Interval ;
+                                                                                           
+                                                                                           time:hasBeginning omn_wireless:valid_from ;
+                                                                                           
+                                                                                           time:hasEnd omn_wireless:valid_until .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#eaba325f-27b8-44aa-baa2-dd4945c142cd
+
+omn_wireless:eaba325f-27b8-44aa-baa2-dd4945c142cd rdf:type :NamedIndividual ,
+                                                           time:Interval ;
+                                                  
+                                                  time:hasBeginning omn_wireless:valid_from2 ;
+                                                  
+                                                  time:hasEnd omn_wireless:valid_until2 .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#link_node_node1
+
+omn_wireless:link_node_node1 rdf:type omn_resource:Link ,
+                                      :NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#valid_from
+
+omn_wireless:valid_from rdf:type :NamedIndividual ,
+                                 time:Instant ;
+                        
+                        time:inXSDDateTime "2013-12-09T17:11:13+02:00" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#valid_from2
+
+omn_wireless:valid_from2 rdf:type :NamedIndividual ,
+                                  time:Instant ;
+                         
+                         time:inXSDDateTime "2013-12-09T18:11:13+02:00" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#valid_until
+
+omn_wireless:valid_until rdf:type :NamedIndividual ,
+                                  time:Instant ;
+                         
+                         time:inXSDDateTime "2013-12-09T18:11:13+02:00" .
+
+
+
+###  http://open-multinet.info/ontology/omn_wireless.owl#valid_until2
+
+omn_wireless:valid_until2 rdf:type :NamedIndividual ,
+                                   time:Instant ;
+                          
+                          time:inXSDDateTime "2013-12-09T19:11:13+02:00" .
+
+
+
+###  urn:publicid:IDN+omf:netmode+node+omf.netmode.node
+
+<urn:publicid:IDN+omf:netmode+node+omf.netmode.node> rdf:type omn_resource:Node ,
+                                                              :NamedIndividual ;
+                                                     
+                                                     rdfs:label "node0" ;
+                                                     
+                                                     omn_resource:isExclusive "true"^^xsd:boolean ;
+                                                     
+                                                     omn_resource:isAvailable "true"^^xsd:boolean ;
+                                                     
+                                                     omn:hasReservation <http://open-multinet.info/ontology/omn_wireless.owl#8749d9cc-2a0c-452d-84fe-5601800cb55f> ;
+                                                     
+                                                     omn_resource:hasInterface <urn:publicid:IDN+omf:netmode+node+omf.netmode.node_if> .
+
+
+
+###  urn:publicid:IDN+omf:netmode+node+omf.netmode.node1
+
+<urn:publicid:IDN+omf:netmode+node+omf.netmode.node1> rdf:type omn_resource:Node ,
+                                                               :NamedIndividual ;
+                                                      
+                                                      rdfs:label "node1" ;
+                                                      
+                                                      omn_resource:isExclusive "true"^^xsd:boolean ;
+                                                      
+                                                      omn_resource:isAvailable "true" ;
+                                                      
+                                                      omn:hasReservation <http://open-multinet.info/ontology/omn_wireless.owl#8749d9cc-2a0c-452d-84fe-5601800cb55f> ,
+                                                                         omn_wireless:eaba325f-27b8-44aa-baa2-dd4945c142cd ;
+                                                      
+                                                      omn_resource:hasInterface <urn:publicid:IDN+omf:netmode+node+omf.netmode.node1_if1> .
+
+
+
+###  urn:publicid:IDN+omf:netmode+node+omf.netmode.node1_if1
+
+<urn:publicid:IDN+omf:netmode+node+omf.netmode.node1_if1> rdf:type omn_resource:Interface ,
+                                                                   :NamedIndividual ;
+                                                          
+                                                          rdfs:label "node1:if1" ;
+                                                          
+                                                          omn_resource:isSource omn_wireless:link_node_node1 ;
+                                                          
+                                                          omn_resource:isSink omn_wireless:link_node_node1 ;
+                                                          
+                                                          omn:hasComponent <urn:publicid:IDN+omf:nitos+ol:channel+1> .
+
+
+
+###  urn:publicid:IDN+omf:netmode+node+omf.netmode.node_if
+
+<urn:publicid:IDN+omf:netmode+node+omf.netmode.node_if> rdf:type omn_resource:Interface ,
+                                                                 :NamedIndividual ;
+                                                        
+                                                        rdfs:label "node0:if1" ;
+                                                        
+                                                        omn_resource:isSource omn_wireless:link_node_node1 ;
+                                                        
+                                                        omn_resource:isSink omn_wireless:link_node_node1 ;
+                                                        
+                                                        omn:hasComponent <urn:publicid:IDN+omf:nitos+ol:channel+1> .
+
+
+
+###  urn:publicid:IDN+omf:nitos+ol:channel+1
+
+<urn:publicid:IDN+omf:nitos+ol:channel+1> rdf:type omn_wireless:Channel ,
+                                                   :NamedIndividual ;
+                                          
+                                          rdfs:label "1" .
+
+
+
+
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type :AllDifferent ;
+  :distinctMembers ( <http://open-multinet.info/ontology/omn_wireless.owl#802.11a>
+                     <http://open-multinet.info/ontology/omn_wireless.owl#802.11b>
+                     <http://open-multinet.info/ontology/omn_wireless.owl#802.11g>
+                     <http://open-multinet.info/ontology/omn_wireless.owl#802.11n>
+                   )
+] .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
