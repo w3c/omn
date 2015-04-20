@@ -38,9 +38,9 @@
                                         
                                          dc:date "2014-11-11"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-04-18"^^xsd:date ;
+                                         dcterms:modified "2015-04-20"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-04-18"^^xsd:string ;
+                                         owl:versionInfo "2015-04-20"^^xsd:string ;
                                          
                                          dc:title "Open-Multinet Upper Ontology"@en ;
                                          
