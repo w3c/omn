@@ -2,9 +2,12 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InstallServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.IpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
@@ -154,7 +157,7 @@ public class ManifestConverter extends AbstractConverter {
 				RDFNode resourceNode = sliverResource.getProperty(
 						Omn.hasResource).getObject();
 				Resource resourceResource = resourceNode.asResource();
-				
+
 				// check if the resource is a disk image
 				if (resourceResource.hasProperty(RDF.type,
 						Omn_domain_pc.DiskImage)) {
@@ -177,13 +180,12 @@ public class ManifestConverter extends AbstractConverter {
 					sliverName.getAnyOrDiskImage().add(diskImage);
 				}
 			}
-			
+
 			JAXBElement<SliverType> sliver = new ObjectFactory()
 					.createNodeContentsSliverType(sliverName);
 			node.getAnyOrRelationOrLocation().add(sliver);
 
 		}
-
 
 		// check if the statement has the property hasService
 		ServiceContents serviceContents = null;
@@ -281,13 +283,13 @@ public class ManifestConverter extends AbstractConverter {
 
 			if (serviceResource.hasProperty(RDF.type,
 					Omn_service.InstallService)) {
-				
 
 				// get install path
 				String installPath = "";
 				if (serviceResource.hasProperty(Omn_service.installPath)) {
-					installPath += serviceResource.getProperty(Omn_service.installPath)
-							.getObject().asLiteral().getString();
+					installPath += serviceResource
+							.getProperty(Omn_service.installPath).getObject()
+							.asLiteral().getString();
 				}
 
 				// get url
@@ -297,14 +299,13 @@ public class ManifestConverter extends AbstractConverter {
 							.getObject().asLiteral().getString();
 				}
 
-				
 				// create execute
 				InstallServiceContents installServiceContent = new ObjectFactory()
 						.createInstallServiceContents();
-				
+
 				installServiceContent.setInstallPath(installPath); // required
 				installServiceContent.setUrl(url); // required
-				
+
 				JAXBElement<InstallServiceContents> installService = new ObjectFactory()
 						.createInstall(installServiceContent);
 				serviceContents.getAnyOrLoginOrInstall().add(installService);
@@ -394,6 +395,7 @@ public class ManifestConverter extends AbstractConverter {
 			for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
 				if (nodeDetailObject instanceof JAXBElement) {
 					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
+
 					if (nodeDetailElement.getDeclaredType().equals(
 							NodeContents.SliverType.class)) {
 
@@ -502,8 +504,7 @@ public class ManifestConverter extends AbstractConverter {
 
 								// add shell info
 								String shell = serviceValue.getShell();
-								omnService
-										.addLiteral(Omn_service.shell, shell);
+								omnService.addLiteral(Omn_service.shell, shell);
 							}
 
 							// if install service
@@ -516,24 +517,55 @@ public class ManifestConverter extends AbstractConverter {
 										Omn_service.InstallService);
 								InstallServiceContents serviceValue = (InstallServiceContents) ((JAXBElement<?>) serviceObject)
 										.getValue();
-								
+
 								// add install path info
-								String installPath = serviceValue.getInstallPath();
-								omnService
-										.addLiteral(Omn_service.installPath, installPath);
-								
+								String installPath = serviceValue
+										.getInstallPath();
+								omnService.addLiteral(Omn_service.installPath,
+										installPath);
+
 								// add url path info
 								String url = serviceValue.getUrl();
 								URI urlURI = URI.create(url);
-								omnService
-										.addLiteral(Omn_service.url, urlURI);
-								
+								omnService.addLiteral(Omn_service.url, urlURI);
+
 							}
 
 							// add service to node
 							if (omnService != null) {
 								omnResource.addProperty(Omn.hasService,
 										omnService);
+							}
+						}
+					}
+
+					// check if type is interface
+					if (nodeDetailElement.getDeclaredType().equals(
+							InterfaceContents.class)) {
+
+						// get value of the element
+						InterfaceContents interfaceContents = (InterfaceContents) nodeDetailElement
+								.getValue();
+						List<Object> interfaces = interfaceContents
+								.getAnyOrIpOrHost();
+						Resource omnInteface = null;
+						omnInteface = model.createResource();
+						
+						// iterate through the interfaces and add to model
+						for (int i = 0; i < interfaces.size(); i++) {
+							Object interfaceObject = interfaces.get(i);
+							
+							
+
+							tryExtractIPAddress(interfaceObject, omnInteface);
+
+//							omnInteface.addProperty(Omn_resource.hasIPAddress,
+//									Omn_resource.IPAddress);
+
+							// add interface to node
+							if (omnInteface != null) {
+								omnResource.addProperty(
+										Omn_resource.hasInterface, omnInteface);
 							}
 						}
 					}
@@ -547,6 +579,19 @@ public class ManifestConverter extends AbstractConverter {
 			omnResource.addProperty(Omn_lifecycle.implementedBy, foo);
 
 			topology.addProperty(Omn.hasResource, omnResource);
+		}
+	}
+	
+	private static void tryExtractIPAddress(Object rspecNodeObject, Resource omnNode) {
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<IpContents> availablityJaxb = (JAXBElement<IpContents>) rspecNodeObject;
+			final IpContents availability = availablityJaxb.getValue();
+
+			omnNode.addLiteral(Omn_resource.hasIPAddress, availability.getAddress());
+
+		} catch (final ClassCastException e) {
+			ManifestConverter.LOG.finer(e.getMessage());
 		}
 	}
 

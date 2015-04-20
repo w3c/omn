@@ -256,9 +256,9 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#parentTo
+###  http://open-multinet.info/ontology/omn-lifecycle#childOf
 
-:parentTo rdf:type owl:ObjectProperty ;
+:childOf rdf:type owl:ObjectProperty ;
           
           owl:inverseOf :parentOf ;
           

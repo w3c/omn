@@ -3,16 +3,19 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
@@ -136,8 +139,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			omnNode.addProperty(Omn.isResourceOf, topology);
 			RDFNode parent = ResourceFactory.createResource(rspecNode
 					.getComponentManagerId());
-			omnNode.addProperty(Omn_lifecycle.parentTo, parent);
-			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive, rspecNode.isExclusive());
+			omnNode.addProperty(Omn_lifecycle.parentOf, parent);
+			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive,
+					rspecNode.isExclusive());
 			omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
 
 			for (Object rspecNodeObject : rspecNode
@@ -198,13 +202,43 @@ public class AdvertisementConverter extends AbstractConverter {
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<SliverType> sliverJaxb = (JAXBElement<SliverType>) rspecNodeObject;
-			SliverType sliver = sliverJaxb.getValue();
+			final SliverType sliver = sliverJaxb.getValue();
 
+			final Resource omnSliver = omnNode.getModel().createResource(
+					sliver.getName());
 			RDFNode type = ResourceFactory.createProperty(sliver.getName());
-			omnNode.addProperty(Omn_lifecycle.parentOf, type);
+			omnNode.addProperty(Omn_lifecycle.canImplement, type);
+			for (Object rspecSliverObject : sliver.getAnyOrDiskImage()) {
+				tryExtractDiskImage(rspecSliverObject, omnSliver);
+			}
+
+			// RDFNode type = ResourceFactory.createProperty(sliver.getName());
+			omnNode.addProperty(Omn_lifecycle.canImplement, type);
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
+	}
+
+	private void tryExtractDiskImage(Object rspecSliverObject,
+			Resource omnSliver) {
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<DiskImageContents> diJaxb = (JAXBElement<DiskImageContents>) rspecSliverObject;
+			final DiskImageContents diskImageContents = diJaxb.getValue();
+
+			Resource diskImage = model.createResource();
+			diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+
+			// add name info
+			String name = diskImageContents.getName();
+			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
+			omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		} catch (final InvalidPropertyURIException e) {
+			AdvertisementConverter.LOG.info(e.getMessage());
+		}
+
 	}
 
 	public String getRSpec(final Model model) throws JAXBException,
@@ -261,8 +295,7 @@ public class AdvertisementConverter extends AbstractConverter {
 				geniNode.setComponentManagerId(infrastructure.getURI());
 			}
 
-			manifest.getAnyOrNodeOrLink().add(
-					this.of.createNode(geniNode));
+			manifest.getAnyOrNodeOrLink().add(this.of.createNode(geniNode));
 		}
 	}
 
@@ -294,17 +327,52 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void setSliverTypes(Statement omnResource, NodeContents geniNode) {
 
-		StmtIterator parentOf = omnResource.getResource().listProperties(
-				Omn_lifecycle.parentOf);
+		StmtIterator canImplement = omnResource.getResource().listProperties(
+				Omn_lifecycle.canImplement);
 		SliverType sliver;
 
 		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
-		while (parentOf.hasNext()) {
-			String parentURI = parentOf.next().getResource().getURI();
+		while (canImplement.hasNext()) {
+			Statement omnSliver = canImplement.next();
+			String parentURI = omnSliver.getResource().getURI();
 			sliver = of.createNodeContentsSliverType();
 			sliver.setName(parentURI);
-			if (null != parentURI)
+			if (null != parentURI) {
 				geniNodeDetails.add(of.createNodeContentsSliverType(sliver));
+				setDiskImage(omnSliver.getObject(), sliver);
+			}
+		}
+
+	}
+
+	private void setDiskImage(RDFNode sliverNode, SliverType sliver) {
+		Resource sliverResource = sliverNode.asResource();
+
+		while (sliverResource.hasProperty(Omn_lifecycle.canImplement)) {
+			Statement omnSliver = sliverResource
+					.getProperty(Omn_lifecycle.canImplement);
+			omnSliver.remove();
+			RDFNode diskImageNode = omnSliver.getObject();
+			Resource diskImageResource = diskImageNode.asResource();
+
+			// check if the resource is a disk image
+			if (diskImageResource
+					.hasProperty(RDF.type, Omn_domain_pc.DiskImage)) {
+
+				String diskName = "";
+				if (diskImageResource
+						.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+					diskName += diskImageResource
+							.getProperty(Omn_domain_pc.hasDiskimageLabel)
+							.getObject().asLiteral();
+				}
+
+				DiskImage diskImage = of
+						.createNodeContentsSliverTypeDiskImage();
+				diskImage.setName(diskName);
+				sliver.getAnyOrDiskImage().add(
+						of.createNodeContentsSliverTypeDiskImage(diskImage));
+			}
 		}
 	}
 
@@ -337,8 +405,8 @@ public class AdvertisementConverter extends AbstractConverter {
 	private void setComponentManagerId(final Statement resource,
 			final NodeContents node) {
 		try {
-			Statement parentTo = resource.getProperty(Omn_lifecycle.parentTo);
-			node.setComponentManagerId(parentTo.getResource().getURI());
+			Statement parentOf = resource.getProperty(Omn_lifecycle.parentOf);
+			node.setComponentManagerId(parentOf.getResource().getURI());
 		} catch (PropertyNotFoundException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -358,8 +426,9 @@ public class AdvertisementConverter extends AbstractConverter {
 		manifest.setExpires(xmlGrogerianCalendar);
 	}
 
-	public static String toString(JAXBElement<RSpecContents> advertisement) throws JAXBException {
-		return toString (advertisement, JAXB);
+	public static String toString(JAXBElement<RSpecContents> advertisement)
+			throws JAXBException {
+		return toString(advertisement, JAXB);
 	}
 
 }
