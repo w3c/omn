@@ -14,7 +14,9 @@
 @prefix cc: <http://creativecommons.org/ns#> .
 @base <http://open-multinet.info/ontology/omn-federation#> .
 
-<http://open-multinet.info/ontology/omn-federation> rdf:type owl:Ontology ,
+<http://open-multinet.info/ontology/omn-federation> rdfs:comment "describes a federation and its members"@en ;
+
+                                                    rdf:type owl:Ontology ,
                                                     voaf:Vocabulary ;
                                                     
                                                     rdfs:label "omn-federation"@en ;
@@ -23,7 +25,7 @@
                                                     
                                                     vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-federation#> ;
                                                     
-                                                    dcterms:created "2014-11-11"^^xsd:date ;
+                                                    dc:date "2014-11-11"^^xsd:date ;
                                          
                                                     dcterms:modified "2015-04-04"^^xsd:date ;
                                              
@@ -43,19 +45,17 @@
 
                                                     dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
 
-                                                    dc:creator <http://alex.willner.ws/about#me> ;
-
-                                                    owl:imports <http://open-multinet.info/ontology/omn#> ;
+                                                    dc:creator <mailto:alexander.willner@tu-berlin.de> ;
                                                                                   
-                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
-                                                        <mailto:thijs.walcarius@intec.ugent.be> ,
-                                                        <mailto:jorge.lopez_vergara@uam.es> ,
-                                                        <mailto:chrisap@noc.ntua.gr> ,
-                                                        <mailto:yahya.al-hazmi@tu-berlin.de> ,
-                                                        <mailto:loughnane@campus.tu-berlin.de> ,
-                                                        <https://staff.fnwi.uva.nl/p.grosso> ,
-                                                        <http://www.commit-nl.nl/people/morsey> , 
-                                                        <mailto:ibaldin@renci.org> ,
+                                                    dc:contributor #<mailto:brecht.vermeulen@iminds.be> ,
+                                                        #<mailto:thijs.walcarius@intec.ugent.be> ,
+                                                        #<mailto:jorge.lopez_vergara@uam.es> ,
+                                                        #<mailto:chrisap@noc.ntua.gr> ,
+                                                        #<mailto:yahya.al-hazmi@tu-berlin.de> ,
+                                                        #<mailto:loughnane@campus.tu-berlin.de> ,
+                                                        #<https://staff.fnwi.uva.nl/p.grosso> ,
+                                                        #<http://www.commit-nl.nl/people/morsey> , 
+                                                        #<mailto:ibaldin@renci.org> ,
                                                         <mailto:yxin@renci.org> .
 
 
@@ -69,8 +69,6 @@
 ###  http://open-multinet.info/ontology/omn-federation#administers
 
 :administers rdf:type owl:ObjectProperty ;
-             
-             rdfs:label "administers"@en ;
              
              rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure"@en ;
              
@@ -140,7 +138,7 @@
 
 :Federation rdf:type owl:Class ;
             
-            rdfs:label "Federation"@en ;
+            rdfs:comment "a federation of infrastructures"@en ;
             
             rdfs:subClassOf foaf:Organization .
 
@@ -150,7 +148,9 @@
 
 :FederationMember rdf:type owl:Class ;
                   
-                  rdfs:label "member of a federation"@en ;
+                  rdfs:label "federation member"@en ;
+
+                  rdfs:comment "member of a federation"@en ;
                   
                   rdfs:subClassOf foaf:Organization .
 
@@ -159,8 +159,6 @@
 ###  http://open-multinet.info/ontology/omn-federation#Infrastructure
 
 :Infrastructure rdf:type owl:Class ;
-                
-                rdfs:label "Infrastructure"@en ;
                 
                 rdfs:subClassOf omn:Group ;
                 
@@ -183,8 +181,6 @@ owl:NamedIndividual rdf:type owl:Class .
 owl:IrreflexiveProperty rdf:type owl:Class .
 owl:AllDisjointClasses rdf:type owl:Class .
 omn:Group rdf:type owl:Class .
-<http://alex.willner.ws/about#me> a foaf:Person .
 
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
-
