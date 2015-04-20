@@ -14,11 +14,13 @@
 @prefix gr: <http://purl.org/goodrelations/v1#> .
 @base <http://open-multinet.info/ontology/omn-lifecycle#> .
 
-<http://open-multinet.info/ontology/omn-lifecycle> rdf:type owl:Ontology, voaf:Vocabulary ;
+<http://open-multinet.info/ontology/omn-lifecycle> rdfs:comment "This ontology addresses parts of the resource lifecycle, to do with offering, provisioning and allocating resources."@en ;
+
+                                                   rdf:type owl:Ontology, voaf:Vocabulary ;
                                                    
                                                    rdfs:label "omn-lifecycle"@en ;
                                                    
-                                                   dcterms:created "2014-11-11"^^xsd:date ;
+                                                   dc:date "2014-11-11"^^xsd:date ;
                                                    
                                                    owl:versionInfo "2015-04-08"^^xsd:string ;
                                                    
@@ -34,11 +36,9 @@
                                                     
                                                    dc:publisher <http://open-multinet.info/> ;
                                                     
-                                                   dc:creator <http://alex.willner.ws/about#me> ;
+                                                   dc:creator <mailto:alexander.willner@tu-berlin.de> ;
                                                    
                                                    dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn-lifecycle.png> ;
-
-                                                   dc:creator <http://alex.willner.ws/about#me> ;
                                          
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 
@@ -46,15 +46,15 @@
 
                                                    dc:rights "This ontology is distributed under a Creative Commons Attribute License - http://creativecommons.org/licenses/by/4.0/"@en ;
 
-                                                   dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
-                                                        <mailto:thijs.walcarius@intec.ugent.be> ,
-                                                        <mailto:jorge.lopez_vergara@uam.es> ,
-                                                        <mailto:chrisap@noc.ntua.gr> ,
-                                                        <mailto:yahya.al-hazmi@tu-berlin.de> ,
-                                                        <mailto:loughnane@campus.tu-berlin.de> ,
-                                                        <https://staff.fnwi.uva.nl/p.grosso> ,
-                                                        <http://www.commit-nl.nl/people/morsey> , 
-                                                        <mailto:ibaldin@renci.org> ,
+                                                   dc:contributor #<mailto:brecht.vermeulen@iminds.be> ,
+                                                        #<mailto:thijs.walcarius@intec.ugent.be> ,
+                                                        #<mailto:jorge.lopez_vergara@uam.es> ,
+                                                        #<mailto:chrisap@noc.ntua.gr> ,
+                                                        #<mailto:yahya.al-hazmi@tu-berlin.de> ,
+                                                        #<mailto:loughnane@campus.tu-berlin.de> ,
+                                                        #<https://staff.fnwi.uva.nl/p.grosso> ,
+                                                        #<http://www.commit-nl.nl/people/morsey> , 
+                                                        #<mailto:ibaldin@renci.org> ,
                                                         <mailto:yxin@renci.org> .
 
 #################################################################
@@ -69,6 +69,8 @@
 :hasReservationState rdf:type owl:FunctionalProperty ,
                               owl:IrreflexiveProperty ,
                               owl:ObjectProperty ;
+
+                     rdfs:comment "The state of the reservation."@en ;
                      
                      rdfs:domain omn:Reservation ;
                      
@@ -83,6 +85,8 @@
 :hasState rdf:type owl:FunctionalProperty ,
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
+
+          rdfs:comment "Has state."@en ;
           
           rdfs:range :State ;
           
@@ -99,6 +103,8 @@
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
           
+          rdfs:comment "Uses a service."@en ;
+
           rdfs:range omn:Service ;
           
           rdfs:domain [ rdf:type owl:Class ;
@@ -161,6 +167,10 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
 
 :implementedBy rdf:type owl:ObjectProperty ;
+
+               rdfs:label "implementd by."@en ;
+
+               rdfs:comment "Implementd by."@en ;
                
                rdfs:range [ rdf:type owl:Class ;
                             owl:unionOf ( omn:Component
@@ -184,6 +194,8 @@
 
 :implements rdf:type owl:ObjectProperty ;
             
+            rdfs:comment "Implements."@en ;
+
             owl:inverseOf :implementedBy ;
             
             rdfs:domain [ rdf:type owl:Class ;
@@ -207,6 +219,10 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#isReservationStateOf
 
 :isReservationStateOf rdf:type owl:ObjectProperty ;
+
+                      rdfs:label "is reservation state of."@en ;
+
+                      rdfs:comment "is reservation state of."@en ;
                       
                       rdfs:range omn:Reservation ;
                       
@@ -219,6 +235,10 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#isStateOf
 
 :isStateOf rdf:type owl:ObjectProperty ;
+
+           rdfs:comment "is state of."@en ;
+
+           rdfs:label "is state of."@en ;
            
            rdfs:domain :State ;
            
@@ -237,6 +257,8 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#parentOf
 
 :parentOf rdf:type owl:ObjectProperty ;
+
+          rdfs:comment "A resource, component, group or serice which encompasses another."@en ;
           
           rdfs:range [ rdf:type owl:Class ;
                        owl:unionOf ( omn:Component
@@ -259,6 +281,8 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#childOf
 
 :childOf rdf:type owl:ObjectProperty ;
+
+          rdfs:comment "A resource, component, group or serice which is a part of another."@en ;
           
           owl:inverseOf :parentOf ;
           
@@ -374,8 +398,6 @@ omn:Topology rdf:type owl:Class .
 
 :Active rdf:type owl:Class ;
         
-        rdfs:label "Active"@en ;
-        
         rdfs:subClassOf :State ;
         
         rdfs:seeAlso "GENI geni_ready_busy operational state"@en ;
@@ -388,8 +410,6 @@ omn:Topology rdf:type owl:Class .
 
 :Allocated rdf:type owl:Class ;
            
-           rdfs:label "Allocated"@en ;
-           
            rdfs:subClassOf :ReservationState ;
            
            rdfs:seeAlso "GENI geni_allocated allocation state"@en ;
@@ -401,8 +421,6 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Cleaned
 
 :Cleaned rdf:type owl:Class ;
-         
-         rdfs:label "Cleaned"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -424,8 +442,6 @@ omn:Topology rdf:type owl:Class .
 
 :Error rdf:type owl:Class ;
        
-       rdfs:label "Error"@en ;
-       
        rdfs:subClassOf :State ;
        
        rdfs:seeAlso "GENI geni_failed operational state"@en ;
@@ -438,8 +454,6 @@ omn:Topology rdf:type owl:Class .
 
 :Initialized rdf:type owl:Class ;
              
-             rdfs:label "Initialized"@en ;
-             
              rdfs:subClassOf :State ;
              
              rdfs:comment "The related resource/service has been initialized"@en .
@@ -449,8 +463,6 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Installed
 
 :Installed rdf:type owl:Class ;
-           
-           rdfs:label "Installed"@en ;
            
            rdfs:subClassOf :State ;
            
@@ -472,7 +484,7 @@ omn:Topology rdf:type owl:Class .
 
 :NotYetInitialized rdf:type owl:Class ;
                    
-                   rdfs:label "NotYetInitialized"@en ;
+                   rdfs:label "Not Yet Initialized"@en ;
                    
                    rdfs:subClassOf :State ;
                    
@@ -498,8 +510,6 @@ omn:Topology rdf:type owl:Class .
 
 :Pending rdf:type owl:Class ;
          
-         rdfs:label "Pending"@en ;
-         
          rdfs:subClassOf :State ;
          
          rdfs:seeAlso "GENI geni_pending_allocation operational state"@en ;
@@ -511,8 +521,6 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Preinit
 
 :Preinit rdf:type owl:Class ;
-         
-         rdfs:label "Preinit"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -526,8 +534,6 @@ omn:Topology rdf:type owl:Class .
 
 :Provisioned rdf:type owl:Class ;
              
-             rdfs:label "Provisioned"@en ;
-             
              rdfs:subClassOf :ReservationState ;
              
              rdfs:seeAlso "GENI geni_provisioned allocation state"@en ;
@@ -540,8 +546,6 @@ omn:Topology rdf:type owl:Class .
 
 :Ready rdf:type owl:Class ;
        
-       rdfs:label "Ready"@en ;
-       
        rdfs:subClassOf :State ;
        
        rdfs:seeAlso "GENI geni_ready operational state"@en ;
@@ -553,8 +557,6 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Removing
 
 :Removing rdf:type owl:Class ;
-          
-          rdfs:label "Removing"@en ;
           
           rdfs:subClassOf :State ;
           
@@ -588,8 +590,6 @@ omn:Topology rdf:type owl:Class .
 
 :Started rdf:type owl:Class ;
          
-         rdfs:label "Started"@en ;
-         
          rdfs:subClassOf :State ;
          
          rdfs:comment "The related resource/service has been started"@en .
@@ -600,8 +600,6 @@ omn:Topology rdf:type owl:Class .
 
 :State rdf:type owl:Class ;
        
-       rdfs:label "State"@en ;
-       
        rdfs:subClassOf omn:Attribute ;
        
        rdfs:comment "The current state of the resource, service or group"@en .
@@ -611,9 +609,7 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Stopped
 
 :Stopped rdf:type owl:Class ;
-         
-         rdfs:label "Stopped"@en ;
-         
+                 
          rdfs:subClassOf :State ;
          
          rdfs:comment "The related resource/service is stopped"@en .
@@ -624,10 +620,6 @@ omn:Topology rdf:type owl:Class .
 
 :Stopping rdf:type owl:Class ;
           
-          rdfs:label "Stopping"@en ;
-          
-          rdfs:subClassOf :State ;
-          
           rdfs:seeAlso "GENI geni_stopping operational state"@en ;
           
           rdfs:comment "The related resource/service is stopping"@en .
@@ -637,8 +629,6 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
 
 :Unallocated rdf:type owl:Class ;
-             
-             rdfs:label "Unallocated"@en ;
              
              rdfs:subClassOf :ReservationState ;
              
@@ -652,8 +642,6 @@ omn:Topology rdf:type owl:Class .
 
 :Uncompleted rdf:type owl:Class ;
              
-             rdfs:label "Uncompleted"@en ;
-             
              rdfs:subClassOf :State ;
              
              rdfs:comment "The related resource/service is not complete"@en .
@@ -663,8 +651,6 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Updating
 
 :Updating rdf:type owl:Class ;
-          
-          rdfs:label "Updating"@en ;
           
           rdfs:subClassOf :State ;
           
@@ -809,4 +795,3 @@ owl:AllDisjointClasses rdf:type owl:Class .
 <http://alex.willner.ws/about#me> a foaf:Person .
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
-
