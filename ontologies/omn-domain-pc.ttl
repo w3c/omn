@@ -27,7 +27,7 @@
                                                    
                                                    dcterms:modified "2015-03-15"^^xsd:date ;
                                                    
-                                                   dcterms:created "2015-03-15"^^xsd:date ;
+                                                   dc:date "2015-03-15"^^xsd:date ;
                                                    
                                                    owl:versionInfo "2015-03-15"^^xsd:string ;
                                                    
@@ -43,21 +43,19 @@
                                                    
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                    
-                                                   owl:imports <http://open-multinet.info/ontology/omn-lifecycle> ;
-
-                                                   dc:creator <http://alex.willner.ws/about#me> ;
+                                                   dc:creator <mailto:alexander.willner@tu-berlin.de> ;
                                          
                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                          
-                                                   dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
-                                                        <mailto:thijs.walcarius@intec.ugent.be> ,
-                                                        <mailto:jorge.lopez_vergara@uam.es> ,
-                                                        <mailto:chrisap@noc.ntua.gr> ,
-                                                        <mailto:yahya.al-hazmi@tu-berlin.de> ,
-                                                        <mailto:loughnane@campus.tu-berlin.de> ,
-                                                        <https://staff.fnwi.uva.nl/p.grosso> ,
-                                                        <http://www.commit-nl.nl/people/morsey> , 
-                                                        <mailto:ibaldin@renci.org> ,
+                                                   dc:contributor #<mailto:brecht.vermeulen@iminds.be> ,
+                                                        #<mailto:thijs.walcarius@intec.ugent.be> ,
+                                                        #<mailto:jorge.lopez_vergara@uam.es> ,
+                                                        #<mailto:chrisap@noc.ntua.gr> ,
+                                                        #<mailto:yahya.al-hazmi@tu-berlin.de> ,
+                                                        #<mailto:loughnane@campus.tu-berlin.de> ,
+                                                        #<https://staff.fnwi.uva.nl/p.grosso> ,
+                                                        #<http://www.commit-nl.nl/people/morsey> , 
+                                                        #<mailto:ibaldin@renci.org> ,
                                                         <mailto:yxin@renci.org> .
 
 
@@ -72,6 +70,8 @@
 
 :hasDiskimageDescription rdf:type owl:DatatypeProperty ,
                                   owl:FunctionalProperty ;
+
+                         rdfs:comment "has disk image description"@en ;
                          
                          rdfs:domain :DiskImage ;
                          
@@ -83,6 +83,8 @@
 
 :hasDiskimageLabel rdf:type owl:DatatypeProperty ,
                             owl:FunctionalProperty ;
+
+                   rdfs:comment "has disk image label"@en ;
                    
                    rdfs:domain :DiskImage ;
                    
@@ -99,6 +101,8 @@
 :hasDiskimageOS rdf:type owl:DatatypeProperty ,
                          owl:FunctionalProperty ;
                 
+                rdfs:comment "has disk image OS"@en ;
+
                 rdfs:domain :DiskImage ;
                 
                 rdfs:range xsd:string .
@@ -117,6 +121,8 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 :hasDiskimageURI rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
+
+                 rdfs:comment "has disk image URI."@en ;
                  
                  rdfs:domain :DiskImage ;
                  
@@ -129,6 +135,8 @@ owl:AllDisjointProperties rdf:type owl:Class .
 :hasDiskimageVersion rdf:type owl:DatatypeProperty ,
                               owl:FunctionalProperty ;
                      
+                     rdfs:comment "has disk image version"@en ;
+
                      rdfs:domain :DiskImage ;
                      
                      rdfs:range xsd:string .
@@ -167,6 +175,8 @@ omn:Resource rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-domain-pc#DiskImage
 
 :DiskImage rdf:type owl:Class ;
+
+           rdfs:comment "Disk Image"@en ;
            
            rdfs:label "Disk Image"@en ;
            
@@ -178,6 +188,8 @@ omn:Resource rdf:type owl:Class .
 
 :OpenStack rdf:type owl:Class ;
            
+           rdfs:comment "Open Stack"@en ;
+
            rdfs:label "Open Stack"@en ;
            
            rdfs:subClassOf :VM .
@@ -187,6 +199,8 @@ omn:Resource rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-domain-pc#PC
 
 :PC rdf:type owl:Class ;
+
+    rdfs:comment "personal computer"@en ;
     
     rdfs:subClassOf omn-resource:Node .
 
@@ -195,6 +209,8 @@ omn:Resource rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-domain-pc#VM
 
 :VM rdf:type owl:Class ;
+
+    rdfs:comment "Virtual Machine"@en ;
     
     rdfs:label "Virtual Machine"@en ;
     
@@ -228,4 +244,3 @@ owl:versionInfo rdf:type owl:Class .
 
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
-
