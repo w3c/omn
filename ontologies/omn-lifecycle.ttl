@@ -22,13 +22,13 @@
                                                    
                                                    dc:date "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-04-08"^^xsd:string ;
+                                                   owl:versionInfo "2015-04-20"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"@en ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to the life cycle of resource or service."@en ;
                                                    
-                                                   dcterms:modified "2015-04-08"^^xsd:date ;
+                                                   dcterms:modified "2015-04-20"^^xsd:date ;
                                                    
                                                    vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
                                                     
