@@ -47,16 +47,16 @@
 
                                                     dc:creator <mailto:alexander.willner@tu-berlin.de> ;
                                                                                   
-                                                    dc:contributor #<mailto:brecht.vermeulen@iminds.be> ,
-                                                        #<mailto:thijs.walcarius@intec.ugent.be> ,
-                                                        #<mailto:jorge.lopez_vergara@uam.es> ,
-                                                        #<mailto:chrisap@noc.ntua.gr> ,
-                                                        #<mailto:yahya.al-hazmi@tu-berlin.de> ,
-                                                        #<mailto:loughnane@campus.tu-berlin.de> ,
-                                                        #<https://staff.fnwi.uva.nl/p.grosso> ,
-                                                        #<http://www.commit-nl.nl/people/morsey> , 
-                                                        #<mailto:ibaldin@renci.org> ,
-                                                        <mailto:yxin@renci.org> .
+                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
+                                                    dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
+                                                    dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
+                                                    dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                                    dc:contributor <mailto:yahya.al-hazmi@tu-berlin.de> ;
+                                                    dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
+                                                    dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+                                                    # dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                                    dc:contributor <mailto:ibaldin@renci.org> ;
+                                                    dc:contributor <mailto:yxin@renci.org> .
 
 
 #################################################################
