@@ -70,11 +70,15 @@
                               owl:IrreflexiveProperty ,
                               owl:ObjectProperty ;
 
+                     rdfs:label "has Reservation State"@en ;
+
                      rdfs:comment "The state of the reservation."@en ;
                      
                      rdfs:domain omn:Reservation ;
                      
                      rdfs:range :ReservationState ;
+
+                     owl:inverseOf :isReservationStateOf ;
                      
                      rdfs:subPropertyOf :hasState .
 
@@ -85,6 +89,8 @@
 :hasState rdf:type owl:FunctionalProperty ,
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
+
+          rdfs:label "has State"@en ;
 
           rdfs:comment "Has state."@en ;
           
@@ -102,12 +108,38 @@
 :usesService rdf:type 
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
+
+          rdfs:label "uses Service"@en ;
           
           rdfs:comment "Uses a service."@en ;
+
+          owl:inverseOf :serviceIsUsedBy ;
 
           rdfs:range omn:Service ;
           
           rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( omn:Component
+                                      omn:Group
+                                      omn:Resource
+                                      omn:Service
+                                    )
+                      ] .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#serviceIsUsedBy
+:serviceIsUsedBy rdf:type 
+                   owl:IrreflexiveProperty ,
+                   owl:ObjectProperty ;
+
+          rdfs:label "service is used by"@en ;
+          
+          rdfs:comment "a service is used by."@en ;
+
+          owl:inverseOf :usesService ;
+
+          rdfs:domain omn:Service ;
+          
+          rdfs:range [ rdf:type owl:Class ;
                         owl:unionOf ( omn:Component
                                       omn:Group
                                       omn:Resource
@@ -119,6 +151,9 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#canImplement
 
 :canImplement rdf:type owl:ObjectProperty ;
+
+
+            rdfs:label "can implement"@en ;
 
             rdfs:comment "That which does not currently implement, but can potentially implement a resource, service, component or group."@en ;
             
@@ -144,6 +179,8 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#canBeImplementedBy
 
 :canBeImplementedBy rdf:type owl:ObjectProperty ;
+
+               rdfs:label "can be implemented by"@en ;
 
                rdfs:comment "That which is not currently implemented, but can potentially be implemented by a resource, service, component or group."@en ;
                
@@ -220,13 +257,15 @@
 
 :isReservationStateOf rdf:type owl:ObjectProperty ;
 
-                      rdfs:label "is reservation state of."@en ;
+                      rdfs:label "is reservation state of"@en ;
 
-                      rdfs:comment "is reservation state of."@en ;
+                      rdfs:comment "is reservation state of"@en ;
                       
                       rdfs:range omn:Reservation ;
                       
                       rdfs:domain :ReservationState ;
+
+                      owl:inverseOf :hasReservationState ;
                       
                       rdfs:subPropertyOf :isStateOf .
 
@@ -236,9 +275,9 @@
 
 :isStateOf rdf:type owl:ObjectProperty ;
 
-           rdfs:comment "is state of."@en ;
+           rdfs:comment "is state of"@en ;
 
-           rdfs:label "is state of."@en ;
+           rdfs:label "is state of"@en ;
            
            rdfs:domain :State ;
            
@@ -257,6 +296,8 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#parentOf
 
 :parentOf rdf:type owl:ObjectProperty ;
+
+          rdfs:label "parent of"@en ;
 
           rdfs:comment "A resource, component, group or serice which encompasses another."@en ;
           
@@ -281,6 +322,8 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#childOf
 
 :childOf rdf:type owl:ObjectProperty ;
+
+          rdfs:label "child of"@en ;
 
           rdfs:comment "A resource, component, group or serice which is a part of another."@en ;
           
@@ -316,30 +359,40 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasAuthenticationInformation
 
 :hasAuthenticationInformation rdf:type owl:DatatypeProperty ;
-                              
-                              rdfs:comment "A specific authentification information for the management system"@en ;
-                              
-                              rdfs:seeAlso "GENI Slice X.509 certificates"@en ;
-                              
-                              rdfs:domain omn:Resource ,
-                                   omn:Service ;
 
-                              rdfs:range xsd:string .
+                rdfs:label "has authentication information"@en ;
+                              
+                rdfs:comment "A specific authentification information for the management system"@en ;
+                
+                rdfs:seeAlso "GENI Slice X.509 certificates"@en ;
+
+                rdfs:domain [ rdf:type owl:Class ;
+                 owl:unionOf ( omn:Resource
+                               omn:Service
+                             )
+                ] ;
+
+                rdfs:range xsd:string .
 
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasID
 
 :hasID rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has ID"@en ;
        
-       rdfs:comment "A unique identifier set by the management system"@en ;
+        rdfs:comment "A unique identifier set by the management system"@en ;
        
-       rdfs:seeAlso "GENI Manifest RSpec v3: component_id"@en ;
+        rdfs:seeAlso "GENI Manifest RSpec v3: component_id"@en ;
        
-       rdfs:domain omn:Resource ,
-                   omn:Service ;
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
        
-       rdfs:range xsd:string .
+        rdfs:range xsd:string .
 
 
 
@@ -619,6 +672,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Stopping
 
 :Stopping rdf:type owl:Class ;
+
+          rdfs:subClassOf :State ;
           
           rdfs:seeAlso "GENI geni_stopping operational state"@en ;
           
@@ -788,10 +843,54 @@ omn:Topology rdf:type owl:Class .
 :Updating rdf:type :State ,
                    owl:NamedIndividual .
 
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Manifest
+                :Offering
+                :Request
+                :Confirmation
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Allocated
+                :Pending
+                :Preinit
+                :Provisioned
+                :Unallocated
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Active
+                :Cleaned
+                :Error
+                :Initialized
+                :Installed
+                :NotYetInitialized
+                :Ready
+                :Removing
+                :Started
+                :Stopped
+                :Stopping
+                :Uncompleted
+                :Updating
+              )
+] .
+
+
 ### Fixes for validation
 owl:NamedIndividual rdf:type owl:Class .
 owl:IrreflexiveProperty rdf:type owl:Class .
 owl:AllDisjointClasses rdf:type owl:Class .
-<http://alex.willner.ws/about#me> a foaf:Person .
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
