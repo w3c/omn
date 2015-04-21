@@ -19,6 +19,7 @@
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
 @prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
 @prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @base <http://open-multinet.info/ontology/omn-domain-pc> .
 
 <http://open-multinet.info/ontology/omn-domain-pc> rdf:type owl:Ontology ;
@@ -71,6 +72,8 @@
 :hasDiskimageDescription rdf:type owl:DatatypeProperty ,
                                   owl:FunctionalProperty ;
 
+                         rdfs:label "has disk image description"@en ;
+
                          rdfs:comment "has disk image description"@en ;
                          
                          rdfs:domain :DiskImage ;
@@ -83,6 +86,8 @@
 
 :hasDiskimageLabel rdf:type owl:DatatypeProperty ,
                             owl:FunctionalProperty ;
+
+                   rdfs:label "has disk image label"@en ;
 
                    rdfs:comment "has disk image label"@en ;
                    
@@ -101,6 +106,8 @@
 :hasDiskimageOS rdf:type owl:DatatypeProperty ,
                          owl:FunctionalProperty ;
                 
+                rdfs:label "has disk image OS"@en ;
+
                 rdfs:comment "has disk image OS"@en ;
 
                 rdfs:domain :DiskImage ;
@@ -122,6 +129,8 @@ owl:AllDisjointProperties rdf:type owl:Class .
 :hasDiskimageURI rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
 
+                 rdfs:label "has disk image URI."@en ;
+
                  rdfs:comment "has disk image URI."@en ;
                  
                  rdfs:domain :DiskImage ;
@@ -135,6 +144,8 @@ owl:AllDisjointProperties rdf:type owl:Class .
 :hasDiskimageVersion rdf:type owl:DatatypeProperty ,
                               owl:FunctionalProperty ;
                      
+                     rdfs:label "has disk image version"@en ;
+
                      rdfs:comment "has disk image version"@en ;
 
                      rdfs:domain :DiskImage ;
@@ -146,15 +157,22 @@ owl:AllDisjointProperties rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasVMID
 
 :hasVMID rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has VM ID"@en ;
          
          rdfs:comment "Unique identifier set by the management system of a virtual machine."@en ;
          
          rdfs:domain :VM ;
          
-         rdfs:subPropertyOf <http://open-multinet.info/ontology/omn-lifecycle#hasID> ;
+         rdfs:subPropertyOf omn-lifecycle:hasID ;
          
          rdfs:range xsd:string .
 
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 #################################################################
@@ -179,7 +197,30 @@ owl:AllDisjointProperties rdf:type owl:Class .
                                         omn:Resource
                                         omn:Service
                                       )
-                        ] .
+                        ] ;
+
+            owl:inverseOf :isDiskImageOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#isDiskImageOf
+
+:isDiskImageOf rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "is disk image of"@en ;
+
+            rdfs:comment "is disk image of"@en ;
+            
+            rdfs:domain :DiskImage ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :hasDiskImage .
 
 
 #################################################################
@@ -217,6 +258,8 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 :PC rdf:type owl:Class ;
 
+    rdfs:label "personal computer"@en ;
+
     rdfs:comment "personal computer"@en ;
     
     rdfs:subClassOf omn-resource:Node .
@@ -235,27 +278,9 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription
-
-:hasDiskimageDescription rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel
-
-:hasDiskimageLabel rdf:type owl:Class .
-
-
-
 ###  http://open-multinet.info/ontology/omn-resource#Node
 
 omn-resource:Node rdf:type owl:Class .
-
-
-
-###  http://www.w3.org/2002/07/owl#versionInfo
-
-owl:versionInfo rdf:type owl:Class .
 
 
 
@@ -275,6 +300,26 @@ omn:Group rdf:type owl:Class .
 omn:Service rdf:type owl:Class .
 
 
+
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :VM
+                :DiskImage
+                :PC
+              )
+] .
+
+
+### Fixes for validation
+owl:versionInfo rdf:type owl:Class .
+owl:AllDisjointClasses rdf:type owl:Class .
 
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
