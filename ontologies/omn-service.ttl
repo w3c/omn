@@ -15,7 +15,9 @@
                                                  
                                                  dc:date "2014-11-11"^^xsd:date ;
                                                  
-                                                 owl:versionInfo "2015-04-20"^^xsd:string ;
+                                                 owl:versionInfo "2015-04-21"^^xsd:string ;
+                                                 
+                                                 dcterms:modified "2015-04-21"^^xsd:date ;
                                                  
                                                  dc:title "Open-Multinet Upper Service Ontology"^^xsd:string ;
                                                  
@@ -83,6 +85,8 @@
           
           rdfs:seeAlso "GENI Manifest RSpec v3: hostname"@en ;
           
+          rdfs:label "host name"@en ;
+
           rdfs:comment "Login Service hostname"@en ;
           
           rdfs:domain :LoginService ;
@@ -97,6 +101,8 @@
              
              rdfs:seeAlso "GENI Manifest RSpec v3: install_path"@en ;
              
+             rdfs:label "install path"@en ;
+
              rdfs:comment "Install Service install path"@en ;
              
              rdfs:domain :InstallService ;
@@ -165,6 +171,8 @@
           
           rdfs:seeAlso "GENI SFA Request public key via x509 certificate"@en ;
           
+          rdfs:label "public key"@en ;
+
           rdfs:comment "Login Service public key"@en ;
           
           rdfs:domain :LoginService ;
@@ -221,6 +229,25 @@ omn:Service rdf:type owl:Class .
               
               rdfs:comment "GENI Manifest RSpec v3: LoginServiceContents"@en .
 
+
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ExecuteService
+                :LoginService
+                :InstallService
+              )
+] .
+
+
+### Fixes for validation
+owl:AllDisjointClasses rdf:type owl:Class .
 
 
 
