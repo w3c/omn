@@ -165,9 +165,9 @@
 
           owl:inverseOf :hasIPAddress ;
           
-          rdfs:domain :NetworkObject ;
+          rdfs:range :NetworkObject ;
           
-          rdfs:range :IPAddress .
+          rdfs:domain :IPAddress .
 
 
 
