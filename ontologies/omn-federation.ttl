@@ -27,9 +27,9 @@
                                                     
                                                     dc:date "2014-11-11"^^xsd:date ;
                                          
-                                                    dcterms:modified "2015-04-20"^^xsd:date ;
+                                                    dcterms:modified "2015-04-21"^^xsd:date ;
                                              
-                                                    owl:versionInfo "2015-04-20"^^xsd:string ;
+                                                    owl:versionInfo "2015-04-21"^^xsd:string ;
                                                                                                         
                                                     dc:title "Open-Multinet Upper Federation Ontology"@en ;
                                                     
@@ -69,7 +69,7 @@
 ###  http://open-multinet.info/ontology/omn-federation#administers
 
 :administers rdf:type owl:ObjectProperty ;
-             
+
              rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure"@en ;
              
              rdfs:range :Infrastructure ;
@@ -137,7 +137,7 @@
 ###  http://open-multinet.info/ontology/omn-federation#Federation
 
 :Federation rdf:type owl:Class ;
-            
+
             rdfs:comment "a federation of infrastructures"@en ;
             
             rdfs:subClassOf foaf:Organization .
@@ -176,9 +176,23 @@
 
 foaf:Organization rdf:type owl:Class .
 
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :FederationMember
+                :Federation
+                :Infrastructure
+              )
+] .
+
+
 ### Fixes for validation
-owl:NamedIndividual rdf:type owl:Class .
-owl:IrreflexiveProperty rdf:type owl:Class .
 owl:AllDisjointClasses rdf:type owl:Class .
 omn:Group rdf:type owl:Class .
 
