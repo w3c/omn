@@ -157,6 +157,29 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
+#################################################################
+#
+#    Object properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskImage
+
+:hasDiskImage rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has disk image"@en ;
+
+            rdfs:comment "has disk image"@en ;
+            
+            rdfs:range :DiskImage ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] .
 
 
 #################################################################
@@ -164,12 +187,6 @@ owl:AllDisjointProperties rdf:type owl:Class .
 #    Classes
 #
 #################################################################
-
-
-###  http://open-multinet.info/ontology/omn#Resource
-
-omn:Resource rdf:type owl:Class .
-
 
 
 ###  http://open-multinet.info/ontology/omn-domain-pc#DiskImage
@@ -239,6 +256,23 @@ omn-resource:Node rdf:type owl:Class .
 ###  http://www.w3.org/2002/07/owl#versionInfo
 
 owl:versionInfo rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+###  http://open-multinet.info/ontology/omn#Group
+
+omn:Group rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
 
 
 
