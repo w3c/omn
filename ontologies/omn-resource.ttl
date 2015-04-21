@@ -159,9 +159,9 @@
 
 :isIPAddressOf rdf:type owl:ObjectProperty ;
           
-          rdfs:label "has IP address"@en ;
+          rdfs:label "is IP address of"@en ;
 
-          rdfs:comment "has IP address"@en ;
+          rdfs:comment "is IP address of"@en ;
 
           owl:inverseOf :hasIPAddress ;
           
