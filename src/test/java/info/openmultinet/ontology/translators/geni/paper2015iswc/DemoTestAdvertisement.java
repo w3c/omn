@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni;
+package info.openmultinet.ontology.translators.geni.paper2015iswc;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.ParserTest;
@@ -33,7 +33,7 @@ import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
 import com.hp.hpl.jena.sparql.syntax.Template;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class DemoTestPaper2015iswc {
+public class DemoTestAdvertisement {
 
 	private AdvertisementConverter converter;
 	private Parser parser;
