@@ -6,6 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @base <http://open-multinet.info/ontology/omn-policy#> .
 
 <http://open-multinet.info/ontology/omn-policy> rdf:type owl:Ontology ;
@@ -14,9 +15,9 @@
                                          
                                          dc:date "2014-11-11"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-04-20"^^xsd:date ;
+                                         dcterms:modified "2015-04-22"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-04-20"^^xsd:string ;
+                                         owl:versionInfo "2015-04-22"^^xsd:string ;
                                                                                   
                                          dc:title "Open-Multinet Upper Policy Ontology"^^xsd:string ;
                                          
@@ -28,7 +29,7 @@
                                          
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
 
-                                         dc:creator <mailto:alexander.willner@tu-berlin.de> ;
+                                         dc:creator <http://alex.willner.ws/about#me> ;
                                          
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                          
@@ -39,7 +40,7 @@
                                          dc:contributor <mailto:yahya.al-hazmi@tu-berlin.de> ;
                                          dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
                                          dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
-                                         # dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                         dc:contributor <http://www.commit-nl.nl/people/morsey> ;
                                          dc:contributor <mailto:ibaldin@renci.org> ;
                                          dc:contributor <mailto:yxin@renci.org> .
 
@@ -71,7 +72,7 @@
 #################################################################
 
 
-
+<http://alex.willner.ws/about#me> rdf:type  foaf:Person .
 
 
 
