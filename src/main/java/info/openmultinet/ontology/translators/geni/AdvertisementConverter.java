@@ -137,9 +137,13 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			omnNode.addProperty(RDF.type, Omn_resource.Node);
 			omnNode.addProperty(Omn.isResourceOf, topology);
-			RDFNode parent = ResourceFactory.createResource(rspecNode
-					.getComponentManagerId());
-			omnNode.addProperty(Omn_lifecycle.parentOf, parent);
+
+			if (rspecNode.getComponentManagerId() != null) {
+				RDFNode parent = ResourceFactory.createResource(rspecNode
+						.getComponentManagerId());
+				omnNode.addProperty(Omn_lifecycle.parentOf, parent);
+			}
+
 			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive,
 					rspecNode.isExclusive());
 			omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
@@ -176,8 +180,16 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<LocationContents> locationJaxb = (JAXBElement<LocationContents>) rspecNodeObject;
 			final LocationContents location = locationJaxb.getValue();
 
-			omnNode.addProperty(Geo.lat, location.getLatitude());
-			omnNode.addProperty(Geo.long_, location.getLongitude());
+			if (location != null) {
+				String latitude = location.getLatitude();
+				String longitude = location.getLongitude();
+				if (latitude != null) {
+					omnNode.addProperty(Geo.lat, latitude);
+				}
+				if (longitude != null) {
+					omnNode.addProperty(Geo.long_, longitude);
+				}
+			}
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -226,13 +238,15 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<DiskImageContents> diJaxb = (JAXBElement<DiskImageContents>) rspecSliverObject;
 			final DiskImageContents diskImageContents = diJaxb.getValue();
 
-			Resource diskImage = model.createResource();
+			String diskImageURL = diskImageContents.getUrl();
+			Resource diskImage = model.createResource(diskImageURL);
 			diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
 
 			// add name info
 			String name = diskImageContents.getName();
 			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
 			omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
+			
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		} catch (final InvalidPropertyURIException e) {
@@ -304,12 +318,13 @@ public class AdvertisementConverter extends AbstractConverter {
 		AvailableContents availabilty = of.createAvailableContents();
 		Resource resource = omnResource.getResource();
 
-		if (resource.hasProperty(Omn_resource.isAvailable))
+		if (resource.hasProperty(Omn_resource.isAvailable)) {
 			availabilty.setNow(resource.getProperty(Omn_resource.isAvailable)
 					.getBoolean());
 
-		geniNode.getAnyOrRelationOrLocation().add(
-				of.createAvailable(availabilty));
+			geniNode.getAnyOrRelationOrLocation().add(
+					of.createAvailable(availabilty));
+		}
 	}
 
 	private void setLocation(Statement omnResource, NodeContents geniNode) {
@@ -317,12 +332,17 @@ public class AdvertisementConverter extends AbstractConverter {
 		LocationContents location = of.createLocationContents();
 		Resource omnRes = omnResource.getResource();
 
-		if (omnRes.hasProperty(Geo.lat))
+		if (omnRes.hasProperty(Geo.lat)) {
 			location.setLatitude(omnRes.getProperty(Geo.lat).getString());
-		if (omnRes.hasProperty(Geo.long_))
-			location.setLongitude(omnRes.getProperty(Geo.long_).getString());
+		}
 
-		geniNode.getAnyOrRelationOrLocation().add(of.createLocation(location));
+		if (omnRes.hasProperty(Geo.long_)) {
+			location.setLongitude(omnRes.getProperty(Geo.long_).getString());
+		}
+		if (omnRes.hasProperty(Geo.lat) || omnRes.hasProperty(Geo.long_)) {
+			geniNode.getAnyOrRelationOrLocation().add(
+					of.createLocation(location));
+		}
 	}
 
 	private void setSliverTypes(Statement omnResource, NodeContents geniNode) {
@@ -348,30 +368,66 @@ public class AdvertisementConverter extends AbstractConverter {
 	private void setDiskImage(RDFNode sliverNode, SliverType sliver) {
 		Resource sliverResource = sliverNode.asResource();
 
-		while (sliverResource.hasProperty(Omn_lifecycle.canImplement)) {
-			Statement omnSliver = sliverResource
-					.getProperty(Omn_lifecycle.canImplement);
-			omnSliver.remove();
-			RDFNode diskImageNode = omnSliver.getObject();
-			Resource diskImageResource = diskImageNode.asResource();
+		if (sliverResource.hasProperty(RDFS.subClassOf, Omn_domain_pc.VM)) {
 
-			// check if the resource is a disk image
-			if (diskImageResource
-					.hasProperty(RDF.type, Omn_domain_pc.DiskImage)) {
+			StmtIterator omnSliverList = sliverResource
+					.listProperties(Omn_domain_pc.hasDiskImage);
 
-				String diskName = "";
-				if (diskImageResource
-						.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-					diskName += diskImageResource
-							.getProperty(Omn_domain_pc.hasDiskimageLabel)
-							.getObject().asLiteral();
+			while (omnSliverList.hasNext()) {
+				Statement omnSliver = omnSliverList.next();
+				RDFNode diskImageNode = omnSliver.getObject();
+				Resource diskImageResource = diskImageNode.asResource();
+
+				// check if the resource is a disk image
+				if (diskImageResource.hasProperty(RDF.type,
+						Omn_domain_pc.DiskImage)) {
+
+					String diskName = "";
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+						diskName += diskImageResource
+								.getProperty(Omn_domain_pc.hasDiskimageLabel)
+								.getObject().asLiteral();
+					}
+
+					DiskImage diskImage = of
+							.createNodeContentsSliverTypeDiskImage();
+					diskImage.setName(diskName);
+					diskImage.setUrl(diskImageResource.getURI());
+					sliver.getAnyOrDiskImage()
+							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
 				}
+			}
+		} else if (sliverResource.getURI().equals(Omn_domain_pc.VM.getURI())) {
+			// TODO
 
-				DiskImage diskImage = of
-						.createNodeContentsSliverTypeDiskImage();
-				diskImage.setName(diskName);
-				sliver.getAnyOrDiskImage().add(
-						of.createNodeContentsSliverTypeDiskImage(diskImage));
+		} else {
+
+			while (sliverResource.hasProperty(Omn_lifecycle.canImplement)) {
+				Statement omnSliver = sliverResource
+						.getProperty(Omn_lifecycle.canImplement);
+				omnSliver.remove();
+				RDFNode diskImageNode = omnSliver.getObject();
+				Resource diskImageResource = diskImageNode.asResource();
+
+				// check if the resource is a disk image
+				if (diskImageResource.hasProperty(RDF.type,
+						Omn_domain_pc.DiskImage)) {
+
+					String diskName = "";
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+						diskName += diskImageResource
+								.getProperty(Omn_domain_pc.hasDiskimageLabel)
+								.getObject().asLiteral();
+					}
+
+					DiskImage diskImage = of
+							.createNodeContentsSliverTypeDiskImage();
+					diskImage.setName(diskName);
+					sliver.getAnyOrDiskImage()
+							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
+				}
 			}
 		}
 	}
@@ -385,15 +441,20 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		while (types.hasNext()) {
 			String rdfType = types.next().getResource().getURI();
+
 			hwType = of.createHardwareTypeContents();
 			hwType.setName(rdfType);
-			if (null != rdfType)
+			if ((null != rdfType)
+					&& !(rdfType
+							.equals("http://www.w3.org/2002/07/owl#NamedIndividual"))) {
 				geniNodeDetails.add(of.createHardwareType(hwType));
+			}
 		}
 	}
 
 	private void setComponentDetails(final Statement resource,
 			final NodeContents node) {
+
 		node.setComponentId(resource.getResource().getURI());
 		node.setComponentName(resource.getResource().getLocalName());
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
