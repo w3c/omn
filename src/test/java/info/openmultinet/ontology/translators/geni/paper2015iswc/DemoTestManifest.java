@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni.paper2015iswc;
 
 import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
@@ -53,15 +54,11 @@ public class DemoTestManifest {
 		long start;
 		start = System.nanoTime();
 		
-
-//		final InfModel infModel = new Parser(model).getInfModel();
-//		final String outputRspec = ManifestConverter.getRSpec(infModel, "test.example.org");
-//		System.out.println("Generated this rspec:");
-//		System.out.println("===============================");
-//		System.out.println(outputRspec);
-//		System.out.println("===============================");
-//		System.out.println("Duration: " + (System.nanoTime() - start));
-		
+//		final String rspec = ManifestConverter.getRSpec(model, "localhost");
+//		System.out.println(rspec);
+//		Assert.assertTrue("should be a manifest",
+//				rspec.contains("type=\"manifest\""));
+		System.out.println("Duration: " + (System.nanoTime() - start));	
 	}
 
 }

@@ -31,7 +31,7 @@
 @prefix demo: <http://demo.fiteagle.org/about#> .
 
 @prefix vm-server123: <http://demo.fiteagle.org/resource/vm-server/123/> .
-_:namedManifest a omnlc:Manifest, owl:NamedIndividual ;
+_:namedManifest a omnlc:Manifest, omn:Topology, owl:NamedIndividual ;
     omn:hasResource vm-server123:offeredVM-111 .
 vm-server123:offeredVM-111 a vm-server123:myLargeVM, omndpc:VM, owl:NamedIndividual ;
     omnlc:implementedBy demo:vm-server123 ;
