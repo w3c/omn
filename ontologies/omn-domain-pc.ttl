@@ -171,6 +171,22 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasCPU
+
+:hasCPU rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has CPU"@en ;
+         
+         rdfs:comment "Gives the number of CPUs available."@en ;
+         
+         rdfs:domain :PC ;
+         
+         rdfs:range xsd:integer .
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasID
 
 omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
@@ -279,6 +295,21 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
+
+###  http://open-multinet.info/ontology/omn-domain-pc#VMServer
+
+:VMServer rdf:type owl:Class ;
+
+    rdfs:comment "Virtual Machine Server"@en ;
+    
+    rdfs:label "VM Server"@en ;
+    
+    rdfs:subClassOf :PC .
+
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#Node
 
 omn-resource:Node rdf:type owl:Class .
@@ -313,7 +344,7 @@ omn:Service rdf:type owl:Class .
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :VM
                 :DiskImage
-                :PC
+                :VMServer
               )
 ] .
 
