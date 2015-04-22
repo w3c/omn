@@ -100,7 +100,7 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	// @fixme: expensive/long running method call
-	RSpecContents getRspec(final InputStream input) throws JAXBException,
+	public RSpecContents getRspec(final InputStream input) throws JAXBException,
 			XMLStreamException {
 
 		XMLStreamReader xmler = xmlif.createXMLStreamReader(input);
