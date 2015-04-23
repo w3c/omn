@@ -5,13 +5,17 @@ import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
+import info.openmultinet.ontology.translators.geni.LoginManifestConverterTest;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverterTest;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
@@ -41,24 +45,33 @@ public class DemoTestManifest {
 	@Test
 	public void testLoginRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException {
-		
-		System.out.println("================================================");
-		System.out
-				.println("Reading Graph");
-		System.out.println("================================================");
 
-		parser.read("/omn/paper2015iswc/omn_2_request.ttl");
+		System.out.println("================================================");
+		System.out.println("Reading Graph");
+		System.out.println("================================================");
+		parser.read("/omn/paper2015iswc/omn_3_manifest.ttl");
 		final Model model = parser.getModel();
 		System.out.println(Parser.toString(model));
 
+		System.out.println("================================================");
+		System.out.println("Converting to RSpec");
+		System.out.println("================================================");
 		long start;
 		start = System.nanoTime();
-		
-//		final String rspec = ManifestConverter.getRSpec(model, "localhost");
-//		System.out.println(rspec);
-//		Assert.assertTrue("should be a manifest",
-//				rspec.contains("type=\"manifest\""));
-		System.out.println("Duration: " + (System.nanoTime() - start));	
-	}
+		final String rspec = ManifestConverter.getRSpec(model, "localhost");
+		System.out.println(rspec);
+		Assert.assertTrue("should be a manifest",
+				rspec.contains("type=\"manifest\""));
+		System.out.println("Duration: " + (System.nanoTime() - start));
 
+		System.out.println("================================================");
+		System.out.println("Converting back to Graph");
+		System.out.println("================================================");
+		start = System.nanoTime();
+		final InputStream inputRspec = new ByteArrayInputStream(
+				rspec.getBytes());
+		final Model newModel = ManifestConverter.getModel(inputRspec);
+		System.out.println(Parser.toString(newModel));
+		System.out.println("Duration: " + (System.nanoTime() - start));
+	}
 }

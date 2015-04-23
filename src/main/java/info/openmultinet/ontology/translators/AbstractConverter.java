@@ -65,7 +65,7 @@ public abstract class AbstractConverter {
 		return result.toString();
 	}
 
-	public static String generateComponentID(String url, String type) {
+	public static String generateUrnFromUrl(String url, String type) {
 		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
 		// urn:publicid:IDN+<authority string>+<type>+<name>
 		// type can be interface, link or node
@@ -129,18 +129,18 @@ public abstract class AbstractConverter {
 		return cleanString;
 	}
 
-	public static String generateUrlFromComponentID(String componentId) {
+	public static String generateUrlFromUrn(String urn) {
 
-		if (componentId == null) {
+		if (urn == null) {
 			return "";
 		}
 
-		URI uri = URI.create(componentId);
+		URI uri = URI.create(urn);
 
 		if (uri.getScheme().equals("urn")) {
 
 			String url = "";
-			String[] parts = componentId.split("\\+");
+			String[] parts = urn.split("\\+");
 
 			if (parts.length > 1) {
 				String part1 = geniUrntoUrl(parts[1]);
@@ -159,7 +159,7 @@ public abstract class AbstractConverter {
 
 			return url;
 		} else {
-			return componentId;
+			return urn;
 		}
 	}
 

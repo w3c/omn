@@ -134,7 +134,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			final NodeContents rspecNode = nodeJaxb.getValue();
 
 			String componentId = AbstractConverter
-					.generateUrlFromComponentID(rspecNode.getComponentId());
+					.generateUrlFromUrn(rspecNode.getComponentId());
 			final Resource omnNode = topology.getModel().createResource(
 					componentId);
 
@@ -459,7 +459,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			final NodeContents node) {
 
 		String url = resource.getResource().getURI();
-		String urn = generateComponentID(url, "node");
+		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
 
 		node.setComponentId(urn);
 		node.setComponentName(resource.getResource().getLocalName());
