@@ -1,5 +1,7 @@
 package info.openmultinet.ontology.translators;
 
+import java.net.URI;
+
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 
 import java.io.BufferedReader;
@@ -7,6 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -31,8 +36,8 @@ public abstract class AbstractConverter {
 			throw new InvalidModelException("No group in model found");
 		}
 		if (groups.size() > 1) {
-			throw new InvalidModelException(
-					"Found '" + groups.size() + "' groups, which is more than one");
+			throw new InvalidModelException("Found '" + groups.size()
+					+ "' groups, which is more than one");
 		}
 	}
 
@@ -58,5 +63,125 @@ public abstract class AbstractConverter {
 			result.append(line).append("\n");
 		}
 		return result.toString();
+	}
+
+	public static String generateComponentID(String url, String type) {
+		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
+		// urn:publicid:IDN+<authority string>+<type>+<name>
+		// type can be interface, link or node
+
+		if (url == null) {
+			return "";
+		}
+
+		URI uri = URI.create(url);
+
+		if (uri.getScheme().equals("http")) {
+			String urn = "";
+			String host = urlToGeniUrn(uri.getHost());
+			String path = urlToGeniUrn(uri.getPath());
+			String fragment = urlToGeniUrn(uri.getFragment());
+
+			urn = "urn:publicid:IDN+" + host + path + "+" + urlToGeniUrn(type)
+					+ "+" + fragment;
+
+			return urn;
+		} else {
+			return url;
+		}
+
+	}
+
+	private static String urlToGeniUrn(String dirtyString) {
+
+		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
+		// From Transcribe to
+		// leading and trailing whitespace trim
+		// whitespace collapse to a single '+'
+		// '//' ':'
+		// '::' ';'
+		// '+' '%2B'
+		// ":' '%3A'
+		// '/' '%2F'
+		// ';' '%3B'
+		// ''' '%27'
+		// '?' '%3F'
+		// '#' '%23'
+		// '%' '%25
+
+		if (dirtyString == null) {
+			return "";
+		}
+		String cleanString;
+		cleanString = dirtyString.replaceAll(";", "%3B");
+		cleanString = cleanString.replaceAll("%", "%25");
+		cleanString = cleanString.replaceAll(":", "%3A");
+		cleanString = cleanString.replaceAll("\\+", "%2B");
+		cleanString = cleanString.replaceAll("//", ":");
+		cleanString = cleanString.replaceAll("::", ";");
+		cleanString = cleanString.replaceAll("/", "%2F");
+		cleanString = cleanString.replaceAll("'", "%27");
+		cleanString = cleanString.replaceAll("\\?", "%3F");
+		cleanString = cleanString.replaceAll("#", "%23");
+		cleanString = cleanString.trim();
+		cleanString = cleanString.replaceAll("\\s+", "+");
+
+		return cleanString;
+	}
+
+	public static String generateUrlFromComponentID(String componentId) {
+
+		if (componentId == null) {
+			return "";
+		}
+
+		URI uri = URI.create(componentId);
+
+		if (uri.getScheme().equals("urn")) {
+
+			String url = "";
+			String[] parts = componentId.split("\\+");
+
+			if (parts.length > 1) {
+				String part1 = geniUrntoUrl(parts[1]);
+				String part2 = "";
+
+				url = "http://" + part1;
+
+				if (parts.length > 3) {
+					part2 = geniUrntoUrl(parts[3]);
+
+					if (part2 != "") {
+						url += "#" + part2;
+					}
+				}
+			}
+
+			return url;
+		} else {
+			return componentId;
+		}
+	}
+
+	private static String geniUrntoUrl(String dirtyString) {
+
+		if (dirtyString == null) {
+			return "";
+		}
+		String cleanString;
+
+		cleanString = dirtyString.replaceAll("\\+", " ");
+		cleanString = cleanString.replaceAll("%23", "#");
+		cleanString = cleanString.replaceAll("%3F", "?");
+		cleanString = cleanString.replaceAll("%27", "'");
+		cleanString = cleanString.replaceAll("%2F", "/");
+		cleanString = cleanString.replaceAll(";", "::");
+		cleanString = cleanString.replaceAll(":", "//");
+		cleanString = cleanString.replaceAll("%2B", "+");
+		cleanString = cleanString.replaceAll("%3A", ":");
+		cleanString = cleanString.replaceAll("%25", "%");
+		cleanString = cleanString.replaceAll("%3B", ";");
+
+		return cleanString;
 	}
 }

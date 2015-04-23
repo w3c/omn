@@ -30,7 +30,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix demo: <http://demo.fiteagle.org/about#> .
 
-@prefix vm-server123: <http://demo.fiteagle.org/resource/vm-server/123/> .
+@prefix vm-server123: <http://demo.fiteagle.org/resource/vm-server/123#> .
 _:namedOffering a omnlc:Offering, owl:NamedIndividual ;
     omn:hasResource demo:vm-server123 ;
     omn:isGroupOf demo:infrastructure .

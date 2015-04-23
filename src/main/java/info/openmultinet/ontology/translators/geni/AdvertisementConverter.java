@@ -100,8 +100,8 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	// @fixme: expensive/long running method call
-	public RSpecContents getRspec(final InputStream input) throws JAXBException,
-			XMLStreamException {
+	public RSpecContents getRspec(final InputStream input)
+			throws JAXBException, XMLStreamException {
 
 		XMLStreamReader xmler = xmlif.createXMLStreamReader(input);
 
@@ -132,8 +132,11 @@ public class AdvertisementConverter extends AbstractConverter {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
 			final NodeContents rspecNode = nodeJaxb.getValue();
+
+			String componentId = AbstractConverter
+					.generateUrlFromComponentID(rspecNode.getComponentId());
 			final Resource omnNode = topology.getModel().createResource(
-					rspecNode.getComponentId());
+					componentId);
 
 			omnNode.addProperty(RDF.type, Omn_resource.Node);
 			omnNode.addProperty(Omn.isResourceOf, topology);
@@ -246,7 +249,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			String name = diskImageContents.getName();
 			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
 			omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
-			
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		} catch (final InvalidPropertyURIException e) {
@@ -455,7 +458,10 @@ public class AdvertisementConverter extends AbstractConverter {
 	private void setComponentDetails(final Statement resource,
 			final NodeContents node) {
 
-		node.setComponentId(resource.getResource().getURI());
+		String url = resource.getResource().getURI();
+		String urn = generateComponentID(url, "node");
+
+		node.setComponentId(urn);
 		node.setComponentName(resource.getResource().getLocalName());
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
 			node.setExclusive(resource.getResource()
