@@ -82,8 +82,8 @@ public abstract class AbstractConverter {
 			String path = urlToGeniUrn(uri.getPath());
 			String fragment = urlToGeniUrn(uri.getFragment());
 
-			urn = "urn:publicid:IDN+" + host + path + "+" + urlToGeniUrn(type)
-					+ "+" + fragment;
+			urn = "urn:publicid:IDN+" + host + "+" + urlToGeniUrn(type) + "+"
+					+ host + path + fragment;
 
 			return urn;
 		} else {
@@ -184,7 +184,7 @@ public abstract class AbstractConverter {
 
 		return cleanString;
 	}
-	
+
 	public static boolean nonGeneric(String uri) {
 		if (uri == null) {
 			return true;
@@ -199,7 +199,7 @@ public abstract class AbstractConverter {
 		if (uri.equals("http://www.w3.org/2000/01/rdf-schema#Resource")) {
 			nonGeneric = false;
 		}
-		
+
 		if (uri.equals("http://www.w3.org/2002/07/owl#NamedIndividual")) {
 			nonGeneric = false;
 		}
@@ -208,7 +208,6 @@ public abstract class AbstractConverter {
 			nonGeneric = false;
 		}
 
-		
 		return nonGeneric;
 	}
 }
