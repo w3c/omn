@@ -6,6 +6,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.*;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_monitoring;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
@@ -120,6 +121,7 @@ public class RequestConverter extends AbstractConverter {
 			RDFNode service = hasService.getObject();
 			Resource serviceResource = service.asResource();
 
+			setMonitoringService(serviceResource, serviceContents);
 			setLoginService(serviceResource, serviceContents);
 			// setExecutiveService(serviceResource, serviceContents);
 			// setInstallService(serviceResource, serviceContents);
@@ -129,6 +131,35 @@ public class RequestConverter extends AbstractConverter {
 			JAXBElement<ServiceContents> services = new ObjectFactory()
 					.createServices(serviceContents);
 			node.getAnyOrRelationOrLocation().add(services);
+		}
+
+	}
+
+	private static void setMonitoringService(Resource serviceResource,
+			ServiceContents serviceContents) {
+		if (serviceResource.hasProperty(RDF.type, Omn_monitoring.OMSPService)) {
+
+			// // get hostname
+			// String hostnameLogin = "";
+			// if (serviceResource.hasProperty(Omn_service.)) {
+			// hostnameLogin += serviceResource
+			// .getProperty(Omn.h).getObject()
+			// .asLiteral().getString();
+			// }
+
+			// // create login
+			// LoginServiceContents loginServiceContent = new ObjectFactory()
+			// .createLoginServiceContents();
+			//
+			// if (hostnameLogin != "") {
+			// loginServiceContent.setHostname(hostnameLogin);
+			// }
+			//
+			// JAXBElement<LoginServiceContents> loginService = new
+			// ObjectFactory()
+			// .createLogin(loginServiceContent);
+
+			// serviceContents.getAnyOrLoginOrInstall().add(loginService);
 		}
 
 	}
@@ -296,8 +327,11 @@ public class RequestConverter extends AbstractConverter {
 						.addProperty(Omn_lifecycle.hasID, node.getClientId());
 				if (null != node.getComponentId()
 						&& !node.getComponentId().isEmpty())
-					omnResource.addProperty(Omn_lifecycle.implementedBy,
-							model.createResource(node.getComponentId()));
+					omnResource
+							.addProperty(Omn_lifecycle.implementedBy, model
+									.createResource(AbstractConverter
+											.generateUrlFromUrn(node
+													.getComponentId())));
 				omnResource.addProperty(Omn.isResourceOf, topology);
 				if (null != node.isExclusive()) {
 					omnResource.addProperty(Omn_resource.isExclusive,
