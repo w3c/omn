@@ -1,10 +1,8 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
@@ -15,23 +13,16 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.hp.hpl.jena.graph.Triple;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.sparql.core.BasicPattern;
-import com.hp.hpl.jena.sparql.core.Var;
-import com.hp.hpl.jena.sparql.syntax.ElementGroup;
-import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
-import com.hp.hpl.jena.sparql.syntax.Template;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class LoginManifestConverterTest {
 
 	@Test
-	public void testLoginRoundtrip() throws JAXBException, IOException, InvalidModelException {
+	public void testLoginRoundtrip() throws JAXBException, IOException,
+			InvalidModelException {
 		final String filename = "/geni/manifest/instageni5nodemanifest.xml";
 		final InputStream inputRspec = LoginManifestConverterTest.class
 				.getResourceAsStream(filename);
@@ -50,7 +41,8 @@ public class LoginManifestConverterTest {
 		Assert.assertTrue("should have a topology", topology.hasNext());
 
 		final InfModel infModel = new Parser(model).getInfModel();
-		final String outputRspec = ManifestConverter.getRSpec(infModel, "instageni.gpolab.bbn.com");
+		final String outputRspec = ManifestConverter.getRSpec(infModel,
+				"instageni.gpolab.bbn.com");
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);

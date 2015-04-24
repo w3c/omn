@@ -2,31 +2,25 @@ package info.openmultinet.ontology.translators.geni.paper2015iswc;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
-
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import com.hp.hpl.jena.rdf.model.Model;
 
-public class DemoTestAdvertisement {
+
+public class AdRspecDemoTest {
 
 	private AdvertisementConverter converter;
-	private Parser parser;
 
 	@Before
 	public void setup() throws InvalidModelException, JAXBException {
-		this.parser = new Parser();
 		this.converter = new AdvertisementConverter();
 	}
 
@@ -34,48 +28,47 @@ public class DemoTestAdvertisement {
 	public void testLoginRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException {
 		long start;
+		String inputFile = "/geni/advertisement/demo-test.xml";
+
+		System.out.println("================================================");
+		System.out.println("Operation: Reading reference advertisement RSpec");
 		start = System.nanoTime();
-		
-		System.out.println("================================================");
+		final InputStream input = AdvertisementConverter.class
+				.getResourceAsStream(inputFile);
+		System.out.println("Input:");
+		String inStr = AbstractConverter.toString(inputFile);
 		System.out
-				.println("Reading Graph");
-		System.out.println("================================================");
-
-		parser.read("/omn/paper2015iswc/omn_1_offer.ttl");
-		final Model model = parser.getModel();
-		System.out.println(Parser.toString(model));
-		
-		System.out.println("================================================");
-		System.out
-				.println("Converting to RSpec");
-		System.out.println("================================================");
-		
-		final String rspec = converter.getRSpec(model);
-
-		System.out.println(rspec);
-		Assert.assertTrue("should be an advertisement",
-				rspec.contains("type=\"advertisement\""));
-		Assert.assertTrue("should have a DiskImage",
-				rspec.contains("disk_image"));
+				.println(StringUtils.abbreviateMiddle(inStr, "\n...\n", 4096));
 		System.out.println("Duration: " + (System.nanoTime() - start));
 		System.out.println("================================================");
-		
 
 		System.out.println("================================================");
-		System.out
-				.println("Converting back to graph");
+		System.out.println("Operation: Converting to object model (jaxb)");
+		RSpecContents rspec = converter.getRspec(input);
+		System.out.println("Duration: " + (System.nanoTime() - start));
 		System.out.println("================================================");
-				
-				
+
+		System.out.println("================================================");
+		System.out.println("Operation: Converting to omn graph");
 		start = System.nanoTime();
-		InputStream input = IOUtils.toInputStream(rspec, "UTF-8");
-		RSpecContents rspecContents = converter.getRspec(input);
-		final Model newModel = converter.getModel(rspecContents);
+		final Model model = converter.getModel(rspec);
 		System.out.println("Result:");
-		String modStr = Parser.toString(newModel);
+		String modStr = Parser.toString(model);
 		System.out.println(StringUtils
 				.abbreviateMiddle(modStr, "\n...\n", 4096));
 		System.out.println("Duration: " + (System.nanoTime() - start));
+
+		System.out.println("================================================");
+		System.out
+				.println("Converting to reference advertisement RSpec again...");
+		start = System.nanoTime();
+		final String advertisement = converter.getRSpec(model);
+		System.out.println("Result:");
+		System.out.println(StringUtils.abbreviateMiddle(advertisement,
+				"\n...\n", 4096));
+		System.out.println("Duration: " + (System.nanoTime() - start));
+		System.out.println("================================================");
+
 	}
 
 }

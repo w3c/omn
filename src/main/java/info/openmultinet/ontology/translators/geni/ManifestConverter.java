@@ -88,6 +88,7 @@ public class ManifestConverter extends AbstractConverter {
 			throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Topology).toList();
+	
 		AbstractConverter.validateModel(groups);
 
 		final Resource group = groups.iterator().next();
@@ -161,7 +162,8 @@ public class ManifestConverter extends AbstractConverter {
 			Resource sliverResource = sliverNode.asResource();
 
 			if ((sliverResource.hasProperty(RDFS.label) || (sliverResource
-					.getURI() != null)) && nonGeneric(sliverResource.getURI())) {
+					.getURI() != null))
+					&& AbstractConverter.nonGeneric(sliverResource.getURI())) {
 				// .getURI() != null))) && nonGeneric(sliverResource.getURI()))
 				// {
 				SliverType sliverName = new ObjectFactory()
@@ -192,24 +194,6 @@ public class ManifestConverter extends AbstractConverter {
 
 		node.setSliverId(generateSliverID(hostname, resource.getResource()
 				.getURI()));
-	}
-
-	static boolean nonGeneric(String uri) {
-		if (uri == null) {
-			return true;
-		}
-
-		boolean nonGeneric = true;
-
-		if (uri.equals("http://www.w3.org/2002/07/owl#Thing")) {
-			nonGeneric = false;
-		}
-
-		if (uri.equals("http://www.w3.org/2000/01/rdf-schema#Resource")) {
-			nonGeneric = false;
-		}
-
-		return nonGeneric;
 	}
 
 	private static void setDiskImage(Resource resourceResource,
@@ -365,7 +349,7 @@ public class ManifestConverter extends AbstractConverter {
 			LoginServiceContents loginServiceContent = new ObjectFactory()
 					.createLoginServiceContents();
 			loginServiceContent.setAuthentication(authentication); // required
-			
+
 			if (hostnameLogin != "") {
 				loginServiceContent.setHostname(hostnameLogin);
 			}

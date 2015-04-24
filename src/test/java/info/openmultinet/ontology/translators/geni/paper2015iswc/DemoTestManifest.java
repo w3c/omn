@@ -1,35 +1,21 @@
 package info.openmultinet.ontology.translators.geni.paper2015iswc;
 
 import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
-import info.openmultinet.ontology.translators.geni.LoginManifestConverterTest;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
-import info.openmultinet.ontology.translators.geni.ManifestConverterTest;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
-import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.vocabulary.RDF;
 
 public class DemoTestManifest {
 

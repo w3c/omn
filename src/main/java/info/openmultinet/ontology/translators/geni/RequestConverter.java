@@ -26,7 +26,9 @@ import javax.xml.transform.stream.StreamSource;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -66,8 +68,12 @@ public class RequestConverter extends AbstractConverter {
 
 	private static void model2rspec(final Model model,
 			final RSpecContents manifest) throws InvalidModelException {
-		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
+		List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Group).toList();
+		if (groups.size() == 0) {
+			groups = model.listSubjectsWithProperty(RDF.type, Omn.Topology)
+					.toList();
+		}
 		AbstractConverter.validateModel(groups);
 
 		final Resource group = groups.iterator().next();
@@ -91,16 +97,116 @@ public class RequestConverter extends AbstractConverter {
 				node.setExclusive(isExclusive);
 			}
 
-			SliverType sliverType = new ObjectFactory()
-					.createNodeContentsSliverType();
-			sliverType.setName(resource.getProperty(RDF.type).getObject()
-					.toString());
-			JAXBElement<SliverType> sliver = new ObjectFactory()
-					.createNodeContentsSliverType(sliverType);
-			node.getAnyOrRelationOrLocation().add(sliver);
+			setSliverType(resource, node);
+			setServices(resource, node);
 
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
+		}
+	}
+
+	private static void setServices(Statement resource, NodeContents node) {
+
+		ServiceContents serviceContents = null;
+		while (resource.getResource().hasProperty(Omn.hasService)) {
+
+			if (serviceContents == null) {
+				serviceContents = new ObjectFactory().createServiceContents();
+			}
+			// get the object resource of this relation
+			Statement hasService = resource.getResource().getProperty(
+					Omn.hasService);
+			hasService.remove();
+			RDFNode service = hasService.getObject();
+			Resource serviceResource = service.asResource();
+
+			setLoginService(serviceResource, serviceContents);
+			// setExecutiveService(serviceResource, serviceContents);
+			// setInstallService(serviceResource, serviceContents);
+
+		}
+		if (serviceContents != null) {
+			JAXBElement<ServiceContents> services = new ObjectFactory()
+					.createServices(serviceContents);
+			node.getAnyOrRelationOrLocation().add(services);
+		}
+
+	}
+
+	private static void setLoginService(Resource serviceResource,
+			ServiceContents serviceContents) {
+		if (serviceResource.hasProperty(RDF.type, Omn_service.LoginService)) {
+			// get authentication
+			String authentication = "";
+			if (serviceResource.hasProperty(Omn_service.authentication)) {
+				authentication += serviceResource
+						.getProperty(Omn_service.authentication).getObject()
+						.asLiteral().getString();
+			} else if (serviceResource.hasProperty(Omn_service.publickey)) {
+				authentication += serviceResource
+						.getProperty(Omn_service.publickey).getObject()
+						.asLiteral().getString();
+			}
+
+			// get hostname
+			String hostnameLogin = "";
+			if (serviceResource.hasProperty(Omn_service.hostname)) {
+				hostnameLogin += serviceResource
+						.getProperty(Omn_service.hostname).getObject()
+						.asLiteral().getString();
+			}
+
+			// get port
+			String port = "";
+			if (serviceResource.hasProperty(Omn_service.port)) {
+				port += serviceResource.getProperty(Omn_service.port)
+						.getObject().asLiteral().getString();
+			}
+
+			// ********not present in Request RSpec xsd**************
+			// get username
+			// String username = "";
+			// if (serviceResource.hasProperty(Omn_service.username)) {
+			// username += serviceResource.getProperty(Omn_service.username)
+			// .getObject().asLiteral().getString();
+			// }
+
+			// create login
+			LoginServiceContents loginServiceContent = new ObjectFactory()
+					.createLoginServiceContents();
+			loginServiceContent.setAuthentication(authentication); // required
+
+			if (hostnameLogin != "") {
+				loginServiceContent.setHostname(hostnameLogin);
+			}
+			if (port != "") {
+				loginServiceContent.setPort(port);
+			}
+
+			JAXBElement<LoginServiceContents> loginService = new ObjectFactory()
+					.createLogin(loginServiceContent);
+			serviceContents.getAnyOrLoginOrInstall().add(loginService);
+		}
+
+	}
+
+	private static void setSliverType(Statement resource, NodeContents node) {
+
+		final List<Statement> hasTypes = resource.getResource()
+				.listProperties(RDF.type).toList();
+
+		for (final Statement hasType : hasTypes) {
+			RDFNode sliverNode = hasType.getObject();
+			Resource sliverResource = sliverNode.asResource();
+
+			if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+				SliverType sliverType = new ObjectFactory()
+						.createNodeContentsSliverType();
+				sliverType.setName(sliverNode.toString());
+				JAXBElement<SliverType> sliver = new ObjectFactory()
+						.createNodeContentsSliverType(sliverType);
+				node.getAnyOrRelationOrLocation().add(sliver);
+			}
 		}
 	}
 
@@ -110,15 +216,33 @@ public class RequestConverter extends AbstractConverter {
 			node.setClientId(resource.getResource()
 					.getProperty(Omn_lifecycle.hasID).getString());
 		}
-
 	}
+
+	// if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
+	// RDFNode implementedBy = resource.getResource()
+	// .getProperty(Omn_lifecycle.implementedBy).getObject();
+	//
+	// String urn = AbstractConverter.generateUrnFromUrl(
+	// implementedBy.toString(), "node");
+	//
+	// node.setComponentId(urn);
+	// node.setComponentName(implementedBy.asNode().getLocalName());
+	// }
+	//
 
 	private static void setComponentId(final Statement resource,
 			final NodeContents node) {
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
-			node.setComponentId(resource.getResource()
-					.getProperty(Omn_lifecycle.implementedBy).getObject()
-					.toString());
+			RDFNode implementedBy = resource.getResource()
+					.getProperty(Omn_lifecycle.implementedBy).getObject();
+
+			node.setComponentId(implementedBy.toString());
+			node.setComponentName(implementedBy.asNode().getLocalName());
+
+			Statement parentOf = resource.getProperty(Omn_lifecycle.parentOf);
+			node.setComponentManagerId(AbstractConverter.generateUrnFromUrl(
+					parentOf.getResource().getURI(), "authority"));
+
 		}
 	}
 
@@ -136,6 +260,7 @@ public class RequestConverter extends AbstractConverter {
 		final Resource topology = model
 				.createResource(AbstractConverter.NAMESPACE + "request");
 		topology.addProperty(RDF.type, Omn_lifecycle.Request);
+		topology.addProperty(RDF.type, Omn.Topology);
 
 		RequestConverter.extractNodes(request, topology);
 
@@ -178,6 +303,15 @@ public class RequestConverter extends AbstractConverter {
 					omnResource.addProperty(Omn_resource.isExclusive,
 							model.createTypedLiteral(node.isExclusive()));
 				}
+
+				if (node.getComponentManagerId() != null) {
+					RDFNode parent = ResourceFactory
+							.createResource(AbstractConverter
+									.generateUrlFromUrn(node
+											.getComponentManagerId()));
+					omnResource.addProperty(Omn_lifecycle.parentOf, parent);
+				}
+
 				topology.addProperty(Omn.hasResource, omnResource);
 				// todo: details such as sliver type
 				// List<Object> details = node.getAnyOrRelationOrLocation();
@@ -199,19 +333,16 @@ public class RequestConverter extends AbstractConverter {
 					// omnResource.addProperty(RDF.type,
 					// model.createResource(sliverType.getName()));
 					if (sliverType.getName().contains(":"))
-						omnResource.addProperty(RDF.type, model
-								.createResource(sliverType
-										.getName()));
+						omnResource.addProperty(RDF.type,
+								model.createResource(sliverType.getName()));
 					else
 						omnResource
 								.addProperty(
 										RDF.type,
 										model.createResource("http://open-multinet.info/example#"
-												+ sliverType
-														.getName()));
+												+ sliverType.getName()));
 				}
-				if (element.getDeclaredType().equals(
-						ServiceContents.class)) {
+				if (element.getDeclaredType().equals(ServiceContents.class)) {
 					ServiceContents serviceContents = (ServiceContents) element
 							.getValue();
 					for (Object service : serviceContents
@@ -222,6 +353,8 @@ public class RequestConverter extends AbstractConverter {
 									serviceElement);
 							extractExecuteService(model, omnResource,
 									serviceElement);
+							extractLoginService(model, omnResource,
+									serviceElement);
 						}
 					}
 				}
@@ -230,42 +363,64 @@ public class RequestConverter extends AbstractConverter {
 		}
 	}
 
+	private static void extractLoginService(Model model, Resource omnResource,
+			JAXBElement serviceElement) {
+		if (serviceElement.getDeclaredType().equals(LoginServiceContents.class)) {
+			LoginServiceContents loginObject = (LoginServiceContents) serviceElement
+					.getValue();
+
+			Resource loginService = model
+					.createResource(Omn_service.LoginService);
+
+			if (loginObject.getAuthentication() != null) {
+				loginService.addProperty(Omn_service.authentication,
+						loginObject.getAuthentication());
+			}
+			if (loginObject.getHostname() != null) {
+				loginService.addProperty(Omn_service.hostname,
+						loginObject.getHostname());
+			}
+			if (loginObject.getPort() != null) {
+				loginService.addProperty(Omn_service.port,
+						loginObject.getPort());
+			}
+			omnResource.addProperty(Omn.hasService, loginService);
+		}
+
+	}
+
 	public static void extractExecuteService(final Model model,
 			final Resource omnResource, JAXBElement serviceElement) {
-		if (serviceElement
-				.getDeclaredType()
-				.equals(ExecuteServiceContents.class)) {
+		if (serviceElement.getDeclaredType().equals(
+				ExecuteServiceContents.class)) {
 			ExecuteServiceContents execObject = (ExecuteServiceContents) serviceElement
 					.getValue();
-			
+
 			Resource execService = model
 					.createResource(Omn_service.ExecuteService);
-			
-			execService.addProperty(Omn_service.command, execObject.getCommand());
+
+			execService.addProperty(Omn_service.command,
+					execObject.getCommand());
 			execService.addProperty(Omn_service.shell, execObject.getShell());
 
-			omnResource.addProperty(
-					Omn.hasService,
-					execService);
+			omnResource.addProperty(Omn.hasService, execService);
 		}
 	}
 
 	public static void extractInstallService(final Model model,
 			final Resource omnResource, JAXBElement serviceElement) {
-		if (serviceElement
-				.getDeclaredType()
-				.equals(InstallServiceContents.class)) {
+		if (serviceElement.getDeclaredType().equals(
+				InstallServiceContents.class)) {
 			InstallServiceContents serviceObject = (InstallServiceContents) serviceElement
 					.getValue();
-			Resource loginService = model
+			Resource installService = model
 					.createResource(Omn_service.InstallService);
-			
-			loginService.addProperty(Omn_service.installPath, serviceObject.getInstallPath());
-			loginService.addProperty(Omn_service.url, serviceObject.getUrl());
 
-			omnResource.addProperty(
-					Omn.hasService,
-					loginService);
+			installService.addProperty(Omn_service.installPath,
+					serviceObject.getInstallPath());
+			installService.addProperty(Omn_service.url, serviceObject.getUrl());
+
+			omnResource.addProperty(Omn.hasService, installService);
 		}
 	}
 

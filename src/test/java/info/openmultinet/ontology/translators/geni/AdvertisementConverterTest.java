@@ -1,7 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
+
 import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.ParserTest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
@@ -20,7 +20,6 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -39,7 +38,7 @@ public class AdvertisementConverterTest {
 	@Test
 	public void testConvertingGraph2ToRSpecPaper() throws JAXBException,
 			InvalidModelException {
-		InputStream input = ParserTest.class
+		InputStream input = AdvertisementConverterTest.class
 				.getResourceAsStream("/omn/offer_paper2015.ttl");
 		parser.read(input);
 		final Model model = parser.getModel();
