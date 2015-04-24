@@ -146,13 +146,14 @@ public abstract class AbstractConverter {
 				String part1 = geniUrntoUrl(parts[1]);
 				String part2 = "";
 
-				url = "http://" + part1;
+				url = "http://";// + part1;
 
 				if (parts.length > 3) {
 					part2 = geniUrntoUrl(parts[3]);
 
 					if (part2 != "") {
-						url += "#" + part2;
+						url += part2;
+						// url += "#" + part2;
 					}
 				}
 			}
