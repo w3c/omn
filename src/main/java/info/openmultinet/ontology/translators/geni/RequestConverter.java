@@ -2,11 +2,21 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.request.*;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
-import info.openmultinet.ontology.vocabulary.Omn_monitoring;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
@@ -32,7 +42,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class RequestConverter extends AbstractConverter {
 
@@ -100,6 +109,7 @@ public class RequestConverter extends AbstractConverter {
 
 			setSliverType(resource, node);
 			setServices(resource, node);
+			setMonitoringService(resource, node);
 
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
@@ -121,7 +131,6 @@ public class RequestConverter extends AbstractConverter {
 			RDFNode service = hasService.getObject();
 			Resource serviceResource = service.asResource();
 
-			setMonitoringService(serviceResource, serviceContents);
 			setLoginService(serviceResource, serviceContents);
 			// setExecutiveService(serviceResource, serviceContents);
 			// setInstallService(serviceResource, serviceContents);
@@ -135,33 +144,36 @@ public class RequestConverter extends AbstractConverter {
 
 	}
 
-	private static void setMonitoringService(Resource serviceResource,
-			ServiceContents serviceContents) {
-		if (serviceResource.hasProperty(RDF.type, Omn_monitoring.OMSPService)) {
+	private static void setMonitoringService(Statement resource,
+			NodeContents node) {
 
-			// // get hostname
-			// String hostnameLogin = "";
-			// if (serviceResource.hasProperty(Omn_service.)) {
-			// hostnameLogin += serviceResource
-			// .getProperty(Omn.h).getObject()
-			// .asLiteral().getString();
-			// }
+		Resource resourceResource = resource.getResource();
+		if (resourceResource.hasProperty(Omn.usesService)) {
+			Statement monitoringService = resourceResource
+					.getProperty(Omn.usesService);
+			Resource monitoringResource = monitoringService.getResource();
+			Monitoring monitoring = new ObjectFactory().createMonitoring();
 
-			// // create login
-			// LoginServiceContents loginServiceContent = new ObjectFactory()
-			// .createLoginServiceContents();
-			//
-			// if (hostnameLogin != "") {
-			// loginServiceContent.setHostname(hostnameLogin);
-			// }
-			//
-			// JAXBElement<LoginServiceContents> loginService = new
-			// ObjectFactory()
-			// .createLogin(loginServiceContent);
+			if (monitoringResource.hasProperty(Omn_service.hasURI)) {
+				Statement hasUri = monitoringService.getResource().getProperty(
+						Omn_service.hasURI);
 
-			// serviceContents.getAnyOrLoginOrInstall().add(loginService);
+				String uri = hasUri.getObject().asResource().getURI()
+						.toString();
+				monitoring.setUri(uri);
+			}
+
+			if (monitoringResource.hasProperty(RDF.type)) {
+				Statement hasType = monitoringService.getResource()
+						.getProperty(RDF.type);
+
+				String type = hasType.getObject().asResource().getURI()
+						.toString();
+				monitoring.setType(type);
+			}
+
+			node.getAnyOrRelationOrLocation().add(monitoring);
 		}
-
 	}
 
 	private static void setLoginService(Resource serviceResource,
@@ -392,7 +404,23 @@ public class RequestConverter extends AbstractConverter {
 						}
 					}
 				}
+			} else {
+				if (o.getClass()
+						.equals(info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring.class)) {
 
+					Monitoring monitor = (Monitoring) o;
+					Resource monitoringResource = model.createResource();
+					if (monitor.getUri() != null && monitor.getUri() != "") {
+						monitoringResource.addProperty(Omn_service.hasURI,
+								monitor.getUri());
+					}
+					if (monitor.getType() != null && monitor.getType() != "") {
+						monitoringResource.addProperty(RDF.type,
+								monitor.getType());
+					}
+					omnResource
+							.addProperty(Omn.usesService, monitoringResource);
+				}
 			}
 		}
 	}
@@ -483,10 +511,13 @@ public class RequestConverter extends AbstractConverter {
 						// omnResource.addProperty(RDF.type, Nml.Node);
 						omnResource.addProperty(RDF.type, Omn_resource.Node);
 
-						List<JAXBElement<InterfaceContents>> interfaces = (List) node
+						List<Object> interfaces = node
 								.getAnyOrRelationOrLocation();
-						for (JAXBElement<InterfaceContents> interfaceContent : interfaces) {
+
+						for (Object interfaceContentObject : interfaces) {
 							try {
+								@SuppressWarnings("unchecked")
+								JAXBElement<InterfaceContents> interfaceContent = (JAXBElement<InterfaceContents>) interfaceContentObject;
 								InterfaceContents content = interfaceContent
 										.getValue();
 								Resource interfaceResource = outputModel

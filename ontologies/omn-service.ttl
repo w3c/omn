@@ -166,6 +166,9 @@
           
           rdfs:range xsd:string .
 
+
+
+
 ###  http://open-multinet.info/ontology/omn-service#publickey
 
 :publickey rdf:type owl:DatatypeProperty ;
@@ -180,6 +183,30 @@
           
           rdfs:range xsd:string .
 
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+###  http://open-multinet.info/ontology/omn-service#hasURI
+
+:hasURI rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "has URI"@en ;
+
+          rdfs:comment "URI of OSMP monitoring serivce"@en ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+              owl:unionOf ( :Group
+                            :Resource
+                            :Service
+                          )
+            ] ;
+          
+          rdfs:range owl:Thing .
 
 
 

@@ -341,6 +341,25 @@
                         ] .
 
 
+
+###  http://open-multinet.info/ontology/omn#usesService
+
+:usesService rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "uses service"@en ;
+
+            rdfs:comment "uses service (OMSP monitoring)"@en ;
+            
+            rdfs:range :Service ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :Group
+                                        :Resource
+                                        :Service
+                                      )
+                        ] .
+
+
 :hasReservation rdf:type owl:ObjectProperty ;
             
             rdfs:label "has reservation"@en ;
