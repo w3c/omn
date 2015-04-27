@@ -17,9 +17,9 @@
                                                   
                                                   dc:date "2014-11-11"^^xsd:date ;
                                                   
-                                                  dcterms:modified "2015-04-22"^^xsd:date ;
+                                                  dcterms:modified "2015-04-27"^^xsd:date ;
                                                   
-                                                  owl:versionInfo "2015-04-22"^^xsd:string ;
+                                                  owl:versionInfo "2015-04-27"^^xsd:string ;
                                                   
                                                   dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
                                                   
@@ -129,6 +129,8 @@
 ###  http://open-multinet.info/ontology/omn-resource#requires
 
 :requires rdf:type owl:ObjectProperty ;
+
+          rdfs:label "requires"@en ;
           
           rdfs:comment "requires an ICT object"@en ;
           
@@ -210,6 +212,8 @@
 ###  http://open-multinet.info/ontology/omn-resource#address
 
 :address rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "address"@en ;
                 
                 rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:address"@en ;
                 
@@ -223,6 +227,8 @@
 ###  http://open-multinet.info/ontology/omn-resource#netmask
 
 :netmask rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "netmask"@en ;
                 
                 rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:netmask"@en ;
                 
@@ -236,6 +242,8 @@
 ###  http://open-multinet.info/ontology/omn-resource#type
 
 :type rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "type"@en ;
                 
                 rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:type"@en ;
                 
@@ -263,6 +271,8 @@ omn:Resource rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-resource#Interface
 
 :Interface rdf:type owl:Class ;
+
+           rdfs:label "Interface"@en ;
            
            rdfs:subClassOf :NetworkObject ;
            
@@ -275,6 +285,8 @@ omn:Resource rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-resource#Link
 
 :Link rdf:type owl:Class ;
+
+      rdfs:label "Link"@en ;
       
       rdfs:subClassOf :NetworkObject ;
       
@@ -301,6 +313,8 @@ omn:Resource rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-resource#Node
 
 :Node rdf:type owl:Class ;
+
+      rdfs:label "Node"@en ;
       
       rdfs:subClassOf :NetworkObject ;
       
