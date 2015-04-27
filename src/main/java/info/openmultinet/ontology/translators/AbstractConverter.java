@@ -209,6 +209,16 @@ public abstract class AbstractConverter {
 			nonGeneric = false;
 		}
 
+
+		if (uri.equals("http://open-multinet.info/ontology/omn#Resource")) {
+			nonGeneric = false;
+		}
+		
+
+		if (uri.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
+			nonGeneric = false;
+		}
+		
 		return nonGeneric;
 	}
 

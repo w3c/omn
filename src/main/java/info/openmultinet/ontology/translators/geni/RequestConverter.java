@@ -42,6 +42,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class RequestConverter extends AbstractConverter {
 
@@ -303,6 +304,7 @@ public class RequestConverter extends AbstractConverter {
 		final Resource topology = model
 				.createResource(AbstractConverter.NAMESPACE + "request");
 		topology.addProperty(RDF.type, Omn_lifecycle.Request);
+		topology.addProperty(RDFS.label, Omn_lifecycle.Request);
 		topology.addProperty(RDF.type, Omn.Topology);
 
 		RequestConverter.extractNodes(request, topology);
@@ -337,6 +339,8 @@ public class RequestConverter extends AbstractConverter {
 
 				omnResource
 						.addProperty(Omn_lifecycle.hasID, node.getClientId());
+				omnResource.addProperty(RDFS.label, node.getClientId());
+
 				if (null != node.getComponentId()
 						&& !node.getComponentId().isEmpty())
 					omnResource
@@ -378,15 +382,16 @@ public class RequestConverter extends AbstractConverter {
 							.getValue();
 					// omnResource.addProperty(RDF.type,
 					// model.createResource(sliverType.getName()));
-					if (sliverType.getName().contains(":"))
+					if (sliverType.getName().contains(":")) {
 						omnResource.addProperty(RDF.type,
 								model.createResource(sliverType.getName()));
-					else
+					} else {
 						omnResource
 								.addProperty(
 										RDF.type,
 										model.createResource("http://open-multinet.info/example#"
 												+ sliverType.getName()));
+					}
 				}
 				if (element.getDeclaredType().equals(ServiceContents.class)) {
 					ServiceContents serviceContents = (ServiceContents) element
@@ -417,6 +422,8 @@ public class RequestConverter extends AbstractConverter {
 					if (monitor.getType() != null && monitor.getType() != "") {
 						monitoringResource.addProperty(RDF.type,
 								monitor.getType());
+						monitoringResource.addProperty(RDFS.label,
+								AbstractConverter.getName(monitor.getType()));
 					}
 					omnResource
 							.addProperty(Omn.usesService, monitoringResource);
@@ -446,6 +453,7 @@ public class RequestConverter extends AbstractConverter {
 				loginService.addProperty(Omn_service.port,
 						loginObject.getPort());
 			}
+			loginService.addProperty(RDFS.label, "LoginService");
 			omnResource.addProperty(Omn.hasService, loginService);
 		}
 
