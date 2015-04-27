@@ -16,9 +16,9 @@
                                                  
                                                  dc:date "2014-11-11"^^xsd:date ;
                                                  
-                                                 owl:versionInfo "2015-04-22"^^xsd:string ;
+                                                 owl:versionInfo "2015-04-27"^^xsd:string ;
                                                  
-                                                 dcterms:modified "2015-04-22"^^xsd:date ;
+                                                 dcterms:modified "2015-04-27"^^xsd:date ;
                                                  
                                                  dc:title "Open-Multinet Upper Service Ontology"^^xsd:string ;
                                                  
@@ -55,6 +55,8 @@
 ###  http://open-multinet.info/ontology/omn-service#authentication
 
 :authentication rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "authentication"@en ;
                 
                 rdfs:seeAlso "GENI Manifest RSpec v3: authentication"@en ;
                 
@@ -69,6 +71,8 @@
 ###  http://open-multinet.info/ontology/omn-service#command
 
 :command rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "command"@en ;
          
          rdfs:comment "Execute Service command"@en ;
          
@@ -115,6 +119,8 @@
 ###  http://open-multinet.info/ontology/omn-service#port
 
 :port rdf:type owl:DatatypeProperty ;
+
+      rdfs:label "port"@en ;
       
       rdfs:seeAlso "GENI Manifest RSpec v3: port"@en ;
       
@@ -129,6 +135,8 @@
 ###  http://open-multinet.info/ontology/omn-service#shell
 
 :shell rdf:type owl:DatatypeProperty ;
+
+       rdfs:label "shell"@en ;
        
        rdfs:comment "Execute Service shell"@en ;
        
@@ -143,6 +151,8 @@
 ###  http://open-multinet.info/ontology/omn-service#url
 
 :url rdf:type owl:DatatypeProperty ;
+
+     rdfs:label "url"@en ;
      
      rdfs:seeAlso "GENI Manifest RSpec v3: url"@en ;
      
@@ -157,6 +167,8 @@
 ###  http://open-multinet.info/ontology/omn-service#username
 
 :username rdf:type owl:DatatypeProperty ;
+
+          rdfs:label "username"@en ;
           
           rdfs:seeAlso "GENI SFA Request username via x509 certificate"@en ;
           
@@ -200,9 +212,9 @@
           rdfs:comment "URI of OSMP monitoring serivce"@en ;
           
           rdfs:domain [ rdf:type owl:Class ;
-              owl:unionOf ( :Group
-                            :Resource
-                            :Service
+              owl:unionOf ( omn:Group
+                            omn:Resource
+                            omn:Service
                           )
             ] ;
           
