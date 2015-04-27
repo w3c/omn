@@ -22,13 +22,13 @@
                                                    
                                                    dc:date "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-04-22"^^xsd:string ;
+                                                   owl:versionInfo "2015-04-27"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"@en ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to the life cycle of resource or service."@en ;
                                                    
-                                                   dcterms:modified "2015-04-22"^^xsd:date ;
+                                                   dcterms:modified "2015-04-27"^^xsd:date ;
                                                    
                                                    vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
                                                     
@@ -230,6 +230,8 @@
 ###  http://open-multinet.info/ontology/omn-lifecycle#implements
 
 :implements rdf:type owl:ObjectProperty ;
+
+            rdfs:label "implements"@en ;
             
             rdfs:comment "Implements."@en ;
 
@@ -450,6 +452,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Active
 
 :Active rdf:type owl:Class ;
+
+        rdfs:label "Active"@en ;
         
         rdfs:subClassOf :State ;
         
@@ -462,6 +466,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Allocated
 
 :Allocated rdf:type owl:Class ;
+
+           rdfs:label "Allocated"@en ;
            
            rdfs:subClassOf :ReservationState ;
            
@@ -474,6 +480,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Cleaned
 
 :Cleaned rdf:type owl:Class ;
+
+         rdfs:label "Cleaned"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -484,6 +492,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Confirmation
 
 :Confirmation rdf:type owl:Class ;
+
+              rdfs:label "Confirmation"@en ;
               
               rdfs:subClassOf omn:Topology ;
               
@@ -494,6 +504,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Error
 
 :Error rdf:type owl:Class ;
+
+       rdfs:label "Error"@en ;
        
        rdfs:subClassOf :State ;
        
@@ -506,6 +518,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
 
 :Initialized rdf:type owl:Class ;
+
+             rdfs:label "Initialized"@en ;
              
              rdfs:subClassOf :State ;
              
@@ -516,6 +530,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Installed
 
 :Installed rdf:type owl:Class ;
+
+           rdfs:label "Installed"@en ;
            
            rdfs:subClassOf :State ;
            
@@ -526,6 +542,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
 
 :Manifest rdf:type owl:Class ;
+
+          rdfs:label "Manifest"@en ;
           
           rdfs:subClassOf omn:Topology ;
           
@@ -550,6 +568,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Offering
 
 :Offering rdf:type owl:Class ;
+
+          rdfs:label "Offering"@en ;
           
           rdfs:subClassOf omn:Topology ;
           
@@ -562,6 +582,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Pending
 
 :Pending rdf:type owl:Class ;
+
+         rdfs:label "Pending"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -574,6 +596,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Preinit
 
 :Preinit rdf:type owl:Class ;
+
+         rdfs:label "Preinit"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -586,6 +610,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
 
 :Provisioned rdf:type owl:Class ;
+
+             rdfs:label "Provisioned"@en ;
              
              rdfs:subClassOf :ReservationState ;
              
@@ -598,6 +624,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Ready
 
 :Ready rdf:type owl:Class ;
+
+       rdfs:label "Ready"@en ;
        
        rdfs:subClassOf :State ;
        
@@ -610,6 +638,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Removing
 
 :Removing rdf:type owl:Class ;
+
+          rdfs:label "Removing"@en ;
           
           rdfs:subClassOf :State ;
           
@@ -620,6 +650,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Request
 
 :Request rdf:type owl:Class ;
+
+         rdfs:label "Request"@en ;
          
          rdfs:subClassOf omn:Topology ;
          
@@ -642,6 +674,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Started
 
 :Started rdf:type owl:Class ;
+
+         rdfs:label "Started"@en ;
          
          rdfs:subClassOf :State ;
          
@@ -652,6 +686,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#State
 
 :State rdf:type owl:Class ;
+
+       rdfs:label "State"@en ;
        
        rdfs:subClassOf omn:Attribute ;
        
@@ -662,6 +698,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Stopped
 
 :Stopped rdf:type owl:Class ;
+
+         rdfs:label "Stopped"@en ;
                  
          rdfs:subClassOf :State ;
          
@@ -672,6 +710,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Stopping
 
 :Stopping rdf:type owl:Class ;
+
+          rdfs:label "Stopping"@en ;
 
           rdfs:subClassOf :State ;
           
@@ -684,6 +724,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
 
 :Unallocated rdf:type owl:Class ;
+
+             rdfs:label "Unallocated"@en ;
              
              rdfs:subClassOf :ReservationState ;
              
@@ -696,6 +738,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Uncompleted
 
 :Uncompleted rdf:type owl:Class ;
+
+             rdfs:label "Uncompleted"@en ;
              
              rdfs:subClassOf :State ;
              
@@ -706,6 +750,8 @@ omn:Topology rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn-lifecycle#Updating
 
 :Updating rdf:type owl:Class ;
+
+          rdfs:label "Updating"@en ;
           
           rdfs:subClassOf :State ;
           
