@@ -83,7 +83,11 @@ public abstract class AbstractConverter {
 			String fragment = urlToGeniUrn(uri.getFragment());
 
 			urn = "urn:publicid:IDN+" + host + "+" + urlToGeniUrn(type) + "+"
-					+ host + path + fragment;
+					+ host + path;
+			
+			if(fragment != null && !fragment.equals("")){
+				urn += "%23" + fragment;
+			}
 
 			return urn;
 		} else {
