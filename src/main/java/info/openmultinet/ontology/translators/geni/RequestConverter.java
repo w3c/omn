@@ -149,9 +149,9 @@ public class RequestConverter extends AbstractConverter {
 			NodeContents node) {
 
 		Resource resourceResource = resource.getResource();
-		if (resourceResource.hasProperty(Omn.usesService)) {
+		if (resourceResource.hasProperty(Omn_lifecycle.usesService)) {
 			Statement monitoringService = resourceResource
-					.getProperty(Omn.usesService);
+					.getProperty(Omn_lifecycle.usesService);
 			Resource monitoringResource = monitoringService.getResource();
 			Monitoring monitoring = new ObjectFactory().createMonitoring();
 
@@ -426,7 +426,7 @@ public class RequestConverter extends AbstractConverter {
 								AbstractConverter.getName(monitor.getType()));
 					}
 					omnResource
-							.addProperty(Omn.usesService, monitoringResource);
+							.addProperty(Omn_lifecycle.usesService, monitoringResource);
 				}
 			}
 		}
