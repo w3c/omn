@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -414,7 +415,7 @@ public class RequestConverter extends AbstractConverter {
 						.equals(info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring.class)) {
 
 					Monitoring monitor = (Monitoring) o;
-					Resource monitoringResource = model.createResource();
+					Resource monitoringResource = model.createResource(UUID.randomUUID().toString());
 					if (monitor.getUri() != null && monitor.getUri() != "") {
 						monitoringResource.addProperty(Omn_service.hasURI,
 								monitor.getUri());
