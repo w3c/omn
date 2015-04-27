@@ -27,9 +27,9 @@
                                                     
                                                     dc:date "2014-11-11"^^xsd:date ;
                                          
-                                                    dcterms:modified "2015-04-22"^^xsd:date ;
+                                                    dcterms:modified "2015-04-27"^^xsd:date ;
                                              
-                                                    owl:versionInfo "2015-04-22"^^xsd:string ;
+                                                    owl:versionInfo "2015-04-27"^^xsd:string ;
                                                                                                         
                                                     dc:title "Open-Multinet Upper Federation Ontology"@en ;
                                                     
@@ -69,6 +69,8 @@
 ###  http://open-multinet.info/ontology/omn-federation#administers
 
 :administers rdf:type owl:ObjectProperty ;
+
+             rdfs:label "administers"@en ;
 
              rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure"@en ;
              
@@ -138,6 +140,8 @@
 
 :Federation rdf:type owl:Class ;
 
+            rdfs:label "Federation"@en ;
+
             rdfs:comment "a federation of infrastructures"@en ;
             
             rdfs:subClassOf foaf:Organization .
@@ -159,6 +163,8 @@
 ###  http://open-multinet.info/ontology/omn-federation#Infrastructure
 
 :Infrastructure rdf:type owl:Class ;
+
+                rdfs:label "Infrastructure"@en ;
                 
                 rdfs:subClassOf omn:Group ;
                 
