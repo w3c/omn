@@ -38,9 +38,9 @@
                                         
                                          dc:date "2014-11-11"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-04-22"^^xsd:date ;
+                                         dcterms:modified "2015-04-27"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-04-22"^^xsd:string ;
+                                         owl:versionInfo "2015-04-27"^^xsd:string ;
                                          
                                          dc:title "Open-Multinet Upper Ontology"@en ;
                                          
@@ -580,6 +580,8 @@
 ###  http://open-multinet.info/ontology/omn#Attribute
 
 :Attribute rdf:type owl:Class ;
+
+           rdfs:label "Attribute"@en ;
            
            rdfs:comment "Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail"@en ,
                         "Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, ..."@en ;
@@ -592,6 +594,8 @@
 ###  http://open-multinet.info/ontology/omn#Component
 
 :Component rdf:type owl:Class ;
+
+           rdfs:label "Component"@en ;
            
            rdfs:comment "Examples: CPU, Sensor, Core, Port, Image"@en ,
                         "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en ;
@@ -607,6 +611,8 @@
 ###  http://open-multinet.info/ontology/omn#Dependency
 
 :Dependency rdf:type owl:Class ;
+
+            rdfs:label "Dependency"@en ;
             
             rdfs:comment "Examples: application coloring (in GENI context), orchestration needs dependencies"@en ,
                          "Helps to defines a directional relationship between omn:Resource, omn:Group, omn:Component or omn:Service. It makes it possible to annotate the dependencies with additional properties."@en ;
@@ -620,6 +626,8 @@
 ###  http://open-multinet.info/ontology/omn#Environment
 
 :Environment rdf:type owl:Class ;
+
+             rdfs:label "Environment"@en ;
              
              rdfs:comment "Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, ..."@en ,
                           "The operating conditions under which a omn:Resource, omn:Group, omn:Service is operating."@en ;
@@ -631,6 +639,8 @@
 ###  http://open-multinet.info/ontology/omn#Group
 
 :Group rdf:type owl:Class ;
+
+       rdfs:label "Group"@en ;
        
        rdfs:comment "Examples: Bi-directional Link, ..."@en ,
                     "A collection of omn:Resource, omn:Service or omn:Group"@en ;
@@ -644,14 +654,20 @@
 
 :Topology rdf:type owl:Class ;
 
+       rdfs:label "Topology"@en ;
+
        rdfs:comment "Examples: Infrastructure, Reservation, Slice, ..."@en ,
                     "A collection of omn:Resource, omn:Service or omn:Group"@en ;
 
        rdfs:subClassOf :Group .
 
+
+
 ###  http://open-multinet.info/ontology/omn#Layer
 
 :Layer rdf:type owl:Class ;
+
+       rdfs:label "Layer"@en ;
        
        rdfs:comment "Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to."@en ,
                     "Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version"@en ;
@@ -664,6 +680,8 @@
 ###  http://open-multinet.info/ontology/omn#Resource
 
 :Resource rdf:type owl:Class ;
+
+          rdfs:label "Resource"@en ;
           
           rdfs:comment "Examples: Node, Link, People, ..."@en ,
                        "An Entity that can be provisioned/controlled/measured by APIs"@en ;
@@ -676,6 +694,8 @@
 ###  http://open-multinet.info/ontology/omn#Service
 
 :Service rdf:type owl:Class ;
+
+         rdfs:label "Service"@en ;
          
          rdfs:comment "An Entity that has an API/capability to use it, it may depend on an omn:Resource"@en ,
                       "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..."@en ;
@@ -691,6 +711,8 @@
 
 ###  http://open-multinet.info/ontology/omn#Reservation
 :Reservation rdf:type owl:Class ;
+
+         rdfs:label "Reservation"@en ;
          
          rdfs:comment "A specification of a guarantee"@en ,
                       "Examples: (Earliest) Start and (lates) end time, data volume, ..."@en ;
