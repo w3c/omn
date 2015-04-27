@@ -88,7 +88,7 @@ public class ManifestConverter extends AbstractConverter {
 			throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Topology).toList();
-	
+
 		AbstractConverter.validateModel(groups);
 
 		final Resource group = groups.iterator().next();
@@ -434,6 +434,7 @@ public class ManifestConverter extends AbstractConverter {
 					.createResource(parseSliverID(node.getSliverId()));
 
 			omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
+			omnResource.addProperty(RDFS.label, node.getClientId());
 
 			for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
 				if (nodeDetailObject instanceof JAXBElement) {
@@ -469,7 +470,11 @@ public class ManifestConverter extends AbstractConverter {
 
 			Resource sliver = model.createResource();
 			if (sliverType.getName() != null) {
-				sliver.addProperty(RDFS.label, sliverType.getName());
+				if (AbstractConverter.isUrl(sliverType.getName())) {
+					sliver.addProperty(RDF.type, sliverType.getName());
+				}
+				sliver.addProperty(RDFS.label,
+						AbstractConverter.getName(sliverType.getName()));
 			}
 			List<Object> sliverContents = sliverType.getAnyOrDiskImage();
 
@@ -547,6 +552,7 @@ public class ManifestConverter extends AbstractConverter {
 						LoginServiceContents.class)) {
 
 					omnService.addProperty(RDF.type, Omn_service.LoginService);
+					omnService.addProperty(RDFS.label, "LoginService");
 					LoginServiceContents serviceValue = (LoginServiceContents) ((JAXBElement<?>) serviceObject)
 							.getValue();
 
@@ -645,6 +651,7 @@ public class ManifestConverter extends AbstractConverter {
 		final Resource topology = model
 				.createResource(AbstractConverter.NAMESPACE + "manifest");
 		topology.addProperty(RDF.type, Omn_lifecycle.Manifest);
+		topology.addProperty(RDFS.label, "Manifest");
 		return model;
 	}
 }

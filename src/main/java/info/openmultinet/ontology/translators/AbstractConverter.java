@@ -211,4 +211,50 @@ public abstract class AbstractConverter {
 
 		return nonGeneric;
 	}
+
+	/**
+	 * Returns the name of resource from a URL
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static String getName(String url) {
+
+		String name = "";
+		if (url == null) {
+			return name;
+		}
+
+		URI uri = URI.create(url);
+
+		if (uri.getScheme() != null) {
+			if (uri.getScheme().equals("http")) {
+
+				if (url.contains("#")) {
+					name = uri.getFragment();
+				} else {
+					String[] parts = url.split("/");
+					name = parts[parts.length - 1];
+				}
+			}
+		} else {
+			name = url;
+		}
+		return name;
+
+	}
+
+	public static boolean isUrl(String url) {
+
+		URI uri = URI.create(url);
+
+		if (uri.getScheme() != null) {
+			if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
+				return true;
+			}
+		} 
+		
+		return false;
+
+	}
 }
