@@ -34,7 +34,7 @@ _:namedRequest a omnlc:Request, omn:Topology, owl:NamedIndividual ;
 _:myVM a omndpc:VM, owl:NamedIndividual ;
     omnlc:hasID "user-provided-id" ;
     omn:hasService _:loginService ;
-    omn:usesService _:monitoringService .
+    omnlc:usesService _:monitoringService .
 _:monitoringService a omnmon:OMSPService ;
     omnsrv:hasURI <http://url-to-collector:1234> .
 _:loginService a omnsrv:LoginService ;
