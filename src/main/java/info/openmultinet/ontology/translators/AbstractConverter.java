@@ -75,22 +75,27 @@ public abstract class AbstractConverter {
 		}
 
 		URI uri = URI.create(url);
+		if (uri.getScheme() == null){
+			return "";
+		}
 
-		if (uri.getScheme().equals("http")) {
+		if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
 			String urn = "";
 			String host = urlToGeniUrn(uri.getHost());
 			String path = urlToGeniUrn(uri.getPath());
 			String fragment = urlToGeniUrn(uri.getFragment());
+			String scheme = urlToGeniUrn(uri.getScheme());
 
 			urn = "urn:publicid:IDN+" + host + "+" + urlToGeniUrn(type) + "+"
-					+ host + path;
-			
-			if(fragment != null && !fragment.equals("")){
+					+ scheme + "%3A%2F%2F" + host + path;
+
+			if (fragment != null && !fragment.equals("")) {
 				urn += "%23" + fragment;
 			}
 
 			return urn;
 		} else {
+
 			return url;
 		}
 
@@ -140,6 +145,9 @@ public abstract class AbstractConverter {
 		}
 
 		URI uri = URI.create(urn);
+		if (uri == null) {
+			return "";
+		}
 
 		if (uri.getScheme().equals("urn")) {
 
@@ -150,7 +158,7 @@ public abstract class AbstractConverter {
 				String part1 = geniUrntoUrl(parts[1]);
 				String part2 = "";
 
-				url = "http://";// + part1;
+				// url = "http://";// + part1;
 
 				if (parts.length > 3) {
 					part2 = geniUrntoUrl(parts[3]);
@@ -213,16 +221,14 @@ public abstract class AbstractConverter {
 			nonGeneric = false;
 		}
 
-
 		if (uri.equals("http://open-multinet.info/ontology/omn#Resource")) {
 			nonGeneric = false;
 		}
-		
 
 		if (uri.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
 			nonGeneric = false;
 		}
-		
+
 		return nonGeneric;
 	}
 
@@ -263,11 +269,12 @@ public abstract class AbstractConverter {
 		URI uri = URI.create(url);
 
 		if (uri.getScheme() != null) {
-			if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
+			if (uri.getScheme().equals("http")
+					|| uri.getScheme().equals("https")) {
 				return true;
 			}
-		} 
-		
+		}
+
 		return false;
 
 	}
