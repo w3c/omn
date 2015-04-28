@@ -4,6 +4,7 @@ jdk:
 script:
 - mvn clean compile
 - mvn test
+- [ ${TRAVIS_PULL_REQUEST} = 'false' ] && mvn deploy --settings .travis/settings.xml
 - ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
 notifications:
   email:
@@ -15,7 +16,6 @@ cache:
   directories:
   - $HOME/.m2
 after_success:
-- mvn deploy --settings .travis/settings.xml
 - mvn clean test jacoco:report coveralls:report
 env:
   global:
