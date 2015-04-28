@@ -1,17 +1,23 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 script:
-  - mvn clean compile
-  - mvn test
-  - ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
+- mvn clean compile
+- mvn test
+- "[ ${TRAVIS_PULL_REQUEST} = 'false' ] &amp;&amp; mvn deploy --settings .travis/settings.xml"
+- ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
 notifications:
-  slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
   email:
-    - alexander.willner@tu-berlin.de
-    - fiteagle.dev@av.tu-berlin.de
+  - alexander.willner@tu-berlin.de
+  - fiteagle.dev@av.tu-berlin.de
+  slack:
+    secure: AU96qD4XI+McpOoyqaFRcDplDb1UR6iB6jE+WAzHmo6NIms469j2PiaKny3THz6AWIg9HChWyGv2yHQfxRuBx/0aPYhu0SI5Hggta6Iib29VAwZ/zMsD3vhANYW0js9X6nDdJQx9RMniJ023A3nO22q4Zyv/D1Fri63BQVSlipA=
 cache:
   directories:
   - $HOME/.m2
 after_success:
-  - mvn clean test jacoco:report coveralls:report
+- mvn clean test jacoco:report coveralls:report
+env:
+  global:
+  - secure: V+aGTePX6BGrOEWfT0M3OHwqQ7dD4uQ3go/TUUVqQ56iEVBZBOUv1Nsxpf1Ha2WED0N+9wX921ULutHnJpEjAccLMK1ZS2qI/RlIQCiz/7tnSvPxOBj6S7koqHv5Ge5zA0nte5w9uquaWmD/OS6ysKttZIpBvf9F+xxW58QhUYs=
+  - secure: W2N7Ik5vkv7tCh1PJCcl105kpn4yBe78WGYW36GqsmlB+hv7f1KraPOqyp+Sd5UPlo1AV7CMICOlTSZTusWEbjOPcmZkswq8V92aQ6dXtyjd0zGMvCYnmuCwSHYdoQ48t94ixJiYH0tvjurkrRQkTdN9Y4g4h9M+yluDZe1dASk=
