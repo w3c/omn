@@ -397,6 +397,25 @@
         rdfs:range xsd:string .
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#managedBy
+
+:managedBy rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "managed by"@en ;
+
+          rdfs:comment "URI of service (e.g. AggregateManager) that manages the instantiation of childs of a resource"@en ;
+          
+          rdfs:seeAlso "GENI RSpec v3: component_manager_id"@en ;
+
+          rdfs:domain [ rdf:type owl:Class ;
+              owl:unionOf ( omn:Group
+                            omn:Resource
+                            omn:Service
+                          )
+            ] ;
+          
+          rdfs:range omn:Service .
+
 
 
 
