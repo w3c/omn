@@ -356,11 +356,9 @@ public class RequestConverter extends AbstractConverter {
 				}
 
 				if (node.getComponentManagerId() != null) {
-					RDFNode parent = ResourceFactory
-							.createResource(AbstractConverter
-									.generateUrlFromUrn(node
-											.getComponentManagerId()));
-					omnResource.addProperty(Omn_lifecycle.parentOf, parent);
+					RDFNode manager = ResourceFactory
+							.createResource(node.getComponentManagerId());
+					omnResource.addProperty(Omn_lifecycle.managedBy, manager);
 				}
 
 				topology.addProperty(Omn.hasResource, omnResource);

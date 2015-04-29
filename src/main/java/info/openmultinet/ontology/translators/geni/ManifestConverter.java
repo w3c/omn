@@ -225,6 +225,10 @@ public class ManifestConverter extends AbstractConverter {
 			node.setClientId(resource.getResource()
 					.getProperty(Omn_lifecycle.hasID).getString());
 		}
+		if (resource.getResource().hasProperty(Omn_lifecycle.managedBy)) {
+			node.setComponentManagerId(resource.getResource()
+					.getProperty(Omn_lifecycle.managedBy).getObject().toString());
+		}
 
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
 			RDFNode implementedBy = resource.getResource()
