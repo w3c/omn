@@ -5,10 +5,14 @@ script:
 - mvn clean compile
 - mvn test
 - ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
-- ! '[ ${TRAVIS_PULL_REQUEST} = "false" ] && [ ${TRAVIS_BRANCH} = "master" ] &&
-  mvn package -DskipTests deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar
-  -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet
-  -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT --settings .travis/settings.xml'
+- '
+if [[ ${TRAVIS_PULL_REQUEST} == "false" && ${TRAVIS_BRANCH} == "master" ]]; then
+  mvn package -DskipTests deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar \
+    -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet \
+    -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT --settings .travis/settings.xml
+else
+  true
+fi'
 notifications:
   email:
   - alexander.willner@tu-berlin.de
