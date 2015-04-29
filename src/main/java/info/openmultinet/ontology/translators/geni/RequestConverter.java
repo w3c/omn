@@ -284,9 +284,9 @@ public class RequestConverter extends AbstractConverter {
 			node.setComponentId(implementedBy.toString());
 			node.setComponentName(implementedBy.asNode().getLocalName());
 
-			Statement parentOf = resource.getProperty(Omn_lifecycle.parentOf);
+			Statement managedBy = resource.getProperty(Omn_lifecycle.managedBy);
 			node.setComponentManagerId(AbstractConverter.generateUrnFromUrl(
-					parentOf.getResource().getURI(), "authority"));
+					managedBy.getResource().getURI(), "authority"));
 
 		}
 	}
