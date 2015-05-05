@@ -6,7 +6,7 @@ script:
 - ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
 - '
 if [[ ${TRAVIS_PULL_REQUEST} == "false" && ${TRAVIS_BRANCH} == "master" ]]; then
-  mvn package -DskipTests deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet  -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT --settings .travis/settings.xml;
+  mvn package -DskipTests deploy deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet  -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT --settings .travis/settings.xml;
 else
   true;
 fi'
