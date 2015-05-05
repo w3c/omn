@@ -90,4 +90,22 @@ public class UrnUrlTest {
 		Assert.assertTrue(urn.equals("urn:publicid:IDN+www.testbed.example.org+node+http%3A%2F%2Fwww.testbed.example.org%2Fresources%23Openstack-1"));;
 		Assert.assertTrue(url.equals(urlNew));
 	}
+	
+	
+	@Test
+	public void authorityRoundtrip() {
+		System.out
+				.println("*************authority round trip*******************");
+		String urn = "urn:publicId:IDN+localhost+authority+am";
+		System.out.println("Conver to urn: " + urn);
+		String url = AbstractConverter.generateUrlFromUrn(urn);
+		System.out.println("Conver back to url: " + url);
+		
+		String urnNew = AbstractConverter.generateUrnFromUrl(url, "node");
+		System.out.println("Conver back to urn: " + urnNew);
+		System.out.println();
+		System.out.println();
+		Assert.assertTrue(urn.equals("urn:publicId:IDN+localhost+authority+am"));;
+		Assert.assertTrue(urn.equals(urnNew));
+	}
 }

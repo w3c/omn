@@ -11,19 +11,23 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeConten
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
+import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -133,8 +137,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
 			final NodeContents rspecNode = nodeJaxb.getValue();
 
-			String componentId = AbstractConverter
-					.generateUrlFromUrn(rspecNode.getComponentId());
+			String componentId = AbstractConverter.generateUrlFromUrn(rspecNode
+					.getComponentId());
 			final Resource omnNode = topology.getModel().createResource(
 					componentId);
 
@@ -224,6 +228,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			RDFNode type = ResourceFactory.createProperty(sliver.getName());
 			omnNode.addProperty(Omn_lifecycle.canImplement, type);
 			for (Object rspecSliverObject : sliver.getAnyOrDiskImage()) {
+				tryExtractCpus(rspecSliverObject, omnSliver);
 				tryExtractDiskImage(rspecSliverObject, omnSliver);
 			}
 
@@ -231,6 +236,18 @@ public class AdvertisementConverter extends AbstractConverter {
 			omnNode.addProperty(Omn_lifecycle.canImplement, type);
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractCpus(Object rspecSliverObject, Resource omnSliver) {
+		if(rspecSliverObject.getClass()
+		.equals(info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc.class)){
+			Pc pc = (Pc) rspecSliverObject;
+
+			if (pc.getCpus() != null) {
+				omnSliver.addLiteral(Omn_domain_pc.hasCPU,
+						pc.getCpus());
+			}
 		}
 	}
 
@@ -362,14 +379,31 @@ public class AdvertisementConverter extends AbstractConverter {
 			sliver.setName(parentURI);
 			if (null != parentURI) {
 				geniNodeDetails.add(of.createNodeContentsSliverType(sliver));
-				setDiskImage(omnSliver.getObject(), sliver);
+				RDFNode sliverObject = omnSliver.getObject();
+				Resource sliverResource = sliverObject.asResource();
+				setCpus(sliverResource, sliver);
+				setDiskImage(sliverResource, sliver);
 			}
 		}
 
 	}
 
-	private void setDiskImage(RDFNode sliverNode, SliverType sliver) {
-		Resource sliverResource = sliverNode.asResource();
+	private void setCpus(Resource sliverResource, SliverType sliver) {
+		Pc pc = null;
+		
+		if (sliverResource.hasProperty(Omn_domain_pc.hasCPU)) {
+			pc = new ObjectFactory().createPc();
+			pc.setCpus(sliverResource.getProperty(Omn_domain_pc.hasCPU)
+					.getObject().asLiteral().getInt());
+		}
+		if (pc != null) {
+			sliver.getAnyOrDiskImage().add(pc);
+		}
+		
+	}
+
+	private void setDiskImage(Resource sliverResource, SliverType sliver) {
+		// Resource sliverResource = sliverNode.asResource();
 
 		if (sliverResource.hasProperty(RDFS.subClassOf, Omn_domain_pc.VM)) {
 

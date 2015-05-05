@@ -1,5 +1,6 @@
 @prefix : <http://fed4fire.eu/resources#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -9,6 +10,8 @@
 @prefix geni: <http://open-multinet.info/ontology/sfa#> .
 @prefix dc:<http://purl.org/dc/elements/1.1/> .
 @prefix dcterms:<http://purl.org/dc/terms/> .
+@prefix omn-domain-pc:<http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix void:<http://rdfs.org/ns/void#> .
 
 <http://fed4fire.eu/about> rdf:type owl:Ontology ;
                                          
@@ -40,7 +43,7 @@
                         
             foaf:homepage <http://fed4fire.eu> ;
             
-            foaf:depiction <http://www.fed4fire.eu/uploads/media/fed4fire-logo.jpg> ;
+            foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
             
             foaf:mbox <mailto:contact@fed4fire.eu> ;
        
@@ -50,6 +53,7 @@
 <http://www.upmc.fr/about#me> ,
 <http://www.fokus.fraunhofer.de/about#me> ,
 <http://federation.av.tu-berlin.de/about#me> ,
+<http://av.tu-berlin.de/about#me> ,
 <http://www.ed.ac.uk/about#me> ,
 <http://www.inria.fr/about#me> ,
 <http://www.nicta.com.au/about#me> ,
@@ -102,4 +106,68 @@
 
 
 
+<http://av.tu-berlin.de/about#me> rdf:type omn:FederationMember ,
+             owl:NamedIndividual ;
+    
+    rdfs:label "TUB | AV" ;
 
+    rdfs:comment "This chair - founded in 2004 and funded by the Fraunhofer Gesellschaft - is part of the Institute for Telecommunication Systems within the Faculty of Electrical Engineering and Computer Science at the Technische Universität Berlin." ;
+                        
+    foaf:homepage <http://av.tu-berlin.de> ;
+            
+    foaf:depiction <http://www.av.tu-berlin.de/fileadmin/fg207/Logos/AV_banner-neu.jpg> ;
+            
+    foaf:mbox <mailto:office@av.tu-berlin.de> ;
+       
+    wgs84:lat 52.526 ;
+
+    wgs84:long 13.314 ;
+    
+    omn:administers <http://demo.fiteagle.org/about#me>,
+                    <http://federation.daad-unifi.org/about#me>,
+                    <http://federation.trescimo.eu/about#me> .
+
+
+<http://demo.fiteagle.org/about#me> rdf:type omn:Infrastructure ,
+             owl:NamedIndividual ;
+    
+ rdfs:label "FITeagle Demo Testbed" ;
+  
+  omn:hasResource <http://openstack.av.tu-berlin.de> ;
+
+  rdfs:comment "The FITeagle Demo Testbed is..." ;
+
+  omn:hasService :am, :sa ;
+
+  void:sparqlEndpoint <http://demo.fiteagle.org/sparql> .
+
+:am rdf:type geni:AggregateManager ;
+
+    rdfs:label "Aggregate Manager" ;
+
+   omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/am/v3> .
+
+
+:sa rdf:type geni:SliceAuthority ;
+
+    rdfs:label "Slice Authority" ;
+
+   omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/sa/v1> .
+ 
+    
+<http://openstack.av.tu-berlin.de> rdf:type omn-domain-pc:PC ;
+
+    rdfs:label "OpenStack Server" ;
+    
+    omn-lifecycle:parentOf <http://demo.fiteagle.org/resource/VMServer-1> .
+
+
+<http://federation.trescimo.eu/about#me> rdf:type omn:Infrastructure ,
+             owl:NamedIndividual ;
+    
+    rdfs:label "TRESCIMO Testbed" .
+
+<http://federation.daad-unifi.org/about#me>  rdf:type omn:Infrastructure ,
+             owl:NamedIndividual ;
+             
+    rdfs:label "DAAD UNIFI Testbed" .

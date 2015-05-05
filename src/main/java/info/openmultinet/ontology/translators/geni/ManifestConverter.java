@@ -14,6 +14,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -108,12 +109,46 @@ public class ManifestConverter extends AbstractConverter {
 
 			setComponentDetails(resource, node);
 			// ManifestConverter.setComponentManagerId(resource, node);
+			setMonitoringService(resource, node);
+			// setState
+			// setVMID
 			setSliverType(resource, node, hostname);
 			setServices(resource, node, hostname);
 
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
 		}
+	}
+
+	private static void setMonitoringService(Statement resource,
+			NodeContents node) {
+		// Resource resourceResource = resource.getResource();
+		// if (resourceResource.hasProperty(Omn_lifecycle.usesService)) {
+		// Statement monitoringService = resourceResource
+		// .getProperty(Omn_lifecycle.usesService);
+		// Resource monitoringResource = monitoringService.getResource();
+		// Monitoring monitoring = new ObjectFactory().createMonitoring();
+		//
+		// if (monitoringResource.hasProperty(Omn_service.hasURI)) {
+		// Statement hasUri = monitoringService.getResource().getProperty(
+		// Omn_service.hasURI);
+		//
+		// String uri = hasUri.getObject().asResource().getURI()
+		// .toString();
+		// monitoring.setUri(uri);
+		// }
+		//
+		// if (monitoringResource.hasProperty(RDF.type)) {
+		// Statement hasType = monitoringService.getResource()
+		// .getProperty(RDF.type);
+		//
+		// String type = hasType.getObject().asResource().getURI()
+		// .toString();
+		// monitoring.setType(type);
+		// }
+		//
+		// node.getAnyOrRelationOrLocation().add(monitoring);
+		// }
 	}
 
 	private static void setServices(Statement resource, NodeContents node,
@@ -225,7 +260,11 @@ public class ManifestConverter extends AbstractConverter {
 			node.setClientId(resource.getResource()
 					.getProperty(Omn_lifecycle.hasID).getString());
 		}
-
+		if (resource.getResource().hasProperty(Omn_lifecycle.managedBy)) {
+			node.setComponentManagerId(resource.getResource()
+					.getProperty(Omn_lifecycle.managedBy).getObject().toString());
+		}
+		
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
 			RDFNode implementedBy = resource.getResource()
 					.getProperty(Omn_lifecycle.implementedBy).getObject();

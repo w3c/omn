@@ -22,13 +22,13 @@
                                                    
                                                    dc:date "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-04-27"^^xsd:string ;
+                                                   owl:versionInfo "2015-04-29"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"@en ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to the life cycle of resource or service."@en ;
                                                    
-                                                   dcterms:modified "2015-04-27"^^xsd:date ;
+                                                   dcterms:modified "2015-04-29"^^xsd:date ;
                                                    
                                                    vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
                                                     
@@ -396,6 +396,25 @@
        
         rdfs:range xsd:string .
 
+
+###  http://open-multinet.info/ontology/omn-lifecycle#managedBy
+
+:managedBy rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "managed by"@en ;
+
+          rdfs:comment "URI of service (e.g. AggregateManager) that manages the instantiation of childs of a resource"@en ;
+          
+          rdfs:seeAlso "GENI RSpec v3: component_manager_id"@en ;
+
+          rdfs:domain [ rdf:type owl:Class ;
+              owl:unionOf ( omn:Group
+                            omn:Resource
+                            omn:Service
+                          )
+            ] ;
+          
+          rdfs:range omn:Service .
 
 
 

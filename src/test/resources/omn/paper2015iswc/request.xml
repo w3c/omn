@@ -1,5 +1,5 @@
 <rspec type="request" generated="2014-07-11T10:20:39Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
-	<node client_id="myVM-1" component_id="http://localhost/resource/VMServer-1"
+	<node client_id="myVM-1" component_id="urn:publicid:IDN+www.testbed.example.org+node+https%3A%2F%2Fwww.testbed.example.org%2Fresources%2FOpenstack-1"
        component_manager_id="urn:publicId:IDN+localhost+authority+am"
        component_name="VMServer-1" exclusive="false">
 		<sliver_type name="http://localhost/resource/512MB_5GB"/>

@@ -16,9 +16,9 @@
                                                  
                                                  dc:date "2014-11-11"^^xsd:date ;
                                                  
-                                                 owl:versionInfo "2015-04-27"^^xsd:string ;
+                                                 owl:versionInfo "2015-04-29"^^xsd:string ;
                                                  
-                                                 dcterms:modified "2015-04-27"^^xsd:date ;
+                                                 dcterms:modified "2015-04-29"^^xsd:date ;
                                                  
                                                  dc:title "Open-Multinet Upper Service Ontology"^^xsd:string ;
                                                  
@@ -209,7 +209,7 @@
           
           rdfs:label "has URI"@en ;
 
-          rdfs:comment "URI of OSMP monitoring serivce"@en ;
+          rdfs:comment "URI of OSMP monitoring service"@en ;
           
           rdfs:domain [ rdf:type owl:Class ;
               owl:unionOf ( omn:Group
@@ -219,7 +219,6 @@
             ] ;
           
           rdfs:range owl:Thing .
-
 
 
 #################################################################

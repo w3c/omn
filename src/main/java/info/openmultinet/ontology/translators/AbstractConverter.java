@@ -75,7 +75,7 @@ public abstract class AbstractConverter {
 		}
 
 		URI uri = URI.create(url);
-		if (uri.getScheme() == null){
+		if (uri.getScheme() == null) {
 			return "";
 		}
 
@@ -155,21 +155,15 @@ public abstract class AbstractConverter {
 			String[] parts = urn.split("\\+");
 
 			if (parts.length > 1) {
-				String part1 = geniUrntoUrl(parts[1]);
-				String part2 = "";
-
-				// url = "http://";// + part1;
-
 				if (parts.length > 3) {
-					part2 = geniUrntoUrl(parts[3]);
-
-					if (part2 != "") {
-						url += part2;
-						// url += "#" + part2;
+					if(isUrl(geniUrntoUrl(parts[3]))){
+						String http = geniUrntoUrl(parts[3]);
+						url += http;
+					} else {
+						return urn;
 					}
 				}
 			}
-
 			return url;
 		} else {
 			return urn;
