@@ -1,17 +1,27 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 script:
-  - mvn clean compile
-  - mvn test
-  - ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
+- mvn test
+- ./bin/rdflint.sh -check ontologies/*.ttl -assume import/*.ttl
+- '
+if [[ ${TRAVIS_PULL_REQUEST} == "false" && ${TRAVIS_BRANCH} == "master" ]]; then
+  mvn package -DskipTests deploy deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet  -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT --settings .travis/settings.xml;
+else
+  true;
+fi'
 notifications:
-  slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
   email:
-    - alexander.willner@tu-berlin.de
-    - fiteagle.dev@av.tu-berlin.de
+  - alexander.willner@tu-berlin.de
+  - fiteagle.dev@av.tu-berlin.de
+  slack:
+    secure: AU96qD4XI+McpOoyqaFRcDplDb1UR6iB6jE+WAzHmo6NIms469j2PiaKny3THz6AWIg9HChWyGv2yHQfxRuBx/0aPYhu0SI5Hggta6Iib29VAwZ/zMsD3vhANYW0js9X6nDdJQx9RMniJ023A3nO22q4Zyv/D1Fri63BQVSlipA=
 cache:
   directories:
   - $HOME/.m2
 after_success:
-  - mvn clean test jacoco:report coveralls:report
+- mvn clean test jacoco:report coveralls:report
+env:
+  global:
+  - secure: SKS5m4l9ykDqpu9FLesziqQqicOweTyauzNDUBi5nWyaX+KjSngnxshdzhidZQTKO7fmMS52Fa3AeNdCfjTPEvZjRpd/i7KFSiw0A56Y9+mMXNKIHDzfCw8JU7UAGvIKt1AiCMkOkWdGPj1GYL4+RPEW/iNlzBbiFDNWaxZ8s6g=
+  - secure: PqDUkOands604NBFJwyide2xUfb+1WuXVyQivaNa99Zp0d0Rz+Sxf6N1f+UMhnHI7nLDrZsqaR0cMm2EYaFIYTtw6BoZAHXLzPNnSSrWycLwB+Yth5Okr0eozLKKmmdJwtr+o7+k4Uz9so7DR61WIe7VuaFav5x1+7x+UkWwYYU=
