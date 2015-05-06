@@ -1,0 +1,2771 @@
+<rspec expires="2015-05-06T14:32:20Z" generated="2015-05-06T14:32:20Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd ">
+    <rspec_opstate
+        aggregate_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        start="geni_notready" xmlns="http://www.geni.net/resources/rspec/ext/opstate/1">
+        <sliver_type name="raw-pc"/>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <state name="geni_notready">
+            <action name="geni_start" next="geni_configuring">
+                <description>Boot the node</description>
+            </action>
+            <description>Raw PCs and VMs begin powered down or inactive. They    must be explicitly booted before use.</description>
+        </state>
+        <state name="geni_configuring">
+            <wait next="geni_ready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>Booting/Reloading takes a significant amount of time, so it    happens asynchronously while the node is in this    state.</description>
+        </state>
+        <state name="geni_ready">
+            <action name="geni_restart" next="geni_configuring">
+                <description>Reboot the node</description>
+            </action>
+            <action name="geni_stop" next="geni_stopping">
+                <description>Power down or stop the node.</description>
+            </action>
+            <action name="geni_reload" next="geni_configuring">
+                <description>Reload the node</description>
+            </action>
+            <action name="geni_update_users" next="geni_updating_users">
+                <description>Update user SSH keys.</description>
+            </action>
+            <description>The node is up and ready to use.</description>
+        </state>
+        <state name="geni_stopping">
+            <wait next="geni_notready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>The node is being stopped or rebooted.</description>
+        </state>
+        <state name="geni_failed">
+            <description>The node has failed and requires administrator    intervention before it can be used. Please contact    the administrator for assistance.</description>
+        </state>
+        <state name="geni_updating_users">
+            <action name="geni_update_users_cancel" next="geni_ready">
+                <description>Cancel an update users action</description>
+            </action>
+            <wait next="geni_ready" type="geni_success"/>
+            <description>Updating users can take a fair amount of time, so it    happens asynchronously in this state.</description>
+        </state>
+    </rspec_opstate>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+cisco1"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="cisco1" exclusive="true">
+        <hardware_type name="switch">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <interface component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)">
+            <emulab:interface name="(null)"/>
+        </interface>
+        <emulab:fd name="real-switch" weight="0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc5"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc5" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth3"
+            public_ipv4="203.250.172.5" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc13"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc13" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth3"
+            public_ipv4="203.250.172.13" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc6"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc6" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth3"
+            public_ipv4="203.250.172.6" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc24"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc24" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth3"
+            public_ipv4="203.250.172.24" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc26"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc26" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth3"
+            public_ipv4="203.250.172.26" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc27"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc27" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth3"
+            public_ipv4="203.250.172.27" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc35"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc35" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth3"
+            public_ipv4="203.250.172.35" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc30"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc30" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth3"
+            public_ipv4="203.250.172.30" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc29"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc29" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth3"
+            public_ipv4="203.250.172.29" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc4"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc4" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth3"
+            public_ipv4="203.250.172.4" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc25"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc25" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth3"
+            public_ipv4="203.250.172.25" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc8"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc8" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth3"
+            public_ipv4="203.250.172.8" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc11"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc11" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth3"
+            public_ipv4="203.250.172.11" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc18"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc18" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth3"
+            public_ipv4="203.250.172.18" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc40"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc40" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth3"
+            public_ipv4="203.250.172.40" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+emulab.kreonet.net+node+pc33"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="pc33" exclusive="true">
+        <hardware_type name="dellR710">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-dellR710">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="dellR710-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+            <disk_image default="true"
+                description="Emulab standard CentOS 5.5 32-bit image."
+                name="urn:publicid:IDN+emulab.kreonet.net+image+emulab-ops:CENTOS55-STD"
+                os="Linux" version="Centos5.5"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth3"
+            public_ipv4="203.250.172.33" role="control">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2400"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="12288"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10104" weight="0"/>
+        <emulab:fd name="OS-10101" weight="0"/>
+        <emulab:fd name="OS-10117" weight="0"/>
+        <emulab:fd name="OS-10115" weight="0"/>
+        <emulab:fd name="OS-10079" weight="0"/>
+        <emulab:fd name="OS-10068" weight="0"/>
+        <emulab:fd name="OS-10084" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10124" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="connected-to-cisco1" weight="0.0"/>
+        <emulab:fd name="connected-to-cisco_ctrl" weight="0.0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+emulab.kreonet.net+node+internet"
+        component_manager_id="urn:publicid:IDN+emulab.kreonet.net+authority+cm"
+        component_name="internet" exclusive="true">
+        <hardware_type name="ipv4">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <cloud/>
+        <interface component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border">
+            <emulab:interface name="border"/>
+        </interface>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc27:eth3-internet:border" component_name="link-pc27//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc4:eth3-internet:border" component_name="link-pc4//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc26:eth3-internet:border" component_name="link-pc26//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc33:eth3-internet:border" component_name="link-pc33//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc5:eth3-internet:border" component_name="link-pc5//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc30:eth3-internet:border" component_name="link-pc30//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc35:eth3-internet:border" component_name="link-pc35//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc24:eth3-internet:border" component_name="link-pc24//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc18:eth3-internet:border" component_name="link-pc18//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc11:eth3-internet:border" component_name="link-pc11//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc6:eth3-internet:border" component_name="link-pc6//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc40:eth3-internet:border" component_name="link-pc40//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc13:eth3-internet:border" component_name="link-pc13//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc25:eth3-internet:border" component_name="link-pc25//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc29:eth3-internet:border" component_name="link-pc29//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc8:eth3-internet:border" component_name="link-pc8//eth3-internet//border">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth3"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc40:eth1-cisco1:(null)" component_name="link-pc40//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc40:eth0-cisco1:(null)" component_name="link-pc40//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc40:eth2-cisco1:(null)" component_name="link-pc40//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc40:eth5-cisco1:(null)" component_name="link-pc40//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc40:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc35:eth1-cisco1:(null)" component_name="link-pc35//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc35:eth0-cisco1:(null)" component_name="link-pc35//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc35:eth2-cisco1:(null)" component_name="link-pc35//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc35:eth5-cisco1:(null)" component_name="link-pc35//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc35:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc33:eth1-cisco1:(null)" component_name="link-pc33//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc33:eth0-cisco1:(null)" component_name="link-pc33//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc33:eth2-cisco1:(null)" component_name="link-pc33//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc33:eth5-cisco1:(null)" component_name="link-pc33//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc33:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc27:eth1-cisco1:(null)" component_name="link-pc27//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc27:eth0-cisco1:(null)" component_name="link-pc27//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc27:eth2-cisco1:(null)" component_name="link-pc27//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc27:eth5-cisco1:(null)" component_name="link-pc27//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc27:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc26:eth1-cisco1:(null)" component_name="link-pc26//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc26:eth0-cisco1:(null)" component_name="link-pc26//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc26:eth2-cisco1:(null)" component_name="link-pc26//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc26:eth5-cisco1:(null)" component_name="link-pc26//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc26:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc25:eth1-cisco1:(null)" component_name="link-pc25//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc25:eth0-cisco1:(null)" component_name="link-pc25//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc25:eth2-cisco1:(null)" component_name="link-pc25//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc25:eth5-cisco1:(null)" component_name="link-pc25//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc25:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc24:eth1-cisco1:(null)" component_name="link-pc24//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc24:eth0-cisco1:(null)" component_name="link-pc24//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc24:eth2-cisco1:(null)" component_name="link-pc24//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc24:eth5-cisco1:(null)" component_name="link-pc24//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc24:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc6:eth1-cisco1:(null)" component_name="link-pc6//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc6:eth0-cisco1:(null)" component_name="link-pc6//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc6:eth2-cisco1:(null)" component_name="link-pc6//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc6:eth5-cisco1:(null)" component_name="link-pc6//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc6:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc30:eth1-cisco1:(null)" component_name="link-pc30//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc30:eth0-cisco1:(null)" component_name="link-pc30//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc30:eth2-cisco1:(null)" component_name="link-pc30//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc30:eth5-cisco1:(null)" component_name="link-pc30//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc30:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc29:eth1-cisco1:(null)" component_name="link-pc29//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc29:eth0-cisco1:(null)" component_name="link-pc29//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc29:eth2-cisco1:(null)" component_name="link-pc29//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc29:eth5-cisco1:(null)" component_name="link-pc29//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc29:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc18:eth1-cisco1:(null)" component_name="link-pc18//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc18:eth0-cisco1:(null)" component_name="link-pc18//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc18:eth2-cisco1:(null)" component_name="link-pc18//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc18:eth5-cisco1:(null)" component_name="link-pc18//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc18:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc13:eth1-cisco1:(null)" component_name="link-pc13//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc13:eth0-cisco1:(null)" component_name="link-pc13//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc13:eth2-cisco1:(null)" component_name="link-pc13//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc13:eth5-cisco1:(null)" component_name="link-pc13//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc13:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc11:eth1-cisco1:(null)" component_name="link-pc11//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc11:eth0-cisco1:(null)" component_name="link-pc11//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc11:eth2-cisco1:(null)" component_name="link-pc11//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc11:eth5-cisco1:(null)" component_name="link-pc11//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc11:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc8:eth1-cisco1:(null)" component_name="link-pc8//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc8:eth0-cisco1:(null)" component_name="link-pc8//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc8:eth2-cisco1:(null)" component_name="link-pc8//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc8:eth5-cisco1:(null)" component_name="link-pc8//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc8:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc4:eth1-cisco1:(null)" component_name="link-pc4//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc4:eth0-cisco1:(null)" component_name="link-pc4//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc4:eth2-cisco1:(null)" component_name="link-pc4//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc4:eth5-cisco1:(null)" component_name="link-pc4//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc4:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc5:eth1-cisco1:(null)" component_name="link-pc5//eth1-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc5:eth0-cisco1:(null)" component_name="link-pc5//eth0-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc5:eth2-cisco1:(null)" component_name="link-pc5//eth2-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+emulab.kreonet.net+link+link-pc5:eth5-cisco1:(null)" component_name="link-pc5//eth5-cisco1//(null)">
+        <component_manager name="urn:publicid:IDN+emulab.kreonet.net+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth5"/>
+        <interface_ref component_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth5"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+emulab.kreonet.net+interface+pc5:eth5"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+emulab.kreonet.net+interface+cisco1:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-cisco1"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+</rspec>

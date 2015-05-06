@@ -1,0 +1,98 @@
+<rspec  type="request" generated_by="Flack" generated="2013-03-10T20:56:06Z"
+        xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+        http://www.geni.net/resources/rspec/3/request.xsd  "
+        xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+        xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+        xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="OVS"
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+        exclusive="true"
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <hardware_type name="pcfast"/>
+    <sliver_type name="raw-pc">
+      <disk_image
+      name="urn:publicid:IDN+emulab.net+image+panther:Ubuntu1204OVSPoX" />
+    </sliver_type>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local"
+      url="http://www.gpolab.bbn.com/experiment-support/OpenFlowOVS/of-ovs.tar.gz"/>
+    </services>
+    <interface client_id="OVS:if0">
+      <ip address="10.10.1.11" netmask="" type="ipv4"/>
+    </interface>
+    <interface client_id="OVS:if1">
+      <ip address="10.10.1.12" netmask="" type="ipv4"/>
+    </interface>
+    <interface client_id="OVS:if2">
+      <ip address="10.10.1.13" netmask="" type="ipv4"/>
+    </interface>
+  </node>
+  
+  <node client_id="host1"
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+        exclusive="false"
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM:if0">
+      <ip address="10.10.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <node client_id="host2"
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+        exclusive="false"
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-0:if0">
+      <ip address="10.10.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <node client_id="host3"
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+        exclusive="false"
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-1:if0">
+      <ip address="10.10.1.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <link client_id="lan0"
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <emulab:vlan_tagging enabled="true"/>
+    <interface_ref client_id="OVS:if0"/>
+    <interface_ref client_id="VM:if0"/>
+    <property source_id="OVS:if0" dest_id="VM:if0" capacity="100000"/>
+    <property source_id="VM:if0" dest_id="OVS:if0" capacity="100000"/>
+    <link_type name="lan"/>
+  </link>
+
+  <link client_id="lan1" 
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <emulab:vlan_tagging enabled="true"/>
+    <interface_ref client_id="OVS:if1"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <property source_id="OVS:if1" dest_id="VM-0:if0" capacity="100000"/>
+    <property source_id="VM-0:if0" dest_id="OVS:if1" capacity="100000"/>
+    <link_type name="lan"/>
+  </link>
+
+  <link client_id="lan2"
+        xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <emulab:vlan_tagging enabled="true"/>
+    <interface_ref client_id="OVS:if2"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <property source_id="OVS:if2" dest_id="VM-1:if0" capacity="100000"/>
+    <property source_id="VM-1:if0" dest_id="OVS:if2" capacity="100000"/>
+    <link_type name="lan"/>
+  </link>
+
+</rspec>

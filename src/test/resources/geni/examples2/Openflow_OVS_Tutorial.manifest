@@ -1,0 +1,81 @@
+<rspec xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" type="manifest" generated_by="Flack" generated="2013-12-13T20:07:42Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd  " expires="2013-12-13T20:33:04Z">
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="OVS" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true" component_id="urn:publicid:IDN+emulab.net+node+pc267" sliver_id="urn:publicid:IDN+emulab.net+sliver+164800">
+    <hardware_type name="pcfast"/>
+    <sliver_type name="raw-pc">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+panther:Ubuntu1204OVSPoX"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/OpenFlowOVS/of-ovs.tar.gz"/>
+    <login authentication="ssh-keys" hostname="pc267.emulab.net" port="22" username="johren"/></services>
+    <interface client_id="OVS:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc267:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164803" mac_address="022142787548">
+      <ip address="10.10.1.11" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="OVS:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc267:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164806" mac_address="0294c95fa198">
+      <ip address="10.10.1.12" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="OVS:if2" component_id="urn:publicid:IDN+emulab.net+interface+pc267:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164809" mac_address="022657f29c48">
+      <ip address="10.10.1.13" netmask="" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="956" y="210" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pc267"/><host name="OVS.joBasicEG.ch-geni-net.emulab.net"/></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="host1" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false" component_id="urn:publicid:IDN+emulab.net+node+pc411" sliver_id="urn:publicid:IDN+emulab.net+sliver+164797">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc411:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164804" mac_address="022ea9de2385">
+      <ip address="10.10.1.1" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="29" y="890" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm411-10"/><host name="host1.joBasicEG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc411.emulab.net" port="34106" username="johren"/></services></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="host2" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false" component_id="urn:publicid:IDN+emulab.net+node+pc411" sliver_id="urn:publicid:IDN+emulab.net+sliver+164798">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-0:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc411:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164807" mac_address="022945f63765">
+      <ip address="10.10.1.2" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="1371" y="369" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm411-11"/><host name="host2.joBasicEG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc411.emulab.net" port="34107" username="johren"/></services></node>
+  <node xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="host3" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false" component_id="urn:publicid:IDN+emulab.net+node+pc411" sliver_id="urn:publicid:IDN+emulab.net+sliver+164799">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-1:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc411:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164810" mac_address="02298a1fa027">
+      <ip address="10.10.1.3" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="1226" y="39" unbound="true"/>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm411-12"/><host name="host3.joBasicEG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc411.emulab.net" port="34108" username="johren"/></services></node>
+  <link xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="lan0" sliver_id="urn:publicid:IDN+emulab.net+sliver+164802" vlantag="280">
+    <rs:vlan_tagging xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1" enabled="true"/>
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="OVS:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc267:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164803"/>
+    <interface_ref client_id="VM:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc411:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164804"/>
+    <property source_id="OVS:if0" dest_id="VM:if0" capacity="100000"/>
+    <property source_id="VM:if0" dest_id="OVS:if0" capacity="100000"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="lan1" sliver_id="urn:publicid:IDN+emulab.net+sliver+164805" vlantag="272">
+    <rs:vlan_tagging xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1" enabled="true"/>
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="OVS:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc267:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164806"/>
+    <interface_ref client_id="VM-0:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc411:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164807"/>
+    <property source_id="OVS:if1" dest_id="VM-0:if0" capacity="100000"/>
+    <property source_id="VM-0:if0" dest_id="OVS:if1" capacity="100000"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" client_id="lan2" sliver_id="urn:publicid:IDN+emulab.net+sliver+164808" vlantag="300">
+    <rs:vlan_tagging xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1" enabled="true"/>
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="OVS:if2" component_id="urn:publicid:IDN+emulab.net+interface+pc267:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164809"/>
+    <interface_ref client_id="VM-1:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc411:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+164810"/>
+    <property source_id="OVS:if2" dest_id="VM-1:if0" capacity="100000"/>
+    <property source_id="VM-1:if0" dest_id="OVS:if2" capacity="100000"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <client:client_info name="Flack" environment="Flash Version: MAC 11,9,900,117, OS: Mac OS 10.8.5, Arch: x86, Screen: 2560x1440 @ 72 DPI with touchscreen type none" version="v17.17" url="https://www.emulab.net/protogeni/flack3/flack.swf"/>
+  <flack:slice_info view="graph"/>
+</rspec>

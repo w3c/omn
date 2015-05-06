@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec type="manifest" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1/slice_info.xsd?format=raw http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1/sliver_info.xsd?format=raw http://www.geni.net/resources/rspec/ext/postBootScript/1 http://www.geni.net/resources/rspec/ext/postBootScript/1/request.xsd" xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:ns3="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:ns5="http://www.geni.net/resources/rspec/ext/postBootScript/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:0" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="0">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="xo.small">
+            <disk_image version="807c4570e46413cba1faf3a25fdfff8361489c69" name="http://pkg.mytestbed.net/geni/deb7-64-p2p.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.17" authentication="ssh-keys"/>
+            <login username="johren" port="22" hostname="152.54.14.17" authentication="ssh-keys"/>
+            <ns5:services_post_boot_script type="velocity">#!/bin/bash
+# Automatically generated boot script
+
+# wget or curl must be installed on the image
+mkdir -p /
+cd /
+if [ -x `which wget 2&amp;gt;/dev/null` ]; then
+  wget -q -O `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh` http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh
+else if [ -x `which curl 2&amp;gt;/dev/null` ]; then
+  curl http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh &amp;gt; `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh`
+fi
+fi
+eval &amp;quot;/bin/sh -c \&amp;quot;chmod +x /deb7-64-p2p.postboot.sh; /deb7-64-p2p.postboot.sh 0 urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\&amp;quot;&amp;quot;
+</ns5:services_post_boot_script>
+        </services>
+        <interface mac_address="fe:16:3e:00:9d:b5" client_id="0:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="192.168.1.1"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w7:bdd5b251-4a63-4bd4-b77c-cad57974602d" state="ready" start_time="2013-12-03T00:57:47.000Z" expiration_time="2013-12-10T00:55:03.000Z" creation_time="2013-12-03T00:57:47.000Z" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:1" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="1">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="xo.small">
+            <disk_image version="807c4570e46413cba1faf3a25fdfff8361489c69" name="http://pkg.mytestbed.net/geni/deb7-64-p2p.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.20" authentication="ssh-keys"/>
+            <login username="johren" port="22" hostname="152.54.14.20" authentication="ssh-keys"/>
+            <ns5:services_post_boot_script type="velocity">#!/bin/bash
+# Automatically generated boot script
+
+# wget or curl must be installed on the image
+mkdir -p /
+cd /
+if [ -x `which wget 2&amp;gt;/dev/null` ]; then
+  wget -q -O `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh` http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh
+else if [ -x `which curl 2&amp;gt;/dev/null` ]; then
+  curl http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh &amp;gt; `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh`
+fi
+fi
+eval &amp;quot;/bin/sh -c \&amp;quot;chmod +x /deb7-64-p2p.postboot.sh; /deb7-64-p2p.postboot.sh 1 urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\&amp;quot;&amp;quot;
+</ns5:services_post_boot_script>
+        </services>
+        <interface mac_address="fe:16:3e:00:13:a8" client_id="1:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="192.168.1.2"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w3:edd8a717-b4d8-4f55-a118-a1831563be83" state="ready" start_time="2013-12-03T00:57:47.000Z" expiration_time="2013-12-10T00:55:03.000Z" creation_time="2013-12-03T00:57:47.000Z" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:2" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="2">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="xo.small">
+            <disk_image version="807c4570e46413cba1faf3a25fdfff8361489c69" name="http://pkg.mytestbed.net/geni/deb7-64-p2p.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.19" authentication="ssh-keys"/>
+            <login username="johren" port="22" hostname="152.54.14.19" authentication="ssh-keys"/>
+            <ns5:services_post_boot_script type="velocity">#!/bin/bash
+# Automatically generated boot script
+
+# wget or curl must be installed on the image
+mkdir -p /
+cd /
+if [ -x `which wget 2&amp;gt;/dev/null` ]; then
+  wget -q -O `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh` http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh
+else if [ -x `which curl 2&amp;gt;/dev/null` ]; then
+  curl http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh &amp;gt; `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh`
+fi
+fi
+eval &amp;quot;/bin/sh -c \&amp;quot;chmod +x /deb7-64-p2p.postboot.sh; /deb7-64-p2p.postboot.sh 2 urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\&amp;quot;&amp;quot;
+</ns5:services_post_boot_script>
+        </services>
+        <interface mac_address="fe:16:3e:00:10:18" client_id="2:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="192.168.1.3"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w8:9ff49b19-bd8e-46c0-b794-8115c4e8a1fe" state="ready" start_time="2013-12-03T00:57:47.000Z" expiration_time="2013-12-10T00:55:03.000Z" creation_time="2013-12-03T00:57:47.000Z" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:3" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="3">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="xo.small">
+            <disk_image version="807c4570e46413cba1faf3a25fdfff8361489c69" name="http://pkg.mytestbed.net/geni/deb7-64-p2p.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.18" authentication="ssh-keys"/>
+            <login username="johren" port="22" hostname="152.54.14.18" authentication="ssh-keys"/>
+            <ns5:services_post_boot_script type="velocity">#!/bin/bash
+# Automatically generated boot script
+
+# wget or curl must be installed on the image
+mkdir -p /
+cd /
+if [ -x `which wget 2&amp;gt;/dev/null` ]; then
+  wget -q -O `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh` http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh
+else if [ -x `which curl 2&amp;gt;/dev/null` ]; then
+  curl http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh &amp;gt; `basename http://pkg.mytestbed.net/geni/deb7-64-p2p.postboot.sh`
+fi
+fi
+eval &amp;quot;/bin/sh -c \&amp;quot;chmod +x /deb7-64-p2p.postboot.sh; /deb7-64-p2p.postboot.sh 3 urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\&amp;quot;&amp;quot;
+</ns5:services_post_boot_script>
+        </services>
+        <interface mac_address="fe:16:3e:00:46:55" client_id="3:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="192.168.1.4"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w7:fc332425-a2fc-4431-a212-52d6b12f4d6d" state="ready" start_time="2013-12-03T00:57:47.000Z" expiration_time="2013-12-10T00:55:03.000Z" creation_time="2013-12-03T00:57:47.000Z" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </node>
+    <link vlantag="2200" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:link0" client_id="link0">
+        <interface_ref client_id="3:if0"/>
+        <interface_ref client_id="1:if0"/>
+        <interface_ref client_id="0:if0"/>
+        <interface_ref client_id="2:if0"/>
+        <ns4:geni_sliver_info state="ready" start_time="2013-12-03T00:57:47.000Z" expiration_time="2013-12-10T00:55:03.000Z" creation_time="2013-12-03T00:57:47.000Z" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </link>
+    <ns3:geni_slice_info state="ready" uuid="5fcc5c81-c686-4e02-89bb-8dd7162697d3" urn="urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut"/>
+</rspec>

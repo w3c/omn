@@ -1,0 +1,44 @@
+<rspec type="request" generated_by="Flack" generated="2013-10-22T13:00:25Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="vm1" exclusive="true">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen:if0">
+    </interface>
+  </node>
+  <node client_id="vm2" exclusive="true">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen-0:if0">
+    </interface>
+  </node>
+  <node client_id="vm3" exclusive="true">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen-1:if0">
+    </interface>
+  </node>
+  <node client_id="vm0" exclusive="true">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen-2:if0">
+    </interface>
+  </node>
+  <link client_id="link0">
+    <interface_ref client_id="emulab-xen-2:if0"/>
+    <interface_ref client_id="emulab-xen-1:if0"/>
+    <interface_ref client_id="emulab-xen-0:if0"/>
+    <interface_ref client_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen-2:if0" dest_id="emulab-xen-1:if0"/>
+    <property source_id="emulab-xen-1:if0" dest_id="emulab-xen-2:if0"/>
+    <property source_id="emulab-xen-2:if0" dest_id="emulab-xen-0:if0"/>
+    <property source_id="emulab-xen-1:if0" dest_id="emulab-xen-0:if0"/>
+    <property source_id="emulab-xen-0:if0" dest_id="emulab-xen-2:if0"/>
+    <property source_id="emulab-xen-0:if0" dest_id="emulab-xen-1:if0"/>
+    <property source_id="emulab-xen-2:if0" dest_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen-1:if0" dest_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen-0:if0" dest_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen:if0" dest_id="emulab-xen-2:if0"/>
+    <property source_id="emulab-xen:if0" dest_id="emulab-xen-1:if0"/>
+    <property source_id="emulab-xen:if0" dest_id="emulab-xen-0:if0"/>
+  </link>
+  </rspec>

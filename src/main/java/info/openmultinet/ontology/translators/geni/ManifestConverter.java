@@ -256,15 +256,18 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setComponentDetails(final Statement resource,
 			final NodeContents node) {
+
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
 			node.setClientId(resource.getResource()
 					.getProperty(Omn_lifecycle.hasID).getString());
 		}
+
 		if (resource.getResource().hasProperty(Omn_lifecycle.managedBy)) {
 			node.setComponentManagerId(resource.getResource()
-					.getProperty(Omn_lifecycle.managedBy).getObject().toString());
+					.getProperty(Omn_lifecycle.managedBy).getObject()
+					.toString());
 		}
-		
+
 		if (resource.getResource().hasProperty(Omn_lifecycle.implementedBy)) {
 			RDFNode implementedBy = resource.getResource()
 					.getProperty(Omn_lifecycle.implementedBy).getObject();
@@ -587,6 +590,7 @@ public class ManifestConverter extends AbstractConverter {
 				Resource omnService = null;
 				omnService = model.createResource();
 				// if login service
+
 				if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(
 						LoginServiceContents.class)) {
 
@@ -612,8 +616,8 @@ public class ManifestConverter extends AbstractConverter {
 					// add username info
 					String username = serviceValue.getUsername();
 					omnService.addLiteral(Omn_service.username, username);
-				}
 
+				}
 				// if execute service
 				if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(
 						ExecuteServiceContents.class)) {

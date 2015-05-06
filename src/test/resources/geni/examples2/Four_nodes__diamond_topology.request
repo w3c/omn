@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
+       type="request">
+  <node client_id="VM-1">
+    <interface client_id="VM-1:if0"/>
+    <interface client_id="VM-1:if1"/>
+  </node>
+  <node client_id="VM-2">
+    <interface client_id="VM-2:if0"/>
+    <interface client_id="VM-2:if1"/>
+  </node>
+  <node client_id="VM-3">
+    <interface client_id="VM-3:if0"/>
+    <interface client_id="VM-3:if1"/>
+  </node>
+  <node client_id="VM-4">
+    <interface client_id="VM-4:if0"/>
+    <interface client_id="VM-4:if1"/>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM-1:if0"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-1:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan1">
+    <interface_ref client_id="VM-2:if1"/>
+    <interface_ref client_id="VM-3:if1"/>
+    <property source_id="VM-2:if1" dest_id="VM-3:if1"/>
+    <property source_id="VM-3:if1" dest_id="VM-2:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan2">
+    <interface_ref client_id="VM-4:if1"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <property source_id="VM-4:if1" dest_id="VM-3:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-4:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan3">
+    <interface_ref client_id="VM-1:if1"/>
+    <interface_ref client_id="VM-4:if0"/>
+    <property source_id="VM-1:if1" dest_id="VM-4:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-1:if1"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

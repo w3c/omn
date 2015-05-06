@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec type="manifest" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1/slice_info.xsd?format=raw http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1/sliver_info.xsd?format=raw http://www.geni.net/resources/rspec/ext/postBootScript/1 http://www.geni.net/resources/rspec/ext/postBootScript/1/request.xsd" xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:ns3="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:ns5="http://www.geni.net/resources/rspec/ext/postBootScript/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:MP-1" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="MP-1">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="m1.large">
+            <disk_image version="438e1f1200f396f148d82324e52566958780262a" name="http://gemini.netlab.uky.edu/Images/vm/exogeni/centos/centos6.4-GEMINI09252013.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.30" authentication="ssh-keys"/>
+            <login username="johren2" port="22" hostname="152.54.14.30" authentication="ssh-keys"/>
+        </services>
+        <interface mac_address="fe:16:3e:00:55:7f" client_id="VM-1:if1">
+            <ip type="ipv4" netmask="255.255.255.0" address="172.16.1.1"/>
+        </interface>
+        <interface mac_address="fe:16:3e:00:6f:b6" client_id="VM-1:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="172.16.0.1"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w4:54911ecc-4232-4b6e-accd-f9a95552a329" state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:MP-2" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="MP-2">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="m1.large">
+            <disk_image version="438e1f1200f396f148d82324e52566958780262a" name="http://gemini.netlab.uky.edu/Images/vm/exogeni/centos/centos6.4-GEMINI09252013.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.28" authentication="ssh-keys"/>
+            <login username="johren2" port="22" hostname="152.54.14.28" authentication="ssh-keys"/>
+        </services>
+        <interface mac_address="fe:16:3e:00:26:ce" client_id="VM-2:if1">
+            <ip type="ipv4" netmask="255.255.255.0" address="172.16.3.2"/>
+        </interface>
+        <interface mac_address="fe:16:3e:00:32:78" client_id="VM-2:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="172.16.0.2"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w1:a5ad371b-8fa1-417c-8e67-5dfdd91ad758" state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:GN-1" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="GN-1">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="m1.large">
+            <disk_image version="438e1f1200f396f148d82324e52566958780262a" name="http://gemini.netlab.uky.edu/Images/vm/exogeni/centos/centos6.4-GEMINI09252013.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.29" authentication="ssh-keys"/>
+            <login username="johren2" port="22" hostname="152.54.14.29" authentication="ssh-keys"/>
+        </services>
+        <ns4:geni_sliver_info resource_id="rci-w3:f6d2ed91-87a7-4705-be7c-56fee08599ec" state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </node>
+    <node sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:MP-3" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:rcivmsite+node+orca-vm-cloud" client_id="MP-3">
+        <location latitude="35.939518" longitude="-79.017426" country="Unspecified"/>
+        <sliver_type name="m1.large">
+            <disk_image version="438e1f1200f396f148d82324e52566958780262a" name="http://gemini.netlab.uky.edu/Images/vm/exogeni/centos/centos6.4-GEMINI09252013.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="152.54.14.31" authentication="ssh-keys"/>
+            <login username="johren2" port="22" hostname="152.54.14.31" authentication="ssh-keys"/>
+        </services>
+        <interface mac_address="fe:16:3e:00:54:04" client_id="VM-3:if1">
+            <ip type="ipv4" netmask="255.255.255.0" address="172.16.3.1"/>
+        </interface>
+        <interface mac_address="fe:16:3e:00:10:df" client_id="VM-3:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="172.16.0.2"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="rci-w3:1b03e526-a1db-45a3-bbab-f56423f7c1ea" state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </node>
+    <link vlantag="2194" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:lan0" client_id="lan0">
+        <interface_ref client_id="VM-1:if0"/>
+        <interface_ref client_id="VM-2:if0"/>
+        <ns4:geni_sliver_info state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </link>
+    <link vlantag="2192" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:lan2" client_id="lan2">
+        <interface_ref client_id="VM-3:if1"/>
+        <interface_ref client_id="VM-2:if1"/>
+        <ns4:geni_sliver_info state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </link>
+    <link vlantag="2193" sliver_id="urn:publicid:IDN+exogeni.net:rcivmsite+sliver+b0439840-432e-4f45-8a3f-b731f2ae3889:lan1" client_id="lan1">
+        <interface_ref client_id="VM-3:if0"/>
+        <interface_ref client_id="VM-1:if1"/>
+        <ns4:geni_sliver_info state="ready" start_time="2013-12-17T17:33:38.000-05:00" expiration_time="2013-12-24T17:33:32.000-05:00" creation_time="2013-12-17T17:33:38.000-05:00" creator_urn="johren2@gpolab.bbn.com, urn:publicid:IDN+ch.geni.net+user+johren2"/>
+    </link>
+    <ns3:geni_slice_info state="ready" uuid="8f20e4fa-37cf-4138-96a9-52b4b7bbb5ad" urn="urn:publicid:IDN+ch.geni.net:GEMINITest+slice+joEGCeS"/>
+</rspec>
