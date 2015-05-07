@@ -424,7 +424,7 @@ public class AdvertisementConverter extends AbstractConverter {
 							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
 						diskName += diskImageResource
 								.getProperty(Omn_domain_pc.hasDiskimageLabel)
-								.getObject().asLiteral();
+								.getObject().asLiteral().getString();
 					}
 
 					DiskImage diskImage = of
@@ -456,7 +456,7 @@ public class AdvertisementConverter extends AbstractConverter {
 							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
 						diskName += diskImageResource
 								.getProperty(Omn_domain_pc.hasDiskimageLabel)
-								.getObject().asLiteral();
+								.getObject().asLiteral().getString();
 					}
 
 					DiskImage diskImage = of

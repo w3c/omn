@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for specifying slice info within an RSpec -->
+<!-- Hosted here: http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1/slice_info.xsd?format=raw -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	targetNamespace="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1"
+	xmlns:slice-info="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1">
+	<!-- This is meant to extend the rspec element -->
+	<xs:element name="geni_slice_info">
+		<xs:complexType>
+			<xs:attribute name="urn" use="required" type="xs:string" />
+			<xs:attribute name="uuid" use="required" type="xs:string" />
+			<xs:attribute name="state" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

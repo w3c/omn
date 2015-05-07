@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators;
 import java.net.URI;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.geni.ManifestConverter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -29,6 +31,8 @@ public abstract class AbstractConverter {
 	public final static String RSPEC_ADVERTISEMENT = "advertisement";
 	public static final String TOSCA = "tosca";
 	protected static final String NAMESPACE = "http://open-multinet.info/example#";
+	private static final Logger LOG = Logger.getLogger(AbstractConverter.class
+			.getName());
 
 	protected static void validateModel(final List<Resource> groups)
 			throws InvalidModelException {
@@ -80,6 +84,9 @@ public abstract class AbstractConverter {
 		}
 
 		if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
+
+			// AbstractConverter.LOG.info(uri.getScheme() + ": " + uri.toString());
+
 			String urn = "";
 			String host = urlToGeniUrn(uri.getHost());
 			String path = urlToGeniUrn(uri.getPath());
@@ -156,7 +163,7 @@ public abstract class AbstractConverter {
 
 			if (parts.length > 1) {
 				if (parts.length > 3) {
-					if(isUrl(geniUrntoUrl(parts[3]))){
+					if (isUrl(geniUrntoUrl(parts[3]))) {
 						String http = geniUrntoUrl(parts[3]);
 						url += http;
 					} else {

@@ -7,6 +7,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceC
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.IpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
@@ -14,7 +15,9 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
+import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -30,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -48,6 +52,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -108,16 +113,127 @@ public class ManifestConverter extends AbstractConverter {
 			final NodeContents node = new NodeContents();
 
 			setComponentDetails(resource, node);
-			// ManifestConverter.setComponentManagerId(resource, node);
+			setLocation(resource, node);
+			// setComponentManagerId(resource, node);
 			setMonitoringService(resource, node);
 			// setState
 			// setVMID
 			setSliverType(resource, node, hostname);
 			setServices(resource, node, hostname);
+			setInterfaces(resource, node);
 
 			manifest.getAnyOrNodeOrLink().add(
 					new ObjectFactory().createNode(node));
 		}
+	}
+
+	private static void setInterfaces(Statement resource, NodeContents node) {
+
+		List<Statement> interfaces = resource.getResource()
+				.listProperties(Omn_resource.hasInterface).toList();
+
+		for (final Statement interface1 : interfaces) {
+			InterfaceContents interfaceContents = null;
+			Resource interfaceResource = interface1.getResource();
+
+			if (interfaceResource.hasProperty(Omn_resource.macAddress)) {
+				interfaceContents = new ObjectFactory()
+						.createInterfaceContents();
+				interfaceContents.setMacAddress(interfaceResource
+						.getProperty(Omn_resource.macAddress).getObject()
+						.asLiteral().toString());
+			}
+			if (interfaceResource.hasProperty(Omn_resource.clientId)) {
+				if (interfaceContents == null) {
+					interfaceContents = new InterfaceContents();
+				}
+				interfaceContents.setClientId(interfaceResource
+						.getProperty(Omn_resource.clientId).getObject()
+						.asLiteral().toString());
+			}
+
+			setIpAddress(interfaceResource, interfaceContents);
+
+			if (interfaceContents != null) {
+				JAXBElement<InterfaceContents> interfaceJaxb = new ObjectFactory()
+						.createInterface(interfaceContents);
+				node.getAnyOrRelationOrLocation().add(interfaceJaxb);
+			}
+		}
+
+	}
+
+	private static void setIpAddress(Resource interfaceResource,
+			InterfaceContents interfaceContents) {
+
+		IpContents ipContents = null;
+		if (interfaceResource.hasProperty(Omn_resource.hasIPAddress)) {
+			Statement ipAddress = interfaceResource
+					.getProperty(Omn_resource.hasIPAddress);
+			if (ipAddress.getResource().hasProperty(Omn_resource.type)) {
+				ipContents = new ObjectFactory().createIpContents();
+				ipContents.setType(ipAddress.getResource()
+						.getProperty(Omn_resource.type).getObject().asLiteral()
+						.getString());
+			}
+
+			if (ipAddress.getResource().hasProperty(Omn_resource.netmask)) {
+				if (ipContents == null) {
+					ipContents = new ObjectFactory().createIpContents();
+				}
+				ipContents.setNetmask(ipAddress.getResource()
+						.getProperty(Omn_resource.netmask).getObject()
+						.asLiteral().getString());
+			}
+
+			if (ipAddress.getResource().hasProperty(Omn_resource.address)) {
+				if (ipContents == null) {
+					ipContents = new ObjectFactory().createIpContents();
+				}
+				ipContents.setAddress(ipAddress.getResource()
+						.getProperty(Omn_resource.address).getObject()
+						.asLiteral().getString());
+			}
+		}
+
+		if (ipContents != null) {
+			JAXBElement<IpContents> ipJaxb = new ObjectFactory()
+					.createIp(ipContents);
+			interfaceContents.getAnyOrIpOrHost().add(ipJaxb);
+		}
+	}
+
+	private static void setLocation(Statement resource, NodeContents node) {
+		LocationContents locationContents = null;
+
+		if (resource.getResource().hasProperty(Geo.lat)) {
+			locationContents = new ObjectFactory().createLocationContents();
+			locationContents.setLatitude(resource.getResource()
+					.getProperty(Geo.lat).getObject().toString());
+		}
+
+		if (resource.getResource().hasProperty(Geo.long_)) {
+			if (locationContents == null) {
+				locationContents = new ObjectFactory().createLocationContents();
+			}
+			locationContents.setLongitude(resource.getResource()
+					.getProperty(Geo.long_).getObject().toString());
+		}
+
+		if (resource.getResource().hasProperty(Omn_resource.country)) {
+			if (locationContents == null) {
+				locationContents = new ObjectFactory().createLocationContents();
+			}
+			locationContents.setCountry(resource.getResource()
+					.getProperty(Omn_resource.country).getObject().toString());
+		}
+
+		if (locationContents != null) {
+			JAXBElement<LocationContents> location = new ObjectFactory()
+					.createLocation(locationContents);
+			node.getAnyOrRelationOrLocation().add(location);
+		}
+
 	}
 
 	private static void setMonitoringService(Statement resource,
@@ -170,12 +286,50 @@ public class ManifestConverter extends AbstractConverter {
 			setLoginService(serviceResource, serviceContents);
 			setExecutiveService(serviceResource, serviceContents);
 			setInstallService(serviceResource, serviceContents);
+			setPostBootScriptService(serviceResource, serviceContents);
 
 		}
 		if (serviceContents != null) {
 			JAXBElement<ServiceContents> services = new ObjectFactory()
 					.createServices(serviceContents);
 			node.getAnyOrRelationOrLocation().add(services);
+		}
+
+	}
+
+	private static void setPostBootScriptService(Resource serviceResource,
+			ServiceContents serviceContents) {
+
+		if (serviceResource.hasProperty(RDF.type, Omn_service.PostBootScript)) {
+
+			// get type
+			String type = "";
+			if (serviceResource.hasProperty(Omn_service.postBootScriptType)) {
+				type += serviceResource
+						.getProperty(Omn_service.postBootScriptType)
+						.getObject().asLiteral().getString();
+			}
+
+			// get text
+			String text = "";
+			if (serviceResource.hasProperty(Omn_service.postBootScriptText)) {
+				text += serviceResource
+						.getProperty(Omn_service.postBootScriptText)
+						.getObject().asLiteral().getString();
+			}
+
+			// create execute
+			ServicesPostBootScript servicesPostBootScript = new ObjectFactory()
+					.createServicesPostBootScript();
+
+			servicesPostBootScript.setType(type);
+
+			if (text != "") {
+				servicesPostBootScript.setContent(text);
+			}
+
+			serviceContents.getAnyOrLoginOrInstall()
+					.add(servicesPostBootScript);
 		}
 
 	}
@@ -227,8 +381,9 @@ public class ManifestConverter extends AbstractConverter {
 			}
 		}
 
-		node.setSliverId(generateSliverID(hostname, resource.getResource()
-				.getURI()));
+		// node.setSliverId(generateSliverID(hostname,
+		node.setSliverId(AbstractConverter.generateUrnFromUrl(resource
+				.getResource().getURI(), "sliver"));
 	}
 
 	private static void setDiskImage(Resource resourceResource,
@@ -243,10 +398,20 @@ public class ManifestConverter extends AbstractConverter {
 						.getObject().asLiteral().getString();
 			}
 
+			String diskVersion = "";
+			if (resourceResource.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
+				diskVersion += resourceResource
+						.getProperty(Omn_domain_pc.hasDiskimageVersion)
+						.getObject().asLiteral().getString();
+			}
+
 			DiskImageContents diskImageContents = new ObjectFactory()
 					.createDiskImageContents();
 			if (diskName != "") {
 				diskImageContents.setName(diskName);
+			}
+			if (diskVersion != "") {
+				diskImageContents.setVersion(diskVersion);
 			}
 			JAXBElement<DiskImageContents> diskImage = new ObjectFactory()
 					.createDiskImage(diskImageContents);
@@ -256,6 +421,12 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setComponentDetails(final Statement resource,
 			final NodeContents node) {
+
+		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
+			final boolean isExclusive = resource.getResource()
+					.getProperty(Omn_resource.isExclusive).getBoolean();
+			node.setExclusive(isExclusive);
+		}
 
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasID)) {
 			node.setClientId(resource.getResource()
@@ -458,7 +629,7 @@ public class ManifestConverter extends AbstractConverter {
 
 		for (Object o : manifest.getAnyOrNodeOrLink()) {
 			if (o instanceof JAXBElement) {
-				setDetails(model, topology, o);
+				extractDetails(model, topology, o);
 			} else {
 				ManifestConverter.LOG.log(Level.INFO, "Found unknown extsion: "
 						+ o);
@@ -466,29 +637,50 @@ public class ManifestConverter extends AbstractConverter {
 		}
 	}
 
-	public static void setDetails(final Model model, Resource topology, Object o) {
+	public static void extractDetails(final Model model, Resource topology,
+			Object o) {
 		JAXBElement<?> element = (JAXBElement<?>) o;
 
 		if (element.getDeclaredType().equals(NodeContents.class)) {
 			NodeContents node = (NodeContents) element.getValue();
 
-			final Resource omnResource = model
-					.createResource(parseSliverID(node.getSliverId()));
+			final Resource omnResource = model.createResource(AbstractConverter
+					.generateUrlFromUrn(node.getSliverId()));
+			// .createResource(parseSliverID(node.getSliverId()));
 
 			omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
 			omnResource.addProperty(RDFS.label, node.getClientId());
+
+			if (null != node.isExclusive()) {
+				omnResource.addProperty(Omn_resource.isExclusive,
+						model.createTypedLiteral(node.isExclusive()));
+			}
+
+			if (node.getComponentManagerId() != null) {
+				RDFNode manager = ResourceFactory.createResource(node
+						.getComponentManagerId());
+				omnResource.addProperty(Omn_lifecycle.managedBy, manager);
+			}
 
 			for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
 				if (nodeDetailObject instanceof JAXBElement) {
 					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
 
+					extractLocation(nodeDetailElement, omnResource, model);
 					extractSliverType(nodeDetailElement, omnResource, model);
 					extractServices(nodeDetailElement, omnResource, model);
 					extractInterfaces(nodeDetailElement, omnResource, model);
 
+				} else if (o
+						.getClass()
+						.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring.class)) {
+					// TODO
+					ManifestConverter.LOG.log(Level.INFO,
+							"TODO: monitoring extension");
 				} else {
 					ManifestConverter.LOG.log(Level.INFO,
 							"Found unknown extsion: " + nodeDetailObject);
+
 				}
 			}
 
@@ -499,6 +691,48 @@ public class ManifestConverter extends AbstractConverter {
 					componentIDResource);
 
 			topology.addProperty(Omn.hasResource, omnResource);
+		}
+	}
+
+	private static void extractPostBootScript(Object nodeDetailObject,
+			Resource omnResource, Model model) {
+		// TODO Auto-generated method stub
+		ServicesPostBootScript postBootScript = (ServicesPostBootScript) nodeDetailObject;
+
+		if (postBootScript.getType() != null && postBootScript.getType() != "") {
+			omnResource.addProperty(Omn_service.postBootScriptType,
+					postBootScript.getType());
+		}
+
+		if (postBootScript.getContent() != null
+				&& postBootScript.getContent() != "") {
+			omnResource.addProperty(Omn_service.postBootScriptText,
+					postBootScript.getContent());
+		}
+	}
+
+	private static void extractLocation(JAXBElement<?> nodeDetailElement,
+			Resource omnResource, Model model) {
+		// check if type is location
+		if (nodeDetailElement.getDeclaredType().equals(LocationContents.class)) {
+
+			// get value of the element
+			LocationContents locationContents = (LocationContents) nodeDetailElement
+					.getValue();
+			if (locationContents.getLatitude() != null
+					&& !locationContents.getLatitude().equals("")) {
+				omnResource
+						.addProperty(Geo.lat, locationContents.getLatitude());
+			}
+			if (locationContents.getLatitude() != null
+					&& !locationContents.getLatitude().equals("")) {
+				omnResource.addProperty(Geo.long_,
+						locationContents.getLongitude());
+			}
+
+			// country is required
+			String country = locationContents.getCountry();
+			omnResource.addProperty(Omn_resource.country, country);
 		}
 	}
 
@@ -535,6 +769,13 @@ public class ManifestConverter extends AbstractConverter {
 					// add name info
 					String name = diskImageContents.getName();
 					diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
+
+					// add version info
+					String version = diskImageContents.getVersion();
+					if (version != null && !version.equals("")) {
+						diskImage.addLiteral(Omn_domain_pc.hasDiskimageVersion,
+								version);
+					}
 					sliver.addProperty(Omn.hasResource, diskImage);
 				}
 			}
@@ -552,17 +793,23 @@ public class ManifestConverter extends AbstractConverter {
 			InterfaceContents interfaceContents = (InterfaceContents) nodeDetailElement
 					.getValue();
 			List<Object> interfaces = interfaceContents.getAnyOrIpOrHost();
-			Resource omnInteface = null;
-			omnInteface = model.createResource();
+			Resource omnInteface = model.createResource();
 
+			if (interfaceContents.getMacAddress() != null) {
+				omnInteface.addProperty(Omn_resource.macAddress,
+						interfaceContents.getMacAddress());
+			}
+			if (interfaceContents.getClientId() != null) {
+				omnInteface.addProperty(Omn_resource.clientId,
+						interfaceContents.getClientId());
+			}
 			// iterate through the interfaces and add to model
 			for (int i = 0; i < interfaces.size(); i++) {
+
 				Object interfaceObject = interfaces.get(i);
 
-				tryExtractIPAddress(interfaceObject, omnInteface);
-
-				// omnInteface.addProperty(Omn_resource.hasIPAddress,
-				// Omn_resource.IPAddress);
+				Resource omnIpAddress = model.createResource();
+				tryExtractIPAddress(interfaceObject, omnInteface, omnIpAddress);
 
 				// add interface to node
 				if (omnInteface != null) {
@@ -590,70 +837,81 @@ public class ManifestConverter extends AbstractConverter {
 				Resource omnService = null;
 				omnService = model.createResource();
 				// if login service
+				if (serviceObject instanceof JAXBElement) {
+					final JAXBElement<?> serviceObjectJaxb = (JAXBElement<?>) serviceObject;
+					final Class<?> serviceType = serviceObjectJaxb
+							.getDeclaredType();
 
-				if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(
-						LoginServiceContents.class)) {
+					if (serviceType.equals(LoginServiceContents.class)) {
 
-					omnService.addProperty(RDF.type, Omn_service.LoginService);
-					omnService.addProperty(RDFS.label, "LoginService");
-					LoginServiceContents serviceValue = (LoginServiceContents) ((JAXBElement<?>) serviceObject)
-							.getValue();
+						omnService.addProperty(RDF.type,
+								Omn_service.LoginService);
+						omnService.addProperty(RDFS.label, "LoginService");
+						LoginServiceContents serviceValue = (LoginServiceContents) ((JAXBElement<?>) serviceObject)
+								.getValue();
 
-					// add authentication info
-					String authentication = serviceValue.getAuthentication();
-					omnService.addLiteral(Omn_service.authentication,
-							authentication);
+						// add authentication info
+						String authentication = serviceValue
+								.getAuthentication();
+						omnService.addLiteral(Omn_service.authentication,
+								authentication);
 
-					// add hostname info
-					String hostname = serviceValue.getHostname();
-					omnService.addLiteral(Omn_service.hostname, hostname);
+						// add hostname info
+						String hostname = serviceValue.getHostname();
+						omnService.addLiteral(Omn_service.hostname, hostname);
 
-					// add port info
-					String portString = serviceValue.getPort();
-					int port = Integer.parseInt(portString);
-					omnService.addLiteral(Omn_service.port, port);
+						// add port info
+						String portString = serviceValue.getPort();
+						int port = Integer.parseInt(portString);
+						omnService.addLiteral(Omn_service.port, port);
 
-					// add username info
-					String username = serviceValue.getUsername();
-					omnService.addLiteral(Omn_service.username, username);
+						// add username info
+						String username = serviceValue.getUsername();
+						omnService.addLiteral(Omn_service.username, username);
 
-				}
-				// if execute service
-				if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(
-						ExecuteServiceContents.class)) {
+					}
+					// if execute service
+					if (serviceType.equals(ExecuteServiceContents.class)) {
 
+						omnService.addProperty(RDF.type,
+								Omn_service.ExecuteService);
+						ExecuteServiceContents serviceValue = (ExecuteServiceContents) ((JAXBElement<?>) serviceObject)
+								.getValue();
+
+						// add command info
+						String command = serviceValue.getCommand();
+						omnService.addLiteral(Omn_service.command, command);
+
+						// add shell info
+						String shell = serviceValue.getShell();
+						omnService.addLiteral(Omn_service.shell, shell);
+					}
+
+					// if install service
+					if (serviceType.equals(InstallServiceContents.class)) {
+
+						omnService.addProperty(RDF.type,
+								Omn_service.InstallService);
+						InstallServiceContents serviceValue = (InstallServiceContents) ((JAXBElement<?>) serviceObject)
+								.getValue();
+
+						// add install path info
+						String installPath = serviceValue.getInstallPath();
+						omnService.addLiteral(Omn_service.installPath,
+								installPath);
+
+						// add url path info
+						String url = serviceValue.getUrl();
+						URI urlURI = URI.create(url);
+						omnService.addLiteral(Omn_service.url, urlURI);
+
+					}
+				} else if (serviceObject
+						.getClass()
+						.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript.class)) {
 					omnService
-							.addProperty(RDF.type, Omn_service.ExecuteService);
-					ExecuteServiceContents serviceValue = (ExecuteServiceContents) ((JAXBElement<?>) serviceObject)
-							.getValue();
-
-					// add command info
-					String command = serviceValue.getCommand();
-					omnService.addLiteral(Omn_service.command, command);
-
-					// add shell info
-					String shell = serviceValue.getShell();
-					omnService.addLiteral(Omn_service.shell, shell);
-				}
-
-				// if install service
-				if (((JAXBElement<?>) serviceObject).getDeclaredType().equals(
-						InstallServiceContents.class)) {
-
-					omnService
-							.addProperty(RDF.type, Omn_service.InstallService);
-					InstallServiceContents serviceValue = (InstallServiceContents) ((JAXBElement<?>) serviceObject)
-							.getValue();
-
-					// add install path info
-					String installPath = serviceValue.getInstallPath();
-					omnService.addLiteral(Omn_service.installPath, installPath);
-
-					// add url path info
-					String url = serviceValue.getUrl();
-					URI urlURI = URI.create(url);
-					omnService.addLiteral(Omn_service.url, urlURI);
-
+							.addProperty(RDF.type, Omn_service.PostBootScript);
+					extractPostBootScript(serviceObject, omnService, model);
 				}
 
 				// add service to node
@@ -665,14 +923,21 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void tryExtractIPAddress(Object rspecNodeObject,
-			Resource omnNode) {
+			Resource omnNode, Resource omnIpAddress) {
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<IpContents> availablityJaxb = (JAXBElement<IpContents>) rspecNodeObject;
 			final IpContents availability = availablityJaxb.getValue();
 
-			omnNode.addLiteral(Omn_resource.hasIPAddress,
+			omnIpAddress.addLiteral(Omn_resource.address,
 					availability.getAddress());
+			if (availability.getNetmask() != null
+					&& !availability.getNetmask().equals("")) {
+				omnIpAddress.addLiteral(Omn_resource.netmask,
+						availability.getNetmask());
+			}
+			omnIpAddress.addLiteral(Omn_resource.type, availability.getType());
+			omnNode.addProperty(Omn_resource.hasIPAddress, omnIpAddress);
 
 		} catch (final ClassCastException e) {
 			ManifestConverter.LOG.finer(e.getMessage());

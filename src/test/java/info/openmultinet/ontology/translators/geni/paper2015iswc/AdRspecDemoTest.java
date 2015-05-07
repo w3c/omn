@@ -87,9 +87,9 @@ public class AdRspecDemoTest {
 		Assert.assertTrue("sliver 1", advertisement.contains("sliver_type name=\"VM-large\""));
 		Assert.assertTrue("sliver 2", advertisement.contains("sliver_type name=\"VM-medium\""));
 		Assert.assertTrue("sliver 3", advertisement.contains("sliver_type name=\"VM-small\""));
-		Assert.assertTrue("disk_image 1", advertisement.contains("disk_image name=\"OpenMTC-image-1"));
-		Assert.assertTrue("disk_image 2", advertisement.contains("disk_image name=\"cirros-linux"));
-		Assert.assertTrue("disk_image 3", advertisement.contains("disk_image name=\"ubuntu-14.04"));
+		Assert.assertTrue("disk_image 1", advertisement.contains("disk_image name=\"OpenMTC-image-1\""));
+		Assert.assertTrue("disk_image 2", advertisement.contains("disk_image name=\"cirros-linux\""));
+		Assert.assertTrue("disk_image 3", advertisement.contains("disk_image name=\"ubuntu-14.04\""));
 	}
 
 }

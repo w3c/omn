@@ -197,6 +197,39 @@
 
 
 
+
+###  http://open-multinet.info/ontology/omn-service#postBootScriptType
+
+:postBootScriptType rdf:type owl:DatatypeProperty ;
+          
+          rdfs:seeAlso "GENI RSpec v3 extension: postBootScript"@en ;
+          
+          rdfs:label "post boot script type"@en ;
+
+          rdfs:comment "post boot script type"@en ;
+          
+          rdfs:domain :PostBootScript ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-service#postBootScriptText
+
+:postBootScriptText rdf:type owl:DatatypeProperty ;
+          
+          rdfs:seeAlso "GENI RSpec v3 extension: postBootScript"@en ;
+          
+          rdfs:label "post boot script text"@en ;
+
+          rdfs:comment "post boot script text"@en ;
+          
+          rdfs:domain :PostBootScript ;
+          
+          rdfs:range xsd:string .
+
+
+
 #################################################################
 #
 #    Object Properties
@@ -231,6 +264,22 @@
 ###  http://open-multinet.info/ontology/omn#Service
 
 omn:Service rdf:type owl:Class .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-service#PostBootScript
+
+:PostBootScript rdf:type owl:Class ;
+
+                rdfs:comment "GENI Manifest RSpec v3 extension: postBootScript"@en ;
+
+                rdfs:seeAlso "http://www.geni.net/resources/rspec/ext/postBootScript/1"@en ;
+                
+                rdfs:label "Post Boot Script"@en;
+                
+                rdfs:subClassOf omn:Service .
+
 
 
 

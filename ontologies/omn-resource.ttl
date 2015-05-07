@@ -255,6 +255,55 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-resource#country
+
+:country rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "country"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: LocationContents:country"@en ;
+                
+                rdfs:comment "country where the resource is located"@en ;
+                
+                rdfs:domain omn:Resource ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#macAddress
+
+:macAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "MAC address"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:mac_address"@en ;
+                
+                rdfs:comment "MAC address"@en ;
+                
+                rdfs:domain :Interface ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#clientId
+
+:clientId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "client ID"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:clientId"@en ;
+                
+                rdfs:comment "client ID"@en ;
+                
+                rdfs:domain :Interface ;
+                
+                rdfs:range xsd:string .
+
+
+
 #################################################################
 #
 #    Classes
@@ -279,6 +328,18 @@ omn:Resource rdf:type owl:Class .
            rdfs:comment "todo: omn-resource:NetworkObject or omn:Component??"@en ;
            
            rdfs:seeAlso nml:Port .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#IPAddress
+
+:IPAddress rdf:type owl:Class ;
+      
+      rdfs:comment "IP Address"@en ;
+
+      rdfs:label "IP Address"@en .
+
 
 
 
@@ -323,13 +384,7 @@ omn:Resource rdf:type owl:Class .
       rdfs:seeAlso nml:Node .
 
 
-###  http://open-multinet.info/ontology/omn-resource#IPAddress
 
-:IPAddress rdf:type owl:Class ;
-      
-      rdfs:comment "IP Address"@en ;
-
-      rdfs:label "IP Address"@en .
 
 
 
