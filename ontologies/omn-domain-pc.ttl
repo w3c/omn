@@ -341,6 +341,12 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
+###  http://open-multinet.info/ontology/omn-resource#Link
+
+omn-resource:Link rdf:type owl:Class .
+
+
+
 
 ###  http://open-multinet.info/ontology/omn-resource#Node
 
