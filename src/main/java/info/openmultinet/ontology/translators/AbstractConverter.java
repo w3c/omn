@@ -4,6 +4,7 @@ import java.net.URI;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,13 +14,20 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public abstract class AbstractConverter {
@@ -85,7 +93,8 @@ public abstract class AbstractConverter {
 
 		if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
 
-			// AbstractConverter.LOG.info(uri.getScheme() + ": " + uri.toString());
+			// AbstractConverter.LOG.info(uri.getScheme() + ": " +
+			// uri.toString());
 
 			String urn = "";
 			String host = urlToGeniUrn(uri.getHost());
@@ -279,4 +288,29 @@ public abstract class AbstractConverter {
 		return false;
 
 	}
+
+	public static XSDDateTime xmlToXsdTime(XMLGregorianCalendar time) {
+
+		Calendar timeCalendar = time.toGregorianCalendar();
+		XSDDateTime timeXSDDateTime = new XSDDateTime(timeCalendar);
+		return timeXSDDateTime;
+	}
+	
+	public static XMLGregorianCalendar xsdToXmlTime(XSDDateTime time) {
+
+		Calendar timeCalendar = time.asCalendar();
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTimeInMillis(timeCalendar.getTimeInMillis());
+		TimeZone timezone = timeCalendar.getTimeZone();
+		gc.setTimeZone(timezone);
+		XMLGregorianCalendar xc = null;
+		try {
+			xc = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+		}
+		
+		return xc;
+	}
+
 }

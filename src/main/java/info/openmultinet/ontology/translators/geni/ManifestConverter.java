@@ -4,9 +4,13 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliverInfo;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.IpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
@@ -16,7 +20,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -33,7 +36,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -48,6 +50,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.stream.StreamSource;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -101,6 +105,10 @@ public class ManifestConverter extends AbstractConverter {
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
+		if (group.hasProperty(RDF.type, Omn_lifecycle.Manifest)) {
+			setGeniSliceInfo(group, manifest);
+		}
+
 		ManifestConverter.convertStatementsToNodesAndLinks(manifest, resources,
 				hostname);
 	}
@@ -110,21 +118,251 @@ public class ManifestConverter extends AbstractConverter {
 			String hostname) {
 
 		for (final Statement resource : resources) {
-			final NodeContents node = new NodeContents();
+			if (!resource.getResource()
+					.hasProperty(RDF.type, Omn_resource.Link)) {
+				final NodeContents node = new NodeContents();
 
-			setComponentDetails(resource, node);
-			setLocation(resource, node);
-			// setComponentManagerId(resource, node);
-			setMonitoringService(resource, node);
-			// setState
-			// setVMID
-			setSliverType(resource, node, hostname);
-			setServices(resource, node, hostname);
-			setInterfaces(resource, node);
+				setComponentDetails(resource, node);
+				setLocation(resource, node);
+				// setComponentManagerId(resource, node);
+				setMonitoringService(resource, node);
+				setGeniSliverInfo(resource, node);
+				// setState
+				// setVMID
+				setSliverType(resource, node, hostname);
+				setServices(resource, node, hostname);
+				setInterfaces(resource, node);
 
-			manifest.getAnyOrNodeOrLink().add(
-					new ObjectFactory().createNode(node));
+				manifest.getAnyOrNodeOrLink().add(
+						new ObjectFactory().createNode(node));
+			} else {
+				final LinkContents link = new LinkContents();
+				setGeniSliverInfo(resource, link);
+				setLinkDetails(resource, link, hostname);
+				setInterfaceRefs(resource, link, hostname);
+
+				manifest.getAnyOrNodeOrLink().add(
+						new ObjectFactory().createLink(link));
+			}
 		}
+	}
+
+	private static void setGeniSliceInfo(Resource group, RSpecContents manifest) {
+
+		GeniSliceInfo geniSliceInfo = null;
+		Resource omnResource = group;
+
+		if (omnResource.hasProperty(Omn_lifecycle.hasState)) {
+			if (geniSliceInfo == null) {
+				geniSliceInfo = new ObjectFactory().createGeniSliceInfo();
+			}
+			Resource state = omnResource.getProperty(Omn_lifecycle.hasState)
+					.getObject().asResource();
+
+			if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
+				geniSliceInfo.setState("ready_busy");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
+				geniSliceInfo.setState("allocated");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
+				geniSliceInfo.setState("failed");
+			}
+			if (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI())) {
+				geniSliceInfo.setState("instantiating");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
+				geniSliceInfo.setState("pending_allocation");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
+				geniSliceInfo.setState("configuring");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
+				geniSliceInfo.setState("provisioned");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
+				geniSliceInfo.setState("ready");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
+				geniSliceInfo.setState("stopping");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
+				geniSliceInfo.setState("unallocated");
+			}
+
+		}
+
+		if (omnResource.hasProperty(Omn_domain_pc.hasUUID)) {
+			geniSliceInfo.setUuid(omnResource
+					.getProperty(Omn_domain_pc.hasUUID).getObject().asLiteral()
+					.getString());
+		}
+
+		if (omnResource.hasProperty(Omn_service.hasURI)) {
+			geniSliceInfo.setUrn(omnResource.getProperty(Omn_service.hasURI)
+					.getObject().asLiteral().getString());
+		}
+
+		if (geniSliceInfo != null) {
+			manifest.getAnyOrNodeOrLink().add(geniSliceInfo);
+		}
+
+	}
+
+	private static void setInterfaceRefs(Statement resource, LinkContents link,
+			String hostname) {
+
+		List<Statement> interfaces = resource.getResource()
+				.listProperties(Omn_resource.hasInterface).toList();
+
+		for (Statement interface1 : interfaces) {
+
+			InterfaceRefContents newInterface = new ObjectFactory()
+					.createInterfaceRefContents();
+			String clientId = interface1.getObject().asLiteral().getString();
+
+			newInterface.setClientId(clientId);
+			link.getAnyOrPropertyOrLinkType().add(
+					new ObjectFactory()
+							.createLinkContentsInterfaceRef(newInterface));
+		}
+	}
+
+	private static void setLinkDetails(Statement resource, LinkContents link,
+			String hostname) {
+		link.setSliverId(AbstractConverter.generateUrnFromUrl(resource
+				.getResource().getURI(), "sliver"));
+		if (resource.getResource().hasProperty(Omn_resource.clientId)) {
+			String clientId = resource.getResource()
+					.getProperty(Omn_resource.clientId).getObject().asLiteral()
+					.getString();
+			link.setClientId(clientId);
+		}
+		if (resource.getResource().hasProperty(Omn_domain_pc.vlanTag)) {
+			String vlanTag = resource.getResource()
+					.getProperty(Omn_domain_pc.vlanTag).getObject().asLiteral()
+					.getString();
+			link.setVlantag(vlanTag);
+		}
+	}
+
+	private static void setGeniSliverInfo(Statement resource, Object node) {
+
+		GeniSliverInfo geniSliverInfo = null;
+		Resource omnResource = resource.getResource();
+		if (omnResource.hasProperty(Omn_lifecycle.creator)) {
+			geniSliverInfo = new ObjectFactory().createGeniSliverInfo();
+			geniSliverInfo.setCreatorUrn(omnResource
+					.getProperty(Omn_lifecycle.creator).getObject().asLiteral()
+					.getString());
+		}
+
+		if (resource.getResource().hasProperty(Omn_lifecycle.creationTime)) {
+			if (geniSliverInfo == null) {
+				geniSliverInfo = new ObjectFactory().createGeniSliverInfo();
+			}
+
+			XSDDateTime creationTime = (XSDDateTime) omnResource
+					.getProperty(Omn_lifecycle.creationTime).getObject()
+					.asLiteral().getValue();
+			XMLGregorianCalendar xgc = xsdToXmlTime(creationTime);
+
+			if (xgc != null) {
+				geniSliverInfo.setCreationTime(xgc);
+			}
+		}
+
+		if (omnResource.hasProperty(Omn_lifecycle.startTime)) {
+			if (geniSliverInfo == null) {
+				geniSliverInfo = new ObjectFactory().createGeniSliverInfo();
+			}
+
+			XSDDateTime startTime = (XSDDateTime) omnResource
+					.getProperty(Omn_lifecycle.startTime).getObject()
+					.asLiteral().getValue();
+			XMLGregorianCalendar xgc = xsdToXmlTime(startTime);
+
+			if (xgc != null) {
+				geniSliverInfo.setStartTime(xgc);
+			}
+		}
+
+		if (omnResource.hasProperty(Omn_lifecycle.expirationTime)) {
+			if (geniSliverInfo == null) {
+				geniSliverInfo = new ObjectFactory().createGeniSliverInfo();
+			}
+
+			XSDDateTime expTime = (XSDDateTime) omnResource
+					.getProperty(Omn_lifecycle.expirationTime).getObject()
+					.asLiteral().getValue();
+			XMLGregorianCalendar xgc = xsdToXmlTime(expTime);
+
+			if (xgc != null) {
+				geniSliverInfo.setExpirationTime(xgc);
+				;
+			}
+		}
+
+		if (omnResource.hasProperty(Omn_lifecycle.resourceId)) {
+			if (geniSliverInfo == null) {
+				geniSliverInfo = new ObjectFactory().createGeniSliverInfo();
+			}
+			geniSliverInfo.setResourceId(omnResource
+					.getProperty(Omn_lifecycle.resourceId).getObject()
+					.asLiteral().getString());
+		}
+
+		if (omnResource.hasProperty(Omn_lifecycle.hasState)) {
+			if (geniSliverInfo == null) {
+				geniSliverInfo = new ObjectFactory().createGeniSliverInfo();
+			}
+			Resource state = omnResource.getProperty(Omn_lifecycle.hasState)
+					.getObject().asResource();
+
+			if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
+				geniSliverInfo.setState("ready_busy");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
+				geniSliverInfo.setState("allocated");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
+				geniSliverInfo.setState("failed");
+			}
+			if (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI())) {
+				geniSliverInfo.setState("instantiating");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
+				geniSliverInfo.setState("pending_allocation");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
+				geniSliverInfo.setState("configuring");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
+				geniSliverInfo.setState("provisioned");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
+				geniSliverInfo.setState("ready");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
+				geniSliverInfo.setState("stopping");
+			}
+			if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
+				geniSliverInfo.setState("unallocated");
+			}
+
+		}
+
+		if (geniSliverInfo != null) {
+			if (node.getClass().equals(NodeContents.class)) {
+				((NodeContents) node).getAnyOrRelationOrLocation().add(
+						geniSliverInfo);
+			}
+			if (node.getClass().equals(LinkContents.class)) {
+				((LinkContents) node).getAnyOrPropertyOrLinkType().add(
+						geniSliverInfo);
+			}
+		}
+
 	}
 
 	private static void setInterfaces(Statement resource, NodeContents node) {
@@ -133,6 +371,7 @@ public class ManifestConverter extends AbstractConverter {
 				.listProperties(Omn_resource.hasInterface).toList();
 
 		for (final Statement interface1 : interfaces) {
+
 			InterfaceContents interfaceContents = null;
 			Resource interfaceResource = interface1.getResource();
 
@@ -160,7 +399,6 @@ public class ManifestConverter extends AbstractConverter {
 				node.getAnyOrRelationOrLocation().add(interfaceJaxb);
 			}
 		}
-
 	}
 
 	private static void setIpAddress(Resource interfaceResource,
@@ -287,7 +525,6 @@ public class ManifestConverter extends AbstractConverter {
 			setExecutiveService(serviceResource, serviceContents);
 			setInstallService(serviceResource, serviceContents);
 			setPostBootScriptService(serviceResource, serviceContents);
-
 		}
 		if (serviceContents != null) {
 			JAXBElement<ServiceContents> services = new ObjectFactory()
@@ -630,10 +867,64 @@ public class ManifestConverter extends AbstractConverter {
 		for (Object o : manifest.getAnyOrNodeOrLink()) {
 			if (o instanceof JAXBElement) {
 				extractDetails(model, topology, o);
+			} else if (o.getClass().equals(GeniSliceInfo.class)) {
+				extractGeniSliceInfo(topology, o);
 			} else {
-				ManifestConverter.LOG.log(Level.INFO, "Found unknown extsion: "
-						+ o);
+				ManifestConverter.LOG.log(Level.INFO,
+						"Found unknown extension: " + o);
 			}
+		}
+	}
+
+	private static void extractGeniSliceInfo(Resource topology, Object o) {
+
+		// get value of the element
+		GeniSliceInfo geniSliceInfo = (GeniSliceInfo) o;
+		OntClass stateClass = null;
+		String stateString = geniSliceInfo.getState();
+
+		switch (stateString) {
+		case "ready_busy":
+			stateClass = Omn_lifecycle.Active;
+			break;
+		case "allocated":
+			stateClass = Omn_lifecycle.Allocated;
+			break;
+		case "failed":
+			stateClass = Omn_lifecycle.Error;
+			break;
+		case "instantiating":
+			stateClass = Omn_lifecycle.NotYetInitialized;
+			break;
+		case "pending_allocation":
+			stateClass = Omn_lifecycle.Pending;
+			break;
+		case "configuring":
+			stateClass = Omn_lifecycle.Preinit;
+			break;
+		case "provisioned":
+			stateClass = Omn_lifecycle.Provisioned;
+			break;
+		case "ready":
+			stateClass = Omn_lifecycle.Ready;
+			break;
+		case "stopping":
+			stateClass = Omn_lifecycle.Stopping;
+			break;
+		case "unallocated":
+			stateClass = Omn_lifecycle.Unallocated;
+			break;
+		}
+		if (stateClass != null) {
+			topology.addProperty(Omn_lifecycle.hasState, stateClass);
+		}
+
+		if (geniSliceInfo.getUuid() != null && geniSliceInfo.getUuid() != "") {
+			topology.addLiteral(Omn_domain_pc.hasUUID, geniSliceInfo.getUuid());
+		}
+
+		if (geniSliceInfo.getUrn() != null && geniSliceInfo.getUrn() != "") {
+			topology.addLiteral(Omn_service.hasURI, geniSliceInfo.getUrn());
 		}
 	}
 
@@ -650,6 +941,7 @@ public class ManifestConverter extends AbstractConverter {
 
 			omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
 			omnResource.addProperty(RDFS.label, node.getClientId());
+			omnResource.addProperty(RDF.type, Omn.Resource);
 
 			if (null != node.isExclusive()) {
 				omnResource.addProperty(Omn_resource.isExclusive,
@@ -666,21 +958,18 @@ public class ManifestConverter extends AbstractConverter {
 				if (nodeDetailObject instanceof JAXBElement) {
 					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
 
-					extractLocation(nodeDetailElement, omnResource, model);
+					extractLocation(nodeDetailElement, omnResource);
 					extractSliverType(nodeDetailElement, omnResource, model);
 					extractServices(nodeDetailElement, omnResource, model);
 					extractInterfaces(nodeDetailElement, omnResource, model);
 
-				} else if (o
-						.getClass()
-						.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring.class)) {
-					// TODO
-					ManifestConverter.LOG.log(Level.INFO,
-							"TODO: monitoring extension");
+				} else if (nodeDetailObject.getClass().equals(
+						GeniSliverInfo.class)) {
+					extractGeniSliverInfo(nodeDetailObject, omnResource);
 				} else {
 					ManifestConverter.LOG.log(Level.INFO,
-							"Found unknown extsion: " + nodeDetailObject);
-
+							"Found unknown extsion within node: "
+									+ nodeDetailObject.getClass());
 				}
 			}
 
@@ -691,12 +980,145 @@ public class ManifestConverter extends AbstractConverter {
 					componentIDResource);
 
 			topology.addProperty(Omn.hasResource, omnResource);
+		} else if (o
+				.getClass()
+				.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring.class)) {
+
+			// TODO
+			ManifestConverter.LOG.log(Level.INFO, "TODO: monitoring extension");
+
+		} else if (element.getDeclaredType().equals(LinkContents.class)) {
+
+			LinkContents link = (LinkContents) element.getValue();
+			Resource linkResource;
+			if (link.getSliverId() != null) {
+				linkResource = model.createResource(AbstractConverter
+						.generateUrlFromUrn(link.getSliverId()));
+			} else {
+				linkResource = model.createResource(AbstractConverter
+						.generateUrlFromUrn(link.getSliverId()));
+			}
+
+			linkResource.addLiteral(Omn_resource.clientId, link.getClientId()); // required
+			linkResource.addProperty(RDF.type, Omn_resource.Link);
+
+			if (link.getVlantag() != null) {
+				linkResource.addLiteral(Omn_domain_pc.vlanTag,
+						link.getVlantag());
+			}
+			// Get source and sink interfaces
+			@SuppressWarnings("unchecked")
+			List<Object> linkContents = link.getAnyOrPropertyOrLinkType();
+			for (Object linkObject : linkContents) {
+				if (linkObject instanceof JAXBElement) {
+					JAXBElement<?> linkElement = (JAXBElement<?>) linkObject;
+
+					if (linkElement.getDeclaredType().equals(
+							InterfaceRefContents.class)) {
+						InterfaceRefContents interfaceRefContents = (InterfaceRefContents) linkElement
+								.getValue();
+						linkResource.addProperty(Omn_resource.hasInterface,
+								interfaceRefContents.getClientId());
+					}
+
+				} else if (linkObject.getClass().equals(GeniSliverInfo.class)) {
+					extractGeniSliverInfo(linkObject, linkResource);
+				} else {
+					ManifestConverter.LOG.log(Level.INFO,
+							"Unknown extension witin link");
+				}
+			}
+			topology.addProperty(Omn.hasResource, linkResource);
+		}
+	}
+
+	private static void extractGeniSliverInfo(Object nodeDetailObject,
+			Resource omnResource) {
+
+		// get value of the element
+		GeniSliverInfo geniSliverInfo = (GeniSliverInfo) nodeDetailObject;
+		OntClass stateClass = null;
+		String stateString = geniSliverInfo.getState();
+
+		switch (stateString) {
+		case "ready_busy":
+			stateClass = Omn_lifecycle.Active;
+			break;
+		case "allocated":
+			stateClass = Omn_lifecycle.Allocated;
+			break;
+		case "failed":
+			stateClass = Omn_lifecycle.Error;
+			break;
+		case "instantiating":
+			stateClass = Omn_lifecycle.NotYetInitialized;
+			break;
+		case "pending_allocation":
+			stateClass = Omn_lifecycle.Pending;
+			break;
+		case "configuring":
+			stateClass = Omn_lifecycle.Preinit;
+			break;
+		case "provisioned":
+			stateClass = Omn_lifecycle.Provisioned;
+			break;
+		case "ready":
+			stateClass = Omn_lifecycle.Ready;
+			break;
+		case "stopping":
+			stateClass = Omn_lifecycle.Stopping;
+			break;
+		case "unallocated":
+			stateClass = Omn_lifecycle.Unallocated;
+			break;
+		}
+		if (stateClass != null) {
+			omnResource.addProperty(Omn_lifecycle.hasState, stateClass);
+		}
+
+		if (geniSliverInfo.getResourceId() != null
+				&& geniSliverInfo.getResourceId() != "") {
+			omnResource.addLiteral(Omn_lifecycle.resourceId,
+					geniSliverInfo.getResourceId());
+		}
+
+		if (geniSliverInfo.getStartTime() != null) {
+			// XMLGregorianCalendar startTime = geniSliverInfo.getStartTime();
+			// Calendar startTimeCalendar = startTime.toGregorianCalendar();
+			// XSDDateTime startTimeXSDDateTime = new XSDDateTime(
+			// startTimeCalendar);
+
+			XSDDateTime startTimeXSDDateTime = xmlToXsdTime(geniSliverInfo
+					.getStartTime());
+			omnResource.addLiteral(Omn_lifecycle.startTime,
+					startTimeXSDDateTime);
+		}
+
+		if (geniSliverInfo.getExpirationTime() != null) {
+
+			XSDDateTime expTimeXSDDateTime = xmlToXsdTime(geniSliverInfo
+					.getExpirationTime());
+			omnResource.addLiteral(Omn_lifecycle.expirationTime,
+					expTimeXSDDateTime);
+		}
+
+		if (geniSliverInfo.getCreationTime() != null) {
+			XSDDateTime creationTimeXSDDateTime = xmlToXsdTime(geniSliverInfo
+					.getCreationTime());
+			omnResource.addLiteral(Omn_lifecycle.creationTime,
+					creationTimeXSDDateTime);
+		}
+
+		if (geniSliverInfo.getCreatorUrn() != null
+				&& geniSliverInfo.getCreatorUrn() != "") {
+			omnResource.addLiteral(Omn_lifecycle.creator,
+					geniSliverInfo.getCreatorUrn());
 		}
 	}
 
 	private static void extractPostBootScript(Object nodeDetailObject,
-			Resource omnResource, Model model) {
-		// TODO Auto-generated method stub
+			Resource omnResource) {
+
 		ServicesPostBootScript postBootScript = (ServicesPostBootScript) nodeDetailObject;
 
 		if (postBootScript.getType() != null && postBootScript.getType() != "") {
@@ -712,7 +1134,7 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void extractLocation(JAXBElement<?> nodeDetailElement,
-			Resource omnResource, Model model) {
+			Resource omnResource) {
 		// check if type is location
 		if (nodeDetailElement.getDeclaredType().equals(LocationContents.class)) {
 
@@ -911,7 +1333,7 @@ public class ManifestConverter extends AbstractConverter {
 						.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript.class)) {
 					omnService
 							.addProperty(RDF.type, Omn_service.PostBootScript);
-					extractPostBootScript(serviceObject, omnService, model);
+					extractPostBootScript(serviceObject, omnService);
 				}
 
 				// add service to node
