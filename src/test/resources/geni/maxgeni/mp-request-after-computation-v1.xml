@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  https://wiki.maxgigapop.net/twiki/bin/view/GENI/NetworkStitchingGeniApiAndRspec -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2 http://www.protogeni.net/resources/rspec/2/request.xsd" type="request">
+
+  <node client_id="pgEP" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <sliver_type name="raw-pc">
+      <disk_image
+	  name="urn:publicid:IDN+emulab.net+image+emulab-ops//FEDORA10-STD" />
+    </sliver_type>
+    <interface client_id="left:if0">
+      <ip address="192.168.44.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <node client_id="bbnEP" component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+node+ganel" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" exclusive="true">
+    <sliver_type name="raw-pc">
+    </sliver_type>
+    <interface client_id="right:if0" component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+node+ganel:eth1">
+      <ip address="192.168.44.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <node client_id="maxEP" component_id="urn:publicid:IDN+max-myplc.dragon.maxgigapop.net+node+planetlab2" component_manager_id="urn:publicid:IDN+max-myplc.dragon.maxgigapop.net+authority+cm" exclusive="false">
+    <sliver_type name="raw-pc">
+    </sliver_type>
+    <interface client_id="right:if0" component_id="urn:publicid:IDN+max-myplc.dragon.maxgigapop.net+node+planetlab2:eth1">
+      <ip address="192.168.44.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <link client_id="mymplink">
+    <interface_ref client_id="pgEP:if0" />
+    <interface_ref client_id="bbnEP:if0"/>
+    <interface_ref client_id="maxEP:if0"/>
+  </link>
+
+
+<stitching xmlns="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" lastUpdateTime="20120220:09:30:21">
+
+<path id="mymplink" >
+  <hop id="1" type="strict">
+    <link id="urn:publicid:IDN+emulab.net+interface+*:*:*">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>0</vlanRangeAvailability>
+           <suggestedVLANRange>0</suggestedVLANRange>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>2</nextHop>
+  </hop>
+
+  <hop id="2" type="strict">
+    <link id="urn:publicid:IDN+emulab.net+interface+procurve-pgeni-salt:eth0:ion">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>408</vlanRangeAvailability>
+           <suggestedVLANRange>408</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>3</nextHop>
+  </hop>
+
+  <hop id="3" type="strict">
+    <link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.salt:ge-7/1/2:protogeni">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>408</vlanRangeAvailability>
+           <suggestedVLANRange>408</suggestedVLANRange>
+           <vlanTranslation>true</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>4</nextHop>
+  </hop>
+
+  <!-- the aggreagte that bridges three edges -->
+  <hop id="4" type="strict">
+    <aggregate id="urn:publicid:IDN+internet2.edu+authority+cm">
+      <capability>
+        <multiPointBridge>
+          <capacity>1000000000</capacity>
+          <vlanRangeAvailability>408</vlanRangeAvailability>
+        </multiPointBridge>
+      </capability>
+    </aggregate>
+    <nextHop>5</nextHop>
+    <nextHop>8</nextHop>
+  </hop>
+
+  <!-- branch to bbn -->
+  <hop id="5" type="strict">
+    <link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.newy:ae0:bbn">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>3750</vlanRangeAvailability>
+           <suggestedVLANRange>3750</suggestedVLANRange>
+           <vlanTranslation>true</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>6</nextHop>
+  </hop>
+
+  <hop id="6" type="strict">
+    <link id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+interface+datapath:06:d6:00:12:e2:b8:a5:d0:GBE0/1:*">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>3750</vlanRangeAvailability>
+           <suggestedVLANRange>3750</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>7</nextHop>
+  </hop>
+    
+  <hop id="7" type="strict">
+    <link id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+interface+ganel:eth1">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>3750</vlanRangeAvailability>
+           <suggestedVLANRange>3750</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>null</nextHop>
+  </hop>
+
+  <!-- branch to max -->
+  <hop id="8" type="strict">
+    <link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.newy:xe-0/0/3:*">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>3106</vlanRangeAvailability>
+           <suggestedVLANRange>3106</suggestedVLANRange>
+           <vlanTranslation>true</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>9</nextHop>
+  </hop>
+
+
+  <hop id="9" type="strict">
+    <link id="urn:publicid:IDN+max-myplc.dragon.maxgigapop.net+interface+clpk:1/2/3:*">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>3106</vlanRangeAvailability>
+           <suggestedVLANRange>3106</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>10</nextHop>
+  </hop>
+  
+  <hop id="10" type="strict">
+    <link id="urn:publicid:IDN+max-myplc.dragon.maxgigapop.net+interface+planetlab2:eth1">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>3106</vlanRangeAvailability>
+           <suggestedVLANRange>3106</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>null</nextHop>
+  </hop>
+
+</path>
+</stitching>
+</rspec>

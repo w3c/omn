@@ -58,7 +58,7 @@ public class ProportionalError {
 	 */
 	static public double getProportionalError(String input) {
 
-		String output = ProportionalError.completeRoundtrip(input);
+		String output = completeRoundtrip(input);
 		String inputNew = null;
 		String outputNew = null;
 
@@ -102,10 +102,10 @@ public class ProportionalError {
 	 * @return
 	 */
 	private static int getNumberDiffs(String input, String output) {
-		
+
 		XMLUnit.setIgnoreWhitespace(true);
 		XMLUnit.setIgnoreComments(true);
-		
+
 		Diff d = null;
 		try {
 			d = new Diff(input, output);
@@ -272,19 +272,14 @@ public class ProportionalError {
 		return output;
 	}
 
-	public static void main(String[] args) {
+	private static void getErrorDirectory(File path) {
 
+		if (!path.isDirectory()) {
+			System.out.println("Not a directory.");
+			return;
+		}
 		System.out
 				.println("==========================================================");
-
-		// File path = new File("./src/test/resources/geni/advertisement");
-		// File path = new File("./src/test/resources/geni/manifest"); //
-		// File path = new File("./src/test/resources/omn/paper2015iswc"); //
-		// File path = new File("./src/test/resources/geni/request"); //
-		// File path = new File("./src/test/resources/geni/protogeni"); //
-		// File path = new File("./src/test/resources/geni/gimiv3"); //
-		File path = new File("./src/test/resources/geni/fed4fire"); //
-
 		try {
 			System.out.println("Testing all RSpecs in folder:");
 			System.out.println("canon path " + path.getCanonicalPath());
@@ -325,8 +320,8 @@ public class ProportionalError {
 				String rspecString = null;
 				try {
 					System.out.println(files[i].getPath());
-
 					System.out.println(files[i].getPath().substring(20));
+
 					// note: substring(20) specifically gets rid of
 					// "./src/test/resources"), so must be changed if a
 					// different path is used
@@ -380,13 +375,146 @@ public class ProportionalError {
 			sum += interimSum;
 		}
 
-		System.out.println("Total error for " + errorRates.size() + " files: "
-				+ sum);
+		int numFiles = errorAds.size() + errorManifests.size()
+				+ errorRequests.size();
+		System.out.println("Total error for " + numFiles + " files: " + sum);
 		System.out.println("Comprising " + errorAds.size() + " ads, "
 				+ errorManifests.size() + " manifests, and "
 				+ errorRequests.size() + " requests.");
-		double average = sum / files.length;
+		double average = sum / numFiles;
 		System.out.println("Average error: " + average);
 
 	}
+
+	private static void getRoundTripDirectory(File path) {
+		if (!path.isDirectory()) {
+			System.out.println("Not a directory.");
+			return;
+		}
+		System.out
+				.println("==========================================================");
+		try {
+			System.out.println("Testing all RSpecs in folder:");
+			System.out.println("canon path " + path.getCanonicalPath());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		File[] files = null;
+		if (path.listFiles() != null) {
+			files = path.listFiles();
+		}
+
+		System.out.println();
+		System.out
+				.println("==========================================================");
+
+		List<Long> timeAds = new ArrayList<Long>();
+		List<Long> timeManifests = new ArrayList<Long>();
+		List<Long> timeRequests = new ArrayList<Long>();
+		ArrayList<List<Long>> times = new ArrayList<List<Long>>();
+		times.add(timeAds);
+		times.add(timeManifests);
+		times.add(timeRequests);
+
+		for (int i = 0; i < files.length; i++) {
+			String fileExt = null;
+			try {
+				fileExt = FilenameUtils.getExtension(files[i]
+						.getCanonicalPath());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+			boolean fileExtensionOK = fileExt.equals("xml")
+					|| fileExt.equals("manifest") || fileExt.equals("request");
+
+			if (files[i].isFile() && fileExtensionOK) {
+				String rspecString = null;
+				try {
+					System.out.println(files[i].getPath());
+					System.out.println(files[i].getPath().substring(20));
+
+					// note: substring(20) specifically gets rid of
+					// "./src/test/resources"), so must be changed if a
+					// different path is used
+					rspecString = AbstractConverter.toString(files[i].getPath()
+							.substring(20));
+					String type = getType(loadXMLFromString(rspecString));
+					long time = System.nanoTime();
+					completeRoundtrip(rspecString);
+					time = System.nanoTime() - time;
+					System.out.println("Time to complete round trip: " + time);
+
+					switch (type) {
+					case "advertisement":
+						timeAds.add(time);
+						break;
+					case "manifest":
+						timeManifests.add(time);
+						break;
+					case "request":
+						timeRequests.add(time);
+						break;
+					}
+
+					System.out
+							.println("==========================================================");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		long sum = 0;
+		for (int i = 0; i < times.size(); i++) {
+			double interimSum = 0;
+			for (int j = 0; j < times.get(i).size(); j++) {
+				interimSum += times.get(i).get(j);
+			}
+
+			String type = null;
+			switch (i) {
+			case 0:
+				type = "advertisement";
+				break;
+			case 1:
+				type = "manifest";
+				break;
+			case 2:
+				type = "request";
+				break;
+			}
+			System.out.println("Total time for " + times.get(i).size()
+					+ " " + type + "s " + interimSum);
+			sum += interimSum;
+		}
+
+		int numFiles = timeAds.size() + timeManifests.size()
+				+ timeRequests.size();
+		System.out.println("Total time for " + numFiles + " files: " + sum);
+		System.out.println("Comprising " + timeAds.size() + " ads, "
+				+ timeManifests.size() + " manifests, and "
+				+ timeRequests.size() + " requests.");
+		long average = sum / numFiles;
+		double seconds = average / 1000000000.0;
+		System.out.println("Average time: " + seconds + " seconds");
+
+	}
+
+	public static void main(String[] args) {
+
+		// File path = new File("./src/test/resources/geni/advertisement");
+		// File path = new File("./src/test/resources/geni/manifest"); //
+		// File path = new File("./src/test/resources/omn/paper2015iswc"); //
+		// File path = new File("./src/test/resources/geni/request"); //
+		// File path = new File("./src/test/resources/geni/protogeni"); //
+		// File path = new File("./src/test/resources/geni/gimiv3"); //
+		File path = new File("./src/test/resources/geni/fed4fire"); //
+		
+		// getErrorDirectory(path);
+		getRoundTripDirectory(path);
+
+	}
+
 }

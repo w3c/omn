@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  https://wiki.maxgigapop.net/twiki/bin/view/GENI/NetworkStitchingGeniApiAndRspec -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2 http://www.protogeni.net/resources/rspec/2/request.xsd" type="request">
+
+  <node client_id="left" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <sliver_type name="raw-pc">
+      <disk_image
+	  name="urn:publicid:IDN+emulab.net+image+emulab-ops//FEDORA10-STD" />
+    </sliver_type>
+    <interface client_id="left:if0">
+      <ip address="192.168.44.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <node client_id="right" component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+node+ganel" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" exclusive="true">
+    <sliver_type name="raw-pc">
+    </sliver_type>
+    <interface client_id="right:if0" component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+node+ganel:eth1">
+      <ip address="192.168.44.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <link client_id="mylink">
+    <interface_ref client_id="left:if0" />
+    <interface_ref client_id="right:if0"/>
+  </link>
+
+<stitching xmlns="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" lastUpdateTime="20120220:09:30:21">
+
+<path id="mylink" >
+  <hop id="1" type="strict">
+    <link id="urn:publicid:IDN+emulab.net+interface+*:*">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>0</vlanRangeAvailability>
+           <suggestedVLANRange>null</suggestedVLANRange>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>2</nextHop>
+  </hop>
+
+  <hop id="2" type="strict">
+    <link id="urn:publicid:IDN+emulab.net+interface+procurve-pgeni-salt:eth0:ion">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>any</vlanRangeAvailability>
+           <suggestedVLANRange>null</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>3</nextHop>
+  </hop>
+
+  <hop id="3" type="strict">
+    <link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.salt:ge-7/1/2:protogeni">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>any</vlanRangeAvailability>
+           <suggestedVLANRange>null</suggestedVLANRange>
+           <vlanTranslation>true</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>4</nextHop>
+  </hop>
+
+  <hop id="4" type="strict">
+    <link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.newy:ae0:bbn">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>any</vlanRangeAvailability>
+           <suggestedVLANRange>null</suggestedVLANRange>
+           <vlanTranslation>true</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>5</nextHop>
+  </hop>
+
+  <hop id="5" type="strict">
+    <link id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+interface+datapath:06:d6:00:12:e2:b8:a5:d0:GBE0/1:*">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>any</vlanRangeAvailability>
+           <suggestedVLANRange>null</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>6</nextHop>
+  </hop>
+
+  <hop id="6" type="strict">
+    <link id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+interface+ganel:eth1">
+      <capacity>1000000000</capacity>
+      <switchingCapabilityDescriptor>
+        <switchingcapType>l2sc</switchingcapType>
+        <encodingType>ethernet</encodingType>
+        <switchingCapabilitySpecificInfo>
+         <switchingCapabilitySpecificInfo_L2sc>
+           <interfaceMTU>9000</interfaceMTU>
+           <vlanRangeAvailability>any</vlanRangeAvailability>
+           <suggestedVLANRange>null</suggestedVLANRange>
+           <vlanTranslation>false</vlanTranslation>
+         </switchingCapabilitySpecificInfo_L2sc>
+        </switchingCapabilitySpecificInfo>
+      </switchingCapabilityDescriptor>
+    </link>
+    <nextHop>null</nextHop>
+  </hop>
+
+</path>
+</stitching>
+</rspec>
