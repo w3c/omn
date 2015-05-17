@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecRequestBoundExample -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd"
+       type="request">
+  <node component_id="urn:publicid:IDN+emulab.net+node+pc175"
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+        client_id="pc175"
+        exclusive="true">
+    <sliver_type name="raw-pc" />
+  </node>
+</rspec>

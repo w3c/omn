@@ -1,0 +1,35 @@
+<rspec type="request" xmlns="http://www.protogeni.net/resources/rspec/0.1">
+  <!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecRequestExample -->
+  <node component_uuid="urn:publicid:IDN+emulab.net+node+pc175" component_manager_uuid="urn:publicid:IDN+emulab.net+authority+cm" virtual_id="pc175" virtualization_type="emulab-vnode" exclusive="1">
+    <node_type type_name="pc" type_slots="1"/>
+    <interface virtual_id="control"/>
+  </node>
+  <node component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc111" component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+cm" virtual_id="pc111" virtualization_type="emulab-vnode" exclusive="1">
+    <node_type type_name="pc" type_slots="1"/>
+    <interface virtual_id="virt-0"/>
+    <interface virtual_id="virt-1"/>
+    <interface virtual_id="control"/>
+  </node>
+  <node component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc119" component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+cm" virtual_id="pc119" virtualization_type="emulab-vnode" exclusive="1">
+    <node_type type_name="pc" type_slots="1"/>
+    <interface virtual_id="virt-0"/>
+    <interface virtual_id="control"/>
+  </node>
+  <node virtual_id="exclusive1" virtualization_type="emulab-vnode" exclusive="1">
+    <node_type type_name="pc" type_slots="1"/>
+    <interface virtual_id="virt-0"/>
+    <interface virtual_id="control"/>
+  </node>
+  <link virtual_id="link0" link_type="tunnel">
+    <interface_ref virtual_node_id="pc175" tunnel_ip="192.168.0.1" virtual_interface_id="control"/>
+    <interface_ref virtual_node_id="pc119" tunnel_ip="192.168.0.2" virtual_interface_id="control"/>
+  </link>
+  <link virtual_id="link2" link_type="ethernet">
+    <interface_ref virtual_node_id="pc119" virtual_interface_id="virt-0"/>
+    <interface_ref virtual_node_id="pc111" virtual_interface_id="virt-1"/>
+  </link>
+  <link virtual_id="link2" link_type="ethernet">
+    <interface_ref virtual_node_id="exclusive1" virtual_interface_id="virt-0"/>
+    <interface_ref virtual_node_id="pc111" virtual_interface_id="virt-0"/>
+  </link>
+</rspec>

@@ -1178,27 +1178,31 @@ public class ManifestConverter extends AbstractConverter {
 
 			for (int i = 0; i < sliverContents.size(); i++) {
 				Object sliverObject = sliverContents.get(i);
+				if (sliverObject instanceof JAXBElement) {
+					// check if disk_image
+					if (((JAXBElement<?>) sliverObject).getDeclaredType()
+							.equals(DiskImageContents.class)) {
 
-				// check if disk_image
-				if (((JAXBElement<?>) sliverObject).getDeclaredType().equals(
-						DiskImageContents.class)) {
+						Resource diskImage = model.createResource();
+						diskImage
+								.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+						DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) sliverObject)
+								.getValue();
 
-					Resource diskImage = model.createResource();
-					diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
-					DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) sliverObject)
-							.getValue();
-
-					// add name info
-					String name = diskImageContents.getName();
-					diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
-
-					// add version info
-					String version = diskImageContents.getVersion();
-					if (version != null && !version.equals("")) {
-						diskImage.addLiteral(Omn_domain_pc.hasDiskimageVersion,
-								version);
+						// add name info
+						String name = diskImageContents.getName();
+						if (name != null && !name.equals("")) {
+							diskImage.addLiteral(
+									Omn_domain_pc.hasDiskimageLabel, name);
+						}
+						// add version info
+						String version = diskImageContents.getVersion();
+						if (version != null && !version.equals("")) {
+							diskImage.addLiteral(
+									Omn_domain_pc.hasDiskimageVersion, version);
+						}
+						sliver.addProperty(Omn.hasResource, diskImage);
 					}
-					sliver.addProperty(Omn.hasResource, diskImage);
 				}
 			}
 			omnResource.addProperty(RDF.type, sliver);

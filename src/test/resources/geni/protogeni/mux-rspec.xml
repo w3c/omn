@@ -1,0 +1,31 @@
+<rspec type="request" xmlns="http://gtnoise.net/em/resources/rspec/0.1/">
+    <!-- http://groups.geni.net/geni/attachment/wiki/DTunnels/mux-rspec.xml -->
+  <credentials username="valas" password="********" as="47065" />
+  <node component_uuid="mux1" component_manager_uuid="en:manager" virtual_id="gt-mux" virtualization_type="bgpmux">
+    <node_type type_name="bgpmux" type_slots="1">
+      <field key="upstream_as" value="3333" />
+      <field key="prefix" value="168.62.16.0/24" note="hack" />
+      <field key="mux_address" value="143.215.254.26" note="hack" />
+      <field key="peer_address" value="192.168.0.2" />
+      <field key="peer_as" value="65000" note="hack" />
+      <field key="password" value="********" note="hack" />
+      <field key="enable" value="********" note="hack" />
+    </node_type>
+    <interface virtual_id="tunnel"/>
+  </node>
+
+ <node component_uuid="pc1" component_manager_uuid="emulab:manager" virtual_id="pc1" virtualization_type="emulab-vnode" exclusive="1">
+   <node_type type_name="pc" type_slots="1"/>
+   <interface virtual_id="tunnel"/>
+ </node>
+
+ <link virtual_id="link0">
+   <link_type name="GRE">
+     <field key="key" value="1" />
+     <field key="ttl" value="255" />
+     <field key="name" value="gre1" />
+   </link_type>
+   <interface_ref virtual_node_id="gt-mux" tunnel_ip="192.168.0.1" tunnel_netmask="24" virtual_interface_id="tunnel" source_ip="143.215.254.26"/>
+   <interface_ref virtual_node_id="pc1" tunnel_ip="192.168.0.2" tunnel_netmask="24" virtual_interface_id="tunnel" source_ip="1.1.1.1"/>
+ </link>
+</rspec>

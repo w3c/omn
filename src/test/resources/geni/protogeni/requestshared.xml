@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecRequestSharedExample -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd"
+       type="request" >
+  <node client_id="my-node"
+        exclusive="false">
+    <sliver_type name="emulab-openvz" />
+  </node>
+</rspec>

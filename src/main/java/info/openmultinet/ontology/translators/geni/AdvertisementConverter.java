@@ -137,8 +137,10 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
 			final NodeContents rspecNode = nodeJaxb.getValue();
 
-			String componentId = AbstractConverter.generateUrlFromUrn(rspecNode
-					.getComponentId());
+			// String componentId =
+			// AbstractConverter.generateUrlFromUrn(rspecNode
+			// .getComponentId());
+			String componentId = rspecNode.getComponentId();
 			final Resource omnNode = topology.getModel().createResource(
 					componentId);
 
@@ -240,13 +242,13 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void tryExtractCpus(Object rspecSliverObject, Resource omnSliver) {
-		if(rspecSliverObject.getClass()
-		.equals(info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc.class)){
+		if (rspecSliverObject
+				.getClass()
+				.equals(info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc.class)) {
 			Pc pc = (Pc) rspecSliverObject;
 
 			if (pc.getCpus() != null) {
-				omnSliver.addLiteral(Omn_domain_pc.hasCPU,
-						pc.getCpus());
+				omnSliver.addLiteral(Omn_domain_pc.hasCPU, pc.getCpus());
 			}
 		}
 	}
@@ -390,7 +392,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void setCpus(Resource sliverResource, SliverType sliver) {
 		Pc pc = null;
-		
+
 		if (sliverResource.hasProperty(Omn_domain_pc.hasCPU)) {
 			pc = new ObjectFactory().createPc();
 			pc.setCpus(sliverResource.getProperty(Omn_domain_pc.hasCPU)
@@ -399,7 +401,7 @@ public class AdvertisementConverter extends AbstractConverter {
 		if (pc != null) {
 			sliver.getAnyOrDiskImage().add(pc);
 		}
-		
+
 	}
 
 	private void setDiskImage(Resource sliverResource, SliverType sliver) {
@@ -493,9 +495,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			final NodeContents node) {
 
 		String url = resource.getResource().getURI();
-		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		//String urn = AbstractConverter.generateUrnFromUrl(url, "node");
 
-		node.setComponentId(urn);
+		node.setComponentId(url);
 		node.setComponentName(resource.getResource().getLocalName());
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
 			node.setExclusive(resource.getResource()

@@ -30,9 +30,9 @@ public class UrnUrlTest {
 		System.out
 		.println("*************URN conversion*******************");
 		String urn = "urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%23motorgarage-1";
-		System.out.println("Conver to urn: " + urn);
+		System.out.println("Original urn: " + urn);
 		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
-		System.out.println("Conver back to url: " + urlNew);
+		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
 		
@@ -49,9 +49,9 @@ public class UrnUrlTest {
 		String url = "http://localhost/resource/VMServer-1";
 		System.out.println("Original url: " + url);
 		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
-		System.out.println("Conver to urn: " + urn);
+		System.out.println("Convert to urn: " + urn);
 		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
-		System.out.println("Conver back to url: " + urlNew);
+		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
 		Assert.assertTrue(urn.equals("urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FVMServer-1"));;
@@ -66,9 +66,9 @@ public class UrnUrlTest {
 		String url = "http://localhost/resources#Openstack-1";
 		System.out.println("Original url: " + url);
 		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
-		System.out.println("Conver to urn: " + urn);
+		System.out.println("Convert to urn: " + urn);
 		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
-		System.out.println("Conver back to url: " + urlNew);
+		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
 		Assert.assertTrue(urn.equals("urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresources%23Openstack-1"));;
@@ -82,9 +82,9 @@ public class UrnUrlTest {
 		String url = "http://www.testbed.example.org/resources#Openstack-1";
 		System.out.println("Original url: " + url);
 		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
-		System.out.println("Conver to urn: " + urn);
+		System.out.println("Convert to urn: " + urn);
 		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
-		System.out.println("Conver back to url: " + urlNew);
+		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
 		Assert.assertTrue(urn.equals("urn:publicid:IDN+www.testbed.example.org+node+http%3A%2F%2Fwww.testbed.example.org%2Fresources%23Openstack-1"));;
@@ -97,12 +97,12 @@ public class UrnUrlTest {
 		System.out
 				.println("*************authority round trip*******************");
 		String urn = "urn:publicId:IDN+localhost+authority+am";
-		System.out.println("Conver to urn: " + urn);
+		System.out.println("Convert to urn: " + urn);
 		String url = AbstractConverter.generateUrlFromUrn(urn);
-		System.out.println("Conver back to url: " + url);
+		System.out.println("Convert back to url: " + url);
 		
 		String urnNew = AbstractConverter.generateUrnFromUrl(url, "node");
-		System.out.println("Conver back to urn: " + urnNew);
+		System.out.println("Convert back to urn: " + urnNew);
 		System.out.println();
 		System.out.println();
 		Assert.assertTrue(urn.equals("urn:publicId:IDN+localhost+authority+am"));;

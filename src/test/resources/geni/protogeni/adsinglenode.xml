@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecAdSingleNodeExample -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/0.1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/0.1 http://www.protogeni.net/resources/rspec/0.1/ad.xsd"
+       type="advertisement"
+       generated="2009-07-21T19:19:06Z"
+       valid_until="2009-07-21T19:19:06Z" >
+  <node component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+cm"
+        component_name="pc160"
+        component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc160" >
+    <node_type 
+      type_name="pc850"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="pc"
+      type_slots="1"
+    />
+    <available>true</available>
+    <exclusive>true</exclusive>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc160:eth0"/>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc160:eth1"/>
+  </node>
+</rspec>

@@ -101,17 +101,17 @@
 					</execution>
 				</executions>
 				<configuration>
-			    <excludes>
-             <exclude>**/jaxb/**</exclude>
-             <exclude>**/vocabulary/**</exclude>
-          </excludes>
+					<excludes>
+						<exclude>**/jaxb/**</exclude>
+						<exclude>**/vocabulary/**</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>3.0.1</version>
-            </plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>3.0.1</version>
+			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.5.3</version>
@@ -171,15 +171,15 @@
 							<output>src/main/java/</output>
 							<package-name>info.openmultinet.ontology.vocabulary</package-name>
 							<ontology>true</ontology>
-                            <no-strict>true</no-strict>
-                            <use-inf>false</use-inf>
-						</source>						
+							<no-strict>true</no-strict>
+							<use-inf>false</use-inf>
+						</source>
 						<source>
-              <input>src/test/resources/ontologies/osco.ttl</input>
-              <output>src/test/java/</output>
-              <package-name>info.openmultinet.ontology.vocabulary</package-name>
-              <ontology>true</ontology>
-            </source>
+							<input>src/test/resources/ontologies/osco.ttl</input>
+							<output>src/test/java/</output>
+							<package-name>info.openmultinet.ontology.vocabulary</package-name>
+							<ontology>true</ontology>
+						</source>
 					</fileOptions>
 					<owl>true</owl>
 				</configuration>
@@ -326,11 +326,16 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-                    <dependency>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>servlet-api</artifactId>
-                        <version>2.5</version>
-                        <scope>provided</scope>
-                </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.6</version>
+		</dependency>
 	</dependencies>
 </project>

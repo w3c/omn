@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecRequestLinkExample -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd"
+       type="request" >
+  <node client_id="left"
+        exclusive="true">
+    <sliver_type name="raw-pc" />
+    <interface client_id="left:if0" />
+  </node>
+  <node client_id="right"
+        exclusive="true">
+    <sliver_type name="raw-pc" />
+    <interface client_id="right:if0" />
+  </node>
+  <link client_id="center">
+    <interface_ref client_id="left:if0" />
+    <interface_ref client_id="right:if0" />
+  </link>
+</rspec>

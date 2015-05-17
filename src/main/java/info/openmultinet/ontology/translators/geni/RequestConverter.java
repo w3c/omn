@@ -160,17 +160,22 @@ public class RequestConverter extends AbstractConverter {
 				Statement hasUri = monitoringService.getResource().getProperty(
 						Omn_service.hasURI);
 
-				String uri = hasUri.getObject().asResource().getURI()
-						.toString();
+				
+				System.out.println(hasUri.getObject().asLiteral().getString());
+//				String uri = hasUri.getObject().asResource().getURI()
+//						.toString();
+				String uri = hasUri.getObject().asLiteral().getString();
 				monitoring.setUri(uri);
+
 			}
 
 			if (monitoringResource.hasProperty(RDF.type)) {
 				Statement hasType = monitoringService.getResource()
 						.getProperty(RDF.type);
 
-				String type = hasType.getObject().asResource().getURI()
-						.toString();
+//				String type = hasType.getObject().asResource().getURI()
+//						.toString();
+				String type = hasType.getObject().asLiteral().getString();
 				monitoring.setType(type);
 			}
 
@@ -372,8 +377,8 @@ public class RequestConverter extends AbstractConverter {
 				}
 
 				if (node.getComponentManagerId() != null) {
-					RDFNode manager = ResourceFactory
-							.createResource(node.getComponentManagerId());
+					RDFNode manager = ResourceFactory.createResource(node
+							.getComponentManagerId());
 					omnResource.addProperty(Omn_lifecycle.managedBy, manager);
 				}
 

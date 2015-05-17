@@ -4,6 +4,7 @@ import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
@@ -123,5 +124,33 @@ public class FourNodesTest {
 		Assert.assertTrue("geni_slice_info uuid", outputRspec.contains("uuid=\"5fcc5c81-c686-4e02-89bb-8dd7162697d3\""));
 		Assert.assertTrue("geni_slice_info urn", outputRspec.contains("urn=\"urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\""));
 	}
+	
+//	@Test
+//	public void requestRoundtrip() throws JAXBException,
+//			InvalidModelException, IOException, XMLStreamException {
+//		final String filename = "/geni/gimiv3/4nodes.request";
+//		final InputStream inputRspec = FourNodesTest.class
+//				.getResourceAsStream(filename);
+//		System.out.println("Converting this input from '" + filename + "':");
+//		System.out.println("===============================");
+//		System.out.println(AbstractConverter.toString(filename));
+//		System.out.println("===============================");
+//
+//		final Model model = RequestConverter.getModel(inputRspec);
+//		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+//				Omn_lifecycle.Request);
+//		System.out.println("Generated this graph:");
+//		System.out.println("===============================");
+//		System.out.println(Parser.toString(model));
+//		System.out.println("===============================");
+//		Assert.assertTrue("should have a topology", topology.hasNext());
+//
+//		final InfModel infModel = new Parser(model).getInfModel();
+//		final String outputRspec = RequestConverter.getRSpec(infModel);
+//		System.out.println("Generated this rspec:");
+//		System.out.println("===============================");
+//		System.out.println(outputRspec);
+//		System.out.println("===============================");
+//	}
 
 }
