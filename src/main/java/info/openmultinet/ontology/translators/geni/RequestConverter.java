@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
@@ -160,10 +161,9 @@ public class RequestConverter extends AbstractConverter {
 				Statement hasUri = monitoringService.getResource().getProperty(
 						Omn_service.hasURI);
 
-				
 				System.out.println(hasUri.getObject().asLiteral().getString());
-//				String uri = hasUri.getObject().asResource().getURI()
-//						.toString();
+				// String uri = hasUri.getObject().asResource().getURI()
+				// .toString();
 				String uri = hasUri.getObject().asLiteral().getString();
 				monitoring.setUri(uri);
 
@@ -173,8 +173,8 @@ public class RequestConverter extends AbstractConverter {
 				Statement hasType = monitoringService.getResource()
 						.getProperty(RDF.type);
 
-//				String type = hasType.getObject().asResource().getURI()
-//						.toString();
+				// String type = hasType.getObject().asResource().getURI()
+				// .toString();
 				String type = hasType.getObject().asLiteral().getString();
 				monitoring.setType(type);
 			}
@@ -286,7 +286,7 @@ public class RequestConverter extends AbstractConverter {
 			RDFNode implementedBy = resource.getResource()
 					.getProperty(Omn_lifecycle.implementedBy).getObject();
 
-			node.setComponentId(AbstractConverter.generateUrnFromUrl(
+			node.setComponentId(CommonMethods.generateUrnFromUrl(
 					implementedBy.toString(), "node"));
 
 			if (implementedBy.asResource().hasProperty(RDFS.label)) {
@@ -298,7 +298,7 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			Statement managedBy = resource.getProperty(Omn_lifecycle.managedBy);
-			node.setComponentManagerId(AbstractConverter.generateUrnFromUrl(
+			node.setComponentManagerId(CommonMethods.generateUrnFromUrl(
 					managedBy.getResource().getURI(), "authority"));
 
 		}
@@ -359,7 +359,7 @@ public class RequestConverter extends AbstractConverter {
 				if (null != node.getComponentId()
 						&& !node.getComponentId().isEmpty()) {
 
-					implementedBy = model.createResource(AbstractConverter
+					implementedBy = model.createResource(CommonMethods
 							.generateUrlFromUrn(node.getComponentId()));
 
 					omnResource.addProperty(Omn_lifecycle.implementedBy,

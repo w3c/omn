@@ -16,7 +16,7 @@ Java library (omnlib) and playground for the ontology work conducted in the [Ope
 
 ## Java omnlib
 
-The Java library helps developers to work wiht Open-Multinet related ontologies and includes a translator to convert between RDF, GENI RSpec XMLs, and TOSCA XML.
+The Java library helps developers to work with Open-Multinet related ontologies and includes a translator to convert between RDF, GENI RSpec XMLs, and TOSCA XML.
 
 ### Using it
 

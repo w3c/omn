@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
@@ -230,7 +231,7 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setLinkDetails(Statement resource, LinkContents link,
 			String hostname) {
-		link.setSliverId(AbstractConverter.generateUrnFromUrl(resource
+		link.setSliverId(CommonMethods.generateUrnFromUrl(resource
 				.getResource().getURI(), "sliver"));
 		if (resource.getResource().hasProperty(Omn_resource.clientId)) {
 			String clientId = resource.getResource()
@@ -619,7 +620,7 @@ public class ManifestConverter extends AbstractConverter {
 		}
 
 		// node.setSliverId(generateSliverID(hostname,
-		node.setSliverId(AbstractConverter.generateUrnFromUrl(resource
+		node.setSliverId(CommonMethods.generateUrnFromUrl(resource
 				.getResource().getURI(), "sliver"));
 	}
 
@@ -680,7 +681,7 @@ public class ManifestConverter extends AbstractConverter {
 			RDFNode implementedBy = resource.getResource()
 					.getProperty(Omn_lifecycle.implementedBy).getObject();
 
-			String urn = AbstractConverter.generateUrnFromUrl(
+			String urn = CommonMethods.generateUrnFromUrl(
 					implementedBy.toString(), "node");
 
 			node.setComponentId(urn);
@@ -935,7 +936,7 @@ public class ManifestConverter extends AbstractConverter {
 		if (element.getDeclaredType().equals(NodeContents.class)) {
 			NodeContents node = (NodeContents) element.getValue();
 
-			final Resource omnResource = model.createResource(AbstractConverter
+			final Resource omnResource = model.createResource(CommonMethods
 					.generateUrlFromUrn(node.getSliverId()));
 			// .createResource(parseSliverID(node.getSliverId()));
 
@@ -973,7 +974,7 @@ public class ManifestConverter extends AbstractConverter {
 				}
 			}
 
-			String componentId = AbstractConverter.generateUrlFromUrn(node
+			String componentId = CommonMethods.generateUrlFromUrn(node
 					.getComponentId());
 			Resource componentIDResource = model.createResource(componentId);
 			omnResource.addProperty(Omn_lifecycle.implementedBy,
@@ -992,10 +993,10 @@ public class ManifestConverter extends AbstractConverter {
 			LinkContents link = (LinkContents) element.getValue();
 			Resource linkResource;
 			if (link.getSliverId() != null) {
-				linkResource = model.createResource(AbstractConverter
+				linkResource = model.createResource(CommonMethods
 						.generateUrlFromUrn(link.getSliverId()));
 			} else {
-				linkResource = model.createResource(AbstractConverter
+				linkResource = model.createResource(CommonMethods
 						.generateUrlFromUrn(link.getSliverId()));
 			}
 

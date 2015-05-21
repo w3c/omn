@@ -1,5 +1,5 @@
 package info.openmultinet.ontology.translators.geni.paper2015iswc;
-
+import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.AbstractConverter;
 
 import org.junit.Assert;
@@ -15,9 +15,9 @@ public class UrnUrlTest {
 				.println("*************Forward slash round trip*******************");
 		String url = "https://www.testbed.example.org/resources/Openstack-1";
 		System.out.println("Original url: " + url);
-		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		String urn = CommonMethods.generateUrnFromUrl(url, "node");
 		System.out.println("Conver to urn: " + urn);
-		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
+		String urlNew = CommonMethods.generateUrlFromUrn(urn);
 		System.out.println("Conver back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
@@ -31,7 +31,7 @@ public class UrnUrlTest {
 		.println("*************URN conversion*******************");
 		String urn = "urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%23motorgarage-1";
 		System.out.println("Original urn: " + urn);
-		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
+		String urlNew = CommonMethods.generateUrlFromUrn(urn);
 		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
@@ -48,9 +48,9 @@ public class UrnUrlTest {
 				.println("*************localhost slash round trip*******************");
 		String url = "http://localhost/resource/VMServer-1";
 		System.out.println("Original url: " + url);
-		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		String urn = CommonMethods.generateUrnFromUrl(url, "node");
 		System.out.println("Convert to urn: " + urn);
-		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
+		String urlNew = CommonMethods.generateUrlFromUrn(urn);
 		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
@@ -65,9 +65,9 @@ public class UrnUrlTest {
 				.println("*************localhost hash round trip*******************");
 		String url = "http://localhost/resources#Openstack-1";
 		System.out.println("Original url: " + url);
-		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		String urn = CommonMethods.generateUrnFromUrl(url, "node");
 		System.out.println("Convert to urn: " + urn);
-		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
+		String urlNew = CommonMethods.generateUrlFromUrn(urn);
 		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
@@ -81,9 +81,9 @@ public class UrnUrlTest {
 				.println("*************hash round trip*******************");
 		String url = "http://www.testbed.example.org/resources#Openstack-1";
 		System.out.println("Original url: " + url);
-		String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		String urn = CommonMethods.generateUrnFromUrl(url, "node");
 		System.out.println("Convert to urn: " + urn);
-		String urlNew = AbstractConverter.generateUrlFromUrn(urn);
+		String urlNew = CommonMethods.generateUrlFromUrn(urn);
 		System.out.println("Convert back to url: " + urlNew);
 		System.out.println();
 		System.out.println();
@@ -98,10 +98,10 @@ public class UrnUrlTest {
 				.println("*************authority round trip*******************");
 		String urn = "urn:publicId:IDN+localhost+authority+am";
 		System.out.println("Convert to urn: " + urn);
-		String url = AbstractConverter.generateUrlFromUrn(urn);
+		String url = CommonMethods.generateUrlFromUrn(urn);
 		System.out.println("Convert back to url: " + url);
 		
-		String urnNew = AbstractConverter.generateUrnFromUrl(url, "node");
+		String urnNew = CommonMethods.generateUrnFromUrl(url, "node");
 		System.out.println("Convert back to urn: " + urnNew);
 		System.out.println();
 		System.out.println();
