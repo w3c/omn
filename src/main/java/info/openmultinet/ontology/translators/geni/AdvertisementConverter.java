@@ -155,8 +155,10 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive,
 					rspecNode.isExclusive());
-			omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
-
+			if (rspecNode.getComponentName() != null) {
+				omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
+			}
+			
 			for (Object rspecNodeObject : rspecNode
 					.getAnyOrRelationOrLocation()) {
 				tryExtractHardwareType(rspecNodeObject, omnNode);
@@ -495,7 +497,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			final NodeContents node) {
 
 		String url = resource.getResource().getURI();
-		//String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		// String urn = AbstractConverter.generateUrnFromUrl(url, "node");
 
 		node.setComponentId(url);
 		node.setComponentName(resource.getResource().getLocalName());

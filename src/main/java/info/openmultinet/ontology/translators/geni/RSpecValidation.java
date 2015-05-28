@@ -7,26 +7,29 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecConte
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -210,8 +213,16 @@ public class RSpecValidation {
 
 		try {
 			xml = RSpecValidation.loadXMLFromString(input);
-			Node root = xml.getElementsByTagName("rspec").item(0);
-			type = root.getAttributes().getNamedItem("type").getNodeValue();
+			if (xml != null) {
+				NodeList rspecNode = xml.getElementsByTagName("rspec");
+				if (rspecNode != null && rspecNode.getLength() > 0) {
+					Node root = rspecNode.item(0);
+					Node typeNode = root.getAttributes().getNamedItem("type");
+					if (typeNode != null) {
+						type = typeNode.getNodeValue();
+					}
+				}
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -240,34 +251,37 @@ public class RSpecValidation {
 			e1.printStackTrace();
 		}
 
-		if (type.equals("advertisement")) {
-			try {
-				AdvertisementConverter converter = new AdvertisementConverter();
-				RSpecContents rspec = converter.getRspec(inputStream);
-				model = converter.getModel(rspec);
-				output = converter.getRSpec(model);
-			} catch (JAXBException | InvalidModelException | XMLStreamException e) {
-				e.printStackTrace();
+		if (type != null) {
+			if (type.equals("advertisement")) {
+				try {
+					AdvertisementConverter converter = new AdvertisementConverter();
+					RSpecContents rspec = converter.getRspec(inputStream);
+					model = converter.getModel(rspec);
+					output = converter.getRSpec(model);
+				} catch (JAXBException | InvalidModelException
+						| XMLStreamException e) {
+					e.printStackTrace();
+				}
 			}
-		}
 
-		if (type.equals("manifest")) {
-			try {
-				model = ManifestConverter.getModel(inputStream);
-				InfModel infModel = new Parser(model).getInfModel();
-				output = ManifestConverter.getRSpec(infModel,
-						"instageni.gpolab.bbn.com");
-			} catch (JAXBException | InvalidModelException e) {
-				e.printStackTrace();
+			if (type.equals("manifest")) {
+				try {
+					model = ManifestConverter.getModel(inputStream);
+					InfModel infModel = new Parser(model).getInfModel();
+					output = ManifestConverter.getRSpec(infModel,
+							"instageni.gpolab.bbn.com");
+				} catch (JAXBException | InvalidModelException e) {
+					e.printStackTrace();
+				}
 			}
-		}
 
-		if (type.equals("request")) {
-			try {
-				model = RequestConverter.getModel(inputStream);
-				output = RequestConverter.getRSpec(model);
-			} catch (JAXBException | InvalidModelException e) {
-				e.printStackTrace();
+			if (type.equals("request")) {
+				try {
+					model = RequestConverter.getModel(inputStream);
+					output = RequestConverter.getRSpec(model);
+				} catch (JAXBException | InvalidModelException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return output;
@@ -309,7 +323,7 @@ public class RSpecValidation {
 					schema = new File(
 							"./src/main/resources/geni/request/request.xsd");
 				}
-				
+
 				// check against XSD whether rspec is valid or not
 				v.setJAXP12SchemaSource(schema);
 				isValid = v.isValid();
@@ -318,6 +332,66 @@ public class RSpecValidation {
 		} catch (SAXException e) {
 			e.printStackTrace();
 		}
+		return isValid;
+	}
+
+	/**
+	 * Validate RSpec using javax.xml.validation library
+	 * 
+	 * @param path
+	 * @param type
+	 * @return
+	 */
+	public static boolean validateRspecSchemaFactory(String path, String type) {
+		// https://simonharrer.wordpress.com/2012/11/05/xml-validation-with-the-java-api/
+		boolean isValid = false;
+
+		Schema schema = null;
+		javax.xml.validation.Validator validator = null;
+		SchemaFactory sFactory = SchemaFactory
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+		if (type != null) {
+			switch (type) {
+			case "advertisement":
+				try {
+					schema = sFactory.newSchema(new File(
+							"./src/main/resources/geni/advertisement/ad.xsd"));
+				} catch (SAXException e2) {
+					e2.printStackTrace();
+				}
+				break;
+			case "manifest":
+				try {
+					schema = sFactory.newSchema(new File(
+							"./src/main/resources/geni/manifest/manifest.xsd"));
+				} catch (SAXException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case "request":
+				try {
+					schema = sFactory.newSchema(new File(
+							"./src/main/resources/geni/request/request.xsd"));
+				} catch (SAXException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+
+		if (schema != null) {
+			validator = schema.newValidator();
+		}
+
+		if (validator != null) {
+			try {
+				validator.validate(new StreamSource(new File(path)));
+				isValid = true;
+			} catch (SAXException | IOException e) {
+			}
+		}
+
 		return isValid;
 	}
 
@@ -352,18 +426,19 @@ public class RSpecValidation {
 		String command1c = null;
 		String type = RSpecValidation.getType(rspecString);
 
-		switch (type) {
-		case "advertisement":
-			command1c = "http://www.geni.net/resources/rspec/3/ad.xsd";
-			break;
-		case "manifest":
-			command1c = "http://www.geni.net/resources/rspec/3/manifest.xsd";
-			break;
-		case "request":
-			command1c = "http://www.geni.net/resources/rspec/3/request.xsd";
-			break;
+		if (type != null) {
+			switch (type) {
+			case "advertisement":
+				command1c = "http://www.geni.net/resources/rspec/3/ad.xsd";
+				break;
+			case "manifest":
+				command1c = "http://www.geni.net/resources/rspec/3/manifest.xsd";
+				break;
+			case "request":
+				command1c = "http://www.geni.net/resources/rspec/3/request.xsd";
+				break;
+			}
 		}
-
 		if (command1c != null) {
 			String[] commands = new String[4];
 			commands[0] = command1a;

@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.translators.AbstractConverter;
+
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
 
 import java.io.BufferedReader;
@@ -14,11 +15,21 @@ import org.apache.commons.io.FilenameUtils;
 
 public class RSpecValidationTest {
 
-	private static void getErrorDirectory(File path) {
+	final static int trueAds = 0;
+	final static int ads = 1;
+	final static int trueManifests = 2;
+	final static int manifests = 3;
+	final static int trueRequests = 4;
+	final static int requests = 5;
+	final static int different = 6;
+	final static int typeMissing = 7;
+	final static double nano = 1000000000.0;
+
+	private static ArrayList<List<Double>> getErrorDirectory(File path) {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
-			return;
+			return null;
 		}
 		System.out
 				.println("==========================================================");
@@ -46,7 +57,8 @@ public class RSpecValidationTest {
 		errorRates.add(errorRequests);
 
 		for (int i = 0; i < files.length; i++) {
-			if (files[i].isFile() && RSpecValidation.rspecFileExtension(files[i])) {
+			if (files[i].isFile()
+					&& RSpecValidation.rspecFileExtension(files[i])) {
 				String rspecString = null;
 				boolean valid = false;
 				try {
@@ -60,6 +72,7 @@ public class RSpecValidationTest {
 				}
 
 				System.out.println(files[i].getPath().substring(20));
+				System.out.println(files[i].getPath());
 				if (valid) {
 
 					// note: substring(20) specifically gets rid of
@@ -82,6 +95,11 @@ public class RSpecValidationTest {
 						errorRequests.add(errorRate);
 						break;
 					}
+				}
+			} else if (files[i].isDirectory()) {
+				ArrayList<List<Double>> newErrorRates = getErrorDirectory(files[i]);
+				for (int j = 0; j < errorRates.size(); j++) {
+					errorRates.get(j).addAll(newErrorRates.get(j));
 				}
 			}
 			System.out
@@ -120,12 +138,14 @@ public class RSpecValidationTest {
 				+ errorRequests.size() + " requests.");
 		double average = sum / numFiles;
 		System.out.println("Average error: " + average);
+
+		return errorRates;
 	}
 
-	private static void getRoundTripDirectory(File path) {
+	private static ArrayList<List<Long>> getTimesDirectory(File path) {
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
-			return;
+			return null;
 		}
 		System.out
 				.println("==========================================================");
@@ -154,39 +174,57 @@ public class RSpecValidationTest {
 		times.add(timeRequests);
 
 		for (int i = 0; i < files.length; i++) {
-			if (files[i].isFile() && RSpecValidation.rspecFileExtension(files[i])) {
+			if (files[i].isFile()
+					&& RSpecValidation.rspecFileExtension(files[i])) {
 				String rspecString = null;
 				try {
 					System.out.println(files[i].getPath());
 					System.out.println(files[i].getPath().substring(20));
 
-					// note: substring(20) specifically gets rid of
-					// "./src/test/resources"), so must be changed if a
-					// different path is used
-					rspecString = AbstractConverter.toString(files[i].getPath()
-							.substring(20));
-					String type = RSpecValidation.getType(rspecString);
-					long time = System.nanoTime();
-					RSpecValidation.completeRoundtrip(rspecString);
-					time = System.nanoTime() - time;
-					System.out.println("Time to complete round trip: " + time);
+					rspecString = AbstractConverter.toString(files[i]
+							.getPath().substring(20));
+					boolean validXMLUnit = RSpecValidation
+							.validateRspecXMLUnit(rspecString);
+					System.out.println("validXMLUnit: " + validXMLUnit);
+					boolean validRSpecLint = RSpecValidation
+							.rspecLintMacOnly(files[i].getPath().substring(20));
 
-					switch (type) {
-					case "advertisement":
-						timeAds.add(time);
-						break;
-					case "manifest":
-						timeManifests.add(time);
-						break;
-					case "request":
-						timeRequests.add(time);
-						break;
+					if (validXMLUnit && validRSpecLint) {
+						// note: substring(20) specifically gets rid of
+						// "./src/test/resources"), so must be changed if a
+						// different path is used
+
+						String type = RSpecValidation.getType(rspecString);
+						long time = System.nanoTime();
+						RSpecValidation.completeRoundtrip(rspecString);
+						time = System.nanoTime() - time;
+						System.out.println("Time to complete round trip: "
+								+ time);
+
+						if (type != null) {
+							switch (type) {
+							case "advertisement":
+								timeAds.add(time);
+								break;
+							case "manifest":
+								timeManifests.add(time);
+								break;
+							case "request":
+								timeRequests.add(time);
+								break;
+							}
+						}
 					}
-
 					System.out
 							.println("==========================================================");
+
 				} catch (IOException e) {
 					e.printStackTrace();
+				}
+			} else if (files[i].isDirectory()) {
+				ArrayList<List<Long>> newTimes = getTimesDirectory(files[i]);
+				for (int j = 0; j < times.size(); j++) {
+					times.get(j).addAll(newTimes.get(j));
 				}
 			}
 		}
@@ -210,8 +248,12 @@ public class RSpecValidationTest {
 				type = "request";
 				break;
 			}
+			double seconds = interimSum / nano;
 			System.out.println("Total time for " + times.get(i).size() + " "
-					+ type + "s " + interimSum);
+					+ type + "s " + seconds);
+			double average = seconds / times.get(i).size();
+			System.out.println("Average time for " + times.get(i).size() + " "
+					+ type + "s " + average);
 			sum += interimSum;
 		}
 
@@ -222,15 +264,16 @@ public class RSpecValidationTest {
 				+ timeManifests.size() + " manifests, and "
 				+ timeRequests.size() + " requests.");
 		long average = sum / numFiles;
-		double seconds = average / 1000000000.0;
+		double seconds = average / nano;
 		System.out.println("Average time: " + seconds + " seconds");
 
+		return times;
 	}
 
-	private static void validateDirectory(File path) {
+	private static int[] validateDirectory(File path) {
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
-			return;
+			return null;
 		}
 		System.out
 				.println("==========================================================");
@@ -250,17 +293,12 @@ public class RSpecValidationTest {
 		System.out
 				.println("==========================================================");
 
-		int trueAds = 0;
-		int ads = 0;
-		int trueManifests = 0;
-		int manifests = 0;
-		int trueRequests = 0;
-		int requests = 0;
-		int different = 0;
+		int[] valid = new int[8];
 
 		for (int i = 0; i < files.length; i++) {
 
-			if (files[i].isFile() && RSpecValidation.rspecFileExtension(files[i])) {
+			if (files[i].isFile()
+					&& RSpecValidation.rspecFileExtension(files[i])) {
 				String rspecString = null;
 				try {
 					// System.out.println(files[i].getPath());
@@ -268,77 +306,107 @@ public class RSpecValidationTest {
 					rspecString = AbstractConverter.toString(files[i].getPath()
 							.substring(20));
 					String type = RSpecValidation.getType(rspecString);
+					// boolean validXMLUnit = RSpecValidation
+					// .validateRspecSchemaFactory(files[i].getPath(),
+					// type);
 
-					boolean validXMLUnit = RSpecValidation
-							.validateRspecXMLUnit(rspecString);
-					System.out.println("validXMLUnit: " + validXMLUnit);
-					boolean validRSpecLint = RSpecValidation.rspecLintMacOnly(files[i]
-							.getPath().substring(20));
+					// boolean validXMLUnit = RSpecValidation
+					// .validateRspecXMLUnit(rspecString);
+					// System.out.println("validXMLUnit: " + validXMLUnit);
+					boolean validRSpecLint = RSpecValidation
+							.rspecLintMacOnly(files[i].getPath().substring(20));
 					System.out.println("validRSpecLint: " + validRSpecLint);
 
-					switch (type) {
-					case "advertisement":
-						if (validXMLUnit && validRSpecLint) {
-							trueAds++;
+					if (type != null) {
+						switch (type) {
+						case "advertisement":
+							// if (validXMLUnit && validRSpecLint) {
+							if (validRSpecLint) {
+								valid[trueAds]++;
+							}
+							valid[ads]++;
+							break;
+						case "manifest":
+							// if (validXMLUnit && validRSpecLint) {
+							if (validRSpecLint) {
+								valid[trueManifests]++;
+							}
+							valid[manifests]++;
+							break;
+						case "request":
+							// if (validXMLUnit && validRSpecLint) {
+							if (validRSpecLint) {
+								valid[trueRequests]++;
+							}
+							valid[requests]++;
+							break;
 						}
-						ads++;
-						break;
-					case "manifest":
-						if (validXMLUnit && validRSpecLint) {
-							trueManifests++;
-						}
-						manifests++;
-						break;
-					case "request":
-						if (validXMLUnit && validRSpecLint) {
-							trueRequests++;
-						}
-						requests++;
-						break;
+					} else {
+						valid[typeMissing]++;
 					}
 
-					if ((validXMLUnit || validRSpecLint)
-							&& !(validXMLUnit && validRSpecLint)) {
-						different++;
-					}
+					// if ((validXMLUnit || validRSpecLint)
+					// && !(validXMLUnit && validRSpecLint)) {
+					// valid[different]++;
+					// }
 
 					System.out
 							.println("==========================================================");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			} else if (files[i].isDirectory()) {
+				int[] newValid = validateDirectory(files[i]);
+				for (int j = 0; j < valid.length; j++) {
+					valid[j] = newValid[j] + valid[j];
+				}
 			}
 		}
 		System.out.println("Summary: ");
-		int total = ads + manifests + requests;
-		int totalTrue = trueAds + trueManifests + trueRequests;
+		int total = valid[ads] + valid[manifests] + valid[requests]
+				+ valid[typeMissing];
+		int totalTrue = valid[trueAds] + valid[trueManifests]
+				+ valid[trueRequests];
 		System.out.println(totalTrue + " / " + total + " RSpecs, "
 				+ " were valid in both XMLUnit and RSpecLint.");
-		System.out.println(trueAds + " / " + ads + " ads were valid");
-		System.out.println(trueManifests + " / " + manifests
+		System.out.println(valid[trueAds] + " / " + valid[ads]
+				+ " ads were valid");
+		System.out.println(valid[trueManifests] + " / " + valid[manifests]
 				+ " manifests were valid");
-		System.out.println(trueRequests + " / " + requests
+		System.out.println(valid[trueRequests] + " / " + valid[requests]
 				+ " requests were valid");
 		System.out.println("Number where XMLUnit and RSpecLint disagreed: "
-				+ different);
+				+ valid[different]);
+		System.out.println(valid[typeMissing]
+				+ " had not rspec type and are therefore invalid");
+
+		return valid;
 
 	}
 
 	public static void main(String[] args) {
 
 		// File path = new File("./src/test/resources/geni/advertisement");
+		// File path = new File("./src/test/resources/geni/ciscogeni");
+		// File path = new File("./src/test/resources/geni/exogeni");
 		// File path = new File("./src/test/resources/geni/fed4fire");
 		// File path = new File("./src/test/resources/geni/gimiv3");
-
+		// File path = new File("./src/test/resources/geni/gpolab");
+		// File path = new File("./src/test/resources/geni/iminds");
+		// File path = new File("./src/test/resources/geni/instageni");
 		// File path = new File("./src/test/resources/geni/manifest");
 		// File path = new File("./src/test/resources/geni/maxgeni");
+		// File path = new File("./src/test/resources/geni/oess");
+		// File path = new File("./src/test/resources/geni/openflow");
+		// File path = new File("./src/test/resources/geni/productionfoam");
 		// File path = new File("./src/test/resources/geni/protogeni");
 		// File path = new File("./src/test/resources/geni/request");
-		File path = new File("./src/test/resources/omn/paper2015iswc");
+		// File path = new File("./src/test/resources/geni/stich");
 
-		getErrorDirectory(path);
-		// getRoundTripDirectory(path);
+		File path = new File("./src/test/resources/geni");
+
+		// getErrorDirectory(path);
+		getTimesDirectory(path);
 		// validateDirectory(path);
-
 	}
 }
