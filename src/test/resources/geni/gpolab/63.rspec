@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+This rspec will reserve all hosts in the Stanford mesoscale MyPLC that are
+known to be available as of 2011-04-27.
+
+AM: https://myplc.stanford.edu:12346/
+-->
+
+<RSpec type="SFA">
+  <network name="plc">
+    <site id="s1">
+      <name>MyPLC</name>
+      <node id="n1">
+        <hostname>of-planet1.stanford.edu</hostname>
+        <sliver></sliver>
+      </node>
+      <node id="n2">
+        <hostname>of-planet2.stanford.edu</hostname>
+        <sliver></sliver>
+      </node>
+      <node id="n3">
+        <hostname>of-planet3.stanford.edu</hostname>
+        <sliver></sliver>
+      </node>
+      <node id="n4">
+        <hostname>of-planet4.stanford.edu</hostname>
+        <sliver></sliver>
+      </node>
+    </site>
+  </network>
+</RSpec>

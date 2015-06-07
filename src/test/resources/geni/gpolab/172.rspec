@@ -1,0 +1,34 @@
+<rspec type="request" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" 
+       xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+       xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="hadoop-worker-0" exclusive="false">
+    <sliver_type name="XOMedium"/>
+    <interface client_id="VM:if0">
+    </interface>
+  </node>
+  <node client_id="hadoop-worker-1" exclusive="false">
+    <sliver_type name="XOMedium"/>
+    <interface client_id="VM-0:if0">
+    </interface>
+  </node>
+  <node client_id="hadoop-master" exclusive="false">
+    <sliver_type name="XOLarge"/>
+    <interface client_id="VM-1:if0">
+    </interface>
+  </node>
+  <link client_id="link0">
+    <interface_ref client_id="VM-1:if0"/>
+    <interface_ref client_id="VM:if0"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM:if0"/>
+    <property source_id="VM:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-0:if0"/>
+    <property source_id="VM:if0" dest_id="VM-0:if0"/>
+    <property source_id="VM-0:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-0:if0" dest_id="VM:if0"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

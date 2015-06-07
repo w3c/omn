@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+AM: https://nox.orbit-lab.org:3626/foam/gapi/1
+-->
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+  <openflow:sliver description="EG-EXP-6-exp3" email="lnevers@bbn.com">
+
+    <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33019" type="primary" />
+
+    <openflow:group name="rutgers-site">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:internal2.orbit-lab.org+datapath+00:00:00:10:10:17:34:01" 
+	                 component_manager_id="urn:publicid:IDN+openflow:foam:internal2.orbit-lab.org+authority+am">
+    <openflow:port name="GBE0/9" num="9"/>
+    <openflow:port name="GBE0/10" num="10"/>
+    <openflow:port name="GBE0/16" num="16"/>
+  </openflow:datapath>
+   </openflow:group>
+
+    <openflow:group name="rutgers-1750-i2-3716">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:internal2.orbit-lab.org+datapath+00:00:00:10:10:17:50:01"
+			 component_manager_id="urn:publicid:IDN+openflow:foam:internal2.orbit-lab.org+authority+am">
+       <openflow:port name="GBE0/3" num="3"/>
+       <openflow:port name="GBE0/5" num="5"/>
+       <openflow:port name="GBE0/9" num="9"/>
+       <openflow:port name="GBE0/10" num="10"/>
+       <openflow:port name="GBE0/11" num="11"/>
+       <openflow:port name="GBE0/12" num="12"/>
+      </openflow:datapath>
+    </openflow:group>
+
+    <openflow:match>
+
+      <openflow:use-group name="rutgers-site" />
+      <openflow:use-group name="rutgers-1750-i2-3716" />
+
+      <openflow:packet>
+	<openflow:dl_type value="0x800,0x806"/>
+	<openflow:nw_dst value="10.42.19.0/24"/>
+	<openflow:nw_src value="10.42.19.0/24"/>
+      </openflow:packet>
+
+    </openflow:match>
+
+  </openflow:sliver>
+
+</rspec>

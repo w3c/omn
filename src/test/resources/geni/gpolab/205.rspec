@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd
+                           "
+       type="request">
+<node client_id="right" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+uky.emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/openvswitch-1.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-topo-setup-64.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/of-topo-setup &amp;&amp; ./right-shaper-setup" />
+    </services>
+    <interface client_id="right:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.3.2" />
+    </interface>
+    <interface client_id="right:aggregator">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.5.1" />
+    </interface>
+</node>
+<node client_id="aggregator" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+uky.emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/openvswitch-1.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-topo-setup-64.tar.gz" install_path="/tmp" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/trema-trema-f995284-F15-64.tar.gz" install_path="/opt" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/aggregator.tar.gz" install_path="/users/geniuser" />
+        <execute shell="sh" command="cd /tmp/of-topo-setup &amp;&amp; ./aggregator-setup" />
+    </services>
+    <interface client_id="aggregator:right">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.5.2" />
+    </interface>
+    <interface client_id="aggregator:left">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.4.2" />
+    </interface>
+    <interface client_id="aggregator:inside">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.6.1" />
+    </interface>
+</node>
+<node client_id="inside" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+uky.emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <interface client_id="inside:aggregator">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.10.2" />
+    </interface>
+</node>
+<node client_id="switch" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+uky.emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/openvswitch-1.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-topo-setup-64.tar.gz" install_path="/tmp" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/trema-trema-f995284-F15-64.tar.gz" install_path="/opt" />
+        <execute shell="sh" command="cd /tmp/of-topo-setup &amp;&amp; ./lb-setup" />
+    </services>
+    <interface client_id="switch:outside">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.1.1" />
+    </interface>
+    <interface client_id="switch:right">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.3.1" />
+    </interface>
+    <interface client_id="switch:left">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.2.1" />
+    </interface>
+</node>
+<node client_id="outside" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+uky.emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <interface client_id="outside:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.10.1" />
+    </interface>
+</node>
+<node client_id="left" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+uky.emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/openvswitch-1.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-topo-setup-64.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/of-topo-setup &amp;&amp; ./left-shaper-setup" />
+    </services>
+    <interface client_id="left:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.2.2" />
+    </interface>
+    <interface client_id="left:aggregator">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.4.1" />
+    </interface>
+</node>
+<link client_id="left-aggregator">
+    <interface_ref client_id="aggregator:left" />
+    <interface_ref client_id="left:aggregator" />
+</link>
+<link client_id="right-aggregator">
+    <interface_ref client_id="aggregator:right" />
+    <interface_ref client_id="right:aggregator" />
+</link>
+<link client_id="aggregator-inside">
+    <interface_ref client_id="aggregator:inside" />
+    <interface_ref client_id="inside:aggregator" />
+</link>
+<link client_id="outside-switch">
+    <interface_ref client_id="outside:switch" />
+    <interface_ref client_id="switch:outside" />
+</link>
+<link client_id="switch-left">
+    <interface_ref client_id="left:switch" />
+    <interface_ref client_id="switch:left" />
+</link>
+<link client_id="switch-right">
+    <interface_ref client_id="right:switch" />
+    <interface_ref client_id="switch:right" />
+</link>
+</rspec>

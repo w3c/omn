@@ -1,0 +1,144 @@
+<rspec type="request" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
+       xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+       xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="hostA" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostA:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="204" y="52" unbound="false"/>
+  </node>
+  <node client_id="top" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" component_id="urn:publicid:IDN+emulab.net+node+pc403" component_name="pc403" exclusive="false">
+    <location latitude="40.768652" longitude="-111.84581" country="US"/>
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="top:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="top:if1">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="top:if2">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="214" y="167" unbound="false"/>
+  </node>
+  <node client_id="left"
+  component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+  component_id="urn:publicid:IDN+emulab.net+node+pc411" component_name="pc411" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="left:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="left:if1">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="45" y="324" unbound="false"/>
+  </node>
+  <node client_id="right" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+  component_id="urn:publicid:IDN+emulab.net+node+pc522" component_name="pc522" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="right:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="right:if1">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="373" y="329" unbound="false"/>
+  </node>
+  <node client_id="bottom" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm"
+  component_id="urn:publicid:IDN+emulab.net+node+pc449" component_name="pc449" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="bottom:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="bottom:if1">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="bottom:if2">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="237" y="413" unbound="false"/>
+  </node>
+  <node client_id="hostB" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostB:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="232" y="542" unbound="false"/>
+  </node>
+  <link client_id="link-A">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="hostA:if0"/>
+    <interface_ref client_id="top:if0"/>
+    <property source_id="hostA:if0" dest_id="top:if0"/>
+    <property source_id="top:if0" dest_id="hostA:if0"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link client_id="link-0">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="top:if1"/>
+    <interface_ref client_id="left:if0"/>
+    <property source_id="top:if1" dest_id="left:if0"/>
+    <property source_id="left:if0" dest_id="top:if1"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link client_id="link-2">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="left:if1"/>
+    <interface_ref client_id="bottom:if0"/>
+    <property source_id="left:if1" dest_id="bottom:if0"/>
+    <property source_id="bottom:if0" dest_id="left:if1"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link client_id="link-1">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="top:if2"/>
+    <interface_ref client_id="right:if0"/>
+    <property source_id="top:if2" dest_id="right:if0"/>
+    <property source_id="right:if0" dest_id="top:if2"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link client_id="link-3">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="bottom:if1"/>
+    <interface_ref client_id="right:if1"/>
+    <property source_id="bottom:if1" dest_id="right:if1"/>
+    <property source_id="right:if1" dest_id="bottom:if1"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link client_id="link-B">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="bottom:if2"/>
+    <interface_ref client_id="hostB:if0"/>
+    <property source_id="bottom:if2" dest_id="hostB:if0"/>
+    <property source_id="hostB:if0" dest_id="bottom:if2"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+
+  
+</rspec>

@@ -1,0 +1,14 @@
+<rspec type="request" generated_by="Flack" generated="2012-10-21T23:55:23Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="ofctrl" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <vnode name="pc136" xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <hardware_type name="pc850"/>
+    <sliver_type name="raw-pc">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU10-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/gec15/adv-omni/l3deflect/l3deflect-install.tar.gz"/>
+    </services>
+    <flack:node_info x="81" y="188" unbound="true"/>
+  </node>
+</rspec>

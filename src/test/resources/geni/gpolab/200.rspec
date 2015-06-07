@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd
+                           "
+       type="request">
+<node client_id="collaborator1" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes researcher1" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+    </services>
+    <interface client_id="collaborator1:researcher1">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.1.1" />
+    </interface>
+    <interface client_id="collaborator1:collaborator3">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.3.1" />
+    </interface>
+</node>
+<node client_id="collaborator3" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes collaborator1 researcher2" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+    </services>
+    <interface client_id="collaborator3:researcher2">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.4.1" />
+    </interface>
+    <interface client_id="collaborator3:collaborator1">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.3.2" />
+    </interface>
+</node>
+<node client_id="collaborator2" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes researcher1" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+    </services>
+    <interface client_id="collaborator2:researcher1">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.2.1" />
+    </interface>
+</node>
+<node client_id="datasource2" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/atmos-data2.tar" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes " />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./atmos-server pr_19020201_060000.nc" />
+    </services>
+    <interface client_id="datasource2:router">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.8.1" />
+    </interface>
+</node>
+<node client_id="datasource1" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/atmos-data1.tar" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes " />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./atmos-server pr_19020101_060000.nc" />
+    </services>
+    <interface client_id="datasource1:router">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.7.1" />
+    </interface>
+</node>
+<node client_id="router" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes datasource1 datasource2" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+    </services>
+    <interface client_id="router:researcher1">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.5.2" />
+    </interface>
+    <interface client_id="router:datasource2">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.8.2" />
+    </interface>
+    <interface client_id="router:researcher2">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.6.2" />
+    </interface>
+    <interface client_id="router:datasource1">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.7.2" />
+    </interface>
+</node>
+<node client_id="researcher1" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes router" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+    </services>
+    <interface client_id="researcher1:router">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.5.1" />
+    </interface>
+    <interface client_id="researcher1:collaborator1">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.1.2" />
+    </interface>
+    <interface client_id="researcher1:collaborator2">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.2.2" />
+    </interface>
+</node>
+<node client_id="researcher2" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-64-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-0.6.1-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-atmos-F15-64.tar.gz" install_path="/" />
+        <install url="http://www.gpolab.bbn.com/experiment-support/CCNExampleExperiment/ccnx-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 8" />
+    </services>
+    <interface client_id="researcher2:collaborator3">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.4.2" />
+    </interface>
+    <interface client_id="researcher2:router">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.6.1" />
+    </interface>
+</node>
+<link client_id="researcher1-router">
+    <interface_ref client_id="researcher1:router" />
+    <interface_ref client_id="router:researcher1" />
+</link>
+<link client_id="collaborator2-researcher1">
+    <interface_ref client_id="collaborator2:researcher1" />
+    <interface_ref client_id="researcher1:collaborator2" />
+</link>
+<link client_id="collaborator1-researcher1">
+    <interface_ref client_id="collaborator1:researcher1" />
+    <interface_ref client_id="researcher1:collaborator1" />
+</link>
+<link client_id="router-datasource2">
+    <interface_ref client_id="datasource2:router" />
+    <interface_ref client_id="router:datasource2" />
+</link>
+<link client_id="router-datasource1">
+    <interface_ref client_id="datasource1:router" />
+    <interface_ref client_id="router:datasource1" />
+</link>
+<link client_id="collaborator3-collaborator1">
+    <interface_ref client_id="collaborator1:collaborator3" />
+    <interface_ref client_id="collaborator3:collaborator1" />
+</link>
+<link client_id="collaborator3-researcher2">
+    <interface_ref client_id="collaborator3:researcher2" />
+    <interface_ref client_id="researcher2:collaborator3" />
+</link>
+<link client_id="researcher2-router">
+    <interface_ref client_id="researcher2:router" />
+    <interface_ref client_id="router:researcher2" />
+</link>
+</rspec>

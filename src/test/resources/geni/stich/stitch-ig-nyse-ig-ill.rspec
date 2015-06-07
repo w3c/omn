@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="nyse" component_manager_id="urn:publicid:IDN+instageni.nysernet.org+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="nyse:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nyse:if1">
+      <ip address="192.168.2.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="nyse2" component_manager_id="urn:publicid:IDN+instageni.nysernet.org+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+     <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="nyse2:if0">
+      <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ill" component_manager_id="urn:publicid:IDN+instageni.illinois.edu+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+  <services> <execute command="sudo sed -i -e '1,$/https/http/' /etc/yum.repos.d/*.repo;sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="ill:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link1">
+    <component_manager name="urn:publicid:IDN+instageni.nysernet.org+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.illinois.edu+authority+cm"/>
+    <interface_ref client_id="nyse:if0"/>
+    <interface_ref client_id="ill:if0"/>
+    <property source_id="nyse:if0" dest_id="ill:if0" capacity="20000"/>
+    <property source_id="ill:if0" dest_id="nyse:if0" capacity="20000"/>
+  </link>
+  <link client_id="link2">
+    <component_manager name="urn:publicid:IDN+instageni.nysernet.org+authority+cm"/>
+    <interface_ref client_id="nyse:if1"/>
+    <interface_ref client_id="nyse2:if0"/>
+    <property source_id="nyse:if1" dest_id="nyse2:if0" capacity="20000"/>
+    <property source_id="nyse2:if0" dest_id="nyse:if1" capacity="20000"/>
+  </link>
+
+</rspec>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="eg-gpo" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am">
+   <interface client_id="eg-gpo:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="ig-utah" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" >
+    <sliver_type name="emulab-xen"/>
+     <services> 
+     <execute command="sudo sed -i -e '4s/#baseurl/baseurl/' /etc/yum.repos.d/fedora.repo;sudo yum install iperf -y" shell="sh"/>
+    </services>
+    <interface client_id="ig-utah:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link-eggpo-igutah">
+    <component_manager name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"/>
+    <interface_ref client_id="eg-gpo:if0"/>
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="ig-utah:if0"/>
+  </link>
+</rspec>

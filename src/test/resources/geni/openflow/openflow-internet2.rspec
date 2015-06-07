@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+AM: https://foam.net.internet2.edu:3626/foam/gapi/1
+-->
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+ <openflow:sliver description="OpenFlow Experiment Example" email="lnevers@bbn.com">
+ <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33020" type="primary" />
+
+    <openflow:group name="i2-losa-1750">
+    <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+datapath+06:d6:00:12:e2:22:63:38" 
+     component_manager_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+authority+am" 
+     dpid="06:d6:00:12:e2:22:63:38">  <!-- I2 Los Angeles 3715 Path -->
+        <openflow:port name="GBE0/12" num="12"/> <!-- I2 UEN 1750 -->
+        <openflow:port name="GBE0/13" num="13"/> <!-- I2 Los Angeles 3715 Port -->
+      </openflow:datapath>
+    </openflow:group>
+
+   <openflow:group name="i2-atla-3715">
+    <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+datapath+0e:83:00:12:e2:22:63:6e"
+      component_manager_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+authority+am" 
+      dpid="0e:83:00:12:e2:22:63:6e"> <!-- I2 ATLA 3715 -->
+      </openflow:datapath>
+   </openflow:group>
+
+   <openflow:group name="i2-hous-3715">
+    <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+datapath+0e:83:00:12:e2:22:81:42"
+     component_manager_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+authority+am" 
+     dpid="0e:83:00:12:e2:22:81:42"> <!-- I2 HOUS 3715 -->
+      </openflow:datapath>
+   </openflow:group>
+
+   <openflow:group name="i2-losa-3715">
+    <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+datapath+0e:83:00:12:e2:22:63:38" 
+     component_manager_id="urn:publicid:IDN+openflow:foam:foam.net.internet2.edu+authority+am" 
+     dpid="0e:83:00:12:e2:22:63:38"> <!-- I2 LOSA 3715 -->
+      </openflow:datapath>
+   </openflow:group>
+
+   <openflow:match>
+      <openflow:use-group name="i2-atla-3715" />
+      <openflow:use-group name="i2-hous-3715" />
+      <openflow:use-group name="i2-losa-3715" />
+      <openflow:use-group name="i2-losa-1750" />
+      <openflow:packet>
+        <openflow:dl_type value="0x800,0x806"/>
+        <openflow:nw_dst value="10.42.11.0/24"/>
+        <openflow:nw_src value="10.42.11.0/24"/>
+      </openflow:packet>
+   </openflow:match>
+
+  </openflow:sliver>
+</rspec>

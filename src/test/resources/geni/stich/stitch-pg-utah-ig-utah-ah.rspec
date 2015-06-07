@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+       xmlns:stitch="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://hpn.east.isi.edu/rspec/ext/stitch/0.1/
+           http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd"
+       type="request">
+
+  <node client_id="utah" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>    
+    <interface client_id="utah:if1">
+      <ip address="10.20.2.2" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <node client_id="utah-ig" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>    
+    <interface client_id="ig-utah:if1">
+      <ip address="10.20.2.3" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <link client_id="link-utah-utah-ig">    
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>    
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="utah:if1"/>    
+    <interface_ref client_id="ig-utah:if1"/>    
+  </link>  
+
+</rspec>

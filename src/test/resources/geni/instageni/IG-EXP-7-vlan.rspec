@@ -1,0 +1,133 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1" 
+	xs:schemaLocation="http://www.geni.net/resources/rspec/3           
+	http://www.geni.net/resources/rspec/3/request.xsd 
+	http://www.geni.net/resources/rspec/ext/shared-vlan/1 
+	http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd" 
+type="request">
+
+  <node client_id="hostA" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostA:if0">
+    <ip address="10.42.18.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="top" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="top:if0">
+    <ip address="10.42.18.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="top:if1">
+    <ip address="10.42.11.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="top:if2">
+    <ip address="10.42.21.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="left" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="left:if0">
+    <ip address="10.42.11.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="left:if1">
+    <ip address="10.42.13.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="right" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="right:if0">
+    <ip address="10.42.21.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="right:if1">
+    <ip address="10.42.20.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="bottom" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="bottom:if0">
+    <ip address="10.42.20.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="bottom:if1">
+    <ip address="10.42.13.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="bottom:if2">
+    <ip address="10.42.19.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="hostB" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostB:if0">
+    <ip address="10.42.19.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link-A">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="hostA:if0"/>
+    <interface_ref client_id="top:if0"/>
+    <property source_id="hostA:if0" dest_id="top:if0"/>
+    <property source_id="top:if0" dest_id="hostA:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-0">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="top:if1"/>
+    <interface_ref client_id="left:if0"/>
+    <property source_id="top:if1" dest_id="left:if0"/>
+    <property source_id="left:if0" dest_id="top:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-2">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="left:if1"/>
+    <sharedvlan:link_shared_vlan name="L2-ping-tutorial"/> 
+  </link>
+  <link client_id="link-2a">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="bottom:if1"/>
+    <sharedvlan:link_shared_vlan name="L2-ping-tutorial"/> 
+  </link>
+  <link client_id="link-1">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="top:if2"/>
+    <sharedvlan:link_shared_vlan name="IG-EXP-7"/>
+  </link>
+  <link client_id="link-1a">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="right:if0"/>
+    <sharedvlan:link_shared_vlan name="IG-EXP-7"/>
+  </link>
+  <link client_id="link-3">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="bottom:if0"/>
+    <interface_ref client_id="right:if1"/>
+    <property source_id="bottom:if0" dest_id="right:if1"/>
+    <property source_id="right:if1" dest_id="bottom:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-B">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="bottom:if2"/>
+    <interface_ref client_id="hostB:if0"/>
+    <property source_id="bottom:if2" dest_id="hostB:if0"/>
+    <property source_id="hostB:if0" dest_id="bottom:if2"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+        xmlns="http://www.geni.net/resources/rspec/3" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+        http://www.geni.net/resources/rspec/3/request.xsd">
+
+  <node client_id="ig-gpo" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-gpo:if0">
+      <ip address="192.168.4.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-utah" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-utah:if0">
+      <ip address="192.168.4.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="ig-gpo:if0"/>
+    <interface_ref client_id="ig-utah:if0"/>
+    <property source_id="ig-gpo:if0" dest_id="ig-utah:if0" capacity="20000"/>
+    <property source_id="ig-utah:if0" dest_id="ig-gpo:if0" capacity="20000"/>
+  </link>
+</rspec>

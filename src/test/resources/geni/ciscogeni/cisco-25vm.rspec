@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+        xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+                            http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+        xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="VM">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM:if0">
+    </interface>
+    <interface client_id="VM:if1">
+    </interface>
+  </node>
+  <node client_id="VM-0">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-0:if0">
+    </interface>
+    <interface client_id="VM-0:if1">
+    </interface>
+    <interface client_id="VM-0:if2">
+    </interface>
+  </node>
+  <node client_id="VM-1">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-1:if0">
+    </interface>
+    <interface client_id="VM-1:if1">
+    </interface>
+    <interface client_id="VM-1:if2">
+    </interface>
+  </node>
+  <node client_id="VM-2">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-2:if0">
+    </interface>
+    <interface client_id="VM-2:if1">
+    </interface>
+    <interface client_id="VM-2:if2">
+    </interface>
+  </node>
+  <node client_id="VM-3">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-3:if0">
+    </interface>
+    <interface client_id="VM-3:if1">
+    </interface>
+    <interface client_id="VM-3:if2">
+    </interface>
+  </node>
+  <node client_id="VM-4">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-4:if0">
+    </interface>
+    <interface client_id="VM-4:if1">
+    </interface>
+    <interface client_id="VM-4:if2">
+    </interface>
+  </node>
+  <node client_id="VM-5">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-5:if0">
+    </interface>
+    <interface client_id="VM-5:if1">
+    </interface>
+    <interface client_id="VM-5:if2">
+    </interface>
+  </node>
+  <node client_id="VM-6">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-6:if0">
+    </interface>
+    <interface client_id="VM-6:if1">
+    </interface>
+    <interface client_id="VM-6:if2">
+    </interface>
+  </node>
+  <node client_id="VM-7">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-7:if0">
+    </interface>
+  </node>
+  <node client_id="VM-9">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-9:if0">
+    </interface>
+    <interface client_id="VM-9:if1">
+    </interface>
+    <interface client_id="VM-9:if2">
+    </interface>
+  </node>
+  <node client_id="VM-10">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-10:if0">
+    </interface>
+    <interface client_id="VM-10:if1">
+    </interface>
+    <interface client_id="VM-10:if2">
+    </interface>
+    <interface client_id="VM-10:if3">
+    </interface>
+  </node>
+  <node client_id="VM-11">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-11:if0">
+    </interface>
+    <interface client_id="VM-11:if1">
+    </interface>
+    <interface client_id="VM-11:if2">
+    </interface>
+    <interface client_id="VM-11:if3">
+    </interface>
+  </node>
+  <node client_id="VM-12">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-12:if0">
+    </interface>
+    <interface client_id="VM-12:if1">
+    </interface>
+    <interface client_id="VM-12:if2">
+    </interface>
+    <interface client_id="VM-12:if3">
+    </interface>
+  </node>
+  <node client_id="VM-13">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-13:if0">
+    </interface>
+    <interface client_id="VM-13:if1">
+    </interface>
+    <interface client_id="VM-13:if2">
+    </interface>
+    <interface client_id="VM-13:if3">
+    </interface>
+  </node>
+  <node client_id="VM-14">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-14:if0">
+    </interface>
+    <interface client_id="VM-14:if1">
+    </interface>
+    <interface client_id="VM-14:if2">
+    </interface>
+    <interface client_id="VM-14:if3">
+    </interface>
+  </node>
+  <node client_id="VM-15">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-15:if0">
+    </interface>
+    <interface client_id="VM-15:if1">
+    </interface>
+    <interface client_id="VM-15:if2">
+    </interface>
+    <interface client_id="VM-15:if3">
+    </interface>
+  </node>
+  <node client_id="VM-16">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-16:if0">
+    </interface>
+    <interface client_id="VM-16:if2">
+    </interface>
+    <interface client_id="VM-16:if3">
+    </interface>
+  </node>
+  <node client_id="VM-19">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-19:if1">
+    </interface>
+    <interface client_id="VM-19:if2">
+    </interface>
+    <interface client_id="VM-19:if3">
+    </interface>
+  </node>
+  <node client_id="VM-21">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-21:if1">
+    </interface>
+    <interface client_id="VM-21:if2">
+    </interface>
+    <interface client_id="VM-21:if3">
+    </interface>
+  </node>
+  <node client_id="VM-22">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-22:if1">
+    </interface>
+    <interface client_id="VM-22:if2">
+    </interface>
+    <interface client_id="VM-22:if3">
+    </interface>
+  </node>
+  <node client_id="VM-23">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-23:if0">
+    </interface>
+    <interface client_id="VM-23:if2">
+    </interface>
+    <interface client_id="VM-23:if3">
+    </interface>
+  </node>
+  <node client_id="VM-24">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-24:if0">
+    </interface>
+    <interface client_id="VM-24:if1">
+    </interface>
+    <interface client_id="VM-24:if3">
+    </interface>
+  </node>
+  <node client_id="VM-27">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-27:if2">
+    </interface>
+    <interface client_id="VM-27:if1">
+    </interface>
+    <interface client_id="VM-27:if3">
+    </interface>
+  </node>
+  <node client_id="VM-20">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-20:if1">
+    </interface>
+    <interface client_id="VM-20:if2">
+    </interface>
+  </node>
+  <node client_id="VM-26">
+    <sliver_type name="m1.small">
+    </sliver_type>
+    <interface client_id="VM-26:if0">
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM:if0"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan1">
+    <interface_ref client_id="VM-0:if1"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan2">
+    <interface_ref client_id="VM-1:if1"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan3">
+    <interface_ref client_id="VM-2:if1"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan4">
+    <interface_ref client_id="VM-3:if1"/>
+    <interface_ref client_id="VM-4:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan5">
+    <interface_ref client_id="VM-4:if1"/>
+    <interface_ref client_id="VM-5:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan6">
+    <interface_ref client_id="VM-5:if1"/>
+    <interface_ref client_id="VM-6:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan7">
+    <interface_ref client_id="VM-6:if1"/>
+    <interface_ref client_id="VM-7:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan24">
+    <interface_ref client_id="VM-9:if0"/>
+    <interface_ref client_id="VM-20:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan25">
+    <interface_ref client_id="VM:if1"/>
+    <interface_ref client_id="VM-9:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan26">
+    <interface_ref client_id="VM-9:if2"/>
+    <interface_ref client_id="VM-10:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan27">
+    <interface_ref client_id="VM-10:if1"/>
+    <interface_ref client_id="VM-11:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan28">
+    <interface_ref client_id="VM-11:if1"/>
+    <interface_ref client_id="VM-12:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan29">
+    <interface_ref client_id="VM-12:if1"/>
+    <interface_ref client_id="VM-13:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan30">
+    <interface_ref client_id="VM-13:if1"/>
+    <interface_ref client_id="VM-14:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan31">
+    <interface_ref client_id="VM-14:if1"/>
+    <interface_ref client_id="VM-15:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan32">
+    <interface_ref client_id="VM-15:if1"/>
+    <interface_ref client_id="VM-16:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan58">
+    <interface_ref client_id="VM-24:if0"/>
+    <interface_ref client_id="VM-27:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan59">
+    <interface_ref client_id="VM-23:if0"/>
+    <interface_ref client_id="VM-24:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan65">
+    <interface_ref client_id="VM-20:if2"/>
+    <interface_ref client_id="VM-21:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan66">
+    <interface_ref client_id="VM-21:if2"/>
+    <interface_ref client_id="VM-19:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan67">
+    <interface_ref client_id="VM-19:if2"/>
+    <interface_ref client_id="VM-22:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan68">
+    <interface_ref client_id="VM-22:if2"/>
+    <interface_ref client_id="VM-23:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan54">
+    <interface_ref client_id="VM-16:if2"/>
+    <interface_ref client_id="VM-26:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan72">
+    <interface_ref client_id="VM-6:if2"/>
+    <interface_ref client_id="VM-16:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan73">
+    <interface_ref client_id="VM-5:if2"/>
+    <interface_ref client_id="VM-15:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan74">
+    <interface_ref client_id="VM-4:if2"/>
+    <interface_ref client_id="VM-14:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan75">
+    <interface_ref client_id="VM-3:if2"/>
+    <interface_ref client_id="VM-13:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan76">
+    <interface_ref client_id="VM-2:if2"/>
+    <interface_ref client_id="VM-12:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan77">
+    <interface_ref client_id="VM-1:if2"/>
+    <interface_ref client_id="VM-11:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan78">
+    <interface_ref client_id="VM-0:if2"/>
+    <interface_ref client_id="VM-10:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan79">
+    <interface_ref client_id="VM-10:if3"/>
+    <interface_ref client_id="VM-21:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan80">
+    <interface_ref client_id="VM-11:if3"/>
+    <interface_ref client_id="VM-19:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan81">
+    <interface_ref client_id="VM-12:if3"/>
+    <interface_ref client_id="VM-22:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan82">
+    <interface_ref client_id="VM-13:if3"/>
+    <interface_ref client_id="VM-23:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan83">
+    <interface_ref client_id="VM-14:if3"/>
+    <interface_ref client_id="VM-24:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan84">
+    <interface_ref client_id="VM-27:if3"/>
+    <interface_ref client_id="VM-15:if3"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

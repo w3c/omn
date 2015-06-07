@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec  xmlns="http://www.geni.net/resources/rspec/3"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:openflow="/opt/ofelia/ofam/local/schemas"
+        xs:schemaLocation="http://www.geni.net/resources/rspec/3
+              http://www.geni.net/resources/rspec/3/request.xsd
+              http://www.geni.net/resources/rspec/ext/openflow/3
+              http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+    type="request">
+    <!-- http://doc.ilabt.iminds.be/fgre/tutorials.html -->
+   <openflow:sliver email="carlos.bermudo@i2cat.net" description="From UOB delphi to i2cat VPN">
+      <openflow:controller url="tcp:10.216.12.29:6633" type="primary"/>
+       <openflow:group name="fs1">
+          <openflow:datapath component_manager_id="urn:publicid:IDN+openflow:ofam:univbris+authority+cm" 
+                             component_id="urn:publicid:IDN+openflow:ofam:univbris+datapath+05:00:00:00:00:00:00:01" 
+                             dpid="05:00:00:00:00:00:00:01">
+             <openflow:port name="GBE0/6" num="6"/> 
+	     <openflow:port name="GBE0/5" num="5"/>
+          </openflow:datapath>
+	   <openflow:datapath component_id="urn:publicid:IDN+openflow:ofam:univbris+datapath+05:00:00:00:00:00:00:03" 
+                             component_manager_id="urn:publicid:IDN+openflow:ofam:univbris+authority+cm" 
+                             dpid="05:00:00:00:00:00:00:03">
+             <openflow:port name="GBE0/19" num="18"/> 
+	     <openflow:port name="GBE0/7" num="7"/>
+          </openflow:datapath>
+       </openflow:group>
+       <openflow:match>
+          <openflow:use-group name="fs1" />
+          <openflow:packet>
+	         <openflow:dl_vlan value= "778"/>
+          </openflow:packet>
+       </openflow:match>
+   </openflow:sliver>
+</rspec>

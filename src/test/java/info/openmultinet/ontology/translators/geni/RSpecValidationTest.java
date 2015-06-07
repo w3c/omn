@@ -1,14 +1,16 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.translators.AbstractConverter;
-
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
@@ -181,8 +183,8 @@ public class RSpecValidationTest {
 					System.out.println(files[i].getPath());
 					System.out.println(files[i].getPath().substring(20));
 
-					rspecString = AbstractConverter.toString(files[i]
-							.getPath().substring(20));
+					rspecString = AbstractConverter.toString(files[i].getPath()
+							.substring(20));
 					boolean validXMLUnit = RSpecValidation
 							.validateRspecXMLUnit(rspecString);
 					System.out.println("validXMLUnit: " + validXMLUnit);
@@ -384,6 +386,87 @@ public class RSpecValidationTest {
 
 	}
 
+	private static void getErrorFile(File path) {
+
+		System.out.println("******************************************");
+		System.out.println("******       Prelim                 ******");
+		System.out.println("******************************************");
+
+		DateFormat dateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+		Date date = new Date();
+
+		System.out.println("Date of test: " + dateFormat.format(date));
+		System.out.println(path.getPath().substring(20) + "\n\n");
+
+		String rspecString = null;
+		try {
+			rspecString = AbstractConverter.toString(path.getPath().substring(
+					20));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			if (rspecString == null) {
+				System.out
+						.println("Something went wrong trying to get the input file. Please check the file path as it may not be correct.");
+				return;
+			}
+		}
+		System.out.println("******************************************");
+		System.out.println("******       Input RSpec            ******");
+		System.out.println("******************************************");
+		System.out.println(rspecString);
+
+		System.out.println("******************************************");
+		System.out.println("******     Checking validity        ******");
+		System.out.println("******************************************");
+		boolean valid = RSpecValidation.validateRspecXMLUnit(rspecString);
+		System.out.println("Valid: " + valid + "\n\n");
+		if (!valid) {
+			System.out.println("RSpec not valid. Quitting process.");
+			return;
+		}
+
+		System.out.println("******************************************");
+		System.out.println("******       Output RSpec           ******");
+		System.out.println("******************************************");
+
+		// String type = RSpecValidation.getType(rspecString);
+		double errorRate = RSpecValidation.getProportionalError(rspecString);
+
+		System.out.println("Error: " + errorRate);
+
+	}
+
+	private static void validateFile(File path) {
+
+		if (RSpecValidation.rspecFileExtension(path)) {
+			String rspecString = null;
+			System.out.println(path.getPath().substring(20));
+			try {
+				rspecString = AbstractConverter.toString(path.getPath().substring(
+						20));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			String type = RSpecValidation.getType(rspecString);
+			
+			 boolean validSchemaFactory = RSpecValidation
+			 .validateRspecSchemaFactory(path.getPath(),
+			 type);
+			 System.out.println("validSchemaFactory: " + validSchemaFactory);
+			 
+			 boolean validXMLUnit = RSpecValidation
+			 .validateRspecXMLUnit(rspecString);
+			 System.out.println("validXMLUnit: " + validXMLUnit);
+			 
+			boolean validRSpecLint = RSpecValidation.rspecLintMacOnly(path
+					.getPath().substring(20));
+			System.out.println("validRSpecLint: " + validRSpecLint);
+
+		}
+
+	}
+
 	public static void main(String[] args) {
 
 		// File path = new File("./src/test/resources/geni/advertisement");
@@ -403,10 +486,17 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/request");
 		// File path = new File("./src/test/resources/geni/stich");
 
-		File path = new File("./src/test/resources/geni");
+		// File path = new File("./src/test/resources/geni");
 
 		// getErrorDirectory(path);
-		getTimesDirectory(path);
+		// getTimesDirectory(path);
 		// validateDirectory(path);
+
+		File path = new File(
+				"./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
+		// getErrorFile(path);
+
+		validateFile(path);
+
 	}
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+AM: https://rci-hn.exogeni.net:11443/orca/xmlrpc
+-->
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="VM" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+    <sliver_type name="m1.small">
+   <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+    </sliver_type>
+    <interface client_id="VM:if0">
+   <ip address="10.42.18.15" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="VM-0" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+    <sliver_type name="m1.small">
+   <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+    </sliver_type>
+    <interface client_id="VM-0:if0">
+   <ip address="10.42.18.16" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM:if0"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <s:link_shared_vlan name="1750"/>
+  </link>
+</rspec>

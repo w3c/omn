@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This rspec will reserve the OpenFlow resources at NLR
+AM: https://foam.nlr.net:3626/foam/gapi/1
+-->
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+  <openflow:sliver description="IG-EXP-6-exp2 "
+                   email="lnevers@bbn.com">
+
+    <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33018" type="primary" />
+
+    <openflow:group name="nlr-atla-1750-3716">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+06:d6:00:24:a8:d2:b8:40" component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am">
+        <openflow:port num="5"/>   <!-- to VLAN 3716 -->
+        <openflow:port num="9"/>   <!-- to AMPATH -->
+        <openflow:port num="11"/>  <!-- to FIU -->
+        <openflow:port num="49"/>  <!-- to RENCI -->
+      </openflow:datapath>
+    </openflow:group>
+
+    <openflow:group name="nlr-3716">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:84:00:23:47:c8:bc:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" />  <!-- NLR CHIC 3716 -->
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:84:00:23:47:ca:bc:40" component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" />  <!-- NLR SUNN 3716 -->
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:84:00:24:a8:d2:48:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" />  <!-- NLR SEAT 3716 -->
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:84:00:24:a8:d2:b8:40" component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" />  <!-- NLR ATLA 3716 -->
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:84:00:26:f1:40:a8:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" />  <!-- NLR DENV 3716 -->
+    </openflow:group>
+
+    <openflow:match>
+      <openflow:use-group name="nlr-atla-1750-3716" />
+      <openflow:use-group name="nlr-3716" />
+      <openflow:packet>
+	<openflow:dl_type value="0x800,0x806"/>
+	<openflow:nw_dst value="10.42.18.0/24"/>
+	<openflow:nw_src value="10.42.18.0/24"/>
+      </openflow:packet>
+    </openflow:match>
+  </openflow:sliver>
+</rspec>
+

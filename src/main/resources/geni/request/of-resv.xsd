@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified"
+  targetNamespace="http://www.geni.net/resources/rspec/ext/openflow/4" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:rspec="http://www.geni.net/resources/rspec/3"
+  xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/4"> 
+
+        <xs:import schemaLocation="request.xsd" namespace="http://www.geni.net/resources/rspec/3"/>
+
+  <xs:simpleType name="DatapathID">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="23"/>
+      <xs:pattern value="([0-9a-fA-F]{2}[:]{0,1}){7}[0-9a-fA-F]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ControllerRole">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="primary"/>
+      <xs:enumeration value="backup"/>
+      <xs:enumeration value="monitor"/>
+      <xs:enumeration value="master"/>
+      <xs:enumeration value="equal"/>
+      <xs:enumeration value="slave"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ControllerURL">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="(tcp|ptcp|ssl)((:(((25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)\.){3}(25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)))|(:(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9]))){1}(:(6553[0-5]|655[0-2]\d|65[0-4]\d\d|6[0-4]\d\d\d|[1-9]\d\d\d|[1-9]\d\d|[1-9]\d|[1-9])){1}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="URN">
+    <xs:restriction base="xs:anyURI">
+      <xs:pattern value="urn:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,.:=@;$_!*'-]|%[0-9A-Fa-f]{2})+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Datapath">
+    <xs:sequence>
+      <xs:element name="port" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="num" type="xs:unsignedInt" use="required" />
+          <xs:attribute name="name" type="xs:token" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="component_id" type="openflow:URN" use="required" />
+    <xs:attribute name="component_manager_id" type="openflow:URN" use="optional" />
+    <xs:attribute name="dpid" type="openflow:DatapathID" use="optional" />
+  </xs:complexType>
+
+  <xs:element name="config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="controller" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="url" type="openflow:ControllerURL" use="required" />
+            <xs:attribute name="role" type="openflow:ControllerRole" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:group ref="rspec:AnyExtension" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

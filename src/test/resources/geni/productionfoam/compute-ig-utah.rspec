@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/shared-vlan/1
+           http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       type="request">
+
+  <node client_id="utah-ig" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+    <interface client_id="utah-ig:if0">
+      <ip address="10.42.11.33" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <node client_id="utah-ig2" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+    <interface client_id="utah-ig2:if0">
+      <ip address="10.42.11.32" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <link client_id="openflow-mesoscale-0">
+    <interface_ref client_id="utah-ig:if0" />
+    <sharedvlan:link_shared_vlan name="mesoscale-openflow" />
+  </link>
+
+  <link client_id="openflow-mesoscale-1">
+    <interface_ref client_id="utah-ig2:if0" />
+    <sharedvlan:link_shared_vlan name="mesoscale-openflow" />
+  </link>
+</rspec>

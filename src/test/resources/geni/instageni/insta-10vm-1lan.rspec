@@ -1,0 +1,163 @@
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="VM-1" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-1:if0">
+    </interface>
+  </node>
+  <node client_id="VM-2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-2:if0">
+    </interface>
+  </node>
+  <node client_id="VM-3" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-3:if0">
+    </interface>
+  </node>
+  <node client_id="VM-4" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-4:if0">
+    </interface>
+  </node>
+  <node client_id="VM-5" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-5:if0">
+    </interface>
+  </node>
+  <node client_id="VM-6" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-6:if0">
+    </interface>
+  </node>
+  <node client_id="VM-7" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-7:if0">
+    </interface>
+  </node>
+  <node client_id="VM-8" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-8:if0">
+    </interface>
+  </node>
+  <node client_id="VM-9" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-9:if0">
+    </interface>
+  </node>
+  <node client_id="VM-10" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-10:if0">
+    </interface>
+  </node>
+  <link client_id="Lan">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <interface_ref client_id="VM-4:if0"/>
+    <interface_ref client_id="VM-5:if0"/>
+    <interface_ref client_id="VM-6:if0"/>
+    <interface_ref client_id="VM-7:if0"/>
+    <interface_ref client_id="VM-8:if0"/>
+    <interface_ref client_id="VM-9:if0"/>
+    <interface_ref client_id="VM-10:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-9:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-8:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-9:if0" dest_id="VM-10:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-3:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-4:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-5:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-6:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-7:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-8:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-9:if0"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

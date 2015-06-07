@@ -65,7 +65,7 @@ public class RSpecValidation {
 		String outputNew = null;
 
 		// clean up input doc
-		Document inputDoc;
+		Document inputDoc = null;
 		try {
 			inputDoc = RSpecValidation.loadXMLFromString(input);
 			RSpecValidation.wipeRootNamespaces(inputDoc);
@@ -80,6 +80,7 @@ public class RSpecValidation {
 			outputDoc = RSpecValidation.loadXMLFromString(output);
 			RSpecValidation.wipeRootNamespaces(outputDoc);
 			outputNew = RSpecValidation.getStringFromXml(outputDoc);
+			System.out.println(outputNew);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -87,7 +88,10 @@ public class RSpecValidation {
 
 		// get number of differences and calculate proportional error rate
 		int numDiffs = getNumberDiffs(inputNew, outputNew);
-		int nodeCount = outputDoc.getElementsByTagName("*").getLength();
+		System.out.println("Number of differences: " + numDiffs);
+		int nodeCount = inputDoc.getElementsByTagName("*").getLength();
+		// int nodeCount = outputDoc.getElementsByTagName("*").getLength();
+		System.out.println("Number of input nodes: " + nodeCount);
 		double errorRate = ((double) numDiffs) / (2 * nodeCount);
 		errorRate = errorRate < 1 ? errorRate : 1;
 
@@ -126,6 +130,7 @@ public class RSpecValidation {
 			Difference diff = (Difference) iter.next();
 			if (!diff.isRecoverable()) {
 				numDiffs++;
+				System.out.println(diff.toString());
 			}
 		}
 		return numDiffs;

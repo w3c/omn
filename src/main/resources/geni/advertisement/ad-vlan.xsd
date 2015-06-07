@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for advertising the option to connect an interface to a shared VLAN. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:s="http://www.geni.net/resources/rspec/ext/shared-vlan/1">
+  <!--
+    localTag: Aggregate local VLAN tag used for this shared VLAN.
+    foamURL: URL to the local FOAM AM userd to configure access to this VLAN, if any.
+    restricted: default false. When true, a special credential is 
+                required to connect to this shared VLAN
+  -->
+  <xs:element name="rspec_shared_vlan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="s:available"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="available">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="description" type="xs:string"/>
+      <xs:attribute name="localTag" type="xs:integer"/>
+      <xs:attribute name="foamURL" type="xs:anyURI"/>
+      <xs:attribute name="restricted" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

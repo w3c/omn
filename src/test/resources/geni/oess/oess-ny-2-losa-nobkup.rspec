@@ -1,0 +1,30 @@
+<rspec  xmlns="http://www.geni.net/resources/rspec/3"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:oess="http://bssoftworks.com/geni/ext/circuit/1"
+      xs:schemaLocation="http://www.geni.net/rspec/3/manifest.xsd
+          http://www.geni.net/resources/rspec/3/request.xsd
+          http://bssoftworks.com/geni/ext/circuit/1
+          http://geni.bssoftworks.com/rspec/ext/circuit/1/request.xsd"
+      type="request">
+
+<oess:circuit>
+  <oess:description>LN ny-2-losa</oess:description>
+  <oess:bandwidth mbps="100" />
+  <oess:primaryPath>
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-CLEV-STAR-100GE-07736" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-LOSA-SUNN-100GE-07755" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-BOST-NEWY32AOA-100GE-09211" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ALBA-BOST-100GE-09210" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ALBA-CLEV-100GE-07735" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-MINN-SEAT-100GE-09130" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-MINN-STAR-100GE-09299" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-SEAT-SUNN-100GE-08997-2" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-PORT-SUNN-100GE-10343" />
+  </oess:primaryPath>
+  <oess:endpoints>
+    <oess:interface urn="urn:publicid:IDN+oess:foam:nddi+sdn-sw.newy32aoa.net.internet2.edu+e15/5" vlan="3002" />
+    <oess:interface urn="urn:publicid:IDN+oess:foam:nddi+sdn-sw.losa.net.internet2.edu+e15/3" vlan="3002" />
+  </oess:endpoints>
+</oess:circuit>
+
+</rspec>

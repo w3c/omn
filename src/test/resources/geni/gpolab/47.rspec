@@ -1,0 +1,47 @@
+<rspec type="request" generated_by="Flack" generated="2013-07-30T19:13:07Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="NodeA" exclusive="false">
+    <sliver_type name="XOMedium"/>
+    <interface client_id="VM:if0">
+      <ip address="192.168.1.10" netmask="255.255.255.0" type=""/>
+    </interface>
+    <interface client_id="VM:if1">
+      <ip address="192.168.3.10" netmask="255.255.255.0" type=""/>
+    </interface>
+  </node>
+  <node client_id="NodeB" exclusive="false">
+    <sliver_type name="XOMedium"/>
+    <interface client_id="VM-0:if0">
+      <ip address="192.168.1.11" netmask="255.255.255.0" type=""/>
+    </interface>
+    <interface client_id="VM-0:if1">
+      <ip address="192.168.2.11" netmask="255.255.255.0" type=""/>
+    </interface>
+  </node>
+  <node client_id="NodeC" exclusive="false">
+    <sliver_type name="XOMedium"/>
+    <interface client_id="VM-1:if0">
+      <ip address="192.168.2.12" netmask="255.255.255.0" type=""/>
+    </interface>
+    <interface client_id="VM-1:if1">
+      <ip address="192.168.3.12" netmask="255.255.255.0" type=""/>
+    </interface>
+  </node>
+  <link client_id="link0">
+    <interface_ref client_id="VM-0:if0"/>
+    <interface_ref client_id="VM:if0"/>
+    <property source_id="VM-0:if0" dest_id="VM:if0"/>
+    <property source_id="VM:if0" dest_id="VM-0:if0"/>
+  </link>
+  <link client_id="link1">
+    <interface_ref client_id="VM-0:if1"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <property source_id="VM-0:if1" dest_id="VM-1:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-0:if1"/>
+  </link>
+  <link client_id="link2">
+    <interface_ref client_id="VM:if1"/>
+    <interface_ref client_id="VM-1:if1"/>
+    <property source_id="VM:if1" dest_id="VM-1:if1"/>
+    <property source_id="VM-1:if1" dest_id="VM:if1"/>
+  </link>
+</rspec>

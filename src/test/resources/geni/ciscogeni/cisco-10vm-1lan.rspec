@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="VM-1"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-1:if0">
+   <ip address="172.16.1.1" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-2"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-2:if0">
+   <ip address="172.16.1.2" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-3"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-3:if0">
+   <ip address="172.16.1.3" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-4"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-4:if0">
+   <ip address="172.16.1.4" netmask="255.255.255.0" />
+   </interface>
+   </node>
+   <node client_id="VM-5"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-5:if0">
+   <ip address="172.16.1.5" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-6"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-6:if0">
+   <ip address="172.16.1.6" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-7"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-7:if0">
+   <ip address="172.16.1.7" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-8"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-8:if0">
+   <ip address="172.16.1.8" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-9"  >
+   <sliver_type name="m1.small">
+ 
+   </sliver_type>
+   <interface client_id="VM-9:if0">
+   <ip address="172.16.1.9" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-10"  >
+   <sliver_type name="m1.small">
+   </sliver_type>
+   <interface client_id="VM-10:if0">
+   <ip address="172.16.1.10" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <link client_id="Lan">
+   <interface_ref client_id="VM-1:if0"/>
+   <interface_ref client_id="VM-2:if0"/>
+   <interface_ref client_id="VM-3:if0"/>
+   <interface_ref client_id="VM-4:if0"/>
+   <interface_ref client_id="VM-5:if0"/>
+   <interface_ref client_id="VM-6:if0"/>
+   <interface_ref client_id="VM-7:if0"/>
+   <interface_ref client_id="VM-8:if0"/>
+   <interface_ref client_id="VM-9:if0"/>
+   <interface_ref client_id="VM-10:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-9:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-1:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-2:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-3:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-4:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-5:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-6:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-7:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-8:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-9:if0" dest_id="VM-10:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-1:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-2:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-3:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-4:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-5:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-6:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-7:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-8:if0"/>
+   <property source_id="VM-10:if0" dest_id="VM-9:if0"/>
+   <link_type name="lan"/>
+  </link>
+</rspec>

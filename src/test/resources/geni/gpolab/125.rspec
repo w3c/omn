@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd
+                           "
+       type="request">
+<node client_id="router" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-STD" />
+    </sliver_type>
+    <interface client_id="router:right">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.11.2" />
+    </interface>
+    <interface client_id="router:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.10.2" />
+    </interface>
+</node>
+<node client_id="switch" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.cs.purdue.edu/homes/fahmy/geni/tarballs/openvswitch-1.6.1-F15.tar.gz" install_path="/" />
+        <install url="http://www.cs.purdue.edu/homes/fahmy/geni/tarballs/trema-trema-8e97343-F15.tar.gz" install_path="/opt" />
+        <install url="http://www.cs.purdue.edu/homes/fahmy/geni/tarballs/of-topo-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/of-topo-setup &amp;&amp; ./switch-setup" />
+    </services>
+    <interface client_id="switch:router">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.129.1" />
+    </interface>
+    <interface client_id="switch:left">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.128.1" />
+    </interface>
+</node>
+<node client_id="right" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-STD" />
+    </sliver_type>
+    <interface client_id="right:router">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.11.1" />
+    </interface>
+</node>
+<node client_id="left" exclusive="true">
+    <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops:FEDORA15-STD" />
+    </sliver_type>
+    <services>
+        <install url="http://www.cs.purdue.edu/homes/fahmy/geni/tarballs/of-topo-setup.tar.gz" install_path="/tmp" />
+        <execute shell="sh" command="cd /tmp/of-topo-setup &amp;&amp; ./left-setup" />
+    </services>
+    <interface client_id="left:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.10.1" />
+    </interface>
+</node>
+<link client_id="switch-router">
+    <interface_ref client_id="router:switch" />
+    <interface_ref client_id="switch:router" />
+</link>
+<link client_id="left-switch">
+    <interface_ref client_id="left:switch" />
+    <interface_ref client_id="switch:left" />
+</link>
+<link client_id="right-router">
+    <interface_ref client_id="right:router" />
+    <interface_ref client_id="router:right" />
+</link>
+</rspec>

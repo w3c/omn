@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This example RSpec shows how to request 1 VM and 1 Bare Metal nodes
+from the BBN ExoGENI Rack. Bare Metal nodes are only available via the 
+ExoSM aggregate at https://geni.renci.org:11443/orca/xmlrpc
+-->
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+<node client_id="BT" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+cm" >
+    <sliver_type name="exogeni-m4">
+      <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+    </sliver_type>
+    <interface client_id="BT:if0">
+   <ip address="172.16.1.1" netmask="255.255.255.0" />
+    </interface>
+  </node>
+
+ <node client_id="geni2" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+cm" >
+    <sliver_type name="m1.small">
+      <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+    </sliver_type>
+    <interface client_id="geni2:if0">
+   <ip address="172.16.1.2" netmask="255.255.255.0" />
+    </interface>
+  </node>
+
+  <link client_id="lan0">
+    <component_manager name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+cm"/>
+    <interface_ref client_id="BT:if0"/>
+    <interface_ref client_id="geni2:if0"/>
+    <property source_id="BT:if0" dest_id="geni2:if0" />
+    <property source_id="geni2:if0" dest_id="BT:if0" />
+    <link_type name="lan"/>
+  </link>
+</rspec>

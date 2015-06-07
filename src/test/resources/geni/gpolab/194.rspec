@@ -1,0 +1,47 @@
+<!--
+This rspec will reserve ProtoGENI VMs at Utah
+
+-->
+<!--  This file is an rspec for GEC 15 tutorial 
+-->
+
+<rspec type="request" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd "
+       xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+       xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="server" 
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" 
+        component_id="urn:publicid:IDN+emulab.net+node+pc560" 
+        component_name="pc560" exclusive="false">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+pgeni-gpolab-bbn-com//Fedora15OmniTutorial"/>
+    </sliver_type>
+    <interface client_id="server:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="97" y="211" unbound="true"/>
+  </node>
+  <node client_id="client" 
+        component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" 
+        component_id="urn:publicid:IDN+emulab.net+node+pc423" 
+        component_name="pc423" exclusive="false">
+    <sliver_type name="emulab-openvz">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+pgeni-gpolab-bbn-com//Fedora15OmniTutorial"/>
+    </sliver_type>
+    <interface client_id="client:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="99" y="376" unbound="true"/>
+  </node>
+  <link client_id="lan0">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="server:if0"/>
+    <interface_ref client_id="client:if0"/>
+    <property source_id="server:if0" dest_id="client:if0"/>
+    <property source_id="client:if0" dest_id="server:if0"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+</rspec>
