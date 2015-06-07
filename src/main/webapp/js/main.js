@@ -7,47 +7,48 @@
 	var pastePanelButton = document.getElementById('paste-panel-button');
 	var fileSelectButton = document.getElementById('file-select-button');
 	var dropZone = document.getElementById('drop-zone');
-	var uploadForm = document.getElementById('js-upload-form');
-	var uploadButton = document.getElementById('js-upload-submit');
 	var uploadFileInput = document.getElementById('js-upload-files');
 	var fileGlobal;
 
-	var startUpload = function(files) {
-		console.log(files)
-		var data = new FormData();
-		data.append('file', files[0], files[0].name);
-		console.log(files[0]);
-		console.log(files[0].name);
-
-		$.ajax({
-			url : uploadForm.action,
-			type : 'POST',
-			data : data,
-			cache : false,
-			processData : false, // Don't process the files
-			contentType : false, // Set content type to false as jQuery will
-			// tell the server its a query string
-			// request
-			success : function(data, textStatus, jqXHR) {
-				console.log(textStatus);
-				if (typeof data.error === 'undefined') {
-					// Success so call function to process the form
-					submitForm(event, data);
-				} else {
-					// Handle errors here
-					console.log('ERRORS: ' + data.error);
-				}
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				// Handle errors here
-				console
-						.log('ERRORS: ' + textStatus + ": "
-								+ jqXHR.responseText);
-				// STOP LOADING SPINNER
-			}
-		});
-	}
-
+	// var uploadForm = document.getElementById('js-upload-form');
+	// var uploadButton = document.getElementById('js-upload-submit');
+	// var startUpload = function(file) {
+	// // var startUpload = function(files) {
+	// console.log(files)
+	// var data = new FormData();
+	// // data.append('file', files[0], files[0].name);
+	// data.append('file', file, file.name);
+	// console.log(files[0]);
+	// console.log(files[0].name);
+	//
+	// $.ajax({
+	// url : uploadForm.action,
+	// type : 'POST',
+	// data : data,
+	// cache : false,
+	// processData : false, // Don't process the files
+	// contentType : false, // Set content type to false as jQuery will
+	// // tell the server its a query string
+	// // request
+	// success : function(data, textStatus, jqXHR) {
+	// console.log(textStatus);
+	// if (typeof data.error === 'undefined') {
+	// // Success so call function to process the form
+	// submitForm(event, data);
+	// } else {
+	// // Handle errors here
+	// console.log('ERRORS: ' + data.error);
+	// }
+	// },
+	// error : function(jqXHR, textStatus, errorThrown) {
+	// // Handle errors here
+	// console
+	// .log('ERRORS: ' + textStatus + ": "
+	// + jqXHR.responseText);
+	// // STOP LOADING SPINNER
+	// }
+	// });
+	// }
 	// uploadForm.addEventListener('submit', function(e) {
 	// var uploadFiles = uploadFileInput.file;
 	// e.preventDefault()
@@ -56,14 +57,26 @@
 	// })
 
 	pastePanelButton.onclick = function(e) {
+		// hide previous alerts
+		jQuery("#response-text").hide();
+		jQuery("#submitted-text").hide();
+		jQuery("#fail-text").hide();
+
 		// show contents of paste panel under the panel
 		var sumittedText = jQuery("textarea#paste-panel").val();
 		jQuery("#submitted-text").show();
 		jQuery("#submitted-text-content").text(sumittedText);
 
-		// TODO 
-		// startUpload();
-		
+		// make POST request to REST API
+		$.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
+			content : sumittedText
+		}, function(data, status) {
+			jQuery("#response-text").show();
+			jQuery("#response-text-content").text(data);
+		}).fail(function() {
+			jQuery("#fail-text").show();
+		});
+
 		// reset form
 		clearAllContent();
 		fileGlobal = null;
@@ -78,18 +91,34 @@
 		}
 
 		if (fileGlobal) {
+			// hide previous alerts
+			jQuery("#response-text").hide();
+			jQuery("#submitted-text").hide();
+			jQuery("#fail-text").hide();
 
 			var r = new FileReader();
 			r.onload = function(e) {
-				var contents = e.target.result;
+				var sumittedText = e.target.result;
 				jQuery("#submitted-text").show();
-				jQuery("#submitted-text-content").text(contents);
+				jQuery("#submitted-text-content").text(sumittedText);
+
+				// make POST request to REST API
+				$
+						.post(
+								"http://demo.fiteagle.org:8080/omnlib/convert/request/ttl",
+								{
+									content : sumittedText
+								},
+								function(data, status) {
+									jQuery("#response-text").show();
+									jQuery("#response-text-content").text(data);
+								}).fail(function() {
+							jQuery("#fail-text").show();
+						});
+
 			}
 			r.readAsText(fileGlobal);
 
-			// TODO 
-			// startUpload();
-			
 			// reset form
 			clearAllContent();
 			fileGlobal = null;
@@ -133,6 +162,7 @@
 	dropZone.ondragover = function() {
 		// if a file has not been selected via the file input
 		if (uploadFileInput.files.length == 0) {
+
 			// change the styles to black
 			this.className = 'upload-drop-zone drop';
 		}
@@ -156,6 +186,9 @@ function listener(event) {
 	event.preventDefault();
 }
 
+/**
+ * reset the forms and text alerts
+ */
 function clearAllContent() {
 	document.getElementById('paste-panel').value = "";
 	document.getElementById('js-upload-files').value = "";
