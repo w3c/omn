@@ -19,19 +19,10 @@
 		// show contents of paste panel under the panel
 		var submittedText = jQuery("textarea#paste-panel").val();
 		jQuery("#submitted-text").show();
-		// jQuery("#submitted-text-content").html(submittedText.replace(/\r?\n/g, "<br />" ).replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;"));
 		jQuery("#submitted-text-content").text(submittedText);
-		
+
 		// make POST request to REST API
-		$.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
-			content : submittedText
-		}, function(data, status, jqXHR) {
-			jQuery("#response-text").show();
-			jQuery("#response-text-content").text(jqXHR.responseText);
-		}).fail(function(jqXHR, textStatus, errorThrown) {
-			jQuery("#fail-text").show();
-			jQuery("#fail-text-content").text(jqXHR.responseText);
-		});
+		postFunction(submittedText);
 
 		// reset form
 		clearAllContent();
@@ -59,22 +50,7 @@
 				jQuery("#submitted-text-content").text(submittedText);
 
 				// make POST request to REST API
-				$
-						.post(
-								"http://demo.fiteagle.org:8080/omnlib/convert/request/ttl",
-								{
-									content : submittedText
-								},
-								function(data, status, jqXHR) {
-									jQuery("#response-text").show();
-									jQuery("#response-text-content").text(jqXHR.responseText);
-								}).fail(
-								function(jqXHR, textStatus, errorThrown) {
-									jQuery("#fail-text").show();
-									jQuery("#fail-text-content").text(
-											jqXHR.responseText);
-								});
-
+				postFunction(submittedText);
 			}
 			r.readAsText(fileGlobal);
 
@@ -143,6 +119,21 @@
 
 function listener(event) {
 	event.preventDefault();
+}
+
+/**
+ * send post request to server and update alert panels
+ */
+function postFunction(submittedText) {
+	$.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
+		content : submittedText
+	}, function(data, status, jqXHR) {
+		jQuery("#response-text").show();
+		jQuery("#response-text-content").text(jqXHR.responseText);
+	}).fail(function(jqXHR, textStatus, errorThrown) {
+		jQuery("#fail-text").show();
+		jQuery("#fail-text-content").text(jqXHR.responseText);
+	});
 }
 
 /**
