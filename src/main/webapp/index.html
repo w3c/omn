@@ -92,7 +92,7 @@ body {
 
 						<!-- Paste Panel -->
 						<h4>Paste document below:</h4>
-						<textarea style="width: 100%; height: 20.3em;" id="paste-panel"></textarea>
+						<textarea style="width: 100%; height: 20.3em; resize:none; " id="paste-panel"></textarea>
 
 						<!-- Upload Finished -->
 						<div class="js-upload-finished"></div>
@@ -163,16 +163,17 @@ body {
 		<div class="alert alert-success" role="alert" id="response-text"
 			hidden>
 			<p>
-				<strong>The following was the result of conversion:</strong>
+				<strong>The conversion was successful!</strong>
+				<p>The server returned the following:</p>
 			</p>
 			<p id="response-text-content"></p>
 		</div>
 
 		<div class="alert alert-danger" role="alert" id="fail-text" hidden>
 			<p>
-				<strong>We were not able to convert the input.</strong>
+				<strong>The conversion failed!</strong>
 			</p>
-			<p>Please make sure that the input file is valid.</p>
+			<p>The server returned the following error:</p>
 			<!-- TODO: error handling -->
 			<p id="fail-text-content"></p>
 		</div>
