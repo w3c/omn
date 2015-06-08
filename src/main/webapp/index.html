@@ -79,7 +79,6 @@ body {
 
 	<div class="container">
 		<div class="row">
-
 			<div class="col-md-6">
 				<!-- left panel paste box -->
 				<div class="panel panel-default">
@@ -92,7 +91,8 @@ body {
 
 						<!-- Paste Panel -->
 						<h4>Paste document below:</h4>
-						<textarea style="width: 100%; height: 20.3em; resize:none; " id="paste-panel"></textarea>
+						<textarea style="width: 100%; height: 20.3em; resize: none;"
+							id="paste-panel"></textarea>
 
 						<!-- Upload Finished -->
 						<div class="js-upload-finished"></div>
@@ -149,45 +149,23 @@ body {
 				</div>
 			</div>
 			<!-- / right panel paste box -->
-		</div>
-		<!-- /row -->
-
-
-		<div class="alert alert-info" role="alert" id="submitted-text" hidden>
-			<p>
-				<strong>You have submitted the following text:</strong>
-			</p>
-			<p id="submitted-text-content"></p>
-		</div>
-
-		<div class="alert alert-success" role="alert" id="response-text"
-			hidden>
-			<p>
-				<strong>The conversion was successful!</strong>
-				<p>The server returned the following:</p>
-			</p>
-			<p id="response-text-content"></p>
-		</div>
-
-		<div class="alert alert-danger" role="alert" id="fail-text" hidden>
-			<p>
-				<strong>The conversion failed!</strong>
-			</p>
-			<p>The server returned the following error:</p>
-			<!-- TODO: error handling -->
-			<p id="fail-text-content"></p>
-		</div>
-
-	</div>
-	<!-- / main body container -->
+		</div><!-- /row -->
+		
+		<!-- @formatter:off -->
+		<div class="alert alert-info" role="alert" id="submitted-text"
+			style="white-space: pre-wrap;" hidden><p><strong>You have submitted the following text:</strong></p><p id="submitted-text-content"></p></div>
+		<div class="alert alert-success" role="alert" id="response-text" style="white-space: pre-wrap;" hidden><p><strong>The conversion was successful!</strong></p><p>The server returned the following:</p><p id="response-text-content"></p></div>
+		<div class="alert alert-danger" role="alert" id="fail-text" style="white-space: pre-wrap;"  hidden><p><strong>The conversion failed!</strong></p><p>The server returned the following error:</p><!-- TODO: error handling --><p id="fail-text-content"></p></div>
+		<!-- @formatter:on -->
+		
+	</div><!-- / main body container -->
 
 	<div class="container">
 		<hr>
 		<footer>
 			<p></p>
 		</footer>
-	</div>
-	<!-- /container -->
+	</div><!-- /container -->
 
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
