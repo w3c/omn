@@ -18,6 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.UnknownFormatConversionException;
 
 import javax.xml.bind.JAXBException;
@@ -26,6 +27,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
+import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class DeliveryMechanism {
@@ -33,7 +35,8 @@ public class DeliveryMechanism {
 	public static String convert(String from, String to, String content)
 			throws JAXBException, InvalidModelException, UnsupportedException,
 			IOException, MultipleNamespacesException,
-			RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
+			RequiredResourceNotFoundException, MultiplePropertyValuesException,
+			XMLStreamException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
@@ -61,8 +64,18 @@ public class DeliveryMechanism {
 			final String rspec = ManifestConverter.getRSpec(model, "localhost");
 			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.TOSCA.equalsIgnoreCase(to)) {
-			final String toplogy = OMN2Tosca.getTopology(model);
-			baos.write(toplogy.getBytes());
+			// this is currently a hack, as you need to add the additional
+			// ontologies first in order to convert to Tosca
+			// TODO: clean up later
+			if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
+				ArrayList<String> additionalOntologies = new ArrayList<String>();
+				additionalOntologies.add("/ontologies/osco.ttl");
+				InputStream input = new ByteArrayInputStream(content.getBytes());
+				Parser parser = new Parser(input, additionalOntologies);
+				InfModel modelTosca = parser.getInfModel();
+				String topology = OMN2Tosca.getTopology(modelTosca);
+				baos.write(topology.getBytes());
+			}
 		} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 			RDFDataMgr.write(baos, model, Lang.TTL);
 		} else {
