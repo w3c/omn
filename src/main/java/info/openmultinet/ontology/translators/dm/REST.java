@@ -78,5 +78,4 @@ public class REST extends DeliveryMechanism {
 			super(Response.status(status).entity(message).build());
 		}
 	}
-
 }

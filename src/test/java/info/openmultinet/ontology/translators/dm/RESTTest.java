@@ -36,12 +36,41 @@ public class RESTTest {
 	}
 
 	@Test
-	public void testConvertToGraphFromRspecRequest() {
+	public void testConvertToGraphFromRspecAd() {
 		System.out.println("*************************************************");
-		System.out.println("*******   start convert Request to model  *******");
+		System.out.println("*******   start convert Ad to model       *******");
 		System.out.println("*************************************************");
 		final String content = this
-				.getFilecontent("/geni/request/request_unbound2.xml");
+				.getFilecontent("/geni/advertisement/advertisement_paper2015.xml");
+
+		final String result = this.converter.post(
+				AbstractConverter.RSPEC_ADVERTISEMENT, AbstractConverter.TTL,
+				content);
+		System.out.println(result);
+		Assert.assertTrue("should contain an ad", result.contains("#Offering"));
+	}
+
+	@Test
+	public void testConvertToRspecAd() {
+		System.out.println("*******************************************");
+		System.out.println("*******  convert model to RSpec Ad  *******");
+		System.out.println("*******************************************");
+		final String content = this.getFilecontent("/omn/offer_paper2015.ttl");
+
+		final String result = this.converter.post(AbstractConverter.TTL,
+				AbstractConverter.RSPEC_ADVERTISEMENT, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain an advertisement rspec",
+				result.contains("type=\"advertisement\""));
+	}
+
+	@Test
+	public void testConvertToGraphFromRspecRequest() {
+		System.out.println("*************************************************");
+		System.out.println("*******   convert RSpec Request to model  *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/geni/request/request_unbound.xml");
 
 		final String result = this.converter
 				.post(AbstractConverter.RSPEC_REQUEST, AbstractConverter.TTL,
@@ -52,17 +81,52 @@ public class RESTTest {
 	}
 
 	@Test
-	public void testConvertToRspec() {
-		System.out.println("*****************************************");
-		System.out.println("*******   start convert to RSpec  *******");
-		System.out.println("*****************************************");
-		final String content = this.getFilecontent("/omn/request.ttl");
+	public void testConvertToRspecRequest() {
+		System.out.println("*************************************************");
+		System.out.println("*******   convert model to RSpec Request  *******");
+		System.out.println("*************************************************");
+		final String content = this.getFilecontent("/omn/request_unbound.ttl");
+		System.out.println(content);
 
 		final String result = this.converter.post(AbstractConverter.TTL,
-				AbstractConverter.RSPEC_ADVERTISEMENT, content);
+				AbstractConverter.RSPEC_REQUEST, content);
 		System.out.println(result);
 		Assert.assertTrue("should contain an advertisement rspec",
-				result.contains("type=\"advertisement"));
+				result.contains("type=\"request\""));
+	}
+
+	@Test
+	public void testConvertToGraphFromRspecManifest() {
+		System.out.println("*************************************************");
+		System.out
+				.println("*******   convert RSpec Manifest to model  *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/geni/manifest/manifest_paper2015.xml");
+
+		final String result = this.converter.post(
+				AbstractConverter.RSPEC_MANIFEST, AbstractConverter.TTL,
+				content);
+		System.out.println(result);
+		Assert.assertTrue("should contain a manifest",
+				result.contains("#Manifest"));
+	}
+
+	@Test
+	public void testConvertToRspecManifest() {
+		System.out.println("*************************************************");
+		System.out
+				.println("*******   convert model to RSpec Manifest  *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/omn/manifest_paper2015.ttl");
+		System.out.println(content);
+
+		final String result = this.converter.post(AbstractConverter.TTL,
+				AbstractConverter.RSPEC_MANIFEST, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain an advertisement rspec",
+				result.contains("type=\"manifest\""));
 	}
 
 	@Test
@@ -73,9 +137,6 @@ public class RESTTest {
 		final String content = this
 				.getFilecontent("/omn/tosca-request-dummy.ttl");
 
-		// System.out.println("orginal file: ");
-		// System.out.println(content);
-
 		final String result = this.converter.post(AbstractConverter.TTL,
 				AbstractConverter.TOSCA, content);
 		System.out.println(result);
@@ -84,22 +145,19 @@ public class RESTTest {
 				result.contains("xmlns=\"http://docs.oasis-open.org/tosca/ns/2011/12\""));
 	}
 
-	// TODO
-	// @Test
-	// public void testConvertToGraphFromTosca() {
-	// System.out.println("*************************************************");
-	// System.out.println("*******   start convert Tosca to model  *********");
-	// System.out.println("*************************************************");
-	// final String content = this
-	// .getFilecontent("/tosca/request_dummy.xml");
-	//
-	// final String result = this.converter
-	// .post(AbstractConverter.TOSCA, AbstractConverter.TTL,
-	// content);
-	// System.out.println(result);
-	// Assert.assertTrue("should contain a request",
-	// result.contains("#Request"));
-	// }
+	@Test
+	public void testConvertToGraphFromTosca() {
+		System.out.println("*************************************************");
+		System.out.println("*******   start convert Tosca to model  *********");
+		System.out.println("*************************************************");
+		final String content = this.getFilecontent("/tosca/request-dummy.xml");
+
+		final String result = this.converter.post(AbstractConverter.TOSCA,
+				AbstractConverter.TTL, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain osco:STOPPED",
+				result.contains("osco:STOPPED"));
+	}
 
 	@Test(expected = WebApplicationException.class)
 	public void testWrongParam() {

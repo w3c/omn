@@ -125,12 +125,16 @@ function listener(event) {
  * send post request to server and update alert panels
  */
 function postFunction(submittedText) {
+	jQuery("#conversion-wait").show();
+	
 	$.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
 		content : submittedText
 	}, function(data, status, jqXHR) {
+		jQuery("#conversion-wait").hide();
 		jQuery("#response-text").show();
 		jQuery("#response-text-content").text(jqXHR.responseText);
 	}).fail(function(jqXHR, textStatus, errorThrown) {
+		jQuery("#conversion-wait").hide();
 		jQuery("#fail-text").show();
 		jQuery("#fail-text-content").text(jqXHR.responseText);
 	});

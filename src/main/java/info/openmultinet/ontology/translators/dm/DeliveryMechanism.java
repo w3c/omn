@@ -40,7 +40,7 @@ public class DeliveryMechanism {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
-		Model model;
+		Model model = null;
 
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 			model = RequestConverter.getModel(stream);
@@ -60,22 +60,15 @@ public class DeliveryMechanism {
 		if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
 			final String rspec = new AdvertisementConverter().getRSpec(model);
 			baos.write(rspec.getBytes());
+		} else if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(to)) {
+			final String rspec = RequestConverter.getRSpec(model);
+			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(to)) {
 			final String rspec = ManifestConverter.getRSpec(model, "localhost");
 			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.TOSCA.equalsIgnoreCase(to)) {
-			// this is currently a hack, as you need to add the additional
-			// ontologies first in order to convert to Tosca
-			// TODO: clean up later
-			if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
-				ArrayList<String> additionalOntologies = new ArrayList<String>();
-				additionalOntologies.add("/ontologies/osco.ttl");
-				InputStream input = new ByteArrayInputStream(content.getBytes());
-				Parser parser = new Parser(input, additionalOntologies);
-				InfModel modelTosca = parser.getInfModel();
-				String topology = OMN2Tosca.getTopology(modelTosca);
-				baos.write(topology.getBytes());
-			}
+			final String toplogy = OMN2Tosca.getTopology(model);
+			baos.write(toplogy.getBytes());
 		} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 			RDFDataMgr.write(baos, model, Lang.TTL);
 		} else {
