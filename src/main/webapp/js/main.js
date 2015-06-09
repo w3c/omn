@@ -127,7 +127,17 @@ function listener(event) {
 function postFunction(submittedText) {
 	jQuery("#conversion-wait").show();
 	
-	$.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
+	var fromDoc = document.getElementById("fromDoc");
+	var fromValue = fromDoc.options[fromDoc.selectedIndex].value;
+	
+	var toDoc = document.getElementById("toDoc");
+	var toValue = toDoc.options[toDoc.selectedIndex].value;
+	
+	var partUrl = "http://demo.fiteagle.org:8080/omnlib/convert/";
+	var url = partUrl.concat(fromValue,"/",toValue);
+	
+	$.post(url, {
+	// $.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
 		content : submittedText
 	}, function(data, status, jqXHR) {
 		jQuery("#conversion-wait").hide();
