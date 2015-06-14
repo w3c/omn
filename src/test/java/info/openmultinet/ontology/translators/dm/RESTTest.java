@@ -65,6 +65,21 @@ public class RESTTest {
 	}
 
 	@Test
+	public void testConvertFromUnknownToRspecAd() {
+		System.out.println("*******************************************");
+		System.out.println("*******  convert model to RSpec Ad  *******");
+		System.out.println("*******************************************");
+		final String content = this.getFilecontent("/omn/offer_paper2015.ttl");
+
+		final String result = this.converter.post(AbstractConverter.ANYFORMAT,
+				AbstractConverter.RSPEC_ADVERTISEMENT, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain an advertisement rspec",
+				result.contains("type=\"advertisement\""));
+	}
+	
+	
+	@Test
 	public void testConvertToGraphFromRspecRequest() {
 		System.out.println("*************************************************");
 		System.out.println("*******   convert RSpec Request to model  *******");
@@ -106,6 +121,23 @@ public class RESTTest {
 
 		final String result = this.converter.post(
 				AbstractConverter.RSPEC_MANIFEST, AbstractConverter.TTL,
+				content);
+		System.out.println(result);
+		Assert.assertTrue("should contain a manifest",
+				result.contains("#Manifest"));
+	}
+	
+	@Test
+	public void testConvertToGraphFromUnknown() {
+		System.out.println("*************************************************");
+		System.out
+				.println("*******   convert RSpec Manifest to model  *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/geni/manifest/manifest_paper2015.xml");
+
+		final String result = this.converter.post(
+				AbstractConverter.ANYFORMAT, AbstractConverter.TTL,
 				content);
 		System.out.println(result);
 		Assert.assertTrue("should contain a manifest",
@@ -153,6 +185,20 @@ public class RESTTest {
 		final String content = this.getFilecontent("/tosca/request-dummy.xml");
 
 		final String result = this.converter.post(AbstractConverter.TOSCA,
+				AbstractConverter.TTL, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain osco:STOPPED",
+				result.contains("osco:STOPPED"));
+	}
+	
+	@Test
+	public void testConvertToGraphFromUnknownTosca() {
+		System.out.println("*************************************************");
+		System.out.println("*******   start convert Tosca to model  *********");
+		System.out.println("*************************************************");
+		final String content = this.getFilecontent("/tosca/request-dummy.xml");
+
+		final String result = this.converter.post(AbstractConverter.ANYFORMAT,
 				AbstractConverter.TTL, content);
 		System.out.println(result);
 		Assert.assertTrue("should contain osco:STOPPED",

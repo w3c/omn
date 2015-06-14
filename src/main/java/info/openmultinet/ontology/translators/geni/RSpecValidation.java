@@ -18,6 +18,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -31,6 +33,10 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import nu.xom.Builder;
+import nu.xom.ParsingException;
+import nu.xom.ValidityException;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.custommonkey.xmlunit.DetailedDiff;
@@ -38,12 +44,15 @@ import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.Difference;
 import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier;
 import org.custommonkey.xmlunit.Validator;
+import org.dom4j.DocumentException;
+import org.dom4j.io.SAXReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -152,10 +161,12 @@ public class RSpecValidation {
 
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			xmlDoc = builder.parse(new ByteArrayInputStream(xml.getBytes()));
+			byte[] bytes = xml.getBytes();
+			ByteArrayInputStream byteArrray = new ByteArrayInputStream(bytes);
+			xmlDoc = builder.parse(byteArrray);
 		} catch (SAXException | IOException | ParserConfigurationException e) {
-
-			e.printStackTrace();
+			return null;
+			// e.printStackTrace();
 		}
 
 		return xmlDoc;
@@ -207,12 +218,15 @@ public class RSpecValidation {
 	}
 
 	/**
-	 * returns the RSpec type, "advertisement", "manifest", or "request"
+	 * returns the RSpec type, "advertisement", "manifest", or "request", as
+	 * well as "tosca" and "ttl"
 	 * 
 	 * @param xml
 	 * @return
 	 */
 	public static String getType(String input) {
+		// TODO: this method could potentially be improved by using validation
+		// against XSD docs
 		Document xml = null;
 		String type = null;
 
@@ -224,7 +238,23 @@ public class RSpecValidation {
 					Node root = rspecNode.item(0);
 					Node typeNode = root.getAttributes().getNamedItem("type");
 					if (typeNode != null) {
-						type = typeNode.getNodeValue();
+						return typeNode.getNodeValue();
+					}
+				} else {
+					// check for tosca namespace
+					// xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
+					NodeList toscaNode = xml
+							.getElementsByTagName("Definitions");
+					if (toscaNode != null && toscaNode.getLength() > 0) {
+						for (int i = 0; i < toscaNode.getLength(); i++) {
+							Node rootTosca = toscaNode.item(i);
+							String nameSpace = rootTosca.getNamespaceURI()
+									.toString();
+							if (nameSpace
+									.equals("http://docs.oasis-open.org/tosca/ns/2011/12")) {
+								return "tosca";
+							}
+						}
 					}
 				}
 			}
@@ -232,7 +262,23 @@ public class RSpecValidation {
 			e1.printStackTrace();
 		}
 
-		return type;
+		InputStream inputStream = null;
+		try {
+			inputStream = IOUtils.toInputStream(input, "UTF-8");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		Parser parser = new Parser();
+
+		try {
+			parser.read(inputStream);
+			return "ttl";
+		} catch (InvalidModelException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	/**
@@ -326,7 +372,8 @@ public class RSpecValidation {
 
 				if (type.equals("request")) {
 					schema = new File(
-							"./src/main/resources/geni/request/request.xsd");
+							"./src/main/resources/geni/request/top.xsd");
+					// "./src/main/resources/geni/request/request.xsd");
 				}
 
 				// check against XSD whether rspec is valid or not
@@ -377,7 +424,8 @@ public class RSpecValidation {
 			case "request":
 				try {
 					schema = sFactory.newSchema(new File(
-							"./src/main/resources/geni/request/request.xsd"));
+							"./src/main/resources/geni/request/top.xsd"));
+					// "./src/main/resources/geni/request/request.xsd"));
 				} catch (SAXException e) {
 					e.printStackTrace();
 				}
@@ -398,6 +446,177 @@ public class RSpecValidation {
 		}
 
 		return isValid;
+	}
+
+	/**
+	 * Validation method.
+	 * 
+	 * @param xmlFilePath
+	 *            The xml file we are trying to validate.
+	 * @param xmlSchemaFilePath
+	 *            The schema file we are using for the validation. This method
+	 *            assumes the schema file is valid.
+	 * @return True if valid, false if not valid or bad parse or exception/error
+	 *         during parse.
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws SAXException
+	 * 
+	 *             source: http://www.edankert.com/validate.html#
+	 *             Validate_using_internal_XSD
+	 */
+	public static boolean validateDOM(String xmlFilePath,
+			String xmlSchemaFilePath) throws ParserConfigurationException,
+			SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setValidating(false);
+		factory.setNamespaceAware(true);
+
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance("http://www.w3.org/2001/XMLSchema");
+
+		factory.setSchema(schemaFactory
+				.newSchema(new Source[] { new StreamSource(xmlSchemaFilePath) }));
+
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		SimpleErrorHandler errors = new SimpleErrorHandler();
+		builder.setErrorHandler(errors);
+
+		Document document = builder.parse(new InputSource(xmlFilePath));
+
+		return errors.getValid();
+	}
+
+	/**
+	 * Validation method.
+	 * 
+	 * @param xmlFilePath
+	 *            The xml file we are trying to validate.
+	 * @param xmlSchemaFilePath
+	 *            The schema file we are using for the validation. This method
+	 *            assumes the schema file is valid.
+	 * @return True if valid, false if not valid or bad parse or exception/error
+	 *         during parse.
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws SAXException
+	 * 
+	 *             source: http://www.edankert.com/validate.html#
+	 *             Validate_using_internal_XSD
+	 */
+	public static boolean validateSAX(String xmlFilePath,
+			String xmlSchemaFilePath) throws ParserConfigurationException,
+			SAXException, IOException {
+
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setValidating(false);
+		factory.setNamespaceAware(true);
+
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance("http://www.w3.org/2001/XMLSchema");
+
+		factory.setSchema(schemaFactory
+				.newSchema(new Source[] { new StreamSource(xmlSchemaFilePath) }));
+
+		SAXParser parser = factory.newSAXParser();
+		SimpleErrorHandler errors = new SimpleErrorHandler();
+		XMLReader reader = parser.getXMLReader();
+		reader.setErrorHandler(errors);
+		reader.parse(new InputSource(xmlFilePath));
+
+		return errors.getValid();
+	}
+
+	/**
+	 * Validation method.
+	 * 
+	 * @param xmlFilePath
+	 *            The xml file we are trying to validate.
+	 * @param xmlSchemaFilePath
+	 *            The schema file we are using for the validation. This method
+	 *            assumes the schema file is valid.
+	 * @return True if valid, false if not valid or bad parse or exception/error
+	 *         during parse.
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws SAXException
+	 * 
+	 *             source: http://www.edankert.com/validate.html#
+	 *             Validate_using_internal_XSD
+	 * @throws DocumentException
+	 */
+	public static boolean validateDom4j(String xmlFilePath,
+			String xmlSchemaFilePath) throws ParserConfigurationException,
+			SAXException, IOException, DocumentException {
+
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance("http://www.w3.org/2001/XMLSchema");
+
+		factory.setSchema(schemaFactory
+				.newSchema(new Source[] { new StreamSource(xmlSchemaFilePath) }));
+
+		SAXParser parser = factory.newSAXParser();
+
+		SAXReader reader = new SAXReader(parser.getXMLReader());
+		reader.setValidation(false);
+
+		SimpleErrorHandler errors = new SimpleErrorHandler();
+
+		reader.setErrorHandler(errors);
+		reader.read(xmlFilePath);
+
+		return errors.getValid();
+
+	}
+
+	/**
+	 * Validation method.
+	 * 
+	 * @param xmlFilePath
+	 *            The xml file we are trying to validate.
+	 * @param xmlSchemaFilePath
+	 *            The schema file we are using for the validation. This method
+	 *            assumes the schema file is valid.
+	 * @return True if valid, false if not valid or bad parse or exception/error
+	 *         during parse.
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws SAXException
+	 * 
+	 *             source: http://www.edankert.com/validate.html#
+	 *             Validate_using_internal_XSD
+	 * @throws DocumentException
+	 * @throws ParsingException
+	 * @throws ValidityException
+	 */
+	public static boolean validateXom(String xmlFilePath,
+			String xmlSchemaFilePath) throws ParserConfigurationException,
+			SAXException, IOException, DocumentException, ValidityException,
+			ParsingException {
+
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setValidating(false);
+		factory.setNamespaceAware(true);
+
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance("http://www.w3.org/2001/XMLSchema");
+		factory.setSchema(schemaFactory
+				.newSchema(new Source[] { new StreamSource(xmlSchemaFilePath) }));
+
+		SAXParser parser = factory.newSAXParser();
+		XMLReader reader = parser.getXMLReader();
+
+		SimpleErrorHandler errors = new SimpleErrorHandler();
+		reader.setErrorHandler(errors);
+
+		Builder builder = new Builder(reader);
+		builder.build(xmlFilePath);
+
+		return errors.getValid();
 	}
 
 	/**

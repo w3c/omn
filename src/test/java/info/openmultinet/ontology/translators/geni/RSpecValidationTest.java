@@ -1,19 +1,28 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.RSpecValidation;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 
-import org.apache.commons.io.FilenameUtils;
+import javax.xml.parsers.ParserConfigurationException;
+
+import nu.xom.ParsingException;
+
+import org.apache.commons.io.IOUtils;
+import org.dom4j.DocumentException;
+import org.junit.Assert;
+import org.junit.Test;
+import org.xml.sax.SAXException;
 
 public class RSpecValidationTest {
 
@@ -26,6 +35,57 @@ public class RSpecValidationTest {
 	final static int different = 6;
 	final static int typeMissing = 7;
 	final static double nano = 1000000000.0;
+
+	@Test
+	public void testGetType() {
+		List<Entry<String, String>> types = new ArrayList<>();
+
+		String pathRequest = "./src/test/resources/geni/request/request_unbound.xml";
+		Entry<String, String> pair1 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.RSPEC_REQUEST, pathRequest);
+		types.add(pair1);
+
+		String pathAd = "./src/test/resources/geni/advertisement/advertisement_paper2015.xml";
+		Entry<String, String> pair2 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.RSPEC_ADVERTISEMENT, pathAd);
+		types.add(pair2);
+
+		String pathManifest = "./src/test/resources/geni/manifest/manifest_paper2015.xml";
+		Entry<String, String> pair3 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.RSPEC_MANIFEST, pathManifest);
+		types.add(pair3);
+
+		String pathTosca = "./src/test/resources/tosca/request-dummy.xml";
+		Entry<String, String> pair4 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.TOSCA, pathTosca);
+		types.add(pair4);
+
+		String pathTtl = "./src/test/resources/omn/request.ttl";
+		Entry<String, String> pair5 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.TTL, pathTtl);
+		types.add(pair5);
+
+		for (int i = 0; i < types.size(); i++) {
+
+			System.out.println("***********************");
+			System.out.println("***** test " + i + " ******");
+			System.out.println("***********************");
+			String path = types.get(i).getValue();
+			String type = types.get(i).getKey();
+			System.out.println(path + "  " + type);
+
+			String rspecString = null;
+			String typeTest = null;
+			try {
+				rspecString = AbstractConverter.toString(path.substring(20));
+				typeTest = RSpecValidation.getType(rspecString);
+				Assert.assertTrue("request type matches for pair " + i,
+						typeTest.equals(type));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	private static ArrayList<List<Double>> getErrorDirectory(File path) {
 
@@ -308,43 +368,89 @@ public class RSpecValidationTest {
 					rspecString = AbstractConverter.toString(files[i].getPath()
 							.substring(20));
 					String type = RSpecValidation.getType(rspecString);
-					// boolean validXMLUnit = RSpecValidation
+
+					String schemaPath = null;
+					if (type.equals("request")) {
+						schemaPath = "./src/main/resources/geni/request/request.xsd";
+					} else if (type.equals("advertisement")) {
+						schemaPath = "./src/main/resources/geni/advertisement/ad.xsd";
+					} else if (type.equals("manifest")) {
+						schemaPath = "./src/main/resources/geni/manifest/manifest.xsd";
+					}
+					boolean validSax;
+					try {
+						validSax = RSpecValidation.validateSAX(
+								files[i].getPath(), schemaPath);
+						System.out.println("validSax: " + validSax);
+					} catch (ParserConfigurationException | SAXException e) {
+						e.printStackTrace();
+					}
+
+					boolean validDom;
+					try {
+						validDom = RSpecValidation.validateDOM(
+								files[i].getPath(), schemaPath);
+						System.out.println("validDom: " + validDom);
+					} catch (ParserConfigurationException | SAXException e) {
+						e.printStackTrace();
+					}
+
+					boolean validDom4j;
+					try {
+						validDom4j = RSpecValidation.validateDom4j(
+								files[i].getPath(), schemaPath);
+						System.out.println("validDom4j: " + validDom4j);
+					} catch (ParserConfigurationException | SAXException
+							| DocumentException e) {
+						e.printStackTrace();
+					}
+
+					boolean validXom;
+					try {
+						validXom = RSpecValidation.validateXom(
+								files[i].getPath(), schemaPath);
+						System.out.println("validXom: " + validXom);
+					} catch (ParserConfigurationException | SAXException
+							| DocumentException | ParsingException e) {
+						e.printStackTrace();
+					}
+
+					// boolean validSchemaFactory = RSpecValidation
 					// .validateRspecSchemaFactory(files[i].getPath(),
 					// type);
-
+					// System.out.println("validSchemaFactory: "
+					// + validSchemaFactory);
+					//
 					// boolean validXMLUnit = RSpecValidation
 					// .validateRspecXMLUnit(rspecString);
 					// System.out.println("validXMLUnit: " + validXMLUnit);
+
 					boolean validRSpecLint = RSpecValidation
 							.rspecLintMacOnly(files[i].getPath().substring(20));
 					System.out.println("validRSpecLint: " + validRSpecLint);
 
-					if (type != null) {
-						switch (type) {
-						case "advertisement":
-							// if (validXMLUnit && validRSpecLint) {
-							if (validRSpecLint) {
-								valid[trueAds]++;
-							}
-							valid[ads]++;
-							break;
-						case "manifest":
-							// if (validXMLUnit && validRSpecLint) {
-							if (validRSpecLint) {
-								valid[trueManifests]++;
-							}
-							valid[manifests]++;
-							break;
-						case "request":
-							// if (validXMLUnit && validRSpecLint) {
-							if (validRSpecLint) {
-								valid[trueRequests]++;
-							}
-							valid[requests]++;
-							break;
+					switch (type) {
+					case "advertisement":
+						// if (validXMLUnit && validRSpecLint) {
+						if (validRSpecLint) {
+							valid[trueAds]++;
 						}
-					} else {
-						valid[typeMissing]++;
+						valid[ads]++;
+						break;
+					case "manifest":
+						// if (validXMLUnit && validRSpecLint) {
+						if (validRSpecLint) {
+							valid[trueManifests]++;
+						}
+						valid[manifests]++;
+						break;
+					case "request":
+						// if (validXMLUnit && validRSpecLint) {
+						if (validRSpecLint) {
+							valid[trueRequests]++;
+						}
+						valid[requests]++;
+						break;
 					}
 
 					// if ((validXMLUnit || validRSpecLint)
@@ -379,8 +485,6 @@ public class RSpecValidationTest {
 				+ " requests were valid");
 		System.out.println("Number where XMLUnit and RSpecLint disagreed: "
 				+ valid[different]);
-		System.out.println(valid[typeMissing]
-				+ " had not rspec type and are therefore invalid");
 
 		return valid;
 
@@ -443,28 +547,26 @@ public class RSpecValidationTest {
 			String rspecString = null;
 			System.out.println(path.getPath().substring(20));
 			try {
-				rspecString = AbstractConverter.toString(path.getPath().substring(
-						20));
+				rspecString = AbstractConverter.toString(path.getPath()
+						.substring(20));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			String type = RSpecValidation.getType(rspecString);
-			
-			 boolean validSchemaFactory = RSpecValidation
-			 .validateRspecSchemaFactory(path.getPath(),
-			 type);
-			 System.out.println("validSchemaFactory: " + validSchemaFactory);
-			 
-			 boolean validXMLUnit = RSpecValidation
-			 .validateRspecXMLUnit(rspecString);
-			 System.out.println("validXMLUnit: " + validXMLUnit);
-			 
+
+			boolean validSchemaFactory = RSpecValidation
+					.validateRspecSchemaFactory(path.getPath(), type);
+			System.out.println("validSchemaFactory: " + validSchemaFactory);
+
+			boolean validXMLUnit = RSpecValidation
+					.validateRspecXMLUnit(rspecString);
+			System.out.println("validXMLUnit: " + validXMLUnit);
+
 			boolean validRSpecLint = RSpecValidation.rspecLintMacOnly(path
 					.getPath().substring(20));
 			System.out.println("validRSpecLint: " + validRSpecLint);
 
 		}
-
 	}
 
 	public static void main(String[] args) {
@@ -491,12 +593,6 @@ public class RSpecValidationTest {
 		// getErrorDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
-
-		File path = new File(
-				"./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
-		// getErrorFile(path);
-
-		validateFile(path);
 
 	}
 }

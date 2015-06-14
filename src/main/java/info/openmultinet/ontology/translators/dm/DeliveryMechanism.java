@@ -5,6 +5,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.translators.geni.RSpecValidation;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
@@ -42,6 +43,10 @@ public class DeliveryMechanism {
 				content.getBytes(StandardCharsets.UTF_8));
 		Model model = null;
 
+		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)){
+			from = RSpecValidation.getType(content);
+		}
+
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 			model = RequestConverter.getModel(stream);
 		} else if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)) {
@@ -78,5 +83,4 @@ public class DeliveryMechanism {
 
 		return baos.toString();
 	}
-
 }
