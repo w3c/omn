@@ -133,12 +133,10 @@ function postFunction(submittedText) {
 	var toDoc = document.getElementById("toDoc");
 	var toValue = toDoc.options[toDoc.selectedIndex].value;
 	
-	// var partUrl = "http://localhost:8080/omnlib/convert/";
-	var partUrl = "http://demo.fiteagle.org:8080/omnlib/convert/";
+	var partUrl = "/omnlib/convert/";
 	var url = partUrl.concat(fromValue,"/",toValue);
 	
 	$.post(url, {
-	// $.post("http://demo.fiteagle.org:8080/omnlib/convert/request/ttl", {
 		content : submittedText
 	}, function(data, status, jqXHR) {
 		jQuery("#conversion-wait").hide();
