@@ -1,0 +1,748 @@
+@prefix : <http://open-multinet.info/ontology/omn-monitoring-metric#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-component: <http://open-multinet.info/ontology/omn-component#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
+@prefix omn-monitoring-data: <http://open-multinet.info/ontology/omn-monitoring-data#> .
+@prefix omn-monitoring-unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
+@prefix omn-monitoring-tool: <http://open-multinet.info/ontology/omn-monitoring-tool#> .
+@prefix omn-monitoring-genericconcepts: <http://open-multinet.info/ontology/omn-monitoring-genericconcepts#> .
+@base <http://open-multinet.info/ontology/omn-monitoring-metric> .
+
+<http://open-multinet.info/ontology/omn-monitoring-metric> rdf:type owl:Ontology ;
+                                                           
+                                                           rdfs:label "omn-monitoring-metric"@en ;
+                                                           
+                                                           dc:title "Open-Multinet Monitoring Metric Ontology"^^xsd:string ;
+                                                           
+                                                           dc:description "The metric ontology describes anything that can be measured. It is defined in a generic way to cover the common measurement metrics in federated ICT infrastructures. It defines metrics whose information change dynamically such as CPU utilization, memory consumption, packet delay and loss, etc., as well as metrics whose information may change very infrequently in time (e.g. CPU core counts in a machine)."^^xsd:string ;
+                                                           
+                                                           vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-metric#" ;
+                                                           
+                                                           vann:preferredNamespacePrefix "omn-monitoring-metric" ;
+                                                           
+                                                           dc:date "2015-05-30" ;
+                                                           
+                                                           dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                           
+                                                           dc:publisher <http://open-multinet.info/> ;
+                                                                                                                      
+                                                           dc:creator <https://www.linkedin.com/in/yahyaalhazmi> ;
+                                                           
+                                                           dc:author <https://www.linkedin.com/in/yahyaalhazmi> ;
+
+                                                           dc:contributor <http://alex.willner.ws/about#me> ;
+                                                           dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
+                                                           dc:contributor <mailto:steger@complex.elte.hu> ;
+                                                           dc:contributor <mailto:lakis@inf.elte.hu> ;
+                                                           dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                                           dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                                           dc:contributor <https://staff.fnwi.uva.nl/p.grosso> .
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#canBeCalculatedFrom
+
+:canBeCalculatedFrom rdf:type owl:ObjectProperty ;
+                      
+                     rdfs:domain omn-monitoring:Metric ;
+
+                     rdfs:range omn-monitoring:Metric .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#hasFrequency
+
+:hasFrequency rdf:type owl:DatatypeProperty ;
+              
+              rdfs:comment "Presents the updating rate of the measurements, e.g. if the frequency is set to 30 second, i.e. a new measure is provided every 30 second."^^xsd:string ;
+              
+              rdfs:domain omn-monitoring:Metric ;
+              
+              rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#statusValue
+
+:statusValue rdf:type owl:DatatypeProperty ;
+              
+             rdfs:comment "Presents the status value either on or off"^^xsd:string ;
+
+             rdfs:range xsd:string ;
+               
+             rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :Status
+                                                  omn:Component
+                                                  omn:Resource
+                                                  omn:Service
+                                                )
+                                  ] .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#Component
+
+omn:Component rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#Metric
+
+omn-monitoring:Metric rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#Tool
+
+omn-monitoring:Tool rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#AllocatedBandwidth
+
+:AllocatedBandwidth rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf :BandwidthUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#AllocatedCPU
+
+:AllocatedCPU rdf:type owl:Class ;
+              
+              rdfs:subClassOf :CPUUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#AllocatedMemory
+
+:AllocatedMemory rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :MemoryUtilization ;
+                 
+                 rdfs:comment "In the case of physical resources, this is the same as total memory, but represents different concept in the case of virtual resources."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Availability
+
+:Availability rdf:type owl:Class ;
+              
+              rdfs:subClassOf omn-monitoring:Metric ;
+              
+              rdfs:comment "Represents resource availability status, 1=available, 0=not, 2=anything else (in Maintenance)."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#AvailableBandwidth
+
+:AvailableBandwidth rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf :BandwidthUtilization ;
+                    
+                    rdfs:comment "Bandwidth that is not used."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#BandwidthUtilization
+
+:BandwidthUtilization rdf:type owl:Class ;
+                      
+                      rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#BatteryCapacity
+
+:BatteryCapacity rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Capacity ;
+                 
+                 rdfs:comment "Represents the battery capacity, e.g. in mWh."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#BatteryLifetime
+
+:BatteryLifetime rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf omn-monitoring:Metric ;
+                 
+                 rdfs:comment "Represents the battery life time of a given device such as GPS, sensor, WiFi smartphone, e.g in second."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#BuffersMemory
+
+:BuffersMemory rdf:type owl:Class ;
+               
+               rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUIOwait
+
+:CPUIOwait rdf:type owl:Class ;
+           
+           rdfs:subClassOf :CPUUtilization ;
+           
+           rdfs:comment "Time in which the CPU is idle AND there is at least one I/O in progress."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPULoad
+
+:CPULoad rdf:type owl:Class ;
+         
+         rdfs:subClassOf :CPUUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUUtilization
+
+:CPUUtilization rdf:type owl:Class ;
+                
+                rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUidle
+
+:CPUidle rdf:type owl:Class ;
+         
+         rdfs:subClassOf :CPUUtilization ;
+         
+         rdfs:comment "Time spent idle."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUnice
+
+:CPUnice rdf:type owl:Class ;
+         
+         rdfs:subClassOf :CPUUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUsystem
+
+:CPUsystem rdf:type owl:Class ;
+           
+           rdfs:subClassOf :CPUUtilization ;
+           
+           rdfs:comment "Time spent running kernel code."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUuser
+
+:CPUuser rdf:type owl:Class ;
+         
+         rdfs:subClassOf :CPUUtilization ;
+         
+         rdfs:comment "Time spent non-kernel code."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#CachedMemory
+
+:CachedMemory rdf:type owl:Class ;
+              
+              rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Capacity
+
+:Capacity rdf:type owl:Class ;
+          
+          rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Counter
+
+:Counter rdf:type owl:Class ;
+         
+         rdfs:subClassOf omn-monitoring:Metric ;
+         
+         rdfs:comment "Represents any counter such as no. of virtual resources running on a physical one (e.g. VMs), processes, CPU cores, users, hops etc. ."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Delay
+
+:Delay rdf:type owl:Class ;
+       
+       rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DelayVariation
+
+:DelayVariation rdf:type owl:Class ;
+                
+                rdfs:subClassOf :Delay ;
+                
+                rdfs:comment "Represents jitter."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIOPs
+
+:DiskIOPs rdf:type owl:Class ;
+          
+          rdfs:subClassOf :DiskUtilization ;
+          
+          rdfs:comment "Represents number of read/write input/output operations executed per second."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIORate
+
+:DiskIORate rdf:type owl:Class ;
+            
+            rdfs:subClassOf :DiskUtilization ;
+            
+            rdfs:comment "Represents amount of input/output data being read and/or written over time in bytes/s."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIORead
+
+:DiskIORead rdf:type owl:Class ;
+            
+            rdfs:subClassOf :DiskUtilization ;
+            
+            rdfs:comment "Represents amount of input/output data being read over time in bytes/s."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIOWrite
+
+:DiskIOWrite rdf:type owl:Class ;
+             
+             rdfs:subClassOf :DiskUtilization ;
+             
+             rdfs:comment "Represents amount of input/output data being written over time in bytes/s."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskQueueLength
+
+:DiskQueueLength rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :DiskUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskUtilization
+
+:DiskUtilization rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DistanceError
+
+:DistanceError rdf:type owl:Class ;
+               
+               rdfs:subClassOf omn-monitoring:Metric ;
+               
+               rdfs:comment "Gives distance error of any device such as GPS, sensor, etc."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#DownTime
+
+:DownTime rdf:type owl:Class ;
+          
+          rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#ErrorRate
+
+:ErrorRate rdf:type owl:Class ;
+           
+           rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#FailureRate
+
+:FailureRate rdf:type owl:Class ;
+             
+             rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#FreeDiskSpace
+
+:FreeDiskSpace rdf:type owl:Class ;
+               
+               rdfs:subClassOf :DiskUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#FreeMemory
+
+:FreeMemory rdf:type owl:Class ;
+            
+            rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#FreeSwap
+
+:FreeSwap rdf:type owl:Class ;
+          
+          rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#InterferenceLevel
+
+:InterferenceLevel rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf :RadioSignalQuality .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#LinkCapacity
+
+:LinkCapacity rdf:type owl:Class ;
+              
+              rdfs:subClassOf :Capacity ;
+              
+              rdfs:comment "Maximum throughput that a flow can get without any cross traffic. The link with the minimum transmission rate determines the capacity of the path, while the link with the minimum unused capacity limits the available bandwidth [C. Dovrolis, et al., What do packet dispersion techniques measure?]."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#MemoryUtilization
+
+:MemoryUtilization rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#NoiseLevel
+
+:NoiseLevel rdf:type owl:Class ;
+            
+            rdfs:subClassOf :RadioSignalQuality .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#OneWayDelay
+
+:OneWayDelay rdf:type owl:Class ;
+             
+             rdfs:subClassOf :Delay .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#PacketArrivalRate
+
+:PacketArrivalRate rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#PathCapacity
+
+:PathCapacity rdf:type owl:Class ;
+              
+              rdfs:subClassOf :Capacity ;
+              
+              rdfs:comment "The path capacity of a determinate protocol is the smallest link capacity of the links that make up the path. The  link capacity C(L,T,I) is the maximum number of bits of a determinate protocol that can be transmitted from the source and correctly received by the destination over the link L during the interval [T, T+I], divided by I."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#PowerConsumption
+
+:PowerConsumption rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf omn-monitoring:Metric ;
+                  
+                  rdfs:comment "Represents the power consumed in a specific time period, e.g. consumed power by GPS, sensor, WiFi smartphone."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#ProcessingTime
+
+:ProcessingTime rdf:type owl:Class ;
+                
+                rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#RSSILevel
+
+:RSSILevel rdf:type owl:Class ;
+           
+           rdfs:subClassOf :RadioSignalQuality ;
+           
+           rdfs:comment "Represents received signal strength indicator (RSSI) level."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#RadioSignalQuality
+
+:RadioSignalQuality rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf omn-monitoring:Metric ;
+                    
+                    rdfs:comment "Represents radio signal quality of any interface or  channel."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#ResourcePosition
+
+:ResourcePosition rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf omn-monitoring:Metric ;
+                  
+                  rdfs:comment "Gives the geographical position of a device such as sensor, mobile node, etc."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#ResponceTime
+
+:ResponceTime rdf:type owl:Class ;
+              
+              rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#RoundTripDelay
+
+:RoundTripDelay rdf:type owl:Class ;
+                
+                rdfs:subClassOf :Delay .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#SINR
+
+:SINR rdf:type owl:Class ;
+      
+      rdfs:subClassOf :RadioSignalQuality ;
+      
+      rdfs:comment "Represents Signal-to-Interference plus Noise Ratio."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#SIR
+
+:SIR rdf:type owl:Class ;
+     
+     rdfs:subClassOf :RadioSignalQuality ;
+     
+     rdfs:comment "Represents Signal-to-Interference Ratio."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#SNIR
+
+:SNIR rdf:type owl:Class ;
+      
+      rdfs:subClassOf :RadioSignalQuality ;
+      
+      rdfs:comment "Represents Signal-to-Noise plus Interference Ratio."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#SNR
+
+:SNR rdf:type owl:Class ;
+     
+     rdfs:subClassOf :RadioSignalQuality ;
+     
+     rdfs:comment "Represents Signal-to-Noise Ratio."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#SharedMemory
+
+:SharedMemory rdf:type owl:Class ;
+              
+              rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#SpectralIntegrity
+
+:SpectralIntegrity rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf :RadioSignalQuality .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Statistics
+
+:Statistics rdf:type owl:Class ;
+            
+            rdfs:subClassOf omn-monitoring:Metric ;
+            
+            rdfs:comment "Represents statistic information per IP connection, interface (packets, bytes) per time slot, or flow, etc."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Status
+
+:Status rdf:type owl:Class ;
+        
+        rdfs:subClassOf omn-monitoring:Metric ;
+        
+        rdfs:comment "Represents the status of a thing weather its ON or OFF. This thing can be virtual or physical resource, interface, port, PowerMode, etc. It is to be noticed that the status is different than the Availability metric"^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#StorageCapacity
+
+:StorageCapacity rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Capacity .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Temperature
+
+:Temperature rdf:type owl:Class ;
+             
+             rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#Throughput
+
+:Throughput rdf:type owl:Class ;
+            
+            rdfs:subClassOf omn-monitoring:Metric ;
+            
+            rdfs:comment "Average rate of successful amount of data delivered over a communication channel in a given time interval. E.g. number of (bytes, packets, and flows) per time slot."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#TimeToRepair
+
+:TimeToRepair rdf:type owl:Class ;
+              
+              rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#TotalMemory
+
+:TotalMemory rdf:type owl:Class ;
+             
+             rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#TotalSwap
+
+:TotalSwap rdf:type owl:Class ;
+           
+           rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedBandwidth
+
+:UsedBandwidth rdf:type owl:Class ;
+               
+               rdfs:subClassOf :BandwidthUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedDiskSpace
+
+:UsedDiskSpace rdf:type owl:Class ;
+               
+               rdfs:subClassOf :DiskUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedMemory
+
+:UsedMemory rdf:type owl:Class ;
+            
+            rdfs:subClassOf :MemoryUtilization .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedSwap
+
+:UsedSwap rdf:type owl:Class ;
+          
+          rdfs:subClassOf :MemoryUtilization .
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+
+
+
+###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
+
