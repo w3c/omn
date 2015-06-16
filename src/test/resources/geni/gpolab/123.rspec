@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd"
+       type="request">
+<node client_id="center" exclusive="false">
+    <sliver_type name="emulab-openvz">
+    </sliver_type>
+    <interface client_id="center:if0" />
+    <interface client_id="center:if1" />
+    <interface client_id="center:if2" />
+    <interface client_id="center:if3" />
+</node>
+<node client_id="left" exclusive="false">
+    <sliver_type name="emulab-openvz">
+    </sliver_type>
+    <interface client_id="left:if0" />
+</node>
+<node client_id="right" exclusive="false">
+    <sliver_type name="emulab-openvz">
+    </sliver_type> <interface client_id="right:if0" />
+</node>
+<link client_id="leftLink">
+    <interface_ref client_id="left:if0" />
+    <interface_ref client_id="center:if0" />
+</link>
+<link client_id="rightLink">
+    <interface_ref client_id="right:if0" />
+    <interface_ref client_id="center:if1" />
+</link>
+<node client_id="top" exclusive="false">
+    <sliver_type name="emulab-openvz">
+    </sliver_type>
+    <interface client_id="top:if0" />
+</node>
+<node client_id="bottom" exclusive="false">
+    <sliver_type name="emulab-openvz">
+    </sliver_type>
+    <interface client_id="bottom:if0" />
+</node>
+<link client_id="topLink">
+    <interface_ref client_id="top:if0" />
+    <interface_ref client_id="center:if2" />
+</link>
+<link client_id="bottomLink">
+    <interface_ref client_id="bottom:if0" />
+    <interface_ref client_id="center:if3" />
+</link>
+</rspec>

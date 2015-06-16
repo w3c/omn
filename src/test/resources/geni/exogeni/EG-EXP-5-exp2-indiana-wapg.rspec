@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This rspec reserves wide-area ProtoGENI host pg58 at Indiana
+AM: http://www.emulab.net/protogeni/xmlrpc/am/2.0
+-->
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       type="request">
+
+  <node client_id="wapg-indiana-pg58" component_id="urn:publicid:IDN+emulab.net+node+pg58" 
+	component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" 
+ 	component_name="pg58" exclusive="true">        
+   <interface client_id="wapg-rutgers-pg58:if0">
+   <ip address="10.42.19.158" netmask="255.255.255.0" />
+    </interface>
+  </node>
+</rspec>

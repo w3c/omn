@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for specifying sliver info within an RSpec -->
+<!-- Hosted here: http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1/sliver_info.xsd?format=raw -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:sliver_info="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+  <!-- This is meant to extend the node or link element -->
+  <xs:element name="geni_sliver_info">
+    <xs:complexType>
+      <xs:attribute name="creator_urn" use="required" type="xs:string"/>
+      <xs:attribute name="creation_time" use="required" type="xs:dateTime"/>
+      <xs:attribute name="expiration_time" use="required" type="xs:dateTime"/>
+      <xs:attribute name="start_time" type="xs:dateTime"/>
+      <xs:attribute name="state" type="xs:string"/>
+      <xs:attribute name="destroyed" type="xs:boolean"/>
+      <xs:attribute name="error" type="xs:string"/>
+      <xs:attribute name="resource_id" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,166 @@
+#!/usr/bin/perl -w
+
+# GENIPUBLIC-COPYRIGHT
+# Copyright (c) 2011 University of Utah and the Flux Group.
+# All rights reserved.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and/or hardware specification (the "Work") to
+# deal in the Work without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Work, and to permit persons to whom the Work
+# is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Work.
+#
+# THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+# IN THE WORK.
+#----------------------------------------------------------------------
+
+#use English;
+use Getopt::Std;
+use XML::LibXML;
+use XML::LibXML::XPathContext;
+use XML::LibXML::NodeList;
+
+sub usage
+{
+	die("Usage: rspeclint [<namespace> <schema>]+ <document>\n\n".
+	    "Schema and document locations are either paths or URLs.\n");
+}
+
+sub addSchema($$);
+sub visit($);
+sub verify($);
+sub report($$);
+
+%ns2file = ();
+%ns2schema = ();
+
+#my %options;
+#
+#if (! getopts('', \%options)) {
+#   usage();
+#}
+
+while (scalar(@ARGV) > 1) {
+    my $ns = shift(@ARGV);
+    my $schema = shift(@ARGV);
+    addSchema($ns, $schema);
+}
+
+if (scalar(@ARGV) != 1) {
+    usage();
+}
+
+my $parser = XML::LibXML->new(line_numbers => 1);
+my $docfile = $ARGV[0];
+my $doc;
+eval {
+    $doc = $parser->parse_file($docfile);
+};
+
+if ($@) {
+    die("Failed to parse XML document at location $docfile: $@\n");
+}
+
+visit($doc->documentElement());
+
+sub addSchema($$)
+{
+    my ($ns, $file) = @_;
+    if (! exists($ns2file{$ns})) {
+	my $schema;
+	eval {
+	    $schema = XML::LibXML::Schema->new(location => $file);
+	};
+	if ($@) {
+	    die("Failed to load schema for namespace $ns from location $file\n: $@");
+	}
+	$ns2file{$ns} = $file;
+	$ns2schema{$ns} = $schema;
+    } else {
+	my $exemplar = $ns2file{$ns};
+	if ($exemplar ne $file) {
+	    die("Schema location mismatch on namespace $ns: Original location is $exemplar while new location is $file\n");
+	}
+    }
+#    print STDERR "Added Schema $ns   --   $file\n";
+}
+
+sub visit($)
+{
+    my ($node) = @_;
+    my $nodens = $node->namespaceURI();
+    if (! defined($nodens)) {
+	report("Element has no namespace", $node);
+    }
+
+    # Add any new schemaLocation pairs
+    my $uri = "http://www.w3.org/2001/XMLSchema-instance";
+    my $xc = XML::LibXML::XPathContext->new();
+    $xc->registerNs('xsi', $uri);
+    my $schemaLocation = $xc->findnodes('@xsi:schemaLocation', $node)->pop();
+    if (defined($schemaLocation)) {
+	my @schemaList = split(/\s+/, $schemaLocation->nodeValue());
+	while (scalar(@schemaList) > 1) {
+	    my $ns = shift(@schemaList);
+	    my $file = shift(@schemaList);
+	    addSchema($ns, $file);
+	}
+	if (scalar(@schemaList) == 1) {
+	    report("schemaLocation tag has an odd number of fields",
+		   $schemaLocation);
+	}
+    }
+
+    # Verify the node if it changes namespaces or is the root
+    my $parent = $node->parentNode();
+    my $parentns = $parent->namespaceURI();
+    if (!defined($parentns) || $parentns ne $nodens) {
+	verify($node);
+    }
+
+    # Recurse
+    for my $child ($node->childNodes()) {
+	if ($child->nodeType() == XML_ELEMENT_NODE) {
+	    visit($child);
+	}
+    }
+}
+
+sub verify($)
+{
+    my ($node) = @_;
+    my $ns = $node->namespaceURI();
+    if (! exists($ns2schema{$ns})) {
+	my $nodeStr = $node->nodeName();
+	print STDERR "Ignoring node $nodeStr with unknown namespace $ns\n";
+	return;
+    }
+    my $schema = $ns2schema{$ns};
+    eval {
+	my $clone = $node->cloneNode(1);
+	my $clonedoc = XML::LibXML::Document->createDocument("1.0", "UTF-8");
+	$clonedoc->setDocumentElement($clone);
+	$schema->validate($clonedoc);
+    };
+    if ($@) {
+	report("Failed validation with root at element: $@", $node);
+    }
+}
+
+sub report($$)
+{
+    my ($error, $node) = @_;
+    my $line = $node->line_number();
+    my $nodeStr = $node->nodeName();
+    die("Line $line: $error: $nodeStr\n");
+}

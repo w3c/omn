@@ -3,6 +3,8 @@ package info.openmultinet.ontology.translators;
 import java.net.URI;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,12 +14,20 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public abstract class AbstractConverter {
@@ -28,7 +38,10 @@ public abstract class AbstractConverter {
 	public final static String RSPEC_MANIFEST = "manifest";
 	public final static String RSPEC_ADVERTISEMENT = "advertisement";
 	public static final String TOSCA = "tosca";
+	public static final String ANYFORMAT = "to";
 	protected static final String NAMESPACE = "http://open-multinet.info/example#";
+	private static final Logger LOG = Logger.getLogger(AbstractConverter.class
+			.getName());
 
 	protected static void validateModel(final List<Resource> groups)
 			throws InvalidModelException {
@@ -65,139 +78,11 @@ public abstract class AbstractConverter {
 		return result.toString();
 	}
 
-	public static String generateUrnFromUrl(String url, String type) {
-		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
-		// urn:publicid:IDN+<authority string>+<type>+<name>
-		// type can be interface, link or node
-
-		if (url == null) {
-			return "";
-		}
-
-		URI uri = URI.create(url);
-		if (uri.getScheme() == null){
-			return "";
-		}
-
-		if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
-			String urn = "";
-			String host = urlToGeniUrn(uri.getHost());
-			String path = urlToGeniUrn(uri.getPath());
-			String fragment = urlToGeniUrn(uri.getFragment());
-			String scheme = urlToGeniUrn(uri.getScheme());
-
-			urn = "urn:publicid:IDN+" + host + "+" + urlToGeniUrn(type) + "+"
-					+ scheme + "%3A%2F%2F" + host + path;
-
-			if (fragment != null && !fragment.equals("")) {
-				urn += "%23" + fragment;
-			}
-
-			return urn;
-		} else {
-
-			return url;
-		}
-
-	}
-
-	private static String urlToGeniUrn(String dirtyString) {
-
-		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
-		// From Transcribe to
-		// leading and trailing whitespace trim
-		// whitespace collapse to a single '+'
-		// '//' ':'
-		// '::' ';'
-		// '+' '%2B'
-		// ":' '%3A'
-		// '/' '%2F'
-		// ';' '%3B'
-		// ''' '%27'
-		// '?' '%3F'
-		// '#' '%23'
-		// '%' '%25
-
-		if (dirtyString == null) {
-			return "";
-		}
-		String cleanString;
-		cleanString = dirtyString.replaceAll(";", "%3B");
-		cleanString = cleanString.replaceAll("%", "%25");
-		cleanString = cleanString.replaceAll(":", "%3A");
-		cleanString = cleanString.replaceAll("\\+", "%2B");
-		cleanString = cleanString.replaceAll("//", ":");
-		cleanString = cleanString.replaceAll("::", ";");
-		cleanString = cleanString.replaceAll("/", "%2F");
-		cleanString = cleanString.replaceAll("'", "%27");
-		cleanString = cleanString.replaceAll("\\?", "%3F");
-		cleanString = cleanString.replaceAll("#", "%23");
-		cleanString = cleanString.trim();
-		cleanString = cleanString.replaceAll("\\s+", "+");
-
-		return cleanString;
-	}
-
-	public static String generateUrlFromUrn(String urn) {
-
-		if (urn == null) {
-			return "";
-		}
-
-		URI uri = URI.create(urn);
-		if (uri == null) {
-			return "";
-		}
-
-		if (uri.getScheme().equals("urn")) {
-
-			String url = "";
-			String[] parts = urn.split("\\+");
-
-			if (parts.length > 1) {
-				String part1 = geniUrntoUrl(parts[1]);
-				String part2 = "";
-
-				// url = "http://";// + part1;
-
-				if (parts.length > 3) {
-					part2 = geniUrntoUrl(parts[3]);
-
-					if (part2 != "") {
-						url += part2;
-						// url += "#" + part2;
-					}
-				}
-			}
-
-			return url;
-		} else {
-			return urn;
-		}
-	}
-
-	private static String geniUrntoUrl(String dirtyString) {
-
-		if (dirtyString == null) {
-			return "";
-		}
-		String cleanString;
-
-		cleanString = dirtyString.replaceAll("\\+", " ");
-		cleanString = cleanString.replaceAll("%23", "#");
-		cleanString = cleanString.replaceAll("%3F", "?");
-		cleanString = cleanString.replaceAll("%27", "'");
-		cleanString = cleanString.replaceAll("%2F", "/");
-		cleanString = cleanString.replaceAll(";", "::");
-		cleanString = cleanString.replaceAll(":", "//");
-		cleanString = cleanString.replaceAll("%2B", "+");
-		cleanString = cleanString.replaceAll("%3A", ":");
-		cleanString = cleanString.replaceAll("%25", "%");
-		cleanString = cleanString.replaceAll("%3B", ";");
-
-		return cleanString;
-	}
-
+	/**
+	 * Returns whether the URI is a generic OWL/RDFS/OMN class or not
+	 * @param uri
+	 * @return
+	 */
 	public static boolean nonGeneric(String uri) {
 		if (uri == null) {
 			return true;
@@ -261,21 +146,66 @@ public abstract class AbstractConverter {
 			name = url;
 		}
 		return name;
-
 	}
 
+	/**
+	 * Method to determine whether a given string is a URL or not
+	 * 
+	 * @param string
+	 * @return boolean, true if string is a URL
+	 */
 	public static boolean isUrl(String url) {
 
-		URI uri = URI.create(url);
+		URI uri = null;
+		uri = URI.create(url);
 
-		if (uri.getScheme() != null) {
-			if (uri.getScheme().equals("http")
-					|| uri.getScheme().equals("https")) {
-				return true;
+		if (uri != null) {
+			if (uri.getScheme() != null) {
+				if (uri.getScheme().equals("http")
+						|| uri.getScheme().equals("https")) {
+					return true;
+				}
 			}
 		}
-
 		return false;
 
 	}
+
+	/**
+	 * Convert XMLGregorianCalendar to XSDDateTime
+	 * 
+	 * @param time
+	 * @return
+	 */
+	public static XSDDateTime xmlToXsdTime(XMLGregorianCalendar time) {
+
+		Calendar timeCalendar = time.toGregorianCalendar();
+		XSDDateTime timeXSDDateTime = new XSDDateTime(timeCalendar);
+		return timeXSDDateTime;
+	}
+
+	/**
+	 * Method for converting XSDDateTime to XMLGregorianCalendar
+	 * 
+	 * @param XSDDateTime
+	 *            time
+	 * @return XMLGregorianCalendar time
+	 */
+	public static XMLGregorianCalendar xsdToXmlTime(XSDDateTime time) {
+
+		Calendar timeCalendar = time.asCalendar();
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTimeInMillis(timeCalendar.getTimeInMillis());
+		TimeZone timezone = timeCalendar.getTimeZone();
+		gc.setTimeZone(timezone);
+		XMLGregorianCalendar xc = null;
+		try {
+			xc = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		return xc;
+	}
+
 }

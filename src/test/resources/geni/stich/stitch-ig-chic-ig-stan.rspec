@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:stitch="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                           http://www.geni.net/resources/rspec/3/request.xsd"
+       type="request">
+
+  <node client_id="chic-ig" component_manager_id="urn:publicid:IDN+geni.uchicago.edu+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen" />
+    <interface client_id="chic-ig:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <node client_id="stan-ig" component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen" />
+    <interface client_id="stan-ig:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <link client_id="link-uchicago-ig-stan-ig">
+    <component_manager name="urn:publicid:IDN+geni.uchicago.edu+authority+cm"/>
+    <property source_id="chic-ig:if0" dest_id="stan-ig:if0" capacity="100000"/>
+    <interface_ref client_id="chic-ig:if0" />
+    <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+    <property source_id="stan-ig:if0" dest_id="chic-ig:if0" capacity="100000"/>
+    <interface_ref client_id="stan-ig:if0" />
+  </link>
+</rspec>

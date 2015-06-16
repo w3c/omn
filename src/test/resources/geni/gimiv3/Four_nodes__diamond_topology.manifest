@@ -1,0 +1,46 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd" type="manifest" expires="2013-12-07T02:58:02Z">
+  <node client_id="VM-1" exclusive="true" component_id="urn:publicid:IDN+emulab.net+node+pc100" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" sliver_id="urn:publicid:IDN+emulab.net+sliver+163400">
+    <interface client_id="VM-1:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc100:eth3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163405" mac_address="0002b365c1e3"><ip address="10.10.1.1" type="ipv4"/></interface>
+    <interface client_id="VM-1:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc100:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+163414" mac_address="00034794c2d7"><ip address="10.10.4.1" type="ipv4"/></interface>
+  <sliver_type name="raw-pc"/><rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pc100"/><host name="VM-1.joBasicPG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc100.emulab.net" port="22" username="johren"/></services></node>
+  <node client_id="VM-2" exclusive="true" component_id="urn:publicid:IDN+emulab.net+node+pc87" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" sliver_id="urn:publicid:IDN+emulab.net+sliver+163399">
+    <interface client_id="VM-2:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc87:eth1" sliver_id="urn:publicid:IDN+emulab.net+sliver+163406" mac_address="000347738c02"><ip address="10.10.1.2" type="ipv4"/></interface>
+    <interface client_id="VM-2:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc87:eth0" sliver_id="urn:publicid:IDN+emulab.net+sliver+163408" mac_address="000347738c01"><ip address="10.10.2.1" type="ipv4"/></interface>
+  <sliver_type name="raw-pc"/><rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pc87"/><host name="VM-2.joBasicPG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc87.emulab.net" port="22" username="johren"/></services></node>
+  <node client_id="VM-3" exclusive="true" component_id="urn:publicid:IDN+emulab.net+node+pc155" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" sliver_id="urn:publicid:IDN+emulab.net+sliver+163401">
+    <interface client_id="VM-3:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc155:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+163412" mac_address="00034794c57b"><ip address="10.10.3.2" type="ipv4"/></interface>
+    <interface client_id="VM-3:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc155:eth3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163409" mac_address="0002b3236d13"><ip address="10.10.2.2" type="ipv4"/></interface>
+  <sliver_type name="raw-pc"/><rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pc155"/><host name="VM-3.joBasicPG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc155.emulab.net" port="22" username="johren"/></services></node>
+  <node client_id="VM-4" exclusive="true" component_id="urn:publicid:IDN+emulab.net+node+pc163" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" sliver_id="urn:publicid:IDN+emulab.net+sliver+163402">
+    <interface client_id="VM-4:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc163:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+163415" mac_address="00034794c041"><ip address="10.10.4.2" type="ipv4"/></interface>
+    <interface client_id="VM-4:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc163:eth3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163411" mac_address="0002b365d147"><ip address="10.10.3.1" type="ipv4"/></interface>
+  <sliver_type name="raw-pc"/><rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pc163"/><host name="VM-4.joBasicPG.ch-geni-net.emulab.net"/><services><login authentication="ssh-keys" hostname="pc163.emulab.net" port="22" username="johren"/></services></node>
+  <link client_id="lan0" sliver_id="urn:publicid:IDN+emulab.net+sliver+163404" vlantag="391">
+    <interface_ref client_id="VM-1:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc100:eth3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163405"/>
+    <interface_ref client_id="VM-2:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc87:eth1" sliver_id="urn:publicid:IDN+emulab.net+sliver+163406"/>
+    <property source_id="VM-1:if0" dest_id="VM-2:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-1:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan1" sliver_id="urn:publicid:IDN+emulab.net+sliver+163407" vlantag="335">
+    <interface_ref client_id="VM-2:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc87:eth0" sliver_id="urn:publicid:IDN+emulab.net+sliver+163408"/>
+    <interface_ref client_id="VM-3:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc155:eth3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163409"/>
+    <property source_id="VM-2:if1" dest_id="VM-3:if1"/>
+    <property source_id="VM-3:if1" dest_id="VM-2:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan2" sliver_id="urn:publicid:IDN+emulab.net+sliver+163410" vlantag="392">
+    <interface_ref client_id="VM-4:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc163:eth3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163411"/>
+    <interface_ref client_id="VM-3:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc155:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+163412"/>
+    <property source_id="VM-4:if1" dest_id="VM-3:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-4:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan3" sliver_id="urn:publicid:IDN+emulab.net+sliver+163413" vlantag="347">
+    <interface_ref client_id="VM-1:if1" component_id="urn:publicid:IDN+emulab.net+interface+pc100:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+163414"/>
+    <interface_ref client_id="VM-4:if0" component_id="urn:publicid:IDN+emulab.net+interface+pc163:eth4" sliver_id="urn:publicid:IDN+emulab.net+sliver+163415"/>
+    <property source_id="VM-1:if1" dest_id="VM-4:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-1:if1"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

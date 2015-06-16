@@ -1,0 +1,42 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+
+<node client_id="Server">
+    <sliver_type name="default-vm">
+    </sliver_type>
+    <services>
+    <execute command="/local/webexample/websrv_init.sh" shell="sh"/><install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/WebServer/webexample.tar.gz"/></services> 
+    <interface client_id="Server:if0"/>
+    <interface client_id="Server:if1"/>
+  <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="31"/><routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/></node>
+
+<node client_id="Client2" exclusive="false">
+    <sliver_type name="default-vm"/>
+    <services>
+    <execute command="/local/webexample/webcl_init.sh" shell="sh"/><install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/WebServer/webexample.tar.gz"/></services>
+    <interface client_id="Client2:if0"/>
+  <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="31"/></node>
+
+<node client_id="Client1" exclusive="false">
+    <sliver_type name="default-vm"/>
+    <services>
+    <execute command="/local/webexample/webcl_init.sh" shell="sh"/><install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/WebServer/webexample.tar.gz"/></services>
+    <interface client_id="Client1:if0"/>
+  <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="31"/></node>
+
+<link client_id="lan0">    
+    <interface_ref client_id="Server:if0"/>
+    <interface_ref client_id="Client1:if0"/>
+    <property source_id="Server:if0" dest_id="Client1:if0"/>
+    <property source_id="Client1:if0" dest_id="Server:if0"/>
+    <link_type name="lan"/>
+  </link>
+
+<link client_id="lan1">    
+    <interface_ref client_id="Server:if1"/>
+    <interface_ref client_id="Client2:if0"/>
+    <property source_id="Server:if1" dest_id="Client2:if0"/>
+    <property source_id="Client2:if0" dest_id="Server:if1"/>
+    <link_type name="lan"/>
+  </link>
+
+</rspec>

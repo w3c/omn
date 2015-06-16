@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                           http://www.geni.net/resources/rspec/3/request.xsd
+                           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       type="request">
+<node client_id="right" exclusive="false">
+    <sliver_type name="m1.small">
+        <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.4.xml" version="375d5861080b85c9b17e8d4c6c431e955e1d72fd" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-topo-setup-exo.tar.gz" install_path="/tmp" />
+        <execute shell="bash" command="/tmp/postboot_script_exo.sh $sliceName $self.Name() ; /tmp/of-topo-setup/right-shaper-setup" />
+    </services>
+    <interface client_id="right:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.3.2" />
+    </interface>
+    <interface client_id="right:aggregator">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.5.1" />
+    </interface>
+</node>
+<node client_id="aggregator" exclusive="false">
+    <sliver_type name="m1.large">
+        <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.4.xml" version="375d5861080b85c9b17e8d4c6c431e955e1d72fd" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-aggregator-exo.tar.gz" install_path="/tmp/" />
+        <execute shell="bash" command="/tmp/postboot_script_exo.sh $sliceName $self.Name() ; /tmp/of-topo-setup/aggregator-setup" />
+    </services>
+    <interface client_id="aggregator:right">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.5.2" />
+    </interface>
+    <interface client_id="aggregator:left">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.4.2" />
+    </interface>
+    <interface client_id="aggregator:inside">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.6.1" />
+    </interface>
+</node>
+<node client_id="inside" exclusive="false">
+    <sliver_type name="m1.small">
+        <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.4.xml" version="375d5861080b85c9b17e8d4c6c431e955e1d72fd" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/install-script-exo.tar.gz" install_path="/tmp/" />
+        <execute shell="bash" command="/tmp/postboot_script_exo.sh $sliceName $self.Name()" />
+    </services>
+    <interface client_id="inside:aggregator">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.10.2" />
+    </interface>
+</node>
+<node client_id="switch" exclusive="false">
+    <sliver_type name="m1.large">
+        <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.4.xml" version="375d5861080b85c9b17e8d4c6c431e955e1d72fd" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-switch-exo.tar.gz" install_path="/tmp/" />
+        <execute shell="bash" command="/tmp/postboot_script_exo.sh $sliceName $self.Name() ; /tmp/of-topo-setup/lb-setup" />
+    </services>
+    <interface client_id="switch:outside">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.1.1" />
+    </interface>
+    <interface client_id="switch:right">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.3.1" />
+    </interface>
+    <interface client_id="switch:left">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.2.1" />
+    </interface>
+</node>
+<node client_id="outside" exclusive="false">
+    <sliver_type name="m1.small">
+        <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.4.xml" version="375d5861080b85c9b17e8d4c6c431e955e1d72fd" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/install-script-exo.tar.gz" install_path="/tmp/" />
+        <execute shell="bash" command="/tmp/postboot_script_exo.sh $sliceName $self.Name()" />
+    </services>
+    <interface client_id="outside:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="10.10.10.1" />
+    </interface>
+</node>
+<node client_id="left" exclusive="false">
+    <sliver_type name="m1.small">
+        <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.0.4.xml" version="375d5861080b85c9b17e8d4c6c431e955e1d72fd" />
+    </sliver_type>
+    <services>
+        <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowExampleExperiment/software/of-topo-setup-exo.tar.gz" install_path="/tmp" />
+        <execute shell="bash" command="/tmp/postboot_script_exo.sh $sliceName $self.Name() ; /tmp/of-topo-setup/left-shaper-setup" />
+    </services>
+    <interface client_id="left:switch">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.2.2" />
+    </interface>
+    <interface client_id="left:aggregator">
+        <ip netmask="255.255.255.0" type="ipv4" address="192.168.4.1" />
+    </interface>
+</node>
+<link client_id="left-aggregator">
+    <interface_ref client_id="aggregator:left" />
+    <interface_ref client_id="left:aggregator" />
+    <property source_id="left:aggregator" dest_id="aggregator:left" capacity="100000000"/>
+    <property source_id="aggregator:left" dest_id="left:aggregator" capacity="100000000"/>
+</link>
+<link client_id="right-aggregator">
+    <interface_ref client_id="aggregator:right" />
+    <interface_ref client_id="right:aggregator" />
+    <property source_id="right:aggregator" dest_id="aggregator:right" capacity="100000000"/>
+    <property source_id="aggregator:right" dest_id="right:aggregator" capacity="100000000"/>
+</link>
+<link client_id="aggregator-inside">
+    <interface_ref client_id="aggregator:inside" />
+    <interface_ref client_id="inside:aggregator" />
+    <property source_id="inside:aggregator" dest_id="aggregator:inside" capacity="100000000"/>
+    <property source_id="aggregator:inside" dest_id="inside:aggregator" capacity="100000000"/>
+</link>
+<link client_id="outside-switch">
+    <interface_ref client_id="outside:switch" />
+    <interface_ref client_id="switch:outside" />
+    <property source_id="outside:switch" dest_id="switch:outside" capacity="100000000"/>
+    <property source_id="switch:outside" dest_id="outside:switch" capacity="100000000"/>
+</link>
+<link client_id="switch-left">
+    <interface_ref client_id="left:switch" />
+    <interface_ref client_id="switch:left" />
+    <property source_id="left:switch" dest_id="switch:left" capacity="100000000"/>
+    <property source_id="switch:left" dest_id="left:switch" capacity="100000000"/>
+</link>
+<link client_id="switch-right">
+    <interface_ref client_id="right:switch" />
+    <interface_ref client_id="switch:right" />
+    <property source_id="right:switch" dest_id="switch:right" capacity="100000000"/>
+    <property source_id="switch:right" dest_id="right:switch" capacity="100000000"/>
+</link>
+</rspec>

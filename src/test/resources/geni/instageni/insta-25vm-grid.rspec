@@ -1,0 +1,539 @@
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+  <node client_id="VM" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM:if0">
+    </interface>
+    <interface client_id="VM:if1">
+    </interface>
+  </node>
+  <node client_id="VM-0" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-0:if0">
+    </interface>
+    <interface client_id="VM-0:if1">
+    </interface>
+    <interface client_id="VM-0:if2">
+    </interface>
+  </node>
+  <node client_id="VM-1" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-1:if0">
+    </interface>
+    <interface client_id="VM-1:if1">
+    </interface>
+    <interface client_id="VM-1:if2">
+    </interface>
+  </node>
+  <node client_id="VM-2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-2:if0">
+    </interface>
+    <interface client_id="VM-2:if1">
+    </interface>
+    <interface client_id="VM-2:if2">
+    </interface>
+  </node>
+  <node client_id="VM-3" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-3:if0">
+    </interface>
+    <interface client_id="VM-3:if1">
+    </interface>
+    <interface client_id="VM-3:if2">
+    </interface>
+  </node>
+  <node client_id="VM-4" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-4:if0">
+    </interface>
+    <interface client_id="VM-4:if1">
+    </interface>
+    <interface client_id="VM-4:if2">
+    </interface>
+  </node>
+  <node client_id="VM-5" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-5:if0">
+    </interface>
+    <interface client_id="VM-5:if1">
+    </interface>
+    <interface client_id="VM-5:if2">
+    </interface>
+  </node>
+  <node client_id="VM-6" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-6:if0">
+    </interface>
+    <interface client_id="VM-6:if1">
+    </interface>
+    <interface client_id="VM-6:if2">
+    </interface>
+  </node>
+  <node client_id="VM-7" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-7:if0">
+    </interface>
+  </node>
+  <node client_id="VM-9" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-9:if0">
+    </interface>
+    <interface client_id="VM-9:if1">
+    </interface>
+    <interface client_id="VM-9:if2">
+    </interface>
+  </node>
+  <node client_id="VM-10" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-10:if0">
+    </interface>
+    <interface client_id="VM-10:if1">
+    </interface>
+    <interface client_id="VM-10:if2">
+    </interface>
+    <interface client_id="VM-10:if3">
+    </interface>
+  </node>
+  <node client_id="VM-11" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-11:if0">
+    </interface>
+    <interface client_id="VM-11:if1">
+    </interface>
+    <interface client_id="VM-11:if2">
+    </interface>
+    <interface client_id="VM-11:if3">
+    </interface>
+  </node>
+  <node client_id="VM-12" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-12:if0">
+    </interface>
+    <interface client_id="VM-12:if1">
+    </interface>
+    <interface client_id="VM-12:if2">
+    </interface>
+    <interface client_id="VM-12:if3">
+    </interface>
+  </node>
+  <node client_id="VM-13" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-13:if0">
+    </interface>
+    <interface client_id="VM-13:if1">
+    </interface>
+    <interface client_id="VM-13:if2">
+    </interface>
+    <interface client_id="VM-13:if3">
+    </interface>
+  </node>
+  <node client_id="VM-14" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-14:if0">
+    </interface>
+    <interface client_id="VM-14:if1">
+    </interface>
+    <interface client_id="VM-14:if2">
+    </interface>
+    <interface client_id="VM-14:if3">
+    </interface>
+  </node>
+  <node client_id="VM-15" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-15:if0">
+    </interface>
+    <interface client_id="VM-15:if1">
+    </interface>
+    <interface client_id="VM-15:if2">
+    </interface>
+    <interface client_id="VM-15:if3">
+    </interface>
+  </node>
+  <node client_id="VM-16" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-16:if0">
+    </interface>
+    <interface client_id="VM-16:if2">
+    </interface>
+    <interface client_id="VM-16:if3">
+    </interface>
+  </node>
+  <node client_id="VM-19" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-19:if1">
+    </interface>
+    <interface client_id="VM-19:if2">
+    </interface>
+    <interface client_id="VM-19:if3">
+    </interface>
+  </node>
+  <node client_id="VM-21" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-21:if1">
+    </interface>
+    <interface client_id="VM-21:if2">
+    </interface>
+    <interface client_id="VM-21:if3">
+    </interface>
+  </node>
+  <node client_id="VM-22" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-22:if1">
+    </interface>
+    <interface client_id="VM-22:if2">
+    </interface>
+    <interface client_id="VM-22:if3">
+    </interface>
+  </node>
+  <node client_id="VM-23" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-23:if0">
+    </interface>
+    <interface client_id="VM-23:if2">
+    </interface>
+    <interface client_id="VM-23:if3">
+    </interface>
+  </node>
+  <node client_id="VM-24" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-24:if0">
+    </interface>
+    <interface client_id="VM-24:if1">
+    </interface>
+    <interface client_id="VM-24:if3">
+    </interface>
+  </node>
+  <node client_id="VM-27" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-27:if2">
+    </interface>
+    <interface client_id="VM-27:if1">
+    </interface>
+    <interface client_id="VM-27:if3">
+    </interface>
+  </node>
+  <node client_id="VM-20" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-20:if1">
+    </interface>
+    <interface client_id="VM-20:if2">
+    </interface>
+  </node>
+  <node client_id="VM-26" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-26:if0">
+    </interface>
+    <interface client_id="VM-26:if1">
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM:if0"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <property source_id="VM:if0" dest_id="VM-0:if0"/>
+    <property source_id="VM-0:if0" dest_id="VM:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan1">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-0:if1"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <property source_id="VM-0:if1" dest_id="VM-1:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-0:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan2">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-1:if1"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <property source_id="VM-1:if1" dest_id="VM-2:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-1:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan3">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-2:if1"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <property source_id="VM-2:if1" dest_id="VM-3:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-2:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan4">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-3:if1"/>
+    <interface_ref client_id="VM-4:if0"/>
+    <property source_id="VM-3:if1" dest_id="VM-4:if0"/>
+    <property source_id="VM-4:if0" dest_id="VM-3:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan5">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-4:if1"/>
+    <interface_ref client_id="VM-5:if0"/>
+    <property source_id="VM-4:if1" dest_id="VM-5:if0"/>
+    <property source_id="VM-5:if0" dest_id="VM-4:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan6">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-5:if1"/>
+    <interface_ref client_id="VM-6:if0"/>
+    <property source_id="VM-5:if1" dest_id="VM-6:if0"/>
+    <property source_id="VM-6:if0" dest_id="VM-5:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan7">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-6:if1"/>
+    <interface_ref client_id="VM-7:if0"/>
+    <property source_id="VM-6:if1" dest_id="VM-7:if0"/>
+    <property source_id="VM-7:if0" dest_id="VM-6:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan24">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-9:if0"/>
+    <interface_ref client_id="VM-20:if1"/>
+    <property source_id="VM-9:if0" dest_id="VM-20:if1"/>
+    <property source_id="VM-20:if1" dest_id="VM-9:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan25">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM:if1"/>
+    <interface_ref client_id="VM-9:if1"/>
+    <property source_id="VM:if1" dest_id="VM-9:if1"/>
+    <property source_id="VM-9:if1" dest_id="VM:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan26">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-9:if2"/>
+    <interface_ref client_id="VM-10:if0"/>
+    <property source_id="VM-9:if2" dest_id="VM-10:if0"/>
+    <property source_id="VM-10:if0" dest_id="VM-9:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan27">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-10:if1"/>
+    <interface_ref client_id="VM-11:if0"/>
+    <property source_id="VM-10:if1" dest_id="VM-11:if0"/>
+    <property source_id="VM-11:if0" dest_id="VM-10:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan28">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-11:if1"/>
+    <interface_ref client_id="VM-12:if0"/>
+    <property source_id="VM-11:if1" dest_id="VM-12:if0"/>
+    <property source_id="VM-12:if0" dest_id="VM-11:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan29">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-12:if1"/>
+    <interface_ref client_id="VM-13:if0"/>
+    <property source_id="VM-12:if1" dest_id="VM-13:if0"/>
+    <property source_id="VM-13:if0" dest_id="VM-12:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan30">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-13:if1"/>
+    <interface_ref client_id="VM-14:if0"/>
+    <property source_id="VM-13:if1" dest_id="VM-14:if0"/>
+    <property source_id="VM-14:if0" dest_id="VM-13:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan31">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-14:if1"/>
+    <interface_ref client_id="VM-15:if0"/>
+    <property source_id="VM-14:if1" dest_id="VM-15:if0"/>
+    <property source_id="VM-15:if0" dest_id="VM-14:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan32">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-15:if1"/>
+    <interface_ref client_id="VM-16:if0"/>
+    <property source_id="VM-15:if1" dest_id="VM-16:if0"/>
+    <property source_id="VM-16:if0" dest_id="VM-15:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan58">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-24:if0"/>
+    <interface_ref client_id="VM-27:if2"/>
+    <property source_id="VM-24:if0" dest_id="VM-27:if2"/>
+    <property source_id="VM-27:if2" dest_id="VM-24:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan59">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-23:if0"/>
+    <interface_ref client_id="VM-24:if1"/>
+    <property source_id="VM-23:if0" dest_id="VM-24:if1"/>
+    <property source_id="VM-24:if1" dest_id="VM-23:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan65">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-20:if2"/>
+    <interface_ref client_id="VM-21:if1"/>
+    <property source_id="VM-20:if2" dest_id="VM-21:if1"/>
+    <property source_id="VM-21:if1" dest_id="VM-20:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan66">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-21:if2"/>
+    <interface_ref client_id="VM-19:if1"/>
+    <property source_id="VM-21:if2" dest_id="VM-19:if1"/>
+    <property source_id="VM-19:if1" dest_id="VM-21:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan67">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-19:if2"/>
+    <interface_ref client_id="VM-22:if1"/>
+    <property source_id="VM-19:if2" dest_id="VM-22:if1"/>
+    <property source_id="VM-22:if1" dest_id="VM-19:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan68">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-22:if2"/>
+    <interface_ref client_id="VM-23:if2"/>
+    <property source_id="VM-22:if2" dest_id="VM-23:if2"/>
+    <property source_id="VM-23:if2" dest_id="VM-22:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan54">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-16:if2"/>
+    <interface_ref client_id="VM-26:if0"/>
+    <property source_id="VM-16:if2" dest_id="VM-26:if0"/>
+    <property source_id="VM-26:if0" dest_id="VM-16:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan55">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-27:if1"/>
+    <interface_ref client_id="VM-26:if1"/>
+    <property source_id="VM-27:if1" dest_id="VM-26:if1"/>
+    <property source_id="VM-26:if1" dest_id="VM-27:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan72">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-6:if2"/>
+    <interface_ref client_id="VM-16:if3"/>
+    <property source_id="VM-6:if2" dest_id="VM-16:if3"/>
+    <property source_id="VM-16:if3" dest_id="VM-6:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan73">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-5:if2"/>
+    <interface_ref client_id="VM-15:if2"/>
+    <property source_id="VM-5:if2" dest_id="VM-15:if2"/>
+    <property source_id="VM-15:if2" dest_id="VM-5:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan74">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-4:if2"/>
+    <interface_ref client_id="VM-14:if2"/>
+    <property source_id="VM-4:if2" dest_id="VM-14:if2"/>
+    <property source_id="VM-14:if2" dest_id="VM-4:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan75">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-3:if2"/>
+    <interface_ref client_id="VM-13:if2"/>
+    <property source_id="VM-3:if2" dest_id="VM-13:if2"/>
+    <property source_id="VM-13:if2" dest_id="VM-3:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan76">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-2:if2"/>
+    <interface_ref client_id="VM-12:if2"/>
+    <property source_id="VM-2:if2" dest_id="VM-12:if2"/>
+    <property source_id="VM-12:if2" dest_id="VM-2:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan77">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-1:if2"/>
+    <interface_ref client_id="VM-11:if2"/>
+    <property source_id="VM-1:if2" dest_id="VM-11:if2"/>
+    <property source_id="VM-11:if2" dest_id="VM-1:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan78">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-0:if2"/>
+    <interface_ref client_id="VM-10:if2"/>
+    <property source_id="VM-0:if2" dest_id="VM-10:if2"/>
+    <property source_id="VM-10:if2" dest_id="VM-0:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan79">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-10:if3"/>
+    <interface_ref client_id="VM-21:if3"/>
+    <property source_id="VM-10:if3" dest_id="VM-21:if3"/>
+    <property source_id="VM-21:if3" dest_id="VM-10:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan80">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-11:if3"/>
+    <interface_ref client_id="VM-19:if3"/>
+    <property source_id="VM-11:if3" dest_id="VM-19:if3"/>
+    <property source_id="VM-19:if3" dest_id="VM-11:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan81">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-12:if3"/>
+    <interface_ref client_id="VM-22:if3"/>
+    <property source_id="VM-12:if3" dest_id="VM-22:if3"/>
+    <property source_id="VM-22:if3" dest_id="VM-12:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan82">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-13:if3"/>
+    <interface_ref client_id="VM-23:if3"/>
+    <property source_id="VM-13:if3" dest_id="VM-23:if3"/>
+    <property source_id="VM-23:if3" dest_id="VM-13:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan83">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-14:if3"/>
+    <interface_ref client_id="VM-24:if3"/>
+    <property source_id="VM-14:if3" dest_id="VM-24:if3"/>
+    <property source_id="VM-24:if3" dest_id="VM-14:if3"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan84">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-15:if3"/>
+    <interface_ref client_id="VM-27:if3"/>
+    <property source_id="VM-15:if3" dest_id="VM-27:if3"/>
+    <property source_id="VM-27:if3" dest_id="VM-15:if3"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

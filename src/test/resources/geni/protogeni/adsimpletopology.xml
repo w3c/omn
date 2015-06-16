@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecAdSimpleTopologyExample -->
+<rspec xmlns="http://www.protogeni.net/resources/rspec/0.1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/0.1 http://www.protogeni.net/resources/rspec/0.1/ad.xsd"
+       type="advertisement"
+       generated="2009-07-21T19:19:06Z" valid_until="2009-07-21T19:19:06Z" >
+  <node component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+cm"
+        component_name="cisco3"
+        component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+cisco3" >
+    <node_type 
+      type_name="switch"
+      type_slots="1"
+    />
+    <available>true</available>
+    <exclusive>true</exclusive>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+cisco3:(null)"/>
+  </node>
+  <node component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+cm"
+        component_name="pc119"
+        component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc119" >
+    <node_type 
+      type_name="pc850"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="pc"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="delay"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="pcvm"
+      type_slots="20"
+    />
+    <available>true</available>
+    <exclusive>true</exclusive>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc119:eth0"/>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc119:eth2"/>
+  </node>
+  <node component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+cm"
+        component_name="pc111"
+        component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc111" >
+    <node_type 
+      type_name="pc850"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="pc"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="delay"
+      type_slots="1"
+    />
+    <node_type 
+      type_name="pcvm"
+      type_slots="20"
+    />
+    <available>true</available>
+    <exclusive>true</exclusive>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc111:eth0"/>
+    <interface component_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc111:eth2"/>
+  </node>
+
+  <link component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+sa"
+        component_name="link-pc111:eth0-cisco3:(null)"
+        component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+link+link-pc111%3Aeth0-cisco3%3A(null)" >
+    <interface_ref component_node_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc111"
+                   component_interface_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc111:eth0"/>
+    <interface_ref component_node_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+cisco3"
+                   component_interface_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+cisco3:(null)"/>
+    <bandwidth>100000</bandwidth>
+    <latency>0</latency>
+    <packet_loss>0</packet_loss>
+    <link_type type_name="ethernet" />
+  </link>
+  <link component_manager_uuid="urn:publicid:IDN+emulab.geni.emulab.net+authority+sa"
+        component_name="link-pc119:eth0-cisco3:(null)"
+        component_uuid="urn:publicid:IDN+emulab.geni.emulab.net+link+link-pc119%3Aeth0-cisco3%3A(null)" >
+    <interface_ref component_node_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+pc119"
+                   component_interface_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+pc119:eth0"/>
+    <interface_ref component_node_uuid="urn:publicid:IDN+emulab.geni.emulab.net+node+cisco3"
+                   component_interface_id="urn:publicid:IDN+emulab.geni.emulab.net+interface+cisco3:(null)"/>
+    <bandwidth>100000</bandwidth>
+    <latency>0</latency>
+    <packet_loss>0</packet_loss>
+    <link_type type_name="ethernet" />
+  </link>
+</rspec>

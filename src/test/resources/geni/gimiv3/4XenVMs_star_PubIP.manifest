@@ -1,0 +1,44 @@
+<rspec xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" type="manifest" generated_by="Flack" generated="2013-10-22T13:00:25Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd" expires="2013-12-07T01:36:54Z">
+  <node client_id="vm1" exclusive="true" component_id="urn:publicid:IDN+utah.geniracks.net+node+pc2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32465">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32473" mac_address="02c32f5df1b4">
+    <ip address="10.10.1.4" type="ipv4"/></interface>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm2-2"/><host name="vm1.joBasicIG.ch-geni-net.utah.geniracks.net"/><services><login authentication="ssh-keys" hostname="pcvm2-2.utah.geniracks.net" port="22" username="johren"/></services></node>
+  <node client_id="vm2" exclusive="true" component_id="urn:publicid:IDN+utah.geniracks.net+node+pc2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32466">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen-0:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32472" mac_address="0210b6710c02">
+    <ip address="10.10.1.3" type="ipv4"/></interface>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm2-3"/><host name="vm2.joBasicIG.ch-geni-net.utah.geniracks.net"/><services><login authentication="ssh-keys" hostname="pcvm2-3.utah.geniracks.net" port="22" username="johren"/></services></node>
+  <node client_id="vm3" exclusive="true" component_id="urn:publicid:IDN+utah.geniracks.net+node+pc2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32467">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen-1:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32471" mac_address="0271163e611c">
+    <ip address="10.10.1.2" type="ipv4"/></interface>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm2-4"/><host name="vm3.joBasicIG.ch-geni-net.utah.geniracks.net"/><services><login authentication="ssh-keys" hostname="pcvm2-4.utah.geniracks.net" port="22" username="johren"/></services></node>
+  <node client_id="vm0" exclusive="true" component_id="urn:publicid:IDN+utah.geniracks.net+node+pc2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32464">
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="emulab-xen-2:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32470" mac_address="0263e81d875a">
+    <ip address="10.10.1.1" type="ipv4"/></interface>
+  <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="pcvm2-1"/><host name="vm0.joBasicIG.ch-geni-net.utah.geniracks.net"/><services><login authentication="ssh-keys" hostname="pcvm2-1.utah.geniracks.net" port="22" username="johren"/></services></node>
+  <link client_id="link0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32469">
+    <interface_ref client_id="emulab-xen-2:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32470"/>
+    <interface_ref client_id="emulab-xen-1:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32471"/>
+    <interface_ref client_id="emulab-xen-0:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32472"/>
+    <interface_ref client_id="emulab-xen:if0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc2:lo0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+32473"/>
+    <property source_id="emulab-xen-2:if0" dest_id="emulab-xen-1:if0"/>
+    <property source_id="emulab-xen-1:if0" dest_id="emulab-xen-2:if0"/>
+    <property source_id="emulab-xen-2:if0" dest_id="emulab-xen-0:if0"/>
+    <property source_id="emulab-xen-1:if0" dest_id="emulab-xen-0:if0"/>
+    <property source_id="emulab-xen-0:if0" dest_id="emulab-xen-2:if0"/>
+    <property source_id="emulab-xen-0:if0" dest_id="emulab-xen-1:if0"/>
+    <property source_id="emulab-xen-2:if0" dest_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen-1:if0" dest_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen-0:if0" dest_id="emulab-xen:if0"/>
+    <property source_id="emulab-xen:if0" dest_id="emulab-xen-2:if0"/>
+    <property source_id="emulab-xen:if0" dest_id="emulab-xen-1:if0"/>
+    <property source_id="emulab-xen:if0" dest_id="emulab-xen-0:if0"/>
+  </link>
+  </rspec>

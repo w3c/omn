@@ -1,0 +1,997 @@
+<rspec expires="2015-05-06T15:25:05Z" generated="2015-05-06T14:25:05Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+    xmlns:opstate="http://www.geni.net/resources/rspec/ext/opstate/1"
+    xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1"
+    xmlns:plos="http://www.planet-lab.org/resources/sfa/ext/plos/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.planet-lab.org/resources/sfa/ext/planetlab/1 http://www.planet-lab.org/resources/sfa/ext/planetlab/1/planetlab.xsd http://www.planet-lab.org/resources/sfa/ext/plos/1 http://www.planet-lab.org/resources/sfa/ext/plos/1/plos.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd">
+    <opstate:rspec_opstate
+        aggregate_manager_id="urn:publicid:IDN+plc+authority+cm" start="geni_notready">
+        <opstate:sliver_type name="plab-vserver"/>
+        <opstate:sliver_type name="plos-pc"/>
+        <opstate:state name="geni_notready">
+            <opstate:action name="geni_start" next="geni_ready">
+                <opstate:description>Boot the node</opstate:description>
+            </opstate:action>
+            <opstate:description>VMs begin powered down or inactive. They        must be explicitly booted before use.</opstate:description>
+        </opstate:state>
+        <opstate:state name="geni_ready">
+            <opstate:description>The node is up and ready to use.</opstate:description>
+        </opstate:state>
+        <opstate:state name="geni_failed">
+            <opstate:description>The node has failed and requires administrator        intervention before it can be used. Please contact support        for assistance.</opstate:description>
+        </opstate:state>
+    </opstate:rspec_opstate>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Melouna-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Melouna-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="39.8411" longitude="22.2468"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+HALNET-UP"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="HALNET-UP" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.9548475308" longitude="12.5334410632"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Wireless+Belgie+VM+2"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="2" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.2197872987" longitude="4.41513061523"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Dolihi-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Dolihi-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0646231671" longitude="22.1688330173"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+AWMN-NUC-Panoramix-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-NUC-Panoramix-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0339" longitude="23.8358"/>
+        <interface component_id="eth0"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+VicBarriOsona"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="VicBarriOsona" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.915561" longitude="2.260303"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Pythio-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Pythio-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0652143552" longitude="22.2314143181"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM06"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM06" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Lia-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Lia-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0649105508" longitude="22.0516097546"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+fabys"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="fabys" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.9105492881" longitude="12.6682662964"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Wireless+Belgie+Schoten"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Schoten" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.1600596035" longitude="4.40659046173"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Milea-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Milea-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0280005621" longitude="22.0760929585"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+BCNRocBoronat131"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="BCNRocBoronat131" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.403386" longitude="2.194009"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-D6-105-RD5"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-D6-105-RD5" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389813" longitude="2.112669"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ffg-kvm-zotac-03"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ffg-kvm-zotac-03" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="48.2173529093" longitude="16.4025878906"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-M__Eleutherohori-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-M__Eleutherohori-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="39.9468006372" longitude="22.1645736694"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-RD1"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-RD1" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Hispanico"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Hispanico" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.8931252179" longitude="12.4083709717"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+LLUperafitaPriona"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="LLUperafitaPriona" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="42.043018" longitude="2.107378"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM03"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM03" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Makris-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Makris-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0676160042" longitude="22.0512664318"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM05"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM05" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM01"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM01" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Ekklisia-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Ekklisia-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0673696851" longitude="22.051679492"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-dem-iit"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-dem-iit" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9964" longitude="23.8181"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+BCNRblMercedes7"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="BCNRblMercedes7" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.408821" longitude="2.154525"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ffw-kvm-zotac-08"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ffw-kvm-zotac-08" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="48.2127775401" longitude="16.356754303"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Fusolab"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Fusolab" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.8720419277" longitude="12.5822391919"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Alberone"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Alberone" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.8756404728" longitude="12.5225204229"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-CF-Infolex"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-CF-Infolex" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0091" longitude="23.8885"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-CF-djk604"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-CF-djk604" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.015" longitude="23.8614"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Achilleas-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Achilleas-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0684534824" longitude="22.0557671785"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Tsapournia-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Tsapournia-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0439776319" longitude="22.0302700996"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Wolfpack-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Wolfpack-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0342251244" longitude="23.8431537151"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+iMinds+VM+2+(public)"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="(public)" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.1843735611" longitude="4.42084908485"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Cruto"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Cruto" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389745" longitude="2.112829"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Gurb-ElSerrat"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Gurb-ElSerrat" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.974191" longitude="2.238115"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-dem-ims"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-dem-ims" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9974" longitude="23.8191"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+NazzaNode"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="NazzaNode" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.9489261492" longitude="12.4443340302"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ffg-kvm-zotac-06"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ffg-kvm-zotac-06" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="48.2173529093" longitude="16.4025878906"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Bizio+di+Castelverde"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Castelverde" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.9064651996" longitude="12.6946739852"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+GB-MNJoanXXIII"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="GB-MNJoanXXIII" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.727107" longitude="1.831155"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-D6-105-RD3"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-D6-105-RD3" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389813" longitude="2.112669"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Fred-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Fred-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9811" longitude="23.9186"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Papi-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Papi-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9801" longitude="23.9207"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-jchr-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-jchr-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0189" longitude="23.8417"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Argi-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Argi-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9946" longitude="23.7981"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-RD2"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-RD2" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Wireless+Belgie+Groenenborger"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Groenenborger" exclusive="false">
+        <hardware_type name="i586"/>
+        <location country="unknown" latitude="51.1789125297" longitude="4.41621959209"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-D6-105-RD1"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-D6-105-RD1" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389813" longitude="2.112669"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Makis-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Makis-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0681" longitude="22.0524"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Farmaki-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Farmaki-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0285345606" longitude="22.0575857162"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Elassona-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Elassona-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="39.8915134337" longitude="22.1962022781"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Lofos-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Lofos-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.016912987" longitude="22.1853232384"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-H"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-H" exclusive="false">
+        <hardware_type name="i586"/>
+        <location country="unknown" latitude="41.384363" longitude="2.116014"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AmeWWW"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AmeWWW" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389745" longitude="2.112829"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+LuX"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="LuX" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.888681" longitude="12.571582"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Torks"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Torks" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.96354" longitude="12.75204"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-7bpm2-KVM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-7bpm2-KVM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.96045" longitude="23.739545"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+BCNGranVia204b"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="BCNGranVia204b" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.368741" longitude="2.142189"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ffg-kvm-zotac-05"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ffg-kvm-zotac-05" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="48.2173529093" longitude="16.4025878906"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-RD3"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-RD3" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Trouli-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Trouli-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0359" longitude="23.8441"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Lisa-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Lisa-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0324" longitude="23.8435"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-demo2"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-demo2" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-demo3"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-demo3" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-f103"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-f103" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Giannis1-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Giannis1-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9646" longitude="23.9167"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-DNT-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-DNT-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.016" longitude="23.8785"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-demo4"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-demo4" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-NUC"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-NUC" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Lancom-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Lancom-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0399" longitude="23.8032"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM09"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM09" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+SBDFerg"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="SBDFerg" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.545991" longitude="2.110695"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+BCNSjmalta-outdoor"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="BCNSjmalta-outdoor" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.408806" longitude="2.192725"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+AWMN-HQ-Wolfpack-LAB-01"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-HQ-Wolfpack-LAB-01" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0345" longitude="23.8432"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-RD4"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-RD4" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+GB-MNUPC"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="GB-MNUPC" exclusive="false">
+        <hardware_type name="i586"/>
+        <location country="unknown" latitude="41.736881" longitude="1.828516"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+LLUalpensAj"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="LLUalpensAj" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="42.119343" longitude="2.101055"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-dem-chem"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-dem-chem" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0345" longitude="23.8432"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ffw-kvm-zotac-07"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ffw-kvm-zotac-07" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="48.2127775401" longitude="16.356754303"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-CF-7net"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-CF-7net" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9632" longitude="23.8197"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-CASTF1"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-CASTF1" exclusive="false">
+        <hardware_type name="i586"/>
+        <location country="unknown" latitude="41.275294" longitude="1.986569"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-CF-7bpm-3"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-CF-7bpm-3" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0163" longitude="23.8052"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-DA-KAPI"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-DA-KAPI" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0578" longitude="23.8024"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+GB-SLLTorreTel"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="GB-SLLTorreTel" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.821312" longitude="1.901154"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-DA-Town+Hall"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Hall" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0525" longitude="23.8084"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="wlan1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+HWErmita11"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="HWErmita11" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.347983" longitude="2.109195"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Larisa-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Larisa-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="39.6280896312" longitude="22.3832648993"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-NetTraptor"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-NetTraptor" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0009" longitude="23.8206"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ffg-kvm-zotac-02"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ffg-kvm-zotac-02" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="48.2173529093" longitude="16.4025878906"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Sarantaporo__gr-Kokkinogi-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Sarantaporo__gr-Kokkinogi-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="40.0336607337" longitude="22.16401577"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+GB-MNBufalvent"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="GB-MNBufalvent" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.707911" longitude="1.849244"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-test"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-test" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389745" longitude="2.112829"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+UPC-Vertex-Pangea-Zotac"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-Vertex-Pangea-Zotac" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.390435" longitude="2.114214"/>
+        <interface component_id="wlan0"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM02"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM02" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+BCNManacor20"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="BCNManacor20" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.407813" longitude="2.143499"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM07"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM07" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM08"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM08" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-demo1"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-demo1" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM04"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM04" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-lab104-VM10"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-lab104-VM10" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.389688" longitude="2.113007"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-CF-7bpm"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-CF-7bpm" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0522" longitude="23.8183"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="eth1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-DA-MEC"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-DA-MEC" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0569" longitude="23.8081"/>
+        <interface component_id="wlan0"/>
+        <interface component_id="wlan1"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-CloudNode-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-CloudNode-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="38.0399" longitude="23.8032"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-TEI-Pir-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-TEI-Pir-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.9792" longitude="23.6747"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+iMinds+VM+4+(FEDERICA)"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="(FEDERICA)" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.1843735611" longitude="4.42084908485"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+iMinds+VM+3+(FEDERICA)"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="(FEDERICA)" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.1843735611" longitude="4.42084908485"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+clab+node+Wireless+Belgie+Mechelen"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="Mechelen" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.2522192621" longitude="4.49953436851"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+UPC-C6-102"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="UPC-C6-102" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.38962" longitude="2.112854"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+Wireless+Belgie+VM+1"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="1" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="51.218927151" longitude="4.41513061523"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+ninnux"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="ninnux" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.9123377411" longitude="12.5219464302"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+GB-Castelladral"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="GB-Castelladral" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="41.898885" longitude="1.780332"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+AWMN-Bonovas-NUC-VM"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="AWMN-Bonovas-NUC-VM" exclusive="false">
+        <hardware_type name="i686"/>
+        <location country="unknown" latitude="37.96045" longitude="23.739545"/>
+        <available now="false"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+    <node component_id="urn:publicid:IDN+clab+node+musk__ninux__org"
+        component_manager_id="urn:publicid:IDN+clab+authority+cm"
+        component_name="musk__ninux__org" exclusive="false">
+        <hardware_type name="i586"/>
+        <location country="unknown" latitude="39.3002161624" longitude="16.2476420403"/>
+        <available now="true"/>
+        <sliver_type name="RD_sliver"/>
+    </node>
+</rspec>

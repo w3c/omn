@@ -4,6 +4,10 @@ import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
+import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_resource;
+import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +22,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ResIterator;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class DemoTestAdvertisement {
 
@@ -35,21 +44,19 @@ public class DemoTestAdvertisement {
 			InvalidModelException, IOException, XMLStreamException {
 		long start;
 		start = System.nanoTime();
-		
+
 		System.out.println("================================================");
-		System.out
-				.println("Reading Graph");
+		System.out.println("Reading Graph");
 		System.out.println("================================================");
 
 		parser.read("/omn/paper2015iswc/omn_1_offer.ttl");
 		final Model model = parser.getModel();
 		System.out.println(Parser.toString(model));
-		
+
 		System.out.println("================================================");
-		System.out
-				.println("Converting to RSpec");
+		System.out.println("Converting to RSpec");
 		System.out.println("================================================");
-		
+
 		final String rspec = converter.getRSpec(model);
 
 		System.out.println(rspec);
@@ -59,14 +66,11 @@ public class DemoTestAdvertisement {
 				rspec.contains("disk_image"));
 		System.out.println("Duration: " + (System.nanoTime() - start));
 		System.out.println("================================================");
-		
 
 		System.out.println("================================================");
-		System.out
-				.println("Converting back to graph");
+		System.out.println("Converting back to graph");
 		System.out.println("================================================");
-				
-				
+
 		start = System.nanoTime();
 		InputStream input = IOUtils.toInputStream(rspec, "UTF-8");
 		RSpecContents rspecContents = converter.getRspec(input);
@@ -76,6 +80,39 @@ public class DemoTestAdvertisement {
 		System.out.println(StringUtils
 				.abbreviateMiddle(modStr, "\n...\n", 4096));
 		System.out.println("Duration: " + (System.nanoTime() - start));
+
+		final ResIterator topology = newModel.listResourcesWithProperty(
+				RDF.type, Omn_lifecycle.Offering);
+		Assert.assertTrue("should have a topology", topology.hasNext());
+		Resource requestResource = topology.nextResource();
+
+		StmtIterator nodes = requestResource.listProperties(Omn.hasResource);
+		Assert.assertTrue("should have a resource", nodes.hasNext());
+
+		Resource resourceResource = nodes.next().getResource();
+		Assert.assertTrue("object of hasResource is of type node",
+				resourceResource.hasProperty(RDF.type, Omn_resource.Node));
+		Assert.assertTrue(
+				"object of hasResource is vm-server123",
+				resourceResource.getURI().toString()
+						.equals("http://demo.fiteagle.org/about#vm-server123"));
+
+		StmtIterator vms = resourceResource
+				.listProperties(Omn_lifecycle.canImplement);
+		Resource anyVm = vms.next().getResource();
+
+		Assert.assertTrue(
+				"vm-server123 can implement a VM",
+				anyVm.getURI()
+						.toString()
+						.equals("http://demo.fiteagle.org/resource/vm-server/123/mySmallVM")
+						|| anyVm.getURI()
+								.toString()
+								.equals("http://demo.fiteagle.org/resource/vm-server/123/myLargeVM")
+						|| anyVm.getURI()
+								.toString()
+								.equals("http://open-multinet.info/ontology/omn-domain-pc#VM"));
+
 	}
 
 }

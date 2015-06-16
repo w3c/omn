@@ -52,7 +52,7 @@
                                                    dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
                                                    dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
                                                    dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
-                                                   dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                                   dc:contributor <http://users.ntua.gr/c.papagianni> ;
                                                    dc:contributor <mailto:yahya.al-hazmi@tu-berlin.de> ;
                                                    dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
                                                    dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
@@ -170,6 +170,38 @@ owl:AllDisjointProperties rdf:type owl:Class .
          rdfs:range xsd:string .
 
 
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasUUID
+
+:hasUUID rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has UUID"@en ;
+         
+         rdfs:comment "has UUID"@en ;
+         
+         rdfs:domain [ rdf:type owl:Class ;
+              owl:unionOf ( omn:Group
+                            omn:Resource
+                            omn:Service
+                          )
+            ] ;
+         
+         rdfs:subPropertyOf omn-lifecycle:hasID ;
+         
+         rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#vlanTag
+
+:vlanTag rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has VLAN tag"@en ;
+         
+         rdfs:comment "has VLAN tag"@en ;
+         
+         rdfs:domain omn-resource:Link ;
+         
+         rdfs:range xsd:string .
 
 
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasCPU
@@ -306,6 +338,12 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
     
     rdfs:subClassOf :PC .
 
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Link
+
+omn-resource:Link rdf:type owl:Class .
 
 
 

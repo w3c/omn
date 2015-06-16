@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This example RSpec shows how to request 4 VMs from the BBN 
+ExoGENI Rack. 
+-->
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="VM-1" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+cm">
+    <sliver_type name="m1.small">
+     <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+ </sliver_type>
+   <interface client_id="VM-1:if0">
+      <ip address="172.16.1.1" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="VM-2" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+cm">
+    <sliver_type name="m1.large">
+     <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+ </sliver_type>
+    <interface client_id="VM-2:if0">
+      <ip address="172.16.1.2" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="VM-3" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+cm">
+    <sliver_type name="m1.large">
+     <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+ </sliver_type>
+    <interface client_id="VM-3:if0">
+     <ip address="172.16.1.3" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="VM-4" component_manager_id="urn:publicid:IDN+exogeni.net:rcivmsite+authority+cm">
+    <sliver_type name="m1.large">
+     <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+ </sliver_type>
+    <interface client_id="VM-4:if0">
+    <ip address="172.16.1.4" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <component_manager name="urn:publicid:IDN+exogeni.net:rcivmsite+authority+cm"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <interface_ref client_id="VM-4:if0"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

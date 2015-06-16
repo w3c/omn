@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+  <node client_id="ig-utahddc" component_manager_id="urn:publicid:IDN+utahddc.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-utahddc:if0">
+      <ip address="192.168.4.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="nyse" component_manager_id="urn:publicid:IDN+instageni.nysernet.org+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="nyse:if0">
+      <ip address="192.168.4.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link0">
+    <component_manager name="urn:publicid:IDN+instageni.nysernet.org+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/>
+    <interface_ref client_id="nyse:if0"/>
+    <interface_ref client_id="ig-utahddc:if0"/>
+    <property source_id="nyse:if0" dest_id="ig-utahddc:if0" capacity="20000"/>
+    <property source_id="ig-utahddc:if0" dest_id="nyse:if0" capacity="20000"/>
+  </link>
+</rspec>

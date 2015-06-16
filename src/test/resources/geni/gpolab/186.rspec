@@ -1,0 +1,42 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3"  
+       xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" 
+       xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" 
+       xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" 
+       type="request">
+
+ <node xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="server" exclusive="false">
+    <sliver_type name="default-vm"/>
+    <emulab:routable_control_ip xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <services>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/HelloGENI//hellogeni-install.tar.gz"/>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+    </services>
+    <interface client_id="server:if0">
+       <ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.10.1" type="ipv4" netmask="255.255.255.0"/>
+     </interface>
+    <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="28"/>
+  </node>
+  
+  <node xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="client" exclusive="false">
+    <sliver_type name="default-vm"/>
+    <services>  
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/HelloGENI//hellogeni-install.tar.gz"/>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+    </services>
+    <interface client_id="client:if0">
+      <ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.10.2" type="ipv4" netmask="255.255.255.0"/>
+    </interface>
+    <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="28"/>
+  </node>
+
+  <link client_id="lan0">
+    <interface_ref client_id="server:if0"/>
+    <interface_ref client_id="client:if0"/>
+    <property source_id="server:if0" dest_id="client:if0"/>
+    <property source_id="client:if0" dest_id="server:if0"/>
+    <link_type name="lan"/>
+  </link>
+
+</rspec>

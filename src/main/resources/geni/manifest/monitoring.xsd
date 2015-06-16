@@ -1,0 +1,19 @@
+<!-- An extension for requesting the option to connect an interface to a 
+	OMSP monitoring tool. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://demo.fiteagle.org/monitoring" elementFormDefault="qualified"
+	targetNamespace="http://demo.fiteagle.org/monitoring">
+	<xs:element name="rspec_omsp_monitoring">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:monitoring" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="monitoring">
+		<xs:complexType>
+			<xs:attribute name="uri" use="required" type="xs:string" />
+			<xs:attribute name="type" type="xs:anyURI" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="ig-utahddc" component_manager_id="urn:publicid:IDN+utahddc.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+     <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-utahddc:if0">
+      <ip address="192.168.0.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="ig-utahddc:if1">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+   <interface client_id="ig-utahddc:if2">
+      <ip address="192.168.2.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+   <interface client_id="ig-utahddc:if3">
+      <ip address="192.168.3.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="pg-uky" component_manager_id="urn:publicid:IDN+uky.emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+     <services> <execute command="sudo yum install iperf -y" shell="sh"/> </services>
+    <interface client_id="pg-uky:if0">
+      <ip address="192.168.0.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-gpo" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+     <services> <execute command="sudo yum install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-gpo:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="pg-utah" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <services> <execute command="sudo yum install iperf -y" shell="sh"/> </services>
+    <interface client_id="pg-utah:if0">
+      <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-utah" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <services> <execute command="sudo yum install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-utah:if0">
+      <ip address="192.168.3.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link-2-pgky">
+    <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+uky.emulab.net+authority+cm"/>
+    <interface_ref client_id="ig-utahddc:if0"/>
+    <interface_ref client_id="pg-uky:if0"/>
+    <property capacity="20000" source_id="ig-utahddc:if0" dest_id="pg-uky:if0"/>
+    <property capacity="20000" source_id="pg-uky:if0" dest_id="ig-utahddc:if0"/>
+  </link>
+  <link client_id="link-2-iggpo">
+    <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/> 
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="ig-gpo:if0"/>
+    <interface_ref client_id="ig-utahddc:if1"/>
+    <property capacity="20000" source_id="ig-gpo:if0" dest_id="ig-utahddc:if1"/>
+    <property capacity="20000" source_id="ig-utahddc:if1" dest_id="ig-gpo:if0"/>
+  </link> 
+  <link client_id="link-2-pgutah">
+    <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="ig-utahddc:if2"/>
+    <interface_ref client_id="pg-utah:if0"/>
+    <property capacity="20000" source_id="pg-utah:if0" dest_id="ig-utahddc:if1"/>
+    <property capacity="20000" source_id="ig-utahddc:if1" dest_id="pg-utah:if0"/>
+  </link>
+  <link client_id="link-2-igutah">
+   <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/>
+   <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+   <interface_ref client_id="ig-utahddc:if3"/>
+   <interface_ref client_id="ig-utah:if0"/>
+   <property capacity="20000" source_id="ig-utah:if0" dest_id="ig-utahddc:if3"/>
+   <property capacity="20000" source_id="ig-utahddc:if3" dest_id="ig-utah:if0"/>
+  </link>
+</rspec>

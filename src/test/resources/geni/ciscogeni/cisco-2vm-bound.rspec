@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- expires="2013-03-12T16:07:42Z" -->
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+<node client_id="geni1" component_manager_id="urn:publicid:IDN+exogeni.net:ncsuvmsite+authority+am">
+ <sliver_type name="m1.small">
+ </sliver_type>
+ <interface client_id="geni1:0">
+   <ip address="172.16.1.1" netmask="255.255.255.0" />
+ </interface>
+</node>
+<node client_id="geni2" component_manager_id="urn:publicid:IDN+exogeni.net:ncsuvmsite+authority+am">
+ <sliver_type name="m1.small">
+ </sliver_type>
+ <interface client_id="geni2:0" >
+   <ip address="172.16.1.2" netmask="255.255.255.0" />
+ </interface>
+</node>
+<link client_id="link">
+  <interface_ref client_id="geni1:0" />
+  <interface_ref client_id="geni2:0" />
+</link>
+</rspec>

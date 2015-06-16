@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+AM: https://foam.nlr.net:3626/foam/gapi/1
+-->
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+ <openflow:sliver description="OpenFlow Experiment Example" email="lnevers@bbn.com">
+ <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33020" type="primary" />
+
+    <openflow:group name="nlr-chic-1750">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+06:d6:00:23:47:c8:bc:00" 
+       component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" 
+        dpid="06:d6:00:23:47:c8:bc:00"> <!-- NLR CHIC 3715 --> 
+        <openflow:port name="3" num="3"/> <!-- NLR CHIC 3715 Port --> 
+        <openflow:port name="9" num="9"/> <!-- GPO 1750 -->
+      </openflow:datapath>
+    </openflow:group>
+
+    <openflow:group name="nlr-atla-1750">
+     <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+06:d6:00:24:a8:d2:b8:40" 
+       component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" 
+       dpid="06:d6:00:24:a8:d2:b8:40"> <!-- NLR ATLA 3715 -->
+    <openflow:port name="3" num="3"/> <!-- NLR ATLA 3715 Port -->
+    <openflow:port name="25" num="49"/> <!-- RENCI 1750 -->
+    </openflow:datapath>
+    </openflow:group>
+
+    <openflow:group name="nlr-chic-3715">
+       <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:83:00:23:47:c8:bc:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" 
+         dpid="0e:83:00:23:47:c8:bc:00">  <!-- NLR CHIC 3715 -->
+       </openflow:datapath>
+    </openflow:group>
+
+    <openflow:group name="nlr-atla-3715">
+       <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+datapath+0e:83:00:24:a8:d2:b8:40" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam.nlr.net+authority+am" 
+         dpid="0e:83:00:24:a8:d2:b8:40">  <!-- NLR ATLA 3715 -->
+      </openflow:datapath>
+    </openflow:group>
+
+  <openflow:match>
+      <openflow:use-group name="nlr-chic-1750" />
+      <openflow:use-group name="nlr-atla-1750" />
+      <openflow:use-group name="nlr-chic-3715" />
+      <openflow:use-group name="nlr-atla-3715" />
+      <openflow:packet>
+        <openflow:dl_type value="0x800,0x806"/>
+        <openflow:nw_dst value="10.42.11.0/24"/>
+        <openflow:nw_src value="10.42.11.0/24"/>
+      </openflow:packet>
+   </openflow:match>
+
+  </openflow:sliver>
+</rspec>

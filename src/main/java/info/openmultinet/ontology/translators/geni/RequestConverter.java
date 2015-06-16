@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
@@ -160,17 +161,21 @@ public class RequestConverter extends AbstractConverter {
 				Statement hasUri = monitoringService.getResource().getProperty(
 						Omn_service.hasURI);
 
-				String uri = hasUri.getObject().asResource().getURI()
-						.toString();
+				System.out.println(hasUri.getObject().asLiteral().getString());
+				// String uri = hasUri.getObject().asResource().getURI()
+				// .toString();
+				String uri = hasUri.getObject().asLiteral().getString();
 				monitoring.setUri(uri);
+
 			}
 
 			if (monitoringResource.hasProperty(RDF.type)) {
 				Statement hasType = monitoringService.getResource()
 						.getProperty(RDF.type);
 
-				String type = hasType.getObject().asResource().getURI()
-						.toString();
+				// String type = hasType.getObject().asResource().getURI()
+				// .toString();
+				String type = hasType.getObject().asLiteral().getString();
 				monitoring.setType(type);
 			}
 
@@ -281,12 +286,20 @@ public class RequestConverter extends AbstractConverter {
 			RDFNode implementedBy = resource.getResource()
 					.getProperty(Omn_lifecycle.implementedBy).getObject();
 
-			node.setComponentId(implementedBy.toString());
-			node.setComponentName(implementedBy.asNode().getLocalName());
+			node.setComponentId(CommonMethods.generateUrnFromUrl(
+					implementedBy.toString(), "node"));
 
-			Statement parentOf = resource.getProperty(Omn_lifecycle.parentOf);
-			node.setComponentManagerId(AbstractConverter.generateUrnFromUrl(
-					parentOf.getResource().getURI(), "authority"));
+			if (implementedBy.asResource().hasProperty(RDFS.label)) {
+				node.setComponentName(implementedBy.asResource()
+						.getProperty(RDFS.label).getObject().asLiteral()
+						.toString());
+			} else {
+				node.setComponentName(implementedBy.asNode().getLocalName());
+			}
+
+			Statement managedBy = resource.getProperty(Omn_lifecycle.managedBy);
+			node.setComponentManagerId(CommonMethods.generateUrnFromUrl(
+					managedBy.getResource().getURI(), "authority"));
 
 		}
 	}
@@ -342,13 +355,21 @@ public class RequestConverter extends AbstractConverter {
 						.addProperty(Omn_lifecycle.hasID, node.getClientId());
 				omnResource.addProperty(RDFS.label, node.getClientId());
 
+				Resource implementedBy = null;
 				if (null != node.getComponentId()
-						&& !node.getComponentId().isEmpty())
-					omnResource
-							.addProperty(Omn_lifecycle.implementedBy, model
-									.createResource(AbstractConverter
-											.generateUrlFromUrn(node
-													.getComponentId())));
+						&& !node.getComponentId().isEmpty()) {
+
+					implementedBy = model.createResource(CommonMethods
+							.generateUrlFromUrn(node.getComponentId()));
+
+					omnResource.addProperty(Omn_lifecycle.implementedBy,
+							implementedBy);
+					if (null != node.getComponentName()
+							&& !node.getComponentName().isEmpty()) {
+						implementedBy.addProperty(RDFS.label,
+								node.getComponentName());
+					}
+				}
 				omnResource.addProperty(Omn.isResourceOf, topology);
 				if (null != node.isExclusive()) {
 					omnResource.addProperty(Omn_resource.isExclusive,
@@ -356,11 +377,9 @@ public class RequestConverter extends AbstractConverter {
 				}
 
 				if (node.getComponentManagerId() != null) {
-					RDFNode parent = ResourceFactory
-							.createResource(AbstractConverter
-									.generateUrlFromUrn(node
-											.getComponentManagerId()));
-					omnResource.addProperty(Omn_lifecycle.parentOf, parent);
+					RDFNode manager = ResourceFactory.createResource(node
+							.getComponentManagerId());
+					omnResource.addProperty(Omn_lifecycle.managedBy, manager);
 				}
 
 				topology.addProperty(Omn.hasResource, omnResource);
@@ -415,7 +434,8 @@ public class RequestConverter extends AbstractConverter {
 						.equals(info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring.class)) {
 
 					Monitoring monitor = (Monitoring) o;
-					Resource monitoringResource = model.createResource(UUID.randomUUID().toString());
+					Resource monitoringResource = model.createResource(UUID
+							.randomUUID().toString());
 					if (monitor.getUri() != null && monitor.getUri() != "") {
 						monitoringResource.addProperty(Omn_service.hasURI,
 								monitor.getUri());
@@ -426,8 +446,8 @@ public class RequestConverter extends AbstractConverter {
 						monitoringResource.addProperty(RDFS.label,
 								AbstractConverter.getName(monitor.getType()));
 					}
-					omnResource
-							.addProperty(Omn_lifecycle.usesService, monitoringResource);
+					omnResource.addProperty(Omn_lifecycle.usesService,
+							monitoringResource);
 				}
 			}
 		}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Request Rspec for Openflow at BBN Meso-scale site
+used in EG-EXP-6 experiment 3 
+NOTE: MUST BE RUN AFTER GPO PG Request to determine host port.
+
+AM: https://foam.gpolab.bbn.com:3626/foam/gapi/1
+-->
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+  <openflow:sliver description="Sliver to allow BBNMeso, BBN ExoGENI, and Rutgers WAPG over 3716 "
+                   email="lnevers@bbn.com">
+
+    <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33020" type="primary" />
+
+   <openflow:group name="bbn-1750-nodes">
+
+     <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath+06:d6:00:24:a8:c4:b9:00"     
+                       component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" 
+                       dpid="06:d6:00:24:a8:c4:b9:00">
+    <openflow:port name="9" num="33"/>
+      <openflow:port name="47" num="71"/>
+    </openflow:datapath>
+  </openflow:group>
+
+    <openflow:group name="poblano-1750-nlr-3716">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath+06:d6:00:12:e2:b8:a5:d0"
+			 component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am">
+        <openflow:port num="5"/>
+        <openflow:port num="15"/>
+        <openflow:port num="20"/>
+      </openflow:datapath>
+    </openflow:group>
+
+    <openflow:match>
+
+      <openflow:use-group name="bbn-1750-nodes" />
+      <openflow:use-group name="poblano-1750-nlr-3716" />
+
+      <openflow:packet>
+        <openflow:dl_type value="0x800,0x806"/>
+        <openflow:nw_dst value="10.42.11.0/24"/>
+        <openflow:nw_src value="10.42.11.0/24"/>
+      </openflow:packet>
+
+    </openflow:match>
+  </openflow:sliver>
+
+</rspec>

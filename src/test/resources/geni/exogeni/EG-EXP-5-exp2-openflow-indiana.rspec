@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This rspec will reserve the OpenFlow resources at Indiana
+AM: https://foam.noc.iu.edu:3626/foam/gapi/1
+-->
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+  <openflow:sliver description="EG-EXP-5-exp2" email="lnevers@bbn.com">
+
+    <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33019" type="primary" />
+
+    <openflow:group name="indiana-1750-nlr-3716">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.noc.iu.edu+datapath+06:d6:00:16:b9:cf:fc:40"
+			 component_manager_id="urn:publicid:IDN+openflow:foam:foam.noc.iu.edu+authority+am">
+        <openflow:port name="3" num="3"/>    
+        <openflow:port name="5" num="5"/>    
+        <openflow:port name="8" num="8"/>    
+        <openflow:port name="9" num="9"/>    
+        <openflow:port name="10" num="10"/>    
+        <openflow:port name="1" num="1"/>
+      </openflow:datapath>
+    </openflow:group>
+
+ <openflow:group name="indiana-WAPG">
+    <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.noc.iu.edu+datapath+06:d6:00:24:a8:fe:e1:00" 
+			component_manager_id="urn:publicid:IDN+openflow:foam:foam.noc.iu.edu+authority+am">    
+        <openflow:port name="3" num="27"/>    
+        <openflow:port name="6" num="30"/>    
+        <openflow:port name="8" num="32"/>    
+        <openflow:port name="22" num="46"/>    
+        <openflow:port name="47" num="71"/>    
+        <openflow:port name="51" num="121"/>
+    </openflow:datapath>  
+    </openflow:group>
+
+    <openflow:match>
+
+      <openflow:use-group name="indiana-1750-nlr-3716" />
+      <openflow:use-group name="indiana-WAPG" />
+      <openflow:packet>
+	<openflow:dl_type value="0x800,0x806"/>
+	<openflow:nw_dst value="10.42.19.0/24"/>
+	<openflow:nw_src value="10.42.19.0/24"/>
+      </openflow:packet>
+
+    </openflow:match>
+
+  </openflow:sliver>
+
+</rspec>

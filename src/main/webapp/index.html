@@ -2,136 +2,241 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Open-Multinet Converter</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="upload.css">
+<title>Open-Multinet Converter</title>
 
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Open-Multinet</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet"
+	href="font-awesome-4.3.0/css/font-awesome.min.css">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Open-Multinet Converter</h1>
-        <p>
-        <b>Open-Multinet Translator</b> is a multi-format conversion tool for structured markup. 
-        It provides translations between Open-Multinet-based graphs and XML-based GENI RSpecs and OASIS TOSCA data formats.
-        The service allows for conversions triggered either by uploads or by direct text input.
-        Furthermore it comes with a straightforward REST API for developers:
-        </p>
-        <p>
-            <code>
-            curl --data-urlencode content@<b>file.xml</b> 
-            http://open-multinet.info/omnlib/convert/to/<b>format</b></code>
-        </p>
-        <p><a class="btn btn-primary btn-lg" href="http://open-multinet.info" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+<style>
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+</style>
 
-    <div class="container">
-<div class="row">
-  <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading"><strong>Text Input</strong> <small>Just copy &amp; paste</small></div>
-        <div class="panel-body">
+<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
 
-          <!-- Drop Zone -->
-          <h4>Paste document below</h4>
-          <textarea style="width:100%; height:20.3em;">
-          </textarea>
+<body>
+	<!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Open-Multinet</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse"></div>
+			<!--/.navbar-collapse -->
+		</div>
+	</nav>
 
-          <!-- Upload Finished -->
-          <div class="js-upload-finished">
-          </div>
-        </div>
-      </div>
-  
-  </div>
-  <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading"><strong>Upload Files</strong> <small>Just drag &amp; drop</small></div>
-        <div class="panel-body">
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Open-Multinet Converter</h1>
+			<p>
+				<b>Open-Multinet Translator</b> is a multi-format conversion tool
+				for structured markup. It provides translations between
+				Open-Multinet-based graphs and XML-based GENI RSpecs and OASIS TOSCA
+				data formats. The service allows for conversions triggered either by
+				uploads or by direct text input. Furthermore it comes with a
+				straightforward REST API for developers:
+			</p>
+			<p>
+				<code>
+					curl --data-urlencode content@<b>file.xml</b>
+					http://open-multinet.info/omnlib/convert/to/<b>format</b>
+				</code>
+			</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="http://open-multinet.info"
+					role="button">Learn more &raquo;</a>
+			</p>
+		</div>
+	</div>
+	<!--/jumbotron -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- 	<p>
+					<i class="fa fa-exclamation-triangle fa-lg"></i> Note: This web GUI
+					is currently only properly functional for RSpec requests. Full
+					functionality is coming soon!
+				</p> -->
+				<p>For example, try pasting the following RSpec into the paste
+					panel below and translate from RSpec Request to Open Multinet model:</p>
+				<code>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br /> &lt;rspec
+					xmlns="http://www.geni.net/resources/rspec/3"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+					http://www.geni.net/resources/rspec/3/request.xsd" type="request"
+					&gt;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&lt;node client_id="my-node"
+					exclusive="true"&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sliver_type
+					name="raw-pc" /&gt;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&lt;/node&gt;<br />
+					&lt;/rspec&gt;<br />
+				</code>
+				<br /> <br />
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<h2>Step 1: Select Translation Mode</h2>
+			<div class="form-group">
+				<div class="col-md-6">
+					<label for="fromDoc">From:</label> <select class="form-control"
+						id="fromDoc">
+						<option value="to">-- autodetect --</option>
+						<option value="ttl">Open Multinet</option>
+						<option value="advertisement">RSpec Advertisement</option>
+						<option value="request">RSpec Request</option>
+						<option value="manifest">RSpec Manifest</option>
+						<option value="tosca">Oasis Tosca</option>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<label for="toDoc">To:</label> <select class="form-control"
+						id="toDoc">
+						<option value="ttl">Open Multinet</option>
+						<option value="advertisement">RSpec Advertisement</option>
+						<option value="request">RSpec Request</option>
+						<option value="manifest">RSpec Manifest</option>
+						<option value="tosca">Oasis Tosca</option>						
+					</select>
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end form -->
+		</div> <!-- end row -->
+	</div>
+	<br /><br />
+	<div class="container">	
+		<div class="row">
+		<h2>Step 2: Provide Input</h2>
+			<div class="col-md-6">
+				<!-- left panel paste box -->
+				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<strong>Text Input</strong> <small>Just copy &amp; paste</small>
+					</div>
+
+					<div class="panel-body">
+
+						<!-- Paste Panel -->
+						<h4>Paste document below:</h4>
+						<textarea style="width: 100%; height: 20.3em; resize: none;"
+							id="paste-panel"></textarea>
+
+						<!-- Upload Finished -->
+						<div class="js-upload-finished"></div>
+
+						<br>
+						<p>
+							<a class="btn btn-success btn-lg" href="#submitted-text"
+								role="button" id="paste-panel-button" onclick="">Convert
+								&raquo;</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<!-- /left panel paste box -->
 
 
-          <!-- Standar Form -->
-          <h4>Select a file (RSpec, TOSCA, OMN) from your computer.</h4>
-          <form action="./convert/detect/ttl" method="post" enctype="application/x-www-form-urlencoded" id="js-upload-form">
-            <div class="form-inline">
-              <div class="form-group">
-                <input type="file" name="file" id="js-upload-files">
-              </div>
-              <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload file</button>
-            </div>
-          </form>
+			<div class="col-md-6">
+				<!-- right panel paste box -->
+				<div class="panel panel-default">
 
-          <!-- Drop Zone -->
-          <h4>Or drag and drop the file below</h4>
-          <div class="upload-drop-zone" id="drop-zone">
-            Just drag and drop the file here
-          </div>
+					<div class="panel-heading">
+						<strong>Upload Files</strong> <small>Just drag &amp; drop</small>
+					</div>
 
-          <!-- Upload Finished -->
-          <div class="js-upload-finished">
-          </div>
-        </div>
-      </div>  
-  </div>
-</div>
-    </div>
+					<div class="panel-body">
 
-    <div class="container">
+						<!-- Standard Form -->
+						<h4>Select a file (RSpec, TOSCA, OMN) from your computer:</h4>
+						<form action="./convert/detect/ttl" method="post"
+							enctype="application/x-www-form-urlencoded" id="js-upload-form">
+							<div class="form-inline">
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files">
+								</div>
+								<!--  button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload file</button -->
+							</div>
+						</form>
+						<br>
+						<!-- Drop Zone -->
+						<h4>Or drag and drop the file below:</h4>
+						<div class="upload-drop-zone" id="drop-zone">Just drag and
+							drop the file here</div>
 
-          <p><a class="btn btn-success btn-lg" href="#" role="button">Convert &raquo;</a></p>
-    </div>
+						<!-- Upload Finished -->
+						<div class="js-upload-finished"></div>
 
+						<p>
+							<a class="btn btn-success btn-lg" href="#submitted-text"
+								role="button" id="file-select-button">Convert &raquo;</a>
+						</p>
 
-      <hr>
+					</div>
+					<!-- / panel body -->
+				</div>
+			</div>
+			<!-- / right panel paste box -->
+		</div>
+		<!-- /row -->
 
-      <footer>
-        <p></p>
-      </footer>
-    </div> <!-- /container --> 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- @formatter:off --><div class="alert alert-info" role="alert" id="submitted-text" style="white-space: pre-wrap;" hidden><p><strong>You have submitted the following text:</strong></p><p id="submitted-text-content"></p></div>
+				<p class="text-center" id="conversion-wait" hidden><i class="fa fa-spinner fa-pulse fa-4x"></i></p>
+				<div class="alert alert-success" role="alert" id="response-text" style="white-space: pre-wrap;" hidden><p><strong>The conversion was successful!</strong></p><p>The server returned the following:</p><p id="response-text-content"></p></div>
+				<div class="alert alert-danger" role="alert" id="fail-text" style="white-space: pre-wrap;" hidden><p><strong>The conversion failed!</strong></p><p>The server returned the following error:</p><!-- TODO: error handling --><p id="fail-text-content"></p></div>
+				<!-- @formatter:on -->
+			</div>
+		</div>
+	</div>
+	<!-- / main body container -->
 
-        <script src="js/vendor/bootstrap.min.js"></script>
+	<div class="container">
+		<hr>
+		<footer>
+			<p></p>
+		</footer>
+	</div>
+	<!-- /container -->
 
-        <script src="js/main.js"></script>
-        <script src="upload.js"></script>
-    </body>
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+	</script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
 </html>

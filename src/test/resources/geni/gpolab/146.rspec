@@ -1,0 +1,44 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node client_id="Server">
+    <sliver_type name="default-vm">
+    </sliver_type>
+    <services>
+    
+    
+    <execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/><install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/></services> 
+    <interface client_id="Server:if0"><ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.2" type="ipv4" netmask="255.255.255.0"/></interface>
+    <interface client_id="Server:if1"><ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.2" type="ipv4" netmask="255.255.255.0"/></interface>
+    <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="30"/>
+    <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+ </node><node client_id="rtclient" exclusive="false">
+    <sliver_type name="default-vm"/>
+    <services>
+    
+    
+    <execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/><install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/></services>
+    <interface client_id="Client2:if0"><ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.1" type="ipv4" netmask="255.255.255.0"/></interface>
+    <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="30"/>
+  </node><node client_id="lftclient" exclusive="false">
+    <sliver_type name="default-vm"/>
+    <services>
+       
+       
+    <execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/><install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/></services>
+    <interface client_id="Client1:if0"><ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.1" type="ipv4" netmask="255.255.255.0"/></interface>
+    <site xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" id="30"/>
+   </node><link client_id="lan0">    
+      <interface_ref client_id="Server:if0"/>
+      <interface_ref client_id="Client1:if0"/>
+      <property source_id="Server:if0" dest_id="Client1:if0"/>
+      <property source_id="Client1:if0" dest_id="Server:if0"/>
+      <link_type name="lan"/>
+      
+   </link><link client_id="lan1">    
+    <interface_ref client_id="Server:if1"/>
+    <interface_ref client_id="Client2:if0"/>
+    <property source_id="Server:if1" dest_id="Client2:if0"/>
+    <property source_id="Client2:if0" dest_id="Server:if1"/>
+    <link_type name="lan"/>
+    
+    
+  </link></rspec>

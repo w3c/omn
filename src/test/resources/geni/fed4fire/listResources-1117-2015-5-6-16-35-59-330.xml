@@ -1,0 +1,79 @@
+<rspec expires="2015-05-06T14:35:59Z" generated="2015-05-06T14:35:59Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd ">
+    <rspec_opstate
+        aggregate_manager_id="urn:publicid:IDN+stanford.edu+authority+cm"
+        start="geni_notready" xmlns="http://www.geni.net/resources/rspec/ext/opstate/1">
+        <sliver_type name="raw-pc"/>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <state name="geni_notready">
+            <action name="geni_start" next="geni_configuring">
+                <description>Boot the node</description>
+            </action>
+            <description>Raw PCs and VMs begin powered down or inactive. They    must be explicitly booted before use.</description>
+        </state>
+        <state name="geni_configuring">
+            <wait next="geni_ready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>Booting takes a significant amount of time, so it    happens asynchronously while the node is in this    state.</description>
+        </state>
+        <state name="geni_ready">
+            <action name="geni_restart" next="geni_configuring">
+                <description>Reboot the node</description>
+            </action>
+            <action name="geni_stop" next="geni_stopping">
+                <description>Power down or stop the node.</description>
+            </action>
+            <action name="geni_update_users" next="geni_updating_users">
+                <description>Update user SSH keys.</description>
+            </action>
+            <description>The node is up and ready to use.</description>
+        </state>
+        <state name="geni_stopping">
+            <wait next="geni_notready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>The node is being stopped or rebooted.</description>
+        </state>
+        <state name="geni_failed">
+            <description>The node has failed and requires administrator    intervention before it can be used. Please contact    the administrator for assistance.</description>
+        </state>
+        <state name="geni_updating_users">
+            <action name="geni_update_users_cancel" next="geni_ready">
+                <description>Cancel an update users action</description>
+            </action>
+            <wait next="geni_ready" type="geni_success"/>
+            <description>Updating users can take a fair amount of time, so it    happens asynchronously in this state.</description>
+        </state>
+    </rspec_opstate>
+    <node component_id="urn:publicid:IDN+stanford.edu+node+cisco1"
+        component_manager_id="urn:publicid:IDN+stanford.edu+authority+cm"
+        component_name="cisco1" exclusive="true">
+        <hardware_type name="switch">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+        <interface component_id="urn:publicid:IDN+stanford.edu+interface+cisco1:(null)">
+            <emulab:interface name="(null)"/>
+        </interface>
+        <emulab:fd name="real-switch" weight="0"/>
+    </node>
+    <node component_id="urn:publicid:IDN+stanford.edu+node+internet"
+        component_manager_id="urn:publicid:IDN+stanford.edu+authority+cm"
+        component_name="internet" exclusive="true">
+        <hardware_type name="ipv4">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <cloud/>
+        <interface component_id="urn:publicid:IDN+stanford.edu+interface+internet:border">
+            <emulab:interface name="border"/>
+        </interface>
+        <location country="US" latitude="40.768652" longitude="-111.84581"/>
+    </node>
+</rspec>

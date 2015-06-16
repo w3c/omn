@@ -25,16 +25,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.jena.riot.RiotException;
 
-import com.google.api.server.spi.config.Api;
-import com.google.api.server.spi.config.ApiNamespace;
-
 @Path("/")
-@Api(name = "myApi",
-version = "v1",
-namespace = @ApiNamespace(ownerDomain = "helloworld.example.com",
-                           ownerName = "helloworld.example.com",
-                           packagePath=""))
-
 public class REST extends DeliveryMechanism {
 
 	private static final Logger LOG = Logger.getLogger(REST.class.getName());
@@ -87,5 +78,4 @@ public class REST extends DeliveryMechanism {
 			super(Response.status(status).entity(message).build());
 		}
 	}
-
 }

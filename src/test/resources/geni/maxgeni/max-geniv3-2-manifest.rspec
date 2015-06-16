@@ -1,0 +1,127 @@
+<RSpec type="SFA">
+   <!-- https://wiki.maxgigapop.net/twiki/bin/view/GENI/MaxRspec -->
+  <network name="maxpl">
+    <rspec expires="2012-05-15T15:23:44.000-04:00" type="manifest" xmlns="http://www.geni.net/resources/rspec/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd">
+      <node client_id="max2" component_id="urn:publicid:IDN+maxpl+node+planetlab2.dragon.maxgigapop.net" component_manager_id="urn:publicid:IDN+maxpl" exclusive="true">
+        <hardware_type name="plab-pc"/>
+        <hardware_type name="pc"/>
+        <sliver_type name="plab-vserver"/>
+        <location country="unknown" latitude="unknown" longitude="unknown"/>
+        <interface client_id="max2:if0" component_id="urn:publicid:IDN+maxpl+interface+planetlab2.dragon.maxgigapop.net:eth1">
+          <ip address="10.10.10.1" mask="255.255.255.0" type="ipv4"/>
+          <attached_link>
+            urn:ogf:network:domain=dragon.maxgigapop.net:node=MAX:port=1-0-9:link=*
+          </attached_link>
+        </interface>
+        <interface client_id="max2:if1" component_id="urn:publicid:IDN+maxpl+interface+planetlab2.dragon.maxgigapop.net:eth1">
+          <ip address="10.10.20.1" mask="255.255.255.0" type="ipv4"/>
+          <attached_link>
+            urn:ogf:network:domain=dragon.maxgigapop.net:node=MAX:port=1-0-9:link=*
+          </attached_link>
+        </interface>
+      </node>
+      <node client_id="max5" component_id="urn:publicid:IDN+maxpl+node+planetlab5.dragon.maxgigapop.net" component_manager_id="urn:publicid:IDN+maxpl" exclusive="true">
+        <hardware_type name="plab-pc"/>
+        <hardware_type name="pc"/>
+        <sliver_type name="plab-vserver"/>
+        <location country="unknown" latitude="unknown" longitude="unknown"/>
+        <interface client_id="max5:if0" component_id="urn:publicid:IDN+maxpl+interface+planetlab5.dragon.maxgigapop.net:eth1">
+          <ip address="10.10.10.2" mask="255.255.255.0" type="ipv4"/>
+          <attached_link>
+            urn:ogf:network:domain=dragon.maxgigapop.net:node=MAX:port=1-0-8:link=*
+          </attached_link>
+        </interface>
+      </node>
+      <link client_id="p2pvlan-13" vlantag="1821">
+        <interface_ref client_id="max2:if0"/>
+        <interface_ref client_id="max5:if0"/>
+        <property>
+          <source_id>
+            urn:ogf:network:domain=dragon.maxgigapop.net:node=MAX:port=1-0-9:link=*
+          </source_id>
+          <dest_id>
+            urn:ogf:network:domain=dragon.maxgigapop.net:node=MAX:port=1-0-8:link=*
+          </dest_id>
+          <global_resource_id>
+            dragon.maxgigapop.net-2225
+          </global_resource_id>
+        </property>
+      </link>
+      <stitching>
+        <topology lastUpdateTime="Mon May 14 15:24:30 EDT 2012" xmlns="http://geni.net/schema/stitching/topology/geniStitch/20110220/">
+          <path id="GRI-dragon.maxgigapop.net-2224">
+            <hop id="src" type="strict">
+              <link id="urn:publicid:IDN+maxpl+interface+planetlab2.dragon.maxgigapop.net:eth1">
+                <capacity>
+                  500.0Mbps
+                </capacity>
+                <switchingCapabilityDescriptor>
+                  <switchingcapType>
+                    l2sc
+                  </switchingcapType>
+                  <encodingType>
+                    ethernet
+                  </encodingType>
+                  <switchingCapabilitySpecificInfo>
+                    <switchingCapabilitySpecificInfo_L2sc>
+                      <interfaceMTU>
+                        9000
+                      </interfaceMTU>
+                      <vlanRangeAvailability>
+                        3201
+                      </vlanRangeAvailability>
+                      <suggestedVLANRange>
+                        3201
+                      </suggestedVLANRange>
+                      <vlanTranslation>
+                        false
+                      </vlanTranslation>
+                    </switchingCapabilitySpecificInfo_L2sc>
+                  </switchingCapabilitySpecificInfo>
+                </switchingCapabilityDescriptor>
+              </link>
+              <nextHop>
+                dst
+              </nextHop>
+            </hop>
+            <hop id="dst" type="strict">
+              <link id="urn:ogf:network:domain=dragon.maxgigapop.net:node=CLPK:port=1-2-3:link=*">
+                <capacity>
+                  500.0Mbps
+                </capacity>
+                <switchingCapabilityDescriptor>
+                  <switchingcapType>
+                    l2sc
+                  </switchingcapType>
+                  <encodingType>
+                    ethernet
+                  </encodingType>
+                  <switchingCapabilitySpecificInfo>
+                    <switchingCapabilitySpecificInfo_L2sc>
+                      <interfaceMTU>
+                        9000
+                      </interfaceMTU>
+                      <vlanRangeAvailability>
+                        3201
+                      </vlanRangeAvailability>
+                      <suggestedVLANRange>
+                        3201
+                      </suggestedVLANRange>
+                      <vlanTranslation>
+                        false
+                      </vlanTranslation>
+                    </switchingCapabilitySpecificInfo_L2sc>
+                  </switchingCapabilitySpecificInfo>
+                </switchingCapabilityDescriptor>
+              </link>
+              <nextHop>
+                null
+              </nextHop>
+            </hop>
+          </path>
+        </topology>
+      </stitching>
+    </rspec>
+  </network>
+   
+</RSpec>

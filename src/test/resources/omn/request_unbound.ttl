@@ -1,0 +1,20 @@
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://open-multinet.info/example#request>
+        a                omn:Topology , omn-lifecycle:Request ;
+        rdfs:label       omn-lifecycle:Request ;
+        omn:hasResource  <http://open-multinet.info/example#my-node> .
+
+<http://open-multinet.info/example#my-node>
+        a                         omn-resource:Node , <http://open-multinet.info/example#raw-pc> ;
+        rdfs:label                "my-node" ;
+        omn:isResourceOf          <http://open-multinet.info/example#request> ;
+        omn-lifecycle:hasID       "my-node" ;
+        omn-resource:isExclusive  true .

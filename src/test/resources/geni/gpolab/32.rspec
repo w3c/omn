@@ -1,0 +1,63 @@
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+        xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+<node client_id="OVS" >
+    <sliver_type name="emulab-xen">
+    <emulab:xen ram="1024" />
+    <disk_image url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=97b97f51-ab35-11e3-9435-000000000000" name="urn:publicid:IDN+instageni.northwestern.edu+image+ch-geni-net:AvrODLTutorial" />
+    </sliver_type>
+    <services>  
+	<execute command="sudo /local/install-script.sh" shell="sh"/>
+        <install install_path="/local" url="http://t-labs.us/avr/install-script.tar.gz"/>
+     </services>
+     <interface client_id="OVS:if0"><ip address="10.10.1.11" netmask="" type="ipv4"/></interface>
+     <interface client_id="OVS:if1"><ip address="10.10.1.12" netmask="" type="ipv4"/></interface>
+     <interface client_id="OVS:if2"><ip address="10.10.1.13" netmask="" type="ipv4"/></interface>
+</node>
+<node client_id="host1" >
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="host1:if0">
+    <ip address="10.10.1.1" netmask="255.255.255.0" type="ipv4"/></interface>
+</node>
+<node client_id="host2" >
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="host2:if0">
+    <ip address="10.10.1.2" netmask="255.255.255.0" type="ipv4"/></interface>
+</node>
+<node client_id="host3">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="host3:if0">
+    <ip address="10.10.1.3" netmask="255.255.255.0" type="ipv4"/></interface>
+</node>
+<link client_id="lan0">
+   <emulab:vlan_tagging enabled="true"/>
+   <interface_ref client_id="OVS:if0"/>
+   <interface_ref client_id="host1:if0"/>
+	<property source_id="OVS:if0" dest_id="host1:if0" capacity="100000"/>
+ 	<property source_id="host1:if0" dest_id="OVS:if0" capacity="100000"/>
+   <link_type name="lan"/>
+</link>
+<link client_id="lan1">
+   <emulab:vlan_tagging enabled="true"/>
+   <interface_ref client_id="OVS:if1"/>
+   <interface_ref client_id="host2:if0"/>
+	<property source_id="OVS:if1" dest_id="host2:if0" capacity="100000"/>
+	<property source_id="host2:if0" dest_id="OVS:if1" capacity="100000"/>
+   <link_type name="lan"/>
+</link>
+<link client_id="lan2">
+   <emulab:vlan_tagging enabled="true"/>
+   <interface_ref client_id="OVS:if2"/>
+   <interface_ref client_id="host3:if0"/>
+	<property source_id="OVS:if2" dest_id="host3:if0" capacity="100000"/>
+	<property source_id="host3:if0" dest_id="OVS:if2" capacity="100000"/>
+  <link_type name="lan"/>
+</link>
+</rspec>
+

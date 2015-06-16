@@ -1,0 +1,25 @@
+
+<rspec type="request" xmlns="http://www.protogeni.net/resources/rspec/0.1">
+    <!-- http://groups.geni.net/geni/attachment/wiki/DTunnels/vnet.xml -->
+ <credentials username="yogesh" password="******" />
+ <node component_uuid="urn:publicid:IDN+emulab.net+node+pc244+100" component_manager_uuid="urn:publicid:IDN+gtnoise.net+dtunnels" virtual_id="100" virtualization_type="emulab-vnode" virtualization_subtype="emulab-openvz" exclusive="1">
+   <node_type type_name="ovz-container" type_slots="1" />
+   <interface virtual_id="virt-0">
+     <ifaddress ipv4="192.168.1.4" netmask="24" note="Hack..should go in manifest" />
+   </interface>
+ </node>
+
+ <node component_uuid="urn:publicid:IDN+emulab.net+node+pc209+100" component_manager_uuid="urn:publicid:IDN+gtnoise.net+dtunnels" virtual_id="100" virtualization_type="emulab-vnode" virtualization_subtype="emulab-openvz" exclusive="1">
+   <node_type type_name="ovz-container" type_slots="1" />
+   <interface virtual_id="virt-0">
+     <ifaddress ipv4="192.168.1.5" netmask="24" note="Hack..should go in manifest" />
+   </interface>
+ </node>
+
+ <link virtual_id="link0">
+   <link_type name="EGRE" />
+   <field key="key" value="6" />
+   <interface_ref component_uuid="urn:publicid:IDN+emulab.net+node+pc244+100" virtual_node_id="100" virtual_interface_id="virt-0" real_interface_ip="10.1.3.3" />
+   <interface_ref component_uuid="urn:publicid:IDN+emulab.net+node+pc209+100" virtual_node_id="100" virtual_interface_id="virt-0" real_interface_ip="10.1.1.3" />
+ </link>
+</rspec>

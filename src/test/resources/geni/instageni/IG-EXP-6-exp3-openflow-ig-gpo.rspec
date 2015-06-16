@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+RSpec reserves the OpenFlow resources in the GPO InstaGENI rack 
+AM: https://foam.instageni.gpolab.bbn.com:3626/foam/gapi/1
+-->
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+  <openflow:sliver description="IG-EXP-6-exp3 ">
+    <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33019" type="primary" />
+
+    <openflow:group name="bbn-instageni-1750">
+      <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.instageni.gpolab.bbn.com+datapath+06:d6:84:34:97:c6:c9:00" 
+	component_manager_id="urn:publicid:IDN+openflow:foam:foam.instageni.gpolab.bbn.com+authority+am"  />
+    </openflow:group>
+
+    <openflow:match>
+
+      <openflow:use-group name="bbn-instageni-1750" />
+
+      <openflow:packet>
+        <openflow:dl_type value="0x800,0x806"/>
+        <openflow:nw_dst value="10.42.19.0/24"/>
+        <openflow:nw_src value="10.42.19.0/24"/>
+      </openflow:packet>
+
+    </openflow:match>
+
+  </openflow:sliver>
+
+</rspec>
+

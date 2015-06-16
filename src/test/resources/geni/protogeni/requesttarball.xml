@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2
+                           http://www.protogeni.net/resources/rspec/2/request.xsd"
+       type="request" >
+  <node client_id="node">
+    <sliver_type name="raw-pc" />
+    <services>
+      <install url="http://example.net/path/tarball.tgz" install_path="/local"/>
+      <install url="http://example.net/path/other.tgz" install_path="/usr/local"/>
+      <execute shell="sh" command="sudo /local/myserver.sh"/>
+    </services>
+  </node>
+</rspec>

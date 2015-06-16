@@ -1,0 +1,125 @@
+<rspec type="request" generated_by="Flack" generated="2013-05-21T19:33:46Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:plos="http://www.planet-lab.org/resources/sfa/ext/plos/1" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="nodeA" component_manager_id="" exclusive="false" >
+    <sliver_type name="m1.small">
+      <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.1.0.xml" version="968102c024704c81a2ab1b6d1dd31b0119ce65df"/>
+    </sliver_type>
+    <interface client_id="nodeA:if0">
+      <ip address="192.168.5.11" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeA:if1">
+      <ip address="192.168.4.11" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+	<install url="http://emmy9.casa.umass.edu/GEC-17/install_script_gimibot.tar.gz" install_path="/tmp" />
+	<execute shell="/bin/bash" command="/tmp/gimibot/gimibot.sh $sliceName $self.Name()"/>
+    </services>
+  </node>
+  <node client_id="nodeE" component_manager_id="" exclusive="false" >
+    <sliver_type name="m1.small">
+     <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.1.0.xml" version="968102c024704c81a2ab1b6d1dd31b0119ce65df"/>
+   </sliver_type>
+    <interface client_id="nodeE:if0">
+      <ip address="192.168.6.14" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+	<install url="http://emmy9.casa.umass.edu/GEC-17/install_script_gimibot.tar.gz" install_path="/tmp" />
+	<execute shell="/bin/bash" command="/tmp/gimibot/gimibot.sh $sliceName $self.Name()"/>
+    </services>
+  </node>
+  <node client_id="nodeC" component_manager_id="" exclusive="false" >
+    <sliver_type name="m1.small">
+      <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.1.0.xml" version="968102c024704c81a2ab1b6d1dd31b0119ce65df"/>
+    </sliver_type>
+    <interface client_id="nodeC:if0">
+      <ip address="192.168.5.12" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeC:if1">
+      <ip address="192.168.2.12" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeC:if2">
+      <ip address="192.168.3.12" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeC:if3">
+      <ip address="192.168.6.12" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+	<install url="http://emmy9.casa.umass.edu/GEC-17/install_script_gimibot.tar.gz" install_path="/tmp" />
+	<execute shell="/bin/bash" command="/tmp/gimibot/gimibot.sh $sliceName $self.Name()"/>
+    </services>
+  </node>
+  <node client_id="nodeB" component_manager_id="" exclusive="false" >
+    <sliver_type name="m1.small">
+     <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.1.0.xml" version="968102c024704c81a2ab1b6d1dd31b0119ce65df"/>
+    </sliver_type>
+    <interface client_id="nodeB:if0">
+      <ip address="192.168.2.10" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeB:if1">
+      <ip address="192.168.1.10" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeB:if2">
+      <ip address="192.168.4.10" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+	<install url="http://emmy9.casa.umass.edu/GEC-17/install_script_gimibot.tar.gz" install_path="/tmp" />
+	<execute shell="/bin/bash" command="/tmp/gimibot/gimibot.sh $sliceName $self.Name()"/>
+    </services>
+  </node>
+  <node client_id="nodeD" component_manager_id="" exclusive="false" >
+    <sliver_type name="m1.small">
+      <disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/exogeni-umass-ovs-1.1.0.xml" version="968102c024704c81a2ab1b6d1dd31b0119ce65df"/>
+    </sliver_type>
+    <interface client_id="nodeD:if0">
+	<ip address="192.168.3.13" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="nodeD:if1">
+	<ip address="192.168.1.13" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+	<install url="http://emmy9.casa.umass.edu/GEC-17/install_script_gimibot.tar.gz" install_path="/tmp" />
+	<execute shell="/bin/bash" command="/tmp/gimibot/gimibot.sh $sliceName $self.Name()"/>
+    </services>
+  </node>
+  <link client_id="link0">
+    <component_manager name=""/>
+    <interface_ref client_id="nodeA:if0"/>
+    <interface_ref client_id="nodeC:if0"/>
+    <property source_id="nodeA:if0" dest_id="nodeC:if0"/>
+    <property source_id="nodeC:if0" dest_id="nodeA:if0"/>
+  </link>
+  <link client_id="link1">
+    <component_manager name=""/>
+    <interface_ref client_id="nodeB:if0"/>
+    <interface_ref client_id="nodeC:if1"/>
+    <property source_id="nodeB:if0" dest_id="nodeC:if1"/>
+    <property source_id="nodeC:if1" dest_id="nodeB:if0"/>
+  </link>
+  <link client_id="link2">
+    <component_manager name=""/>
+    <interface_ref client_id="nodeC:if2"/>
+    <interface_ref client_id="nodeD:if0"/>
+    <property source_id="nodeC:if2" dest_id="nodeD:if0"/>
+    <property source_id="nodeD:if0" dest_id="nodeC:if2"/>
+  </link>
+  <link client_id="link3">
+    <component_manager name=""/>
+    <interface_ref client_id="nodeB:if1"/>
+    <interface_ref client_id="nodeD:if1"/>
+    <property source_id="nodeB:if1" dest_id="nodeD:if1"/>
+    <property source_id="nodeD:if1" dest_id="nodeB:if1"/>
+  </link>
+  <link client_id="link4">
+    <component_manager name=""/>
+    <interface_ref client_id="nodeB:if2"/>
+    <interface_ref client_id="nodeA:if1"/>
+    <property source_id="nodeB:if2" dest_id="nodeA:if1"/>
+    <property source_id="nodeA:if1" dest_id="nodeB:if2"/>
+  </link>
+  <link client_id="link5">
+    <component_manager name=""/>
+    <interface_ref client_id="nodeC:if3"/>
+    <interface_ref client_id="nodeE:if0"/>
+    <property source_id="nodeC:if3" dest_id="nodeE:if0"/>
+    <property source_id="nodeE:if0" dest_id="nodeC:if3"/>
+  </link>
+</rspec>

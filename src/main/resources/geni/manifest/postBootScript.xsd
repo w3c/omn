@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GENIPUBLIC-COPYRIGHT
+  Copyright (c) 2011 University of Utah and the Flux Group.
+  All rights reserved.
+  
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and/or hardware specification (the "Work") to
+  deal in the Work without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense,
+  and/or sell copies of the Work, and to permit persons to whom the Work
+  is furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Work.
+  
+  THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+  IN THE WORK.
+-->
+<!--
+  An extension to the GENI request RSpec supporting a post-boot
+  script.
+  
+  See https://geni-orca.renci.org/trac/wiki/flukes for ExoGENI
+  documentation involving this extension.
+  
+  Sample usage:
+  
+  <rspec xmlns="http://www.geni.net/resources/rspec/3"
+         xmlns:pbs="http://www.geni.net/resources/rspec/ext/postBootScript/1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd http://www.geni.net/resources/rspec/ext/postBootScript/1 http://www.geni.net/resources/rspec/ext/postBootScript/1/request.xsd"
+         type="request">
+    <node client_id="foo">
+      <services>
+        <pbs:services_post_boot_script type="velocity">
+  #!/bin/sh
+  echo "Hello from post boot script"
+  # $Group1.get(0) is handled by velocity
+  echo $Group1.get(0) master  &gt;&gt; /etc/hosts
+        </pbs:services_post_boot_script>
+      </services>
+    </node>
+  </rspec>
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.geni.net/resources/rspec/ext/postBootScript/1" xmlns:p="http://www.geni.net/resources/rspec/ext/postBootScript/1">
+  <xs:element name="services_post_boot_script">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="p:PostBootScriptContents"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="PostBootScriptContents">
+    <xs:attribute name="type" use="required"/>
+  </xs:attributeGroup>
+</xs:schema>

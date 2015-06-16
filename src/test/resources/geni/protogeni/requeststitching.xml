@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RSpecRequestStitching -->
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stitch="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" xmlns="http://www.geni.net/resources/rspec/3" type="request" xsi:schemaLocation="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd">
+
+<node client_id="pg1" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+  <sliver_type name="raw-pc">
+    <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops//FEDORA15-STD"/>
+  </sliver_type>
+  <interface client_id="pg1:if0">
+    <ip address="192.168.44.1" netmask="255.255.255.0" type="ipv4"/>
+  </interface>
+</node>
+
+<node client_id="max5" component_id="urn:publicid:IDN+dragon.maxgigapop.net+node+planetlab5.dragon.maxgigapop.net" component_manager_id="urn:publicid:IDN+dragon.maxgigapop.net+authority+am" exclusive="true">
+  <hardware_type name="plab-pc"/>
+  <hardware_type name="pc"/>
+  <sliver_type name="plab-vserver"> </sliver_type>
+  <interface client_id="max5:if0" component_id="urn:publicid:IDN+dragon.maxgigapop.net+interface+planetlab5.dragon.maxgigapop.net:eth1">
+    <ip address="192.168.44.2" netmask="255.255.255.0" type="ipv4"/>
+  </interface>
+</node>
+
+<link client_id="link-pg1-max5">
+  <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+  <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+  <component_manager name="urn:publicid:IDN+dragon.maxgigapop.net+authority+am"/>
+  <interface_ref client_id="pg1:if0"/>
+  <interface_ref client_id="max5:if0"/>
+  <property source_id="pg1:if0" dest_id="max5:if0" capacity="1000000"/>
+  <property source_id="max5:if0" dest_id="pg1:if0" capacity="1000000"/>
+</link>
+
+<stitch:stitching lastUpdateTime="20120815:09:30:00"> 
+  <stitch:path id="link-pg1-max5">
+  <stitch:hop id="1" type="strict">
+    <stitch:link id="urn:publicid:IDN+emulab.net+interface+*:*">
+      <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+      <stitch:capacity>1000000</stitch:capacity>
+      <stitch:switchingCapabilityDescriptor>
+        <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+        <stitch:encodingType>ethernet</stitch:encodingType>
+        <stitch:switchingCapabilitySpecificInfo>
+          <stitch:switchingCapabilitySpecificInfo_L2sc>
+            <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+            <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+            <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+          </stitch:switchingCapabilitySpecificInfo_L2sc>
+        </stitch:switchingCapabilitySpecificInfo>
+      </stitch:switchingCapabilityDescriptor>
+    </stitch:link>
+    <stitch:nextHop>2</stitch:nextHop>
+  </stitch:hop>
+
+  <stitch:hop id="2" type="strict">
+    <stitch:link id="urn:publicid:IDN+emulab.net+interface+procurve-pgeni-salt:3.21">
+      <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+      <stitch:capacity>1000000</stitch:capacity>
+      <stitch:switchingCapabilityDescriptor>
+        <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+        <stitch:encodingType>ethernet</stitch:encodingType>
+        <stitch:switchingCapabilitySpecificInfo>
+          <stitch:switchingCapabilitySpecificInfo_L2sc>
+            <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+            <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+            <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+            <stitch:vlanTranslation>false</stitch:vlanTranslation>
+          </stitch:switchingCapabilitySpecificInfo_L2sc>
+        </stitch:switchingCapabilitySpecificInfo>
+      </stitch:switchingCapabilityDescriptor>
+    </stitch:link>
+    <stitch:nextHop>3</stitch:nextHop>
+  </stitch:hop>
+
+  <stitch:hop id="3" type="strict">
+    <stitch:link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.salt:ge-7/1/2:*">
+      <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+      <stitch:capacity>1000000</stitch:capacity>
+      <stitch:switchingCapabilityDescriptor>
+        <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+        <stitch:encodingType>ethernet</stitch:encodingType>
+        <stitch:switchingCapabilitySpecificInfo>
+          <stitch:switchingCapabilitySpecificInfo_L2sc>
+            <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+            <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+            <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+            <stitch:vlanTranslation>false</stitch:vlanTranslation>
+          </stitch:switchingCapabilitySpecificInfo_L2sc>
+        </stitch:switchingCapabilitySpecificInfo>
+      </stitch:switchingCapabilityDescriptor>
+    </stitch:link>
+    <stitch:nextHop>4</stitch:nextHop>
+    </stitch:hop>
+
+    <stitch:hop id="4">
+      <stitch:link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.newy:xe-0/0/3:*">
+        <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+        <stitch:capacity>1000000</stitch:capacity>
+        <stitch:switchingCapabilityDescriptor>
+          <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+          <stitch:encodingType>ethernet</stitch:encodingType>
+            <stitch:switchingCapabilitySpecificInfo>
+              <stitch:switchingCapabilitySpecificInfo_L2sc>
+                <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+                <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+                <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+                <stitch:vlanTranslation>true</stitch:vlanTranslation>
+              </stitch:switchingCapabilitySpecificInfo_L2sc>
+           </stitch:switchingCapabilitySpecificInfo>
+        </stitch:switchingCapabilityDescriptor>
+      </stitch:link>
+      <stitch:nextHop>5</stitch:nextHop>
+    </stitch:hop>
+
+    <stitch:hop id="5">
+      <stitch:link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.newy:xe-0/0/3:*">
+        <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+        <stitch:capacity>1000000</stitch:capacity>
+        <stitch:switchingCapabilityDescriptor>
+          <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+          <stitch:encodingType>ethernet</stitch:encodingType>
+            <stitch:switchingCapabilitySpecificInfo>
+              <stitch:switchingCapabilitySpecificInfo_L2sc>
+                <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+                <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+                <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+                <stitch:vlanTranslation>true</stitch:vlanTranslation>
+              </stitch:switchingCapabilitySpecificInfo_L2sc>
+           </stitch:switchingCapabilitySpecificInfo>
+        </stitch:switchingCapabilityDescriptor>
+      </stitch:link>
+      <stitch:nextHop>6</stitch:nextHop>
+    </stitch:hop>
+
+    <stitch:hop id="6">
+      <stitch:link id="urn:publicid:IDN+dragon.maxgigapop.net+interface+CLPK:1-2-3:*">
+        <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+        <stitch:capacity>1000000</stitch:capacity>
+        <stitch:switchingCapabilityDescriptor>
+          <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+          <stitch:encodingType>ethernet</stitch:encodingType>
+            <stitch:switchingCapabilitySpecificInfo>
+              <stitch:switchingCapabilitySpecificInfo_L2sc>
+                <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+                <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+                <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+                <stitch:vlanTranslation>false</stitch:vlanTranslation>
+              </stitch:switchingCapabilitySpecificInfo_L2sc>
+           </stitch:switchingCapabilitySpecificInfo>
+        </stitch:switchingCapabilityDescriptor>
+      </stitch:link>
+      <stitch:nextHop>7</stitch:nextHop>
+    </stitch:hop>
+
+    <stitch:hop id="7">
+      <stitch:link id="urn:publicid:IDN+dragon.maxgigapop.net+interface+planetlab5.dragon.maxgigapop.net:eth1">
+        <stitch:trafficEngineeringMetric>10</stitch:trafficEngineeringMetric>
+        <stitch:capacity>1000000</stitch:capacity>
+        <stitch:switchingCapabilityDescriptor>
+          <stitch:switchingcapType>l2sc</stitch:switchingcapType>
+          <stitch:encodingType>ethernet</stitch:encodingType>
+            <stitch:switchingCapabilitySpecificInfo>
+              <stitch:switchingCapabilitySpecificInfo_L2sc>
+                <stitch:interfaceMTU>9000</stitch:interfaceMTU>
+                <stitch:vlanRangeAvailability>any</stitch:vlanRangeAvailability>
+                <stitch:suggestedVLANRange>780</stitch:suggestedVLANRange>
+                <stitch:vlanTranslation>false</stitch:vlanTranslation>
+              </stitch:switchingCapabilitySpecificInfo_L2sc>
+           </stitch:switchingCapabilitySpecificInfo>
+        </stitch:switchingCapabilityDescriptor>
+      </stitch:link>
+      <stitch:nextHop>null</stitch:nextHop>
+    </stitch:hop>
+  </stitch:path>
+</stitch:stitching>
+
+</rspec>

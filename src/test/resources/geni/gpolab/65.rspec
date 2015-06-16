@@ -1,0 +1,47 @@
+<rspec type="request" generated_by="Flack" generated="2014-07-24T22:43:11Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns:ns3="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="gridhub" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.small">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridhub_1.0.xml" version="e302745f5b0f0ce65f3d633f95b6d2800b49e89b"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-0" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-1" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-2" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-5" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-6" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-4" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-3" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+  <node client_id="gridworker-7" exclusive="false" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1">
+    <sliver_type name="xo.medium">
+      <disk_image name="http://www.gpolab.bbn.com/experiment-support/images/johren/SeleniumGrid/gridworker_1.0.xml" version="ab831ba6ca4fe1141f24a9fb1f9a60c719f30c79"/>
+    </sliver_type>
+  </node>
+</rspec>

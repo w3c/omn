@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This rspec will reserve one VMs on VLAN 1750 at Utah ProtoGENI 
+AM: https://www.emulab.net:12369/protogeni/xmlrpc/am/2.0
+--> 
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/shared-vlan/1
+           http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       type="request">
+
+  <node client_id="utah-pg" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+    <interface client_id="utah-pg:if0">
+      <ip address="10.42.11.134" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <link client_id="mesoscale-openflow-0">
+    <interface_ref client_id="utah-pg:if0" />
+    <sharedvlan:link_shared_vlan name="mesoscale-openflow" />
+  </link>
+</rspec>

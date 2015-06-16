@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec type="manifest" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1/slice_info.xsd?format=raw http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1 http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1/sliver_info.xsd?format=raw http://www.geni.net/resources/rspec/ext/postBootScript/1 http://www.geni.net/resources/rspec/ext/postBootScript/1/request.xsd" xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/sliver-info/1" xmlns:ns3="http://groups.geni.net/exogeni/attachment/wiki/RspecExtensions/slice-info/1" xmlns:ns5="http://www.geni.net/resources/rspec/ext/postBootScript/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node sliver_id="urn:publicid:IDN+exogeni.net:bbnvmsite+sliver+e032cfd3-3443-468d-8141-d701d63e4b63:VM" exclusive="false" component_name="orca-vm-cloud" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am" component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+node+orca-vm-cloud" client_id="VM">
+        <location latitude="42.38974" longitude="-71.14751" country="Unspecified"/>
+        <sliver_type name="m1.small">
+            <disk_image version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml"/>
+        </sliver_type>
+        <services>
+            <login username="root" port="22" hostname="192.1.242.23" authentication="ssh-keys"/>
+            <login username="johren" port="22" hostname="192.1.242.23" authentication="ssh-keys"/>
+        </services>
+        <interface mac_address="fe:16:3e:00:34:85" client_id="VM:if0">
+            <ip type="ipv4" netmask="255.255.255.0" address="10.42.11.25"/>
+        </interface>
+        <ns4:geni_sliver_info resource_id="bbn-w3:6a2ef71a-3523-4197-b659-e060a1b05656" state="ready" start_time="2013-12-13T15:03:07.000-05:00" expiration_time="2013-12-13T15:32:28.000-05:00" creation_time="2013-12-13T15:03:07.000-05:00" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </node>
+    <link vlantag="8" sliver_id="urn:publicid:IDN+exogeni.net:bbnvmsite+sliver+e032cfd3-3443-468d-8141-d701d63e4b63:lan0" client_id="lan0">
+        <interface_ref client_id="VM:if0"/>
+        <ns4:geni_sliver_info state="ready" start_time="2013-12-13T15:03:07.000-05:00" expiration_time="2013-12-13T15:32:28.000-05:00" creation_time="2013-12-13T15:03:07.000-05:00" creator_urn="johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren"/>
+    </link>
+    <ns3:geni_slice_info state="ready" uuid="d9598c63-dbde-455b-b79d-b8bf32d36b2a" urn="urn:publicid:IDN+ch.geni.net:iRODSTesting+slice+joBasicIG"/>
+</rspec>

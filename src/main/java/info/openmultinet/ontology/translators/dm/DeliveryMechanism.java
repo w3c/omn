@@ -5,6 +5,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.translators.geni.RSpecValidation;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
@@ -18,6 +19,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.UnknownFormatConversionException;
 
 import javax.xml.bind.JAXBException;
@@ -26,6 +28,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
+import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class DeliveryMechanism {
@@ -33,11 +36,16 @@ public class DeliveryMechanism {
 	public static String convert(String from, String to, String content)
 			throws JAXBException, InvalidModelException, UnsupportedException,
 			IOException, MultipleNamespacesException,
-			RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
+			RequiredResourceNotFoundException, MultiplePropertyValuesException,
+			XMLStreamException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
-		Model model;
+		Model model = null;
+
+		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)){
+			from = RSpecValidation.getType(content);
+		}
 
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 			model = RequestConverter.getModel(stream);
@@ -57,6 +65,9 @@ public class DeliveryMechanism {
 		if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
 			final String rspec = new AdvertisementConverter().getRSpec(model);
 			baos.write(rspec.getBytes());
+		} else if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(to)) {
+			final String rspec = RequestConverter.getRSpec(model);
+			baos.write(rspec.getBytes());
 		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(to)) {
 			final String rspec = ManifestConverter.getRSpec(model, "localhost");
 			baos.write(rspec.getBytes());
@@ -72,5 +83,4 @@ public class DeliveryMechanism {
 
 		return baos.toString();
 	}
-
 }

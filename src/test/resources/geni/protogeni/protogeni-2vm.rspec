@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This rspec will reserve two VMs on shared OpenFlow VLAN 1750 
+at the PG Utah site.
+
+AM: http://www.emulab.net/protogeni/xmlrpc/am/2.0
+-->
+<!-- http://groups.geni.net/geni/browser/trunk/RSpecExamples -->
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="host1" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+      <interface client_id="host1:if0" />
+      <interface client_id="host1:if1" />
+  </node>
+
+  <node client_id="host2" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+      <interface client_id="host2:if0" />
+      <interface client_id="host2:if1" />
+  </node>
+
+  <link client_id="host1-and-host2-0">
+    <interface_ref client_id="host1:if0"/>
+    <interface_ref client_id="host2:if0"/>
+    <property source_id="host1:if0" dest_id="host2:if0"/>
+    <property source_id="host2:if0" dest_id="host1:if0"/>
+  </link>
+
+  <link client_id="host1-and-host2-1">
+    <interface_ref client_id="host1:if1"/>
+    <interface_ref client_id="host2:if1"/>
+    <property source_id="host1:if1" dest_id="host2:if1"/>
+    <property source_id="host2:if1" dest_id="host1:if1"/>
+  </link>
+</rspec>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="VM" component_manager_id="urn:publicid:IDN+bbnvmsite+authority+cm" >
+    <sliver_type name="m1.small">
+   <disk_image name="http://geni-images.renci.org/images/standard/debian/debian-squeeze-amd64-neuca-2g.zfilesystem.sparse.v0.2.xml" version="397c431cb9249e1f361484b08674bc3381455bb9" />
+    </sliver_type>
+    <interface client_id="VM:if0">
+   <ip address="10.42.18.77" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="VM-0" component_manager_id="urn:publicid:IDN+bbnvmsite+authority+cm" >
+    <sliver_type name="m1.small">
+   <disk_image name="http://geni-images.renci.org/images/standard/debian/debian-squeeze-amd64-neuca-2g.zfilesystem.sparse.v0.2.xml" version="397c431cb9249e1f361484b08674bc3381455bb9" />
+    </sliver_type>
+    <interface client_id="VM-0:if0">
+   <ip address="10.42.18.98" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM:if0"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <s:link_shared_vlan name="1750"/>
+  </link>
+</rspec>

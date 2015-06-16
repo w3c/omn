@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<!-- http://groups.geni.net/geni/attachment/wiki/HowTo/WriteOFv3Rspecs/ad-sample.rspec
+  Resources at AM:
+	URN: unspecified_AM_URN
+	URL: https://foam.gpolab.bbn.com:3626/foam/gapi
+ -->
+
+<rspec type="advertisement" xmlns="http://www.geni.net/resources/rspec/3" xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.geni.net/resources/rspec/ext/openflow/3 http://www.geni.net/resources/rspec/ext/openflow/3/of-ad.xsd">
+  <node component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:a4:00:12:e2:b8:a5:d0" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" component_name="06:a4:00:12:e2:b8:a5:d0" exclusive="false">
+    <hardware_type name="openflow-switch"/>
+    <available now="true"/>
+  </node>
+  <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:a4:00:12:e2:b8:a5:d0" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" dpid="06:a4:00:12:e2:b8:a5:d0">
+    <openflow:port name="GBE0/20" num="20"/>
+    <openflow:port name="GBE0/21" num="21"/>
+    <openflow:port name="GBE0/22" num="22"/>
+  </openflow:datapath>
+  <node component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:a4:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" component_name="06:a4:00:24:a8:c4:b9:00" exclusive="false">
+    <hardware_type name="openflow-switch"/>
+    <available now="true"/>
+  </node>
+  <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:a4:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" dpid="06:a4:00:24:a8:c4:b9:00">
+    <openflow:port name="1" num="25"/>
+    <openflow:port name="2" num="26"/>
+    <openflow:port name="3" num="27"/>
+    <openflow:port name="5" num="29"/>
+    <openflow:port name="7" num="31"/>
+    <openflow:port name="8" num="32"/>
+    <openflow:port name="9" num="33"/>
+    <openflow:port name="10" num="34"/>
+    <openflow:port name="25" num="49"/>
+    <openflow:port name="26" num="50"/>
+    <openflow:port name="27" num="51"/>
+    <openflow:port name="28" num="52"/>
+    <openflow:port name="29" num="53"/>
+    <openflow:port name="31" num="55"/>
+    <openflow:port name="32" num="56"/>
+    <openflow:port name="47" num="71"/>
+    <openflow:port name="local" num="65534"/>
+  </openflow:datapath>
+  <node component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:b3:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" component_name="06:b3:00:24:a8:c4:b9:00" exclusive="false">
+    <hardware_type name="openflow-switch"/>
+    <available now="true"/>
+  </node>
+  <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:b3:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" dpid="06:b3:00:24:a8:c4:b9:00">
+    <openflow:port name="25" num="49"/>
+    <openflow:port name="26" num="50"/>
+    <openflow:port name="27" num="51"/>
+    <openflow:port name="39" num="63"/>
+    <openflow:port name="local" num="65534"/>
+  </openflow:datapath>
+  <node component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:c6:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" component_name="06:c6:00:24:a8:c4:b9:00" exclusive="false">
+    <hardware_type name="openflow-switch"/>
+    <available now="true"/>
+  </node>
+  <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:c6:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" dpid="06:c6:00:24:a8:c4:b9:00">
+    <openflow:port name="31" num="55"/>
+    <openflow:port name="41" num="65"/>
+    <openflow:port name="local" num="65534"/>
+  </openflow:datapath>
+  <node component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:d6:00:12:e2:b8:a5:d0" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" component_name="06:d6:00:12:e2:b8:a5:d0" exclusive="false">
+    <hardware_type name="openflow-switch"/>
+    <available now="true"/>
+  </node>
+  <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:d6:00:12:e2:b8:a5:d0" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" dpid="06:d6:00:12:e2:b8:a5:d0">
+    <openflow:port name="GBE0/3" num="3"/>
+    <openflow:port name="GBE0/5" num="5"/>
+    <openflow:port name="GBE0/9" num="9"/>
+    <openflow:port name="GBE0/11" num="11"/>
+    <openflow:port name="GBE0/20" num="20"/>
+    <openflow:port name="GBE0/21" num="21"/>
+    <openflow:port name="GBE0/22" num="22"/>
+  </openflow:datapath>
+  <node component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:d6:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" component_name="06:d6:00:24:a8:c4:b9:00" exclusive="false">
+    <hardware_type name="openflow-switch"/>
+    <available now="true"/>
+  </node>
+  <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+datapath:06:d6:00:24:a8:c4:b9:00" component_manager_id="urn:publicid:IDN+openflow:foam:foam.gpolab.bbn.com+authority+am" dpid="06:d6:00:24:a8:c4:b9:00">
+    <openflow:port name="1" num="25"/>
+    <openflow:port name="2" num="26"/>
+    <openflow:port name="3" num="27"/>
+    <openflow:port name="5" num="29"/>
+    <openflow:port name="7" num="31"/>
+    <openflow:port name="8" num="32"/>
+    <openflow:port name="9" num="33"/>
+    <openflow:port name="10" num="34"/>
+    <openflow:port name="25" num="49"/>
+    <openflow:port name="26" num="50"/>
+    <openflow:port name="27" num="51"/>
+    <openflow:port name="28" num="52"/>
+    <openflow:port name="29" num="53"/>
+    <openflow:port name="31" num="55"/>
+    <openflow:port name="32" num="56"/>
+    <openflow:port name="47" num="71"/>
+    <openflow:port name="local" num="65534"/>
+  </openflow:datapath>
+</rspec>
+

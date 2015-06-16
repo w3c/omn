@@ -1,0 +1,55 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/"
+    xmlns:ns3="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd">
+    <link component_id="urn:publicid:IDN+exogeni.net:nictavmsite+link+Nicta:ExoGeni:TenGigabitEthernet:1:ethernet_NictaNet:Pronto:3290:TenGigabitEthernet:1:1:ethernet">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:nictavmsite+interface+Nicta:ExoGeni:TenGigabitEthernet:1:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:nictaNet+interface+NictaNet:Pronto:3290:TenGigabitEthernet:1:1:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:nictavmsite+authority+am"/>
+        <link_type name="ethernet"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:nictavmsite+interface+Nicta:ExoGeni:TenGigabitEthernet:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:nictaNet+interface+NictaNet:Pronto:3290:TenGigabitEthernet:1:1:ethernet"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:nictaNet+interface+NictaNet:Pronto:3290:TenGigabitEthernet:1:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:nictavmsite+interface+Nicta:ExoGeni:TenGigabitEthernet:1:ethernet"/>
+    </link>
+    <node
+        component_id="urn:publicid:IDN+exogeni.net:nictavmsite+node+orca-vm-cloud"
+        component_manager_id="urn:publicid:IDN+exogeni.net:nictavmsite+authority+am"
+        component_name="orca-vm-cloud" exclusive="false">
+        <location country="Unspecified" latitude="-33.89533" longitude="151.19708"/>
+        <sliver_type name="EucaC1Medium"/>
+        <sliver_type name="EC2M1XLarge"/>
+        <sliver_type name="EC2M1Large"/>
+        <sliver_type name="EucaM1Large"/>
+        <sliver_type name="EC2C1Medium"/>
+        <sliver_type name="EucaM1Small"/>
+        <sliver_type name="EC2M1Small"/>
+        <sliver_type name="EucaM1XLarge"/>
+        <sliver_type name="XOLarge"/>
+        <sliver_type name="XOMedium"/>
+        <sliver_type name="XOXlarge"/>
+        <sliver_type name="EucaC1XLarge"/>
+        <sliver_type name="XOSmall"/>
+        <sliver_type name="EucaM1XLarge"/>
+        <sliver_type name="EucaM1Small"/>
+        <sliver_type name="XOXlarge"/>
+        <sliver_type name="EC2M1Small"/>
+        <sliver_type name="XOSmall"/>
+        <sliver_type name="XOLarge"/>
+        <sliver_type name="XOMedium"/>
+        <sliver_type name="EC2M1XLarge"/>
+        <sliver_type name="EC2M1Large"/>
+        <sliver_type name="EucaM1Large"/>
+        <sliver_type name="EC2C1Medium"/>
+        <sliver_type name="EucaC1XLarge"/>
+        <sliver_type name="EucaC1Medium"/>
+        <hardware_type name="orca-vm-cloud">
+            <ns3:node_type type_slots="16"/>
+        </hardware_type>
+        <available now="true"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:nictavmsite+interface+Nicta:ExoGeni:TenGigabitEthernet:1:ethernet" role="experimental"/>
+    </node>
+    <ns2:stitching lastUpdateTime="Wed May 06 10:36:16 EDT 2015"/>
+</rspec>

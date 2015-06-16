@@ -1,0 +1,75 @@
+<rspec type="request" generated_by="Flack" generated="2013-12-17T22:44:01Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+  <node client_id="VM" exclusive="false">
+    <sliver_type name="emulab-xen">
+        <emulab:xen cores="1" ram="512" disk="8"/>
+    </sliver_type>
+    <interface client_id="VM:if0">
+      <flack:interface_info addressBound="false" bound="false"/>
+    </interface>
+    <flack:node_info x="253" y="352" unbound="true"/>
+  </node>
+  <node client_id="VM-0" exclusive="false">
+    <sliver_type name="emulab-xen">
+        <emulab:xen cores="1" ram="512" disk="8"/>
+    </sliver_type>
+    <interface client_id="VM-0:if0">
+      <flack:interface_info addressBound="false" bound="false"/>
+    </interface>
+    <flack:node_info x="490" y="378" unbound="true"/>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM:if0"/>
+    <interface_ref client_id="VM-0:if0"/>
+    <property source_id="VM:if0" dest_id="VM-0:if0"/>
+    <property source_id="VM-0:if0" dest_id="VM:if0"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <client:client_info name="Flack" environment="Flash Version: MAC 11,9,900,170, OS: Mac OS 10.8.5, Arch: x86, Screen: 2560x1440 @ 72 DPI with touchscreen type none" version="v17.17" url="https://www.emulab.net/protogeni/flack3/flack.swf"/>
+  <history:slice_history backIndex="3" note="Edited VM-0" xmlns:history="http://www.protogeni.net/resources/rspec/ext/history/1">
+    <history:state>eNqVUkFu2zAQvPcVC15ti6JkR4lgBQ0aFAgQtwVcBEUvBk2vLaISqZKUJef1pUSlbQ4F0pOE5e7M
+zuysjW1QgLs0WBCDP1u0jsAJFRru8LDbXwryseLix1/FgiQxSxcsWbDsa5LkyzRn2XcCvZW5FSXW
+/FEL7qRWBSmda3JKu66L/LyMFDpq0OrWCLR0JKcpvKmLTutFvT2AZ6srZfPjsNsrmsZop/+Jgr2j
+4wxlLxCikqjcf2KEoT8gXvsrhC6NtDnRJI4Z/bZ53I62LKSyjiuB09Qb7SG37wDWSh8QAu1O+hs8
+bQgIXTdaDZWaK35CM760RuVNu6+kkIf84f7TrHW8HPGNF24HkhlvXamNdJeZqAlgL6rWyrPPwJFX
+FkdGz2krXzO7IR2geO2fsW4rvl/oBtX5mdCpb3Q0HzbcSXXU0PuIrFICPjzpKiHQqr1ulV/NmRbD
+1JoO7eNfEJW/aBsAAtkUPE8ljVb1eCVfsyU8obE+Xzls7j4AY/Ob+U0cz1kWz+Hz1le58F9gcXQd
+reZwZ0SZQ399NYetMIh+LlldxT1bLmN4D1kC918eoJOuBKdbUdqxCYJs7y+Bc+AryJllEcu8IlOF
+69npfMGY8YC/0xOSloZPZLvjJD3Y5c0Vk19niV1BToY35dCyDpe//QVvBTlJ</history:state>
+    <history:state>eNrNU8GOmzAQvfcrRr6GAIZkSVBYddVVpZU2baVUq6qXyHEmwSrY1DaB7dfXYLbtHlbd3nqyNMy8
+N+/xZqNNgxzsY4MF0fi9RWMJnFGiZhaP+8NjQd5XjH/7o1iQJKbpnCZzmn1OknyR5kn8lUBvRG54
+iTW7V5xZoWRBSmubPIq6rgvdvAgl2kijUa3maKKRPErhVV3RtF7YmyM4trqSJj8Nuz2jabSy6kUU
+7G00zkT0CYJXAqX9Rww/9BvEaX+G0KWh0ucoiWMafdne70Zb5kIayyTHaeqV9pDrNwAbqY4InnYv
+3D942BLgqm6UHCo1k+yMevzSapk37aESXBzzu9sPs9aycsTXTrgZSGastaXSwj7OeE0Ae161Rlxc
+Bk6sMjgyOk5TuZreD+kAyWr3Geu2Yoe5alBefpBo6hsdzYcN90KeFPQuIsuUgAtPukwItPKgWulW
+s7pFP7WJhvYXlM3j/1rbYh17bdnqb9q8rPxJ3QDgyaajclRCK1mPCXQ1U8IDauNuJ4ftzTugNFgH
+6zgOaBYH8HHnqoy7F2gcrsJlADealzn0q6sAdlwjurlkeRX3dLGI4S1kCdx+uoNO2BKsanlpxibw
+sp2/BC6eryAXmoU0c4p05ZNppmh6Y8Zw/roMf0Wpf0LTnSbp3i5nLp/8ugjsCnLWrCmHlo1P9fVP
+rNuCgw==</history:state>
+    <history:state>eNrNVFFvmzAQft+vOPk1AQwkTYuSat2qSZXabVKnatpL5BgTrILNbBPIfv0MhixZV619mfZEcv7u
++3zfnW+pdMUomH3FVkix7zXTBsGWCaaIYel6s1+hDwWhj0fBFYpwGHth5IWLL1GUzOJkhr8haDVP
+NM1ZSW4lJYZLsUK5MVUSBE3T+Daf+4KZQDEta0WZDnrxIIYXoYLhen6rU7BqZSF0knV3O5GplDTy
+WRbWmqDPCcKRghacCfNKDpf0i8TWfsLQxL5U2yDCOAy+3t3e97Z4XGhDBGVD1gvtQZdvAJZCpgyc
+7JrbHjzcIaCyrKToIiURZMtUf1IrkVT1puCUp8nN9cdJbUje8ytbuO5EJqQ2uVTc7Ce0RMBaWtSa
+7+wMZKTQrFe0mrqwMbXupgMEKe0xK+uCbDxZMbH7gYIBx4VhKiP0twsmPMMDlQX1ticH6JqLTAJJ
+U1uvfidrkY7isDn+N2oEh8wh4Pg6WxxVa+dyHiOwExvPIwS1GHiMqgeaZdDBn7HTw/+9oR7+55bO
+LrCzdHH+N0sLLh6P71sQMd51+cTYofxXW/vEobVi2R/G7gW4wc0RaR99xZTZg3t+x2SQ2r3zmqwB
+dJx3ktVZdTwF1qrDmWtCjxib4IV9D7rP0IIHm2HI9rQTXU7/y5WZjNV2LE5nWOV21riSouz3no3p
+HB6Y0nZjJ3B39R7CcHoxvcB4Gi7wFD7d2yih9gsh9s/9+RSuFM0TaM/PpnBPFWM2L5qf4TaczTC8
+hUUE159voOEmByNrmuseBK5iOwcIdk5vhXbhwg8XtjBVuH2oh4XoXka/Eg/72O3u2H183WRD6c4z
++7rGR7DjrFmhrSJV3kGWbpde/gRr50sg</history:state>
+    <history:state>eNrFVF1P2zAUfd+vuPIrzXdLIWrR2NAkJNgmMaFpL5XrOI1FYme206T8+jmx07VjCHjZnpxc33uO
+77kfC6lqSkDvarpEkv5sqNIINpRTiTXNVuvdEn0qMXk4MC5RHEaJF8VeNP8Wx+k0SaenPxB0iqWK
+FLTCN4JgzQRfokLrOg2Ctm19E898TnUgqRKNJFQFA3mQwKu8Avc8v1MZGLaq5CrN+7cd0dRSaPEs
+Cu10MMQE0QhBSka5fiOGDfoNYnI/QmgTX8hNEIdhFHy/vbkbZPEYVxpzQl3UK+VBF+8AFlxkFCzt
+ipka3N8iIKKqBe8tFeZ4Q+Vw00ie1s26ZIRl6fXV55NG42LAlyZx1ZOc4EYXQjK9OyEVAtqRslFs
+a3ogx6WiA6PhVKWxyVXfHcBxZa5p1ZR47Yma8u0jCpwf45rKHJM/HpiyPHRQxmmQPd27rhjPBeAs
+M/mqD6Lh2UgO68O/kSPYRzqDxetlsVCd6ctZgsB0bDKLETTc4WjZOJhF0Ls/I6cX/kdBO8pfUtML
+/7me0/PQ6jk/e0nPkvGHw/eWmI9vXTxR1eX+Zl2fKLSSNP9Lz73Cz6k5epqJr6nUO7CzdwgGmVk6
+b4lyTodxR1G9VIctYKTa39kiDB5jEbxoqEF/uBLcmwiNN8eV6GOGL5tmOmbbo1get8fN5DIpeDUs
+PWNTBdxTqcy6TuH28iNE0eR8ch6Gk2geTuDLnbFiYk6IQv/Mn03gUpIihe7sdAJ3RFJq4uLZadhF
+02kI72Eew9XXa2iZLkCLhhRqcAKbsekDBFvLt0TbaO5Hc5OYLO0yVG4b2rEY9uF+GdvFndjDV23u
+UreamdEah2DLaLtEG4nrondZ2EV68QtgBEnP</history:state>
+  </history:slice_history>
+  <flack:slice_info view="graph"/>
+</rspec>

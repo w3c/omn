@@ -1,0 +1,41 @@
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns="http://www.geni.net/resources/rspec/3" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd" type="request">
+  <node client_id="host1" exclusive="false" component_id="urn:publicid:IDN+instageni.rutgers.edu+node+pc3" component_manager_id="urn:publicid:IDN+instageni.rutgers.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <ns0:xen xmlns:ns0="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="host1:if0">
+      <ip address="10.10.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="host2" exclusive="false" component_id="urn:publicid:IDN+instageni.rutgers.edu+node+pc1" component_manager_id="urn:publicid:IDN+instageni.rutgers.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <ns1:xen xmlns:ns1="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="host2:if0">
+      <ip address="10.10.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="host3" exclusive="false" component_id="urn:publicid:IDN+instageni.rutgers.edu+node+pc2" component_manager_id="urn:publicid:IDN+instageni.rutgers.edu+authority+cm">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="host3:if0">
+      <ip address="10.10.1.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="controller" exclusive="false" component_manager_id="urn:publicid:IDN+instageni.rutgers.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <ns3:xen xmlns:ns3="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <services>
+      <install url="http://www.gpolab.bbn.com/experiment-support/OpenFlowHW/of-hw.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="sudo /local/install-script.sh"/>
+    </services>
+    <ns2:routable_control_ip xmlns:ns2="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+  </node>
+  <link client_id="link-19">
+    <interface_ref client_id="host1:if0"/>
+    <interface_ref client_id="host2:if0"/>
+    <interface_ref client_id="host3:if0"/>
+    <link_type name="lan"/>
+    <sharedvlan:link_shared_vlan name="mesoscale-openflow"/>
+  </link>
+</rspec>

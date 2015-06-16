@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.geni.net/resources/rspec/ext/openflow/3
+           http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+       type="request">
+
+  <openflow:sliver description="EG-MON-4-exp3" email="lnevers@bbn.com">
+
+    <openflow:controller url="tcp:mallorea.gpolab.bbn.com:33020" type="primary" />
+
+    <openflow:group name="bbn-exogeni">
+     <openflow:datapath component_id="urn:publicid:IDN+openflow:foam:bbn-hn.exogeni.gpolab.bbn.com+datapath+00:01:08:17:f4:b5:2a:00" 
+	component_manager_id="urn:publicid:IDN+openflow:foam:bbn-hn.exogeni.gpolab.bbn.com+authority+am" dpid="00:01:08:17:f4:b5:2a:00">
+      </openflow:datapath>
+
+    </openflow:group>
+
+    <openflow:match>
+
+      <openflow:use-group name="bbn-exogeni" />
+
+      <openflow:packet>
+	<openflow:dl_vlan value="1750"/>
+	<openflow:dl_type value="0x800,0x806"/>
+	<openflow:nw_dst value="10.42.11.0/24"/>
+	<openflow:nw_src value="10.42.11.0/24"/>
+      </openflow:packet>
+
+    </openflow:match>
+
+  </openflow:sliver>
+
+</rspec>

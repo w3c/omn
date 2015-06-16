@@ -1,0 +1,117 @@
+<rspec type="request" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
+       xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+       xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="hostA" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostA:if0">
+    </interface>
+  </node>
+  <node client_id="top" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="top:if0">
+    </interface>
+    <interface client_id="top:if1">
+    </interface>
+    <interface client_id="top:if2">
+    </interface>
+  </node>
+  <node client_id="left"
+  component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="left:if0">
+    </interface>
+    <interface client_id="left:if1">
+    </interface>
+  </node>
+  <node client_id="right" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="right:if0">
+    </interface>
+    <interface client_id="right:if1">
+    </interface>
+  </node>
+  <node client_id="bottom" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="bottom:if0">
+    </interface>
+    <interface client_id="bottom:if1">
+    </interface>
+    <interface client_id="bottom:if2">
+    </interface>
+  </node>
+  <node client_id="hostB" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostB:if0">
+    </interface>
+  </node>
+  <link client_id="link-A">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="hostA:if0"/>
+    <interface_ref client_id="top:if0"/>
+    <property source_id="hostA:if0" dest_id="top:if0"/>
+    <property source_id="top:if0" dest_id="hostA:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-0">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="top:if1"/>
+    <interface_ref client_id="left:if0"/>
+    <property source_id="top:if1" dest_id="left:if0"/>
+    <property source_id="left:if0" dest_id="top:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-2">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="left:if1"/>
+    <interface_ref client_id="bottom:if0"/>
+    <property source_id="left:if1" dest_id="bottom:if0"/>
+    <property source_id="bottom:if0" dest_id="left:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-1">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="top:if2"/>
+    <interface_ref client_id="right:if0"/>
+    <property source_id="top:if2" dest_id="right:if0"/>
+    <property source_id="right:if0" dest_id="top:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-3">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="bottom:if1"/>
+    <interface_ref client_id="right:if1"/>
+    <property source_id="bottom:if1" dest_id="right:if1"/>
+    <property source_id="right:if1" dest_id="bottom:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-B">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="bottom:if2"/>
+    <interface_ref client_id="hostB:if0"/>
+    <property source_id="bottom:if2" dest_id="hostB:if0"/>
+    <property source_id="hostB:if0" dest_id="bottom:if2"/>
+    <link_type name="lan"/>
+  </link>
+
+  
+</rspec>
+

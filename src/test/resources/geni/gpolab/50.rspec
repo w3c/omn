@@ -1,0 +1,69 @@
+<rspec type="request" generated_by="Flack" generated="2013-06-24T02:50:53Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="VM-3"  exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-3:if0">
+    </interface>
+    <interface client_id="VM-3:if1">
+    </interface>
+  </node>
+  <node client_id="VM-0"  exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-0:if0">
+    </interface>
+    <interface client_id="VM-0:if1">
+    </interface>
+    <interface client_id="VM-0:if2">
+    </interface>
+  </node>
+  <node client_id="VM-1"  exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-1:if0">
+    </interface>
+    <interface client_id="VM-1:if1">
+    </interface>
+  </node>
+  <node client_id="VM-2"  exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-2:if0">
+    </interface>
+    <interface client_id="VM-2:if1">
+    </interface>
+    <interface client_id="VM-2:if2">
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM-0:if0"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <property source_id="VM-0:if0" dest_id="VM-1:if0"/>
+    <property source_id="VM-1:if0" dest_id="VM-0:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan1">
+    <interface_ref client_id="VM-1:if1"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <property source_id="VM-1:if1" dest_id="VM-2:if0"/>
+    <property source_id="VM-2:if0" dest_id="VM-1:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan2">
+    <interface_ref client_id="VM-2:if1"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <property source_id="VM-2:if1" dest_id="VM-3:if0"/>
+    <property source_id="VM-3:if0" dest_id="VM-2:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan3">
+    <interface_ref client_id="VM-3:if1"/>
+    <interface_ref client_id="VM-0:if1"/>
+    <property source_id="VM-3:if1" dest_id="VM-0:if1"/>
+    <property source_id="VM-0:if1" dest_id="VM-3:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="lan4">
+    <interface_ref client_id="VM-0:if2"/>
+    <interface_ref client_id="VM-2:if2"/>
+    <property source_id="VM-0:if2" dest_id="VM-2:if2"/>
+    <property source_id="VM-2:if2" dest_id="VM-0:if2"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

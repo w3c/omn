@@ -1,0 +1,79 @@
+<rspec type="request" generated_by="Flack" generated="2014-06-03T15:52:19Z"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd "
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+	xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="C1" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.ku.gpeni.net+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /tmp/script/controller.sh; sudo sh /tmp/script/hostname.sh" shell="bash"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/ping-pong/script.tar.gz"/>
+    </services>
+    <interface client_id="C1:if0">
+      <ip address="10.10.10.1" netmask="255.255.255.0" type=""/>
+    </interface>
+    <interface client_id="C1:if1">
+      <ip address="10.10.11.1" netmask="255.255.255.0" type=""/>
+    </interface>
+    <flack:node_info x="494" y="253" unbound="true"/>
+  </node>
+  <node client_id="C2" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.ku.gpeni.net+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /tmp/script/controller.sh; sudo sh /tmp/script/hostname.sh" shell="bash"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/ping-pong/script.tar.gz"/>
+    </services>
+    <interface client_id="C2:if0">
+      <ip address="10.10.11.2" netmask="255.255.255.0" type=""/>
+    </interface>
+    <interface client_id="C2:if1">
+      <ip address="10.10.12.1" netmask="255.255.255.0" type=""/>
+    </interface>
+    <flack:node_info x="812" y="254" unbound="true"/>
+  </node>
+  <node client_id="A1" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.ku.gpeni.net+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /tmp/script/agent1.sh; sudo sh /tmp/script/hostname.sh" shell="bash"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/ping-pong/script.tar.gz"/>
+    </services>
+    <interface client_id="A1:if0">
+      <ip address="10.10.10.2" netmask="255.255.255.0" type=""/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="337" y="417" unbound="true"/>
+  </node>
+  <node client_id="A2" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.ku.gpeni.net+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /tmp/script/agent2.sh; sudo sh /tmp/script/hostname.sh" shell="bash"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/ping-pong/script.tar.gz"/>
+    </services>
+    <interface client_id="A2:if0">
+      <ip address="10.10.12.2" netmask="255.255.255.0" type=""/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="979" y="427" unbound="true"/>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="A1:if0"/>
+    <interface_ref client_id="C1:if0"/>
+  </link>
+  <link client_id="lan1">
+    <interface_ref client_id="C1:if1"/>
+    <interface_ref client_id="C2:if0"/>
+  </link>
+  <link client_id="lan2">
+    <interface_ref client_id="C2:if1"/>
+    <interface_ref client_id="A2:if0"/>
+  </link>
+</rspec>

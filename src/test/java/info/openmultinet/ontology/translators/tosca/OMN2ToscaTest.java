@@ -57,7 +57,8 @@ public class OMN2ToscaTest {
     System.out.println(topology);
 
     testGeneralToscaDefinitions(topology);
-    String containerTypes = "<xs:element name=\"ServiceContainerProperties\">";
+    String containerTypes = "<element name=\"ServiceContainerProperties\">";
+    // String containerTypes = "<xs:element name=\"ServiceContainerProperties\">";
     Assert.assertTrue("Should contain the container node properties type", topology.contains(containerTypes));
     Assert.assertTrue("Should not contain twice the same types", topology.lastIndexOf(containerTypes) == topology.indexOf(containerTypes));
     
@@ -84,7 +85,8 @@ public class OMN2ToscaTest {
 	private static void testTypes(final String topology) {
 		Assert.assertTrue(
 				"Should contain type definitions for parameters",
-				topology.contains("<xs:element name=\"parameter2\" type=\"xs:string\"/>"));
+				// topology.contains("<xs:element name=\"parameter2\" type=\"xs:string\"/>"));
+				topology.contains("<element name=\"parameter2\" type=\"xs:string\"/>"));
 	}
 
 	private static void testNodeTypes(final String topology) {

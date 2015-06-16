@@ -37,7 +37,7 @@
                                          dc:contributor <mailto:brecht.vermeulen@iminds.be> ,
                                                         <mailto:thijs.walcarius@intec.ugent.be> ,
                                                         <mailto:jorge.lopez_vergara@uam.es> ,
-                                                        <mailto:chrisap@noc.ntua.gr> ,
+                                                        <http://users.ntua.gr/c.papagianni> ,
                                                         <mailto:yahya.al-hazmi@tu-berlin.de> ,
                                                         <mailto:loughnane@campus.tu-berlin.de> ,
                                                         <https://staff.fnwi.uva.nl/p.grosso> ,
