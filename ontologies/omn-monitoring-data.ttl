@@ -1,0 +1,521 @@
+@prefix : <http://open-multinet.info/ontology/omn-monitoring-data#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-component: <http://open-multinet.info/ontology/omn-component#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
+@prefix omn-monitoring-unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
+@prefix omn-monitoring-tool: <http://open-multinet.info/ontology/omn-monitoring-tool#> .
+@prefix omn-monitoring-metric: <http://open-multinet.info/ontology/omn-monitoring-metric#> .
+@prefix omn-monitoring-genericconcepts: <http://open-multinet.info/ontology/omn-monitoring-genericconcepts#> .
+@base <http://open-multinet.info/ontology/omn-monitoring-data> .
+
+<http://open-multinet.info/ontology/omn-monitoring-data> rdf:type owl:Ontology ;
+                                                         
+                                                         rdfs:label "omn-monitoring-data"@en ;
+                                                         
+                                                         dc:title "Open-Multinet Monitoring Data Ontology"^^xsd:string ;
+                                                         
+                                                         dc:description "The data ontology describes the main concepts related to monitoring and measurement data (e.g. measurements, measurement results) as well as information of relevant concepts such as the name of measured resource/application, measurement duration, etc."^^xsd:string ;
+                                                         
+                                                         vann:preferredNamespacePrefix "omn-monitoring-data" ;
+                                                         
+                                                         dc:date "2015-05-30" ;
+                                                         
+                                                         vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-data#" ;
+
+                                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                         
+                                                         dc:publisher <http://open-multinet.info/> ;
+                                                                                                                  
+                                                         dc:creator <https://www.linkedin.com/in/yahyaalhazmi> ;
+
+                                                         dc:author <https://www.linkedin.com/in/yahyaalhazmi> ;
+                                                         
+                                                         dc:contributor <http://alex.willner.ws/about#me> ;
+                                                         dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
+                                                         dc:contributor <mailto:steger@complex.elte.hu> ;
+                                                         dc:contributor <mailto:lakis@inf.elte.hu> ;
+                                                         dc:contributor <mailto:chrisap@noc.ntua.gr> ;
+                                                         dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                                         dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+
+                                                         rdfs:comment """This ontology includes some classes and proberties that were defined by the European MOnitoring and MEasurement in the Next generation Technologies (MOMENT) project under MOMENT ontology that was then published under ETSI Group Specification Measurement Ontology for IP traffic (MOI). 
+                                                         However, most of the reused classes are classified in this ontology in different taxonomic hierarchy, and properties might have different domains and ranges."""@en .
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasMeasurementData
+
+:hasMeasurementData rdf:type owl:ObjectProperty ;
+                    
+                    rdfs:comment "Different data which can be obtained from the measurement. Those Values determine the metrics measured and stated in :measuresMetric property"^^xsd:string ;
+                    
+                    rdfs:domain omn-monitoring:Metric ;
+                    
+                    rdfs:range :MeasurementData .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#isMeasuredIn
+
+:isMeasuredIn rdf:type owl:ObjectProperty ;
+                    
+              rdfs:comment "Represents the unit of the measurement data"^^xsd:string ;
+                    
+              rdfs:domain :MeasurementData ;
+                    
+              rdfs:range omn-monitoring:Unit .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#isStatisticalMeasurementOf
+
+:isStatisticalMeasurementOf rdf:type owl:ObjectProperty ;
+                              
+                            rdfs:comment "Determines the measure associated with the statistical measurement."^^xsd:string ;
+                              
+                            rdfs:domain :StatisticalMeasurement ;
+
+                            rdfs:range :SimpleMeasurement .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#dataFormat
+
+:dataFormat rdf:type owl:ObjectProperty ;
+                              
+            rdfs:comment "Determines the data format."^^xsd:string ;
+                              
+            rdfs:domain omn-monitoring:Data ;
+
+            rdfs:range :DataFormat .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasMeasurementDataValue
+
+:hasMeasurementDataValue rdf:type owl:DatatypeProperty ;
+                         
+                         rdfs:comment "The value related to a measurement. Should be the property of a MeasurementData (or one of its subclasses) instance and other details as unit and datatype should be present"^^xsd:string ;
+                         
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( omn-monitoring:Metric
+                                                     :MeasurementData
+                                                   )
+                                     ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasTimestamp
+
+:hasTimestamp rdf:type owl:DatatypeProperty ;
+              
+              rdfs:domain :SimpleMeasurement .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#isRequired
+
+:isRequired rdf:type owl:DatatypeProperty ;
+                
+            rdfs:comment "Indicate if a monitoring service, a configuration parameter that is considered as data is required (True) or not (False)."^^xsd:string ;
+
+            rdfs:range xsd:boolean ;  
+
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn-monitoring:MonitoringService
+                                        omn-monitoring-tool:CollectionEndpoint
+                                        :ConfigurationParameter
+                                      )
+                        ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasMeasurementID
+
+:hasMeasurementID rdf:type owl:DatatypeProperty ;
+                
+                  rdfs:comment "Unique identifier given for each measurement."@en ;
+
+                  rdfs:subPropertyOf omn-lifecycle:hasID ;
+
+                  rdfs:domain omn-monitoring:Measurement ;
+
+                  rdfs:range xsd:int .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#DurationValue
+
+:DurationValue rdf:type owl:DatatypeProperty ;
+                 
+               rdfs:comment "Value of duration set in advance of the measurement."^^xsd:string ;
+                 
+               rdfs:domain :Duration ;
+                 
+               rdfs:range xsd:decimal .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasDesinationIP
+
+:hasDesinationIP rdf:type owl:DatatypeProperty ;
+
+                 rdfs:comment "IP address of the destination network object."^^xsd:string ;
+
+                 rdfs:domain omn-resource:NetworkObject ;
+
+                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasSourceIP
+
+:hasSourceIP rdf:type owl:DatatypeProperty ;
+
+             rdfs:comment "IP address of the source network object."^^xsd:string ;
+
+             rdfs:domain omn-resource:NetworkObject ;
+                      
+             rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasDestinationMACAddress
+
+:hasDestinationMACAddress rdf:type owl:DatatypeProperty ;
+
+                          rdfs:comment "MAC address of the destination network object."^^xsd:string ; 
+
+                          rdfs:domain omn-resource:NetworkObject ;
+
+                          rdfs:range xsd:string .
+                      
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasSourceMACAddress
+
+:hasSourceMACAddress rdf:type owl:DatatypeProperty ;
+
+                     rdfs:comment "MAC address of the source network object."^^xsd:string ; 
+
+                     rdfs:domain omn-resource:NetworkObject ;
+
+                     rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#Data
+
+omn-monitoring:Data rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#Metric
+
+omn-monitoring:Metric rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#ResourceInformation
+
+:ResourceInformation rdf:type owl:Class ;
+
+                     rdfs:subClassOf omn-monitoring:Data ;
+                     
+                     rdfs:comment "Represents information about an entity (machine, path, link) being measured, e.g. Location, Name, etc."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#GeneralInformation
+
+:GeneralInformation rdf:type owl:Class ;
+
+                    rdfs:subClassOf omn-monitoring:Data ;
+                    
+                    rdfs:comment "Represents general information that are not modelled by the other classes."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#MeasurementData
+
+:MeasurementData rdf:type owl:Class ;
+
+                 rdfs:subClassOf omn-monitoring:Data ;
+                 
+                 rdfs:comment "Represents individual results of a measured metric."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#ConfigurationParameter
+
+:ConfigurationParameter rdf:type owl:Class ;
+
+                      rdfs:subClassOf omn-monitoring:Data ;
+                      
+                      rdfs:comment "Represents configuration parameters used to to setup the monitoring service, e.g. duration."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#SimpleMeasurement
+
+:SimpleMeasurement rdf:type owl:Class ;
+
+                   rdfs:subClassOf :MeasurementData ;
+                  
+                   rdfs:comment "Represents data obtained from one simple measurement."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#StatisticalMeasurement
+
+:StatisticalMeasurement rdf:type owl:Class ;
+                        
+                        rdfs:subClassOf :MeasurementData ;
+
+                        rdfs:comment "Represents statistical measurements that can be obtained from the simple measurement values."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#MaxMeasurement
+
+:MaxMeasurement rdf:type owl:Class ;
+                  
+                rdfs:subClassOf :StatisticalMeasurement ;
+                  
+                rdfs:comment "Represents maximum Value from a statistacal measurement."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#MeanMeasurement
+
+:MeanMeasurement rdf:type owl:Class ;
+                   
+                 rdfs:subClassOf :StatisticalMeasurement ;
+                   
+                 rdfs:comment "Represents mean Value from a statistacal measurement."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#MinMeasurement
+
+:MinMeasurement rdf:type owl:Class ;
+                  
+                rdfs:subClassOf :StatisticalMeasurement ;
+                  
+                rdfs:comment "Represents minimum Value from a statistacal measurement."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#StandardDeviationMeasurement
+
+:StandardDeviationMeasurement rdf:type owl:Class ;
+                                
+                              rdfs:subClassOf :StatisticalMeasurement ;
+                                
+                              rdfs:comment "Represents the standard deviation of the statistical measurement"^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#VarMeasurement
+
+:VarMeasurement rdf:type owl:Class ;
+                  
+                rdfs:subClassOf :StatisticalMeasurement ;
+                  
+                rdfs:comment "Represents the variance from a statistacal measurement."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#DataFormat
+
+:DataFormat rdf:type owl:Class ;
+                        
+            rdfs:comment "Represents the format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#FormattedFile
+
+:FormattedFile rdf:type owl:Class ;
+
+               rdfs:subClassOf :DataFormat ;
+                        
+               rdfs:comment "Represents the formatted form of the data file."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#CSVFormat
+
+:CSVFormat rdf:type owl:Class ;
+
+           rdfs:subClassOf :FormattedFile ;
+                        
+           rdfs:comment "Represents the CSV format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#XMLFormat
+
+:XMLFormat rdf:type owl:Class ;
+
+           rdfs:subClassOf :FormattedFile ;
+                        
+           rdfs:comment "Represents the XML format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#JSONFormat
+
+:JSONFormat rdf:type owl:Class ;
+
+            rdfs:subClassOf :FormattedFile ;
+                        
+            rdfs:comment "Represents the JSON format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#GraphicsFile
+
+:GraphicsFile rdf:type owl:Class ;
+
+              rdfs:subClassOf :FormattedFile ;
+                        
+              rdfs:comment "Represents the graphics format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#UnformattedFile
+
+:UnformattedFile rdf:type owl:Class ;
+
+                 rdfs:subClassOf :DataFormat ;
+                        
+                 rdfs:comment "Represents the unformatted form of the data file."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#BinaryFormat
+
+:BinaryFormat rdf:type owl:Class ;
+
+              rdfs:subClassOf :UnformattedFile ;
+                        
+              rdfs:comment "Represents the binary format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#TextFormat
+
+:TextFormat rdf:type owl:Class ;
+
+              rdfs:subClassOf :UnformattedFile ;
+                        
+              rdfs:comment "Represents the text format of the transfered data."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#Duration
+
+:Duration rdf:type owl:Class ;
+            
+          rdfs:subClassOf :ConfigurationParameter ;
+            
+          rdfs:comment "Duration set in advance of the measurement."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#DestinationIP
+
+:DestinationIP rdf:type owl:Class ;
+            
+               rdfs:subClassOf omn-resource:IPAddress ;
+            
+               rdfs:comment "IP address of the destination network object."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#SourceIP
+
+:SourceIP rdf:type owl:Class ;
+            
+          rdfs:subClassOf omn-resource:IPAddress ;
+            
+          rdfs:comment "IP address of the source network object."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#MACAddress
+
+:DestinationMACAddress rdf:type owl:Class ;
+                        
+                       rdfs:comment "MAC address of the destination network object."^^xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#Duration
+
+:SourceMACAddress rdf:type owl:Class ;
+                        
+                  rdfs:comment "MAC address of the source network object."^^xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#OMLStream
+
+:OMLStream rdf:type omn-monitoring:Data ,
+                    :FormattedFile ,
+                    owl:NamedIndividual ;
+
+           rdfs:comment "OML streams exported by injection points (OML clients) and collected by the OML server."^^xsd:string .
+
+
+
+
+###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
+
