@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec generated="2014-07-08T14:01:38.358+02:00" generated_by="Experimental jFed Rspec Editor" type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns="http://www.geni.net/resources/rspec/3" xmlns:jFed="http://jfed.iminds.be/rspec/ext/jfed/1" xmlns:jFedBonfire="http://jfed.iminds.be/rspec/ext/jfed-bonfire/1" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node client_id="nodea" component_manager_id="urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="cd /local ; sudo wget http://fed4fire-testbeds.ilabt.iminds.be/FGRE/fgre_wall1.sh"/>
+            <execute shell="sh" command="sudo chmod 755 /local/fgre_wall1.sh"/>
+            <execute shell="sh" command="sudo /local/fgre_wall1.sh"/>
+            <execute shell="sh" command="sudo apt-get install iperf"/>
+        </services>
+        <jFed:location x="99.0" y="92.0"/>
+        <jFed:nodeDescription>simple-node</jFed:nodeDescription>
+        <interface client_id="nodea:if0">
+            <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <node client_id="nodeb" component_manager_id="urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="cd /local ; sudo wget http://fed4fire-testbeds.ilabt.iminds.be/FGRE/fgre_wall1.sh"/>
+            <execute shell="sh" command="sudo chmod 755 /local/fgre_wall1.sh"/>
+            <execute shell="sh" command="sudo /local/fgre_wall1.sh"/>
+            <execute shell="sh" command="sudo apt-get install iperf"/>
+        </services>
+        <jFed:location x="35.0" y="232.0"/>
+        <jFed:nodeDescription>simple-node</jFed:nodeDescription>
+        <interface client_id="nodeb:if0">
+            <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <link client_id="link2">
+        <component_manager name="urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm"/>
+        <property source_id="nodea:if0" dest_id="nodeb:if0" capacity="100000"/>
+        <property source_id="nodeb:if0" dest_id="nodea:if0" capacity="100000"/>
+        <interface_ref client_id="nodea:if0"/>
+        <interface_ref client_id="nodeb:if0"/>
+    </link>
+</rspec>
+

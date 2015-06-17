@@ -139,6 +139,7 @@ public class Parser {
     schema.add(Parser.parse("/omn-resource.ttl"));
     schema.add(Parser.parse("/omn-service.ttl"));
     schema.add(Parser.parse("/omn-component.ttl"));
+    schema.add(Parser.parse("/osco.ttl"));
     for(String filename : additionalFileNames){
       schema.add(Parser.parse(filename));
     }

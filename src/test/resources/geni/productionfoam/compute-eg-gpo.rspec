@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.geni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="VM" component_manager_id="urn:publicid:IDN+bbnvmsite+authority+cm" >
+	<services>
+	<execute shell="sh" command="hostname gpo-eg"/>
+	</services>
+    <interface client_id="VM:if0">
+   <ip address="10.42.11.198" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="VM:if0"/>
+    <s:link_shared_vlan name="1750"/>
+  </link>
+</rspec>

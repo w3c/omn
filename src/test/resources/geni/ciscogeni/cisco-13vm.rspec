@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.geni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+<node client_id="geni1"> 
+ <sliver_type name="XOSmall"/>
+ <interface client_id="geni1:0">
+   <ip address="172.16.1.1" netmask="255.255.255.0" />
+ </interface>
+</node>
+
+<node client_id="geni2"> 
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni2:0" >
+   <ip address="172.16.1.2" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni3">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni3:0" >
+   <ip address="172.16.1.3" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni4">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni4:0" >
+   <ip address="172.16.1.4" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni5">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni5:0" >
+   <ip address="172.16.1.5" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni6">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni6:0" >
+   <ip address="172.16.1.6" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni7">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni7:0" >
+   <ip address="172.16.1.7" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni8">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni8:0" >
+   <ip address="172.16.1.8" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni9">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni9:0" >
+   <ip address="172.16.1.9" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni10">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni10:0" >
+   <ip address="172.16.1.10" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni11">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni11:0" >
+   <ip address="172.16.1.11" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni12">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni12:0" >
+   <ip address="172.16.1.12" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<node client_id="geni13">
+  <sliver_type name="XOSmall"/>
+  <interface client_id="geni13:0" >
+   <ip address="172.16.1.13" netmask="255.255.255.0" />
+  </interface>
+</node>
+
+<link client_id="link">
+  <interface_ref client_id="geni1:0" />
+  <interface_ref client_id="geni2:0" />
+  <interface_ref client_id="geni3:0" />
+  <interface_ref client_id="geni4:0" />
+  <interface_ref client_id="geni5:0" />
+  <interface_ref client_id="geni6:0" />
+  <interface_ref client_id="geni7:0" />
+  <interface_ref client_id="geni8:0" />
+  <interface_ref client_id="geni9:0" />
+  <interface_ref client_id="geni10:0" />
+  <interface_ref client_id="geni11:0" />
+  <interface_ref client_id="geni12:0" />
+  <interface_ref client_id="geni13:0" />
+</link>
+</rspec>

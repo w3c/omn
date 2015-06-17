@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.InputStream;
@@ -19,7 +20,7 @@ public class Demo201504Test {
 
 	@Test
 	public void testConvertingRSpecToGraph() throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_demo201504.xml");
 		final Model model = RequestConverter.getModel(rspec);

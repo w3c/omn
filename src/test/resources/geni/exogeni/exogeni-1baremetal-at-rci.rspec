@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This example RSpec shows how to request a Bare Metal node from the 
+RENCI ExoGENI Rack. Bare Metal nodes are only available via the 
+ExoSM aggregate at https://geni.renci.org:11443/orca/xmlrpc
+-->
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+<node client_id="BT2" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+    <sliver_type name="exogeni-m4">
+   <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.6.xml" version="64ad567ce3b1c0dbaa15bad673bbf556a9593e1c" /> 
+    </sliver_type>
+  </node>
+</rspec>

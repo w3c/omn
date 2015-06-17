@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This example RSpec shows how to request 4 VMs at the 
+Utah InstaGENI Rack. 
+-->
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="VM-1" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-1:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="VM-2" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-2:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="VM-3" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-3:if0">
+      <ip address="192.168.1.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="VM-4" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="VM-4:if0">
+      <ip address="192.168.1.4" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <interface_ref client_id="VM-1:if0"/>
+    <interface_ref client_id="VM-2:if0"/>
+    <interface_ref client_id="VM-3:if0"/>
+    <interface_ref client_id="VM-4:if0"/>
+    <link_type name="lan"/>
+  </link>
+</rspec>

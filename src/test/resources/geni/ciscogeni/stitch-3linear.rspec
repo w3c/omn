@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="ig-gpo" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" >
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-gpo:if0">
+      <ip address="192.168.4.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="eg-ncsu2" component_manager_id="urn:publicid:IDN+exogeni.net:ncsu2vmsite+authority+am">
+    <interface client_id="eg-ncsu2:if0">
+      <ip address="192.168.4.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="eg-ncsu2:if1">
+      <ip address="192.168.2.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-chic" component_manager_id="urn:publicid:IDN+geni.uchicago.edu+authority+cm" >
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-chic:if0">
+      <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+
+  <link client_id="link">
+    <component_manager name="urn:publicid:IDN+exogeni.net:ncsu2vmsite+authority+am"/>
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="eg-ncsu2:if0"/>
+    <interface_ref client_id="ig-gpo:if0"/>
+    <property source_id="eg-ncsu2:if0" dest_id="ig-gpo:if0" />
+    <property source_id="ig-gpo:if0" dest_id="eg-ncsu2:if0" />
+  </link>
+  <link client_id="link1">
+    <component_manager name="urn:publicid:IDN+geni.uchicago.edu+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+exogeni.net:ncsu2vmsite+authority+am"/>
+    <interface_ref client_id="eg-ncsu2:if1"/>
+    <interface_ref client_id="ig-chic:if0"/>
+    <property source_id="ig-chic:if0" dest_id="eg-ncsu2:if1" />
+    <property source_id="eg-ncsu2:if1" dest_id="ig-chic:if0" />
+  </link>
+</rspec>

@@ -1,0 +1,44 @@
+<rspec type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd "
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+	xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="OVS" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.nysernet.org+image+emulab-ops:Ubuntu12-64-OVS"/>
+    </sliver_type>
+    <interface client_id="OVS:if0">
+      <ip address="10.10.10.1" netmask="255.255.255.0" type=""/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="OVS:if1">
+      <ip address="10.10.11.1" netmask="255.255.255.0" type=""/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="500" y="300" unbound="true"/>
+  </node>
+  <node client_id="host1" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="host1:if0">
+      <ip address="10.10.10.2" netmask="255.255.255.0" type=""/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="300" y="500" unbound="true"/>
+  </node>
+  <node client_id="host2" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="host2:if0">
+      <ip address="10.10.11.2" netmask="255.255.255.0" type=""/>
+      <flack:interface_info addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info x="700" y="500" unbound="true"/>
+  </node>
+  <link client_id="lan0">
+    <interface_ref client_id="OVS:if0"/>
+    <interface_ref client_id="host1:if0"/>
+  </link>
+  <link client_id="lan1">
+    <interface_ref client_id="OVS:if1"/>
+    <interface_ref client_id="host2:if0"/>
+  </link>
+</rspec>

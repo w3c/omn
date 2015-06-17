@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This rspec will reserve one VM on VLAN 1750 at the RENCI ExoGENI rack.
+AM: https://rci-hn.exogeni.net:11443/orca/xmlrpc
+--> 
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.geni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.geni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="renci-eg" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+    <sliver_type name="m1.small">
+   <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.7.xml" version="ba15fa6f56cc00d354e505259b9cb3804e1bcb73" />
+    </sliver_type>
+        <services>
+        <execute shell="sh" command="hostname renci-eg"/>
+        </services>
+    <interface client_id="renci-eg:if0">
+   <ip address="10.42.11.205" netmask="255.255.255.0" />
+    </interface>
+  </node>
+
+  <link client_id="lan0">
+    <interface_ref client_id="renci-eg:if0"/>
+    <s:link_shared_vlan name="1750"/>
+  </link>
+
+</rspec>

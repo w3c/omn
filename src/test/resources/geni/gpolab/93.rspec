@@ -1,0 +1,163 @@
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd "
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+	xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="client" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/moses-setup; sudo route add -net 10.0.0.0/8 gw 10.10.14.1" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="cl:if0">
+      <ip address="10.10.14.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="100" y="400" unbound="true"/>
+  </node>
+  <node client_id="malicious1" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/moses-setup; sudo route add -net 10.0.0.0/8 gw 10.10.14.1" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="m1:if0">
+      <ip address="10.10.14.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="200" y="600" unbound="true"/>
+  </node>
+  <node client_id="controller1" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/moses-setup; sudo route add -net 10.0.0.0/8 gw 10.10.13.1; sudo sh /tmp/anti-ddos-setup/hostname.sh" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="ctr1:if0">
+      <ip address="10.10.14.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="ctr1:if1">
+      <ip address="10.10.13.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="300" y="400" unbound="true"/>
+  </node>
+  <node client_id="malicious2" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/moses-setup; sudo route add -net 10.0.0.0/8 gw 10.10.13.1" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="m2:if0">
+      <ip address="10.10.13.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="400" y="200" unbound="true"/>
+  </node>
+  <node client_id="router1" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.nysernet.org/image_metadata.php?uuid=551210c7-ecca-11e3-9973-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/switch-setup 10.10.13.1 10.10.12.2" shell="sh"/>
+      <execute command="sudo route add -net 10.10.10.0/24 gw 10.10.12.1; sudo route add -net 10.10.11.0/24 gw 10.10.12.1; sudo route add -net 10.10.14.0/24 gw 10.10.13.2" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="r1:if0">
+      <ip address="10.10.13.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="r1:if1">
+      <ip address="10.10.12.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="500" y="400" unbound="true"/>
+  </node>
+  <node client_id="router2" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.nysernet.org/image_metadata.php?uuid=551210c7-ecca-11e3-9973-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/switch-setup 10.10.12.1 10.10.11.1" shell="sh"/>
+      <execute command="sudo route add -net 10.10.10.0/24 gw 10.10.11.2; sudo route add -net 10.10.14.0/24 gw 10.10.12.2; sudo route add -net 10.10.13.0/24 gw 10.10.12.2" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="r2:if0">
+      <ip address="10.10.12.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="r2:if1">
+      <ip address="10.10.11.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="800" y="400" unbound="true"/>
+  </node>
+  <node client_id="controller2" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/moses-setup; sudo route add -net 10.0.0.0/8 gw 10.10.11.1; sudo sh /tmp/anti-ddos-setup/hostname.sh" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="ctr2:if0">
+      <ip address="10.10.11.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="ctr2:if1">
+      <ip address="10.10.10.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="1100" y="400" unbound="true"/>
+  </node>
+  <node client_id="server" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.illinois.edu/image_metadata.php?uuid=df9ce62b-ec1a-11e3-bc1a-000000000000"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo sh /gimidev/gimibot.sh" shell="sh"/>
+      <execute command="sudo bash /tmp/anti-ddos-setup/moses-setup" shell="sh"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/anti-ddos/anti-ddos-setup.tar.gz"/>
+      <install install_path="/" url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz"/>
+    </services>
+    <interface client_id="server:if0">
+      <ip address="10.10.10.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="1400" y="400" unbound="true"/>
+  </node>
+  <link client_id="l0">
+    <interface_ref client_id="cl:if0"/>
+    <interface_ref client_id="m1:if0"/>
+    <interface_ref client_id="ctr1:if0"/>
+  </link>
+  <link client_id="l1">
+    <interface_ref client_id="ctr1:if1"/>
+    <interface_ref client_id="m2:if0"/>
+    <interface_ref client_id="r1:if0"/>
+  </link>
+  <link client_id="l2">
+    <interface_ref client_id="r1:if1"/>
+    <interface_ref client_id="r2:if0"/>
+  </link>
+  <link client_id="l3">
+    <interface_ref client_id="r2:if1"/>
+    <interface_ref client_id="ctr2:if0"/>
+  </link>
+  <link client_id="l4">
+    <interface_ref client_id="ctr2:if1"/>
+    <interface_ref client_id="server:if0"/>
+  </link>
+</rspec>

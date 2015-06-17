@@ -1,0 +1,109 @@
+<rspec type="request" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
+       xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="hostA" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostA:if0">
+    </interface>
+  </node>
+  <node client_id="top" exclusive="false">
+    <location latitude="40.768652" longitude="-111.84581" country="US"/>
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="top:if0">
+    </interface>
+    <interface client_id="top:if1">
+    </interface>
+    <interface client_id="top:if2">
+    </interface>
+  </node>
+  <node client_id="left" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="left:if0">
+    </interface>
+    <interface client_id="left:if1">
+    </interface>
+  </node>
+  <node client_id="right" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="right:if0">
+    </interface>
+    <interface client_id="right:if1">
+    </interface>
+  </node>
+  <node client_id="bottom" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <services>
+      <execute command="sudo /local/install-script.sh" shell="sh"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/ClickExampleExperiment/click-example.tar.gz"/>
+    </services>
+    <interface client_id="bottom:if0">
+    </interface>
+    <interface client_id="bottom:if1">
+    </interface>
+    <interface client_id="bottom:if2">
+    </interface>
+  </node>
+  <node client_id="hostB" exclusive="false">
+    <sliver_type name="emulab-openvz"/>
+    <interface client_id="hostB:if0">
+    </interface>
+  </node>
+  <link client_id="link-A">
+    <interface_ref client_id="hostA:if0"/>
+    <interface_ref client_id="top:if0"/>
+    <property source_id="hostA:if0" dest_id="top:if0"/>
+    <property source_id="top:if0" dest_id="hostA:if0"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-0">
+    <interface_ref client_id="top:if1"/>
+    <interface_ref client_id="left:if0"/>
+    <property source_id="top:if1" dest_id="left:if0"/>
+    <property source_id="left:if0" dest_id="top:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-2">
+    <interface_ref client_id="left:if1"/>
+    <interface_ref client_id="bottom:if0"/>
+    <property source_id="left:if1" dest_id="bottom:if0"/>
+    <property source_id="bottom:if0" dest_id="left:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-1">
+    <interface_ref client_id="top:if2"/>
+    <interface_ref client_id="right:if0"/>
+    <property source_id="top:if2" dest_id="right:if0"/>
+    <property source_id="right:if0" dest_id="top:if2"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-3">
+    <interface_ref client_id="bottom:if1"/>
+    <interface_ref client_id="right:if1"/>
+    <property source_id="bottom:if1" dest_id="right:if1"/>
+    <property source_id="right:if1" dest_id="bottom:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="link-B">
+    <interface_ref client_id="bottom:if2"/>
+    <interface_ref client_id="hostB:if0"/>
+    <property source_id="bottom:if2" dest_id="hostB:if0"/>
+    <property source_id="hostB:if0" dest_id="bottom:if2"/>
+    <link_type name="lan"/>
+  </link>
+
+  
+</rspec>

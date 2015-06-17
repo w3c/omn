@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+  <node client_id="pg-utah" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <services> <execute command="sudo sed -i -e '4s/#baseurl/baseurl/' /etc/yum.repos.d/fedora.repo;sudo yum install iperf -y" shell="sh"/> </services>
+    <interface client_id="pg-utah:if0">
+      <ip address="10.22.4.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-utahddc" component_manager_id="urn:publicid:IDN+utahddc.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+   <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-utahddc:if0">
+      <ip address="10.22.4.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link">
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/>
+    <interface_ref client_id="pg-utah:if0"/>
+    <interface_ref client_id="ig-utahddc:if0"/>
+    <property source_id="pg-utah:if0" dest_id="ig-utahddc:if0"/>
+    <property source_id="ig-utahddc:if0" dest_id="pg-utah:if0"/>
+  </link>
+</rspec>

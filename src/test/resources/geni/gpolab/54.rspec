@@ -1,0 +1,514 @@
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns="http://www.geni.net/resources/rspec/3" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+  <node client_id="rt-1" exclusive="false" component_id="urn:publicid:IDN+instageni.nysernet.org+node+pc2" component_manager_id="urn:publicid:IDN+instageni.nysernet.org+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns0:xen xmlns:ns0="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-1:if1">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-1:if2">
+      <ip address="192.168.2.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-1:if3">
+      <ip address="192.168.3.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-1:if4">
+      <ip address="192.168.4.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-1:if5">
+      <ip address="192.168.5.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-1:if6">
+      <ip address="192.168.6.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-6" exclusive="false" component_id="urn:publicid:IDN+instageni.nysernet.org+node+pc2" component_manager_id="urn:publicid:IDN+instageni.nysernet.org+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns1:xen xmlns:ns1="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-6:if1">
+      <ip address="192.168.3.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-6:if2">
+      <ip address="192.168.24.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-6:if3">
+      <ip address="192.168.25.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-6:if4">
+      <ip address="192.168.26.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-2" exclusive="false" component_id="urn:publicid:IDN+instageni.illinois.edu+node+pc1" component_manager_id="urn:publicid:IDN+instageni.illinois.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns2:xen xmlns:ns2="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-2:if1">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-2:if2">
+      <ip address="192.168.7.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-2:if3">
+      <ip address="192.168.8.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-2:if4">
+      <ip address="192.168.9.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-2:if5">
+      <ip address="192.168.10.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-3" exclusive="false" component_id="urn:publicid:IDN+instageni.maxgigapop.net+node+pc2" component_manager_id="urn:publicid:IDN+instageni.maxgigapop.net+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns3:xen xmlns:ns3="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-3:if1">
+      <ip address="192.168.9.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-3:if2">
+      <ip address="192.168.11.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-3:if3">
+      <ip address="192.168.12.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-3:if4">
+      <ip address="192.168.13.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-3:if5">
+      <ip address="192.168.14.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-3:if6">
+      <ip address="192.168.15.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-4" exclusive="false" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+node+pc3" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns4:xen xmlns:ns4="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-4:if1">
+      <ip address="192.168.11.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-4:if2">
+      <ip address="192.168.16.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-4:if3">
+      <ip address="192.168.17.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-4:if4">
+      <ip address="192.168.18.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-4:if5">
+      <ip address="192.168.19.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-4:if6">
+      <ip address="192.168.20.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-7" exclusive="false" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+node+pc3" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns5:xen xmlns:ns5="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-7:if1">
+      <ip address="192.168.17.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-7:if2">
+      <ip address="192.168.27.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-7:if3">
+      <ip address="192.168.28.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-7:if4">
+      <ip address="192.168.29.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-5" exclusive="false" component_id="urn:publicid:IDN+instageni.wisc.edu+node+pc1" component_manager_id="urn:publicid:IDN+instageni.wisc.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns6:xen xmlns:ns6="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-5:if1">
+      <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-5:if2">
+      <ip address="192.168.12.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-5:if3">
+      <ip address="192.168.16.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-5:if4">
+      <ip address="192.168.21.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-5:if5">
+      <ip address="192.168.22.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-5:if6">
+      <ip address="192.168.23.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-8" exclusive="false" component_id="urn:publicid:IDN+instageni.wisc.edu+node+pc3" component_manager_id="urn:publicid:IDN+instageni.wisc.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns7:xen xmlns:ns7="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-8:if1">
+      <ip address="192.168.4.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if2">
+      <ip address="192.168.7.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if3">
+      <ip address="192.168.13.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if4">
+      <ip address="192.168.18.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if5">
+      <ip address="192.168.21.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if6">
+      <ip address="192.168.24.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if7">
+      <ip address="192.168.27.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if8">
+      <ip address="192.168.30.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-8:if9">
+      <ip address="192.168.31.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-9" exclusive="false" component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc2" component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns8:xen xmlns:ns8="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-9:if1">
+      <ip address="192.168.5.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if2">
+      <ip address="192.168.10.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if3">
+      <ip address="192.168.14.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if4">
+      <ip address="192.168.19.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if5">
+      <ip address="192.168.22.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if6">
+      <ip address="192.168.26.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if7">
+      <ip address="192.168.28.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if8">
+      <ip address="192.168.30.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-9:if9">
+      <ip address="192.168.32.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <node client_id="rt-10" exclusive="false" component_id="urn:publicid:IDN+utahddc.geniracks.net+node+pc2" component_manager_id="urn:publicid:IDN+utahddc.geniracks.net+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="https://www.instageni.clemson.edu/image_metadata.php?uuid=21a48773-f7cc-11e3-aa57-000000000000"/>
+      <ns9:xen xmlns:ns9="http://www.protogeni.net/resources/rspec/ext/emulab/1" cores="1" ram="256" disk="8"/>
+    </sliver_type>
+    <interface client_id="rt-10:if1">
+      <ip address="192.168.6.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if2">
+      <ip address="192.168.8.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if3">
+      <ip address="192.168.15.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if4">
+      <ip address="192.168.20.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if5">
+      <ip address="192.168.23.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if6">
+      <ip address="192.168.25.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if7">
+      <ip address="192.168.29.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if8">
+      <ip address="192.168.31.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="rt-10:if9">
+      <ip address="192.168.32.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <services>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_autostart.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/xorp_run.tar.gz" install_path="/local"/>
+      <install url="http://emmy9.casa.umass.edu/GEC-20/gimidev.tar.gz" install_path="/"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/labwiki.tar.gz" install_path="/local"/>
+      <install url="http://geni-myvini.umkc.gpeni.net/resources/experiments/install_script.tar.gz" install_path="/local"/>
+      <execute shell="sh" command="/bin/bash /local/xorp_autostart/start-xorp.sh"/>
+      <execute shell="sh" command="/bin/bash /local/install_script/initial_install.sh"/>
+      <execute shell="sh" command="sudo sh /gimidev/gimibot.sh"/>
+    </services>
+  </node>
+  <link client_id="egre0">
+    <interface_ref client_id="rt-1:if1"/>
+    <interface_ref client_id="rt-2:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre1">
+    <interface_ref client_id="rt-1:if2"/>
+    <interface_ref client_id="rt-5:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="lan0">
+    <interface_ref client_id="rt-1:if3"/>
+    <interface_ref client_id="rt-6:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="egre2">
+    <interface_ref client_id="rt-1:if4"/>
+    <interface_ref client_id="rt-8:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre3">
+    <interface_ref client_id="rt-1:if5"/>
+    <interface_ref client_id="rt-9:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre4">
+    <interface_ref client_id="rt-1:if6"/>
+    <interface_ref client_id="rt-10:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre5">
+    <interface_ref client_id="rt-2:if2"/>
+    <interface_ref client_id="rt-8:if2"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre6">
+    <interface_ref client_id="rt-2:if3"/>
+    <interface_ref client_id="rt-10:if2"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre7">
+    <interface_ref client_id="rt-2:if4"/>
+    <interface_ref client_id="rt-3:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre8">
+    <interface_ref client_id="rt-2:if5"/>
+    <interface_ref client_id="rt-9:if2"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre9">
+    <interface_ref client_id="rt-3:if2"/>
+    <interface_ref client_id="rt-4:if1"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre10">
+    <interface_ref client_id="rt-3:if3"/>
+    <interface_ref client_id="rt-5:if2"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre11">
+    <interface_ref client_id="rt-3:if4"/>
+    <interface_ref client_id="rt-8:if3"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre12">
+    <interface_ref client_id="rt-3:if5"/>
+    <interface_ref client_id="rt-9:if3"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre13">
+    <interface_ref client_id="rt-3:if6"/>
+    <interface_ref client_id="rt-10:if3"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre14">
+    <interface_ref client_id="rt-4:if2"/>
+    <interface_ref client_id="rt-5:if3"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="lan1">
+    <interface_ref client_id="rt-4:if3"/>
+    <interface_ref client_id="rt-7:if1"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="egre15">
+    <interface_ref client_id="rt-4:if4"/>
+    <interface_ref client_id="rt-8:if4"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre16">
+    <interface_ref client_id="rt-4:if5"/>
+    <interface_ref client_id="rt-9:if4"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre17">
+    <interface_ref client_id="rt-4:if6"/>
+    <interface_ref client_id="rt-10:if4"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="lan2">
+    <interface_ref client_id="rt-5:if4"/>
+    <interface_ref client_id="rt-8:if5"/>
+    <link_type name="lan"/>
+  </link>
+  <link client_id="egre18">
+    <interface_ref client_id="rt-5:if5"/>
+    <interface_ref client_id="rt-9:if5"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre19">
+    <interface_ref client_id="rt-5:if6"/>
+    <interface_ref client_id="rt-10:if5"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre20">
+    <interface_ref client_id="rt-6:if2"/>
+    <interface_ref client_id="rt-8:if6"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre21">
+    <interface_ref client_id="rt-6:if3"/>
+    <interface_ref client_id="rt-10:if6"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre22">
+    <interface_ref client_id="rt-6:if4"/>
+    <interface_ref client_id="rt-9:if6"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre23">
+    <interface_ref client_id="rt-7:if2"/>
+    <interface_ref client_id="rt-8:if7"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre24">
+    <interface_ref client_id="rt-7:if3"/>
+    <interface_ref client_id="rt-9:if7"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre25">
+    <interface_ref client_id="rt-7:if4"/>
+    <interface_ref client_id="rt-10:if7"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre26">
+    <interface_ref client_id="rt-8:if8"/>
+    <interface_ref client_id="rt-9:if8"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre27">
+    <interface_ref client_id="rt-8:if9"/>
+    <interface_ref client_id="rt-10:if8"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="egre28">
+    <interface_ref client_id="rt-9:if9"/>
+    <interface_ref client_id="rt-10:if9"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+</rspec>

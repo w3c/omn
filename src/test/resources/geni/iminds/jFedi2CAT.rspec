@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec generated="2014-06-25T16:12:31.795+02:00" generated_by="Experimental jFed Rspec Editor" type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:jFed="http://jfed.iminds.be/rspec/ext/jfed/1" xmlns:jFedBonfire="http://jfed.iminds.be/rspec/ext/jfed-bonfire/1" xmlns:ns9="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1" xmlns:jfed-ssh-keys="http://jfed.iminds.be/rspec/ext/jfed-ssh-keys/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<!-- http://doc.ilabt.iminds.be/fgre/tutorials.html -->
+    <node client_id="node0" component_manager_id="urn:publicid:IDN+i2cat186-edge.ilabt.iminds.be+authority+cm" exclusive="false">
+        <sliver_type name="fake"/>
+        <jFed:location x="159.0" y="266.0"/>
+        <jFed:nodeDescription>network</jFed:nodeDescription>
+        <interface client_id="node0:if0"/>
+    </node>
+    <node client_id="node1" component_manager_id="urn:publicid:IDN+i2cat187-edge.ilabt.iminds.be+authority+cm" exclusive="false">
+        <sliver_type name="fake"/>
+        <jFed:location x="462.0" y="243.0"/>
+        <jFed:nodeDescription>network</jFed:nodeDescription>
+        <interface client_id="node1:if0"/>
+    </node>
+    <node client_id="node2" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc"/>
+        <jFed:location x="172.0" y="58.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="node2:if0">
+            <ip address="10.0.0.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <node client_id="node3" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc"/>
+        <jFed:location x="496.0" y="18.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="node3:if0">
+            <ip address="10.0.1.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <link client_id="link4">
+        <component_manager name="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm"/>
+        <component_manager name="urn:publicid:IDN+i2cat186-edge.ilabt.iminds.be+authority+cm"/>
+        <property source_id="node2:if0" dest_id="node0:if0" capacity="100000"/>
+        <property source_id="node0:if0" dest_id="node2:if0" capacity="100000"/>
+        <interface_ref client_id="node2:if0"/>
+        <interface_ref client_id="node0:if0"/>
+    </link>
+    <link client_id="link5">
+        <component_manager name="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm"/>
+        <component_manager name="urn:publicid:IDN+i2cat187-edge.ilabt.iminds.be+authority+cm"/>
+        <property source_id="node3:if0" dest_id="node1:if0" capacity="100000"/>
+        <property source_id="node1:if0" dest_id="node3:if0" capacity="100000"/>
+        <interface_ref client_id="node3:if0"/>
+        <interface_ref client_id="node1:if0"/>
+    </link>
+</rspec>
+

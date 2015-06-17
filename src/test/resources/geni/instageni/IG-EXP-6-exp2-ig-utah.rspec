@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+This rspec will two VMs on VLAN 1750 at the InstaGENI rack at Utah,
+AM: http://Utah.geniracks.net/protogeni/xmlrpc/am
+--> 
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+       xs:schemaLocation="http://www.geni.net/resources/rspec/3
+           http://www.geni.net/resources/rspec/3/request.xsd
+           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+           http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       type="request">
+
+  <node client_id="Utah-VM" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+    <interface client_id="Utah-VM:if0">
+      <ip address="10.42.18.43" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <node client_id="Utah-VM2" exclusive="false">
+    <sliver_type name="emulab-openvz" />
+    <interface client_id="Utah-VM2:if0">
+      <ip address="10.42.18.42" netmask="255.255.255.0" type="ipv4" />
+    </interface>
+  </node>
+
+  <link client_id="openflow-mesoscale-0">
+    <interface_ref client_id="Utah-VM:if0" />
+    <sharedvlan:link_shared_vlan name="mesoscale-openflow" />
+  </link>
+
+  <link client_id="openflow-mesoscale-1">
+    <interface_ref client_id="Utah-VM2:if0" />
+    <sharedvlan:link_shared_vlan name="mesoscale-openflow" />
+  </link>
+</rspec>

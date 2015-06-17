@@ -1,0 +1,76 @@
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1" xmlns:gemini="http://geni.net/resources/rspec/ext/gemini/1" xmlns="http://www.geni.net/resources/rspec/3" type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd http://www.protogeni.net/resources/rspec/ext/shared-vlan/1 http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd">
+<node client_id="MP-1" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am" exclusive="false">
+<sliver_type name="m1.large">
+<disk_image name="http://geni-images.renci.org/images/standard/centos/centos6.3-v1.0.6.tgz" version="754834b3d2652cd291a776099e598f05183569f8"/>
+</sliver_type>
+<gemini:node type="mp_node">
+<gemini:services>
+<gemini:active install="no" enable="no"/>
+<gemini:passive install="yes" enable="yes"/>
+</gemini:services>
+</gemini:node>
+<interface client_id="VM-1:if0">
+<ip address="172.16.0.1" netmask="255.255.255.0"/>
+</interface>
+<interface client_id="VM-1:if1">
+<ip address="172.16.1.1" netmask="255.255.255.0"/>
+</interface>
+</node>
+<node client_id="MP-2" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am" exclusive="false">
+<sliver_type name="m1.large">
+<disk_image name="http://geni-images.renci.org/images/standard/centos/centos6.3-v1.0.6.tgz" version="754834b3d2652cd291a776099e598f05183569f8"/>
+</sliver_type>
+<gemini:node type="mp_node">
+<gemini:services>
+<gemini:active install="no" enable="no"/>
+<gemini:passive install="yes" enable="yes"/>
+</gemini:services>
+</gemini:node>
+<interface client_id="VM-2:if0">
+<ip address="172.16.0.2" netmask="255.255.255.0"/>
+</interface>
+<interface client_id="VM-2:if1">
+<ip address="172.16.3.2" netmask="255.255.255.0"/>
+</interface>
+</node>
+<node client_id="MP-3" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am" exclusive="false">
+<sliver_type name="m1.large">
+<disk_image name="http://geni-images.renci.org/images/standard/centos/centos6.3-v1.0.6.tgz" version="754834b3d2652cd291a776099e598f05183569f8"/>
+</sliver_type>
+<gemini:node type="mp_node">
+<gemini:services>
+<gemini:active install="no" enable="no"/>
+<gemini:passive install="yes" enable="yes"/>
+</gemini:services>
+</gemini:node>
+<interface client_id="VM-3:if0">
+<ip address="172.16.0.2" netmask="255.255.255.0"/>
+</interface>
+<interface client_id="VM-3:if1">
+<ip address="172.16.3.1" netmask="255.255.255.0"/>
+</interface>
+</node>
+<node client_id="GN-1" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am" exclusive="false">
+<gemini:node type="global_node">
+<gemini:monitor_urn name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"/>
+</gemini:node>
+<sliver_type name="m1.large">
+<disk_image name="http://geni-images.renci.org/images/standard/centos/centos6.3-v1.0.6.tgz" version="754834b3d2652cd291a776099e598f05183569f8"/>
+</sliver_type>
+</node>
+<link client_id="lan0">
+<interface_ref client_id="VM-1:if0"/>
+<interface_ref client_id="VM-2:if0"/>
+<link_type name="lan"/>
+</link>
+<link client_id="lan1">
+<interface_ref client_id="VM-1:if1"/>
+<interface_ref client_id="VM-3:if0"/>
+<link_type name="lan"/>
+</link>
+<link client_id="lan2">
+<interface_ref client_id="VM-2:if1"/>
+<interface_ref client_id="VM-3:if1"/>
+<link_type name="lan"/>
+</link>
+</rspec>

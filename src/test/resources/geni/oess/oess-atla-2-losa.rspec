@@ -1,0 +1,33 @@
+<rspec  xmlns="http://www.geni.net/resources/rspec/3"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:oess="http://bssoftworks.com/geni/ext/circuit/1"
+      xs:schemaLocation="http://www.geni.net/rspec/3/manifest.xsd
+          http://www.geni.net/resources/rspec/3/request.xsd
+          http://bssoftworks.com/geni/ext/circuit/1
+          http://geni.bssoftworks.com/rspec/ext/circuit/1/request.xsd"
+      type="request">
+
+<oess:circuit>
+  <oess:description>LN atla-2-losa</oess:description>
+  <oess:bandwidth mbps="100" />
+  <oess:primaryPath>
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ELPA-HOUH-100GE-07749" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ATLA-JACK-100GE-07739" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-HOUH-JACK-100GE-08860" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-LOSA-PHOE-100GE-09190" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ELPA-PHOE-100GE-07750" />
+  </oess:primaryPath>
+  <oess:backupPath>
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-DENV-KANS-100GE-07746" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-CHIC-KANS-100GE-07745" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-DENV-SALT-100GE-07747" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-LOSA-SALT-100GE-07757" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ATLA-CHIC-100GE-07740" />
+  </oess:backupPath>
+  <oess:endpoints>
+    <oess:interface urn="urn:publicid:IDN+oess:foam:nddi+sdn-sw.atla.net.internet2.edu+e15/3" vlan="3000" />
+    <oess:interface urn="urn:publicid:IDN+oess:foam:nddi+sdn-sw.losa.net.internet2.edu+e15/3" vlan="3000" />
+  </oess:endpoints>
+</oess:circuit>
+
+</rspec>

@@ -2,13 +2,18 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.xml.bind.JAXBException;
+
 import org.junit.Assert;
 import org.junit.Test;
+
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -33,7 +38,8 @@ public class ManifestConverterTest {
 	}
 
 	@Test
-	public void testRoundtripWithRequest() throws JAXBException, IOException, InvalidModelException {
+	public void testRoundtripWithRequest() throws JAXBException, IOException,
+			InvalidModelException, MissingRspecElementException {
 		final String filename = "/geni/request/request_bound.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
 				.getResourceAsStream(filename);
@@ -52,7 +58,8 @@ public class ManifestConverterTest {
 		System.out.println("===============================");
 
 		final InfModel infModel = new Parser(model).getInfModel();
-		final String outputRspec = ManifestConverter.getRSpec(infModel, "localhost");
+		final String outputRspec = ManifestConverter.getRSpec(infModel,
+				"localhost");
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);
@@ -66,7 +73,7 @@ public class ManifestConverterTest {
 		InputStream input = ManifestConverterTest.class
 				.getResourceAsStream("/omn/request.ttl");
 		Parser parser = new Parser(input);
-		
+
 		final Model model = parser.getInfModel();
 		final String rspec = ManifestConverter.getRSpec(model, "localhost");
 		System.out.println(rspec);
@@ -76,7 +83,8 @@ public class ManifestConverterTest {
 	}
 
 	@Test
-	public void testPaper2015Roundtrip() throws JAXBException, IOException, InvalidModelException {
+	public void testPaper2015Roundtrip() throws JAXBException, IOException,
+			InvalidModelException {
 		final String filename = "/geni/manifest/manifest_paper2015.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
 				.getResourceAsStream(filename);
@@ -95,7 +103,8 @@ public class ManifestConverterTest {
 		Assert.assertTrue("should have a topology", topology.hasNext());
 
 		final InfModel infModel = new Parser(model).getInfModel();
-		final String outputRspec = ManifestConverter.getRSpec(infModel, "testbed.example.org");
+		final String outputRspec = ManifestConverter.getRSpec(infModel,
+				"testbed.example.org");
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);

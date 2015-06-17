@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+
+  <node client_id="VM-1" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-1:if0">
+   <ip address="172.16.1.1" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-2" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " />
+   </sliver_type>
+   <interface client_id="VM-2:if0">
+   <ip address="172.16.1.2" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-3" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-3:if0">
+   <ip address="172.16.1.3" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-4" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-4:if0">
+   <ip address="172.16.1.4" netmask="255.255.255.0" />
+   </interface>
+   </node>
+   <node client_id="VM-5" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-5:if0">
+   <ip address="172.16.1.5" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-6" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-6:if0">
+   <ip address="172.16.1.6" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-7" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-7:if0">
+   <ip address="172.16.1.7" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-8" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-8:if0">
+   <ip address="172.16.1.8" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-9" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-9:if0">
+   <ip address="172.16.1.9" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-10" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-10:if0">
+   <ip address="172.16.1.10" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-11" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-11:if0">
+   <ip address="172.16.1.21" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-12" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " />
+   </sliver_type>
+   <interface client_id="VM-12:if0">
+   <ip address="172.16.1.22" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-13" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-13:if0">
+   <ip address="172.16.1.23" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-14" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-14:if0">
+   <ip address="172.16.1.24" netmask="255.255.255.0" />
+   </interface>
+   </node>
+   <node client_id="VM-15" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-15:if0">
+   <ip address="172.16.1.25" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-16" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-16:if0">
+   <ip address="172.16.1.26" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-17" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-17:if0">
+   <ip address="172.16.1.27" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-18" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-18:if0">
+   <ip address="172.16.1.28" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-19" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-19:if0">
+   <ip address="172.16.1.29" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <node client_id="VM-20" component_manager_id="urn:publicid:IDN+rcivmsite+authority+cm" >
+   <sliver_type name="m1.large">
+  <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.5.xml" version="104ea3d824906f0e13cebb89b14df232290553b1 " /> 
+   </sliver_type>
+   <interface client_id="VM-20:if0">
+   <ip address="172.16.1.20" netmask="255.255.255.0" />
+   </interface>
+  </node>
+  <link client_id="Lan">
+   <component_manager name="urn:publicid:IDN+rcivmsite+authority+cm"/>
+   <interface_ref client_id="VM-1:if0"/>
+   <interface_ref client_id="VM-2:if0"/>
+   <interface_ref client_id="VM-3:if0"/>
+   <interface_ref client_id="VM-4:if0"/>
+   <interface_ref client_id="VM-5:if0"/>
+   <interface_ref client_id="VM-6:if0"/>
+   <interface_ref client_id="VM-7:if0"/>
+   <interface_ref client_id="VM-8:if0"/>
+   <interface_ref client_id="VM-9:if0"/>
+   <interface_ref client_id="VM-10:if0"/>
+   <interface_ref client_id="VM-11:if0"/>
+   <interface_ref client_id="VM-12:if0"/>
+   <interface_ref client_id="VM-13:if0"/>
+   <interface_ref client_id="VM-14:if0"/>
+   <interface_ref client_id="VM-15:if0"/>
+   <interface_ref client_id="VM-16:if0"/>
+   <interface_ref client_id="VM-17:if0"/>
+   <interface_ref client_id="VM-18:if0"/>
+   <interface_ref client_id="VM-19:if0"/>
+   <interface_ref client_id="VM-20:if0"/>
+
+   <link_type name="lan"/>
+  </link>
+</rspec>

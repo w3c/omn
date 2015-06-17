@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec generated="2014-07-06T14:55:13.720-05:00" generated_by="Experimental jFed Rspec Editor" type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:jFed="http://jfed.iminds.be/rspec/ext/jfed/1" xmlns:jFed_command="http://jfed.iminds.be/rspec/ext/jfed-command/1" xmlns:jFedBonfire="http://jfed.iminds.be/rspec/ext/jfed-bonfire/1" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns:ns10="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:jfed-ssh-keys="http://jfed.iminds.be/rspec/ext/jfed-ssh-keys/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node client_id="collab" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops//FEDORA15-64-STD"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./node-setup"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes rschr"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 4"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-0.6.1-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-atmos-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-setup.tar.gz" install_path="/tmp"/>
+        </services>
+        <jFed:location x="341.0" y="123.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="collab:if0">
+            <ip address="10.0.0.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <node client_id="rschr" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops//FEDORA15-64-STD"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./node-setup"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes router"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 4"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-0.6.1-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-atmos-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-setup.tar.gz" install_path="/tmp"/>
+        </services>
+        <jFed:location x="364.0" y="340.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="rschr:if0">
+            <ip address="10.0.0.2" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+        <interface client_id="rschr:if1">
+            <ip address="10.0.1.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <node client_id="router" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops//FEDORA15-64-STD"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./node-setup"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes dsrc1"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 4"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-0.6.1-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-atmos-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-setup.tar.gz" install_path="/tmp"/>
+        </services>
+        <jFed:location x="367.0" y="545.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="router:if0">
+            <ip address="10.0.1.2" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+        <interface client_id="router:if1">
+            <ip address="10.0.2.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <node client_id="dsrc1" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops//FEDORA15-64-STD"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./node-setup"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes "/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 4"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./atmos-server pr_19020101_060000.nc"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-0.6.1-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-atmos-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-setup.tar.gz" install_path="/tmp"/>
+            <install url="http://www.cs.purdue.edu/homes/fahmy/geni/tarballs/atmos-data1.tar" install_path="/tmp"/>
+        </services>
+        <jFed:location x="386.0" y="742.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="dsrc1:if0">
+            <ip address="10.0.2.2" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+    <link client_id="linkcr">
+        <component_manager name="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm"/>
+        <link_type name="lan"/>
+        <interface_ref client_id="collab:if0"/>
+        <interface_ref client_id="rschr:if0"/>
+    </link>
+    <link client_id="linkrr">
+        <component_manager name="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm"/>
+        <link_type name="lan"/>
+        <interface_ref client_id="rschr:if1"/>
+        <interface_ref client_id="router:if0"/>
+    </link>
+    <link client_id="linkrd">
+        <component_manager name="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm"/>
+        <link_type name="lan"/>
+        <interface_ref client_id="router:if1"/>
+        <interface_ref client_id="dsrc1:if0"/>
+    </link>
+</rspec>

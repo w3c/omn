@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec type="request" generated_by="Flack" generated="2014-07-21T17:54:21Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="controller" exclusive="false" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+    <emulab:routable_control_ip/>
+    <emulab:vnode name="pcvm1-3" xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <emulab:routable_control_ip/>
+    <sliver_type name="emulab-xen"/>
+    <services>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/experiment-support/OpenFlowOVS/pox-gpo.tar.gz"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/OpenFlowOVS/wireshark.tar.gz"/>
+	    <execute command="sudo /local/install-script-wireshark.sh" shell="sh"/>
+    </services>
+    <flack:node_info x="441" y="148" unbound="true"/>
+  </node>
+</rspec>

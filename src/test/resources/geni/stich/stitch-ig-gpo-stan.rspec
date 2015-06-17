@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:stitch="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+			   http://www.geni.net/resources/rspec/3/request.xsd"
+       type="request">
+<!-- Stanford Node. Dataplane is 192.168.1.1  SSH in at??? -->
+
+  <node client_id="ig-gpo1" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>    
+    <services> <execute command="sudo yum install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-gpo1:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.252" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link-stanford-ig-gpo1">
+    <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <interface_ref client_id="ig-gpo1:if0" />
+  </link>
+  <stitching xmlns="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/">
+    <path id="link-stanford-ig-gpo1">
+      <hop id="1">
+        <link id="urn:publicid:IDN+ion.internet2.edu+interface+rtr.losa:xe-0/1/0:cenic">
+          <trafficEngineeringMetric>10</trafficEngineeringMetric>
+          <capacity>10000000</capacity>
+          <switchingCapabilityDescriptor>
+            <switchingcapType>l2sc</switchingcapType>
+            <encodingType>ethernet</encodingType>
+            <switchingCapabilitySpecificInfo>
+              <switchingCapabilitySpecificInfo_L2sc>
+                <interfaceMTU>9000</interfaceMTU>
+                <vlanRangeAvailability>3721</vlanRangeAvailability>
+                <suggestedVLANRange>3721</suggestedVLANRange>
+                <vlanTranslation>true</vlanTranslation>
+              </switchingCapabilitySpecificInfo_L2sc>
+            </switchingCapabilitySpecificInfo>
+          </switchingCapabilityDescriptor>
+          <capabilities>
+            <capability>consumer</capability>
+            <capability>producer</capability>
+          </capabilities>
+        </link>
+        <nextHop>2</nextHop>
+      </hop>
+      <hop id="2">
+        <link id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+*:*:*">
+          <trafficEngineeringMetric>10</trafficEngineeringMetric>
+          <capacity>1000000</capacity>
+          <switchingCapabilityDescriptor>
+            <switchingcapType>l2sc</switchingcapType>
+            <encodingType>ethernet</encodingType>
+            <switchingCapabilitySpecificInfo>
+              <switchingCapabilitySpecificInfo_L2sc>
+                <interfaceMTU>9000</interfaceMTU>
+                <vlanRangeAvailability>3747-3749</vlanRangeAvailability>
+                <suggestedVLANRange>any</suggestedVLANRange>
+                <vlanTranslation>false</vlanTranslation>
+              </switchingCapabilitySpecificInfo_L2sc>
+            </switchingCapabilitySpecificInfo>
+          </switchingCapabilityDescriptor>
+        </link>
+        <nextHop>null</nextHop>
+      </hop>
+    </path>
+  </stitching>
+</rspec>

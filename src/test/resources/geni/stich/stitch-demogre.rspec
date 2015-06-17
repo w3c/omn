@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                           http://www.geni.net/resources/rspec/3/request.xsd" 
+       type="request">
+
+ <node client_id="ig-gpo" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-gpo:if0">
+      <ip address="192.168.4.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="ig-gpo:if1">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+ <node client_id="gatech" component_manager_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="gatech:if0">
+      <ip address="192.168.4.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+ </node>
+ <node client_id="ig-nyse" component_manager_id="urn:publicid:IDN+instageni.nysernet.org+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <interface client_id="ig-nyse:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="Wlink">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.nysernet.org+authority+cm"/>
+    <interface_ref client_id="ig-gpo:if1"/>
+    <interface_ref client_id="ig-nyse:if0"/>
+    <property source_id="ig-gpo:if1" dest_id="ig-nyse:if0" />
+    <property source_id="ig-nyse:if0" dest_id="ig-gpo:if1" />
+  </link>
+  <link client_id="gre-tunnel0">
+    <component_manager name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <interface_ref client_id="ig-gpo:if0"/>
+    <interface_ref client_id="gatech:if0"/>
+    <property source_id="ig-gpo:if0" dest_id="gatech:if0"/>
+    <property source_id="gatech:if0" dest_id="ig-gpo:if0"/>
+    <link_type name="gre-tunnel"/>
+  </link>
+</rspec>

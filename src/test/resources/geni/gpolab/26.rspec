@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec generated="2014-07-07T10:52:46.884+02:00" generated_by="Experimental jFed Rspec Editor" type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:jFed="http://jfed.iminds.be/rspec/ext/jfed/1" xmlns:jFed_command="http://jfed.iminds.be/rspec/ext/jfed-command/1" xmlns:jFedBonfire="http://jfed.iminds.be/rspec/ext/jfed-bonfire/1" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns:ns10="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:jfed-ssh-keys="http://jfed.iminds.be/rspec/ext/jfed-ssh-keys/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <node client_id="collab" component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm" exclusive="true">
+        <sliver_type name="raw-pc">
+            <disk_image name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops//FEDORA15-64-STD"/>
+        </sliver_type>
+        <services>
+            <execute shell="sh" command="/tmp/moveFiles.sh &gt; /tmp/log 2&gt;&amp;1"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./node-setup"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./add-precip-routes rschr"/>
+            <execute shell="sh" command="cd /tmp/ccnx-setup &amp;&amp; ./ccnx-setup router 4"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-0.6.1-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-atmos-fedora.tar.gz" install_path="/opt"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/ccnx-setup.tar.gz" install_path="/tmp"/>
+            <install url="http://www.gpolab.bbn.com/experiment-support/iMinds/moveFiles1.sh.tar.gz" install_path="/tmp"/>
+        </services>
+        <jFed:location x="341.0" y="123.0"/>
+        <jFed:nodeDescription>physical-node</jFed:nodeDescription>
+        <interface client_id="collab:if0">
+            <ip address="10.0.0.1" netmask="255.255.255.0" type="ipv4"/>
+        </interface>
+    </node>
+</rspec>
+

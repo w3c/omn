@@ -142,7 +142,8 @@
 				<executions>
 					<execution>
 						<id>make-a-jar</id>
-						<phase>package</phase>
+						<!--phase>package</phase-->
+						<phase>compile</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -336,6 +337,36 @@
 			<groupId>xmlunit</groupId>
 			<artifactId>xmlunit</artifactId>
 			<version>1.6</version>
+		</dependency>
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>junitperf</groupId>
+			<artifactId>junitperf</artifactId>
+			<version>1.8</version>
+		</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>xom</groupId>
+			<artifactId>xom</artifactId>
+			<version>1.2.5</version>
 		</dependency>
 	</dependencies>
 </project>

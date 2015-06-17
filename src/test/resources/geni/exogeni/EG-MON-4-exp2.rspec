@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	          	    http://www.geni.net/resources/rspec/3/request.xsd
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1
+                            http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns="http://www.geni.net/resources/rspec/3">
+<node client_id="BT" component_manager_id="urn:publicid:IDN+bbnvmsite+authority+cm" >
+    <sliver_type name="exogeni-m4">
+    </sliver_type>
+ <services>
+   <execute shell="sh" command="hostname BT"/>
+ </services>
+    <interface client_id="BT:if0">
+   <ip address="172.16.1.1" netmask="255.255.255.0" />
+    </interface>
+  </node>
+ <node client_id="VM" component_manager_id="urn:publicid:IDN+bbnvmsite+authority+cm" >
+    <sliver_type name="m1.small">
+    <disk_image name="http://geni-images.renci.org/images/standard/debian/deb6-neuca-v1.0.7.xml" version="ba15fa6f56cc00d354e505259b9cb3804e1bcb73  " /> 
+    </sliver_type>
+ <services>
+   <execute shell="sh" command="hostname VM"/>
+ </services>
+    <interface client_id="VM:if0">
+   <ip address="172.16.1.2" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <link client_id="lan0">
+    <component_manager name="urn:publicid:IDN+bbnvmsite+authority+cm"/>
+    <interface_ref client_id="BT:if0"/>
+    <interface_ref client_id="VM:if0"/>
+    <property source_id="BT:if0" dest_id="VM:if0" />
+    <property source_id="VM:if0" dest_id="BT:if0" />
+    <link_type name="lan"/>
+  </link>
+</rspec>

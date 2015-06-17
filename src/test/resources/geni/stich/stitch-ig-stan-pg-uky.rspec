@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+  <node client_id="uky" component_manager_id="urn:publicid:IDN+uky.emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+<services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="uky:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="uky:if1">
+      <ip address="192.168.2.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="uky2" component_manager_id="urn:publicid:IDN+uky.emulab.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+<services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="uky2:if0">
+      <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-stan" component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+    <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-stan:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link1">
+    <component_manager name="urn:publicid:IDN+uky.emulab.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+    <interface_ref client_id="uky:if0"/>
+    <interface_ref client_id="ig-stan:if0"/>
+    <property source_id="uky:if0" dest_id="ig-stan:if0" capacity="20000"/>
+    <property source_id="ig-stan:if0" dest_id="uky:if0" capacity="20000"/>
+  </link>
+  <link client_id="link2">
+    <component_manager name="urn:publicid:IDN+uky.emulab.net+authority+cm"/>
+    <interface_ref client_id="uky:if1"/>
+    <interface_ref client_id="uky2:if0"/>
+    <property source_id="uky:if1" dest_id="uky2:if0" capacity="20000"/>
+    <property source_id="uky2:if0" dest_id="uky:if1" capacity="20000"/>
+  </link>
+
+</rspec>

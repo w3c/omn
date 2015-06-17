@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+AM: https://pgeni.gpolab.bbn.com/protogeni/xmlrpc/am
+-->
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+
+<node client_id="VM" component_manager_id="urn:publicid:IDN+pgeni.gpolab.bbn.com+authority+cm" 
+	exclusive="false">
+      <sliver_type name="raw-pc">
+        <disk_image name="urn:publicid:IDN+pgeni.gpolab.bbn.com+image+emulab-ops//UBUNTU1004-STD" /> 
+      </sliver_type>
+    	<interface client_id="VM:if0">
+   	<ip address="10.42.19.199" netmask="255.255.255.0" />
+	</interface> 
+</node>
+</rspec>
+

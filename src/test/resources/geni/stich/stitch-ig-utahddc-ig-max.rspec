@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec type="request" 
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:stitch="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 
+	http://www.geni.net/resources/rspec/3/request.xsd">  
+  <node client_id="ig-utahddc" component_manager_id="urn:publicid:IDN+utahddc.geniracks.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+     <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-utahddc:if0">
+      <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="ig-max" component_manager_id="urn:publicid:IDN+instageni.maxgigapop.net+authority+cm" exclusive="false">
+    <sliver_type name="emulab-xen"/>
+     <services> <execute command="sudo apt-get install iperf -y" shell="sh"/> </services>
+    <interface client_id="ig-max:if0">
+      <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="Qlink">
+    <component_manager name="urn:publicid:IDN+utahddc.geniracks.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.maxgigapop.net+authority+cm"/>
+    <interface_ref client_id="ig-utahddc:if0"/>
+    <interface_ref client_id="ig-max:if0"/>
+    <property source_id="ig-utahddc:if0" dest_id="ig-max:if0" capacity="20000"/>
+    <property source_id="ig-max:if0" dest_id="ig-utahddc:if0" capacity="20000"/>
+  </link>
+</rspec>

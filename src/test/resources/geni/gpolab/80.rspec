@@ -1,0 +1,18 @@
+<rspec type="request" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="client" exclusive="false">
+    <sliver_type name="XOSmall" />
+    <interface client_id="client:interface">
+      <ip address="10.20.30.41" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <node client_id="server" exclusive="false">
+    <sliver_type name="XOSmall" />
+    <interface client_id="server:interface">
+      <ip address="10.20.30.40" netmask="255.255.255.0" />
+    </interface>
+  </node>
+  <link client_id="lan">
+    <interface_ref client_id="client:interface"/>
+    <interface_ref client_id="server:interface"/>
+  </link>
+</rspec>

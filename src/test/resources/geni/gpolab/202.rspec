@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+AM: https://foam-tutorial.gpolab.bbn.com:1443/openflow/gapi/
+-->
+<!-- This file is a template OpenFlow rspec for the GEC 12 tutorial
+     Experimental topologies on the GENI Mesoscale network with Omni
+     Make sure to replace 
+        - <USERNAME> : 1 occurrence
+        - <HOSTNAME> : 1 occurrence
+        - <SUBNET> : 2 occurences
+-->
+
+<rspec  xmlns="http://www.geni.net/resources/rspec/3"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+        xs:schemaLocation="http://www.geni.net/resources/rspec/3
+              http://www.geni.net/resources/rspec/3/request.xsd
+              http://www.geni.net/resources/rspec/ext/openflow/3
+              http://www.geni.net/resources/rspec/ext/openflow/3/of-resv.xsd"
+    type="request">
+
+  <openflow:sliver description="The FOAM at GPO, for GEC15 tutorial."
+  email="USERNAME@gpolab.bbn.com">
+      <!-- modified here due to parsing error, was email="<USERNAME>@gpolab.bbn.com" -->
+    <openflow:controller url="tcp:<HOSTNAME>:6633" type="primary" />
+
+    <openflow:group name="3715">
+      <!-- Internet2 3715 -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:83:40:39:18:1b" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="00:00:0e:83:40:39:18:1b"/>
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:83:40:39:18:58" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="00:00:0e:83:40:39:18:58"/>
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:83:40:39:19:96" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="00:00:0e:83:40:39:19:96"/>
+      <openflow:datapath
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:83:40:39:1a:57" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+         dpid="00:00:0e:83:40:39:1a:57"/>
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:83:40:39:1b:93" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+         dpid="00:00:0e:83:40:39:1b:93"/>
+
+      <!-- NLR 3715 -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:83:00:23:47:c8:bc:00" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="0e:83:00:23:47:c8:bc:00"/>
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:83:00:23:47:ca:bc:40"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="0e:83:00:23:47:ca:bc:40"/>
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:83:00:24:a8:d2:48:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+         dpid="0e:83:00:24:a8:d2:48:00"/>
+      <openflow:datapath
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:83:00:24:a8:d2:b8:40" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="0e:83:00:24:a8:d2:b8:40"/>
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:83:00:26:f1:40:a8:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="0e:83:00:26:f1:40:a8:00"/>
+  
+      <!-- GATECH -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:19:bb:b3:0d:00" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:19:bb:b3:0d:00">
+            <openflow:port num="3" />
+            <openflow:port num="9" />
+            <openflow:port num="10" />
+            <openflow:port num="11" />
+            <openflow:port num="12" />
+      </openflow:datapath>
+
+      <!-- Wisconsin -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:21:f7:be:8d:00" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:21:f7:be:8d:00">
+            <openflow:port num="3" />
+            <openflow:port num="51" />
+      </openflow:datapath>
+  
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:23:47:cc:44:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:23:47:cc:44:00">
+            <openflow:port num="1" />
+            <openflow:port num="4" />
+            <openflow:port num="6" />
+            <openflow:port num="20" />
+            <openflow:port num="22" />
+      </openflow:datapath>
+ 
+      <!-- GPO -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:24:a8:c4:b9:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+         dpid="06:d6:00:24:a8:c4:b9:00">
+           <openflow:port num="25"/>
+           <openflow:port num="26"/>
+           <openflow:port num="27"/>
+           <openflow:port num="28"/>
+           <openflow:port num="29"/>
+           <openflow:port num="30"/>
+           <openflow:port num="31"/>
+           <openflow:port num="32"/>
+           <openflow:port num="33"/>
+           <openflow:port num="34"/>
+           <openflow:port num="35"/>
+           <openflow:port num="49"/>
+           <openflow:port num="50"/>
+           <openflow:port num="51"/>
+           <openflow:port num="71"/>
+    
+         <!-- eisande port -->
+           <openflow:port num="36"/>
+
+      </openflow:datapath>
+      <openflow:datapath
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:12:e2:b8:a5:d0" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:12:e2:b8:a5:d0">
+            <openflow:port num="20"/>
+            <openflow:port num="9"/>
+      </openflow:datapath>
+
+      <!-- Clemson -->
+      <openflow:datapath
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:26:f1:3f:e4:80" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:26:f1:3f:e4:80">
+           <openflow:port num="36"/>
+           <openflow:port num="39"/>
+           <openflow:port num="43"/>
+      </openflow:datapath>
+      
+      <!-- Indiana -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:16:b9:cf:fc:40" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+           dpid="06:d6:00:16:b9:cf:fc:40">
+           <openflow:port num="3"/>
+           <openflow:port num="8"/>
+           <openflow:port num="9"/>
+           <openflow:port num="10"/>
+      </openflow:datapath>
+
+      <openflow:datapath 
+            component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:24:a8:fe:e1:00"
+            component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"> 
+        <openflow:port num="27"/>  
+        <openflow:port num="30"/>  
+        <openflow:port num="32"/> 
+        <openflow:port num="46"/>
+        <openflow:port num="71"/>
+      </openflow:datapath>
+      
+
+      <!-- Rutgers -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:10:10:17:50:01" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:10:10:17:50:01">
+
+          <openflow:port num="3" />
+          <openflow:port num="9" />
+          <openflow:port num="10" />
+          <openflow:port num="11" />
+          <openflow:port num="12" />
+      </openflow:datapath>
+
+      <!-- Stanford -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:12:e2:78:31:f5" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:12:e2:78:31:f5">
+
+          <openflow:port num="1" />
+          <openflow:port num="2"/>   <!-- to hpsw4 -->
+          <openflow:port num="11" />
+      </openflow:datapath>
+
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:12:e2:78:67:65" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:12:e2:78:67:65">
+
+          <openflow:port num="1" />
+          <openflow:port num="2" />
+          <openflow:port num="4" />
+      </openflow:datapath>
+
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:12:e2:b8:f3:d0" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:12:e2:b8:f3:d0">
+
+          <openflow:port num="3" />
+          <openflow:port num="27" />
+          <openflow:port num="28" />
+          <openflow:port num="33" />
+          <openflow:port num="34" />
+      </openflow:datapath>
+   
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+03:85:00:23:47:4e:2e:c0" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="03:85:00:23:47:4e:2e:c0">
+
+          <openflow:port num="4" />
+          <openflow:port num="8" />
+      </openflow:datapath>
+
+      <!-- Washington -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:23:47:c8:8c:40" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="06:d6:00:23:47:c8:8c:40">
+
+          <openflow:port num="22" />
+          <openflow:port num="23" />
+          <openflow:port num="24" />
+      </openflow:datapath>
+
+    </openflow:group>
+
+    <openflow:group name="3716">
+      <!-- NLR -->
+      <openflow:datapath 
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:84:00:23:47:c8:bc:00" 
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="0e:84:00:23:47:c8:bc:00"/>
+      <openflow:datapath 
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:84:00:23:47:ca:bc:40"
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="0e:84:00:23:47:ca:bc:40"/>
+      <openflow:datapath
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:84:00:24:a8:d2:48:00" 
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="0e:84:00:24:a8:d2:48:00"/>
+      <openflow:datapath 
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:84:00:24:a8:d2:b8:40"
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+          dpid="0e:84:00:24:a8:d2:b8:40"/>
+      <openflow:datapath
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+0e:84:00:26:f1:40:a8:00"
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+          dpid="0e:84:00:26:f1:40:a8:00"/>
+
+      <!-- Internet2 -->
+      <openflow:datapath 
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:84:40:39:18:1b"
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="00:00:0e:84:40:39:18:1b"/>
+      <openflow:datapath
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:84:40:39:18:58" 
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="00:00:0e:84:40:39:18:58"/>
+      <openflow:datapath 
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:84:40:39:19:96"
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+          dpid="00:00:0e:84:40:39:19:96"/> 
+      <openflow:datapath 
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:84:40:39:1a:57"
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="00:00:0e:84:40:39:1a:57"/>
+      <openflow:datapath
+          component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:0e:84:40:39:1b:93" 
+          component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+          dpid="00:00:0e:84:40:39:1b:93"/>
+
+     <!-- GATECH -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:19:bb:b3:0d:00" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:19:bb:b3:0d:00">
+            <openflow:port num="5" />
+            <openflow:port num="9" />
+            <openflow:port num="10" />
+            <openflow:port num="11" />
+            <openflow:port num="12" />
+      </openflow:datapath>
+
+      <!-- Wisconsin -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:21:f7:be:8d:00" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:21:f7:be:8d:00">
+            <openflow:port num="3" />
+            <openflow:port num="53" />
+      </openflow:datapath>
+  
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:23:47:cc:44:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:23:47:cc:44:00">
+            <openflow:port num="1" />
+            <openflow:port num="4" />
+            <openflow:port num="6" />
+            <openflow:port num="20" />
+            <openflow:port num="22" />
+      </openflow:datapath>
+ 
+      <!-- GPO -->
+      <openflow:datapath 
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:24:a8:c4:b9:00"
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+         dpid="06:d6:00:24:a8:c4:b9:00">
+           <openflow:port num="25"/>
+           <openflow:port num="26"/>
+           <openflow:port num="27"/>
+           <openflow:port num="28"/>
+           <openflow:port num="29"/>
+           <openflow:port num="30"/>
+           <openflow:port num="31"/>
+           <openflow:port num="32"/>
+           <openflow:port num="33"/>
+           <openflow:port num="34"/>
+           <openflow:port num="35"/>
+           <openflow:port num="49"/>
+           <openflow:port num="50"/>
+           <openflow:port num="51"/>
+           <openflow:port num="71"/>
+
+           <!-- eisande port -->
+           <openflow:port num="36"/>
+           
+      </openflow:datapath>
+      <openflow:datapath
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:12:e2:b8:a5:d0" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:12:e2:b8:a5:d0">
+            <openflow:port num="20"/>
+            <openflow:port num="11"/>
+      </openflow:datapath>
+
+      <!-- Clemson -->
+      <openflow:datapath
+         component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:26:f1:3f:e4:80" 
+         component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+         dpid="06:d6:00:26:f1:3f:e4:80">
+           <openflow:port num="36"/>
+           <openflow:port num="39"/>
+           <openflow:port num="41"/>
+      </openflow:datapath>
+
+      <!-- Indiana -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:16:b9:cf:fc:40" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"
+           dpid="06:d6:00:16:b9:cf:fc:40">
+           <openflow:port num="5"/>
+           <openflow:port num="8"/>
+           <openflow:port num="9"/>
+           <openflow:port num="10"/>
+      </openflow:datapath>
+
+      <openflow:datapath 
+            component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:24:a8:fe:e1:00"
+            component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am"> 
+        <openflow:port num="27"/>  
+        <openflow:port num="30"/>  
+        <openflow:port num="32"/> 
+        <openflow:port num="46"/>
+        <openflow:port num="71"/>
+      </openflow:datapath>
+     
+      <!-- Rutgers -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:10:10:17:50:01" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:10:10:17:50:01">
+
+          <openflow:port num="5" />
+          <openflow:port num="9" />
+          <openflow:port num="10" />
+          <openflow:port num="11" />
+          <openflow:port num="12" />
+      </openflow:datapath>
+
+      <!-- Stanford -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:12:e2:78:31:f5" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:12:e2:78:31:f5">
+
+          <openflow:port num="1" />
+          <openflow:port num="2"/>   <!-- to hpsw4 -->
+          <openflow:port num="10" />
+      </openflow:datapath>
+
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:12:e2:78:67:65" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:12:e2:78:67:65">
+
+          <openflow:port num="1" />
+          <openflow:port num="2" />
+          <openflow:port num="4" />
+      </openflow:datapath>
+
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+00:00:00:12:e2:b8:f3:d0" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="00:00:00:12:e2:b8:f3:d0">
+
+          <openflow:port num="3" />
+          <openflow:port num="27" />
+          <openflow:port num="28" />
+          <openflow:port num="33" />
+          <openflow:port num="34" />
+      </openflow:datapath>
+   
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+03:85:00:23:47:4e:2e:c0" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="03:85:00:23:47:4e:2e:c0">
+
+          <openflow:port num="4" />
+          <openflow:port num="8" />
+      </openflow:datapath>
+
+      <!-- Washington -->
+      <openflow:datapath 
+           component_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+datapath+06:d6:00:23:47:c8:8c:40" 
+           component_manager_id="urn:publicid:IDN+openflow:foam:foam-tutorial.gpolab.bbn.com+authority+am" 
+           dpid="06:d6:00:23:47:c8:8c:40">
+
+          <openflow:port num="20" />
+          <openflow:port num="23" />
+          <openflow:port num="24" />
+      </openflow:datapath>
+
+    </openflow:group>
+
+    <openflow:match>
+        <openflow:use-group name="3715"/>
+        <openflow:packet>
+           <openflow:dl_type value="0x800,0x806" />
+           <openflow:nw_src value="10.42.<SUBNET>.0/24" />
+           <openflow:nw_dst value="10.42.<SUBNET>.0/24" />
+        </openflow:packet>
+    </openflow:match>
+
+  </openflow:sliver>
+
+</rspec>

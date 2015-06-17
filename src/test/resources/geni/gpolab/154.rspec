@@ -1,0 +1,64 @@
+<rspec type="request" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd "
+	xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+	xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="outside" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.nysernet.org+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo bash /tmp/of-setup/outside-setup" shell="bash"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/NAT/of-setup.tar.gz"/>
+    </services>
+    <interface client_id="outside:NAT">
+      <ip address="128.128.128.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="100" y="400" unbound="true"/>
+  </node>
+  <node client_id="NAT" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.nysernet.org+image+emulab-ops:UBUNTU12-64-OVS"/>
+    </sliver_type>
+    <services>
+      <execute command="sudo bash /tmp/of-setup/switch-setup-ryu" shell="bash"/>
+      <install install_path="/tmp" url="http://www.gpolab.bbn.com/exp/NAT/of-setup.tar.gz"/>
+    </services>
+    <interface client_id="NAT:outside">
+      <ip address="128.128.128.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="NAT:inside">
+      <ip address="192.168.0.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="500" y="400" unbound="true"/>
+  </node>
+  <node client_id="inside1" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.nysernet.org+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <interface client_id="inside1:NAT">
+      <ip address="192.168.0.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="1000" y="200" unbound="true"/>
+  </node>
+  <node client_id="inside2" exclusive="false">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.nysernet.org+image+emulab-ops:UBUNTU12-64-STD"/>
+    </sliver_type>
+    <interface client_id="inside2:NAT">
+      <ip address="192.168.0.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <flack:node_info x="1000" y="600" unbound="true"/>
+  </node>
+  
+  <link client_id="outside-NAT">
+    <interface_ref client_id="outside:NAT"/>
+    <interface_ref client_id="NAT:outside"/>
+  </link>
+  <link client_id="inside-NAT">
+    <interface_ref client_id="inside1:NAT"/>
+    <interface_ref client_id="NAT:inside"/>
+    <interface_ref client_id="inside2:NAT"/>
+  </link>
+</rspec>

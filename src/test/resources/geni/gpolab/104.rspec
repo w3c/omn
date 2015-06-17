@@ -1,0 +1,98 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3"
+	   xmlns:s="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.geni.net/resources/rspec/3
+                           http://www.geni.net/resources/rspec/3/request.xsd
+						   http://www.protogeni.net/resources/rspec/ext/shared-vlan/1 
+						   http://www.protogeni.net/resources/rspec/ext/shared-vlan/1/request.xsd"
+       type="request">
+<node client_id="center" exclusive="false">
+    <sliver_type name="m1.small">
+		<disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/Ubuntu1204/ubuntu1204.xml" version="0beb69c8fbe65af0134ac8fe38b22e8f9b3c254c"/>
+    </sliver_type>
+    <interface client_id="center:if0">
+		<ip address="10.10.1.1" netmask="255.255.255.0"/>
+	</interface>
+    <interface client_id="center:if1">
+		<ip address="10.10.2.1" netmask="255.255.255.0"/>
+	</interface>
+    <interface client_id="center:if2">
+		<ip address="10.10.3.1" netmask="255.255.255.0"/>
+	</interface>
+    <interface client_id="center:if3">
+		<ip address="10.10.4.1" netmask="255.255.255.0"/>
+	</interface>
+	<services>
+		<install url="http://www.gpolab.bbn.com/experiment-support/TCPExampleExperiment/enableIPFwd.tar.gz" install_path="/tmp" />
+      <execute command="/tmp/enableIPFwd.sh" shell="/bin/bash"/>
+    </services>
+</node>
+<node client_id="left" exclusive="false">
+    <sliver_type name="m1.small">
+		<disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/Ubuntu1204/ubuntu1204.xml" version="0beb69c8fbe65af0134ac8fe38b22e8f9b3c254c"/>
+    </sliver_type>
+    <interface client_id="left:if0">
+		<ip address="10.10.1.2" netmask="255.255.255.0"/>
+	</interface>
+	<services>
+    	<install url="http://www.gpolab.bbn.com/experiment-support/TCPExampleExperiment/changeRoute.tar.gz" install_path="/tmp" />
+      <execute command="/tmp/changeRoute.sh 10.10.1.1" shell="/bin/bash"/>
+	</services>
+</node>
+<node client_id="right" exclusive="false">
+    <sliver_type name="m1.small">
+		<disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/Ubuntu1204/ubuntu1204.xml" version="0beb69c8fbe65af0134ac8fe38b22e8f9b3c254c"/>
+    </sliver_type>
+	<interface client_id="right:if0">
+		<ip address="10.10.2.2" netmask="255.255.255.0"/>
+	</interface>
+	<services>
+    	<install url="http://www.gpolab.bbn.com/experiment-support/TCPExampleExperiment/changeRoute.tar.gz" install_path="/tmp" />
+      <execute command="/tmp/changeRoute.sh 10.10.2.1" shell="/bin/bash"/>
+	</services>
+</node>
+<link client_id="leftLink">
+    <interface_ref client_id="left:if0"/>
+    <interface_ref client_id="center:if0"/>
+	<link_type name="lan"/>
+</link>
+<link client_id="rightLink">
+    <interface_ref client_id="right:if0"/>
+    <interface_ref client_id="center:if1"/>
+	<link_type name="lan"/>
+</link>
+<node client_id="top" exclusive="false">
+    <sliver_type name="m1.small">
+		<disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/Ubuntu1204/ubuntu1204.xml" version="0beb69c8fbe65af0134ac8fe38b22e8f9b3c254c"/>
+    </sliver_type>
+    <interface client_id="top:if0">
+		<ip address="10.10.3.2" netmask="255.255.255.0"/>
+	</interface>
+	<services>
+    	<install url="http://www.gpolab.bbn.com/experiment-support/TCPExampleExperiment/changeRoute.tar.gz" install_path="/tmp" />
+      <execute command="/tmp/changeRoute.sh 10.10.3.1" shell="/bin/bash"/>
+	</services>
+</node>
+<node client_id="bottom" exclusive="false">
+    <sliver_type name="m1.small">
+		<disk_image name="http://emmy9.casa.umass.edu/Disk_Images/ExoGENI/Ubuntu1204/ubuntu1204.xml" version="0beb69c8fbe65af0134ac8fe38b22e8f9b3c254c"/>
+    </sliver_type>
+    <interface client_id="bottom:if0">
+		<ip address="10.10.4.2" netmask="255.255.255.0"/>
+	</interface>
+	<services>
+    	<install url="http://www.gpolab.bbn.com/experiment-support/TCPExampleExperiment/changeRoute.tar.gz" install_path="/tmp" />
+      <execute command="/tmp/changeRoute.sh 10.10.4.1" shell="/bin/bash"/>
+	</services>
+</node>
+<link client_id="topLink">
+    <interface_ref client_id="top:if0"/>
+    <interface_ref client_id="center:if2"/>
+	<link_type name="lan"/>
+</link>
+<link client_id="bottomLink">
+    <interface_ref client_id="bottom:if0"/>
+    <interface_ref client_id="center:if3"/>
+	<link_type name="lan"/>
+</link>
+</rspec>

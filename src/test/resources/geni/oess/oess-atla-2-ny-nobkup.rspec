@@ -1,0 +1,24 @@
+<rspec  xmlns="http://www.geni.net/resources/rspec/3"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:oess="http://bssoftworks.com/geni/ext/circuit/1"
+      xs:schemaLocation="http://www.geni.net/rspec/3/manifest.xsd
+          http://www.geni.net/resources/rspec/3/request.xsd
+          http://bssoftworks.com/geni/ext/circuit/1
+          http://geni.bssoftworks.com/rspec/ext/circuit/1/request.xsd"
+      type="request">
+
+<oess:circuit>
+  <oess:description>LN atla-2-ny</oess:description>
+  <oess:bandwidth mbps="100" />
+  <oess:primaryPath>
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-NEWY32AOA-WASH-100GE-07759" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-ATLA-RALE-100GE-07738" />
+    <oess:link urn="urn:publicid:IDN+oess:foam:nddi+link+I2-RALE-WASH-100GE-08888" />
+  </oess:primaryPath>
+  <oess:endpoints>
+    <oess:interface urn="urn:publicid:IDN+oess:foam:nddi+sdn-sw.atla.net.internet2.edu+e15/3" vlan="3001" />
+    <oess:interface urn="urn:publicid:IDN+oess:foam:nddi+sdn-sw.newy32aoa.net.internet2.edu+e15/5" vlan="3001" />
+  </oess:endpoints>
+</oess:circuit>
+
+</rspec>

@@ -38,6 +38,7 @@ public abstract class AbstractConverter {
 	public final static String RSPEC_MANIFEST = "manifest";
 	public final static String RSPEC_ADVERTISEMENT = "advertisement";
 	public static final String TOSCA = "tosca";
+	public static final String ANYFORMAT = "to";
 	protected static final String NAMESPACE = "http://open-multinet.info/example#";
 	private static final Logger LOG = Logger.getLogger(AbstractConverter.class
 			.getName());

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for attaching an interface to a shared vlan -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:s="http://www.geni.net/resources/rspec/ext/shared-vlan/1">
+  <!-- This is meant to extend the services element -->
+  <xs:element name="link_shared_vlan">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="vlantag" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- Both of the above are start elements. -->
+</xs:schema>
