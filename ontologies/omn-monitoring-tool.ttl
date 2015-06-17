@@ -2,7 +2,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
@@ -95,7 +95,7 @@
                 rdfs:range :DataBroker ;
 
                 rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( :Tool
+                              owl:unionOf ( omn-monitoring:Tool
                                             omn:Service
                                           )
                             ] .
@@ -297,7 +297,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 :MeasurementTool rdf:type owl:Class ;
                    
-                 rdfs:subClassOf :Tool ;
+                 rdfs:subClassOf omn-monitoring:Tool ;
                    
                  rdfs:comment "Represents any tool used to execute the measurments."^^xsd:string .
 
@@ -327,7 +327,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 :DataBroker rdf:type owl:Class ;
                    
-            rdfs:subClassOf :Tool ;
+            rdfs:subClassOf omn-monitoring:Tool ;
                    
             rdfs:comment "Represents any tool that acts as a data broker between two tools or between a service and a collection resource."^^xsd:string .
 

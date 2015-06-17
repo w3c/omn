@@ -2,7 +2,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
@@ -104,7 +104,7 @@
                               
             rdfs:comment "Determines the data format."^^xsd:string ;
                               
-            rdfs:domain :Data ;
+            rdfs:domain omn-monitoring:Data ;
 
             rdfs:range :DataFormat .
 
@@ -508,10 +508,9 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 ###  http://open-multinet.info/ontology/omn-monitoring-data#OMLStream
 
-:OMLStream rdf:type :Data ,
+:OMLStream rdf:type omn-monitoring:Data ,
+                    :FormattedFile ,
                     owl:NamedIndividual ;
-
-           rdfs:subClassOf :FormattedFile ;
 
            rdfs:comment "OML streams exported by injection points (OML clients) and collected by the OML server."^^xsd:string .
 
