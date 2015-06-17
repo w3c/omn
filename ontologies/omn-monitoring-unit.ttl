@@ -28,7 +28,7 @@
                                                          
                                                          dc:description "This ontology defines the data unites (e.g. bit, byte, second, bps) covering both unit prefixes binary and decimal, as well as different levels (nominal, ordinal, interval, and ratio) and dimensions (basic and derived)."^^xsd:string ;
                                                          
-                                                         dc:oldNamespaceUri "http://www.fp7-novi.eu/information-model/unit.owl."^^xsd:string ;
+                                                         dc:rights "this ontology was developed by the European FP7 project NOVI. It was published under the name http://www.fp7-novi.eu/information-model/unit.owl. However now it is part of OMN ontology"^^xsd:string ;
                                                          
                                                          vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-unit#" ;
                                                          
@@ -41,7 +41,7 @@
                                                          dc:publisher <http://open-multinet.info/> ;
                                                                                                                   
                                                          dc:creator <https://www.linkedin.com/in/yahyaalhazmi> ;
-
+                                                         
                                                          dc:author "NOVI project http://www.fp7-novi.eu/."^^xsd:string ;
                                                          
                                                          dc:contributor <https://www.linkedin.com/in/yahyaalhazmi> ;

@@ -41,7 +41,7 @@
                                                                     dc:creator <https://www.linkedin.com/in/yahyaalhazmi> ;
                                                                     
                                                                     dc:author <https://www.linkedin.com/in/yahyaalhazmi> ;
-
+                                                                    
                                                                     dc:contributor <http://alex.willner.ws/about#me> ;
                                                                     dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
                                                                     dc:contributor <mailto:steger@complex.elte.hu> ;
@@ -273,7 +273,7 @@
 
 :EventAtMeasurementPhase rdf:type owl:Class ;
                                               
-                         rdfs:subClassOf owl:Event ;
+                         rdfs:subClassOf :Event ;
 
                          rdfs:comment "Represents an event that occurs during a measurement phase."^^xsd:string .
 

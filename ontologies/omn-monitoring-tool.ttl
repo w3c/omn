@@ -41,7 +41,7 @@
                                                          dc:creator <https://www.linkedin.com/in/yahyaalhazmi> ;
                                                          
                                                          dc:author <https://www.linkedin.com/in/yahyaalhazmi> ;
-
+                                                         
                                                          dc:contributor <http://alex.willner.ws/about#me> ;
                                                          dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
                                                          dc:contributor <mailto:steger@complex.elte.hu> ;
@@ -49,7 +49,7 @@
                                                          dc:contributor <mailto:chrisap@noc.ntua.gr> ;
                                                          dc:contributor <http://www.commit-nl.nl/people/morsey> ;
                                                          dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
-
+                                                         
                                                          rdfs:comment """This ontology includes some classes and proberties that were defined by the European MOnitoring and MEasurement in the Next generation Technologies (MOMENT) project under MOMENT ontology that was then published under ETSI Group Specification Measurement Ontology for IP traffic (MOI). 
                                                          However, most of the reused classes are classified in this ontology in different taxonomic hierarchy, and properties might have different domains and ranges."""@en .
 
