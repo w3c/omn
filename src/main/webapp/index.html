@@ -211,10 +211,10 @@ body {
 
 		<div class="row">
 			<div class="col-md-12">
-				<!-- @formatter:off --><div class="alert alert-info" role="alert" id="submitted-text" style="white-space: pre-wrap;" hidden><p><strong>You have submitted the following text:</strong></p><p id="submitted-text-content"></p></div>
+				<!-- @formatter:off --><div class="alert alert-info" role="alert" id="submitted-text" style="white-space: pre-wrap;" hidden><p><strong>You have submitted the following text for translation from <span id="fromSpan"></span> to <span id="toSpan"></span>:</strong></p><p id="submitted-text-content"></p></div>
 				<p class="text-center" id="conversion-wait" hidden><i class="fa fa-spinner fa-pulse fa-4x"></i></p>
 				<div class="alert alert-success" role="alert" id="response-text" style="white-space: pre-wrap;" hidden><p><strong>The conversion was successful!</strong></p><p>The server returned the following:</p><p id="response-text-content"></p></div>
-				<div class="alert alert-danger" role="alert" id="fail-text" style="white-space: pre-wrap;" hidden><p><strong>The conversion failed!</strong></p><p>The server returned the following error:</p><!-- TODO: error handling --><p id="fail-text-content"></p></div>
+				<div class="alert alert-danger" role="alert" id="fail-text" style="white-space: pre-wrap;" hidden><p><strong>The conversion failed!</strong></p><p id="error-code"></p><p>The server returned the following error:</p><p id="fail-text-content"></p></div>
 				<!-- @formatter:on -->
 			</div>
 		</div>

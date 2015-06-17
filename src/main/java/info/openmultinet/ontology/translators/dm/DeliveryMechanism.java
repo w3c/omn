@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
@@ -37,7 +38,7 @@ public class DeliveryMechanism {
 			throws JAXBException, InvalidModelException, UnsupportedException,
 			IOException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException,
-			XMLStreamException {
+			XMLStreamException, MissingRspecElementException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));

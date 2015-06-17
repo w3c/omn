@@ -1,7 +1,7 @@
 package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
@@ -48,16 +48,22 @@ public class REST extends DeliveryMechanism {
 
 		try {
 			result = DeliveryMechanism.convert(from, to, content);
-		} catch (RiotException | MultipleNamespacesException
+		} catch (MissingRspecElementException | RiotException
+				| MultipleNamespacesException
 				| RequiredResourceNotFoundException
 				| MultiplePropertyValuesException | UnsupportedException e) {
 			throw new ConverterWebApplicationException(
+					// send Client Error 400
+					// indicates error within document
 					Response.Status.BAD_REQUEST, e);
 		} catch (UnknownFormatConversionException e) {
 			throw new ConverterWebApplicationException(
+					// send Client Error 406
 					Response.Status.NOT_ACCEPTABLE, e.getMessage());
-		} catch (XMLStreamException | JAXBException | InvalidModelException | IOException e) {
+		} catch (XMLStreamException | JAXBException | InvalidModelException
+				| IOException e) {
 			throw new ConverterWebApplicationException(
+					// send Server Error 500
 					Response.Status.INTERNAL_SERVER_ERROR, e);
 		}
 

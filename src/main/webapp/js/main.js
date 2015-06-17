@@ -18,8 +18,6 @@
 
 		// show contents of paste panel under the panel
 		var submittedText = jQuery("textarea#paste-panel").val();
-		jQuery("#submitted-text").show();
-		jQuery("#submitted-text-content").text(submittedText);
 
 		// make POST request to REST API
 		postFunction(submittedText);
@@ -46,8 +44,6 @@
 			var r = new FileReader();
 			r.onload = function(e) {
 				var submittedText = e.target.result;
-				jQuery("#submitted-text").show();
-				jQuery("#submitted-text-content").text(submittedText);
 
 				// make POST request to REST API
 				postFunction(submittedText);
@@ -125,17 +121,33 @@ function listener(event) {
  * send post request to server and update alert panels
  */
 function postFunction(submittedText) {
-	jQuery("#conversion-wait").show();
 	
+	// show waiting icon
+	jQuery("#conversion-wait").show();
+
+	// get to and from document formats froh html select elements
 	var fromDoc = document.getElementById("fromDoc");
 	var fromValue = fromDoc.options[fromDoc.selectedIndex].value;
-	
 	var toDoc = document.getElementById("toDoc");
 	var toValue = toDoc.options[toDoc.selectedIndex].value;
+
+	var newFromValue;
+	if (fromValue == "to") {
+		newFromValue = "autodetected format"
+	}
 	
+	// show the text submitted by the user
+	jQuery("#submitted-text").show();
+	jQuery("#fromSpan").text(newFromValue);
+
+	jQuery("#toSpan").text(toValue);
+	jQuery("#submitted-text-content").text(submittedText);
+
+	// construct url to post 
 	var partUrl = "/omnlib/convert/";
-	var url = partUrl.concat(fromValue,"/",toValue);
-	
+	var url = partUrl.concat(fromValue, "/", toValue);
+
+	// perform post request
 	$.post(url, {
 		content : submittedText
 	}, function(data, status, jqXHR) {
@@ -145,6 +157,15 @@ function postFunction(submittedText) {
 	}).fail(function(jqXHR, textStatus, errorThrown) {
 		jQuery("#conversion-wait").hide();
 		jQuery("#fail-text").show();
+		
+		if(jqXHR.status > 399 && jqXHR.status < 500){
+			jQuery("#error-code").text("Your input does not appear to be valid. Please correct your input and try again.");
+		}
+
+		if(jqXHR.status > 499 && jqXHR.status < 600){
+			jQuery("#error-code").text("Oops! Something went wrong while processing your request. Please try again or contact us if it happens again.");
+		}
+				
 		jQuery("#fail-text-content").text(jqXHR.responseText);
 	});
 }

@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
@@ -16,8 +17,14 @@ import org.junit.Test;
 public class CLITest {
 
 	@Test
-	public void testMain() throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
-        CLI.main(new String[] {"-i", "src/test/resources/geni/request/request_bound.xml", "-o" ,"ttl"});
+	public void testMain() throws IOException, JAXBException,
+			InvalidModelException, UnsupportedException,
+			MultipleNamespacesException, RequiredResourceNotFoundException,
+			MultiplePropertyValuesException, XMLStreamException,
+			MissingRspecElementException {
+		CLI.main(new String[] { "-i",
+				"src/test/resources/geni/request/request_bound.xml", "-o",
+				"ttl" });
 	}
 
 }

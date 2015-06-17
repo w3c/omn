@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
@@ -29,7 +30,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingRSpecToGraph() throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_unbound2.xml");
 		final Model model = RequestConverter.getModel(rspec);
@@ -40,7 +41,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingBoundRspec2Graph() throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_bound.xml");
 		final Model model = RequestConverter.getModel(rspec);
@@ -60,7 +61,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingBoundMotorRspec2Graph() throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_motor.xml");
 		final Model model = RequestConverter.getModel(rspec);
@@ -80,7 +81,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingBoundRSpec4PhysicalNode2Graph()
-			throws JAXBException, InvalidModelException {
+			throws JAXBException, InvalidModelException, MissingRspecElementException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_bound_rawpc.xml");
 		final Model model = RequestConverter.getModel(rspec);
@@ -99,7 +100,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingUnboundRspec2Graph() throws JAXBException,
-			InvalidModelException, IOException {
+			InvalidModelException, IOException, MissingRspecElementException {
 		final String filename = "/geni/request/request_unbound.xml";
 		final InputStream inputRspec = RequestConverterTest.class
 				.getResourceAsStream(filename);
@@ -127,7 +128,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testSliverTypeEqualsRDFType() throws IOException,
-			JAXBException, InvalidModelException {
+			JAXBException, InvalidModelException, MissingRspecElementException {
 		final String filename = "/geni/request/request_unbound.xml";
 		final InputStream inputRspec = RequestConverterTest.class
 				.getResourceAsStream(filename);
@@ -146,7 +147,7 @@ public class RequestConverterTest {
 
 	@Test
 	public void testPaper2015Roundtrip() throws JAXBException,
-			InvalidModelException, IOException {
+			InvalidModelException, IOException, MissingRspecElementException {
 		final String filename = "/geni/request/request_paper2015.xml";
 		final InputStream inputRspec = RequestConverterTest.class
 				.getResourceAsStream(filename);

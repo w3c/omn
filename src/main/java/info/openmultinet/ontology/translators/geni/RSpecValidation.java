@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 
@@ -330,7 +331,7 @@ public class RSpecValidation {
 				try {
 					model = RequestConverter.getModel(inputStream);
 					output = RequestConverter.getRSpec(model);
-				} catch (JAXBException | InvalidModelException e) {
+				} catch (JAXBException | InvalidModelException | MissingRspecElementException e) {
 					e.printStackTrace();
 				}
 			}
@@ -372,8 +373,9 @@ public class RSpecValidation {
 
 				if (type.equals("request")) {
 					schema = new File(
-							"./src/main/resources/geni/request/top.xsd");
-					// "./src/main/resources/geni/request/request.xsd");
+							// "./src/main/resources/geni/request/of-resv.xsd");
+							// "./src/main/resources/geni/request/top.xsd");
+					"./src/main/resources/geni/request/request.xsd");
 				}
 
 				// check against XSD whether rspec is valid or not

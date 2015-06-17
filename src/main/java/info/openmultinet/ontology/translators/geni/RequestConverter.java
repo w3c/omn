@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
@@ -305,7 +306,7 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	public static Model getModel(final InputStream input) throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 
 		final JAXBContext context = JAXBContext
 				.newInstance(RSpecContents.class);
@@ -330,7 +331,7 @@ public class RequestConverter extends AbstractConverter {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static void extractNodes(final RSpecContents request,
-			final Resource topology) {
+			final Resource topology) throws MissingRspecElementException {
 
 		List<JAXBElement<NodeContents>> nodes;
 		try {
@@ -351,9 +352,13 @@ public class RequestConverter extends AbstractConverter {
 					omnResource.addProperty(RDF.type, Omn_resource.Node);
 				}
 
-				omnResource
-						.addProperty(Omn_lifecycle.hasID, node.getClientId());
-				omnResource.addProperty(RDFS.label, node.getClientId());
+				if (node.getClientId() == null) {
+					throw new MissingRspecElementException("NodeContents > client_id");
+				} else {
+					omnResource.addProperty(Omn_lifecycle.hasID,
+							node.getClientId());
+					omnResource.addProperty(RDFS.label, node.getClientId());
+				}
 
 				Resource implementedBy = null;
 				if (null != node.getComponentId()

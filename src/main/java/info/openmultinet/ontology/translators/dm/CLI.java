@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
@@ -27,33 +28,28 @@ import org.apache.commons.io.FileUtils;
 public class CLI {
 	private static final String NAME = CLI.class.getCanonicalName();
 
-	public static void main(String[] args) throws IOException, JAXBException, InvalidModelException, UnsupportedException, MultipleNamespacesException, RequiredResourceNotFoundException, MultiplePropertyValuesException, XMLStreamException {
+	public static void main(String[] args) throws IOException, JAXBException,
+			InvalidModelException, UnsupportedException,
+			MultipleNamespacesException, RequiredResourceNotFoundException,
+			MultiplePropertyValuesException, XMLStreamException,
+			MissingRspecElementException {
 
 		CommandLine lvCmd = null;
 		HelpFormatter lvFormater = new HelpFormatter();
 		CommandLineParser lvParser = new BasicParser();
 		Options lvOptions = new Options();
 
-		Option lvHelp = new Option("h", "help", false,
-				"shows this help.");
+		Option lvHelp = new Option("h", "help", false, "shows this help.");
 		lvOptions.addOption(lvHelp);
 
-        lvOptions.addOption(OptionBuilder
-                .withLongOpt("input")
-                .withArgName("FILENAME")
-                .withDescription("input filename.")
-                .hasArg()
-                .isRequired()
-                .create("i"));
+		lvOptions.addOption(OptionBuilder.withLongOpt("input")
+				.withArgName("FILENAME").withDescription("input filename.")
+				.hasArg().isRequired().create("i"));
 
-        lvOptions.addOption(OptionBuilder
-                .withLongOpt("output")
-                .withArgName("FORMAT")
-                .withDescription("output format (TTL/TOSCA/RSpec).")
-                .hasArg()
-                .isRequired()
-                .create("o"));
-
+		lvOptions.addOption(OptionBuilder.withLongOpt("output")
+				.withArgName("FORMAT")
+				.withDescription("output format (TTL/TOSCA/RSpec).").hasArg()
+				.isRequired().create("o"));
 
 		try {
 			lvCmd = lvParser.parse(lvOptions, args);
@@ -71,9 +67,11 @@ public class CLI {
 		String filename = lvCmd.getOptionValue("i");
 		String outSerialization = lvCmd.getOptionValue("o");
 		String inSerialization = guessSerialization(filename);
-		
-		String content = FileUtils.readFileToString(new File(filename), StandardCharsets.UTF_8.toString());
-		System.out.println(DeliveryMechanism.convert(inSerialization, outSerialization, content));
+
+		String content = FileUtils.readFileToString(new File(filename),
+				StandardCharsets.UTF_8.toString());
+		System.out.println(DeliveryMechanism.convert(inSerialization,
+				outSerialization, content));
 	}
 
 	private static String guessSerialization(String filename) {

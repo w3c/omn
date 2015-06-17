@@ -60,10 +60,10 @@ public class RSpecValidationTest {
 				AbstractConverter.TOSCA, pathTosca);
 		types.add(pair4);
 
-		String pathTtl = "./src/test/resources/omn/request.ttl";
-		Entry<String, String> pair5 = new java.util.AbstractMap.SimpleEntry<>(
-				AbstractConverter.TTL, pathTtl);
-		types.add(pair5);
+//		String pathTtl = "./src/test/resources/omn/request.ttl";
+//		Entry<String, String> pair5 = new java.util.AbstractMap.SimpleEntry<>(
+//				AbstractConverter.TTL, pathTtl);
+//		types.add(pair5);
 
 		for (int i = 0; i < types.size(); i++) {
 
@@ -333,6 +333,11 @@ public class RSpecValidationTest {
 	}
 
 	private static int[] validateDirectory(File path) {
+		System.out
+		.println("==========================================================");
+		System.out
+		.println("===========  validateDirectory test           ============");
+
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
 			return null;
@@ -369,61 +374,63 @@ public class RSpecValidationTest {
 							.substring(20));
 					String type = RSpecValidation.getType(rspecString);
 
-					String schemaPath = null;
-					if (type.equals("request")) {
-						schemaPath = "./src/main/resources/geni/request/request.xsd";
-					} else if (type.equals("advertisement")) {
-						schemaPath = "./src/main/resources/geni/advertisement/ad.xsd";
-					} else if (type.equals("manifest")) {
-						schemaPath = "./src/main/resources/geni/manifest/manifest.xsd";
-					}
-					boolean validSax;
-					try {
-						validSax = RSpecValidation.validateSAX(
-								files[i].getPath(), schemaPath);
-						System.out.println("validSax: " + validSax);
-					} catch (ParserConfigurationException | SAXException e) {
-						e.printStackTrace();
-					}
-
-					boolean validDom;
-					try {
-						validDom = RSpecValidation.validateDOM(
-								files[i].getPath(), schemaPath);
-						System.out.println("validDom: " + validDom);
-					} catch (ParserConfigurationException | SAXException e) {
-						e.printStackTrace();
-					}
-
-					boolean validDom4j;
-					try {
-						validDom4j = RSpecValidation.validateDom4j(
-								files[i].getPath(), schemaPath);
-						System.out.println("validDom4j: " + validDom4j);
-					} catch (ParserConfigurationException | SAXException
-							| DocumentException e) {
-						e.printStackTrace();
-					}
-
-					boolean validXom;
-					try {
-						validXom = RSpecValidation.validateXom(
-								files[i].getPath(), schemaPath);
-						System.out.println("validXom: " + validXom);
-					} catch (ParserConfigurationException | SAXException
-							| DocumentException | ParsingException e) {
-						e.printStackTrace();
-					}
-
+					// String schemaPath = null;
+					// if (type.equals("request")) {
+					// schemaPath =
+					// "./src/main/resources/geni/request/request.xsd";
+					// } else if (type.equals("advertisement")) {
+					// schemaPath =
+					// "./src/main/resources/geni/advertisement/ad.xsd";
+					// } else if (type.equals("manifest")) {
+					// schemaPath =
+					// "./src/main/resources/geni/manifest/manifest.xsd";
+					// }
+					// boolean validSax;
+					// try {
+					// validSax = RSpecValidation.validateSAX(
+					// files[i].getPath(), schemaPath);
+					// System.out.println("validSax: " + validSax);
+					// } catch (ParserConfigurationException | SAXException e) {
+					// e.printStackTrace();
+					// }
+					//
+					// boolean validDom;
+					// try {
+					// validDom = RSpecValidation.validateDOM(
+					// files[i].getPath(), schemaPath);
+					// System.out.println("validDom: " + validDom);
+					// } catch (ParserConfigurationException | SAXException e) {
+					// e.printStackTrace();
+					// }
+					//
+					// boolean validDom4j;
+					// try {
+					// validDom4j = RSpecValidation.validateDom4j(
+					// files[i].getPath(), schemaPath);
+					// System.out.println("validDom4j: " + validDom4j);
+					// } catch (ParserConfigurationException | SAXException
+					// | DocumentException e) {
+					// e.printStackTrace();
+					// }
+					//
+					// boolean validXom;
+					// try {
+					// validXom = RSpecValidation.validateXom(
+					// files[i].getPath(), schemaPath);
+					// System.out.println("validXom: " + validXom);
+					// } catch (ParserConfigurationException | SAXException
+					// | DocumentException | ParsingException e) {
+					// e.printStackTrace();
+					// }
 					// boolean validSchemaFactory = RSpecValidation
 					// .validateRspecSchemaFactory(files[i].getPath(),
 					// type);
 					// System.out.println("validSchemaFactory: "
 					// + validSchemaFactory);
-					//
-					// boolean validXMLUnit = RSpecValidation
-					// .validateRspecXMLUnit(rspecString);
-					// System.out.println("validXMLUnit: " + validXMLUnit);
+					
+					 boolean validXMLUnit = RSpecValidation
+					 .validateRspecXMLUnit(rspecString);
+					 System.out.println("validXMLUnit: " + validXMLUnit);
 
 					boolean validRSpecLint = RSpecValidation
 							.rspecLintMacOnly(files[i].getPath().substring(20));
@@ -431,15 +438,15 @@ public class RSpecValidationTest {
 
 					switch (type) {
 					case "advertisement":
-						// if (validXMLUnit && validRSpecLint) {
-						if (validRSpecLint) {
+						if (validXMLUnit && validRSpecLint) {
+						// if (validRSpecLint) {
 							valid[trueAds]++;
 						}
 						valid[ads]++;
 						break;
 					case "manifest":
-						// if (validXMLUnit && validRSpecLint) {
-						if (validRSpecLint) {
+						if (validXMLUnit && validRSpecLint) {
+						// if (validRSpecLint) {
 							valid[trueManifests]++;
 						}
 						valid[manifests]++;
@@ -453,10 +460,10 @@ public class RSpecValidationTest {
 						break;
 					}
 
-					// if ((validXMLUnit || validRSpecLint)
-					// && !(validXMLUnit && validRSpecLint)) {
-					// valid[different]++;
-					// }
+					 if ((validXMLUnit || validRSpecLint)
+					 && !(validXMLUnit && validRSpecLint)) {
+					 valid[different]++;
+					 }
 
 					System.out
 							.println("==========================================================");
@@ -550,13 +557,14 @@ public class RSpecValidationTest {
 				rspecString = AbstractConverter.toString(path.getPath()
 						.substring(20));
 			} catch (IOException e) {
+				System.out.println("********* error converting to string ***************");
 				e.printStackTrace();
 			}
 			String type = RSpecValidation.getType(rspecString);
 
-			boolean validSchemaFactory = RSpecValidation
-					.validateRspecSchemaFactory(path.getPath(), type);
-			System.out.println("validSchemaFactory: " + validSchemaFactory);
+//			boolean validSchemaFactory = RSpecValidation
+//					.validateRspecSchemaFactory(path.getPath(), type);
+//			System.out.println("validSchemaFactory: " + validSchemaFactory);
 
 			boolean validXMLUnit = RSpecValidation
 					.validateRspecXMLUnit(rspecString);
@@ -587,12 +595,14 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/protogeni");
 		// File path = new File("./src/test/resources/geni/request");
 		// File path = new File("./src/test/resources/geni/stich");
-
+		
 		// File path = new File("./src/test/resources/geni");
 
 		// getErrorDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
-
+		
+		File path = new File("./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
+		validateFile(path);
 	}
 }
