@@ -53,23 +53,29 @@ public class Parser {
 	public Parser(final InputStream input) throws InvalidModelException {
 		this.read(input);
 	}
-	public Parser(final InputStream input, List<String> additionalOntologies) throws InvalidModelException {
-    this.read(input, additionalOntologies);
-  }
+
+	public Parser(final InputStream input, List<String> additionalOntologies)
+			throws InvalidModelException {
+		this.read(input, additionalOntologies);
+	}
 
 	public Parser(final String filename) throws InvalidModelException {
 		this.read(filename);
 	}
-	public Parser(final String filename, List<String> additionalOntologies) throws InvalidModelException {
-    this.read(filename,  additionalOntologies);
-  }
+
+	public Parser(final String filename, List<String> additionalOntologies)
+			throws InvalidModelException {
+		this.read(filename, additionalOntologies);
+	}
 
 	public Parser(final Model model) throws InvalidModelException {
 		this.read(model, new ArrayList<String>());
 	}
-	public Parser(final Model model, List<String> additionalOntologies) throws InvalidModelException {
-    this.read(model, additionalOntologies);
-  }
+
+	public Parser(final Model model, List<String> additionalOntologies)
+			throws InvalidModelException {
+		this.read(model, additionalOntologies);
+	}
 
 	public Parser() {
 		this.init();
@@ -77,26 +83,34 @@ public class Parser {
 
 	private void init() {
 		// @fixme: this is a slow/expensive operation
-		this.data = ModelFactory.createDefaultModel();		
+		this.data = ModelFactory.createDefaultModel();
 	}
 
-	public void read(@NotNull final InputStream input, List<String> additionalOntologies) throws InvalidModelException {
+	public void read(@NotNull final InputStream input,
+			List<String> additionalOntologies) throws InvalidModelException {
 		init();
 		if (null == input)
-	        throw new IllegalArgumentException("input must not be null");
-		
+			throw new IllegalArgumentException("input must not be null");
+
 		final RDFReader arp = data.getReader("TTL");
-		// @fixme: this is a slow/expensive operation
-		arp.read(data, input, null);
+		try {
+			// @fixme: this is a slow/expensive operation
+			arp.read(data, input, null);
+		} catch (org.apache.jena.riot.RiotException e) {
+			throw new InvalidModelException(
+					"org.apache.jena.riot.RiotException");
+		}
 		this.read(data, additionalOntologies);
 	}
-	
-	public void read(@NotNull final InputStream input) throws InvalidModelException {
-    read(input, new ArrayList<String>());
-  }
 
-	public void read(@NotNull final Model model, List<String> additionalOntologies) throws InvalidModelException {
-	  this.model = model;
+	public void read(@NotNull final InputStream input)
+			throws InvalidModelException {
+		read(input, new ArrayList<String>());
+	}
+
+	public void read(@NotNull final Model model,
+			List<String> additionalOntologies) throws InvalidModelException {
+		this.model = model;
 		Parser.reasoner = Parser.createReasoner(additionalOntologies);
 		this.infModel = Parser.createInfModel(model);
 		if (!Parser.isValid(this.infModel)) {
@@ -104,15 +118,16 @@ public class Parser {
 					Parser.getValidationReport(this.infModel));
 		}
 	}
-	
-	public void read(String filename, List<String> additionalOntologies) throws InvalidModelException {
-    final InputStream input = Parser.class.getResourceAsStream(filename);
-    read(input, additionalOntologies);
-  }
-	
+
+	public void read(String filename, List<String> additionalOntologies)
+			throws InvalidModelException {
+		final InputStream input = Parser.class.getResourceAsStream(filename);
+		read(input, additionalOntologies);
+	}
+
 	public void read(String filename) throws InvalidModelException {
-	  read(filename, new ArrayList<String>());
-  }
+		read(filename, new ArrayList<String>());
+	}
 
 	public static InfModel createInfModel() throws InvalidModelException {
 		return Parser.createInfModel(ModelFactory.createDefaultModel());
@@ -129,26 +144,26 @@ public class Parser {
 	public static Reasoner createReasoner() {
 		return createReasoner(new ArrayList<String>());
 	}
-	
+
 	public static Reasoner createReasoner(List<String> additionalFileNames) {
-    final Model schema = ModelFactory.createDefaultModel();
+		final Model schema = ModelFactory.createDefaultModel();
 
-    schema.add(Parser.parse("/omn.ttl"));
-    schema.add(Parser.parse("/omn-federation.ttl"));
-    schema.add(Parser.parse("/omn-lifecycle.ttl"));
-    schema.add(Parser.parse("/omn-resource.ttl"));
-    schema.add(Parser.parse("/omn-service.ttl"));
-    schema.add(Parser.parse("/omn-component.ttl"));
-    schema.add(Parser.parse("/osco.ttl"));
-    for(String filename : additionalFileNames){
-      schema.add(Parser.parse(filename));
-    }
+		schema.add(Parser.parse("/omn.ttl"));
+		schema.add(Parser.parse("/omn-federation.ttl"));
+		schema.add(Parser.parse("/omn-lifecycle.ttl"));
+		schema.add(Parser.parse("/omn-resource.ttl"));
+		schema.add(Parser.parse("/omn-service.ttl"));
+		schema.add(Parser.parse("/omn-component.ttl"));
+		schema.add(Parser.parse("/osco.ttl"));
+		for (String filename : additionalFileNames) {
+			schema.add(Parser.parse(filename));
+		}
 
-    Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
-    // @fixme: this is a slow/expensive operation
-    reasoner = reasoner.bindSchema(schema);
-    return reasoner;
-  }
+		Reasoner reasoner = ReasonerRegistry.getOWLMiniReasoner();
+		// @fixme: this is a slow/expensive operation
+		reasoner = reasoner.bindSchema(schema);
+		return reasoner;
+	}
 
 	public static void setCommonPrefixes(final Model model) {
 		model.setNsPrefix("omn", Omn.getURI());
@@ -202,7 +217,7 @@ public class Parser {
 	public static String toString(final Model model) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		setCommonPrefixes(model);
-		RDFDataMgr.write(baos , model, Lang.TURTLE);
+		RDFDataMgr.write(baos, model, Lang.TURTLE);
 		return baos.toString();
 	}
 
@@ -210,10 +225,10 @@ public class Parser {
 		return this.infModel;
 	}
 
-	public Model getModel(){
-	  return this.model;
+	public Model getModel() {
+		return this.model;
 	}
-	
+
 	public static boolean isValid(final InfModel model) {
 		final ValidityReport validity = model.validate();
 		return validity.isValid();

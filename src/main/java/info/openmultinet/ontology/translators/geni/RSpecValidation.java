@@ -278,7 +278,7 @@ public class RSpecValidation {
 		} catch (InvalidModelException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -331,7 +331,8 @@ public class RSpecValidation {
 				try {
 					model = RequestConverter.getModel(inputStream);
 					output = RequestConverter.getRSpec(model);
-				} catch (JAXBException | InvalidModelException | MissingRspecElementException e) {
+				} catch (JAXBException | InvalidModelException
+						| MissingRspecElementException e) {
 					e.printStackTrace();
 				}
 			}
@@ -373,9 +374,7 @@ public class RSpecValidation {
 
 				if (type.equals("request")) {
 					schema = new File(
-							// "./src/main/resources/geni/request/of-resv.xsd");
-							// "./src/main/resources/geni/request/top.xsd");
-					"./src/main/resources/geni/request/request.xsd");
+							"./src/main/resources/geni/request/request.xsd");
 				}
 
 				// check against XSD whether rspec is valid or not
@@ -426,8 +425,7 @@ public class RSpecValidation {
 			case "request":
 				try {
 					schema = sFactory.newSchema(new File(
-							"./src/main/resources/geni/request/top.xsd"));
-					// "./src/main/resources/geni/request/request.xsd"));
+							"./src/main/resources/geni/request/request.xsd"));
 				} catch (SAXException e) {
 					e.printStackTrace();
 				}

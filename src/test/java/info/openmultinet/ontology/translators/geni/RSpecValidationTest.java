@@ -32,8 +32,8 @@ public class RSpecValidationTest {
 	final static int manifests = 3;
 	final static int trueRequests = 4;
 	final static int requests = 5;
-	final static int different = 6;
-	final static int typeMissing = 7;
+	final static int different1 = 6;
+	final static int different2 = 7;
 	final static double nano = 1000000000.0;
 
 	@Test
@@ -60,10 +60,11 @@ public class RSpecValidationTest {
 				AbstractConverter.TOSCA, pathTosca);
 		types.add(pair4);
 
-//		String pathTtl = "./src/test/resources/omn/request.ttl";
-//		Entry<String, String> pair5 = new java.util.AbstractMap.SimpleEntry<>(
-//				AbstractConverter.TTL, pathTtl);
-//		types.add(pair5);
+		// String pathTtl = "./src/test/resources/omn/request.ttl";
+		// Entry<String, String> pair5 = new
+		// java.util.AbstractMap.SimpleEntry<>(
+		// AbstractConverter.TTL, pathTtl);
+		// types.add(pair5);
 
 		for (int i = 0; i < types.size(); i++) {
 
@@ -334,9 +335,9 @@ public class RSpecValidationTest {
 
 	private static int[] validateDirectory(File path) {
 		System.out
-		.println("==========================================================");
+				.println("==========================================================");
 		System.out
-		.println("===========  validateDirectory test           ============");
+				.println("===========  validateDirectory test           ============");
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -422,48 +423,58 @@ public class RSpecValidationTest {
 					// | DocumentException | ParsingException e) {
 					// e.printStackTrace();
 					// }
+
 					// boolean validSchemaFactory = RSpecValidation
 					// .validateRspecSchemaFactory(files[i].getPath(),
 					// type);
 					// System.out.println("validSchemaFactory: "
 					// + validSchemaFactory);
-					
-					 boolean validXMLUnit = RSpecValidation
-					 .validateRspecXMLUnit(rspecString);
-					 System.out.println("validXMLUnit: " + validXMLUnit);
+
+					boolean validXMLUnit = RSpecValidation
+							.validateRspecXMLUnit(rspecString);
+					System.out.println("validXMLUnit: " + validXMLUnit);
 
 					boolean validRSpecLint = RSpecValidation
 							.rspecLintMacOnly(files[i].getPath().substring(20));
 					System.out.println("validRSpecLint: " + validRSpecLint);
 
-					switch (type) {
-					case "advertisement":
-						if (validXMLUnit && validRSpecLint) {
-						// if (validRSpecLint) {
-							valid[trueAds]++;
+					if (type != null) {
+						switch (type) {
+						case "advertisement":
+							// if (validSchemaFactory && validRSpecLint) {
+							if (validXMLUnit && validRSpecLint) {
+								// if (validRSpecLint) {
+								valid[trueAds]++;
+							}
+							valid[ads]++;
+							break;
+						case "manifest":
+							// if (validSchemaFactory && validRSpecLint) {
+							if (validXMLUnit && validRSpecLint) {
+								// if (validRSpecLint) {
+								valid[trueManifests]++;
+							}
+							valid[manifests]++;
+							break;
+						case "request":
+							// if (validSchemaFactory && validRSpecLint) {
+							if (validXMLUnit && validRSpecLint) {
+								// if (validRSpecLint) {
+								valid[trueRequests]++;
+							}
+							valid[requests]++;
+							break;
 						}
-						valid[ads]++;
-						break;
-					case "manifest":
-						if (validXMLUnit && validRSpecLint) {
-						// if (validRSpecLint) {
-							valid[trueManifests]++;
-						}
-						valid[manifests]++;
-						break;
-					case "request":
-						// if (validXMLUnit && validRSpecLint) {
-						if (validRSpecLint) {
-							valid[trueRequests]++;
-						}
-						valid[requests]++;
-						break;
+					}
+					// if ((validXMLUnit || validRSpecLint)
+					// && !(validXMLUnit && validRSpecLint)) {
+					if (validXMLUnit && !validRSpecLint) {
+						valid[different1]++;
 					}
 
-					 if ((validXMLUnit || validRSpecLint)
-					 && !(validXMLUnit && validRSpecLint)) {
-					 valid[different]++;
-					 }
+					if (!validXMLUnit && validRSpecLint) {
+						valid[different2]++;
+					}
 
 					System.out
 							.println("==========================================================");
@@ -478,10 +489,10 @@ public class RSpecValidationTest {
 			}
 		}
 		System.out.println("Summary: ");
-		int total = valid[ads] + valid[manifests] + valid[requests]
-				+ valid[typeMissing];
+		int total = valid[ads] + valid[manifests] + valid[requests];
 		int totalTrue = valid[trueAds] + valid[trueManifests]
 				+ valid[trueRequests];
+		int totalDisagree = valid[different1] + valid[different2];
 		System.out.println(totalTrue + " / " + total + " RSpecs, "
 				+ " were valid in both XMLUnit and RSpecLint.");
 		System.out.println(valid[trueAds] + " / " + valid[ads]
@@ -491,7 +502,13 @@ public class RSpecValidationTest {
 		System.out.println(valid[trueRequests] + " / " + valid[requests]
 				+ " requests were valid");
 		System.out.println("Number where XMLUnit and RSpecLint disagreed: "
-				+ valid[different]);
+				+ totalDisagree);
+		System.out
+				.println("Number where valid in XMLUnit and not valid in RSpecLint: "
+						+ valid[different1]);
+		System.out
+				.println("Number where not valid in XMLUnit and valid in RSpecLint: "
+						+ valid[different2]);
 
 		return valid;
 
@@ -557,21 +574,26 @@ public class RSpecValidationTest {
 				rspecString = AbstractConverter.toString(path.getPath()
 						.substring(20));
 			} catch (IOException e) {
-				System.out.println("********* error converting to string ***************");
 				e.printStackTrace();
 			}
-			String type = RSpecValidation.getType(rspecString);
 
-//			boolean validSchemaFactory = RSpecValidation
-//					.validateRspecSchemaFactory(path.getPath(), type);
-//			System.out.println("validSchemaFactory: " + validSchemaFactory);
+			boolean validSchemaFactory = false;
+			boolean validRSpecLint = false;
 
-			boolean validXMLUnit = RSpecValidation
-					.validateRspecXMLUnit(rspecString);
-			System.out.println("validXMLUnit: " + validXMLUnit);
+			if (rspecString != null) {
+				String type = RSpecValidation.getType(rspecString);
+				validSchemaFactory = RSpecValidation
+						.validateRspecSchemaFactory(path.getPath(), type);
+				validRSpecLint = RSpecValidation.rspecLintMacOnly(path
+						.getPath().substring(20));
+			}
 
-			boolean validRSpecLint = RSpecValidation.rspecLintMacOnly(path
-					.getPath().substring(20));
+			System.out.println("validSchemaFactory: " + validSchemaFactory);
+
+			// boolean validXMLUnit = RSpecValidation
+			// .validateRspecXMLUnit(rspecString);
+			// System.out.println("validXMLUnit: " + validXMLUnit);
+
 			System.out.println("validRSpecLint: " + validRSpecLint);
 
 		}
@@ -579,7 +601,7 @@ public class RSpecValidationTest {
 
 	public static void main(String[] args) {
 
-		// File path = new File("./src/test/resources/geni/advertisement");
+		File path = new File("./src/test/resources/geni/advertisement");
 		// File path = new File("./src/test/resources/geni/ciscogeni");
 		// File path = new File("./src/test/resources/geni/exogeni");
 		// File path = new File("./src/test/resources/geni/fed4fire");
@@ -595,14 +617,19 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/protogeni");
 		// File path = new File("./src/test/resources/geni/request");
 		// File path = new File("./src/test/resources/geni/stich");
-		
+
 		// File path = new File("./src/test/resources/geni");
 
-		// getErrorDirectory(path);
+		getErrorDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
-		
-		File path = new File("./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
-		validateFile(path);
+
+		// File path = new File("./src/test/resources/geni/gpolab/63.rspec");
+		// File path = new File(
+		// "./src/test/resources/geni/exogeni/EG-EXP-6-exp3-eg-gpo.rspec");
+		// File path = new File(
+		// "./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
+		// validateFile(path);
+
 	}
 }

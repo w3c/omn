@@ -69,6 +69,11 @@ public abstract class AbstractConverter {
 		StringBuffer result = new StringBuffer();
 		final InputStream inputStream = AbstractConverter.class
 				.getResourceAsStream(filename);
+		
+		if(inputStream == null){
+			return null;
+		}
+		
 		final BufferedReader br = new BufferedReader(new InputStreamReader(
 				inputStream));
 		String line = null;

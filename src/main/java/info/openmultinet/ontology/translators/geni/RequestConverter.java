@@ -54,7 +54,7 @@ public class RequestConverter extends AbstractConverter {
 			.getName());
 
 	public static String getRSpec(final Model model) throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final RSpecContents request = new RSpecContents();
 		request.setType(RspecTypeContents.REQUEST);
 		request.setGeneratedBy(AbstractConverter.VENDOR);
@@ -81,7 +81,7 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void model2rspec(final Model model,
-			final RSpecContents manifest) throws InvalidModelException {
+			final RSpecContents manifest) throws InvalidModelException, MissingRspecElementException {
 		List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Group).toList();
 		if (groups.size() == 0) {
@@ -98,7 +98,7 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void convertStatementsToNodesAndLinks(
-			final RSpecContents manifest, final List<Statement> resources) {
+			final RSpecContents manifest, final List<Statement> resources) throws MissingRspecElementException {
 
 		for (final Statement resource : resources) {
 			final NodeContents node = new NodeContents();
@@ -120,7 +120,7 @@ public class RequestConverter extends AbstractConverter {
 		}
 	}
 
-	private static void setServices(Statement resource, NodeContents node) {
+	private static void setServices(Statement resource, NodeContents node) throws MissingRspecElementException {
 
 		ServiceContents serviceContents = null;
 		while (resource.getResource().hasProperty(Omn.hasService)) {
@@ -185,7 +185,7 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void setLoginService(Resource serviceResource,
-			ServiceContents serviceContents) {
+			ServiceContents serviceContents) throws MissingRspecElementException {
 		if (serviceResource.hasProperty(RDF.type, Omn_service.LoginService)) {
 			// get authentication
 			String authentication = "";
@@ -193,7 +193,12 @@ public class RequestConverter extends AbstractConverter {
 				authentication += serviceResource
 						.getProperty(Omn_service.authentication).getObject()
 						.asLiteral().getString();
-			} else if (serviceResource.hasProperty(Omn_service.publickey)) {
+			} else {
+				throw new MissingRspecElementException(
+						"LoginServiceContents > authentication");
+			}
+
+			if (serviceResource.hasProperty(Omn_service.publickey)) {
 				authentication += serviceResource
 						.getProperty(Omn_service.publickey).getObject()
 						.asLiteral().getString();
@@ -225,6 +230,7 @@ public class RequestConverter extends AbstractConverter {
 			// create login
 			LoginServiceContents loginServiceContent = new ObjectFactory()
 					.createLoginServiceContents();
+
 			loginServiceContent.setAuthentication(authentication); // required
 
 			if (hostnameLogin != "") {
@@ -353,7 +359,8 @@ public class RequestConverter extends AbstractConverter {
 				}
 
 				if (node.getClientId() == null) {
-					throw new MissingRspecElementException("NodeContents > client_id");
+					throw new MissingRspecElementException(
+							"NodeContents > client_id");
 				} else {
 					omnResource.addProperty(Omn_lifecycle.hasID,
 							node.getClientId());
@@ -397,7 +404,7 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	public static void extractRelationOrLocation(final Model model,
-			final Resource omnResource, List<Object> anyOrRelationOrLocation) {
+			final Resource omnResource, List<Object> anyOrRelationOrLocation) throws MissingRspecElementException {
 		for (Object o : anyOrRelationOrLocation) {
 			if (o instanceof JAXBElement) {
 				JAXBElement element = (JAXBElement) o;
@@ -407,6 +414,12 @@ public class RequestConverter extends AbstractConverter {
 							.getValue();
 					// omnResource.addProperty(RDF.type,
 					// model.createResource(sliverType.getName()));
+					
+					// name is required by slivertype
+					if (sliverType.getName() == null) {
+						throw new MissingRspecElementException(
+								"SliverTypeContents > name");
+					}
 					if (sliverType.getName().contains(":")) {
 						omnResource.addProperty(RDF.type,
 								model.createResource(sliverType.getName()));
