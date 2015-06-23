@@ -15,7 +15,7 @@ notifications:
   - alexander.willner@tu-berlin.de
   - fiteagle.dev@av.tu-berlin.de
   slack:
-    secure: AU96qD4XI+McpOoyqaFRcDplDb1UR6iB6jE+WAzHmo6NIms469j2PiaKny3THz6AWIg9HChWyGv2yHQfxRuBx/0aPYhu0SI5Hggta6Iib29VAwZ/zMsD3vhANYW0js9X6nDdJQx9RMniJ023A3nO22q4Zyv/D1Fri63BQVSlipA=
+    secure: ADSEKsnBXO6rCoEoHkqZYib+A6s6dTgRtcIVusNPXIhuVYXfnOfJw/lyQ+IaI2l5C3ll9GaAGy9nXVqSjvgXN+0iXlYidVpP3FJlr04+K5lBVB3Z2b4NDtM/n/iXNEVyF4jPlSeuHMNPKEKMQo+Xt1wVas1hf50AUeSDbVMpXiw=
 cache:
   directories:
   - $HOME/.m2
