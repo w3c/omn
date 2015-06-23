@@ -100,12 +100,62 @@ public class RSpecValidation {
 		int numDiffs = getNumberDiffs(inputNew, outputNew);
 		System.out.println("Number of differences: " + numDiffs);
 		int nodeCount = inputDoc.getElementsByTagName("*").getLength();
-		// int nodeCount = outputDoc.getElementsByTagName("*").getLength();
+
 		System.out.println("Number of input nodes: " + nodeCount);
 		double errorRate = ((double) numDiffs) / (2 * nodeCount);
 		errorRate = errorRate < 1 ? errorRate : 1;
 
 		return errorRate;
+	}
+	
+	/**
+	 * returns the number of non-recoverable XMLunit differences (errors) and
+	 * the number of nodes in the rspec
+	 * 
+	 * @param input
+	 *            RSpec as string
+	 * @return
+	 */
+	// static public double getProportionalError(String input) {
+	static public int[] getDiffsNodes(String input) {
+
+		String output = completeRoundtrip(input);
+		String inputNew = null;
+		String outputNew = null;
+
+		// clean up input doc
+		Document inputDoc = null;
+		try {
+			inputDoc = RSpecValidation.loadXMLFromString(input);
+			RSpecValidation.wipeRootNamespaces(inputDoc);
+			inputNew = RSpecValidation.getStringFromXml(inputDoc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// clean up output doc
+		Document outputDoc = null;
+		try {
+			outputDoc = RSpecValidation.loadXMLFromString(output);
+			RSpecValidation.wipeRootNamespaces(outputDoc);
+			outputNew = RSpecValidation.getStringFromXml(outputDoc);
+			System.out.println(outputNew);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		// get number of differences and calculate proportional error rate
+		int numDiffs = getNumberDiffs(inputNew, outputNew);
+		System.out.println("Number of differences: " + numDiffs);
+		int nodeCountInput = inputDoc.getElementsByTagName("*").getLength();
+		System.out.println("Number of input nodes: " + nodeCountInput);
+		
+		int nodeCountOutput = outputDoc.getElementsByTagName("*").getLength();
+		System.out.println("Number of output nodes: " + nodeCountOutput);
+		int[] diffsNodes = {numDiffs, nodeCountInput, nodeCountOutput};
+		
+		return diffsNodes;
 	}
 
 	/**

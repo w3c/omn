@@ -4,6 +4,7 @@ import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.translators.geni.RSpecValidation;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
@@ -105,52 +106,52 @@ public class FourNodesTest {
 		Assert.assertTrue("ip netmask",
 				outputRspec.contains("netmask=\"255.255.255.0\""));
 		Assert.assertTrue("ip type", outputRspec.contains("type=\"ipv4\""));
-		Assert.assertTrue("geni_sliver_info", outputRspec.contains("geni_sliver_info"));
-		Assert.assertTrue("geni_sliver_info resource_id", outputRspec.contains("resource_id=\"rci-w7:bdd5b251-4a63-4bd4-b77c-cad57974602d\""));
-		Assert.assertTrue("geni_sliver_info state", outputRspec.contains("state=\"ready\""));
-		Assert.assertTrue("geni_sliver_info start_time", outputRspec.contains("start_time=\"2013-12-03T00:57:47.000Z\""));
-		Assert.assertTrue("geni_sliver_info expiration_time", outputRspec.contains("expiration_time=\"2013-12-10T00:55:03.000Z\""));
-		Assert.assertTrue("geni_sliver_info creation_time", outputRspec.contains("creation_time=\"2013-12-03T00:57:47.000Z\""));
-		Assert.assertTrue("geni_sliver_info creator_urn", outputRspec.contains("creator_urn=\"johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren\""));
-		
+		Assert.assertTrue("geni_sliver_info",
+				outputRspec.contains("geni_sliver_info"));
+		Assert.assertTrue(
+				"geni_sliver_info resource_id",
+				outputRspec
+						.contains("resource_id=\"rci-w7:bdd5b251-4a63-4bd4-b77c-cad57974602d\""));
+		Assert.assertTrue("geni_sliver_info state",
+				outputRspec.contains("state=\"ready\""));
+		Assert.assertTrue("geni_sliver_info start_time",
+				outputRspec.contains("start_time=\"2013-12-03T00:57:47.000Z\""));
+		Assert.assertTrue("geni_sliver_info expiration_time", outputRspec
+				.contains("expiration_time=\"2013-12-10T00:55:03.000Z\""));
+		Assert.assertTrue("geni_sliver_info creation_time", outputRspec
+				.contains("creation_time=\"2013-12-03T00:57:47.000Z\""));
+		Assert.assertTrue(
+				"geni_sliver_info creator_urn",
+				outputRspec
+						.contains("creator_urn=\"johren@bbn.com, urn:publicid:IDN+ch.geni.net+user+johren\""));
+
 		Assert.assertTrue("link", outputRspec.contains("link"));
-		Assert.assertTrue("link sliver_id", outputRspec.contains("sliver_id=\"urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:link0\""));
-		Assert.assertTrue("link client_id", outputRspec.contains("client_id=\"link0\""));
-		Assert.assertTrue("link vlantag", outputRspec.contains("vlantag=\"2200\""));
-		Assert.assertTrue("interface_ref", outputRspec.contains("interface_ref"));
-		Assert.assertTrue("interface_ref client_id", outputRspec.contains("client_id=\"3:if0\""));
-		
-		Assert.assertTrue("geni_slice_info", outputRspec.contains("geni_slice_info"));
-		Assert.assertTrue("geni_slice_info uuid", outputRspec.contains("uuid=\"5fcc5c81-c686-4e02-89bb-8dd7162697d3\""));
-		Assert.assertTrue("geni_slice_info urn", outputRspec.contains("urn=\"urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\""));
+		Assert.assertTrue(
+				"link sliver_id",
+				outputRspec
+						.contains("sliver_id=\"urn:publicid:IDN+exogeni.net:rcivmsite+sliver+bd6b53fd-9185-4cd5-99cb-f9b8736010b2:link0\""));
+		Assert.assertTrue("link client_id",
+				outputRspec.contains("client_id=\"link0\""));
+		Assert.assertTrue("link vlantag",
+				outputRspec.contains("vlantag=\"2200\""));
+		Assert.assertTrue("interface_ref",
+				outputRspec.contains("interface_ref"));
+		Assert.assertTrue("interface_ref client_id",
+				outputRspec.contains("client_id=\"3:if0\""));
+
+		Assert.assertTrue("geni_slice_info",
+				outputRspec.contains("geni_slice_info"));
+		Assert.assertTrue("geni_slice_info uuid", outputRspec
+				.contains("uuid=\"5fcc5c81-c686-4e02-89bb-8dd7162697d3\""));
+		Assert.assertTrue(
+				"geni_slice_info urn",
+				outputRspec
+						.contains("urn=\"urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\""));
+
+		System.out.println("===============================");
+		String inputRSpec = AbstractConverter.toString(filename);
+		System.out.println(inputRSpec);
+		RSpecValidation.getDiffsNodes(inputRSpec);
 	}
-	
-//	@Test
-//	public void requestRoundtrip() throws JAXBException,
-//			InvalidModelException, IOException, XMLStreamException {
-//		final String filename = "/geni/gimiv3/4nodes.request";
-//		final InputStream inputRspec = FourNodesTest.class
-//				.getResourceAsStream(filename);
-//		System.out.println("Converting this input from '" + filename + "':");
-//		System.out.println("===============================");
-//		System.out.println(AbstractConverter.toString(filename));
-//		System.out.println("===============================");
-//
-//		final Model model = RequestConverter.getModel(inputRspec);
-//		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
-//				Omn_lifecycle.Request);
-//		System.out.println("Generated this graph:");
-//		System.out.println("===============================");
-//		System.out.println(Parser.toString(model));
-//		System.out.println("===============================");
-//		Assert.assertTrue("should have a topology", topology.hasNext());
-//
-//		final InfModel infModel = new Parser(model).getInfModel();
-//		final String outputRspec = RequestConverter.getRSpec(infModel);
-//		System.out.println("Generated this rspec:");
-//		System.out.println("===============================");
-//		System.out.println(outputRspec);
-//		System.out.println("===============================");
-//	}
 
 }
