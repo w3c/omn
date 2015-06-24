@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.gimiv3;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
@@ -26,7 +27,8 @@ public class FourNodesTest {
 
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException {
+			InvalidModelException, IOException, XMLStreamException,
+			MissingRspecElementException {
 		final String filename = "/geni/gimiv3/4nodes.manifest";
 		final InputStream inputRspec = FourNodesTest.class
 				.getResourceAsStream(filename);
@@ -148,10 +150,10 @@ public class FourNodesTest {
 				outputRspec
 						.contains("urn=\"urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\""));
 
-		System.out.println("===============================");
-		String inputRSpec = AbstractConverter.toString(filename);
-		System.out.println(inputRSpec);
-		RSpecValidation.getDiffsNodes(inputRSpec);
+		// System.out.println("===============================");
+		// String inputRSpec = AbstractConverter.toString(filename);
+		// System.out.println(inputRSpec);
+		// RSpecValidation.getDiffsNodes(inputRSpec);
 	}
 
 }

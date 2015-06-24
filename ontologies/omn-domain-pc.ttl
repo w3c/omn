@@ -204,6 +204,23 @@ owl:AllDisjointProperties rdf:type owl:Class .
          rdfs:range xsd:string .
 
 
+
+###  http://open-multinet.info/ontology/omn-domain-pc#routableControlIp
+
+:routableControlIp rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has routable control IP"@en ;
+         
+         rdfs:comment "Indicates that the user requires a routable IP on the control interface."@en ;
+         
+         rdfs:domain omn-resource:Node ;
+
+         rdfs:seeAlso <http://www.protogeni.net/resources/rspec/ext/emulab/1> ;
+         
+         rdfs:range xsd:boolean .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasCPU
 
 :hasCPU rdf:type owl:DatatypeProperty ;

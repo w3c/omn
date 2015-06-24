@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
@@ -850,7 +851,7 @@ public class ManifestConverter extends AbstractConverter {
 		}
 	}
 
-	public static Model getModel(final InputStream stream) throws JAXBException {
+	public static Model getModel(final InputStream stream) throws JAXBException, MissingRspecElementException {
 		final Model model = ManifestConverter.createModelTemplate();
 		final RSpecContents manifest = ManifestConverter.getManifest(stream);
 
@@ -860,7 +861,7 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void convertManifest2Model(final RSpecContents manifest,
-			final Model model) {
+			final Model model) throws MissingRspecElementException {
 
 		Resource topology = model.getResource(AbstractConverter.NAMESPACE
 				+ "manifest");
@@ -930,7 +931,7 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	public static void extractDetails(final Model model, Resource topology,
-			Object o) {
+			Object o) throws MissingRspecElementException {
 		JAXBElement<?> element = (JAXBElement<?>) o;
 
 		if (element.getDeclaredType().equals(NodeContents.class)) {
@@ -1000,6 +1001,10 @@ public class ManifestConverter extends AbstractConverter {
 						.generateUrlFromUrn(link.getSliverId()));
 			}
 
+			if(link.getClientId() == null){
+				throw new MissingRspecElementException("LinkContents > client_id ");
+			}
+					
 			linkResource.addLiteral(Omn_resource.clientId, link.getClientId()); // required
 			linkResource.addProperty(RDF.type, Omn_resource.Link);
 

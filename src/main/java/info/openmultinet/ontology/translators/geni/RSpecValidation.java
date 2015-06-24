@@ -67,8 +67,10 @@ public class RSpecValidation {
 	 * @param input
 	 *            RSpec as string
 	 * @return
+	 * @throws MissingRspecElementException
 	 */
-	static public double getProportionalError(String input) {
+	static public double getProportionalError(String input)
+			throws MissingRspecElementException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -107,7 +109,7 @@ public class RSpecValidation {
 
 		return errorRate;
 	}
-	
+
 	/**
 	 * returns the number of non-recoverable XMLunit differences (errors) and
 	 * the number of nodes in the rspec
@@ -115,9 +117,10 @@ public class RSpecValidation {
 	 * @param input
 	 *            RSpec as string
 	 * @return
+	 * @throws MissingRspecElementException
 	 */
-	// static public double getProportionalError(String input) {
-	static public int[] getDiffsNodes(String input) {
+	static public int[] getDiffsNodes(String input)
+			throws MissingRspecElementException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -139,7 +142,7 @@ public class RSpecValidation {
 			outputDoc = RSpecValidation.loadXMLFromString(output);
 			RSpecValidation.wipeRootNamespaces(outputDoc);
 			outputNew = RSpecValidation.getStringFromXml(outputDoc);
-			System.out.println(outputNew);
+			// System.out.println(outputNew);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -150,11 +153,11 @@ public class RSpecValidation {
 		System.out.println("Number of differences: " + numDiffs);
 		int nodeCountInput = inputDoc.getElementsByTagName("*").getLength();
 		System.out.println("Number of input nodes: " + nodeCountInput);
-		
+
 		int nodeCountOutput = outputDoc.getElementsByTagName("*").getLength();
 		System.out.println("Number of output nodes: " + nodeCountOutput);
-		int[] diffsNodes = {numDiffs, nodeCountInput, nodeCountOutput};
-		
+		int[] diffsNodes = { numDiffs, nodeCountInput, nodeCountOutput };
+
 		return diffsNodes;
 	}
 
@@ -256,16 +259,19 @@ public class RSpecValidation {
 	public static void wipeRootNamespaces(Document xml) {
 
 		Node root = xml.getElementsByTagName("rspec").item(0);
-		NodeList rootchildren = root.getChildNodes();
-		Element newroot = xml.createElement(root.getNodeName());
+		if (root != null) {
+			NodeList rootchildren = root.getChildNodes();
+			Element newroot = xml.createElement(root.getNodeName());
 
-		String type = root.getAttributes().getNamedItem("type").getNodeValue();
-		newroot.setAttribute("type", type);
+			String type = root.getAttributes().getNamedItem("type")
+					.getNodeValue();
+			newroot.setAttribute("type", type);
 
-		for (int i = 0; i < rootchildren.getLength(); i++) {
-			newroot.appendChild(rootchildren.item(i).cloneNode(true));
+			for (int i = 0; i < rootchildren.getLength(); i++) {
+				newroot.appendChild(rootchildren.item(i).cloneNode(true));
+			}
+			xml.replaceChild(newroot, root);
 		}
-		xml.replaceChild(newroot, root);
 	}
 
 	/**
@@ -338,8 +344,10 @@ public class RSpecValidation {
 	 * 
 	 * @param input
 	 * @return
+	 * @throws MissingRspecElementException
 	 */
-	public static String completeRoundtrip(String input) {
+	public static String completeRoundtrip(String input)
+			throws MissingRspecElementException {
 
 		String output = null;
 		Model model;
@@ -359,6 +367,7 @@ public class RSpecValidation {
 					AdvertisementConverter converter = new AdvertisementConverter();
 					RSpecContents rspec = converter.getRspec(inputStream);
 					model = converter.getModel(rspec);
+					System.out.println(Parser.toString(model));
 					output = converter.getRSpec(model);
 				} catch (JAXBException | InvalidModelException
 						| XMLStreamException e) {
@@ -369,6 +378,7 @@ public class RSpecValidation {
 			if (type.equals("manifest")) {
 				try {
 					model = ManifestConverter.getModel(inputStream);
+					System.out.println(Parser.toString(model));
 					InfModel infModel = new Parser(model).getInfModel();
 					output = ManifestConverter.getRSpec(infModel,
 							"instageni.gpolab.bbn.com");
@@ -380,6 +390,7 @@ public class RSpecValidation {
 			if (type.equals("request")) {
 				try {
 					model = RequestConverter.getModel(inputStream);
+					System.out.println(Parser.toString(model));
 					output = RequestConverter.getRSpec(model);
 				} catch (JAXBException | InvalidModelException
 						| MissingRspecElementException e) {

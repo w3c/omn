@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 
 import java.io.File;
@@ -88,7 +89,8 @@ public class RSpecValidationTest {
 		}
 	}
 
-	private static ArrayList<List<Double>> getErrorDirectory(File path) {
+	private static ArrayList<List<Double>> getErrorDirectory(File path)
+			throws MissingRspecElementException {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -205,7 +207,8 @@ public class RSpecValidationTest {
 		return errorRates;
 	}
 
-	private static ArrayList<List<Integer>> getNodesDiffsDirectory(File path) {
+	private static ArrayList<List<Integer>> getNodesDiffsDirectory(File path)
+			throws MissingRspecElementException {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -368,7 +371,8 @@ public class RSpecValidationTest {
 		return totalDiffNodes;
 	}
 
-	private static ArrayList<List<Long>> getTimesDirectory(File path) {
+	private static ArrayList<List<Long>> getTimesDirectory(File path)
+			throws MissingRspecElementException {
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
 			return null;
@@ -677,7 +681,8 @@ public class RSpecValidationTest {
 
 	}
 
-	private static void getErrorFile(File path) {
+	private static void getErrorFile(File path)
+			throws MissingRspecElementException {
 
 		System.out.println("******************************************");
 		System.out.println("******       Prelim                 ******");
@@ -765,7 +770,7 @@ public class RSpecValidationTest {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MissingRspecElementException {
 
 		// File path = new File("./src/test/resources/geni/advertisement");
 		// File path = new File("./src/test/resources/geni/ciscogeni");

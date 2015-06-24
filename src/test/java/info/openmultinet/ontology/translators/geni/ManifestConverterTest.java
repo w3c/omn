@@ -23,7 +23,7 @@ public class ManifestConverterTest {
 
 	@Test
 	public void testConvertingComplexRSpecToGraph() throws JAXBException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final InputStream rspec = ManifestConverterTest.class
 				.getResourceAsStream("/geni/manifest/exogeni5nodemanifest.xml");
 		final Model model = ManifestConverter.getModel(rspec);
@@ -84,7 +84,7 @@ public class ManifestConverterTest {
 
 	@Test
 	public void testPaper2015Roundtrip() throws JAXBException, IOException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final String filename = "/geni/manifest/manifest_paper2015.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
 				.getResourceAsStream(filename);

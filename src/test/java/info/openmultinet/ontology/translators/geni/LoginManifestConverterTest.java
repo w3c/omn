@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
@@ -22,7 +23,7 @@ public class LoginManifestConverterTest {
 
 	@Test
 	public void testLoginRoundtrip() throws JAXBException, IOException,
-			InvalidModelException {
+			InvalidModelException, MissingRspecElementException {
 		final String filename = "/geni/manifest/instageni5nodemanifest.xml";
 		final InputStream inputRspec = LoginManifestConverterTest.class
 				.getResourceAsStream(filename);

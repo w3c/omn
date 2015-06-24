@@ -9,15 +9,18 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceCo
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.LinkPropertyContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.RoutableControlIp;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
@@ -67,21 +70,22 @@ public class RequestConverter extends AbstractConverter {
 		return AbstractConverter.toString(rspec, RequestConverter.JAXB);
 	}
 
-	private static void setGeneratedTime(final RSpecContents manifest) {
+	private static void setGeneratedTime(final RSpecContents request) {
 		final GregorianCalendar gregorianCalendar = new GregorianCalendar();
 		gregorianCalendar.setTime(new Date(System.currentTimeMillis()));
 		XMLGregorianCalendar xmlGrogerianCalendar;
 		try {
 			xmlGrogerianCalendar = DatatypeFactory.newInstance()
 					.newXMLGregorianCalendar(gregorianCalendar);
-			manifest.setGenerated(xmlGrogerianCalendar);
+			request.setGenerated(xmlGrogerianCalendar);
 		} catch (final DatatypeConfigurationException e) {
 			RequestConverter.LOG.info(e.getMessage());
 		}
 	}
 
 	private static void model2rspec(final Model model,
-			final RSpecContents manifest) throws InvalidModelException, MissingRspecElementException {
+			final RSpecContents request) throws InvalidModelException,
+			MissingRspecElementException {
 		List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn.Group).toList();
 		if (groups.size() == 0) {
@@ -94,33 +98,126 @@ public class RequestConverter extends AbstractConverter {
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
-		RequestConverter.convertStatementsToNodesAndLinks(manifest, resources);
+		RequestConverter.convertStatementsToNodesAndLinks(request, resources);
 	}
 
 	private static void convertStatementsToNodesAndLinks(
-			final RSpecContents manifest, final List<Statement> resources) throws MissingRspecElementException {
+			final RSpecContents request, final List<Statement> resources)
+			throws MissingRspecElementException {
 
 		for (final Statement resource : resources) {
-			final NodeContents node = new NodeContents();
+			if (!resource.getResource()
+					.hasProperty(RDF.type, Omn_resource.Link)) {
 
-			RequestConverter.setComponentDetails(resource, node);
-			RequestConverter.setComponentId(resource, node);
-			if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
-				final boolean isExclusive = resource.getResource()
-						.getProperty(Omn_resource.isExclusive).getBoolean();
-				node.setExclusive(isExclusive);
+				final NodeContents node = new NodeContents();
+
+				RequestConverter.setComponentDetails(resource, node);
+				RequestConverter.setComponentId(resource, node);
+				if (resource.getResource()
+						.hasProperty(Omn_resource.isExclusive)) {
+					final boolean isExclusive = resource.getResource()
+							.getProperty(Omn_resource.isExclusive).getBoolean();
+					node.setExclusive(isExclusive);
+				}
+
+				setSliverType(resource, node);
+				setServices(resource, node);
+				setMonitoringService(resource, node);
+				setInterfaces(resource, node);
+				setEmulabExtension(resource, node);
+
+				request.getAnyOrNodeOrLink().add(
+						new ObjectFactory().createNode(node));
+			} else {
+
+				final LinkContents link = new LinkContents();
+
+				// setGeniSliverInfo(resource, link);
+				setLinkDetails(resource, link);
+				setInterfaceRefs(resource, link);
+
+				request.getAnyOrNodeOrLink().add(
+						new ObjectFactory().createLink(link));
 			}
-
-			setSliverType(resource, node);
-			setServices(resource, node);
-			setMonitoringService(resource, node);
-
-			manifest.getAnyOrNodeOrLink().add(
-					new ObjectFactory().createNode(node));
 		}
 	}
 
-	private static void setServices(Statement resource, NodeContents node) throws MissingRspecElementException {
+	private static void setInterfaceRefs(Statement resource, LinkContents link) {
+		// TODO Auto-generated method stub
+		List<Statement> interfaces = resource.getResource()
+				.listProperties(Omn_resource.hasInterface).toList();
+
+		for (Statement interface1 : interfaces) {
+
+			InterfaceRefContents newInterface = new ObjectFactory()
+					.createInterfaceRefContents();
+			// String clientId = interface1.getObject().asLiteral().getString();
+			String clientId = interface1.getResource()
+					.getProperty(Omn_resource.clientId).getObject().asLiteral()
+					.getString();
+
+			newInterface.setClientId(clientId);
+			link.getAnyOrPropertyOrLinkType().add(
+					new ObjectFactory()
+							.createLinkContentsInterfaceRef(newInterface));
+		}
+
+	}
+
+	private static void setLinkDetails(Statement resource, LinkContents link) {
+		// TODO Auto-generated method stub
+
+		if (resource.getResource().hasProperty(Omn_resource.clientId)) {
+			String clientId = resource.getResource()
+					.getProperty(Omn_resource.clientId).getObject().asLiteral()
+					.getString();
+			link.setClientId(clientId);
+		}
+
+	}
+
+	private static void setEmulabExtension(Statement resource, NodeContents node) {
+
+		Resource resourceResource = resource.getResource();
+
+		// checks if routableControlIp property present
+		// it's a boolean property, so if present add to RSpec
+		if (resourceResource.hasProperty(Omn_domain_pc.routableControlIp)) {
+			RoutableControlIp routableControlIp = new ObjectFactory()
+					.createRoutableControlIp();
+			node.getAnyOrRelationOrLocation().add(routableControlIp);
+		}
+	}
+
+	private static void setInterfaces(Statement resource, NodeContents node) {
+
+		List<Statement> interfaces = resource.getResource()
+				.listProperties(Omn_resource.hasInterface).toList();
+
+		for (final Statement interface1 : interfaces) {
+
+			InterfaceContents interfaceContents = null;
+			Resource interfaceResource = interface1.getResource();
+
+			if (interfaceResource.hasProperty(Omn_resource.clientId)) {
+				if (interfaceContents == null) {
+					interfaceContents = new InterfaceContents();
+				}
+				interfaceContents.setClientId(interfaceResource
+						.getProperty(Omn_resource.clientId).getObject()
+						.asLiteral().toString());
+			}
+
+			if (interfaceContents != null) {
+				JAXBElement<InterfaceContents> interfaceJaxb = new ObjectFactory()
+						.createInterface(interfaceContents);
+				node.getAnyOrRelationOrLocation().add(interfaceJaxb);
+			}
+		}
+	}
+
+	private static void setServices(Statement resource, NodeContents node)
+			throws MissingRspecElementException {
 
 		ServiceContents serviceContents = null;
 		while (resource.getResource().hasProperty(Omn.hasService)) {
@@ -185,7 +282,8 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void setLoginService(Resource serviceResource,
-			ServiceContents serviceContents) throws MissingRspecElementException {
+			ServiceContents serviceContents)
+			throws MissingRspecElementException {
 		if (serviceResource.hasProperty(RDF.type, Omn_service.LoginService)) {
 			// get authentication
 			String authentication = "";
@@ -342,6 +440,7 @@ public class RequestConverter extends AbstractConverter {
 		List<JAXBElement<NodeContents>> nodes;
 		try {
 			nodes = (List) request.getAnyOrNodeOrLink();
+
 			for (final JAXBElement<NodeContents> nodeObject : nodes) {
 				final NodeContents node = nodeObject.getValue();
 				final Model model = topology.getModel();
@@ -404,7 +503,8 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	public static void extractRelationOrLocation(final Model model,
-			final Resource omnResource, List<Object> anyOrRelationOrLocation) throws MissingRspecElementException {
+			final Resource omnResource, List<Object> anyOrRelationOrLocation)
+			throws MissingRspecElementException {
 		for (Object o : anyOrRelationOrLocation) {
 			if (o instanceof JAXBElement) {
 				JAXBElement element = (JAXBElement) o;
@@ -414,7 +514,7 @@ public class RequestConverter extends AbstractConverter {
 							.getValue();
 					// omnResource.addProperty(RDF.type,
 					// model.createResource(sliverType.getName()));
-					
+
 					// name is required by slivertype
 					if (sliverType.getName() == null) {
 						throw new MissingRspecElementException(
@@ -467,6 +567,12 @@ public class RequestConverter extends AbstractConverter {
 					omnResource.addProperty(Omn_lifecycle.usesService,
 							monitoringResource);
 				}
+				if (o.getClass()
+						.equals(info.openmultinet.ontology.translators.geni.jaxb.request.RoutableControlIp.class)) {
+					omnResource.addProperty(Omn_domain_pc.routableControlIp,
+							"true");
+				}
+
 			}
 		}
 	}
@@ -536,7 +642,7 @@ public class RequestConverter extends AbstractConverter {
 	private static class NetworkTopologyExtractor {
 
 		static void extractTopologyInformation(final RSpecContents request,
-				final Resource topology) {
+				final Resource topology) throws MissingRspecElementException {
 
 			List<JAXBElement<NodeContents>> xmlElements;
 			Model outputModel = topology.getModel();
@@ -580,25 +686,38 @@ public class RequestConverter extends AbstractConverter {
 								omnResource.addProperty(
 										Omn_resource.hasInterface,
 										interfaceResource);
+								if (content.getClientId() != null) {
+									interfaceResource.addProperty(
+											Omn_resource.clientId,
+											content.getClientId());
+								}
 							} catch (ClassCastException exp) {
 
 							}
 						}
 					}
-					// If it's an interface, then extract the node information
+					// If it's a link, then extract the link information
 					// and its corresponding interfaces
 					else if (element.getDeclaredType() == LinkContents.class) {
 
 						JAXBElement<LinkContents> linkObject = (JAXBElement<LinkContents>) element;
 						LinkContents link = linkObject.getValue();
 
+						if (link.getClientId() == null) {
+							throw new MissingRspecElementException(
+									"LinkContents > client_id ");
+						}
 						Resource linkResource = outputModel
 								.createResource("http://open-multinet.info/example#"
 										+ link.getClientId());
 						// linkResource.addProperty(RDF.type, Nml.Link);
 						linkResource.addProperty(RDF.type, Omn_resource.Link);
 
+						linkResource.addLiteral(Omn_resource.clientId,
+								link.getClientId()); // required
+
 						// Get source and sink interfaces
+						@SuppressWarnings({ "unchecked", "rawtypes" })
 						List<JAXBElement<InterfaceRefContents>> interfaces = (List) link
 								.getAnyOrPropertyOrLinkType();
 						for (JAXBElement<InterfaceRefContents> interfaceRefContents : interfaces) {
@@ -613,18 +732,54 @@ public class RequestConverter extends AbstractConverter {
 								// interfaceResource.addProperty(Nml.isSource,
 								// linkResource);
 
+								// interfaceResource.addProperty(
+								// Omn_resource.isSink, linkResource);
+								// interfaceResource.addProperty(
+								// Omn_resource.isSource, linkResource);
 								interfaceResource.addProperty(
-										Omn_resource.isSink, linkResource);
-								interfaceResource.addProperty(
-										Omn_resource.isSource, linkResource);
-
+										Omn_resource.clientId,
+										content.getClientId());
 								// linkResource.addProperty(Nml.hasPort,
 								// interfaceResource);
+								linkResource.addProperty(
+										Omn_resource.hasInterface,
+										interfaceResource);
 							} catch (ClassCastException exp) {
 
 							}
 						}
 
+						// Get source and sink interfaces
+						@SuppressWarnings({ "unchecked", "rawtypes" })
+						List<JAXBElement<LinkPropertyContents>> properties = (List) link
+								.getAnyOrPropertyOrLinkType();
+						for (JAXBElement<LinkPropertyContents> propertyContents : properties) {
+							try {
+								LinkPropertyContents content = propertyContents
+										.getValue();
+
+								// interfaceResource.addProperty(Nml.isSink,
+								// linkResource);
+								// interfaceResource.addProperty(Nml.isSource,
+								// linkResource);
+
+								// interfaceResource.addProperty(
+								// Omn_resource.isSink, linkResource);
+								// interfaceResource.addProperty(
+								// Omn_resource.isSource, linkResource);
+								// interfaceResource.addProperty(
+								// Omn_resource.clientId,
+								// content.getClientId());
+								// linkResource.addProperty(Nml.hasPort,
+								// interfaceResource);
+								// linkResource.addProperty(
+								// Omn_resource.hasInterface,
+								// interfaceResource);
+							} catch (ClassCastException exp) {
+
+							}
+						}
+						topology.addProperty(Omn.hasResource, linkResource);
 					}
 				}
 			} catch (ClassCastException e) {

@@ -357,6 +357,15 @@ omn:Resource rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-resource#LinkProperty
+
+:LinkProperty rdf:type owl:Class ;
+
+      rdfs:label "Link Property"@en ;
+      
+      rdfs:subClassOf :Link .
+
+
 ###  http://open-multinet.info/ontology/omn-resource#NetworkObject
 
 :NetworkObject rdf:type owl:Class ;
