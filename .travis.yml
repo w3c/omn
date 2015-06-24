@@ -4,21 +4,17 @@ jdk:
 script:
 - mvn test
 - ./bin/rdflint.sh -assume ontologies/*.ttl import/*.ttl -check ontologies/*.ttl
-- '
-if [[ ${TRAVIS_PULL_REQUEST} == "false" && ${TRAVIS_BRANCH} == "master" ]]; then
-  mvn deploy -DskipTests --settings .travis/settings.xml deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet  -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT;
-else
-  true;
-fi'
+- mvn_deploy.sh
 notifications:
   email:
   - alexander.willner@tu-berlin.de
   - fiteagle.dev@av.tu-berlin.de
   slack:
-    secure: AU96qD4XI+McpOoyqaFRcDplDb1UR6iB6jE+WAzHmo6NIms469j2PiaKny3THz6AWIg9HChWyGv2yHQfxRuBx/0aPYhu0SI5Hggta6Iib29VAwZ/zMsD3vhANYW0js9X6nDdJQx9RMniJ023A3nO22q4Zyv/D1Fri63BQVSlipA=
+    secure: ADSEKsnBXO6rCoEoHkqZYib+A6s6dTgRtcIVusNPXIhuVYXfnOfJw/lyQ+IaI2l5C3ll9GaAGy9nXVqSjvgXN+0iXlYidVpP3FJlr04+K5lBVB3Z2b4NDtM/n/iXNEVyF4jPlSeuHMNPKEKMQo+Xt1wVas1hf50AUeSDbVMpXiw=
 cache:
   directories:
   - $HOME/.m2
+  - $HOME/eyeball-2.3
 after_success:
 - mvn clean test jacoco:report coveralls:report
 env:
