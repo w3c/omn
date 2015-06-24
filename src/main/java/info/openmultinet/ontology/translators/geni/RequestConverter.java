@@ -135,11 +135,37 @@ public class RequestConverter extends AbstractConverter {
 				// setGeniSliverInfo(resource, link);
 				setLinkDetails(resource, link);
 				setInterfaceRefs(resource, link);
+				setLinkProperties(resource, link);
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createLink(link));
 			}
 		}
+	}
+
+	private static void setLinkProperties(Statement resource, LinkContents link) {
+		List<Statement> linkProperties = resource.getResource()
+				.listProperties(Omn_resource.hasProperty).toList();
+
+		for (Statement linkPropertyStatement : linkProperties) {
+
+			LinkPropertyContents newLinkProperty = new ObjectFactory()
+					.createLinkPropertyContents();
+
+			Resource linkResource = linkPropertyStatement.getResource();
+
+			String sinkId = linkResource.getProperty(Omn_resource.hasSink)
+					.getObject().asLiteral().getString();
+			newLinkProperty.setDestId(sinkId);
+
+			String sourceId = linkResource.getProperty(Omn_resource.hasSource)
+					.getObject().asLiteral().getString();
+			newLinkProperty.setSourceId(sourceId);
+
+			link.getAnyOrPropertyOrLinkType().add(
+					new ObjectFactory().createProperty(newLinkProperty));
+		}
+
 	}
 
 	private static void setInterfaceRefs(Statement resource, LinkContents link) {
@@ -756,23 +782,31 @@ public class RequestConverter extends AbstractConverter {
 							try {
 								LinkPropertyContents content = propertyContents
 										.getValue();
+								String sourceID = content.getSourceId();
+								String destID = content.getDestId();
 
+								if (sourceID == null || destID == null) {
+									throw new MissingRspecElementException(
+											"LinkPropertyContents > source_id/dest_id");
+								}
+
+								Resource linkPropertyResource = outputModel
+										.createResource();
+								linkPropertyResource.addProperty(RDF.type,
+										Omn_resource.LinkProperty);
+								linkPropertyResource.addProperty(
+										Omn_resource.hasSink, destID);
+								linkPropertyResource.addProperty(
+										Omn_resource.hasSource, sourceID);
+
+								linkResource.addProperty(
+										Omn_resource.hasProperty,
+										linkPropertyResource);
 								// interfaceResource.addProperty(Nml.isSink,
 								// linkResource);
 								// interfaceResource.addProperty(Nml.isSource,
 								// linkResource);
-
-								// interfaceResource.addProperty(
-								// Omn_resource.isSink, linkResource);
-								// interfaceResource.addProperty(
-								// Omn_resource.isSource, linkResource);
-								// interfaceResource.addProperty(
-								// Omn_resource.clientId,
-								// content.getClientId());
 								// linkResource.addProperty(Nml.hasPort,
-								// interfaceResource);
-								// linkResource.addProperty(
-								// Omn_resource.hasInterface,
 								// interfaceResource);
 							} catch (ClassCastException exp) {
 

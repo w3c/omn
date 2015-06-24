@@ -112,6 +112,62 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-resource#hasSink
+
+:hasSink rdf:type owl:ObjectProperty ;
+        
+        rdfs:comment "has sink"@en ;
+
+        rdfs:label "has sink"@en ;
+        
+        rdfs:range :Interface ;
+        
+        rdfs:domain :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasSource
+
+:hasSource rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "has source"@en ;
+
+          rdfs:label "has source"@en ;
+          
+          rdfs:range :Interface ;
+          
+          rdfs:domain :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasProperty
+
+:hasProperty rdf:type owl:ObjectProperty ;
+        
+        rdfs:comment "has link property"@en ;
+
+        rdfs:label "has link property"@en ;
+        
+        rdfs:range :Link ;
+        
+        rdfs:domain :LinkProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isPropertyOf
+
+:isPropertyOf rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "is link property of"@en ;
+
+          rdfs:label "is link property of"@en ;
+          
+          rdfs:range :LinkProperty ;
+          
+          rdfs:domain :Link .
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#requiredBy
 
 :requiredBy rdf:type owl:ObjectProperty ;

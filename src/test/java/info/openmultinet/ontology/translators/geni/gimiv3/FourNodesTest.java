@@ -150,10 +150,14 @@ public class FourNodesTest {
 				outputRspec
 						.contains("urn=\"urn:publicid:IDN+ch.geni.net:GIMITesting+slice+joOEDLTut\""));
 
-		// System.out.println("===============================");
-		// String inputRSpec = AbstractConverter.toString(filename);
-		// System.out.println(inputRSpec);
-		// RSpecValidation.getDiffsNodes(inputRSpec);
+		System.out.println("===============================");
+		String inputRSpec = AbstractConverter.toString(filename);
+		System.out.println(inputRSpec);
+		System.out.println("Diffs:");
+		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRSpec);
+		Assert.assertTrue("No differences between input and output files",
+				diffsNodes[0] == 0);
+
 	}
 
 }
