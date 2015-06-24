@@ -4,7 +4,7 @@ jdk:
 script:
 - mvn test
 - ./bin/rdflint.sh -assume ontologies/*.ttl import/*.ttl -check ontologies/*.ttl
-- mvn_deploy.sh
+- ./.travis/mvn_deploy.sh
 notifications:
   email:
   - alexander.willner@tu-berlin.de
