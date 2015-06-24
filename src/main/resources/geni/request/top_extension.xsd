@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+	xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+	<!-- EMULAB-COPYRIGHT Copyright (c) 2010 University of Utah and the Flux 
+		Group. All rights reserved. -->
+	<!-- Definition of common extensions in topologies - shared between vtop 
+		(virtual topology) and ptop (physical topology) extensions. -->
+	<xs:element name="node_type">
+		<xs:complexType>
+			<xs:attribute name="type_slots" use="required" />
+			<xs:attribute name="static">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="true" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="fd">
+		<xs:complexType>
+			<xs:attribute name="name" use="required">
+				<xs:annotation>
+					<xs:documentation>Name of this feature or desire
+						element fd_name { text },
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="weight" use="required">
+				<xs:annotation>
+					<xs:documentation>Weight assocated with the feature or desire
+						element fd_weight { xsd:float },
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="violatable">
+				<xs:annotation>
+					<xs:documentation>A flag indicating whether or not a failure to
+						match the desire with a
+						a feature is a constraint violation
+						element violatable { empty }?,
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="true" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="global_operator">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="OnceOnly" />
+						<xs:enumeration value="FirstFree" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="local_operator">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="+" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="GlobalSpec">
+		<xs:annotation>
+			<xs:documentation>GlobalSpec = element global {
+				element operator { "OnceOnly" | "FirstFree" }
+				}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="global_operator" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="OnceOnly" />
+					<xs:enumeration value="FirstFree" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="LocalSpec">
+		<xs:annotation>
+			<xs:documentation>LocalSpec = element local {
+				element operator { "+" }
+				attribute local_operator { "+" }
+				}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="local_operator" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="+" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="property">
+		<xs:complexType>
+			<xs:attribute name="name" use="required">
+				<xs:annotation>
+					<xs:documentation>Name of this property</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="value" use="required">
+				<xs:annotation>
+					<xs:documentation>Value associated with this property
+						TODO: Add ranges and other types from rspec
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="penalty" use="required">
+				<xs:annotation>
+					<xs:documentation>The penalty associated with this property
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="0.0" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="violatable">
+				<xs:annotation>
+					<xs:documentation>If this flag is present, not having the property
+						is considered a violation</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="true" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="global_operator">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="OnceOnly" />
+						<xs:enumeration value="FirstFree" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="local_operator">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="+" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

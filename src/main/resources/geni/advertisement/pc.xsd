@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- An extension for requesting specific properties of PCs. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:s="http://demo.fiteagle.org/pc" elementFormDefault="qualified"

@@ -7,6 +7,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageC
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LocationContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
@@ -14,7 +15,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFact
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -40,7 +40,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.transform.stream.StreamSource;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -165,9 +164,33 @@ public class AdvertisementConverter extends AbstractConverter {
 				tryExtractSliverType(rspecNodeObject, omnNode);
 				tryExtractLocation(rspecNodeObject, omnNode);
 				tryExtractAvailability(rspecNodeObject, omnNode);
+				tryExtractMonitoring(rspecNodeObject, omnNode);
 			}
 
 			topology.addProperty(Omn.hasResource, omnNode);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractMonitoring(Object rspecNodeObject, Resource omnNode) {
+		try {
+			@SuppressWarnings("unchecked")
+			Monitoring monitor = (Monitoring) rspecNodeObject;
+			Resource monitoringResource = model.createResource(UUID
+					.randomUUID().toString());
+			if (monitor.getUri() != null && monitor.getUri() != "") {
+				monitoringResource.addProperty(Omn_service.hasURI,
+						monitor.getUri());
+			}
+			if (monitor.getType() != null && monitor.getType() != "") {
+				monitoringResource.addProperty(RDF.type,
+						monitor.getType());
+				monitoringResource.addProperty(RDFS.label,
+						AbstractConverter.getName(monitor.getType()));
+			}
+			omnNode.addProperty(Omn_lifecycle.usesService,
+					monitoringResource);
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -324,7 +347,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			setSliverTypes(omnResource, geniNode);
 			setLocation(omnResource, geniNode);
 			setAvailability(omnResource, geniNode);
-
+			setMonitoringService(omnResource, geniNode);
+			
 			ResIterator infrastructures = omnResource.getModel()
 					.listResourcesWithProperty(Omn.isResourceOf,
 							Omn_federation.Infrastructure);
@@ -335,6 +359,42 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			manifest.getAnyOrNodeOrLink().add(this.of.createNode(geniNode));
 		}
+	}
+
+	private void setMonitoringService(Statement resource,
+			NodeContents node) {
+		Resource resourceResource = resource.getResource();
+		if (resourceResource.hasProperty(Omn_lifecycle.usesService)) {
+			Statement monitoringService = resourceResource
+					.getProperty(Omn_lifecycle.usesService);
+			Resource monitoringResource = monitoringService.getResource();
+			Monitoring monitoring = new ObjectFactory().createMonitoring();
+
+			if (monitoringResource.hasProperty(Omn_service.hasURI)) {
+				Statement hasUri = monitoringService.getResource().getProperty(
+						Omn_service.hasURI);
+
+				System.out.println(hasUri.getObject().asLiteral().getString());
+				// String uri = hasUri.getObject().asResource().getURI()
+				// .toString();
+				String uri = hasUri.getObject().asLiteral().getString();
+				monitoring.setUri(uri);
+
+			}
+
+			if (monitoringResource.hasProperty(RDF.type)) {
+				Statement hasType = monitoringService.getResource()
+						.getProperty(RDF.type);
+
+				// String type = hasType.getObject().asResource().getURI()
+				// .toString();
+				String type = hasType.getObject().asLiteral().getString();
+				monitoring.setType(type);
+			}
+
+			node.getAnyOrRelationOrLocation().add(monitoring);
+		}
+		
 	}
 
 	private void setAvailability(Statement omnResource, NodeContents geniNode) {
@@ -485,9 +545,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			hwType = of.createHardwareTypeContents();
 			hwType.setName(rdfType);
-			if ((null != rdfType)
-					&& !(rdfType
-							.equals("http://www.w3.org/2002/07/owl#NamedIndividual"))) {
+			if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)){
 				geniNodeDetails.add(of.createHardwareType(hwType));
 			}
 		}

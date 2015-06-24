@@ -550,7 +550,6 @@ public class RequestConverter extends AbstractConverter {
 			} else {
 				if (o.getClass()
 						.equals(info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring.class)) {
-
 					Monitoring monitor = (Monitoring) o;
 					Resource monitoringResource = model.createResource(UUID
 							.randomUUID().toString());

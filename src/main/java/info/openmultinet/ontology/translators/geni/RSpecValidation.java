@@ -142,7 +142,6 @@ public class RSpecValidation {
 			outputDoc = RSpecValidation.loadXMLFromString(output);
 			RSpecValidation.wipeRootNamespaces(outputDoc);
 			outputNew = RSpecValidation.getStringFromXml(outputDoc);
-			// System.out.println(outputNew);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -285,56 +284,54 @@ public class RSpecValidation {
 		// TODO: this method could potentially be improved by using validation
 		// against XSD docs
 		Document xml = null;
-		String type = null;
 
 		try {
 			xml = RSpecValidation.loadXMLFromString(input);
-			if (xml != null) {
-				NodeList rspecNode = xml.getElementsByTagName("rspec");
-				if (rspecNode != null && rspecNode.getLength() > 0) {
-					Node root = rspecNode.item(0);
-					Node typeNode = root.getAttributes().getNamedItem("type");
-					if (typeNode != null) {
-						return typeNode.getNodeValue();
-					}
-				} else {
-					// check for tosca namespace
-					// xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
-					NodeList toscaNode = xml
-							.getElementsByTagName("Definitions");
-					if (toscaNode != null && toscaNode.getLength() > 0) {
-						for (int i = 0; i < toscaNode.getLength(); i++) {
-							Node rootTosca = toscaNode.item(i);
-							String nameSpace = rootTosca.getNamespaceURI()
-									.toString();
-							if (nameSpace
-									.equals("http://docs.oasis-open.org/tosca/ns/2011/12")) {
-								return "tosca";
-							}
-						}
-					}
-				}
-			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
-		InputStream inputStream = null;
-		try {
-			inputStream = IOUtils.toInputStream(input, "UTF-8");
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if (xml != null) {
+			NodeList rspecNode = xml.getElementsByTagName("rspec");
+			if (rspecNode != null && rspecNode.getLength() > 0) {
+				Node root = rspecNode.item(0);
+				Node typeNode = root.getAttributes().getNamedItem("type");
+				if (typeNode != null) {
+					return typeNode.getNodeValue();
+				}
+			} else {
+				// check for tosca namespace
+				// xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
+				NodeList toscaNode = xml.getElementsByTagName("Definitions");
+				if (toscaNode != null && toscaNode.getLength() > 0) {
+					for (int i = 0; i < toscaNode.getLength(); i++) {
+						Node rootTosca = toscaNode.item(i);
+						String nameSpace = rootTosca.getNamespaceURI()
+								.toString();
+						if (nameSpace
+								.equals("http://docs.oasis-open.org/tosca/ns/2011/12")) {
+							return "tosca";
+						}
+					}
+				}
+			}
+		} else {
+			InputStream inputStream = null;
+			try {
+				inputStream = IOUtils.toInputStream(input, "UTF-8");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+			Parser parser = new Parser();
+
+			try {
+				parser.read(inputStream);
+				return "ttl";
+			} catch (InvalidModelException e) {
+				e.printStackTrace();
+			}
 		}
-
-		Parser parser = new Parser();
-
-		try {
-			parser.read(inputStream);
-			return "ttl";
-		} catch (InvalidModelException e) {
-			e.printStackTrace();
-		}
-
 		return null;
 	}
 
