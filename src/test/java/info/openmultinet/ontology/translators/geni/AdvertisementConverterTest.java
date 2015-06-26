@@ -1,8 +1,8 @@
 package info.openmultinet.ontology.translators.geni;
 
-
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 
@@ -79,7 +79,8 @@ public class AdvertisementConverterTest {
 
 	@Test
 	public void testPaper2015Roundtrip() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException {
+			InvalidModelException, IOException, XMLStreamException,
+			MissingRspecElementException {
 		long start;
 		String inputFile = "/geni/advertisement/advertisement_paper2015.xml";
 
@@ -126,7 +127,8 @@ public class AdvertisementConverterTest {
 
 	@Test
 	public void testRoundtripRSpecToRSpecPerformance() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException, InterruptedException {
+			InvalidModelException, IOException, XMLStreamException,
+			InterruptedException, MissingRspecElementException {
 		String inputFile = "/geni/advertisement/advertisement_vwall1.xml";
 
 		InputStream input = null;
@@ -140,29 +142,29 @@ public class AdvertisementConverterTest {
 		String method = "";
 		String result = "";
 		Writer writer = null;
-		
-		method="convert.xml2jaxb";
+
+		method = "convert.xml2jaxb";
 		System.out.println("Operation: " + method);
 		writer = new BufferedWriter(new FileWriter(new File(method + ".data")));
 
 		for (int i = 0; i < warmups; i++)
-			converter.getRspec(AdvertisementConverter.class.getResourceAsStream(inputFile));
+			converter.getRspec(AdvertisementConverter.class
+					.getResourceAsStream(inputFile));
 		for (int i = 0; i < repetitions; i++) {
-			Thread.sleep(pause);			
-			input = AdvertisementConverter.class
-					.getResourceAsStream(inputFile);
+			Thread.sleep(pause);
+			input = AdvertisementConverter.class.getResourceAsStream(inputFile);
 			start = System.nanoTime();
 			rspec = converter.getRspec(input);
 			result = i + " " + (System.nanoTime() - start) + "\n";
 			System.out.print(result);
-            writer.write(result);
+			writer.write(result);
 			input = null;
 		}
-        writer.close();
+		writer.close();
 		System.out.println("XML serialized size (kb): "
 				+ AbstractConverter.toString(inputFile).length() / 1024);
-		
-		method="convert.jaxb2rdf";
+
+		method = "convert.jaxb2rdf";
 		System.out.println("Operation: " + method);
 		writer = new BufferedWriter(new FileWriter(new File(method + ".data")));
 		for (int i = 0; i < warmups; i++)
@@ -173,12 +175,13 @@ public class AdvertisementConverterTest {
 			model = converter.getModel(rspec);
 			result = i + " " + (System.nanoTime() - start) + "\n";
 			System.out.print(result);
-            writer.write(result);
+			writer.write(result);
 		}
-        writer.close();
-		System.out.println("TTL serialized size (kb): " + Parser.toString(model).length() / 1024);
+		writer.close();
+		System.out.println("TTL serialized size (kb): "
+				+ Parser.toString(model).length() / 1024);
 
-		method="convert.rdf2jaxb";
+		method = "convert.rdf2jaxb";
 		System.out.println("Operation: " + method);
 		writer = new BufferedWriter(new FileWriter(new File(method + ".data")));
 		for (int i = 0; i < warmups; i++)
@@ -189,11 +192,11 @@ public class AdvertisementConverterTest {
 			advertisement = converter.getRSpecObject(model);
 			result = i + " " + (System.nanoTime() - start) + "\n";
 			System.out.print(result);
-            writer.write(result);
+			writer.write(result);
 		}
-        writer.close();
-		
-		method="convert.jaxb2xml";
+		writer.close();
+
+		method = "convert.jaxb2xml";
 		System.out.println("Operation: " + method);
 		writer = new BufferedWriter(new FileWriter(new File(method + ".data")));
 		for (int i = 0; i < warmups; i++)
@@ -204,9 +207,9 @@ public class AdvertisementConverterTest {
 			AdvertisementConverter.toString(advertisement);
 			result = i + " " + (System.nanoTime() - start) + "\n";
 			System.out.print(result);
-            writer.write(result);
+			writer.write(result);
 		}
-        writer.close();
+		writer.close();
 	}
 
 }

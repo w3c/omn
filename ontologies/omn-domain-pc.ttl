@@ -125,6 +125,22 @@
 owl:Axiom rdf:type owl:Class .
 owl:AllDisjointProperties rdf:type owl:Class .
 
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabNodeTypeSlots
+
+:hasEmulabNodeTypeSlots rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+
+                 rdfs:label "has emulab node type slots"@en ;
+
+                 rdfs:comment "has emulab node type slots"@en ;
+                 
+                 rdfs:domain :HardwareType ;
+                 
+                 rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageURI
 
 :hasDiskimageURI rdf:type owl:DatatypeProperty ,
@@ -289,6 +305,49 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
             owl:inverseOf :hasDiskImage .
 
 
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType
+
+:hasHardwareType rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has hardware type"@en ;
+
+            rdfs:comment "has hardware type"@en ;
+            
+            rdfs:range :HardwareType ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :isHardwareTypeOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#isHardwareTypeOf
+
+:isHardwareTypeOf rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "is hardware type of"@en ;
+
+            rdfs:comment "is hardware type of"@en ;
+            
+            rdfs:domain :HardwareType ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :hasHardwareType .
+
+
 #################################################################
 #
 #    Classes
@@ -303,6 +362,18 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
            rdfs:comment "Disk Image"@en ;
            
            rdfs:label "Disk Image"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#HardwareType
+
+:HardwareType rdf:type owl:Class ;
+
+           rdfs:comment "Hardware Type, see rspec v3 hardware_type"@en ;
+           
+           rdfs:label "Hardware Type"@en ;
            
            rdfs:subClassOf omn:Resource .
 

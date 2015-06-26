@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.dm;
 
+import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
@@ -51,19 +52,20 @@ public class REST extends DeliveryMechanism {
 		} catch (MissingRspecElementException | RiotException
 				| MultipleNamespacesException
 				| RequiredResourceNotFoundException
-				| MultiplePropertyValuesException | UnsupportedException e) {
+				| MultiplePropertyValuesException
+				| DeprecatedRspecVersionException | UnsupportedException e) {
 			throw new ConverterWebApplicationException(
-					// send Client Error 400
-					// indicates error within document
+			// send Client Error 400
+			// indicates error within document
 					Response.Status.BAD_REQUEST, e);
 		} catch (UnknownFormatConversionException e) {
 			throw new ConverterWebApplicationException(
-					// send Client Error 406
+			// send Client Error 406
 					Response.Status.NOT_ACCEPTABLE, e.getMessage());
 		} catch (XMLStreamException | JAXBException | InvalidModelException
 				| IOException e) {
 			throw new ConverterWebApplicationException(
-					// send Server Error 500
+			// send Server Error 500
 					Response.Status.INTERNAL_SERVER_ERROR, e);
 		}
 

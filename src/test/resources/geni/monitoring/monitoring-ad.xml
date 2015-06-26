@@ -9,7 +9,8 @@
       <sliver_type name="http://demo.fiteagle.org/resource/1024MB_10GB"/>
       <sliver_type name="http://demo.fiteagle.org/resource/2048MB_20GB"/>
       <sliver_type name="http://demo.fiteagle.org/resource/512MB_5GB"/>
-      <location longitude="13.3172764" latitude="52.5258083"/>
+      <!-- have added country here as required -->
+      <location longitude="13.3172764" latitude="52.5258083" country=""/>
       <ns2:monitoring type="http://open-multinet.info/ontology/omn-monitoring#MonitoringService"/>
   </node>
 </rspec>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+	xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+	<xs:include schemaLocation="top_extension.xsd" />
+	<!-- EMULAB-COPYRIGHT Copyright (c) 2010 University of Utah and the Flux 
+		Group. All rights reserved. -->
+	<!-- Description of Emulab-specific extensions for a virtual topology -->
+	<!-- We include the common topology extension specification schema, -->
+	<xs:group name="HintToSpec">
+		<xs:annotation>
+			<xs:documentation>Provides hints to assign regarding the physical
+				node to which this
+				virtual node should be mapped
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="emulab:hint_to" />
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="hint_to">
+		<xs:complexType>
+			<xs:attribute name="value" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:group name="NodeFlagSpec">
+		<xs:annotation>
+			<xs:documentation>"Legacy" assign node flags - will be replaced with
+				properties, and in some
+				cases, explicit links
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="emulab:disallow_trivial_mix" />
+				<xs:element ref="emulab:routable_control_ip" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="disallow_trivial_mix">
+		<xs:annotation>
+			<xs:documentation>Indicates that virtual links must either all be
+				trivial (loopback), or
+				none of them must be. Possibly expressible
+				with properties?
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType />
+	</xs:element>
+	<xs:element name="routable_control_ip">
+		<xs:annotation>
+			<xs:documentation>Indicates that the user requires a routable IP on
+				the control interface.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType />
+	</xs:element>
+	<xs:group name="LinkFlagSpec">
+		<xs:annotation>
+			<xs:documentation>"Legacy" link flags used by assign. Will be
+				replaced by properties
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="emulab:nodelay" />
+				<xs:element ref="emulab:multiplex_ok" />
+				<xs:element ref="emulab:trivial_ok" />
+				<xs:element ref="emulab:untagged_vlan" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="nodelay">
+		<xs:annotation>
+			<xs:documentation>Indicates that it is not okay to use a delay node
+				to artificially
+				shape/delay traffic for this link. Replace by using
+				type system.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType />
+	</xs:element>
+	<xs:element name="multiplex_ok">
+		<xs:annotation>
+			<xs:documentation>Indicates whether it is okay to multiplex this link
+				with other virtual
+				links onto the same physical link (old name:
+				emulated) Probably replace
+				by using the type system (ie. have an
+				'Ethernet' type that can only
+				hold one slot, and an 'Ethernet-tagged'
+				type that can hold more).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType />
+	</xs:element>
+	<xs:element name="trivial_ok">
+		<xs:annotation>
+			<xs:documentation>Indicates whether it is okay to satisfy this link
+				with a trivial
+				(loopback) link. Replace using type system.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType />
+	</xs:element>
+	<xs:element name="untagged_vlan">
+		<xs:annotation>
+			<xs:documentation>Indicates that a vlan should be untagged
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType />
+	</xs:element>
+	<xs:element name="fixedinterface">
+		<xs:complexType>
+			<xs:attribute name="name" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="vclass">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="emulab:physical_type" />
+			</xs:sequence>
+			<xs:attribute name="name" use="required">
+				<xs:annotation>
+					<xs:documentation>Name of the virtual class</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="weight" use="required">
+				<xs:annotation>
+					<xs:documentation>Specify whether the vclass is hard (ie. all nodes
+						*must* be of the same
+						type) or soft (ie. violating it is allowed,
+						but penalize)
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:union>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value="hard" />
+							</xs:restriction>
+						</xs:simpleType>
+						<xs:simpleType>
+							<xs:restriction base="xs:float">
+								<xs:minInclusive value="0.0" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:union>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="physical_type">
+		<xs:annotation>
+			<xs:documentation>The physical types associated with this vclass
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="name" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<!-- Information about the virtual node in the nodes table assigned to a 
+		particular node. -->
+	<xs:element name="vnode">
+		<xs:complexType>
+			<xs:attribute name="name" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="xen">
+		<xs:complexType>
+			<xs:attribute name="cores">
+				<xs:annotation>
+					<xs:documentation>Number of cores to reserve (0 or absent means no
+						guaranteed reservation)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ram">
+				<xs:annotation>
+					<xs:documentation>Minimum amount of RAM (in megabytes) to reserve
+						for the node.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="disk">
+				<xs:annotation>
+					<xs:documentation>Minimum amount of Disk to reserve for the node.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

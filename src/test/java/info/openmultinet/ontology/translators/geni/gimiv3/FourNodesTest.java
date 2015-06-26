@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni.gimiv3;
 
 import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
@@ -28,7 +29,7 @@ public class FourNodesTest {
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException {
+			MissingRspecElementException, DeprecatedRspecVersionException {
 		final String filename = "/geni/gimiv3/4nodes.manifest";
 		final InputStream inputRspec = FourNodesTest.class
 				.getResourceAsStream(filename);
@@ -155,8 +156,11 @@ public class FourNodesTest {
 		System.out.println(inputRSpec);
 		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRSpec);
-//		Assert.assertTrue("No differences between input and output files",
-//				diffsNodes[0] == 0);
+
+		// TODO: This test does not consistently return 0, only sometimes. Need
+		// to debug.
+		// Assert.assertTrue("No differences between input and output files",
+		// diffsNodes[0] == 0);
 
 	}
 

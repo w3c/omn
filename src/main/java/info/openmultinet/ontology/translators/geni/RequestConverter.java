@@ -120,10 +120,11 @@ public class RequestConverter extends AbstractConverter {
 					node.setExclusive(isExclusive);
 				}
 
+				setInterfaces(resource, node);
 				setSliverType(resource, node);
 				setServices(resource, node);
+
 				setMonitoringService(resource, node);
-				setInterfaces(resource, node);
 				setEmulabExtension(resource, node);
 
 				request.getAnyOrNodeOrLink().add(
@@ -169,7 +170,6 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void setInterfaceRefs(Statement resource, LinkContents link) {
-		// TODO Auto-generated method stub
 		List<Statement> interfaces = resource.getResource()
 				.listProperties(Omn_resource.hasInterface).toList();
 
@@ -191,15 +191,12 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void setLinkDetails(Statement resource, LinkContents link) {
-		// TODO Auto-generated method stub
-
 		if (resource.getResource().hasProperty(Omn_resource.clientId)) {
 			String clientId = resource.getResource()
 					.getProperty(Omn_resource.clientId).getObject().asLiteral()
 					.getString();
 			link.setClientId(clientId);
 		}
-
 	}
 
 	private static void setEmulabExtension(Statement resource, NodeContents node) {
@@ -373,17 +370,21 @@ public class RequestConverter extends AbstractConverter {
 
 	private static void setSliverType(Statement resource, NodeContents node) {
 
+		// final List<Statement> hasTypes = resource.getResource()
+		// .listProperties(RDF.type).toList();
 		final List<Statement> hasTypes = resource.getResource()
-				.listProperties(RDF.type).toList();
+				.listProperties(RDFS.label).toList();
 
 		for (final Statement hasType : hasTypes) {
-			RDFNode sliverNode = hasType.getObject();
-			Resource sliverResource = sliverNode.asResource();
-
-			if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+			// RDFNode sliverNode = hasType.getObject();
+			// Resource sliverResource = sliverNode.asResource();
+			// if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+			String label = hasType.getObject().asLiteral().getString();
+			if (AbstractConverter.nonGeneric(label)) {
 				SliverType sliverType = new ObjectFactory()
 						.createNodeContentsSliverType();
-				sliverType.setName(sliverNode.toString());
+				sliverType.setName(label);
+				// sliverType.setName(sliverNode.toString());
 				JAXBElement<SliverType> sliver = new ObjectFactory()
 						.createNodeContentsSliverType(sliverType);
 				node.getAnyOrRelationOrLocation().add(sliver);
@@ -489,7 +490,7 @@ public class RequestConverter extends AbstractConverter {
 				} else {
 					omnResource.addProperty(Omn_lifecycle.hasID,
 							node.getClientId());
-					omnResource.addProperty(RDFS.label, node.getClientId());
+					// omnResource.addProperty(RDFS.label, node.getClientId());
 				}
 
 				Resource implementedBy = null;
@@ -538,25 +539,20 @@ public class RequestConverter extends AbstractConverter {
 						NodeContents.SliverType.class)) {
 					NodeContents.SliverType sliverType = (NodeContents.SliverType) element
 							.getValue();
-					// omnResource.addProperty(RDF.type,
-					// model.createResource(sliverType.getName()));
 
-					// name is required by slivertype
 					if (sliverType.getName() == null) {
 						throw new MissingRspecElementException(
 								"SliverTypeContents > name");
 					}
-					if (sliverType.getName().contains(":")) {
-						omnResource.addProperty(RDF.type,
-								model.createResource(sliverType.getName()));
-					} else {
-						omnResource
-								.addProperty(
-										RDF.type,
-										model.createResource("http://open-multinet.info/example#"
-												+ sliverType.getName()));
-					}
+
+					// omnResource
+					// .addProperty(
+					// RDF.type,
+					// model.createResource("http://open-multinet.info/example#"
+					// + sliverType.getName()));
+					omnResource.addProperty(RDFS.label, sliverType.getName());
 				}
+				// }
 				if (element.getDeclaredType().equals(ServiceContents.class)) {
 					ServiceContents serviceContents = (ServiceContents) element
 							.getValue();

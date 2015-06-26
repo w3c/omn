@@ -10,6 +10,7 @@ import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyVa
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,9 @@ import org.junit.Test;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class RequestConverterTest {
 
@@ -81,7 +84,8 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingBoundRSpec4PhysicalNode2Graph()
-			throws JAXBException, InvalidModelException, MissingRspecElementException {
+			throws JAXBException, InvalidModelException,
+			MissingRspecElementException {
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_bound_rawpc.xml");
 		final Model model = RequestConverter.getModel(rspec);
@@ -141,8 +145,14 @@ public class RequestConverterTest {
 		final ResIterator resourceIterator = model
 				.listResourcesWithProperty(Omn.isResourceOf);
 
-		Assert.assertTrue(resourceIterator.nextResource().hasProperty(RDF.type,
-				model.getResource("http://open-multinet.info/example#raw-pc")));
+		Resource resource = resourceIterator.nextResource();
+		String label = resource.getProperty(RDFS.label).getObject().asLiteral()
+				.getString();
+		Assert.assertTrue(label.equals("raw-pc"));
+		Assert.assertTrue(resource.hasProperty(RDF.type, Omn_resource.Node));
+
+		// Assert.assertTrue(resourceIterator.nextResource().hasProperty(RDF.type,
+		// model.getResource("http://open-multinet.info/example#raw-pc")));
 	}
 
 	@Test
@@ -175,41 +185,37 @@ public class RequestConverterTest {
 				outputRspec.contains("sliver_type"));
 	}
 
-	// **** Took this test out temporarily as method extractNodes in
-	// RequestConverter makes an error at line
-	// omnResource.addProperty(Omn_lifecycle.parentOf, parent); Need to build
-	// Omn_lifecycle.parentOf into TOSCA converter???
-	//
-	// @Test
-	// public void testRSpecTOSCARoundtrip() throws JAXBException,
-	// InvalidModelException, IOException, MultipleNamespacesException,
-	// RequiredResourceNotFoundException, MultiplePropertyValuesException {
-	// final String filename = "/geni/request/request_paper2015.xml";
-	// final InputStream inputRspec = RequestConverterTest.class
-	// .getResourceAsStream(filename);
-	// System.out.println("Converting this input from '" + filename + "':");
-	// System.out.println("===============================");
-	// System.out.println(AbstractConverter.toString(filename));
-	// System.out.println("===============================");
-	//
-	// final Model model = RequestConverter.getModel(inputRspec);
-	// final ResIterator topology = model.listResourcesWithProperty(RDF.type,
-	// Omn_lifecycle.Request);
-	// Assert.assertTrue("should have a topology", topology.hasNext());
-	// System.out.println("Generated this graph:");
-	// System.out.println("===============================");
-	// System.out.println(Parser.toString(model));
-	// System.out.println("===============================");
-	//
-	// List<String> additionalOntologies = new ArrayList<String>();
-	// additionalOntologies.add("/ontologies/motor.ttl");
-	// final InfModel infModel = new Parser(model,
-	// additionalOntologies).getInfModel();
-	// final String outputTosca = OMN2Tosca.getTopology(infModel);
-	// System.out.println("Generated this tosca:");
-	// System.out.println("===============================");
-	// System.out.println(outputTosca);
-	// System.out.println("===============================");
-	// }
+	@Test
+	public void testRSpecTOSCARoundtrip() throws JAXBException,
+			InvalidModelException, IOException, MultipleNamespacesException,
+			RequiredResourceNotFoundException, MultiplePropertyValuesException,
+			MissingRspecElementException {
+		final String filename = "/geni/request/request_paper2015.xml";
+		final InputStream inputRspec = RequestConverterTest.class
+				.getResourceAsStream(filename);
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(AbstractConverter.toString(filename));
+		System.out.println("===============================");
+
+		final Model model = RequestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Request);
+		Assert.assertTrue("should have a topology", topology.hasNext());
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
+
+		List<String> additionalOntologies = new ArrayList<String>();
+		additionalOntologies.add("/ontologies/motor.ttl");
+		final InfModel infModel = new Parser(model, additionalOntologies)
+				.getInfModel();
+		final String outputTosca = OMN2Tosca.getTopology(infModel);
+		System.out.println("Generated this tosca:");
+		System.out.println("===============================");
+		System.out.println(outputTosca);
+		System.out.println("===============================");
+	}
 
 }

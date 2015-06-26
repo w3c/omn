@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
@@ -38,13 +39,23 @@ public class DeliveryMechanism {
 			throws JAXBException, InvalidModelException, UnsupportedException,
 			IOException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException,
-			XMLStreamException, MissingRspecElementException {
+			XMLStreamException, MissingRspecElementException,
+			DeprecatedRspecVersionException {
+
+		// check if RSpec version 2 is used and convert to version 3 or throw
+		// exception if version 0.1
+		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)
+				|| AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)
+				|| AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
+			content = RSpecValidation.fixVerson(content);
+		}
+
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
 		Model model = null;
 
-		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)){
+		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)) {
 			from = RSpecValidation.getType(content);
 		}
 

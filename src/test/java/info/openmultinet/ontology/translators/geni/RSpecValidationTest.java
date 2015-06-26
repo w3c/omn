@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
@@ -90,7 +91,8 @@ public class RSpecValidationTest {
 	}
 
 	private static ArrayList<List<Double>> getErrorDirectory(File path)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -208,7 +210,8 @@ public class RSpecValidationTest {
 	}
 
 	private static ArrayList<List<Integer>> getNodesDiffsDirectory(File path)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -372,7 +375,8 @@ public class RSpecValidationTest {
 	}
 
 	private static ArrayList<List<Long>> getTimesDirectory(File path)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
 			return null;
@@ -682,7 +686,8 @@ public class RSpecValidationTest {
 	}
 
 	private static void getErrorFile(File path)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		System.out.println("******************************************");
 		System.out.println("******       Prelim                 ******");
@@ -736,7 +741,7 @@ public class RSpecValidationTest {
 
 	}
 
-	private static void validateFile(File path) {
+	public static void validateFile(File path) {
 
 		if (RSpecValidation.rspecFileExtension(path)) {
 			String rspecString = null;
@@ -761,13 +766,105 @@ public class RSpecValidationTest {
 
 			System.out.println("validSchemaFactory: " + validSchemaFactory);
 
-			// boolean validXMLUnit = RSpecValidation
-			// .validateRspecXMLUnit(rspecString);
-			// System.out.println("validXMLUnit: " + validXMLUnit);
+			boolean validXMLUnit = RSpecValidation
+					.validateRspecXMLUnit(rspecString);
+			System.out.println("validXMLUnit: " + validXMLUnit);
 
 			System.out.println("validRSpecLint: " + validRSpecLint);
 
 		}
+	}
+
+	private static int[] checkVersionDirectory(File path) {
+		System.out
+				.println("==========================================================");
+		System.out
+				.println("===========  checkVersionDirectory test           ============");
+
+		if (!path.isDirectory()) {
+			System.out.println("Not a directory.");
+			return null;
+		}
+		System.out
+				.println("==========================================================");
+		try {
+			System.out.println("Testing all RSpecs in folder:");
+			System.out.println("canon path " + path.getCanonicalPath());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		File[] files = null;
+		if (path.listFiles() != null) {
+			files = path.listFiles();
+		}
+
+		System.out.println();
+		System.out
+				.println("==========================================================");
+
+		int[] valid = new int[9];
+
+		for (int i = 0; i < files.length; i++) {
+
+			if (files[i].isFile()
+					&& RSpecValidation.rspecFileExtension(files[i])) {
+				valid[8]++;
+				String rspecString = null;
+				try {
+					// System.out.println(files[i].getPath());
+					System.out.println(files[i].getPath().substring(20));
+					rspecString = AbstractConverter.toString(files[i].getPath()
+							.substring(20));
+					String type = RSpecValidation.getType(rspecString);
+
+					boolean validRspecVersion = RSpecValidation
+							.checkVersion(rspecString);
+					System.out.println("valid version: " + validRspecVersion);
+
+					if (type != null) {
+						switch (type) {
+						case "advertisement":
+							if (validRspecVersion) {
+								valid[ads]++;
+							}
+							break;
+						case "manifest":
+							if (validRspecVersion) {
+								valid[manifests]++;
+							}
+							break;
+						case "request":
+							if (validRspecVersion) {
+								valid[requests]++;
+							}
+							break;
+						}
+					}
+
+					System.out
+							.println("==========================================================");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if (files[i].isDirectory()) {
+				int[] newValid = checkVersionDirectory(files[i]);
+				for (int j = 0; j < valid.length; j++) {
+					valid[j] = newValid[j] + valid[j];
+				}
+			}
+		}
+		System.out.println("Summary: ");
+		int total = valid[ads] + valid[manifests] + valid[requests];
+
+		System.out.println(total + " of " + valid[8] + " RSpecs, "
+				+ " had a valid version.");
+		System.out.println(valid[ads] + " ads had a valid version");
+		System.out.println(valid[manifests] + " manifests had a valid version");
+		System.out.println(valid[requests] + " requests had a valid version");
+
+		return valid;
+
 	}
 
 	public static void main(String[] args) throws MissingRspecElementException {
@@ -790,8 +887,8 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/stich");
 
 		File path = new File("./src/test/resources/geni");
-
-		getErrorDirectory(path);
+		checkVersionDirectory(path);
+		// getErrorDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
 

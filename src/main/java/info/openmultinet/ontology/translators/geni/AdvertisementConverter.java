@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageContents;
@@ -11,10 +12,12 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -23,11 +26,15 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -40,6 +47,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+
+import org.apache.commons.io.input.CloseShieldInputStream;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -76,7 +85,8 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public Model getModel(RSpecContents rspec) {
+	public Model getModel(RSpecContents rspec)
+			throws MissingRspecElementException {
 
 		final Resource offering = model.createResource(
 				AdvertisementConverter.PREFIX + "#advertisement").addProperty(
@@ -95,7 +105,8 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	public Model getModel(final InputStream input) throws JAXBException,
-			InvalidModelException, XMLStreamException {
+			InvalidModelException, XMLStreamException,
+			MissingRspecElementException {
 
 		final RSpecContents rspecRequest = getRspec(input);
 
@@ -130,7 +141,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private void tryExtractNode(final Object object, final Resource topology) {
+	private void tryExtractNode(final Object object, final Resource topology)
+			throws MissingRspecElementException {
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
@@ -154,10 +166,11 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive,
 					rspecNode.isExclusive());
+
 			if (rspecNode.getComponentName() != null) {
 				omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
 			}
-			
+
 			for (Object rspecNodeObject : rspecNode
 					.getAnyOrRelationOrLocation()) {
 				tryExtractHardwareType(rspecNodeObject, omnNode);
@@ -165,9 +178,24 @@ public class AdvertisementConverter extends AbstractConverter {
 				tryExtractLocation(rspecNodeObject, omnNode);
 				tryExtractAvailability(rspecNodeObject, omnNode);
 				tryExtractMonitoring(rspecNodeObject, omnNode);
+
 			}
 
 			topology.addProperty(Omn.hasResource, omnNode);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractEmulabNodeType(Object rspecHwObject, Resource omnHw) {
+		try {
+			@SuppressWarnings("unchecked")
+			NodeType nodeType = (NodeType) rspecHwObject;
+
+			String nodeTypeSlots = nodeType.getTypeSlots();
+
+			omnHw.addProperty(Omn_domain_pc.hasEmulabNodeTypeSlots,
+					nodeTypeSlots);
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -184,13 +212,11 @@ public class AdvertisementConverter extends AbstractConverter {
 						monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
-				monitoringResource.addProperty(RDF.type,
-						monitor.getType());
+				monitoringResource.addProperty(RDF.type, monitor.getType());
 				monitoringResource.addProperty(RDFS.label,
 						AbstractConverter.getName(monitor.getType()));
 			}
-			omnNode.addProperty(Omn_lifecycle.usesService,
-					monitoringResource);
+			omnNode.addProperty(Omn_lifecycle.usesService, monitoringResource);
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -208,7 +234,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private void tryExtractLocation(Object rspecNodeObject, Resource omnNode) {
+	private void tryExtractLocation(Object rspecNodeObject, Resource omnNode)
+			throws MissingRspecElementException {
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<LocationContents> locationJaxb = (JAXBElement<LocationContents>) rspecNodeObject;
@@ -217,6 +244,16 @@ public class AdvertisementConverter extends AbstractConverter {
 			if (location != null) {
 				String latitude = location.getLatitude();
 				String longitude = location.getLongitude();
+				String country = location.getCountry();
+
+				// country is required, when location is specified
+				if (country == null) {
+					throw new MissingRspecElementException(
+							"LocationContents > country");
+				} else {
+					omnNode.addProperty(Omn_resource.country, country);
+				}
+
 				if (latitude != null) {
 					omnNode.addProperty(Geo.lat, latitude);
 				}
@@ -235,8 +272,19 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<HardwareTypeContents> hwJaxb = (JAXBElement<HardwareTypeContents>) rspecNodeObject;
 			final HardwareTypeContents hw = hwJaxb.getValue();
 
+			final Resource omnHw = omnNode.getModel().createResource();
 			RDFNode type = ResourceFactory.createProperty(hw.getName());
+
+			// TODO: get rid of this line
 			omnNode.addProperty(RDF.type, type);
+
+			omnHw.addProperty(RDFS.label, type.toString());
+			omnHw.addProperty(RDF.type, Omn_domain_pc.HardwareType);
+			for (Object hwObject : hw.getAny()) {
+				tryExtractEmulabNodeType(hwObject, omnHw);
+			}
+			omnNode.addProperty(Omn_domain_pc.hasHardwareType, omnHw);
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		} catch (final InvalidPropertyURIException e) {
@@ -294,6 +342,23 @@ public class AdvertisementConverter extends AbstractConverter {
 			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
 			omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
 
+			String os = diskImageContents.getOs();
+			if (os != null) {
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageOS, os);
+			}
+
+			String version = diskImageContents.getVersion();
+			if (version != null) {
+				diskImage
+						.addLiteral(Omn_domain_pc.hasDiskimageVersion, version);
+			}
+
+			String description = diskImageContents.getDescription();
+			if (description != null) {
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageDescription,
+						description);
+			}
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		} catch (final InvalidPropertyURIException e) {
@@ -348,7 +413,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			setLocation(omnResource, geniNode);
 			setAvailability(omnResource, geniNode);
 			setMonitoringService(omnResource, geniNode);
-			
+
 			ResIterator infrastructures = omnResource.getModel()
 					.listResourcesWithProperty(Omn.isResourceOf,
 							Omn_federation.Infrastructure);
@@ -361,8 +426,7 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private void setMonitoringService(Statement resource,
-			NodeContents node) {
+	private void setMonitoringService(Statement resource, NodeContents node) {
 		Resource resourceResource = resource.getResource();
 		if (resourceResource.hasProperty(Omn_lifecycle.usesService)) {
 			Statement monitoringService = resourceResource
@@ -394,7 +458,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			node.getAnyOrRelationOrLocation().add(monitoring);
 		}
-		
+
 	}
 
 	private void setAvailability(Statement omnResource, NodeContents geniNode) {
@@ -415,6 +479,14 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		LocationContents location = of.createLocationContents();
 		Resource omnRes = omnResource.getResource();
+
+		if (omnRes.hasProperty(Omn_resource.country)) {
+			location.setCountry(omnRes.getProperty(Omn_resource.country)
+					.getString());
+		} else {
+			// country required
+			location.setCountry("");
+		}
 
 		if (omnRes.hasProperty(Geo.lat)) {
 			location.setLatitude(omnRes.getProperty(Geo.lat).getString());
@@ -482,18 +554,27 @@ public class AdvertisementConverter extends AbstractConverter {
 				// check if the resource is a disk image
 				if (diskImageResource.hasProperty(RDF.type,
 						Omn_domain_pc.DiskImage)) {
-
+					DiskImage diskImage = of
+							.createNodeContentsSliverTypeDiskImage();
 					String diskName = "";
+
 					if (diskImageResource
 							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
 						diskName += diskImageResource
 								.getProperty(Omn_domain_pc.hasDiskimageLabel)
 								.getObject().asLiteral().getString();
 					}
-
-					DiskImage diskImage = of
-							.createNodeContentsSliverTypeDiskImage();
 					diskImage.setName(diskName);
+
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
+						String description = diskImageResource
+								.getProperty(
+										Omn_domain_pc.hasDiskimageDescription)
+								.getObject().asLiteral().getString();
+						diskImage.setDescription(description);
+					}
+
 					diskImage.setUrl(diskImageResource.getURI());
 					sliver.getAnyOrDiskImage()
 							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
@@ -503,7 +584,6 @@ public class AdvertisementConverter extends AbstractConverter {
 			// TODO
 
 		} else {
-
 			while (sliverResource.hasProperty(Omn_lifecycle.canImplement)) {
 				Statement omnSliver = sliverResource
 						.getProperty(Omn_lifecycle.canImplement);
@@ -511,6 +591,8 @@ public class AdvertisementConverter extends AbstractConverter {
 				RDFNode diskImageNode = omnSliver.getObject();
 				Resource diskImageResource = diskImageNode.asResource();
 
+				// TODO: diskimage is handled in two places. Need to make a
+				// single method.
 				// check if the resource is a disk image
 				if (diskImageResource.hasProperty(RDF.type,
 						Omn_domain_pc.DiskImage)) {
@@ -525,6 +607,32 @@ public class AdvertisementConverter extends AbstractConverter {
 
 					DiskImage diskImage = of
 							.createNodeContentsSliverTypeDiskImage();
+
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
+						String description = diskImageResource
+								.getProperty(
+										Omn_domain_pc.hasDiskimageDescription)
+								.getObject().asLiteral().getString();
+						diskImage.setDescription(description);
+					}
+
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageOS)) {
+						String os = diskImageResource
+								.getProperty(Omn_domain_pc.hasDiskimageOS)
+								.getObject().asLiteral().getString();
+						diskImage.setOs(os);
+					}
+
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
+						String version = diskImageResource
+								.getProperty(Omn_domain_pc.hasDiskimageVersion)
+								.getObject().asLiteral().getString();
+						diskImage.setVersion(version);
+					}
+
 					diskImage.setName(diskName);
 					sliver.getAnyOrDiskImage()
 							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
@@ -537,17 +645,46 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
 
-		StmtIterator types = omnResource.getResource().listProperties(RDF.type);
-		HardwareTypeContents hwType;
+		StmtIterator types = omnResource.getResource().listProperties(
+				Omn_domain_pc.hasHardwareType);
+
+		// check if the hardware type was specified as a type
+		if (!types.hasNext()) {
+			types = omnResource.getResource().listProperties(RDF.type);
+			HardwareTypeContents hwType;
+
+			while (types.hasNext()) {
+				String rdfType = types.next().getResource().getURI();
+
+				hwType = of.createHardwareTypeContents();
+				hwType.setName(rdfType);
+				if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)) {
+					geniNodeDetails.add(of.createHardwareType(hwType));
+				}
+			}
+		}
 
 		while (types.hasNext()) {
-			String rdfType = types.next().getResource().getURI();
+			HardwareTypeContents hwType;
+			Resource hwObject = types.next().getObject().asResource();
+			String hwName = hwObject.getProperty(RDFS.label).getObject()
+					.asLiteral().getString();
 
 			hwType = of.createHardwareTypeContents();
-			hwType.setName(rdfType);
-			if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)){
-				geniNodeDetails.add(of.createHardwareType(hwType));
+			hwType.setName(hwName);
+
+			// add emulab node slots
+			if (hwObject.hasProperty(Omn_domain_pc.hasEmulabNodeTypeSlots)) {
+				NodeType nodeType = of.createNodeType();
+				String numSlots = hwObject
+						.getProperty(Omn_domain_pc.hasEmulabNodeTypeSlots)
+						.getObject().asLiteral().getString();
+				nodeType.setTypeSlots(numSlots);
+				hwType.getAny().add(nodeType);
 			}
+
+			geniNodeDetails.add(of.createHardwareType(hwType));
+
 		}
 	}
 

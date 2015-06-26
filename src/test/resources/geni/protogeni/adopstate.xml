@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RspecAdOpState -->
 <rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.protogeni.net/resources/rspec/2" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2 http://www.protogeni.net/resources/rspec/2/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.protogeni.net/resources/rspec/ext/opstate/1/ad.xsd" type="advertisement" generated="2012-05-18T22:25:38Z" expires="2012-05-18T22:25:38Z" >
-
 <rspec_opstate xmlns="http://www.geni.net/resources/rspec/ext/opstate/1"
   aggregate_manager_id="urn:publicid:IDN+jonlab.tbres.emulab.net+authority+cm"
   start="geni_notready">

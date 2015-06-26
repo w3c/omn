@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
+import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
@@ -68,9 +69,10 @@ public class RSpecValidation {
 	 *            RSpec as string
 	 * @return
 	 * @throws MissingRspecElementException
+	 * @throws DeprecatedRspecVersionException 
 	 */
 	static public double getProportionalError(String input)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException, DeprecatedRspecVersionException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -118,9 +120,10 @@ public class RSpecValidation {
 	 *            RSpec as string
 	 * @return
 	 * @throws MissingRspecElementException
+	 * @throws DeprecatedRspecVersionException 
 	 */
 	static public int[] getDiffsNodes(String input)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException, DeprecatedRspecVersionException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -217,6 +220,30 @@ public class RSpecValidation {
 			byte[] bytes = xml.getBytes();
 			ByteArrayInputStream byteArrray = new ByteArrayInputStream(bytes);
 			xmlDoc = builder.parse(byteArrray);
+		} catch (SAXException | IOException | ParserConfigurationException e) {
+			return null;
+			// e.printStackTrace();
+		}
+
+		return xmlDoc;
+	}
+
+	/**
+	 * loads and XML document from a stream
+	 * 
+	 * @param xml
+	 * @return
+	 * @throws Exception
+	 */
+	public static Document loadXMLFromStream(InputStream xml) {
+
+		Document xmlDoc = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			xmlDoc = builder.parse(xml);
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			return null;
 			// e.printStackTrace();
@@ -342,13 +369,16 @@ public class RSpecValidation {
 	 * @param input
 	 * @return
 	 * @throws MissingRspecElementException
+	 * @throws DeprecatedRspecVersionException
 	 */
 	public static String completeRoundtrip(String input)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		String output = null;
 		Model model;
 
+		input = RSpecValidation.fixVerson(input);
 		String type = getType(input);
 
 		InputStream inputStream = null;
@@ -763,5 +793,100 @@ public class RSpecValidation {
 				|| fileExt.equals("rspec");
 
 		return fileExtensionOK;
+	}
+
+	/**
+	 * makes sure that the RSpec version is 2 or 3 version 1 is not supported
+	 * 
+	 * @param xml
+	 * @return
+	 * @throws DeprecatedRspecVersionException
+	 */
+	public static String fixVerson(String input)
+			throws DeprecatedRspecVersionException {
+
+		Document xml = null;
+		String newString = null;
+
+		try {
+			xml = RSpecValidation.loadXMLFromString(input);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+		if (xml != null) {
+			NodeList rspecNode = xml.getElementsByTagName("rspec");
+			if (rspecNode != null && rspecNode.getLength() > 0) {
+				Node root = rspecNode.item(0);
+				Node typeNode = root.getAttributes().getNamedItem("xmlns");
+				if (typeNode != null) {
+					String namespace = typeNode.getNodeValue();
+					System.out.println("RSpec version: " + namespace);
+					if (namespace
+							.equals("http://www.protogeni.net/resources/rspec/0.1")) {
+						System.out
+								.println("RSpec version 0.1 is not supported.");
+						throw new DeprecatedRspecVersionException("0.1");
+					}
+					if (namespace
+							.equals("http://www.geni.net/resources/rspec/3")) {
+						return input;
+					}
+					if (namespace
+							.equals("http://www.protogeni.net/resources/rspec/2")) {
+						System.out.println("Converting RSpec version 2 to version 3.");
+						input = input.replaceAll(
+								"http://www.protogeni.net/resources/rspec/2",
+								"http://www.geni.net/resources/rspec/3");
+						return input;
+					}
+				}
+			}
+		}
+		return newString;
+	}
+
+	/**
+	 * makes sure that the RSpec version is 2 or 3 version 1 is not supported
+	 * 
+	 * @param xml
+	 * @return
+	 */
+	public static boolean checkVersion(String input) {
+
+		Document xml = null;
+
+		try {
+			xml = RSpecValidation.loadXMLFromString(input);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+		if (xml != null) {
+			NodeList rspecNode = xml.getElementsByTagName("rspec");
+			if (rspecNode != null && rspecNode.getLength() > 0) {
+				Node root = rspecNode.item(0);
+				Node typeNode = root.getAttributes().getNamedItem("xmlns");
+				if (typeNode != null) {
+					String namespace = typeNode.getNodeValue();
+					System.out.println("RSpec version: " + namespace);
+					if (namespace
+							.equals("http://www.protogeni.net/resources/rspec/0.1")) {
+						System.out
+								.println("RSpec version 0.1 is not supported.");
+						return false;
+					}
+					if (namespace
+							.equals("http://www.geni.net/resources/rspec/3")) {
+						return true;
+					}
+					if (namespace
+							.equals("http://www.protogeni.net/resources/rspec/2")) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

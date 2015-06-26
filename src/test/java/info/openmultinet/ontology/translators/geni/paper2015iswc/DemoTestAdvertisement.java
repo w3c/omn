@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.paper2015iswc;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -41,7 +42,8 @@ public class DemoTestAdvertisement {
 
 	@Test
 	public void testLoginRoundtrip() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException {
+			InvalidModelException, IOException, XMLStreamException,
+			MissingRspecElementException {
 		long start;
 		start = System.nanoTime();
 

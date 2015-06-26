@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 
@@ -11,7 +12,8 @@ import org.junit.Test;
 public class MonitoringTest {
 
 	@Test
-	public void testRequest() throws MissingRspecElementException {
+	public void testRequest() throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		// check that RSpec is valid
 		String path = "./src/test/resources/geni/monitoring/monitoring-request.xml";
@@ -58,12 +60,13 @@ public class MonitoringTest {
 		System.out.println("========================================");
 		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputString);
-//		Assert.assertTrue("No differences between input and output files",
-//				diffsNodes[0] == 0);
+		// Assert.assertTrue("No differences between input and output files",
+		// diffsNodes[0] == 0);
 	}
 
 	@Test
-	public void testAd() throws MissingRspecElementException {
+	public void testAd() throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		// check that RSpec is valid
 		String path = "./src/test/resources/geni/monitoring/monitoring-ad.xml";
@@ -111,7 +114,7 @@ public class MonitoringTest {
 		System.out.println("========================================");
 		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputString);
-//		Assert.assertTrue("No differences between input and output files",
-//				diffsNodes[0] == 0);
+		// Assert.assertTrue("No differences between input and output files",
+		// diffsNodes[0] == 0);
 	}
 }
