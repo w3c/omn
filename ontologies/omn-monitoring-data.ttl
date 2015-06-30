@@ -184,9 +184,9 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasDesinationIP
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasDestinationIP
 
-:hasDesinationIP rdf:type owl:DatatypeProperty ;
+:hasDestinationIP rdf:type owl:DatatypeProperty ;
 
                  rdfs:comment "IP address of the destination network object."^^xsd:string ;
 

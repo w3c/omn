@@ -567,9 +567,9 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#ResponceTime
+###  http://open-multinet.info/ontology/omn-monitoring-metric#ResponseTime
 
-:ResponceTime rdf:type owl:Class ;
+:ResponseTime rdf:type owl:Class ;
               
               rdfs:subClassOf omn-monitoring:Metric .
 
