@@ -193,16 +193,6 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#AvailableMemory
-
-:AvailableMemory rdf:type owl:Class ;
-                    
-                 rdfs:subClassOf :MemoryUtilization ;
-                    
-                 rdfs:comment "Represents the available memory that can be used by programs."^^xsd:string .
-
-
-
 ###  http://open-multinet.info/ontology/omn-monitoring-metric#BandwidthUtilization
 
 :BandwidthUtilization rdf:type owl:Class ;
@@ -508,6 +498,14 @@ omn-monitoring:Tool rdf:type owl:Class .
 :PacketArrivalRate rdf:type owl:Class ;
                    
                    rdfs:subClassOf omn-monitoring:Metric .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-metric#PacketLoss
+
+:PacketLoss rdf:type owl:Class ;
+                   
+            rdfs:subClassOf omn-monitoring:Metric .
 
 
 
