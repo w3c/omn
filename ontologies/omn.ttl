@@ -550,6 +550,16 @@
 
 
 
+###  http://open-multinet.info/ontology/omn#sequenceNumber
+
+:sequenceNumber rdf:type owl:DatatypeProperty ;
+            
+            rdfs:comment "represents the sequence number"@en ;
+                                    
+            rdfs:range xsd:integer .
+
+
+
 
 
 #################################################################
