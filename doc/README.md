@@ -6,5 +6,6 @@
  - Public link: as a report at https://www.w3.org/community/omn/
  - Example: http://www.openannotation.org/spec/core/
 
- ## Todo
- - Align with this example http://www.w3.org/community/src/css/spec/sample
+## Preview
+
+ See [https://cdn.rawgit.com/open-multinet/playground-rspecs-ontology/master/doc/index.html](https://cdn.rawgit.com/open-multinet/playground-rspecs-ontology/master/doc/index.html)
