@@ -13,3 +13,4 @@ src/test/java/info/openmultinet/ontology/vocabulary/
 omnlib
 eyeball*
 pellet*
+.travis/settings-secret.xml
