@@ -5,6 +5,7 @@ import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
+import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -44,8 +45,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class CommonMethods {
 
@@ -178,6 +181,156 @@ public class CommonMethods {
 		cleanString = cleanString.replaceAll("%3B", ";");
 
 		return cleanString;
+	}
+
+	static OntClass convertGeniStateToOmn(String geniState) {
+
+		OntClass omnState = null;
+		switch (geniState) {
+		case "geni_ready_busy":
+			omnState = Omn_lifecycle.Active;
+			break;
+		case "geni_allocated":
+			omnState = Omn_lifecycle.Allocated;
+			break;
+		case "geni_configuring":
+			omnState = Omn_lifecycle.Preinit;
+			break;
+		case "geni_failed":
+			omnState = Omn_lifecycle.Error;
+			break;
+		case "geni_failure":
+			omnState = Omn_lifecycle.Failure;
+			break;
+		case "geni_instantiating":
+			omnState = Omn_lifecycle.NotYetInitialized;
+			break;
+		case "geni_notready":
+			omnState = Omn_lifecycle.NotReady;
+			break;
+		case "geni_pending_allocation":
+			omnState = Omn_lifecycle.Pending;
+			break;
+		case "geni_provisioned":
+			omnState = Omn_lifecycle.Provisioned;
+			break;
+		case "geni_ready":
+			omnState = Omn_lifecycle.Ready;
+			break;
+		case "geni_reload":
+			omnState = Omn_lifecycle.Reload;
+			break;
+		case "geni_restart":
+			omnState = Omn_lifecycle.Restart;
+			break;
+		case "geni_start":
+			omnState = Omn_lifecycle.Start;
+			break;
+		case "geni_stop":
+			omnState = Omn_lifecycle.Stop;
+			break;
+		case "geni_stopping":
+			omnState = Omn_lifecycle.Stopping;
+			break;
+		case "geni_success":
+			omnState = Omn_lifecycle.Success;
+			break;
+		case "geni_update_users":
+			omnState = Omn_lifecycle.UpdateUsers;
+			break;
+			case "geni_update_users_cancel":
+			omnState = Omn_lifecycle.UpdateUsersCancel;
+			break;
+			case "geni_updating_users":
+			omnState = Omn_lifecycle.UpdatingUsers;
+			break;
+		case "geni_unallocated":
+			omnState = Omn_lifecycle.Unallocated;
+			break;
+		}
+
+		return omnState;
+	}
+
+	static String convertOmnToGeniState(Resource start) {
+
+		String geniState = "";
+
+		if (start.equals(Omn_lifecycle.Active)) {
+			geniState = "geni_ready_busy";
+		} else if (start.equals(Omn_lifecycle.Allocated)) {
+			geniState = "geni_allocated";
+		} else if (start.equals(Omn_lifecycle.Error)) {
+			geniState = "geni_failed";
+		} else if (start.equals(Omn_lifecycle.Failure)) {
+			geniState = "geni_failure";
+		} else if (start.equals(Omn_lifecycle.NotReady)) {
+			geniState = "geni_notready";
+		} else if (start.equals(Omn_lifecycle.NotYetInitialized)) {
+			geniState = "geni_instantiating";
+		} else if (start.equals(Omn_lifecycle.Pending)) {
+			geniState = "geni_pending_allocation";
+		} else if (start.equals(Omn_lifecycle.Preinit)) {
+			geniState = "geni_configuring";
+		} else if (start.equals(Omn_lifecycle.Provisioned)) {
+			geniState = "geni_provisioned";
+		} else if (start.equals(Omn_lifecycle.Ready)) {
+			geniState = "geni_ready";
+		} else if (start.equals(Omn_lifecycle.Reload)) {
+			geniState = "geni_reload";
+		} else if (start.equals(Omn_lifecycle.Restart)) {
+			geniState = "geni_restart";
+		} else if (start.equals(Omn_lifecycle.Start)) {
+			geniState = "geni_start";
+		} else if (start.equals(Omn_lifecycle.Success)) {
+			geniState = "geni_success";
+		} else if (start.equals(Omn_lifecycle.Stop)) {
+			geniState = "geni_stop";
+		} else if (start.equals(Omn_lifecycle.Stopping)) {
+			geniState = "geni_stopping";
+		} else if (start.equals(Omn_lifecycle.Unallocated)) {
+			geniState = "geni_unallocated";
+		} else if (start.equals(Omn_lifecycle.UpdateUsers)) {
+			geniState = "geni_update_users";
+			} else if (start.equals(Omn_lifecycle.UpdateUsersCancel)) {
+			geniState = "geni_update_users_cancel";
+			} else if (start.equals(Omn_lifecycle.UpdatingUsers)) {
+			geniState = "geni_updating_users";
+		}
+
+		return geniState;
+
+	}
+
+	static boolean isOmnState(Resource type) {
+
+		boolean geniState = false;
+
+		if (type.equals(Omn_lifecycle.Active)
+				|| type.equals(Omn_lifecycle.Allocated)
+				|| type.equals(Omn_lifecycle.Error)
+				|| type.equals(Omn_lifecycle.Failure)
+				|| type.equals(Omn_lifecycle.NotReady)
+				|| type.equals(Omn_lifecycle.NotYetInitialized)
+				|| type.equals(Omn_lifecycle.Pending)
+				|| type.equals(Omn_lifecycle.Preinit)
+				|| type.equals(Omn_lifecycle.Provisioned)
+				|| type.equals(Omn_lifecycle.Ready)
+				 || type.equals(Omn_lifecycle.Reload)
+				|| type.equals(Omn_lifecycle.Restart)
+				|| type.equals(Omn_lifecycle.Start)
+				|| type.equals(Omn_lifecycle.Stop)
+				|| type.equals(Omn_lifecycle.Stopping)
+				|| type.equals(Omn_lifecycle.Success)
+				 || type.equals(Omn_lifecycle.UpdateUsers)
+				 || type.equals(Omn_lifecycle.UpdateUsersCancel)
+				 || type.equals(Omn_lifecycle.UpdatingUsers)
+				|| type.equals(Omn_lifecycle.Unallocated)) {
+			geniState = true;
+		}
+
+		return geniState;
+
 	}
 
 }

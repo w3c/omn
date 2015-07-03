@@ -237,6 +237,22 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#restricted
+
+:restricted rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "restricted"@en ;
+         
+         rdfs:comment "restricted"@en ;
+         
+         rdfs:domain :Available ;
+
+         rdfs:seeAlso <http://www.geni.net/resources/rspec/ext/shared-vlan/1> ;
+         
+         rdfs:range xsd:boolean .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasCPU
 
 :hasCPU rdf:type owl:DatatypeProperty ;
@@ -282,6 +298,19 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
                         ] ;
 
             owl:inverseOf :isDiskImageOf .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasAvailable
+
+:hasAvailable rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has avalable"@en ;
+
+            rdfs:comment "has avalable"@en ;
+            
+            rdfs:range :Available ;
+            
+            rdfs:domain :SharedVlan .
 
 
 
@@ -355,6 +384,21 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#Available
+
+:Available rdf:type owl:Class ;
+
+           rdfs:comment "Available"@en ;
+           
+           rdfs:label "Available"@en ;
+
+           rdfs:seeAlso <http://www.geni.net/resources/rspec/ext/shared-vlan/1> ;
+         
+           rdfs:subClassOf omn:Resource .
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#DiskImage
 
 :DiskImage rdf:type owl:Class ;
@@ -362,6 +406,18 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
            rdfs:comment "Disk Image"@en ;
            
            rdfs:label "Disk Image"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#SharedVlan
+
+:SharedVlan rdf:type owl:Class ;
+
+           rdfs:comment "SharedVlan"@en ;
+           
+           rdfs:label "SharedVlan"@en ;
            
            rdfs:subClassOf omn:Resource .
 

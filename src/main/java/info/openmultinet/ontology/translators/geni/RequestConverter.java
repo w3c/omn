@@ -256,8 +256,8 @@ public class RequestConverter extends AbstractConverter {
 			Resource serviceResource = service.asResource();
 
 			setLoginService(serviceResource, serviceContents);
-			// setExecutiveService(serviceResource, serviceContents);
-			// setInstallService(serviceResource, serviceContents);
+			setExecutiveService(serviceResource, serviceContents);
+			setInstallService(serviceResource, serviceContents);
 
 		}
 		if (serviceContents != null) {
@@ -266,6 +266,71 @@ public class RequestConverter extends AbstractConverter {
 			node.getAnyOrRelationOrLocation().add(services);
 		}
 
+	}
+	
+
+	private static void setExecutiveService(Resource serviceResource,
+			ServiceContents serviceContents) {
+		if (serviceResource.hasProperty(RDF.type, Omn_service.ExecuteService)) {
+
+			// get command
+			String command = "";
+			if (serviceResource.hasProperty(Omn_service.command)) {
+				command += serviceResource.getProperty(Omn_service.command)
+						.getObject().asLiteral().getString();
+			}
+
+			// get shell
+			String shell = "";
+			if (serviceResource.hasProperty(Omn_service.shell)) {
+				shell += serviceResource.getProperty(Omn_service.shell)
+						.getObject().asLiteral().getString();
+			}
+
+			// create execute
+			ExecuteServiceContents excuteServiceContent = new ObjectFactory()
+					.createExecuteServiceContents();
+
+			excuteServiceContent.setCommand(command); // required
+			excuteServiceContent.setShell(shell); // required
+
+			JAXBElement<ExecuteServiceContents> executeService = new ObjectFactory()
+					.createExecute(excuteServiceContent);
+			serviceContents.getAnyOrLoginOrInstall().add(executeService);
+		}
+	}
+	
+	private static void setInstallService(Resource serviceResource,
+			ServiceContents serviceContents) {
+
+		if (serviceResource.hasProperty(RDF.type, Omn_service.InstallService)) {
+
+			// get install path
+			String installPath = "";
+			if (serviceResource.hasProperty(Omn_service.installPath)) {
+				installPath += serviceResource
+						.getProperty(Omn_service.installPath).getObject()
+						.asLiteral().getString();
+			}
+
+			// get url
+			String url = "";
+			if (serviceResource.hasProperty(Omn_service.url)) {
+				url += serviceResource.getProperty(Omn_service.url).getObject()
+						.asLiteral().getString();
+			}
+
+			// create execute
+			InstallServiceContents installServiceContent = new ObjectFactory()
+					.createInstallServiceContents();
+
+			installServiceContent.setInstallPath(installPath); // required
+			installServiceContent.setUrl(url); // required
+
+			JAXBElement<InstallServiceContents> installService = new ObjectFactory()
+					.createInstall(installServiceContent);
+			serviceContents.getAnyOrLoginOrInstall().add(installService);
+		}
 	}
 
 	private static void setMonitoringService(Statement resource,
@@ -540,7 +605,8 @@ public class RequestConverter extends AbstractConverter {
 					NodeContents.SliverType sliverType = (NodeContents.SliverType) element
 							.getValue();
 
-					if (sliverType.getName() == null) {
+					String sliverName = sliverType.getName();
+					if (sliverName == null) {
 						throw new MissingRspecElementException(
 								"SliverTypeContents > name");
 					}
@@ -550,6 +616,11 @@ public class RequestConverter extends AbstractConverter {
 					// RDF.type,
 					// model.createResource("http://open-multinet.info/example#"
 					// + sliverType.getName()));
+					
+					if(AbstractConverter.isUrl(sliverName)){
+						Resource sliverTypeResource = model.createResource(sliverName);
+						omnResource.addProperty(RDF.type, sliverTypeResource);
+					}
 					omnResource.addProperty(RDFS.label, sliverType.getName());
 				}
 				// }
@@ -679,9 +750,10 @@ public class RequestConverter extends AbstractConverter {
 
 						NodeContents node = nodeObject.getValue();
 
+						String clientId = node.getClientId();
 						Resource omnResource = outputModel
 								.createResource("http://open-multinet.info/example#"
-										+ node.getClientId());
+										+ clientId);
 						// omnResource.addProperty(RDF.type, Nml.Node);
 						omnResource.addProperty(RDF.type, Omn_resource.Node);
 

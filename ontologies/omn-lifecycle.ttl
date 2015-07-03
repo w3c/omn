@@ -104,6 +104,87 @@
                                     )
                       ] .
 
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasStartState
+
+:hasStartState rdf:type owl:ObjectProperty ;
+
+          rdfs:label "has start state"@en ;
+
+          rdfs:comment "start state of a GENI operational state machine"@en ;
+          
+          rdfs:range :State ;
+          
+          rdfs:domain :Opstate .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasNext
+
+:hasNext rdf:type owl:ObjectProperty ;
+
+          rdfs:label "has next state"@en ;
+
+          rdfs:comment "next state of a GENI operational state machine"@en ;
+          
+          rdfs:range :State ;
+          
+          rdfs:domain :State .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasType
+
+:hasType rdf:type owl:ObjectProperty ;
+
+          rdfs:label "has state type"@en ;
+
+          rdfs:comment "state type of a GENI operational state machine"@en ;
+          
+          rdfs:range :State ;
+          
+          rdfs:domain :State .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasName
+
+:hasName rdf:type owl:ObjectProperty ;
+
+          rdfs:label "has state name"@en ;
+
+          rdfs:comment "state name of a GENI operational state machine"@en ;
+          
+          rdfs:range :State ;
+          
+          rdfs:domain :State .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasWait
+
+:hasWait rdf:type owl:ObjectProperty ;
+
+          rdfs:label "has wait"@en ;
+
+          rdfs:comment "wait of a state of a GENI operational state machine"@en ;
+          
+          rdfs:range :Wait ;
+          
+          rdfs:domain :State .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasAction
+
+:hasAction rdf:type owl:ObjectProperty ;
+
+          rdfs:label "has action"@en ;
+
+          rdfs:comment "action of a state of a GENI operational state machine"@en ;
+          
+          rdfs:range :Action ;
+          
+          rdfs:domain :State .
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#usesService
 :usesService rdf:type 
                    owl:IrreflexiveProperty ,
@@ -559,6 +640,20 @@ omn:Topology rdf:type owl:Class .
 
 
 
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Action
+
+:Action rdf:type owl:Class ;
+
+       rdfs:label "Action"@en ;
+       
+       rdfs:subClassOf omn:State ;
+       
+       rdfs:comment "GENI state action"@en .
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#Active
 
 :Active rdf:type owl:Class ;
@@ -624,6 +719,18 @@ omn:Topology rdf:type owl:Class .
        rdfs:comment "The related resource/service is in an error state"@en .
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#Failure
+
+:Failure rdf:type owl:Class ;
+
+       rdfs:label "Failure"@en ;
+       
+       rdfs:subClassOf :State ;
+       
+       rdfs:seeAlso "GENI geni_failure operational state"@en ;
+       
+       rdfs:comment "geni_failure"@en .
+
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
 
@@ -661,6 +768,18 @@ omn:Topology rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#NotReady
+
+:NotReady rdf:type owl:Class ;
+                   
+                   rdfs:label "Not Ready"@en ;
+                   
+                   rdfs:subClassOf :State ;
+                   
+                   rdfs:seeAlso "GENI geni_notready operational state"@en .
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized
 
 :NotYetInitialized rdf:type owl:Class ;
@@ -686,6 +805,17 @@ omn:Topology rdf:type owl:Class .
           rdfs:comment "A collection (group) of services and resources provided by an Infrastructure. The collection is the result of the application of Policies."@en ;
           
           rdfs:seeAlso gr:Offering .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Opstate
+
+:Opstate rdf:type owl:Class ;
+
+          rdfs:label "GENI operational state machine"@en ;
+          
+          rdfs:subClassOf omn:Resource .
+
 
 
 
@@ -781,6 +911,41 @@ omn:Topology rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#Success
+
+:Success rdf:type owl:Class ;
+
+         rdfs:label "Success"@en ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "geni_success"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Restart
+
+:Restart rdf:type owl:Class ;
+
+         rdfs:label "Restart"@en ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "geni_restart"@en .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Start
+
+:Start rdf:type owl:Class ;
+
+         rdfs:label "Start"@en ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "geni_start"@en .
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#Started
 
 :Started rdf:type owl:Class ;
@@ -802,6 +967,17 @@ omn:Topology rdf:type owl:Class .
        rdfs:subClassOf omn:Attribute ;
        
        rdfs:comment "The current state of the resource, service or group"@en .
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Stop
+
+:Stop rdf:type owl:Class ;
+
+         rdfs:label "Stop"@en ;
+                 
+         rdfs:subClassOf :State ;
+         
+         rdfs:comment "geni_stop"@en .
 
 
 
@@ -845,6 +1021,66 @@ omn:Topology rdf:type owl:Class .
 
 
 
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Reload
+
+:Reload rdf:type owl:Class ;
+
+             rdfs:label "Reload"@en ;
+             
+             rdfs:subClassOf :State ;
+             
+             rdfs:comment "geni_reload"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#UpdatingUsers
+
+:UpdatingUsers rdf:type owl:Class ;
+
+             rdfs:label "UpdatingUsers"@en ;
+             
+             rdfs:subClassOf :State ;
+             
+             rdfs:comment "geni_updating_users"@en .
+
+
+             
+###  http://open-multinet.info/ontology/omn-lifecycle#UpdateUsersCancel
+
+:UpdateUsersCancel rdf:type owl:Class ;
+
+             rdfs:label "UpdateUsersCancel"@en ;
+             
+             rdfs:subClassOf :State ;
+             
+             rdfs:comment "geni_update_users_cancel"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#UpdateUsers
+
+:UpdateUsers rdf:type owl:Class ;
+
+             rdfs:label "UpdateUsers"@en ;
+             
+             rdfs:subClassOf :State ;
+             
+             rdfs:comment "geni_update_users"@en .
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#Uncompleted
 
 :Uncompleted rdf:type owl:Class ;
@@ -866,6 +1102,18 @@ omn:Topology rdf:type owl:Class .
           rdfs:subClassOf :State ;
           
           rdfs:comment "The related resource/service is getting updated"@en .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#Wait
+
+:Wait rdf:type owl:Class ;
+
+       rdfs:label "State"@en ;
+       
+       rdfs:subClassOf omn:State ;
+       
+       rdfs:comment "GENI state wait"@en .
 
 
 #################################################################

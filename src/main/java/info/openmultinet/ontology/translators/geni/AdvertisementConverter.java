@@ -3,8 +3,11 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ActionSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Available;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ExternalReferenceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LocationContents;
@@ -16,7 +19,11 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecOpstate;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -50,6 +57,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.apache.commons.io.input.CloseShieldInputStream;
 
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -84,26 +92,6 @@ public class AdvertisementConverter extends AbstractConverter {
 		this.xmlif = XMLInputFactory.newInstance();
 	}
 
-	@SuppressWarnings("rawtypes")
-	public Model getModel(RSpecContents rspec)
-			throws MissingRspecElementException {
-
-		final Resource offering = model.createResource(
-				AdvertisementConverter.PREFIX + "#advertisement").addProperty(
-				RDF.type, Omn_lifecycle.Offering);
-
-		@SuppressWarnings("unchecked")
-		final List<JAXBElement<?>> rspecObjects = (List) rspec
-				.getAnyOrNodeOrLink();
-
-		for (final Object rspecObject : rspecObjects) {
-			tryExtractNode(rspecObject, offering);
-			tryExtractLink(rspecObject, offering);
-		}
-
-		return model;
-	}
-
 	public Model getModel(final InputStream input) throws JAXBException,
 			InvalidModelException, XMLStreamException,
 			MissingRspecElementException {
@@ -125,6 +113,82 @@ public class AdvertisementConverter extends AbstractConverter {
 		return request;
 	}
 
+	@SuppressWarnings("rawtypes")
+	public Model getModel(RSpecContents rspec)
+			throws MissingRspecElementException {
+
+		final Resource offering = model.createResource(
+				AdvertisementConverter.PREFIX + "#advertisement").addProperty(
+				RDF.type, Omn_lifecycle.Offering);
+
+		@SuppressWarnings("unchecked")
+		final List<JAXBElement<?>> rspecObjects = (List) rspec
+				.getAnyOrNodeOrLink();
+
+		for (final Object rspecObject : rspecObjects) {
+			tryExtractNode(rspecObject, offering);
+			tryExtractLink(rspecObject, offering);
+			tryExtractOpstate(rspecObject, offering);
+			tryExtractExternalRef(rspecObject, offering);
+			tryExtractSharedVlan(rspecObject, offering);
+		}
+
+		return model;
+	}
+
+	private void tryExtractSharedVlan(Object rspecObject, Resource offering) {
+		try {
+			@SuppressWarnings("unchecked")
+			final RspecSharedVlan vlan = (RspecSharedVlan) rspecObject;
+			Resource sharedVlan = offering.getModel().createResource();
+			sharedVlan.addProperty(RDF.type, Omn_domain_pc.SharedVlan);
+
+			List<Available> availables = vlan.getAvailable();
+			for (Available available : availables) {
+
+				Resource availableOmn = offering.getModel().createResource();
+
+				String restricted = available.isRestricted().toString();
+				availableOmn.addProperty(Omn_domain_pc.restricted, restricted);
+
+				if (available.getName() != null) {
+					availableOmn.addProperty(RDFS.label, available.getName());
+				}
+				sharedVlan
+						.addProperty(Omn_domain_pc.hasAvailable, availableOmn);
+			}
+
+			offering.addProperty(Omn.hasResource, sharedVlan);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	private void tryExtractExternalRef(Object rspecObject, Resource offering)
+			throws MissingRspecElementException {
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<ExternalReferenceContents> exRefJaxb = (JAXBElement<ExternalReferenceContents>) rspecObject;
+			final ExternalReferenceContents exRef = exRefJaxb.getValue();
+
+			// <xs:attribute name="component_id" use="required"/>
+			if (exRef.getComponentId() == null) {
+				throw new MissingRspecElementException(
+						"ExternalReferenceContents > component_id");
+			}
+			offering.addProperty(Omn_lifecycle.hasID, exRef.getComponentId());
+
+			if (exRef.getComponentManagerId() != null) {
+				offering.addProperty(Omn_lifecycle.managedBy,
+						exRef.getComponentManagerId());
+			}
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
 	private void tryExtractLink(final Object rspecObject,
 			final Resource topology) {
 		try {
@@ -136,6 +200,171 @@ public class AdvertisementConverter extends AbstractConverter {
 			omnLink.addProperty(RDF.type, Omn_resource.Link);
 			omnLink.addProperty(Omn.isResourceOf, topology);
 			topology.addProperty(Omn.hasResource, omnLink);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractOpstate(Object rspecObject, Resource offering)
+			throws MissingRspecElementException {
+		try {
+			@SuppressWarnings("unchecked")
+			final RspecOpstate nodeJaxb = (RspecOpstate) rspecObject;
+
+			Resource opstate = offering.getModel().createResource(
+					UUID.randomUUID().toString());
+			opstate.addProperty(RDF.type, Omn_lifecycle.Opstate);
+
+			// extract start
+			// start is required
+			String start = nodeJaxb.getStart();
+			if (start == null) {
+				throw new MissingRspecElementException("RspecOpstate > start");
+			}
+			opstate.addProperty(Omn_lifecycle.hasStartState,
+					CommonMethods.convertGeniStateToOmn(start));
+
+			// extract aggregate manager id
+			// aggregate_manager_id is required
+			String aggregateManagerId = nodeJaxb.getAggregateManagerId();
+			if (aggregateManagerId == null) {
+				throw new MissingRspecElementException(
+						"RspecOpstate > aggregate_manager_id");
+			}
+			opstate.addProperty(Omn_lifecycle.managedBy, aggregateManagerId);
+
+			List<Object> sliverStates = nodeJaxb.getSliverTypeOrState();
+			for (Object object : sliverStates) {
+				tryExtractOpstateSliverType(object, opstate);
+				tryExtractOpstateState(object, opstate);
+			}
+
+			offering.addProperty(Omn.hasResource, opstate);
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.info(e.getMessage());
+		}
+	}
+
+	private void tryExtractOpstateState(Object object, Resource opstate) {
+		try {
+			@SuppressWarnings("unchecked")
+			StateSpec stateSpecs = (StateSpec) object;
+
+			Resource state = opstate.getModel().createResource();
+
+			String geniType = stateSpecs.getName();
+			OntClass omnType = CommonMethods.convertGeniStateToOmn(geniType);
+			if (omnType != null) {
+				state.addProperty(RDF.type, omnType);
+				opstate.addProperty(Omn_lifecycle.hasState, state);
+			} else {
+				return;
+			}
+
+			List<Object> actionWaitDescription = stateSpecs
+					.getActionOrWaitOrDescription();
+			for (Object awd : actionWaitDescription) {
+				tryExtractAction(awd, state);
+				tryExtractWait(awd, state);
+				tryExtractDescription(awd, state);
+			}
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractAction(Object awd, Resource state) {
+		try {
+			@SuppressWarnings("unchecked")
+			ActionSpec action = (ActionSpec) awd;
+
+			String description = action.getDescription();
+			String next = action.getNext();
+			String name = action.getName();
+			Resource actionResource = state.getModel().createResource();
+			actionResource.addProperty(RDF.type, Omn_lifecycle.Action);
+
+			if (next != null) {
+				OntClass omnNext = CommonMethods.convertGeniStateToOmn(next);
+				actionResource.addProperty(Omn_lifecycle.hasNext, omnNext);
+			}
+			if (description != null) {
+				actionResource.addProperty(RDFS.comment, description);
+			}
+
+			if (name != null) {
+				OntClass omnType = CommonMethods.convertGeniStateToOmn(name);
+				actionResource.addProperty(Omn_lifecycle.hasName, omnType);
+			}
+
+			state.addProperty(Omn_lifecycle.hasAction, actionResource);
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractWait(Object awd, Resource state) {
+		try {
+			@SuppressWarnings("unchecked")
+			WaitSpec wait = (WaitSpec) awd;
+
+			String description = wait.getDescription();
+			String next = wait.getNext();
+			String type = wait.getType();
+			Resource waitResource = state.getModel().createResource();
+			waitResource.addProperty(RDF.type, Omn_lifecycle.Wait);
+
+			if (next != null) {
+				OntClass omnNext = CommonMethods.convertGeniStateToOmn(next);
+				waitResource.addProperty(Omn_lifecycle.hasNext, omnNext);
+			}
+			if (description != null) {
+				waitResource.addProperty(RDFS.comment, description);
+			}
+
+			if (type != null) {
+				OntClass omnType = CommonMethods.convertGeniStateToOmn(type);
+				waitResource.addProperty(Omn_lifecycle.hasType, omnType);
+			}
+
+			state.addProperty(Omn_lifecycle.hasWait, waitResource);
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractDescription(Object awd, Resource state) {
+		try {
+			@SuppressWarnings("unchecked")
+			String description = (String) awd;
+			state.addProperty(RDFS.comment, description);
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractOpstateSliverType(Object object, Resource opstate)
+			throws MissingRspecElementException {
+
+		try {
+			@SuppressWarnings("unchecked")
+			info.openmultinet.ontology.translators.geni.jaxb.advertisement.SliverType sliver = (info.openmultinet.ontology.translators.geni.jaxb.advertisement.SliverType) object;
+
+			final Resource omnSliver = opstate.getModel().createResource();
+
+			// name is required
+			String name = sliver.getName();
+			if (name == null) {
+				throw new MissingRspecElementException(
+						"opstate > slivertype > name");
+			}
+			omnSliver.addProperty(RDFS.label, name);
+			opstate.addProperty(Omn_lifecycle.canBeImplementedBy, omnSliver);
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -387,42 +616,259 @@ public class AdvertisementConverter extends AbstractConverter {
 		return rspec;
 	}
 
-	private void model2rspec(final Model model, final RSpecContents manifest)
+	private void model2rspec(final Model model, final RSpecContents ad)
 			throws InvalidModelException {
 		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
 				Omn_lifecycle.Offering).toList();
 		AbstractConverter.validateModel(groups);
 		final Resource group = groups.iterator().next();
 
+		// set external_ref
+		if (group.hasProperty(Omn_lifecycle.hasID)) {
+			ExternalReferenceContents exrefContents = of
+					.createExternalReferenceContents();
+			String componentId = group.getProperty(Omn_lifecycle.hasID)
+					.getObject().asLiteral().getString();
+			exrefContents.setComponentId(componentId);
+
+			if (group.hasProperty(Omn_lifecycle.managedBy)) {
+				String component_manager_id = group
+						.getProperty(Omn_lifecycle.managedBy).getObject()
+						.asLiteral().getString();
+				exrefContents.setComponentManagerId(component_manager_id);
+			}
+
+			ad.getAnyOrNodeOrLink().add(of.createExternalRef(exrefContents));
+		}
+
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
-		convertStatementsToNodesAndLinks(manifest, resources);
+		convertStatementsToNodesAndLinks(ad, resources);
 	}
 
 	private void convertStatementsToNodesAndLinks(final RSpecContents manifest,
 			final List<Statement> omnResources) {
 		for (final Statement omnResource : omnResources) {
-			// @todo: check type of resource here and not only generate nodes
-			final NodeContents geniNode = new NodeContents();
+			if (!omnResource.getResource().hasProperty(RDF.type,
+					Omn_resource.Link)
+					&& !omnResource.getResource().hasProperty(RDF.type,
+							Omn_lifecycle.Opstate)
+					&& !omnResource.getResource().hasProperty(RDF.type,
+							Omn_domain_pc.SharedVlan)) {
+				// @todo: check type of resource here and not only generate
+				// nodes
+				final NodeContents geniNode = new NodeContents();
 
-			setComponentDetails(omnResource, geniNode);
-			setComponentManagerId(omnResource, geniNode);
-			setHardwareTypes(omnResource, geniNode);
-			setSliverTypes(omnResource, geniNode);
-			setLocation(omnResource, geniNode);
-			setAvailability(omnResource, geniNode);
-			setMonitoringService(omnResource, geniNode);
+				setComponentDetails(omnResource, geniNode);
+				setComponentManagerId(omnResource, geniNode);
+				setHardwareTypes(omnResource, geniNode);
+				setSliverTypes(omnResource, geniNode);
+				setLocation(omnResource, geniNode);
+				setAvailability(omnResource, geniNode);
+				setMonitoringService(omnResource, geniNode);
 
-			ResIterator infrastructures = omnResource.getModel()
-					.listResourcesWithProperty(Omn.isResourceOf,
-							Omn_federation.Infrastructure);
-			if (infrastructures.hasNext()) {
-				Resource infrastructure = infrastructures.next();
-				geniNode.setComponentManagerId(infrastructure.getURI());
+				ResIterator infrastructures = omnResource.getModel()
+						.listResourcesWithProperty(Omn.isResourceOf,
+								Omn_federation.Infrastructure);
+				if (infrastructures.hasNext()) {
+					Resource infrastructure = infrastructures.next();
+					geniNode.setComponentManagerId(infrastructure.getURI());
+				}
+
+				manifest.getAnyOrNodeOrLink().add(this.of.createNode(geniNode));
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					Omn_domain_pc.SharedVlan)) {
+
+				RspecSharedVlan sharedVlan = this.of.createRspecSharedVlan();
+
+				StmtIterator availables = omnResource.getResource()
+						.listProperties(Omn_domain_pc.hasAvailable);
+
+				while (availables.hasNext()) {
+					Resource availableResource = availables.next().getObject()
+							.asResource();
+					Available available = this.of.createAvailable();
+
+					if (availableResource.hasProperty(Omn_domain_pc.restricted)) {
+						boolean restricted = availableResource
+								.getProperty(Omn_domain_pc.restricted)
+								.getObject().asLiteral().getBoolean();
+						available.setRestricted(restricted);
+					}
+					if (availableResource.hasProperty(RDFS.label)) {
+						String name = availableResource.getProperty(RDFS.label)
+								.getObject().asLiteral().getString();
+						available.setName(name);
+					}
+					sharedVlan.getAvailable().add(available);
+				}
+
+				manifest.getAnyOrNodeOrLink().add(sharedVlan);
+
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					Omn_lifecycle.Opstate)) {
+
+				RspecOpstate rspecOpstate = this.of.createRspecOpstate();
+
+				setOpstateAttributes(omnResource, rspecOpstate);
+				setSliverTypes(omnResource, rspecOpstate);
+				setStates(omnResource, rspecOpstate);
+
+				manifest.getAnyOrNodeOrLink().add(rspecOpstate);
+
+			}
+		}
+	}
+
+	private void setOpstateAttributes(Statement omnResource,
+			RspecOpstate rspecOpstate) {
+		// set aggregateManagerId
+		String aggregateManagerId = omnResource
+				.getProperty(Omn_lifecycle.managedBy).getObject().asLiteral()
+				.getString();
+		// required
+		if (aggregateManagerId == null) {
+			aggregateManagerId = "";
+		}
+		rspecOpstate.setAggregateManagerId(aggregateManagerId);
+
+		// set start state
+		Resource start = omnResource.getProperty(Omn_lifecycle.hasStartState)
+				.getObject().asResource();
+		String geniStart = CommonMethods.convertOmnToGeniState(start);
+		rspecOpstate.setStart(geniStart);
+
+	}
+
+	private void setStates(Statement omnResource, RspecOpstate rspecOpstate) {
+		// get states
+		StmtIterator states = omnResource.getResource().listProperties(
+				Omn_lifecycle.hasState);
+		while (states.hasNext()) {
+			Statement stateStatement = states.next();
+			StateSpec stateSpec = of.createStateSpec();
+
+			// set name
+			Resource stateResource = stateStatement.getObject().asResource();
+			setStateName(stateResource, stateSpec);
+			setDescription(stateResource, stateSpec);
+			setWait(stateResource, stateSpec);
+			setAction(stateResource, stateSpec);
+			rspecOpstate.getSliverTypeOrState().add(stateSpec);
+		}
+	}
+
+	private void setAction(Resource stateResource, StateSpec stateSpec) {
+
+		StmtIterator actions = stateResource
+				.listProperties(Omn_lifecycle.hasAction);
+		while (actions.hasNext()) {
+			Statement typeStatement = actions.next();
+			Resource action = typeStatement.getObject().asResource();
+			ActionSpec actionSpec = of.createActionSpec();
+
+			// set next
+			Resource next = action.getProperty(Omn_lifecycle.hasNext)
+					.getObject().asResource();
+			if (CommonMethods.isOmnState(next)) {
+				String geniState = CommonMethods.convertOmnToGeniState(next);
+				actionSpec.setNext(geniState);
 			}
 
-			manifest.getAnyOrNodeOrLink().add(this.of.createNode(geniNode));
+			// set name
+			Resource name = action.getProperty(Omn_lifecycle.hasName)
+					.getObject().asResource();
+			if (CommonMethods.isOmnState(name)) {
+				String geniState = CommonMethods.convertOmnToGeniState(name);
+				actionSpec.setName(geniState);
+			}
+
+			// set description
+			if (action.hasProperty(RDFS.comment)) {
+				String description = action.getProperty(RDFS.comment)
+						.getObject().asLiteral().getString();
+				actionSpec.setDescription(description);
+			}
+
+			stateSpec.getActionOrWaitOrDescription().add(actionSpec);
+		}
+	}
+
+	private void setWait(Resource stateResource, StateSpec stateSpec) {
+
+		StmtIterator waits = stateResource
+				.listProperties(Omn_lifecycle.hasWait);
+		while (waits.hasNext()) {
+			Statement typeStatement = waits.next();
+			Resource wait = typeStatement.getObject().asResource();
+			WaitSpec waitSpec = of.createWaitSpec();
+
+			// set next
+			Resource next = wait.getProperty(Omn_lifecycle.hasNext).getObject()
+					.asResource();
+			if (CommonMethods.isOmnState(next)) {
+				String geniState = CommonMethods.convertOmnToGeniState(next);
+				waitSpec.setNext(geniState);
+			}
+
+			// set type
+			Resource type = wait.getProperty(Omn_lifecycle.hasType).getObject()
+					.asResource();
+			if (CommonMethods.isOmnState(type)) {
+				String geniState = CommonMethods.convertOmnToGeniState(type);
+				waitSpec.setType(geniState);
+			}
+
+			stateSpec.getActionOrWaitOrDescription().add(waitSpec);
+		}
+	}
+
+	private void setStateName(Resource stateResource, StateSpec stateSpec) {
+
+		StmtIterator types = stateResource.listProperties(RDF.type);
+		while (types.hasNext()) {
+			Statement typeStatement = types.next();
+			Resource type = typeStatement.getObject().asResource();
+
+			if (CommonMethods.isOmnState(type)) {
+				String geniState = CommonMethods.convertOmnToGeniState(type);
+				stateSpec.setName(geniState);
+			}
+		}
+	}
+
+	private void setDescription(Resource stateResource, StateSpec stateSpec) {
+		StmtIterator descriptions = stateResource.listProperties(RDFS.comment);
+		while (descriptions.hasNext()) {
+			Statement descriptionStatement = descriptions.next();
+			String descriptionString = descriptionStatement.getObject()
+					.asLiteral().getString();
+			stateSpec.getActionOrWaitOrDescription().add(descriptionString);
+		}
+	}
+
+	private void setSliverTypes(Statement omnResource, RspecOpstate rspecOpstate) {
+		// get sliver types
+		StmtIterator canBeImplementBy = omnResource.getResource()
+				.listProperties(Omn_lifecycle.canBeImplementedBy);
+		info.openmultinet.ontology.translators.geni.jaxb.advertisement.SliverType sliver;
+
+		List<Object> sliverTypeOrState = rspecOpstate.getSliverTypeOrState();
+		while (canBeImplementBy.hasNext()) {
+			Statement omnSliver = canBeImplementBy.next();
+
+			sliver = of.createSliverType();
+
+			String name = "";
+			if (omnSliver.getObject().asResource().hasProperty(RDFS.label)) {
+				name = omnSliver.getObject().asResource()
+						.getProperty(RDFS.label).getObject().asLiteral()
+						.getString();
+
+			}
+			sliver.setName(name);
+			sliverTypeOrState.add(sliver);
 		}
 	}
 

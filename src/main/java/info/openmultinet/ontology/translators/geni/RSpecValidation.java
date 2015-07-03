@@ -9,8 +9,10 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecConte
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -69,10 +71,11 @@ public class RSpecValidation {
 	 *            RSpec as string
 	 * @return
 	 * @throws MissingRspecElementException
-	 * @throws DeprecatedRspecVersionException 
+	 * @throws DeprecatedRspecVersionException
 	 */
 	static public double getProportionalError(String input)
-			throws MissingRspecElementException, DeprecatedRspecVersionException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -120,10 +123,11 @@ public class RSpecValidation {
 	 *            RSpec as string
 	 * @return
 	 * @throws MissingRspecElementException
-	 * @throws DeprecatedRspecVersionException 
+	 * @throws DeprecatedRspecVersionException
 	 */
 	static public int[] getDiffsNodes(String input)
-			throws MissingRspecElementException, DeprecatedRspecVersionException {
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -394,10 +398,15 @@ public class RSpecValidation {
 					AdvertisementConverter converter = new AdvertisementConverter();
 					RSpecContents rspec = converter.getRspec(inputStream);
 					model = converter.getModel(rspec);
-					System.out.println(Parser.toString(model));
+
+					String modelString = Parser.toString(model);
+					PrintWriter outBlah = new PrintWriter("model.txt");
+					outBlah.println(modelString);
+					outBlah.close();
+
 					output = converter.getRSpec(model);
 				} catch (JAXBException | InvalidModelException
-						| XMLStreamException e) {
+						| XMLStreamException | FileNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
@@ -834,7 +843,8 @@ public class RSpecValidation {
 					}
 					if (namespace
 							.equals("http://www.protogeni.net/resources/rspec/2")) {
-						System.out.println("Converting RSpec version 2 to version 3.");
+						System.out
+								.println("Converting RSpec version 2 to version 3.");
 						input = input.replaceAll(
 								"http://www.protogeni.net/resources/rspec/2",
 								"http://www.geni.net/resources/rspec/3");

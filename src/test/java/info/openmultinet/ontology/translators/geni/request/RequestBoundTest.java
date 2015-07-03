@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni.protogeni;
+package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
@@ -7,11 +7,9 @@ import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
-import info.openmultinet.ontology.translators.geni.RSpecValidationTest;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -20,23 +18,19 @@ import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class AdOpStateTest {
+public class RequestBoundTest {
 
 	@Test
-	public void adRoundtrip() throws JAXBException, InvalidModelException,
-			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
-
-		final String filename = "/geni/protogeni/adopstate.xml";
+	public void manifestRoundtrip() throws JAXBException,
+			InvalidModelException, IOException, XMLStreamException,
+			MissingRspecElementException, DeprecatedRspecVersionException {
+		final String filename = "/geni/request/request_bound.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		System.out.println("Converting this input from '" + filename + "':");
@@ -52,40 +46,18 @@ public class AdOpStateTest {
 		System.out.println(outputRspec);
 		System.out.println("===============================");
 
-		Assert.assertTrue("type",
-				outputRspec.contains("type=\"advertisement\""));
-
+		System.out.println("Get number of diffs and nodes:");
 		System.out.println("===============================");
-		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
 
-		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
+		Assert.assertTrue("client id",
+				outputRspec.contains("client_id=\"mypc175\""));
 
-		// check that output has one rspec element
-		NodeList rspec = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "rspec");
-		Assert.assertTrue(rspec.getLength() == 1);
-
-		NodeList opstates = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/ext/opstate/1",
-				"rspec_opstate");
-		Assert.assertTrue(opstates.getLength() == 2);
-
-		NodeList nodes = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "node");
-		Assert.assertTrue(nodes.getLength() == 1);
-		String componentID = nodes.item(0).getAttributes()
-				.getNamedItem("component_id").getNodeValue();
-		Assert.assertTrue(componentID
-				.equals("urn:publicid:IDN+jonlab.tbres.emulab.net+node+pc39"));
-		String exclusive = nodes.item(0).getAttributes()
-				.getNamedItem("exclusive").getNodeValue();
-		Assert.assertTrue(exclusive.equals("true"));
-
-		// TODO: Currently returns a high number of errors, although translation
-		// appears to be correct.
+		// TODO: This test does not consistently return 0, only sometimes. Need
+		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);
-
 	}
+
 }

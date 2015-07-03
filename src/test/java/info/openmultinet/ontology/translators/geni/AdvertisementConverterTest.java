@@ -52,17 +52,18 @@ public class AdvertisementConverterTest {
 				rspec.contains("MotorGarage"));
 	}
 
-	@Test
-	public void testConvertingGraphToRSpec() throws JAXBException,
-			InvalidModelException {
-		parser.read("/omn/request.ttl");
-		final Model model = parser.getModel();
-		final String rspec = converter.getRSpec(model);
-		System.out.println(rspec);
-		Assert.assertTrue("should be an advertisement",
-				rspec.contains("type=\"advertisement\""));
-		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
-	}
+	// not an Advertisement!!
+	// @Test
+	// public void testConvertingGraphToRSpec() throws JAXBException,
+	// InvalidModelException {
+	// parser.read("/omn/request.ttl");
+	// final Model model = parser.getModel();
+	// final String rspec = converter.getRSpec(model);
+	// System.out.println(rspec);
+	// Assert.assertTrue("should be an advertisement",
+	// rspec.contains("type=\"advertisement\""));
+	// Assert.assertTrue("should have a motor", rspec.contains("Motor"));
+	// }
 
 	@Test
 	public void testConvertingRSpecToGraphFromNTUA() throws JAXBException,
