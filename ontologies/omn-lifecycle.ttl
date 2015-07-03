@@ -647,7 +647,7 @@ omn:Topology rdf:type owl:Class .
 
        rdfs:label "Action"@en ;
        
-       rdfs:subClassOf omn:State ;
+       rdfs:subClassOf :State ;
        
        rdfs:comment "GENI state action"@en .
 
@@ -1111,7 +1111,7 @@ omn:Topology rdf:type owl:Class .
 
        rdfs:label "State"@en ;
        
-       rdfs:subClassOf omn:State ;
+       rdfs:subClassOf :State ;
        
        rdfs:comment "GENI state wait"@en .
 

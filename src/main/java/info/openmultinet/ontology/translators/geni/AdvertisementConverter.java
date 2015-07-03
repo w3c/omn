@@ -241,7 +241,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			offering.addProperty(Omn.hasResource, opstate);
 		} catch (final ClassCastException e) {
-			AdvertisementConverter.LOG.info(e.getMessage());
+			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
 	}
 
