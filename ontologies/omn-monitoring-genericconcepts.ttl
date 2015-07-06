@@ -181,7 +181,7 @@
 
 :Event rdf:type owl:Class ;
        
-       rdfs:comment "Represents monitoring related events or notifications within a system, e.g CPU load is over a defined threshold, a resource is created or deleted, etc.."^^xsd:string .
+       rdfs:comment "Represents any event or notification within a system during processing phase, e.g CPU load is over a defined threshold, a resource is created or deleted, etc.."^^xsd:string .
 
 
 
@@ -248,14 +248,6 @@
 :BatchQuery rdf:type owl:Class ;
        
        rdfs:comment "Represents batch of queries to retrieve data about multiple metrics of multiple resources."^^xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#Event
-
-:Event rdf:type owl:Class ;
-       
-       rdfs:comment "Represents any event occurs during a processing phase."^^xsd:string .
 
 
 
