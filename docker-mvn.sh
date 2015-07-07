@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ -z $@ ]; then
+if [ -n "$@" ]; then
 	ARGS="mvn clean install"	
 else
 	ARGS=$@
@@ -16,11 +16,12 @@ echo $CMD
 $CMD
 RET=$?
 
-echo "***"
+echo "**********************"
 echo "** Note: for deployment you need to provide CI_DEPLOY_USERNAME & CI_DEPLOY_PASSWORD envoriment vars!"
 #echo "** e.g. ${CMD1} ${CMD_WORK} ${CMD_ENV} ${M2_CACHE} ${CMD2} mvn deploy -DskipTests --settings .travis/settings.xml"
-echo "** or provide a custom settings.xml to this script"
-echo "** e.g. $0 mvn deploy -DskipTests --settings .travis/settings-secret.xml"
-echo "***"
+echo "** or provide a custom settings.xml to maven"
+echo "** e.g. for WAR: $0 mvn deploy -DskipTests --settings .travis/settings-secret.xml"
+echo "** e.g. for JAR: $0 mvn deploy:deploy-file -DrepositoryId=ossrh -Dfile=target/omnlib.jar -Durl=https://oss.sonatype.org/content/repositories/snapshots  -DgroupId=info.open-multinet  -DartifactId=omnlib -Dversion=0.0.1-SNAPSHOT -DskipTests --settings .travis/settings-secret.xml"
+echo "**********************"
 
 exit $RET
