@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni.request;
+package info.openmultinet.ontology.translators.geni.manifest;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
@@ -6,6 +6,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
+import info.openmultinet.ontology.translators.geni.ManifestConverterTest;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -26,35 +27,48 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class RequestBoundRawPcTest {
+public class ManifestPaper2015Test {
 
 	@Test
-	public void requestRoundtrip() throws JAXBException,
+	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
 			MissingRspecElementException, DeprecatedRspecVersionException {
-		final String filename = "/geni/request/request_bound_rawpc.xml";
-		final String inputRspec = AbstractConverter.toString(filename);
 
+		final String filename = "/geni/manifest/manifest_paper2015.xml";
+		final InputStream inputRspec = ManifestConverterTest.class
+				.getResourceAsStream(filename);
 		System.out.println("Converting this input from '" + filename + "':");
 		System.out.println("===============================");
-		System.out.println(inputRspec);
+		System.out.println(AbstractConverter.toString(filename));
 		System.out.println("===============================");
 
-		final String outputRspec = RSpecValidation
-				.completeRoundtrip(inputRspec);
+		final Model model = ManifestConverter.getModel(inputRspec);
+		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
+				Omn_lifecycle.Manifest);
+		System.out.println("Generated this graph:");
+		System.out.println("===============================");
+		System.out.println(Parser.toString(model));
+		System.out.println("===============================");
+		Assert.assertTrue("should have a topology", topology.hasNext());
 
+		final InfModel infModel = new Parser(model).getInfModel();
+		final String outputRspec = ManifestConverter.getRSpec(infModel,
+				"testbed.example.org");
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);
 		System.out.println("===============================");
 
-		System.out.println("Get number of diffs and nodes:");
 		System.out.println("===============================");
-		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+		String inputRSpec = AbstractConverter.toString(filename);
+		System.out.println(inputRSpec);
 
-		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
+		System.out.println("Diffs:");
+		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRSpec);
+
+		Assert.assertTrue("type", outputRspec.contains("type=\"manifest\""));
 		Assert.assertTrue("client id",
-				outputRspec.contains("client_id=\"my-raw-pc-1\""));
+				outputRspec.contains("client_id=\"myMotor\""));
 
 		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
@@ -63,18 +77,24 @@ public class RequestBoundRawPcTest {
 				"http://www.geni.net/resources/rspec/3", "rspec");
 		Assert.assertTrue(rspec.getLength() == 1);
 
-		NodeList installServices = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "install");
-		Assert.assertTrue(installServices.getLength() == 2);
+		NodeList nodes = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "node");
+		Assert.assertTrue(nodes.getLength() == 1);
 
-		NodeList executeServices = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "execute");
-		Assert.assertTrue(executeServices.getLength() == 2);
+		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "sliver_type");
+		Assert.assertTrue(sliverType.getLength() == 1);
+
+		String sliverName = sliverType.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(sliverName
+				.equals("http://open-multinet.info/ontology/resources/motor#Motor"));
 
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);
+
 	}
 
 }

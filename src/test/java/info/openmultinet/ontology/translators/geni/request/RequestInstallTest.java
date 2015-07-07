@@ -1,20 +1,12 @@
-package info.openmultinet.ontology.translators.geni.fed4fire;
+package info.openmultinet.ontology.translators.geni.request;
 
-import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
-import info.openmultinet.ontology.translators.geni.RSpecValidationTest;
-import info.openmultinet.ontology.translators.geni.RequestConverter;
-import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
@@ -22,22 +14,15 @@ import javax.xml.stream.XMLStreamException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.hp.hpl.jena.rdf.model.InfModel;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.vocabulary.RDF;
-
-public class ListResources101201556163559958 {
+public class RequestInstallTest {
 
 	@Test
-	public void adRoundtrip() throws JAXBException, InvalidModelException,
+	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-
-		final String filename = "/geni/fed4fire/listResources-101-2015-5-6-16-35-59-958.xml";
+		final String filename = "/geni/request/request_install.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		System.out.println("Converting this input from '" + filename + "':");
@@ -48,21 +33,18 @@ public class ListResources101201556163559958 {
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		PrintWriter outFile = new PrintWriter("filename.txt");
-		outFile.println(outputRspec);
-		outFile.close();
-		
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
 		System.out.println(outputRspec);
 		System.out.println("===============================");
 
-		Assert.assertTrue("type",
-				outputRspec.contains("type=\"advertisement\""));
-
+		System.out.println("Get number of diffs and nodes:");
 		System.out.println("===============================");
-		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+
+		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
+		Assert.assertTrue("client id",
+				outputRspec.contains("client_id=\"node\""));
 
 		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
@@ -71,15 +53,22 @@ public class ListResources101201556163559958 {
 				"http://www.geni.net/resources/rspec/3", "rspec");
 		Assert.assertTrue(rspec.getLength() == 1);
 
-		NodeList opstates = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/ext/opstate/1",
-				"rspec_opstate");
-		Assert.assertTrue(opstates.getLength() == 1);
+		NodeList nodes = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "node");
+		Assert.assertTrue(nodes.getLength() == 1);
 
-		// TODO: Currently returns a high number of errors, although translation
-		// appears to be correct.
+		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "sliver_type");
+		Assert.assertTrue(sliverType.getLength() == 1);
+
+		String sliverName = sliverType.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(sliverName.equals("raw-pc"));
+
+		// TODO: This test does not consistently return 0, only sometimes. Need
+		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);
-
 	}
+
 }

@@ -295,7 +295,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			if (name != null) {
 				OntClass omnType = CommonMethods.convertGeniStateToOmn(name);
-				actionResource.addProperty(Omn_lifecycle.hasName, omnType);
+				actionResource.addProperty(Omn_lifecycle.hasStateName, omnType);
 			}
 
 			state.addProperty(Omn_lifecycle.hasAction, actionResource);
@@ -777,7 +777,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			}
 
 			// set name
-			Resource name = action.getProperty(Omn_lifecycle.hasName)
+			Resource name = action.getProperty(Omn_lifecycle.hasStateName)
 					.getObject().asResource();
 			if (CommonMethods.isOmnState(name)) {
 				String geniState = CommonMethods.convertOmnToGeniState(name);

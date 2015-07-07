@@ -88,6 +88,8 @@ public class DeliveryMechanism {
 			baos.write(toplogy.getBytes());
 		} else if (AbstractConverter.TTL.equalsIgnoreCase(to)) {
 			RDFDataMgr.write(baos, model, Lang.TTL);
+		} else if (AbstractConverter.RDFXML.equalsIgnoreCase(to)) {
+			RDFDataMgr.write(baos, model, Lang.RDFXML);
 		} else {
 			throw new UnknownFormatConversionException("unknown output '" + to
 					+ "'");

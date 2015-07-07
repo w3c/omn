@@ -18,6 +18,8 @@ import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -27,7 +29,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class RequestBoundTest {
 
 	@Test
-	public void manifestRoundtrip() throws JAXBException,
+	public void requestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
 			MissingRspecElementException, DeprecatedRspecVersionException {
 		final String filename = "/geni/request/request_bound.xml";
@@ -53,7 +55,26 @@ public class RequestBoundTest {
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 		Assert.assertTrue("client id",
 				outputRspec.contains("client_id=\"mypc175\""));
+		
+		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+		
+		// check that output has one rspec element
+		NodeList rspec = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "rspec");
+		Assert.assertTrue(rspec.getLength() == 1);
 
+		NodeList nodes = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "node");
+		Assert.assertTrue(nodes.getLength() == 1);
+
+		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "sliver_type");
+		Assert.assertTrue(sliverType.getLength() == 1);
+		
+		String sliverName = sliverType.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(sliverName.equals("raw-pc"));
+		
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",

@@ -33,6 +33,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 public abstract class AbstractConverter {
 
 	protected final static String VENDOR = "omnlib";
+	public final static String RDFXML = "rdfxml";
 	public final static String TTL = "ttl";
 	public final static String RSPEC_REQUEST = "request";
 	public final static String RSPEC_MANIFEST = "manifest";
@@ -118,6 +119,10 @@ public abstract class AbstractConverter {
 		if (uri.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
 			nonGeneric = false;
 		}
+		
+		if (uri.equals("http://open-multinet.info/ontology/omn#Group")) {
+			nonGeneric = false;
+		}
 
 		return nonGeneric;
 	}
@@ -173,7 +178,28 @@ public abstract class AbstractConverter {
 			}
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * Method to determine whether a given string is a URN or not
+	 * 
+	 * @param string
+	 * @return boolean, true if string is a URN
+	 */
+	public static boolean isUrn(String urn) {
 
+		URI uri = null;
+		uri = URI.create(urn);
+
+		if (uri != null) {
+			if (uri.getScheme() != null) {
+				if (uri.getScheme().equals("urn")) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**

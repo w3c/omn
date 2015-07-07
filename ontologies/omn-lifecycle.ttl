@@ -22,13 +22,13 @@
                                                    
                                                    dc:date "2014-11-11"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-04-29"^^xsd:string ;
+                                                   owl:versionInfo "2015-07-03"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Upper Lifecycle Ontology"@en ;
                                                    
                                                    dc:description "This ontology defines generic concepts related to the life cycle of resource or service."@en ;
                                                    
-                                                   dcterms:modified "2015-04-29"^^xsd:date ;
+                                                   dcterms:modified "2015-07-03"^^xsd:date ;
                                                    
                                                    vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
                                                     
@@ -144,9 +144,9 @@
           rdfs:domain :State .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasName
+###  http://open-multinet.info/ontology/omn-lifecycle#hasStateName
 
-:hasName rdf:type owl:ObjectProperty ;
+:hasStateName rdf:type owl:ObjectProperty ;
 
           rdfs:label "has state name"@en ;
 
@@ -477,6 +477,108 @@
        
         rdfs:range xsd:string .
 
+
+
+### This is a temporary solution to test the translator, so that the orignal component ID is return when a URL, and not the URN as provided by the translator.
+###  http://open-multinet.info/ontology/omn-lifecycle#hasOriginalID
+
+:hasOriginalID rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has original component ID"@en ;
+       
+        rdfs:comment "The original identifier set by the management system"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: component_id"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentName
+
+:hasComponentName rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has component name"@en ;
+       
+        rdfs:comment "has component name"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: component_name"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerName
+
+:hasComponentManagerName rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has component manager name"@en ;
+       
+        rdfs:comment "has component manager name"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: component_manager"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasSliverName
+
+:hasSliverName rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has sliver name"@en ;
+       
+        rdfs:comment "has sliver name"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: sliver_type name"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasLinkName
+
+:hasLinkName rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has link name"@en ;
+       
+        rdfs:comment "has link name"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: link_type name"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#resourceId
@@ -1068,16 +1170,6 @@ omn:Topology rdf:type owl:Class .
              rdfs:subClassOf :State ;
              
              rdfs:comment "geni_update_users"@en .
-
-
-
-
-
-
-
-
-
-
 
 
 

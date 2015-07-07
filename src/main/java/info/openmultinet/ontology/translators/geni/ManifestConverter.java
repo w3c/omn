@@ -240,12 +240,14 @@ public class ManifestConverter extends AbstractConverter {
 					.getString();
 			link.setClientId(clientId);
 		}
+
 		if (resource.getResource().hasProperty(Omn_domain_pc.vlanTag)) {
 			String vlanTag = resource.getResource()
 					.getProperty(Omn_domain_pc.vlanTag).getObject().asLiteral()
 					.getString();
 			link.setVlantag(vlanTag);
 		}
+
 	}
 
 	private static void setGeniSliverInfo(Statement resource, Object node) {
@@ -597,11 +599,15 @@ public class ManifestConverter extends AbstractConverter {
 				SliverType sliverName = new ObjectFactory()
 						.createNodeContentsSliverType();
 
-				if (sliverResource.hasProperty(RDFS.label)) {
-					sliverName.setName(sliverResource.getProperty(RDFS.label)
+				// if (sliverResource.hasProperty(RDFS.label)) {
+				// sliverName.setName(sliverResource.getProperty(RDFS.label)
+				// .getObject().toString());
+				// } else if (sliverResource.getURI() != null) {
+				// sliverName.setName(sliverResource.getURI().toString());
+				// }
+				if (sliverResource.hasProperty(RDF.type)) {
+					sliverName.setName(sliverResource.getProperty(RDF.type)
 							.getObject().toString());
-				} else if (sliverResource.getURI() != null) {
-					sliverName.setName(sliverResource.getURI().toString());
 				}
 
 				// get resource
@@ -686,7 +692,21 @@ public class ManifestConverter extends AbstractConverter {
 					implementedBy.toString(), "node");
 
 			node.setComponentId(urn);
-			node.setComponentName(implementedBy.asNode().getLocalName());
+			// node.setComponentName(implementedBy.asNode().getLocalName());
+
+			// if (implementedBy.asResource().hasProperty(
+			// Omn_lifecycle.hasComponentName)) {
+			// String componentName = implementedBy.asResource()
+			// .getProperty(Omn_lifecycle.hasComponentName)
+			// .getObject().asLiteral().getString();
+			// node.setComponentName(componentName);
+			// }
+		}
+
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasComponentName)) {
+			node.setComponentName(resource.getResource()
+					.getProperty(Omn_lifecycle.hasComponentName).getObject()
+					.asLiteral().getString());
 		}
 
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
@@ -851,7 +871,8 @@ public class ManifestConverter extends AbstractConverter {
 		}
 	}
 
-	public static Model getModel(final InputStream stream) throws JAXBException, MissingRspecElementException {
+	public static Model getModel(final InputStream stream)
+			throws JAXBException, MissingRspecElementException {
 		final Model model = ManifestConverter.createModelTemplate();
 		final RSpecContents manifest = ManifestConverter.getManifest(stream);
 
@@ -941,7 +962,14 @@ public class ManifestConverter extends AbstractConverter {
 					.generateUrlFromUrn(node.getSliverId()));
 			// .createResource(parseSliverID(node.getSliverId()));
 
-			omnResource.addProperty(Omn_lifecycle.hasID, node.getClientId());
+			// client_id is required by manifest-common.xsd
+			String clientId = node.getClientId();
+			if (clientId == null) {
+				throw new MissingRspecElementException(
+						"NodeContents > client_id");
+			}
+			omnResource.addProperty(Omn_lifecycle.hasID, clientId);
+
 			omnResource.addProperty(RDFS.label, node.getClientId());
 			omnResource.addProperty(RDF.type, Omn.Resource);
 
@@ -975,11 +1003,23 @@ public class ManifestConverter extends AbstractConverter {
 				}
 			}
 
-			String componentId = CommonMethods.generateUrlFromUrn(node
-					.getComponentId());
-			Resource componentIDResource = model.createResource(componentId);
-			omnResource.addProperty(Omn_lifecycle.implementedBy,
-					componentIDResource);
+			// component id is not required
+			String componentIdOriginal = node.getComponentId();
+			if (componentIdOriginal != null) {
+				String componentId = CommonMethods
+						.generateUrlFromUrn(componentIdOriginal);
+				Resource componentIDResource = model
+						.createResource(componentId);
+				omnResource.addProperty(Omn_lifecycle.implementedBy,
+						componentIDResource);
+			}
+
+			// component name is not required
+			String componentName = node.getComponentName();
+			if (componentName != null) {
+				omnResource.addProperty(Omn_lifecycle.hasComponentName,
+						componentName);
+			}
 
 			topology.addProperty(Omn.hasResource, omnResource);
 		} else if (o
@@ -1001,10 +1041,11 @@ public class ManifestConverter extends AbstractConverter {
 						.generateUrlFromUrn(link.getSliverId()));
 			}
 
-			if(link.getClientId() == null){
-				throw new MissingRspecElementException("LinkContents > client_id ");
+			if (link.getClientId() == null) {
+				throw new MissingRspecElementException(
+						"LinkContents > client_id ");
 			}
-					
+
 			linkResource.addLiteral(Omn_resource.clientId, link.getClientId()); // required
 			linkResource.addProperty(RDF.type, Omn_resource.Link);
 
@@ -1261,6 +1302,12 @@ public class ManifestConverter extends AbstractConverter {
 			ServiceContents service = (ServiceContents) nodeDetailElement
 					.getValue();
 			List<Object> services = service.getAnyOrLoginOrInstall();
+
+			// add blank service, if blank service node in rspec
+			if (services.size() == 0) {
+				Resource omnService = model.createResource();
+				omnResource.addProperty(Omn.hasService, omnService);
+			}
 
 			// iterate through the Services and add to model
 			for (int i = 0; i < services.size(); i++) {

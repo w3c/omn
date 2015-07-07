@@ -28,7 +28,7 @@ The Java library helps developers to work with Open-Multinet related ontologies 
 
 Assuming you have a running WildFly instance
 
- 1. mvn clean compile
+ 1. mvn clean install
  2. mvn wildfly:deploy
  
 Then convert the file
