@@ -13,9 +13,10 @@ notifications:
     secure: ADSEKsnBXO6rCoEoHkqZYib+A6s6dTgRtcIVusNPXIhuVYXfnOfJw/lyQ+IaI2l5C3ll9GaAGy9nXVqSjvgXN+0iXlYidVpP3FJlr04+K5lBVB3Z2b4NDtM/n/iXNEVyF4jPlSeuHMNPKEKMQo+Xt1wVas1hf50AUeSDbVMpXiw=
 cache:
   directories:
-  - $HOME/.m2
   - $HOME/eyeball-2.3
+  - $HOME/.m2
 after_success:
+- curl http://demo.fiteagle.org/trigger.php?c=omn
 - mvn clean test jacoco:report coveralls:report
 env:
   global:
