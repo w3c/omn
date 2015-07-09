@@ -1,6 +1,7 @@
 language: java
 jdk:
 - oraclejdk8
+sudo: false
 script:
 - mvn test
 - ./bin/rdflint.sh -assume ontologies/*.ttl import/*.ttl -check ontologies/*.ttl
