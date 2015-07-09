@@ -91,7 +91,7 @@ public abstract class AbstractConverter {
 	 */
 	public static boolean nonGeneric(String uri) {
 		if (uri == null) {
-			return true;
+			return false;
 		}
 
 		boolean nonGeneric = true;

@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni.paper2015iswc;
+package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.AbstractConverter;
 

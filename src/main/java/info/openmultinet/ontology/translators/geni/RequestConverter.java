@@ -4,6 +4,9 @@ import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecSharedVlan;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Available;
+import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
@@ -146,9 +149,36 @@ public class RequestConverter extends AbstractConverter {
 				setLinkDetails(resource, link);
 				setInterfaceRefs(resource, link);
 				setLinkProperties(resource, link);
+				setSharedVlan(resource, link);
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createLink(link));
+			}
+		}
+	}
+
+	private static void setSharedVlan(Statement resource, LinkContents link) {
+
+		StmtIterator types = resource.getResource().listProperties(
+				Omn.hasResource);
+
+		while (types.hasNext()) {
+
+			Resource object = types.next().getObject().asResource();
+			if (object.hasProperty(RDF.type, Omn_domain_pc.SharedVlan)) {
+				ObjectFactory of = new ObjectFactory();
+				LinkSharedVlan sharedVlanRspec = of.createLinkSharedVlan();
+				if (object.hasProperty(RDFS.label)) {
+					String name = object.getProperty(RDFS.label).getObject()
+							.asLiteral().getString();
+					sharedVlanRspec.setName(name);
+				}
+				if (object.hasProperty(Omn_domain_pc.vlanTag)) {
+					String vlanTag = object.getProperty(Omn_domain_pc.vlanTag).getObject()
+							.asLiteral().getString();
+					sharedVlanRspec.setVlantag(vlanTag);
+				}
+				link.getAnyOrPropertyOrLinkType().add(sharedVlanRspec);
 			}
 		}
 	}
@@ -716,6 +746,8 @@ public class RequestConverter extends AbstractConverter {
 				extractComponentManager(o, linkResource);
 			} else if (o.getClass().equals(LinkType.class)) {
 				extractLinkType(o, linkResource);
+			} else if (o.getClass().equals(LinkSharedVlan.class)) {
+				tryExtractSharedVlan(o, linkResource);
 			} else {
 				RequestConverter.LOG.log(Level.INFO,
 						"Found unknown link extension: " + o);
@@ -727,6 +759,27 @@ public class RequestConverter extends AbstractConverter {
 		linkResource.addProperty(Omn.isResourceOf, topology);
 		topology.addProperty(Omn.hasResource, linkResource);
 
+	}
+
+	private static void tryExtractSharedVlan(Object rspecObject,
+			Resource offering) throws MissingRspecElementException {
+
+		final LinkSharedVlan vlan = (LinkSharedVlan) rspecObject;
+		Resource sharedVlan = offering.getModel().createResource();
+		sharedVlan.addProperty(RDF.type, Omn_domain_pc.SharedVlan);
+
+		String name = vlan.getName();
+		if (name == null) {
+			throw new MissingRspecElementException("link_shared_vlan > name");
+		}
+		sharedVlan.addProperty(RDFS.label, name);
+
+		String vlanTag = vlan.getVlantag();
+		if (vlanTag != null) {
+			sharedVlan.addProperty(Omn_domain_pc.vlanTag, vlanTag);
+		}
+
+		offering.addProperty(Omn.hasResource, sharedVlan);
 	}
 
 	private static void extractComponentManager(Object o, Resource linkResource)

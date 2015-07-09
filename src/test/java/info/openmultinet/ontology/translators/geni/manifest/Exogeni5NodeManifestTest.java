@@ -97,10 +97,6 @@ public class Exogeni5NodeManifestTest {
 						"geni_slice_info");
 		Assert.assertTrue(sliceInfo.getLength() == 1);
 
-		String sliceState = sliceInfo.item(0).getAttributes()
-				.getNamedItem("state").getNodeValue();
-		Assert.assertTrue(sliceState.equals("configuring"));
-
 		String sliceUuid = sliceInfo.item(0).getAttributes()
 				.getNamedItem("uuid").getNodeValue();
 		Assert.assertTrue(sliceUuid
@@ -115,7 +111,5 @@ public class Exogeni5NodeManifestTest {
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);
-
 	}
-
 }

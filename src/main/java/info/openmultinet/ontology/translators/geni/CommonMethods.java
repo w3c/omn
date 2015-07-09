@@ -190,19 +190,37 @@ public class CommonMethods {
 		case "geni_ready_busy":
 			omnState = Omn_lifecycle.Active;
 			break;
+		case "ready_busy":
+			omnState = Omn_lifecycle.Active;
+			break;
 		case "geni_allocated":
+			omnState = Omn_lifecycle.Allocated;
+			break;
+		case "allocated":
 			omnState = Omn_lifecycle.Allocated;
 			break;
 		case "geni_configuring":
 			omnState = Omn_lifecycle.Preinit;
 			break;
+		case "configuring":
+			omnState = Omn_lifecycle.Preinit;
+			break;
 		case "geni_failed":
+			omnState = Omn_lifecycle.Error;
+			break;
+		case "failed":
 			omnState = Omn_lifecycle.Error;
 			break;
 		case "geni_failure":
 			omnState = Omn_lifecycle.Failure;
 			break;
+		case "Nascent":
+			omnState = Omn_lifecycle.Nascent;
+			break;
 		case "geni_instantiating":
+			omnState = Omn_lifecycle.NotYetInitialized;
+			break;
+		case "instantiating":
 			omnState = Omn_lifecycle.NotYetInitialized;
 			break;
 		case "geni_notready":
@@ -211,10 +229,19 @@ public class CommonMethods {
 		case "geni_pending_allocation":
 			omnState = Omn_lifecycle.Pending;
 			break;
+		case "pending_allocation":
+			omnState = Omn_lifecycle.Pending;
+			break;
 		case "geni_provisioned":
 			omnState = Omn_lifecycle.Provisioned;
 			break;
+		case "provisioned":
+			omnState = Omn_lifecycle.Provisioned;
+			break;
 		case "geni_ready":
+			omnState = Omn_lifecycle.Ready;
+			break;
+		case "ready":
 			omnState = Omn_lifecycle.Ready;
 			break;
 		case "geni_reload":
@@ -232,19 +259,25 @@ public class CommonMethods {
 		case "geni_stopping":
 			omnState = Omn_lifecycle.Stopping;
 			break;
+		case "stopping":
+			omnState = Omn_lifecycle.Stopping;
+			break;
 		case "geni_success":
 			omnState = Omn_lifecycle.Success;
 			break;
 		case "geni_update_users":
 			omnState = Omn_lifecycle.UpdateUsers;
 			break;
-			case "geni_update_users_cancel":
+		case "geni_update_users_cancel":
 			omnState = Omn_lifecycle.UpdateUsersCancel;
 			break;
-			case "geni_updating_users":
+		case "geni_updating_users":
 			omnState = Omn_lifecycle.UpdatingUsers;
 			break;
 		case "geni_unallocated":
+			omnState = Omn_lifecycle.Unallocated;
+			break;
+		case "unallocated":
 			omnState = Omn_lifecycle.Unallocated;
 			break;
 		}
@@ -264,6 +297,8 @@ public class CommonMethods {
 			geniState = "geni_failed";
 		} else if (start.equals(Omn_lifecycle.Failure)) {
 			geniState = "geni_failure";
+		} else if (start.equals(Omn_lifecycle.Nascent)) {
+			geniState = "Nascent";
 		} else if (start.equals(Omn_lifecycle.NotReady)) {
 			geniState = "geni_notready";
 		} else if (start.equals(Omn_lifecycle.NotYetInitialized)) {
@@ -292,9 +327,9 @@ public class CommonMethods {
 			geniState = "geni_unallocated";
 		} else if (start.equals(Omn_lifecycle.UpdateUsers)) {
 			geniState = "geni_update_users";
-			} else if (start.equals(Omn_lifecycle.UpdateUsersCancel)) {
+		} else if (start.equals(Omn_lifecycle.UpdateUsersCancel)) {
 			geniState = "geni_update_users_cancel";
-			} else if (start.equals(Omn_lifecycle.UpdatingUsers)) {
+		} else if (start.equals(Omn_lifecycle.UpdatingUsers)) {
 			geniState = "geni_updating_users";
 		}
 
@@ -310,21 +345,22 @@ public class CommonMethods {
 				|| type.equals(Omn_lifecycle.Allocated)
 				|| type.equals(Omn_lifecycle.Error)
 				|| type.equals(Omn_lifecycle.Failure)
+				|| type.equals(Omn_lifecycle.Nascent)
 				|| type.equals(Omn_lifecycle.NotReady)
 				|| type.equals(Omn_lifecycle.NotYetInitialized)
 				|| type.equals(Omn_lifecycle.Pending)
 				|| type.equals(Omn_lifecycle.Preinit)
 				|| type.equals(Omn_lifecycle.Provisioned)
 				|| type.equals(Omn_lifecycle.Ready)
-				 || type.equals(Omn_lifecycle.Reload)
+				|| type.equals(Omn_lifecycle.Reload)
 				|| type.equals(Omn_lifecycle.Restart)
 				|| type.equals(Omn_lifecycle.Start)
 				|| type.equals(Omn_lifecycle.Stop)
 				|| type.equals(Omn_lifecycle.Stopping)
 				|| type.equals(Omn_lifecycle.Success)
-				 || type.equals(Omn_lifecycle.UpdateUsers)
-				 || type.equals(Omn_lifecycle.UpdateUsersCancel)
-				 || type.equals(Omn_lifecycle.UpdatingUsers)
+				|| type.equals(Omn_lifecycle.UpdateUsers)
+				|| type.equals(Omn_lifecycle.UpdateUsersCancel)
+				|| type.equals(Omn_lifecycle.UpdatingUsers)
 				|| type.equals(Omn_lifecycle.Unallocated)) {
 			geniState = true;
 		}

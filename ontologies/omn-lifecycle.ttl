@@ -870,6 +870,17 @@ omn:Topology rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#Nascent
+
+:Nascent rdf:type owl:Class ;
+                   
+                   rdfs:label "Nascent"@en ;
+                   
+                   rdfs:subClassOf :State ;
+                   
+                   rdfs:seeAlso "GENI Nascent operational state"@en .
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#NotReady
 
 :NotReady rdf:type owl:Class ;

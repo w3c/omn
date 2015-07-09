@@ -60,6 +60,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -161,36 +162,43 @@ public class ManifestConverter extends AbstractConverter {
 			Resource state = omnResource.getProperty(Omn_lifecycle.hasState)
 					.getObject().asResource();
 
-			if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
-				geniSliceInfo.setState("ready_busy");
+			String stateGeni = CommonMethods.convertOmnToGeniState(state);
+			if (stateGeni != null && stateGeni != "") {
+				geniSliceInfo.setState(stateGeni);
 			}
-			if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
-				geniSliceInfo.setState("allocated");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
-				geniSliceInfo.setState("failed");
-			}
-			if (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI())) {
-				geniSliceInfo.setState("instantiating");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
-				geniSliceInfo.setState("pending_allocation");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
-				geniSliceInfo.setState("configuring");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
-				geniSliceInfo.setState("provisioned");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
-				geniSliceInfo.setState("ready");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
-				geniSliceInfo.setState("stopping");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
-				geniSliceInfo.setState("unallocated");
-			}
+
+			// if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
+			// geniSliceInfo.setState("ready_busy");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
+			// geniSliceInfo.setState("allocated");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
+			// geniSliceInfo.setState("failed");
+			// }
+			// if
+			// (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI()))
+			// {
+			// geniSliceInfo.setState("instantiating");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
+			// geniSliceInfo.setState("pending_allocation");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
+			// geniSliceInfo.setState("configuring");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
+			// geniSliceInfo.setState("provisioned");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
+			// geniSliceInfo.setState("ready");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
+			// geniSliceInfo.setState("stopping");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
+			// geniSliceInfo.setState("unallocated");
+			// }
 
 		}
 
@@ -323,36 +331,43 @@ public class ManifestConverter extends AbstractConverter {
 			Resource state = omnResource.getProperty(Omn_lifecycle.hasState)
 					.getObject().asResource();
 
-			if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
-				geniSliverInfo.setState("ready_busy");
+			String stateGeni = CommonMethods.convertOmnToGeniState(state);
+			if (stateGeni != null && stateGeni != "") {
+				geniSliverInfo.setState(stateGeni);
 			}
-			if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
-				geniSliverInfo.setState("allocated");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
-				geniSliverInfo.setState("failed");
-			}
-			if (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI())) {
-				geniSliverInfo.setState("instantiating");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
-				geniSliverInfo.setState("pending_allocation");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
-				geniSliverInfo.setState("configuring");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
-				geniSliverInfo.setState("provisioned");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
-				geniSliverInfo.setState("ready");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
-				geniSliverInfo.setState("stopping");
-			}
-			if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
-				geniSliverInfo.setState("unallocated");
-			}
+
+			// if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
+			// geniSliverInfo.setState("ready_busy");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
+			// geniSliverInfo.setState("allocated");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
+			// geniSliverInfo.setState("failed");
+			// }
+			// if
+			// (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI()))
+			// {
+			// geniSliverInfo.setState("instantiating");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
+			// geniSliverInfo.setState("pending_allocation");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
+			// geniSliverInfo.setState("configuring");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
+			// geniSliverInfo.setState("provisioned");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
+			// geniSliverInfo.setState("ready");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
+			// geniSliverInfo.setState("stopping");
+			// }
+			// if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
+			// geniSliverInfo.setState("unallocated");
+			// }
 
 		}
 
@@ -577,91 +592,131 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setSliverType(Statement resource, NodeContents node,
 			String hostname) {
+		SliverType sliverType = new ObjectFactory()
+				.createNodeContentsSliverType();
+		Resource omnSliver = null;
 
 		final List<Statement> hasTypes = resource.getResource()
 				.listProperties(RDF.type).toList();
 
-		for (final Statement hasType : hasTypes) {
-			// check if the statement has sliver type
-			// if (resource.getResource().hasProperty(RDF.type)) {
+		// for (final Statement hasType : hasTypes) {
+		//
+		// sliverResource = hasType.getObject().asResource();
+		//
+		// if ((sliverResource.hasProperty(RDFS.label) || (sliverResource
+		// .getURI() != null))
+		// && AbstractConverter.nonGeneric(sliverResource.getURI())) {
+		//
+		// if (sliverResource.hasProperty(RDF.type)) {
+		// sliverName.setName(sliverResource.getProperty(RDF.type)
+		// .getObject().toString());
+		// }
+		//
+		// // get resource
+		// if (sliverResource.hasProperty(Omn.hasResource)) {
+		//
+		// RDFNode resourceNode = sliverResource.getProperty(
+		// Omn.hasResource).getObject();
+		// Resource resourceResource = resourceNode.asResource();
+		//
+		// setDiskImage(resourceResource, sliverName);
+		// }
+		//
+		// JAXBElement<SliverType> sliver = new ObjectFactory()
+		// .createNodeContentsSliverType(sliverName);
+		// node.getAnyOrRelationOrLocation().add(sliver);
+		// }
+		// }
 
-			// RDFNode sliverNode = resource.getResource().getProperty(RDF.type)
-			// .getObject();
-
-			RDFNode sliverNode = hasType.getObject();
-			Resource sliverResource = sliverNode.asResource();
-
-			if ((sliverResource.hasProperty(RDFS.label) || (sliverResource
-					.getURI() != null))
-					&& AbstractConverter.nonGeneric(sliverResource.getURI())) {
-				// .getURI() != null))) && nonGeneric(sliverResource.getURI()))
-				// {
-				SliverType sliverName = new ObjectFactory()
-						.createNodeContentsSliverType();
-
-				// if (sliverResource.hasProperty(RDFS.label)) {
-				// sliverName.setName(sliverResource.getProperty(RDFS.label)
-				// .getObject().toString());
-				// } else if (sliverResource.getURI() != null) {
-				// sliverName.setName(sliverResource.getURI().toString());
-				// }
-				if (sliverResource.hasProperty(RDF.type)) {
-					sliverName.setName(sliverResource.getProperty(RDF.type)
-							.getObject().toString());
-				}
-
-				// get resource
-				if (sliverResource.hasProperty(Omn.hasResource)) {
-
-					RDFNode resourceNode = sliverResource.getProperty(
-							Omn.hasResource).getObject();
-					Resource resourceResource = resourceNode.asResource();
-
-					setDiskImage(resourceResource, sliverName);
-				}
-
-				JAXBElement<SliverType> sliver = new ObjectFactory()
-						.createNodeContentsSliverType(sliverName);
-				node.getAnyOrRelationOrLocation().add(sliver);
-			}
-		}
-
-		// node.setSliverId(generateSliverID(hostname,
 		node.setSliverId(CommonMethods.generateUrnFromUrl(resource
 				.getResource().getURI(), "sliver"));
+
+		for (final Statement hasType : hasTypes) {
+			Resource sliverResource = hasType.getObject().asResource();
+			if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+				omnSliver = sliverResource;
+				sliverType.setName(sliverResource.getURI());
+			}
+		}
+
+		// check if name was string and not uri
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasSliverName)) {
+			String sliverName = resource.getResource()
+					.getProperty(Omn_lifecycle.hasSliverName).getObject()
+					.asLiteral().getString();
+			sliverType.setName(sliverName);
+		}
+
+		if (omnSliver != null) {
+			setDiskImage(omnSliver, sliverType);
+		}
+
+		JAXBElement<SliverType> sliver = new ObjectFactory()
+				.createNodeContentsSliverType(sliverType);
+		node.getAnyOrRelationOrLocation().add(sliver);
 	}
 
-	private static void setDiskImage(Resource resourceResource,
-			SliverType sliverName) {
+	private static void setDiskImage(Resource resource, SliverType sliver) {
 		// check if the resource is a disk image
-		if (resourceResource.hasProperty(RDF.type, Omn_domain_pc.DiskImage)) {
+		// if (resourceResource.hasProperty(RDF.type, Omn_domain_pc.DiskImage))
+		// {
+		//
+		// String diskName = "";
+		// if (resourceResource.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+		// diskName += resourceResource
+		// .getProperty(Omn_domain_pc.hasDiskimageLabel)
+		// .getObject().asLiteral().getString();
+		// }
+		//
+		// String diskVersion = "";
+		// if (resourceResource.hasProperty(Omn_domain_pc.hasDiskimageVersion))
+		// {
+		// diskVersion += resourceResource
+		// .getProperty(Omn_domain_pc.hasDiskimageVersion)
+		// .getObject().asLiteral().getString();
+		// }
+		//
+		// DiskImageContents diskImageContents = new ObjectFactory()
+		// .createDiskImageContents();
+		// if (diskName != "") {
+		// diskImageContents.setName(diskName);
+		// }
+		// if (diskVersion != "") {
+		// diskImageContents.setVersion(diskVersion);
+		// }
+		// JAXBElement<DiskImageContents> diskImage = new ObjectFactory()
+		// .createDiskImage(diskImageContents);
+		// sliverName.getAnyOrDiskImage().add(diskImage);
+		// }
 
-			String diskName = "";
-			if (resourceResource.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-				diskName += resourceResource
-						.getProperty(Omn_domain_pc.hasDiskimageLabel)
-						.getObject().asLiteral().getString();
-			}
+		List<Statement> diskImages = resource.listProperties(
+				Omn_domain_pc.hasDiskImage).toList();
 
-			String diskVersion = "";
-			if (resourceResource.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
-				diskVersion += resourceResource
-						.getProperty(Omn_domain_pc.hasDiskimageVersion)
-						.getObject().asLiteral().getString();
-			}
-
+		for (Statement diskImageStatement : diskImages) {
 			DiskImageContents diskImageContents = new ObjectFactory()
 					.createDiskImageContents();
-			if (diskName != "") {
-				diskImageContents.setName(diskName);
+			Resource linkResource = diskImageStatement.getResource();
+
+			// set name
+			if (linkResource.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+				String diskImageName = linkResource
+						.getProperty(Omn_domain_pc.hasDiskimageLabel)
+						.getObject().asLiteral().getString();
+				diskImageContents.setName(diskImageName);
 			}
-			if (diskVersion != "") {
-				diskImageContents.setVersion(diskVersion);
+
+			// set version
+			if (linkResource.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
+				String diskImageVersion = linkResource
+						.getProperty(Omn_domain_pc.hasDiskimageVersion)
+						.getObject().asLiteral().getString();
+				diskImageContents.setVersion(diskImageVersion);
 			}
-			JAXBElement<DiskImageContents> diskImage = new ObjectFactory()
-					.createDiskImage(diskImageContents);
-			sliverName.getAnyOrDiskImage().add(diskImage);
+
+			sliver.getAnyOrDiskImage().add(
+					new ObjectFactory().createDiskImage(diskImageContents));
 		}
+
 	}
 
 	private static void setComponentDetails(final Statement resource,
@@ -1084,41 +1139,42 @@ public class ManifestConverter extends AbstractConverter {
 
 		// get value of the element
 		GeniSliverInfo geniSliverInfo = (GeniSliverInfo) nodeDetailObject;
-		OntClass stateClass = null;
+		// OntClass stateClass = null;
 		String stateString = geniSliverInfo.getState();
+		OntClass stateClass = CommonMethods.convertGeniStateToOmn(stateString);
 
-		switch (stateString) {
-		case "ready_busy":
-			stateClass = Omn_lifecycle.Active;
-			break;
-		case "allocated":
-			stateClass = Omn_lifecycle.Allocated;
-			break;
-		case "failed":
-			stateClass = Omn_lifecycle.Error;
-			break;
-		case "instantiating":
-			stateClass = Omn_lifecycle.NotYetInitialized;
-			break;
-		case "pending_allocation":
-			stateClass = Omn_lifecycle.Pending;
-			break;
-		case "configuring":
-			stateClass = Omn_lifecycle.Preinit;
-			break;
-		case "provisioned":
-			stateClass = Omn_lifecycle.Provisioned;
-			break;
-		case "ready":
-			stateClass = Omn_lifecycle.Ready;
-			break;
-		case "stopping":
-			stateClass = Omn_lifecycle.Stopping;
-			break;
-		case "unallocated":
-			stateClass = Omn_lifecycle.Unallocated;
-			break;
-		}
+		// switch (stateString) {
+		// case "ready_busy":
+		// stateClass = Omn_lifecycle.Active;
+		// break;
+		// case "allocated":
+		// stateClass = Omn_lifecycle.Allocated;
+		// break;
+		// case "failed":
+		// stateClass = Omn_lifecycle.Error;
+		// break;
+		// case "instantiating":
+		// stateClass = Omn_lifecycle.NotYetInitialized;
+		// break;
+		// case "pending_allocation":
+		// stateClass = Omn_lifecycle.Pending;
+		// break;
+		// case "configuring":
+		// stateClass = Omn_lifecycle.Preinit;
+		// break;
+		// case "provisioned":
+		// stateClass = Omn_lifecycle.Provisioned;
+		// break;
+		// case "ready":
+		// stateClass = Omn_lifecycle.Ready;
+		// break;
+		// case "stopping":
+		// stateClass = Omn_lifecycle.Stopping;
+		// break;
+		// case "unallocated":
+		// stateClass = Omn_lifecycle.Unallocated;
+		// break;
+		// }
 		if (stateClass != null) {
 			omnResource.addProperty(Omn_lifecycle.hasState, stateClass);
 		}
@@ -1206,53 +1262,134 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void extractSliverType(JAXBElement<?> nodeDetailElement,
-			Resource omnResource, Model model) {
+			Resource omnResource, Model model)
+			throws MissingRspecElementException {
 		if (nodeDetailElement.getDeclaredType().equals(
 				NodeContents.SliverType.class)) {
 
 			NodeContents.SliverType sliverType = (NodeContents.SliverType) nodeDetailElement
 					.getValue();
 
-			Resource sliver = model.createResource();
-			if (sliverType.getName() != null) {
-				if (AbstractConverter.isUrl(sliverType.getName())) {
-					sliver.addProperty(RDF.type, sliverType.getName());
-				}
-				sliver.addProperty(RDFS.label,
-						AbstractConverter.getName(sliverType.getName()));
+			String sliverName = sliverType.getName();
+			if (sliverName == null) {
+				throw new MissingRspecElementException(
+						"SliverTypeContents > name");
 			}
-			List<Object> sliverContents = sliverType.getAnyOrDiskImage();
+			Resource sliverTypeResource = null;
+			// Note: Do not change sliver type here, as Fiteagle will
+			// not work
+			if (AbstractConverter.isUrl(sliverName)) {
+				sliverTypeResource = omnResource.getModel().createResource(
+						sliverName);
+				omnResource.addProperty(RDF.type, sliverTypeResource);
+			} else {
+				sliverTypeResource = omnResource.getModel().createResource(
+						"http://open-multinet.info/example#" + sliverName);
+				omnResource.addProperty(RDF.type, sliverTypeResource);
+				omnResource
+						.addProperty(Omn_lifecycle.hasSliverName, sliverName);
+			}
 
+			// Resource sliver = model.createResource();
+			// if (sliverType.getName() != null) {
+			// if (AbstractConverter.isUrl(sliverType.getName())) {
+			// sliver.addProperty(RDF.type, sliverType.getName());
+			// }
+			// sliver.addProperty(RDFS.label,
+			// AbstractConverter.getName(sliverType.getName()));
+			// }
+
+			List<Object> sliverContents = sliverType.getAnyOrDiskImage();
 			for (int i = 0; i < sliverContents.size(); i++) {
 				Object sliverObject = sliverContents.get(i);
-				if (sliverObject instanceof JAXBElement) {
-					// check if disk_image
-					if (((JAXBElement<?>) sliverObject).getDeclaredType()
-							.equals(DiskImageContents.class)) {
+				tryExtractDiskImage(sliverObject, sliverTypeResource);
+			}
+			omnResource.addProperty(RDF.type, sliverTypeResource);
+		}
+	}
 
-						Resource diskImage = model.createResource();
-						diskImage
-								.addProperty(RDF.type, Omn_domain_pc.DiskImage);
-						DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) sliverObject)
-								.getValue();
+	private static void tryExtractDiskImage(Object sliverObject,
+			Resource omnSliver) throws MissingRspecElementException {
+		if (sliverObject instanceof JAXBElement) {
+			// check if disk_image
+			if (((JAXBElement<?>) sliverObject).getDeclaredType().equals(
+					DiskImageContents.class)) {
 
-						// add name info
-						String name = diskImageContents.getName();
-						if (name != null && !name.equals("")) {
-							diskImage.addLiteral(
-									Omn_domain_pc.hasDiskimageLabel, name);
+				// Resource diskImage = sliver.getModel().createResource();
+				// diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+				DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) sliverObject)
+						.getValue();
+				//
+				// // add name info
+				// String name = diskImageContents.getName();
+				// if (name != null && !name.equals("")) {
+				// diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
+				// }
+				// // add version info
+				// String version = diskImageContents.getVersion();
+				// if (version != null && !version.equals("")) {
+				// diskImage.addLiteral(Omn_domain_pc.hasDiskimageVersion,
+				// version);
+				// }
+				// sliver.addProperty(Omn.hasResource, diskImage);
+
+				String diskImageURL = diskImageContents.getUrl();
+				Resource diskImage = omnSliver.getModel().createResource(
+						diskImageURL);
+				diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+
+				// add name info
+				String name = diskImageContents.getName();
+				if (name == null) {
+					throw new MissingRspecElementException(
+							"DiskImageContents > name");
+				}
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
+
+				String os = diskImageContents.getOs();
+				if (os != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageOS, os);
+				}
+
+				String version = diskImageContents.getVersion();
+				if (version != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageVersion,
+							version);
+				}
+
+				String description = diskImageContents.getDescription();
+				if (description != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageDescription,
+							description);
+				}
+
+				// check that does not extract twice
+				boolean alreadyExists = false;
+				if (omnSliver.hasProperty(Omn_domain_pc.hasDiskImage)) {
+					StmtIterator diskImages = omnSliver
+							.listProperties(Omn_domain_pc.hasDiskImage);
+					while (diskImages.hasNext()) {
+						Statement diskImageStatement = diskImages.next();
+						Resource diskImageResource = diskImageStatement
+								.getObject().asResource();
+						if (diskImageResource
+								.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+							String diskImageLabel = diskImageResource
+									.getProperty(
+											Omn_domain_pc.hasDiskimageLabel)
+									.getObject().asLiteral().getString();
+							if (diskImageLabel.equals(name)) {
+								alreadyExists = true;
+							}
 						}
-						// add version info
-						String version = diskImageContents.getVersion();
-						if (version != null && !version.equals("")) {
-							diskImage.addLiteral(
-									Omn_domain_pc.hasDiskimageVersion, version);
-						}
-						sliver.addProperty(Omn.hasResource, diskImage);
 					}
 				}
+
+				if (!alreadyExists) {
+					omnSliver
+							.addProperty(Omn_domain_pc.hasDiskImage, diskImage);
+				}
 			}
-			omnResource.addProperty(RDF.type, sliver);
 		}
 	}
 
