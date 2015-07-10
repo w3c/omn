@@ -1,28 +1,25 @@
 package info.openmultinet.ontology.translators.geni;
 
-import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecSharedVlan;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Available;
-import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
-import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
-import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
-import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
+import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.IpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkPropertyContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RoutableControlIp;
@@ -174,8 +171,8 @@ public class RequestConverter extends AbstractConverter {
 					sharedVlanRspec.setName(name);
 				}
 				if (object.hasProperty(Omn_domain_pc.vlanTag)) {
-					String vlanTag = object.getProperty(Omn_domain_pc.vlanTag).getObject()
-							.asLiteral().getString();
+					String vlanTag = object.getProperty(Omn_domain_pc.vlanTag)
+							.getObject().asLiteral().getString();
 					sharedVlanRspec.setVlantag(vlanTag);
 				}
 				link.getAnyOrPropertyOrLinkType().add(sharedVlanRspec);
