@@ -68,6 +68,34 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#hasControllerType
+
+:hasControllerType rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Controller type"@en ;
+
+                         rdfs:comment "has Openflow Controller type"@en ;
+                         
+                         rdfs:domain :Controller ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasControllerUrl
+
+:hasControllerUrl rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Controller URL"@en ;
+
+                         rdfs:comment "has Openflow Controller URL"@en ;
+                         
+                         rdfs:domain :Controller ;
+                         
+                         rdfs:range xsd:anyURI .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription
 
 :hasDiskimageDescription rdf:type owl:DatatypeProperty ,
@@ -126,18 +154,30 @@ owl:Axiom rdf:type owl:Class .
 owl:AllDisjointProperties rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabNodeTypeSlots
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDlVlan
 
-:hasEmulabNodeTypeSlots rdf:type owl:DatatypeProperty ,
-                          owl:FunctionalProperty ;
+:hasDlVlan rdf:type owl:DatatypeProperty ;
 
-                 rdfs:label "has emulab node type slots"@en ;
+                         rdfs:label "has Openflow Packet DL Vlan"@en ;
 
-                 rdfs:comment "has emulab node type slots"@en ;
-                 
-                 rdfs:domain :HardwareType ;
-                 
-                 rdfs:range xsd:string .
+                         rdfs:comment "has Openflow Packet DL Vlan"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDlType
+
+:hasDlType rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet DL Type"@en ;
+
+                         rdfs:comment "has Openflow Packet DL Type"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
 
 
 
@@ -171,6 +211,49 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabNodeTypeSlots
+
+:hasEmulabNodeTypeSlots rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+
+                 rdfs:label "has emulab node type slots"@en ;
+
+                 rdfs:comment "has emulab node type slots"@en ;
+                 
+                 rdfs:domain :HardwareType ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasNwDst
+
+:hasNwDst rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet Nw Dst"@en ;
+
+                         rdfs:comment "has Openflow Packet Nw Dst"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasNwSrc
+
+:hasNwSrc rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet Nw Src"@en ;
+
+                         rdfs:comment "has Openflow Packet Nw Src"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasVMID
 
 :hasVMID rdf:type owl:DatatypeProperty ;
@@ -184,6 +267,19 @@ owl:AllDisjointProperties rdf:type owl:Class .
          rdfs:subPropertyOf omn-lifecycle:hasID ;
          
          rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasUseGroupName
+
+:hasUseGroupName rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Use-Group name"@en ;
+
+                         rdfs:comment "has Openflow Use-Group name"@en ;
+                         
+                         rdfs:domain omn-resource:Openflow ;
+                         
+                         rdfs:range xsd:anyURI .
 
 
 
@@ -398,6 +494,29 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#Controller
+
+:Controller rdf:type owl:Class ;
+
+           rdfs:comment "Openflow Controller"@en ;
+           
+           rdfs:label "Openflow Controller"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#Datapath
+
+:Datapath rdf:type owl:Class ;
+
+           rdfs:comment "Openflow Datapath"@en ;
+           
+           rdfs:label "Openflow Datapath"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
 
 ###  http://open-multinet.info/ontology/omn-domain-pc#DiskImage
 
@@ -444,6 +563,17 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
            rdfs:label "Open Stack"@en ;
            
            rdfs:subClassOf :VM .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#Packet
+
+:Packet rdf:type owl:Class ;
+
+           rdfs:comment "Openflow Packet"@en ;
+           
+           rdfs:label "Openflow Packet"@en ;
+           
+           rdfs:subClassOf omn:Resource .
 
 
 

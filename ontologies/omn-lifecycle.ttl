@@ -463,6 +463,24 @@
 
 :hasID rdf:type owl:DatatypeProperty ;
 
+        rdfs:label "has ID"@en ;
+       
+        rdfs:comment "A unique identifier set by the management system"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentID
+
+:hasComponentID rdf:type owl:DatatypeProperty ;
+
         rdfs:label "has component ID"@en ;
        
         rdfs:comment "A unique identifier set by the management system"@en ;
@@ -517,7 +535,6 @@
         ] ;
        
         rdfs:range xsd:string .
-
 
 
 

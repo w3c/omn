@@ -451,6 +451,14 @@ omn:Resource rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-resource#Openflow
+
+:Openflow rdf:type owl:Class ;
+
+      rdfs:label "Openflow"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
 
 
 

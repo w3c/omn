@@ -4,8 +4,17 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Config;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Controller;
+// import info.openmultinet.ontology.translators.geni.jaxb.request.Config.Controller;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ControllerRole;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Datapath;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.DlType;
+import info.openmultinet.ontology.translators.geni.jaxb.request.DlVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Group;
+import info.openmultinet.ontology.translators.geni.jaxb.request.GroupContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
@@ -16,15 +25,22 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.LinkPropertyCont
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Match;
+import info.openmultinet.ontology.translators.geni.jaxb.request.MatchContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NwDst;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NwSrc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.request.PacketContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RoutableControlIp;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
+import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -32,6 +48,8 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -47,6 +65,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.stream.StreamSource;
+
+import org.apache.xerces.dom.ElementNSImpl;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -116,7 +139,9 @@ public class RequestConverter extends AbstractConverter {
 
 		for (final Statement resource : resources) {
 			if (!resource.getResource()
-					.hasProperty(RDF.type, Omn_resource.Link)) {
+					.hasProperty(RDF.type, Omn_resource.Link)
+					&& !resource.getResource().hasProperty(RDF.type,
+							Omn_resource.Openflow)) {
 
 				final NodeContents node = new NodeContents();
 
@@ -138,7 +163,8 @@ public class RequestConverter extends AbstractConverter {
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
-			} else {
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_resource.Link)) {
 
 				final LinkContents link = new LinkContents();
 
@@ -150,6 +176,157 @@ public class RequestConverter extends AbstractConverter {
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createLink(link));
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_resource.Openflow)) {
+				final Sliver of = new Sliver();
+				setOpenflow(resource, of);
+				request.getAnyOrNodeOrLink().add(of);
+			}
+		}
+	}
+
+	private static void setOpenflow(Statement resource, Sliver of) {
+		// get sliver description
+		if (resource.getResource().hasProperty(RDFS.comment)) {
+			String description = resource.getResource()
+					.getProperty(RDFS.comment).getObject().asLiteral()
+					.getString();
+			of.setDescription(description);
+		}
+
+		// get sliver email
+		if (resource.getResource().hasProperty(RDFS.seeAlso)) {
+			String email = resource.getResource().getProperty(RDFS.seeAlso)
+					.getObject().asResource().getURI().toString();
+			if (email.contains("mailto:")) {
+				email = email.substring(7, email.length());
+			}
+			of.setEmail(email);
+		}
+
+		StmtIterator types = resource.getResource().listProperties(
+				Omn.hasResource);
+
+		while (types.hasNext()) {
+
+			Resource object = types.next().getObject().asResource();
+
+			// set controller details
+			if (object.hasProperty(RDF.type, Omn_domain_pc.Controller)) {
+
+				Controller controller = new Controller();
+
+				// set controller type
+				if (object.hasProperty(Omn_domain_pc.hasControllerType)) {
+					String type = object
+							.getProperty(Omn_domain_pc.hasControllerType)
+							.getObject().asLiteral().getString();
+					controller.setType(ControllerRole.fromValue(type));
+				}
+
+				// set controller URL
+				if (object.hasProperty(Omn_domain_pc.hasControllerUrl)) {
+					String uri = object
+							.getProperty(Omn_domain_pc.hasControllerUrl)
+							.getObject().asResource().getURI().toString();
+					controller.setUrl(uri);
+				}
+
+				of.getController().add(controller);
+			}
+
+			// set packet details
+			if (object.hasProperty(RDF.type, Omn_domain_pc.Packet)) {
+
+				UseGroup useGroup = new UseGroup();
+				MatchContents match = new MatchContents();
+
+				// set use group name
+				if (object.hasProperty(RDFS.label)) {
+					String usegroupName = object.getProperty(RDFS.label)
+							.getObject().asLiteral().getString();
+					useGroup.setName(usegroupName);
+					;
+				}
+
+				PacketContents packet = new PacketContents();
+				if (object.hasProperty(Omn_domain_pc.hasDlType)) {
+					DlType dlType = new DlType();
+					String dlTypeValue = object
+							.getProperty(Omn_domain_pc.hasDlType).getObject()
+							.asLiteral().getString();
+					dlType.setValue(dlTypeValue);
+					packet.setDlType(dlType);
+				}
+
+				if (object.hasProperty(Omn_domain_pc.hasDlVlan)) {
+					DlVlan dlVlan = new DlVlan();
+					String dlVlanValue = object
+							.getProperty(Omn_domain_pc.hasDlVlan).getObject()
+							.asLiteral().getString();
+					dlVlan.setValue(dlVlanValue);
+					packet.setDlVlan(dlVlan);
+				}
+
+				if (object.hasProperty(Omn_domain_pc.hasNwDst)) {
+					NwDst nwDst = new NwDst();
+					String dlVlanValue = object
+							.getProperty(Omn_domain_pc.hasNwDst).getObject()
+							.asLiteral().getString();
+					nwDst.setValue(dlVlanValue);
+					packet.setNwDst(nwDst);
+				}
+
+				if (object.hasProperty(Omn_domain_pc.hasNwSrc)) {
+					NwSrc nwSrc = new NwSrc();
+					String dlVlanValue = object
+							.getProperty(Omn_domain_pc.hasNwSrc).getObject()
+							.asLiteral().getString();
+					nwSrc.setValue(dlVlanValue);
+					packet.setNwSrc(nwSrc);
+				}
+
+				match.setPacket(packet);
+
+				match.setUseGroup(useGroup);
+				of.getMatch().add(match);
+			}
+
+			if (object.hasProperty(RDF.type, Omn_domain_pc.Datapath)) {
+				GroupContents gc = new GroupContents();
+				// set group name
+				if (object.hasProperty(RDFS.label)) {
+					String uri = object.getProperty(RDFS.label).getObject()
+							.asLiteral().getString();
+					gc.setName(uri);
+				}
+
+				Datapath dp = new Datapath();
+				// set component ID
+				if (object.hasProperty(Omn_lifecycle.hasComponentID)) {
+					String componentId = object
+							.getProperty(Omn_lifecycle.hasComponentID)
+							.getObject().asLiteral().getString();
+					dp.setComponentId(componentId);
+				}
+
+				// set component Manager ID
+				if (object.hasProperty(Omn_lifecycle.managedBy)) {
+					String componentManagerId = object
+							.getProperty(Omn_lifecycle.managedBy).getObject()
+							.asLiteral().getString();
+					dp.setComponentManagerId(componentManagerId);
+				}
+
+				// set ID
+				if (object.hasProperty(Omn_lifecycle.hasID)) {
+					String id = object.getProperty(Omn_lifecycle.hasID)
+							.getObject().asLiteral().getString();
+					dp.setDpid(id);
+				}
+
+				gc.setDatapath(dp);
+				of.getGroup().add(gc);
 			}
 		}
 	}
@@ -685,7 +862,11 @@ public class RequestConverter extends AbstractConverter {
 
 		for (Object o : request.getAnyOrNodeOrLink()) {
 			if (o instanceof JAXBElement) {
-				extractDetails(model, topology, o);
+				extractDetails(topology, o);
+			} else if (o instanceof org.apache.xerces.dom.ElementNSImpl) {
+				if (o.toString().contains("openflow:sliver")) {
+					extractOpenflow(topology, o);
+				}
 			} else {
 				RequestConverter.LOG.log(Level.INFO,
 						"Found unknown extension: " + o);
@@ -698,8 +879,206 @@ public class RequestConverter extends AbstractConverter {
 		return model;
 	}
 
-	private static void extractDetails(Model model, Resource topology, Object o)
+	private static void extractOpenflow(Resource topology, Object o) {
+
+		Model model = topology.getModel();
+		Resource openflowResource = model.createResource();
+		openflowResource.addProperty(RDF.type, Omn_resource.Openflow);
+
+		ElementNSImpl openflow = ((org.apache.xerces.dom.ElementNSImpl) o);
+		NamedNodeMap attributes = openflow.getAttributes();
+		for (int i = 0; i < attributes.getLength(); i++) {
+			if (attributes.item(i).getNodeName().equals("description")) {
+				String description = attributes.item(i).getNodeValue();
+				openflowResource.addProperty(RDFS.comment, description);
+			}
+			if (attributes.item(i).getNodeName().equals("email")) {
+				String email = attributes.item(i).getNodeValue();
+				Resource mailtoUri = model.createResource("mailto:" + email);
+				openflowResource.addProperty(RDFS.seeAlso, mailtoUri);
+			}
+		}
+
+		NodeList children = ((org.apache.xerces.dom.ElementNSImpl) o)
+				.getChildNodes();
+
+		for (int i = 0; i < children.getLength(); i++) {
+			Node child = children.item(i);
+			RequestConverter.LOG.log(Level.INFO, "Found unknown extension: "
+					+ child.getNodeName());
+
+			if (child.getNodeName().contains("controller")) {
+				Resource controller = model.createResource();
+				controller.addProperty(RDF.type, Omn_domain_pc.Controller);
+
+				NamedNodeMap controllerAttributes = child.getAttributes();
+				for (int k = 0; k < controllerAttributes.getLength(); k++) {
+					if (controllerAttributes.item(k).getNodeName()
+							.equals("type")) {
+						String type = controllerAttributes.item(k)
+								.getNodeValue();
+						controller.addProperty(Omn_domain_pc.hasControllerType,
+								type);
+					}
+					if (controllerAttributes.item(k).getNodeName()
+							.equals("url")) {
+						String url = controllerAttributes.item(k)
+								.getNodeValue();
+						Resource urlResource = model.createResource(url);
+						controller.addProperty(Omn_domain_pc.hasControllerUrl,
+								urlResource);
+					}
+				}
+				openflowResource.addProperty(Omn.hasResource, controller);
+			}
+
+			if (child.getNodeName().contains("match")) {
+				Resource packet = model.createResource();
+				packet.addProperty(RDF.type, Omn_domain_pc.Packet);
+
+				NodeList grandchildren = child.getChildNodes();
+				for (int j = 0; j < grandchildren.getLength(); j++) {
+					Node grandchild = grandchildren.item(j);
+
+					if (grandchild.getNodeName().contains("use-group")) {
+						NamedNodeMap usegroupAttributes = grandchild
+								.getAttributes();
+						for (int k = 0; k < usegroupAttributes.getLength(); k++) {
+							if (usegroupAttributes.item(k).getNodeName()
+									.equals("name")) {
+								String name = usegroupAttributes.item(k)
+										.getNodeValue();
+								packet.addProperty(RDFS.label, name);
+							}
+						}
+					}
+
+					if (grandchild.getNodeName().contains("packet")) {
+						NodeList greatGrandchildren = grandchild
+								.getChildNodes();
+						for (int k = 0; k < greatGrandchildren.getLength(); k++) {
+							Node greatGrandchild = greatGrandchildren.item(k);
+
+							if (greatGrandchild.getNodeName().contains(
+									"dl_vlan")) {
+								NamedNodeMap dvlanAttributes = greatGrandchild
+										.getAttributes();
+								for (int l = 0; l < dvlanAttributes.getLength(); l++) {
+									if (dvlanAttributes.item(l).getNodeName()
+											.equals("value")) {
+										String value = dvlanAttributes.item(l)
+												.getNodeValue();
+										packet.addProperty(
+												Omn_domain_pc.hasDlVlan, value);
+									}
+								}
+							}
+							if (greatGrandchild.getNodeName().contains(
+									"dl_type")) {
+								NamedNodeMap dvlanAttributes = greatGrandchild
+										.getAttributes();
+								for (int l = 0; l < dvlanAttributes.getLength(); l++) {
+									if (dvlanAttributes.item(l).getNodeName()
+											.equals("value")) {
+										String value = dvlanAttributes.item(l)
+												.getNodeValue();
+										packet.addProperty(
+												Omn_domain_pc.hasDlType, value);
+									}
+								}
+							}
+
+							if (greatGrandchild.getNodeName()
+									.contains("nw_dst")) {
+								NamedNodeMap dvlanAttributes = greatGrandchild
+										.getAttributes();
+								for (int l = 0; l < dvlanAttributes.getLength(); l++) {
+									if (dvlanAttributes.item(l).getNodeName()
+											.equals("value")) {
+										String value = dvlanAttributes.item(l)
+												.getNodeValue();
+										packet.addProperty(
+												Omn_domain_pc.hasNwDst, value);
+									}
+								}
+							}
+
+							if (greatGrandchild.getNodeName()
+									.contains("nw_src")) {
+								NamedNodeMap dvlanAttributes = greatGrandchild
+										.getAttributes();
+								for (int l = 0; l < dvlanAttributes.getLength(); l++) {
+									if (dvlanAttributes.item(l).getNodeName()
+											.equals("value")) {
+										String value = dvlanAttributes.item(l)
+												.getNodeValue();
+										packet.addProperty(
+												Omn_domain_pc.hasNwSrc, value);
+									}
+								}
+							}
+						}
+					}
+				}
+
+				openflowResource.addProperty(Omn.hasResource, packet);
+			}
+
+			if (child.getNodeName().contains("group")) {
+				Resource datapath = model.createResource();
+				datapath.addProperty(RDF.type, Omn_domain_pc.Datapath);
+
+				// get group name
+				NamedNodeMap groupAttributes = child.getAttributes();
+				for (int l = 0; l < groupAttributes.getLength(); l++) {
+					if (groupAttributes.item(l).getNodeName().equals("name")) {
+						String groupName = groupAttributes.item(l)
+								.getNodeValue();
+						datapath.addProperty(RDFS.label, groupName);
+					}
+				}
+
+				NodeList grandchildren1 = child.getChildNodes();
+				for (int j = 0; j < grandchildren1.getLength(); j++) {
+					Node grandchild = grandchildren1.item(j);
+
+					if (grandchild.getNodeName().contains("datapath")) {
+						NamedNodeMap datapathAttributes = grandchild
+								.getAttributes();
+						for (int k = 0; k < datapathAttributes.getLength(); k++) {
+							if (datapathAttributes.item(k).getNodeName()
+									.equals("component_id")) {
+								String componentId = datapathAttributes.item(k)
+										.getNodeValue();
+								datapath.addProperty(
+										Omn_lifecycle.hasComponentID,
+										componentId);
+							}
+							if (datapathAttributes.item(k).getNodeName()
+									.equals("component_manager_id")) {
+								String componentManagerId = datapathAttributes
+										.item(k).getNodeValue();
+								datapath.addProperty(Omn_lifecycle.managedBy,
+										componentManagerId);
+							}
+							if (datapathAttributes.item(k).getNodeName()
+									.equals("dpid")) {
+								String dpid = datapathAttributes.item(k)
+										.getNodeValue();
+								datapath.addProperty(Omn_lifecycle.hasID, dpid);
+							}
+						}
+						openflowResource.addProperty(Omn.hasResource, datapath);
+					}
+				}
+			}
+		}
+		topology.addProperty(Omn.hasResource, openflowResource);
+	}
+
+	private static void extractDetails(Resource topology, Object o)
 			throws MissingRspecElementException {
+
 		JAXBElement<?> element = (JAXBElement<?>) o;
 		if (element.getDeclaredType().equals(NodeContents.class)) {
 			extractNodes(element, topology);
@@ -873,8 +1252,7 @@ public class RequestConverter extends AbstractConverter {
 		List<Object> anyOrRelationOrLocation = node
 				.getAnyOrRelationOrLocation();
 		if (anyOrRelationOrLocation.size() > 0) {
-			extractRelationOrLocation(model, omnResource,
-					anyOrRelationOrLocation);
+			extractRelationOrLocation(omnResource, anyOrRelationOrLocation);
 		}
 		omnResource.addProperty(RDF.type, Omn_resource.Node);
 
@@ -1002,8 +1380,8 @@ public class RequestConverter extends AbstractConverter {
 
 	}
 
-	public static void extractRelationOrLocation(final Model model,
-			final Resource omnResource, List<Object> anyOrRelationOrLocation)
+	public static void extractRelationOrLocation(final Resource omnResource,
+			List<Object> anyOrRelationOrLocation)
 			throws MissingRspecElementException {
 		for (Object o : anyOrRelationOrLocation) {
 			if (o instanceof JAXBElement) {
