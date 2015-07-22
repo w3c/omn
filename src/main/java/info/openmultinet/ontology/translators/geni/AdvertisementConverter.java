@@ -6,8 +6,10 @@ import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ActionSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Available;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Cloud;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ExternalReferenceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LocationContents;
@@ -24,6 +26,11 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecShare
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.InterfaceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ComponentManager;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.InterfaceRefContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkPropertyContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkType;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -37,6 +44,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -89,9 +97,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			InvalidModelException, XMLStreamException,
 			MissingRspecElementException {
 
-		final RSpecContents rspecRequest = getRspec(input);
+		final RSpecContents rspecAdvertisement = getRspec(input);
 
-		return getModel(rspecRequest);
+		return getModel(rspecAdvertisement);
 	}
 
 	// @fixme: expensive/long running method call
@@ -102,8 +110,8 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		final JAXBElement<RSpecContents> rspec = unmarshaller.unmarshal(xmler,
 				RSpecContents.class);
-		final RSpecContents request = rspec.getValue();
-		return request;
+		final RSpecContents advertisement = rspec.getValue();
+		return advertisement;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -124,9 +132,56 @@ public class AdvertisementConverter extends AbstractConverter {
 			tryExtractOpstate(rspecObject, offering);
 			tryExtractExternalRef(rspecObject, offering);
 			tryExtractSharedVlan(rspecObject, offering);
+			tryExtractRoutableAddresses(rspecObject, offering);
 		}
 
 		return model;
+	}
+
+	private void tryExtractInterface(Object rspecObject, Resource omnResource) {
+
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<InterfaceContents> nodeJaxb = (JAXBElement<InterfaceContents>) rspecObject;
+			final InterfaceContents content = nodeJaxb.getValue();
+
+			Model outputModel = omnResource.getModel();
+			Resource interfaceResource = outputModel.createResource();
+
+			List<Object> interfaces = content.getAnyOrIpOrMonitoring();
+			for (int i = 0; i < interfaces.size(); i++) {
+				Object interfaceObject = interfaces.get(i);
+				// tryExtractIPAddress(interfaceObject, interfaceResource);
+			}
+
+			interfaceResource.addProperty(RDF.type, Omn_resource.Interface);
+			omnResource.addProperty(Omn_resource.hasInterface,
+					interfaceResource);
+
+			if (content.getComponentId() != null) {
+				interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
+						content.getComponentId());
+			}
+
+			if (content.getRole() != null) {
+				interfaceResource.addProperty(Omn_lifecycle.hasRole,
+						content.getRole());
+			}
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	private void tryExtractRoutableAddresses(Object rspecObject,
+			Resource offering) {
+		try {
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+
 	}
 
 	private void tryExtractSharedVlan(Object rspecObject, Resource offering) {
@@ -183,19 +238,135 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void tryExtractLink(final Object rspecObject,
-			final Resource topology) {
+			final Resource topology) throws MissingRspecElementException {
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<LinkContents> nodeJaxb = (JAXBElement<LinkContents>) rspecObject;
-			final LinkContents rspecLink = nodeJaxb.getValue();
-			final Resource omnLink = topology.getModel().createResource(
-					rspecLink.getComponentId());
-			omnLink.addProperty(RDF.type, Omn_resource.Link);
-			omnLink.addProperty(Omn.isResourceOf, topology);
-			topology.addProperty(Omn.hasResource, omnLink);
+			final LinkContents link = nodeJaxb.getValue();
+			final Resource linkResource = topology.getModel().createResource(
+					link.getComponentId());
+
+			// component_id is required
+			if (link.getComponentId() == null) {
+				throw new MissingRspecElementException(
+						"LinkContents > component_id ");
+			}
+			String componentId = link.getComponentId();
+			linkResource.addProperty(Omn_lifecycle.hasComponentID, componentId);
+
+			String componentName = link.getComponentName();
+			if (componentName != null) {
+				linkResource.addProperty(Omn_lifecycle.hasComponentName,
+						componentName);
+			}
+
+			for (Object o : link.getAnyOrPropertyOrLinkType()) {
+				if (o instanceof JAXBElement) {
+					JAXBElement<?> linkElement = (JAXBElement<?>) o;
+					if (linkElement.getDeclaredType().equals(
+							InterfaceRefContents.class)) {
+						extractInterfaceRefs(linkElement, linkResource);
+					} else if (linkElement.getDeclaredType().equals(
+							LinkPropertyContents.class)) {
+						extractLinkProperties(linkElement, linkResource);
+					}
+				} else if (o.getClass().equals(ComponentManager.class)) {
+					extractComponentManager(o, linkResource);
+				} else if (o.getClass().equals(LinkType.class)) {
+					extractLinkType(o, linkResource);
+				} else {
+					AdvertisementConverter.LOG.log(Level.INFO,
+							"Found unknown link extension: " + o);
+				}
+			}
+
+			linkResource.addProperty(RDF.type, Omn_resource.Link);
+			linkResource.addProperty(Omn.isResourceOf, topology);
+			topology.addProperty(Omn.hasResource, linkResource);
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
+	}
+
+	private void extractLinkType(Object o, Resource linkResource)
+			throws MissingRspecElementException {
+
+		final LinkType content = (LinkType) o;
+
+		// name required
+		if (content.getName() == null) {
+			throw new MissingRspecElementException("link_type > name");
+		}
+		linkResource.addProperty(Omn_lifecycle.hasLinkName, content.getName());
+
+	}
+
+	private void extractComponentManager(Object o, Resource linkResource) {
+
+		final ComponentManager content = (ComponentManager) o;
+
+		if (content.getName() != null) {
+			linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
+					content.getName());
+
+		}
+
+	}
+
+	private void extractLinkProperties(JAXBElement<?> linkElement,
+			Resource linkResource) throws MissingRspecElementException {
+
+		final LinkPropertyContents content = (LinkPropertyContents) linkElement
+				.getValue();
+
+		String sourceID = content.getSourceId();
+		String destID = content.getDestId();
+
+		if (sourceID == null || destID == null) {
+			throw new MissingRspecElementException(
+					"LinkPropertyContents > source_id/dest_id");
+		}
+
+		Resource linkPropertyResource = linkResource.getModel()
+				.createResource();
+		linkPropertyResource.addProperty(RDF.type, Omn_resource.LinkProperty);
+		linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
+		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceID);
+
+		String capacity = content.getCapacity();
+		if (capacity != null) {
+			linkPropertyResource.addProperty(Omn_domain_pc.hasCapacity,
+					capacity);
+		}
+
+		String latency = content.getLatency();
+		if (latency != null) {
+			linkPropertyResource.addProperty(Omn_domain_pc.hasLatency, latency);
+		}
+
+		String packetLoss = content.getPacketLoss();
+		if (packetLoss != null) {
+			linkPropertyResource.addProperty(Omn_domain_pc.hasPacketLoss,
+					packetLoss);
+		}
+
+		linkResource
+				.addProperty(Omn_resource.hasProperty, linkPropertyResource);
+
+	}
+
+	private void extractInterfaceRefs(JAXBElement<?> linkElement,
+			Resource linkResource) {
+		final InterfaceRefContents content = (InterfaceRefContents) linkElement
+				.getValue();
+
+		Resource interfaceResource = linkResource.getModel().createResource();
+		interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
+				content.getComponentId());
+
+		linkResource.addProperty(Omn_resource.hasInterface, interfaceResource);
+
 	}
 
 	private void tryExtractOpstate(Object rspecObject, Resource offering)
@@ -391,15 +562,20 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			if (rspecNode.getComponentName() != null) {
 				omnNode.addLiteral(RDFS.label, rspecNode.getComponentName());
+				omnNode.addProperty(Omn_lifecycle.hasComponentName,
+						rspecNode.getComponentName());
 			}
 
 			for (Object rspecNodeObject : rspecNode
 					.getAnyOrRelationOrLocation()) {
+				tryExtractCloud(rspecNodeObject, omnNode);
 				tryExtractHardwareType(rspecNodeObject, omnNode);
 				tryExtractSliverType(rspecNodeObject, omnNode);
 				tryExtractLocation(rspecNodeObject, omnNode);
 				tryExtractAvailability(rspecNodeObject, omnNode);
 				tryExtractMonitoring(rspecNodeObject, omnNode);
+				tryExtractInterface(rspecNodeObject, omnNode);
+				tryExtractEmulabFd(rspecNodeObject, omnNode);
 
 			}
 
@@ -409,15 +585,81 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
+	private void tryExtractCloud(Object rspecNodeObject, Resource omnNode) {
+		try {
+			@SuppressWarnings("unchecked")
+			final Cloud cloudJaxb = (Cloud) rspecNodeObject;
+			final Resource cloudResource = omnNode.getModel().createResource();
+
+			omnNode.addProperty(RDF.type, Omn_resource.Cloud);
+			omnNode.addProperty(Omn.hasResource, cloudResource);
+			cloudResource.addProperty(Omn.isResourceOf, omnNode);
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+	}
+
+	private void tryExtractEmulabFd(Object rspecNodeObject, Resource omnNode) {
+		try {
+			@SuppressWarnings("unchecked")
+			Fd featureDescription = (Fd) rspecNodeObject;
+
+			Resource fdResource = model.createResource();
+			fdResource.addProperty(RDF.type, Omn_domain_pc.FeatureDescription);
+
+			// name is required
+			String name = featureDescription.getName();
+			fdResource.addProperty(Omn_domain_pc.hasEmulabFdName, name);
+
+			// weight is required
+			String weight = featureDescription.getWeight();
+			fdResource.addProperty(Omn_domain_pc.hasEmulabFdWeight, weight);
+
+			// violatable is not required
+			String violatable = featureDescription.getViolatable();
+			if (violatable != null) {
+				fdResource.addProperty(Omn_domain_pc.emulabFdViolatable,
+						violatable);
+			}
+
+			// local operator is not required
+			String localOperator = featureDescription.getLocalOperator();
+			if (localOperator != null) {
+				fdResource.addProperty(Omn_domain_pc.hasEmulabFdLocalOperator,
+						localOperator);
+			}
+
+			// global operator is not required
+			String globalOperator = featureDescription.getGlobalOperator();
+			if (globalOperator != null) {
+				fdResource.addProperty(Omn_domain_pc.hasEmulabFdGlobalOperator,
+						globalOperator);
+			}
+
+			omnNode.addProperty(Omn.hasResource, fdResource);
+
+		} catch (final ClassCastException e) {
+			AdvertisementConverter.LOG.finer(e.getMessage());
+		}
+
+	}
+
 	private void tryExtractEmulabNodeType(Object rspecHwObject, Resource omnHw) {
 		try {
 			@SuppressWarnings("unchecked")
 			NodeType nodeType = (NodeType) rspecHwObject;
 
 			String nodeTypeSlots = nodeType.getTypeSlots();
-
 			omnHw.addProperty(Omn_domain_pc.hasEmulabNodeTypeSlots,
 					nodeTypeSlots);
+
+			String staticSlot = nodeType.getStatic();
+			if (staticSlot != null) {
+				omnHw.addProperty(Omn_domain_pc.emulabNodeTypeStatic,
+						staticSlot);
+			}
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -581,6 +823,11 @@ public class AdvertisementConverter extends AbstractConverter {
 						description);
 			}
 
+			String url = diskImageContents.getUrl();
+			if (url != null) {
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
+			}
+
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		} catch (final InvalidPropertyURIException e) {
@@ -640,7 +887,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		convertStatementsToNodesAndLinks(ad, resources);
 	}
 
-	private void convertStatementsToNodesAndLinks(final RSpecContents manifest,
+	private void convertStatementsToNodesAndLinks(
+			final RSpecContents advertisement,
 			final List<Statement> omnResources) {
 		for (final Statement omnResource : omnResources) {
 			if (!omnResource.getResource().hasProperty(RDF.type,
@@ -653,6 +901,7 @@ public class AdvertisementConverter extends AbstractConverter {
 				// nodes
 				final NodeContents geniNode = new NodeContents();
 
+				setCloud(omnResource, geniNode);
 				setComponentDetails(omnResource, geniNode);
 				setComponentManagerId(omnResource, geniNode);
 				setHardwareTypes(omnResource, geniNode);
@@ -660,6 +909,8 @@ public class AdvertisementConverter extends AbstractConverter {
 				setLocation(omnResource, geniNode);
 				setAvailability(omnResource, geniNode);
 				setMonitoringService(omnResource, geniNode);
+				setInterface(omnResource, geniNode);
+				setFd(omnResource, geniNode);
 
 				ResIterator infrastructures = omnResource.getModel()
 						.listResourcesWithProperty(Omn.isResourceOf,
@@ -669,7 +920,20 @@ public class AdvertisementConverter extends AbstractConverter {
 					geniNode.setComponentManagerId(infrastructure.getURI());
 				}
 
-				manifest.getAnyOrNodeOrLink().add(this.of.createNode(geniNode));
+				advertisement.getAnyOrNodeOrLink().add(
+						this.of.createNode(geniNode));
+
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					Omn_resource.Link)) {
+				final LinkContents link = new LinkContents();
+
+				setLinkDetails(omnResource, link);
+				setInterfaceRefs(omnResource, link);
+				setLinkProperties(omnResource, link);
+
+				advertisement.getAnyOrNodeOrLink().add(
+						new ObjectFactory().createLink(link));
+
 			} else if (omnResource.getResource().hasProperty(RDF.type,
 					Omn_domain_pc.SharedVlan)) {
 
@@ -697,7 +961,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					sharedVlan.getAvailable().add(available);
 				}
 
-				manifest.getAnyOrNodeOrLink().add(sharedVlan);
+				advertisement.getAnyOrNodeOrLink().add(sharedVlan);
 
 			} else if (omnResource.getResource().hasProperty(RDF.type,
 					Omn_lifecycle.Opstate)) {
@@ -708,9 +972,218 @@ public class AdvertisementConverter extends AbstractConverter {
 				setSliverTypes(omnResource, rspecOpstate);
 				setStates(omnResource, rspecOpstate);
 
-				manifest.getAnyOrNodeOrLink().add(rspecOpstate);
+				advertisement.getAnyOrNodeOrLink().add(rspecOpstate);
 
 			}
+		}
+	}
+
+	private void setCloud(Statement omnResource, NodeContents geniNode) {
+		if (omnResource.getResource().hasProperty(RDF.type, Omn_resource.Cloud)) {
+			Cloud cloud = new ObjectFactory().createCloud();
+			geniNode.getAnyOrRelationOrLocation().add(cloud);
+		}
+
+	}
+
+	private void setLinkProperties(Statement resource, LinkContents link) {
+		List<Statement> linkProperties = resource.getResource()
+				.listProperties(Omn_resource.hasProperty).toList();
+
+		for (Statement linkPropertyStatement : linkProperties) {
+
+			LinkPropertyContents newLinkProperty = new ObjectFactory()
+					.createLinkPropertyContents();
+
+			Resource linkResource = linkPropertyStatement.getResource();
+
+			String sinkId = linkResource.getProperty(Omn_resource.hasSink)
+					.getObject().asLiteral().getString();
+			newLinkProperty.setDestId(sinkId);
+
+			String sourceId = linkResource.getProperty(Omn_resource.hasSource)
+					.getObject().asLiteral().getString();
+			newLinkProperty.setSourceId(sourceId);
+
+			if (linkResource.hasProperty(Omn_domain_pc.hasLatency)) {
+				String latency = linkResource
+						.getProperty(Omn_domain_pc.hasLatency).getObject()
+						.asLiteral().getString();
+				newLinkProperty.setLatency(latency);
+			}
+
+			if (linkResource.hasProperty(Omn_domain_pc.hasPacketLoss)) {
+				String packetLoss = linkResource
+						.getProperty(Omn_domain_pc.hasPacketLoss).getObject()
+						.asLiteral().getString();
+				newLinkProperty.setPacketLoss(packetLoss);
+			}
+
+			if (linkResource.hasProperty(Omn_domain_pc.hasCapacity)) {
+				String capacity = linkResource
+						.getProperty(Omn_domain_pc.hasCapacity).getObject()
+						.asLiteral().getString();
+				newLinkProperty.setCapacity(capacity);
+			}
+
+			link.getAnyOrPropertyOrLinkType().add(
+					new ObjectFactory().createProperty(newLinkProperty));
+		}
+
+	}
+
+	private void setInterfaceRefs(Statement resource, LinkContents link) {
+		List<Statement> interfaces = resource.getResource()
+				.listProperties(Omn_resource.hasInterface).toList();
+
+		for (Statement interface1 : interfaces) {
+
+			InterfaceRefContents newInterface = new ObjectFactory()
+					.createInterfaceRefContents();
+
+			String componentId = interface1.getResource()
+					.getProperty(Omn_lifecycle.hasComponentID).getObject()
+					.asLiteral().getString();
+
+			newInterface.setComponentId(componentId);
+
+			JAXBElement<InterfaceRefContents> interfaceJaxb = new ObjectFactory()
+					.createInterfaceRef(newInterface);
+
+			link.getAnyOrPropertyOrLinkType().add(interfaceJaxb);
+		}
+
+	}
+
+	private void setLinkDetails(Statement resource, LinkContents link) {
+
+		List<Statement> linkTypes = resource.getResource()
+				.listProperties(Omn_lifecycle.hasLinkName).toList();
+
+		for (Statement linkStatement : linkTypes) {
+			String linkName = linkStatement.getObject().asLiteral().getString();
+			LinkType linkType = new ObjectFactory().createLinkType();
+			linkType.setName(linkName);
+			link.getAnyOrPropertyOrLinkType().add(linkType);
+		}
+
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasComponentID)) {
+			String componentId = resource.getResource()
+					.getProperty(Omn_lifecycle.hasComponentID).getObject()
+					.asLiteral().getString();
+			link.setComponentId(componentId);
+		}
+
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasComponentName)) {
+			String componentName = resource.getResource()
+					.getProperty(Omn_lifecycle.hasComponentName).getObject()
+					.asLiteral().getString();
+			link.setComponentName(componentName);
+		}
+
+		if (resource.getResource().hasProperty(
+				Omn_lifecycle.hasComponentManagerName)) {
+
+			List<Statement> componentManagers = resource.getResource()
+					.listProperties(Omn_lifecycle.hasComponentManagerName)
+					.toList();
+
+			for (final Statement manager : componentManagers) {
+				String managerName = manager.getObject().asLiteral()
+						.getString();
+				ComponentManager rspecManager = new ObjectFactory()
+						.createComponentManager();
+				rspecManager.setName(managerName);
+				link.getAnyOrPropertyOrLinkType().add(rspecManager);
+			}
+
+		}
+
+	}
+
+	private void setFd(Statement omnResource, NodeContents geniNode) {
+		// TODO Auto-generated method stub
+
+		List<Statement> resources = omnResource.getResource()
+				.listProperties(Omn.hasResource).toList();
+
+		for (final Statement resourceStatement : resources) {
+			// add emulab node slots
+			if (resourceStatement.getResource().hasProperty(RDF.type,
+					Omn_domain_pc.FeatureDescription)) {
+
+				// name is required
+				Fd fd = of.createFd();
+				String name = resourceStatement.getResource()
+						.getProperty(Omn_domain_pc.hasEmulabFdName).getObject()
+						.asLiteral().getString();
+				fd.setName(name);
+
+				// weight is required
+				String weight = resourceStatement.getResource()
+						.getProperty(Omn_domain_pc.hasEmulabFdWeight)
+						.getObject().asLiteral().getString();
+				fd.setWeight(weight);
+
+				if (resourceStatement.getResource().hasProperty(
+						Omn_domain_pc.emulabFdViolatable)) {
+					String violatable = resourceStatement.getResource()
+							.getProperty(Omn_domain_pc.emulabFdViolatable)
+							.getObject().asLiteral().getString();
+					fd.setViolatable(violatable);
+				}
+
+				if (resourceStatement.getResource().hasProperty(
+						Omn_domain_pc.hasEmulabFdLocalOperator)) {
+					String localOperator = resourceStatement
+							.getResource()
+							.getProperty(Omn_domain_pc.hasEmulabFdLocalOperator)
+							.getObject().asLiteral().getString();
+					fd.setLocalOperator(localOperator);
+				}
+
+				if (resourceStatement.getResource().hasProperty(
+						Omn_domain_pc.hasEmulabFdGlobalOperator)) {
+					String localOperator = resourceStatement
+							.getResource()
+							.getProperty(
+									Omn_domain_pc.hasEmulabFdGlobalOperator)
+							.getObject().asLiteral().getString();
+					fd.setGlobalOperator(localOperator);
+				}
+
+				geniNode.getAnyOrRelationOrLocation().add(fd);
+			}
+		}
+	}
+
+	private void setInterface(Statement resource, NodeContents nodeContents) {
+		// TODO Auto-generated method stub
+		List<Statement> interfaces = resource.getResource()
+				.listProperties(Omn_resource.hasInterface).toList();
+
+		for (final Statement interface1 : interfaces) {
+			InterfaceContents interfaceContents = new ObjectFactory()
+					.createInterfaceContents();
+			Resource interfaceResource = interface1.getResource();
+
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+				interfaceContents.setComponentId(interfaceResource
+						.getProperty(Omn_lifecycle.hasComponentID).getObject()
+						.asLiteral().toString());
+			}
+
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasRole)) {
+				interfaceContents.setRole(interfaceResource
+						.getProperty(Omn_lifecycle.hasRole).getObject()
+						.asLiteral().toString());
+			}
+
+			// setIpAddress(interfaceResource, interfaceContents);
+
+			JAXBElement<InterfaceContents> interfaceRspec = new ObjectFactory()
+					.createInterface(interfaceContents);
+			nodeContents.getAnyOrRelationOrLocation().add(interfaceRspec);
 		}
 	}
 
@@ -1072,6 +1545,14 @@ public class AdvertisementConverter extends AbstractConverter {
 						diskImage.setVersion(version);
 					}
 
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.hasDiskimageURI)) {
+						String uri = diskImageResource
+								.getProperty(Omn_domain_pc.hasDiskimageURI)
+								.getObject().asLiteral().getString();
+						diskImage.setUrl(uri);
+					}
+
 					diskImage.setName(diskName);
 					sliver.getAnyOrDiskImage()
 							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
@@ -1115,10 +1596,18 @@ public class AdvertisementConverter extends AbstractConverter {
 			// add emulab node slots
 			if (hwObject.hasProperty(Omn_domain_pc.hasEmulabNodeTypeSlots)) {
 				NodeType nodeType = of.createNodeType();
+				// type slots is required
 				String numSlots = hwObject
 						.getProperty(Omn_domain_pc.hasEmulabNodeTypeSlots)
 						.getObject().asLiteral().getString();
 				nodeType.setTypeSlots(numSlots);
+
+				if (hwObject.hasProperty(Omn_domain_pc.emulabNodeTypeStatic)) {
+					String staticType = hwObject
+							.getProperty(Omn_domain_pc.emulabNodeTypeStatic)
+							.getObject().asLiteral().getString();
+					nodeType.setStatic(staticType);
+				}
 				hwType.getAny().add(nodeType);
 			}
 
@@ -1134,7 +1623,15 @@ public class AdvertisementConverter extends AbstractConverter {
 		// String urn = AbstractConverter.generateUrnFromUrl(url, "node");
 
 		node.setComponentId(url);
-		node.setComponentName(resource.getResource().getLocalName());
+
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasComponentName)) {
+			node.setComponentName(resource.getResource()
+					.getProperty(Omn_lifecycle.hasComponentName).getObject()
+					.asLiteral().getString());
+		} else {
+			node.setComponentName(resource.getResource().getLocalName());
+		}
+
 		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
 			node.setExclusive(resource.getResource()
 					.getProperty(Omn_resource.isExclusive).getBoolean());

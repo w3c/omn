@@ -13,9 +13,11 @@ import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 public class RequestIonTest {
-	// TODO : stich extension
+	// TODO : stitch extension
 	@Test
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
@@ -38,30 +40,30 @@ public class RequestIonTest {
 
 		System.out.println("Get number of diffs and nodes:");
 		System.out.println("===============================");
-		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+		// int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
-		// Assert.assertTrue("client id",
-		// outputRspec.contains("client_id=\"exclusive-0\""));
+		Assert.assertTrue("client id",
+				outputRspec.contains("client_id=\"pg1\""));
 
-		// Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
 		// check that output has one rspec element
-		// NodeList rspec = xmlDoc.getElementsByTagNameNS(
-		// "http://www.geni.net/resources/rspec/3", "rspec");
-		// Assert.assertTrue(rspec.getLength() == 1);
-		//
-		// NodeList nodes = xmlDoc.getElementsByTagNameNS(
-		// "http://www.geni.net/resources/rspec/3", "node");
-		// Assert.assertTrue(nodes.getLength() == 1);
-		//
-		// NodeList sliverType = xmlDoc.getElementsByTagNameNS(
-		// "http://www.geni.net/resources/rspec/3", "sliver_type");
-		// Assert.assertTrue(sliverType.getLength() == 1);
-		//
-		// String sliverName = sliverType.item(0).getAttributes()
-		// .getNamedItem("name").getNodeValue();
-		// Assert.assertTrue(sliverName.equals("raw-pc"));
+		NodeList rspec = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "rspec");
+		Assert.assertTrue(rspec.getLength() == 1);
+
+		NodeList nodes = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "node");
+		Assert.assertTrue(nodes.getLength() == 2);
+
+		NodeList stitching = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/ext/stitch/2/", "stitching");
+		Assert.assertTrue(stitching.getLength() == 1);
+
+		String sliverName = stitching.item(0).getAttributes()
+				.getNamedItem("lastUpdateTime").getNodeValue();
+		Assert.assertTrue(sliverName.equals("20120815:09:30:00"));
 
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.

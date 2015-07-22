@@ -1,14 +1,11 @@
 package info.openmultinet.ontology.translators.geni;
 
-import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
-import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,15 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import nu.xom.ParsingException;
-
-import org.apache.commons.io.IOUtils;
-import org.dom4j.DocumentException;
 import org.junit.Assert;
-import org.junit.Test;
-import org.xml.sax.SAXException;
 
 public class RSpecValidationTest {
 
@@ -38,7 +27,6 @@ public class RSpecValidationTest {
 	final static int different2 = 7;
 	final static double nano = 1000000000.0;
 
-	@Test
 	public void testGetType() {
 		List<Entry<String, String>> types = new ArrayList<>();
 
@@ -687,7 +675,7 @@ public class RSpecValidationTest {
 
 	private static void getErrorFile(File path)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, IOException {
 
 		System.out.println("******************************************");
 		System.out.println("******       Prelim                 ******");
@@ -720,7 +708,10 @@ public class RSpecValidationTest {
 		System.out.println("******************************************");
 		System.out.println("******     Checking validity        ******");
 		System.out.println("******************************************");
-		boolean valid = RSpecValidation.validateRspecXMLUnit(rspecString);
+		// boolean valid = RSpecValidation.validateRspecXMLUnit(rspecString);
+
+		boolean valid = RSpecValidation.rspecLintMacOnly(path.getPath()
+				.substring(20));
 		System.out.println("Valid: " + valid + "\n\n");
 		if (!valid) {
 			System.out.println("RSpec not valid. Quitting process.");
@@ -867,10 +858,11 @@ public class RSpecValidationTest {
 
 	}
 
-	public static void main(String[] args) throws MissingRspecElementException {
+	public static void main(String[] args) throws MissingRspecElementException,
+			DeprecatedRspecVersionException, IOException {
 
 		// File path = new File("./src/test/resources/geni/advertisement");
-		// File path = new File("./src/test/resources/geni/ciscogeni");
+		File path = new File("./src/test/resources/geni/ciscogeni");
 		// File path = new File("./src/test/resources/geni/exogeni");
 		// File path = new File("./src/test/resources/geni/fed4fire");
 		// File path = new File("./src/test/resources/geni/gimiv3");
@@ -886,9 +878,10 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/request");
 		// File path = new File("./src/test/resources/geni/stich");
 
-		File path = new File("./src/test/resources/geni");
-		checkVersionDirectory(path);
+		// File path = new File("./src/test/resources/geni");
+		// checkVersionDirectory(path);
 		// getErrorDirectory(path);
+		getNodesDiffsDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
 
@@ -897,6 +890,10 @@ public class RSpecValidationTest {
 		// "./src/test/resources/geni/exogeni/EG-EXP-6-exp3-eg-gpo.rspec");
 		// File path = new File(
 		// "./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
+		// File path = new File(
+		// "./src/test/resources/geni/ciscogeni/CG-CT-5-eg-ncsu2.rspec");
+//		File path = new File(
+//				"./src/test/resources/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec");
 		// validateFile(path);
 		// getErrorFile(path);
 

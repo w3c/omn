@@ -400,6 +400,7 @@ public class RSpecValidation {
 					model = converter.getModel(rspec);
 
 					String modelString = Parser.toString(model);
+					System.out.println(modelString);
 					PrintWriter outBlah = new PrintWriter("model.txt");
 					outBlah.println(modelString);
 					outBlah.close();

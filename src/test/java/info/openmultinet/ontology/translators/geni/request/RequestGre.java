@@ -19,9 +19,9 @@ import org.w3c.dom.NodeList;
 public class RequestGre {
 
 	@Test
-	public void requestRoundtrip() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+	public void requestRoundtrip() throws JAXBException, InvalidModelException,
+			IOException, XMLStreamException, MissingRspecElementException,
+			DeprecatedRspecVersionException {
 		final String filename = "/geni/request/request_gre.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 

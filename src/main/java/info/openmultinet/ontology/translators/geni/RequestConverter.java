@@ -13,6 +13,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.DlVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.GroupContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.HopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
@@ -24,6 +25,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.LinkType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.MatchContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NextHopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
@@ -31,11 +33,13 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.NwDst;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NwSrc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.request.PacketContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.PathContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RoutableControlIp;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
+import info.openmultinet.ontology.translators.geni.jaxb.request.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -135,7 +139,9 @@ public class RequestConverter extends AbstractConverter {
 			if (!resource.getResource()
 					.hasProperty(RDF.type, Omn_resource.Link)
 					&& !resource.getResource().hasProperty(RDF.type,
-							Omn_resource.Openflow)) {
+							Omn_resource.Openflow)
+					&& !resource.getResource().hasProperty(RDF.type,
+							Omn_resource.Stitching)) {
 
 				final NodeContents node = new NodeContents();
 
@@ -175,8 +181,79 @@ public class RequestConverter extends AbstractConverter {
 				final Sliver of = new Sliver();
 				setOpenflow(resource, of);
 				request.getAnyOrNodeOrLink().add(of);
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_resource.Stitching)) {
+				ObjectFactory of = new ObjectFactory();
+
+				StitchContent stitchContent = of.createStitchContent();
+				setStitching(resource, stitchContent);
+
+				JAXBElement<StitchContent> stitching = of
+						.createStitching(stitchContent);
+
+				request.getAnyOrNodeOrLink().add(stitching);
+
+			}
+
+		}
+	}
+
+	private static void setStitching(Statement resource,
+			StitchContent stitchContent) {
+
+		if (resource.getResource().hasProperty(Omn_domain_pc.lastUpdateTime)) {
+			String lastUpdateTime = resource.getResource()
+					.getProperty(Omn_domain_pc.lastUpdateTime).getObject()
+					.asLiteral().getString();
+			stitchContent.setLastUpdateTime(lastUpdateTime);
+		}
+
+		StmtIterator resources = resource.getResource().listProperties(
+				Omn.hasResource);
+
+		while (resources.hasNext()) {
+			Resource object = resources.next().getObject().asResource();
+			if (object.hasProperty(RDF.type, Omn_resource.Path)) {
+				final PathContent pathContent = new PathContent();
+
+				if (object.hasProperty(Omn_lifecycle.hasID)) {
+					String id = object.getProperty(Omn_lifecycle.hasID)
+							.getObject().asLiteral().getString();
+					pathContent.setId(id);
+				}
+
+				StmtIterator hops = object.listProperties(Omn.hasResource);
+
+				while (hops.hasNext()) {
+					HopContent hopContent = new HopContent();
+					Resource hopObject = hops.next().getObject().asResource();
+					if (hopObject.hasProperty(Omn_lifecycle.hasID)) {
+						String id = hopObject.getProperty(Omn_lifecycle.hasID)
+								.getObject().asLiteral().getString();
+						hopContent.setId(id);
+					}
+					if (hopObject.hasProperty(Omn_domain_pc.hasHopType)) {
+						String type = hopObject
+								.getProperty(Omn_domain_pc.hasHopType)
+								.getObject().asLiteral().getString();
+						hopContent.setType(type);
+					}
+					if (hopObject.hasProperty(Omn_domain_pc.hasNextHop)) {
+						String nextHop = hopObject
+								.getProperty(Omn_domain_pc.hasNextHop)
+								.getObject().asLiteral().getString();
+
+						NextHopContent nextHopContent = new NextHopContent();
+						nextHopContent.setValue(nextHop);
+						hopContent.getNextHop().add(nextHopContent);
+					}
+					pathContent.getHop().add(hopContent);
+				}
+
+				stitchContent.getPath().add(pathContent);
 			}
 		}
+
 	}
 
 	private static void setOpenflow(Statement resource, Sliver of) {
@@ -401,6 +478,27 @@ public class RequestConverter extends AbstractConverter {
 					.getObject().asLiteral().getString();
 			newLinkProperty.setSourceId(sourceId);
 
+			if (linkResource.hasProperty(Omn_domain_pc.hasLatency)) {
+				String latency = linkResource
+						.getProperty(Omn_domain_pc.hasLatency).getObject()
+						.asLiteral().getString();
+				newLinkProperty.setLatency(latency);
+			}
+
+			if (linkResource.hasProperty(Omn_domain_pc.hasPacketLoss)) {
+				String packetLoss = linkResource
+						.getProperty(Omn_domain_pc.hasPacketLoss).getObject()
+						.asLiteral().getString();
+				newLinkProperty.setPacketLoss(packetLoss);
+			}
+
+			if (linkResource.hasProperty(Omn_domain_pc.hasCapacity)) {
+				String capacity = linkResource
+						.getProperty(Omn_domain_pc.hasCapacity).getObject()
+						.asLiteral().getString();
+				newLinkProperty.setCapacity(capacity);
+			}
+
 			link.getAnyOrPropertyOrLinkType().add(
 					new ObjectFactory().createProperty(newLinkProperty));
 		}
@@ -532,6 +630,12 @@ public class RequestConverter extends AbstractConverter {
 			if (interfaceResource.hasProperty(Omn_resource.clientId)) {
 				interfaceContents.setClientId(interfaceResource
 						.getProperty(Omn_resource.clientId).getObject()
+						.asLiteral().toString());
+			}
+
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+				interfaceContents.setComponentId(interfaceResource
+						.getProperty(Omn_lifecycle.hasComponentID).getObject()
 						.asLiteral().toString());
 			}
 
@@ -723,38 +827,74 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void setSliverType(Statement resource, NodeContents node) {
-		SliverType sliverType = new ObjectFactory()
-				.createNodeContentsSliverType();
-		Resource omnSliver = null;
-
-		final List<Statement> hasTypes = resource.getResource()
-				.listProperties(RDF.type).toList();
-
-		for (final Statement hasType : hasTypes) {
-			RDFNode sliverNode = hasType.getObject();
-			Resource sliverResource = sliverNode.asResource();
-
-			if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
-				omnSliver = sliverResource;
-				sliverType.setName(sliverResource.getURI());
-			}
-		}
+		// SliverType sliverType = new ObjectFactory()
+		// .createNodeContentsSliverType();
+		//
+		// Resource omnSliver = null;
+		//
+		// final List<Statement> hasTypes = resource.getResource()
+		// .listProperties(RDF.type).toList();
+		//
+		// for (final Statement hasType : hasTypes) {
+		// RDFNode sliverNode = hasType.getObject();
+		// Resource sliverResource = sliverNode.asResource();
+		//
+		// if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+		// omnSliver = sliverResource;
+		// sliverType.setName(sliverResource.getURI());
+		// }
+		// }
+		//
+		// // check if name was string and not uri
+		// if (resource.getResource().hasProperty(Omn_lifecycle.hasSliverName))
+		// {
+		// String sliverName = resource.getResource()
+		// .getProperty(Omn_lifecycle.hasSliverName).getObject()
+		// .asLiteral().getString();
+		// sliverType.setName(sliverName);
+		// }
+		//
+		// if (omnSliver != null) {
+		// setDiskImage(omnSliver, sliverType);
+		// }
+		//
+		// JAXBElement<SliverType> sliver = new ObjectFactory()
+		// .createNodeContentsSliverType(sliverType);
+		//
+		// node.getAnyOrRelationOrLocation().add(sliver);
 
 		// check if name was string and not uri
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasSliverName)) {
+
+			SliverType sliverType = new ObjectFactory()
+					.createNodeContentsSliverType();
+
 			String sliverName = resource.getResource()
 					.getProperty(Omn_lifecycle.hasSliverName).getObject()
 					.asLiteral().getString();
 			sliverType.setName(sliverName);
-		}
 
-		if (omnSliver != null) {
+			final List<Statement> hasTypes = resource.getResource()
+					.listProperties(RDF.type).toList();
+
+			// find the URI of the sliver
+			Resource omnSliver = null;
+			for (final Statement hasType : hasTypes) {
+				RDFNode sliverNode = hasType.getObject();
+				Resource sliverResource = sliverNode.asResource();
+
+				if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+					omnSliver = sliverResource;
+				}
+			}
 			setDiskImage(omnSliver, sliverType);
+
+			JAXBElement<SliverType> sliver = new ObjectFactory()
+					.createNodeContentsSliverType(sliverType);
+
+			node.getAnyOrRelationOrLocation().add(sliver);
 		}
 
-		JAXBElement<SliverType> sliver = new ObjectFactory()
-				.createNodeContentsSliverType(sliverType);
-		node.getAnyOrRelationOrLocation().add(sliver);
 	}
 
 	private static void setDiskImage(Resource resource, SliverType sliver) {
@@ -860,6 +1000,11 @@ public class RequestConverter extends AbstractConverter {
 			} else if (o instanceof org.apache.xerces.dom.ElementNSImpl) {
 				if (o.toString().contains("openflow:sliver")) {
 					extractOpenflow(topology, o);
+				} else if (o.toString().contains("stitch:stitching")) {
+					extractStitching(topology, o);
+				} else {
+					RequestConverter.LOG.log(Level.INFO,
+							"Found unknown ElementNSImpl extension: " + o);
 				}
 			} else {
 				RequestConverter.LOG.log(Level.INFO,
@@ -871,6 +1016,93 @@ public class RequestConverter extends AbstractConverter {
 		// topology);
 
 		return model;
+	}
+
+	private static void extractStitching(Resource topology, Object o) {
+		Model model = topology.getModel();
+		Resource stitchResource = model.createResource();
+		stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
+
+		ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) o);
+		NamedNodeMap attributes = stitch.getAttributes();
+		for (int i = 0; i < attributes.getLength(); i++) {
+			if (attributes.item(i).getNodeName().equals("lastUpdateTime")) {
+				String lastUpdate = attributes.item(i).getNodeValue();
+				stitchResource.addProperty(Omn_domain_pc.lastUpdateTime,
+						lastUpdate);
+			}
+		}
+
+		NodeList children = ((org.apache.xerces.dom.ElementNSImpl) o)
+				.getChildNodes();
+
+		for (int i = 0; i < children.getLength(); i++) {
+			Node child = children.item(i);
+
+			if (child.getNodeName().contains("path")) {
+				Resource path = model.createResource();
+				path.addProperty(RDF.type, Omn_resource.Path);
+
+				NamedNodeMap pathAttributes = child.getAttributes();
+				for (int j = 0; j < pathAttributes.getLength(); j++) {
+					if (pathAttributes.item(j).getNodeName().equals("id")) {
+						String id = pathAttributes.item(j).getNodeValue();
+						path.addProperty(Omn_lifecycle.hasID, id);
+					}
+				}
+				extractHops(path, child);
+				stitchResource.addProperty(Omn.hasResource, path);
+			}
+		}
+
+		topology.addProperty(Omn.hasResource, stitchResource);
+	}
+
+	private static void extractHops(Resource path, Node pathNode) {
+		NodeList children = pathNode.getChildNodes();
+
+		for (int k = 0; k < children.getLength(); k++) {
+
+			Node child = children.item(k);
+			NodeList grandchildren = child.getChildNodes();
+
+			if (child.getNodeName().contains("hop")) {
+				Resource hop = path.getModel().createResource();
+				hop.addProperty(RDF.type, Omn_resource.Hop);
+				path.addProperty(Omn.hasResource, hop);
+
+				NamedNodeMap hopAttributes = child.getAttributes();
+				for (int j = 0; j < hopAttributes.getLength(); j++) {
+					if (hopAttributes.item(j).getNodeName().equals("id")) {
+						String id = hopAttributes.item(j).getNodeValue();
+						hop.addProperty(Omn_lifecycle.hasID, id);
+					}
+
+					if (hopAttributes.item(j).getNodeName().equals("type")) {
+						String type = hopAttributes.item(j).getNodeValue();
+						hop.addProperty(Omn_domain_pc.hasHopType, type);
+					}
+				}
+
+				for (int i = 0; i < grandchildren.getLength(); i++) {
+					Node grandchild = grandchildren.item(i);
+
+					if (grandchild.getNodeName().contains("nextHop")) {
+						String nextHop = grandchild.getTextContent();
+						if (nextHop != null) {
+							hop.addProperty(Omn_domain_pc.hasNextHop, nextHop);
+						}
+					}
+
+					if (grandchild.getNodeName().contains("link")) {
+						RequestConverter.LOG.log(Level.INFO,
+								"Stitching link translation capability has yet to be done.");
+					}
+				}
+
+			}
+		}
+
 	}
 
 	private static void extractOpenflow(Resource topology, Object o) {
@@ -1223,6 +1455,23 @@ public class RequestConverter extends AbstractConverter {
 		linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
 		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceID);
 
+		String capacity = content.getCapacity();
+		if (capacity != null) {
+			linkPropertyResource.addProperty(Omn_domain_pc.hasCapacity,
+					capacity);
+		}
+
+		String latency = content.getLatency();
+		if (latency != null) {
+			linkPropertyResource.addProperty(Omn_domain_pc.hasLatency, latency);
+		}
+
+		String packetLoss = content.getPacketLoss();
+		if (packetLoss != null) {
+			linkPropertyResource.addProperty(Omn_domain_pc.hasPacketLoss,
+					packetLoss);
+		}
+
 		linkResource
 				.addProperty(Omn_resource.hasProperty, linkPropertyResource);
 		// interfaceResource.addProperty(Nml.isSink,
@@ -1284,6 +1533,11 @@ public class RequestConverter extends AbstractConverter {
 			if (content.getClientId() != null) {
 				interfaceResource.addProperty(Omn_resource.clientId,
 						content.getClientId());
+			}
+
+			if (content.getComponentId() != null) {
+				interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
+						content.getComponentId());
 			}
 		}
 	}
@@ -1473,14 +1727,12 @@ public class RequestConverter extends AbstractConverter {
 			if (AbstractConverter.isUrl(sliverName)) {
 				sliverTypeResource = omnResource.getModel().createResource(
 						sliverName);
-				omnResource.addProperty(RDF.type, sliverTypeResource);
 			} else {
 				sliverTypeResource = omnResource.getModel().createResource(
 						"http://open-multinet.info/example#" + sliverName);
-				omnResource.addProperty(RDF.type, sliverTypeResource);
-				omnResource
-						.addProperty(Omn_lifecycle.hasSliverName, sliverName);
 			}
+			omnResource.addProperty(RDF.type, sliverTypeResource);
+			omnResource.addProperty(Omn_lifecycle.hasSliverName, sliverName);
 
 			for (Object rspecSliverObject : sliverType.getAnyOrDiskImage()) {
 				tryExtractDiskImage(rspecSliverObject, sliverTypeResource);

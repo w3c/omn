@@ -372,6 +372,17 @@
 omn:Resource rdf:type owl:Class .
 
 
+###  http://open-multinet.info/ontology/omn-resource#Cloud
+
+:Cloud rdf:type owl:Class ;
+
+      rdfs:label "Cloud"@en ;
+
+      rdfs:seeAlso "GENI Manifest RSpec v3: NodeContents > cloud"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
 
 ###  http://open-multinet.info/ontology/omn-resource#Interface
 
@@ -459,6 +470,35 @@ omn:Resource rdf:type owl:Class .
       
       rdfs:subClassOf :NetworkObject .
 
+
+
+###  http://open-multinet.info/ontology/omn-resource#Path
+
+:Path rdf:type owl:Class ;
+
+      rdfs:label "Stitching Path"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Hop
+
+:Hop rdf:type owl:Class ;
+
+      rdfs:label "Stitching Hop"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Stitching
+
+:Stitching rdf:type owl:Class ;
+
+      rdfs:label "Stitching"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
 
 
 

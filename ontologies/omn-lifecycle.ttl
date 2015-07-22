@@ -497,6 +497,26 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#hasRole
+
+:hasRole rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has role"@en ;
+       
+        rdfs:comment "has role"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: role"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
 ### This is a temporary solution to test the translator, so that the orignal component ID is return when a URL, and not the URN as provided by the translator.
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasOriginalID
 

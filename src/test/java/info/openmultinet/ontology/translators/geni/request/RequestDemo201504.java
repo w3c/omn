@@ -1,17 +1,12 @@
 package info.openmultinet.ontology.translators.geni.request;
 
-import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
-import info.openmultinet.ontology.translators.geni.RequestConverter;
-import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
@@ -21,17 +16,12 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.hp.hpl.jena.rdf.model.InfModel;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.vocabulary.RDF;
-
 public class RequestDemo201504 {
 
 	@Test
-	public void requestRoundtrip() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+	public void requestRoundtrip() throws JAXBException, InvalidModelException,
+			IOException, XMLStreamException, MissingRspecElementException,
+			DeprecatedRspecVersionException {
 		final String filename = "/geni/request/request_demo201504.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
