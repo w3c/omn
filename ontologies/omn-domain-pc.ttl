@@ -126,6 +126,21 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#diskimageDefault
+
+:diskimageDefault rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+
+                         rdfs:label "disk image default"@en ;
+
+                         rdfs:comment "disk image default  (GENI RSpec v3 disk_image > default)"@en ;
+                         
+                         rdfs:domain :DiskImage ;
+                         
+                         rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel
 
 :hasDiskimageLabel rdf:type owl:DatatypeProperty ,

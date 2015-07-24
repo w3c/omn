@@ -11,20 +11,24 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageC
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ExternalReferenceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HardwareTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NextHopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.PathContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecOpstate;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ComponentManager;
@@ -43,6 +47,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,9 +59,15 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+
+import org.apache.xerces.dom.ElementNSImpl;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -123,19 +134,63 @@ public class AdvertisementConverter extends AbstractConverter {
 				RDF.type, Omn_lifecycle.Offering);
 
 		@SuppressWarnings("unchecked")
-		final List<JAXBElement<?>> rspecObjects = (List) rspec
-				.getAnyOrNodeOrLink();
+		final List rspecObjects = (List) rspec.getAnyOrNodeOrLink();
 
-		for (final Object rspecObject : rspecObjects) {
+		for (Object rspecObject : rspecObjects) {
 			tryExtractNode(rspecObject, offering);
 			tryExtractLink(rspecObject, offering);
-			tryExtractOpstate(rspecObject, offering);
 			tryExtractExternalRef(rspecObject, offering);
 			tryExtractSharedVlan(rspecObject, offering);
 			tryExtractRoutableAddresses(rspecObject, offering);
+			tryExtractOpstate(rspecObject, offering);
+			tryExtractStitching(rspecObject, offering);
 		}
 
 		return model;
+	}
+
+	private void tryExtractStitching(Object rspecObject, Resource offering)
+			throws MissingRspecElementException {
+		if (rspecObject.toString().contains("stitching")) {
+
+			Model model = offering.getModel();
+			Resource stitchResource = model.createResource();
+			stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
+
+			ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) rspecObject);
+			NamedNodeMap attributes = stitch.getAttributes();
+			for (int i = 0; i < attributes.getLength(); i++) {
+				if (attributes.item(i).getNodeName().equals("lastUpdateTime")) {
+					String lastUpdate = attributes.item(i).getNodeValue();
+					stitchResource.addProperty(Omn_domain_pc.lastUpdateTime,
+							lastUpdate);
+				}
+			}
+
+			NodeList children = ((org.apache.xerces.dom.ElementNSImpl) rspecObject)
+					.getChildNodes();
+
+			for (int i = 0; i < children.getLength(); i++) {
+				Node child = children.item(i);
+
+				if (child.getNodeName().contains("path")) {
+					Resource path = model.createResource();
+					path.addProperty(RDF.type, Omn_resource.Path);
+
+					NamedNodeMap pathAttributes = child.getAttributes();
+					for (int j = 0; j < pathAttributes.getLength(); j++) {
+						if (pathAttributes.item(j).getNodeName().equals("id")) {
+							String id = pathAttributes.item(j).getNodeValue();
+							path.addProperty(Omn_lifecycle.hasID, id);
+						}
+					}
+					// extractHops(path, child);
+					stitchResource.addProperty(Omn.hasResource, path);
+				}
+			}
+
+			offering.addProperty(Omn.hasResource, stitchResource);
+		}
 	}
 
 	private void tryExtractInterface(Object rspecObject, Resource omnResource) {
@@ -756,23 +811,60 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private void tryExtractSliverType(Object rspecNodeObject, Resource omnNode) {
+	private void tryExtractSliverType(Object rspecNodeObject,
+			Resource omnResource) throws MissingRspecElementException {
+		// try {
+		// @SuppressWarnings("unchecked")
+		// final JAXBElement<SliverType> sliverJaxb = (JAXBElement<SliverType>)
+		// rspecNodeObject;
+		// final SliverType sliver = sliverJaxb.getValue();
+		//
+		// final Resource omnSliver = omnNode.getModel().createResource(
+		// sliver.getName());
+		//
+		//
+		// RDFNode type = ResourceFactory.createProperty(sliver.getName());
+		//
+		// omnNode.addProperty(Omn_lifecycle.canImplement, type);
+		//
+		// for (Object rspecSliverObject : sliver.getAnyOrDiskImage()) {
+		// tryExtractCpus(rspecSliverObject, omnSliver);
+		// tryExtractDiskImage(rspecSliverObject, omnSliver);
+		// }
+		//
+		// // RDFNode type = ResourceFactory.createProperty(sliver.getName());
+		// omnNode.addProperty(Omn_lifecycle.canImplement, type);
+		// } catch (final ClassCastException e) {
+		// AdvertisementConverter.LOG.finer(e.getMessage());
+		// }
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<SliverType> sliverJaxb = (JAXBElement<SliverType>) rspecNodeObject;
-			final SliverType sliver = sliverJaxb.getValue();
-
-			final Resource omnSliver = omnNode.getModel().createResource(
-					sliver.getName());
-			RDFNode type = ResourceFactory.createProperty(sliver.getName());
-			omnNode.addProperty(Omn_lifecycle.canImplement, type);
-			for (Object rspecSliverObject : sliver.getAnyOrDiskImage()) {
-				tryExtractCpus(rspecSliverObject, omnSliver);
-				tryExtractDiskImage(rspecSliverObject, omnSliver);
+			final SliverType sliverType = sliverJaxb.getValue();
+			String sliverName = sliverType.getName();
+			if (sliverName == null) {
+				throw new MissingRspecElementException(
+						"SliverTypeContents > name");
 			}
+			Resource sliverTypeResource = null;
+			// Note: Do not change sliver type here, as Fiteagle will
+			// not work
+			if (AbstractConverter.isUrl(sliverName)) {
+				sliverTypeResource = omnResource.getModel().createResource(
+						sliverName);
+			} else {
+				sliverTypeResource = omnResource.getModel().createResource();
+			}
+			omnResource.addProperty(Omn_resource.hasSliverType,
+					sliverTypeResource);
+			sliverTypeResource.addProperty(Omn_lifecycle.hasSliverName,
+					sliverName);
+			sliverTypeResource.addProperty(RDF.type, Omn_resource.SliverType);
 
-			// RDFNode type = ResourceFactory.createProperty(sliver.getName());
-			omnNode.addProperty(Omn_lifecycle.canImplement, type);
+			for (Object rspecSliverObject : sliverType.getAnyOrDiskImage()) {
+				tryExtractCpus(rspecSliverObject, sliverTypeResource);
+				tryExtractDiskImage(rspecSliverObject, sliverTypeResource);
+			}
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
@@ -794,8 +886,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			Resource omnSliver) {
 		try {
 			@SuppressWarnings("unchecked")
-			final JAXBElement<DiskImageContents> diJaxb = (JAXBElement<DiskImageContents>) rspecSliverObject;
-			final DiskImageContents diskImageContents = diJaxb.getValue();
+			JAXBElement<DiskImageContents> diJaxb = (JAXBElement<DiskImageContents>) rspecSliverObject;
+			DiskImageContents diskImageContents = diJaxb.getValue();
 
 			String diskImageURL = diskImageContents.getUrl();
 			Resource diskImage = model.createResource(diskImageURL);
@@ -828,8 +920,18 @@ public class AdvertisementConverter extends AbstractConverter {
 				diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
 			}
 
+			System.out.println(rspecSliverObject.toString());
+			@SuppressWarnings("unchecked")
+			JAXBElement<DiskImage> diskImageElement = (JAXBElement<DiskImage>) rspecSliverObject;
+			String defaultString = diskImageElement.getValue().getDefault();
+
+			if (defaultString != null) {
+				diskImage.addLiteral(Omn_domain_pc.diskimageDefault,
+						defaultString);
+			}
+
 		} catch (final ClassCastException e) {
-			AdvertisementConverter.LOG.finer(e.getMessage());
+			AdvertisementConverter.LOG.info(e.getMessage());
 		} catch (final InvalidPropertyURIException e) {
 			AdvertisementConverter.LOG.info(e.getMessage());
 		}
@@ -896,7 +998,9 @@ public class AdvertisementConverter extends AbstractConverter {
 					&& !omnResource.getResource().hasProperty(RDF.type,
 							Omn_lifecycle.Opstate)
 					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_domain_pc.SharedVlan)) {
+							Omn_domain_pc.SharedVlan)
+					&& !omnResource.getResource().hasProperty(RDF.type,
+							Omn_resource.Stitching)) {
 				// @todo: check type of resource here and not only generate
 				// nodes
 				final NodeContents geniNode = new NodeContents();
@@ -974,8 +1078,75 @@ public class AdvertisementConverter extends AbstractConverter {
 
 				advertisement.getAnyOrNodeOrLink().add(rspecOpstate);
 
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					Omn_resource.Stitching)) {
+				ObjectFactory of = new ObjectFactory();
+
+				StitchContent stitchContent = of.createStitchContent();
+				setStitching(omnResource, stitchContent);
+
+				JAXBElement<StitchContent> stitching = of
+						.createStitching(stitchContent);
+
+				advertisement.getAnyOrNodeOrLink().add(stitching);
 			}
 		}
+	}
+
+	private void setStitching(Statement resource, StitchContent stitchContent) {
+		if (resource.getResource().hasProperty(Omn_domain_pc.lastUpdateTime)) {
+			String lastUpdateTime = resource.getResource()
+					.getProperty(Omn_domain_pc.lastUpdateTime).getObject()
+					.asLiteral().getString();
+			stitchContent.setLastUpdateTime(lastUpdateTime);
+		}
+
+		StmtIterator resources = resource.getResource().listProperties(
+				Omn.hasResource);
+
+		while (resources.hasNext()) {
+			Resource object = resources.next().getObject().asResource();
+			if (object.hasProperty(RDF.type, Omn_resource.Path)) {
+				final PathContent pathContent = new PathContent();
+
+				if (object.hasProperty(Omn_lifecycle.hasID)) {
+					String id = object.getProperty(Omn_lifecycle.hasID)
+							.getObject().asLiteral().getString();
+					pathContent.setId(id);
+				}
+
+				StmtIterator hops = object.listProperties(Omn.hasResource);
+
+				while (hops.hasNext()) {
+					HopContent hopContent = new HopContent();
+					Resource hopObject = hops.next().getObject().asResource();
+					if (hopObject.hasProperty(Omn_lifecycle.hasID)) {
+						String id = hopObject.getProperty(Omn_lifecycle.hasID)
+								.getObject().asLiteral().getString();
+						hopContent.setId(id);
+					}
+					if (hopObject.hasProperty(Omn_domain_pc.hasHopType)) {
+						String type = hopObject
+								.getProperty(Omn_domain_pc.hasHopType)
+								.getObject().asLiteral().getString();
+						hopContent.setType(type);
+					}
+					if (hopObject.hasProperty(Omn_domain_pc.hasNextHop)) {
+						String nextHop = hopObject
+								.getProperty(Omn_domain_pc.hasNextHop)
+								.getObject().asLiteral().getString();
+
+						NextHopContent nextHopContent = new NextHopContent();
+						nextHopContent.setValue(nextHop);
+						hopContent.getNextHop().add(nextHopContent);
+					}
+					pathContent.getHop().add(hopContent);
+				}
+
+				stitchContent.getPath().add(pathContent);
+			}
+		}
+
 	}
 
 	private void setCloud(Statement omnResource, NodeContents geniNode) {
@@ -1336,6 +1507,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			sliver.setName(name);
 			sliverTypeOrState.add(sliver);
 		}
+
 	}
 
 	private void setMonitoringService(Statement resource, NodeContents node) {
@@ -1413,27 +1585,57 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private void setSliverTypes(Statement omnResource, NodeContents geniNode) {
+	private void setSliverTypes(Statement resource, NodeContents geniNode) {
 
-		StmtIterator canImplement = omnResource.getResource().listProperties(
-				Omn_lifecycle.canImplement);
-		SliverType sliver;
+		// StmtIterator canImplement = omnResource.getResource().listProperties(
+		// Omn_lifecycle.canImplement);
+		// SliverType sliver;
+		//
+		// List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
+		// while (canImplement.hasNext()) {
+		// Statement omnSliver = canImplement.next();
+		// String parentURI = omnSliver.getResource().getURI();
+		// sliver = of.createNodeContentsSliverType();
+		// sliver.setName(parentURI);
+		// if (null != parentURI) {
+		// geniNodeDetails.add(of.createNodeContentsSliverType(sliver));
+		// RDFNode sliverObject = omnSliver.getObject();
+		// Resource sliverResource = sliverObject.asResource();
+		// setCpus(sliverResource, sliver);
+		// setDiskImage(sliverResource, sliver);
+		// }
+		// }
 
-		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
-		while (canImplement.hasNext()) {
-			Statement omnSliver = canImplement.next();
-			String parentURI = omnSliver.getResource().getURI();
-			sliver = of.createNodeContentsSliverType();
-			sliver.setName(parentURI);
-			if (null != parentURI) {
-				geniNodeDetails.add(of.createNodeContentsSliverType(sliver));
-				RDFNode sliverObject = omnSliver.getObject();
-				Resource sliverResource = sliverObject.asResource();
-				setCpus(sliverResource, sliver);
-				setDiskImage(sliverResource, sliver);
+		// check if name was string and not uri
+		if (resource.getResource().hasProperty(Omn_resource.hasSliverType)) {
+
+			final List<Statement> hasSliverNames = resource.getResource()
+					.listProperties(Omn_resource.hasSliverType).toList();
+
+			for (final Statement hasSliverName : hasSliverNames) {
+
+				SliverType sliverType = new ObjectFactory()
+						.createNodeContentsSliverType();
+
+				Resource sliverTypeResource = hasSliverName.getObject()
+						.asResource();
+				if (sliverTypeResource.hasProperty(Omn_lifecycle.hasSliverName)) {
+					String sliverName = sliverTypeResource
+							.getProperty(Omn_lifecycle.hasSliverName)
+							.getObject().asLiteral().getString();
+					sliverType.setName(sliverName);
+				}
+
+				if (sliverTypeResource != null) {
+					setDiskImage(sliverTypeResource, sliverType);
+				}
+
+				JAXBElement<SliverType> sliver = new ObjectFactory()
+						.createNodeContentsSliverType(sliverType);
+
+				geniNode.getAnyOrRelationOrLocation().add(sliver);
 			}
 		}
-
 	}
 
 	private void setCpus(Resource sliverResource, SliverType sliver) {
@@ -1487,12 +1689,21 @@ public class AdvertisementConverter extends AbstractConverter {
 						diskImage.setDescription(description);
 					}
 
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.diskimageDefault)) {
+						String diskimageDefault = diskImageResource
+								.getProperty(Omn_domain_pc.diskimageDefault)
+								.getObject().asLiteral().getString();
+						diskImage.setDefault(diskimageDefault);
+					}
+
 					diskImage.setUrl(diskImageResource.getURI());
 					sliver.getAnyOrDiskImage()
 							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
 				}
 			}
-		} else if (sliverResource.getURI().equals(Omn_domain_pc.VM.getURI())) {
+			// } else if
+			// (sliverResource.getURI().equals(Omn_domain_pc.VM.getURI())) {
 			// TODO
 
 		} else {
@@ -1551,6 +1762,14 @@ public class AdvertisementConverter extends AbstractConverter {
 								.getProperty(Omn_domain_pc.hasDiskimageURI)
 								.getObject().asLiteral().getString();
 						diskImage.setUrl(uri);
+					}
+
+					if (diskImageResource
+							.hasProperty(Omn_domain_pc.diskimageDefault)) {
+						String diskimageDefault = diskImageResource
+								.getProperty(Omn_domain_pc.diskimageDefault)
+								.getObject().asLiteral().getString();
+						diskImage.setDefault(diskimageDefault);
 					}
 
 					diskImage.setName(diskName);

@@ -84,6 +84,38 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-resource#hasIPAddress
+
+:hasIPAddress rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "has IP address"@en ;
+
+          rdfs:comment "has IP address"@en ;
+
+          owl:inverseOf :isIPAddressOf ;
+          
+          rdfs:domain :NetworkObject ;
+          
+          rdfs:range :IPAddress .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isIPAddressOf
+
+:isIPAddressOf rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "is IP address of"@en ;
+
+          rdfs:comment "is IP address of"@en ;
+
+          owl:inverseOf :hasIPAddress ;
+          
+          rdfs:range :NetworkObject ;
+          
+          rdfs:domain :IPAddress .
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#isSink
 
 :isSink rdf:type owl:ObjectProperty ;
@@ -137,6 +169,21 @@
           rdfs:range :Interface ;
           
           rdfs:domain :Link .
+
+
+
+### required to translate GENI RSpecs with multiple sliver types
+###  http://open-multinet.info/ontology/omn-resource#hasSliverType
+
+:hasSliverType rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "has sliver type"@en ;
+
+          rdfs:label "has sliver type"@en ;
+          
+          rdfs:range :SliverType ;
+          
+          rdfs:domain :NetworkObject .
 
 
 
@@ -196,37 +243,6 @@
           
           owl:inverseOf :requiredBy .
 
-
-
-###  http://open-multinet.info/ontology/omn-resource#hasIPAddress
-
-:hasIPAddress rdf:type owl:ObjectProperty ;
-          
-          rdfs:label "has IP address"@en ;
-
-          rdfs:comment "has IP address"@en ;
-
-          owl:inverseOf :isIPAddressOf ;
-          
-          rdfs:domain :NetworkObject ;
-          
-          rdfs:range :IPAddress .
-
-
-
-###  http://open-multinet.info/ontology/omn-resource#isIPAddressOf
-
-:isIPAddressOf rdf:type owl:ObjectProperty ;
-          
-          rdfs:label "is IP address of"@en ;
-
-          rdfs:comment "is IP address of"@en ;
-
-          owl:inverseOf :hasIPAddress ;
-          
-          rdfs:range :NetworkObject ;
-          
-          rdfs:domain :IPAddress .
 
 
 
@@ -384,6 +400,18 @@ omn:Resource rdf:type owl:Class .
 
 
 
+
+###  http://open-multinet.info/ontology/omn-resource#Hop
+
+:Hop rdf:type owl:Class ;
+
+      rdfs:label "Stitching Hop"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#Interface
 
 :Interface rdf:type owl:Class ;
@@ -482,11 +510,14 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Hop
 
-:Hop rdf:type owl:Class ;
+###  http://open-multinet.info/ontology/omn-resource#SliverType
 
-      rdfs:label "Stitching Hop"@en ;
+:SliverType rdf:type owl:Class ;
+
+      rdfs:label "Sliver Type"@en ;
+
+      rdfs:seeAlso "GENI Manifest RSpec v3: sliver_type"@en ;
       
       rdfs:subClassOf :NetworkObject .
 
