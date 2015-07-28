@@ -57,6 +57,19 @@ public class RequestImageTest {
 				"http://www.geni.net/resources/rspec/3", "node");
 		Assert.assertTrue(nodes.getLength() == 1);
 
+		String clientId = nodes.item(0).getAttributes()
+				.getNamedItem("client_id").getNodeValue();
+		Assert.assertTrue(clientId.equals("exclusive-0"));
+
+		String componentManager = nodes.item(0).getAttributes()
+				.getNamedItem("component_manager_id").getNodeValue();
+		Assert.assertTrue(componentManager
+				.equals("urn:publicid:IDN+emulab.net+authority+cm"));
+
+		String exclusive = nodes.item(0).getAttributes()
+				.getNamedItem("exclusive").getNodeValue();
+		Assert.assertTrue(exclusive.equals("true"));
+
 		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "sliver_type");
 		Assert.assertTrue(sliverType.getLength() == 1);
@@ -64,6 +77,15 @@ public class RequestImageTest {
 		String sliverName = sliverType.item(0).getAttributes()
 				.getNamedItem("name").getNodeValue();
 		Assert.assertTrue(sliverName.equals("raw-pc"));
+
+		NodeList diskImage = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "disk_image");
+		Assert.assertTrue(diskImage.getLength() == 1);
+
+		String diskImageName = diskImage.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(diskImageName
+				.equals("urn:publicid:IDN+emulab.net+image+emulab-ops//FEDORA10-STD"));
 
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.

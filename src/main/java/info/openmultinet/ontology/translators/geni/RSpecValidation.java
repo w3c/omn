@@ -193,9 +193,12 @@ public class RSpecValidation {
 		DetailedDiff myDiff = new DetailedDiff(d);
 
 		int numDiffs = 0;
-		for (@SuppressWarnings("rawtypes")
-		java.util.Iterator iter = myDiff.getAllDifferences().iterator(); iter
-				.hasNext();) {
+		@SuppressWarnings("rawtypes")
+		java.util.Iterator iter = myDiff.getAllDifferences().iterator();
+		// for (@SuppressWarnings("rawtypes")
+		// java.util.Iterator iter = myDiff.getAllDifferences().iterator(); iter
+		// .hasNext();) {
+		while (iter.hasNext()) {
 			Difference diff = (Difference) iter.next();
 			if (!diff.isRecoverable()) {
 				numDiffs++;

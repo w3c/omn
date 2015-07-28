@@ -69,6 +69,14 @@ public class RequestGre {
 				.getNamedItem("client_id").getNodeValue();
 		Assert.assertTrue(linkClientId.equals("center"));
 
+		NodeList linkType = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "link_type");
+		Assert.assertTrue(linkType.getLength() == 1);
+
+		String linkTypeName = linkType.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(linkTypeName.equals("gre-tunnel"));
+
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",

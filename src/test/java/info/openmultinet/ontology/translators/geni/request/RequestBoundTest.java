@@ -53,9 +53,27 @@ public class RequestBoundTest {
 				"http://www.geni.net/resources/rspec/3", "rspec");
 		Assert.assertTrue(rspec.getLength() == 1);
 
-		NodeList nodes = xmlDoc.getElementsByTagNameNS(
+		NodeList node = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "node");
-		Assert.assertTrue(nodes.getLength() == 1);
+		Assert.assertTrue(node.getLength() == 1);
+		
+		String componentId = node.item(0).getAttributes()
+				.getNamedItem("component_id").getNodeValue();
+		Assert.assertTrue(componentId
+				.equals("urn:publicid:IDN+emulab.net+node+pc175"));
+
+		String componentManagerId = node.item(0).getAttributes()
+				.getNamedItem("component_manager_id").getNodeValue();
+		Assert.assertTrue(componentManagerId
+				.equals("urn:publicid:IDN+emulab.net+authority+cm"));
+
+		String clientId = node.item(0).getAttributes()
+				.getNamedItem("client_id").getNodeValue();
+		Assert.assertTrue(clientId.equals("mypc175"));
+
+		String exclusive = node.item(0).getAttributes()
+				.getNamedItem("exclusive").getNodeValue();
+		Assert.assertTrue(exclusive.equals("true"));
 
 		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "sliver_type");

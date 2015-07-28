@@ -862,7 +862,7 @@ public class RSpecValidationTest {
 			DeprecatedRspecVersionException, IOException {
 
 		// File path = new File("./src/test/resources/geni/advertisement");
-		File path = new File("./src/test/resources/geni/ciscogeni");
+		// File path = new File("./src/test/resources/geni/ciscogeni");
 		// File path = new File("./src/test/resources/geni/exogeni");
 		// File path = new File("./src/test/resources/geni/fed4fire");
 		// File path = new File("./src/test/resources/geni/gimiv3");
@@ -878,10 +878,10 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/request");
 		// File path = new File("./src/test/resources/geni/stich");
 
-		// File path = new File("./src/test/resources/geni");
+		File path = new File("./src/test/resources/geni");
 		// checkVersionDirectory(path);
-		// getErrorDirectory(path);
-		getNodesDiffsDirectory(path);
+		getErrorDirectory(path);
+		// getNodesDiffsDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
 
@@ -892,10 +892,12 @@ public class RSpecValidationTest {
 		// "./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
 		// File path = new File(
 		// "./src/test/resources/geni/ciscogeni/CG-CT-5-eg-ncsu2.rspec");
-//		File path = new File(
-//				"./src/test/resources/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec");
+		// File path = new File(
+		// "./src/test/resources/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec");
 		// validateFile(path);
-		// getErrorFile(path);
+//		File path = new File(
+//				"./src/test/resources/geni/advertisement/advertisement_vwall1.xml");
+//		getErrorFile(path);
 
 	}
 }

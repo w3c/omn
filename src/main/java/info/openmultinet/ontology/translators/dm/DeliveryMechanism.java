@@ -41,7 +41,11 @@ public class DeliveryMechanism {
 			RequiredResourceNotFoundException, MultiplePropertyValuesException,
 			XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-
+		
+		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)) {
+			from = RSpecValidation.getType(content);
+		}
+		
 		// check if RSpec version 2 is used and convert to version 3 or throw
 		// exception if version 0.1
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)
@@ -54,10 +58,6 @@ public class DeliveryMechanism {
 		final InputStream stream = new ByteArrayInputStream(
 				content.getBytes(StandardCharsets.UTF_8));
 		Model model = null;
-
-		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)) {
-			from = RSpecValidation.getType(content);
-		}
 
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
 			model = RequestConverter.getModel(stream);

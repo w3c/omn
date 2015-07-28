@@ -53,10 +53,30 @@ public class RequestDemo201504 {
 				"http://www.geni.net/resources/rspec/3", "rspec");
 		Assert.assertTrue(rspec.getLength() == 1);
 
-		NodeList nodes = xmlDoc.getElementsByTagNameNS(
+		NodeList node = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "node");
-		Assert.assertTrue(nodes.getLength() == 1);
+		Assert.assertTrue(node.getLength() == 1);
 
+		
+		String componentId = node.item(0).getAttributes()
+				.getNamedItem("component_id").getNodeValue();
+		Assert.assertTrue(componentId
+				.equals("urn:publicid:IDN+demo.fiteagle.org+node+http%3A%2F%2Fdemo.fiteagle.org%2Fresource%2FVMServer-1"));
+
+		String componentManagerId = node.item(0).getAttributes()
+				.getNamedItem("component_manager_id").getNodeValue();
+		Assert.assertTrue(componentManagerId
+				.equals("urn:publicid:IDN+demo.fiteagle.org+authority+cm"));
+
+		String clientId = node.item(0).getAttributes()
+				.getNamedItem("client_id").getNodeValue();
+		Assert.assertTrue(clientId.equals("f4f-demo-gent-2015"));
+
+		String componentName = node.item(0).getAttributes()
+				.getNamedItem("component_name").getNodeValue();
+		Assert.assertTrue(componentName.equals("VMServer-1"));
+		
+		
 		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "sliver_type");
 		Assert.assertTrue(sliverType.getLength() == 1);

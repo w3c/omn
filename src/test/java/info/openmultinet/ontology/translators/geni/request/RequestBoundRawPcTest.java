@@ -61,6 +61,37 @@ public class RequestBoundRawPcTest {
 				"http://www.geni.net/resources/rspec/3", "execute");
 		Assert.assertTrue(executeServices.getLength() == 2);
 
+		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "sliver_type");
+		Assert.assertTrue(sliverType.getLength() == 1);
+
+		String sliverName = sliverType.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(sliverName
+				.equals("http://open-multinet.info/ontology/omn-domain-pc#PC"));
+
+		NodeList node = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "node");
+		Assert.assertTrue(sliverType.getLength() == 1);
+
+		String componentId = node.item(0).getAttributes()
+				.getNamedItem("component_id").getNodeValue();
+		Assert.assertTrue(componentId
+				.equals("https://localhost:8443/resource/physicalnode-1"));
+
+		String componentManagerId = node.item(0).getAttributes()
+				.getNamedItem("component_manager_id").getNodeValue();
+		Assert.assertTrue(componentManagerId
+				.equals("urn:publicid:IDN+localhost+authority+cm"));
+
+		String clientId = node.item(0).getAttributes()
+				.getNamedItem("client_id").getNodeValue();
+		Assert.assertTrue(clientId.equals("my-raw-pc-1"));
+
+		String exclusive = node.item(0).getAttributes()
+				.getNamedItem("exclusive").getNodeValue();
+		Assert.assertTrue(exclusive.equals("true"));
+
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",

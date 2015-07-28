@@ -904,22 +904,45 @@ public class RequestConverter extends AbstractConverter {
 		for (Statement diskImageStatement : diskImages) {
 			DiskImageContents diskImageContents = new ObjectFactory()
 					.createDiskImageContents();
-			Resource linkResource = diskImageStatement.getResource();
+			Resource diskImageResource = diskImageStatement.getResource();
 
 			// set name
-			if (linkResource.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-				String diskImageName = linkResource
+			if (diskImageResource.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+				String diskImageName = diskImageResource
 						.getProperty(Omn_domain_pc.hasDiskimageLabel)
 						.getObject().asLiteral().getString();
 				diskImageContents.setName(diskImageName);
 			}
 
 			// set version
-			if (linkResource.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
-				String diskImageVersion = linkResource
+			if (diskImageResource
+					.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
+				String diskImageVersion = diskImageResource
 						.getProperty(Omn_domain_pc.hasDiskimageVersion)
 						.getObject().asLiteral().getString();
 				diskImageContents.setVersion(diskImageVersion);
+			}
+
+			if (diskImageResource.hasProperty(Omn_domain_pc.hasDiskimageURI)) {
+				String uri = diskImageResource
+						.getProperty(Omn_domain_pc.hasDiskimageURI).getObject()
+						.asLiteral().getString();
+				diskImageContents.setUrl(uri);
+			}
+
+			if (diskImageResource
+					.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
+				String description = diskImageResource
+						.getProperty(Omn_domain_pc.hasDiskimageDescription)
+						.getObject().asLiteral().getString();
+				diskImageContents.setDescription(description);
+			}
+
+			if (diskImageResource.hasProperty(Omn_domain_pc.hasDiskimageOS)) {
+				String os = diskImageResource
+						.getProperty(Omn_domain_pc.hasDiskimageOS).getObject()
+						.asLiteral().getString();
+				diskImageContents.setOs(os);
 			}
 
 			sliver.getAnyOrDiskImage().add(
@@ -946,17 +969,19 @@ public class RequestConverter extends AbstractConverter {
 			if (AbstractConverter.isUrn(componentId)) {
 				node.setComponentId(componentId);
 			} else {
-				// TODO: add these lines in to remove error in RSpec round trips
-				// if (resource.getResource().hasProperty(
-				// Omn_lifecycle.hasOriginalID)) {
-				// node.setComponentId(resource.getResource()
-				// .getProperty(Omn_lifecycle.hasOriginalID)
-				// .getObject().asLiteral().getString());
-				// } else {
 				node.setComponentId(CommonMethods.generateUrnFromUrl(
 						componentId, "node"));
 			}
-			// }
+
+			// override above way of setting component ID, if the specific
+			// property hasComponentID is set
+			if (resource.getResource()
+					.hasProperty(Omn_lifecycle.hasComponentID)) {
+				componentId = resource.getResource()
+						.getProperty(Omn_lifecycle.hasComponentID).getObject()
+						.asLiteral().getString();
+				node.setComponentId(componentId);
+			}
 
 			if (implementedBy.asResource().hasProperty(
 					Omn_lifecycle.hasComponentName)) {
@@ -1095,8 +1120,9 @@ public class RequestConverter extends AbstractConverter {
 					}
 
 					if (grandchild.getNodeName().contains("link")) {
-						RequestConverter.LOG.log(Level.INFO,
-								"Stitching link translation capability has yet to be done.");
+						RequestConverter.LOG
+								.log(Level.INFO,
+										"Stitching link translation capability has yet to be done.");
 					}
 				}
 
@@ -1598,15 +1624,11 @@ public class RequestConverter extends AbstractConverter {
 			String componentId = node.getComponentId();
 			if (AbstractConverter.isUrl(componentId)) {
 				implementedBy = model.createResource(componentId);
-				// TODO: add this line get rid of differences in
-				// component ID for an RSpec round trip
-				// omnResource.addProperty(Omn_lifecycle.hasOriginalID,
-				// componentId);
 			} else {
 				implementedBy = model.createResource(CommonMethods
 						.generateUrlFromUrn(componentId));
 			}
-
+			omnResource.addProperty(Omn_lifecycle.hasComponentID, componentId);
 			omnResource.addProperty(Omn_lifecycle.implementedBy, implementedBy);
 			if (null != node.getComponentName()
 					&& !node.getComponentName().isEmpty()) {
@@ -1770,6 +1792,11 @@ public class RequestConverter extends AbstractConverter {
 			if (version != null) {
 				diskImage
 						.addLiteral(Omn_domain_pc.hasDiskimageVersion, version);
+			}
+
+			String url = diskImageContents.getUrl();
+			if (url != null) {
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
 			}
 
 			String description = diskImageContents.getDescription();

@@ -251,8 +251,13 @@ public class AdvertisementConverter extends AbstractConverter {
 
 				Resource availableOmn = offering.getModel().createResource();
 
-				String restricted = available.isRestricted().toString();
-				availableOmn.addProperty(Omn_domain_pc.restricted, restricted);
+				if (available.isRestricted() != null) {
+					String restricted = available.isRestricted().toString();
+					if (restricted != null) {
+						availableOmn.addProperty(Omn_domain_pc.restricted,
+								restricted);
+					}
+				}
 
 				if (available.getName() != null) {
 					availableOmn.addProperty(RDFS.label, available.getName());

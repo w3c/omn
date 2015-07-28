@@ -57,6 +57,10 @@ public class RequestInstallTest {
 				"http://www.geni.net/resources/rspec/3", "node");
 		Assert.assertTrue(nodes.getLength() == 1);
 
+		String clientId = nodes.item(0).getAttributes()
+				.getNamedItem("client_id").getNodeValue();
+		Assert.assertTrue(clientId.equals("node"));
+
 		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "sliver_type");
 		Assert.assertTrue(sliverType.getLength() == 1);
@@ -65,10 +69,25 @@ public class RequestInstallTest {
 				.getNamedItem("name").getNodeValue();
 		Assert.assertTrue(sliverName.equals("raw-pc"));
 
+		NodeList services = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "services");
+		Assert.assertTrue(services.getLength() == 1);
+
+		NodeList execute = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "execute");
+		Assert.assertTrue(execute.getLength() == 1);
+
+		String executeShell = execute.item(0).getAttributes()
+				.getNamedItem("shell").getNodeValue();
+		Assert.assertTrue(executeShell.equals("sh"));
+
+		String command = execute.item(0).getAttributes()
+				.getNamedItem("command").getNodeValue();
+		Assert.assertTrue(command.equals("sudo /local/myserver.sh"));
+
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);
 	}
-
 }
