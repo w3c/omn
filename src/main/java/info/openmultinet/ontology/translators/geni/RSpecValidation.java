@@ -157,12 +157,35 @@ public class RSpecValidation {
 		// get number of differences and calculate proportional error rate
 		int numDiffs = getNumberDiffs(inputNew, outputNew);
 		System.out.println("Number of differences: " + numDiffs);
-		int nodeCountInput = inputDoc.getElementsByTagName("*").getLength();
+		NodeList inNodes = inputDoc.getElementsByTagName("*");
+		int attributesIn = 0;
+		for (int i = 0; i < inNodes.getLength(); i++) {
+			Element node = (Element) inNodes.item(i);
+			if (node.getLocalName() != null) {
+				if (!node.getLocalName().equals("rspec")) {
+					attributesIn += node.getAttributes().getLength();
+				}
+			}
+		}
+		System.out.println("Number of input attributes: " + attributesIn);
+		int nodeCountInput = inNodes.getLength();
 		System.out.println("Number of input nodes: " + nodeCountInput);
 
-		int nodeCountOutput = outputDoc.getElementsByTagName("*").getLength();
+		NodeList outNodes = outputDoc.getElementsByTagName("*");
+		int attributesOut = 0;
+		for (int i = 0; i < outNodes.getLength(); i++) {
+			Element node = (Element) outNodes.item(i);
+			if (node.getLocalName() != null) {
+				if (!node.getLocalName().equals("rspec")) {
+					attributesOut += node.getAttributes().getLength();
+				}
+			}
+		}
+		System.out.println("Number of output attributes: " + attributesOut);
+		int nodeCountOutput = outNodes.getLength();
 		System.out.println("Number of output nodes: " + nodeCountOutput);
-		int[] diffsNodes = { numDiffs, nodeCountInput, nodeCountOutput };
+		int[] diffsNodes = { numDiffs, nodeCountInput, nodeCountOutput,
+				attributesIn, attributesOut };
 
 		return diffsNodes;
 	}

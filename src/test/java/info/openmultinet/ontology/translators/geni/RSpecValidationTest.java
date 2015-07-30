@@ -243,6 +243,21 @@ public class RSpecValidationTest {
 		totalDiffNodes.add(outNodesAds);
 		totalDiffNodes.add(outNodesManifests);
 		totalDiffNodes.add(outNodesRequests);
+		
+		List<Integer> attributesInAds = new ArrayList<Integer>();
+		List<Integer> attributesInManifests = new ArrayList<Integer>();
+		List<Integer> attributesInRequests = new ArrayList<Integer>();
+		totalDiffNodes.add(attributesInAds);
+		totalDiffNodes.add(attributesInManifests);
+		totalDiffNodes.add(attributesInRequests);
+		
+		
+		List<Integer> attributesOutAds = new ArrayList<Integer>();
+		List<Integer> attributesOutManifests = new ArrayList<Integer>();
+		List<Integer> attributesOutRequests = new ArrayList<Integer>();
+		totalDiffNodes.add(attributesOutAds);
+		totalDiffNodes.add(attributesOutManifests);
+		totalDiffNodes.add(attributesOutRequests);
 
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].isFile()
@@ -278,16 +293,22 @@ public class RSpecValidationTest {
 					diffsAds.add(diffNodes[0]);
 					inNodesAds.add(diffNodes[1]);
 					outNodesAds.add(diffNodes[2]);
+					attributesInAds.add(diffNodes[3]);
+					attributesOutAds.add(diffNodes[4]);
 					break;
 				case "manifest":
 					diffsManifests.add(diffNodes[0]);
 					inNodesManifests.add(diffNodes[1]);
 					outNodesManifests.add(diffNodes[2]);
+					attributesInManifests.add(diffNodes[3]);
+					attributesOutManifests.add(diffNodes[4]);
 					break;
 				case "request":
 					diffsRequests.add(diffNodes[0]);
 					inNodesRequests.add(diffNodes[1]);
 					outNodesRequests.add(diffNodes[2]);
+					attributesInRequests.add(diffNodes[3]);
+					attributesOutRequests.add(diffNodes[4]);
 					break;
 				}
 				// }
@@ -304,15 +325,22 @@ public class RSpecValidationTest {
 		int sumInNodes = 0;
 		int sumOutNodes = 0;
 		int sumDiffs = 0;
+		int sumAttributesIn = 0;
+		int sumAttributesOut = 0;
+		
 		for (int i = 0; i < 3; i++) {
 			int interimSumInNodes = 0;
 			int interimSumOutNodes = 0;
 			int interimSumDiffs = 0;
-
+			int interimAttributesIn = 0;
+			int interimAttributesOut = 0;
+			
 			for (int j = 0; j < totalDiffNodes.get(i).size(); j++) {
 				interimSumDiffs += totalDiffNodes.get(i).get(j);
 				interimSumInNodes += totalDiffNodes.get(i + 3).get(j);
 				interimSumOutNodes += totalDiffNodes.get(i + 6).get(j);
+				interimAttributesIn += totalDiffNodes.get(i + 9).get(j);
+				interimAttributesOut += totalDiffNodes.get(i + 12).get(j);
 			}
 
 			String type = null;
@@ -336,9 +364,17 @@ public class RSpecValidationTest {
 			System.out.println("Total out nodes for "
 					+ totalDiffNodes.get(i).size() + " " + type + "s "
 					+ interimSumOutNodes);
+			System.out.println("Total in attributes for "
+					+ totalDiffNodes.get(i).size() + " " + type + "s "
+					+ interimAttributesIn);
+			System.out.println("Total out nodes for "
+					+ totalDiffNodes.get(i).size() + " " + type + "s "
+					+ interimAttributesOut);
 			sumDiffs += interimSumDiffs;
 			sumInNodes += interimSumInNodes;
 			sumOutNodes += interimSumOutNodes;
+			sumAttributesIn += interimAttributesIn;
+			sumAttributesOut += interimAttributesOut;
 		}
 
 		int numFiles = diffsAds.size() + diffsManifests.size()
@@ -349,15 +385,23 @@ public class RSpecValidationTest {
 				+ sumInNodes);
 		System.out.println("Total out nodes for " + numFiles + " files: "
 				+ sumOutNodes);
+		System.out.println("Total attributes in for " + numFiles + " files: "
+				+ sumAttributesIn);
+		System.out.println("Total attributes out for " + numFiles + " files: "
+				+ sumAttributesOut);
 		System.out.println("Comprising " + diffsAds.size() + " ads, "
 				+ diffsManifests.size() + " manifests, and "
 				+ diffsRequests.size() + " requests.");
 		double averageDiffs = sumDiffs / numFiles;
 		double averageInNodes = sumInNodes / numFiles;
 		double averageOutNodes = sumOutNodes / numFiles;
+		double averageAttributesIn = sumAttributesIn / numFiles;
+		double averageAttributesOut = sumAttributesOut / numFiles;
 		System.out.println("Average diffs per file: " + averageDiffs);
 		System.out.println("Average in nodes per file: " + averageInNodes);
 		System.out.println("Average out nodes per file: " + averageOutNodes);
+		System.out.println("Average attributes in per file: " + averageAttributesIn);
+		System.out.println("Average attributes out per file: " + averageAttributesOut);
 
 		return totalDiffNodes;
 	}
@@ -875,29 +919,39 @@ public class RSpecValidationTest {
 		// File path = new File("./src/test/resources/geni/openflow");
 		// File path = new File("./src/test/resources/geni/productionfoam");
 		// File path = new File("./src/test/resources/geni/protogeni");
-		// File path = new File("./src/test/resources/geni/request");
+		//File path = new File("./src/test/resources/geni/request");
 		// File path = new File("./src/test/resources/geni/stich");
 
 		File path = new File("./src/test/resources/geni");
 		// checkVersionDirectory(path);
-		getErrorDirectory(path);
-		// getNodesDiffsDirectory(path);
+		// getErrorDirectory(path);
+		getNodesDiffsDirectory(path);
 		// getTimesDirectory(path);
 		// validateDirectory(path);
 
-		// File path = new File("./src/test/resources/geni/gpolab/64.rspec");
-		// File path = new File(
-		// "./src/test/resources/geni/exogeni/EG-EXP-6-exp3-eg-gpo.rspec");
-		// File path = new File(
-		// "./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
+//		File path = new File(
+//				"./src/test/resources/geni/request/request_bound.xml");
+	
+//		File path = new File(
+//				"./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
 		// File path = new File(
 		// "./src/test/resources/geni/ciscogeni/CG-CT-5-eg-ncsu2.rspec");
 		// File path = new File(
 		// "./src/test/resources/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec");
 		// validateFile(path);
-//		File path = new File(
-//				"./src/test/resources/geni/advertisement/advertisement_vwall1.xml");
-//		getErrorFile(path);
+		// File path = new File(
+		// "./src/test/resources/geni/advertisement/advertisement_vwall1.xml");
+		// getErrorFile(path);
+
+//		String rspecString = null;
+//		try {
+//			System.out.println(path.getPath().substring(20));
+//			rspecString = AbstractConverter.toString(path.getPath().substring(
+//					20));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		int[] diffNodes = RSpecValidation.getDiffsNodes(rspecString);
 
 	}
 }
