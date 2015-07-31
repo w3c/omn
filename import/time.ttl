@@ -424,4 +424,3 @@
 
 tzont:TimeZone
     a owl:Class .
-

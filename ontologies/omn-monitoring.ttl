@@ -327,13 +327,19 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring#secondsSinceExperimentStarted
+###  http://open-multinet.info/ontology/omn-monitoring#elapsedTimeAtClientSinceExperimentStartedInSeconds
 
-:secondsSinceExperimentStarted rdf:type owl:DatatypeProperty ;
-                            
-                               rdfs:domain :Measurement ;
-                    
-                               rdfs:range xsd:double .
+:elapsedTimeAtClientSinceExperimentStartedInSeconds rdf:type owl:DatatypeProperty ;
+                                                
+                                           rdfs:range xsd:decimal .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring#elapsedTimeAtServerSinceExperimentStartedInSeconds
+
+:elapsedTimeAtServerSinceExperimentStartedInSeconds rdf:type owl:DatatypeProperty ;
+                                                
+                                           rdfs:range xsd:decimal .
 
 
 

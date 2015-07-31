@@ -287,9 +287,9 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 :ConfigurationParameter rdf:type owl:Class ;
 
-                      rdfs:subClassOf omn-monitoring:Data ;
+                        rdfs:subClassOf omn-monitoring:Data ;
                       
-                      rdfs:comment "Represents configuration parameters used to to setup the monitoring service, e.g. duration."^^xsd:string .
+                        rdfs:comment "Represents configuration parameters used to to setup the monitoring service, e.g. duration."^^xsd:string .
 
 
 
@@ -445,9 +445,9 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 :TextFormat rdf:type owl:Class ;
 
-              rdfs:subClassOf :UnformattedFile ;
+            rdfs:subClassOf :UnformattedFile ;
                         
-              rdfs:comment "Represents the text format of the transfered data."^^xsd:string .
+            rdfs:comment "Represents the text format of the transfered data."^^xsd:string .
 
 
 
@@ -457,7 +457,7 @@ omn-monitoring:Metric rdf:type owl:Class .
             
           rdfs:subClassOf :ConfigurationParameter ;
             
-          rdfs:comment "Duration set in advance of the measurement."^^xsd:string .
+          rdfs:comment "Duration set in advance of the measurement or monitoring service."^^xsd:string .
 
 
 
@@ -481,7 +481,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#MACAddress
+###  http://open-multinet.info/ontology/omn-monitoring-data#DestinationMACAddress
 
 :DestinationMACAddress rdf:type owl:Class ;
                         
@@ -489,7 +489,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#Duration
+###  http://open-multinet.info/ontology/omn-monitoring-data#SourceMACAddress
 
 :SourceMACAddress rdf:type owl:Class ;
                         
