@@ -7,7 +7,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix time: <http://www.w3.org/2006/time#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
 @prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
@@ -521,7 +520,6 @@ omn:Resource rdf:type owl:Class .
 omn:Service rdf:type owl:Class .
 
 
-time:second rdf:type owl:DatatypeProperty .
 
 
 
