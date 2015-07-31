@@ -427,13 +427,14 @@ public class RSpecValidation {
 
 					String modelString = Parser.toString(model);
 					System.out.println(modelString);
-					PrintWriter outBlah = new PrintWriter("model.txt");
-					outBlah.println(modelString);
-					outBlah.close();
+					// PrintWriter outBlah = new PrintWriter("model.txt");
+					// outBlah.println(modelString);
+					// outBlah.close();
 
 					output = converter.getRSpec(model);
 				} catch (JAXBException | InvalidModelException
-						| XMLStreamException | FileNotFoundException e) {
+				// | XMLStreamException | FileNotFoundException e) {
+						| XMLStreamException e) {
 					e.printStackTrace();
 				}
 			}

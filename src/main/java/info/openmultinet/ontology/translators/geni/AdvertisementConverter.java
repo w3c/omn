@@ -1640,6 +1640,23 @@ public class AdvertisementConverter extends AbstractConverter {
 
 				geniNode.getAnyOrRelationOrLocation().add(sliver);
 			}
+		} else {
+			SliverType sliverType = new ObjectFactory()
+					.createNodeContentsSliverType();
+	
+			final List<Statement> hasTypes = resource.getResource()
+					.listProperties(RDF.type).toList();
+
+			for (final Statement hasType : hasTypes) {
+				Resource sliverResource = hasType.getObject().asResource();
+				if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
+					sliverType.setName(sliverResource.getURI());
+				}
+			}
+
+			JAXBElement<SliverType> sliver = new ObjectFactory()
+					.createNodeContentsSliverType(sliverType);
+			geniNode.getAnyOrRelationOrLocation().add(sliver);
 		}
 	}
 
@@ -1793,20 +1810,20 @@ public class AdvertisementConverter extends AbstractConverter {
 				Omn_domain_pc.hasHardwareType);
 
 		// check if the hardware type was specified as a type
-		if (!types.hasNext()) {
-			types = omnResource.getResource().listProperties(RDF.type);
-			HardwareTypeContents hwType;
-
-			while (types.hasNext()) {
-				String rdfType = types.next().getResource().getURI();
-
-				hwType = of.createHardwareTypeContents();
-				hwType.setName(rdfType);
-				if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)) {
-					geniNodeDetails.add(of.createHardwareType(hwType));
-				}
-			}
-		}
+		// if (!types.hasNext()) {
+		// types = omnResource.getResource().listProperties(RDF.type);
+		// HardwareTypeContents hwType;
+		//
+		// while (types.hasNext()) {
+		// String rdfType = types.next().getResource().getURI();
+		//
+		// hwType = of.createHardwareTypeContents();
+		// hwType.setName(rdfType);
+		// if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)) {
+		// geniNodeDetails.add(of.createHardwareType(hwType));
+		// }
+		// }
+		// }
 
 		while (types.hasNext()) {
 			HardwareTypeContents hwType;
