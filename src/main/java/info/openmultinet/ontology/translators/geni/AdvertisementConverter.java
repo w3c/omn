@@ -901,7 +901,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			// add name info
 			String name = diskImageContents.getName();
 			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
-			omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
+			// omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
+			omnSliver.addProperty(Omn_domain_pc.hasDiskImage, diskImage);
 
 			String os = diskImageContents.getOs();
 			if (os != null) {
@@ -1643,7 +1644,7 @@ public class AdvertisementConverter extends AbstractConverter {
 		} else {
 			SliverType sliverType = new ObjectFactory()
 					.createNodeContentsSliverType();
-	
+
 			final List<Statement> hasTypes = resource.getResource()
 					.listProperties(RDF.type).toList();
 
@@ -1675,131 +1676,125 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void setDiskImage(Resource sliverResource, SliverType sliver) {
-		// Resource sliverResource = sliverNode.asResource();
 
-		if (sliverResource.hasProperty(RDFS.subClassOf, Omn_domain_pc.VM)) {
+		// if (sliverResource.hasProperty(RDFS.subClassOf, Omn_domain_pc.VM)) {
+		//
+		// StmtIterator omnSliverList = sliverResource
+		// .listProperties(Omn_domain_pc.hasDiskImage);
+		//
+		// while (omnSliverList.hasNext()) {
+		// Statement omnSliver = omnSliverList.next();
+		// RDFNode diskImageNode = omnSliver.getObject();
+		// Resource diskImageResource = diskImageNode.asResource();
+		//
+		// // check if the resource is a disk image
+		// if (diskImageResource.hasProperty(RDF.type,
+		// Omn_domain_pc.DiskImage)) {
+		// DiskImage diskImage = of
+		// .createNodeContentsSliverTypeDiskImage();
+		// String diskName = "";
+		//
+		// if (diskImageResource
+		// .hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+		// diskName += diskImageResource
+		// .getProperty(Omn_domain_pc.hasDiskimageLabel)
+		// .getObject().asLiteral().getString();
+		// }
+		// diskImage.setName(diskName);
+		//
+		// if (diskImageResource
+		// .hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
+		// String description = diskImageResource
+		// .getProperty(
+		// Omn_domain_pc.hasDiskimageDescription)
+		// .getObject().asLiteral().getString();
+		// diskImage.setDescription(description);
+		// }
+		//
+		// if (diskImageResource
+		// .hasProperty(Omn_domain_pc.diskimageDefault)) {
+		// String diskimageDefault = diskImageResource
+		// .getProperty(Omn_domain_pc.diskimageDefault)
+		// .getObject().asLiteral().getString();
+		// diskImage.setDefault(diskimageDefault);
+		// }
+		//
+		// diskImage.setUrl(diskImageResource.getURI());
+		// sliver.getAnyOrDiskImage()
+		// .add(of.createNodeContentsSliverTypeDiskImage(diskImage));
+		// }
+		// }
 
-			StmtIterator omnSliverList = sliverResource
-					.listProperties(Omn_domain_pc.hasDiskImage);
+		// } else {
+		while (sliverResource.hasProperty(Omn_domain_pc.hasDiskImage)) {
+			Statement omnSliver = sliverResource
+					.getProperty(Omn_domain_pc.hasDiskImage);
+			omnSliver.remove();
+			RDFNode diskImageNode = omnSliver.getObject();
+			Resource diskImageResource = diskImageNode.asResource();
 
-			while (omnSliverList.hasNext()) {
-				Statement omnSliver = omnSliverList.next();
-				RDFNode diskImageNode = omnSliver.getObject();
-				Resource diskImageResource = diskImageNode.asResource();
+			// TODO: diskimage is handled in two places. Need to make a
+			// single method.
+			// check if the resource is a disk image
+			if (diskImageResource
+					.hasProperty(RDF.type, Omn_domain_pc.DiskImage)) {
 
-				// check if the resource is a disk image
-				if (diskImageResource.hasProperty(RDF.type,
-						Omn_domain_pc.DiskImage)) {
-					DiskImage diskImage = of
-							.createNodeContentsSliverTypeDiskImage();
-					String diskName = "";
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-						diskName += diskImageResource
-								.getProperty(Omn_domain_pc.hasDiskimageLabel)
-								.getObject().asLiteral().getString();
-					}
-					diskImage.setName(diskName);
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
-						String description = diskImageResource
-								.getProperty(
-										Omn_domain_pc.hasDiskimageDescription)
-								.getObject().asLiteral().getString();
-						diskImage.setDescription(description);
-					}
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.diskimageDefault)) {
-						String diskimageDefault = diskImageResource
-								.getProperty(Omn_domain_pc.diskimageDefault)
-								.getObject().asLiteral().getString();
-						diskImage.setDefault(diskimageDefault);
-					}
-
-					diskImage.setUrl(diskImageResource.getURI());
-					sliver.getAnyOrDiskImage()
-							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
+				String diskName = "";
+				if (diskImageResource
+						.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+					diskName += diskImageResource
+							.getProperty(Omn_domain_pc.hasDiskimageLabel)
+							.getObject().asLiteral().getString();
 				}
-			}
-			// } else if
-			// (sliverResource.getURI().equals(Omn_domain_pc.VM.getURI())) {
-			// TODO
 
-		} else {
-			while (sliverResource.hasProperty(Omn_lifecycle.canImplement)) {
-				Statement omnSliver = sliverResource
-						.getProperty(Omn_lifecycle.canImplement);
-				omnSliver.remove();
-				RDFNode diskImageNode = omnSliver.getObject();
-				Resource diskImageResource = diskImageNode.asResource();
+				DiskImage diskImage = of
+						.createNodeContentsSliverTypeDiskImage();
 
-				// TODO: diskimage is handled in two places. Need to make a
-				// single method.
-				// check if the resource is a disk image
-				if (diskImageResource.hasProperty(RDF.type,
-						Omn_domain_pc.DiskImage)) {
-
-					String diskName = "";
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-						diskName += diskImageResource
-								.getProperty(Omn_domain_pc.hasDiskimageLabel)
-								.getObject().asLiteral().getString();
-					}
-
-					DiskImage diskImage = of
-							.createNodeContentsSliverTypeDiskImage();
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
-						String description = diskImageResource
-								.getProperty(
-										Omn_domain_pc.hasDiskimageDescription)
-								.getObject().asLiteral().getString();
-						diskImage.setDescription(description);
-					}
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageOS)) {
-						String os = diskImageResource
-								.getProperty(Omn_domain_pc.hasDiskimageOS)
-								.getObject().asLiteral().getString();
-						diskImage.setOs(os);
-					}
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
-						String version = diskImageResource
-								.getProperty(Omn_domain_pc.hasDiskimageVersion)
-								.getObject().asLiteral().getString();
-						diskImage.setVersion(version);
-					}
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageURI)) {
-						String uri = diskImageResource
-								.getProperty(Omn_domain_pc.hasDiskimageURI)
-								.getObject().asLiteral().getString();
-						diskImage.setUrl(uri);
-					}
-
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.diskimageDefault)) {
-						String diskimageDefault = diskImageResource
-								.getProperty(Omn_domain_pc.diskimageDefault)
-								.getObject().asLiteral().getString();
-						diskImage.setDefault(diskimageDefault);
-					}
-
-					diskImage.setName(diskName);
-					sliver.getAnyOrDiskImage()
-							.add(of.createNodeContentsSliverTypeDiskImage(diskImage));
+				if (diskImageResource
+						.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
+					String description = diskImageResource
+							.getProperty(Omn_domain_pc.hasDiskimageDescription)
+							.getObject().asLiteral().getString();
+					diskImage.setDescription(description);
 				}
+
+				if (diskImageResource.hasProperty(Omn_domain_pc.hasDiskimageOS)) {
+					String os = diskImageResource
+							.getProperty(Omn_domain_pc.hasDiskimageOS)
+							.getObject().asLiteral().getString();
+					diskImage.setOs(os);
+				}
+
+				if (diskImageResource
+						.hasProperty(Omn_domain_pc.hasDiskimageVersion)) {
+					String version = diskImageResource
+							.getProperty(Omn_domain_pc.hasDiskimageVersion)
+							.getObject().asLiteral().getString();
+					diskImage.setVersion(version);
+				}
+
+				if (diskImageResource
+						.hasProperty(Omn_domain_pc.hasDiskimageURI)) {
+					String uri = diskImageResource
+							.getProperty(Omn_domain_pc.hasDiskimageURI)
+							.getObject().asLiteral().getString();
+					diskImage.setUrl(uri);
+				}
+
+				if (diskImageResource
+						.hasProperty(Omn_domain_pc.diskimageDefault)) {
+					String diskimageDefault = diskImageResource
+							.getProperty(Omn_domain_pc.diskimageDefault)
+							.getObject().asLiteral().getString();
+					diskImage.setDefault(diskimageDefault);
+				}
+
+				diskImage.setName(diskName);
+				sliver.getAnyOrDiskImage().add(
+						of.createNodeContentsSliverTypeDiskImage(diskImage));
 			}
 		}
+		// }
 	}
 
 	private void setHardwareTypes(Statement omnResource, NodeContents geniNode) {
