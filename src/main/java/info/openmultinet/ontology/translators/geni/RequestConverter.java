@@ -1681,7 +1681,7 @@ public class RequestConverter extends AbstractConverter {
 			RDFNode type = ResourceFactory.createProperty(hw.getName());
 
 			// TODO: get rid of this line
-			omnNode.addProperty(RDF.type, type);
+			// omnNode.addProperty(RDF.type, type);
 
 			omnHw.addProperty(RDFS.label, type.toString());
 			omnHw.addProperty(RDF.type, Omn_domain_pc.HardwareType);
