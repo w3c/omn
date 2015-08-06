@@ -175,12 +175,12 @@
 							<no-strict>true</no-strict>
 							<use-inf>false</use-inf>
 						</source>
-						<source>
+						<!--  source>
 							<input>src/test/resources/ontologies/osco.ttl</input>
 							<output>src/test/java/</output>
 							<package-name>info.openmultinet.ontology.vocabulary</package-name>
 							<ontology>true</ontology>
-						</source>
+						</source-->
 					</fileOptions>
 					<owl>true</owl>
 				</configuration>
