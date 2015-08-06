@@ -130,8 +130,8 @@ function postFunction(submittedText) {
 	var fromValue = fromDoc.options[fromDoc.selectedIndex].value;
 	var toDoc = document.getElementById("toDoc");
 	var toValue = toDoc.options[toDoc.selectedIndex].value;
-
-	var newFromValue;
+	
+	var newFromValue = fromValue;
 	if (fromValue == "to") {
 		newFromValue = "autodetected format"
 	}
