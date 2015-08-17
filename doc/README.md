@@ -4,7 +4,9 @@
  - Template: http://www.w3.org/respec/
  - Target: at https://github.com/open-multinet/playground-rspecs-ontology
  - Public link: as a report at https://www.w3.org/community/omn/
- - Example: http://www.openannotation.org/spec/core/
+ - Examples:
+   - http://www.openannotation.org/spec/core/
+   - http://www.w3.org/TR/prov-o/
 
 ## Preview
 
