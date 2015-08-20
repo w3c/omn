@@ -85,6 +85,19 @@
               rdfs:range omn-monitoring:Unit .
 
 
+###  http://open-multinet.info/ontology/omn-monitoring-data#isMeasurementDataOf
+
+:isMeasurementDataOf rdf:type owl:ObjectProperty ;
+                    
+                     rdfs:comment "Reprenets a measurement data of a particular metric"^^xsd:string ;
+
+                     owl:inverseOf :hasMeasurementData ;
+                    
+                     rdfs:domain :MeasurementData ;
+                    
+                     rdfs:range omn-monitoring:Metric .
+
+
 
 ###  http://open-multinet.info/ontology/omn-monitoring-data#isStatisticalMeasurementOf
 
