@@ -150,7 +150,7 @@
 
 :hasTimestamp rdf:type owl:DatatypeProperty ;
               
-              rdfs:domain :SimpleMeasurement .
+              rdfs:domain :MeasurementData .
 
 
 
