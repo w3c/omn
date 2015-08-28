@@ -8,8 +8,8 @@
     <script class='remove'>
       var respecConfig = {
           // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
-          specStatus:           "ED",
-          
+          specStatus: "CG-DRAFT",
+
           // the specification's short name, as in http://www.w3.org/TR/short-name/
           shortName:            "omn",
 
@@ -123,16 +123,12 @@
               ,   companyURL: "http://renci.org"
               }
           ],
-          
+
           // name of the WG
-          wg:           "In Charge Of This Document Working Group",
-          
-          // URI of the public WG page
-          wgURI:        "http://example.org/really-cool-wg",
-          
-          // name (without the @w3c.org) of the public mailing to which comments are due
-          wgPublicList: "spec-writers-anonymous",
-          
+          wg:           "Federated Infrastructures Community Group",
+          wgURI:        "https://www.w3.org/community/omn/",
+          wgPublicList: "omn",
+
           // URI of the patent status for this WG, for Rec-track documents
           // !!!! IMPORTANT !!!!
           // This is important for Rec-track documents, do not copy a patent URI from a random
@@ -153,14 +149,14 @@
         We welcome your participation. Please subscribe to the mailing list, dive into the documentation available in the git repository, and learn more about the multinet from the tutorials that are posted here.
       </p>
     </section>
-    
+
     <section id='sotd'>
       <p>
         <!--You need to have a custom SotD paragraph. Maybe give a succinct description of your spec's
         status.-->
       </p>
     </section>
-    
+
     <section>
       <h1>Concepts</h1>
       <section>
@@ -170,7 +166,7 @@
         Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, etc.
       </p>
       </section>
-      
+
       <section>
       <h2>Component</h2>
       <p>
@@ -178,7 +174,7 @@
         Examples: CPU, Sensor, Core, Port, Image.
       </p>
       </section>
-      
+
       <section>
       <h2>Dependency</h2>
       <p>
@@ -186,7 +182,7 @@
         Examples: application coloring (in GENI context), orchestration needs dependencies.
       </p>
       </section>
-      
+
       <section>
       <h2>Environment</h2>
       <p>
@@ -194,7 +190,7 @@
         Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, etc.
       </p>
       </section>
-      
+
       <section>
       <h2>Group</h2>
       <p>
@@ -202,7 +198,7 @@
         Examples: Bi-directional Link, etc.
       </p>
       </section>
-      
+
       <section>
       <h2>Topology</h2>
       <p>
@@ -210,7 +206,7 @@
         Examples: Infrastructure, Reservation, Slice, etc.
       </p>
       </section>
-      
+
       <section>
       <h2>Layer</h2>
       <p>
@@ -218,7 +214,7 @@
         Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version.
       </p>
       </section>
-      
+
       <section>
       <h2>Resource</h2>
       <p>
@@ -226,7 +222,7 @@
         Examples: Node, Link, People, etc.
       </p>
       </section>
-      
+
       <section>
       <h2>Service</h2>
       <p>
@@ -234,7 +230,7 @@
         Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, etc.
       </p>
       </section>
-      
+
       <section>
       <h2>Reservation</h2>
       <p>
@@ -243,7 +239,7 @@
       </p>
       </section>
     </section>
-    
+
     <section>
       <h1>Properties</h1>
       <section>
@@ -252,21 +248,21 @@
         Determines the resource from which this resource can be adapted from - e.g. from an Ethernet to a FDDI port.
       </p>
       </section>
-      
+
       <section>
       <h2>adaptableTo</h2>
       <p>
         Determines to which resource this resource can adapts to - e.g. from an Ethernet to a FDDI port.
       </p>
       </section>
-      
+
       <section>
       <h2>adaptsFrom</h2>
       <p>
         Determines from which resource this resource adapts - e.g. from an Ethernet to a FDDI port.
       </p>
       </section>
-      
+
       <section>
       <h2>adaptsTo</h2>
       <p>
@@ -280,114 +276,114 @@
         Link to a general attribute of the resource - e.g. to a ReadOnly class.
       </p>
       </section>
-      
+
       <section>
       <h2>hasGroup</h2>
       <p>
         A group that is related to this resource - e.g. a reserved topology within an infrastructure.
       </p>
       </section>
-      
+
       <section>
       <h2>hasResource</h2>
       <p>
         A resource that this resource contains - e.g. a node within a reserved topology.
       </p>
       </section>
-      
+
       <section>
       <h2>hasService</h2>
       <p>
         A service that this resource contains - e.g. a Hadoop instance within a reserved topology.
       </p>
       </section>
-      
+
       <section>
       <h2>hasReservation</h2>
       <p>
         The reservation details of a resource - e.g. an immediate reservation for 3 hours.
       </p>
       </section>
-      
+
       <section>
       <h2>isAttributeOf</h2>
       <p>
         A general attribute of a resource - e.g. to a ReadOnly class.
       </p>
       </section>
-       
+
       <section>
       <h2>isComponentOf</h2>
       <p>
         Is component of a resource - e.g. a CPU in a PC.
       </p>
       </section>
-        
+
       <section>
       <h2>isGroupOf</h2>
       <p>
         A group that is related to a resource - e.g. a reserved topology within an infrastructure.
       </p>
       </section>
-      
+
       <section>
       <h2>isResourceOf</h2>
       <p>
         A resource that another resource contains - e.g. a node within a reserved topology.
       </p>
       </section>
-      
+
       <section>
       <h2>isServiceOf</h2>
       <p>
         A service of a resource - e.g. a Hadoop instance within a reserved topology.
       </p>
       </section>
-      
+
       <section>
       <h2>isReservationOf</h2>
       <p>
         The reservation details of a resource - e.g. an immediate reservation for 3 hours.
       </p>
       </section>
-      
+
       <section>
       <h2>toDependency</h2>
       <p>
         Claims dependency.
       </p>
       </section>
-      
+
       <section>
       <h2>withinEnvironment</h2>
       <p>
         Claims dependency.
       </p>
       </section>
-      
+
       <section>
       <h2>hasEndpoint</h2>
       <p>
         The URL of the API of a service.
       </p>
       </section>
-      
+
       <section>
       <h2>isReadonly</h2>
       <p>
         Information/attribute that is not writable.
       </p>
       </section>
-      
+
     </section>
-    
-    
-    
-    
+
+
+
+
     <section class='appendix'>
       <h2>Acknowledgements</h2>
       <p>
-        
+
       </p>
     </section>
   </body>
