@@ -1,0 +1,109 @@
+module ietf-vnfd {
+
+	namespace "urn:ietf:params:xml:ns:yang:ietf-vnfd";
+	prefix vnfd;
+	
+	organization "Huawei Technologies";
+	contact "Yuanlong Jiang
+			 <mailto:jiangyuanlong@huawei.com>
+			Weiping Xu
+			 <mailto:xuweiping@huawei.com>
+	        Cathy Zhou
+	         <mailto:cathy.zhou@huawei.com>";
+			 
+	description
+		"This module contains a collection of YANG definitions for
+		managing VNFD.
+		Copyright (c) 2013 IETF Trust and the persons identified as
+		authors of the code. All rights reserved.
+		
+		Redistribution and use in source and binary forms, with or
+		without modification, is permitted pursuant to, and subject
+		to the license terms contained in, the Simplified BSD License
+		set forth in Section 4.c of the IETF Trusts Legal Provisions
+		Relating to IETF Documents
+		(http://trustee.ietf.org/license-info).";
+		
+	revision 2014-01-03 {
+				description
+					"Initial revision.";
+    }
+		
+	container VNF-descriptor {
+		description "A configuration template that describes a VNF.";
+		container general-information {
+			description "General information of a VNF.";
+			leaf name {
+				type string;
+				description "the name of this VNF.";
+			}
+			leaf description {
+				type string;
+				description "description of this VNF.";
+			}
+			leaf vendor {
+				type string;
+				description "the vendor generating this VNF.";
+			}
+			leaf version {
+				type uint8;
+				description "the version number.";
+			}
+			leaf sharing {
+				type enumeration {
+					enum non-sharing {
+					value "0";
+					description "The VNF could not be shared by more than
+					one consumer.";
+					}
+					enum sharing {
+					value "1";
+					description "The VNF could be shared, such as virtual
+					STB is shared by more than one consumer.";
+					}
+				}
+				description "The flag shows whether the VNF could be
+				shared by more than one consumer.";
+			}
+		}
+		
+	container deploy-information {
+		description "VNF deployment information.";
+		list virtualization-deployment-unit {
+			key index;
+			description "Used to store the deployment parameters of VNF.";
+			leaf index {
+				type uint16;
+				description "the VDU index.";
+			}
+			container require-resource {
+			  description "The required source for the VNF.";
+			  leaf CPU-unit {
+				type uint16;
+				description "The virtual CPU unit numbers";
+			   }
+			  leaf memory-size {
+				type uint64;
+				description "The virtual memory size, unit:KByte.";
+			   }
+			  leaf disk-size {
+				type uint64;
+				description "The virtual disk size, unit:MByte.";
+			   }
+			   }
+			leaf image-ref {
+				type string;
+				description "the software image associated with the VNF.";
+		    }
+		}
+	}
+		list external-interface {
+			key name;
+			description "The interface connected to other VNF.";
+			leaf name {
+				type string;
+				description "The interface name.";
+			}
+	    }
+    }
+}

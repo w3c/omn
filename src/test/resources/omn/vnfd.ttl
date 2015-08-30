@@ -1,0 +1,59 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://open-multinet.info/example#vnfd>
+        a       <http://open-multinet.info/ontology/omn-domain-nfv#VnfDescriptor> ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasDeployInfo>
+                [ <http://open-multinet.info/ontology/omn-domain-nfv#hasVDU>
+                          [ <http://open-multinet.info/ontology/omn-domain-nfv#hasImageRef>
+                                    "100" ;
+                            <http://open-multinet.info/ontology/omn-domain-nfv#hasIndex>
+                                    "20" ;
+                            <http://open-multinet.info/ontology/omn-domain-nfv#hasRequiredResources>
+                                    [ <http://open-multinet.info/ontology/omn-domain-nfv#hasCPUunit>
+                                              "10" ;
+                                      <http://open-multinet.info/ontology/omn-domain-nfv#hasDiskSize>
+                                              "18446744073709" ;
+                                      <http://open-multinet.info/ontology/omn-domain-nfv#hasMemorySize>
+                                              "184467440737"
+                                    ]
+                          ] ;
+                  <http://open-multinet.info/ontology/omn-domain-nfv#hasVDU>
+                          [ <http://open-multinet.info/ontology/omn-domain-nfv#hasImageRef>
+                                    "100" ;
+                            <http://open-multinet.info/ontology/omn-domain-nfv#hasIndex>
+                                    "10" ;
+                            <http://open-multinet.info/ontology/omn-domain-nfv#hasRequiredResources>
+                                    [ <http://open-multinet.info/ontology/omn-domain-nfv#hasCPUunit>
+                                              "10" ;
+                                      <http://open-multinet.info/ontology/omn-domain-nfv#hasDiskSize>
+                                              "18446744073709" ;
+                                      <http://open-multinet.info/ontology/omn-domain-nfv#hasMemorySize>
+                                              "184467440737"
+                                    ]
+                          ] ] ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasExternalInterfaces>
+                [ <http://open-multinet.info/ontology/omn-domain-nfv#hasName>
+                          "eth1" ] ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasExternalInterfaces>
+                [ <http://open-multinet.info/ontology/omn-domain-nfv#hasName>
+                          "eth0" ] ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasGeneralInfo>
+                [ <http://open-multinet.info/ontology/omn-domain-nfv#hasDescription>
+                          "a storage VNF" ;
+                  <http://open-multinet.info/ontology/omn-domain-nfv#hasName>
+                          " storage " ;
+                  <http://open-multinet.info/ontology/omn-domain-nfv#hasVendor>
+                          "cisco" ;
+                  <http://open-multinet.info/ontology/omn-domain-nfv#hasVersion>
+                          "10" ;
+                  <http://open-multinet.info/ontology/omn-domain-nfv#isSharing>
+                          "Sharing"
+                ] .
+

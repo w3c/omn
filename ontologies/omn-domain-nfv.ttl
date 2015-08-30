@@ -1,0 +1,576 @@
+@prefix : <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix omn-component: <http://open-multinet.info/ontology/omn-service#> .
+@prefix omn-monitoring-data: <http://open-multinet.info/ontology/omn-monitoring-data#> .
+@base <http://open-multinet.info/ontology/omn-domain-nfv> .
+
+<http://open-multinet.info/ontology/omn-domain-nfv> rdf:type owl:Ontology ;
+                                                    
+                                                    rdfs:label "omn-domain-nfv"@en ;
+                                                    
+                                                    dc:date "2014-11-11"^^xsd:date ;
+                                                    
+                                                    dcterms:modified "2015-04-29"^^xsd:date ;
+                                                    
+                                                    owl:versionInfo "2015-04-29"^^xsd:string ;
+                                                    
+                                                    dc:title "Open-Multinet Domain NFV Ontology"^^xsd:string ;
+                                                    
+                                                    dc:description "This ontology defines the the VNFD and VNF instance."^^xsd:string ,
+                                                                   "ontologies/pics/omn-domain-nfv.png" ;
+                                                    
+                                                    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                    
+                                                    dc:publisher <http://open-multinet.info/> ;
+                                                    
+                                                    dc:contributor <http://users.ntua.gr/c.papagianni> ,
+                                                                   <http://www.commit-nl.nl/people/morsey> ,
+                                                                   <https://staff.fnwi.uva.nl/p.grosso> ,
+                                                                   <mailto:brecht.vermeulen@iminds.be> ,
+                                                                   <mailto:ibaldin@renci.org> ,
+                                                                   <mailto:jorge.lopez_vergara@uam.es> ,
+                                                                   <mailto:loughnane@campus.tu-berlin.de> ,
+                                                                   <mailto:nesrine.doghri@campus.tu-berlin.de> ,
+                                                                   <mailto:thijs.walcarius@intec.ugent.be> ,
+                                                                   <mailto:yahya.al-hazmi@tu-berlin.de> ,
+                                                                   <mailto:yxin@renci.org> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasAction
+
+:hasAction rdf:type owl:ObjectProperty ;
+           
+           rdfs:range :Action ;
+           
+           rdfs:domain :Operation ;
+           
+           rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasDeployInfo
+
+:hasDeployInfo rdf:type owl:ObjectProperty ;
+               
+               rdfs:range :DeployInfo ;
+               
+               rdfs:domain :VnfDescriptor .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasDescriptor
+
+:hasDescriptor rdf:type owl:ObjectProperty ;
+               
+               rdfs:domain :VirtualNetworkFunction ;
+               
+               rdfs:range :VnfDescriptor .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasExternalInterfaces
+
+:hasExternalInterfaces rdf:type owl:ObjectProperty ;
+                       
+                       rdfs:range :ExternalInterface ;
+                       
+                       rdfs:domain :VnfDescriptor .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasGeneralInfo
+
+:hasGeneralInfo rdf:type owl:ObjectProperty ;
+                
+                rdfs:range :GeneralInformation ;
+                
+                rdfs:domain :VnfDescriptor .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasInstance
+
+:hasInstance rdf:type owl:ObjectProperty ;
+             
+             rdfs:domain :VirtualNetworkFunction ;
+             
+             rdfs:range :VnfInstance .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasOperation
+
+:hasOperation rdf:type owl:ObjectProperty ;
+              
+              rdfs:range :Operation ;
+              
+              rdfs:domain :VnfInstance .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasParameter
+
+:hasParameter rdf:type owl:ObjectProperty ;
+              
+              rdfs:domain :Operation ;
+              
+              rdfs:range :Parameter .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasRequiredResources
+
+:hasRequiredResources rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:range :RequiredResources ;
+                      
+                      rdfs:domain :VirtualizationDeploymentUnit .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasScale
+
+:hasScale rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :Parameter ;
+          
+          rdfs:range :ScaleParam ;
+          
+          rdfs:subPropertyOf :hasParameter .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasVDU
+
+:hasVDU rdf:type owl:ObjectProperty ;
+        
+        rdfs:domain :DeployInfo ;
+        
+        rdfs:range :VirtualizationDeploymentUnit .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#isMappedTo
+
+:isMappedTo rdf:type owl:ObjectProperty ;
+            
+            rdfs:range :VM ;
+            
+            rdfs:domain :VirtualizationDeploymentUnit .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#migratesTo
+
+:migratesTo rdf:type owl:ObjectProperty ;
+            
+            rdfs:range :MigrationParam ;
+            
+            rdfs:domain :Parameter ;
+            
+            rdfs:subPropertyOf :hasParameter .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#destIp
+
+:destIp rdf:type owl:DatatypeProperty ;
+        
+        rdfs:domain :MigrationParam ;
+        
+        rdfs:subPropertyOf omn-monitoring-data:hasDestinationIP ;
+        
+        rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasCPUunit
+
+:hasCPUunit rdf:type owl:DatatypeProperty ;
+            
+            rdfs:range xsd:string ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :RequiredResources
+                                        :ScaleParam
+                                        omn-component:CPU
+                                      )
+                        ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasDescription
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+                
+                rdfs:comment "description of the VNF" ;
+                
+                rdfs:domain :GeneralInformation ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasDiskSize
+
+:hasDiskSize rdf:type owl:DatatypeProperty ;
+             
+             rdfs:range xsd:string ;
+             
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Disk
+                                         :RequiredResources
+                                         :ScaleParam
+                                       )
+                         ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasID
+
+:hasID rdf:type owl:DatatypeProperty ;
+       
+       rdfs:domain :VnfInstance ;
+       
+       rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasImageRef
+
+:hasImageRef rdf:type owl:DatatypeProperty ;
+             
+             rdfs:domain :VirtualizationDeploymentUnit ;
+             
+             rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasIndex
+
+:hasIndex rdf:type owl:DatatypeProperty ;
+          
+          rdfs:domain :VirtualizationDeploymentUnit ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasMemorySize
+
+:hasMemorySize rdf:type owl:DatatypeProperty ;
+               
+               rdfs:range xsd:string ;
+               
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :RequiredResources
+                                           :ScaleParam
+                                           omn-component:MemoryComponent
+                                         )
+                           ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasName
+
+:hasName rdf:type owl:DatatypeProperty ;
+         
+         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasVendor
+
+:hasVendor rdf:type owl:DatatypeProperty ;
+           
+           rdfs:comment "the vendor generating the VNF" ;
+           
+           rdfs:domain :GeneralInformation ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasVersion
+
+:hasVersion rdf:type owl:DatatypeProperty ;
+            
+            rdfs:domain :GeneralInformation ;
+            
+            rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#hasVnfdName
+
+:hasVnfdName rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "the name of VNF descriptor" ;
+             
+             rdfs:subPropertyOf :hasName ;
+             
+             rdfs:range xsd:string ;
+             
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:intersectionOf ( :VnfDescriptor
+                                                :VnfInstance
+                                              )
+                         ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#isSharing
+
+:isSharing rdf:type owl:DatatypeProperty ;
+           
+           rdfs:comment "takes \"0\" if the VNF could not be shared by more than one consumer and \"1\" if it could be shared." ;
+           
+           rdfs:domain :GeneralInformation ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-monitoring-data#hasDestinationIP
+
+omn-monitoring-data:hasDestinationIP rdf:type owl:DatatypeProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Action
+
+:Action rdf:type owl:Class ;
+        
+        rdfs:comment "The action to be performed on a VNF.It could be Migrate, Pause, Scale Down, Scale Up, Start or Stop" .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#DeployInfo
+
+:DeployInfo rdf:type owl:Class ;
+            
+            rdfs:comment "The class of VNF deployment information." .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Disk
+
+:Disk rdf:type owl:Class ;
+      
+      rdfs:subClassOf omn-component:StorageComponent .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#ExternalInterface
+
+:ExternalInterface rdf:type owl:Class ;
+                   
+                   rdfs:comment "external interface" .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#GeneralInformation
+
+:GeneralInformation rdf:type owl:Class ;
+                    
+                    rdfs:comment "General information of a VNF." .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#MigrationParam
+
+:MigrationParam rdf:type owl:Class ;
+                
+                rdfs:subClassOf :Parameter ;
+                
+                owl:disjointWith :ScaleParam .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Operation
+
+:Operation rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Parameter
+
+:Parameter rdf:type owl:Class ;
+           
+           rdfs:comment "The parameters  associated with the scale procedure or with the migration ." .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#RequiredResources
+
+:RequiredResources rdf:type owl:Class ;
+                   
+                   rdfs:comment "It contains the required source for the VNF" .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#ScaleParam
+
+:ScaleParam rdf:type owl:Class ;
+            
+            rdfs:subClassOf :Parameter .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#VM
+
+:VM rdf:type owl:Class ;
+    
+    rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#VirtualNetworkFunction
+
+:VirtualNetworkFunction rdf:type owl:Class ;
+                        
+                        rdfs:subClassOf omn:Service ;
+                        
+                        rdfs:comment "The Virtual Network Function" .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#VirtualizationDeploymentUnit
+
+:VirtualizationDeploymentUnit rdf:type owl:Class ;
+                              
+                              rdfs:comment "THis class is used to store the deployment parameters of VNF" .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#VnfDescriptor
+
+:VnfDescriptor rdf:type owl:Class ;
+               
+               rdfs:comment "A configuration template that describes a VNF." .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#VnfInstance
+
+:VnfInstance rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-service#CPU
+
+omn-component:CPU rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-service#MemoryComponent
+
+omn-component:MemoryComponent rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-service#StorageComponent
+
+omn-component:StorageComponent rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Migrate
+
+:Migrate rdf:type :Action ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Pause
+
+:Pause rdf:type :Action ,
+                owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#ScaleDown
+
+:ScaleDown rdf:type :Action ,
+                    owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#ScaleUp
+
+:ScaleUp rdf:type :Action ,
+                  owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Start
+
+:Start rdf:type :Action ,
+                owl:NamedIndividual .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-nfv#Stop
+
+:Stop rdf:type :Action ,
+               owl:NamedIndividual .
+
+
+
+
+###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
+

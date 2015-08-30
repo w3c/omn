@@ -4,6 +4,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
+import info.openmultinet.ontology.vocabulary.Omn_domain_nfv;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -174,6 +175,8 @@ public class Parser {
 		model.setNsPrefix("owl", OWL.getURI());
 		model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 		model.setNsPrefix("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#");
+		// added the omn-domain-nfv prefix
+		model.setNsPrefix("omn-domain-nfv", Omn_domain_nfv.getURI());
 	}
 
 	public static Model parse(final String filename) {

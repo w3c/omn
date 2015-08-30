@@ -1,0 +1,91 @@
+module ietf-vnf-instance {
+	namespace "urn:ietf:params:xml:ns:yang:ietf-vnf-instance";
+	prefix vnf;
+	import ietf-inet-types { prefix inet; }
+	organization "Huawei Technologies";
+	contact "Yuanlong Jiang
+			<mailto:jiangyuanlong@huawei.com>
+			Weiping Xu
+			<mailto:xuweiping@huawei.com>
+			Cathy Zhou
+			<mailto:cathy.zhou@huawei.com>";
+	description
+		"This module contains a collection of YANG definitions for
+		managing VNF instance.
+		
+		Copyright (c) 2013 IETF Trust and the persons identified as
+		authors of the code. All rights reserved.
+		Redistribution and use in source and binary forms, with or
+		without modification, is permitted pursuant to, and subject
+		to the license terms contained in, the Simplified BSD License
+		set forth in Section 4.c of the IETF Trust�s Legal Provisions
+		Relating to IETF Documents
+		(http://trustee.ietf.org/license-info).";
+	revision 2014-01-03 {
+		description
+		"Initial revision.";
+	}
+	container VNF-instance {
+		description "VNF instance.";
+		leaf id {
+			type uint32;
+			description "the instance id.";
+		}
+		leaf VNFD-name {
+			type string;
+			description "the name of VNF descriptor.";
+		}
+		container operation {
+			description "Performing an operation on VNF.";
+			leaf action {
+			  type enumeration {
+				enum start {
+					description "Start a VNF instance.";
+				}
+				enum stop {
+					description "Stop a VNF instance.";
+				}
+				enum pause {
+					description "Pause a VNF instance.";
+				}
+				enum migrate {
+					description "Pause a VNF instance.";
+				}
+				enum scale-up {
+					description "Add resource to a VNF instance.";
+				}
+				enum scale-down {
+					description "Add resource to a VNF instance.";
+				}
+			  }
+				description "The operation on VNF";
+			}
+			container parameter {
+			description "The parameters that associated with scale procedure.";
+			choice action {
+				description "Different parameter with different action.";
+				case scale {
+					leaf CPU-unit {
+					type uint16;
+					description "The virtual CPU unit numbers";
+				    }
+					leaf memory-size {
+						type uint64;
+						description "The virtual memory size, unit:KByte.";
+					}
+					leaf disk-size {
+						type uint64;
+						description "The virtual disk size, unit:MByte.";
+					}
+				}
+				case migration {
+					leaf destination-location {
+						type inet:ip-address;
+						description "The ip address of the destination location.";
+				    }
+				}
+			}
+			}
+		}
+	}
+}
