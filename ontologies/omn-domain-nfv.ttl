@@ -336,9 +336,9 @@
              rdfs:range xsd:string ;
              
              rdfs:domain [ rdf:type owl:Class ;
-                           owl:intersectionOf ( :VnfDescriptor
-                                                :VnfInstance
-                                              )
+                           owl:unionOf ( :VnfDescriptor
+                                         :VnfInstance
+                                       )
                          ] .
 
 
