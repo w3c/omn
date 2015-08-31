@@ -578,6 +578,25 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#hasSliverID
+
+:hasSliverID rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has sliver ID"@en ;
+       
+        rdfs:comment "has sliver ID"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: node > sliver_id"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasSliverName
 

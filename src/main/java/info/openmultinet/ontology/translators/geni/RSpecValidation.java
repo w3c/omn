@@ -427,6 +427,7 @@ public class RSpecValidation {
 
 					String modelString = Parser.toString(model);
 					System.out.println(modelString);
+
 					// PrintWriter outBlah = new PrintWriter("model.txt");
 					// outBlah.println(modelString);
 					// outBlah.close();
@@ -443,6 +444,7 @@ public class RSpecValidation {
 				try {
 					model = ManifestConverter.getModel(inputStream);
 					System.out.println(Parser.toString(model));
+
 					InfModel infModel = new Parser(model).getInfModel();
 					output = ManifestConverter.getRSpec(infModel,
 							"instageni.gpolab.bbn.com");
@@ -858,11 +860,11 @@ public class RSpecValidation {
 				Node typeNode = root.getAttributes().getNamedItem("xmlns");
 				if (typeNode != null) {
 					String namespace = typeNode.getNodeValue();
-					System.out.println("RSpec version: " + namespace);
+					// System.out.println("RSpec version: " + namespace);
 					if (namespace
 							.equals("http://www.protogeni.net/resources/rspec/0.1")) {
-						System.out
-								.println("RSpec version 0.1 is not supported.");
+						// System.out
+						// .println("RSpec version 0.1 is not supported.");
 						throw new DeprecatedRspecVersionException("0.1");
 					}
 					if (namespace
@@ -871,8 +873,8 @@ public class RSpecValidation {
 					}
 					if (namespace
 							.equals("http://www.protogeni.net/resources/rspec/2")) {
-						System.out
-								.println("Converting RSpec version 2 to version 3.");
+						// System.out
+						// .println("Converting RSpec version 2 to version 3.");
 						input = input.replaceAll(
 								"http://www.protogeni.net/resources/rspec/2",
 								"http://www.geni.net/resources/rspec/3");

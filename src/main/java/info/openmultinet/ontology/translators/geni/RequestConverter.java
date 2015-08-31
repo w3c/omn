@@ -826,75 +826,87 @@ public class RequestConverter extends AbstractConverter {
 
 	}
 
-	private static void setSliverType(Statement resource, NodeContents node) {
+	private static void setSliverType(Statement resource, NodeContents geniNode) {
+
+		// check if name was string and not uri
+		// if (resource.getResource().hasProperty(Omn_lifecycle.hasSliverName))
+		// {
+		//
 		// SliverType sliverType = new ObjectFactory()
 		// .createNodeContentsSliverType();
 		//
-		// Resource omnSliver = null;
+		// String sliverName = resource.getResource()
+		// .getProperty(Omn_lifecycle.hasSliverName).getObject()
+		// .asLiteral().getString();
+		// sliverType.setName(sliverName);
 		//
 		// final List<Statement> hasTypes = resource.getResource()
 		// .listProperties(RDF.type).toList();
 		//
+		// // find the URI of the sliver
+		// Resource omnSliver = null;
 		// for (final Statement hasType : hasTypes) {
 		// RDFNode sliverNode = hasType.getObject();
 		// Resource sliverResource = sliverNode.asResource();
 		//
 		// if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
 		// omnSliver = sliverResource;
-		// sliverType.setName(sliverResource.getURI());
 		// }
 		// }
-		//
-		// // check if name was string and not uri
-		// if (resource.getResource().hasProperty(Omn_lifecycle.hasSliverName))
-		// {
-		// String sliverName = resource.getResource()
-		// .getProperty(Omn_lifecycle.hasSliverName).getObject()
-		// .asLiteral().getString();
-		// sliverType.setName(sliverName);
-		// }
-		//
-		// if (omnSliver != null) {
 		// setDiskImage(omnSliver, sliverType);
-		// }
 		//
 		// JAXBElement<SliverType> sliver = new ObjectFactory()
 		// .createNodeContentsSliverType(sliverType);
 		//
 		// node.getAnyOrRelationOrLocation().add(sliver);
+		// }
 
-		// check if name was string and not uri
-		if (resource.getResource().hasProperty(Omn_lifecycle.hasSliverName)) {
+		if (resource.getResource().hasProperty(Omn_resource.hasSliverType)) {
 
+			final List<Statement> hasSliverNames = resource.getResource()
+					.listProperties(Omn_resource.hasSliverType).toList();
+
+			for (final Statement hasSliverName : hasSliverNames) {
+
+				SliverType sliverType = new ObjectFactory()
+						.createNodeContentsSliverType();
+
+				Resource sliverTypeResource = hasSliverName.getObject()
+						.asResource();
+				if (sliverTypeResource.hasProperty(Omn_lifecycle.hasSliverName)) {
+					String sliverName = sliverTypeResource
+							.getProperty(Omn_lifecycle.hasSliverName)
+							.getObject().asLiteral().getString();
+					sliverType.setName(sliverName);
+				}
+
+				if (sliverTypeResource != null) {
+					setDiskImage(sliverTypeResource, sliverType);
+				}
+
+				JAXBElement<SliverType> sliver = new ObjectFactory()
+						.createNodeContentsSliverType(sliverType);
+
+				geniNode.getAnyOrRelationOrLocation().add(sliver);
+			}
+		} else {
 			SliverType sliverType = new ObjectFactory()
 					.createNodeContentsSliverType();
-
-			String sliverName = resource.getResource()
-					.getProperty(Omn_lifecycle.hasSliverName).getObject()
-					.asLiteral().getString();
-			sliverType.setName(sliverName);
 
 			final List<Statement> hasTypes = resource.getResource()
 					.listProperties(RDF.type).toList();
 
-			// find the URI of the sliver
-			Resource omnSliver = null;
 			for (final Statement hasType : hasTypes) {
-				RDFNode sliverNode = hasType.getObject();
-				Resource sliverResource = sliverNode.asResource();
-
+				Resource sliverResource = hasType.getObject().asResource();
 				if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
-					omnSliver = sliverResource;
+					sliverType.setName(sliverResource.getURI());
 				}
 			}
-			setDiskImage(omnSliver, sliverType);
 
 			JAXBElement<SliverType> sliver = new ObjectFactory()
 					.createNodeContentsSliverType(sliverType);
-
-			node.getAnyOrRelationOrLocation().add(sliver);
+			geniNode.getAnyOrRelationOrLocation().add(sliver);
 		}
-
 	}
 
 	private static void setDiskImage(Resource resource, SliverType sliver) {
@@ -1747,14 +1759,27 @@ public class RequestConverter extends AbstractConverter {
 			// Note: Do not change sliver type here, as Fiteagle will
 			// not work
 			if (AbstractConverter.isUrl(sliverName)) {
-				sliverTypeResource = omnResource.getModel().createResource(
-						sliverName);
+				sliverTypeResource = omnResource.getModel().createResource();
+				omnResource.addProperty(RDF.type, omnResource.getModel()
+						.createResource(sliverName));
 			} else {
-				sliverTypeResource = omnResource.getModel().createResource(
-						"http://open-multinet.info/example#" + sliverName);
+				// set type of node
+				String sliverTypeUrl = "http://open-multinet.info/example#"
+						+ sliverName;
+				omnResource.addProperty(RDF.type, omnResource.getModel()
+						.createResource(sliverTypeUrl));
+
+				// create sliver type blank node
+				sliverTypeResource = omnResource.getModel().createResource();
+
 			}
-			omnResource.addProperty(RDF.type, sliverTypeResource);
-			omnResource.addProperty(Omn_lifecycle.hasSliverName, sliverName);
+			// omnResource.addProperty(RDF.type, sliverTypeResource);
+			// omnResource.addProperty(Omn_lifecycle.hasSliverName, sliverName);
+			omnResource.addProperty(Omn_resource.hasSliverType,
+					sliverTypeResource);
+			sliverTypeResource.addProperty(Omn_lifecycle.hasSliverName,
+					sliverName);
+			sliverTypeResource.addProperty(RDF.type, Omn_resource.SliverType);
 
 			for (Object rspecSliverObject : sliverType.getAnyOrDiskImage()) {
 				tryExtractDiskImage(rspecSliverObject, sliverTypeResource);

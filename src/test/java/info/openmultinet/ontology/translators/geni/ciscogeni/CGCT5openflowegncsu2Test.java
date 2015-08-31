@@ -27,58 +27,62 @@ public class CGCT5openflowegncsu2Test {
 		final String filename = "/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		PrintWriter outFile = new PrintWriter("filename.txt");
-		outFile.println(outputRspec);
-		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.txt");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 
 		System.out.println("===============================");
 		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+		if (diffsNodes[0] == 0) {
+			Assert.assertTrue("No differences between input and output files",
+					diffsNodes[0] == 0);
+			// TODO: Currently sometimes returns a high number of errors,
+			// although translation
+			// appears to be correct.
+			// Assert.assertTrue("No differences between input and output files",
+			// diffsNodes[0] == 0);
+		} else {
+			Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
-		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+			// check that output has one rspec element
+			NodeList rspec = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/3", "rspec");
+			Assert.assertTrue(rspec.getLength() == 1);
 
-		// check that output has one rspec element
-		NodeList rspec = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "rspec");
-		Assert.assertTrue(rspec.getLength() == 1);
+			NodeList sliver = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/ext/openflow/4",
+					"sliver");
+			Assert.assertTrue(sliver.getLength() == 1);
 
-		NodeList sliver = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/ext/openflow/4", "sliver");
-		Assert.assertTrue(sliver.getLength() == 1);
+			NodeList packet = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/ext/openflow/4",
+					"packet");
+			Assert.assertTrue(packet.getLength() == 1);
 
+			NodeList usegroup = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/ext/openflow/4",
+					"use-group");
+			Assert.assertTrue(usegroup.getLength() == 1);
 
-		
-		 NodeList packet = xmlDoc.getElementsByTagNameNS(
-				 "http://www.geni.net/resources/rspec/ext/openflow/4", "packet");
-		 Assert.assertTrue(packet.getLength() == 1);
-		
-		 NodeList usegroup = xmlDoc.getElementsByTagNameNS(
-				 "http://www.geni.net/resources/rspec/ext/openflow/4", "use-group");
-		 Assert.assertTrue(usegroup.getLength() == 1);
-		 
-		 String usegroupName = usegroup.item(0).getAttributes()
-		 .getNamedItem("name").getNodeValue();
-		 Assert.assertTrue(usegroupName.equals("ncsu2-exogeni"));
-
-		// TODO: Currently returns a high number of errors, although translation
-		// appears to be correct.
-		// Assert.assertTrue("No differences between input and output files",
-		// diffsNodes[0] == 0);
-
+			String usegroupName = usegroup.item(0).getAttributes()
+					.getNamedItem("name").getNodeValue();
+			Assert.assertTrue(usegroupName.equals("ncsu2-exogeni"));
+		}
 	}
 }

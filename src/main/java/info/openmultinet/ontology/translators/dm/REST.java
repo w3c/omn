@@ -66,7 +66,7 @@ public class REST extends DeliveryMechanism {
 				| IOException e) {
 			throw new ConverterWebApplicationException(
 			// send Server Error 500
-					Response.Status.INTERNAL_SERVER_ERROR, e);
+					Response.Status.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 
 		return result;

@@ -27,10 +27,10 @@ public class CGCT5egncsu2Test {
 		final String filename = "/geni/ciscogeni/CG-CT-5-eg-ncsu2.rspec";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+//		System.out.println("Converting this input from '" + filename + "':");
+//		System.out.println("===============================");
+//		System.out.println(inputRspec);
+//		System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
@@ -39,45 +39,45 @@ public class CGCT5egncsu2Test {
 		outFile.println(outputRspec);
 		outFile.close();
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+//		System.out.println("Generated this rspec:");
+//		System.out.println("===============================");
+//		System.out.println(outputRspec);
+//		System.out.println("===============================");
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 
 		System.out.println("===============================");
 		System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
-
-		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
-
-		// check that output has one rspec element
-		NodeList rspec = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "rspec");
-		Assert.assertTrue(rspec.getLength() == 1);
-
-		NodeList nodes = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "node");
-		Assert.assertTrue(nodes.getLength() == 2);
-
-		NodeList links = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/3", "link");
-		Assert.assertTrue(links.getLength() == 1);
-
-		NodeList sharedVlan = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/ext/shared-vlan/1",
-				"link_shared_vlan");
-		Assert.assertTrue(sharedVlan.getLength() == 1);
-
-		String sharedVlanName = sharedVlan.item(0).getAttributes()
-				.getNamedItem("name").getNodeValue();
-		Assert.assertTrue(sharedVlanName.equals("1760"));
-
 		// TODO: Currently returns a high number of errors, although translation
 		// appears to be correct.
-		// Assert.assertTrue("No differences between input and output files",
-		// diffsNodes[0] == 0);
+		if (diffsNodes[0] == 0) {
+			Assert.assertTrue("No differences between input and output files",
+					diffsNodes[0] == 0);
+		} else {
+			Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
+			// check that output has one rspec element
+			NodeList rspec = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/3", "rspec");
+			Assert.assertTrue(rspec.getLength() == 1);
+
+			NodeList nodes = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/3", "node");
+			Assert.assertTrue(nodes.getLength() == 2);
+
+			NodeList links = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/3", "link");
+			Assert.assertTrue(links.getLength() == 1);
+
+			NodeList sharedVlan = xmlDoc.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/ext/shared-vlan/1",
+					"link_shared_vlan");
+			Assert.assertTrue(sharedVlan.getLength() == 1);
+
+			String sharedVlanName = sharedVlan.item(0).getAttributes()
+					.getNamedItem("name").getNodeValue();
+			Assert.assertTrue(sharedVlanName.equals("1760"));
+		}
 	}
 }
