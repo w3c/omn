@@ -17,7 +17,7 @@ cache:
   - $HOME/eyeball-2.3
   - $HOME/.m2
 after_success:
-- curl http://demo.fiteagle.org/trigger.php?c=omn
+- if [ "${TRAVIS_BRANCH}" = "master" ]; then curl http://demo.fiteagle.org/trigger.php?c=omn ; fi
 - mvn clean test jacoco:report coveralls:report
 env:
   global:
