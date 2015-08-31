@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -70,6 +71,13 @@ public class REST extends DeliveryMechanism {
 		}
 
 		return result;
+	}
+
+	// for testing purposes
+	@GET
+	@Path("test")
+	public String test() {
+		return "OK";
 	}
 
 	public static class ConverterWebApplicationException extends
