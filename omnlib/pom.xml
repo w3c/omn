@@ -6,7 +6,7 @@
 		<artifactId>omn</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>info.open-multinet.omn</groupId>
+	<groupId>info.open-multinet</groupId>
 	<artifactId>omnlib</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Open-Multinet Ontology Java Library</name>
