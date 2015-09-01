@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec generated="2015-09-01T13:41:58.524+02:00" generated_by="omnlib" type="request" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns6="http://www.geni.net/resources/rspec/ext/openflow/4" xmlns:ns5="http://demo.fiteagle.org/monitoring" xmlns:ns2="http://www.geni.net/resources/rspec/ext/stitch/2/" xmlns:ns4="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns3="http://www.geni.net/resources/rspec/ext/shared-vlan/1">
+    <link client_id="link">
+        <interface_ref client_id="cg-ncsu2:0"/>
+        <interface_ref client_id="eg-gpo:0"/>
+    </link>
+    <node client_id="cg-ncsu2" component_manager_id="urn:publicid:IDN+exogeni.net:ncsuvmsite+authority+am">
+        <interface client_id="cg-ncsu2:0">
+            <ip address="172.16.1.2" netmask="255.255.255.0"/>
+        </interface>
+        <sliver_type name="m1.small"/>
+    </node>
+    <node client_id="eg-gpo" component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am">
+        <interface client_id="eg-gpo:0">
+            <ip address="172.16.1.1" netmask="255.255.255.0"/>
+        </interface>
+        <sliver_type name="m1.small"/>
+    </node>
+</rspec>
+
