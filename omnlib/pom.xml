@@ -126,7 +126,7 @@
 				<artifactId>wildfly-maven-plugin</artifactId>
 				<version>${wildfly.version}</version>
 				<configuration>
-					<skip>false</skip>
+					<skip>true</skip>
 					<filename>omnlib.jar</filename>
 				</configuration>
 			</plugin>
