@@ -27,22 +27,22 @@ public class cisco10vm1lanTest {
 		final String filename = "/geni/ciscogeni/cisco-10vm-1lan.rspec";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		PrintWriter outFile = new PrintWriter("filename.txt");
-		outFile.println(outputRspec);
-		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.txt");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 
@@ -64,7 +64,6 @@ public class cisco10vm1lanTest {
 		NodeList links = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "link");
 		Assert.assertTrue(links.getLength() == 1);
-
 
 		String linkClientId = links.item(0).getAttributes()
 				.getNamedItem("client_id").getNodeValue();

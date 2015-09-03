@@ -27,22 +27,22 @@ public class CGCT5iggpoTest {
 		final String filename = "/geni/ciscogeni/CG-CT-5-ig-gpo.rspec";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-//		System.out.println("Converting this input from '" + filename + "':");
-//		System.out.println("===============================");
-//		System.out.println(inputRspec);
-//		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-//		PrintWriter outFile = new PrintWriter("filename.txt");
-//		outFile.println(outputRspec);
-//		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.txt");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
-//		System.out.println("Generated this rspec:");
-//		System.out.println("===============================");
-//		System.out.println(outputRspec);
-//		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 
@@ -52,7 +52,8 @@ public class CGCT5iggpoTest {
 		if (diffsNodes[0] == 0) {
 			Assert.assertTrue("No differences between input and output files",
 					diffsNodes[0] == 0);
-			// TODO: Currently sometimes returns a high number of errors, although translation
+			// TODO: Currently sometimes returns a high number of errors,
+			// although translation
 			// appears to be correct.
 			// Assert.assertTrue("No differences between input and output files",
 			// diffsNodes[0] == 0);
@@ -81,7 +82,6 @@ public class CGCT5iggpoTest {
 					.getNamedItem("name").getNodeValue();
 			Assert.assertTrue(sharedVlanName.equals("ncsu2-meso"));
 		}
-
 
 	}
 }

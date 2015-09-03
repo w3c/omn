@@ -175,6 +175,25 @@
 				<version>1.6</version>
 				<executions>
 					<execution>
+						<id>xjc-ad-extensions</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<strict>false</strict>
+							<nv>true</nv>
+							<packageName>info.openmultinet.ontology.translators.geni.jaxb.advertisement</packageName>
+							<schemaDirectory>src/main/resources/geni/advertisement-ext</schemaDirectory>
+							<!--bindingDirectory>src/main/resources/geni/advertisement</bindingDirectory>
+							<bindingIncludes>
+							    <include>*.xjb</include>
+							</bindingIncludes-->
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<extension>true</extension>
+						</configuration>
+					</execution>
+					<execution>
 						<id>xjc-advertisement</id>
 						<goals>
 							<goal>xjc</goal>
@@ -188,6 +207,21 @@
 							<outputDirectory>src/main/java</outputDirectory>
 						</configuration>
 					</execution>
+					<!--execution>
+						<id>xjc-manifest-extensions</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<strict>false</strict>
+							<nv>true</nv>
+							<packageName>info.openmultinet.ontology.translators.geni.jaxb.manifest.extensions</packageName>
+							<schemaDirectory>src/main/resources/geni/manifest-ext</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<extension>true</extension>
+						</configuration>
+					</execution-->
 					<execution>
 						<id>xjc-manifest</id>
 						<goals>
@@ -202,6 +236,21 @@
 							<outputDirectory>src/main/java</outputDirectory>
 						</configuration>
 					</execution>
+					<!--execution>
+						<id>xjc-request-extensions</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<strict>false</strict>
+							<nv>true</nv>
+							<packageName>info.openmultinet.ontology.translators.geni.jaxb.request.extensions</packageName>
+							<schemaDirectory>src/main/resources/geni/request-ext</schemaDirectory>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<extension>true</extension>
+						</configuration>
+					</execution-->
 					<execution>
 						<id>xjc-request</id>
 						<goals>

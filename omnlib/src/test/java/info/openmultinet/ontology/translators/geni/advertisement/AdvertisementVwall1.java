@@ -21,8 +21,7 @@ public class AdvertisementVwall1 {
 			InvalidModelException, IOException, XMLStreamException,
 			MissingRspecElementException, DeprecatedRspecVersionException {
 		
-		final String filename = "/geni/advertisement/advertisement_vwall1"
-				+ ".xml";
+		final String filename = "/geni/advertisement/advertisement_vwall1.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 		
 		System.out.println("Converting this input from '" + filename + "':");

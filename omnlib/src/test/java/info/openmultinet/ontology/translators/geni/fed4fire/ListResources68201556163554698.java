@@ -28,22 +28,22 @@ public class ListResources68201556163554698 {
 
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		PrintWriter outFile = new PrintWriter("filename.txt");
-		outFile.println(outputRspec);
-		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.txt");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
 		Assert.assertTrue("type",
 				outputRspec.contains("type=\"advertisement\""));

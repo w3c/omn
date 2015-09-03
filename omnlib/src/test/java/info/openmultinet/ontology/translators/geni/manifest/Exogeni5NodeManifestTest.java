@@ -56,9 +56,9 @@ public class Exogeni5NodeManifestTest {
 		final String outputRspec = ManifestConverter.getRSpec(infModel,
 				"testbed.example.org");
 
-		PrintWriter outFile = new PrintWriter("filename.xml");
-		outFile.println(outputRspec);
-		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.xml");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");

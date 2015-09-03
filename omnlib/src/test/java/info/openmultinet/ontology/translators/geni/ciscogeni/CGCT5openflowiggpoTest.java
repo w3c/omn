@@ -27,22 +27,22 @@ public class CGCT5openflowiggpoTest {
 		final String filename = "/geni/ciscogeni/CG-CT-5-openflow-ig-gpo.rspec";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		PrintWriter outFile = new PrintWriter("filename.txt");
-		outFile.println(outputRspec);
-		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.txt");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 
@@ -61,19 +61,18 @@ public class CGCT5openflowiggpoTest {
 				"http://www.geni.net/resources/rspec/ext/openflow/4", "sliver");
 		Assert.assertTrue(sliver.getLength() == 1);
 
+		NodeList packet = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/ext/openflow/4", "packet");
+		Assert.assertTrue(packet.getLength() == 1);
 
-		
-		 NodeList packet = xmlDoc.getElementsByTagNameNS(
-				 "http://www.geni.net/resources/rspec/ext/openflow/4", "packet");
-		 Assert.assertTrue(packet.getLength() == 1);
-		
-		 NodeList usegroup = xmlDoc.getElementsByTagNameNS(
-				 "http://www.geni.net/resources/rspec/ext/openflow/4", "use-group");
-		 Assert.assertTrue(usegroup.getLength() == 1);
-		 
-		 String usegroupName = usegroup.item(0).getAttributes()
-		 .getNamedItem("name").getNodeValue();
-		 Assert.assertTrue(usegroupName.equals("bbn-instageni"));
+		NodeList usegroup = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/ext/openflow/4",
+				"use-group");
+		Assert.assertTrue(usegroup.getLength() == 1);
+
+		String usegroupName = usegroup.item(0).getAttributes()
+				.getNamedItem("name").getNodeValue();
+		Assert.assertTrue(usegroupName.equals("bbn-instageni"));
 
 		// TODO: Currently returns a high number of errors, although translation
 		// appears to be correct.

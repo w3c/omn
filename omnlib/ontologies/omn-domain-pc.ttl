@@ -343,6 +343,20 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabTrivialBandwidth
+
+:hasEmulabTrivialBandwidth rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "has emulab trivial bandwidth"@en ;
+
+                 rdfs:comment "has emulab trivial bandwidth"@en ;
+                 
+                 rdfs:domain omn:Resource;
+                 
+                 rdfs:range xsd:integer .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-pc#hasLatency
 
 :hasLatency rdf:type owl:DatatypeProperty ;

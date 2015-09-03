@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The default namespace for the ptop extension -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1">
+  <xs:include schemaLocation="../advertisement/top_extension.xsd"/>
+  <xs:group name="NodeFlagSpec">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="emulab:trivial_bandwidth"/>
+        <xs:element ref="emulab:unique"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="trivial_bandwidth">
+    <xs:annotation>
+      <xs:documentation>Gives the amount of bandwidth this node can forward through its loopback
+interface. In the future, we will make the loopback interface/link
+explicit in the topology
+Valid only for physical nodes</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="value" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="unique">
+    <xs:annotation>
+      <xs:documentation>Indicates that this node should never be considered identical to any
+other node. Could be done with a property
+Valid only for physical nodes</xs:documentation>
+    </xs:annotation>
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="policy">
+    <xs:complexType>
+      <xs:attributeGroup ref="emulab:PolicySpecContents"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="PolicySpecContents">
+    <xs:attribute name="type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="desire"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="limit" use="required">
+      <xs:simpleType>
+        <xs:union>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="disallow"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:float">
+              <xs:minInclusive value="0.0"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="set_type_limit">
+    <xs:complexType>
+      <xs:attributeGroup ref="emulab:TypeLimitContents"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="TypeLimitContents">
+    <xs:attribute name="typeclass" use="required"/>
+    <xs:attribute name="count" use="required" type="xs:integer"/>
+  </xs:attributeGroup>
+  <xs:element name="interface">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rspec_routable_addresses">
+    <xs:complexType>
+      <xs:attribute name="configured" use="required" type="xs:integer"/>
+      <xs:attribute name="available" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
