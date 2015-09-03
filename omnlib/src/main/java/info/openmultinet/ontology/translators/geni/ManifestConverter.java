@@ -38,6 +38,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -1050,7 +1051,8 @@ public class ManifestConverter extends AbstractConverter {
 						.generateUrlFromUrn(sliverID));
 				omnResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
 			} else {
-				omnResource = model.createResource();
+				omnResource = model
+						.createResource(UUID.randomUUID().toString());
 			}
 
 			// .createResource(parseSliverID(node.getSliverId()));
@@ -1132,7 +1134,8 @@ public class ManifestConverter extends AbstractConverter {
 						.generateUrlFromUrn(sliverID));
 				linkResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
 			} else {
-				linkResource = model.createResource();
+				linkResource = model.createResource(UUID.randomUUID()
+						.toString());
 			}
 
 			if (link.getClientId() == null) {
@@ -1317,18 +1320,21 @@ public class ManifestConverter extends AbstractConverter {
 			// Note: Do not change sliver type here, as Fiteagle will
 			// not work
 			if (AbstractConverter.isUrl(sliverName)) {
-				sliverTypeResource = omnResource.getModel().createResource();
+				sliverTypeResource = omnResource.getModel().createResource(
+						UUID.randomUUID().toString());
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverName));
 			} else {
 				String sliverTypeUrl = "http://open-multinet.info/example#"
 						+ sliverName;
-				sliverTypeResource = omnResource.getModel().createResource();
+				sliverTypeResource = omnResource.getModel().createResource(
+						UUID.randomUUID().toString());
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverTypeUrl));
 			}
 
-			// Resource sliver = model.createResource();
+			// Resource sliver =
+			// model.createResource(UUID.randomUUID().toString());
 			// if (sliverType.getName() != null) {
 			// if (AbstractConverter.isUrl(sliverType.getName())) {
 			// sliver.addProperty(RDF.type, sliverType.getName());
@@ -1358,7 +1364,8 @@ public class ManifestConverter extends AbstractConverter {
 			if (((JAXBElement<?>) sliverObject).getDeclaredType().equals(
 					DiskImageContents.class)) {
 
-				// Resource diskImage = sliver.getModel().createResource();
+				// Resource diskImage =
+				// sliver.getModel().createResource(UUID.randomUUID().toString());
 				// diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
 				DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) sliverObject)
 						.getValue();
@@ -1446,7 +1453,8 @@ public class ManifestConverter extends AbstractConverter {
 			InterfaceContents interfaceContents = (InterfaceContents) nodeDetailElement
 					.getValue();
 			List<Object> interfaces = interfaceContents.getAnyOrIpOrHost();
-			Resource omnInteface = model.createResource();
+			Resource omnInteface = model.createResource(UUID.randomUUID()
+					.toString());
 
 			if (interfaceContents.getMacAddress() != null) {
 				omnInteface.addProperty(Omn_resource.macAddress,
@@ -1461,7 +1469,8 @@ public class ManifestConverter extends AbstractConverter {
 
 				Object interfaceObject = interfaces.get(i);
 
-				Resource omnIpAddress = model.createResource();
+				Resource omnIpAddress = model.createResource(UUID.randomUUID()
+						.toString());
 				tryExtractIPAddress(interfaceObject, omnInteface, omnIpAddress);
 
 				// add interface to node
@@ -1485,7 +1494,8 @@ public class ManifestConverter extends AbstractConverter {
 
 			// add blank service, if blank service node in rspec
 			if (services.size() == 0) {
-				Resource omnService = model.createResource();
+				Resource omnService = model.createResource(UUID.randomUUID()
+						.toString());
 				omnResource.addProperty(Omn.hasService, omnService);
 			}
 
@@ -1494,7 +1504,7 @@ public class ManifestConverter extends AbstractConverter {
 
 				Object serviceObject = services.get(i);
 				Resource omnService = null;
-				omnService = model.createResource();
+				omnService = model.createResource(UUID.randomUUID().toString());
 				// if login service
 				if (serviceObject instanceof JAXBElement) {
 					final JAXBElement<?> serviceObjectJaxb = (JAXBElement<?>) serviceObject;

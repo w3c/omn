@@ -1057,7 +1057,8 @@ public class RequestConverter extends AbstractConverter {
 
 	private static void extractStitching(Resource topology, Object o) {
 		Model model = topology.getModel();
-		Resource stitchResource = model.createResource();
+		Resource stitchResource = model.createResource(UUID.randomUUID()
+				.toString());
 		stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
 
 		ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) o);
@@ -1077,7 +1078,8 @@ public class RequestConverter extends AbstractConverter {
 			Node child = children.item(i);
 
 			if (child.getNodeName().contains("path")) {
-				Resource path = model.createResource();
+				Resource path = model.createResource(UUID.randomUUID()
+						.toString());
 				path.addProperty(RDF.type, Omn_resource.Path);
 
 				NamedNodeMap pathAttributes = child.getAttributes();
@@ -1104,7 +1106,8 @@ public class RequestConverter extends AbstractConverter {
 			NodeList grandchildren = child.getChildNodes();
 
 			if (child.getNodeName().contains("hop")) {
-				Resource hop = path.getModel().createResource();
+				Resource hop = path.getModel().createResource(
+						UUID.randomUUID().toString());
 				hop.addProperty(RDF.type, Omn_resource.Hop);
 				path.addProperty(Omn.hasResource, hop);
 
@@ -1146,7 +1149,8 @@ public class RequestConverter extends AbstractConverter {
 	private static void extractOpenflow(Resource topology, Object o) {
 
 		Model model = topology.getModel();
-		Resource openflowResource = model.createResource();
+		Resource openflowResource = model.createResource(UUID.randomUUID()
+				.toString());
 		openflowResource.addProperty(RDF.type, Omn_resource.Openflow);
 
 		ElementNSImpl openflow = ((org.apache.xerces.dom.ElementNSImpl) o);
@@ -1172,7 +1176,8 @@ public class RequestConverter extends AbstractConverter {
 					+ child.getNodeName());
 
 			if (child.getNodeName().contains("controller")) {
-				Resource controller = model.createResource();
+				Resource controller = model.createResource(UUID.randomUUID()
+						.toString());
 				controller.addProperty(RDF.type, Omn_domain_pc.Controller);
 
 				NamedNodeMap controllerAttributes = child.getAttributes();
@@ -1197,7 +1202,8 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			if (child.getNodeName().contains("match")) {
-				Resource packet = model.createResource();
+				Resource packet = model.createResource(UUID.randomUUID()
+						.toString());
 				packet.addProperty(RDF.type, Omn_domain_pc.Packet);
 
 				NodeList grandchildren = child.getChildNodes();
@@ -1289,7 +1295,8 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			if (child.getNodeName().contains("group")) {
-				Resource datapath = model.createResource();
+				Resource datapath = model.createResource(UUID.randomUUID()
+						.toString());
 				datapath.addProperty(RDF.type, Omn_domain_pc.Datapath);
 
 				// get group name
@@ -1405,7 +1412,8 @@ public class RequestConverter extends AbstractConverter {
 			Resource offering) throws MissingRspecElementException {
 
 		final LinkSharedVlan vlan = (LinkSharedVlan) rspecObject;
-		Resource sharedVlan = offering.getModel().createResource();
+		Resource sharedVlan = offering.getModel().createResource(
+				UUID.randomUUID().toString());
 		sharedVlan.addProperty(RDF.type, Omn_domain_pc.SharedVlan);
 
 		String name = vlan.getName();
@@ -1487,8 +1495,8 @@ public class RequestConverter extends AbstractConverter {
 					"LinkPropertyContents > source_id/dest_id");
 		}
 
-		Resource linkPropertyResource = linkResource.getModel()
-				.createResource();
+		Resource linkPropertyResource = linkResource.getModel().createResource(
+				UUID.randomUUID().toString());
 		linkPropertyResource.addProperty(RDF.type, Omn_resource.LinkProperty);
 		linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
 		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceID);
@@ -1588,7 +1596,7 @@ public class RequestConverter extends AbstractConverter {
 			final IpContents availability = availablityJaxb.getValue();
 
 			Resource omnIpAddress = interfaceResource.getModel()
-					.createResource();
+					.createResource(UUID.randomUUID().toString());
 			omnIpAddress.addProperty(RDF.type, Omn_resource.IPAddress);
 
 			// add address (required)
@@ -1689,7 +1697,8 @@ public class RequestConverter extends AbstractConverter {
 			final HardwareTypeContents hw = (HardwareTypeContents) element
 					.getValue();
 
-			final Resource omnHw = omnNode.getModel().createResource();
+			final Resource omnHw = omnNode.getModel().createResource(
+					UUID.randomUUID().toString());
 			RDFNode type = ResourceFactory.createProperty(hw.getName());
 
 			// TODO: get rid of this line
@@ -2023,7 +2032,7 @@ public class RequestConverter extends AbstractConverter {
 	// }
 	//
 	// Resource linkPropertyResource = outputModel
-	// .createResource();
+	// .createResource(UUID.randomUUID().toString());
 	// linkPropertyResource.addProperty(RDF.type,
 	// Omn_resource.LinkProperty);
 	// linkPropertyResource.addProperty(
