@@ -35,7 +35,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeC
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.extensions.TrivialBandwidth;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -45,7 +44,6 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -1148,8 +1146,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			// .getProperty(Omn_domain_pc.hasEmulabTrivialBandwidth).getObject()
 			// .asLiteral().getInt();
 			
-			info.openmultinet.ontology.translators.geni.jaxb.advertisement.extensions.ObjectFactory of = new info.openmultinet.ontology.translators.geni.jaxb.advertisement.extensions.ObjectFactory();
-			TrivialBandwidth trivialBandwidth = of.createTrivialBandwidth();
+			// info.openmultinet.ontology.translators.geni.jaxb.advertisement.extensions.ObjectFactory of = new info.openmultinet.ontology.translators.geni.jaxb.advertisement.extensions.ObjectFactory();
+			//TrivialBandwidth trivialBandwidth = of.createTrivialBandwidth();
 			// trivialBandwidth.setValue(BigInteger.valueOf(value));
 			// geniNode.getAnyOrRelationOrLocation().add(trivialBandwidth);
 		}
