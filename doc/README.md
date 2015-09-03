@@ -2,6 +2,7 @@
 
 ## Background
  - Background: https://github.com/w3c/echidna/wiki
+ - Github for W3C docs: https://w3c.github.io/specs.html
  - Template: http://www.w3.org/respec/
  - Target: at https://github.com/open-multinet/playground-rspecs-ontology
  - Public link: as a report at https://www.w3.org/community/omn/
