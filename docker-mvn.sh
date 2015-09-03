@@ -1,8 +1,8 @@
 #!/bin/sh
-if [ -n "$@" ]; then
-	ARGS="mvn clean install"	
-else
+if [ $# -ge 0 ]; then
 	ARGS=$@
+else
+	ARGS="mvn clean install"	
 fi
 
 M2_CACHE="-v ${PWD}:/root/.m2"

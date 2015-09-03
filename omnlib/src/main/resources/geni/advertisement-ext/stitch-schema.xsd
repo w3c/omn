@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.geni.net/resources/rspec/ext/stitch/2/"
+    xmlns:Stitch="http://www.geni.net/resources/rspec/ext/stitch/2/">
+
+    <xs:annotation>
+      <xs:documentation>
+        This is the schema for the GENI Common Stitching RSpec Extension (for use in Ads, request, and manifests).
+        --- Open it in FireFox to view the XSD structure.
+      </xs:documentation>
+    </xs:annotation>
+    
+  <!--GENI Stitching -->
+  <xs:element name="stitching" type="Stitch:StitchContent"/>
+  
+  <xs:complexType name="StitchContent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:path"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:aggregate"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="aggregateSignature" 
+        type="Stitch:AggregateSignatureContent"/>
+    </xs:sequence>
+<!--    <xs:attribute name="id" use="required" type="xs:string"/> -->
+    <xs:attribute use="required" name="lastUpdateTime" type="xs:string"/>
+  </xs:complexType>
+  
+  <!-- Aggregate -->
+  <xs:element name="aggregate" type="Stitch:AggregateContent"/>
+  
+  <xs:complexType name="AggregateContent">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="lifetime" type="Stitch:Lifetime"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="aggregatetype" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="stitchingmode" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="scheduledservices" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="negotiatedservices" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="capabilities" type="Stitch:CapabilitiesContent"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:node"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:port"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:link"/>
+    </xs:sequence>
+    <xs:attribute name="id" use="required" type="xs:string"/>
+    <xs:attribute name="url" use="required" type="xs:string"/>
+  </xs:complexType>
+  
+
+  <!-- Capabilities -->
+  <xs:complexType name="CapabilitiesContent">
+      <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="capability" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+  <xs:annotation>
+      <xs:documentation>
+        The 'capabilities' field is used to add other tags of the capabilities of the aggregate for stitching. 
+        2 possible values are defined (others are possible), and clients must understand these attributes. 
+
+        'vlanproducer': The capability to autonomously produce a specific VLAN tag in response to an 
+                        unbounded request, namely an 'any' VLAN request. 
+        'vlanconsumer': The capability to accept and instantiate on a network/host interface a specific 
+                        VLAN tag as requested by a user, agent or vlanproducer. 
+
+         Note: A GENI AM MUST specify one or both of the vlanproducer and vlanconsumer capabilities in its ad RSpec. 
+               Optionally 'capabilities' can also be used as sub-elements for 'node', 'port' and/or 'link' elements.
+      </xs:documentation>
+  </xs:annotation>
+
+
+  <!-- Node -->
+  <xs:element name="node" type="Stitch:NodeContent"/>
+  
+  <xs:complexType name="NodeContent">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="lifetime" type="Stitch:Lifetime"/>
+        <xs:element minOccurs="0" name="address" type="Stitch:AddressContent" />
+        <xs:element minOccurs="0" maxOccurs="1" name="capabilities" type="Stitch:CapabilitiesContent"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:port"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string"/>
+  </xs:complexType>
+  
+  <!-- Port -->
+  <xs:element name="port" type="Stitch:PortContent" />
+  
+  <xs:complexType name="PortContent">
+      <xs:sequence>
+        <!-- <xs:group ref="Stitch:CapacityContent"/> -->
+        <xs:element minOccurs="0" maxOccurs="1" name="lifetime" type="Stitch:Lifetime"/>
+	<!-- capacity default unit is kbps. Supply an optional
+	explicit units string to change: G, g, Gbps, gbps, M, M, Mbps,
+	mbps, K, k, Kbps, kbps, B, b, bps -->
+        <xs:element minOccurs="0" name="capacity" type="xs:string"/>
+        <xs:element minOccurs="0" name="maximumReservableCapacity" type="xs:string"/>
+        <xs:element minOccurs="0" name="minimumReservableCapacity" type="xs:string"/>
+        <xs:element minOccurs="0" name="granularity" type="xs:string"/>
+        <xs:element minOccurs="0" name="unreservedCapacity" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="capabilities" type="Stitch:CapabilitiesContent"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stitch:link"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string"/>
+  </xs:complexType>
+  
+  
+  <!-- Link -->
+  <xs:element name="link" type="Stitch:LinkContent" />
+  
+  <xs:complexType name="LinkContent">
+      <xs:sequence>
+        <xs:element minOccurs="0" name="remoteLinkId" type="xs:string" />
+        <xs:element name="trafficEngineeringMetric" type="xs:string"/>        
+        <!-- <xs:group ref="Stitch:CapacityContent"/> -->
+	<!-- capacity default unit is kbps. Supply an optional
+	explicit units string to change: G, g, Gbps, gbps, M, M, Mbps,
+	mbps, K, k, Kbps, kbps, B, b, bps -->
+        <xs:element minOccurs="0" name="capacity" type="xs:string"/>
+        <xs:element minOccurs="0" name="maximumReservableCapacity" type="xs:string"/>
+        <xs:element minOccurs="0" name="minimumReservableCapacity" type="xs:string"/>
+        <xs:element minOccurs="0" name="granularity" type="xs:string"/>
+        <xs:element minOccurs="0" name="unreservedCapacity" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="linkProtectionTypes" type="xs:string"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="administrativeGroups" type="Stitch:AdministrativeGroup"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilityDescriptor" type="Stitch:SwitchingCapabilityDescriptor"/>
+        <xs:element minOccurs="0" maxOccurs="1" name="capabilities" type="Stitch:CapabilitiesContent"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string"/>
+  </xs:complexType>
+    
+  <!-- Path -->
+  <xs:element name="path" type="Stitch:PathContent" />
+  
+  <xs:complexType name="PathContent">
+      <xs:sequence>
+        <xs:element minOccurs="0" name="globalId" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="lifetime" type="Stitch:Lifetime" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="hop" type="Stitch:HopContent" />
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string"/>
+      <xs:attribute name="direction" use="optional" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="HopContent">
+      <xs:sequence>
+        <xs:element minOccurs="0" name="aggregateIdRef" type="xs:string" />
+        <xs:element minOccurs="0" name="nodeIdRef" type="xs:string" />
+        <xs:element minOccurs="0" name="portIdRef" type="xs:string" />
+        <xs:element minOccurs="0" name="linkIdRef" type="xs:string" />
+        <xs:element minOccurs="0" ref="Stitch:aggregate"/>
+        <xs:element minOccurs="0" ref="Stitch:node"/>
+        <xs:element minOccurs="0" ref="Stitch:port"/>
+        <xs:element minOccurs="0" ref="Stitch:link"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="nextHop" 
+                    type="Stitch:NextHopContent" />
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string"/>
+      <xs:attribute name="type" use="optional" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="NextHopContent">
+    <xs:simpleContent>
+        <xs:extension base="xs:string">
+            <xs:attribute use="optional" name="weight" type="xs:int"/>
+            <xs:attribute use="optional" name="optional" type="xs:boolean"/>
+        </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="Lifetime">
+      <xs:sequence>
+        <xs:element name="start" type="Stitch:TimeContent" minOccurs="0"/>
+        <xs:element name="end" type="Stitch:TimeContent" minOccurs="0"/>
+        <xs:element name="duration" type="Stitch:Duration" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string"/>
+      <xs:attribute name="direction" use="optional" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="TimeContent">
+    <xs:simpleContent>
+        <xs:extension base="xs:string">
+            <xs:attribute use="required" name="type" type="xs:string"/>
+        </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="Duration">
+    <xs:simpleContent>
+        <xs:extension base="xs:string">
+            <xs:attribute use="required" name="type" type="xs:string"/>
+        </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+<!-- Service Toplogy -->
+  <!--Service Topology elements will be used to describe more complex topologies like  a point-to-multipoint,
+multipoint-to-multipoint, and paths-with-protection.  This will described in a later revision-->
+<!-- /Service Toplogy -->
+  
+  <!-- Misc Types -->
+  <xs:complexType name="AggregateSignatureContent">
+    <xs:attribute name="aggregateId" use="required" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="AddressContent">
+    <xs:simpleContent>
+        <xs:extension base="xs:string">
+        	<!-- TODO: this line caused problems; need to implement custom bindings to resolve name conflict -->
+            <!-- xs:attribute use="optional" name="value" type="xs:string"/ -->
+            <xs:attribute use="optional" name="type" type="xs:string"/>
+        </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="SwitchingCapabilityDescriptor">
+    <xs:sequence>
+      <xs:element name="switchingcapType" type="xs:string" />
+      <xs:element name="encodingType" type="xs:string" />
+      <xs:element name="switchingCapabilitySpecificInfo" type="Stitch:SwitchingCapabilitySpecificInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AdministrativeGroup">
+    <xs:sequence>
+      <xs:element name="group" type="xs:int"/>
+      <xs:element minOccurs="0" name="groupID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+ 
+  <xs:complexType name="SwitchingCapabilitySpecificInfo">
+    <xs:choice>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_L2sc" type="Stitch:SwitchingCapabilitySpecificInfo_L2sc"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Lsc" type="Stitch:SwitchingCapabilitySpecificInfo_Lsc"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_OpenflowL2sc" type="Stitch:SwitchingCapabilitySpecificInfo_OpenflowL2sc"/>
+<!--
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Psc1" type="Stitch:SwitchingCapabilitySpecificInfo_Psc1"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Psc2" type="Stitch:SwitchingCapabilitySpecificInfo_Psc2"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Psc3" type="Stitch:SwitchingCapabilitySpecificInfo_Psc3"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Psc4" type="Stitch:SwitchingCapabilitySpecificInfo_Psc4"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Tdm" type="Stitch:SwitchingCapabilitySpecificInfo_Tdm"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="switchingCapabilitySpecificInfo_Fsc" type="Stitch:SwitchingCapabilitySpecificInfo_Fsc"/>
+-->
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="SwitchingCapabilitySpecificInfo_L2sc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="capability" type="xs:string"/>
+      <xs:element  minOccurs="0" maxOccurs="1" name="interfaceMTU" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="vlanRangeAvailability" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="suggestedVLANRange" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="vlanTranslation" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- LambdaSwitchingCapability - the GMPLS term for L1 -->
+  <xs:complexType name="SwitchingCapabilitySpecificInfo_Lsc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="capability" type="xs:string"/>
+      <xs:element minOccurs="0" name="wavelengthSpacing" type="xs:string"/>
+      <xs:element minOccurs="0" name="wavelengthRangeAvailability" type="xs:string"/>
+      <xs:element minOccurs="0" name="suggestedWavelengthRange" type="xs:string"/>
+      <xs:element minOccurs="0" name="wavelengthTranslation" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- OpenFlowCapability -->
+  <xs:complexType name="SwitchingCapabilitySpecificInfo_OpenflowL2sc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="capability" type="xs:string"/>
+      <xs:element  minOccurs="0" maxOccurs="1" name="interfaceMTU" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="vlanRangeAvailability" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="suggestedVLANRange" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="vlanTranslation" type="xs:boolean"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="ofAMUrl" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="controllerUrl" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+
