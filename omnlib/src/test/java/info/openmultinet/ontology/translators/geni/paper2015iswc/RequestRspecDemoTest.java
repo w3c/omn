@@ -5,7 +5,6 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
 
 import java.io.IOException;
 import java.io.InputStream;

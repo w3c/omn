@@ -8,7 +8,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecConte
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
-import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +26,6 @@ import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class DemoTestAdvertisement {
 
