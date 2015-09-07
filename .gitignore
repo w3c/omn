@@ -11,7 +11,7 @@ omnlib/src/main/java/info/openmultinet/ontology/vocabulary/
 omnlib/src/main/java/info/openmultinet/ontology/translators/geni/jaxb/
 omnlib/src/main/java/info/openmultinet/ontology/translators/tosca/jaxb/
 omnlib/src/test/java/info/openmultinet/ontology/vocabulary/
-bin/
+bin/info/
 eyeball*
 pellet*
 .travis/settings-secret.xml

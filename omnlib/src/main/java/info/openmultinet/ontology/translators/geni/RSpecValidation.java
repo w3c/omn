@@ -9,10 +9,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecConte
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;

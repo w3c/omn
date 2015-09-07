@@ -1057,8 +1057,8 @@ public class RequestConverter extends AbstractConverter {
 
 	private static void extractStitching(Resource topology, Object o) {
 		Model model = topology.getModel();
-		Resource stitchResource = model.createResource(UUID.randomUUID()
-				.toString());
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource stitchResource = model.createResource(uuid);
 		stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
 
 		ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) o);
@@ -1078,8 +1078,8 @@ public class RequestConverter extends AbstractConverter {
 			Node child = children.item(i);
 
 			if (child.getNodeName().contains("path")) {
-				Resource path = model.createResource(UUID.randomUUID()
-						.toString());
+				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource path = model.createResource(uuid2);
 				path.addProperty(RDF.type, Omn_resource.Path);
 
 				NamedNodeMap pathAttributes = child.getAttributes();
@@ -1106,8 +1106,8 @@ public class RequestConverter extends AbstractConverter {
 			NodeList grandchildren = child.getChildNodes();
 
 			if (child.getNodeName().contains("hop")) {
-				Resource hop = path.getModel().createResource(
-						UUID.randomUUID().toString());
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource hop = path.getModel().createResource(uuid);
 				hop.addProperty(RDF.type, Omn_resource.Hop);
 				path.addProperty(Omn.hasResource, hop);
 
@@ -1149,8 +1149,8 @@ public class RequestConverter extends AbstractConverter {
 	private static void extractOpenflow(Resource topology, Object o) {
 
 		Model model = topology.getModel();
-		Resource openflowResource = model.createResource(UUID.randomUUID()
-				.toString());
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource openflowResource = model.createResource(uuid);
 		openflowResource.addProperty(RDF.type, Omn_resource.Openflow);
 
 		ElementNSImpl openflow = ((org.apache.xerces.dom.ElementNSImpl) o);
@@ -1176,8 +1176,8 @@ public class RequestConverter extends AbstractConverter {
 					+ child.getNodeName());
 
 			if (child.getNodeName().contains("controller")) {
-				Resource controller = model.createResource(UUID.randomUUID()
-						.toString());
+				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource controller = model.createResource(uuid2);
 				controller.addProperty(RDF.type, Omn_domain_pc.Controller);
 
 				NamedNodeMap controllerAttributes = child.getAttributes();
@@ -1202,8 +1202,8 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			if (child.getNodeName().contains("match")) {
-				Resource packet = model.createResource(UUID.randomUUID()
-						.toString());
+				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource packet = model.createResource(uuid2);
 				packet.addProperty(RDF.type, Omn_domain_pc.Packet);
 
 				NodeList grandchildren = child.getChildNodes();
@@ -1295,8 +1295,8 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			if (child.getNodeName().contains("group")) {
-				Resource datapath = model.createResource(UUID.randomUUID()
-						.toString());
+				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource datapath = model.createResource(uuid2);
 				datapath.addProperty(RDF.type, Omn_domain_pc.Datapath);
 
 				// get group name
@@ -1412,8 +1412,8 @@ public class RequestConverter extends AbstractConverter {
 			Resource offering) throws MissingRspecElementException {
 
 		final LinkSharedVlan vlan = (LinkSharedVlan) rspecObject;
-		Resource sharedVlan = offering.getModel().createResource(
-				UUID.randomUUID().toString());
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource sharedVlan = offering.getModel().createResource(uuid);
 		sharedVlan.addProperty(RDF.type, Omn_domain_pc.SharedVlan);
 
 		String name = vlan.getName();
@@ -1494,9 +1494,9 @@ public class RequestConverter extends AbstractConverter {
 			throw new MissingRspecElementException(
 					"LinkPropertyContents > source_id/dest_id");
 		}
-
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 		Resource linkPropertyResource = linkResource.getModel().createResource(
-				UUID.randomUUID().toString());
+				uuid);
 		linkPropertyResource.addProperty(RDF.type, Omn_resource.LinkProperty);
 		linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
 		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceID);
@@ -1595,8 +1595,9 @@ public class RequestConverter extends AbstractConverter {
 			final JAXBElement<IpContents> availablityJaxb = (JAXBElement<IpContents>) interfaceObject;
 			final IpContents availability = availablityJaxb.getValue();
 
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource omnIpAddress = interfaceResource.getModel()
-					.createResource(UUID.randomUUID().toString());
+					.createResource(uuid);
 			omnIpAddress.addProperty(RDF.type, Omn_resource.IPAddress);
 
 			// add address (required)
@@ -1697,8 +1698,8 @@ public class RequestConverter extends AbstractConverter {
 			final HardwareTypeContents hw = (HardwareTypeContents) element
 					.getValue();
 
-			final Resource omnHw = omnNode.getModel().createResource(
-					UUID.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			final Resource omnHw = omnNode.getModel().createResource(uuid);
 			RDFNode type = ResourceFactory.createProperty(hw.getName());
 
 			// TODO: get rid of this line
@@ -1718,8 +1719,9 @@ public class RequestConverter extends AbstractConverter {
 		if (o.getClass().equals(Monitoring.class)) {
 
 			Monitoring monitor = (Monitoring) o;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource monitoringResource = omnResource.getModel()
-					.createResource(UUID.randomUUID().toString());
+					.createResource(uuid);
 			if (monitor.getUri() != null && monitor.getUri() != "") {
 				monitoringResource.addProperty(Omn_service.hasURI,
 						monitor.getUri());
@@ -1768,8 +1770,9 @@ public class RequestConverter extends AbstractConverter {
 			// Note: Do not change sliver type here, as Fiteagle will
 			// not work
 			if (AbstractConverter.isUrl(sliverName)) {
-				sliverTypeResource = omnResource.getModel().createResource(
-						UUID.randomUUID().toString());
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				sliverTypeResource = omnResource.getModel()
+						.createResource(uuid);
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverName));
 			} else {
@@ -1780,8 +1783,9 @@ public class RequestConverter extends AbstractConverter {
 						.createResource(sliverTypeUrl));
 
 				// create sliver type blank node
-				sliverTypeResource = omnResource.getModel().createResource(
-						UUID.randomUUID().toString());
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				sliverTypeResource = omnResource.getModel()
+						.createResource(uuid);
 
 			}
 			// omnResource.addProperty(RDF.type, sliverTypeResource);

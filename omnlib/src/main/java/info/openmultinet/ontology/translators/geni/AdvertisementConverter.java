@@ -44,6 +44,7 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -172,8 +173,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		if (rspecObject.toString().contains("stitching")) {
 
 			Model model = offering.getModel();
-			Resource stitchResource = model.createResource(UUID.randomUUID()
-					.toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource stitchResource = model.createResource(uuid);
 			stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
 
 			ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) rspecObject);
@@ -193,8 +194,8 @@ public class AdvertisementConverter extends AbstractConverter {
 				Node child = children.item(i);
 
 				if (child.getNodeName().contains("path")) {
-					Resource path = model.createResource(UUID.randomUUID()
-							.toString());
+					String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
+					Resource path = model.createResource(uuid2);
 					path.addProperty(RDF.type, Omn_resource.Path);
 
 					NamedNodeMap pathAttributes = child.getAttributes();
@@ -221,8 +222,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			final InterfaceContents content = nodeJaxb.getValue();
 
 			Model outputModel = omnResource.getModel();
-			Resource interfaceResource = outputModel.createResource(UUID
-					.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource interfaceResource = outputModel.createResource(uuid);
 
 			List<Object> interfaces = content.getAnyOrIpOrMonitoring();
 			for (int i = 0; i < interfaces.size(); i++) {
@@ -278,15 +279,16 @@ public class AdvertisementConverter extends AbstractConverter {
 		try {
 			@SuppressWarnings("unchecked")
 			final RspecSharedVlan vlan = (RspecSharedVlan) rspecObject;
-			Resource sharedVlan = offering.getModel().createResource(
-					UUID.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource sharedVlan = offering.getModel().createResource(uuid);
 			sharedVlan.addProperty(RDF.type, Omn_domain_pc.SharedVlan);
 
 			List<Available> availables = vlan.getAvailable();
 			for (Available available : availables) {
 
+				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
 				Resource availableOmn = offering.getModel().createResource(
-						UUID.randomUUID().toString());
+						uuid2);
 
 				if (available.isRestricted() != null) {
 					String restricted = available.isRestricted().toString();
@@ -425,8 +427,9 @@ public class AdvertisementConverter extends AbstractConverter {
 					"LinkPropertyContents > source_id/dest_id");
 		}
 
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 		Resource linkPropertyResource = linkResource.getModel().createResource(
-				UUID.randomUUID().toString());
+				uuid);
 		linkPropertyResource.addProperty(RDF.type, Omn_resource.LinkProperty);
 		linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
 		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceID);
@@ -458,8 +461,9 @@ public class AdvertisementConverter extends AbstractConverter {
 		final InterfaceRefContents content = (InterfaceRefContents) linkElement
 				.getValue();
 
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 		Resource interfaceResource = linkResource.getModel().createResource(
-				UUID.randomUUID().toString());
+				uuid);
 		interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
 				content.getComponentId());
 
@@ -473,8 +477,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			@SuppressWarnings("unchecked")
 			final RspecOpstate nodeJaxb = (RspecOpstate) rspecObject;
 
-			Resource opstate = offering.getModel().createResource(
-					UUID.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource opstate = offering.getModel().createResource(uuid);
 			opstate.addProperty(RDF.type, Omn_lifecycle.Opstate);
 
 			// extract start
@@ -512,8 +516,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			@SuppressWarnings("unchecked")
 			StateSpec stateSpecs = (StateSpec) object;
 
-			Resource state = opstate.getModel().createResource(
-					UUID.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource state = opstate.getModel().createResource(uuid);
 
 			String geniType = stateSpecs.getName();
 			OntClass omnType = CommonMethods.convertGeniStateToOmn(geniType);
@@ -545,8 +549,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			String description = action.getDescription();
 			String next = action.getNext();
 			String name = action.getName();
-			Resource actionResource = state.getModel().createResource(
-					UUID.randomUUID().toString());
+
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource actionResource = state.getModel().createResource(uuid);
 			actionResource.addProperty(RDF.type, Omn_lifecycle.Action);
 
 			if (next != null) {
@@ -577,8 +582,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			String description = wait.getDescription();
 			String next = wait.getNext();
 			String type = wait.getType();
-			Resource waitResource = state.getModel().createResource(
-					UUID.randomUUID().toString());
+
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource waitResource = state.getModel().createResource(uuid);
 			waitResource.addProperty(RDF.type, Omn_lifecycle.Wait);
 
 			if (next != null) {
@@ -619,8 +625,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			@SuppressWarnings("unchecked")
 			info.openmultinet.ontology.translators.geni.jaxb.advertisement.SliverType sliver = (info.openmultinet.ontology.translators.geni.jaxb.advertisement.SliverType) object;
 
-			final Resource omnSliver = opstate.getModel().createResource(
-					UUID.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			final Resource omnSliver = opstate.getModel().createResource(uuid);
 
 			// name is required
 			String name = sliver.getName();
@@ -670,8 +676,18 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			// blank node indicates that node does not yet have a declared
 			// sliver type; to be overwritten if has sliver type
-			Resource sliverType = topology.getModel().createResource(
-					UUID.randomUUID().toString());
+			// http://www.ietf.org/rfc/rfc4122.txt
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			URI sliverTypeUri = URI.create(uuid);
+			System.out.println("*******************************");
+			System.out.println(sliverTypeUri.toString());
+			System.out.println(sliverTypeUri.getHost());
+			System.out.println(sliverTypeUri.getScheme());
+			System.out.println(sliverTypeUri.getPath());
+			System.out.println("*******************************");
+			// Resource sliverType = topology.getModel().createResource(
+			// UUID.randomUUID().toString());
+			Resource sliverType = topology.getModel().createResource(uuid);
 			omnNode.addProperty(Omn_resource.hasSliverType, sliverType);
 
 			for (Object rspecNodeObject : rspecNode
@@ -697,8 +713,9 @@ public class AdvertisementConverter extends AbstractConverter {
 		try {
 			@SuppressWarnings("unchecked")
 			final Cloud cloudJaxb = (Cloud) rspecNodeObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			final Resource cloudResource = omnNode.getModel().createResource(
-					UUID.randomUUID().toString());
+					uuid);
 
 			omnNode.addProperty(RDF.type, Omn_resource.Cloud);
 			omnNode.addProperty(Omn.hasResource, cloudResource);
@@ -714,8 +731,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			@SuppressWarnings("unchecked")
 			Fd featureDescription = (Fd) rspecNodeObject;
 
-			Resource fdResource = model.createResource(UUID.randomUUID()
-					.toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource fdResource = model.createResource(uuid);
 			fdResource.addProperty(RDF.type, Omn_domain_pc.FeatureDescription);
 
 			// name is required
@@ -779,8 +796,9 @@ public class AdvertisementConverter extends AbstractConverter {
 		try {
 			@SuppressWarnings("unchecked")
 			Monitoring monitor = (Monitoring) rspecNodeObject;
-			Resource monitoringResource = model.createResource(UUID
-					.randomUUID().toString());
+
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource monitoringResource = model.createResource(uuid);
 			if (monitor.getUri() != null && monitor.getUri() != "") {
 				monitoringResource.addProperty(Omn_service.hasURI,
 						monitor.getUri());
@@ -846,8 +864,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<HardwareTypeContents> hwJaxb = (JAXBElement<HardwareTypeContents>) rspecNodeObject;
 			final HardwareTypeContents hw = hwJaxb.getValue();
 
-			final Resource omnHw = omnNode.getModel().createResource(
-					UUID.randomUUID().toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			final Resource omnHw = omnNode.getModel().createResource(uuid);
+
 			omnHw.addProperty(RDFS.label, hw.getName());
 			omnHw.addProperty(RDF.type, Omn_domain_pc.HardwareType);
 			for (Object hwObject : hw.getAny()) {
@@ -899,14 +918,16 @@ public class AdvertisementConverter extends AbstractConverter {
 						Omn_resource.SliverType)) {
 					sliverTypeResource = existingSliver;
 				} else {
+					String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 					sliverTypeResource = omnResource.getModel().createResource(
-							UUID.randomUUID().toString());
+							uuid);
 					omnResource.addProperty(Omn_resource.hasSliverType,
 							sliverTypeResource);
 				}
 			} else {
-				sliverTypeResource = omnResource.getModel().createResource(
-						UUID.randomUUID().toString());
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				sliverTypeResource = omnResource.getModel()
+						.createResource(uuid);
 				omnResource.addProperty(Omn_resource.hasSliverType,
 						sliverTypeResource);
 			}
@@ -947,8 +968,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			// url
 			// String diskImageURL = diskImageContents.getUrl();
 			// Resource diskImage = model.createResource(diskImageURL);
-			Resource diskImage = model.createResource(UUID.randomUUID()
-					.toString());
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource diskImage = model.createResource(uuid);
 			diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
 
 			// add name info

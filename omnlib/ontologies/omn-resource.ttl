@@ -173,7 +173,8 @@
 
 
 ### required to translate GENI RSpecs with multiple sliver types
-###  http://open-multinet.info/ontology/omn-resource#hasSliverType
+### NOT used in standard Open Multinet descriptions
+### http://open-multinet.info/ontology/omn-resource#hasSliverType
 
 :hasSliverType rdf:type owl:ObjectProperty ;
           
@@ -510,8 +511,9 @@ omn:Resource rdf:type owl:Class .
 
 
 
-
-###  http://open-multinet.info/ontology/omn-resource#SliverType
+### required to translate GENI RSpecs with multiple sliver types
+### NOT used in standard Open Multinet descriptions 
+### http://open-multinet.info/ontology/omn-resource#SliverType
 
 :SliverType rdf:type owl:Class ;
 

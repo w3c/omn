@@ -1,30 +1,15 @@
 package info.openmultinet.ontology.translators.dm;
 
-import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
-import info.openmultinet.ontology.translators.tosca.OMN2Tosca.RequiredResourceNotFoundException;
-import info.openmultinet.ontology.translators.tosca.Tosca2OMN;
-import info.openmultinet.ontology.translators.tosca.Tosca2OMN.UnsupportedException;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import javax.ws.rs.WebApplicationException;
-import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.hp.hpl.jena.rdf.model.Model;
 
 public class RESTTest {
 
@@ -48,6 +33,21 @@ public class RESTTest {
 				content);
 		System.out.println(result);
 		Assert.assertTrue("should contain an ad", result.contains("#Offering"));
+	}
+
+	@Test
+	public void testConvertToRdfXmlFromRspecAd() {
+		System.out.println("*************************************************");
+		System.out.println("*******   start convert Ad to model       *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/geni/advertisement/advertisement_paper2015.xml");
+
+		final String result = this.converter.post(
+				AbstractConverter.RSPEC_ADVERTISEMENT,
+				AbstractConverter.RDFXML, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain an ad", result.contains("Offering"));
 	}
 
 	@Test
@@ -77,8 +77,7 @@ public class RESTTest {
 		Assert.assertTrue("should contain an advertisement rspec",
 				result.contains("type=\"advertisement\""));
 	}
-	
-	
+
 	@Test
 	public void testConvertToGraphFromRspecRequest() {
 		System.out.println("*************************************************");
@@ -93,6 +92,22 @@ public class RESTTest {
 		System.out.println(result);
 		Assert.assertTrue("should contain a request",
 				result.contains("#Request"));
+	}
+
+	@Test
+	public void testConvertToRdfXmlFromRspecRequest() {
+		System.out.println("*************************************************");
+		System.out.println("*******   convert RSpec Request to model  *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/geni/request/request_unbound.xml");
+
+		final String result = this.converter.post(
+				AbstractConverter.RSPEC_REQUEST, AbstractConverter.RDFXML,
+				content);
+		System.out.println(result);
+		Assert.assertTrue("should contain a request",
+				result.contains("Request"));
 	}
 
 	@Test
@@ -126,7 +141,24 @@ public class RESTTest {
 		Assert.assertTrue("should contain a manifest",
 				result.contains("#Manifest"));
 	}
-	
+
+	@Test
+	public void testConvertToRdfXmlFromRspecManifest() {
+		System.out.println("*************************************************");
+		System.out
+				.println("*******   convert RSpec Manifest to model  *******");
+		System.out.println("*************************************************");
+		final String content = this
+				.getFilecontent("/geni/manifest/manifest_paper2015.xml");
+
+		final String result = this.converter.post(
+				AbstractConverter.RSPEC_MANIFEST, AbstractConverter.RDFXML,
+				content);
+		System.out.println(result);
+		Assert.assertTrue("should contain a manifest",
+				result.contains("Manifest"));
+	}
+
 	@Test
 	public void testConvertToGraphFromUnknown() {
 		System.out.println("*************************************************");
@@ -136,9 +168,8 @@ public class RESTTest {
 		final String content = this
 				.getFilecontent("/geni/manifest/manifest_paper2015.xml");
 
-		final String result = this.converter.post(
-				AbstractConverter.ANYFORMAT, AbstractConverter.TTL,
-				content);
+		final String result = this.converter.post(AbstractConverter.ANYFORMAT,
+				AbstractConverter.TTL, content);
 		System.out.println(result);
 		Assert.assertTrue("should contain a manifest",
 				result.contains("#Manifest"));
@@ -190,7 +221,21 @@ public class RESTTest {
 		Assert.assertTrue("should contain osco:STOPPED",
 				result.contains("osco:STOPPED"));
 	}
-	
+
+	@Test
+	public void testConvertToRdfXmlFromTosca() {
+		System.out.println("*************************************************");
+		System.out.println("*******   start convert Tosca to model  *********");
+		System.out.println("*************************************************");
+		final String content = this.getFilecontent("/tosca/request-dummy.xml");
+
+		final String result = this.converter.post(AbstractConverter.TOSCA,
+				AbstractConverter.RDFXML, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain osco:STOPPED",
+				result.contains("STOPPED"));
+	}
+
 	@Test
 	public void testConvertToGraphFromUnknownTosca() {
 		System.out.println("*************************************************");
