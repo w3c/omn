@@ -1,0 +1,17 @@
+.DS_Store
+catalog-*.xml
+omnlib/target/
+omnweb/target/
+.classpath
+.project
+.settings/
+.pmd
+convert.*.data
+omnlib/src/main/java/info/openmultinet/ontology/vocabulary/
+omnlib/src/main/java/info/openmultinet/ontology/translators/geni/jaxb/
+omnlib/src/main/java/info/openmultinet/ontology/translators/tosca/jaxb/
+omnlib/src/test/java/info/openmultinet/ontology/vocabulary/
+bin/info/
+eyeball*
+pellet*
+.travis/settings-secret.xml

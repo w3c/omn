@@ -1,0 +1,24 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://open-multinet.info/example#storageInstance>
+        a       <http://open-multinet.info/ontology/omn-domain-nfv#VnfInstance> ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasID>
+                "10" ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasOperation>
+                [ <http://open-multinet.info/ontology/omn-domain-nfv#hasAction>
+                          "Migrate" ;
+                  <http://open-multinet.info/ontology/omn-domain-nfv#hasParameter>
+                          [ <http://open-multinet.info/ontology/omn-domain-nfv#migratesTo>
+                                    [ <http://open-multinet.info/ontology/omn-domain-nfv#destIp>
+                                              "192.85.120.75" ] ]
+                ] ;
+        <http://open-multinet.info/ontology/omn-domain-nfv#hasVnfdName>
+                " storage " .
+
