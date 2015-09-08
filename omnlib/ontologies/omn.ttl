@@ -535,6 +535,25 @@
 
 
 
+###  http://open-multinet.info/ontology/omn#hasURI
+
+:hasURI rdf:type owl:DatatypeProperty ;
+          
+        rdfs:label "has URI"@en ;
+
+        rdfs:comment "Uniform Resource Identifier"@en ;
+          
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :Group
+                                    :Resource
+                                    :Service
+                                  )
+                    ] ;
+          
+        rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn#isReadonly
 
 :isReadonly rdf:type owl:DatatypeProperty ,
