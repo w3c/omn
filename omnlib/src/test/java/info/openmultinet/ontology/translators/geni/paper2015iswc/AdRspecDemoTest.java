@@ -80,7 +80,7 @@ public class AdRspecDemoTest {
 		Assert.assertTrue(
 				"component_id",
 				advertisement
-						.contains("component_id=\"http://testbed.example.org/resources#Openstack-1\""));
+						.contains("component_id=\"urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%23Openstack-1\""));
 		Assert.assertTrue(
 				"component_manager_id",
 				advertisement

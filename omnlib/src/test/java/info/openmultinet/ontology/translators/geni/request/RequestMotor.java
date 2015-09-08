@@ -23,22 +23,22 @@ public class RequestMotor {
 		final String filename = "/geni/request/request_motor.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
-		System.out.println("Get number of diffs and nodes:");
-		System.out.println("===============================");
-		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+		// System.out.println("Get number of diffs and nodes:");
+		// System.out.println("===============================");
+		// int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 		Assert.assertTrue("client id",

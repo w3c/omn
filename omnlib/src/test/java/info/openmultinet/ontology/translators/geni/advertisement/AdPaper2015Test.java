@@ -76,7 +76,7 @@ public class AdPaper2015Test {
 			String componentId = nodes.item(0).getAttributes()
 					.getNamedItem("component_id").getNodeValue();
 			Assert.assertTrue(componentId
-					.equals("http://testbed.example.org/resources#motorgarage-1"));
+					.equals("urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%23motorgarage-1"));
 
 			NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 					"http://www.geni.net/resources/rspec/3", "sliver_type");

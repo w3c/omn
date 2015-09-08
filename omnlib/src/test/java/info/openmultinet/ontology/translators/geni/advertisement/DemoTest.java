@@ -26,18 +26,18 @@ public class DemoTest {
 		final String filename = "/geni/advertisement/demo-test.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-//		System.out.println("Converting this input from '" + filename + "':");
-//		System.out.println("===============================");
-//		System.out.println(inputRspec);
-//		System.out.println("===============================");
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(inputRspec);
+		System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-//		System.out.println("Generated this rspec:");
-//		System.out.println("===============================");
-//		System.out.println(outputRspec);
-//		System.out.println("===============================");
+		System.out.println("Generated this rspec:");
+		System.out.println("===============================");
+		System.out.println(outputRspec);
+		System.out.println("===============================");
 
 		Assert.assertTrue("type",
 				outputRspec.contains("type=\"advertisement\""));
@@ -75,7 +75,7 @@ public class DemoTest {
 			String componentId = nodes.item(0).getAttributes()
 					.getNamedItem("component_id").getNodeValue();
 			Assert.assertTrue(componentId
-					.equals("http://testbed.example.org/resources#Openstack-1"));
+					.equals("urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%23Openstack-1"));
 
 			NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 					"http://www.geni.net/resources/rspec/3", "sliver_type");

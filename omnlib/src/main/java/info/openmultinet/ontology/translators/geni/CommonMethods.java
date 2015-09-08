@@ -24,6 +24,10 @@ public class CommonMethods {
 			return "";
 		}
 
+		if (AbstractConverter.isUrn(url)) {
+			return url;
+		}
+
 		if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
 
 			// AbstractConverter.LOG.info(uri.getScheme() + ": " +
@@ -96,6 +100,10 @@ public class CommonMethods {
 		URI uri = URI.create(urn);
 		if (uri == null) {
 			return "";
+		}
+
+		if (AbstractConverter.isUrl(urn)) {
+			return urn;
 		}
 
 		if (uri.getScheme().equals("urn")) {

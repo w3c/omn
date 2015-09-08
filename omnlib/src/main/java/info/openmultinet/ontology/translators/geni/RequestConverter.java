@@ -978,22 +978,18 @@ public class RequestConverter extends AbstractConverter {
 					.getProperty(Omn_lifecycle.implementedBy).getObject();
 
 			String componentId = implementedBy.toString();
-			if (AbstractConverter.isUrn(componentId)) {
-				node.setComponentId(componentId);
-			} else {
-				node.setComponentId(CommonMethods.generateUrnFromUrl(
-						componentId, "node"));
-			}
+			node.setComponentId(CommonMethods.generateUrnFromUrl(componentId,
+					"node"));
 
 			// override above way of setting component ID, if the specific
 			// property hasComponentID is set
-			if (resource.getResource()
-					.hasProperty(Omn_lifecycle.hasComponentID)) {
-				componentId = resource.getResource()
-						.getProperty(Omn_lifecycle.hasComponentID).getObject()
-						.asLiteral().getString();
-				node.setComponentId(componentId);
-			}
+			// if (resource.getResource()
+			// .hasProperty(Omn_lifecycle.hasComponentID)) {
+			// componentId = resource.getResource()
+			// .getProperty(Omn_lifecycle.hasComponentID).getObject()
+			// .asLiteral().getString();
+			// node.setComponentId(componentId);
+			// }
 
 			if (implementedBy.asResource().hasProperty(
 					Omn_lifecycle.hasComponentName)) {
@@ -1643,12 +1639,9 @@ public class RequestConverter extends AbstractConverter {
 		if (null != node.getComponentId() && !node.getComponentId().isEmpty()) {
 
 			String componentId = node.getComponentId();
-			if (AbstractConverter.isUrl(componentId)) {
-				implementedBy = model.createResource(componentId);
-			} else {
-				implementedBy = model.createResource(CommonMethods
-						.generateUrlFromUrn(componentId));
-			}
+			implementedBy = model.createResource(CommonMethods
+					.generateUrlFromUrn(componentId));
+
 			omnResource.addProperty(Omn_lifecycle.hasComponentID, componentId);
 			omnResource.addProperty(Omn_lifecycle.implementedBy, implementedBy);
 			if (null != node.getComponentName()

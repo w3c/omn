@@ -1042,138 +1042,152 @@ public class ManifestConverter extends AbstractConverter {
 		JAXBElement<?> element = (JAXBElement<?>) o;
 
 		if (element.getDeclaredType().equals(NodeContents.class)) {
-			NodeContents node = (NodeContents) element.getValue();
+			extractNode(element, topology);
 
-			String sliverID = node.getSliverId();
-			Resource omnResource = null;
-			if (sliverID != null) {
-				omnResource = model.createResource(CommonMethods
-						.generateUrlFromUrn(sliverID));
-				omnResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
-			} else {
-				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-				omnResource = model.createResource(uuid);
-			}
-
-			// .createResource(parseSliverID(node.getSliverId()));
-
-			// client_id is required by manifest-common.xsd
-			String clientId = node.getClientId();
-			if (clientId == null) {
-				throw new MissingRspecElementException(
-						"NodeContents > client_id");
-			}
-			omnResource.addProperty(Omn_lifecycle.hasID, clientId);
-
-			omnResource.addProperty(RDFS.label, node.getClientId());
-			omnResource.addProperty(RDF.type, Omn.Resource);
-
-			if (null != node.isExclusive()) {
-				omnResource.addProperty(Omn_resource.isExclusive,
-						model.createTypedLiteral(node.isExclusive()));
-			}
-
-			if (node.getComponentManagerId() != null) {
-				RDFNode manager = ResourceFactory.createResource(node
-						.getComponentManagerId());
-				omnResource.addProperty(Omn_lifecycle.managedBy, manager);
-			}
-
-			for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
-				if (nodeDetailObject instanceof JAXBElement) {
-					JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
-
-					extractLocation(nodeDetailElement, omnResource);
-					extractSliverType(nodeDetailElement, omnResource);
-					extractServices(nodeDetailElement, omnResource, model);
-					extractInterfaces(nodeDetailElement, omnResource, model);
-
-				} else if (nodeDetailObject.getClass().equals(
-						GeniSliverInfo.class)) {
-					extractGeniSliverInfo(nodeDetailObject, omnResource);
-				} else {
-					ManifestConverter.LOG.log(Level.INFO,
-							"Found unknown extsion within node: "
-									+ nodeDetailObject.getClass());
-				}
-			}
-
-			// component id is not required
-			String componentIdOriginal = node.getComponentId();
-			if (componentIdOriginal != null) {
-				String componentId = CommonMethods
-						.generateUrlFromUrn(componentIdOriginal);
-				Resource componentIDResource = model
-						.createResource(componentId);
-				omnResource.addProperty(Omn_lifecycle.implementedBy,
-						componentIDResource);
-			}
-
-			// component name is not required
-			String componentName = node.getComponentName();
-			if (componentName != null) {
-				omnResource.addProperty(Omn_lifecycle.hasComponentName,
-						componentName);
-			}
-
-			topology.addProperty(Omn.hasResource, omnResource);
 		} else if (o
 				.getClass()
 				.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring.class)) {
-
 			// TODO
 			ManifestConverter.LOG.log(Level.INFO, "TODO: monitoring extension");
-
 		} else if (element.getDeclaredType().equals(LinkContents.class)) {
-
-			LinkContents link = (LinkContents) element.getValue();
-			Resource linkResource;
-			String sliverID = link.getSliverId();
-			if (sliverID != null) {
-				linkResource = model.createResource(CommonMethods
-						.generateUrlFromUrn(sliverID));
-				linkResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
-			} else {
-				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-				linkResource = model.createResource(uuid);
-			}
-
-			if (link.getClientId() == null) {
-				throw new MissingRspecElementException(
-						"LinkContents > client_id ");
-			}
-
-			linkResource.addLiteral(Omn_resource.clientId, link.getClientId()); // required
-			linkResource.addProperty(RDF.type, Omn_resource.Link);
-
-			if (link.getVlantag() != null) {
-				linkResource.addLiteral(Omn_domain_pc.vlanTag,
-						link.getVlantag());
-			}
-			// Get source and sink interfaces
-			@SuppressWarnings("unchecked")
-			List<Object> linkContents = link.getAnyOrPropertyOrLinkType();
-			for (Object linkObject : linkContents) {
-				if (linkObject instanceof JAXBElement) {
-					JAXBElement<?> linkElement = (JAXBElement<?>) linkObject;
-
-					if (linkElement.getDeclaredType().equals(
-							InterfaceRefContents.class)) {
-						InterfaceRefContents interfaceRefContents = (InterfaceRefContents) linkElement
-								.getValue();
-						linkResource.addProperty(Omn_resource.hasInterface,
-								interfaceRefContents.getClientId());
-					}
-
-				} else if (linkObject.getClass().equals(GeniSliverInfo.class)) {
-					extractGeniSliverInfo(linkObject, linkResource);
-				} else {
-					ManifestConverter.LOG.log(Level.INFO,
-							"Unknown extension witin link");
-				}
-			}
-			topology.addProperty(Omn.hasResource, linkResource);
+			extractLink(element, topology);
 		}
+	}
+
+	private static void extractNode(JAXBElement<?> element, Resource topology)
+			throws MissingRspecElementException {
+		NodeContents node = (NodeContents) element.getValue();
+
+		String sliverID = node.getSliverId();
+		Resource omnResource = null;
+		if (sliverID != null) {
+			omnResource = topology.getModel().createResource(
+					CommonMethods.generateUrlFromUrn(sliverID));
+			omnResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
+		} else {
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			omnResource = topology.getModel().createResource(uuid);
+		}
+
+		// .createResource(parseSliverID(node.getSliverId()));
+
+		// client_id is required by manifest-common.xsd
+		String clientId = node.getClientId();
+		if (clientId == null) {
+			throw new MissingRspecElementException("NodeContents > client_id");
+		}
+		omnResource.addProperty(Omn_lifecycle.hasID, clientId);
+
+		omnResource.addProperty(RDFS.label, node.getClientId());
+		omnResource.addProperty(RDF.type, Omn.Resource);
+
+		if (null != node.isExclusive()) {
+			omnResource.addProperty(Omn_resource.isExclusive, topology
+					.getModel().createTypedLiteral(node.isExclusive()));
+		}
+		
+		extractComponentDetails(node, omnResource);
+
+		for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
+			if (nodeDetailObject instanceof JAXBElement) {
+				JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
+
+				extractLocation(nodeDetailElement, omnResource);
+				extractSliverType(nodeDetailElement, omnResource);
+				extractServices(nodeDetailElement, omnResource,
+						topology.getModel());
+				extractInterfaces(nodeDetailElement, omnResource,
+						topology.getModel());
+
+			} else if (nodeDetailObject.getClass().equals(GeniSliverInfo.class)) {
+				extractGeniSliverInfo(nodeDetailObject, omnResource);
+			} else {
+				ManifestConverter.LOG.log(Level.INFO,
+						"Found unknown extsion within node: "
+								+ nodeDetailObject.getClass());
+			}
+		}
+
+		topology.addProperty(Omn.hasResource, omnResource);
+	}
+
+	private static void extractComponentDetails(NodeContents node,
+			Resource omnResource) {
+		if (node.getComponentManagerId() != null) {
+			RDFNode manager = ResourceFactory.createResource(node
+					.getComponentManagerId());
+			omnResource.addProperty(Omn_lifecycle.managedBy, manager);
+		}
+		
+
+		// component id is not required
+		String componentIdOriginal = node.getComponentId();
+		if (componentIdOriginal != null) {
+			String componentId = CommonMethods
+					.generateUrlFromUrn(componentIdOriginal);
+			Resource componentIDResource = omnResource.getModel().createResource(
+					componentId);
+			omnResource.addProperty(Omn_lifecycle.implementedBy,
+					componentIDResource);
+		}
+
+		// component name is not required
+		String componentName = node.getComponentName();
+		if (componentName != null) {
+			omnResource.addProperty(Omn_lifecycle.hasComponentName,
+					componentName);
+		}
+
+		
+	}
+
+	private static void extractLink(JAXBElement<?> element, Resource topology)
+			throws MissingRspecElementException {
+		LinkContents link = (LinkContents) element.getValue();
+		Resource linkResource;
+		String sliverID = link.getSliverId();
+		if (sliverID != null) {
+			linkResource = topology.getModel().createResource(
+					CommonMethods.generateUrlFromUrn(sliverID));
+			linkResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
+		} else {
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			linkResource = topology.getModel().createResource(uuid);
+		}
+
+		if (link.getClientId() == null) {
+			throw new MissingRspecElementException("LinkContents > client_id ");
+		}
+
+		linkResource.addLiteral(Omn_resource.clientId, link.getClientId()); // required
+		linkResource.addProperty(RDF.type, Omn_resource.Link);
+
+		if (link.getVlantag() != null) {
+			linkResource.addLiteral(Omn_domain_pc.vlanTag, link.getVlantag());
+		}
+		// Get source and sink interfaces
+		@SuppressWarnings("unchecked")
+		List<Object> linkContents = link.getAnyOrPropertyOrLinkType();
+		for (Object linkObject : linkContents) {
+			if (linkObject instanceof JAXBElement) {
+				JAXBElement<?> linkElement = (JAXBElement<?>) linkObject;
+
+				if (linkElement.getDeclaredType().equals(
+						InterfaceRefContents.class)) {
+					InterfaceRefContents interfaceRefContents = (InterfaceRefContents) linkElement
+							.getValue();
+					linkResource.addProperty(Omn_resource.hasInterface,
+							interfaceRefContents.getClientId());
+				}
+
+			} else if (linkObject.getClass().equals(GeniSliverInfo.class)) {
+				extractGeniSliverInfo(linkObject, linkResource);
+			} else {
+				ManifestConverter.LOG.log(Level.INFO,
+						"Unknown extension witin link");
+			}
+		}
+		topology.addProperty(Omn.hasResource, linkResource);
 	}
 
 	private static void extractGeniSliverInfo(Object nodeDetailObject,

@@ -25,22 +25,22 @@ public class RequestIonTest {
 		final String filename = "/geni/request/request_ion.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		System.out.println("Converting this input from '" + filename + "':");
-		System.out.println("===============================");
-		System.out.println(inputRspec);
-		System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		System.out.println("Generated this rspec:");
-		System.out.println("===============================");
-		System.out.println(outputRspec);
-		System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
-		System.out.println("Get number of diffs and nodes:");
-		System.out.println("===============================");
-		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+		// System.out.println("Get number of diffs and nodes:");
+		// System.out.println("===============================");
+		// int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
 
 		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
 		Assert.assertTrue("client id",
@@ -58,7 +58,8 @@ public class RequestIonTest {
 		Assert.assertTrue(nodes.getLength() == 2);
 
 		NodeList stitching = xmlDoc.getElementsByTagNameNS(
-				"http://www.geni.net/resources/rspec/ext/stitch/2/", "stitching");
+				"http://www.geni.net/resources/rspec/ext/stitch/2/",
+				"stitching");
 		Assert.assertTrue(stitching.getLength() == 1);
 
 		String sliverName = stitching.item(0).getAttributes()

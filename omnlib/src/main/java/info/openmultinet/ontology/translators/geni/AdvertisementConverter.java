@@ -649,10 +649,10 @@ public class AdvertisementConverter extends AbstractConverter {
 			final JAXBElement<NodeContents> nodeJaxb = (JAXBElement<NodeContents>) object;
 			final NodeContents rspecNode = nodeJaxb.getValue();
 
-			// String componentId =
-			// AbstractConverter.generateUrlFromUrn(rspecNode
-			// .getComponentId());
-			String componentId = rspecNode.getComponentId();
+			// if it is an acceptable OMN URN, it will be converted into a URL
+			String componentId = CommonMethods.generateUrlFromUrn(rspecNode
+					.getComponentId());
+			
 			final Resource omnNode = topology.getModel().createResource(
 					componentId);
 
@@ -678,15 +678,6 @@ public class AdvertisementConverter extends AbstractConverter {
 			// sliver type; to be overwritten if has sliver type
 			// http://www.ietf.org/rfc/rfc4122.txt
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			URI sliverTypeUri = URI.create(uuid);
-			System.out.println("*******************************");
-			System.out.println(sliverTypeUri.toString());
-			System.out.println(sliverTypeUri.getHost());
-			System.out.println(sliverTypeUri.getScheme());
-			System.out.println(sliverTypeUri.getPath());
-			System.out.println("*******************************");
-			// Resource sliverType = topology.getModel().createResource(
-			// UUID.randomUUID().toString());
 			Resource sliverType = topology.getModel().createResource(uuid);
 			omnNode.addProperty(Omn_resource.hasSliverType, sliverType);
 
@@ -1954,9 +1945,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			final NodeContents node) {
 
 		String url = resource.getResource().getURI();
-		// String urn = AbstractConverter.generateUrnFromUrl(url, "node");
+		String urn = CommonMethods.generateUrnFromUrl(url, "node");
 
-		node.setComponentId(url);
+		node.setComponentId(urn);
 
 		if (resource.getResource().hasProperty(Omn_lifecycle.hasComponentName)) {
 			node.setComponentName(resource.getResource()

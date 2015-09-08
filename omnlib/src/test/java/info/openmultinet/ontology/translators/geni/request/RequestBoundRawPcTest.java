@@ -77,7 +77,7 @@ public class RequestBoundRawPcTest {
 		String componentId = node.item(0).getAttributes()
 				.getNamedItem("component_id").getNodeValue();
 		Assert.assertTrue(componentId
-				.equals("https://localhost:8443/resource/physicalnode-1"));
+				.equals("urn:publicid:IDN+localhost+node+https%3A%2F%2Flocalhost%2Fresource%2Fphysicalnode-1"));
 
 		String componentManagerId = node.item(0).getAttributes()
 				.getNamedItem("component_manager_id").getNodeValue();

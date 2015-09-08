@@ -6,6 +6,8 @@ import info.openmultinet.ontology.translators.AbstractConverter;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 public class DeprecatedVersionTest {
 
@@ -36,40 +38,40 @@ public class DeprecatedVersionTest {
 				+ "<interface component_id=\"urn:publicid:IDN+emulab.geni.emulab.net+interface+pc160:eth1\"/>"
 				+ "</node>" + "</rspec>";
 
-		System.out.println(RSpecValidation.fixVerson(rspec1));
-
+		RSpecValidation.fixVerson(rspec1);
 	}
 
 	@Test
-	public void version2() {
-		// System.out.println("*************URN conversion*******************");
-		// String urn =
-		// "urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%23motorgarage-1";
-		// System.out.println("Original urn: " + urn);
-		// String urlNew = CommonMethods.generateUrlFromUrn(urn);
-		// System.out.println("Convert back to url: " + urlNew);
-		// System.out.println();
-		// System.out.println();
-		//
-		// Assert.assertTrue(urlNew
-		// .equals("http://testbed.example.org/resources#motorgarage-1"));
+	public void version2() throws DeprecatedRspecVersionException {
+		String rspec2 = "<rspec xmlns=\"http://www.protogeni.net/resources/rspec/2\" "
+				+ "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+				+ "xsi:schemaLocation=\"http://www.protogeni.net/resources/rspec/2"
+				+ " http://www.protogeni.net/resources/rspec/2/request.xsd\""
+				+ " type=\"request\" ></rspec>";
+		
+		String outputRspec = RSpecValidation.fixVerson(rspec2);
+		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+
+		// check that output has one rspec element
+		NodeList rspec = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "rspec");
+		Assert.assertTrue(rspec.getLength() == 1);
 	}
 
 	@Test
-	public void version3() {
-		// System.out
-		// .println("*************localhost hash round trip*******************");
-		// String url = "http://localhost/resources#Openstack-1";
-		// System.out.println("Original url: " + url);
-		// String urn = CommonMethods.generateUrnFromUrl(url, "node");
-		// System.out.println("Convert to urn: " + urn);
-		// String urlNew = CommonMethods.generateUrlFromUrn(urn);
-		// System.out.println("Convert back to url: " + urlNew);
-		// System.out.println();
-		// System.out.println();
-		// Assert.assertTrue(urn
-		// .equals("urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresources%23Openstack-1"));
-		// ;
-		// Assert.assertTrue(url.equals(urlNew));
+	public void version3() throws DeprecatedRspecVersionException {
+		String rspec2 = "<rspec xmlns=\"http://www.geni.net/resources/rspec/3\" "
+				+ "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+				+ "xsi:schemaLocation=\"http://www.geni.net/resources/rspec/3 "
+				+ " http://www.geni.net/resources/rspec/3/request.xsd\""
+				+ " type=\"request\" ></rspec>";
+		
+		String outputRspec = RSpecValidation.fixVerson(rspec2);
+		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+
+		// check that output has one rspec element
+		NodeList rspec = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "rspec");
+		Assert.assertTrue(rspec.getLength() == 1);
 	}
 }
