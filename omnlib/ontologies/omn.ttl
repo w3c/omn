@@ -539,18 +539,18 @@
 
 :hasURI rdf:type owl:DatatypeProperty ;
           
-          rdfs:label "has URI"@en ;
+        rdfs:label "has URI"@en ;
 
-          rdfs:comment "Uniform Resource Identifier"@en ;
+        rdfs:comment "Uniform Resource Identifier"@en ;
           
-          rdfs:domain [ rdf:type owl:Class ;
-              owl:unionOf ( omn:Group
-                            omn:Resource
-                            omn:Service
-                          )
-            ] ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :Group
+                                    :Resource
+                                    :Service
+                                  )
+                    ] ;
           
-          rdfs:range xsd:string .
+        rdfs:range xsd:string .
 
 
 
