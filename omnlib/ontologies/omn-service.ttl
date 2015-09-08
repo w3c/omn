@@ -100,6 +100,25 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-service#hasURI
+
+:hasURI rdf:type owl:DatatypeProperty ;
+          
+          rdfs:label "has URI"@en ;
+
+          rdfs:comment "Uniform Resource Identifier"@en ;
+          
+          rdfs:domain [ rdf:type owl:Class ;
+              owl:unionOf ( omn:Group
+                            omn:Resource
+                            omn:Service
+                          )
+            ] ;
+          
+          rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-service#installPath
 
 :installPath rdf:type owl:DatatypeProperty ;
@@ -236,22 +255,6 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/omn-service#hasURI
-
-:hasURI rdf:type owl:ObjectProperty ;
-          
-          rdfs:label "has URI"@en ;
-
-          rdfs:comment "URI of OSMP monitoring service"@en ;
-          
-          rdfs:domain [ rdf:type owl:Class ;
-              owl:unionOf ( omn:Group
-                            omn:Resource
-                            omn:Service
-                          )
-            ] ;
-          
-          rdfs:range owl:Thing .
 
 
 #################################################################
