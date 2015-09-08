@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.protogeni.net/wiki/ProtoGeni/wiki/RspecAdOpState -->
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.protogeni.net/resources/rspec/2" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2 http://www.protogeni.net/resources/rspec/2/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.protogeni.net/resources/rspec/ext/opstate/1/ad.xsd" type="advertisement" generated="2012-05-18T22:25:38Z" expires="2012-05-18T22:25:38Z" >
+<rspec_opstate xmlns="http://www.geni.net/resources/rspec/ext/opstate/1"
+  aggregate_manager_id="urn:publicid:IDN+jonlab.tbres.emulab.net+authority+cm"
+  start="geni_notready">
+  <!-- The start state is the operating state the node will be in when the allocation state was
+       'geni_provisioned' and the act of provisioning (whatever that means for this
+       sliver_type) is complete. All slivers will start out with operational state
+       'geni_pending_allocation' until that process completes. -->
+
+  <!-- The list of sliver types on nodes or link types on links that
+       use this state machine. Operational state machines are
+       per-aggregate per-sliver_type. These sliver_type names may also
+       refer to resources defined in extensions rather than just nodes
+       and links. -->
+  <sliver_type name="raw-pc" />
+  <sliver_type name="emulab-openvz" />
+
+  <!-- Each state may have actions which can be invoked by the user and/or
+       waits which are internally triggered by the AM. -->
+  <state name="geni_notready">
+    <!-- The name of the action and the state which will result when
+         that action is invoked using AM API method PerformOperationalAction. -->
+    <action name="geni_start" next="geni_configuring">
+      <description>Boot the node</description>
+    </action>
+    <description>Raw PCs and VMs begin powered down or inactive. They
+    must be explicitly booted before use.</description>
+  </state>
+  <state name="geni_configuring">
+    <!-- A 'wait' in a state indicates a possible next state after the current
+	 state, that the AM may trigger based on ongoing AM operations or sliver
+	 changes. The 'type' on the 'wait' is a description for distinguishing when
+	 each next state might be triggered. A single state may have both 'action's
+	 and 'wait's, e.g. waits for success and failure, as well as an action for
+	 'cancel'. -->
+    <wait type="geni_success" next="geni_ready" />
+    <wait type="geni_failure" next="geni_failed" />
+    <description>Booting takes a significant amount of time, so it
+    happens asynchronously while the node is in this
+    state.</description>
+  </state>
+  <state name="geni_ready">
+    <action name="geni_restart" next="geni_configuring">
+      <description>Reboot the node</description>
+    </action>
+    <action name="geni_stop" next="geni_stopping">
+      <description>Power down or stop the node.</description>
+    </action>
+    <description>The node is up and ready to use.</description>
+  </state>
+  <state name="geni_stopping">
+    <wait type="geni_success" next="geni_notready" />
+    <wait type="geni_failure" next="geni_failed" />
+    <description>The node is being stopped or rebooted.</description>
+  </state>
+  <state name="geni_failed">
+    <description>The node has failed and requires administrator
+    intervention before it can be used. Please contact
+    name@example.com for assistance.</description>
+  </state>
+</rspec_opstate>
+
+<rspec_opstate xmlns="http://www.geni.net/resources/rspec/ext/opstate/1"
+  aggregate_manager_id="urn:publicid:IDN+jonlab.tbres.emulab.net+authority+cm"
+  start="geni_ready">
+  <sliver_type name="vlan" />
+  <state name="geni_ready">
+    <description>VLans are ready to transit packets as soon as they
+    are allocated. No boot process is necessary.</description>
+  </state>
+</rspec_opstate>
+
+<node component_manager_id="urn:publicid:IDN+jonlab.tbres.emulab.net+authority+cm" component_name="pc39"  component_id="urn:publicid:IDN+jonlab.tbres.emulab.net+node+pc39"  exclusive="true" >
+  <hardware_type name="pc600">
+    <emulab:node_type type_slots="1" />
+  </hardware_type>
+  <sliver_type name="raw-pc">
+<disk_image name="urn:publicid:IDN+jonlab.tbres.emulab.net+image+emulab-ops:FEDORA10-STD" os="Fedora" version="10" description="Standard 32-bit Fedora 10 image" />
+<disk_image name="urn:publicid:IDN+jonlab.tbres.emulab.net+image+emulab-ops:FBSD72-STD" os="FreeBSD" version="7.2" description="FreeBSD 7.2" />
+<disk_image name="urn:publicid:IDN+jonlab.tbres.emulab.net+image+emulab-ops:UBUNTU10-STD" os="Linux" version="10" description="Ubuntu 10 32-bit" />
+<disk_image name="urn:publicid:IDN+jonlab.tbres.emulab.net+image+emulab-ops:RHL-STD" os="Linux" version="" description="Any of RedHat Linux" default="true" />
+  </sliver_type>
+  <hardware_type name="pc">
+    <emulab:node_type type_slots="1" />
+  </hardware_type>
+  <hardware_type name="delay">
+    <emulab:node_type type_slots="1" />
+  </hardware_type>
+  <hardware_type name="delay-pc600">
+    <emulab:node_type type_slots="1" />
+  </hardware_type>
+  <hardware_type name="pc600-vm">
+    <emulab:node_type type_slots="10" />
+  </hardware_type>
+  <hardware_type name="pcvm600">
+    <emulab:node_type type_slots="10" />
+  </hardware_type>
+  <sliver_type name="emulab-openvz" />
+  <hardware_type name="pcvm">
+    <emulab:node_type type_slots="10" />
+  </hardware_type>
+  <hardware_type name="lan">
+    <emulab:node_type type_slots="unlimited" static="true"/>
+  </hardware_type>
+  <available now="false" />
+  <location country="US" longitude="-111.84581" latitude="40.768652" />
+</node>
+
+</rspec>

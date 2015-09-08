@@ -1,0 +1,558 @@
+@prefix : <http://open-multinet.info/ontology/omn-resource#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@base <http://open-multinet.info/ontology/omn-resource> .
+
+<http://open-multinet.info/ontology/omn-resource> rdf:type owl:Ontology ;
+                                                  
+                                                  rdfs:label "omn-resource"@en ;
+                                                  
+                                                  dc:date "2014-11-11"^^xsd:date ;
+                                                  
+                                                  dcterms:modified "2015-04-27"^^xsd:date ;
+                                                  
+                                                  owl:versionInfo "2015-04-27"^^xsd:string ;
+                                                  
+                                                  dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
+                                                  
+                                                  dc:description "This ontology expands definitions of types of resources as described in the main OMN upper ontology. Resources are defined as entities that can be provisioned/controlled/measured by APIs."^^xsd:string ;
+                                                  
+                                                  dc:publisher <http://open-multinet.info/> ;
+                                                  
+                                                  dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                  
+                                                  dc:description <https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/robyn-ontology-changes/ontologies/pics/omn-resoure.png> ;
+
+						                                      dc:creator <http://alex.willner.ws/about#me> ;
+		                                 
+            		                                  dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+            		                                 
+            		                                  dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
+            		                                  dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
+            		                                  dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
+            		                                  dc:contributor <http://users.ntua.gr/c.papagianni> ;
+            		                                  dc:contributor <mailto:yahya.al-hazmi@tu-berlin.de> ;
+            		                                  dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
+            		                                  dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+            		                                  dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+            		                                  dc:contributor <mailto:ibaldin@renci.org> ;
+            		                                  dc:contributor <mailto:yxin@renci.org> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasInterface
+
+:hasInterface rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has interface"@en ;
+              
+              rdfs:label "has interface"@en ;
+              
+              rdfs:range :Interface ;
+              
+              rdfs:domain :Node ;
+              
+              owl:inverseOf :isInterfaceOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isInterfaceOf
+
+:isInterfaceOf rdf:type owl:ObjectProperty ;
+
+               rdfs:comment "is interface of"@en ;
+
+               rdfs:label "is interface of"@en ;
+               
+               rdfs:domain :Interface ;
+               
+               rdfs:range :Node .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasIPAddress
+
+:hasIPAddress rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "has IP address"@en ;
+
+          rdfs:comment "has IP address"@en ;
+
+          owl:inverseOf :isIPAddressOf ;
+          
+          rdfs:domain :NetworkObject ;
+          
+          rdfs:range :IPAddress .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isIPAddressOf
+
+:isIPAddressOf rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "is IP address of"@en ;
+
+          rdfs:comment "is IP address of"@en ;
+
+          owl:inverseOf :hasIPAddress ;
+          
+          rdfs:range :NetworkObject ;
+          
+          rdfs:domain :IPAddress .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isSink
+
+:isSink rdf:type owl:ObjectProperty ;
+        
+        rdfs:comment "is sink"@en ;
+
+        rdfs:label "is sink"@en ;
+        
+        rdfs:domain :Interface ;
+        
+        rdfs:range :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isSource
+
+:isSource rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "is source"@en ;
+
+          rdfs:label "is source"@en ;
+          
+          rdfs:domain :Interface ;
+          
+          rdfs:range :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasSink
+
+:hasSink rdf:type owl:ObjectProperty ;
+        
+        rdfs:comment "has sink"@en ;
+
+        rdfs:label "has sink"@en ;
+        
+        rdfs:range :Interface ;
+        
+        rdfs:domain :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasSource
+
+:hasSource rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "has source"@en ;
+
+          rdfs:label "has source"@en ;
+          
+          rdfs:range :Interface ;
+          
+          rdfs:domain :Link .
+
+
+
+### required to translate GENI RSpecs with multiple sliver types
+### NOT used in standard Open Multinet descriptions
+### http://open-multinet.info/ontology/omn-resource#hasSliverType
+
+:hasSliverType rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "has sliver type"@en ;
+
+          rdfs:label "has sliver type"@en ;
+          
+          rdfs:range :SliverType ;
+          
+          rdfs:domain :NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasProperty
+
+:hasProperty rdf:type owl:ObjectProperty ;
+        
+        rdfs:comment "has link property"@en ;
+
+        rdfs:label "has link property"@en ;
+        
+        rdfs:range :Link ;
+        
+        rdfs:domain :LinkProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isPropertyOf
+
+:isPropertyOf rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "is link property of"@en ;
+
+          rdfs:label "is link property of"@en ;
+          
+          rdfs:range :LinkProperty ;
+          
+          rdfs:domain :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#requiredBy
+
+:requiredBy rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "required by"@en ;
+
+            rdfs:comment "is required by an ICT object"@en ;
+            
+            rdfs:domain :NetworkObject ;
+            
+            rdfs:range :NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#requires
+
+:requires rdf:type owl:ObjectProperty ;
+
+          rdfs:label "requires"@en ;
+          
+          rdfs:comment "requires an ICT object"@en ;
+          
+          rdfs:domain :NetworkObject ;
+          
+          rdfs:range :NetworkObject ;
+          
+          owl:inverseOf :requiredBy .
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-resource#isAvailable
+
+:isAvailable rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "is available"@en ;
+
+             rdfs:comment "is available"@en ;
+             
+             rdfs:domain :NetworkObject ;
+             
+             rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#isExclusive
+
+:isExclusive rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "is exclusive"@en ;
+
+             rdfs:comment "is exclusive"@en ;
+             
+             rdfs:domain omn:Resource ;
+             
+             rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#address
+
+:address rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "address"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:address"@en ;
+                
+                rdfs:comment "IP address"@en ;
+                
+                rdfs:domain :IPAddress ;
+                
+                rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-resource#netmask
+
+:netmask rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "netmask"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:netmask"@en ;
+                
+                rdfs:comment "IP netmask"@en ;
+                
+                rdfs:domain :IPAddress ;
+                
+                rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-resource#type
+
+:type rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "type"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:type"@en ;
+                
+                rdfs:comment "IP type"@en ;
+                
+                rdfs:domain :IPAddress ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#country
+
+:country rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "country"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: LocationContents:country"@en ;
+                
+                rdfs:comment "country where the resource is located"@en ;
+                
+                rdfs:domain omn:Resource ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#macAddress
+
+:macAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "MAC address"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:mac_address"@en ;
+                
+                rdfs:comment "MAC address"@en ;
+                
+                rdfs:domain :Interface ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#clientId
+
+:clientId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "client ID"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:clientId"@en ;
+                
+                rdfs:comment "client ID"@en ;
+                
+                rdfs:domain :Interface ;
+                
+                rdfs:range xsd:string .
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+###  http://open-multinet.info/ontology/omn-resource#Cloud
+
+:Cloud rdf:type owl:Class ;
+
+      rdfs:label "Cloud"@en ;
+
+      rdfs:seeAlso "GENI Manifest RSpec v3: NodeContents > cloud"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Hop
+
+:Hop rdf:type owl:Class ;
+
+      rdfs:label "Stitching Hop"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Interface
+
+:Interface rdf:type owl:Class ;
+
+           rdfs:label "Interface"@en ;
+           
+           rdfs:subClassOf :NetworkObject ;
+           
+           rdfs:comment "todo: omn-resource:NetworkObject or omn:Component??"@en ;
+           
+           rdfs:seeAlso nml:Port .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#IPAddress
+
+:IPAddress rdf:type owl:Class ;
+      
+      rdfs:comment "IP Address"@en ;
+
+      rdfs:label "IP Address"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Link
+
+:Link rdf:type owl:Class ;
+
+      rdfs:label "Link"@en ;
+      
+      rdfs:subClassOf :NetworkObject ;
+      
+      rdfs:comment "todo: still to decide if also at this level there is an equivalence to nml concepts with the same name"@en ;
+      
+      rdfs:seeAlso nml:Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#LinkProperty
+
+:LinkProperty rdf:type owl:Class ;
+
+      rdfs:label "Link Property"@en ;
+      
+      rdfs:subClassOf :Link .
+
+
+###  http://open-multinet.info/ontology/omn-resource#NetworkObject
+
+:NetworkObject rdf:type owl:Class ;
+               
+               rdfs:label "Network Object"@en ;
+               
+               rdfs:subClassOf omn:Resource ;
+               
+               rdfs:comment "example: ports, paths, links, node, physical machine,machine, VM"@en ;
+               
+               rdfs:seeAlso nml:NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Node
+
+:Node rdf:type owl:Class ;
+
+      rdfs:label "Node"@en ;
+      
+      rdfs:subClassOf :NetworkObject ;
+      
+      rdfs:comment "todo: still to decide if also at this level there is an equivalence to nml concepts with the same name"@en ;
+      
+      rdfs:seeAlso nml:Node .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Openflow
+
+:Openflow rdf:type owl:Class ;
+
+      rdfs:label "Openflow"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Path
+
+:Path rdf:type owl:Class ;
+
+      rdfs:label "Stitching Path"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+### required to translate GENI RSpecs with multiple sliver types
+### NOT used in standard Open Multinet descriptions 
+### http://open-multinet.info/ontology/omn-resource#SliverType
+
+:SliverType rdf:type owl:Class ;
+
+      rdfs:label "Sliver Type"@en ;
+
+      rdfs:seeAlso "GENI Manifest RSpec v3: sliver_type"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Stitching
+
+:Stitching rdf:type owl:Class ;
+
+      rdfs:label "Stitching"@en ;
+      
+      rdfs:subClassOf :NetworkObject .
+
+
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Interface
+                :Link
+                :Node
+              )
+] .
+
+
+### Fixes for validation
+owl:AllDisjointClasses rdf:type owl:Class .
+<http://alex.willner.ws/about#me> rdf:type  foaf:Person .
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net

@@ -1,0 +1,885 @@
+@prefix : <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
+@prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
+@prefix novi: <http://fp7-novi.eu/im.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix color: <http://geni-orca.renci.org/owl/app-color.owl#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
+@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@base <http://open-multinet.info/ontology/omn-domain-pc> .
+
+<http://open-multinet.info/ontology/omn-domain-pc> rdf:type owl:Ontology ;
+                                                   
+                                                   rdfs:label "omn-domain-pc"@en ;
+                                                   
+                                                   dcterms:modified "2015-04-27"^^xsd:date ;
+                                                   
+                                                   dc:date "2015-03-15"^^xsd:date ;
+                                                   
+                                                   owl:versionInfo "2015-04-27"^^xsd:string ;
+                                                   
+                                                   dc:title "Open-Multinet Domain PC Ontology"^^xsd:string ;
+                                                   
+                                                   dc:description "This ontology defines the a common physical or virtual PC with SSH login."^^xsd:string ;
+                                                   
+                                                   vann:preferredNamespacePrefix "omn-domain-pc" ;
+                                                   
+                                                   vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-domain-pc#" ;
+                                                   
+                                                   dc:publisher <http://open-multinet.info/> ;
+                                                   
+                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                                   
+                                                   dc:creator <http://alex.willner.ws/about#me> ;
+                                         
+                                                   dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                         
+                                                   dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
+                                                   dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
+                                                   dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
+                                                   dc:contributor <http://users.ntua.gr/c.papagianni> ;
+                                                   dc:contributor <mailto:yahya.al-hazmi@tu-berlin.de> ;
+                                                   dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
+                                                   dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
+                                                   dc:contributor <http://www.commit-nl.nl/people/morsey> ;
+                                                   dc:contributor <mailto:ibaldin@renci.org> ;
+                                                   dc:contributor <mailto:yxin@renci.org> .
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasCapacity
+
+:hasCapacity rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has link property capacity"@en ;
+
+                         rdfs:comment "has link property capacity (GENI Request > LinkPropertyContents > capacity)"@en ;
+                         
+                         rdfs:domain omn-resource:LinkProperty ;
+                         
+                         rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasControllerType
+
+:hasControllerType rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Controller type"@en ;
+
+                         rdfs:comment "has Openflow Controller type"@en ;
+                         
+                         rdfs:domain :Controller ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasControllerUrl
+
+:hasControllerUrl rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Controller URL"@en ;
+
+                         rdfs:comment "has Openflow Controller URL"@en ;
+                         
+                         rdfs:domain :Controller ;
+                         
+                         rdfs:range xsd:anyURI .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription
+
+:hasDiskimageDescription rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+
+                         rdfs:label "has disk image description"@en ;
+
+                         rdfs:comment "has disk image description"@en ;
+                         
+                         rdfs:domain :DiskImage ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#diskimageDefault
+
+:diskimageDefault rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+
+                         rdfs:label "disk image default"@en ;
+
+                         rdfs:comment "disk image default  (GENI RSpec v3 disk_image > default)"@en ;
+                         
+                         rdfs:domain :DiskImage ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel
+
+:hasDiskimageLabel rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+
+                   rdfs:label "has disk image label"@en ;
+
+                   rdfs:comment "has disk image label"@en ;
+                   
+                   rdfs:domain :DiskImage ;
+                   
+                   rdfs:range xsd:string .
+[ rdf:type owl:AllDisjointProperties ;
+  owl:members ( :hasDiskimageLabel
+              )
+] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS
+
+:hasDiskimageOS rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                
+                rdfs:label "has disk image OS"@en ;
+
+                rdfs:comment "has disk image OS"@en ;
+
+                rdfs:domain :DiskImage ;
+                
+                rdfs:range xsd:string .
+[ rdf:type owl:Axiom ;
+  rdfs:comment "Should not be a String but an object here."@en ;
+  owl:annotatedSource :hasDiskimageOS ;
+  owl:annotatedProperty rdfs:range ;
+  owl:annotatedTarget xsd:string
+] .
+
+### Fix for Apache Eyeball
+owl:Axiom rdf:type owl:Class .
+owl:AllDisjointProperties rdf:type owl:Class .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDlVlan
+
+:hasDlVlan rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet DL Vlan"@en ;
+
+                         rdfs:comment "has Openflow Packet DL Vlan"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDlType
+
+:hasDlType rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet DL Type"@en ;
+
+                         rdfs:comment "has Openflow Packet DL Type"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageURI
+
+:hasDiskimageURI rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+
+                 rdfs:label "has disk image URI."@en ;
+
+                 rdfs:comment "has disk image URI."@en ;
+                 
+                 rdfs:domain :DiskImage ;
+                 
+                 rdfs:range xsd:anyURI .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageVersion
+
+:hasDiskimageVersion rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     
+                     rdfs:label "has disk image version"@en ;
+
+                     rdfs:comment "has disk image version"@en ;
+
+                     rdfs:domain :DiskImage ;
+                     
+                     rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabNodeTypeSlots
+
+:hasEmulabNodeTypeSlots rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+
+                 rdfs:label "has emulab node type slots"@en ;
+
+                 rdfs:comment "has emulab node type slots"@en ;
+                 
+                 rdfs:domain :HardwareType ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#emulabNodeTypeStatic
+
+:emulabNodeTypeStatic rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "is emulab node type static"@en ;
+
+                 rdfs:comment "is emulab node type static"@en ;
+                 
+                 rdfs:domain :HardwareType ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#emulabFdViolatable
+
+:emulabFdViolatable rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "is emulab FD violatable"@en ;
+
+                 rdfs:comment "is emulab FD violatable"@en ;
+                 
+                 rdfs:domain :FeatureDescription ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdName
+
+:hasEmulabFdName rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "has emulab FD name"@en ;
+
+                 rdfs:comment "has emulab FD name"@en ;
+                 
+                 rdfs:domain :FeatureDescription ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdLocalOperator
+
+:hasEmulabFdLocalOperator rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "has emulab FD local operator"@en ;
+
+                 rdfs:comment "has emulab FD local operator"@en ;
+                 
+                 rdfs:domain :FeatureDescription ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdGlobalOperator
+
+:hasEmulabFdGlobalOperator rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "has emulab FD global operator"@en ;
+
+                 rdfs:comment "has emulab FD global operator"@en ;
+                 
+                 rdfs:domain :FeatureDescription ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdWeight
+
+:hasEmulabFdWeight rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "has emulab FD weight"@en ;
+
+                 rdfs:comment "has emulab FD weight"@en ;
+                 
+                 rdfs:domain :FeatureDescription ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabTrivialBandwidth
+
+:hasEmulabTrivialBandwidth rdf:type owl:DatatypeProperty ;
+
+                 rdfs:label "has emulab trivial bandwidth"@en ;
+
+                 rdfs:comment "has emulab trivial bandwidth"@en ;
+                 
+                 rdfs:domain omn:Resource;
+                 
+                 rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasLatency
+
+:hasLatency rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has link property latency"@en ;
+
+                         rdfs:comment "has link property latency (GENI Request > LinkPropertyContents > latency)"@en ;
+                         
+                         rdfs:domain omn-resource:LinkProperty ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasPacketLoss
+
+:hasPacketLoss rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has link property packet loss"@en ;
+
+                         rdfs:comment "has link property packet loss (GENI Request > LinkPropertyContents > packet_loss)"@en ;
+                         
+                         rdfs:domain omn-resource:LinkProperty ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#lastUpdateTime
+
+:lastUpdateTime rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has last update time"@en ;
+                         
+                         rdfs:domain omn-resource:Stitching ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasHopType
+
+:hasHopType rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Stitching hop type"@en ;
+                         
+                         rdfs:domain omn-resource:Hop ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasNextHop
+
+:hasNextHop rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Stitching next hop"@en ;
+                         
+                         rdfs:domain omn-resource:Hop ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasNwDst
+
+:hasNwDst rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet Nw Dst"@en ;
+
+                         rdfs:comment "has Openflow Packet Nw Dst"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasNwSrc
+
+:hasNwSrc rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Packet Nw Src"@en ;
+
+                         rdfs:comment "has Openflow Packet Nw Src"@en ;
+                         
+                         rdfs:domain :Packet ;
+                         
+                         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasVMID
+
+:hasVMID rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has VM ID"@en ;
+         
+         rdfs:comment "Unique identifier set by the management system of a virtual machine."@en ;
+         
+         rdfs:domain :VM ;
+         
+         rdfs:subPropertyOf omn-lifecycle:hasID ;
+         
+         rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasUseGroupName
+
+:hasUseGroupName rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "has Openflow Use-Group name"@en ;
+
+                         rdfs:comment "has Openflow Use-Group name"@en ;
+                         
+                         rdfs:domain omn-resource:Openflow ;
+                         
+                         rdfs:range xsd:anyURI .
+
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasUUID
+
+:hasUUID rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has UUID"@en ;
+         
+         rdfs:comment "has UUID"@en ;
+         
+         rdfs:domain [ rdf:type owl:Class ;
+              owl:unionOf ( omn:Group
+                            omn:Resource
+                            omn:Service
+                          )
+            ] ;
+         
+         rdfs:subPropertyOf omn-lifecycle:hasID ;
+         
+         rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#vlanTag
+
+:vlanTag rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has VLAN tag"@en ;
+         
+         rdfs:comment "has VLAN tag"@en ;
+         
+         rdfs:domain omn-resource:Link ;
+         
+         rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#routableControlIp
+
+:routableControlIp rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has routable control IP"@en ;
+         
+         rdfs:comment "Indicates that the user requires a routable IP on the control interface."@en ;
+         
+         rdfs:domain omn-resource:Node ;
+
+         rdfs:seeAlso <http://www.protogeni.net/resources/rspec/ext/emulab/1> ;
+         
+         rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#restricted
+
+:restricted rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "restricted"@en ;
+         
+         rdfs:comment "restricted"@en ;
+         
+         rdfs:domain :Available ;
+
+         rdfs:seeAlso <http://www.geni.net/resources/rspec/ext/shared-vlan/1> ;
+         
+         rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasCPU
+
+:hasCPU rdf:type owl:DatatypeProperty ;
+
+         rdfs:label "has CPU"@en ;
+         
+         rdfs:comment "Gives the number of CPUs available."@en ;
+         
+         rdfs:domain :PC ;
+         
+         rdfs:range xsd:integer .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#
+#    Object properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskImage
+
+:hasDiskImage rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has disk image"@en ;
+
+            rdfs:comment "has disk image"@en ;
+            
+            rdfs:range :DiskImage ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :isDiskImageOf .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasAvailable
+
+:hasAvailable rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has avalable"@en ;
+
+            rdfs:comment "has avalable"@en ;
+            
+            rdfs:range :Available ;
+            
+            rdfs:domain :SharedVlan .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#isDiskImageOf
+
+:isDiskImageOf rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "is disk image of"@en ;
+
+            rdfs:comment "is disk image of"@en ;
+            
+            rdfs:domain :DiskImage ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :hasDiskImage .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType
+
+:hasHardwareType rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has hardware type"@en ;
+
+            rdfs:comment "has hardware type"@en ;
+            
+            rdfs:range :HardwareType ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :isHardwareTypeOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#isHardwareTypeOf
+
+:isHardwareTypeOf rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "is hardware type of"@en ;
+
+            rdfs:comment "is hardware type of"@en ;
+            
+            rdfs:domain :HardwareType ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :hasHardwareType .
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#Available
+
+:Available rdf:type owl:Class ;
+
+           rdfs:comment "Available"@en ;
+           
+           rdfs:label "Available"@en ;
+
+           rdfs:seeAlso <http://www.geni.net/resources/rspec/ext/shared-vlan/1> ;
+         
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#Controller
+
+:Controller rdf:type owl:Class ;
+
+           rdfs:comment "Openflow Controller"@en ;
+           
+           rdfs:label "Openflow Controller"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#Datapath
+
+:Datapath rdf:type owl:Class ;
+
+           rdfs:comment "Openflow Datapath"@en ;
+           
+           rdfs:label "Openflow Datapath"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#DiskImage
+
+:DiskImage rdf:type owl:Class ;
+
+           rdfs:comment "Disk Image"@en ;
+           
+           rdfs:label "Disk Image"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#FeatureDescription
+
+:FeatureDescription rdf:type owl:Class ;
+
+           rdfs:comment "Emulab Feature Description"@en ;
+           
+           rdfs:label "Emulab Feature Description"@en ;
+
+           rdfs:seeAlso <http://www.protogeni.net/resources/rspec/ext/emulab/1> ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#HardwareType
+
+:HardwareType rdf:type owl:Class ;
+
+           rdfs:comment "Hardware Type, see rspec v3 hardware_type"@en ;
+           
+           rdfs:label "Hardware Type"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#OpenStack
+
+:OpenStack rdf:type owl:Class ;
+           
+           rdfs:comment "Open Stack"@en ;
+
+           rdfs:label "Open Stack"@en ;
+           
+           rdfs:subClassOf :VM .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#Packet
+
+:Packet rdf:type owl:Class ;
+
+           rdfs:comment "Openflow Packet"@en ;
+           
+           rdfs:label "Openflow Packet"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#PC
+
+:PC rdf:type owl:Class ;
+
+    rdfs:label "personal computer"@en ;
+
+    rdfs:comment "personal computer"@en ;
+    
+    rdfs:subClassOf omn-resource:Node .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#SharedVlan
+
+:SharedVlan rdf:type owl:Class ;
+
+           rdfs:comment "SharedVlan"@en ;
+           
+           rdfs:label "SharedVlan"@en ;
+           
+           rdfs:subClassOf omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#VM
+
+:VM rdf:type owl:Class ;
+
+    rdfs:comment "Virtual Machine"@en ;
+    
+    rdfs:label "Virtual Machine"@en ;
+    
+    rdfs:subClassOf :PC .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#VMServer
+
+:VMServer rdf:type owl:Class ;
+
+    rdfs:comment "Virtual Machine Server"@en ;
+    
+    rdfs:label "VM Server"@en ;
+    
+    rdfs:subClassOf :PC .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Link
+
+omn-resource:Link rdf:type owl:Class .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Node
+
+omn-resource:Node rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Resource
+
+omn:Resource rdf:type owl:Class .
+
+
+###  http://open-multinet.info/ontology/omn#Group
+
+omn:Group rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
+
+
+
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :VM
+                :DiskImage
+                :VMServer
+              )
+] .
+
+
+### Fixes for validation
+owl:versionInfo rdf:type owl:Class .
+owl:AllDisjointClasses rdf:type owl:Class .
+<http://alex.willner.ws/about#me> rdf:type  foaf:Person .
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net

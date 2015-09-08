@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.geni.net/resources/rspec/ext/opstate/1" xmlns:opstate="http://www.geni.net/resources/rspec/ext/opstate/1">
+  <xs:element name="rspec_opstate">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="opstate:sliver_type"/>
+        <xs:element ref="opstate:state"/>
+      </xs:choice>
+      <xs:attribute name="aggregate_manager_id" use="required"/>
+      <xs:attribute name="start" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sliver_type">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="state" type="opstate:StateSpec"/>
+  <xs:complexType name="StateSpec">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="opstate:action"/>
+      <xs:element ref="opstate:wait"/>
+      <xs:element ref="opstate:description"/>
+    </xs:choice>
+    <xs:attribute name="name" use="required"/>
+  </xs:complexType>
+  <xs:element name="action" type="opstate:ActionSpec"/>
+  <xs:element name="wait" type="opstate:WaitSpec"/>
+  <xs:element name="description" type="xs:string"/>
+  <xs:complexType name="ActionSpec">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="opstate:description"/>
+    </xs:sequence>
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="next" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="WaitSpec">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="opstate:description"/>
+    </xs:sequence>
+    <xs:attribute name="type"/>
+    <xs:attribute name="next" use="required"/>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec generated="2015-04-27T11:49:00.341+02:00" generated_by="omnlib" type="request" xmlns:ns2="http://demo.fiteagle.org/monitoring" xmlns="http://www.geni.net/resources/rspec/3">
+<!-- Note: have changed the namespace url for monitoring, original text below -->
+<!--  rspec generated="2015-04-27T11:49:00.341+02:00" generated_by="omnlib" type="request" xmlns:ns2="http://test.fiteagle.org/monitoring" xmlns="http://www.geni.net/resources/rspec/3"-->
+  <node
+      component_manager_id="urn:publicid:IDN+test.fiteagle.org+authority+cm"
+      component_id="urn:publicid:IDN+test.fiteagle.org+node+http%3A%2F%2Ftest.fiteagle.org%2Fresource%2FVMServer-1"
+      client_id="myVM"
+      component_name="VMServer-1"
+      exclusive="false">
+      <sliver_type name="http://open-multinet.info/ontology/omn-domain-pc#VM"/>
+      <ns2:monitoring uri="http://federation.av.tu-berlin.de:3003" type="http://open-multinet.info/ontology/omn-monitoring-tool#OMSPEndpoint"/>
+  </node>
+</rspec>
