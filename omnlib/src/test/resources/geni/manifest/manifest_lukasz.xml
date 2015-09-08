@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd "
+	xmlns:ns2="http://jfed.iminds.be/proxy/1.0"
+	type="manifest">
+	<node 
+	    component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
+        component_id="http://testbed.example.org/resources/motorgarage-1"
+		client_id="myMotor"
+		sliver_id="urn:publicid:IDN+testbed.example.org+sliver+http%3A%2F%2Ftestbed.example.org%2Fmotorgarage-1%2Fmotor-1">
+		<sliver_type name="http://open-multinet.info/ontology/resources/motor#Motor" />
+		<services>    
+			<ns2:proxy proxy="U0000001@150.254.160.199:22" for="llopat@10.134.0.5:22" />
+    		<login authentication="ssh-keys" hostname="150.254.160.199" port="22" username="U0000001"/>
+    		<login authentication="ssh-keys" hostname="10.134.0.5" port="22" username="llopat"/>
+		</services>
+	</node>
+</rspec>

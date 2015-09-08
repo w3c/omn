@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for requesting the option to connect an interface to a 
+	OMSP monitoring tool. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://jfed.iminds.be/proxy/1.0" elementFormDefault="qualified"
+	targetNamespace="http://jfed.iminds.be/proxy/1.0">
+	<xs:element name="rspec_proxy">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:proxy" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="proxy">
+		<xs:complexType>
+			<xs:attribute name="proxy" use="required" type="xs:string" />
+			<xs:attribute name="for" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

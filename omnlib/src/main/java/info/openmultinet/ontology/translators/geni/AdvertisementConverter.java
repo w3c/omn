@@ -791,7 +791,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource monitoringResource = model.createResource(uuid);
 			if (monitor.getUri() != null && monitor.getUri() != "") {
-				monitoringResource.addProperty(Omn_service.hasURI,
+				monitoringResource.addProperty(Omn.hasURI,
 						monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
@@ -1608,9 +1608,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			Resource monitoringResource = monitoringService.getResource();
 			Monitoring monitoring = new ObjectFactory().createMonitoring();
 
-			if (monitoringResource.hasProperty(Omn_service.hasURI)) {
+			if (monitoringResource.hasProperty(Omn.hasURI)) {
 				Statement hasUri = monitoringService.getResource().getProperty(
-						Omn_service.hasURI);
+						Omn.hasURI);
 
 				// System.out.println(hasUri.getObject().asLiteral().getString());
 				// String uri = hasUri.getObject().asResource().getURI()

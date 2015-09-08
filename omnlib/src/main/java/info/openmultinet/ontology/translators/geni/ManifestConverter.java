@@ -209,8 +209,8 @@ public class ManifestConverter extends AbstractConverter {
 					.getString());
 		}
 
-		if (omnResource.hasProperty(Omn_service.hasURI)) {
-			geniSliceInfo.setUrn(omnResource.getProperty(Omn_service.hasURI)
+		if (omnResource.hasProperty(Omn.hasURI)) {
+			geniSliceInfo.setUrn(omnResource.getProperty(Omn.hasURI)
 					.getObject().asLiteral().getString());
 		}
 
@@ -548,6 +548,7 @@ public class ManifestConverter extends AbstractConverter {
 			RDFNode service = hasService.getObject();
 			Resource serviceResource = service.asResource();
 
+			setProxyService(serviceResource, serviceContents);
 			setLoginService(serviceResource, serviceContents);
 			setExecutiveService(serviceResource, serviceContents);
 			setInstallService(serviceResource, serviceContents);
@@ -559,6 +560,12 @@ public class ManifestConverter extends AbstractConverter {
 			node.getAnyOrRelationOrLocation().add(services);
 		}
 
+	}
+
+	private static void setProxyService(Resource serviceResource,
+			ServiceContents serviceContents) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static void setPostBootScriptService(Resource serviceResource,
@@ -1033,7 +1040,7 @@ public class ManifestConverter extends AbstractConverter {
 		}
 
 		if (geniSliceInfo.getUrn() != null && geniSliceInfo.getUrn() != "") {
-			topology.addLiteral(Omn_service.hasURI, geniSliceInfo.getUrn());
+			topology.addLiteral(Omn.hasURI, geniSliceInfo.getUrn());
 		}
 	}
 
@@ -1597,6 +1604,8 @@ public class ManifestConverter extends AbstractConverter {
 					omnService
 							.addProperty(RDF.type, Omn_service.PostBootScript);
 					extractPostBootScript(serviceObject, omnService);
+				} else if (serviceObject.getClass().equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Proxy.class)){
+					ManifestConverter.LOG.info("proxy lkjblskdfjlskdjfdklfj");
 				}
 
 				// add service to node

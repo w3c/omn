@@ -98,24 +98,6 @@
           
           rdfs:range xsd:string .
 
-###  http://open-multinet.info/ontology/omn-service#hasURI
-
-:hasURI rdf:type owl:DatatypeProperty ;
-          
-          rdfs:label "has URI"@en ;
-
-          rdfs:comment "Uniform Resource Identifier"@en ;
-          
-          rdfs:domain [ rdf:type owl:Class ;
-              owl:unionOf ( omn:Group
-                            omn:Resource
-                            omn:Service
-                          )
-            ] ;
-          
-          rdfs:range xsd:string .
-
-
 
 
 ###  http://open-multinet.info/ontology/omn-service#installPath
@@ -248,6 +230,35 @@
 
 
 
+
+###  http://open-multinet.info/ontology/omn-service#proxyProxy
+
+:proxyProxy rdf:type owl:DatatypeProperty ;
+          
+          rdfs:label "proxy address of proxy service"@en ;
+
+          rdfs:comment "proxy address of proxy service"@en ;
+          
+          rdfs:domain :Proxy ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-service#proxyFor
+
+:proxyFor rdf:type owl:DatatypeProperty ;
+          
+          rdfs:label "proxy for of proxy service"@en ;
+
+          rdfs:comment "proxy for of proxy service"@en ;
+          
+          rdfs:domain :Proxy ;
+          
+          rdfs:range xsd:string .
+
+
+
 #################################################################
 #
 #    Object Properties
@@ -281,6 +292,18 @@ omn:Service rdf:type owl:Class .
                 rdfs:label "Post Boot Script"@en;
                 
                 rdfs:subClassOf omn:Service .
+
+
+
+###  http://open-multinet.info/ontology/omn-service#Proxy
+
+:Proxy  rdf:type owl:Class ;
+
+        rdfs:comment "proxy service"@en ;
+        
+        rdfs:label "Proxy Service"@en;
+        
+        rdfs:subClassOf omn:Service .
 
 
 

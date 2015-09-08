@@ -750,9 +750,9 @@ public class RequestConverter extends AbstractConverter {
 			Resource monitoringResource = monitoringService.getResource();
 			Monitoring monitoring = new ObjectFactory().createMonitoring();
 
-			if (monitoringResource.hasProperty(Omn_service.hasURI)) {
+			if (monitoringResource.hasProperty(Omn.hasURI)) {
 				Statement hasUri = monitoringService.getResource().getProperty(
-						Omn_service.hasURI);
+						Omn.hasURI);
 				String uri = hasUri.getObject().asLiteral().getString();
 				monitoring.setUri(uri);
 
@@ -1716,7 +1716,7 @@ public class RequestConverter extends AbstractConverter {
 			Resource monitoringResource = omnResource.getModel()
 					.createResource(uuid);
 			if (monitor.getUri() != null && monitor.getUri() != "") {
-				monitoringResource.addProperty(Omn_service.hasURI,
+				monitoringResource.addProperty(Omn.hasURI,
 						monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
