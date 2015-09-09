@@ -1,0 +1,13 @@
+todo:alex an example .
+
+example:advertisement a  omn-lifecycle:Offering ;
+  omn:hasResource <http://testbed.example.org/resources/motorgarage-1> .
+                
+<http://testbed.example.org/resources/motorgarage-1>
+  a       motorgarage:MotorGarage ;
+  omn:isResourceOf example:advertisement ;
+  omn-lifecycle:parentOf motor:Motor ;
+  omn-resource:isAvailable true ;
+  omn-resource:isExclusive  false ;
+  wgs84:lat "51.036145" ;
+  wgs84:long "3.734761" .
