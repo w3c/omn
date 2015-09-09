@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Open-Multinet Specification</title>
+    <meta charset='utf-8'>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common'
+            async class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+          // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
+          specStatus: "CG-DRAFT",
+
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+          shortName:            "omn",
+
+          // if your specification has a subtitle that goes below the main
+          // formal title, define it here
+          // subtitle   :  "an excellent document",
+
+          // if you wish the publication date to be other than the last modification, set this
+          // publishDate:  "2009-08-06",
+
+          // if the specification's copyright date is a range of years, specify
+          // the start date here:
+          // copyrightStart: "2005"
+
+          // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+          // and its maturity status
+          // previousPublishDate:  "1977-03-15",
+          // previousMaturity:  "WD",
+
+          // if there a publicly available Editor's Draft, this is the link
+          // edDraftURI:           "http://berjon.com/",
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors:  [
+              {
+                  name:       "Alexander Willner"
+              ,   url:        "http://alex.willner.ws/about#me"
+              ,   mailto:     "alexander.willner@tu-berlin.de"
+              ,   company:    "Technische Universität Berlin"
+              ,   companyURL: "http://www.tu-berlin.de"
+              },
+              {
+                  name:       "Brecht Vermeulen"
+              ,   url:        "http://ilabt.iminds.be/people"
+              ,   mailto:     "brecht.vermeulen@iminds.be"
+              ,   company:    "iMinds Technical Testing"
+              ,   companyURL: "http://ilabt.iminds.be"
+              },
+              {
+                  name:       "Chrysa Papagianni"
+              ,   url:        "http://users.ntua.gr/c.papagianni"
+              ,   mailto:     "chrisap@noc.ntua.gr"
+              ,   company:    "The National Technical University (NTUA)"
+              ,   companyURL: "http://www.ntua.gr"
+              },
+              {
+                  name:       "Ilya Baldin"
+              ,   url:        "http://renci.org/staff/ilia-baldine"
+              ,   mailto:     "ibaldin@renci.org"
+              ,   company:    "Renaissance Computing Institute"
+              ,   companyURL: "http://renci.org"
+              },
+              {
+                  name:       "Jorge lopez Vergara"
+              ,   url:        "http://arantxa.ii.uam.es/~jlopezv"
+              ,   mailto:     "Jorge.Lopez_Vergara@uam.es"
+              ,   company:    "Universidad Autónoma de Madrid"
+              ,   companyURL: "http://uam.es"
+              },
+              {
+                  name:       "Mohamed Morsey"
+              ,   url:        "http://www.commit-nl.nl/people/morsey"
+              ,   mailto:     "m.morsey@uva.nl"
+              ,   company:    "University of Amsterdam"
+              ,   companyURL: "http://uva.nl"
+              },
+              {
+                  name:       "Paola Grosso"
+              ,   url:        "http://staff.fnwi.uva.nl/p.grosso"
+              ,   mailto:     "p.grosso@uva.nl"
+              ,   company:    "University of Amsterdam"
+              ,   companyURL: "http://uva.nl"
+              },
+              {
+                  name:       "Robyn Loughnane"
+              ,   url:        "http://www.av.tu-berlin.de/menue/team/robyn_loughnane"
+              ,   mailto:     "loughnane@campus.tu-berlin.de"
+              ,   company:    "Technical University of Berlin"
+              ,   companyURL: "www.tu-berlin.de"
+              },
+              {
+                  name:       "Thijs Walcarius"
+              ,   url:        "https://biblio.ugent.be/person/802001057336"
+              ,   mailto:     "thijs.walcarius@intec.ugent.be"
+              ,   company:    "University of Ghent"
+              ,   companyURL: "http://www.ugent.be/"
+              },
+              {
+                  name:       "Yahya Al-Hazmi"
+              ,   url:        "http://www.av.tu-berlin.de/al-hazmi"
+              ,   mailto:     "yahya.al-hazmi@tu-berlin.de"
+              ,   company:    "Technische Universität Berlin"
+              ,   companyURL: "http://www.tu-berlin.de"
+              },
+              {
+                  name:       "Yufeng Xin"
+              ,   url:        "http://renci.org/about/staff-directory"
+              ,   mailto:     "yxin@renci.org"
+              ,   company:    "Renaissance Computing Institute"
+              ,   companyURL: "http://renci.org"
+              }
+          ],
+
+          // name of the WG
+          wg:           "Federated Infrastructures Community Group",
+          wgURI:        "https://www.w3.org/community/omn/",
+          wgPublicList: "omn",
+
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          // !!!! IMPORTANT !!!! MAKE THE ABOVE BLINK IN YOUR HEAD
+      };
+    </script>
+  </head>
+  <body>
+    <section id='abstract'>
+      <p>
+        TWe are approaching the era of the multinet. Instead of the one internet, we will have a multitude of parallel networks, customized by you to include anything and anyone you wish.
+        The mechanisms to control the multinet are emerging in a demand-driven way, stemming from the needs of those who are developing and using the first experimental systems.
+        Open Multinet forum has been created, among others by key stakeholders in the GENI and FIRE context, as a locus for community discussion and contributions to the evolution of these control mechanisms.
+        The aim is to provide a common reference to serve as the basis for all those who wish to develop platforms and tools for the multinet - this includes the current federation approaches developed within GENI and FIRE.
+        We welcome your participation. Please subscribe to the mailing list, dive into the documentation available in the git repository, and learn more about the multinet from the tutorials that are posted here.
+      </p>
+    </section>
+
+    <section id='sotd'>
+      <p>
+        <!--You need to have a custom SotD paragraph. Maybe give a succinct description of your spec's
+        status.-->
+      </p>
+    </section>
+
+    <section>
+      <h1>Concepts</h1>
+      <section>
+      <h2>Attribute</h2>
+      <p>
+        Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail.
+        Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, etc.
+      </p>
+      </section>
+
+      <section>
+      <h2>Component</h2>
+      <p>
+        An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself.
+        Examples: CPU, Sensor, Core, Port, Image.
+      </p>
+      </section>
+
+      <section>
+      <h2>Dependency</h2>
+      <p>
+        Helps to defines a directional relationship between omn:Resource, omn:Group, omn:Component or omn:Service. It makes it possible to annotate the dependencies with additional properties.
+        Examples: application coloring (in GENI context), orchestration needs dependencies.
+      </p>
+      </section>
+
+      <section>
+      <h2>Environment</h2>
+      <p>
+        The operating conditions under which a omn:Resource, omn:Group, omn:Service is operating.
+        Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, etc.
+      </p>
+      </section>
+
+      <section>
+      <h2>Group</h2>
+      <p>
+        A collection of omn:Resource, omn:Service or omn:Group.
+        Examples: Bi-directional Link, etc.
+      </p>
+      </section>
+
+      <section>
+      <h2>Topology</h2>
+      <p>
+        A collection of omn:Resource, omn:Service or omn:Group
+        Examples: Infrastructure, Reservation, Slice, etc.
+      </p>
+      </section>
+
+      <section>
+      <h2>Layer</h2>
+      <p>
+        Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to.
+        Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version.
+      </p>
+      </section>
+
+      <section>
+      <h2>Resource</h2>
+      <p>
+        An Entity that can be provisioned/controlled/measured by APIs.
+        Examples: Node, Link, People, etc.
+      </p>
+      </section>
+
+      <section>
+      <h2>Service</h2>
+      <p>
+        An Entity that has an API/capability to use it, it may depend on an omn:Resource.
+        Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, etc.
+      </p>
+      </section>
+
+      <section>
+      <h2>Reservation</h2>
+      <p>
+        A specification of a guarantee.
+        Examples: (Earliest) Start and (latest) end time, data volume, etc.
+      </p>
+      </section>
+    </section>
+
+    <section>
+      <h1>Properties</h1>
+      <section>
+      <h2>adaptableFrom</h2>
+      <p>
+        Determines the resource from which this resource can be adapted from - e.g. from an Ethernet to a FDDI port.
+      </p>
+      </section>
+
+      <section>
+      <h2>adaptableTo</h2>
+      <p>
+        Determines to which resource this resource can adapts to - e.g. from an Ethernet to a FDDI port.
+      </p>
+      </section>
+
+      <section>
+      <h2>adaptsFrom</h2>
+      <p>
+        Determines from which resource this resource adapts - e.g. from an Ethernet to a FDDI port.
+      </p>
+      </section>
+
+      <section>
+      <h2>adaptsTo</h2>
+      <p>
+        Determines to which resource this resource adapts - e.g. from an Ethernet to a FDDI port.
+      </p>
+      </section>
+
+      <section>
+      <h2>hasAttribute</h2>
+      <p>
+        Link to a general attribute of the resource - e.g. to a ReadOnly class.
+      </p>
+      </section>
+
+      <section>
+      <h2>hasGroup</h2>
+      <p>
+        A group that is related to this resource - e.g. a reserved topology within an infrastructure.
+      </p>
+      </section>
+
+      <section>
+      <h2>hasResource</h2>
+      <p>
+        A resource that this resource contains - e.g. a node within a reserved topology.
+      </p>
+      </section>
+
+      <section>
+      <h2>hasService</h2>
+      <p>
+        A service that this resource contains - e.g. a Hadoop instance within a reserved topology.
+      </p>
+      </section>
+
+      <section>
+      <h2>hasReservation</h2>
+      <p>
+        The reservation details of a resource - e.g. an immediate reservation for 3 hours.
+      </p>
+      </section>
+
+      <section>
+      <h2>isAttributeOf</h2>
+      <p>
+        A general attribute of a resource - e.g. to a ReadOnly class.
+      </p>
+      </section>
+
+      <section>
+      <h2>isComponentOf</h2>
+      <p>
+        Is component of a resource - e.g. a CPU in a PC.
+      </p>
+      </section>
+
+      <section>
+      <h2>isGroupOf</h2>
+      <p>
+        A group that is related to a resource - e.g. a reserved topology within an infrastructure.
+      </p>
+      </section>
+
+      <section>
+      <h2>isResourceOf</h2>
+      <p>
+        A resource that another resource contains - e.g. a node within a reserved topology.
+      </p>
+      </section>
+
+      <section>
+      <h2>isServiceOf</h2>
+      <p>
+        A service of a resource - e.g. a Hadoop instance within a reserved topology.
+      </p>
+      </section>
+
+      <section>
+      <h2>isReservationOf</h2>
+      <p>
+        The reservation details of a resource - e.g. an immediate reservation for 3 hours.
+      </p>
+      </section>
+
+      <section>
+      <h2>toDependency</h2>
+      <p>
+        Claims dependency.
+      </p>
+      </section>
+
+      <section>
+      <h2>withinEnvironment</h2>
+      <p>
+        Claims dependency.
+      </p>
+      </section>
+
+      <section>
+      <h2>hasEndpoint</h2>
+      <p>
+        The URL of the API of a service.
+      </p>
+      </section>
+
+      <section>
+      <h2>isReadonly</h2>
+      <p>
+        Information/attribute that is not writable.
+      </p>
+      </section>
+
+    </section>
+
+
+
+
+    <section class='appendix'>
+      <h2>Acknowledgements</h2>
+      <p>
+
+      </p>
+    </section>
+  </body>
+</html>
