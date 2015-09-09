@@ -18,6 +18,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceCon
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Proxy;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
@@ -564,8 +565,35 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setProxyService(Resource serviceResource,
 			ServiceContents serviceContents) {
-		// TODO Auto-generated method stub
-		
+		if (serviceResource.hasProperty(RDF.type, Omn_service.Proxy)) {
+
+			// get proxy
+			String proxyProxy = "";
+			if (serviceResource.hasProperty(Omn_service.proxyProxy)) {
+				proxyProxy += serviceResource
+						.getProperty(Omn_service.proxyProxy).getObject()
+						.asLiteral().getString();
+			}
+
+			// get for
+			String proxyFor = "";
+			if (serviceResource.hasProperty(Omn_service.proxyFor)) {
+				proxyFor += serviceResource.getProperty(Omn_service.proxyFor)
+						.getObject().asLiteral().getString();
+			}
+
+			// create execute
+			Proxy proxy = new ObjectFactory().createProxy();
+
+			proxy.setProxy(proxyProxy);
+
+			if (proxyFor != "") {
+				proxy.setFor(proxyFor);
+			}
+
+			serviceContents.getAnyOrLoginOrInstall().add(proxy);
+		}
+
 	}
 
 	private static void setPostBootScriptService(Resource serviceResource,
@@ -1092,7 +1120,7 @@ public class ManifestConverter extends AbstractConverter {
 			omnResource.addProperty(Omn_resource.isExclusive, topology
 					.getModel().createTypedLiteral(node.isExclusive()));
 		}
-		
+
 		extractComponentDetails(node, omnResource);
 
 		for (Object nodeDetailObject : node.getAnyOrRelationOrLocation()) {
@@ -1125,15 +1153,14 @@ public class ManifestConverter extends AbstractConverter {
 					.getComponentManagerId());
 			omnResource.addProperty(Omn_lifecycle.managedBy, manager);
 		}
-		
 
 		// component id is not required
 		String componentIdOriginal = node.getComponentId();
 		if (componentIdOriginal != null) {
 			String componentId = CommonMethods
 					.generateUrlFromUrn(componentIdOriginal);
-			Resource componentIDResource = omnResource.getModel().createResource(
-					componentId);
+			Resource componentIDResource = omnResource.getModel()
+					.createResource(componentId);
 			omnResource.addProperty(Omn_lifecycle.implementedBy,
 					componentIDResource);
 		}
@@ -1145,7 +1172,6 @@ public class ManifestConverter extends AbstractConverter {
 					componentName);
 		}
 
-		
 	}
 
 	private static void extractLink(JAXBElement<?> element, Resource topology)
@@ -1604,8 +1630,11 @@ public class ManifestConverter extends AbstractConverter {
 					omnService
 							.addProperty(RDF.type, Omn_service.PostBootScript);
 					extractPostBootScript(serviceObject, omnService);
-				} else if (serviceObject.getClass().equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Proxy.class)){
-					ManifestConverter.LOG.info("proxy lkjblskdfjlskdjfdklfj");
+				} else if (serviceObject
+						.getClass()
+						.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Proxy.class)) {
+					omnService.addProperty(RDF.type, Omn_service.Proxy);
+					extractProxyService(serviceObject, omnService);
 				}
 
 				// add service to node
@@ -1613,6 +1642,20 @@ public class ManifestConverter extends AbstractConverter {
 					omnResource.addProperty(Omn.hasService, omnService);
 				}
 			}
+		}
+	}
+
+	private static void extractProxyService(Object serviceObject,
+			Resource omnService) {
+
+		Proxy proxy = (Proxy) serviceObject;
+
+		if (proxy.getProxy() != null && proxy.getProxy() != "") {
+			omnService.addProperty(Omn_service.proxyProxy, proxy.getProxy());
+		}
+
+		if (proxy.getFor() != null && proxy.getFor() != "") {
+			omnService.addProperty(Omn_service.proxyFor, proxy.getFor());
 		}
 	}
 
