@@ -5,7 +5,7 @@ else
 	ARGS="mvn clean install"	
 fi
 
-M2_CACHE="-v ${PWD}:/root/.m2"
+M2_CACHE="-v ${PWD}/m2:/root/.m2"
 CMD_ENV="-e CI_DEPLOY_USERNAME=foo -e CI_DEPLOY_PASSWORD=bar"
 CMD_WORK="-v $PWD:/usr/src/omnlib ${M2_CACHE} -w /usr/src/omnlib"
 CMD1="docker run -it --rm --name omnlib"
