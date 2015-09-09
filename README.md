@@ -10,8 +10,7 @@
  - W3C docs background: https://github.com/w3c/echidna/wiki
  - Github for W3C docs: https://w3c.github.io/specs.html
  - Versioning for W3C docs: https://github.com/w3c/csvw/blob/gh-pages/publishing_process.md
- - Target: at
- - Public link: as a report at https://www.w3.org/community/omn/
+ - Publication: planned as a report at https://www.w3.org/community/omn/
  - Examples:
    - http://www.openannotation.org/spec/core/
    - http://www.w3.org/TR/prov-o/
