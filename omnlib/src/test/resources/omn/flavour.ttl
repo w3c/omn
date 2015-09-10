@@ -1,0 +1,25 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-nfv: <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://localhost/resource/OpenStackAdapter>
+        a                               omn-resource:Node ;
+        rdfs:label                      "OpenStackAdapter"^^xsd:string ;
+        rdfs:comment                    "OpenStack server"^^xsd:string ;
+        omn:isResourceOf                <http://open-multinet.info/omnlib/converter#advertisement> ;
+        omn-lifecycle:canImplement      "http://localhost/resource/2048MB_20GB" , "http://localhost/resource/1024MB_10GB" , "http://localhost/resource/VM" , "http://localhost/resource/512MB_5GB" ;
+        omn-lifecycle:hasComponentName  "OpenStackAdapter" ;
+        omn-lifecycle:parentOf          <urn:publicid:IDN+localhost+authority+cm> ;
+        omn-resource:isExclusive        false ;
+        geo:lat                         "52.516377" ;
+        geo:long                        "13.323732" .
+
+<http://open-multinet.info/omnlib/converter#advertisement>
+        a                omn-lifecycle:Offering ;
+        omn:hasResource  <http://localhost/resource/OpenStackAdapter> .
