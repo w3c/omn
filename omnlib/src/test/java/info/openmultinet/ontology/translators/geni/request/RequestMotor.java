@@ -31,10 +31,10 @@ public class RequestMotor {
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		// System.out.println("Generated this rspec:");
-		// System.out.println("===============================");
-		// System.out.println(outputRspec);
-		// System.out.println("===============================");
+		 System.out.println("Generated this rspec:");
+		 System.out.println("===============================");
+		 System.out.println(outputRspec);
+		 System.out.println("===============================");
 
 		// System.out.println("Get number of diffs and nodes:");
 		// System.out.println("===============================");

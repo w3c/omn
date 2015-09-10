@@ -74,6 +74,7 @@ public class REST extends DeliveryMechanism {
 	}
 
 	// for testing purposes
+	// http://localhost:8080/omnweb/convert/test
 	@GET
 	@Path("test")
 	public String test() {

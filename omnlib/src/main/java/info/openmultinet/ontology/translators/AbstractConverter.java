@@ -1,19 +1,13 @@
 package info.openmultinet.ontology.translators;
 
-import java.net.URI;
-
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.translators.geni.ManifestConverter;
-import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.net.URI;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -238,5 +232,4 @@ public abstract class AbstractConverter {
 
 		return xc;
 	}
-
 }

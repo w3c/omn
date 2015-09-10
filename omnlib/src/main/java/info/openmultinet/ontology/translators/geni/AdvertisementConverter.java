@@ -652,7 +652,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			// if it is an acceptable OMN URN, it will be converted into a URL
 			String componentId = CommonMethods.generateUrlFromUrn(rspecNode
 					.getComponentId());
-			
+
 			final Resource omnNode = topology.getModel().createResource(
 					componentId);
 
@@ -791,8 +791,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource monitoringResource = model.createResource(uuid);
 			if (monitor.getUri() != null && monitor.getUri() != "") {
-				monitoringResource.addProperty(Omn.hasURI,
-						monitor.getUri());
+				monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
 				monitoringResource.addProperty(RDF.type, monitor.getType());
@@ -858,6 +857,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			final Resource omnHw = omnNode.getModel().createResource(uuid);
 
+			omnNode.addProperty(RDF.type, hw.getName());
+
 			omnHw.addProperty(RDFS.label, hw.getName());
 			omnHw.addProperty(RDF.type, Omn_domain_pc.HardwareType);
 			for (Object hwObject : hw.getAny()) {
@@ -883,19 +884,20 @@ public class AdvertisementConverter extends AbstractConverter {
 						"SliverTypeContents > name");
 			}
 			Resource sliverTypeResource = null;
-			// Note: Do not change sliver type here, as Fiteagle will
-			// not work
-			if (AbstractConverter.isUrl(sliverName)) {
-				// sliverTypeResource = omnResource.getModel().createResource();
-				omnResource.addProperty(RDF.type, omnResource.getModel()
-						.createResource(sliverName));
-			} else {
-				String sliverTypeUrl = "http://open-multinet.info/example#"
-						+ sliverName;
-				// sliverTypeResource = omnResource.getModel().createResource();
-				omnResource.addProperty(RDF.type, omnResource.getModel()
-						.createResource(sliverTypeUrl));
-			}
+
+			// // Note: Do not change sliver type here, as Fiteagle will
+			// // not work
+			// if (AbstractConverter.isUrl(sliverName)) {
+			// // sliverTypeResource = omnResource.getModel().createResource();
+			// omnResource.addProperty(RDF.type, omnResource.getModel()
+			// .createResource(sliverName));
+			// } else {
+			// String sliverTypeUrl = "http://open-multinet.info/example#"
+			// + sliverName;
+			// // sliverTypeResource = omnResource.getModel().createResource();
+			// omnResource.addProperty(RDF.type, omnResource.getModel()
+			// .createResource(sliverTypeUrl));
+			// }
 
 			// override existing sliverType if blank
 			StmtIterator existingSliverTypes = omnResource
@@ -926,6 +928,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			sliverTypeResource.addProperty(Omn_lifecycle.hasSliverName,
 					sliverName);
 			sliverTypeResource.addProperty(RDF.type, Omn_resource.SliverType);
+			omnResource.addProperty(Omn_lifecycle.canImplement, sliverName);
 
 			for (Object rspecSliverObject : sliverType.getAnyOrDiskImage()) {
 				tryExtractCpus(rspecSliverObject, sliverTypeResource);
@@ -1677,24 +1680,8 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void setSliverTypes(Statement resource, NodeContents geniNode) {
 
-		// StmtIterator canImplement = omnResource.getResource().listProperties(
-		// Omn_lifecycle.canImplement);
-		// SliverType sliver;
-		//
-		// List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
-		// while (canImplement.hasNext()) {
-		// Statement omnSliver = canImplement.next();
-		// String parentURI = omnSliver.getResource().getURI();
-		// sliver = of.createNodeContentsSliverType();
-		// sliver.setName(parentURI);
-		// if (null != parentURI) {
-		// geniNodeDetails.add(of.createNodeContentsSliverType(sliver));
-		// RDFNode sliverObject = omnSliver.getObject();
-		// Resource sliverResource = sliverObject.asResource();
-		// setCpus(sliverResource, sliver);
-		// setDiskImage(sliverResource, sliver);
-		// }
-		// }
+		StmtIterator canImplement = resource.getResource().listProperties(
+				Omn_lifecycle.canImplement);
 
 		// check if name was string and not uri
 		if (resource.getResource().hasProperty(Omn_resource.hasSliverType)) {
@@ -1730,6 +1717,16 @@ public class AdvertisementConverter extends AbstractConverter {
 					geniNode.getAnyOrRelationOrLocation().add(sliver);
 				}
 			}
+		} else if (canImplement.hasNext()) {
+			while (canImplement.hasNext()) {
+				SliverType sliver1;
+				Statement omnSliver = canImplement.next();
+				sliver1 = of.createNodeContentsSliverType();
+				sliver1.setName(omnSliver.getObject().asLiteral().getString());
+				JAXBElement<SliverType> sliverType = new ObjectFactory()
+						.createNodeContentsSliverType(sliver1);
+				geniNode.getAnyOrRelationOrLocation().add(sliverType);
+			}
 		} else {
 			SliverType sliverType = new ObjectFactory()
 					.createNodeContentsSliverType();
@@ -1748,6 +1745,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					.createNodeContentsSliverType(sliverType);
 			geniNode.getAnyOrRelationOrLocation().add(sliver);
 		}
+
 	}
 
 	private void setCpus(Resource sliverResource, SliverType sliver) {
