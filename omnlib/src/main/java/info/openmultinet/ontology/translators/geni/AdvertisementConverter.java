@@ -928,7 +928,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			sliverTypeResource.addProperty(Omn_lifecycle.hasSliverName,
 					sliverName);
 			sliverTypeResource.addProperty(RDF.type, Omn_resource.SliverType);
-			omnResource.addProperty(Omn_lifecycle.canImplement, sliverName);
+			omnResource.addProperty(Omn_lifecycle.canImplement, omnResource
+					.getModel().createResource(sliverName));
 
 			for (Object rspecSliverObject : sliverType.getAnyOrDiskImage()) {
 				tryExtractCpus(rspecSliverObject, sliverTypeResource);
