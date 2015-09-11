@@ -107,6 +107,18 @@ public class ManifestConverter extends AbstractConverter {
 		AbstractConverter.validateModel(groups);
 
 		final Resource group = groups.iterator().next();
+
+		if (group.hasProperty(Omn_lifecycle.expirationTime)) {
+			XSDDateTime creationTime = (XSDDateTime) group
+					.getProperty(Omn_lifecycle.expirationTime).getObject()
+					.asLiteral().getValue();
+			XMLGregorianCalendar xgc = xsdToXmlTime(creationTime);
+
+			if (xgc != null) {
+				manifest.setExpires(xgc);
+			}
+		}
+
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
@@ -345,40 +357,6 @@ public class ManifestConverter extends AbstractConverter {
 			if (stateGeni != null && stateGeni != "") {
 				geniSliverInfo.setState(stateGeni);
 			}
-
-			// if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
-			// geniSliverInfo.setState("ready_busy");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
-			// geniSliverInfo.setState("allocated");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
-			// geniSliverInfo.setState("failed");
-			// }
-			// if
-			// (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI()))
-			// {
-			// geniSliverInfo.setState("instantiating");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
-			// geniSliverInfo.setState("pending_allocation");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
-			// geniSliverInfo.setState("configuring");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
-			// geniSliverInfo.setState("provisioned");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
-			// geniSliverInfo.setState("ready");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
-			// geniSliverInfo.setState("stopping");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
-			// geniSliverInfo.setState("unallocated");
-			// }
-
 		}
 
 		if (geniSliverInfo != null) {
@@ -1026,39 +1004,39 @@ public class ManifestConverter extends AbstractConverter {
 		GeniSliceInfo geniSliceInfo = (GeniSliceInfo) o;
 		OntClass stateClass = null;
 		String stateString = geniSliceInfo.getState();
-
-		switch (stateString) {
-		case "ready_busy":
-			stateClass = Omn_lifecycle.Active;
-			break;
-		case "allocated":
-			stateClass = Omn_lifecycle.Allocated;
-			break;
-		case "failed":
-			stateClass = Omn_lifecycle.Error;
-			break;
-		case "instantiating":
-			stateClass = Omn_lifecycle.NotYetInitialized;
-			break;
-		case "pending_allocation":
-			stateClass = Omn_lifecycle.Pending;
-			break;
-		case "configuring":
-			stateClass = Omn_lifecycle.Preinit;
-			break;
-		case "provisioned":
-			stateClass = Omn_lifecycle.Provisioned;
-			break;
-		case "ready":
-			stateClass = Omn_lifecycle.Ready;
-			break;
-		case "stopping":
-			stateClass = Omn_lifecycle.Stopping;
-			break;
-		case "unallocated":
-			stateClass = Omn_lifecycle.Unallocated;
-			break;
-		}
+		stateClass = CommonMethods.convertGeniStateToOmn(stateString);
+		// switch (stateString) {
+		// case "ready_busy":
+		// stateClass = Omn_lifecycle.Active;
+		// break;
+		// case "allocated":
+		// stateClass = Omn_lifecycle.Allocated;
+		// break;
+		// case "failed":
+		// stateClass = Omn_lifecycle.Error;
+		// break;
+		// case "instantiating":
+		// stateClass = Omn_lifecycle.NotYetInitialized;
+		// break;
+		// case "pending_allocation":
+		// stateClass = Omn_lifecycle.Pending;
+		// break;
+		// case "configuring":
+		// stateClass = Omn_lifecycle.Preinit;
+		// break;
+		// case "provisioned":
+		// stateClass = Omn_lifecycle.Provisioned;
+		// break;
+		// case "ready":
+		// stateClass = Omn_lifecycle.Ready;
+		// break;
+		// case "stopping":
+		// stateClass = Omn_lifecycle.Stopping;
+		// break;
+		// case "unallocated":
+		// stateClass = Omn_lifecycle.Unallocated;
+		// break;
+		// }
 		if (stateClass != null) {
 			topology.addProperty(Omn_lifecycle.hasState, stateClass);
 		}
@@ -1228,42 +1206,9 @@ public class ManifestConverter extends AbstractConverter {
 
 		// get value of the element
 		GeniSliverInfo geniSliverInfo = (GeniSliverInfo) nodeDetailObject;
-		// OntClass stateClass = null;
 		String stateString = geniSliverInfo.getState();
 		OntClass stateClass = CommonMethods.convertGeniStateToOmn(stateString);
 
-		// switch (stateString) {
-		// case "ready_busy":
-		// stateClass = Omn_lifecycle.Active;
-		// break;
-		// case "allocated":
-		// stateClass = Omn_lifecycle.Allocated;
-		// break;
-		// case "failed":
-		// stateClass = Omn_lifecycle.Error;
-		// break;
-		// case "instantiating":
-		// stateClass = Omn_lifecycle.NotYetInitialized;
-		// break;
-		// case "pending_allocation":
-		// stateClass = Omn_lifecycle.Pending;
-		// break;
-		// case "configuring":
-		// stateClass = Omn_lifecycle.Preinit;
-		// break;
-		// case "provisioned":
-		// stateClass = Omn_lifecycle.Provisioned;
-		// break;
-		// case "ready":
-		// stateClass = Omn_lifecycle.Ready;
-		// break;
-		// case "stopping":
-		// stateClass = Omn_lifecycle.Stopping;
-		// break;
-		// case "unallocated":
-		// stateClass = Omn_lifecycle.Unallocated;
-		// break;
-		// }
 		if (stateClass != null) {
 			omnResource.addProperty(Omn_lifecycle.hasState, stateClass);
 		}
@@ -1275,11 +1220,6 @@ public class ManifestConverter extends AbstractConverter {
 		}
 
 		if (geniSliverInfo.getStartTime() != null) {
-			// XMLGregorianCalendar startTime = geniSliverInfo.getStartTime();
-			// Calendar startTimeCalendar = startTime.toGregorianCalendar();
-			// XSDDateTime startTimeXSDDateTime = new XSDDateTime(
-			// startTimeCalendar);
-
 			XSDDateTime startTimeXSDDateTime = xmlToXsdTime(geniSliverInfo
 					.getStartTime());
 			omnResource.addLiteral(Omn_lifecycle.startTime,
@@ -1433,8 +1373,14 @@ public class ManifestConverter extends AbstractConverter {
 				// sliver.addProperty(Omn.hasResource, diskImage);
 
 				String diskImageURL = diskImageContents.getUrl();
-				Resource diskImage = omnSliver.getModel().createResource(
-						diskImageURL);
+				Resource diskImage;
+				if (diskImageURL != null) {
+					diskImage = omnSliver.getModel().createResource(
+							diskImageURL);
+				} else {
+					String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+					diskImage = omnSliver.getModel().createResource(uuid);
+				}
 				diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
 
 				// add name info
@@ -1576,17 +1522,22 @@ public class ManifestConverter extends AbstractConverter {
 
 						// add hostname info
 						String hostname = serviceValue.getHostname();
-						omnService.addLiteral(Omn_service.hostname, hostname);
-
+						if (hostname != null) {
+							omnService.addLiteral(Omn_service.hostname,
+									hostname);
+						}
 						// add port info
 						String portString = serviceValue.getPort();
-						int port = Integer.parseInt(portString);
-						omnService.addLiteral(Omn_service.port, port);
-
+						if (portString != null) {
+							int port = Integer.parseInt(portString);
+							omnService.addLiteral(Omn_service.port, port);
+						}
 						// add username info
 						String username = serviceValue.getUsername();
-						omnService.addLiteral(Omn_service.username, username);
-
+						if (username != null) {
+							omnService.addLiteral(Omn_service.username,
+									username);
+						}
 					}
 					// if execute service
 					if (serviceType.equals(ExecuteServiceContents.class)) {

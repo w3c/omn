@@ -699,7 +699,8 @@
         rdfs:comment "GENI sliver info expiration time"@en ;
        
         rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
+         owl:unionOf ( omn:Group
+                       omn:Resource
                        omn:Service
                      )
         ] ;

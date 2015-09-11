@@ -1,0 +1,45 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
+@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix motor:  <http://open-multinet.info/ontology/resource/motor#> .
+
+<http://localhost/reservation/5698e772-e2f5-473c-b914-82cc0991b369>
+        a       omn:Reservation ;
+        rdfs:label	"http://localhost/reservation/5698e772-e2f5-473c-b914-82cc0991b369" ;
+        omn-lifecycle:expirationTime "2015-09-10T19:36:06+02:00"^^xsd:dateTime ;
+        omn:isReservationOf	<http://localhost/resource/MotorGarage-1/adb04caa-9134-4909-8749-8d837c076937> ;
+        omn-lifecycle:hasReservationState	omn-lifecycle:Provisioned .
+
+<http://localhost/topology/sRMV1441899365>
+        a       omn:Topology ;
+        rdfs:label "http://localhost/topology/sRMV1441899365" ;
+        omn-lifecycle:expirationTime	"2015-09-10T19:36:05+02:00"^^xsd:dateTime ;
+        omn:hasResource	<http://localhost/resource/MotorGarage-1/adb04caa-9134-4909-8749-8d837c076937> ;
+        omn-lifecycle:hasAuthenticationInformation	"blahblah..." .
+
+<http://localhost/resource/MotorGarage-1/adb04caa-9134-4909-8749-8d837c076937>
+        a       motor:Motor , omn-resource:Node ;
+        rdfs:label	"motor1" ;
+        omn:hasReservation 	<http://localhost/reservation/5698e772-e2f5-473c-b914-82cc0991b369> ;
+        omn:isResourceOf	<http://localhost/topology/sRMV1441899365> ;
+        omn-lifecycle:hasComponentID	"http://localhost/resource/MotorGarage-1" ;
+        omn-lifecycle:hasID 	"motor1" ;
+        omn-lifecycle:hasState 	omn-lifecycle:Uncompleted ;
+        omn-lifecycle:implementedBy 	<http://localhost/resource/MotorGarage-1> ;
+        omn-lifecycle:managedBy 	<http://localhost:8443/sfa/api/am/v3> ;
+        omn-resource:isExclusive 	true ;
+        omn:hasService  <urn:uuid:2528652b-283a-404a-89a7-a1a63c6032ac> .
+        
+
+<urn:uuid:2528652b-283a-404a-89a7-a1a63c6032ac>
+        a           omn-service:LoginService ;
+        rdfs:label  "LoginService" ;
+        omn-service:username    "testing" ;
+        omn-service:publickey     "ssh-rsa AAAAB3...7"   .

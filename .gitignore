@@ -13,6 +13,7 @@ omnlib/src/main/java/info/openmultinet/ontology/translators/tosca/jaxb/
 omnlib/src/test/java/info/openmultinet/ontology/vocabulary/
 omnlib/src/main/java/org/opendaylight/yang/gen/v1/urn/ietf/params/xml/ns/yang/ietf/
 bin/info/
+bin/org/
 eyeball*
 pellet*
 .travis/settings-secret.xml
