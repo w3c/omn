@@ -1,0 +1,51 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix motor:  <http://open-multinet.info/ontology/resource/motor#> .
+
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement <http://localhost/resource/2048MB_20GB> .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement <http://localhost/resource/Ubuntu2> .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement <http://localhost/resource/Ubuntu> .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement <http://localhost/resource/Ubuntu3> .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement <http://localhost/resource/1024MB_10GB> .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement <http://localhost/resource/512MB_5GB> .
+<http://localhost/resource/OpenStackAdapter> rdf:type omn-domain-pc:VMServer .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:canImplement omn-domain-pc:VM .
+<http://localhost/resource/OpenStackAdapter> rdfs:label "OpenStackAdapter" .
+<http://localhost/resource/OpenStackAdapter> omn:isResourceOf <http://open-multinet.info/advertisement> .
+<http://localhost/resource/OpenStackAdapter> rdfs:comment "Openstack server" .
+<http://localhost/resource/OpenStackAdapter> geo:lat "52.516377" .
+<http://localhost/resource/OpenStackAdapter> geo:long "13.323732" .
+<http://localhost/resource/OpenStackAdapter> omn-lifecycle:parentOf <urn:publicid:IDN+localhost+authority+cm> .
+
+<http://localhost/resource/MotorGarage-1> omn-lifecycle:parentOf <urn:publicid:IDN+localhost+authority+cm> .
+<http://localhost/resource/MotorGarage-1> rdf:type <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+<http://localhost/resource/MotorGarage-1> rdfs:comment "A motor garage adapter that can simulate different dynamic motor resources." .
+<http://localhost/resource/MotorGarage-1> rdfs:label "MotorGarage-1" .
+<http://localhost/resource/MotorGarage-1> omn:maxInstances "10"^^xsd:long .
+<http://localhost/resource/MotorGarage-1> omn-lifecycle:canImplement motor:Motor .
+<http://localhost/resource/MotorGarage-1> geo:lat "52.516377" .
+<http://localhost/resource/MotorGarage-1> geo:long "13.323732" .
+<http://localhost/resource/MotorGarage-1> omn:isResourceOf <http://open-multinet.info/advertisement> .
+
+<http://open-multinet.info/advertisement> omn:hasResource <http://localhost/resource/OpenStackAdapter> .
+<http://open-multinet.info/advertisement> omn:hasResource <http://localhost/resource/MotorGarage-2> .
+<http://open-multinet.info/advertisement> omn:hasResource <http://localhost/resource/MotorGarage-1> .
+<http://open-multinet.info/advertisement> rdf:type omn:Topology .
+<http://open-multinet.info/advertisement> rdf:type omn-lifecycle:Offering .
+
+<http://localhost/resource/MotorGarage-2> omn-lifecycle:parentOf <urn:publicid:IDN+localhost+authority+cm> .
+<http://localhost/resource/MotorGarage-2> omn:isResourceOf <http://open-multinet.info/advertisement> .
+<http://localhost/resource/MotorGarage-2> rdf:type <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+<http://localhost/resource/MotorGarage-2> rdfs:comment "A motor garage adapter that can simulate different dynamic motor resources." .
+<http://localhost/resource/MotorGarage-2> rdfs:label "MotorGarage-2" .
+<http://localhost/resource/MotorGarage-2> omn:maxInstances "10"^^xsd:long .
+<http://localhost/resource/MotorGarage-2> omn-lifecycle:canImplement motor:Motor .
+<http://localhost/resource/MotorGarage-2> geo:lat "52.516377" .
+<http://localhost/resource/MotorGarage-2> geo:long "13.323732" .

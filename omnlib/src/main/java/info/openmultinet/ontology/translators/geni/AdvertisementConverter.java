@@ -1723,7 +1723,7 @@ public class AdvertisementConverter extends AbstractConverter {
 				SliverType sliver1;
 				Statement omnSliver = canImplement.next();
 				sliver1 = of.createNodeContentsSliverType();
-				sliver1.setName(omnSliver.getObject().asLiteral().getString());
+				sliver1.setName(omnSliver.getObject().asResource().getURI());
 				JAXBElement<SliverType> sliverType = new ObjectFactory()
 						.createNodeContentsSliverType(sliver1);
 				geniNode.getAnyOrRelationOrLocation().add(sliverType);
