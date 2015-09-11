@@ -44,7 +44,6 @@ public class ManifestAlaaTest {
 		// Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
 
-	
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,

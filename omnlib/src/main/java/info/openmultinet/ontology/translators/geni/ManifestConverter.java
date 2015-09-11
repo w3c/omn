@@ -20,6 +20,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.Sl
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Proxy;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
@@ -142,6 +143,7 @@ public class ManifestConverter extends AbstractConverter {
 				setComponentDetails(resource, node);
 				setLocation(resource, node);
 				// setComponentManagerId(resource, node);
+				setReservation(resource, node);
 				setMonitoringService(resource, node);
 				setGeniSliverInfo(resource, node);
 				// setState
@@ -164,6 +166,52 @@ public class ManifestConverter extends AbstractConverter {
 		}
 	}
 
+	private static void setReservation(Statement omnResource, NodeContents node) {
+
+		List<Statement> reservations = omnResource.getResource()
+				.listProperties(Omn.hasReservation).toList();
+
+		for (final Statement reservationStatement : reservations) {
+			Resource reservationResource = reservationStatement.getObject()
+					.asResource();
+
+			Reservation reservation = null;
+			if (reservationResource.hasProperty(Omn_lifecycle.expirationTime)) {
+				if (reservation == null) {
+					reservation = new ObjectFactory().createReservation();
+				}
+
+				XSDDateTime expTime = (XSDDateTime) reservationResource
+						.getProperty(Omn_lifecycle.expirationTime).getObject()
+						.asLiteral().getValue();
+				XMLGregorianCalendar xgc = xsdToXmlTime(expTime);
+
+				if (xgc != null) {
+					reservation.setExpirationTime(xgc);
+				}
+
+			}
+
+			if (reservationResource
+					.hasProperty(Omn_lifecycle.hasReservationState)) {
+				if (reservation == null) {
+					reservation = new ObjectFactory().createReservation();
+				}
+
+				Resource state = reservationResource
+						.getProperty(Omn_lifecycle.hasReservationState)
+						.getObject().asResource();
+
+				String stateGeni = CommonMethods.convertOmnToGeniState(state);
+				reservation.setReservationState(stateGeni);
+			}
+
+			if (reservation != null) {
+				node.getAnyOrRelationOrLocation().add(reservation);
+			}
+		}
+	}
+
 	private static void setGeniSliceInfo(Resource group, RSpecContents manifest) {
 
 		GeniSliceInfo geniSliceInfo = null;
@@ -180,40 +228,6 @@ public class ManifestConverter extends AbstractConverter {
 			if (stateGeni != null && stateGeni != "") {
 				geniSliceInfo.setState(stateGeni);
 			}
-
-			// if (state.getURI().equals(Omn_lifecycle.Active.getURI())) {
-			// geniSliceInfo.setState("ready_busy");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Allocated.getURI())) {
-			// geniSliceInfo.setState("allocated");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Error.getURI())) {
-			// geniSliceInfo.setState("failed");
-			// }
-			// if
-			// (state.getURI().equals(Omn_lifecycle.NotYetInitialized.getURI()))
-			// {
-			// geniSliceInfo.setState("instantiating");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Pending.getURI())) {
-			// geniSliceInfo.setState("pending_allocation");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Preinit.getURI())) {
-			// geniSliceInfo.setState("configuring");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Provisioned.getURI())) {
-			// geniSliceInfo.setState("provisioned");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Ready.getURI())) {
-			// geniSliceInfo.setState("ready");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Stopping.getURI())) {
-			// geniSliceInfo.setState("stopping");
-			// }
-			// if (state.getURI().equals(Omn_lifecycle.Unallocated.getURI())) {
-			// geniSliceInfo.setState("unallocated");
-			// }
-
 		}
 
 		if (omnResource.hasProperty(Omn_domain_pc.hasUUID)) {
@@ -333,7 +347,6 @@ public class ManifestConverter extends AbstractConverter {
 
 			if (xgc != null) {
 				geniSliverInfo.setExpirationTime(xgc);
-				;
 			}
 		}
 
@@ -1114,6 +1127,11 @@ public class ManifestConverter extends AbstractConverter {
 
 			} else if (nodeDetailObject.getClass().equals(GeniSliverInfo.class)) {
 				extractGeniSliverInfo(nodeDetailObject, omnResource);
+			} else if (nodeDetailObject
+					.getClass()
+					.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation.class)) {
+
+				extractReservation(nodeDetailObject, omnResource);
 			} else {
 				ManifestConverter.LOG.log(Level.INFO,
 						"Found unknown extsion within node: "
@@ -1122,6 +1140,33 @@ public class ManifestConverter extends AbstractConverter {
 		}
 
 		topology.addProperty(Omn.hasResource, omnResource);
+	}
+
+	private static void extractReservation(Object nodeDetailObject,
+			Resource omnResource) {
+
+		// get value of the element
+		Reservation reservation = (Reservation) nodeDetailObject;
+		XMLGregorianCalendar expirationTime = reservation.getExpirationTime();
+		String stateString = reservation.getReservationState();
+		OntClass stateClass = CommonMethods.convertGeniStateToOmn(stateString);
+
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource reservationResource = omnResource.getModel().createResource(
+				uuid);
+
+		if (stateClass != null) {
+			reservationResource.addProperty(Omn_lifecycle.hasReservationState,
+					stateClass);
+		}
+
+		if (expirationTime != null) {
+			XSDDateTime expirationTimeXsd = xmlToXsdTime(expirationTime);
+			reservationResource.addLiteral(Omn_lifecycle.expirationTime,
+					expirationTimeXsd);
+		}
+		
+		omnResource.addProperty(Omn.hasReservation, reservationResource);
 	}
 
 	private static void extractComponentDetails(NodeContents node,

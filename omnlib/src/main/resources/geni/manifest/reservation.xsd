@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for requesting the option to connect an interface to a 
+	OMSP monitoring tool. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://demo.fiteagle.org/monitoring" elementFormDefault="qualified"
+	targetNamespace="http://demo.fiteagle.org/monitoring">
+	<xs:element name="rspec_omn_reservation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:reservation" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="reservation">
+		<xs:complexType>
+			<xs:attribute name="expirationTime" type="xs:dateTime" />
+			<xs:attribute name="reservationState" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
