@@ -24,6 +24,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkType;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ComponentManager;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -69,6 +71,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class ManifestConverter extends AbstractConverter {
 
+	private static final String HOST = "http://open-multinet.info/example#";
 	private static final Logger LOG = Logger.getLogger(ManifestConverter.class
 			.getName());
 
@@ -255,11 +258,33 @@ public class ManifestConverter extends AbstractConverter {
 
 		for (Statement interface1 : interfaces) {
 
+			Resource interfaceResource = interface1.getObject().asResource();
 			InterfaceRefContents newInterface = new ObjectFactory()
 					.createInterfaceRefContents();
-			String clientId = interface1.getObject().asLiteral().getString();
 
+			// clientId is required
+			// String clientId = interface1.getObject().asLiteral().getString();
+			String clientId = interfaceResource
+					.getProperty(Omn_resource.clientId).getObject().asLiteral()
+					.getString();
 			newInterface.setClientId(clientId);
+
+			// componentId optional
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+				String componentId = interfaceResource
+						.getProperty(Omn_lifecycle.hasComponentID).getObject()
+						.asLiteral().getString();
+				newInterface.setComponentId(componentId);
+			}
+
+			// sliverId optional
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasSliverID)) {
+				String sliverId = interfaceResource
+						.getProperty(Omn_lifecycle.hasSliverID).getObject()
+						.asLiteral().getString();
+				newInterface.setSliverId(sliverId);
+			}
+
 			link.getAnyOrPropertyOrLinkType().add(
 					new ObjectFactory()
 							.createLinkContentsInterfaceRef(newInterface));
@@ -276,6 +301,33 @@ public class ManifestConverter extends AbstractConverter {
 		} else {
 			link.setSliverId(CommonMethods.generateUrnFromUrl(resource
 					.getResource().getURI(), "sliver"));
+		}
+
+		if (resource.getResource().hasProperty(Omn_lifecycle.hasLinkName)) {
+			String linkName = resource.getResource()
+					.getProperty(Omn_lifecycle.hasLinkName).getObject()
+					.asLiteral().getString();
+			LinkType linkType = new ObjectFactory().createLinkType();
+			linkType.setName(linkName);
+			link.getAnyOrPropertyOrLinkType().add(linkType);
+		}
+
+		if (resource.getResource().hasProperty(
+				Omn_lifecycle.hasComponentManagerName)) {
+
+			List<Statement> componentManagers = resource.getResource()
+					.listProperties(Omn_lifecycle.hasComponentManagerName)
+					.toList();
+
+			for (final Statement manager : componentManagers) {
+				String managerName = manager.getObject().asLiteral()
+						.getString();
+				ComponentManager rspecManager = new ObjectFactory()
+						.createComponentManager();
+				rspecManager.setName(managerName);
+				link.getAnyOrPropertyOrLinkType().add(rspecManager);
+			}
+
 		}
 
 		if (resource.getResource().hasProperty(Omn_resource.clientId)) {
@@ -409,6 +461,22 @@ public class ManifestConverter extends AbstractConverter {
 				interfaceContents.setClientId(interfaceResource
 						.getProperty(Omn_resource.clientId).getObject()
 						.asLiteral().toString());
+			}
+
+			// componentId optional
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+				String componentId = interfaceResource
+						.getProperty(Omn_lifecycle.hasComponentID).getObject()
+						.asLiteral().getString();
+				interfaceContents.setComponentId(componentId);
+			}
+
+			// sliverId optional
+			if (interfaceResource.hasProperty(Omn_lifecycle.hasSliverID)) {
+				String sliverId = interfaceResource
+						.getProperty(Omn_lifecycle.hasSliverID).getObject()
+						.asLiteral().getString();
+				interfaceContents.setSliverId(sliverId);
 			}
 
 			setIpAddress(interfaceResource, interfaceContents);
@@ -1165,7 +1233,7 @@ public class ManifestConverter extends AbstractConverter {
 			reservationResource.addLiteral(Omn_lifecycle.expirationTime,
 					expirationTimeXsd);
 		}
-		
+
 		omnResource.addProperty(Omn.hasReservation, reservationResource);
 	}
 
@@ -1228,14 +1296,11 @@ public class ManifestConverter extends AbstractConverter {
 			if (linkObject instanceof JAXBElement) {
 				JAXBElement<?> linkElement = (JAXBElement<?>) linkObject;
 
-				if (linkElement.getDeclaredType().equals(
-						InterfaceRefContents.class)) {
-					InterfaceRefContents interfaceRefContents = (InterfaceRefContents) linkElement
-							.getValue();
-					linkResource.addProperty(Omn_resource.hasInterface,
-							interfaceRefContents.getClientId());
-				}
-
+				extractIntefaceRef(linkElement, linkResource);
+			} else if (linkObject.getClass().equals(ComponentManager.class)) {
+				extractComponentManager(linkObject, linkResource);
+			} else if (linkObject.getClass().equals(LinkType.class)) {
+				extractLinkType(linkObject, linkResource);
 			} else if (linkObject.getClass().equals(GeniSliverInfo.class)) {
 				extractGeniSliverInfo(linkObject, linkResource);
 			} else {
@@ -1244,6 +1309,83 @@ public class ManifestConverter extends AbstractConverter {
 			}
 		}
 		topology.addProperty(Omn.hasResource, linkResource);
+	}
+
+	private static void extractLinkType(Object linkObject, Resource linkResource)
+			throws MissingRspecElementException {
+
+		LinkType content = (LinkType) linkObject;
+		String linkName = content.getName();
+
+		// name required
+		if (linkName == null) {
+			throw new MissingRspecElementException("link_type > name");
+		}
+		linkResource.addProperty(Omn_lifecycle.hasLinkName, linkName);
+
+		// add link type as RDF type, analog to sliver type
+		if (AbstractConverter.isUrl(linkName)) {
+			linkResource.addProperty(RDF.type, linkResource.getModel()
+					.createResource(linkName));
+		} else {
+			// set type of node
+			String sliverTypeUrl = HOST + linkName;
+			linkResource.addProperty(RDF.type, linkResource.getModel()
+					.createResource(sliverTypeUrl));
+		}
+	}
+
+	private static void extractComponentManager(Object linkObject,
+			Resource linkResource) throws MissingRspecElementException {
+
+		final ComponentManager componentManager = (ComponentManager) linkObject;
+		String componentManagerName = componentManager.getName();
+
+		// name required
+		if (componentManagerName == null) {
+			throw new MissingRspecElementException("component_manager > name");
+		}
+
+		// add managedBy property if the component name is a URN
+		if (AbstractConverter.isUrn(componentManagerName)) {
+			RDFNode componentManagerResource = ResourceFactory
+					.createResource(componentManagerName);
+			linkResource.addProperty(Omn_lifecycle.managedBy,
+					componentManagerResource);
+		}
+		linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
+				componentManagerName);
+	}
+
+	private static void extractIntefaceRef(JAXBElement<?> linkElement,
+			Resource linkResource) {
+		if (linkElement.getDeclaredType().equals(InterfaceRefContents.class)) {
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource interfaceResource = linkResource.getModel()
+					.createResource(uuid);
+			interfaceResource.addProperty(RDF.type, Omn_resource.Interface);
+
+			InterfaceRefContents interfaceRefContents = (InterfaceRefContents) linkElement
+					.getValue();
+
+			String clientId = interfaceRefContents.getClientId();
+			interfaceResource.addProperty(Omn_resource.clientId, clientId);
+
+			String sliverId = interfaceRefContents.getSliverId();
+			if (sliverId != null) {
+				interfaceResource.addProperty(Omn_lifecycle.hasSliverID,
+						sliverId);
+			}
+
+			String componentId = interfaceRefContents.getComponentId();
+			if (componentId != null) {
+				interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
+						componentId);
+			}
+
+			linkResource.addProperty(Omn_resource.hasInterface,
+					interfaceResource);
+		}
 	}
 
 	private static void extractGeniSliverInfo(Object nodeDetailObject,
@@ -1358,8 +1500,7 @@ public class ManifestConverter extends AbstractConverter {
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverName));
 			} else {
-				String sliverTypeUrl = "http://open-multinet.info/example#"
-						+ sliverName;
+				String sliverTypeUrl = HOST + sliverName;
 				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 				sliverTypeResource = omnResource.getModel()
 						.createResource(uuid);
@@ -1500,23 +1641,35 @@ public class ManifestConverter extends AbstractConverter {
 				omnInteface.addProperty(Omn_resource.macAddress,
 						interfaceContents.getMacAddress());
 			}
-			if (interfaceContents.getClientId() != null) {
-				omnInteface.addProperty(Omn_resource.clientId,
-						interfaceContents.getClientId());
+
+			String clientId = interfaceContents.getClientId();
+			if (clientId != null) {
+				omnInteface.addProperty(Omn_resource.clientId, clientId);
 			}
+
+			String sliverId = interfaceContents.getSliverId();
+			if (sliverId != null) {
+				omnInteface.addProperty(Omn_lifecycle.hasSliverID, sliverId);
+			}
+
+			String componentId = interfaceContents.getComponentId();
+			if (componentId != null) {
+				omnInteface.addProperty(Omn_lifecycle.hasComponentID,
+						componentId);
+			}
+
 			// iterate through the interfaces and add to model
 			for (int i = 0; i < interfaces.size(); i++) {
-
 				Object interfaceObject = interfaces.get(i);
 				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
 				Resource omnIpAddress = model.createResource(uuid2);
 				tryExtractIPAddress(interfaceObject, omnInteface, omnIpAddress);
 
-				// add interface to node
-				if (omnInteface != null) {
-					omnResource.addProperty(Omn_resource.hasInterface,
-							omnInteface);
-				}
+			}
+
+			// add interface to node
+			if (omnInteface != null) {
+				omnResource.addProperty(Omn_resource.hasInterface, omnInteface);
 			}
 		}
 	}

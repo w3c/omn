@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.pllab.pl/doc/docf4f/ -->
+<rspec xmlns="http://www.geni.net/resources/rspec/3" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="manifest" 
+     generated_by="jFed RSpec Editor" generated="2015-03-17T17:02:30.471+01:00" 
+     xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd"
+     expires="2015-03-17T17:03:06Z">
+
+     <node client_id="node0" exclusive="true" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          component_id="urn:publicid:IDN+pllab.pl+node+srv1.psnc" 
+          sliver_id="urn:publicid:IDN+pllab.pl+sliver+100"> 
+          <sliver_type name="raw-pc"/>
+          <interface client_id="node0:if0" 
+               sliver_id="urn:publicid:IDN+pllab.pl+sliver+102"
+               component_id="urn:publicid:IDN+pllab.pl+interface+srv1.psnc:eth1">           
+          </interface>
+          <services xmlns:ns="http://jfed.iminds.be/proxy/1.0">
+               <ns:proxy proxy="U0000001@150.254.160.199:22" for="llopat@10.134.0.5:22"/>
+               <login authentication="ssh-keys" hostname="150.254.160.199" port="22" username="U0000001"/>
+               <login authentication="ssh-keys" hostname="10.134.0.5" port="22" username="llopat"/>
+          </services>
+    </node>
+
+     <node client_id="node1" exclusive="true" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          component_id="urn:publicid:IDN+pllab.pl+node+rt0.psnc" 
+          sliver_id="urn:publicid:IDN+pllab.pl+sliver+101"> 
+          <sliver_type name="raw-router"/>
+          <interface client_id="node0:if0" 
+               sliver_id="urn:publicid:IDN+pllab.pl+sliver+103"
+               component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth1">          
+          </interface>
+          <services xmlns:ns="http://jfed.iminds.be/proxy/1.0">
+               <ns:proxy proxy="U0000001@150.254.160.199:22" for="llopat@10.134.0.8:22"/>
+               <login authentication="ssh-keys" hostname="150.254.160.199" port="22" username="U0000001"/>
+               <login authentication="ssh-keys" hostname="10.134.0.8" port="22" username="llopat"/>
+          </services>
+     </node>
+
+    <link client_id="link0" 
+         sliver_id="urn:publicid:IDN+pllab.pl+sliver+104" vlantag="">
+         <component_manager name="urn:publicid:IDN+pllab.pl+authority+cm" />          
+         <interface_ref client_id="node0:if0" sliver_id="urn:publicid:IDN+pllab.pl+sliver+102" 
+              component_id="urn:publicid:IDN+pllab.pl+interface+srv1.psnc:eth1"/>          
+         <interface_ref client_id="node1:if0" sliver_id="urn:publicid:IDN+pllab.pl+sliver+103" 
+              component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth1"/>         
+         <link_type name="lan"/>     
+    </link>
+</rspec>

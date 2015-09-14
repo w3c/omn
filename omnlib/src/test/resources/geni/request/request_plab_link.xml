@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- http://www.pllab.pl/doc/docf4f/ -->
+<rspec type="request"
+     xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" 
+     xmlns="http://www.geni.net/resources/rspec/3" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     <node client_id="node0"
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm"   
+          exclusive="true">
+               <sliver_type name="raw-pc"/>
+               <interface client_id="node0:if0"/>
+     </node>
+     <node client_id="node1" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          exclusive="true">
+               <sliver_type name="raw-router"/>
+               <interface client_id="node1:if0"/>
+     </node>
+     <link client_id="link1">
+           <component_manager name="urn:publicid:IDN+pllab.pl+authority+cm"/>
+           <link_type name="lan"/>
+          <interface_ref client_id="node0:if0"/>
+          <interface_ref client_id="node1:if0"/>
+          <property source_id="node0:if0" dest_id="node1:if0" capacity="100000"/>
+          <property source_id="node1:if0" dest_id="node0:if0" capacity="100000"/>
+     </link>
+</rspec>

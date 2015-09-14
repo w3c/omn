@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- http://www.pllab.pl/doc/docf4f/ -->
+<rspec type="advertisement" 
+     xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd"
+     xmlns="http://www.geni.net/resources/rspec/3" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     <node component_id="urn:publicid:IDN+pllab.pl+node+srv1.psnc" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          component_name="srv1.psnc" 
+          exclusive="true">
+               <sliver_type name="raw-pc">
+                    <disk_image default="true" description="Ubuntu 14.04 LTS (64 bit)" name="Ubuntu-14.04-64" />
+                    <disk_image  description="Debian 7.7 Wheezy (64 bit)" name="Debian-7.7-64" />
+               </sliver_type>
+               <available now="true"/>
+               <location country="PL" latitude="52.411363" longitude="16.9168" />
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+srv1.psnc:eth0" role="control" />
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+srv1.psnc:eth1" role="experimental" />
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+srv1.psnc:eth2" role="experimental" />
+     </node>
+     <node component_id="urn:publicid:IDN+pllab.pl+node+srv5.pw" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          component_name="srv5.pw"
+          exclusive="true">
+               <sliver_type name="raw-pc">
+                    <disk_image default="true" description="Ubuntu 14.04 LTS (64 bit)" name="Ubuntu-14.04-64" />
+               </sliver_type>
+               <available now="false"/>
+               <location country="PL" latitude="52.2204154" longitude="21.0105095" />
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+srv5.pw:eth0" role="control"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+srv5.pw:eth1" role="experimental"/>
+     </node>
+     <node component_id="urn:publicid:IDN+pllab.pl+node+rt0.psnc" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          component_name="rt0.psnc"
+          exclusive="true">
+               <sliver_type name="raw-router"/>
+               <available now="true"/>
+               <location country="PL" latitude="52.411363" longitude="16.9168" />
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth0" role="control"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth1" role="experimental"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth2" role="experimental"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth3" role="experimental"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+rt0.psnc:eth4" role="experimental"/>
+     </node>
+     <node component_id="urn:publicid:IDN+pllab.pl+node+fpga1.pp" 
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" 
+          component_name="fpga1.pp"
+          exclusive="true">
+               <hardware_type name="netfpga" />
+               <sliver_type name="raw-pc" >
+                    <disk_image default="true" description="Ubuntu 14.04 LTS (64 bit)" name="Ubuntu-14.04-64" />
+               </sliver_type>
+               <available now="true"/>
+               <location country="PL" latitude=" 52.3941716" longitude="16.9180558" />
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+fpga1.pp:eth0" role="control"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga0" role="experimental"/>
+               <interface component_id="urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga1" role="experimental"/>   
+     </node>
+</rspec>

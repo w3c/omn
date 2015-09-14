@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- http://www.pllab.pl/doc/docf4f/ -->
+<rspec type="request"
+     xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" 
+     xmlns="http://www.geni.net/resources/rspec/3" 
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     <node client_id="node0"
+          component_id="urn:publicid:IDN+pllab.pl+node+srv1.psnc"
+          component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm"   
+          exclusive="true">
+               <sliver_type name="raw-pc"/>
+     </node>
+</rspec>
