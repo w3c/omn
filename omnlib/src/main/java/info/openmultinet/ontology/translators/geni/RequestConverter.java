@@ -85,6 +85,7 @@ public class RequestConverter extends AbstractConverter {
 	public static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.request";
 	private static final Logger LOG = Logger.getLogger(RequestConverter.class
 			.getName());
+	private static final String HOST = "http://open-multinet.info/example#";
 
 	public static String getRSpec(final Model model) throws JAXBException,
 			InvalidModelException, MissingRspecElementException {
@@ -1429,14 +1430,23 @@ public class RequestConverter extends AbstractConverter {
 	private static void extractComponentManager(Object o, Resource linkResource)
 			throws MissingRspecElementException {
 
-		final ComponentManager content = (ComponentManager) o;
+		final ComponentManager componentManager = (ComponentManager) o;
+		String componentManagerName = componentManager.getName();
 
 		// name required
-		if (content.getName() == null) {
+		if (componentManagerName == null) {
 			throw new MissingRspecElementException("component_manager > name");
 		}
+		
+		// add managedBy property if the component name is a URN
+		if (AbstractConverter.isUrn(componentManagerName)) {
+			RDFNode componentManagerResource = ResourceFactory
+					.createResource(componentManagerName);
+			linkResource.addProperty(Omn_lifecycle.managedBy,
+					componentManagerResource);
+		}
 		linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
-				content.getName());
+				componentManagerName);
 
 	}
 
@@ -1444,12 +1454,24 @@ public class RequestConverter extends AbstractConverter {
 			throws MissingRspecElementException {
 
 		final LinkType content = (LinkType) o;
+		String linkName = content.getName();
 
 		// name required
-		if (content.getName() == null) {
+		if (linkName == null) {
 			throw new MissingRspecElementException("link_type > name");
 		}
-		linkResource.addProperty(Omn_lifecycle.hasLinkName, content.getName());
+		linkResource.addProperty(Omn_lifecycle.hasLinkName, linkName);
+
+		// add link type as RDF type, analog to sliver type
+		if (AbstractConverter.isUrl(linkName)) {
+			linkResource.addProperty(RDF.type, linkResource.getModel()
+					.createResource(linkName));
+		} else {
+			// set type of node
+			String sliverTypeUrl = HOST + linkName;
+			linkResource.addProperty(RDF.type, linkResource.getModel()
+					.createResource(sliverTypeUrl));
+		}
 
 		// class optional
 		// TODO
@@ -1463,7 +1485,7 @@ public class RequestConverter extends AbstractConverter {
 				.getValue();
 
 		Resource interfaceResource = linkResource.getModel().createResource(
-				"http://open-multinet.info/example#" + content.getClientId());
+				HOST + content.getClientId());
 		// interfaceResource.addProperty(Nml.isSink,
 		// linkResource);
 		// interfaceResource.addProperty(Nml.isSource,
@@ -1554,9 +1576,8 @@ public class RequestConverter extends AbstractConverter {
 		if (element.getDeclaredType().equals(InterfaceContents.class)) {
 			Model outputModel = omnResource.getModel();
 			InterfaceContents content = (InterfaceContents) element.getValue();
-			Resource interfaceResource = outputModel
-					.createResource("http://open-multinet.info/example#"
-							+ content.getClientId());
+			Resource interfaceResource = outputModel.createResource(HOST
+					+ content.getClientId());
 			// interfaceResource.addProperty(RDF.type,
 			// Nml.Port);
 			// omnResource.addProperty(Nml.hasPort,
@@ -1659,6 +1680,7 @@ public class RequestConverter extends AbstractConverter {
 		if (node.getComponentManagerId() != null) {
 			RDFNode manager = ResourceFactory.createResource(node
 					.getComponentManagerId());
+			// TODO: must be URI here
 			omnResource.addProperty(Omn_lifecycle.managedBy, manager);
 		}
 
@@ -1716,8 +1738,7 @@ public class RequestConverter extends AbstractConverter {
 			Resource monitoringResource = omnResource.getModel()
 					.createResource(uuid);
 			if (monitor.getUri() != null && monitor.getUri() != "") {
-				monitoringResource.addProperty(Omn.hasURI,
-						monitor.getUri());
+				monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
 				monitoringResource.addProperty(RDF.type, monitor.getType());
@@ -1770,8 +1791,7 @@ public class RequestConverter extends AbstractConverter {
 						.createResource(sliverName));
 			} else {
 				// set type of node
-				String sliverTypeUrl = "http://open-multinet.info/example#"
-						+ sliverName;
+				String sliverTypeUrl = HOST + sliverName;
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverTypeUrl));
 
