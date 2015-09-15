@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rspec generated="2015-05-05T11:34:05.739+02:00" generated_by="omnlib" expires="2015-05-05T11:34:05.739+02:00" type="advertisement" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://demo.fiteagle.org/monitoring" >
+<rspec generated="2015-05-05T11:34:05.739+02:00" generated_by="omnlib" expires="2015-05-05T11:34:05.739+02:00" type="advertisement" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://monitoring.service.tu-berlin.de/monitoring" >
 <!-- Note: have changed the namespace url for monitoring, original text below -->
-<!--  rspec generated="2015-05-05T11:34:05.739+02:00" generated_by="omnlib" expires="2015-05-05T11:34:05.739+02:00" type="advertisement" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://test.fiteagle.org/monitoring" -->
+<!--  rspec generated="2015-05-05T11:34:05.739+02:00" generated_by="omnlib" expires="2015-05-05T11:34:05.739+02:00" type="advertisement" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://demo.fiteagle.org/monitoring" -->
 <!-- TODO: check that such and RSpec is generated correctly, as the namespace for monitoring was missing. --> 
   <node component_id="urn:publicid:IDN+test.fiteagle.org+node+http%3A%2F%2Ftest.fiteagle.org%2Fresource%2FVMServer-1" component_manager_id="urn:publicid:IDN+test.fiteagle.org+authority+cm" component_name="VMServer-1" exclusive="false">
       <hardware_type name="http://open-multinet.info/ontology/omn-domain-pc#VMServer"/>

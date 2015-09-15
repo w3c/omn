@@ -132,6 +132,7 @@ public class AdvertisementConverter extends AbstractConverter {
 		final Resource offering = model.createResource(
 				AdvertisementConverter.PREFIX + "#advertisement").addProperty(
 				RDF.type, Omn_lifecycle.Offering);
+		offering.addProperty(RDFS.label, "Offering");
 
 		@SuppressWarnings("unchecked")
 		final List rspecObjects = (List) rspec.getAnyOrNodeOrLink();
@@ -929,8 +930,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			sliverTypeResource.addProperty(Omn_lifecycle.hasSliverName,
 					sliverName);
 			sliverTypeResource.addProperty(RDF.type, Omn_resource.SliverType);
-			
-			if(!AbstractConverter.isUrl(sliverName)){
+
+			if (!AbstractConverter.isUrl(sliverName)) {
 				sliverName = HOST + sliverName;
 			}
 			omnResource.addProperty(Omn_lifecycle.canImplement, omnResource

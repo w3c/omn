@@ -1,0 +1,8 @@
+<rspec type="request" generated="2014-07-11T10:20:39Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://monitoring.service.tu-berlin.de/monitoring">
+<node client_id="myVM-1" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FVM-Server-1"
+      component_manager_id="urn:publicid:IDN+localhost+authority+cm"
+      component_name="VM-Server-1" exclusive="false">
+      <sliver_type name="http://localhost/resource/Ubuntu-64bit"/>
+      <ns2:monitoring type="http://open-multinet.info/ontology/omn-monitoring#MonitoringService" uri="http://federation.av.tu-berlin.de:3003"/>
+  </node>
+</rspec>

@@ -1051,7 +1051,7 @@ public class RequestConverter extends AbstractConverter {
 		final Resource topology = model
 				.createResource(AbstractConverter.NAMESPACE + "request");
 		topology.addProperty(RDF.type, Omn_lifecycle.Request);
-		topology.addProperty(RDFS.label, Omn_lifecycle.Request);
+		topology.addProperty(RDFS.label, "Request");
 		topology.addProperty(RDF.type, Omn.Topology);
 
 		// RequestConverter.extractNodes(request, topology);

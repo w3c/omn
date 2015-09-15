@@ -1,5 +1,5 @@
 <rspec generated="2015-04-27T11:49:00.341+02:00" generated_by="omnlib"
-  type="request" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns2="http://demo.fiteagle.org/monitoring">
+  type="request" xmlns="http://www.geni.net/resources/rspec/3">
   <node
         client_id="f4f-demo-gent-2015"
         component_name="BMW-Garage-1"
