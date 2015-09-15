@@ -86,6 +86,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.advertisement";
 	private static final String PREFIX = "http://open-multinet.info/omnlib/converter";
+	private static final String HOST = "http://open-multinet.info/example#";
 	private static final Logger LOG = Logger
 			.getLogger(AdvertisementConverter.class.getName());
 	private Model model;
@@ -928,6 +929,10 @@ public class AdvertisementConverter extends AbstractConverter {
 			sliverTypeResource.addProperty(Omn_lifecycle.hasSliverName,
 					sliverName);
 			sliverTypeResource.addProperty(RDF.type, Omn_resource.SliverType);
+			
+			if(!AbstractConverter.isUrl(sliverName)){
+				sliverName = HOST + sliverName;
+			}
 			omnResource.addProperty(Omn_lifecycle.canImplement, omnResource
 					.getModel().createResource(sliverName));
 

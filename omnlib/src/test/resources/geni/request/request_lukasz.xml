@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<rspec xmlns="http://www.geni.net/resources/rspec/3" type="request" generated_by="jFed RSpec Editor" generated="2015-09-14T15:53:02.417+02:00" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:jfedBonfire="http://jfed.iminds.be/rspec/ext/jfed-bonfire/1" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns:jfed-command="http://jfed.iminds.be/rspec/ext/jfed-command/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:jfed-ssh-keys="http://jfed.iminds.be/rspec/ext/jfed-ssh-keys/1" xmlns:jfed="http://jfed.iminds.be/rspec/ext/jfed/1" xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd ">
+<node client_id="node0" exclusive="true" component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" component_id="urn:publicid:IDN+pllab.pl+node+http%3A%2F%2Fpllab.pl%2Fresource%2Fsrv201.psnc">
+  <sliver_type name="raw-pc"/>
+  <location country="PL" latitude="52.3941716" longitude="16.9180558" />
+  <!-- weird location?? -->
+  <!--location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="97.0" y="53.5"/-->
+  <interface client_id="node0:if0">
+    <ip address="192.168.0.1" netmask="255.255.255.0" type="ipv4"/>
+  </interface>
+</node>
+<node client_id="node1" exclusive="true" component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" component_id="urn:publicid:IDN+pllab.pl+node+http%3A%2F%2Fpllab.pl%2Fresource%2Fsrv202.psnc">
+  <sliver_type name="raw-pc"/>
+  <!--  location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="391.0" y="52.5"/ -->
+  <location country="PL" latitude="52.3941716" longitude="16.9180558" />
+  <interface client_id="node1:if0">
+    <ip address="192.168.0.2" netmask="255.255.255.0" type="ipv4"/>
+  </interface>
+</node>
+<link client_id="link0">
+  <component_manager name="urn:publicid:IDN+pllab.pl+authority+cm"/>
+  <interface_ref client_id="node0:if0"/>
+  <interface_ref client_id="node1:if0"/>
+  <link_type name="lan"/>
+</link>
+</rspec>

@@ -26,24 +26,24 @@ public class AdPaper2015Test {
 		final String filename = "/geni/advertisement/advertisement_paper2015.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
-		 System.out.println("Converting this input from '" + filename + "':");
-		 System.out.println("===============================");
-		 System.out.println(inputRspec);
-		 System.out.println("===============================");
+		// System.out.println("Converting this input from '" + filename + "':");
+		// System.out.println("===============================");
+		// System.out.println(inputRspec);
+		// System.out.println("===============================");
 
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		 System.out.println("Generated this rspec:");
-		 System.out.println("===============================");
-		 System.out.println(outputRspec);
-		 System.out.println("===============================");
+		// System.out.println("Generated this rspec:");
+		// System.out.println("===============================");
+		// System.out.println(outputRspec);
+		// System.out.println("===============================");
 
 		Assert.assertTrue("type",
 				outputRspec.contains("type=\"advertisement\""));
 
-		System.out.println("===============================");
-		System.out.println("Diffs:");
+		// System.out.println("===============================");
+		// System.out.println("Diffs:");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
 
 		if (diffsNodes[0] == 0) {

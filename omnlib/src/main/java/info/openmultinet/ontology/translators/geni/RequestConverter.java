@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.request.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Controller;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControllerRole;
@@ -41,6 +42,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
 import info.openmultinet.ontology.translators.geni.jaxb.request.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
+import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -154,7 +156,7 @@ public class RequestConverter extends AbstractConverter {
 							.getProperty(Omn_resource.isExclusive).getBoolean();
 					node.setExclusive(isExclusive);
 				}
-
+				setLocation(resource, node);
 				setInterfaces(resource, node);
 				setSliverType(resource, node);
 				setServices(resource, node);
@@ -197,6 +199,33 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 		}
+	}
+
+	private static void setLocation(Statement omnResource, NodeContents geniNode) {
+		ObjectFactory of = new ObjectFactory();
+		LocationContents location = of.createLocationContents();
+		Resource omnRes = omnResource.getResource();
+
+		if (omnRes.hasProperty(Omn_resource.country)) {
+			location.setCountry(omnRes.getProperty(Omn_resource.country)
+					.getString());
+		} else {
+			// country required
+			location.setCountry("");
+		}
+
+		if (omnRes.hasProperty(Geo.lat)) {
+			location.setLatitude(omnRes.getProperty(Geo.lat).getString());
+		}
+
+		if (omnRes.hasProperty(Geo.long_)) {
+			location.setLongitude(omnRes.getProperty(Geo.long_).getString());
+		}
+		if (omnRes.hasProperty(Geo.lat) || omnRes.hasProperty(Geo.long_)) {
+			geniNode.getAnyOrRelationOrLocation().add(
+					of.createLocation(location));
+		}
+
 	}
 
 	private static void setStitching(Statement resource,
@@ -1437,7 +1466,7 @@ public class RequestConverter extends AbstractConverter {
 		if (componentManagerName == null) {
 			throw new MissingRspecElementException("component_manager > name");
 		}
-		
+
 		// add managedBy property if the component name is a URN
 		if (AbstractConverter.isUrn(componentManagerName)) {
 			RDFNode componentManagerResource = ResourceFactory
@@ -1696,11 +1725,42 @@ public class RequestConverter extends AbstractConverter {
 				tryExtractServices(omnResource, element);
 				tryExtractInterfaces(omnResource, element);
 				tryExtractHardwareType(omnResource, element);
+				tryExtractLocation(omnResource, element);
 			} else {
 				tryExtractMonitoring(omnResource, o);
 				if (o.getClass().equals(RoutableControlIp.class)) {
 					omnResource.addProperty(Omn_domain_pc.routableControlIp,
 							"true");
+				}
+			}
+		}
+	}
+
+	private static void tryExtractLocation(Resource omnNode, JAXBElement element)
+			throws MissingRspecElementException {
+		if (element.getDeclaredType().equals(LocationContents.class)) {
+
+			final JAXBElement<LocationContents> locationJaxb = (JAXBElement<LocationContents>) element;
+			final LocationContents location = locationJaxb.getValue();
+
+			if (location != null) {
+				String latitude = location.getLatitude();
+				String longitude = location.getLongitude();
+				String country = location.getCountry();
+
+				// country is required, when location is specified
+				if (country == null) {
+					throw new MissingRspecElementException(
+							"LocationContents > country");
+				} else {
+					omnNode.addProperty(Omn_resource.country, country);
+				}
+
+				if (latitude != null) {
+					omnNode.addProperty(Geo.lat, latitude);
+				}
+				if (longitude != null) {
+					omnNode.addProperty(Geo.long_, longitude);
 				}
 			}
 		}

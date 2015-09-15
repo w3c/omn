@@ -1,4 +1,4 @@
-package info.openmultinet.ontology.translators.geni.advertisement;
+package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
@@ -13,15 +13,16 @@ import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
-public class AdvertisementVwall1 {
+public class RequestLukaszTest {
 
 	@Test
-	public void adRoundtrip() throws JAXBException, InvalidModelException,
+	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-
-		final String filename = "/geni/advertisement/advertisement_vwall1.xml";
+		final String filename = "/geni/request/request_lukasz.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		// System.out.println("Converting this input from '" + filename + "':");
@@ -36,19 +37,27 @@ public class AdvertisementVwall1 {
 		// System.out.println("===============================");
 		// System.out.println(outputRspec);
 		// System.out.println("===============================");
-
-		Assert.assertTrue("type",
-				outputRspec.contains("type=\"advertisement\""));
-
-		System.out.println("===============================");
-		System.out.println("Diffs:");
+		// System.out.println("Get number of diffs and nodes:");
+		// System.out.println("===============================");
 		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+
+		Assert.assertTrue("type", outputRspec.contains("type=\"request\""));
+
+		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
+
+		// check that output has one rspec element
+		NodeList rspec = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "rspec");
+		Assert.assertTrue(rspec.getLength() == 1);
+
+		NodeList node = xmlDoc.getElementsByTagNameNS(
+				"http://www.geni.net/resources/rspec/3", "node");
+		Assert.assertTrue(node.getLength() == 2);
 
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);
-
 	}
 
 }
