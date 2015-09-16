@@ -4,6 +4,7 @@ import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
@@ -564,33 +565,37 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void setMonitoringService(Statement resource,
 			NodeContents node) {
-		// Resource resourceResource = resource.getResource();
-		// if (resourceResource.hasProperty(Omn_lifecycle.usesService)) {
-		// Statement monitoringService = resourceResource
-		// .getProperty(Omn_lifecycle.usesService);
-		// Resource monitoringResource = monitoringService.getResource();
-		// Monitoring monitoring = new ObjectFactory().createMonitoring();
-		//
-		// if (monitoringResource.hasProperty(Omn_service.hasURI)) {
-		// Statement hasUri = monitoringService.getResource().getProperty(
-		// Omn_service.hasURI);
-		//
-		// String uri = hasUri.getObject().asResource().getURI()
-		// .toString();
-		// monitoring.setUri(uri);
-		// }
-		//
-		// if (monitoringResource.hasProperty(RDF.type)) {
-		// Statement hasType = monitoringService.getResource()
-		// .getProperty(RDF.type);
-		//
-		// String type = hasType.getObject().asResource().getURI()
-		// .toString();
-		// monitoring.setType(type);
-		// }
-		//
-		// node.getAnyOrRelationOrLocation().add(monitoring);
-		// }
+		Resource resourceResource = resource.getResource();
+		if (resourceResource.hasProperty(Omn_lifecycle.usesService)) {
+			Statement monitoringService = resourceResource
+					.getProperty(Omn_lifecycle.usesService);
+			Resource monitoringResource = monitoringService.getResource();
+			Monitoring monitoring = new ObjectFactory().createMonitoring();
+
+			if (monitoringResource.hasProperty(Omn.hasURI)) {
+				Statement hasUri = monitoringService.getResource().getProperty(
+						Omn.hasURI);
+
+				String uri = hasUri.getObject().asLiteral().getString();
+				monitoring.setUri(uri);
+			}
+
+			if (monitoringResource.hasProperty(RDF.type)) {
+				final List<Statement> hasTypes = monitoringResource
+						.listProperties(RDF.type).toList();
+
+				for (final Statement hasType : hasTypes) {
+
+					String type = hasType.getResource().getURI();
+
+					if (AbstractConverter.nonGeneric(type)) {
+						monitoring.setType(type);
+					}
+				}
+			}
+
+			node.getAnyOrRelationOrLocation().add(monitoring);
+		}
 	}
 
 	private static void setServices(Statement resource, NodeContents node) {
@@ -1137,15 +1142,33 @@ public class ManifestConverter extends AbstractConverter {
 
 		if (element.getDeclaredType().equals(NodeContents.class)) {
 			extractNode(element, topology);
-
-		} else if (o
-				.getClass()
-				.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring.class)) {
-			// TODO
-			ManifestConverter.LOG.log(Level.INFO, "TODO: monitoring extension");
 		} else if (element.getDeclaredType().equals(LinkContents.class)) {
 			extractLink(element, topology);
 		}
+	}
+
+	private static void extractMonitoring(Object rspecNodeObject,
+			Resource omnNode) {
+
+		Monitoring monitor = (Monitoring) rspecNodeObject;
+
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource monitoringResource = omnNode.getModel().createResource(uuid);
+
+		if (monitor.getUri() != null && monitor.getUri() != "") {
+			monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
+		}
+
+		if (monitor.getType() != null && monitor.getType() != "") {
+			Resource typeResource = monitoringResource.getModel()
+					.createResource(monitor.getType());
+			monitoringResource.addProperty(RDF.type, typeResource);
+			monitoringResource.addProperty(RDFS.label,
+					AbstractConverter.getName(monitor.getType()));
+		}
+
+		omnNode.addProperty(Omn_lifecycle.usesService, monitoringResource);
+
 	}
 
 	private static void extractNode(JAXBElement<?> element, Resource topology)
@@ -1158,6 +1181,7 @@ public class ManifestConverter extends AbstractConverter {
 			omnResource = topology.getModel().createResource(
 					CommonMethods.generateUrlFromUrn(sliverID));
 			omnResource.addProperty(Omn_lifecycle.hasSliverID, sliverID);
+
 		} else {
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			omnResource = topology.getModel().createResource(uuid);
@@ -1200,6 +1224,10 @@ public class ManifestConverter extends AbstractConverter {
 					.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation.class)) {
 
 				extractReservation(nodeDetailObject, omnResource);
+			} else if (nodeDetailObject
+					.getClass()
+					.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring.class)) {
+				extractMonitoring(nodeDetailObject, omnResource);
 			} else {
 				ManifestConverter.LOG.log(Level.INFO,
 						"Found unknown extsion within node: "

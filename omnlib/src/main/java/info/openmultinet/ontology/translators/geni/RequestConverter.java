@@ -789,10 +789,17 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			if (monitoringResource.hasProperty(RDF.type)) {
-				Statement hasType = monitoringService.getResource()
-						.getProperty(RDF.type);
-				String type = hasType.getObject().asLiteral().getString();
-				monitoring.setType(type);
+				final List<Statement> hasTypes = monitoringResource
+						.listProperties(RDF.type).toList();
+
+				for (final Statement hasType : hasTypes) {
+
+					String type = hasType.getResource().getURI();
+
+					if (AbstractConverter.nonGeneric(type)) {
+						monitoring.setType(type);
+					}
+				}
 			}
 
 			node.getAnyOrRelationOrLocation().add(monitoring);
@@ -1801,7 +1808,9 @@ public class RequestConverter extends AbstractConverter {
 				monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
-				monitoringResource.addProperty(RDF.type, monitor.getType());
+				Resource typeResource = monitoringResource.getModel()
+						.createResource(monitor.getType());
+				monitoringResource.addProperty(RDF.type, typeResource);
 				monitoringResource.addProperty(RDFS.label,
 						AbstractConverter.getName(monitor.getType()));
 			}

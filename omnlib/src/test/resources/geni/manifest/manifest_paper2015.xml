@@ -2,6 +2,7 @@
 <rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://www.geni.net/resources/rspec/3" 
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd "
+	xmlns:ns4="http://monitoring.service.tu-berlin.de/monitoring" 
 	type="manifest">
 	<node 
 	    component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
@@ -9,5 +10,6 @@
 		client_id="myMotor"
 		sliver_id="urn:publicid:IDN+testbed.example.org+sliver+http%3A%2F%2Ftestbed.example.org%2Fmotorgarage-1%2Fmotor-1">
 		<sliver_type name="http://open-multinet.info/ontology/resources/motor#Motor" />
+		<ns4:monitoring uri="http://federation.av.tu-berlin.de:3003" type="http://open-multinet.info/ontology/omn-monitoring#MonitoringService"/>
 	</node>
 </rspec>

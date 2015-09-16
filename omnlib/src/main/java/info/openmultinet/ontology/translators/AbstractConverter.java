@@ -64,11 +64,11 @@ public abstract class AbstractConverter {
 		StringBuffer result = new StringBuffer();
 		final InputStream inputStream = AbstractConverter.class
 				.getResourceAsStream(filename);
-		
-		if(inputStream == null){
+
+		if (inputStream == null) {
 			return null;
 		}
-		
+
 		final BufferedReader br = new BufferedReader(new InputStreamReader(
 				inputStream));
 		String line = null;
@@ -80,6 +80,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Returns whether the URI is a generic OWL/RDFS/OMN class or not
+	 * 
 	 * @param uri
 	 * @return
 	 */
@@ -92,29 +93,22 @@ public abstract class AbstractConverter {
 
 		if (uri.equals("http://www.w3.org/2002/07/owl#Thing")) {
 			nonGeneric = false;
-		}
-
-		if (uri.equals("http://www.w3.org/2000/01/rdf-schema#Resource")) {
+		} else if (uri.equals("http://www.w3.org/2000/01/rdf-schema#Resource")) {
 			nonGeneric = false;
-		}
-
-		if (uri.equals("http://www.w3.org/2002/07/owl#NamedIndividual")) {
+		} else if (uri.equals("http://www.w3.org/2002/07/owl#NamedIndividual")) {
 			nonGeneric = false;
-		}
-
-		if (uri.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
+		} else if (uri
+				.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
 			nonGeneric = false;
-		}
-
-		if (uri.equals("http://open-multinet.info/ontology/omn#Resource")) {
+		} else if (uri
+				.equals("http://open-multinet.info/ontology/omn#Resource")) {
 			nonGeneric = false;
-		}
-
-		if (uri.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
+		} else if (uri
+				.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
 			nonGeneric = false;
-		}
-		
-		if (uri.equals("http://open-multinet.info/ontology/omn#Group")) {
+		} else if (uri.equals("http://open-multinet.info/ontology/omn#Group")) {
+			nonGeneric = false;
+		} else if (uri.equals("http://open-multinet.info/ontology/omn#Service")) {
 			nonGeneric = false;
 		}
 
@@ -173,8 +167,7 @@ public abstract class AbstractConverter {
 		}
 		return false;
 	}
-	
-	
+
 	/**
 	 * Method to determine whether a given string is a URN or not
 	 * 

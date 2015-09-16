@@ -796,7 +796,9 @@ public class AdvertisementConverter extends AbstractConverter {
 				monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
 			}
 			if (monitor.getType() != null && monitor.getType() != "") {
-				monitoringResource.addProperty(RDF.type, monitor.getType());
+				Resource typeResource = monitoringResource.getModel()
+						.createResource(monitor.getType());
+				monitoringResource.addProperty(RDF.type, typeResource);
 				monitoringResource.addProperty(RDFS.label,
 						AbstractConverter.getName(monitor.getType()));
 			}
@@ -1622,22 +1624,23 @@ public class AdvertisementConverter extends AbstractConverter {
 				Statement hasUri = monitoringService.getResource().getProperty(
 						Omn.hasURI);
 
-				// System.out.println(hasUri.getObject().asLiteral().getString());
-				// String uri = hasUri.getObject().asResource().getURI()
-				// .toString();
 				String uri = hasUri.getObject().asLiteral().getString();
 				monitoring.setUri(uri);
 
 			}
 
 			if (monitoringResource.hasProperty(RDF.type)) {
-				Statement hasType = monitoringService.getResource()
-						.getProperty(RDF.type);
+				final List<Statement> hasTypes = monitoringResource
+						.listProperties(RDF.type).toList();
 
-				// String type = hasType.getObject().asResource().getURI()
-				// .toString();
-				String type = hasType.getObject().asLiteral().getString();
-				monitoring.setType(type);
+				for (final Statement hasType : hasTypes) {
+
+					String type = hasType.getResource().getURI();
+
+					if (AbstractConverter.nonGeneric(type)) {
+						monitoring.setType(type);
+					}
+				}
 			}
 
 			node.getAnyOrRelationOrLocation().add(monitoring);
