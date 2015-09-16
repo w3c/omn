@@ -1744,18 +1744,21 @@ public class AdvertisementConverter extends AbstractConverter {
 			final List<Statement> hasTypes = resource.getResource()
 					.listProperties(RDF.type).toList();
 
+			boolean sliverTypeNameExists = false;
 			for (final Statement hasType : hasTypes) {
 				Resource sliverResource = hasType.getObject().asResource();
 				if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
 					sliverType.setName(sliverResource.getURI());
+					sliverTypeNameExists = true;
 				}
 			}
 
-			JAXBElement<SliverType> sliver = new ObjectFactory()
-					.createNodeContentsSliverType(sliverType);
-			geniNode.getAnyOrRelationOrLocation().add(sliver);
+			if (sliverTypeNameExists) {
+				JAXBElement<SliverType> sliver = new ObjectFactory()
+						.createNodeContentsSliverType(sliverType);
+				geniNode.getAnyOrRelationOrLocation().add(sliver);
+			}
 		}
-
 	}
 
 	private void setCpus(Resource sliverResource, SliverType sliver) {
