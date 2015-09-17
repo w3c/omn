@@ -76,8 +76,8 @@ public class DeliveryMechanism {
 					+ "'");
 		}
 
-		String modelString = Parser.toString(model);
-		System.out.println(modelString);
+		// String modelString = Parser.toString(model);
+		// System.out.println(modelString);
 		
 		if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
 			final String rspec = new AdvertisementConverter().getRSpec(model);
