@@ -1595,7 +1595,14 @@ public class RequestConverter extends AbstractConverter {
 		final Resource omnResource = model
 				.createResource(AbstractConverter.NAMESPACE
 						+ node.getClientId());
-		omnResource.addProperty(RDFS.label, node.getClientId());
+
+		// client_id is required
+		String clientId = node.getClientId();
+		if (clientId == null) {
+			throw new MissingRspecElementException("NodeContents > client_id");
+		}
+		omnResource.addProperty(RDFS.label, clientId);
+
 		List<Object> anyOrRelationOrLocation = node
 				.getAnyOrRelationOrLocation();
 		if (anyOrRelationOrLocation.size() > 0) {
