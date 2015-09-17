@@ -30,6 +30,7 @@ import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class DeliveryMechanism {
 
@@ -43,11 +44,11 @@ public class DeliveryMechanism {
 		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)) {
 			from = RSpecValidation.getType(content);
 		}
-		
+
 		if (to.equalsIgnoreCase(from)) {
 			return content;
 		}
-		
+
 		// check if RSpec version 2 is used and convert to version 3 or throw
 		// exception if version 0.1
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)
@@ -78,7 +79,7 @@ public class DeliveryMechanism {
 
 		// String modelString = Parser.toString(model);
 		// System.out.println(modelString);
-		
+
 		if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
 			final String rspec = new AdvertisementConverter().getRSpec(model);
 			baos.write(rspec.getBytes());
@@ -102,4 +103,57 @@ public class DeliveryMechanism {
 
 		return baos.toString();
 	}
+
+	/**
+	 * Gives standard model (not inferred model!) back
+	 * 
+	 * @param content
+	 * @return standard model (not inferred model!)
+	 * @throws DeprecatedRspecVersionException
+	 * @throws JAXBException
+	 * @throws InvalidModelException
+	 * @throws MissingRspecElementException
+	 * @throws XMLStreamException
+	 * @throws UnsupportedException
+	 */
+	public static Model getModelFromUnkownInput(String content)
+			throws DeprecatedRspecVersionException, JAXBException,
+			InvalidModelException, MissingRspecElementException,
+			XMLStreamException, UnsupportedException {
+
+		String from = RSpecValidation.getType(content);
+
+		// check if RSpec version 2 is used and convert to version 3 or throw
+		// exception if version 0.1
+		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)
+				|| AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)
+				|| AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
+			content = RSpecValidation.fixVerson(content);
+		}
+
+		final InputStream stream = new ByteArrayInputStream(
+				content.getBytes(StandardCharsets.UTF_8));
+		Model model = null;
+
+		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)) {
+			model = RequestConverter.getModel(stream);
+		} else if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)) {
+			model = new AdvertisementConverter().getModel(stream);
+		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
+			model = ManifestConverter.getModel(stream);
+		} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
+
+			model = ModelFactory.createDefaultModel();
+			model.read(stream, StandardCharsets.UTF_8.toString(), "TTL");
+
+		} else if (AbstractConverter.TOSCA.equalsIgnoreCase(from)) {
+			model = Tosca2OMN.getModel(stream);
+		} else {
+			throw new UnknownFormatConversionException("unknown input '" + from
+					+ "'");
+		}
+
+		return model;
+	}
+
 }
