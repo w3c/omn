@@ -21,7 +21,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.UnknownFormatConversionException;
 
 import javax.xml.bind.JAXBException;
@@ -30,7 +29,6 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
-import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class DeliveryMechanism {
@@ -41,9 +39,13 @@ public class DeliveryMechanism {
 			RequiredResourceNotFoundException, MultiplePropertyValuesException,
 			XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-		
+
 		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)) {
 			from = RSpecValidation.getType(content);
+		}
+		
+		if (to.equalsIgnoreCase(from)) {
+			return content;
 		}
 		
 		// check if RSpec version 2 is used and convert to version 3 or throw
@@ -74,6 +76,9 @@ public class DeliveryMechanism {
 					+ "'");
 		}
 
+		String modelString = Parser.toString(model);
+		System.out.println(modelString);
+		
 		if (AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(to)) {
 			final String rspec = new AdvertisementConverter().getRSpec(model);
 			baos.write(rspec.getBytes());
