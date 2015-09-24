@@ -29,6 +29,7 @@ public abstract class AbstractConverter {
 	protected final static String VENDOR = "omnlib";
 	public final static String RDFXML = "rdfxml";
 	public final static String TTL = "ttl";
+	public final static String JSON = "json-ld";
 	public final static String RSPEC_REQUEST = "request";
 	public final static String RSPEC_MANIFEST = "manifest";
 	public final static String RSPEC_ADVERTISEMENT = "advertisement";
@@ -80,7 +81,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Returns whether the URI is a generic OWL/RDFS/OMN class or not
-	 * 
+	 *
 	 * @param uri
 	 * @return
 	 */
@@ -117,7 +118,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Returns the name of resource from a URL
-	 * 
+	 *
 	 * @param url
 	 * @return
 	 */
@@ -148,7 +149,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Method to determine whether a given string is a URL or not
-	 * 
+	 *
 	 * @param string
 	 * @return boolean, true if string is a URL
 	 */
@@ -170,7 +171,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Method to determine whether a given string is a URN or not
-	 * 
+	 *
 	 * @param string
 	 * @return boolean, true if string is a URN
 	 */
@@ -191,7 +192,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Convert XMLGregorianCalendar to XSDDateTime
-	 * 
+	 *
 	 * @param time
 	 * @return
 	 */
@@ -204,7 +205,7 @@ public abstract class AbstractConverter {
 
 	/**
 	 * Method for converting XSDDateTime to XMLGregorianCalendar
-	 * 
+	 *
 	 * @param XSDDateTime
 	 *            time
 	 * @return XMLGregorianCalendar time

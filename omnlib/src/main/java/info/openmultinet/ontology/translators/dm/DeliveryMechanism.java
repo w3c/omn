@@ -96,6 +96,8 @@ public class DeliveryMechanism {
 			RDFDataMgr.write(baos, model, Lang.TTL);
 		} else if (AbstractConverter.RDFXML.equalsIgnoreCase(to)) {
 			RDFDataMgr.write(baos, model, Lang.RDFXML);
+		} else if (AbstractConverter.JSON.equalsIgnoreCase(to)) {
+			RDFDataMgr.write(baos, model, Lang.JSONLD);
 		} else {
 			throw new UnknownFormatConversionException("unknown output '" + to
 					+ "'");
@@ -106,7 +108,7 @@ public class DeliveryMechanism {
 
 	/**
 	 * Gives standard model (not inferred model!) back
-	 * 
+	 *
 	 * @param content
 	 * @return standard model (not inferred model!)
 	 * @throws DeprecatedRspecVersionException
