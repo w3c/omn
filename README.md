@@ -22,18 +22,21 @@ The Java library helps developers to work with Open-Multinet related ontologies 
 
 #### CLI
 
-    ./src/main/bin/omnlib -o ttl -i src/test/resources/geni/request/request_bound.xml
+    cd omnlib
+    ./src/main/bin/omnlib -o ttl -i ./src/test/resources/geni/request/request_bound.xml
 
 #### Web Service
 
 Assuming you have a running WildFly instance
 
- 1. mvn clean install
- 2. mvn wildfly:deploy
+     cd omnweb
+     mvn clean install
+     mvn wildfly:deploy
  
 Then convert the file
 
-  curl --data-urlencode content@src/test/resources/geni/request/request_bound.xml http://127.0.0.1:8080/omnlib/convert/request/ttl
+    curl --data-urlencode content@../omnlib/src/test/resources/geni/request/request_bound.xml http://127.0.0.1:8080/omnweb/convert/request/ttl
+    curl --data-urlencode content@../omnlib/src/test/resources/geni/request/request_bound.xml http://demo.fiteagle.org:8080/omnweb/convert/request/ttl
 
 ### Developing it
 
