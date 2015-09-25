@@ -76,7 +76,7 @@ public class CLI {
 	}
 
 	private static String guessSerialization(String filename) {
-		return AbstractConverter.RSPEC_REQUEST;
+		return AbstractConverter.ANYFORMAT;
 	}
 
 }
