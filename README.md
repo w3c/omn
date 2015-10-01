@@ -1,4 +1,4 @@
-# W3C OMN CG Ontology
+# Federated Infrastructures Ontology
 
 [![Build Status](https://travis-ci.org/w3c/omn.svg)](https://travis-ci.org/w3c/omn)
 [![Coverage Status](https://coveralls.io/repos/w3c/omn/badge.svg)](https://coveralls.io/r/w3c/omn)
