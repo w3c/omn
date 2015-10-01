@@ -5,7 +5,7 @@
 
 ## Abstract
 
-This repository contains the work conducted in the [W3C OMN Community Group](https://www.w3.org/community/omn/).
+This repository contains the work conducted in the [W3C Federated Infrastructures Community Group](https://www.w3.org/community/omn/).
 It includes a formal information model for federated infrastructures (omn)
 and a Java library (omnlib) to translate between
 our Open-Multinet Ontology,
