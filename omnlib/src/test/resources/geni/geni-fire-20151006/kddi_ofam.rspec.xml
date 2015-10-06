@@ -1,0 +1,57 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.geni.net/resources/rspec/ext/openflow/3 http://www.geni.net/resources/rspec/ext/openflow/3/of-ad.xsd">
+    <openflow:datapath
+        component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07"
+        component_manager_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+authority+cm" dpid="00:00:00:25:5c:e6:4f:07">
+        <openflow:port name="GBE0/1" num="1"/>
+        <openflow:port name="GBE0/2" num="2"/>
+        <openflow:port name="GBE0/3" num="3"/>
+        <openflow:port name="GBE0/4" num="4"/>
+        <openflow:port name="GBE0/5" num="5"/>
+        <openflow:port name="GBE0/6" num="6"/>
+        <openflow:port name="GBE0/7" num="7"/>
+        <openflow:port name="GBE0/8" num="8"/>
+        <openflow:port name="GBE0/9" num="9"/>
+        <openflow:port name="GBE0/10" num="10"/>
+        <openflow:port name="GBE0/11" num="11"/>
+        <openflow:port name="GBE0/12" num="12"/>
+        <openflow:port name="GBE0/13" num="13"/>
+        <openflow:port name="GBE0/14" num="14"/>
+        <openflow:port name="GBE0/15" num="15"/>
+        <openflow:port name="GBE0/16" num="16"/>
+        <openflow:port name="GBE0/17" num="17"/>
+        <openflow:port name="GBE0/18" num="18"/>
+        <openflow:port name="GBE0/19" num="19"/>
+        <openflow:port name="GBE0/20" num="20"/>
+        <openflow:port name="GBE0/21" num="21"/>
+        <openflow:port name="GBE0/22" num="22"/>
+        <openflow:port name="GBE0/23" num="23"/>
+        <openflow:port name="GBE0/24" num="24"/>
+        <openflow:port name="GBE0/25" num="25"/>
+        <openflow:port name="GBE0/26" num="26"/>
+        <openflow:port name="GBE0/27" num="27"/>
+        <openflow:port name="GBE0/28" num="28"/>
+        <openflow:port name="GBE0/29" num="29"/>
+        <openflow:port name="GBE0/30" num="30"/>
+        <openflow:port name="GBE0/31" num="31"/>
+        <openflow:port name="GBE0/32" num="32"/>
+        <openflow:port name="GBE0/33" num="33"/>
+        <openflow:port name="GBE0/34" num="34"/>
+        <openflow:port name="GBE0/35" num="35"/>
+        <openflow:port name="GBE0/36" num="36"/>
+        <openflow:port name="GBE0/37" num="37"/>
+        <openflow:port name="GBE0/38" num="38"/>
+        <openflow:port name="GBE0/39" num="39"/>
+        <openflow:port name="GBE0/40" num="40"/>
+        <openflow:port name="GBE0/41" num="41"/>
+        <openflow:port name="GBE0/42" num="42"/>
+        <openflow:port name="GBE0/43" num="43"/>
+        <openflow:port name="GBE0/44" num="44"/>
+        <openflow:port name="GBE0/45" num="45"/>
+        <openflow:port name="GBE0/46" num="46"/>
+        <openflow:port name="GBE0/47" num="47"/>
+        <openflow:port name="GBE0/48" num="48"/>
+    </openflow:datapath>
+</rspec>

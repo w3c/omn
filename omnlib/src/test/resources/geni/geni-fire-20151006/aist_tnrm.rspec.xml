@@ -1,0 +1,74 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3/ad.xsd                          http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd">
+    <node component_id="urn:publicid:IDN+fms:aist:tnrm+stp"
+        component_manager_id="urn:publicid:IDN+fms:aist:tnrm+authority+cm" exclusive="false">
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-9">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-9+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-aist">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-aist+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-startap">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-startap+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-video">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-video+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se2">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-ps">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-ps+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-1-7">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-1-7+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-3">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-3+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-4">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-4+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test1">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test2">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:geant.net:2013:topology:iMinds__port__to__GEANT">
+            <sharedvlan:available description="1280" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:geant.net:2013:topology:iMinds__port__to__GEANT+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:icair.org:2013:topology:ps">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:icair.org:2013:topology:ps+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-aist-jgn-x">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-aist-jgn-x+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se2">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se1">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:server_port">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:server_port+vlan"/>
+        </interface>
+    </node>
+</rspec>

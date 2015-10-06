@@ -1,0 +1,1018 @@
+<rspec expires="2015-10-06T17:50:59+03:00"
+    generated="2015-10-06T17:40:59+03:00" type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
+    xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/ad-reservation.xsd">
+    <ol:lease id="6c7c66cc-64ab-4781-aed7-e96df148d959"
+        valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"/>
+    <ol:lease id="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"
+        valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"/>
+    <ol:lease id="90203788-fb7e-4a67-a48b-3f2b0cd56fcb"
+        valid_from="2015-10-06T21:30:00Z" valid_until="2015-10-07T02:00:00Z"/>
+    <ol:lease id="b1bde1a8-52a0-4b30-b67a-afa6073b9cc5"
+        valid_from="2015-10-06T06:30:00Z" valid_until="2015-10-06T16:00:00Z"/>
+    <ol:lease id="da32fd13-8af0-443c-b381-949c60fe7094"
+        valid_from="2015-10-06T07:00:00Z" valid_until="2015-10-06T16:00:00Z"/>
+    <ol:lease id="202cd3d8-f52b-49ae-a3ff-407389e31f6c"
+        valid_from="2015-10-06T16:00:00Z" valid_until="2015-10-06T21:30:00Z"/>
+    <ol:lease id="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"
+        valid_from="2015-10-06T08:30:00Z" valid_until="2015-10-06T16:00:00Z"/>
+    <ol:lease id="802a94e9-fea5-46d4-8be8-e247fe75d5cb"
+        valid_from="2015-10-06T12:00:00Z" valid_until="2015-10-06T16:00:00Z"/>
+    <ol:lease id="122f2d05-f0c2-4812-ac2d-7e887680494b"
+        valid_from="2015-10-06T11:30:00Z" valid_until="2015-10-06T16:00:00Z"/>
+    <ol:lease id="41af2c83-39e6-4592-b570-bd82291f4218"
+        valid_from="2015-10-07T08:00:00Z" valid_until="2015-10-07T12:00:00Z"/>
+    <ol:lease id="dd76319d-0a81-4c11-8294-848fd440f8f6"
+        valid_from="2015-10-06T14:00:00Z" valid_until="2015-10-06T18:00:00Z"/>
+    <ol:lease id="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"
+        valid_from="2015-10-07T06:30:00Z" valid_until="2015-10-07T12:00:00Z"/>
+    <ol:lease id="2138be98-819c-4c12-acbc-13ae1ef5ef63"
+        valid_from="2015-10-01T12:30:00Z" valid_until="2015-10-25T19:30:00Z"/>
+    <ol:lease id="64929e0f-4a5f-4175-94bb-6ef78d576ff1"
+        valid_from="2015-10-01T19:30:00Z" valid_until="2015-10-25T21:00:00Z"/>
+    <ol:lease id="5584a277-0fd8-4ad5-ada0-477e6b2243b1"
+        valid_from="2015-10-01T20:30:00Z" valid_until="2015-10-25T23:30:00Z"/>
+    <ol:lease id="c8693180-4151-477f-b1fa-e5455cacd314"
+        valid_from="2015-10-02T04:00:00Z" valid_until="2015-10-25T06:00:00Z"/>
+    <ol:lease id="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"
+        valid_from="2015-10-06T16:00:00Z" valid_until="2015-10-06T21:29:00Z"/>
+    <ol:lease id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
+        valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"/>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node004"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node004" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Orbit"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node004:if0"
+            component_name="node004:if0" role="control">
+            <ip address="10.0.1.4" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node004:if1"
+            component_name="node004:if1" role="experimental"/>
+    </node>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+2"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="2" frequency="2.417GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+3"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="3" frequency="2.422GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+4"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="4" frequency="2.427GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+5"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="5" frequency="2.432GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+6"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="6" frequency="2.437GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+7"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="7" frequency="2.442GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+8"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="8" frequency="2.447GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+9"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="9" frequency="2.452GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+10"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="10" frequency="2.457GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+11"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="11" frequency="2.462GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+12"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="12" frequency="2.467GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+13"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="13" frequency="2.472GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+36"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="36" frequency="5.180GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+40"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="40" frequency="5.200GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+44"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="44" frequency="5.220GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+1"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="1" frequency="2.412GHz"/>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node057"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node057" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node057:if0"
+            component_name="node057:if0" role="control">
+            <ip address="10.0.1.57" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node057:if1"
+            component_name="node057:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node053"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node053" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node053:if0"
+            component_name="node053:if0" role="control">
+            <ip address="10.0.1.53" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node053:if1"
+            component_name="node053:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+100"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="100" frequency="5.500GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+60"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="60" frequency="5.300GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+48"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="48" frequency="5.240GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+104"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="104" frequency="5.520GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+108"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="108" frequency="5.540GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+112"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="112" frequency="5.560GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+120"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="120" frequency="5.600GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+124"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="124" frequency="5.620GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+128"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="128" frequency="5.640GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+132"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="132" frequency="5.660GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+140"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="140" frequency="5.700GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+56"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="56" frequency="5.280GHz"/>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node029"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node029" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node029:if0"
+            component_name="node029:if0" role="control">
+            <ip address="10.0.1.29" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node029:if1"
+            component_name="node029:if1" role="experimental"/>
+        <ol:lease_ref id_ref="dd76319d-0a81-4c11-8294-848fd440f8f6"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node021"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node021" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node021:if0"
+            component_name="node021:if0" role="control">
+            <ip address="10.0.1.21" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node021:if1"
+            component_name="node021:if1" role="experimental"/>
+        <ol:lease_ref id_ref="dd76319d-0a81-4c11-8294-848fd440f8f6"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node024"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node024" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node024:if0"
+            component_name="node024:if0" role="control">
+            <ip address="10.0.1.24" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node024:if1"
+            component_name="node024:if1" role="experimental"/>
+        <ol:lease_ref id_ref="dd76319d-0a81-4c11-8294-848fd440f8f6"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node031"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node031" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node031:if0"
+            component_name="node031:if0" role="control">
+            <ip address="10.0.1.31" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node031:if1"
+            component_name="node031:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node035"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node035" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node035:if0"
+            component_name="node035:if0" role="control">
+            <ip address="10.0.1.35" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node035:if1"
+            component_name="node035:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.office+node+node043"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node043" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node043:if0"
+            component_name="node043:if0" role="control">
+            <ip address="10.0.2.43" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node043:if1"
+            component_name="node043:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node015"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node015" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node015:if0"
+            component_name="node015:if0" role="control">
+            <ip address="10.0.1.15" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node015:if1"
+            component_name="node015:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.office+node+node041"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node041" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node041:if0"
+            component_name="node041:if0" role="control">
+            <ip address="10.0.2.41" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node041:if1"
+            component_name="node041:if1" role="experimental"/>
+    </node>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+52"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="52" frequency="5.260GHz"/>
+    <node component_id="urn:publicid:IDN+omf:nitos.office+node+node044"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node044" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node044:if0"
+            component_name="node044:if0" role="control">
+            <ip address="10.0.2.44" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node044:if1"
+            component_name="node044:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.office+node+node046"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node046" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node046:if0"
+            component_name="node046:if0" role="control">
+            <ip address="10.0.2.46" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node046:if1"
+            component_name="node046:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.office+node+node047"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node047" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node047:if0"
+            component_name="node047:if0" role="control">
+            <ip address="10.0.2.47" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node047:if1"
+            component_name="node047:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node052"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node052" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node052:if0"
+            component_name="node052:if0" role="control">
+            <ip address="10.0.1.52" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node052:if1"
+            component_name="node052:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node064"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node064" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node064:if0"
+            component_name="node064:if0" role="control">
+            <ip address="10.0.1.64" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node064:if1"
+            component_name="node064:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="da32fd13-8af0-443c-b381-949c60fe7094"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node084"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node084" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node084:if0"
+            component_name="node084:if0" role="control">
+            <ip address="10.0.1.84" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node084:if1"
+            component_name="node084:if1" role="experimental"/>
+        <ol:lease_ref id_ref="c8693180-4151-477f-b1fa-e5455cacd314"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node060"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node060" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node060:if0"
+            component_name="node060:if0" role="control">
+            <ip address="10.0.1.60" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node060:if1"
+            component_name="node060:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node077"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node077" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node077:if0"
+            component_name="node077:if0" role="control">
+            <ip address="10.0.1.77" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node077:if1"
+            component_name="node077:if1" role="experimental"/>
+        <ol:lease_ref id_ref="64929e0f-4a5f-4175-94bb-6ef78d576ff1"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node062"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node062" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node062:if0"
+            component_name="node062:if0" role="control">
+            <ip address="10.0.1.62" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node062:if1"
+            component_name="node062:if1" role="experimental"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node069"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node069" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node069:if0"
+            component_name="node069:if0" role="control">
+            <ip address="10.0.1.69" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node069:if1"
+            component_name="node069:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="da32fd13-8af0-443c-b381-949c60fe7094"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node075"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node075" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node075:if0"
+            component_name="node075:if0" role="control">
+            <ip address="10.0.1.75" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node075:if1"
+            component_name="node075:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node055"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node055" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node055:if0"
+            component_name="node055:if0" role="control">
+            <ip address="10.0.1.55" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node055:if1"
+            component_name="node055:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node071"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node071" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node071:if0"
+            component_name="node071:if0" role="control">
+            <ip address="10.0.1.71" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node071:if1"
+            component_name="node071:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node083"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node083" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node083:if0"
+            component_name="node083:if0" role="control">
+            <ip address="10.0.1.83" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node083:if1"
+            component_name="node083:if1" role="experimental"/>
+        <ol:lease_ref id_ref="c8693180-4151-477f-b1fa-e5455cacd314"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node085"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node085" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node085:if0"
+            component_name="node085:if0" role="control">
+            <ip address="10.0.1.85" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node085:if1"
+            component_name="node085:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node066"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node066" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node066:if0"
+            component_name="node066:if0" role="control">
+            <ip address="10.0.1.66" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node066:if1"
+            component_name="node066:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="da32fd13-8af0-443c-b381-949c60fe7094"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node082"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node082" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node082:if0"
+            component_name="node082:if0" role="control">
+            <ip address="10.0.1.82" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node082:if1"
+            component_name="node082:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node072"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node072" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node072:if0"
+            component_name="node072:if0" role="control">
+            <ip address="10.0.1.72" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node072:if1"
+            component_name="node072:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node063"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node063" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node063:if0"
+            component_name="node063:if0" role="control">
+            <ip address="10.0.1.63" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node063:if1"
+            component_name="node063:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node059"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node059" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node059:if0"
+            component_name="node059:if0" role="control">
+            <ip address="10.0.1.59" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node059:if1"
+            component_name="node059:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node074"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node074" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node074:if0"
+            component_name="node074:if0" role="control">
+            <ip address="10.0.1.74" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node074:if1"
+            component_name="node074:if1" role="experimental"/>
+        <ol:lease_ref id_ref="5584a277-0fd8-4ad5-ada0-477e6b2243b1"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node065"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node065" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node065:if0"
+            component_name="node065:if0" role="control">
+            <ip address="10.0.1.65" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node065:if1"
+            component_name="node065:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="da32fd13-8af0-443c-b381-949c60fe7094"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node080"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node080" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node080:if0"
+            component_name="node080:if0" role="control">
+            <ip address="10.0.1.80" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node080:if1"
+            component_name="node080:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node070"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node070" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node070:if0"
+            component_name="node070:if0" role="control">
+            <ip address="10.0.1.70" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node070:if1"
+            component_name="node070:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node068"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node068" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node068:if0"
+            component_name="node068:if0" role="control">
+            <ip address="10.0.1.68" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node068:if1"
+            component_name="node068:if1" role="experimental"/>
+        <ol:lease_ref id_ref="2138be98-819c-4c12-acbc-13ae1ef5ef63"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node006"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node006" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Orbit"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node006:if0"
+            component_name="node006:if0" role="control">
+            <ip address="10.0.1.6" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node006:if1"
+            component_name="node006:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node086"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node086" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node086:if0"
+            component_name="node086:if0" role="control">
+            <ip address="10.0.1.86" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node086:if1"
+            component_name="node086:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="90203788-fb7e-4a67-a48b-3f2b0cd56fcb"/>
+        <ol:lease_ref id_ref="802a94e9-fea5-46d4-8be8-e247fe75d5cb"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node088"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node088" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node088:if0"
+            component_name="node088:if0" role="control">
+            <ip address="10.0.1.88" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node088:if1"
+            component_name="node088:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node087"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node087" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node087:if0"
+            component_name="node087:if0" role="control">
+            <ip address="10.0.1.87" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node087:if1"
+            component_name="node087:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="90203788-fb7e-4a67-a48b-3f2b0cd56fcb"/>
+        <ol:lease_ref id_ref="802a94e9-fea5-46d4-8be8-e247fe75d5cb"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node089"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node089" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node087:if0"
+            component_name="node087:if0" role="control">
+            <ip address="10.0.1.89" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node087:if1"
+            component_name="node087:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node051"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node051" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node051:if0"
+            component_name="node051:if0" role="control">
+            <ip address="10.0.1.51" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node051:if1"
+            component_name="node051:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="b1bde1a8-52a0-4b30-b67a-afa6073b9cc5"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node091"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node091" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node091:if0"
+            component_name="node091:if0" role="control">
+            <ip address="10.0.1.91" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node091:if1"
+            component_name="node091:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node093"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node093" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node093:if0"
+            component_name="node093:if0" role="control">
+            <ip address="10.0.1.93" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node093:if1"
+            component_name="node093:if1" role="experimental"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node061"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node061" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node061:if0"
+            component_name="node061:if0" role="control">
+            <ip address="10.0.1.61" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node061:if1"
+            component_name="node061:if1" role="experimental"/>
+        <ol:lease_ref id_ref="202cd3d8-f52b-49ae-a3ff-407389e31f6c"/>
+        <ol:lease_ref id_ref="122f2d05-f0c2-4812-ac2d-7e887680494b"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node007"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node007" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Orbit"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node007:if0"
+            component_name="node007:if0" role="control">
+            <ip address="10.0.1.7" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node007:if1"
+            component_name="node007:if1" role="experimental"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node054"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node054" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node054:if0"
+            component_name="node054:if0" role="control">
+            <ip address="10.0.1.54" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node054:if1"
+            component_name="node054:if1" role="experimental"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node023"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node023" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node023:if0"
+            component_name="node023:if0" role="control">
+            <ip address="10.0.1.23" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node023:if1"
+            component_name="node023:if1" role="experimental"/>
+        <ol:lease_ref id_ref="dd76319d-0a81-4c11-8294-848fd440f8f6"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node058"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node058" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node058:if0"
+            component_name="node058:if0" role="control">
+            <ip address="10.0.1.58" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node058:if1"
+            component_name="node058:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node050"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node050" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node050:if0"
+            component_name="node050:if0" role="control">
+            <ip address="10.0.1.50" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node050:if1"
+            component_name="node050:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="83314983-57f8-470a-84e5-b6dccb4ce9bc"/>
+        <ol:lease_ref id_ref="b1bde1a8-52a0-4b30-b67a-afa6073b9cc5"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node092"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node092" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node092:if0"
+            component_name="node092:if0" role="control">
+            <ip address="10.0.1.92" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node092:if1"
+            component_name="node092:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+64"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="64" frequency="5.220GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+116"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="116" frequency="5.580GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+136"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="136" frequency="5.680GHz"/>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node056"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node056" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node056:if0"
+            component_name="node056:if0" role="control">
+            <ip address="10.0.1.56" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node056:if1"
+            component_name="node056:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="6c7c66cc-64ab-4781-aed7-e96df148d959"/>
+        <ol:lease_ref id_ref="41af2c83-39e6-4592-b570-bd82291f4218"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.indoor+node+node073"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node073" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="PC-Icarus"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node073:if0"
+            component_name="node073:if0" role="control">
+            <ip address="10.0.1.73" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node073:if1"
+            component_name="node073:if1" role="experimental"/>
+        <ol:lease_ref id_ref="81e3d1c1-b15a-4a4b-9922-da26f2c9a65c"/>
+        <ol:lease_ref id_ref="7cd181f3-7a0d-4dd6-a537-457f9c8b0d94"/>
+        <ol:lease_ref id_ref="c8d3406c-b894-4a2d-b0f5-9d52787e6f30"/>
+        <ol:lease_ref id_ref="b9ffdf82-53ea-4f0f-a4c9-e641fd573775"/>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node014"
+        component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+        component_name="node014" exclusive="true" monitored="true">
+        <available now="true"/>
+        <hardware_type name="PC-Grid"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node014:if0"
+            component_name="node014:if0" role="control">
+            <ip address="10.0.1.14" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+omf:nitos+interface+node014:if1"
+            component_name="node014:if1" role="experimental"/>
+    </node>
+</rspec>

@@ -1,0 +1,323 @@
+<rspec expires="2015-10-06T17:50:59+03:00"
+    generated="2015-10-06T17:40:59+03:00" type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
+    xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/ad-reservation.xsd">
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node1"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node1" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node1:eth0"
+            component_name="node1:eth0" role="control">
+            <ip address="10.0.0.1" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node2"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node2" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node2:eth0"
+            component_name="node2:eth0" role="control">
+            <ip address="10.0.0.2" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node3"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node3" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node3:eth0"
+            component_name="node3:eth0" role="control">
+            <ip address="10.0.0.3" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node4"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node4" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node4:eth0"
+            component_name="node4:eth0" role="control">
+            <ip address="10.0.0.4" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node5"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node5" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node5:eth0"
+            component_name="node5:eth0" role="control">
+            <ip address="10.0.0.5" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node6"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node6" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node6:eth0"
+            component_name="node6:eth0" role="control">
+            <ip address="10.0.0.6" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node7"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node7" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node7:eth0"
+            component_name="node7:eth0" role="control">
+            <ip address="10.0.0.7" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node8"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node8" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node8:eth0"
+            component_name="node8:eth0" role="control">
+            <ip address="10.0.0.8" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node9"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node9" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node9:eth0"
+            component_name="node9:eth0" role="control">
+            <ip address="10.0.0.9" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node10"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node10" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node10:eth0"
+            component_name="node10:eth0" role="control">
+            <ip address="10.0.0.10" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node11"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node11" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node11:eth0"
+            component_name="node11:eth0" role="control">
+            <ip address="10.0.0.11" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node12"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node12" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node12:eth0"
+            component_name="node12:eth0" role="control">
+            <ip address="10.0.0.12" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node13"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node13" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node13:eth0"
+            component_name="node13:eth0" role="control">
+            <ip address="10.0.0.13" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node14"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node14" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node14:eth0"
+            component_name="node14:eth0" role="control">
+            <ip address="10.0.0.14" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node15"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node15" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node15:eth0"
+            component_name="node15:eth0" role="control">
+            <ip address="10.0.0.15" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node16"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node16" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node16:eth0"
+            component_name="node16:eth0" role="control">
+            <ip address="10.0.0.16" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node17"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node17" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node17:eth0"
+            component_name="node17:eth0" role="control">
+            <ip address="10.0.0.17" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node18"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node18" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="alix3d2"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node18:eth0"
+            component_name="node18:eth0" role="control">
+            <ip address="10.0.0.18" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node19"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node19" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="Intel Atom"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node19:eth0"
+            component_name="node19:eth0" role="control">
+            <ip address="10.0.0.19" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <node component_id="urn:publicid:IDN+omf:netmode+node+node20"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="node20" exclusive="true">
+        <available now="true"/>
+        <hardware_type name="Intel Atom"/>
+        <interface
+            component_id="urn:publicid:IDN+omf:netmode+interface+node20:eth0"
+            component_name="node20:eth0" role="control">
+            <ip address="10.0.0.20" ip_type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+1"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="1" frequency="2.412GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+2"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="2" frequency="2.417GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+3"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="3" frequency="2.422GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+4"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="4" frequency="2.427GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+5"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="5" frequency="2.432GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+6"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="6" frequency="2.437GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+7"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="7" frequency="2.442GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+8"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="8" frequency="2.447GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+9"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="9" frequency="2.452GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+10"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="10" frequency="2.457GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+11"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="11" frequency="2.462GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+12"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="12" frequency="2.467GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+13"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="13" frequency="2.472GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+36"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="36" frequency="5.180GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+40"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="40" frequency="5.200GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+44"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="44" frequency="5.220GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+48"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="48" frequency="5.240GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+52"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="52" frequency="5.260GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+56"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="56" frequency="5.280GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+60"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="60" frequency="5.300GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+64"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="64" frequency="5.220GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+100"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="100" frequency="5.500GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+104"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="104" frequency="5.520GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+108"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="108" frequency="5.540GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+112"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="112" frequency="5.560GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+116"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="116" frequency="5.580GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+120"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="120" frequency="5.600GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+124"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="124" frequency="5.620GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+128"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="128" frequency="5.640GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+132"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="132" frequency="5.660GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+136"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="136" frequency="5.680GHz"/>
+    <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+140"
+        component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+        component_name="140" frequency="5.700GHz"/>
+</rspec>

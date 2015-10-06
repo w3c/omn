@@ -1,0 +1,1636 @@
+<rspec expires="2015-10-06T14:36:02Z" generated="2015-10-06T14:36:02Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd ">
+    <rspec_shared_vlan xmlns="http://www.geni.net/resources/rspec/ext/shared-vlan/1">
+        <available name="mesoscale-openflow" restricted="false"/>
+        <available name="vlan-3792" restricted="false"/>
+        <available name="vlan-1517" restricted="false"/>
+        <available name="vlan-1591" restricted="false"/>
+        <available name="vlan-1592" restricted="false"/>
+        <available name="vlan-1595" restricted="false"/>
+        <available name="vlan-2780" restricted="false"/>
+        <available name="vlan-3515" restricted="false"/>
+        <available name="vlan-461" restricted="false"/>
+        <available name="vlan-1770" restricted="false"/>
+    </rspec_shared_vlan>
+    <rspec_routable_addresses available="33" configured="61" xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <rspec_opstate
+        aggregate_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        start="geni_notready" xmlns="http://www.geni.net/resources/rspec/ext/opstate/1">
+        <sliver_type name="raw-pc"/>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <state name="geni_notready">
+            <action name="geni_start" next="geni_configuring">
+                <description>Boot the node</description>
+            </action>
+            <description>Raw PCs and VMs begin powered down or inactive. They    must be explicitly booted before use.</description>
+        </state>
+        <state name="geni_configuring">
+            <wait next="geni_ready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>Booting/Reloading takes a significant amount of time, so it    happens asynchronously while the node is in this    state.</description>
+        </state>
+        <state name="geni_ready">
+            <action name="geni_restart" next="geni_configuring">
+                <description>Reboot the node</description>
+            </action>
+            <action name="geni_stop" next="geni_stopping">
+                <description>Power down or stop the node.</description>
+            </action>
+            <action name="geni_reload" next="geni_configuring">
+                <description>Reload the node</description>
+            </action>
+            <action name="geni_update_users" next="geni_updating_users">
+                <description>Update user SSH keys.</description>
+            </action>
+            <description>The node is up and ready to use.</description>
+        </state>
+        <state name="geni_stopping">
+            <wait next="geni_notready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>The node is being stopped or rebooted.</description>
+        </state>
+        <state name="geni_failed">
+            <description>The node has failed and requires administrator    intervention before it can be used. Please contact    the administrator for assistance.</description>
+        </state>
+        <state name="geni_updating_users">
+            <action name="geni_update_users_cancel" next="geni_ready">
+                <description>Cancel an update users action</description>
+            </action>
+            <wait next="geni_ready" type="geni_success"/>
+            <description>Updating users can take a fair amount of time, so it    happens asynchronously in this state.</description>
+        </state>
+    </rspec_opstate>
+    <site_info xmlns="http://www.protogeni.net/resources/rspec/ext/site-info/1">
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+    </site_info>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+procurve2"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="procurve2" exclusive="true">
+        <hardware_type name="switch">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)">
+            <emulab:interface name="(null)"/>
+        </interface>
+        <emulab:fd name="real-switch" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+pc3"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="pc3" exclusive="true">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="dl360-G7">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a408f40e-6aff-11e2-8fcb-02d6cd042885" version="15"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a408f40e-6aff-11e2-8fcb-02d6cd042885" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz">
+            <disk_image
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="false"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth0"
+            public_ipv4="165.124.51.142" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2666"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="44035"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10013" weight="0"/>
+        <emulab:fd name="OS-10007" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10009" weight="0"/>
+        <emulab:fd name="OS-10016" weight="0"/>
+        <emulab:fd name="OS-10016-10014" weight="0"/>
+        <emulab:fd name="OS-10016-10018" weight="0"/>
+        <emulab:fd name="OS-10016-10019" weight="0"/>
+        <emulab:fd name="OS-10016-10022" weight="0"/>
+        <emulab:fd name="OS-10016-10025" weight="0"/>
+        <emulab:fd name="OS-10016-10034" weight="0"/>
+        <emulab:fd name="OS-10016-10035" weight="0"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10020" weight="0"/>
+        <emulab:fd name="OS-10021" weight="0"/>
+        <emulab:fd name="OS-10023" weight="0"/>
+        <emulab:fd name="OS-10023-10013" weight="0"/>
+        <emulab:fd name="OS-10023-10024" weight="0"/>
+        <emulab:fd name="OS-10023-10026" weight="0"/>
+        <emulab:fd name="OS-10023-10030" weight="0"/>
+        <emulab:fd name="OS-10023-10037" weight="0"/>
+        <emulab:fd name="OS-10023-10038" weight="0"/>
+        <emulab:fd name="OS-10023-10039" weight="0"/>
+        <emulab:fd name="OS-10023-10040" weight="0"/>
+        <emulab:fd name="OS-10023-10041" weight="0"/>
+        <emulab:fd name="OS-10023-10042" weight="0"/>
+        <emulab:fd name="OS-10023-10043" weight="0"/>
+        <emulab:fd name="OS-10023-10044" weight="0"/>
+        <emulab:fd name="OS-10023-10045" weight="0"/>
+        <emulab:fd name="OS-10023-10046" weight="0"/>
+        <emulab:fd name="OS-10023-10047" weight="0"/>
+        <emulab:fd name="OS-10023-10048" weight="0"/>
+        <emulab:fd name="OS-10023-10049" weight="0"/>
+        <emulab:fd name="OS-10023-10050" weight="0"/>
+        <emulab:fd name="OS-10023-10051" weight="0"/>
+        <emulab:fd name="OS-10023-10052" weight="0"/>
+        <emulab:fd name="OS-10023-10053" weight="0"/>
+        <emulab:fd name="OS-10023-10054" weight="0"/>
+        <emulab:fd name="OS-10023-10056" weight="0"/>
+        <emulab:fd name="OS-10023-10057" weight="0"/>
+        <emulab:fd name="OS-10023-10058" weight="0"/>
+        <emulab:fd name="OS-10023-10059" weight="0"/>
+        <emulab:fd name="OS-10023-10060" weight="0"/>
+        <emulab:fd name="OS-10023-10061" weight="0"/>
+        <emulab:fd name="OS-10023-10062" weight="0"/>
+        <emulab:fd name="OS-10023-10063" weight="0"/>
+        <emulab:fd name="OS-10023-10064" weight="0"/>
+        <emulab:fd name="OS-10023-10065" weight="0"/>
+        <emulab:fd name="OS-10023-10066" weight="0"/>
+        <emulab:fd name="OS-10023-10067" weight="0"/>
+        <emulab:fd name="OS-10023-10068" weight="0"/>
+        <emulab:fd name="OS-10023-10069" weight="0"/>
+        <emulab:fd name="OS-10023-10071" weight="0"/>
+        <emulab:fd name="OS-10023-10073" weight="0"/>
+        <emulab:fd name="OS-10023-10074" weight="0"/>
+        <emulab:fd name="OS-10023-10075" weight="0"/>
+        <emulab:fd name="OS-10023-10076" weight="0"/>
+        <emulab:fd name="OS-10023-10077" weight="0"/>
+        <emulab:fd name="OS-10023-10080" weight="0"/>
+        <emulab:fd name="OS-10023-10081" weight="0"/>
+        <emulab:fd name="OS-10023-10082" weight="0"/>
+        <emulab:fd name="OS-10023-10083" weight="0"/>
+        <emulab:fd name="OS-10023-10084" weight="0"/>
+        <emulab:fd name="OS-10023-10086" weight="0"/>
+        <emulab:fd name="OS-10023-10087" weight="0"/>
+        <emulab:fd name="OS-10023-10088" weight="0"/>
+        <emulab:fd name="OS-10023-10090" weight="0"/>
+        <emulab:fd name="OS-10023-10091" weight="0"/>
+        <emulab:fd name="OS-10023-10092" weight="0"/>
+        <emulab:fd name="OS-10023-10093" weight="0"/>
+        <emulab:fd name="OS-10023-10094" weight="0"/>
+        <emulab:fd name="OS-10023-10095" weight="0"/>
+        <emulab:fd name="OS-10023-10096" weight="0"/>
+        <emulab:fd name="OS-10023-10097" weight="0"/>
+        <emulab:fd name="OS-10023-10098" weight="0"/>
+        <emulab:fd name="OS-10023-10099" weight="0"/>
+        <emulab:fd name="OS-10024" weight="0"/>
+        <emulab:fd name="OS-10027" weight="0"/>
+        <emulab:fd name="OS-10029" weight="0"/>
+        <emulab:fd name="OS-10029-10009" weight="0"/>
+        <emulab:fd name="OS-10029-10013" weight="0"/>
+        <emulab:fd name="OS-10029-10024" weight="0"/>
+        <emulab:fd name="OS-10029-10026" weight="0"/>
+        <emulab:fd name="OS-10029-10030" weight="0"/>
+        <emulab:fd name="OS-10029-10031" weight="0"/>
+        <emulab:fd name="OS-10029-10033" weight="0"/>
+        <emulab:fd name="OS-10029-10036" weight="0"/>
+        <emulab:fd name="OS-10029-10037" weight="0"/>
+        <emulab:fd name="OS-10029-10038" weight="0"/>
+        <emulab:fd name="OS-10029-10039" weight="0"/>
+        <emulab:fd name="OS-10029-10040" weight="0"/>
+        <emulab:fd name="OS-10029-10041" weight="0"/>
+        <emulab:fd name="OS-10029-10042" weight="0"/>
+        <emulab:fd name="OS-10029-10043" weight="0"/>
+        <emulab:fd name="OS-10029-10044" weight="0"/>
+        <emulab:fd name="OS-10029-10045" weight="0"/>
+        <emulab:fd name="OS-10029-10046" weight="0"/>
+        <emulab:fd name="OS-10029-10047" weight="0"/>
+        <emulab:fd name="OS-10029-10048" weight="0"/>
+        <emulab:fd name="OS-10029-10049" weight="0"/>
+        <emulab:fd name="OS-10029-10050" weight="0"/>
+        <emulab:fd name="OS-10029-10051" weight="0"/>
+        <emulab:fd name="OS-10029-10052" weight="0"/>
+        <emulab:fd name="OS-10029-10053" weight="0"/>
+        <emulab:fd name="OS-10029-10054" weight="0"/>
+        <emulab:fd name="OS-10029-10056" weight="0"/>
+        <emulab:fd name="OS-10029-10057" weight="0"/>
+        <emulab:fd name="OS-10029-10058" weight="0"/>
+        <emulab:fd name="OS-10029-10059" weight="0"/>
+        <emulab:fd name="OS-10029-10060" weight="0"/>
+        <emulab:fd name="OS-10029-10061" weight="0"/>
+        <emulab:fd name="OS-10029-10062" weight="0"/>
+        <emulab:fd name="OS-10029-10063" weight="0"/>
+        <emulab:fd name="OS-10029-10064" weight="0"/>
+        <emulab:fd name="OS-10029-10065" weight="0"/>
+        <emulab:fd name="OS-10029-10066" weight="0"/>
+        <emulab:fd name="OS-10029-10067" weight="0"/>
+        <emulab:fd name="OS-10029-10068" weight="0"/>
+        <emulab:fd name="OS-10029-10069" weight="0"/>
+        <emulab:fd name="OS-10029-10071" weight="0"/>
+        <emulab:fd name="OS-10029-10073" weight="0"/>
+        <emulab:fd name="OS-10029-10074" weight="0"/>
+        <emulab:fd name="OS-10029-10075" weight="0"/>
+        <emulab:fd name="OS-10029-10076" weight="0"/>
+        <emulab:fd name="OS-10029-10077" weight="0"/>
+        <emulab:fd name="OS-10029-10080" weight="0"/>
+        <emulab:fd name="OS-10029-10081" weight="0"/>
+        <emulab:fd name="OS-10029-10082" weight="0"/>
+        <emulab:fd name="OS-10029-10083" weight="0"/>
+        <emulab:fd name="OS-10029-10084" weight="0"/>
+        <emulab:fd name="OS-10029-10086" weight="0"/>
+        <emulab:fd name="OS-10029-10087" weight="0"/>
+        <emulab:fd name="OS-10029-10088" weight="0"/>
+        <emulab:fd name="OS-10029-10090" weight="0"/>
+        <emulab:fd name="OS-10029-10091" weight="0"/>
+        <emulab:fd name="OS-10029-10092" weight="0"/>
+        <emulab:fd name="OS-10029-10093" weight="0"/>
+        <emulab:fd name="OS-10029-10094" weight="0"/>
+        <emulab:fd name="OS-10029-10095" weight="0"/>
+        <emulab:fd name="OS-10029-10096" weight="0"/>
+        <emulab:fd name="OS-10029-10097" weight="0"/>
+        <emulab:fd name="OS-10029-10098" weight="0"/>
+        <emulab:fd name="OS-10029-10099" weight="0"/>
+        <emulab:fd name="OS-10098" weight="0"/>
+        <emulab:fd name="OS-10038" weight="0"/>
+        <emulab:fd name="OS-10041" weight="0"/>
+        <emulab:fd name="OS-10046" weight="0"/>
+        <emulab:fd name="OS-10055" weight="0"/>
+        <emulab:fd name="OS-10056" weight="0"/>
+        <emulab:fd name="OS-10057" weight="0"/>
+        <emulab:fd name="OS-10058" weight="0"/>
+        <emulab:fd name="OS-10067" weight="0"/>
+        <emulab:fd name="OS-10073" weight="0"/>
+        <emulab:fd name="OS-10074" weight="0"/>
+        <emulab:fd name="OS-10080" weight="0"/>
+        <emulab:fd name="OS-10085" weight="0"/>
+        <emulab:fd name="OS-10087" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10089-10087" weight="0"/>
+        <emulab:fd name="OS-10089-10090" weight="0"/>
+        <emulab:fd name="OS-10089-10091" weight="0"/>
+        <emulab:fd name="OS-10089-10092" weight="0"/>
+        <emulab:fd name="OS-10089-10093" weight="0"/>
+        <emulab:fd name="OS-10089-10094" weight="0"/>
+        <emulab:fd name="OS-10089-10095" weight="0"/>
+        <emulab:fd name="OS-10089-10096" weight="0"/>
+        <emulab:fd name="OS-10089-10097" weight="0"/>
+        <emulab:fd name="OS-10089-10098" weight="0"/>
+        <emulab:fd name="OS-10089-10099" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10095" weight="0"/>
+        <emulab:fd name="OS-10096" weight="0"/>
+        <emulab:fd name="OS-10097" weight="0"/>
+        <emulab:fd name="OS-10099" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10006" weight="0"/>
+        <emulab:fd name="OS-10010" weight="0"/>
+        <emulab:fd name="OS-10014" weight="0"/>
+        <emulab:fd name="OS-10026" weight="0"/>
+        <emulab:fd name="connected-to-procurve1" weight="0.0"/>
+        <emulab:fd name="connected-to-procurve2" weight="0.0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+icair-arista"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="icair-arista" exclusive="false">
+        <hardware_type name="interconnect">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+icair-arista:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree"
+            name="spreadshared-icair-arista" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10011" weight="0.5"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+pc5"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="pc5" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="88"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="88"/>
+        </hardware_type>
+        <hardware_type name="dl360-G7">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="true"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth0"
+            public_ipv4="165.124.51.144" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc5" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2666"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="22531"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10029" weight="0.5"/>
+        <emulab:fd name="OS-10029-10009" weight="0"/>
+        <emulab:fd name="OS-10029-10013" weight="0"/>
+        <emulab:fd name="OS-10029-10024" weight="0"/>
+        <emulab:fd name="OS-10029-10026" weight="0"/>
+        <emulab:fd name="OS-10029-10030" weight="0"/>
+        <emulab:fd name="OS-10029-10031" weight="0"/>
+        <emulab:fd name="OS-10029-10033" weight="0"/>
+        <emulab:fd name="OS-10029-10036" weight="0"/>
+        <emulab:fd name="OS-10029-10037" weight="0"/>
+        <emulab:fd name="OS-10029-10038" weight="0"/>
+        <emulab:fd name="OS-10029-10039" weight="0"/>
+        <emulab:fd name="OS-10029-10040" weight="0"/>
+        <emulab:fd name="OS-10029-10041" weight="0"/>
+        <emulab:fd name="OS-10029-10042" weight="0"/>
+        <emulab:fd name="OS-10029-10043" weight="0"/>
+        <emulab:fd name="OS-10029-10044" weight="0"/>
+        <emulab:fd name="OS-10029-10045" weight="0"/>
+        <emulab:fd name="OS-10029-10046" weight="0"/>
+        <emulab:fd name="OS-10029-10047" weight="0"/>
+        <emulab:fd name="OS-10029-10048" weight="0"/>
+        <emulab:fd name="OS-10029-10049" weight="0"/>
+        <emulab:fd name="OS-10029-10050" weight="0"/>
+        <emulab:fd name="OS-10029-10051" weight="0"/>
+        <emulab:fd name="OS-10029-10052" weight="0"/>
+        <emulab:fd name="OS-10029-10053" weight="0"/>
+        <emulab:fd name="OS-10029-10054" weight="0"/>
+        <emulab:fd name="OS-10029-10056" weight="0"/>
+        <emulab:fd name="OS-10029-10057" weight="0"/>
+        <emulab:fd name="OS-10029-10058" weight="0"/>
+        <emulab:fd name="OS-10029-10059" weight="0"/>
+        <emulab:fd name="OS-10029-10060" weight="0"/>
+        <emulab:fd name="OS-10029-10061" weight="0"/>
+        <emulab:fd name="OS-10029-10062" weight="0"/>
+        <emulab:fd name="OS-10029-10063" weight="0"/>
+        <emulab:fd name="OS-10029-10064" weight="0"/>
+        <emulab:fd name="OS-10029-10065" weight="0"/>
+        <emulab:fd name="OS-10029-10066" weight="0"/>
+        <emulab:fd name="OS-10029-10067" weight="0"/>
+        <emulab:fd name="OS-10029-10068" weight="0"/>
+        <emulab:fd name="OS-10029-10069" weight="0"/>
+        <emulab:fd name="OS-10029-10071" weight="0"/>
+        <emulab:fd name="OS-10029-10073" weight="0"/>
+        <emulab:fd name="OS-10029-10074" weight="0"/>
+        <emulab:fd name="OS-10029-10075" weight="0"/>
+        <emulab:fd name="OS-10029-10076" weight="0"/>
+        <emulab:fd name="OS-10029-10077" weight="0"/>
+        <emulab:fd name="OS-10029-10080" weight="0"/>
+        <emulab:fd name="OS-10029-10081" weight="0"/>
+        <emulab:fd name="OS-10029-10082" weight="0"/>
+        <emulab:fd name="OS-10029-10083" weight="0"/>
+        <emulab:fd name="OS-10029-10084" weight="0"/>
+        <emulab:fd name="OS-10029-10086" weight="0"/>
+        <emulab:fd name="OS-10029-10087" weight="0"/>
+        <emulab:fd name="OS-10029-10088" weight="0"/>
+        <emulab:fd name="OS-10029-10090" weight="0"/>
+        <emulab:fd name="OS-10029-10091" weight="0"/>
+        <emulab:fd name="OS-10029-10092" weight="0"/>
+        <emulab:fd name="OS-10029-10093" weight="0"/>
+        <emulab:fd name="OS-10029-10094" weight="0"/>
+        <emulab:fd name="OS-10029-10095" weight="0"/>
+        <emulab:fd name="OS-10029-10096" weight="0"/>
+        <emulab:fd name="OS-10029-10097" weight="0"/>
+        <emulab:fd name="OS-10029-10098" weight="0"/>
+        <emulab:fd name="OS-10029-10099" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+pc4"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="pc4" exclusive="true">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="dl360-G7">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a408f40e-6aff-11e2-8fcb-02d6cd042885" version="15"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a408f40e-6aff-11e2-8fcb-02d6cd042885" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz">
+            <disk_image
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="false"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth0"
+            public_ipv4="165.124.51.143" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2666"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="44035"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10013" weight="0"/>
+        <emulab:fd name="OS-10007" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10009" weight="0"/>
+        <emulab:fd name="OS-10016" weight="0"/>
+        <emulab:fd name="OS-10016-10014" weight="0"/>
+        <emulab:fd name="OS-10016-10018" weight="0"/>
+        <emulab:fd name="OS-10016-10019" weight="0"/>
+        <emulab:fd name="OS-10016-10022" weight="0"/>
+        <emulab:fd name="OS-10016-10025" weight="0"/>
+        <emulab:fd name="OS-10016-10034" weight="0"/>
+        <emulab:fd name="OS-10016-10035" weight="0"/>
+        <emulab:fd name="OS-10017" weight="0"/>
+        <emulab:fd name="OS-10020" weight="0"/>
+        <emulab:fd name="OS-10021" weight="0"/>
+        <emulab:fd name="OS-10023" weight="0"/>
+        <emulab:fd name="OS-10023-10013" weight="0"/>
+        <emulab:fd name="OS-10023-10024" weight="0"/>
+        <emulab:fd name="OS-10023-10026" weight="0"/>
+        <emulab:fd name="OS-10023-10030" weight="0"/>
+        <emulab:fd name="OS-10023-10037" weight="0"/>
+        <emulab:fd name="OS-10023-10038" weight="0"/>
+        <emulab:fd name="OS-10023-10039" weight="0"/>
+        <emulab:fd name="OS-10023-10040" weight="0"/>
+        <emulab:fd name="OS-10023-10041" weight="0"/>
+        <emulab:fd name="OS-10023-10042" weight="0"/>
+        <emulab:fd name="OS-10023-10043" weight="0"/>
+        <emulab:fd name="OS-10023-10044" weight="0"/>
+        <emulab:fd name="OS-10023-10045" weight="0"/>
+        <emulab:fd name="OS-10023-10046" weight="0"/>
+        <emulab:fd name="OS-10023-10047" weight="0"/>
+        <emulab:fd name="OS-10023-10048" weight="0"/>
+        <emulab:fd name="OS-10023-10049" weight="0"/>
+        <emulab:fd name="OS-10023-10050" weight="0"/>
+        <emulab:fd name="OS-10023-10051" weight="0"/>
+        <emulab:fd name="OS-10023-10052" weight="0"/>
+        <emulab:fd name="OS-10023-10053" weight="0"/>
+        <emulab:fd name="OS-10023-10054" weight="0"/>
+        <emulab:fd name="OS-10023-10056" weight="0"/>
+        <emulab:fd name="OS-10023-10057" weight="0"/>
+        <emulab:fd name="OS-10023-10058" weight="0"/>
+        <emulab:fd name="OS-10023-10059" weight="0"/>
+        <emulab:fd name="OS-10023-10060" weight="0"/>
+        <emulab:fd name="OS-10023-10061" weight="0"/>
+        <emulab:fd name="OS-10023-10062" weight="0"/>
+        <emulab:fd name="OS-10023-10063" weight="0"/>
+        <emulab:fd name="OS-10023-10064" weight="0"/>
+        <emulab:fd name="OS-10023-10065" weight="0"/>
+        <emulab:fd name="OS-10023-10066" weight="0"/>
+        <emulab:fd name="OS-10023-10067" weight="0"/>
+        <emulab:fd name="OS-10023-10068" weight="0"/>
+        <emulab:fd name="OS-10023-10069" weight="0"/>
+        <emulab:fd name="OS-10023-10071" weight="0"/>
+        <emulab:fd name="OS-10023-10073" weight="0"/>
+        <emulab:fd name="OS-10023-10074" weight="0"/>
+        <emulab:fd name="OS-10023-10075" weight="0"/>
+        <emulab:fd name="OS-10023-10076" weight="0"/>
+        <emulab:fd name="OS-10023-10077" weight="0"/>
+        <emulab:fd name="OS-10023-10080" weight="0"/>
+        <emulab:fd name="OS-10023-10081" weight="0"/>
+        <emulab:fd name="OS-10023-10082" weight="0"/>
+        <emulab:fd name="OS-10023-10083" weight="0"/>
+        <emulab:fd name="OS-10023-10084" weight="0"/>
+        <emulab:fd name="OS-10023-10086" weight="0"/>
+        <emulab:fd name="OS-10023-10087" weight="0"/>
+        <emulab:fd name="OS-10023-10088" weight="0"/>
+        <emulab:fd name="OS-10023-10090" weight="0"/>
+        <emulab:fd name="OS-10023-10091" weight="0"/>
+        <emulab:fd name="OS-10023-10092" weight="0"/>
+        <emulab:fd name="OS-10023-10093" weight="0"/>
+        <emulab:fd name="OS-10023-10094" weight="0"/>
+        <emulab:fd name="OS-10023-10095" weight="0"/>
+        <emulab:fd name="OS-10023-10096" weight="0"/>
+        <emulab:fd name="OS-10023-10097" weight="0"/>
+        <emulab:fd name="OS-10023-10098" weight="0"/>
+        <emulab:fd name="OS-10023-10099" weight="0"/>
+        <emulab:fd name="OS-10024" weight="0"/>
+        <emulab:fd name="OS-10027" weight="0"/>
+        <emulab:fd name="OS-10029" weight="0"/>
+        <emulab:fd name="OS-10029-10009" weight="0"/>
+        <emulab:fd name="OS-10029-10013" weight="0"/>
+        <emulab:fd name="OS-10029-10024" weight="0"/>
+        <emulab:fd name="OS-10029-10026" weight="0"/>
+        <emulab:fd name="OS-10029-10030" weight="0"/>
+        <emulab:fd name="OS-10029-10031" weight="0"/>
+        <emulab:fd name="OS-10029-10033" weight="0"/>
+        <emulab:fd name="OS-10029-10036" weight="0"/>
+        <emulab:fd name="OS-10029-10037" weight="0"/>
+        <emulab:fd name="OS-10029-10038" weight="0"/>
+        <emulab:fd name="OS-10029-10039" weight="0"/>
+        <emulab:fd name="OS-10029-10040" weight="0"/>
+        <emulab:fd name="OS-10029-10041" weight="0"/>
+        <emulab:fd name="OS-10029-10042" weight="0"/>
+        <emulab:fd name="OS-10029-10043" weight="0"/>
+        <emulab:fd name="OS-10029-10044" weight="0"/>
+        <emulab:fd name="OS-10029-10045" weight="0"/>
+        <emulab:fd name="OS-10029-10046" weight="0"/>
+        <emulab:fd name="OS-10029-10047" weight="0"/>
+        <emulab:fd name="OS-10029-10048" weight="0"/>
+        <emulab:fd name="OS-10029-10049" weight="0"/>
+        <emulab:fd name="OS-10029-10050" weight="0"/>
+        <emulab:fd name="OS-10029-10051" weight="0"/>
+        <emulab:fd name="OS-10029-10052" weight="0"/>
+        <emulab:fd name="OS-10029-10053" weight="0"/>
+        <emulab:fd name="OS-10029-10054" weight="0"/>
+        <emulab:fd name="OS-10029-10056" weight="0"/>
+        <emulab:fd name="OS-10029-10057" weight="0"/>
+        <emulab:fd name="OS-10029-10058" weight="0"/>
+        <emulab:fd name="OS-10029-10059" weight="0"/>
+        <emulab:fd name="OS-10029-10060" weight="0"/>
+        <emulab:fd name="OS-10029-10061" weight="0"/>
+        <emulab:fd name="OS-10029-10062" weight="0"/>
+        <emulab:fd name="OS-10029-10063" weight="0"/>
+        <emulab:fd name="OS-10029-10064" weight="0"/>
+        <emulab:fd name="OS-10029-10065" weight="0"/>
+        <emulab:fd name="OS-10029-10066" weight="0"/>
+        <emulab:fd name="OS-10029-10067" weight="0"/>
+        <emulab:fd name="OS-10029-10068" weight="0"/>
+        <emulab:fd name="OS-10029-10069" weight="0"/>
+        <emulab:fd name="OS-10029-10071" weight="0"/>
+        <emulab:fd name="OS-10029-10073" weight="0"/>
+        <emulab:fd name="OS-10029-10074" weight="0"/>
+        <emulab:fd name="OS-10029-10075" weight="0"/>
+        <emulab:fd name="OS-10029-10076" weight="0"/>
+        <emulab:fd name="OS-10029-10077" weight="0"/>
+        <emulab:fd name="OS-10029-10080" weight="0"/>
+        <emulab:fd name="OS-10029-10081" weight="0"/>
+        <emulab:fd name="OS-10029-10082" weight="0"/>
+        <emulab:fd name="OS-10029-10083" weight="0"/>
+        <emulab:fd name="OS-10029-10084" weight="0"/>
+        <emulab:fd name="OS-10029-10086" weight="0"/>
+        <emulab:fd name="OS-10029-10087" weight="0"/>
+        <emulab:fd name="OS-10029-10088" weight="0"/>
+        <emulab:fd name="OS-10029-10090" weight="0"/>
+        <emulab:fd name="OS-10029-10091" weight="0"/>
+        <emulab:fd name="OS-10029-10092" weight="0"/>
+        <emulab:fd name="OS-10029-10093" weight="0"/>
+        <emulab:fd name="OS-10029-10094" weight="0"/>
+        <emulab:fd name="OS-10029-10095" weight="0"/>
+        <emulab:fd name="OS-10029-10096" weight="0"/>
+        <emulab:fd name="OS-10029-10097" weight="0"/>
+        <emulab:fd name="OS-10029-10098" weight="0"/>
+        <emulab:fd name="OS-10029-10099" weight="0"/>
+        <emulab:fd name="OS-10098" weight="0"/>
+        <emulab:fd name="OS-10038" weight="0"/>
+        <emulab:fd name="OS-10041" weight="0"/>
+        <emulab:fd name="OS-10046" weight="0"/>
+        <emulab:fd name="OS-10055" weight="0"/>
+        <emulab:fd name="OS-10056" weight="0"/>
+        <emulab:fd name="OS-10057" weight="0"/>
+        <emulab:fd name="OS-10058" weight="0"/>
+        <emulab:fd name="OS-10067" weight="0"/>
+        <emulab:fd name="OS-10073" weight="0"/>
+        <emulab:fd name="OS-10074" weight="0"/>
+        <emulab:fd name="OS-10080" weight="0"/>
+        <emulab:fd name="OS-10085" weight="0"/>
+        <emulab:fd name="OS-10087" weight="0"/>
+        <emulab:fd name="OS-10089" weight="0"/>
+        <emulab:fd name="OS-10089-10087" weight="0"/>
+        <emulab:fd name="OS-10089-10090" weight="0"/>
+        <emulab:fd name="OS-10089-10091" weight="0"/>
+        <emulab:fd name="OS-10089-10092" weight="0"/>
+        <emulab:fd name="OS-10089-10093" weight="0"/>
+        <emulab:fd name="OS-10089-10094" weight="0"/>
+        <emulab:fd name="OS-10089-10095" weight="0"/>
+        <emulab:fd name="OS-10089-10096" weight="0"/>
+        <emulab:fd name="OS-10089-10097" weight="0"/>
+        <emulab:fd name="OS-10089-10098" weight="0"/>
+        <emulab:fd name="OS-10089-10099" weight="0"/>
+        <emulab:fd name="OS-10090" weight="0"/>
+        <emulab:fd name="OS-10095" weight="0"/>
+        <emulab:fd name="OS-10096" weight="0"/>
+        <emulab:fd name="OS-10097" weight="0"/>
+        <emulab:fd name="OS-10099" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10006" weight="0"/>
+        <emulab:fd name="OS-10010" weight="0"/>
+        <emulab:fd name="OS-10014" weight="0"/>
+        <emulab:fd name="OS-10026" weight="0"/>
+        <emulab:fd name="connected-to-procurve1" weight="0.0"/>
+        <emulab:fd name="connected-to-procurve2" weight="0.0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+pc1"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="pc1" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="91"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="91"/>
+        </hardware_type>
+        <hardware_type name="dl360-G7">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="true"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0"
+            public_ipv4="165.124.51.140" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc1" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2666"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="35331"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10029" weight="0.5"/>
+        <emulab:fd name="OS-10029-10009" weight="0"/>
+        <emulab:fd name="OS-10029-10013" weight="0"/>
+        <emulab:fd name="OS-10029-10024" weight="0"/>
+        <emulab:fd name="OS-10029-10026" weight="0"/>
+        <emulab:fd name="OS-10029-10030" weight="0"/>
+        <emulab:fd name="OS-10029-10031" weight="0"/>
+        <emulab:fd name="OS-10029-10033" weight="0"/>
+        <emulab:fd name="OS-10029-10036" weight="0"/>
+        <emulab:fd name="OS-10029-10037" weight="0"/>
+        <emulab:fd name="OS-10029-10038" weight="0"/>
+        <emulab:fd name="OS-10029-10039" weight="0"/>
+        <emulab:fd name="OS-10029-10040" weight="0"/>
+        <emulab:fd name="OS-10029-10041" weight="0"/>
+        <emulab:fd name="OS-10029-10042" weight="0"/>
+        <emulab:fd name="OS-10029-10043" weight="0"/>
+        <emulab:fd name="OS-10029-10044" weight="0"/>
+        <emulab:fd name="OS-10029-10045" weight="0"/>
+        <emulab:fd name="OS-10029-10046" weight="0"/>
+        <emulab:fd name="OS-10029-10047" weight="0"/>
+        <emulab:fd name="OS-10029-10048" weight="0"/>
+        <emulab:fd name="OS-10029-10049" weight="0"/>
+        <emulab:fd name="OS-10029-10050" weight="0"/>
+        <emulab:fd name="OS-10029-10051" weight="0"/>
+        <emulab:fd name="OS-10029-10052" weight="0"/>
+        <emulab:fd name="OS-10029-10053" weight="0"/>
+        <emulab:fd name="OS-10029-10054" weight="0"/>
+        <emulab:fd name="OS-10029-10056" weight="0"/>
+        <emulab:fd name="OS-10029-10057" weight="0"/>
+        <emulab:fd name="OS-10029-10058" weight="0"/>
+        <emulab:fd name="OS-10029-10059" weight="0"/>
+        <emulab:fd name="OS-10029-10060" weight="0"/>
+        <emulab:fd name="OS-10029-10061" weight="0"/>
+        <emulab:fd name="OS-10029-10062" weight="0"/>
+        <emulab:fd name="OS-10029-10063" weight="0"/>
+        <emulab:fd name="OS-10029-10064" weight="0"/>
+        <emulab:fd name="OS-10029-10065" weight="0"/>
+        <emulab:fd name="OS-10029-10066" weight="0"/>
+        <emulab:fd name="OS-10029-10067" weight="0"/>
+        <emulab:fd name="OS-10029-10068" weight="0"/>
+        <emulab:fd name="OS-10029-10069" weight="0"/>
+        <emulab:fd name="OS-10029-10071" weight="0"/>
+        <emulab:fd name="OS-10029-10073" weight="0"/>
+        <emulab:fd name="OS-10029-10074" weight="0"/>
+        <emulab:fd name="OS-10029-10075" weight="0"/>
+        <emulab:fd name="OS-10029-10076" weight="0"/>
+        <emulab:fd name="OS-10029-10077" weight="0"/>
+        <emulab:fd name="OS-10029-10080" weight="0"/>
+        <emulab:fd name="OS-10029-10081" weight="0"/>
+        <emulab:fd name="OS-10029-10082" weight="0"/>
+        <emulab:fd name="OS-10029-10083" weight="0"/>
+        <emulab:fd name="OS-10029-10084" weight="0"/>
+        <emulab:fd name="OS-10029-10086" weight="0"/>
+        <emulab:fd name="OS-10029-10087" weight="0"/>
+        <emulab:fd name="OS-10029-10088" weight="0"/>
+        <emulab:fd name="OS-10029-10090" weight="0"/>
+        <emulab:fd name="OS-10029-10091" weight="0"/>
+        <emulab:fd name="OS-10029-10092" weight="0"/>
+        <emulab:fd name="OS-10029-10093" weight="0"/>
+        <emulab:fd name="OS-10029-10094" weight="0"/>
+        <emulab:fd name="OS-10029-10095" weight="0"/>
+        <emulab:fd name="OS-10029-10096" weight="0"/>
+        <emulab:fd name="OS-10029-10097" weight="0"/>
+        <emulab:fd name="OS-10029-10098" weight="0"/>
+        <emulab:fd name="OS-10029-10099" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+interconnect-aristap19-hp23"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="interconnect-aristap19-hp23" exclusive="false">
+        <hardware_type name="interconnect">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+interconnect-aristap19-hp23:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree"
+            name="spreadshared-interconnect-aristap19-hp23" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10011" weight="0.5"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+pc2"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="pc2" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="85"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="85"/>
+        </hardware_type>
+        <hardware_type name="dl360-G7">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=a43a3618-6aff-11e2-8fcb-02d6cd042885" version="8.2"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.northwestern.edu/image_metadata.php?uuid=03225417-068f-11e4-9f73-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.northwestern.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="true"/>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth0"
+            public_ipv4="165.124.51.141" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc2" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2666"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="28675"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10029" weight="0.5"/>
+        <emulab:fd name="OS-10029-10009" weight="0"/>
+        <emulab:fd name="OS-10029-10013" weight="0"/>
+        <emulab:fd name="OS-10029-10024" weight="0"/>
+        <emulab:fd name="OS-10029-10026" weight="0"/>
+        <emulab:fd name="OS-10029-10030" weight="0"/>
+        <emulab:fd name="OS-10029-10031" weight="0"/>
+        <emulab:fd name="OS-10029-10033" weight="0"/>
+        <emulab:fd name="OS-10029-10036" weight="0"/>
+        <emulab:fd name="OS-10029-10037" weight="0"/>
+        <emulab:fd name="OS-10029-10038" weight="0"/>
+        <emulab:fd name="OS-10029-10039" weight="0"/>
+        <emulab:fd name="OS-10029-10040" weight="0"/>
+        <emulab:fd name="OS-10029-10041" weight="0"/>
+        <emulab:fd name="OS-10029-10042" weight="0"/>
+        <emulab:fd name="OS-10029-10043" weight="0"/>
+        <emulab:fd name="OS-10029-10044" weight="0"/>
+        <emulab:fd name="OS-10029-10045" weight="0"/>
+        <emulab:fd name="OS-10029-10046" weight="0"/>
+        <emulab:fd name="OS-10029-10047" weight="0"/>
+        <emulab:fd name="OS-10029-10048" weight="0"/>
+        <emulab:fd name="OS-10029-10049" weight="0"/>
+        <emulab:fd name="OS-10029-10050" weight="0"/>
+        <emulab:fd name="OS-10029-10051" weight="0"/>
+        <emulab:fd name="OS-10029-10052" weight="0"/>
+        <emulab:fd name="OS-10029-10053" weight="0"/>
+        <emulab:fd name="OS-10029-10054" weight="0"/>
+        <emulab:fd name="OS-10029-10056" weight="0"/>
+        <emulab:fd name="OS-10029-10057" weight="0"/>
+        <emulab:fd name="OS-10029-10058" weight="0"/>
+        <emulab:fd name="OS-10029-10059" weight="0"/>
+        <emulab:fd name="OS-10029-10060" weight="0"/>
+        <emulab:fd name="OS-10029-10061" weight="0"/>
+        <emulab:fd name="OS-10029-10062" weight="0"/>
+        <emulab:fd name="OS-10029-10063" weight="0"/>
+        <emulab:fd name="OS-10029-10064" weight="0"/>
+        <emulab:fd name="OS-10029-10065" weight="0"/>
+        <emulab:fd name="OS-10029-10066" weight="0"/>
+        <emulab:fd name="OS-10029-10067" weight="0"/>
+        <emulab:fd name="OS-10029-10068" weight="0"/>
+        <emulab:fd name="OS-10029-10069" weight="0"/>
+        <emulab:fd name="OS-10029-10071" weight="0"/>
+        <emulab:fd name="OS-10029-10073" weight="0"/>
+        <emulab:fd name="OS-10029-10074" weight="0"/>
+        <emulab:fd name="OS-10029-10075" weight="0"/>
+        <emulab:fd name="OS-10029-10076" weight="0"/>
+        <emulab:fd name="OS-10029-10077" weight="0"/>
+        <emulab:fd name="OS-10029-10080" weight="0"/>
+        <emulab:fd name="OS-10029-10081" weight="0"/>
+        <emulab:fd name="OS-10029-10082" weight="0"/>
+        <emulab:fd name="OS-10029-10083" weight="0"/>
+        <emulab:fd name="OS-10029-10084" weight="0"/>
+        <emulab:fd name="OS-10029-10086" weight="0"/>
+        <emulab:fd name="OS-10029-10087" weight="0"/>
+        <emulab:fd name="OS-10029-10088" weight="0"/>
+        <emulab:fd name="OS-10029-10090" weight="0"/>
+        <emulab:fd name="OS-10029-10091" weight="0"/>
+        <emulab:fd name="OS-10029-10092" weight="0"/>
+        <emulab:fd name="OS-10029-10093" weight="0"/>
+        <emulab:fd name="OS-10029-10094" weight="0"/>
+        <emulab:fd name="OS-10029-10095" weight="0"/>
+        <emulab:fd name="OS-10029-10096" weight="0"/>
+        <emulab:fd name="OS-10029-10097" weight="0"/>
+        <emulab:fd name="OS-10029-10098" weight="0"/>
+        <emulab:fd name="OS-10029-10099" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+node+internet"
+        component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"
+        component_name="internet" exclusive="true">
+        <hardware_type name="ipv4">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <cloud/>
+        <interface component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border">
+            <emulab:interface name="border"/>
+        </interface>
+        <location country="US" latitude=" 41.89508" longitude="-87.619418"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc4:eth0-internet:border" component_name="link-pc4//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc2:eth0-internet:border" component_name="link-pc2//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc3:eth0-internet:border" component_name="link-pc3//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc5:eth0-internet:border" component_name="link-pc5//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc1:eth0-internet:border" component_name="link-pc1//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc1:eth1-procurve2:(null)" component_name="link-pc1//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="900000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth1"/>
+        <property capacity="900000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc1:eth2-procurve2:(null)" component_name="link-pc1//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc1:eth3-procurve2:(null)" component_name="link-pc1//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc2:eth1-procurve2:(null)" component_name="link-pc2//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="800000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth1"/>
+        <property capacity="800000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc2:eth2-procurve2:(null)" component_name="link-pc2//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc2:eth3-procurve2:(null)" component_name="link-pc2//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc2:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc3:eth1-procurve2:(null)" component_name="link-pc3//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc3:eth2-procurve2:(null)" component_name="link-pc3//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc3:eth3-procurve2:(null)" component_name="link-pc3//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc3:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc4:eth1-procurve2:(null)" component_name="link-pc4//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc4:eth2-procurve2:(null)" component_name="link-pc4//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc4:eth3-procurve2:(null)" component_name="link-pc4//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc4:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc5:eth1-procurve2:(null)" component_name="link-pc5//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="900000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth1"/>
+        <property capacity="900000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc5:eth2-procurve2:(null)" component_name="link-pc5//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-pc5:eth3-procurve2:(null)" component_name="link-pc5//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc5:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-icair-arista:eth0-procurve2:(null)" component_name="link-icair-arista//eth0-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+icair-arista:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+icair-arista:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+icair-arista:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-generic_1G"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.northwestern.edu+link+link-interconnect-aristap19-hp23:eth0-procurve2:(null)" component_name="link-interconnect-aristap19-hp23//eth0-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+interconnect-aristap19-hp23:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+interconnect-aristap19-hp23:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.northwestern.edu+interface+interconnect-aristap19-hp23:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.northwestern.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-generic_1G"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+</rspec>

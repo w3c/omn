@@ -1,0 +1,44 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3/ad.xsd">
+    <link component_id="urn:publicid:IDN+fms:aist:serm:link">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix"/>
+        <interface_ref component_id="*"/>
+        <interface_ref component_id="*"/>
+        <property capacity="1G" dest_id="*" source_id="*"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_1_urn:ogf:network:aist.go.jp:2013:gre:bi-se1">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_1"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:gre:bi-se1"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_3_00:00:00:00:00:00:00:01_5">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_3"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01_5"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_2_urn:ogf:network:aist.go.jp:2013:topology:bi-se1">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_2"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_4_00:00:00:00:00:00:00:01_6">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_4"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01_6"/>
+    </link>
+    <node
+        component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10"
+        component_manager_id="urn:publicid:IDN+fms:aist:serm+authority+cm" exclusive="false">
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_1"/>
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_3"/>
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_2"/>
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_4"/>
+    </node>
+</rspec>

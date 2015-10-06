@@ -1,0 +1,15 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd">
+    <node component_id="urn:publicid:IDN+ocf:eict:vtam+node+node03"
+        component_manager_id="urn:publicid:IDN+ocf:eict:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:eict:vtam+node+node03" exclusive="false">
+        <available now="true"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+ocf:eict:vtam:node03+link+eth2-00:00:3e:dc:81:be:77:4c_1" component_name="urn:publicid:IDN+ocf:eict:vtam:node03+link+eth2-00:00:3e:dc:81:be:77:4c_1">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:eict:ofam+datapath+00:00:3e:dc:81:be:77:4c" source_id="urn:publicid:IDN+ocf:eict:vtam+node+node03+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+</rspec>

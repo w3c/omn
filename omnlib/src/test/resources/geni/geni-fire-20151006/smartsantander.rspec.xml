@@ -1,0 +1,6 @@
+<rspec expires="2015-10-06T15:39:25Z" generated="2015-10-06T14:39:25Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1"
+    xmlns:planetlab="http://www.planet-lab.org/resources/sfa/ext/planetlab/1"
+    xmlns:plos="http://www.planet-lab.org/resources/sfa/ext/plos/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.planet-lab.org/resources/sfa/ext/planetlab/1 http://www.planet-lab.org/resources/sfa/ext/planetlab/1/planetlab.xsd http://www.planet-lab.org/resources/sfa/ext/plos/1 http://www.planet-lab.org/resources/sfa/ext/plos/1/plos.xsd"/>

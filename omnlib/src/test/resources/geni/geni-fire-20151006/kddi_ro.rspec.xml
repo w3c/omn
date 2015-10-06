@@ -1,0 +1,303 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+    xmlns:protogeni="http://www.protogeni.net/resources/rspec/0.1"
+    xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3/ad.xsd">
+    <openflow:datapath
+        component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07"
+        component_manager_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+authority+cm" dpid="00:00:00:25:5c:e6:4f:07">
+        <openflow:port name="GBE0/1" num="1"/>
+        <openflow:port name="GBE0/2" num="2"/>
+        <openflow:port name="GBE0/3" num="3"/>
+        <openflow:port name="GBE0/4" num="4"/>
+        <openflow:port name="GBE0/5" num="5"/>
+        <openflow:port name="GBE0/6" num="6"/>
+        <openflow:port name="GBE0/7" num="7"/>
+        <openflow:port name="GBE0/8" num="8"/>
+        <openflow:port name="GBE0/9" num="9"/>
+        <openflow:port name="GBE0/10" num="10"/>
+        <openflow:port name="GBE0/11" num="11"/>
+        <openflow:port name="GBE0/12" num="12"/>
+        <openflow:port name="GBE0/13" num="13"/>
+        <openflow:port name="GBE0/14" num="14"/>
+        <openflow:port name="GBE0/15" num="15"/>
+        <openflow:port name="GBE0/16" num="16"/>
+        <openflow:port name="GBE0/17" num="17"/>
+        <openflow:port name="GBE0/18" num="18"/>
+        <openflow:port name="GBE0/19" num="19"/>
+        <openflow:port name="GBE0/20" num="20"/>
+        <openflow:port name="GBE0/21" num="21"/>
+        <openflow:port name="GBE0/22" num="22"/>
+        <openflow:port name="GBE0/23" num="23"/>
+        <openflow:port name="GBE0/24" num="24"/>
+        <openflow:port name="GBE0/25" num="25"/>
+        <openflow:port name="GBE0/26" num="26"/>
+        <openflow:port name="GBE0/27" num="27"/>
+        <openflow:port name="GBE0/28" num="28"/>
+        <openflow:port name="GBE0/29" num="29"/>
+        <openflow:port name="GBE0/30" num="30"/>
+        <openflow:port name="GBE0/31" num="31"/>
+        <openflow:port name="GBE0/32" num="32"/>
+        <openflow:port name="GBE0/33" num="33"/>
+        <openflow:port name="GBE0/34" num="34"/>
+        <openflow:port name="GBE0/35" num="35"/>
+        <openflow:port name="GBE0/36" num="36"/>
+        <openflow:port name="GBE0/37" num="37"/>
+        <openflow:port name="GBE0/38" num="38"/>
+        <openflow:port name="GBE0/39" num="39"/>
+        <openflow:port name="GBE0/40" num="40"/>
+        <openflow:port name="GBE0/41" num="41"/>
+        <openflow:port name="GBE0/42" num="42"/>
+        <openflow:port name="GBE0/43" num="43"/>
+        <openflow:port name="GBE0/44" num="44"/>
+        <openflow:port name="GBE0/45" num="45"/>
+        <openflow:port name="GBE0/46" num="46"/>
+        <openflow:port name="GBE0/47" num="47"/>
+        <openflow:port name="GBE0/48" num="48"/>
+    </openflow:datapath>
+    <openflow:datapath
+        component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07"
+        component_manager_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+authority+cm" dpid="00:00:00:25:5c:e6:4f:07">
+        <openflow:port name="GBE0/1" num="1"/>
+        <openflow:port name="GBE0/2" num="2"/>
+        <openflow:port name="GBE0/3" num="3"/>
+        <openflow:port name="GBE0/4" num="4"/>
+        <openflow:port name="GBE0/5" num="5"/>
+        <openflow:port name="GBE0/6" num="6"/>
+        <openflow:port name="GBE0/7" num="7"/>
+        <openflow:port name="GBE0/8" num="8"/>
+        <openflow:port name="GBE0/9" num="9"/>
+        <openflow:port name="GBE0/10" num="10"/>
+        <openflow:port name="GBE0/11" num="11"/>
+        <openflow:port name="GBE0/12" num="12"/>
+        <openflow:port name="GBE0/13" num="13"/>
+        <openflow:port name="GBE0/14" num="14"/>
+        <openflow:port name="GBE0/15" num="15"/>
+        <openflow:port name="GBE0/16" num="16"/>
+        <openflow:port name="GBE0/17" num="17"/>
+        <openflow:port name="GBE0/18" num="18"/>
+        <openflow:port name="GBE0/19" num="19"/>
+        <openflow:port name="GBE0/20" num="20"/>
+        <openflow:port name="GBE0/21" num="21"/>
+        <openflow:port name="GBE0/22" num="22"/>
+        <openflow:port name="GBE0/23" num="23"/>
+        <openflow:port name="GBE0/24" num="24"/>
+        <openflow:port name="GBE0/25" num="25"/>
+        <openflow:port name="GBE0/26" num="26"/>
+        <openflow:port name="GBE0/27" num="27"/>
+        <openflow:port name="GBE0/28" num="28"/>
+        <openflow:port name="GBE0/29" num="29"/>
+        <openflow:port name="GBE0/30" num="30"/>
+        <openflow:port name="GBE0/31" num="31"/>
+        <openflow:port name="GBE0/32" num="32"/>
+        <openflow:port name="GBE0/33" num="33"/>
+        <openflow:port name="GBE0/34" num="34"/>
+        <openflow:port name="GBE0/35" num="35"/>
+        <openflow:port name="GBE0/36" num="36"/>
+        <openflow:port name="GBE0/37" num="37"/>
+        <openflow:port name="GBE0/38" num="38"/>
+        <openflow:port name="GBE0/39" num="39"/>
+        <openflow:port name="GBE0/40" num="40"/>
+        <openflow:port name="GBE0/41" num="41"/>
+        <openflow:port name="GBE0/42" num="42"/>
+        <openflow:port name="GBE0/43" num="43"/>
+        <openflow:port name="GBE0/44" num="44"/>
+        <openflow:port name="GBE0/45" num="45"/>
+        <openflow:port name="GBE0/46" num="46"/>
+        <openflow:port name="GBE0/47" num="47"/>
+        <openflow:port name="GBE0/48" num="48"/>
+    </openflow:datapath>
+    <node
+        component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8"
+        component_manager_id="urn:publicid:IDN+fms:kddi:serm+authority+cm"
+        exclusive="false" protogeni:component_manager_uuid="felix:SERM">
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_11"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_10"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_13"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_12"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_15"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_14"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_16"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_1"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_3"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_2"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_4"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_9"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8"
+        component_manager_id="urn:publicid:IDN+fms:kddi:serm+authority+cm"
+        exclusive="false" protogeni:component_manager_uuid="felix:SERM">
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_11"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_10"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_13"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_12"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_15"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_14"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_16"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_1"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_3"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_2"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_4"/>
+        <interface component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_9"/>
+    </node>
+    <link component_id="urn:publicid:IDN+fms:kddi:serm:link" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:kddi:serm+authority+cm"/>
+        <link_type name="urn:felix"/>
+        <interface_ref component_id="*"/>
+        <interface_ref component_id="*"/>
+        <property capacity="1G" dest_id="*" source_id="*"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_11_00:00:00:25:5c:e6:4f:07_3" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_11"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_3"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_10_00:00:00:25:5c:e6:4f:07_2" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_10"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_2"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_13_00:00:00:25:5c:e6:4f:07_5" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_13"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_5"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_12_00:00:00:25:5c:e6:4f:07_4" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_12"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_15_00:00:00:25:5c:e6:4f:07_7" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_15"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_7"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_14_00:00:00:25:5c:e6:4f:07_6" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_14"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_6"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_16_00:00:00:25:5c:e6:4f:07_8" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_16"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_8"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_1_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_1"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_3_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_3"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_2_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_2"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_4_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_4"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_9_00:00:00:25:5c:e6:4f:07_1" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_9"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_1"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:kddi:serm:link" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:kddi:serm+authority+cm"/>
+        <link_type name="urn:felix"/>
+        <interface_ref component_id="*"/>
+        <interface_ref component_id="*"/>
+        <property capacity="1G" dest_id="*" source_id="*"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_11_00:00:00:25:5c:e6:4f:07_3" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_11"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_3"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_10_00:00:00:25:5c:e6:4f:07_2" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_10"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_2"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_13_00:00:00:25:5c:e6:4f:07_5" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_13"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_5"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_12_00:00:00:25:5c:e6:4f:07_4" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_12"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_15_00:00:00:25:5c:e6:4f:07_7" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_15"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_7"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_14_00:00:00:25:5c:e6:4f:07_6" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_14"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_6"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_16_00:00:00:25:5c:e6:4f:07_8" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_16"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_8"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_1_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_1"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_3_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_3"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_2_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_2"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_4_urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_4"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:kddi:serm+link+00:00:00:25:5c:e6:4f:d8_9_00:00:00:25:5c:e6:4f:07_1" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+static_link"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:kddi:serm+datapath+00:00:00:25:5c:e6:4f:d8_9"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:kddi:ofam+datapath+00:00:00:25:5c:e6:4f:07_1"/>
+    </link>
+</rspec>

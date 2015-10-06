@@ -1,0 +1,84 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/"
+    xmlns:ns3="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd">
+    <node
+        component_id="urn:publicid:IDN+exogeni.net:uflvmsite+node+orca-iscsi-luns"
+        component_manager_id="urn:publicid:IDN+exogeni.net:uflvmsite+authority+am"
+        component_name="orca-iscsi-luns" exclusive="false">
+        <hardware_type name="orca-iscsi-luns">
+            <ns3:node_type type_slots="58"/>
+        </hardware_type>
+        <available now="true"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TenGigabitEthernet:3:ethernet:VLAN:1009" role="experimental"/>
+    </node>
+    <link component_id="urn:publicid:IDN+exogeni.net:uflvmsite+link+UFL:ExoGeni:TenGigabitEthernet:3:ethernet:VLAN:1009_UFLNet:IBM:G8052:TenGigabitEthernet:3:ethernet:VLAN:1009">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TenGigabitEthernet:3:ethernet:VLAN:1009"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:3:ethernet:VLAN:1009"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:uflvmsite+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <node
+        component_id="urn:publicid:IDN+exogeni.net:uflvmsite+node+orca-vm-cloud"
+        component_manager_id="urn:publicid:IDN+exogeni.net:uflvmsite+authority+am"
+        component_name="orca-vm-cloud" exclusive="false">
+        <location country="Unspecified" latitude="29.64171" longitude="-82.346214"/>
+        <sliver_type name="XOMedium"/>
+        <sliver_type name="EucaC1XLarge"/>
+        <sliver_type name="EucaM1Small"/>
+        <sliver_type name="XOSmall"/>
+        <sliver_type name="EucaC1Medium"/>
+        <sliver_type name="EC2M1XLarge"/>
+        <sliver_type name="EC2M1Large"/>
+        <sliver_type name="XOLarge"/>
+        <sliver_type name="EC2C1Medium"/>
+        <sliver_type name="XOXlarge"/>
+        <sliver_type name="EucaM1XLarge"/>
+        <sliver_type name="EC2M1Small"/>
+        <sliver_type name="EucaM1Large"/>
+        <sliver_type name="XOSmall"/>
+        <sliver_type name="EucaC1Medium"/>
+        <sliver_type name="EC2M1Small"/>
+        <sliver_type name="EC2M1XLarge"/>
+        <sliver_type name="EC2M1Large"/>
+        <sliver_type name="XOMedium"/>
+        <sliver_type name="EucaM1Large"/>
+        <sliver_type name="EC2C1Medium"/>
+        <sliver_type name="EucaC1XLarge"/>
+        <sliver_type name="EucaM1XLarge"/>
+        <sliver_type name="XOLarge"/>
+        <sliver_type name="XOXlarge"/>
+        <sliver_type name="EucaM1Small"/>
+        <hardware_type name="orca-vm-cloud">
+            <ns3:node_type type_slots="49"/>
+        </hardware_type>
+        <available now="true"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TenGigabitEthernet:1:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TengigabitEthernet:2:ethernet" role="experimental"/>
+    </node>
+    <link component_id="urn:publicid:IDN+exogeni.net:uflvmsite+link+UFL:ExoGeni:TenGigabitEthernet:1:ethernet_UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:1:ethernet">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TenGigabitEthernet:1:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:1:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:uflvmsite+authority+am"/>
+        <link_type name="ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TenGigabitEthernet:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:1:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TenGigabitEthernet:1:ethernet"/>
+    </link>
+    <link component_id="urn:publicid:IDN+exogeni.net:uflvmsite+link+UFL:ExoGeni:TengigabitEthernet:2:ethernet_UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:2:ethernet">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TengigabitEthernet:2:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:2:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:uflvmsite+authority+am"/>
+        <link_type name="ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TengigabitEthernet:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:2:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:uflNet+interface+UFLNet:IBM:G8052:TenGigabitEthernet:ExoGeni:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:uflvmsite+interface+UFL:ExoGeni:TengigabitEthernet:2:ethernet"/>
+    </link>
+    <ns2:stitching lastUpdateTime="Tue Oct 06 14:36:04 UTC 2015"/>
+</rspec>

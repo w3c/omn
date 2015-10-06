@@ -1,0 +1,266 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/3"
+    xmlns:protogeni="http://www.protogeni.net/resources/rspec/0.1"
+    xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3/ad.xsd">
+    <node component_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-1"
+        component_manager_id="urn:publicid:IDN+ocf:aist:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:aist:vtam+node+dc1-1"
+        exclusive="false" protogeni:component_manager_uuid="felix:CRM">
+        <available now="true"/>
+    </node>
+    <node component_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-2"
+        component_manager_id="urn:publicid:IDN+ocf:aist:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:aist:vtam+node+dc1-2"
+        exclusive="false" protogeni:component_manager_uuid="felix:CRM">
+        <available now="true"/>
+    </node>
+    <node component_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3"
+        component_manager_id="urn:publicid:IDN+ocf:aist:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3"
+        exclusive="false" protogeni:component_manager_uuid="felix:CRM">
+        <available now="false"/>
+    </node>
+    <node component_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-4"
+        component_manager_id="urn:publicid:IDN+ocf:aist:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:aist:vtam+node+dc1-4"
+        exclusive="false" protogeni:component_manager_uuid="felix:CRM">
+        <available now="false"/>
+    </node>
+    <openflow:datapath
+        component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01"
+        component_manager_id="urn:publicid:IDN+openflow:ocf:aist:ofam+authority+cm" dpid="00:00:00:00:00:00:00:01">
+        <openflow:port name="eth14" num="3"/>
+        <openflow:port name="eth12" num="1"/>
+        <openflow:port name="eth7" num="8"/>
+        <openflow:port name="eth15" num="4"/>
+        <openflow:port name="eth6" num="7"/>
+        <openflow:port name="eth3" num="5"/>
+        <openflow:port name="eth4" num="6"/>
+        <openflow:port name="eth13" num="2"/>
+        <openflow:port name="br0" num="65534"/>
+    </openflow:datapath>
+    <node component_id="urn:publicid:IDN+fms:aist:tnrm+stp"
+        component_manager_id="urn:publicid:IDN+fms:aist:tnrm+authority+cm"
+        exclusive="false" protogeni:component_manager_uuid="felix:TNRM">
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-9">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-9+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp3+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-felix-kddi-stp4+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-aist">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-aist+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-startap">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:jgn-x.jp:2013:topology:bi-jgn-x-startap+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-video">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-video+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se2">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-ps">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-ps+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-1-7">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-1-7+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-3">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-3+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-4">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-4+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test1">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test2">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-test2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:geant.net:2013:topology:iMinds__port__to__GEANT">
+            <sharedvlan:available description="1280" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:geant.net:2013:topology:iMinds__port__to__GEANT+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:icair.org:2013:topology:ps">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:icair.org:2013:topology:ps+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-aist-jgn-x">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-aist-jgn-x+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se2">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se2+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se1">
+            <sharedvlan:available description="1700-1799" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2015:gre:bi-se1+vlan"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:server_port">
+            <sharedvlan:available description="1779-1798" name="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:server_port+vlan"/>
+        </interface>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10"
+        component_manager_id="urn:publicid:IDN+fms:aist:serm+authority+cm"
+        exclusive="false" protogeni:component_manager_uuid="felix:SERM">
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_1"/>
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_3"/>
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_2"/>
+        <interface component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_4"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-1+link+eth0-brx0_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-1+link+eth0-brx0_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx0" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-1+interface+eth0"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-1+link+eth1-brx3000_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-1+link+eth1-brx3000_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx3000" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-1+interface+eth1"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-1+link+eth2-brx1_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-1+link+eth2-brx1_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx1" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-1+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-2+link+eth0-brx0_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-2+link+eth0-brx0_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx0" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-2+interface+eth0"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-2+link+eth1-brx3000_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-2+link+eth1-brx3000_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx3000" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-2+interface+eth1"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-2+link+eth2-brx1_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-2+link+eth2-brx1_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx1" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-2+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth0-brx0_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth0-brx0_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx0" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3+interface+eth0"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth1-brx3000_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth1-brx3000_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx3000" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3+interface+eth1"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth2-brx1_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth2-brx1_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx1" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-4+link+eth0-brx0_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-4+link+eth0-brx0_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx0" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-4+interface+eth0"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-4+link+eth1-brx3000_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-4+link+eth1-brx3000_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx3000" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-4+interface+eth1"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-4+link+eth2-brx1_1"
+        component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-4+link+eth2-brx1_1" protogeni:component_manager_uuid="felix:CRM">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx1" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-4+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:aist:serm:link" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix"/>
+        <interface_ref component_id="*"/>
+        <interface_ref component_id="*"/>
+        <property capacity="1G" dest_id="*" source_id="*"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_1_urn:ogf:network:aist.go.jp:2013:gre:bi-se1" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_1"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:gre:bi-se1"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_3_00:00:00:00:00:00:00:01_5" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_3"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01_5"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_2_urn:ogf:network:aist.go.jp:2013:topology:bi-se1" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_2"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_4_00:00:00:00:00:00:00:01_6" protogeni:component_manager_uuid="felix:SERM">
+        <component_manager name="urn:publicid:IDN+fms:aist:serm+authority+cm"/>
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_4"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01_6"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_1_urn:ogf:network:aist.go.jp:2013:gre:bi-se1" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_1"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:gre:bi-se1"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_3_00:00:00:00:00:00:00:01_5" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_3"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01_5"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_2_urn:ogf:network:aist.go.jp:2013:topology:bi-se1" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_2"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:aist.go.jp:2013:topology:bi-se1"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+fms:aist:serm+link+00:00:00:00:00:00:00:10_4_00:00:00:00:00:00:00:01_6" protogeni:component_manager_uuid="felix:SERM">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:serm+datapath+00:00:00:00:00:00:00:10_4"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+00:00:00:00:00:00:00:01_6"/>
+    </link>
+</rspec>

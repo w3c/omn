@@ -1,0 +1,27 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd">
+    <node component_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3"
+        component_manager_id="urn:publicid:IDN+ocf:aist:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3" exclusive="false">
+        <available now="true"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth0-brx0_1" component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth0-brx0_1">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx0" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3+interface+eth0"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth1-brx1795_1" component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth1-brx1795_1">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx1795" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3+interface+eth1"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth2-brx1_1" component_name="urn:publicid:IDN+ocf:aist:vtam:dc1-3+link+eth2-brx1_1">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:aist:ofam+datapath+brx1" source_id="urn:publicid:IDN+ocf:aist:vtam+node+dc1-3+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+</rspec>

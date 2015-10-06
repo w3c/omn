@@ -1,0 +1,14 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd">
+    <node
+        component_id="urn:publicid:IDN+HPCN.UAM+tracetester10g+13580f72-772c-47e3-9483-7edeb9fa58c8"
+        component_manager_id="urn:publicid:IDN+HPCN.UAM+authority+am"
+        component_name="13580f72-772c-47e3-9483-7edeb9fa58c8" exclusive="true">
+        <available now="true"/>
+        <services>
+            <login authentication="ssh-keys"
+                hostname="tracetester10g.ii.uam.es" port="22" username="tracetester10g"/>
+        </services>
+    </node>
+</rspec>

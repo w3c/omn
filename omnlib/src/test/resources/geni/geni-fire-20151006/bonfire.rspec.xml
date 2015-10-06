@@ -1,0 +1,1503 @@
+<rspec expires="2015-10-06 14:40:59.601734+00:00"
+    generated="2015-10-06 14:40:59.601734+00:00" type="advertissement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:bonfire="http://doc.bonfire-project.eu/schemas/rspec/ext/bonfire/1"
+    xmlns:f4fmon="http://schemas.fed4fire.eu/schemas/rspec/ext/f4f_monitoring/1"
+    xmlns:occi="http://api.bonfire-project.eu/doc/schemas/occi"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad">
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Ffr-inria%2Fhosts%2Fbonfire-blade-1"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="bonfire-blade-1" exclusive="false">
+        <location country="FR"/>
+        <occi:cpu_model>Intel_Xeon_CPU_E5-2620_0_@_2.00GHz</occi:cpu_model>
+        <occi:cpu_smt_size>24</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>true</occi:cpu_ht_enabled>
+        <occi:memory_total_available>64980992</occi:memory_total_available>
+        <occi:net_bandwidth>2*1Gb</occi:net_bandwidth>
+        <occi:cluster>pe-c6220</occi:cluster>
+        <occi:allocation_blocs>96</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Number of processes"
+                id="PhysicalHost.procnum" unit="proc"/>
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="CPU user time (avg1)"
+                id="PhysicalHost.cpuutil" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="CO2 generation per 30s"
+                id="PhysicalHost.co2g" unit="g"/>
+            <f4fmon:metric description="Aggregate energy usage"
+                id="PhysicalHost.conswh" unit="Wh"/>
+            <f4fmon:metric description="Apparent power"
+                id="PhysicalHost.consva" unit="VA"/>
+            <f4fmon:metric description="Real power"
+                id="PhysicalHost.consw" unit="W"/>
+            <f4fmon:metric description="Free space on /srv"
+                id="PhysicalHost.freespacesrv" unit="B"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.5</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Ffr-inria%2Fhosts%2Fbonfire-blade-2"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="bonfire-blade-2" exclusive="false">
+        <location country="FR"/>
+        <occi:cpu_model>Intel_Xeon_CPU_E5-2620_0_@_2.00GHz</occi:cpu_model>
+        <occi:cpu_smt_size>24</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>true</occi:cpu_ht_enabled>
+        <occi:memory_total_available>64980992</occi:memory_total_available>
+        <occi:net_bandwidth>2*1Gb</occi:net_bandwidth>
+        <occi:cluster>pe-c6220</occi:cluster>
+        <occi:allocation_blocs>96</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Number of processes"
+                id="PhysicalHost.procnum" unit="proc"/>
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="CPU user time (avg1)"
+                id="PhysicalHost.cpuutil" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="CO2 generation per 30s"
+                id="PhysicalHost.co2g" unit="g"/>
+            <f4fmon:metric description="Aggregate energy usage"
+                id="PhysicalHost.conswh" unit="Wh"/>
+            <f4fmon:metric description="Apparent power"
+                id="PhysicalHost.consva" unit="VA"/>
+            <f4fmon:metric description="Real power"
+                id="PhysicalHost.consw" unit="W"/>
+            <f4fmon:metric description="Free space on /srv"
+                id="PhysicalHost.freespacesrv" unit="B"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.5</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Ffr-inria%2Fhosts%2Fbonfire-blade-3"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="bonfire-blade-3" exclusive="false">
+        <location country="FR"/>
+        <occi:cpu_model>Intel_Xeon_CPU_E5-2620_0_@_2.00GHz</occi:cpu_model>
+        <occi:cpu_smt_size>24</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>true</occi:cpu_ht_enabled>
+        <occi:memory_total_available>64980992</occi:memory_total_available>
+        <occi:net_bandwidth>2*1Gb</occi:net_bandwidth>
+        <occi:cluster>pe-c6220</occi:cluster>
+        <occi:allocation_blocs>96</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Number of processes"
+                id="PhysicalHost.procnum" unit="proc"/>
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="CPU user time (avg1)"
+                id="PhysicalHost.cpuutil" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="CO2 generation per 30s"
+                id="PhysicalHost.co2g" unit="g"/>
+            <f4fmon:metric description="Aggregate energy usage"
+                id="PhysicalHost.conswh" unit="Wh"/>
+            <f4fmon:metric description="Apparent power"
+                id="PhysicalHost.consva" unit="VA"/>
+            <f4fmon:metric description="Real power"
+                id="PhysicalHost.consw" unit="W"/>
+            <f4fmon:metric description="Free space on /srv"
+                id="PhysicalHost.freespacesrv" unit="B"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.5</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Ffr-inria%2Fhosts%2Fbonfire-blade-4"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="bonfire-blade-4" exclusive="false">
+        <location country="FR"/>
+        <occi:cpu_model>Intel_Xeon_CPU_E5-2620_0_@_2.00GHz</occi:cpu_model>
+        <occi:cpu_smt_size>24</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>true</occi:cpu_ht_enabled>
+        <occi:memory_total_available>64980992</occi:memory_total_available>
+        <occi:net_bandwidth>2*1Gb</occi:net_bandwidth>
+        <occi:cluster>pe-c6220</occi:cluster>
+        <occi:allocation_blocs>96</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Number of processes"
+                id="PhysicalHost.procnum" unit="proc"/>
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="CPU user time (avg1)"
+                id="PhysicalHost.cpuutil" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="CO2 generation per 30s"
+                id="PhysicalHost.co2g" unit="g"/>
+            <f4fmon:metric description="Aggregate energy usage"
+                id="PhysicalHost.conswh" unit="Wh"/>
+            <f4fmon:metric description="Apparent power"
+                id="PhysicalHost.consva" unit="VA"/>
+            <f4fmon:metric description="Real power"
+                id="PhysicalHost.consw" unit="W"/>
+            <f4fmon:metric description="Free space on /srv"
+                id="PhysicalHost.freespacesrv" unit="B"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.5</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <bonfire:lan
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+lan+%2Flocations%2Ffr-inria%2Fnetworks%2F27"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="Public Network" exclusive="false">
+        <occi:vlan/>
+    </bonfire:lan>
+    <bonfire:lan
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+lan+%2Flocations%2Ffr-inria%2Fnetworks%2F53"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE WAN" exclusive="false">
+        <occi:vlan/>
+    </bonfire:lan>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F3904"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE Debian Squeeze 10G v6" exclusive="false">
+        <occi:state>USED</occi:state>
+        <occi:description>Debian Squeeze created at 2013-01-21, with 10G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>10240</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F3905"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE Debian Squeeze 2G v6" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-15, with 2G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>2048</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F3907"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE Debian Squeeze v6" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-14, with 700 root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>700</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F3908"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE Zabbix Aggregator v8" exclusive="false">
+        <occi:state>USED</occi:state>
+        <occi:description>BonFIRE Aggregator created at 2012-06-18, with 6G root partition</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>6144</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F3909"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE COCOMA Service v1" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>BonFIRE COCOMA Service, more details at</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>2048</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F4168"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="tutorial_1h_frontend" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:fstype>save_as</occi:fstype>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>700</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F5274"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE Debian Squeeze 2G OMF v2" exclusive="false">
+        <occi:state>USED</occi:state>
+        <occi:description>Debian Squeeze created at 2014-01-23, with 2G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>2048</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Ffr-inria%2Fstorages%2F5627"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:fr-inria+authority+am"
+        component_name="BonFIRE load balancer v3" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>EaaS LB</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>1500</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:lan
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+lan+%2Flocations%2Fpl-psnc%2Fnetworks%2F0"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:pl-psnc+authority+am"
+        component_name="BonFIRE WAN" exclusive="false">
+        <occi:vlan/>
+        <occi:netmask>255.255.255.0</occi:netmask>
+    </bonfire:lan>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fpl-psnc%2Fstorages%2F1068"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:pl-psnc+authority+am"
+        component_name="BonFIRE Debian Squeeze 2G v6" exclusive="false">
+        <occi:state>USED</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-15, with 2G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>2048</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fpl-psnc%2Fstorages%2F1069"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:pl-psnc+authority+am"
+        component_name="BonFIRE Debian Squeeze 10G v6" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-15, with 10G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>10240</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fpl-psnc%2Fstorages%2F1070"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:pl-psnc+authority+am"
+        component_name="BonFIRE Zabbix Aggregator v8" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>BonFIRE Aggregator created at 2012-06-18, with 6G root partition</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>6144</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fpl-psnc%2Fstorages%2F1071"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:pl-psnc+authority+am"
+        component_name="BonFIRE load balancer v3" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>EaaS LB</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>1500</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fpl-psnc%2Fstorages%2F2238"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:pl-psnc+authority+am"
+        component_name="BonFIRE Debian Squeeze v6" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-14, with 700 root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>700</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost0"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost0" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_6176</occi:cpu_model>
+        <occi:cpu_smt_size>48</occi:cpu_smt_size>
+        <occi:cpu_smp_size>4</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>132110336</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r815</occi:cluster>
+        <occi:allocation_blocs>192</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost1"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost1" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_6176</occi:cpu_model>
+        <occi:cpu_smt_size>48</occi:cpu_smt_size>
+        <occi:cpu_smp_size>4</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>132110336</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r815</occi:cluster>
+        <occi:allocation_blocs>192</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost2"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost2" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_4274_HE</occi:cpu_model>
+        <occi:cpu_smt_size>16</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>31430656</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r415</occi:cluster>
+        <occi:allocation_blocs>64</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost3"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost3" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_4274_HE</occi:cpu_model>
+        <occi:cpu_smt_size>16</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>31430656</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r415</occi:cluster>
+        <occi:allocation_blocs>64</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost4"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost4" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_4274_HE</occi:cpu_model>
+        <occi:cpu_smt_size>16</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>31430656</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r415</occi:cluster>
+        <occi:allocation_blocs>64</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost5"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost5" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_4274_HE</occi:cpu_model>
+        <occi:cpu_smt_size>16</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>31430656</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r415</occi:cluster>
+        <occi:allocation_blocs>64</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+node+locations%2Fuk-epcc%2Fhosts%2Fvmhost6"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="vmhost6" exclusive="false">
+        <location country="UK"/>
+        <occi:cpu_model>AMD_Opteron_Processor_4274_HE</occi:cpu_model>
+        <occi:cpu_smt_size>16</occi:cpu_smt_size>
+        <occi:cpu_smp_size>2</occi:cpu_smp_size>
+        <occi:cpu_ht_enabled>false</occi:cpu_ht_enabled>
+        <occi:memory_total_available>31430656</occi:memory_total_available>
+        <occi:net_bandwidth>1*10Gb</occi:net_bandwidth>
+        <occi:cluster>dell-r415</occi:cluster>
+        <occi:allocation_blocs>64</occi:allocation_blocs>
+        <f4fmon:monitoring
+            doc="http://doc.bonfire-project.eu/integration/sfa/AMv3_API.html"
+            supported="true" type="zabbix">
+            <f4fmon:metric description="Processor load"
+                id="PhysicalHost.cpuload" unit="%"/>
+            <f4fmon:metric description="Free memory"
+                id="PhysicalHost.memfree" unit="MB"/>
+            <f4fmon:metric description="Total memory"
+                id="PhysicalHost.memtotal" unit="MB"/>
+            <f4fmon:metric description="Free swap space"
+                id="PhysicalHost.swapfree" unit="B"/>
+            <f4fmon:metric description="Number of VMs running"
+                id="PhysicalHost.runningvm" unit="Vm"/>
+            <f4fmon:metric description="Availability" id="PhysicalHost.Availability"/>
+            <f4fmon:metric description="Disk IOPS" id="PhysicalHost.IOPS"/>
+            <f4fmon:metric description="CPU utilization"
+                id="PhysicalHost.cpuUtilization" unit="%"/>
+            <f4fmon:metric description="Power consumption"
+                id="PhysicalHost.PowerConsumption" unit="W"/>
+            <f4fmon:metric description="Location-wide Biomass"
+                id="Location.Biomass" unit="%"/>
+            <f4fmon:metric description="Location-wide CCGT"
+                id="Location.CCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Co2 per kWh"
+                id="Location.Co2" unit="g/kWh"/>
+            <f4fmon:metric description="Location-wide Coal"
+                id="Location.Coal" unit="%"/>
+            <f4fmon:metric description="Location-wide Cogeneration"
+                id="Location.Cogeneration" unit="%"/>
+            <f4fmon:metric description="Location-wide Exported"
+                id="Location.Exported" unit="%"/>
+            <f4fmon:metric description="Location-wide Fossil"
+                id="Location.Fossil" unit="%"/>
+            <f4fmon:metric description="Location-wide Gas"
+                id="Location.Gas" unit="%"/>
+            <f4fmon:metric description="Location-wide Geothermal"
+                id="Location.Geothermal" unit="%"/>
+            <f4fmon:metric description="Location-wide Hydraulic"
+                id="Location.Hydraulic" unit="%"/>
+            <f4fmon:metric description="Location-wide Imported"
+                id="Location.Imported" unit="%"/>
+            <f4fmon:metric description="Location-wide NPS hydro"
+                id="Location.NPSHydro" unit="%"/>
+            <f4fmon:metric description="Location-wide Nuclear"
+                id="Location.Nuclear" unit="%"/>
+            <f4fmon:metric description="Location-wide OCGT"
+                id="Location.OCGT" unit="%"/>
+            <f4fmon:metric description="Location-wide Oil"
+                id="Location.Oil" unit="%"/>
+            <f4fmon:metric description="Location-wide Other"
+                id="Location.Other" unit="%"/>
+            <f4fmon:metric description="Location-wide Pumped storage"
+                id="Location.PumpedStorage" unit="%"/>
+            <f4fmon:metric description="Location-wide Solar"
+                id="Location.Solar" unit="%"/>
+            <f4fmon:metric description="Location-wide Grid Total"
+                id="Location.GridTotal" unit="MW"/>
+            <f4fmon:metric description="Location-wide Total green"
+                id="Location.TotalGreen" unit="%"/>
+            <f4fmon:metric description="Location-wide Water"
+                id="Location.Water" unit="%"/>
+            <f4fmon:metric description="Location-wide Wind"
+                id="Location.Wind" unit="%"/>
+            <f4fmon:metric
+                description="Location-wide Storage utilization"
+                id="Location.StorageUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide Availability" id="Location.Availability"/>
+            <f4fmon:metric description="Location-wide Site utilization"
+                id="Location.SiteUtilization" unit="%"/>
+            <f4fmon:metric description="Location-wide PUE" id="Location.PUE"/>
+        </f4fmon:monitoring>
+        <sliver_type name="large">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>4096</occi:memory>
+        </sliver_type>
+        <sliver_type name="xlarge">
+            <occi:cpu>4.0</occi:cpu>
+            <occi:memory>8192</occi:memory>
+        </sliver_type>
+        <sliver_type name="custom">
+            <occi:cpu/>
+            <occi:memory/>
+        </sliver_type>
+        <sliver_type name="lite">
+            <occi:cpu>0.25</occi:cpu>
+            <occi:memory>256</occi:memory>
+        </sliver_type>
+        <sliver_type name="small">
+            <occi:cpu>1.0</occi:cpu>
+            <occi:memory>1024</occi:memory>
+        </sliver_type>
+        <sliver_type name="medium">
+            <occi:cpu>2.0</occi:cpu>
+            <occi:memory>2048</occi:memory>
+        </sliver_type>
+    </node>
+    <bonfire:lan
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+lan+%2Flocations%2Fuk-epcc%2Fnetworks%2F105"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE WAN" exclusive="false">
+        <occi:vlan/>
+        <occi:netmask>255.255.248.0</occi:netmask>
+    </bonfire:lan>
+    <bonfire:lan
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+lan+%2Flocations%2Fuk-epcc%2Fnetworks%2F517"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="Public Network" exclusive="false">
+        <occi:vlan/>
+    </bonfire:lan>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F4527"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE Debian Squeeze v6" exclusive="false">
+        <occi:state>USED</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-14, with 700 root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>700</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F4528"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE Debian Squeeze 2G v6" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>Debian Squeeze created at 2012-06-15, with 2G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>2048</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F4529"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE Debian Squeeze 10G v6" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>Debian Squeeze created at 2013-01-21, with 10G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>10240</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F4530"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE Zabbix Aggregator v8" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>BonFIRE Aggregator created at 2012-06-18, with 6G root partition</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>6144</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F4660"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="tutorial_1h_backend" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:fstype>save_as</occi:fstype>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>700</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F5840"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE Debian Squeeze 2G OMF v2" exclusive="false">
+        <occi:state>USED</occi:state>
+        <occi:description>Debian Squeeze created at 2014-01-23, with 2G root partition described at http://wiki.bonfire-project.eu/index.php/DebianSqueezeVmi</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>2048</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+    <bonfire:disk_image
+        component_id="urn:publicid:IDN+sfa.bonfire.eu+storage+%2Flocations%2Fuk-epcc%2Fstorages%2F6968"
+        component_manager_id="urn:publicid:IDN+sfa.bonfire.eu:uk-epcc+authority+am"
+        component_name="BonFIRE load balancer v4" exclusive="false">
+        <occi:state>READY</occi:state>
+        <occi:description>EaaS LB</occi:description>
+        <occi:datastore>default</occi:datastore>
+        <occi:datastore_id>1</occi:datastore_id>
+        <occi:type>OS</occi:type>
+        <occi:size>1500</occi:size>
+        <occi:persistent>NO</occi:persistent>
+    </bonfire:disk_image>
+</rspec>

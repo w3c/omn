@@ -1,0 +1,76 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:sharedvlan="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.geni.net/resources/rspec/3/ad.xsd">
+    <link component_id="urn:publicid:IDN+fms:psnc:serm:link">
+        <component_manager name="urn:publicid:IDN+fms:psnc:serm+authority+cm"/>
+        <link_type name="urn:felix"/>
+        <interface_ref component_id="*"/>
+        <interface_ref component_id="*"/>
+        <property capacity="1G" dest_id="*" source_id="*"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_24_10:00:78:ac:c0:15:19:c0_21">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_24"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:i2cat:serm+datapath+10:00:78:ac:c0:15:19:c0_21"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_10_urn:ogf:network:pionier.net.pl:2013:topology:felix-gre">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_10"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-gre"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_26_00:00:08:81:f4:88:f5:b0_26">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_26"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:08:81:f4:88:f5:b0_26"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_27_00:00:08:81:f4:88:f5:b0_27">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_27"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:08:81:f4:88:f5:b0_27"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_22_00:00:54:e0:32:cc:a4:c0_21">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_22"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:54:e0:32:cc:a4:c0_21"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_23_urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-3">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_23"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-0-3"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_16_00:00:00:00:00:00:00:00_0">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_16"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:iminds:serm+datapath+00:00:00:00:00:00:00:00_0"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_13_urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-1-7">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_13"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:aist:tnrm+stp+urn:ogf:network:pionier.net.pl:2013:topology:felix-ge-1-1-7"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_12_00:00:54:e0:32:cc:a4:c0_11">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_12"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:54:e0:32:cc:a4:c0_11"/>
+    </link>
+    <link component_id="urn:publicid:IDN+fms:psnc:serm+link+00:00:54:e0:32:cc:a4:c0_9_00:00:08:81:f4:88:f5:b0_9">
+        <link_type name="urn:felix+vlan_trans"/>
+        <interface_ref component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_9"/>
+        <interface_ref component_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:08:81:f4:88:f5:b0_9"/>
+    </link>
+    <node
+        component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0"
+        component_manager_id="urn:publicid:IDN+fms:psnc:serm+authority+cm" exclusive="false">
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_24"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_10"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_26"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_27"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_22"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_23"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_16"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_13"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_12"/>
+        <interface component_id="urn:publicid:IDN+fms:psnc:serm+datapath+00:00:54:e0:32:cc:a4:c0_9"/>
+    </node>
+</rspec>

@@ -1,0 +1,1585 @@
+<rspec expires="2015-10-06T14:36:20Z" generated="2015-10-06T14:36:20Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd ">
+    <external_ref
+        component_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.sunn.net.internet2.edu:eth5/1:stanford-ig" component_manager_id="urn:publicid:IDN+al2s.internet2.edu+am"/>
+    <rspec_shared_vlan xmlns="http://www.geni.net/resources/rspec/ext/shared-vlan/1">
+        <available name="mesoscale-openflow" restricted="false"/>
+        <available name="exclusive-openflow-1758" restricted="false"/>
+        <available name="exclusive-openflow-1757" restricted="false"/>
+        <available name="exclusive-openflow-1756" restricted="false"/>
+        <available name="exclusive-openflow-1755" restricted="false"/>
+        <available name="exclusive-openflow-1759" restricted="false"/>
+        <available name="al2s-openflow-1645" restricted="false"/>
+        <available name="al2s-openflow-1646" restricted="false"/>
+        <available name="al2s-openflow-1647" restricted="false"/>
+        <available name="al2s-openflow-1648" restricted="false"/>
+        <available name="al2s-openflow-1649" restricted="false"/>
+    </rspec_shared_vlan>
+    <rspec_routable_addresses available="28" configured="35" xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+    <rspec_opstate
+        aggregate_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        start="geni_notready" xmlns="http://www.geni.net/resources/rspec/ext/opstate/1">
+        <sliver_type name="raw-pc"/>
+        <sliver_type name="emulab-openvz"/>
+        <sliver_type name="emulab-xen"/>
+        <state name="geni_notready">
+            <action name="geni_start" next="geni_configuring">
+                <description>Boot the node</description>
+            </action>
+            <description>Raw PCs and VMs begin powered down or inactive. They    must be explicitly booted before use.</description>
+        </state>
+        <state name="geni_configuring">
+            <wait next="geni_ready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>Booting/Reloading takes a significant amount of time, so it    happens asynchronously while the node is in this    state.</description>
+        </state>
+        <state name="geni_ready">
+            <action name="geni_restart" next="geni_configuring">
+                <description>Reboot the node</description>
+            </action>
+            <action name="geni_stop" next="geni_stopping">
+                <description>Power down or stop the node.</description>
+            </action>
+            <action name="geni_reload" next="geni_configuring">
+                <description>Reload the node</description>
+            </action>
+            <action name="geni_update_users" next="geni_updating_users">
+                <description>Update user SSH keys.</description>
+            </action>
+            <description>The node is up and ready to use.</description>
+        </state>
+        <state name="geni_stopping">
+            <wait next="geni_notready" type="geni_success"/>
+            <wait next="geni_failed" type="geni_failure"/>
+            <description>The node is being stopped or rebooted.</description>
+        </state>
+        <state name="geni_failed">
+            <description>The node has failed and requires administrator    intervention before it can be used. Please contact    the administrator for assistance.</description>
+        </state>
+        <state name="geni_updating_users">
+            <action name="geni_update_users_cancel" next="geni_ready">
+                <description>Cancel an update users action</description>
+            </action>
+            <wait next="geni_ready" type="geni_success"/>
+            <description>Updating users can take a fair amount of time, so it    happens asynchronously in this state.</description>
+        </state>
+    </rspec_opstate>
+    <site_info xmlns="http://www.protogeni.net/resources/rspec/ext/site-info/1">
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+    </site_info>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+procurve2"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="procurve2" exclusive="true">
+        <hardware_type name="switch">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)">
+            <emulab:interface name="(null)"/>
+        </interface>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:1.24.al2s">
+            <emulab:interface name="1.24.al2s"/>
+        </interface>
+        <emulab:fd name="real-switch" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+interconnect-geni-core"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="interconnect-geni-core" exclusive="false">
+        <hardware_type name="interconnect">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-geni-core:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree"
+            name="spreadshared-interconnect-geni-core" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10011" weight="0.5"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc3"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="pc3" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="87"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="87"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41e79bc7-3c24-11e3-9ec0-000000000000" version="8.2"/>
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=c67fba66-069f-11e4-8e49-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0"
+            public_ipv4="171.67.2.22" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc3" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2094"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="29477"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10021" weight="0.5"/>
+        <emulab:fd name="OS-10021-10009" weight="0"/>
+        <emulab:fd name="OS-10021-10013" weight="0"/>
+        <emulab:fd name="OS-10021-10014" weight="0"/>
+        <emulab:fd name="OS-10021-10015" weight="0"/>
+        <emulab:fd name="OS-10021-10019" weight="0"/>
+        <emulab:fd name="OS-10021-10023" weight="0"/>
+        <emulab:fd name="OS-10021-10026" weight="0"/>
+        <emulab:fd name="OS-10021-10029" weight="0"/>
+        <emulab:fd name="OS-10021-10030" weight="0"/>
+        <emulab:fd name="OS-10021-10031" weight="0"/>
+        <emulab:fd name="OS-10021-10032" weight="0"/>
+        <emulab:fd name="OS-10021-10033" weight="0"/>
+        <emulab:fd name="OS-10021-10034" weight="0"/>
+        <emulab:fd name="OS-10021-10035" weight="0"/>
+        <emulab:fd name="OS-10021-10036" weight="0"/>
+        <emulab:fd name="OS-10021-10037" weight="0"/>
+        <emulab:fd name="OS-10021-10038" weight="0"/>
+        <emulab:fd name="OS-10021-10039" weight="0"/>
+        <emulab:fd name="OS-10021-10040" weight="0"/>
+        <emulab:fd name="OS-10021-10041" weight="0"/>
+        <emulab:fd name="OS-10021-10042" weight="0"/>
+        <emulab:fd name="OS-10021-10043" weight="0"/>
+        <emulab:fd name="OS-10021-10044" weight="0"/>
+        <emulab:fd name="OS-10021-10045" weight="0"/>
+        <emulab:fd name="OS-10021-10046" weight="0"/>
+        <emulab:fd name="OS-10021-10047" weight="0"/>
+        <emulab:fd name="OS-10021-10049" weight="0"/>
+        <emulab:fd name="OS-10021-10050" weight="0"/>
+        <emulab:fd name="OS-10021-10051" weight="0"/>
+        <emulab:fd name="OS-10021-10052" weight="0"/>
+        <emulab:fd name="OS-10021-10053" weight="0"/>
+        <emulab:fd name="OS-10021-10054" weight="0"/>
+        <emulab:fd name="OS-10021-10055" weight="0"/>
+        <emulab:fd name="OS-10021-10056" weight="0"/>
+        <emulab:fd name="OS-10021-10057" weight="0"/>
+        <emulab:fd name="OS-10021-10058" weight="0"/>
+        <emulab:fd name="OS-10021-10059" weight="0"/>
+        <emulab:fd name="OS-10021-10061" weight="0"/>
+        <emulab:fd name="OS-10021-10062" weight="0"/>
+        <emulab:fd name="OS-10021-10063" weight="0"/>
+        <emulab:fd name="OS-10021-10064" weight="0"/>
+        <emulab:fd name="OS-10021-10065" weight="0"/>
+        <emulab:fd name="OS-10021-10066" weight="0"/>
+        <emulab:fd name="OS-10021-10067" weight="0"/>
+        <emulab:fd name="OS-10021-10068" weight="0"/>
+        <emulab:fd name="OS-10021-10069" weight="0"/>
+        <emulab:fd name="OS-10021-10070" weight="0"/>
+        <emulab:fd name="OS-10021-10071" weight="0"/>
+        <emulab:fd name="OS-10021-10072" weight="0"/>
+        <emulab:fd name="OS-10021-10073" weight="0"/>
+        <emulab:fd name="OS-10021-10074" weight="0"/>
+        <emulab:fd name="OS-10021-10076" weight="0"/>
+        <emulab:fd name="OS-10021-10077" weight="0"/>
+        <emulab:fd name="OS-10021-10078" weight="0"/>
+        <emulab:fd name="OS-10021-10079" weight="0"/>
+        <emulab:fd name="OS-10021-10081" weight="0"/>
+        <emulab:fd name="OS-10021-10082" weight="0"/>
+        <emulab:fd name="OS-10021-10084" weight="0"/>
+        <emulab:fd name="OS-10021-10085" weight="0"/>
+        <emulab:fd name="OS-10021-10086" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+interconnect-al2s"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="interconnect-al2s" exclusive="false">
+        <hardware_type name="interconnect">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree"
+            name="spreadshared-interconnect-al2s" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10011" weight="0.5"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc5"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="pc5" exclusive="true">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41b8ac9f-3c24-11e3-9ec0-000000000000" version="15"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41e79bc7-3c24-11e3-9ec0-000000000000" version="8.2"/>
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=c67fba66-069f-11e4-8e49-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41b8ac9f-3c24-11e3-9ec0-000000000000" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz">
+            <disk_image
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41e79bc7-3c24-11e3-9ec0-000000000000" version="8.2"/>
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=c67fba66-069f-11e4-8e49-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="false"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth0"
+            public_ipv4="171.67.2.24" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2094"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="45093"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10007" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10009" weight="0"/>
+        <emulab:fd name="OS-10013" weight="0"/>
+        <emulab:fd name="OS-10014" weight="0"/>
+        <emulab:fd name="OS-10015" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10018-10016" weight="0"/>
+        <emulab:fd name="OS-10018-10024" weight="0"/>
+        <emulab:fd name="OS-10018-10025" weight="0"/>
+        <emulab:fd name="OS-10018-10060" weight="0"/>
+        <emulab:fd name="OS-10020" weight="0"/>
+        <emulab:fd name="OS-10020-10009" weight="0"/>
+        <emulab:fd name="OS-10020-10013" weight="0"/>
+        <emulab:fd name="OS-10020-10014" weight="0"/>
+        <emulab:fd name="OS-10020-10015" weight="0"/>
+        <emulab:fd name="OS-10020-10019" weight="0"/>
+        <emulab:fd name="OS-10020-10023" weight="0"/>
+        <emulab:fd name="OS-10020-10026" weight="0"/>
+        <emulab:fd name="OS-10020-10029" weight="0"/>
+        <emulab:fd name="OS-10020-10030" weight="0"/>
+        <emulab:fd name="OS-10020-10031" weight="0"/>
+        <emulab:fd name="OS-10020-10032" weight="0"/>
+        <emulab:fd name="OS-10020-10033" weight="0"/>
+        <emulab:fd name="OS-10020-10034" weight="0"/>
+        <emulab:fd name="OS-10020-10035" weight="0"/>
+        <emulab:fd name="OS-10020-10036" weight="0"/>
+        <emulab:fd name="OS-10020-10037" weight="0"/>
+        <emulab:fd name="OS-10020-10038" weight="0"/>
+        <emulab:fd name="OS-10020-10039" weight="0"/>
+        <emulab:fd name="OS-10020-10040" weight="0"/>
+        <emulab:fd name="OS-10020-10041" weight="0"/>
+        <emulab:fd name="OS-10020-10042" weight="0"/>
+        <emulab:fd name="OS-10020-10043" weight="0"/>
+        <emulab:fd name="OS-10020-10044" weight="0"/>
+        <emulab:fd name="OS-10020-10045" weight="0"/>
+        <emulab:fd name="OS-10020-10046" weight="0"/>
+        <emulab:fd name="OS-10020-10047" weight="0"/>
+        <emulab:fd name="OS-10020-10049" weight="0"/>
+        <emulab:fd name="OS-10020-10050" weight="0"/>
+        <emulab:fd name="OS-10020-10051" weight="0"/>
+        <emulab:fd name="OS-10020-10052" weight="0"/>
+        <emulab:fd name="OS-10020-10053" weight="0"/>
+        <emulab:fd name="OS-10020-10054" weight="0"/>
+        <emulab:fd name="OS-10020-10055" weight="0"/>
+        <emulab:fd name="OS-10020-10056" weight="0"/>
+        <emulab:fd name="OS-10020-10057" weight="0"/>
+        <emulab:fd name="OS-10020-10058" weight="0"/>
+        <emulab:fd name="OS-10020-10059" weight="0"/>
+        <emulab:fd name="OS-10020-10061" weight="0"/>
+        <emulab:fd name="OS-10020-10062" weight="0"/>
+        <emulab:fd name="OS-10020-10063" weight="0"/>
+        <emulab:fd name="OS-10020-10064" weight="0"/>
+        <emulab:fd name="OS-10020-10065" weight="0"/>
+        <emulab:fd name="OS-10020-10066" weight="0"/>
+        <emulab:fd name="OS-10020-10067" weight="0"/>
+        <emulab:fd name="OS-10020-10068" weight="0"/>
+        <emulab:fd name="OS-10020-10069" weight="0"/>
+        <emulab:fd name="OS-10020-10070" weight="0"/>
+        <emulab:fd name="OS-10020-10071" weight="0"/>
+        <emulab:fd name="OS-10020-10072" weight="0"/>
+        <emulab:fd name="OS-10020-10073" weight="0"/>
+        <emulab:fd name="OS-10020-10074" weight="0"/>
+        <emulab:fd name="OS-10020-10076" weight="0"/>
+        <emulab:fd name="OS-10020-10077" weight="0"/>
+        <emulab:fd name="OS-10020-10078" weight="0"/>
+        <emulab:fd name="OS-10020-10079" weight="0"/>
+        <emulab:fd name="OS-10020-10081" weight="0"/>
+        <emulab:fd name="OS-10020-10082" weight="0"/>
+        <emulab:fd name="OS-10020-10084" weight="0"/>
+        <emulab:fd name="OS-10020-10085" weight="0"/>
+        <emulab:fd name="OS-10020-10086" weight="0"/>
+        <emulab:fd name="OS-10021" weight="0"/>
+        <emulab:fd name="OS-10021-10009" weight="0"/>
+        <emulab:fd name="OS-10021-10013" weight="0"/>
+        <emulab:fd name="OS-10021-10014" weight="0"/>
+        <emulab:fd name="OS-10021-10015" weight="0"/>
+        <emulab:fd name="OS-10021-10019" weight="0"/>
+        <emulab:fd name="OS-10021-10023" weight="0"/>
+        <emulab:fd name="OS-10021-10026" weight="0"/>
+        <emulab:fd name="OS-10021-10029" weight="0"/>
+        <emulab:fd name="OS-10021-10030" weight="0"/>
+        <emulab:fd name="OS-10021-10031" weight="0"/>
+        <emulab:fd name="OS-10021-10032" weight="0"/>
+        <emulab:fd name="OS-10021-10033" weight="0"/>
+        <emulab:fd name="OS-10021-10034" weight="0"/>
+        <emulab:fd name="OS-10021-10035" weight="0"/>
+        <emulab:fd name="OS-10021-10036" weight="0"/>
+        <emulab:fd name="OS-10021-10037" weight="0"/>
+        <emulab:fd name="OS-10021-10038" weight="0"/>
+        <emulab:fd name="OS-10021-10039" weight="0"/>
+        <emulab:fd name="OS-10021-10040" weight="0"/>
+        <emulab:fd name="OS-10021-10041" weight="0"/>
+        <emulab:fd name="OS-10021-10042" weight="0"/>
+        <emulab:fd name="OS-10021-10043" weight="0"/>
+        <emulab:fd name="OS-10021-10044" weight="0"/>
+        <emulab:fd name="OS-10021-10045" weight="0"/>
+        <emulab:fd name="OS-10021-10046" weight="0"/>
+        <emulab:fd name="OS-10021-10047" weight="0"/>
+        <emulab:fd name="OS-10021-10049" weight="0"/>
+        <emulab:fd name="OS-10021-10050" weight="0"/>
+        <emulab:fd name="OS-10021-10051" weight="0"/>
+        <emulab:fd name="OS-10021-10052" weight="0"/>
+        <emulab:fd name="OS-10021-10053" weight="0"/>
+        <emulab:fd name="OS-10021-10054" weight="0"/>
+        <emulab:fd name="OS-10021-10055" weight="0"/>
+        <emulab:fd name="OS-10021-10056" weight="0"/>
+        <emulab:fd name="OS-10021-10057" weight="0"/>
+        <emulab:fd name="OS-10021-10058" weight="0"/>
+        <emulab:fd name="OS-10021-10059" weight="0"/>
+        <emulab:fd name="OS-10021-10061" weight="0"/>
+        <emulab:fd name="OS-10021-10062" weight="0"/>
+        <emulab:fd name="OS-10021-10063" weight="0"/>
+        <emulab:fd name="OS-10021-10064" weight="0"/>
+        <emulab:fd name="OS-10021-10065" weight="0"/>
+        <emulab:fd name="OS-10021-10066" weight="0"/>
+        <emulab:fd name="OS-10021-10067" weight="0"/>
+        <emulab:fd name="OS-10021-10068" weight="0"/>
+        <emulab:fd name="OS-10021-10069" weight="0"/>
+        <emulab:fd name="OS-10021-10070" weight="0"/>
+        <emulab:fd name="OS-10021-10071" weight="0"/>
+        <emulab:fd name="OS-10021-10072" weight="0"/>
+        <emulab:fd name="OS-10021-10073" weight="0"/>
+        <emulab:fd name="OS-10021-10074" weight="0"/>
+        <emulab:fd name="OS-10021-10076" weight="0"/>
+        <emulab:fd name="OS-10021-10077" weight="0"/>
+        <emulab:fd name="OS-10021-10078" weight="0"/>
+        <emulab:fd name="OS-10021-10079" weight="0"/>
+        <emulab:fd name="OS-10021-10081" weight="0"/>
+        <emulab:fd name="OS-10021-10082" weight="0"/>
+        <emulab:fd name="OS-10021-10084" weight="0"/>
+        <emulab:fd name="OS-10021-10085" weight="0"/>
+        <emulab:fd name="OS-10021-10086" weight="0"/>
+        <emulab:fd name="OS-10023" weight="0"/>
+        <emulab:fd name="OS-10048" weight="0"/>
+        <emulab:fd name="OS-10055" weight="0"/>
+        <emulab:fd name="OS-10056" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10075" weight="0"/>
+        <emulab:fd name="OS-10080" weight="0"/>
+        <emulab:fd name="OS-10081" weight="0"/>
+        <emulab:fd name="OS-10083" weight="0"/>
+        <emulab:fd name="OS-10083-10081" weight="0"/>
+        <emulab:fd name="OS-10083-10084" weight="0"/>
+        <emulab:fd name="OS-10083-10085" weight="0"/>
+        <emulab:fd name="OS-10083-10086" weight="0"/>
+        <emulab:fd name="OS-10085" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10006" weight="0"/>
+        <emulab:fd name="OS-10010" weight="0"/>
+        <emulab:fd name="OS-10016" weight="0"/>
+        <emulab:fd name="OS-10019" weight="0"/>
+        <emulab:fd name="connected-to-procurve1" weight="0.0"/>
+        <emulab:fd name="connected-to-procurve2" weight="0.0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+interconnect-ion"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="interconnect-ion" exclusive="false">
+        <hardware_type name="interconnect">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="99"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="99"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-ion:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree"
+            name="spreadshared-interconnect-ion" weight="0.9"/>
+        <emulab:fd local_operator="+" name="ram" weight="0"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10011" weight="0.5"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc4"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="pc4" exclusive="true">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41b8ac9f-3c24-11e3-9ec0-000000000000" version="15"/>
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41e79bc7-3c24-11e3-9ec0-000000000000" version="8.2"/>
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=c67fba66-069f-11e4-8e49-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Standard 32-bit Fedora 15 image"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FEDORA15-STD"
+                os="Fedora"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41b8ac9f-3c24-11e3-9ec0-000000000000" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz">
+            <disk_image
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41e79bc7-3c24-11e3-9ec0-000000000000" version="8.2"/>
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=c67fba66-069f-11e4-8e49-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="false"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth0"
+            public_ipv4="171.67.2.23" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd local_operator="+" name="virtpercent"
+            violatable="true" weight="100"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2094"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="45093"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10007" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10009" weight="0"/>
+        <emulab:fd name="OS-10013" weight="0"/>
+        <emulab:fd name="OS-10014" weight="0"/>
+        <emulab:fd name="OS-10015" weight="0"/>
+        <emulab:fd name="OS-10018" weight="0"/>
+        <emulab:fd name="OS-10018-10016" weight="0"/>
+        <emulab:fd name="OS-10018-10024" weight="0"/>
+        <emulab:fd name="OS-10018-10025" weight="0"/>
+        <emulab:fd name="OS-10018-10060" weight="0"/>
+        <emulab:fd name="OS-10020" weight="0"/>
+        <emulab:fd name="OS-10020-10009" weight="0"/>
+        <emulab:fd name="OS-10020-10013" weight="0"/>
+        <emulab:fd name="OS-10020-10014" weight="0"/>
+        <emulab:fd name="OS-10020-10015" weight="0"/>
+        <emulab:fd name="OS-10020-10019" weight="0"/>
+        <emulab:fd name="OS-10020-10023" weight="0"/>
+        <emulab:fd name="OS-10020-10026" weight="0"/>
+        <emulab:fd name="OS-10020-10029" weight="0"/>
+        <emulab:fd name="OS-10020-10030" weight="0"/>
+        <emulab:fd name="OS-10020-10031" weight="0"/>
+        <emulab:fd name="OS-10020-10032" weight="0"/>
+        <emulab:fd name="OS-10020-10033" weight="0"/>
+        <emulab:fd name="OS-10020-10034" weight="0"/>
+        <emulab:fd name="OS-10020-10035" weight="0"/>
+        <emulab:fd name="OS-10020-10036" weight="0"/>
+        <emulab:fd name="OS-10020-10037" weight="0"/>
+        <emulab:fd name="OS-10020-10038" weight="0"/>
+        <emulab:fd name="OS-10020-10039" weight="0"/>
+        <emulab:fd name="OS-10020-10040" weight="0"/>
+        <emulab:fd name="OS-10020-10041" weight="0"/>
+        <emulab:fd name="OS-10020-10042" weight="0"/>
+        <emulab:fd name="OS-10020-10043" weight="0"/>
+        <emulab:fd name="OS-10020-10044" weight="0"/>
+        <emulab:fd name="OS-10020-10045" weight="0"/>
+        <emulab:fd name="OS-10020-10046" weight="0"/>
+        <emulab:fd name="OS-10020-10047" weight="0"/>
+        <emulab:fd name="OS-10020-10049" weight="0"/>
+        <emulab:fd name="OS-10020-10050" weight="0"/>
+        <emulab:fd name="OS-10020-10051" weight="0"/>
+        <emulab:fd name="OS-10020-10052" weight="0"/>
+        <emulab:fd name="OS-10020-10053" weight="0"/>
+        <emulab:fd name="OS-10020-10054" weight="0"/>
+        <emulab:fd name="OS-10020-10055" weight="0"/>
+        <emulab:fd name="OS-10020-10056" weight="0"/>
+        <emulab:fd name="OS-10020-10057" weight="0"/>
+        <emulab:fd name="OS-10020-10058" weight="0"/>
+        <emulab:fd name="OS-10020-10059" weight="0"/>
+        <emulab:fd name="OS-10020-10061" weight="0"/>
+        <emulab:fd name="OS-10020-10062" weight="0"/>
+        <emulab:fd name="OS-10020-10063" weight="0"/>
+        <emulab:fd name="OS-10020-10064" weight="0"/>
+        <emulab:fd name="OS-10020-10065" weight="0"/>
+        <emulab:fd name="OS-10020-10066" weight="0"/>
+        <emulab:fd name="OS-10020-10067" weight="0"/>
+        <emulab:fd name="OS-10020-10068" weight="0"/>
+        <emulab:fd name="OS-10020-10069" weight="0"/>
+        <emulab:fd name="OS-10020-10070" weight="0"/>
+        <emulab:fd name="OS-10020-10071" weight="0"/>
+        <emulab:fd name="OS-10020-10072" weight="0"/>
+        <emulab:fd name="OS-10020-10073" weight="0"/>
+        <emulab:fd name="OS-10020-10074" weight="0"/>
+        <emulab:fd name="OS-10020-10076" weight="0"/>
+        <emulab:fd name="OS-10020-10077" weight="0"/>
+        <emulab:fd name="OS-10020-10078" weight="0"/>
+        <emulab:fd name="OS-10020-10079" weight="0"/>
+        <emulab:fd name="OS-10020-10081" weight="0"/>
+        <emulab:fd name="OS-10020-10082" weight="0"/>
+        <emulab:fd name="OS-10020-10084" weight="0"/>
+        <emulab:fd name="OS-10020-10085" weight="0"/>
+        <emulab:fd name="OS-10020-10086" weight="0"/>
+        <emulab:fd name="OS-10021" weight="0"/>
+        <emulab:fd name="OS-10021-10009" weight="0"/>
+        <emulab:fd name="OS-10021-10013" weight="0"/>
+        <emulab:fd name="OS-10021-10014" weight="0"/>
+        <emulab:fd name="OS-10021-10015" weight="0"/>
+        <emulab:fd name="OS-10021-10019" weight="0"/>
+        <emulab:fd name="OS-10021-10023" weight="0"/>
+        <emulab:fd name="OS-10021-10026" weight="0"/>
+        <emulab:fd name="OS-10021-10029" weight="0"/>
+        <emulab:fd name="OS-10021-10030" weight="0"/>
+        <emulab:fd name="OS-10021-10031" weight="0"/>
+        <emulab:fd name="OS-10021-10032" weight="0"/>
+        <emulab:fd name="OS-10021-10033" weight="0"/>
+        <emulab:fd name="OS-10021-10034" weight="0"/>
+        <emulab:fd name="OS-10021-10035" weight="0"/>
+        <emulab:fd name="OS-10021-10036" weight="0"/>
+        <emulab:fd name="OS-10021-10037" weight="0"/>
+        <emulab:fd name="OS-10021-10038" weight="0"/>
+        <emulab:fd name="OS-10021-10039" weight="0"/>
+        <emulab:fd name="OS-10021-10040" weight="0"/>
+        <emulab:fd name="OS-10021-10041" weight="0"/>
+        <emulab:fd name="OS-10021-10042" weight="0"/>
+        <emulab:fd name="OS-10021-10043" weight="0"/>
+        <emulab:fd name="OS-10021-10044" weight="0"/>
+        <emulab:fd name="OS-10021-10045" weight="0"/>
+        <emulab:fd name="OS-10021-10046" weight="0"/>
+        <emulab:fd name="OS-10021-10047" weight="0"/>
+        <emulab:fd name="OS-10021-10049" weight="0"/>
+        <emulab:fd name="OS-10021-10050" weight="0"/>
+        <emulab:fd name="OS-10021-10051" weight="0"/>
+        <emulab:fd name="OS-10021-10052" weight="0"/>
+        <emulab:fd name="OS-10021-10053" weight="0"/>
+        <emulab:fd name="OS-10021-10054" weight="0"/>
+        <emulab:fd name="OS-10021-10055" weight="0"/>
+        <emulab:fd name="OS-10021-10056" weight="0"/>
+        <emulab:fd name="OS-10021-10057" weight="0"/>
+        <emulab:fd name="OS-10021-10058" weight="0"/>
+        <emulab:fd name="OS-10021-10059" weight="0"/>
+        <emulab:fd name="OS-10021-10061" weight="0"/>
+        <emulab:fd name="OS-10021-10062" weight="0"/>
+        <emulab:fd name="OS-10021-10063" weight="0"/>
+        <emulab:fd name="OS-10021-10064" weight="0"/>
+        <emulab:fd name="OS-10021-10065" weight="0"/>
+        <emulab:fd name="OS-10021-10066" weight="0"/>
+        <emulab:fd name="OS-10021-10067" weight="0"/>
+        <emulab:fd name="OS-10021-10068" weight="0"/>
+        <emulab:fd name="OS-10021-10069" weight="0"/>
+        <emulab:fd name="OS-10021-10070" weight="0"/>
+        <emulab:fd name="OS-10021-10071" weight="0"/>
+        <emulab:fd name="OS-10021-10072" weight="0"/>
+        <emulab:fd name="OS-10021-10073" weight="0"/>
+        <emulab:fd name="OS-10021-10074" weight="0"/>
+        <emulab:fd name="OS-10021-10076" weight="0"/>
+        <emulab:fd name="OS-10021-10077" weight="0"/>
+        <emulab:fd name="OS-10021-10078" weight="0"/>
+        <emulab:fd name="OS-10021-10079" weight="0"/>
+        <emulab:fd name="OS-10021-10081" weight="0"/>
+        <emulab:fd name="OS-10021-10082" weight="0"/>
+        <emulab:fd name="OS-10021-10084" weight="0"/>
+        <emulab:fd name="OS-10021-10085" weight="0"/>
+        <emulab:fd name="OS-10021-10086" weight="0"/>
+        <emulab:fd name="OS-10023" weight="0"/>
+        <emulab:fd name="OS-10048" weight="0"/>
+        <emulab:fd name="OS-10055" weight="0"/>
+        <emulab:fd name="OS-10056" weight="0"/>
+        <emulab:fd name="OS-10065" weight="0"/>
+        <emulab:fd name="OS-10075" weight="0"/>
+        <emulab:fd name="OS-10080" weight="0"/>
+        <emulab:fd name="OS-10081" weight="0"/>
+        <emulab:fd name="OS-10083" weight="0"/>
+        <emulab:fd name="OS-10083-10081" weight="0"/>
+        <emulab:fd name="OS-10083-10084" weight="0"/>
+        <emulab:fd name="OS-10083-10085" weight="0"/>
+        <emulab:fd name="OS-10083-10086" weight="0"/>
+        <emulab:fd name="OS-10085" weight="0"/>
+        <emulab:fd name="OS-10008" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10005" weight="0"/>
+        <emulab:fd name="OS-10006" weight="0"/>
+        <emulab:fd name="OS-10010" weight="0"/>
+        <emulab:fd name="OS-10016" weight="0"/>
+        <emulab:fd name="OS-10019" weight="0"/>
+        <emulab:fd name="connected-to-procurve1" weight="0.0"/>
+        <emulab:fd name="connected-to-procurve2" weight="0.0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc1"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="pc1" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth0"
+            public_ipv4="171.67.2.20" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc1" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2094"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="45093"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10018" weight="0.5"/>
+        <emulab:fd name="OS-10018-10016" weight="0"/>
+        <emulab:fd name="OS-10018-10024" weight="0"/>
+        <emulab:fd name="OS-10018-10025" weight="0"/>
+        <emulab:fd name="OS-10018-10060" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+interconnect-campus"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="interconnect-campus" exclusive="false">
+        <hardware_type name="interconnect">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="interconnect-vm">
+            <emulab:node_type type_slots="100"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-campus:eth0" role="experimental">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree"
+            name="spreadshared-interconnect-campus" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10011" weight="0.5"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc2"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="pc2" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay-dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="dl360-vm">
+            <emulab:node_type type_slots="91"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="91"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=41e79bc7-3c24-11e3-9ec0-000000000000" version="8.2"/>
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=ac179de4-a389-11e1-a37b-001143e453fe" version="12.04"/>
+            <disk_image
+                description="Ubuntu 12.04 with OVS for ProtoGeni (by Niky)"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:Ubuntu12-64-OVS"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=cd0cd9c0-8f3f-11e3-83eb-001143e453fe" version="12.04"/>
+            <disk_image description="FreeBSD 9.2 32-bit version"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:FBSD92-STD"
+                os="FreeBSD"
+                url="https://www.instageni.stanford.edu/image_metadata.php?uuid=c67fba66-069f-11e4-8e49-000000000000" version="9.2"/>
+            <disk_image description="Ubuntu 14.04 LTS"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a29c738-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image description="Ubuntu 14 with OVS, by Niky"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:UBUNTU14-OVS2.31"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=b21a466b-da48-11e4-97ea-38eaa71273fa" version="14.04"/>
+            <disk_image
+                description="CENTOS 6.6 supports VM client and Blockstores"
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:CENTOS66-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=33789a11-66bc-11e4-afea-001143e453fe" version="6.6"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+instageni.stanford.edu+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="true"/>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+        <emulab:trivial_bandwidth value="1000000"/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth99">
+            <emulab:interface name="eth99"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth0"
+            public_ipv4="171.67.2.21" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <emulab:fd name="pcshared" violatable="true" weight="1.0"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc2" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2094"/>
+        <emulab:fd local_operator="+" name="ram" violatable="true" weight="29221"/>
+        <emulab:fd local_operator="+" name="cpupercent"
+            violatable="true" weight="92"/>
+        <emulab:fd local_operator="+" name="rampercent"
+            violatable="true" weight="80"/>
+        <emulab:fd name="OS-10021" weight="0.5"/>
+        <emulab:fd name="OS-10021-10009" weight="0"/>
+        <emulab:fd name="OS-10021-10013" weight="0"/>
+        <emulab:fd name="OS-10021-10014" weight="0"/>
+        <emulab:fd name="OS-10021-10015" weight="0"/>
+        <emulab:fd name="OS-10021-10019" weight="0"/>
+        <emulab:fd name="OS-10021-10023" weight="0"/>
+        <emulab:fd name="OS-10021-10026" weight="0"/>
+        <emulab:fd name="OS-10021-10029" weight="0"/>
+        <emulab:fd name="OS-10021-10030" weight="0"/>
+        <emulab:fd name="OS-10021-10031" weight="0"/>
+        <emulab:fd name="OS-10021-10032" weight="0"/>
+        <emulab:fd name="OS-10021-10033" weight="0"/>
+        <emulab:fd name="OS-10021-10034" weight="0"/>
+        <emulab:fd name="OS-10021-10035" weight="0"/>
+        <emulab:fd name="OS-10021-10036" weight="0"/>
+        <emulab:fd name="OS-10021-10037" weight="0"/>
+        <emulab:fd name="OS-10021-10038" weight="0"/>
+        <emulab:fd name="OS-10021-10039" weight="0"/>
+        <emulab:fd name="OS-10021-10040" weight="0"/>
+        <emulab:fd name="OS-10021-10041" weight="0"/>
+        <emulab:fd name="OS-10021-10042" weight="0"/>
+        <emulab:fd name="OS-10021-10043" weight="0"/>
+        <emulab:fd name="OS-10021-10044" weight="0"/>
+        <emulab:fd name="OS-10021-10045" weight="0"/>
+        <emulab:fd name="OS-10021-10046" weight="0"/>
+        <emulab:fd name="OS-10021-10047" weight="0"/>
+        <emulab:fd name="OS-10021-10049" weight="0"/>
+        <emulab:fd name="OS-10021-10050" weight="0"/>
+        <emulab:fd name="OS-10021-10051" weight="0"/>
+        <emulab:fd name="OS-10021-10052" weight="0"/>
+        <emulab:fd name="OS-10021-10053" weight="0"/>
+        <emulab:fd name="OS-10021-10054" weight="0"/>
+        <emulab:fd name="OS-10021-10055" weight="0"/>
+        <emulab:fd name="OS-10021-10056" weight="0"/>
+        <emulab:fd name="OS-10021-10057" weight="0"/>
+        <emulab:fd name="OS-10021-10058" weight="0"/>
+        <emulab:fd name="OS-10021-10059" weight="0"/>
+        <emulab:fd name="OS-10021-10061" weight="0"/>
+        <emulab:fd name="OS-10021-10062" weight="0"/>
+        <emulab:fd name="OS-10021-10063" weight="0"/>
+        <emulab:fd name="OS-10021-10064" weight="0"/>
+        <emulab:fd name="OS-10021-10065" weight="0"/>
+        <emulab:fd name="OS-10021-10066" weight="0"/>
+        <emulab:fd name="OS-10021-10067" weight="0"/>
+        <emulab:fd name="OS-10021-10068" weight="0"/>
+        <emulab:fd name="OS-10021-10069" weight="0"/>
+        <emulab:fd name="OS-10021-10070" weight="0"/>
+        <emulab:fd name="OS-10021-10071" weight="0"/>
+        <emulab:fd name="OS-10021-10072" weight="0"/>
+        <emulab:fd name="OS-10021-10073" weight="0"/>
+        <emulab:fd name="OS-10021-10074" weight="0"/>
+        <emulab:fd name="OS-10021-10076" weight="0"/>
+        <emulab:fd name="OS-10021-10077" weight="0"/>
+        <emulab:fd name="OS-10021-10078" weight="0"/>
+        <emulab:fd name="OS-10021-10079" weight="0"/>
+        <emulab:fd name="OS-10021-10081" weight="0"/>
+        <emulab:fd name="OS-10021-10082" weight="0"/>
+        <emulab:fd name="OS-10021-10084" weight="0"/>
+        <emulab:fd name="OS-10021-10085" weight="0"/>
+        <emulab:fd name="OS-10021-10086" weight="0"/>
+    </node>
+    <node
+        component_id="urn:publicid:IDN+instageni.stanford.edu+node+internet"
+        component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm"
+        component_name="internet" exclusive="true">
+        <hardware_type name="ipv4">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <available now="true"/>
+        <cloud/>
+        <interface component_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border">
+            <emulab:interface name="border"/>
+        </interface>
+        <location country="US" latitude="37.43" longitude="-122.17"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc4:eth0-internet:border" component_name="link-pc4//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc2:eth0-internet:border" component_name="link-pc2//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc3:eth0-internet:border" component_name="link-pc3//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc5:eth0-internet:border" component_name="link-pc5//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc1:eth0-internet:border" component_name="link-pc1//eth0-internet//border">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth0"/>
+        <property capacity="100000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+internet:border"/>
+        <link_type name="ipv4"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc1:eth1-procurve2:(null)" component_name="link-pc1//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc1:eth2-procurve2:(null)" component_name="link-pc1//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc1:eth3-procurve2:(null)" component_name="link-pc1//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc1:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc2:eth1-procurve2:(null)" component_name="link-pc2//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="960000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth1"/>
+        <property capacity="960000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc2:eth2-procurve2:(null)" component_name="link-pc2//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc2:eth3-procurve2:(null)" component_name="link-pc2//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc2:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc3:eth1-procurve2:(null)" component_name="link-pc3//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc3:eth2-procurve2:(null)" component_name="link-pc3//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc3:eth3-procurve2:(null)" component_name="link-pc3//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc4:eth1-procurve2:(null)" component_name="link-pc4//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc4:eth2-procurve2:(null)" component_name="link-pc4//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc4:eth3-procurve2:(null)" component_name="link-pc4//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc4:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc5:eth1-procurve2:(null)" component_name="link-pc5//eth1-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth1"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth1"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth1"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc5:eth2-procurve2:(null)" component_name="link-pc5//eth2-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth2"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth2"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth2"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-pc5:eth3-procurve2:(null)" component_name="link-pc5//eth3-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth3"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth3"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc5:eth3"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-bce"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-interconnect-geni-core:eth0-procurve2:(null)" component_name="link-interconnect-geni-core//eth0-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-geni-core:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-geni-core:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-geni-core:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-generic_1G"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+instageni.stanford.edu+link+link-interconnect-campus:eth0-procurve2:(null)" component_name="link-interconnect-campus//eth0-procurve2//(null)">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-campus:eth0"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-campus:eth0"/>
+        <property capacity="1000000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+interconnect-campus:eth0"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:(null)"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-generic_1G"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+al2s.internet2.edu+link+sdn-sw.sunn.net.internet2.edu:eth5/1:stanford-ig" component_name="sdn-sw.sunn.net.internet2.edu//eth5/1//stanford-ig">
+        <component_manager name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+        <component_manager name="urn:publicid:IDN+al2s.internet2.edu+am"/>
+        <interface_ref component_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.sunn.net.internet2.edu:eth5/1:stanford-ig"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:1.24.al2s"/>
+        <property capacity="970000"
+            dest_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:1.24.al2s"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.sunn.net.internet2.edu:eth5/1:stanford-ig"/>
+        <property capacity="970000"
+            dest_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.sunn.net.internet2.edu:eth5/1:stanford-ig"
+            latency="0" packet_loss="0" source_id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:1.24.al2s"/>
+        <link_type name="ethernet"/>
+        <link_type name="ethernet-procurve2"/>
+        <link_type name="ethernet-generic_1G"/>
+        <link_type name="ethernet-1000000"/>
+    </link>
+    <stitching lastUpdateTime="2015-10-06T14:36:21Z" xmlns="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/">
+        <aggregate
+            id="urn:publicid:IDN+instageni.stanford.edu+authority+cm" url="https://www.instageni.stanford.edu:12369/protogeni/xmlrpc/am">
+            <aggregatetype>protogeni</aggregatetype>
+            <stitchingmode>chainANDTree</stitchingmode>
+            <scheduledservices>false</scheduledservices>
+            <negotiatedservices>false</negotiatedservices>
+            <lifetime id="life">
+                <start type="time">2015-10-06T14:36:21Z</start>
+                <end type="time">2015-10-06T14:36:21Z</end>
+            </lifetime>
+            <node id="urn:publicid:IDN+instageni.stanford.edu+node+procurve2">
+                <port id="urn:publicid:IDN+instageni.stanford.edu+stitchport+procurve2:1.24.al2s">
+                    <capacity>1000000</capacity>
+                    <maximumReservableCapacity>1000000</maximumReservableCapacity>
+                    <minimumReservableCapacity>1000</minimumReservableCapacity>
+                    <granularity>1</granularity>
+                    <link id="urn:publicid:IDN+instageni.stanford.edu+interface+procurve2:1.24.al2s">
+                        <remoteLinkId>urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.sunn.net.internet2.edu:eth5/1:stanford-ig</remoteLinkId>
+                        <trafficEngineeringMetric>10</trafficEngineeringMetric>
+                        <capacity>1000000</capacity>
+                        <maximumReservableCapacity>1000000</maximumReservableCapacity>
+                        <minimumReservableCapacity>1000</minimumReservableCapacity>
+                        <granularity>1</granularity>
+                        <switchingCapabilityDescriptor>
+                            <switchingcapType>l2sc</switchingcapType>
+                            <encodingType>ethernet</encodingType>
+                            <switchingCapabilitySpecificInfo>
+                                <switchingCapabilitySpecificInfo_L2sc>
+                                    <interfaceMTU>1500</interfaceMTU>
+                                    <vlanRangeAvailability>1630-1644</vlanRangeAvailability>
+                                    <vlanTranslation>false</vlanTranslation>
+                                </switchingCapabilitySpecificInfo_L2sc>
+                            </switchingCapabilitySpecificInfo>
+                        </switchingCapabilityDescriptor>
+                    </link>
+                </port>
+            </node>
+        </aggregate>
+    </stitching>
+</rspec>

@@ -1,0 +1,240 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:ns2="http://hpn.east.isi.edu/rspec/ext/stitch/0.1/"
+    xmlns:ns3="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd">
+    <node
+        component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+node+orca-vm-cloud"
+        component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"
+        component_name="orca-vm-cloud" exclusive="false">
+        <location country="Unspecified" latitude="42.38974" longitude="-71.14751"/>
+        <sliver_type name="EucaC1Medium"/>
+        <sliver_type name="EC2C1Medium"/>
+        <sliver_type name="EC2M1Small"/>
+        <sliver_type name="EucaM1XLarge"/>
+        <sliver_type name="XOLarge"/>
+        <sliver_type name="EucaM1Small"/>
+        <sliver_type name="XOXlarge"/>
+        <sliver_type name="EucaM1Large"/>
+        <sliver_type name="EC2M1XLarge"/>
+        <sliver_type name="XOMedium"/>
+        <sliver_type name="XOSmall"/>
+        <sliver_type name="EucaC1XLarge"/>
+        <sliver_type name="EC2M1Large"/>
+        <sliver_type name="XOMedium"/>
+        <sliver_type name="XOLarge"/>
+        <sliver_type name="EC2M1Small"/>
+        <sliver_type name="XOXlarge"/>
+        <sliver_type name="EucaM1Small"/>
+        <sliver_type name="XOSmall"/>
+        <sliver_type name="EucaM1XLarge"/>
+        <sliver_type name="EC2M1XLarge"/>
+        <sliver_type name="EC2M1Large"/>
+        <sliver_type name="EucaM1Large"/>
+        <sliver_type name="EC2C1Medium"/>
+        <sliver_type name="EucaC1XLarge"/>
+        <sliver_type name="EucaC1Medium"/>
+        <hardware_type name="orca-vm-cloud">
+            <ns3:node_type type_slots="34"/>
+        </hardware_type>
+        <available now="true"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TengigabitEthernet:2:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TenGigabitEthernet:1:ethernet" role="experimental"/>
+    </node>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+link+Bbn:ExoGeni:TenGigabitEthernet:1:ethernet_BbnNet:IBM:G8052:TenGigabitEthernet:1:1:ethernet">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TenGigabitEthernet:1:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:1:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"/>
+        <link_type name="ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TenGigabitEthernet:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:1:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TenGigabitEthernet:1:ethernet"/>
+    </link>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+link+Bbn:ExoGeni:TengigabitEthernet:2:ethernet_BbnNet:IBM:G8052:TenGigabitEthernet:1:2:ethernet">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TengigabitEthernet:2:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:2:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"/>
+        <link_type name="ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TengigabitEthernet:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:2:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TengigabitEthernet:2:ethernet"/>
+    </link>
+    <node
+        component_id="urn:publicid:IDN+exogeni.net:bbnNet+node+orca-transit-net-vlan"
+        component_manager_id="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"
+        component_name="orca-transit-net-vlan" exclusive="true">
+        <hardware_type name="orca-transit-net-vlan">
+            <ns3:node_type type_slots="106"/>
+        </hardware_type>
+        <available now="true"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:1:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:2:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:2:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:0:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:3:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet" role="experimental"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:1:ethernet" role="experimental"/>
+    </node>
+    <external_ref
+        component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TengigabitEthernet:2:ethernet" component_manager_id="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnNet+link+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:2:ethernet_internet2-ion">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:2:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TengigabitEthernet:2:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TengigabitEthernet:2:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TengigabitEthernet:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:2:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"/>
+        <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <external_ref
+        component_id="urn:publicid:IDN+exogeni.net:ion+interface+AL2S:BBN:Juniper:MX:TenGigabitEthernet:1:1:ethernet" component_manager_id="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnNet+link+BbnNet:IBM:G8052:GigabitEthernet:1:0:ethernet_internet2-ion">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:0:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:ion+interface+AL2S:BBN:Juniper:MX:TenGigabitEthernet:1:1:ethernet"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:0:ethernet" source_id="urn:publicid:IDN+exogeni.net:ion+interface+AL2S:BBN:Juniper:MX:TenGigabitEthernet:1:1:ethernet"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:ion+interface+AL2S:BBN:Juniper:MX:TenGigabitEthernet:1:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:0:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"/>
+        <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <external_ref
+        component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TenGigabitEthernet:1:ethernet" component_manager_id="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnNet+link+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:1:ethernet_internet2-ion">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:1:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TenGigabitEthernet:1:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TenGigabitEthernet:1:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:BareMetal:TenGigabitEthernet:1:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+bbnNet:IBM:G8264:TenGigabitEthernet:BareMetal:1:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"/>
+        <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <external_ref
+        component_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.newy32aoa.net.internet2.edu:eth5/2:gpo-eg" component_manager_id="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnNet+link+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet_internet2-ion">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.newy32aoa.net.internet2.edu:eth5/2:gpo-eg"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet" source_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.newy32aoa.net.internet2.edu:eth5/2:gpo-eg"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.newy32aoa.net.internet2.edu:eth5/2:gpo-eg" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"/>
+        <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <external_ref
+        component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+procurve2:5.24.gpo-eg" component_manager_id="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnNet+link+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet_internet2-ion">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+procurve2:5.24.gpo-eg"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet" source_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+procurve2:5.24.gpo-eg"/>
+        <property capacity="1000000kbps"
+            dest_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+procurve2:5.24.gpo-eg" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"/>
+        <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <external_ref
+        component_id="urn:publicid:IDN+exogeni.net:umassNet+interface+umassNet:IBM:G8264:TenGigabitEthernet:1:2:ethernet" component_manager_id="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnNet+link+BbnNet:IBM:G8052:GigabitEthernet:1:3:ethernet_internet2-ion">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:3:ethernet"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:umassNet+interface+umassNet:IBM:G8264:TenGigabitEthernet:1:2:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:3:ethernet" source_id="urn:publicid:IDN+exogeni.net:umassNet+interface+umassNet:IBM:G8264:TenGigabitEthernet:1:2:ethernet"/>
+        <property capacity="10000000kbps"
+            dest_id="urn:publicid:IDN+exogeni.net:umassNet+interface+umassNet:IBM:G8264:TenGigabitEthernet:1:2:ethernet" source_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:3:ethernet"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnNet+authority+am"/>
+        <component_manager name="urn:publicid:IDN+ion.internet2.edu+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <node
+        component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+node+orca-iscsi-luns"
+        component_manager_id="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"
+        component_name="orca-iscsi-luns" exclusive="false">
+        <location country="Unspecified" latitude="42.38974" longitude="-71.14751"/>
+        <hardware_type name="orca-iscsi-luns">
+            <ns3:node_type type_slots="58"/>
+        </hardware_type>
+        <available now="true"/>
+        <interface
+            component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TenGigabitEthernet:3:ethernet:VLAN:1009" role="experimental"/>
+    </node>
+    <link component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+link+Bbn:ExoGeni:TenGigabitEthernet:3:ethernet:VLAN:1009_BbnNet:IBM:G8052:TenGigabitEthernet:1:3:ethernet:VLAN:1009">
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnvmsite+interface+Bbn:ExoGeni:TenGigabitEthernet:3:ethernet:VLAN:1009"/>
+        <interface_ref component_id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:TenGigabitEthernet:1:3:ethernet:VLAN:1009"/>
+        <component_manager name="urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am"/>
+        <link_type name="ethernet"/>
+    </link>
+    <ns2:stitching lastUpdateTime="Tue Oct 06 10:36:04 EDT 2015">
+        <ns2:aggregate
+            id="urn:publicid:IDN+exogeni.net:bbnNet+authority+am" url="https://bbn-hn.exogeni.net:11443/orca/xmlrpc">
+            <ns2:aggregatetype>orca</ns2:aggregatetype>
+            <ns2:stitchingmode>tree</ns2:stitchingmode>
+            <ns2:scheduledservices>true</ns2:scheduledservices>
+            <ns2:negotiatedservices>false</ns2:negotiatedservices>
+            <ns2:node id="urn:publicid:IDN+exogeni.net:bbnNet+node+orca-transit-net-vlan">
+                <ns2:port id="urn:publicid:IDN+exogeni.net:bbnNet+stitchport+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet">
+                    <ns2:capacity>1000000kbps</ns2:capacity>
+                    <ns2:maximumReservableCapacity>1000000kbps</ns2:maximumReservableCapacity>
+                    <ns2:link id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:2:ethernet">
+                        <ns2:remoteLinkId>urn:publicid:IDN+al2s.internet2.edu+interface+sdn-sw.newy32aoa.net.internet2.edu:eth5/2:gpo-eg</ns2:remoteLinkId>
+                        <ns2:trafficEngineeringMetric>10</ns2:trafficEngineeringMetric>
+                        <ns2:capacity>1000000kbps</ns2:capacity>
+                        <ns2:maximumReservableCapacity>1000000kbps</ns2:maximumReservableCapacity>
+                        <ns2:switchingCapabilityDescriptor>
+                            <ns2:switchingcapType>l2sc</ns2:switchingcapType>
+                            <ns2:encodingType>ethernet</ns2:encodingType>
+                            <ns2:switchingCapabilitySpecificInfo>
+                                <ns2:switchingCapabilitySpecificInfo_L2sc>
+                                    <ns2:capability>consumer</ns2:capability>
+                                    <ns2:vlanRangeAvailability>3741,3736-3739</ns2:vlanRangeAvailability>
+                                    <ns2:vlanTranslation>false</ns2:vlanTranslation>
+                                </ns2:switchingCapabilitySpecificInfo_L2sc>
+                            </ns2:switchingCapabilitySpecificInfo>
+                        </ns2:switchingCapabilityDescriptor>
+                    </ns2:link>
+                </ns2:port>
+                <ns2:port id="urn:publicid:IDN+exogeni.net:bbnNet+stitchport+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet">
+                    <ns2:capacity>1000000kbps</ns2:capacity>
+                    <ns2:maximumReservableCapacity>1000000kbps</ns2:maximumReservableCapacity>
+                    <ns2:link id="urn:publicid:IDN+exogeni.net:bbnNet+interface+BbnNet:IBM:G8052:GigabitEthernet:1:1:ethernet">
+                        <ns2:remoteLinkId>urn:publicid:IDN+instageni.gpolab.bbn.com+interface+procurve2:5.24.gpo-eg</ns2:remoteLinkId>
+                        <ns2:trafficEngineeringMetric>10</ns2:trafficEngineeringMetric>
+                        <ns2:capacity>1000000kbps</ns2:capacity>
+                        <ns2:maximumReservableCapacity>1000000kbps</ns2:maximumReservableCapacity>
+                        <ns2:switchingCapabilityDescriptor>
+                            <ns2:switchingcapType>l2sc</ns2:switchingcapType>
+                            <ns2:encodingType>ethernet</ns2:encodingType>
+                            <ns2:switchingCapabilitySpecificInfo>
+                                <ns2:switchingCapabilitySpecificInfo_L2sc>
+                                    <ns2:capability>consumer</ns2:capability>
+                                    <ns2:vlanRangeAvailability>2400-2500</ns2:vlanRangeAvailability>
+                                    <ns2:vlanTranslation>false</ns2:vlanTranslation>
+                                </ns2:switchingCapabilitySpecificInfo_L2sc>
+                            </ns2:switchingCapabilitySpecificInfo>
+                        </ns2:switchingCapabilityDescriptor>
+                    </ns2:link>
+                </ns2:port>
+            </ns2:node>
+        </ns2:aggregate>
+    </ns2:stitching>
+</rspec>

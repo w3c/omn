@@ -1,0 +1,21 @@
+<rspec type="advertisement"
+    xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd">
+    <node component_id="urn:publicid:IDN+ocf:psnc:vtam+node+PSNC-IBM-1"
+        component_manager_id="urn:publicid:IDN+ocf:psnc:vtam+authority+cm"
+        component_name="urn:publicid:IDN+ocf:psnc:vtam+node+PSNC-IBM-1" exclusive="false">
+        <available now="true"/>
+    </node>
+    <link
+        component_id="urn:publicid:IDN+ocf:psnc:vtam:PSNC-IBM-1+link+eth1-00:00:54:e0:32:cc:a4:c0_10" component_name="urn:publicid:IDN+ocf:psnc:vtam:PSNC-IBM-1+link+eth1-00:00:54:e0:32:cc:a4:c0_10">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:54:e0:32:cc:a4:c0" source_id="urn:publicid:IDN+ocf:psnc:vtam+node+PSNC-IBM-1+interface+eth1"/>
+        <link_type name="L2 Link"/>
+    </link>
+    <link
+        component_id="urn:publicid:IDN+ocf:psnc:vtam:PSNC-IBM-1+link+eth2-00:00:08:81:f4:88:f5:b0_8" component_name="urn:publicid:IDN+ocf:psnc:vtam:PSNC-IBM-1+link+eth2-00:00:08:81:f4:88:f5:b0_8">
+        <property capacity="1024MB/s"
+            dest_id="urn:publicid:IDN+openflow:ocf:psnc:ofam+datapath+00:00:08:81:f4:88:f5:b0" source_id="urn:publicid:IDN+ocf:psnc:vtam+node+PSNC-IBM-1+interface+eth2"/>
+        <link_type name="L2 Link"/>
+    </link>
+</rspec>
