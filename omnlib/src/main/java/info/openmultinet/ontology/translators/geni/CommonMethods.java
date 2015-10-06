@@ -10,6 +10,34 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 public class CommonMethods {
 
+	public static String dropLocalName(String url) {
+
+		int index = 0;
+		if (url.contains("#")) {
+			index = url.lastIndexOf('#');
+		} else {
+			index = url.lastIndexOf('/');
+		}
+
+		String newUrl;
+		if (index > 0) {
+			newUrl = url.substring(0, index);
+		} else {
+			newUrl = url;
+		}
+		return newUrl;
+	}
+
+	public static String getLocalName(String url) {
+		int index = 0;
+		if (url.contains("#")) {
+			index = url.lastIndexOf('#');
+		} else {
+			index = url.lastIndexOf('/');
+		}
+		return url.substring(index + 1, url.length());
+	}
+
 	public static String generateUrnFromUrl(String url, String type) {
 		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
 		// urn:publicid:IDN+<authority string>+<type>+<name>
@@ -54,7 +82,7 @@ public class CommonMethods {
 
 	}
 
-	private static String urlToGeniUrn(String dirtyString) {
+	public static String urlToGeniUrn(String dirtyString) {
 
 		// http://groups.geni.net/geni/wiki/GeniApiIdentifiers
 		// From Transcribe to
@@ -127,7 +155,7 @@ public class CommonMethods {
 		}
 	}
 
-	private static String geniUrntoUrl(String dirtyString) {
+	public static String geniUrntoUrl(String dirtyString) {
 
 		if (dirtyString == null) {
 			return "";
@@ -149,7 +177,7 @@ public class CommonMethods {
 		return cleanString;
 	}
 
-	static OntClass convertGeniStateToOmn(String geniState) {
+	public static OntClass convertGeniStateToOmn(String geniState) {
 
 		OntClass omnState = null;
 		switch (geniState) {
@@ -254,7 +282,7 @@ public class CommonMethods {
 		return omnState;
 	}
 
-	static String convertOmnToGeniState(Resource start) {
+	public static String convertOmnToGeniState(Resource start) {
 
 		String geniState = "";
 
@@ -307,10 +335,9 @@ public class CommonMethods {
 		}
 
 		return geniState;
-
 	}
 
-	static boolean isOmnState(Resource type) {
+	public static boolean isOmnState(Resource type) {
 
 		boolean geniState = false;
 
@@ -349,7 +376,5 @@ public class CommonMethods {
 		}
 
 		return geniState;
-
 	}
-
 }
