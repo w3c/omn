@@ -464,7 +464,7 @@ public class RequestConverter extends AbstractConverter {
 		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
 
 		StmtIterator types = omnResource.getResource().listProperties(
-				Omn_domain_pc.hasHardwareType);
+				Omn_resource.hasHardwareType);
 		ObjectFactory of = new ObjectFactory();
 
 		while (types.hasNext()) {
@@ -1799,11 +1799,11 @@ public class RequestConverter extends AbstractConverter {
 			// omnNode.addProperty(RDF.type, type);
 
 			omnHw.addProperty(RDFS.label, type.toString());
-			omnHw.addProperty(RDF.type, Omn_domain_pc.HardwareType);
+			omnHw.addProperty(RDF.type, Omn_resource.HardwareType);
 			// for (Object hwObject : hw.getAny()) {
 			// tryExtractEmulabNodeType(hwObject, omnHw);
 			// }
-			omnNode.addProperty(Omn_domain_pc.hasHardwareType, omnHw);
+			omnNode.addProperty(Omn_resource.hasHardwareType, omnHw);
 
 		}
 	}

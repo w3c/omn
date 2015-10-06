@@ -250,7 +250,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
                  rdfs:comment "has emulab node type slots"@en ;
                  
-                 rdfs:domain :HardwareType ;
+                 rdfs:domain omn-resource:HardwareType ;
                  
                  rdfs:range xsd:string .
 
@@ -264,7 +264,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
                  rdfs:comment "is emulab node type static"@en ;
                  
-                 rdfs:domain :HardwareType ;
+                 rdfs:domain omn-resource:HardwareType ;
                  
                  rdfs:range xsd:string .
 
@@ -630,48 +630,6 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-
-###  http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType
-
-:hasHardwareType rdf:type owl:ObjectProperty ;
-            
-            rdfs:label "has hardware type"@en ;
-
-            rdfs:comment "has hardware type"@en ;
-            
-            rdfs:range :HardwareType ;
-            
-            rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( omn:Group
-                                        omn:Resource
-                                        omn:Service
-                                      )
-                        ] ;
-
-            owl:inverseOf :isHardwareTypeOf .
-
-
-
-###  http://open-multinet.info/ontology/omn-domain-pc#isHardwareTypeOf
-
-:isHardwareTypeOf rdf:type owl:ObjectProperty ;
-            
-            rdfs:label "is hardware type of"@en ;
-
-            rdfs:comment "is hardware type of"@en ;
-            
-            rdfs:domain :HardwareType ;
-            
-            rdfs:range [ rdf:type owl:Class ;
-                          owl:unionOf ( omn:Group
-                                        omn:Resource
-                                        omn:Service
-                                      )
-                        ] ;
-
-            owl:inverseOf :hasHardwareType .
-
-
 #################################################################
 #
 #    Classes
@@ -738,20 +696,6 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
            rdfs:label "Emulab Feature Description"@en ;
 
            rdfs:seeAlso <http://www.protogeni.net/resources/rspec/ext/emulab/1> ;
-           
-           rdfs:subClassOf omn:Resource .
-
-
-
-
-
-###  http://open-multinet.info/ontology/omn-domain-pc#HardwareType
-
-:HardwareType rdf:type owl:Class ;
-
-           rdfs:comment "Hardware Type, see rspec v3 hardware_type"@en ;
-           
-           rdfs:label "Hardware Type"@en ;
            
            rdfs:subClassOf omn:Resource .
 

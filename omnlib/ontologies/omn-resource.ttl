@@ -17,9 +17,9 @@
                                                   
                                                   dc:date "2014-11-11"^^xsd:date ;
                                                   
-                                                  dcterms:modified "2015-04-27"^^xsd:date ;
+                                                  dcterms:modified "2015-10-06"^^xsd:date ;
                                                   
-                                                  owl:versionInfo "2015-04-27"^^xsd:string ;
+                                                  owl:versionInfo "2015-10-06"^^xsd:string ;
                                                   
                                                   dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
                                                   
@@ -247,6 +247,48 @@
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType
+
+:hasHardwareType rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "has hardware type"@en ;
+
+            rdfs:comment "has hardware type"@en ;
+            
+            rdfs:range :HardwareType ;
+            
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :isHardwareTypeOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#isHardwareTypeOf
+
+:isHardwareTypeOf rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "is hardware type of"@en ;
+
+            rdfs:comment "is hardware type of"@en ;
+            
+            rdfs:domain :HardwareType ;
+            
+            rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( omn:Group
+                                        omn:Resource
+                                        omn:Service
+                                      )
+                        ] ;
+
+            owl:inverseOf :hasHardwareType .
+
+
+
 #################################################################
 #
 #    Data properties
@@ -399,6 +441,17 @@ omn:Resource rdf:type owl:Class .
       
       rdfs:subClassOf :NetworkObject .
 
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#HardwareType
+
+:HardwareType rdf:type owl:Class ;
+
+           rdfs:comment "Hardware Type, see rspec v3 hardware_type"@en ;
+           
+           rdfs:label "Hardware Type"@en ;
+           
+           rdfs:subClassOf omn:Resource .
 
 
 
