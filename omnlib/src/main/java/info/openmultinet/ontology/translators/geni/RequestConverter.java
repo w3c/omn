@@ -1870,8 +1870,11 @@ public class RequestConverter extends AbstractConverter {
 			// Note: Do not change sliver type here, as Fiteagle will
 			// not work
 			if (AbstractConverter.isUrl(sliverName)) {
-				sliverTypeResource = omnResource.getModel().createResource(
-						sliverName);
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				sliverTypeResource = omnResource.getModel()
+						.createResource(uuid);
+				// sliverTypeResource = omnResource.getModel().createResource(
+				// sliverName);
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverName));
 			} else {
