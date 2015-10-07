@@ -1785,24 +1785,30 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void tryExtractHardwareType(Resource omnNode,
-			JAXBElement element) {
+			JAXBElement element) throws MissingRspecElementException {
 		if (element.getDeclaredType().equals(HardwareTypeContents.class)) {
 
 			final HardwareTypeContents hw = (HardwareTypeContents) element
 					.getValue();
 
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			final Resource omnHw = omnNode.getModel().createResource(uuid);
-			RDFNode type = ResourceFactory.createProperty(hw.getName());
+			String hardwareTypeName = hw.getName();
+			if (hardwareTypeName == null) {
+				throw new MissingRspecElementException(
+						"HardwareTypeContents > name");
+			}
 
-			// TODO: get rid of this line
-			// omnNode.addProperty(RDF.type, type);
+			final Resource omnHw;
+			if (AbstractConverter.isUrl(hardwareTypeName)
+					|| AbstractConverter.isUrn(hardwareTypeName)) {
+				omnHw = omnNode.getModel().createResource(hardwareTypeName);
+				omnNode.addProperty(RDF.type, omnHw);
+			} else {
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				omnHw = omnNode.getModel().createResource(uuid);
+			}
 
-			omnHw.addProperty(RDFS.label, type.toString());
+			omnHw.addProperty(RDFS.label, hardwareTypeName);
 			omnHw.addProperty(RDF.type, Omn_resource.HardwareType);
-			// for (Object hwObject : hw.getAny()) {
-			// tryExtractEmulabNodeType(hwObject, omnHw);
-			// }
 			omnNode.addProperty(Omn_resource.hasHardwareType, omnHw);
 
 		}
@@ -1864,9 +1870,8 @@ public class RequestConverter extends AbstractConverter {
 			// Note: Do not change sliver type here, as Fiteagle will
 			// not work
 			if (AbstractConverter.isUrl(sliverName)) {
-				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-				sliverTypeResource = omnResource.getModel()
-						.createResource(uuid);
+				sliverTypeResource = omnResource.getModel().createResource(
+						sliverName);
 				omnResource.addProperty(RDF.type, omnResource.getModel()
 						.createResource(sliverName));
 			} else {

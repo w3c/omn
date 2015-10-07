@@ -10,6 +10,33 @@ import org.junit.Test;
 public class UrnUrlTest {
 
 	@Test
+	public void dropLocalName() {
+
+		System.out.println("*************Drop local name*******************");
+		String url = "https://www.testbed.example.org/resources/Openstack-1/VM-small";
+		System.out.println("Original url: " + url);
+		String urlNew = CommonMethods.dropLocalName(url);
+		System.out.println("New url: " + urlNew);
+		System.out.println();
+		System.out.println();
+		Assert.assertTrue(urlNew
+				.equals("https://www.testbed.example.org/resources/Openstack-1"));
+	}
+
+	@Test
+	public void getLocalName() {
+
+		System.out.println("*************Get local name*******************");
+		String url = "https://www.testbed.example.org/resources/Openstack-1/VM-small";
+		System.out.println("Original url: " + url);
+		String localName = CommonMethods.getLocalName(url);
+		System.out.println("local name: " + localName);
+		System.out.println();
+		System.out.println();
+		Assert.assertTrue(localName.equals("VM-small"));
+	}
+
+	@Test
 	public void forwardSlashRoundtrip() {
 
 		System.out
