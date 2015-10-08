@@ -1,0 +1,22 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-nfv: <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.testbed.example.org/resources#MotorGarage-1>
+        a                               <http://open-multinet.info/ontology/resources/motorgarage#MotorGarage> ;
+        rdfs:label                      "motorgarage-1"^^xsd:string ;
+        omn:isResourceOf                <http://open-multinet.info/omnlib/converter#advertisement> ;
+        omn-lifecycle:canImplement      <http://open-multinet.info/ontology/resources/motor#BMWMotor> , <http://open-multinet.info/ontology/resources/motor#VWMotor> ;
+        omn-lifecycle:parentOf          <urn:publicid:IDN+testbed.example.org+authority+cm> ;
+        omn-resource:isExclusive        false .
+
+<http://open-multinet.info/omnlib/converter#advertisement>
+        a                omn-lifecycle:Offering ;
+        rdfs:label       "Offering" ;
+        omn:hasResource  <http://www.testbed.example.org/resources#MotorGarage-1> .

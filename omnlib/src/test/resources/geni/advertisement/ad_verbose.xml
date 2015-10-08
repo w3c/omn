@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.geni.net/resources/rspec/3"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd "
+	type="advertisement" generated="2015-01-22T13:44:44Z" expires="2015-01-22T13:44:44Z">
+	<node component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
+		component_name="motorgarage-1" component_id="urn:publicid:IDN+www.testbed.example.org+node+http%3A%2F%2Fwww.testbed.example.org%2Fresources%23MotorGarage-1+VWMotor"
+		exclusive="false">
+		<hardware_type
+			name="http://open-multinet.info/ontology/resources/motorgarage#MotorGarage" />
+		<sliver_type
+			name="http://open-multinet.info/ontology/resources/motor#VWMotor" />
+	</node>
+	<node component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
+		component_name="motorgarage-1" component_id="urn:publicid:IDN+www.testbed.example.org+node+http%3A%2F%2Fwww.testbed.example.org%2Fresources%23MotorGarage-1+BMWMotor"
+		exclusive="false">
+		<hardware_type
+			name="http://open-multinet.info/ontology/resources/motorgarage#MotorGarage" />
+		<sliver_type
+			name="http://open-multinet.info/ontology/resources/motor#BMWMotor" />
+	</node>
+</rspec>

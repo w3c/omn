@@ -94,6 +94,7 @@ public class AdvertisementConverter extends AbstractConverter {
 	private Unmarshaller unmarshaller;
 	private ObjectFactory of;
 	private XMLInputFactory xmlif;
+	private boolean verbose = false;
 
 	public AdvertisementConverter() throws JAXBException {
 		super();
@@ -102,6 +103,10 @@ public class AdvertisementConverter extends AbstractConverter {
 		this.unmarshaller = context.createUnmarshaller();
 		this.of = new ObjectFactory();
 		this.xmlif = XMLInputFactory.newInstance();
+	}
+
+	public void setVerbose(boolean verbosity) {
+		this.verbose = verbosity;
 	}
 
 	public Model getModel(final InputStream input) throws JAXBException,
@@ -679,9 +684,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			// blank node indicates that node does not yet have a declared
 			// sliver type; to be overwritten if has sliver type
 			// http://www.ietf.org/rfc/rfc4122.txt
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource sliverType = topology.getModel().createResource(uuid);
-			omnNode.addProperty(Omn_resource.hasSliverType, sliverType);
+			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			// Resource sliverType = topology.getModel().createResource(uuid);
+			// omnNode.addProperty(Omn_resource.hasSliverType, sliverType);
 
 			for (Object rspecNodeObject : rspecNode
 					.getAnyOrRelationOrLocation()) {
@@ -852,18 +857,32 @@ public class AdvertisementConverter extends AbstractConverter {
 		}
 	}
 
-	private void tryExtractHardwareType(Object rspecNodeObject, Resource omnNode) {
+	private void tryExtractHardwareType(Object rspecNodeObject, Resource omnNode)
+			throws MissingRspecElementException {
 		try {
 			@SuppressWarnings("unchecked")
 			final JAXBElement<HardwareTypeContents> hwJaxb = (JAXBElement<HardwareTypeContents>) rspecNodeObject;
 			final HardwareTypeContents hw = hwJaxb.getValue();
 
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			final Resource omnHw = omnNode.getModel().createResource(uuid);
+			final Resource omnHw;
 
-			omnNode.addProperty(RDF.type, hw.getName());
+			String hardwareTypeName = hw.getName();
+			// <xs:attribute name="component_id" use="required"/>
+			if (hardwareTypeName == null) {
+				throw new MissingRspecElementException(
+						"HardwareTypeContents > name");
+			}
 
-			omnHw.addProperty(RDFS.label, hw.getName());
+			if (AbstractConverter.isUrl(hardwareTypeName)
+					|| AbstractConverter.isUrn(hardwareTypeName)) {
+				omnHw = omnNode.getModel().createResource(hardwareTypeName);
+				omnNode.addProperty(RDF.type, omnHw);
+			} else {
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				omnHw = omnNode.getModel().createResource(uuid);
+			}
+
+			omnHw.addProperty(RDFS.label, hardwareTypeName);
 			omnHw.addProperty(RDF.type, Omn_resource.HardwareType);
 			for (Object hwObject : hw.getAny()) {
 				tryExtractEmulabNodeType(hwObject, omnHw);
@@ -915,16 +934,29 @@ public class AdvertisementConverter extends AbstractConverter {
 						Omn_resource.SliverType)) {
 					sliverTypeResource = existingSliver;
 				} else {
-					String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-					sliverTypeResource = omnResource.getModel().createResource(
-							uuid);
+					if (AbstractConverter.isUrl(sliverName)
+							|| AbstractConverter.isUrn(sliverName)) {
+						sliverTypeResource = omnResource.getModel()
+								.createResource(sliverName);
+					} else {
+						String uuid = "urn:uuid:"
+								+ UUID.randomUUID().toString();
+						sliverTypeResource = omnResource.getModel()
+								.createResource(uuid);
+					}
 					omnResource.addProperty(Omn_resource.hasSliverType,
 							sliverTypeResource);
 				}
 			} else {
-				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-				sliverTypeResource = omnResource.getModel()
-						.createResource(uuid);
+				if (AbstractConverter.isUrl(sliverName)
+						|| AbstractConverter.isUrn(sliverName)) {
+					sliverTypeResource = omnResource.getModel().createResource(
+							sliverName);
+				} else {
+					String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+					sliverTypeResource = omnResource.getModel().createResource(
+							uuid);
+				}
 				omnResource.addProperty(Omn_resource.hasSliverType,
 						sliverTypeResource);
 			}
@@ -1085,33 +1117,37 @@ public class AdvertisementConverter extends AbstractConverter {
 							Omn_domain_pc.SharedVlan)
 					&& !omnResource.getResource().hasProperty(RDF.type,
 							Omn_resource.Stitching)) {
-				// @todo: check type of resource here and not only generate
-				// nodes
-				final NodeContents geniNode = new NodeContents();
 
-				setCloud(omnResource, geniNode);
-				setComponentDetails(omnResource, geniNode);
-				setComponentManagerId(omnResource, geniNode);
-				setHardwareTypes(omnResource, geniNode);
-				setSliverTypes(omnResource, geniNode);
-				setLocation(omnResource, geniNode);
-				setAvailability(omnResource, geniNode);
-				setMonitoringService(omnResource, geniNode);
-				setInterface(omnResource, geniNode);
-				setFd(omnResource, geniNode);
-				setTrivialBandwidth(omnResource, geniNode);
+				if (verbose) {
+					setNodesVerbose(omnResource, advertisement);
+				} else {
+					// @todo: check type of resource here and not only generate
+					// nodes
+					final NodeContents geniNode = new NodeContents();
 
-				ResIterator infrastructures = omnResource.getModel()
-						.listResourcesWithProperty(Omn.isResourceOf,
-								Omn_federation.Infrastructure);
-				if (infrastructures.hasNext()) {
-					Resource infrastructure = infrastructures.next();
-					geniNode.setComponentManagerId(infrastructure.getURI());
+					setCloud(omnResource, geniNode);
+					setComponentDetails(omnResource, geniNode);
+					setComponentManagerId(omnResource, geniNode);
+					setHardwareTypes(omnResource, geniNode);
+					setSliverTypes(omnResource, geniNode);
+					setLocation(omnResource, geniNode);
+					setAvailability(omnResource, geniNode);
+					setMonitoringService(omnResource, geniNode);
+					setInterface(omnResource, geniNode);
+					setFd(omnResource, geniNode);
+					setTrivialBandwidth(omnResource, geniNode);
+
+					ResIterator infrastructures = omnResource.getModel()
+							.listResourcesWithProperty(Omn.isResourceOf,
+									Omn_federation.Infrastructure);
+					if (infrastructures.hasNext()) {
+						Resource infrastructure = infrastructures.next();
+						geniNode.setComponentManagerId(infrastructure.getURI());
+					}
+
+					advertisement.getAnyOrNodeOrLink().add(
+							this.of.createNode(geniNode));
 				}
-
-				advertisement.getAnyOrNodeOrLink().add(
-						this.of.createNode(geniNode));
-
 			} else if (omnResource.getResource().hasProperty(RDF.type,
 					Omn_resource.Link)) {
 				final LinkContents link = new LinkContents();
@@ -1175,6 +1211,81 @@ public class AdvertisementConverter extends AbstractConverter {
 
 				advertisement.getAnyOrNodeOrLink().add(stitching);
 			}
+		}
+	}
+
+	private void setNodesVerbose(Statement omnResource,
+			RSpecContents advertisement) {
+		StmtIterator canImplement = omnResource.getResource().listProperties(
+				Omn_lifecycle.canImplement);
+
+		while (canImplement.hasNext()) {
+			Statement omnSliver = canImplement.next();
+
+			final NodeContents geniNode = new NodeContents();
+
+			SliverType sliver1;
+			sliver1 = of.createNodeContentsSliverType();
+			String sliverUri = omnSliver.getObject().asResource().getURI();
+			sliver1.setName(sliverUri);
+			JAXBElement<SliverType> sliverType = new ObjectFactory()
+					.createNodeContentsSliverType(sliver1);
+			geniNode.getAnyOrRelationOrLocation().add(sliverType);
+
+			String sliverName = CommonMethods.getLocalName(sliverUri);
+			String url = omnSliver.getSubject().asResource().getURI();
+			String urn = CommonMethods.generateUrnFromUrl(url, "node") + "+"
+					+ sliverName;
+			geniNode.setComponentId(urn);
+			geniNode.setComponentName(sliverName);
+
+			setCloud(omnResource, geniNode);
+			setComponentDetailsVerbose(omnResource, geniNode);
+			setComponentManagerId(omnResource, geniNode);
+			setHardwareTypesVerbose(omnResource, geniNode);
+			setLocation(omnResource, geniNode);
+			setAvailability(omnResource, geniNode);
+			setMonitoringService(omnResource, geniNode);
+			setInterface(omnResource, geniNode);
+			setFd(omnResource, geniNode);
+			setTrivialBandwidth(omnResource, geniNode);
+
+			ResIterator infrastructures = omnResource.getModel()
+					.listResourcesWithProperty(Omn.isResourceOf,
+							Omn_federation.Infrastructure);
+			if (infrastructures.hasNext()) {
+				Resource infrastructure = infrastructures.next();
+				geniNode.setComponentManagerId(infrastructure.getURI());
+			}
+
+			advertisement.getAnyOrNodeOrLink()
+					.add(this.of.createNode(geniNode));
+		}
+	}
+
+	private void setHardwareTypesVerbose(Statement omnResource,
+			NodeContents geniNode) {
+		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
+
+		StmtIterator types = omnResource.getResource().listProperties(RDF.type);
+		HardwareTypeContents hwType;
+
+		while (types.hasNext()) {
+			String rdfType = types.next().getResource().getURI();
+
+			hwType = of.createHardwareTypeContents();
+			hwType.setName(rdfType);
+			if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)) {
+				geniNodeDetails.add(of.createHardwareType(hwType));
+			}
+		}
+	}
+
+	private void setComponentDetailsVerbose(Statement resource,
+			NodeContents node) {
+		if (resource.getResource().hasProperty(Omn_resource.isExclusive)) {
+			node.setExclusive(resource.getResource()
+					.getProperty(Omn_resource.isExclusive).getBoolean());
 		}
 	}
 
@@ -1719,12 +1830,10 @@ public class AdvertisementConverter extends AbstractConverter {
 
 					if (sliverTypeResource != null) {
 						setDiskImage(sliverTypeResource, sliverType);
+						JAXBElement<SliverType> sliver = new ObjectFactory()
+								.createNodeContentsSliverType(sliverType);
+						geniNode.getAnyOrRelationOrLocation().add(sliver);
 					}
-
-					JAXBElement<SliverType> sliver = new ObjectFactory()
-							.createNodeContentsSliverType(sliverType);
-
-					geniNode.getAnyOrRelationOrLocation().add(sliver);
 				}
 			}
 		} else if (canImplement.hasNext()) {
