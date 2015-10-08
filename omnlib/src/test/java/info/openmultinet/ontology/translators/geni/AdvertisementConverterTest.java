@@ -172,6 +172,7 @@ public class AdvertisementConverterTest {
 			converter.getModel(rspec);
 		for (int i = 0; i < repetitions; i++) {
 			Thread.sleep(pause);
+			converter.resetModel();
 			start = System.nanoTime();
 			model = converter.getModel(rspec);
 			result = i + " " + (System.nanoTime() - start) + "\n";

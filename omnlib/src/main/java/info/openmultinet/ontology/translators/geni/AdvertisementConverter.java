@@ -85,7 +85,8 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class AdvertisementConverter extends AbstractConverter {
 
 	private static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.advertisement";
-	private static final String PREFIX = "http://open-multinet.info/omnlib/converter";
+	// private static final String PREFIX =
+	// "http://open-multinet.info/omnlib/converter";
 	private static final String HOST = "http://open-multinet.info/example#";
 	private static final Logger LOG = Logger
 			.getLogger(AdvertisementConverter.class.getName());
@@ -108,6 +109,11 @@ public class AdvertisementConverter extends AbstractConverter {
 	public void setVerbose(boolean verbosity) {
 		this.verbose = verbosity;
 	}
+	
+	public void resetModel() {
+		this.model = null;
+		this.model = ModelFactory.createDefaultModel();
+	}	
 
 	public Model getModel(final InputStream input) throws JAXBException,
 			InvalidModelException, XMLStreamException,
@@ -134,9 +140,14 @@ public class AdvertisementConverter extends AbstractConverter {
 	public Model getModel(RSpecContents rspec)
 			throws MissingRspecElementException {
 
-		final Resource offering = model.createResource(
-				AdvertisementConverter.PREFIX + "#advertisement").addProperty(
-				RDF.type, Omn_lifecycle.Offering);
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		final Resource offering = model.createResource(uuid);
+
+		// final Resource offering = model.createResource(
+		// AdvertisementConverter.PREFIX + "#advertisement").addProperty(
+		// RDF.type, Omn_lifecycle.Offering);
+
+		offering.addProperty(RDF.type, Omn_lifecycle.Offering);
 		offering.addProperty(RDFS.label, "Offering");
 
 		@SuppressWarnings("unchecked")

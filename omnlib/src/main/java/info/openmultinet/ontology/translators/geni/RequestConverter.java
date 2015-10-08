@@ -1059,8 +1059,12 @@ public class RequestConverter extends AbstractConverter {
 		final RSpecContents request = rspec.getValue();
 
 		final Model model = ModelFactory.createDefaultModel();
-		final Resource topology = model
-				.createResource(AbstractConverter.NAMESPACE + "request");
+
+		// final Resource topology = model
+		// .createResource(AbstractConverter.NAMESPACE + "request");
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		final Resource topology = model.createResource(uuid);
+
 		topology.addProperty(RDF.type, Omn_lifecycle.Request);
 		topology.addProperty(RDFS.label, "Request");
 		topology.addProperty(RDF.type, Omn.Topology);

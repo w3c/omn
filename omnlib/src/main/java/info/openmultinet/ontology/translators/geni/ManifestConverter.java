@@ -49,6 +49,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.faces.lifecycle.Lifecycle;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -1061,7 +1062,8 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	public static Model getModel(final InputStream stream)
-			throws JAXBException, MissingRspecElementException {
+			throws JAXBException, MissingRspecElementException,
+			InvalidModelException {
 		final Model model = ManifestConverter.createModelTemplate();
 		final RSpecContents manifest = ManifestConverter.getManifest(stream);
 
@@ -1071,10 +1073,15 @@ public class ManifestConverter extends AbstractConverter {
 	}
 
 	private static void convertManifest2Model(final RSpecContents manifest,
-			final Model model) throws MissingRspecElementException {
+			final Model model) throws MissingRspecElementException,
+			InvalidModelException {
 
-		Resource topology = model.getResource(AbstractConverter.NAMESPACE
-				+ "manifest");
+		// Resource topology = model.getResource(AbstractConverter.NAMESPACE
+		// + "manifest");
+		final List<Resource> groups = model.listSubjectsWithProperty(RDF.type,
+				Omn_lifecycle.Manifest).toList();
+		AbstractConverter.validateModel(groups);
+		Resource topology = groups.get(0);
 
 		for (Object o : manifest.getAnyOrNodeOrLink()) {
 			if (o instanceof JAXBElement) {
@@ -1874,8 +1881,10 @@ public class ManifestConverter extends AbstractConverter {
 
 	public static Model createModelTemplate() throws JAXBException {
 		final Model model = ModelFactory.createDefaultModel();
-		final Resource topology = model
-				.createResource(AbstractConverter.NAMESPACE + "manifest");
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		final Resource topology = model.createResource(uuid);
+		// final Resource topology = model
+		// .createResource(AbstractConverter.NAMESPACE + "manifest");
 		topology.addProperty(RDF.type, Omn_lifecycle.Manifest);
 		topology.addProperty(RDFS.label, "Manifest");
 		return model;
