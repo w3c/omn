@@ -18,7 +18,7 @@
                 "fpga1.pp" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+pllab.pl+authority+cm> ;
-        <http://purl.org/dc/terms/coverage>
+        <http://www.geonames.org/ontology#countryCode>
                 "PL" ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
                 [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
