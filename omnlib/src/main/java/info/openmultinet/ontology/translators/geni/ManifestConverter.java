@@ -1,10 +1,9 @@
 package info.openmultinet.ontology.translators.geni;
 
-import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ComponentManager;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
@@ -14,8 +13,10 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceConten
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.IpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
@@ -25,9 +26,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkType;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.ComponentManager;
-import info.openmultinet.ontology.vocabulary.Dcterms;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -51,7 +49,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.faces.lifecycle.Lifecycle;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;

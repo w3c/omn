@@ -35,7 +35,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeC
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
-import info.openmultinet.ontology.vocabulary.Dcterms;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -43,10 +42,8 @@ import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
-import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
-import java.net.URI;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
