@@ -27,6 +27,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ComponentManager;
+import info.openmultinet.ontology.vocabulary.Dcterms;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -548,12 +549,12 @@ public class ManifestConverter extends AbstractConverter {
 					.getProperty(Geo.long_).getObject().toString());
 		}
 
-		if (resource.getResource().hasProperty(Omn_resource.country)) {
+		if (resource.getResource().hasProperty(Dcterms.coverage)) {
 			if (locationContents == null) {
 				locationContents = new ObjectFactory().createLocationContents();
 			}
 			locationContents.setCountry(resource.getResource()
-					.getProperty(Omn_resource.country).getObject().toString());
+					.getProperty(Dcterms.coverage).getObject().toString());
 		}
 
 		if (locationContents != null) {
@@ -1512,7 +1513,7 @@ public class ManifestConverter extends AbstractConverter {
 
 			// country is required
 			String country = locationContents.getCountry();
-			omnResource.addProperty(Omn_resource.country, country);
+			omnResource.addProperty(Dcterms.coverage, country);
 		}
 	}
 

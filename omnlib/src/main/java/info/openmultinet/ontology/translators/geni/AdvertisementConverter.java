@@ -35,6 +35,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeC
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.vocabulary.Dcterms;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -853,7 +854,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					throw new MissingRspecElementException(
 							"LocationContents > country");
 				} else {
-					omnNode.addProperty(Omn_resource.country, country);
+					omnNode.addProperty(Dcterms.coverage, country);
 				}
 
 				if (latitude != null) {
@@ -1789,8 +1790,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		LocationContents location = of.createLocationContents();
 		Resource omnRes = omnResource.getResource();
 
-		if (omnRes.hasProperty(Omn_resource.country)) {
-			location.setCountry(omnRes.getProperty(Omn_resource.country)
+		if (omnRes.hasProperty(Dcterms.coverage)) {
+			location.setCountry(omnRes.getProperty(Dcterms.coverage)
 					.getString());
 		} else {
 			// country required

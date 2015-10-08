@@ -42,6 +42,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
 import info.openmultinet.ontology.translators.geni.jaxb.request.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
+import info.openmultinet.ontology.vocabulary.Dcterms;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -206,8 +207,8 @@ public class RequestConverter extends AbstractConverter {
 		LocationContents location = of.createLocationContents();
 		Resource omnRes = omnResource.getResource();
 
-		if (omnRes.hasProperty(Omn_resource.country)) {
-			location.setCountry(omnRes.getProperty(Omn_resource.country)
+		if (omnRes.hasProperty(Dcterms.coverage)) {
+			location.setCountry(omnRes.getProperty(Dcterms.coverage)
 					.getString());
 		} else {
 			// country required
@@ -1775,7 +1776,7 @@ public class RequestConverter extends AbstractConverter {
 					throw new MissingRspecElementException(
 							"LocationContents > country");
 				} else {
-					omnNode.addProperty(Omn_resource.country, country);
+					omnNode.addProperty(Dcterms.coverage, country);
 				}
 
 				if (latitude != null) {

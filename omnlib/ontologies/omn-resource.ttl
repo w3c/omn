@@ -370,23 +370,6 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#country
-
-:country rdf:type owl:DatatypeProperty ;
-
-                rdfs:label "country"@en ;
-                
-                rdfs:seeAlso "GENI Manifest RSpec v3: LocationContents:country"@en ;
-                
-                rdfs:comment "country where the resource is located"@en ;
-                
-                rdfs:domain omn:Resource ;
-                
-                rdfs:range xsd:string .
-
-
-
-
 ###  http://open-multinet.info/ontology/omn-resource#macAddress
 
 :macAddress rdf:type owl:DatatypeProperty ;

@@ -195,6 +195,7 @@
 						<include>ontologies/omn*.ttl</include>
 						<include>import/geo.ttl</include>
 						<include>import/http.ttl</include>
+						<include>import/dcterms.ttl</include>
 						<include>ontologies/osco.ttl</include>
 						<!--  include>src/test/resources/ontologies/osco.ttl</include-->
 					</includes>
