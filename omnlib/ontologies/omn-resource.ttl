@@ -64,7 +64,12 @@
               
               rdfs:range :Interface ;
               
-              rdfs:domain :Node ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :Group
+                                          :Resource
+                                          :Service
+                                        )
+                          ] ;
               
               owl:inverseOf :isInterfaceOf .
 
@@ -80,7 +85,12 @@
                
                rdfs:domain :Interface ;
                
-               rdfs:range :Node .
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( :Group
+                                          :Resource
+                                          :Service
+                                        )
+                          ] .
 
 
 
@@ -352,6 +362,21 @@
                 rdfs:domain :IPAddress ;
                 
                 rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#port
+
+:port rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "port number"@en ;
+                
+                rdfs:comment "port (interface) number"@en ;
+                
+                rdfs:domain :Interface ;
+                
+                rdfs:range xsd:integer .
+
 
 
 ###  http://open-multinet.info/ontology/omn-resource#type

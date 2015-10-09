@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NOTE: This schema has been extended from the oringal one found online 
+	at the namespace below. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:openflow="http://www.geni.net/resources/rspec/ext/openflow/4"
+	elementFormDefault="qualified" targetNamespace="http://www.geni.net/resources/rspec/ext/openflow/4">
+	<xs:element name="sliver">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="openflow:controller" />
+				<xs:element maxOccurs="unbounded" ref="openflow:group" />
+				<xs:element maxOccurs="unbounded" ref="openflow:match" />
+			</xs:sequence>
+			<xs:attribute name="description" use="required" type="xs:string" />
+			<xs:attribute name="email" type="xs:anyURI" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="controller">
+		<xs:complexType>
+			<xs:attribute name="url" type="openflow:ControllerURL"
+				use="required" />
+			<xs:attribute name="type" type="openflow:ControllerRole"
+				use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="group" type="openflow:GroupContents" />
+	<xs:complexType name="GroupContents">
+		<xs:sequence>
+			<xs:element ref="openflow:datapath" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:element name="datapath" type="openflow:Datapath" />
+
+	<xs:element name="match" type="openflow:MatchContents" />
+	<xs:complexType name="MatchContents">
+		<xs:sequence>
+			<xs:element ref="openflow:use-group" />
+			<xs:element ref="openflow:packet" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="packet" type="openflow:PacketContents" />
+	<xs:complexType name="PacketContents">
+		<xs:sequence>
+			<xs:element ref="openflow:dl_vlan" />
+			<xs:element ref="openflow:dl_type" />
+			<xs:element ref="openflow:nw_dst" />
+			<xs:element ref="openflow:nw_src" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="dl_vlan">
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="dl_type">
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="nw_dst">
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="nw_src">
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="use-group">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="DatapathID">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="23" />
+			<xs:pattern value="([0-9a-fA-F]{2}[:]{0,1}){7}[0-9a-fA-F]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ControllerRole">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="primary" />
+			<xs:enumeration value="backup" />
+			<xs:enumeration value="monitor" />
+			<xs:enumeration value="master" />
+			<xs:enumeration value="equal" />
+			<xs:enumeration value="slave" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ControllerURL">
+		<xs:restriction base="xs:token">
+			<xs:pattern
+				value="(tcp|ptcp|ssl)((:(((25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)\.){3}(25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)))|(:(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9]))){1}(:(6553[0-5]|655[0-2]\d|65[0-4]\d\d|6[0-4]\d\d\d|[1-9]\d\d\d|[1-9]\d\d|[1-9]\d|[1-9])){1}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="URN">
+		<xs:restriction base="xs:anyURI">
+			<xs:pattern
+				value="urn:[a-zA-Z0-9][a-zA-Z0-9-]{1,31}:([a-zA-Z0-9()+,.:=@;$_!*'-]|%[0-9A-Fa-f]{2})+" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Datapath">
+		<xs:sequence>
+			<xs:element name="port" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="num" type="xs:unsignedInt" use="required" />
+					<xs:attribute name="name" type="xs:token" use="optional" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="component_id" type="openflow:URN"
+			use="required" />
+		<xs:attribute name="component_manager_id" type="openflow:URN"
+			use="optional" />
+		<xs:attribute name="dpid" type="openflow:DatapathID" use="optional" />
+	</xs:complexType>
+</xs:schema>
