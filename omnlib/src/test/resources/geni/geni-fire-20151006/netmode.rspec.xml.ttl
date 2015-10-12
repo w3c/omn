@@ -1,26 +1,7 @@
-<urn:uuid:2775874d-5d0f-4c24-9bff-6894cf737931>
+<urn:uuid:79452cea-1125-4996-af7e-c1212f5f1e7f>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node9:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:5a3fd8fa-e191-48f4-b7a9-f58f9add9a87>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:a5496852-baf6-4e95-8805-5645d0630e6b>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node17:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:a5eecc32-fa36-48de-87a7-cd06a04dc142>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node14:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node13:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
@@ -29,15 +10,15 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node14"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node14" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:e47a440e-a5fb-4d18-be55-46ff68c5d921> ;
+                <urn:uuid:25b445b8-bd43-4e16-91a1-b6532672919b> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:a5eecc32-fa36-48de-87a7-cd06a04dc142> ;
+                <urn:uuid:14deacca-2dfb-4677-9c49-ea76b486499e> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
@@ -48,88 +29,121 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node4"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node4" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:0b31325f-18f7-42c1-8742-aa5c5a20cce9> ;
+                <urn:uuid:1a3c4d24-69d4-4f3a-90fb-5b99254b51b8> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:641e7691-d178-43a7-bd2b-07a2b1734268> ;
+                <urn:uuid:5a32a998-1af9-4a7c-a938-57ae378df8b3> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:00940bac-a4f3-46ae-b577-b7d8642fdcb4>
+<urn:uuid:1b90a9f7-e755-4a03-8e18-1a2868180a59>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:8b0070df-beb6-4cca-bcf9-10971a56f41a>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node8:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node19:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
-<urn:uuid:95020ccd-6fa2-42b1-a751-aba35c8d7049>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:61d177c1-c5c3-4618-ba44-9f26fc06b51a>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:9b96f4a1-ed47-4390-a397-4e499ab1cd61>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "Intel_Atom" .
-
-<urn:publicid:IDN+omf:netmode+node+node19>
-        a       <http://open-multinet.info/ontology/omn-resource#Node> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "node19"^^<http://www.w3.org/2001/XMLSchema#string> ;
-        <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
-                "node19" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
-                <urn:publicid:IDN+omf:netmode+authority+cm> ;
-        <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:474687da-5231-425b-9747-2b5056dbb575> ;
-        <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:f50af080-4a48-48ad-8878-f756be5f1f93> ;
-        <http://open-multinet.info/ontology/omn-resource#isAvailable>
-                true ;
-        <http://open-multinet.info/ontology/omn-resource#isExclusive>
-                true .
-
-<urn:publicid:IDN+omf:netmode+node+node9>
-        a       <http://open-multinet.info/ontology/omn-resource#Node> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "node9"^^<http://www.w3.org/2001/XMLSchema#string> ;
-        <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
-                "node9" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
-                <urn:publicid:IDN+omf:netmode+authority+cm> ;
-        <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:56057a9d-4771-44cd-8522-f348467d8bbd> ;
-        <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:2775874d-5d0f-4c24-9bff-6894cf737931> ;
-        <http://open-multinet.info/ontology/omn-resource#isAvailable>
-                true ;
-        <http://open-multinet.info/ontology/omn-resource#isExclusive>
-                true .
-
-<urn:uuid:9432e575-40e2-4e53-b084-a94c682776b9>
+<urn:uuid:b05b6880-f871-41a4-bdf7-524954c73ef3>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
                 "urn:publicid:IDN+omf:netmode+interface+node16:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
-<urn:uuid:807220fe-e019-4efc-9d7a-f2bbe292414a>
+<urn:uuid:a6e5c949-ed4c-4d99-829a-2893ad17cb6f>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:000f2f94-2f34-4ba2-b1a3-a4c8e0c9e42f>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:publicid:IDN+omf:netmode+node+node19>
+        a       <http://open-multinet.info/ontology/omn-resource#Node> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "node19"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn#isResourceOf>
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
+                "node19" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
+                <urn:publicid:IDN+omf:netmode+authority+cm> ;
+        <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
+                <urn:uuid:80714033-91f7-496b-a318-3f846efe2279> ;
+        <http://open-multinet.info/ontology/omn-resource#hasInterface>
+                <urn:uuid:8b0070df-beb6-4cca-bcf9-10971a56f41a> ;
+        <http://open-multinet.info/ontology/omn-resource#isAvailable>
+                true ;
+        <http://open-multinet.info/ontology/omn-resource#isExclusive>
+                true .
+
+<urn:uuid:e4c61e42-444c-4435-9853-0d81a9803521>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:dae74207-7c63-4df5-8f60-100b0f273825>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node20:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:publicid:IDN+omf:netmode+node+node9>
+        a       <http://open-multinet.info/ontology/omn-resource#Node> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "node9"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn#isResourceOf>
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
+                "node9" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
+                <urn:publicid:IDN+omf:netmode+authority+cm> ;
+        <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
+                <urn:uuid:1b90a9f7-e755-4a03-8e18-1a2868180a59> ;
+        <http://open-multinet.info/ontology/omn-resource#hasInterface>
+                <urn:uuid:333af2b1-61f4-4e8b-a0fc-6c3a5cdaefab> ;
+        <http://open-multinet.info/ontology/omn-resource#isAvailable>
+                true ;
+        <http://open-multinet.info/ontology/omn-resource#isExclusive>
+                true .
+
+<urn:uuid:0c193c01-fb37-433d-bd21-e97426fed70f>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node3:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:22e1a76a-f115-41f2-9b28-731938580f47>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node7:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:dbee48ae-1305-43d2-95aa-d81a49255036>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node15:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:19dba0aa-c7d8-4aff-8cdf-bee1f3f5c216>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "alix3d2" .
@@ -139,83 +153,110 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node13"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node13" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:ae298b26-7bb9-480e-a0a7-c887e4ca430f> ;
+                <urn:uuid:199a53f3-f3b6-46b4-80ef-015977e925b9> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:f6b8a1f4-0506-4b57-bc26-ff505694bd38> ;
+                <urn:uuid:79452cea-1125-4996-af7e-c1212f5f1e7f> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
-
-<urn:uuid:28fa612e-e799-4644-9069-b0ece731b12e>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node6:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
 
 <urn:publicid:IDN+omf:netmode+node+node3>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node3"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node3" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:8f59a676-6366-460b-9878-afec7e9c25fd> ;
+                <urn:uuid:95e82799-f27c-47bb-92f6-7cbc87b22278> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:eabe759f-c343-4e95-accc-988c6bf250a6> ;
+                <urn:uuid:0c193c01-fb37-433d-bd21-e97426fed70f> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4>
-        a       <http://open-multinet.info/ontology/omn-lifecycle#Offering> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "Offering" ;
-        <http://open-multinet.info/ontology/omn#hasResource>
-                <urn:publicid:IDN+omf:netmode+node+node8> , <urn:publicid:IDN+omf:netmode+node+node19> , <urn:publicid:IDN+omf:netmode+node+node6> , <urn:publicid:IDN+omf:netmode+node+node12> , <urn:publicid:IDN+omf:netmode+node+node4> , <urn:publicid:IDN+omf:netmode+node+node9> , <urn:publicid:IDN+omf:netmode+node+node17> , <urn:publicid:IDN+omf:netmode+node+node2> , <urn:publicid:IDN+omf:netmode+node+node7> , <urn:publicid:IDN+omf:netmode+node+node15> , <urn:publicid:IDN+omf:netmode+node+node13> , <urn:publicid:IDN+omf:netmode+node+node10> , <urn:publicid:IDN+omf:netmode+node+node5> , <urn:publicid:IDN+omf:netmode+node+node18> , <urn:publicid:IDN+omf:netmode+node+node20> , <urn:publicid:IDN+omf:netmode+node+node3> , <urn:publicid:IDN+omf:netmode+node+node11> , <urn:publicid:IDN+omf:netmode+node+node16> , <urn:publicid:IDN+omf:netmode+node+node1> , <urn:publicid:IDN+omf:netmode+node+node14> .
-
-<urn:uuid:46625416-96df-45be-bc05-b7f3568ae063>
+<urn:uuid:4c37ff81-336f-4977-9b70-e901aeeff156>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node1:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node11:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
+
+<urn:uuid:25b445b8-bd43-4e16-91a1-b6532672919b>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:c32c1332-9a77-4e25-b776-1f7187466c98>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:333af2b1-61f4-4e8b-a0fc-6c3a5cdaefab>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node9:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:e91c8273-326f-45b4-b64d-2b8031a6a5f3>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node8:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:8e9c4942-d047-4304-b16b-01ce9a6bf448>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Intel_Atom" .
 
 <urn:publicid:IDN+omf:netmode+node+node20>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node20"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node20" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:9b96f4a1-ed47-4390-a397-4e499ab1cd61> ;
+                <urn:uuid:8e9c4942-d047-4304-b16b-01ce9a6bf448> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:f40adec2-1fdf-4fe2-8faa-6bfd87364ec4> ;
+                <urn:uuid:dae74207-7c63-4df5-8f60-100b0f273825> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:f50af080-4a48-48ad-8878-f756be5f1f93>
+<urn:uuid:95e82799-f27c-47bb-92f6-7cbc87b22278>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:741c4b99-b30b-4a3b-b937-54d692233096>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node19:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node18:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:643a58a0-44c9-44c5-a21e-529abf2dc234>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node12:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
@@ -224,79 +265,63 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node18"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node18" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:5d40b405-b307-4fe0-a2df-07ce103a5253> ;
+                <urn:uuid:715a6aff-ab96-4652-afc9-c27acf713fe6> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:005852a3-e887-476f-9f55-01026227b6f1> ;
+                <urn:uuid:741c4b99-b30b-4a3b-b937-54d692233096> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:f40adec2-1fdf-4fe2-8faa-6bfd87364ec4>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node20:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
+<urn:uuid:1a3c4d24-69d4-4f3a-90fb-5b99254b51b8>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
 
 <urn:publicid:IDN+omf:netmode+node+node8>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node8"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node8" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:c38447b9-74a1-4537-86ac-ac669a90df9c> ;
+                <urn:uuid:4753bd0d-70a8-4162-8464-9cdd06196221> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:00940bac-a4f3-46ae-b577-b7d8642fdcb4> ;
+                <urn:uuid:e91c8273-326f-45b4-b64d-2b8031a6a5f3> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:c3dfe36b-daac-4d64-b54c-cf47a29d3fe6>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node12:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:5d40b405-b307-4fe0-a2df-07ce103a5253>
+<urn:uuid:4753bd0d-70a8-4162-8464-9cdd06196221>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "alix3d2" .
-
-<urn:uuid:79dd1932-e6d9-4d0d-a16e-caf82fd6246d>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node5:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
 
 <urn:publicid:IDN+omf:netmode+node+node12>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node12"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node12" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:807220fe-e019-4efc-9d7a-f2bbe292414a> ;
+                <urn:uuid:14ce5376-2c1a-4fe6-be18-a7f3e3493465> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:c3dfe36b-daac-4d64-b54c-cf47a29d3fe6> ;
+                <urn:uuid:643a58a0-44c9-44c5-a21e-529abf2dc234> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
@@ -307,70 +332,39 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node2"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node2" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:64b218b1-53b6-4d89-9a82-522b93cdf0c0> ;
+                <urn:uuid:000f2f94-2f34-4ba2-b1a3-a4c8e0c9e42f> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:f1ee57ec-f38f-427e-b2f7-67694830110e> ;
+                <urn:uuid:66336249-fb5b-4891-bf3a-5b6457215427> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:0b31325f-18f7-42c1-8742-aa5c5a20cce9>
+<urn:uuid:80714033-91f7-496b-a318-3f846efe2279>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:dbc66e1e-0c78-4434-ac37-a1163b8cb245>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node7:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:890a3f68-8028-439f-8349-d2fd40e0ea18>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node10:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:005852a3-e887-476f-9f55-01026227b6f1>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node18:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:ed05f08b-828e-4ec1-9116-2da3bade6dac>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:56057a9d-4771-44cd-8522-f348467d8bbd>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
+                "Intel_Atom" .
 
 <urn:publicid:IDN+omf:netmode+node+node17>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node17"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node17" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:a1f8e556-cb58-4bae-8372-69c919900f23> ;
+                <urn:uuid:861f1ba2-d1ef-4791-9968-b496e9eba82e> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:a5496852-baf6-4e95-8805-5645d0630e6b> ;
+                <urn:uuid:5864e0d9-54d3-4253-a237-f91c21866fb1> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
@@ -381,24 +375,24 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node7"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node7" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:a559ba3d-5c79-4867-8d2a-2d47c86949ce> ;
+                <urn:uuid:2569fdf5-3c69-48f7-aeab-2d3914d349d8> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:dbc66e1e-0c78-4434-ac37-a1163b8cb245> ;
+                <urn:uuid:22e1a76a-f115-41f2-9b28-731938580f47> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:1070d430-7f0e-442d-94ee-b42054dc3173>
+<urn:uuid:5864e0d9-54d3-4253-a237-f91c21866fb1>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node15:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node17:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
@@ -407,124 +401,97 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node11"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node11" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:121e6c57-9336-4217-96c3-0bf91da43a2f> ;
+                <urn:uuid:19dba0aa-c7d8-4aff-8cdf-bee1f3f5c216> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:85a21708-d270-4835-95e5-88233f371ddd> ;
+                <urn:uuid:4c37ff81-336f-4977-9b70-e901aeeff156> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
-
-<urn:uuid:121e6c57-9336-4217-96c3-0bf91da43a2f>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
 
 <urn:publicid:IDN+omf:netmode+node+node1>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node1"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node1" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:1af652b1-f37a-40bc-b536-41c3b6878153> ;
+                <urn:uuid:a6e5c949-ed4c-4d99-829a-2893ad17cb6f> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:46625416-96df-45be-bc05-b7f3568ae063> ;
+                <urn:uuid:9f67c933-6861-469f-abd4-cc86f0622fe8> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:eabe759f-c343-4e95-accc-988c6bf250a6>
+<urn:uuid:123be7ea-ff05-4d38-a9ec-99e324922e48>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node3:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node5:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
-
-<urn:uuid:641e7691-d178-43a7-bd2b-07a2b1734268>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node4:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:5cd4af28-c527-4b3b-a84b-e852a00d2e08>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:8f59a676-6366-460b-9878-afec7e9c25fd>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:474687da-5231-425b-9747-2b5056dbb575>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "Intel_Atom" .
 
 <urn:publicid:IDN+omf:netmode+node+node16>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node16"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node16" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:5a3fd8fa-e191-48f4-b7a9-f58f9add9a87> ;
+                <urn:uuid:c55c31e2-2766-46e7-8125-7610c1d87f8d> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:9432e575-40e2-4e53-b084-a94c682776b9> ;
+                <urn:uuid:b05b6880-f871-41a4-bdf7-524954c73ef3> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
+
+<urn:uuid:2569fdf5-3c69-48f7-aeab-2d3914d349d8>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:5a32a998-1af9-4a7c-a938-57ae378df8b3>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node4:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
 
 <urn:publicid:IDN+omf:netmode+node+node6>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node6"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node6" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:ed05f08b-828e-4ec1-9116-2da3bade6dac> ;
+                <urn:uuid:c32c1332-9a77-4e25-b776-1f7187466c98> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:28fa612e-e799-4644-9069-b0ece731b12e> ;
+                <urn:uuid:587ec133-e5b3-443b-9458-5c413c8a621d> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:f6b8a1f4-0506-4b57-bc26-ff505694bd38>
-        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node13:eth0" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
-                "control" .
-
-<urn:uuid:a1f8e556-cb58-4bae-8372-69c919900f23>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:c38447b9-74a1-4537-86ac-ac669a90df9c>
+<urn:uuid:e4312280-37ee-4a5b-bac4-07681b9923e8>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "alix3d2" .
@@ -534,48 +501,64 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node10"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node10" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:5cd4af28-c527-4b3b-a84b-e852a00d2e08> ;
+                <urn:uuid:4ad039d4-e720-4737-8781-3fd40b2b572a> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:890a3f68-8028-439f-8349-d2fd40e0ea18> ;
+                <urn:uuid:c206ad71-6356-4c14-ab7b-92facec41a8d> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:ae298b26-7bb9-480e-a0a7-c887e4ca430f>
+<urn:uuid:715a6aff-ab96-4652-afc9-c27acf713fe6>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "alix3d2" .
 
-<urn:uuid:1af652b1-f37a-40bc-b536-41c3b6878153>
+<urn:uuid:861f1ba2-d1ef-4791-9968-b496e9eba82e>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "alix3d2" .
 
-<urn:uuid:f1ee57ec-f38f-427e-b2f7-67694830110e>
+<urn:uuid:199a53f3-f3b6-46b4-80ef-015977e925b9>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:c206ad71-6356-4c14-ab7b-92facec41a8d>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node10:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:9f67c933-6861-469f-abd4-cc86f0622fe8>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node1:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
+
+<urn:uuid:66336249-fb5b-4891-bf3a-5b6457215427>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
                 "urn:publicid:IDN+omf:netmode+interface+node2:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
-<urn:uuid:a559ba3d-5c79-4867-8d2a-2d47c86949ce>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
+<urn:uuid:587ec133-e5b3-443b-9458-5c413c8a621d>
+        a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "urn:publicid:IDN+omf:netmode+interface+node6:eth0" ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                "control" .
 
-<urn:uuid:64b218b1-53b6-4d89-9a82-522b93cdf0c0>
-        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
-        <http://www.w3.org/2000/01/rdf-schema#label>
-                "alix3d2" .
-
-<urn:uuid:e47a440e-a5fb-4d18-be55-46ff68c5d921>
+<urn:uuid:14ce5376-2c1a-4fe6-be18-a7f3e3493465>
         a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "alix3d2" .
@@ -585,43 +568,59 @@
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node15"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node15" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:61d177c1-c5c3-4618-ba44-9f26fc06b51a> ;
+                <urn:uuid:e4c61e42-444c-4435-9853-0d81a9803521> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:1070d430-7f0e-442d-94ee-b42054dc3173> ;
+                <urn:uuid:dbee48ae-1305-43d2-95aa-d81a49255036> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
+
+<urn:uuid:c55c31e2-2766-46e7-8125-7610c1d87f8d>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
+
+<urn:uuid:4ad039d4-e720-4737-8781-3fd40b2b572a>
+        a       <http://open-multinet.info/ontology/omn-resource#HardwareType> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "alix3d2" .
 
 <urn:publicid:IDN+omf:netmode+node+node5>
         a       <http://open-multinet.info/ontology/omn-resource#Node> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "node5"^^<http://www.w3.org/2001/XMLSchema#string> ;
         <http://open-multinet.info/ontology/omn#isResourceOf>
-                <urn:uuid:c738b2a0-a8c1-4bc2-8860-72da43b9f7a4> ;
+                <urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
                 "node5" ;
         <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+omf:netmode+authority+cm> ;
         <http://open-multinet.info/ontology/omn-resource#hasHardwareType>
-                <urn:uuid:95020ccd-6fa2-42b1-a751-aba35c8d7049> ;
+                <urn:uuid:e4312280-37ee-4a5b-bac4-07681b9923e8> ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                <urn:uuid:79dd1932-e6d9-4d0d-a16e-caf82fd6246d> ;
+                <urn:uuid:123be7ea-ff05-4d38-a9ec-99e324922e48> ;
         <http://open-multinet.info/ontology/omn-resource#isAvailable>
                 true ;
         <http://open-multinet.info/ontology/omn-resource#isExclusive>
                 true .
 
-<urn:uuid:85a21708-d270-4835-95e5-88233f371ddd>
+<urn:uuid:14deacca-2dfb-4677-9c49-ea76b486499e>
         a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                "urn:publicid:IDN+omf:netmode+interface+node11:eth0" ;
+                "urn:publicid:IDN+omf:netmode+interface+node14:eth0" ;
         <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                 "control" .
 
+<urn:uuid:a0580cbe-f9d0-4ce0-a74b-d1fe8ea7b2e5>
+        a       <http://open-multinet.info/ontology/omn-lifecycle#Offering> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Offering" ;
+        <http://open-multinet.info/ontology/omn#hasResource>
+                <urn:publicid:IDN+omf:netmode+node+node19> , <urn:publicid:IDN+omf:netmode+node+node10> , <urn:publicid:IDN+omf:netmode+node+node20> , <urn:publicid:IDN+omf:netmode+node+node17> , <urn:publicid:IDN+omf:netmode+node+node16> , <urn:publicid:IDN+omf:netmode+node+node11> , <urn:publicid:IDN+omf:netmode+node+node4> , <urn:publicid:IDN+omf:netmode+node+node5> , <urn:publicid:IDN+omf:netmode+node+node2> , <urn:publicid:IDN+omf:netmode+node+node15> , <urn:publicid:IDN+omf:netmode+node+node8> , <urn:publicid:IDN+omf:netmode+node+node14> , <urn:publicid:IDN+omf:netmode+node+node9> , <urn:publicid:IDN+omf:netmode+node+node3> , <urn:publicid:IDN+omf:netmode+node+node18> , <urn:publicid:IDN+omf:netmode+node+node1> , <urn:publicid:IDN+omf:netmode+node+node13> , <urn:publicid:IDN+omf:netmode+node+node6> , <urn:publicid:IDN+omf:netmode+node+node12> , <urn:publicid:IDN+omf:netmode+node+node7> .

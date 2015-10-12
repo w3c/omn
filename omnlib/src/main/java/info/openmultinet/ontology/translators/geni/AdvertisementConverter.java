@@ -955,9 +955,9 @@ public class AdvertisementConverter extends AbstractConverter {
 			omnNode.addProperty(Omn.isResourceOf, topology);
 
 			if (rspecNode.getComponentManagerId() != null) {
-				RDFNode parent = ResourceFactory.createResource(rspecNode
+				RDFNode componentManager = ResourceFactory.createResource(rspecNode
 						.getComponentManagerId());
-				omnNode.addProperty(Omn_lifecycle.parentOf, parent);
+				omnNode.addProperty(Omn_lifecycle.managedBy, componentManager);
 			}
 
 			topology.getModel().addLiteral(omnNode, Omn_resource.isExclusive,
@@ -2766,8 +2766,8 @@ public class AdvertisementConverter extends AbstractConverter {
 	private void setComponentManagerId(final Statement resource,
 			final NodeContents node) {
 		try {
-			Statement parentOf = resource.getProperty(Omn_lifecycle.parentOf);
-			node.setComponentManagerId(parentOf.getResource().getURI());
+			Statement managedBy = resource.getProperty(Omn_lifecycle.managedBy);
+			node.setComponentManagerId(managedBy.getResource().getURI());
 		} catch (PropertyNotFoundException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
 		}
