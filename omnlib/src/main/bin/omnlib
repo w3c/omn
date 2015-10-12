@@ -13,8 +13,11 @@ if [ ! -f ${jar} ]; then
   mvn clean compile assembly:single
 fi
 
-echo "Running omnlib..."
-echo "Usage example: $0 -o ttl -i src/test/resources/request_bound.xml"
-echo ""
+if [ "" == "${1}" ]; then
+  echo "Running omnlib..."
+  echo "Usage example: $0 -o ttl -i src/test/resources/request_bound.xml"
+  exit 2
+fi
+
 java -jar ${jar} $@
 
