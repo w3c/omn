@@ -23,7 +23,7 @@ public class TestRules {
 	private static final String RULEFILE1 = "/rules/rule1.txt";
 
 	@Test
-	public void test() throws IOException {
+	public void testSimpleRuleset() throws IOException {
 
 		final String rule1 = AbstractConverter.toString(RULEFILE1);
 		Model rawModel1 = RDFDataMgr.loadModel(RAWFILE1);
@@ -36,6 +36,6 @@ public class TestRules {
 		    System.out.println(" - " + list.next());
 		}
 		
-		Assert.assertTrue(infModel1.toString().contains("omn-monitoring-unit"));
+		Assert.assertTrue(infModel1.toString().contains(EXPECTED1));
 	}
 }
