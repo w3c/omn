@@ -7,7 +7,7 @@
         component_id="urn:publicid:IDN+bbn-cam-ctrl-1+node+bbn-cam-cmpe-1"
         component_manager_id="urn:publicid:IDN+bbn-cam-ctrl-1.gpolab.bbn.com+authority+am"
         component_name="bbn-cam-cmpe-1" exclusive="false">
-        <location latitude="42.3736" longitude="-71.1106", country="US"/>
+        <location latitude="42.3736" longitude="-71.1106" country="US"/>
         <sliver_type name="m1.tiny">
             <disk_image description="standard" name="centos-7.0"
                 os="Linux" version="7.0"/>
@@ -85,7 +85,7 @@
         component_id="urn:publicid:IDN+bbn-cam-ctrl-1+node+bbn-cam-cmpe-2"
         component_manager_id="urn:publicid:IDN+bbn-cam-ctrl-1.gpolab.bbn.com+authority+am"
         component_name="bbn-cam-cmpe-2" exclusive="false">
-        <location latitude="42.3736" longitude="-71.1106", country="US"/>
+        <location latitude="42.3736" longitude="-71.1106" country="US"/>
         <sliver_type name="m1.tiny">
             <disk_image description="standard" name="centos-7.0"
                 os="Linux" version="7.0"/>
