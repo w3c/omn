@@ -1,5 +1,5 @@
 [rule1: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)->
@@ -9,7 +9,7 @@ noValue(?memComp rdf:type owl:NamedIndividual)->
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256000000"^^xsd:integer)
 ]
 [rule2: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
@@ -19,7 +19,7 @@ noValue(?cpuComp rdf:type owl:NamedIndividual)->
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "500000000"^^xsd:integer)
 ]
 [rule3: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
@@ -31,7 +31,7 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 
 
 [rule4: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Icarus"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)-> 
@@ -41,7 +41,7 @@ noValue(?memComp rdf:type owl:NamedIndividual)->
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "4000000000"^^xsd:integer)
 ]
 [rule5: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Icarus"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
@@ -51,7 +51,7 @@ noValue(?cpuComp rdf:type owl:NamedIndividual)->
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "3400000000"^^xsd:integer)
 ]
 [rule6: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Icarus"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
@@ -63,7 +63,7 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 
 
 [rule7: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Orbit"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)-> 
@@ -73,7 +73,7 @@ noValue(?memComp rdf:type owl:NamedIndividual)->
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256000000"^^xsd:integer)
 ]
 [rule8: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Orbit"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
@@ -83,7 +83,7 @@ noValue(?cpuComp rdf:type owl:NamedIndividual)->
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "500000000"^^xsd:integer)
 ]
 [rule9: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Orbit"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
@@ -96,7 +96,7 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 
 
 [rule10: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Grid"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)-> 
@@ -106,7 +106,7 @@ noValue(?memComp rdf:type owl:NamedIndividual)->
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "1890500000"^^xsd:integer)
 ]
 [rule11: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Grid"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
@@ -116,7 +116,7 @@ noValue(?cpuComp rdf:type owl:NamedIndividual)->
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "2260000000"^^xsd:integer)
 ]
 [rule12: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Grid"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
@@ -140,8 +140,3 @@ uriConcat("http://open-multinet.info/ontology/omn-domain-pc#",str(?name),"dimage
 (?dimage <http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS> "VoyageLinux"^^xsd:string)
 ]
 
-[rule14: 
-(?node <http://open-multinet.info/ontology/omn-lifecycle#hasRole> ?hwtype)
-->
-(?node <foo> "bar") 
-]

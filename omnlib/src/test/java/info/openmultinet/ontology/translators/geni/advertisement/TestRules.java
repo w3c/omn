@@ -32,12 +32,10 @@ public class TestRules {
 		reasoner.setDerivationLogging(true);
 		InfModel infModel1 = ModelFactory.createInfModel(reasoner, rawModel1);
 		Iterator<?> list = infModel1.listStatements();
-		/*while (list.hasNext()) {
+		while (list.hasNext()) {
 		    System.out.println(" - " + list.next());
-		}*/
+		}
 		
-		Assert.assertTrue(infModel1.toString().contains("bar"));
-		//fixme, this should be true
-		Assert.assertFalse(infModel1.toString().contains("omn-monitoring-unit"));
+		Assert.assertTrue(infModel1.toString().contains("omn-monitoring-unit"));
 	}
 }
