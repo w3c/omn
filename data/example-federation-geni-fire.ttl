@@ -1,0 +1,588 @@
+@prefix : <http://w3.org/ns/omn/examples/geni-fire#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geni: <http://open-multinet.info/ontology/sfa#> .
+@prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
+@prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
+@prefix novi: <http://fp7-novi.eu/im.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix color: <http://geni-orca.renci.org/owl/app-color.owl#> .
+@prefix owl-s: <http://www.daml.org/services/owl-s/1.0DL/Service.owl#> .
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix service: <http://purl.org/ontology/service#> .
+@prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
+@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
+@base <http://w3.org/ns/omn/examples/geni-fire> .
+
+<http://w3.org/ns/omn/examples/geni-fire> rdf:type owl:Ontology ;
+                                          
+                                          rdfs:label "omn"@en ;
+                                          
+                                          dc:date "2014-11-11"^^xsd:date ;
+                                          
+                                          dcterms:modified "2015-10-12"^^xsd:date ;
+                                          
+                                          owl:versionInfo "2015-10-12"^^xsd:string ;
+                                          
+                                          vann:preferredNamespacePrefix "omn"^^xsd:string ;
+                                          
+                                          dc:title "GENI / FIRE Federation"@en ;
+                                          
+                                          dc:description "This data set lists experimental facilities available within the GENI and FIRE testbed federation."@en ;
+                                          
+                                          rdfs:comment "This data set lists experimental facilities available within the GENI and FIRE testbed federation."@en ;
+                                          
+                                          dc:creator <http://alex.willner.ws/about#me> ;
+                                          
+                                          dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+                                          
+                                          cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                          
+                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                          
+                                          dc:publisher <http://w3.org/community/omn/> ;
+                                          
+                                          foaf:homepage <http://w3.org/community/omn/> ;
+                                          
+                                          vann:preferredNamespaceUri : .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#hasEndpoint
+
+omn:hasEndpoint rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn#hasService
+
+omn:hasService rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#administers
+
+omn-federation:administers rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#hasFederationMember
+
+omn-federation:hasFederationMember rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+
+omn-federation:isAdministeredBy rdf:type owl:AnnotationProperty .
+
+
+
+###  http://rdfs.org/ns/void#sparqlEndpoint
+
+void:sparqlEndpoint rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+
+wgs84:lat rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+
+wgs84:long rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/based_near
+
+foaf:based_near rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/depiction
+
+foaf:depiction rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/homepage
+
+foaf:homepage rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/mbox
+
+foaf:mbox rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#Service
+
+omn:Service rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-geni-fire#AMService
+
+omn-domain-geni-fire:AMService rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-geni-fire#SAService
+
+omn-domain-geni-fire:SAService rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#Federation
+
+omn-federation:Federation rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#FederationMember
+
+omn-federation:FederationMember rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#Infrastructure
+
+omn-federation:Infrastructure rdf:type owl:Class .
+
+
+
+###  http://purl.org/vocommons/voaf#Vocabulary
+
+voaf:Vocabulary rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing
+
+wgs84:SpatialThing rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://example.org/about#1
+
+<http://example.org/about#1> rdf:type omn-federation:Infrastructure ,
+                                      owl:NamedIndividual ;
+                             
+                             rdfs:label "AM's not assigned to an infrastructure" ;
+                             
+                             omn:hasService <urn:publicid:IDN+HPCN.UAM+authority+am> ,
+                                            <urn:publicid:IDN+apt.emulab.net+authority+cm> ,
+                                            <urn:publicid:IDN+clemson.cloudlab.us+authority+cm> ,
+                                            <urn:publicid:IDN+emulab.kreonet.net+authority+cm> ,
+                                            <urn:publicid:IDN+emulab.net+authority+cm> ,
+                                            <urn:publicid:IDN+exogeni.net:bbnNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:ben+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:cienaNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:cienavmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:gwuNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:gwuvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:ion+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:nictavmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:nlr+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:osfNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:osfvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:pscNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:pscvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:slNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:slvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:tamuNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:tamuvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:ucdNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:ucdvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:uflNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:uflvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:umassNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:umassvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:uvanlNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:uvanlvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:wsuNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:wsuvmsite+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:wvnNet+authority+am> ,
+                                            <urn:publicid:IDN+exogeni.net:wvnvmsite+authority+am> ,
+                                            <urn:publicid:IDN+fms:aist:serm+authority+cm> ,
+                                            <urn:publicid:IDN+fms:aist:tnrm+authority+cm> ,
+                                            <urn:publicid:IDN+fms:kddi:serm+authority+cm> ,
+                                            <urn:publicid:IDN+fms:psnc:serm+authority+cm> ,
+                                            <urn:publicid:IDN+geni.case.edu+authority+cm> ,
+                                            <urn:publicid:IDN+geni.it.cornell.edu+authority+cm> ,
+                                            <urn:publicid:IDN+geni.kettering.edu+authority+cm> ,
+                                            <urn:publicid:IDN+geni.uchicago.edu+authority+cm> ,
+                                            <urn:publicid:IDN+genirack.nyu.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.cenic.net+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.clemson.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.cs.princeton.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.illinois.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.iu.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.maxgigapop.net+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.metrodatacenter.com+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.northwestern.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.nps.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.nysernet.org+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.rutgers.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.sox.net+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.stanford.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.umkc.edu+authority+cm> ,
+                                            <urn:publicid:IDN+instageni.wisc.edu+authority+cm> ,
+                                            <urn:publicid:IDN+it.uc3m.es+authority+cm> ,
+                                            <urn:publicid:IDN+lan.sdn.uky.edu+authority+cm> ,
+                                            <urn:publicid:IDN+ocf:aist:vtam+authority+cm> ,
+                                            <urn:publicid:IDN+ocf:eict:vtam+authority+cm> ,
+                                            <urn:publicid:IDN+ocf:psnc:vtam+authority+cm> ,
+                                            <urn:publicid:IDN+ocf:univbris:vtam+authority+cm> ,
+                                            <urn:publicid:IDN+omf:nitos+authority+cm> ,
+                                            <urn:publicid:IDN+pks2.sdn.uky.edu+authority+cm> ,
+                                            <urn:publicid:IDN+ple+authority+cm> ,
+                                            <urn:publicid:IDN+utah.cloudlab.us+authority+cm> ,
+                                            <urn:publicid:IDN+utahddc.geniracks.net+authority+cm> ,
+                                            <urn:publicid:IDN+wisc.cloudlab.us+authority+cm> .
+
+
+
+###  http://fed4fire.eu/about#backoffice
+
+<http://fed4fire.eu/about#backoffice> rdf:type omn-federation:Infrastructure ,
+                                               owl:NamedIndividual ;
+                                      
+                                      rdfs:label "Fed4FIRE Backoffice" ;
+                                      
+                                      rdfs:comment "The infrastructure for the portal, FLS, etc..." ;
+                                      
+                                      omn:hasEndpoint "Fed4FIRE Backoffice" ;
+                                      
+                                      omn-federation:isAdministeredBy <http://fed4fire.eu/about#me> ;
+                                      
+                                      omn:hasService <http://fed4fire.eu/about#portal> .
+
+
+
+###  http://fed4fire.eu/about#me
+
+<http://fed4fire.eu/about#me> rdf:type omn-federation:Federation ,
+                                       owl:NamedIndividual ;
+                              
+                              rdfs:label "Fed4FIRE" ;
+                              
+                              rdfs:comment "The Fed4FIRE federation is a collaboration of European Future Internet Research and Experimentation (FIRE) testbeds. It was formed by a consortium of initial 17 partner organisations from 8 countries and is coordinated by iMinds, Belgium. It started in October 2012." ;
+                              
+                              omn-federation:hasFederationMember <http://atos.net/about#me> ,
+                                                                 <http://eng.nia.or.kr/about#me> ;
+                              
+                              foaf:homepage <http://fed4fire.eu/> ;
+                              
+                              omn-federation:administers <http://fed4fire.eu/about#backoffice> ;
+                              
+                              omn-federation:hasFederationMember <http://www.bris.ac.uk/about#me> ,
+                                                                 <http://www.bt.com/about#me> ,
+                                                                 <http://www.dante.net/about#me> ,
+                                                                 <http://www.deimos-space.com/about#me> ,
+                                                                 <http://www.ed.ac.uk/about#me> ,
+                                                                 <http://www.eurescom.eu/about#me> ;
+                              
+                              foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
+                              
+                              omn-federation:hasFederationMember <http://www.fokus.fraunhofer.de/about#me> ,
+                                                                 <http://www.i2cat.net/about#me> ,
+                                                                 <http://www.iminds.be/about#me> ,
+                                                                 <http://www.inria.fr/about#me> ,
+                                                                 <http://www.kent.ac.uk/about#me> ,
+                                                                 <http://www.lancaster.ac.uk/about#me> ,
+                                                                 <http://www.nicta.com.au/about#me> ,
+                                                                 <http://www.ntua.gr/about#me> ,
+                                                                 <http://www.nuigalway.ie/about#me> ,
+                                                                 <http://www.southampton.ac.uk/about#me> ,
+                                                                 <http://www.sztaki.hu/about#me> ,
+                                                                 <http://www.televes.com/about#me> ,
+                                                                 <http://www.uc3m.es/about#me> ,
+                                                                 <http://www.uma.es/about#me> ,
+                                                                 <http://www.unican.es/about#me> ,
+                                                                 <http://www.upc.edu/about#me> ,
+                                                                 <http://www.upmc.fr/about#me> ,
+                                                                 <http://www.uth.gr/en/about#me> ,
+                                                                 <http://www.woox.com/about#me> ;
+                              
+                              foaf:mbox <mailto:contact@fed4fire.eu> .
+
+
+
+###  http://fed4fire.eu/about#portal
+
+<http://fed4fire.eu/about#portal> rdf:type omn:Service ,
+                                           owl:NamedIndividual ;
+                                  
+                                  rdfs:label "Fed4FIRE Single Sign-On Portal" ;
+                                  
+                                  omn:hasEndpoint <http://portal.fed4fire.eu/> .
+
+
+
+###  http://fuseco.fokus.fraunhofer.de/about#me
+
+<http://fuseco.fokus.fraunhofer.de/about#me> rdf:type omn-federation:Infrastructure ,
+                                                      owl:NamedIndividual ;
+                                             
+                                             rdfs:label "Fraunhofer FUSECO Playground" ;
+                                             
+                                             omn:hasService <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm> ,
+                                                            <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+sa> .
+
+
+
+###  http://w3.org/ns/omn/examples/foo
+
+<http://w3.org/ns/omn/examples/foo> rdf:type omn-federation:Infrastructure ,
+                                             owl:NamedIndividual ;
+                                    
+                                    omn:hasService <urn:publicid:IDN+ocf:i2cat:vtam+authority+cm> .
+
+
+
+###  http://w3.org/ns/omn/examples/foo2
+
+<http://w3.org/ns/omn/examples/foo2> rdf:type omn-federation:Infrastructure ,
+                                              owl:NamedIndividual ;
+                                     
+                                     omn:hasService <urn:publicid:IDN+fms:i2cat:serm+authority+cm> .
+
+
+
+###  http://w3.org/ns/omn/examples/geni-fire
+
+<http://w3.org/ns/omn/examples/geni-fire> rdf:type voaf:Vocabulary ,
+                                                   owl:NamedIndividual .
+
+
+
+###  http://wall1.ilabt.iminds.be/about#me
+
+<http://wall1.ilabt.iminds.be/about#me> rdf:type omn-federation:Infrastructure ,
+                                                 owl:NamedIndividual ;
+                                        
+                                        rdfs:label "WALL1" ;
+                                        
+                                        omn:hasService <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm> .
+
+
+
+###  http://wall2.ilabt.iminds.be/about#me
+
+<http://wall2.ilabt.iminds.be/about#me> rdf:type omn-federation:Infrastructure ,
+                                                 owl:NamedIndividual ;
+                                        
+                                        rdfs:label "WALL2" ;
+                                        
+                                        omn:hasService <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm> .
+
+
+
+###  http://wilab2.ilabt.iminds.be/about#me
+
+<http://wilab2.ilabt.iminds.be/about#me> rdf:type omn-federation:Infrastructure ,
+                                                  owl:NamedIndividual ;
+                                         
+                                         rdfs:label "WILAB2" ;
+                                         
+                                         omn:hasService <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm> .
+
+
+
+###  http://www.fokus.fraunhofer.de/about#me
+
+<http://www.fokus.fraunhofer.de/about#me> rdf:type omn-federation:FederationMember ,
+                                                   owl:NamedIndividual ;
+                                          
+                                          rdfs:label "Fraunhofer FOKUS" ;
+                                          
+                                          rdfs:comment "The Fraunhofer FOKUS is..." ;
+                                          
+                                          rdfs:isDefinedBy <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
+                                          
+                                          foaf:homepage <http://fokus.fraunhofer.de/> ;
+                                          
+                                          void:sparqlEndpoint <http://fuseco.fokus.fraunhofer.de/sparql> ;
+                                          
+                                          omn-federation:administers <http://fuseco.fokus.fraunhofer.de/about#me> ;
+                                          
+                                          foaf:depiction <https://www.fokus.fraunhofer.de/assets/logo-56550c0d3788abb69084c8017983224e.png> ;
+                                          
+                                          foaf:mbox <mailto:info@fokus.fraunhofer.de> ;
+                                          
+                                          foaf:based_near [ rdf:type wgs84:SpatialThing
+                                                          ] .
+
+
+
+###  http://www.i2cat.net/about#me
+
+<http://www.i2cat.net/about#me> rdf:type omn-federation:FederationMember ,
+                                         owl:NamedIndividual ;
+                                
+                                rdfs:label "i2CAT" ;
+                                
+                                omn-federation:administers <http://w3.org/ns/omn/examples/foo> ,
+                                                           <http://w3.org/ns/omn/examples/foo2> .
+
+
+
+###  http://www.iminds.be/about#me
+
+<http://www.iminds.be/about#me> rdf:type omn-federation:FederationMember ,
+                                         owl:NamedIndividual ;
+                                
+                                rdfs:label "iMinds" ;
+                                
+                                omn-federation:administers <http://wall1.ilabt.iminds.be/about#me> ,
+                                                           <http://wall2.ilabt.iminds.be/about#me> ,
+                                                           <http://wilab2.ilabt.iminds.be/about#me> .
+
+
+
+###  http://www.netmode.ntua.gr/about#me
+
+<http://www.netmode.ntua.gr/about#me> rdf:type omn-federation:Infrastructure ,
+                                               owl:NamedIndividual ;
+                                      
+                                      rdfs:label "NETMODE" ;
+                                      
+                                      omn:hasService <urn:publicid:IDN+omf:netmode+authority+cm> .
+
+
+
+###  http://www.ntua.gr/about#me
+
+<http://www.ntua.gr/about#me> rdf:type omn-federation:FederationMember ,
+                                       owl:NamedIndividual ;
+                              
+                              rdfs:label "NTUA" ;
+                              
+                              wgs84:long 23.782106 ;
+                              
+                              wgs84:lat 37.978326 ;
+                              
+                              rdfs:comment "National Technical University of Athens" ;
+                              
+                              omn-federation:administers <http://www.netmode.ntua.gr/about#me> ;
+                              
+                              foaf:depiction <http://www.ntua.gr/transparent.gif> .
+
+
+
+###  urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm
+
+<urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                                    owl:NamedIndividual ;
+                                                           
+                                                           rdfs:label "GENI AM v3 API" ;
+                                                           
+                                                           omn:hasEndpoint <http://fuseco.fokus.fraunhofer.de/api/sfa/am/v3> .
+
+
+
+###  urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+sa
+
+<urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+sa> rdf:type omn-domain-geni-fire:SAService ,
+                                                                    owl:NamedIndividual ;
+                                                           
+                                                           rdfs:label "GENI SA v1 API" ;
+                                                           
+                                                           omn:hasEndpoint <http://fuseco.fokus.fraunhofer.de/api/sfa/sa/v1> .
+
+
+
+###  urn:publicid:IDN+omf:netmode+authority+cm
+
+<urn:publicid:IDN+omf:netmode+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                     owl:NamedIndividual ;
+                                            
+                                            rdfs:label "NETMODE GENI AM v2 API" ;
+                                            
+                                            omn:hasEndpoint <https://vnews.netmode.ntua.gr:8001/RPC2> .
+
+
+
+###  urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm
+
+<urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                               owl:NamedIndividual ;
+                                                      
+                                                      rdfs:label "WALL1 AM" .
+
+
+
+###  urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm
+
+<urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                               owl:NamedIndividual ;
+                                                      
+                                                      rdfs:label "WALL2 AM" .
+
+
+
+###  urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm
+
+<urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                                owl:NamedIndividual ;
+                                                       
+                                                       rdfs:label "WILAB2 AM" .
+
+
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
+
