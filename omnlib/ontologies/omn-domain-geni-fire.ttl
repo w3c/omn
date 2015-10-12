@@ -56,9 +56,6 @@
 #
 #################################################################
 
-
-###  http://open-multinet.info/ontology/omn-domain-geni-fire#Available
-
 :AMService rdf:type owl:Class ;
 
            rdfs:comment "SFA Aggregate Manager"@en ;
@@ -68,3 +65,11 @@
            rdfs:seeAlso <http://groups.geni.net/geni/wiki/GAPI_AM_API> ;
 
            rdfs:subClassOf omn:Service .
+
+:SAService rdf:type owl:Class ;
+
+                      rdfs:comment "SFA Slice Authority"@en ;
+
+                      rdfs:label "SFA SA"@en ;
+
+                      rdfs:subClassOf omn:Service .
