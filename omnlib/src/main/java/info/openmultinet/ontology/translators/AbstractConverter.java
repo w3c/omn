@@ -30,6 +30,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.commons.io.IOUtils;
+
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -41,6 +43,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 
 public abstract class AbstractConverter {
 
+	public static final String FOLDER_RULES = "rules";
 	protected Reasoner reasoner = null;
 	protected final static String VENDOR = "omnlib";
 	public final static String RDFXML = "rdfxml";
@@ -105,11 +108,10 @@ public abstract class AbstractConverter {
 	}
 
 	public static List<Rule> getAllRules() throws URISyntaxException, IOException {
-		String[] a = getResourceListing(AbstractConverter.class, "rules");
+		List<URI> a = getResourceListing(AbstractConverter.FOLDER_RULES);
 		List<Rule> rules = new LinkedList<Rule>();
-		for (String x : a) {
-			final String ruleFile = File.separator + "rules" + File.separator + x;
-			String newRules = AbstractConverter.toString(ruleFile);
+		for (URI x : a) {
+			String newRules = IOUtils.toString(x);
 			for (Rule rule : Rule.parseRules(newRules)) {
 				rules.add(rule);
 			}
@@ -264,58 +266,35 @@ public abstract class AbstractConverter {
 		return xc;
 	}
 
-	/**
-	   * List directory contents for a resource folder. Not recursive.
-	   * This is basically a brute-force implementation.
-	   * Works for regular files and also JARs.
-	   *
-	   * @author Greg Briggs
-	   * @param clazz Any java class that lives in the same place as the resources you want.
-	   * @param path Should end with "/", but not start with one.
-	   * @return Just the name of each member item, not the full paths.
-	   * @throws URISyntaxException
-	   * @throws IOException
-	   */
-	  private static String[] getResourceListing(Class clazz, String path) throws URISyntaxException, IOException {
-	      URL dirURL = clazz.getClassLoader().getResource(path);
-	      if (dirURL != null && dirURL.getProtocol().equals("file")) {
-	        /* A file path: easy enough */
-	        return new File(dirURL.toURI()).list();
-	      }
-
-	      if (dirURL == null) {
-	        /*
-	         * In case of a jar file, we can't actually find a directory.
-	         * Have to assume the same jar as clazz.
-	         */
-	        String me = clazz.getName().replace(".", "/")+".class";
-	        dirURL = clazz.getClassLoader().getResource(me);
-	      }
-
-	      if (dirURL.getProtocol().equals("jar")) {
-	        /* A JAR path */
-	        String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!")); //strip out only the JAR file
-	        JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
-	        Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
-	        Set<String> result = new HashSet<String>(); //avoid duplicates in case it is a subdirectory
-	        while(entries.hasMoreElements()) {
-	          String name = entries.nextElement().getName();
-	          if (name.startsWith(path)) { //filter according to the path
-	            String entry = name.substring(path.length());
-	            int checkSubdir = entry.indexOf("/");
-	            if (checkSubdir >= 0) {
-	              // if it is a subdirectory, we just return the directory name
-	              entry = entry.substring(0, checkSubdir);
-	            }
-	            result.add(entry);
-	          }
-	        }
-	        return result.toArray(new String[result.size()]);
-	      }
-
-	      throw new UnsupportedOperationException("Cannot list files for URL "+dirURL);
-	  }
-
+	public static List<URI> getResourceListing(String path) throws IOException, URISyntaxException {
+		final File jarFile = new File(AbstractConverter.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		final List<URI> files = new LinkedList<URI>(); 
+		if(jarFile.isFile()) {  // Run with JAR file
+		    final JarFile jar = new JarFile(jarFile);
+		    final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
+		    while(entries.hasMoreElements()) {
+		        final String name = entries.nextElement().getName();
+		        if (name.startsWith(path + "/") && ! name.endsWith("/")) { //filter according to the path
+		            files.add(new URI("jar:" + jarFile.toURI() + "!/" + name));
+		        }
+		    }
+		    jar.close();
+		} else { // Run with IDE
+		    final URL url = AbstractConverter.class.getResource("/" + path);
+		    if (url != null) {
+		        try {
+		            final File apps = new File(url.toURI());
+		            for (File app : apps.listFiles()) {
+		                files.add(app.toURI());
+		            }
+		        } catch (URISyntaxException ex) {
+		            // never happens
+		        }
+		    }
+		}
+		return files;
+	}
+	
 	public static void print(Model model) {
 		Iterator<?> list = model.listStatements();
 		while (list.hasNext()) {
