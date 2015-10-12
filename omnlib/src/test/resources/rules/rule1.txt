@@ -31,3 +31,8 @@ noValues(?stoComp rdf:type owl:NamedIndividual)->
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring#hasUnit> <http://open-multinet.info/ontology/omn-monitoring-unit#giga>)
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "1"^^xsd:integer)
 ]
+[rule4: 
+(?node <http://open-multinet.info/ontology/omn-lifecycle#hasRole> ?hwtype)
+->
+(?node <foo> "bar") 
+]

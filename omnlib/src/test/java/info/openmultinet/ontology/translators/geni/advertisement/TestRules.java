@@ -1,8 +1,10 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.apache.jena.riot.RDFDataMgr;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -24,13 +26,16 @@ public class TestRules {
 	public void test() throws IOException {
 
 		final String rule1 = AbstractConverter.toString(RULEFILE1);
-		Model rawModel1 = RDFDataMgr.loadModel(RAWFILE1) ;
+		Model rawModel1 = RDFDataMgr.loadModel(RAWFILE1);
 		
 		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(rule1));
 		reasoner.setDerivationLogging(true);
 		InfModel infModel1 = ModelFactory.createInfModel(reasoner, rawModel1);
-		
-		//fixme Assert.assertTrue(infModel1.toString().contains(TestRules.EXPECTED1));
-	}
+		Iterator<?> list = infModel1.listStatements();
+		while (list.hasNext()) {
+		    System.out.println(" - " + list.next());
+		}
 
+		Assert.assertTrue(infModel1.toString().contains("bar"));
+	}
 }
