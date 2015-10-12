@@ -1,0 +1,42 @@
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix ns2: <http://opensdncore.org/ontology/> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omnlife: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix target: <http://localhost/resource/topology/8#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://localhost/resource/topology/8f7ddc0c-f459-4a9e-a87e-685d9504873a> a omn:Topology,
+        owl:NamedIndividual ;
+        a omnlife:Offering ;
+    omn:hasResource <http://localhost/resource/ToscaAdapter-1/8381e904-6262-4524-966d-dcbc926eff46>,
+        <http://localhost/resource/ToscaAdapter-1/a0b43cb52d17905277d5b5d5898009> .
+
+<http://localhost/resource/ToscaAdapter-1/8381e904-6262-4524-966d-dcbc926eff46> a <http://localhost/resource/ToscaAdapter-1/m2m_server>,
+        owl:NamedIndividual ;
+    omnlife:hasID "server1" ;
+    ns2:APP_PORT "15001"^^xsd:string ;
+    ns2:LOGGING_FILE "/var/log/openmtc/nscl.log"^^xsd:string ;
+    ns2:REQUIRE_AUTH "false"^^xsd:string ;
+    ns2:SERVICE_PORT "0"^^xsd:string ;
+    ns2:LOGGING_LEVEL "ERROR"^^xsd:string ;
+    ns2:NOTIFY_DISABLED "true"^^xsd:string ;
+    ns2:RETARGET_DISABLED "true"^^xsd:string ;
+    ns2:NOTIFY_CHAN_DISABLED "true"^^xsd:string ;
+    ns2:COAP_DISABLED "true"^^xsd:string ;
+    ns2:ANNC_AUTO "true"^^xsd:string ;
+    ns2:MGMT_INTF "1"^^xsd:string ;
+    ns2:ANNC_DISABLED "true"^^xsd:string ;
+    ns2:requires <http://localhost/resource/ToscaAdapter-1/a0b43cb52d17905277d5b5d5898009> .
+
+<http://localhost/resource/ToscaAdapter-1/a0b43cb52d17905277d5b5d5898009> a <http://localhost/resource/ToscaAdapter-1/m2m_gateway>,
+        owl:NamedIndividual ;
+    omnlife:hasID "gw1" ;
+    ns2:APP_PORT "12345"^^xsd:string ;
+    ns2:LOGGING_FILE "/var/log/openmtc/gscl.log"^^xsd:string ;
+    ns2:REQUIRE_AUTH "false"^^xsd:string ;
+    ns2:SERVICE_PORT "0"^^xsd:string .

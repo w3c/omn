@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for TOSCA OpenSNDCore Orchestrator. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://opensdncore.org/ontology/" elementFormDefault="qualified"
+	targetNamespace="http://opensdncore.org/ontology/">
+	<xs:element name="rspec_osco">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:osco" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="osco">
+		<xs:complexType>
+			<xs:attribute name="app_port" type="xs:string" />
+			<xs:attribute name="logging_file" type="xs:string" />
+			<xs:attribute name="require_auth" type="xs:boolean" />
+			<xs:attribute name="service_port" type="xs:string" />
+			<xs:attribute name="requires" type="xs:anyURI" />
+			<xs:attribute name="notify_disabled" type="xs:boolean" />
+			<xs:attribute name="retarget_disabled" type="xs:boolean" />
+			<xs:attribute name="logging_level" type="xs:string" />
+			<xs:attribute name="notify_chan_disabled" type="xs:boolean" />
+			<xs:attribute name="coap_disabled" type="xs:boolean" />
+			<xs:attribute name="annc_auto" type="xs:boolean" />
+			<xs:attribute name="mgmt_intf" type="xs:string" />
+			<xs:attribute name="annc_disabled" type="xs:boolean" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
