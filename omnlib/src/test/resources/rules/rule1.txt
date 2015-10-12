@@ -1,0 +1,33 @@
+[rule1: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdf:label "alix3d2"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_mem", ?memComp) 
+noValues(?memComp rdf:type owl:NamedIndividual)-> 
+(?memComp rdf:type owl:NamedIndividual)
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
+(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp <http://open-multinet.info/ontology/omn-monitoring#hasUnit> <http://open-multinet.info/ontology/omn-monitoring-unit#mega>)
+(?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256"^^xsd:integer)
+]
+[rule2: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdf:label "alix3d2"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_cpu", ?cpuComp) 
+noValues(?cpuComp rdf:type owl:NamedIndividual)->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
+(?cpuComp rdf:type owl:NamedIndividual)
+(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp <http://open-multinet.info/ontology/omn-monitoring#hasUnit> <http://open-multinet.info/ontology/omn-monitoring-unit#mega>)
+(?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "500"^^xsd:integer)
+]
+[rule3: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdf:label "alix3d2"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_sto", ?stoComp) 
+noValues(?stoComp rdf:type owl:NamedIndividual)->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
+(?stoComp rdf:type owl:NamedIndividual)
+(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp <http://open-multinet.info/ontology/omn-monitoring#hasUnit> <http://open-multinet.info/ontology/omn-monitoring-unit#giga>)
+(?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "1"^^xsd:integer)
+]

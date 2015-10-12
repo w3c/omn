@@ -206,7 +206,7 @@
         component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
         component_name="node19" exclusive="true">
         <available now="true"/>
-        <hardware_type name="Intel Atom"/>
+        <hardware_type name="Intel_Atom"/>
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node19:eth0"
             component_name="node19:eth0" role="control">
@@ -217,7 +217,7 @@
         component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
         component_name="node20" exclusive="true">
         <available now="true"/>
-        <hardware_type name="Intel Atom"/>
+        <hardware_type name="Intel_Atom"/>
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node20:eth0"
             component_name="node20:eth0" role="control">
