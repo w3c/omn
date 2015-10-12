@@ -1,0 +1,5 @@
+[parentIsService: 
+(?node <http://open-multinet.info/ontology/omn-lifecycle#parentOf> ?am)
+->
+(?am <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://open-multinet.info/ontology/omn-domain-geni-fire#AMService>)  
+]

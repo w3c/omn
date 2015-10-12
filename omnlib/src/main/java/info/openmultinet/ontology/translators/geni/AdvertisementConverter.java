@@ -91,6 +91,9 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.shared.InvalidPropertyURIException;
 import com.hp.hpl.jena.shared.PropertyNotFoundException;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -113,7 +116,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	public AdvertisementConverter() throws JAXBException {
 		super();
-		this.model = ModelFactory.createDefaultModel();
+		this.model = ModelFactory.createInfModel(this.reasoner, ModelFactory.createDefaultModel());
 		this.context = JAXBContext.newInstance(RSpecContents.class);
 		this.unmarshaller = context.createUnmarshaller();
 		this.of = new ObjectFactory();
@@ -125,8 +128,7 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	public void resetModel() {
-		this.model = null;
-		this.model = ModelFactory.createDefaultModel();
+		this.model = ModelFactory.createInfModel(this.reasoner, ModelFactory.createDefaultModel());
 	}
 
 	public Model getModel(final InputStream input) throws JAXBException,
