@@ -1,139 +1,257 @@
-[rule1: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "alix3d2"^^xsd:string)
+[rulea: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp)  
 (?memComp rdf:type owl:NamedIndividual)
 (?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256000000"^^xsd:integer)
 ]
-[rule2: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "alix3d2"^^xsd:string)
+[ruleb: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "500000000"^^xsd:integer)
 ]
-[rule3: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "alix3d2"^^xsd:string)
+[rulec: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
 (?stoComp rdf:type owl:NamedIndividual)
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "1000000000"^^xsd:integer)
 ]
 
+[rule1: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "alix3d2"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_mem", ?memComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp)  
+]
+[rule2: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "alix3d2"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_cpu", ?cpuComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
+]
+[rule3: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "alix3d2"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_sto", ?stoComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
+]
 
-[rule4: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+
+[ruled: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)-> 
 (?memComp rdf:type owl:NamedIndividual)
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 (?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "4000000000"^^xsd:integer)
 ]
-[rule5: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+[rulee: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "3400000000"^^xsd:integer)
 ]
-[rule6: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+[rulef: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
 (?stoComp rdf:type owl:NamedIndividual)
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "111000000000"^^xsd:integer)
 ]
 
 
-[rule7: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+[rule4: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_mem", ?memComp) 
+-> 
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
+]
+[rule5: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_cpu", ?cpuComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
+]
+[rule6: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_sto", ?stoComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
+]
+
+
+
+[ruleg: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)-> 
 (?memComp rdf:type owl:NamedIndividual)
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 (?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256000000"^^xsd:integer)
 ]
-[rule8: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+[ruleh: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "500000000"^^xsd:integer)
 ]
-[rule9: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+[rulei: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
 (?stoComp rdf:type owl:NamedIndividual)
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "59626300000"^^xsd:integer)
 ]
 
+[rule7: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_mem", ?memComp) 
+-> 
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
+]
+[rule8: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_cpu", ?cpuComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
+]
+[rule9: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_sto", ?stoComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
+]
 
 
-[rule10: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+
+
+[rulej: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_mem", ?memComp) 
 noValue(?memComp rdf:type owl:NamedIndividual)-> 
 (?memComp rdf:type owl:NamedIndividual)
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 (?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
-(?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "1890500000"^^xsd:integer)
+(?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256000000"^^xsd:integer)
 ]
-[rule11: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+[rulek: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
 (?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "2260000000"^^xsd:integer)
 ]
-[rule12: 
-(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
-(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+[rulel: 
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_sto", ?stoComp) 
 noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
 (?stoComp rdf:type owl:NamedIndividual)
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "59626300000"^^xsd:integer)
 ]
+
+
+[rule10: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_mem", ?memComp) 
+-> 
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
+]
+[rule11: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_cpu", ?cpuComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
+]
+[rule12: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_sto", ?stoComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
+]
+
+
+
+[rulem: 
+uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_mem", ?memComp) 
+noValue(?memComp rdf:type owl:NamedIndividual)-> 
+(?memComp rdf:type owl:NamedIndividual)
+(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "2000000000"^^xsd:integer)
+]
+[rulen: 
+uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_cpu", ?cpuComp) 
+noValue(?cpuComp rdf:type owl:NamedIndividual)->
+(?cpuComp rdf:type owl:NamedIndividual)
+(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "2128000000"^^xsd:integer)
+]
+[ruleo: 
+uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_sto", ?stoComp) 
+noValue(?stoComp rdf:type owl:NamedIndividual)->
+(?stoComp rdf:type owl:NamedIndividual)
+(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "250000000000"^^xsd:integer)
+]
+
+
 [rule13: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "Intel Atom"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_mem", ?memComp) 
+-> 
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
+]
+[rule14: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "Intel Atom"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_cpu", ?cpuComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
+]
+[rule15: 
+(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?hwtype rdfs:label "Intel Atom"^^xsd:string)
+uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_sto", ?stoComp) 
+->
+(?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
+]
+
+
+
+[rule16: 
 (?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
-(?node <http://open-multinet.info/ontology/omn-resource#hasSliverType> ?stype)
 (?node <http://open-multinet.info/ontology/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)
-(?node rdfs:label ?name) 
+(?node rdfs:label ?name)
+uriConcat("http://open-multinet.info/ontology/omn-resource#",str(?name),"sltype", ?stype)
 uriConcat("http://open-multinet.info/ontology/omn-domain-pc#",str(?name),"dimageOS", ?dimage)  
 ->
+(?node <http://open-multinet.info/ontology/omn-resource#hasSliverType> ?stype)
 (?stype <http://open-multinet.info/ontology/omn-domain-pc#hasDiskImage> ?dimage)
 (?dimage rdf:type owl:NamedIndividual)
 (?dimage rdf:type <http://open-multinet.info/ontology/omn-domain-pc#DiskImage>)
 (?dimage <http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS> "VoyageLinux"^^xsd:string)
 ]
+
+
+[rule17:
+(?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
+(?node <http://open-multinet.info/ontology/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)
+(?node rdfs:label ?name)
+->
+(?node <http://www.w3.org/2003/01/geo/wgs84_pos#lat>   "37.9813"^^xsd:float)
+(?node <http://www.w3.org/2003/01/geo/wgs84_pos#long>  "23.7827"^^xsd:float)
+]
+
