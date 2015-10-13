@@ -38,11 +38,11 @@
                                           
                                           dc:date "2014-11-11"^^xsd:date ;
                                           
-                                          dcterms:modified "2015-10-12"^^xsd:date ;
-                                          
                                           owl:versionInfo "2015-10-12"^^xsd:string ;
                                           
                                           vann:preferredNamespacePrefix "omn"^^xsd:string ;
+                                          
+                                          dcterms:modified "2015-10-13" ;
                                           
                                           dc:title "GENI / FIRE Federation"@en ;
                                           
@@ -286,7 +286,6 @@ wgs84:SpatialThing rdf:type owl:Class .
                                             <urn:publicid:IDN+ocf:eict:vtam+authority+cm> ,
                                             <urn:publicid:IDN+ocf:psnc:vtam+authority+cm> ,
                                             <urn:publicid:IDN+ocf:univbris:vtam+authority+cm> ,
-                                            <urn:publicid:IDN+omf:nitos+authority+cm> ,
                                             <urn:publicid:IDN+pks2.sdn.uky.edu+authority+cm> ,
                                             <urn:publicid:IDN+ple+authority+cm> ,
                                             <urn:publicid:IDN+utah.cloudlab.us+authority+cm> ,
@@ -306,58 +305,58 @@ wgs84:SpatialThing rdf:type owl:Class .
                                       
                                       omn:hasEndpoint "Fed4FIRE Backoffice" ;
                                       
-                                      omn-federation:isAdministeredBy <http://fed4fire.eu/about#me> ;
+                                      omn-federation:isAdministeredBy <http://fed4fire.eu/about#federation> ;
                                       
                                       omn:hasService <http://fed4fire.eu/about#portal> .
 
 
 
-###  http://fed4fire.eu/about#me
+###  http://fed4fire.eu/about#federation
 
-<http://fed4fire.eu/about#me> rdf:type omn-federation:Federation ,
-                                       owl:NamedIndividual ;
-                              
-                              rdfs:label "Fed4FIRE" ;
-                              
-                              rdfs:comment "The Fed4FIRE federation is a collaboration of European Future Internet Research and Experimentation (FIRE) testbeds. It was formed by a consortium of initial 17 partner organisations from 8 countries and is coordinated by iMinds, Belgium. It started in October 2012." ;
-                              
-                              omn-federation:hasFederationMember <http://atos.net/about#me> ,
-                                                                 <http://eng.nia.or.kr/about#me> ;
-                              
-                              foaf:homepage <http://fed4fire.eu/> ;
-                              
-                              omn-federation:administers <http://fed4fire.eu/about#backoffice> ;
-                              
-                              omn-federation:hasFederationMember <http://www.bris.ac.uk/about#me> ,
-                                                                 <http://www.bt.com/about#me> ,
-                                                                 <http://www.dante.net/about#me> ,
-                                                                 <http://www.deimos-space.com/about#me> ,
-                                                                 <http://www.ed.ac.uk/about#me> ,
-                                                                 <http://www.eurescom.eu/about#me> ;
-                              
-                              foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
-                              
-                              omn-federation:hasFederationMember <http://www.fokus.fraunhofer.de/about#me> ,
-                                                                 <http://www.i2cat.net/about#me> ,
-                                                                 <http://www.iminds.be/about#me> ,
-                                                                 <http://www.inria.fr/about#me> ,
-                                                                 <http://www.kent.ac.uk/about#me> ,
-                                                                 <http://www.lancaster.ac.uk/about#me> ,
-                                                                 <http://www.nicta.com.au/about#me> ,
-                                                                 <http://www.ntua.gr/about#me> ,
-                                                                 <http://www.nuigalway.ie/about#me> ,
-                                                                 <http://www.southampton.ac.uk/about#me> ,
-                                                                 <http://www.sztaki.hu/about#me> ,
-                                                                 <http://www.televes.com/about#me> ,
-                                                                 <http://www.uc3m.es/about#me> ,
-                                                                 <http://www.uma.es/about#me> ,
-                                                                 <http://www.unican.es/about#me> ,
-                                                                 <http://www.upc.edu/about#me> ,
-                                                                 <http://www.upmc.fr/about#me> ,
-                                                                 <http://www.uth.gr/en/about#me> ,
-                                                                 <http://www.woox.com/about#me> ;
-                              
-                              foaf:mbox <mailto:contact@fed4fire.eu> .
+<http://fed4fire.eu/about#federation> rdf:type omn-federation:Federation ,
+                                               owl:NamedIndividual ;
+                                      
+                                      rdfs:label "Fed4FIRE" ;
+                                      
+                                      rdfs:comment "The Fed4FIRE federation is a collaboration of European Future Internet Research and Experimentation (FIRE) testbeds. It was formed by a consortium of initial 17 partner organisations from 8 countries and is coordinated by iMinds, Belgium. It started in October 2012." ;
+                                      
+                                      omn-federation:hasFederationMember <http://atos.net/about#me> ,
+                                                                         <http://eng.nia.or.kr/about#me> ;
+                                      
+                                      foaf:homepage <http://fed4fire.eu/> ;
+                                      
+                                      omn-federation:administers <http://fed4fire.eu/about#backoffice> ;
+                                      
+                                      omn-federation:hasFederationMember <http://www.bris.ac.uk/about#me> ,
+                                                                         <http://www.bt.com/about#me> ,
+                                                                         <http://www.dante.net/about#me> ,
+                                                                         <http://www.deimos-space.com/about#me> ,
+                                                                         <http://www.ed.ac.uk/about#me> ,
+                                                                         <http://www.eurescom.eu/about#me> ;
+                                      
+                                      foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
+                                      
+                                      omn-federation:hasFederationMember <http://www.fokus.fraunhofer.de/about#me> ,
+                                                                         <http://www.i2cat.net/about#me> ,
+                                                                         <http://www.iminds.be/about#organization> ,
+                                                                         <http://www.inria.fr/about#me> ,
+                                                                         <http://www.kent.ac.uk/about#me> ,
+                                                                         <http://www.lancaster.ac.uk/about#me> ,
+                                                                         <http://www.nicta.com.au/about#me> ,
+                                                                         <http://www.ntua.gr/about#me> ,
+                                                                         <http://www.nuigalway.ie/about#me> ,
+                                                                         <http://www.southampton.ac.uk/about#me> ,
+                                                                         <http://www.sztaki.hu/about#me> ,
+                                                                         <http://www.televes.com/about#me> ,
+                                                                         <http://www.uc3m.es/about#me> ,
+                                                                         <http://www.uma.es/about#me> ,
+                                                                         <http://www.unican.es/about#me> ,
+                                                                         <http://www.upc.edu/about#me> ,
+                                                                         <http://www.upmc.fr/about#me> ,
+                                                                         <http://www.uth.gr/en/about#me> ,
+                                                                         <http://www.woox.com/about#me> ;
+                                      
+                                      foaf:mbox <mailto:contact@fed4fire.eu> .
 
 
 
@@ -384,21 +383,32 @@ wgs84:SpatialThing rdf:type owl:Class .
 
 
 
-###  http://w3.org/ns/omn/examples/foo
+###  http://i2cat.es/about#serm
 
-<http://w3.org/ns/omn/examples/foo> rdf:type omn-federation:Infrastructure ,
+<http://i2cat.es/about#serm> rdf:type omn-federation:Infrastructure ,
+                                      owl:NamedIndividual ;
+                             
+                             omn:hasService <urn:publicid:IDN+fms:i2cat:serm+authority+cm> .
+
+
+
+###  http://i2cat.es/about#vtam
+
+<http://i2cat.es/about#vtam> rdf:type omn-federation:Infrastructure ,
+                                      owl:NamedIndividual ;
+                             
+                             omn:hasService <urn:publicid:IDN+ocf:i2cat:vtam+authority+cm> .
+
+
+
+###  http://nitlab.inf.uth.gr/about#me
+
+<http://nitlab.inf.uth.gr/about#me> rdf:type omn-federation:Infrastructure ,
                                              owl:NamedIndividual ;
                                     
-                                    omn:hasService <urn:publicid:IDN+ocf:i2cat:vtam+authority+cm> .
-
-
-
-###  http://w3.org/ns/omn/examples/foo2
-
-<http://w3.org/ns/omn/examples/foo2> rdf:type omn-federation:Infrastructure ,
-                                              owl:NamedIndividual ;
-                                     
-                                     omn:hasService <urn:publicid:IDN+fms:i2cat:serm+authority+cm> .
+                                    rdfs:label "NITOS" ;
+                                    
+                                    omn:hasService <urn:publicid:IDN+omf:nitos+authority+cm> .
 
 
 
@@ -409,36 +419,36 @@ wgs84:SpatialThing rdf:type owl:Class .
 
 
 
-###  http://wall1.ilabt.iminds.be/about#me
+###  http://wall1.ilabt.iminds.be/about#infrastructure
 
-<http://wall1.ilabt.iminds.be/about#me> rdf:type omn-federation:Infrastructure ,
-                                                 owl:NamedIndividual ;
-                                        
-                                        rdfs:label "WALL1" ;
-                                        
-                                        omn:hasService <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm> .
-
-
-
-###  http://wall2.ilabt.iminds.be/about#me
-
-<http://wall2.ilabt.iminds.be/about#me> rdf:type omn-federation:Infrastructure ,
-                                                 owl:NamedIndividual ;
-                                        
-                                        rdfs:label "WALL2" ;
-                                        
-                                        omn:hasService <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm> .
+<http://wall1.ilabt.iminds.be/about#infrastructure> rdf:type omn-federation:Infrastructure ,
+                                                             owl:NamedIndividual ;
+                                                    
+                                                    rdfs:label "WALL1" ;
+                                                    
+                                                    omn:hasService <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm> .
 
 
 
-###  http://wilab2.ilabt.iminds.be/about#me
+###  http://wall2.ilabt.iminds.be/about#infrastructure
 
-<http://wilab2.ilabt.iminds.be/about#me> rdf:type omn-federation:Infrastructure ,
-                                                  owl:NamedIndividual ;
-                                         
-                                         rdfs:label "WILAB2" ;
-                                         
-                                         omn:hasService <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm> .
+<http://wall2.ilabt.iminds.be/about#infrastructure> rdf:type omn-federation:Infrastructure ,
+                                                             owl:NamedIndividual ;
+                                                    
+                                                    rdfs:label "WALL2" ;
+                                                    
+                                                    omn:hasService <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm> .
+
+
+
+###  http://wilab2.ilabt.iminds.be/about#infrastructure
+
+<http://wilab2.ilabt.iminds.be/about#infrastructure> rdf:type omn-federation:Infrastructure ,
+                                                              owl:NamedIndividual ;
+                                                     
+                                                     rdfs:label "WILAB2" ;
+                                                     
+                                                     omn:hasService <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm> .
 
 
 
@@ -475,21 +485,21 @@ wgs84:SpatialThing rdf:type owl:Class .
                                 
                                 rdfs:label "i2CAT" ;
                                 
-                                omn-federation:administers <http://w3.org/ns/omn/examples/foo> ,
-                                                           <http://w3.org/ns/omn/examples/foo2> .
+                                omn-federation:administers <http://i2cat.es/about#serm> ,
+                                                           <http://i2cat.es/about#vtam> .
 
 
 
-###  http://www.iminds.be/about#me
+###  http://www.iminds.be/about#organization
 
-<http://www.iminds.be/about#me> rdf:type omn-federation:FederationMember ,
-                                         owl:NamedIndividual ;
-                                
-                                rdfs:label "iMinds" ;
-                                
-                                omn-federation:administers <http://wall1.ilabt.iminds.be/about#me> ,
-                                                           <http://wall2.ilabt.iminds.be/about#me> ,
-                                                           <http://wilab2.ilabt.iminds.be/about#me> .
+<http://www.iminds.be/about#organization> rdf:type omn-federation:FederationMember ,
+                                                   owl:NamedIndividual ;
+                                          
+                                          rdfs:label "iMinds" ;
+                                          
+                                          omn-federation:administers <http://wall1.ilabt.iminds.be/about#infrastructure> ,
+                                                                     <http://wall2.ilabt.iminds.be/about#infrastructure> ,
+                                                                     <http://wilab2.ilabt.iminds.be/about#infrastructure> .
 
 
 
@@ -523,6 +533,17 @@ wgs84:SpatialThing rdf:type owl:Class .
 
 
 
+###  http://www.uth.gr/en/about#me
+
+<http://www.uth.gr/en/about#me> rdf:type omn-federation:FederationMember ,
+                                         owl:NamedIndividual ;
+                                
+                                rdfs:label "UTH" ;
+                                
+                                omn-federation:administers <http://nitlab.inf.uth.gr/about#me> .
+
+
+
 ###  urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm
 
 <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
@@ -553,6 +574,17 @@ wgs84:SpatialThing rdf:type owl:Class .
                                             rdfs:label "NETMODE GENI AM v2 API" ;
                                             
                                             omn:hasEndpoint <https://vnews.netmode.ntua.gr:8001/RPC2> .
+
+
+
+###  urn:publicid:IDN+omf:nitos+authority+cm
+
+<urn:publicid:IDN+omf:nitos+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                   owl:NamedIndividual ;
+                                          
+                                          rdfs:label "NITOS GENI AM v2 API" ;
+                                          
+                                          omn:hasEndpoint <https://nitlab.inf.uth.gr:8001/RPC2> .
 
 
 
