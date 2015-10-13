@@ -21,21 +21,21 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 ]
 
 [rule1: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_mem", ?memComp) 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp)  
 ]
 [rule2: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_cpu", ?cpuComp) 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 ]
 [rule3: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","alix3d2_sto", ?stoComp) 
 ->
@@ -67,21 +67,21 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 
 
 [rule4: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Icarus"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_mem", ?memComp) 
 -> 
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 ]
 [rule5: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Icarus"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_cpu", ?cpuComp) 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 ]
 [rule6: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Icarus"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Icarus_sto", ?stoComp) 
 ->
@@ -113,21 +113,21 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 ]
 
 [rule7: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Orbit"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_mem", ?memComp) 
 -> 
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 ]
 [rule8: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Orbit"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_cpu", ?cpuComp) 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 ]
 [rule9: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Orbit"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Orbit_sto", ?stoComp) 
 ->
@@ -161,21 +161,21 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 
 
 [rule10: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Grid"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_mem", ?memComp) 
 -> 
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 ]
 [rule11: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Grid"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_cpu", ?cpuComp) 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 ]
 [rule12: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "PC-Grid"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Grid_sto", ?stoComp) 
 ->
@@ -208,21 +208,21 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 
 
 [rule13: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "Intel Atom"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_mem", ?memComp) 
 -> 
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?memComp) 
 ]
 [rule14: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "Intel Atom"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_cpu", ?cpuComp) 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?cpuComp) 
 ]
 [rule15: 
-(?node <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType> ?hwtype)
+(?node <http://open-multinet.info/ontology/omn-resource#hasHardwareType> ?hwtype)
 (?hwtype rdfs:label "Intel Atom"^^xsd:string)
 uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_sto", ?stoComp) 
 ->
