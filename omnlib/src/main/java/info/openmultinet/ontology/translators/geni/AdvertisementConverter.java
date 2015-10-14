@@ -116,7 +116,8 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	public AdvertisementConverter() throws JAXBException {
 		super();
-		this.model = ModelFactory.createInfModel(this.reasoner, ModelFactory.createDefaultModel());
+		this.model = ModelFactory.createInfModel(this.reasoner,
+				ModelFactory.createDefaultModel());
 		this.context = JAXBContext.newInstance(RSpecContents.class);
 		this.unmarshaller = context.createUnmarshaller();
 		this.of = new ObjectFactory();
@@ -128,7 +129,8 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	public void resetModel() {
-		this.model = ModelFactory.createInfModel(this.reasoner, ModelFactory.createDefaultModel());
+		this.model = ModelFactory.createInfModel(this.reasoner,
+				ModelFactory.createDefaultModel());
 	}
 
 	public Model getModel(final InputStream input) throws JAXBException,
@@ -692,7 +694,7 @@ public class AdvertisementConverter extends AbstractConverter {
 		if (content.getName() == null) {
 			throw new MissingRspecElementException("link_type > name");
 		}
-		linkResource.addProperty(Omn_lifecycle.hasLinkName, content.getName());
+		linkResource.addProperty(RDFS.label, content.getName());
 
 	}
 
@@ -703,9 +705,7 @@ public class AdvertisementConverter extends AbstractConverter {
 		if (content.getName() != null) {
 			linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
 					content.getName());
-
 		}
-
 	}
 
 	private void extractLinkProperties(JAXBElement<?> linkElement,
@@ -955,8 +955,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			omnNode.addProperty(Omn.isResourceOf, topology);
 
 			if (rspecNode.getComponentManagerId() != null) {
-				RDFNode componentManager = ResourceFactory.createResource(rspecNode
-						.getComponentManagerId());
+				RDFNode componentManager = ResourceFactory
+						.createResource(rspecNode.getComponentManagerId());
 				omnNode.addProperty(Omn_lifecycle.managedBy, componentManager);
 			}
 
@@ -2121,11 +2121,18 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void setLinkDetails(Statement resource, LinkContents link) {
 
-		List<Statement> linkTypes = resource.getResource()
-				.listProperties(Omn_lifecycle.hasLinkName).toList();
+		// List<Statement> linkTypes = resource.getResource()
+		// .listProperties(Omn_lifecycle.hasLinkName).toList();
+		// for (Statement linkStatement : linkTypes) {
+		// String linkName = linkStatement.getObject().asLiteral().getString();
+		// LinkType linkType = new ObjectFactory().createLinkType();
+		// linkType.setName(linkName);
+		// link.getAnyOrPropertyOrLinkType().add(linkType);
+		// }
 
-		for (Statement linkStatement : linkTypes) {
-			String linkName = linkStatement.getObject().asLiteral().getString();
+		if (resource.getResource().hasProperty(RDFS.label)) {
+			String linkName = resource.getResource().getProperty(RDFS.label)
+					.getObject().asLiteral().getString();
 			LinkType linkType = new ObjectFactory().createLinkType();
 			linkType.setName(linkName);
 			link.getAnyOrPropertyOrLinkType().add(linkType);

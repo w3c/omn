@@ -618,25 +618,6 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasLinkName
-
-:hasLinkName rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has link name"@en ;
-       
-        rdfs:comment "has link name"@en ;
-       
-        rdfs:seeAlso "GENI Manifest RSpec v3: link_type name"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
-                       omn:Service
-                     )
-        ] ;
-       
-        rdfs:range xsd:string .
-
-
 ###  http://open-multinet.info/ontology/omn-lifecycle#resourceId
 
 :resourceId rdf:type owl:DatatypeProperty ;

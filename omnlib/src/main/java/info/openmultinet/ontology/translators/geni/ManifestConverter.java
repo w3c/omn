@@ -284,7 +284,7 @@ public class ManifestConverter extends AbstractConverter {
 
 			node.getAnyOrRelationOrLocation().add(osco);
 		}
-		
+
 	}
 
 	private static void setReservation(Statement omnResource, NodeContents node) {
@@ -421,10 +421,17 @@ public class ManifestConverter extends AbstractConverter {
 					.getResource().getURI(), "sliver"));
 		}
 
-		if (resource.getResource().hasProperty(Omn_lifecycle.hasLinkName)) {
-			String linkName = resource.getResource()
-					.getProperty(Omn_lifecycle.hasLinkName).getObject()
-					.asLiteral().getString();
+		// if (resource.getResource().hasProperty(Omn_lifecycle.hasLinkName)) {
+		// String linkName = resource.getResource()
+		// .getProperty(Omn_lifecycle.hasLinkName).getObject()
+		// .asLiteral().getString();
+		// LinkType linkType = new ObjectFactory().createLinkType();
+		// linkType.setName(linkName);
+		// link.getAnyOrPropertyOrLinkType().add(linkType);
+		// }
+		if (resource.getResource().hasProperty(RDFS.label)) {
+			String linkName = resource.getResource().getProperty(RDFS.label)
+					.getObject().asLiteral().getString();
 			LinkType linkType = new ObjectFactory().createLinkType();
 			linkType.setName(linkName);
 			link.getAnyOrPropertyOrLinkType().add(linkType);
@@ -1558,7 +1565,8 @@ public class ManifestConverter extends AbstractConverter {
 		if (linkName == null) {
 			throw new MissingRspecElementException("link_type > name");
 		}
-		linkResource.addProperty(Omn_lifecycle.hasLinkName, linkName);
+		// linkResource.addProperty(Omn_lifecycle.hasLinkName, linkName);
+		linkResource.addProperty(RDFS.label, linkName);
 
 		// add link type as RDF type, analog to sliver type
 		if (AbstractConverter.isUrl(linkName)) {
