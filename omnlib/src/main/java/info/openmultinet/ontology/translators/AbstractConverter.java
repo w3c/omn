@@ -107,7 +107,8 @@ public abstract class AbstractConverter {
 		return result.toString();
 	}
 
-	public static List<Rule> getAllRules() throws URISyntaxException, IOException {
+	public static List<Rule> getAllRules() throws URISyntaxException,
+			IOException {
 		List<URI> a = getResourceListing(AbstractConverter.FOLDER_RULES);
 		List<Rule> rules = new LinkedList<Rule>();
 		for (URI x : a) {
@@ -118,6 +119,7 @@ public abstract class AbstractConverter {
 		}
 		return rules;
 	}
+
 	/**
 	 * Returns whether the URI is a generic OWL/RDFS/OMN class or not
 	 *
@@ -195,7 +197,12 @@ public abstract class AbstractConverter {
 	public static boolean isUrl(String url) {
 
 		URI uri = null;
-		uri = URI.create(url);
+
+		try {
+			uri = URI.create(url);
+		} catch (java.lang.IllegalArgumentException e) {
+			return false;
+		}
 
 		if (uri != null) {
 			if (uri.getScheme() != null) {
@@ -217,7 +224,12 @@ public abstract class AbstractConverter {
 	public static boolean isUrn(String urn) {
 
 		URI uri = null;
-		uri = URI.create(urn);
+
+		try {
+			uri = URI.create(urn);
+		} catch (java.lang.IllegalArgumentException e) {
+			return false;
+		}
 
 		if (uri != null) {
 			if (uri.getScheme() != null) {
@@ -266,39 +278,47 @@ public abstract class AbstractConverter {
 		return xc;
 	}
 
-	public static List<URI> getResourceListing(String path) throws IOException, URISyntaxException {
-		final File jarFile = new File(AbstractConverter.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		final List<URI> files = new LinkedList<URI>(); 
-		if(jarFile.isFile()) {  // Run with JAR file
-		    final JarFile jar = new JarFile(jarFile);
-		    final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
-		    while(entries.hasMoreElements()) {
-		        final String name = entries.nextElement().getName();
-		        if (name.startsWith(path + "/") && ! name.endsWith("/")) { //filter according to the path
-		            files.add(new URI("jar:" + jarFile.toURI() + "!/" + name));
-		        }
-		    }
-		    jar.close();
+	public static List<URI> getResourceListing(String path) throws IOException,
+			URISyntaxException {
+		final File jarFile = new File(AbstractConverter.class
+				.getProtectionDomain().getCodeSource().getLocation().getPath());
+		final List<URI> files = new LinkedList<URI>();
+		if (jarFile.isFile()) { // Run with JAR file
+			final JarFile jar = new JarFile(jarFile);
+			final Enumeration<JarEntry> entries = jar.entries(); // gives ALL
+																	// entries
+																	// in jar
+			while (entries.hasMoreElements()) {
+				final String name = entries.nextElement().getName();
+				if (name.startsWith(path + "/") && !name.endsWith("/")) { // filter
+																			// according
+																			// to
+																			// the
+																			// path
+					files.add(new URI("jar:" + jarFile.toURI() + "!/" + name));
+				}
+			}
+			jar.close();
 		} else { // Run with IDE
-		    final URL url = AbstractConverter.class.getResource("/" + path);
-		    if (url != null) {
-		        try {
-		            final File apps = new File(url.toURI());
-		            for (File app : apps.listFiles()) {
-		                files.add(app.toURI());
-		            }
-		        } catch (URISyntaxException ex) {
-		            // never happens
-		        }
-		    }
+			final URL url = AbstractConverter.class.getResource("/" + path);
+			if (url != null) {
+				try {
+					final File apps = new File(url.toURI());
+					for (File app : apps.listFiles()) {
+						files.add(app.toURI());
+					}
+				} catch (URISyntaxException ex) {
+					// never happens
+				}
+			}
 		}
 		return files;
 	}
-	
+
 	public static void print(Model model) {
 		Iterator<?> list = model.listStatements();
 		while (list.hasNext()) {
-		    System.out.println(" - " + list.next());
+			System.out.println(" - " + list.next());
 		}
 	}
 
