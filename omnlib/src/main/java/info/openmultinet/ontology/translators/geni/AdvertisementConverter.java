@@ -91,10 +91,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
-import com.hp.hpl.jena.reasoner.rulesys.Rule;
-import com.hp.hpl.jena.shared.InvalidPropertyURIException;
 import com.hp.hpl.jena.shared.PropertyNotFoundException;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -1366,63 +1362,62 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void tryExtractDiskImage(Object rspecSliverObject,
 			Resource omnSliver) {
-		try {
-			@SuppressWarnings("unchecked")
-			JAXBElement<DiskImageContents> diJaxb = (JAXBElement<DiskImageContents>) rspecSliverObject;
-			DiskImageContents diskImageContents = diJaxb.getValue();
 
-			// removed, as does not account for multiple disk images with same
-			// url
-			// String diskImageURL = diskImageContents.getUrl();
-			// Resource diskImage = model.createResource(diskImageURL);
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource diskImage = model.createResource(uuid);
-			diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+		if (rspecSliverObject instanceof JAXBElement) {
+			// check if disk_image
+			if (((JAXBElement<?>) rspecSliverObject).getDeclaredType().equals(
+					SliverType.DiskImage.class)) {
 
-			// add name info
-			String name = diskImageContents.getName();
-			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
-			// omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
-			omnSliver.addProperty(Omn_domain_pc.hasDiskImage, diskImage);
+				DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) rspecSliverObject)
+						.getValue();
 
-			String os = diskImageContents.getOs();
-			if (os != null) {
-				diskImage.addLiteral(Omn_domain_pc.hasDiskimageOS, os);
+				// removed, as does not account for multiple disk images with
+				// same url
+				// String diskImageURL = diskImageContents.getUrl();
+				// Resource diskImage = model.createResource(diskImageURL);
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource diskImage = model.createResource(uuid);
+				diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+
+				// add name info
+				String name = diskImageContents.getName();
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
+				// omnSliver.addProperty(Omn_lifecycle.canImplement, diskImage);
+				omnSliver.addProperty(Omn_domain_pc.hasDiskImage, diskImage);
+
+				String os = diskImageContents.getOs();
+				if (os != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageOS, os);
+				}
+
+				String version = diskImageContents.getVersion();
+				if (version != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageVersion,
+							version);
+				}
+
+				String description = diskImageContents.getDescription();
+				if (description != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageDescription,
+							description);
+				}
+
+				String url = diskImageContents.getUrl();
+				if (url != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
+				}
+
+				// System.out.println(rspecSliverObject.toString());
+				@SuppressWarnings("unchecked")
+				JAXBElement<DiskImage> diskImageElement = (JAXBElement<DiskImage>) rspecSliverObject;
+				String defaultString = diskImageElement.getValue().getDefault();
+
+				if (defaultString != null) {
+					diskImage.addLiteral(Omn_domain_pc.diskimageDefault,
+							defaultString);
+				}
 			}
-
-			String version = diskImageContents.getVersion();
-			if (version != null) {
-				diskImage
-						.addLiteral(Omn_domain_pc.hasDiskimageVersion, version);
-			}
-
-			String description = diskImageContents.getDescription();
-			if (description != null) {
-				diskImage.addLiteral(Omn_domain_pc.hasDiskimageDescription,
-						description);
-			}
-
-			String url = diskImageContents.getUrl();
-			if (url != null) {
-				diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
-			}
-
-			// System.out.println(rspecSliverObject.toString());
-			@SuppressWarnings("unchecked")
-			JAXBElement<DiskImage> diskImageElement = (JAXBElement<DiskImage>) rspecSliverObject;
-			String defaultString = diskImageElement.getValue().getDefault();
-
-			if (defaultString != null) {
-				diskImage.addLiteral(Omn_domain_pc.diskimageDefault,
-						defaultString);
-			}
-
-		} catch (final ClassCastException e) {
-			AdvertisementConverter.LOG.info(e.getMessage());
-		} catch (final InvalidPropertyURIException e) {
-			AdvertisementConverter.LOG.info(e.getMessage());
 		}
-
 	}
 
 	public String getRSpec(final Model model) throws JAXBException,

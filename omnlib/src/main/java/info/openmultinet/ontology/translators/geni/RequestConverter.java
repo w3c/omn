@@ -2169,74 +2169,76 @@ public class RequestConverter extends AbstractConverter {
 	private static void tryExtractDiskImage(Object rspecSliverObject,
 			Resource omnSliver) throws MissingRspecElementException {
 
-		try {
-			@SuppressWarnings("unchecked")
-			final JAXBElement<DiskImageContents> diJaxb = (JAXBElement<DiskImageContents>) rspecSliverObject;
-			final DiskImageContents diskImageContents = diJaxb.getValue();
+		if (rspecSliverObject instanceof JAXBElement) {
+			// check if disk_image
+			if (((JAXBElement<?>) rspecSliverObject).getDeclaredType().equals(
+					DiskImageContents.class)) {
 
-			String diskImageURL = diskImageContents.getUrl();
-			Resource diskImage = omnSliver.getModel().createResource(
-					diskImageURL);
-			diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
+				DiskImageContents diskImageContents = (DiskImageContents) ((JAXBElement<?>) rspecSliverObject)
+						.getValue();
 
-			// add name info
-			String name = diskImageContents.getName();
-			if (name == null) {
-				throw new MissingRspecElementException(
-						"DiskImageContents > name");
-			}
-			diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
+				String diskImageURL = diskImageContents.getUrl();
+				Resource diskImage = omnSliver.getModel().createResource(
+						diskImageURL);
+				diskImage.addProperty(RDF.type, Omn_domain_pc.DiskImage);
 
-			String os = diskImageContents.getOs();
-			if (os != null) {
-				diskImage.addLiteral(Omn_domain_pc.hasDiskimageOS, os);
-			}
+				// add name info
+				String name = diskImageContents.getName();
+				if (name == null) {
+					throw new MissingRspecElementException(
+							"DiskImageContents > name");
+				}
+				diskImage.addLiteral(Omn_domain_pc.hasDiskimageLabel, name);
 
-			String version = diskImageContents.getVersion();
-			if (version != null) {
-				diskImage
-						.addLiteral(Omn_domain_pc.hasDiskimageVersion, version);
-			}
+				String os = diskImageContents.getOs();
+				if (os != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageOS, os);
+				}
 
-			String url = diskImageContents.getUrl();
-			if (url != null) {
-				diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
-			}
+				String version = diskImageContents.getVersion();
+				if (version != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageVersion,
+							version);
+				}
 
-			String description = diskImageContents.getDescription();
-			if (description != null) {
-				diskImage.addLiteral(Omn_domain_pc.hasDiskimageDescription,
-						description);
-			}
+				String url = diskImageContents.getUrl();
+				if (url != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageURI, url);
+				}
 
-			// check that does not extract twice
-			boolean alreadyExists = false;
-			if (omnSliver.hasProperty(Omn_domain_pc.hasDiskImage)) {
-				StmtIterator diskImages = omnSliver
-						.listProperties(Omn_domain_pc.hasDiskImage);
-				while (diskImages.hasNext()) {
-					Statement diskImageStatement = diskImages.next();
-					Resource diskImageResource = diskImageStatement.getObject()
-							.asResource();
-					if (diskImageResource
-							.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-						String diskImageLabel = diskImageResource
-								.getProperty(Omn_domain_pc.hasDiskimageLabel)
-								.getObject().asLiteral().getString();
-						if (diskImageLabel.equals(name)) {
-							alreadyExists = true;
+				String description = diskImageContents.getDescription();
+				if (description != null) {
+					diskImage.addLiteral(Omn_domain_pc.hasDiskimageDescription,
+							description);
+				}
+
+				// check that does not extract twice
+				boolean alreadyExists = false;
+				if (omnSliver.hasProperty(Omn_domain_pc.hasDiskImage)) {
+					StmtIterator diskImages = omnSliver
+							.listProperties(Omn_domain_pc.hasDiskImage);
+					while (diskImages.hasNext()) {
+						Statement diskImageStatement = diskImages.next();
+						Resource diskImageResource = diskImageStatement
+								.getObject().asResource();
+						if (diskImageResource
+								.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+							String diskImageLabel = diskImageResource
+									.getProperty(
+											Omn_domain_pc.hasDiskimageLabel)
+									.getObject().asLiteral().getString();
+							if (diskImageLabel.equals(name)) {
+								alreadyExists = true;
+							}
 						}
 					}
 				}
-			}
 
-			if (!alreadyExists) {
-				omnSliver.addProperty(Omn_domain_pc.hasDiskImage, diskImage);
+				if (!alreadyExists) {
+					omnSliver
+							.addProperty(Omn_domain_pc.hasDiskImage, diskImage);
+				}
 			}
-		} catch (final ClassCastException e) {
-			RequestConverter.LOG.finer(e.getMessage());
-		} catch (final InvalidPropertyURIException e) {
-			RequestConverter.LOG.info(e.getMessage());
 		}
 	}
 
