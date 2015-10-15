@@ -9,15 +9,14 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLDecoder;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -32,6 +31,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.io.IOUtils;
+import org.jboss.vfs.VirtualFile;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -105,7 +105,7 @@ public abstract class AbstractConverter {
 		try {
 			listOfRuleSets = getResourceListing(AbstractConverter.FOLDER_RULES);
 			for (URI ruleSet : listOfRuleSets) {
-				String newRuleSet = IOUtils.toString(ruleSet);
+				String newRuleSet = IOUtils.toString(ruleSet, Charset.defaultCharset());
 				for (Rule rule : Rule.parseRules(newRuleSet)) {
 					rules.add(rule);
 				}
@@ -276,35 +276,57 @@ public abstract class AbstractConverter {
 				AbstractConverter.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		final List<URI> files = new LinkedList<URI>();
 		LOG.info("Looking for files in: " + fileName);
-		if (fileName.isFile()) { 
-			LOG.info("I think we're in a jar file...");
-			final JarFile jar = new JarFile(fileName);
-			final Enumeration<JarEntry> entries = jar.entries();
-			while (entries.hasMoreElements()) {
-				final String name = entries.nextElement().getName();
-				LOG.info("Found entry: " + name);
-				if (name.startsWith(path + "/") && !name.endsWith("/")) {
-					files.add(new URI("jar:" + fileName.toURI() + "!/" + name));
-				}
-			}
-			jar.close();
+		
+		if (fileName.isFile()) {
+			addFilesFromJar(path, fileName, files);
 		} else {
-			LOG.info("I think we're in an IDE...");
-			final URL url = AbstractConverter.class.getResource("/" + path);
+			LOG.info("I think we're not in a simple jar file...");
+			URL url = AbstractConverter.class.getResource("/" + path);
 			if (url != null) {
 				try {
 					LOG.info("Found URL: " + url);
-					final File apps = new File(url.toURI());
-					for (File app : apps.listFiles()) {
-						LOG.info("Found file: " + app);
-						files.add(app.toURI());
+					String protocol = url.getProtocol();
+					
+					if ("vfs".equalsIgnoreCase(protocol)) {
+						URLConnection conn = url.openConnection();
+						VirtualFile virtualFile = (VirtualFile) conn.getContent();
+						String realJarFile = virtualFile.getPhysicalFile().getParentFile().getParentFile() + File.separator + fileName.getName();
+						LOG.info("Guessing real file: " + realJarFile);
+						addFilesFromJar(path, new File(realJarFile), files);
+					} else if ("file".equalsIgnoreCase(protocol)) {
+						File folder = new File(url.toURI());
+						LOG.info("Looking now for files in: " + folder);
+						for (File file : folder.listFiles()) {
+							LOG.info("Adding: " + file);
+							files.add(file.toURI());
+						}						
+					} else {
+						throw new URISyntaxException(url.toString(), "Unsupported protocol: " + protocol);
 					}
 				} catch (URISyntaxException ex) {
 					LOG.log(Level.WARNING, "Should not happen", ex);
+				} catch (IllegalArgumentException ex) {
+					LOG.log(Level.WARNING, "Couldn't read file from: " + url, ex);
 				}
 			}
 		}
 		return files;
+	}
+
+	public static void addFilesFromJar(String path, final File fileName, final List<URI> files)
+			throws IOException, URISyntaxException {
+		LOG.info("I think we're in a jar file...");
+		final JarFile jar = new JarFile(fileName);
+		final Enumeration<JarEntry> entries = jar.entries();
+		while (entries.hasMoreElements()) {
+			final String name = entries.nextElement().getName();
+			if (name.startsWith(path + "/") && !name.endsWith("/")) {
+				String newName = "jar:" + fileName.toURI() + "!/" + name;
+				LOG.info("Adding: " + newName);
+				files.add(new URI(newName));
+			}
+		}
+		jar.close();
 	}
 
 	public static void print(Model model) {
