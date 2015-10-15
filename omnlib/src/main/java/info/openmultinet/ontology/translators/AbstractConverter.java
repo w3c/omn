@@ -109,14 +109,14 @@ public abstract class AbstractConverter {
 
 	public static List<Rule> getAllRules() throws URISyntaxException,
 			IOException {
-		List<URI> a = getResourceListing(AbstractConverter.FOLDER_RULES);
+		// List<URI> a = getResourceListing(AbstractConverter.FOLDER_RULES);
 		List<Rule> rules = new LinkedList<Rule>();
-		for (URI x : a) {
-			String newRules = IOUtils.toString(x);
-			for (Rule rule : Rule.parseRules(newRules)) {
-				rules.add(rule);
-			}
-		}
+//		for (URI x : a) {
+//			String newRules = IOUtils.toString(x);
+//			for (Rule rule : Rule.parseRules(newRules)) {
+//				rules.add(rule);
+//			}
+//		}
 		return rules;
 	}
 
