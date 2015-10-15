@@ -280,38 +280,38 @@ public abstract class AbstractConverter {
 
 	public static List<URI> getResourceListing(String path) throws IOException,
 			URISyntaxException {
-		final File jarFile = new File(AbstractConverter.class
-				.getProtectionDomain().getCodeSource().getLocation().getPath());
+//		final File jarFile = new File(AbstractConverter.class
+//				.getProtectionDomain().getCodeSource().getLocation().getPath());
 		final List<URI> files = new LinkedList<URI>();
-		if (jarFile.isFile()) { // Run with JAR file
-			final JarFile jar = new JarFile(jarFile);
-			final Enumeration<JarEntry> entries = jar.entries(); // gives ALL
-																	// entries
-																	// in jar
-			while (entries.hasMoreElements()) {
-				final String name = entries.nextElement().getName();
-				if (name.startsWith(path + "/") && !name.endsWith("/")) { // filter
-																			// according
-																			// to
-																			// the
-																			// path
-					files.add(new URI("jar:" + jarFile.toURI() + "!/" + name));
-				}
-			}
-			jar.close();
-		} else { // Run with IDE
-			final URL url = AbstractConverter.class.getResource("/" + path);
-			if (url != null) {
-				try {
-					final File apps = new File(url.toURI());
-					for (File app : apps.listFiles()) {
-						files.add(app.toURI());
-					}
-				} catch (URISyntaxException ex) {
-					// never happens
-				}
-			}
-		}
+//		if (jarFile.isFile()) { // Run with JAR file
+//			final JarFile jar = new JarFile(jarFile);
+//			final Enumeration<JarEntry> entries = jar.entries(); // gives ALL
+//																	// entries
+//																	// in jar
+//			while (entries.hasMoreElements()) {
+//				final String name = entries.nextElement().getName();
+//				if (name.startsWith(path + "/") && !name.endsWith("/")) { // filter
+//																			// according
+//																			// to
+//																			// the
+//																			// path
+//					files.add(new URI("jar:" + jarFile.toURI() + "!/" + name));
+//				}
+//			}
+//			jar.close();
+//		} else { // Run with IDE
+//			final URL url = AbstractConverter.class.getResource("/" + path);
+//			if (url != null) {
+//				try {
+//					final File apps = new File(url.toURI());
+//					for (File app : apps.listFiles()) {
+//						files.add(app.toURI());
+//					}
+//				} catch (URISyntaxException ex) {
+//					// never happens
+//				}
+//			}
+//		}
 		return files;
 	}
 

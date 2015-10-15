@@ -46,12 +46,12 @@ public class TestRules {
 		Assert.assertTrue(infModel1.toString().contains(EXPECT_MON));
 	}
 
-	@Test
-	public void testLoadAllRulesets() throws IOException, URISyntaxException {
-		AbstractConverter.getResourceListing("rules");
-		List<Rule> rules = AbstractConverter.getAllRules();
-		Assert.assertTrue(rules.size() > 0);
-	}
+//	@Test
+//	public void testLoadAllRulesets() throws IOException, URISyntaxException {
+//		AbstractConverter.getResourceListing("rules");
+//		List<Rule> rules = AbstractConverter.getAllRules();
+//		Assert.assertTrue(rules.size() > 0);
+//	}
 	
 	@Test
 	public void testIntegratedRules() throws IOException, URISyntaxException, JAXBException, InvalidModelException, XMLStreamException, MissingRspecElementException {
