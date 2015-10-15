@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -55,31 +56,23 @@ public abstract class AbstractConverter {
 	public static final String TOSCA = "tosca";
 	public static final String ANYFORMAT = "to";
 	protected static final String NAMESPACE = "http://open-multinet.info/example#";
-	private static final Logger LOG = Logger.getLogger(AbstractConverter.class
-			.getName());
+	private static final Logger LOG = Logger.getLogger(AbstractConverter.class.getName());
 
 	public AbstractConverter() {
 		super();
-		try {
-			this.reasoner = new GenericRuleReasoner(getAllRules());
-		} catch (URISyntaxException | IOException e) {
-			LOG.warning("Couldn't create reasoner: " + e);
-		}
+		this.reasoner = new GenericRuleReasoner(getAllRules());
 	}
 
-	protected static void validateModel(final List<Resource> groups)
-			throws InvalidModelException {
+	protected static void validateModel(final List<Resource> groups) throws InvalidModelException {
 		if (groups.isEmpty()) {
 			throw new InvalidModelException("No group in model found");
 		}
 		if (groups.size() > 1) {
-			throw new InvalidModelException("Found '" + groups.size()
-					+ "' groups, which is more than one");
+			throw new InvalidModelException("Found '" + groups.size() + "' groups, which is more than one");
 		}
 	}
 
-	public static String toString(final Object jaxbObject,
-			final String namespaces) throws JAXBException {
+	public static String toString(final Object jaxbObject, final String namespaces) throws JAXBException {
 		final JAXBContext jaxbContext = JAXBContext.newInstance(namespaces);
 		final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -91,15 +84,13 @@ public abstract class AbstractConverter {
 
 	public static String toString(final String filename) throws IOException {
 		StringBuffer result = new StringBuffer();
-		final InputStream inputStream = AbstractConverter.class
-				.getResourceAsStream(filename);
+		final InputStream inputStream = AbstractConverter.class.getResourceAsStream(filename);
 
 		if (inputStream == null) {
 			return null;
 		}
 
-		final BufferedReader br = new BufferedReader(new InputStreamReader(
-				inputStream));
+		final BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 		String line = null;
 		while ((line = br.readLine()) != null) {
 			result.append(line).append("\n");
@@ -107,16 +98,22 @@ public abstract class AbstractConverter {
 		return result.toString();
 	}
 
-	public static List<Rule> getAllRules() throws URISyntaxException,
-			IOException {
-		// List<URI> a = getResourceListing(AbstractConverter.FOLDER_RULES);
+	public static List<Rule> getAllRules() {
 		List<Rule> rules = new LinkedList<Rule>();
-//		for (URI x : a) {
-//			String newRules = IOUtils.toString(x);
-//			for (Rule rule : Rule.parseRules(newRules)) {
-//				rules.add(rule);
-//			}
-//		}
+
+		List<URI> listOfRuleSets;
+		try {
+			listOfRuleSets = getResourceListing(AbstractConverter.FOLDER_RULES);
+			for (URI ruleSet : listOfRuleSets) {
+				String newRuleSet = IOUtils.toString(ruleSet);
+				for (Rule rule : Rule.parseRules(newRuleSet)) {
+					rules.add(rule);
+				}
+			}
+		} catch (IOException | URISyntaxException e) {
+			LOG.info("Could not get inferencing rules: " + e.getMessage() + " - " + e.toString());
+		}
+
 		return rules;
 	}
 
@@ -139,14 +136,11 @@ public abstract class AbstractConverter {
 			nonGeneric = false;
 		} else if (uri.equals("http://www.w3.org/2002/07/owl#NamedIndividual")) {
 			nonGeneric = false;
-		} else if (uri
-				.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
+		} else if (uri.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
 			nonGeneric = false;
-		} else if (uri
-				.equals("http://open-multinet.info/ontology/omn#Resource")) {
+		} else if (uri.equals("http://open-multinet.info/ontology/omn#Resource")) {
 			nonGeneric = false;
-		} else if (uri
-				.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
+		} else if (uri.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
 			nonGeneric = false;
 		} else if (uri.equals("http://open-multinet.info/ontology/omn#Group")) {
 			nonGeneric = false;
@@ -206,8 +200,7 @@ public abstract class AbstractConverter {
 
 		if (uri != null) {
 			if (uri.getScheme() != null) {
-				if (uri.getScheme().equals("http")
-						|| uri.getScheme().equals("https")) {
+				if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
 					return true;
 				}
 			}
@@ -278,40 +271,39 @@ public abstract class AbstractConverter {
 		return xc;
 	}
 
-	public static List<URI> getResourceListing(String path) throws IOException,
-			URISyntaxException {
-//		final File jarFile = new File(AbstractConverter.class
-//				.getProtectionDomain().getCodeSource().getLocation().getPath());
+	public static List<URI> getResourceListing(String path) throws IOException, URISyntaxException {
+		final File fileName = new File(
+				AbstractConverter.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		final List<URI> files = new LinkedList<URI>();
-//		if (jarFile.isFile()) { // Run with JAR file
-//			final JarFile jar = new JarFile(jarFile);
-//			final Enumeration<JarEntry> entries = jar.entries(); // gives ALL
-//																	// entries
-//																	// in jar
-//			while (entries.hasMoreElements()) {
-//				final String name = entries.nextElement().getName();
-//				if (name.startsWith(path + "/") && !name.endsWith("/")) { // filter
-//																			// according
-//																			// to
-//																			// the
-//																			// path
-//					files.add(new URI("jar:" + jarFile.toURI() + "!/" + name));
-//				}
-//			}
-//			jar.close();
-//		} else { // Run with IDE
-//			final URL url = AbstractConverter.class.getResource("/" + path);
-//			if (url != null) {
-//				try {
-//					final File apps = new File(url.toURI());
-//					for (File app : apps.listFiles()) {
-//						files.add(app.toURI());
-//					}
-//				} catch (URISyntaxException ex) {
-//					// never happens
-//				}
-//			}
-//		}
+		LOG.info("Looking for files in: " + fileName);
+		if (fileName.isFile()) { 
+			LOG.info("I think we're in a jar file...");
+			final JarFile jar = new JarFile(fileName);
+			final Enumeration<JarEntry> entries = jar.entries();
+			while (entries.hasMoreElements()) {
+				final String name = entries.nextElement().getName();
+				LOG.info("Found entry: " + name);
+				if (name.startsWith(path + "/") && !name.endsWith("/")) {
+					files.add(new URI("jar:" + fileName.toURI() + "!/" + name));
+				}
+			}
+			jar.close();
+		} else {
+			LOG.info("I think we're in an IDE...");
+			final URL url = AbstractConverter.class.getResource("/" + path);
+			if (url != null) {
+				try {
+					LOG.info("Found URL: " + url);
+					final File apps = new File(url.toURI());
+					for (File app : apps.listFiles()) {
+						LOG.info("Found file: " + app);
+						files.add(app.toURI());
+					}
+				} catch (URISyntaxException ex) {
+					LOG.log(Level.WARNING, "Should not happen", ex);
+				}
+			}
+		}
 		return files;
 	}
 
