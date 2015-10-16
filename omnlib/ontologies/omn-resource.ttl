@@ -17,9 +17,9 @@
                                                   
                                                   dc:date "2014-11-11"^^xsd:date ;
                                                   
-                                                  dcterms:modified "2015-10-06"^^xsd:date ;
+                                                  dcterms:modified "2015-10-16"^^xsd:date ;
                                                   
-                                                  owl:versionInfo "2015-10-06"^^xsd:string ;
+                                                  owl:versionInfo "2015-10-16"^^xsd:string ;
                                                   
                                                   dc:title "Open-Multinet Upper Resource Ontology"^^xsd:string ;
                                                   
@@ -108,6 +108,24 @@
           
           rdfs:range :IPAddress .
 
+
+
+###  http://open-multinet.info/ontology/omn-resource#hasLocation
+
+:hasLocation rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has location"@en ;
+              
+              rdfs:label "has location"@en ;
+              
+              rdfs:range :Location ;
+              
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :Group
+                                          :Resource
+                                          :Service
+                                        )
+                          ] .
 
 
 ###  http://open-multinet.info/ontology/omn-resource#isIPAddressOf
@@ -521,6 +539,15 @@ omn:Resource rdf:type owl:Class .
       rdfs:label "Link Property"@en ;
       
       rdfs:subClassOf :Link .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#Location
+
+:Location rdf:type owl:Class ;
+
+      rdfs:label "Location"@en  .
+
 
 
 ###  http://open-multinet.info/ontology/omn-resource#NetworkObject
