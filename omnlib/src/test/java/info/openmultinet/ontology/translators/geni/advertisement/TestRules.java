@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -36,7 +37,6 @@ public class TestRules {
 
 	@Test
 	public void testSimpleRuleset() throws IOException {
-
 		final String rule1 = AbstractConverter.toString(TEST_RULE);
 		Model rawModel1 = RDFDataMgr.loadModel(TEST_TTL);
 		

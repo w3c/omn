@@ -179,7 +179,8 @@ public class CommonMethods {
 
 	public static OntClass convertGeniStateToOmn(String geniState) {
 
-		OntClass omnState = null;
+		OntClass omnState = Omn_lifecycle.Unknown;
+		
 		switch (geniState) {
 		case "geni_ready_busy":
 			omnState = Omn_lifecycle.Active;

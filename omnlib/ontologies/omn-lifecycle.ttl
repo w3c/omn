@@ -996,6 +996,18 @@ omn:Topology rdf:type owl:Class .
          
          rdfs:comment "The related resource/service is currently configuring"@en .
 
+###  http://open-multinet.info/ontology/omn-lifecycle#Unknown
+
+:Unknown rdf:type owl:Class ;
+
+         rdfs:label "Unknown"@en ;
+         
+         rdfs:subClassOf :State ;
+         
+         rdfs:seeAlso "GENI operational state in general"@en ;
+         
+         rdfs:comment "The related resource/service is currently in an unknown state"@en .
+
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
