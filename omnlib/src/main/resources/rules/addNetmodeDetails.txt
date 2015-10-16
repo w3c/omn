@@ -228,24 +228,6 @@ uriConcat("http://open-multinet.info/ontology/omn-component#","Intel_Atom_sto", 
 ->
 (?node <http://open-multinet.info/ontology/omn#hasComponent> ?stoComp) 
 ]
-
-
-
-[rule16: 
-(?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
-(?node <http://open-multinet.info/ontology/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)
-(?node rdfs:label ?name)
-uriConcat("http://open-multinet.info/ontology/omn-resource#",str(?name),"sltype", ?stype)
-uriConcat("http://open-multinet.info/ontology/omn-domain-pc#",str(?name),"dimageOS", ?dimage)  
-->
-(?node <http://open-multinet.info/ontology/omn-resource#hasSliverType> ?stype)
-(?stype <http://open-multinet.info/ontology/omn-domain-pc#hasDiskImage> ?dimage)
-(?dimage rdf:type owl:NamedIndividual)
-(?dimage rdf:type <http://open-multinet.info/ontology/omn-domain-pc#DiskImage>)
-(?dimage <http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS> "VoyageLinux"^^xsd:string)
-]
-
-
 [rule17:
 (?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
 (?node <http://open-multinet.info/ontology/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)

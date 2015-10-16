@@ -125,15 +125,3 @@ noValue(?stoComp rdf:type owl:NamedIndividual)->
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
 (?stoComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "59626300000"^^xsd:integer)
 ]
-[rule13: 
-(?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
-(?node <http://open-multinet.info/ontology/omn-resource#hasSliverType> ?stype)
-(?node <http://open-multinet.info/ontology/omn-lifecycle#parentOf>  <urn:publicid:IDN+omf:netmode+authority+cm>)
-(?node rdfs:label ?name) 
-uriConcat("http://open-multinet.info/ontology/omn-domain-pc#",str(?name),"dimageOS", ?dimage)  
-->
-(?stype <http://open-multinet.info/ontology/omn-domain-pc#hasDiskImage> ?dimage)
-(?dimage rdf:type owl:NamedIndividual)
-(?dimage rdf:type <http://open-multinet.info/ontology/omn-domain-pc#DiskImage>)
-(?dimage <http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS> "VoyageLinux"^^xsd:string)
-]
