@@ -1,43 +1,5 @@
 package info.openmultinet.ontology.translators.geni;
 
-import java.io.InputStream;
-import java.math.BigInteger;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
-import org.apache.xerces.dom.ElementNSImpl;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.hp.hpl.jena.ontology.OntClass;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.shared.PropertyNotFoundException;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
-
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
@@ -94,6 +56,47 @@ import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Osco;
+
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
+import org.apache.xerces.dom.ElementNSImpl;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.ResIterator;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.shared.PropertyNotFoundException;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class AdvertisementConverter extends AbstractConverter {
 
@@ -1201,6 +1204,12 @@ public class AdvertisementConverter extends AbstractConverter {
 			final LocationContents location = locationJaxb.getValue();
 
 			if (location != null) {
+
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource locationResource = omnNode.getModel().createResource(
+						uuid);
+				locationResource.addProperty(RDF.type, Omn_resource.Location);
+
 				String latitude = location.getLatitude();
 				String longitude = location.getLongitude();
 				String country = location.getCountry();
@@ -1210,15 +1219,36 @@ public class AdvertisementConverter extends AbstractConverter {
 					throw new MissingRspecElementException(
 							"LocationContents > country");
 				} else {
-					omnNode.addProperty(Geonames.countryCode, country);
+					locationResource.addProperty(Geonames.countryCode, country);
 				}
 
 				if (latitude != null) {
-					omnNode.addProperty(Geo.lat, latitude);
+					locationResource.addProperty(Geo.lat, latitude);
 				}
 				if (longitude != null) {
-					omnNode.addProperty(Geo.long_, longitude);
+					locationResource.addProperty(Geo.long_, longitude);
 				}
+
+				Map<QName, String> otherLocationAttributes = location
+						.getOtherAttributes();
+				for (Entry<QName, String> entry : otherLocationAttributes
+						.entrySet()) {
+
+					QName key = entry.getKey();
+					String value = entry.getValue();
+
+					if (key.getNamespaceURI().equals(
+							"http://open-multinet.info/location")) {
+
+						if (key.getLocalPart().equals("id")) {
+							locationResource.addProperty(Omn_lifecycle.hasID,
+									value);
+						} else if (key.getLocalPart().equals("name")) {
+							locationResource.addProperty(RDFS.label, value);
+						}
+					}
+				}
+				omnNode.addProperty(Omn_resource.hasLocation, locationResource);
 			}
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
@@ -2457,27 +2487,50 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void setLocation(Statement omnResource, NodeContents geniNode) {
 
-		LocationContents location = of.createLocationContents();
-		Resource omnRes = omnResource.getResource();
+		StmtIterator locations = omnResource.getResource().listProperties(
+				Omn_resource.hasLocation);
 
-		if (omnRes.hasProperty(Geonames.countryCode)) {
-			location.setCountry(omnRes.getProperty(Geonames.countryCode)
-					.getString());
-		} else {
-			// country required
-			location.setCountry("");
-		}
+		while (locations.hasNext()) {
 
-		if (omnRes.hasProperty(Geo.lat)) {
-			location.setLatitude(omnRes.getProperty(Geo.lat).getString());
-		}
+			Statement locationStatement = locations.next();
 
-		if (omnRes.hasProperty(Geo.long_)) {
-			location.setLongitude(omnRes.getProperty(Geo.long_).getString());
-		}
-		if (omnRes.hasProperty(Geo.lat) || omnRes.hasProperty(Geo.long_)) {
+			LocationContents location = of.createLocationContents();
+			Resource omnRes = locationStatement.getResource();
+
+			if (omnRes.hasProperty(Geonames.countryCode)) {
+				location.setCountry(omnRes.getProperty(Geonames.countryCode)
+						.getString());
+			} else {
+				// country required
+				location.setCountry("");
+			}
+
+			if (omnRes.hasProperty(Geo.lat)) {
+				location.setLatitude(omnRes.getProperty(Geo.lat).getString());
+			}
+
+			if (omnRes.hasProperty(Geo.long_)) {
+				location.setLongitude(omnRes.getProperty(Geo.long_).getString());
+			}
+
+			if (omnRes.hasProperty(RDFS.label)) {
+				QName key = new QName("http://open-multinet.info/location",
+						"name", "omn");
+				String value = omnRes.getProperty(RDFS.label).getString();
+				location.getOtherAttributes().put(key, value);
+			}
+
+			if (omnRes.hasProperty(Omn_lifecycle.hasID)) {
+				QName key = new QName("http://open-multinet.info/location",
+						"id", "omn");
+				String value = omnRes.getProperty(Omn_lifecycle.hasID)
+						.getString();
+				location.getOtherAttributes().put(key, value);
+			}
+
 			geniNode.getAnyOrRelationOrLocation().add(
 					of.createLocation(location));
+
 		}
 	}
 

@@ -10,6 +10,7 @@
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix gr: <http://purl.org/goodrelations/v1#> .
 @base <http://open-multinet.info/ontology/omn-lifecycle#> .
@@ -470,6 +471,7 @@
         rdfs:domain [ rdf:type owl:Class ;
          owl:unionOf ( omn:Resource
                        omn:Service
+                       omn-resource:Location
                      )
         ] ;
        
