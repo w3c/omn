@@ -87,7 +87,7 @@ public class RequestDemo201504 {
 				.equals("http://open-multinet.info/ontology/omn-domain-pc#VM"));
 
 		NodeList monitoring = xmlDoc.getElementsByTagNameNS(
-				"http://demo.fiteagle.org/monitoring", "monitoring");
+				"http://monitoring.service.tu-berlin.de/monitoring", "monitoring");
 		Assert.assertTrue(monitoring.getLength() == 1);
 
 		String monitoringUri = monitoring.item(0).getAttributes()

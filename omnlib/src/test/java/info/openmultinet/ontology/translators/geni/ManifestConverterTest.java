@@ -83,6 +83,7 @@ public class ManifestConverterTest {
 	}
 
 	@Test
+	//fixme: this test is slow!
 	public void testPaper2015Roundtrip() throws JAXBException, IOException,
 			InvalidModelException, MissingRspecElementException {
 		final String filename = "/geni/manifest/manifest_paper2015.xml";

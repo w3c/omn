@@ -12,7 +12,7 @@ noValue(?memComp rdf:type owl:NamedIndividual)->
 (?memComp <http://open-multinet.info/ontology/omn-monitoring-unit#hasValue> "256000000"^^xsd:integer)
 ]
 [ruleb: 
-uriConcat(omncomp,"alix3d2_cpu", ?cpuComp) 
+uriConcat(omncomp:,"alix3d2_cpu", ?cpuComp) 
 noValue(?cpuComp rdf:type owl:NamedIndividual)->
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type omncomp:CPU)

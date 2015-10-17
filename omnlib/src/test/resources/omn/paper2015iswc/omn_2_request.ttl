@@ -38,5 +38,6 @@ _:myVM a omndpc:VM, owl:NamedIndividual ;
 _:monitoringService a omnmon:OMSPService ;
     omnsrv:hasURI <http://url-to-collector:1234> .
 _:loginService a omnsrv:LoginService ;
+    omnsrv:authentication "ssh-key:xyz" ;
     omnsrv:username "user" ;
     omnsrv:publickey "foo" .

@@ -51,6 +51,7 @@ public class RESTTest {
 	}
 
 	@Test
+	//fixme: this test is slow!
 	public void testConvertToRspecAd() {
 		System.out.println("*******************************************");
 		System.out.println("*******  convert model to RSpec Ad  *******");
@@ -65,6 +66,7 @@ public class RESTTest {
 	}
 
 	@Test
+	//fixme: this test is slow!
 	public void testConvertFromUnknownToRspecAd() {
 		System.out.println("*******************************************");
 		System.out.println("*******  convert model to RSpec Ad  *******");
@@ -111,6 +113,7 @@ public class RESTTest {
 	}
 
 	@Test
+	//fixme: this test is slow!
 	public void testConvertToRspecRequest() {
 		System.out.println("*************************************************");
 		System.out.println("*******   convert model to RSpec Request  *******");
@@ -176,6 +179,7 @@ public class RESTTest {
 	}
 
 	@Test
+	//fixme: this test is slow!
 	public void testConvertToRspecManifest() {
 		System.out.println("*************************************************");
 		System.out

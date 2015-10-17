@@ -12,11 +12,14 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class AdvertisementVwall1 {
 
 	@Test
+	@Ignore
+	//fixme: this test is slow!
 	public void adRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {

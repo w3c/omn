@@ -28,6 +28,7 @@ public class OMN2ToscaTest {
   }
   
 	@Test
+	//fixme: this test is slow!
 	public void testConvertDummyTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException {
 	  InputStream input = getClass().getResourceAsStream("/omn/tosca-request-dummy.ttl");
@@ -47,6 +48,7 @@ public class OMN2ToscaTest {
 	}
 	
 	@Test
+	//fixme: this test is slow!
   public void testConvertOpenMTCTopology() throws JAXBException, InvalidModelException, MultipleNamespacesException,
       RequiredResourceNotFoundException, MultiplePropertyValuesException {
     InputStream input = getClass().getResourceAsStream("/omn/tosca-request-openmtc.ttl");

@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -69,6 +70,8 @@ public class RequestLinkTest {
 	}
 
 	@Test
+	@Ignore
+	//@todo @robynml add the file link-manifest.ttl
 	public void testConvertingGraph2RSpec() throws JAXBException,
 			InvalidModelException {
 		InputStream input = ManifestConverterTest.class

@@ -44,6 +44,6 @@ vm-server123:myLargeVM rdfs:subClassOf omndpc:VM ;
     omndpc:hasDiskImage vm-server123:diskImage1, vm-server123:diskImage2 ;
     omndpc:hasCPU 8 .
 vm-server123:diskImage1 a omndpc:DiskImage ;
-    omndpc:hasDiskimageLabel "ubuntu1404" .
+    omndpc:hasDiskimageLabel "ubuntu1404"^^<http://www.w3.org/2001/XMLSchema#string> .
 vm-server123:diskImage2 a omndpc:DiskImage ;
-    omndpc:hasDiskimageLabel "cirros-linux" .
+    omndpc:hasDiskimageLabel "cirros-linux"^^<http://www.w3.org/2001/XMLSchema#string> .

@@ -180,7 +180,7 @@ public class CommonMethods {
 	public static OntClass convertGeniStateToOmn(String geniState) {
 
 		OntClass omnState = Omn_lifecycle.Unknown;
-		
+		if (null == geniState) return omnState;
 		switch (geniState) {
 		case "geni_ready_busy":
 			omnState = Omn_lifecycle.Active;

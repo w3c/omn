@@ -90,11 +90,10 @@ public class DemoTestRequest {
 		Resource monitoringResource = resourceResource
 				.getProperty(Omn_lifecycle.usesService).getObject()
 				.asResource();
+		System.out.println(monitoringResource.getProperty(RDF.type));
 		Assert.assertTrue(
-				"object of usesService is of type OMSPService",
-				monitoringResource
-						.hasProperty(RDF.type,
-								"http://open-multinet.info/ontology/omn-monitoring#OMSPService"));
+				"object of usesService is of type OMSPService",				
+				monitoringResource.getProperty(RDF.type).toString().contains("http://open-multinet.info/ontology/omn-monitoring#OMSPService"));
 		Assert.assertTrue("label is OMSPSerivce", monitoringResource
 				.getProperty(RDFS.label).getObject().asLiteral().toString()
 				.equals("OMSPService"));

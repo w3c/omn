@@ -68,6 +68,7 @@ public class RoundtripTest {
 	// }
 
 	@Test
+	//fixme: this test is slow!
 	public void testTosca2OMN2Tosca() throws JAXBException,
 			InvalidModelException, UnsupportedException,
 			MultipleNamespacesException, RequiredResourceNotFoundException,

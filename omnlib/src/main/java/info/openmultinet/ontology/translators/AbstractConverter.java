@@ -42,7 +42,6 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.translators.geni.advertisement.TestRules;
 
 public abstract class AbstractConverter {
 
@@ -279,7 +278,7 @@ public abstract class AbstractConverter {
 				AbstractConverter.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		final List<URI> files = new LinkedList<URI>();
 		LOG.info("Looking for files in: " + fileName);
-		
+
 		if (fileName.isFile()) {
 			addFilesFromJar(path, fileName, files);
 		} else {
@@ -289,7 +288,7 @@ public abstract class AbstractConverter {
 				try {
 					LOG.info("Found URL: " + url);
 					String protocol = url.getProtocol();
-					
+
 					if ("vfs".equalsIgnoreCase(protocol)) {
 						URLConnection conn = url.openConnection();
 						VirtualFile virtualFile = (VirtualFile) conn.getContent();
@@ -302,7 +301,7 @@ public abstract class AbstractConverter {
 						for (File file : folder.listFiles()) {
 							LOG.info("Adding: " + file);
 							files.add(file.toURI());
-						}						
+						}
 					} else {
 						throw new URISyntaxException(url.toString(), "Unsupported protocol: " + protocol);
 					}

@@ -20,6 +20,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -127,6 +128,8 @@ public class AdvertisementConverterTest {
 	}
 
 	@Test
+	@Ignore
+	//fixme: this test is slow!
 	public void testRoundtripRSpecToRSpecPerformance() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
 			InterruptedException, MissingRspecElementException {
