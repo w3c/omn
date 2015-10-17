@@ -32,6 +32,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 import org.jboss.vfs.VirtualFile;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
@@ -330,10 +332,7 @@ public abstract class AbstractConverter {
 	}
 
 	public static void print(Model model) {
-		Iterator<?> list = model.listStatements();
-		while (list.hasNext()) {
-			System.out.println(" - " + list.next());
-		}
+		RDFDataMgr.write(System.out, model, Lang.NT);
 	}
 
 }
