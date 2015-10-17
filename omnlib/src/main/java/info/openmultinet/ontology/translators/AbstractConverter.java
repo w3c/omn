@@ -31,6 +31,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.riot.RDFDataMgr;
 import org.jboss.vfs.VirtualFile;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
@@ -41,6 +42,7 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.geni.advertisement.TestRules;
 
 public abstract class AbstractConverter {
 
@@ -105,8 +107,9 @@ public abstract class AbstractConverter {
 		try {
 			listOfRuleSets = getResourceListing(AbstractConverter.FOLDER_RULES);
 			for (URI ruleSet : listOfRuleSets) {
-				String newRuleSet = IOUtils.toString(ruleSet, Charset.defaultCharset());
-				for (Rule rule : Rule.parseRules(newRuleSet)) {
+				//String newRuleSet = IOUtils.toString(ruleSet, Charset.defaultCharset());
+				BufferedReader br = new BufferedReader(new InputStreamReader(ruleSet.toURL().openStream(),Charset.defaultCharset()));
+				for (Rule rule : Rule.parseRules(Rule.rulesParserFromReader(br))) {
 					rules.add(rule);
 				}
 			}

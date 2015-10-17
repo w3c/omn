@@ -1,8 +1,9 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -33,14 +34,15 @@ public class TestRules {
 	private static final String EXPECT_MON = "omn-monitoring-unit";
 	private static final String TEST_XML = "/geni/geni-fire-20151006/netmode.rspec.xml";
 	private static final String TEST_TTL = "geni/geni-fire-20151006/netmode.rspec.xml.ttl";
-	private static final String TEST_RULE = "/rules/rule1.txt";
+	private static final String TEST_RULE = "/rules/ruleParserTest1.rules";
 
 	@Test
 	public void testSimpleRuleset() throws IOException {
-		final String rule1 = AbstractConverter.toString(TEST_RULE);
+		InputStream is = TestRules.class.getResourceAsStream(TEST_RULE);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is , "UTF-8"));
 		Model rawModel1 = RDFDataMgr.loadModel(TEST_TTL);
 		
-		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(rule1));
+		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(br)));
 		reasoner.setDerivationLogging(true);
 		InfModel infModel1 = ModelFactory.createInfModel(reasoner, rawModel1);
 		Assert.assertTrue(infModel1.toString().contains(EXPECT_MON));
