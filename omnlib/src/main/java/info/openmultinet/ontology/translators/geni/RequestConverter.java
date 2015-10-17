@@ -52,6 +52,9 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -1570,9 +1573,20 @@ public class RequestConverter extends AbstractConverter {
 		if (link.getClientId() == null) {
 			throw new MissingRspecElementException("LinkContents > client_id ");
 		}
-		final Resource linkResource = outputModel
-				.createResource(AbstractConverter.NAMESPACE
-						+ link.getClientId());
+
+		String componentManagerName = getComponentManagerName(link);
+		String sliverTypeUrl = null;
+		if (componentManagerName != null && AbstractConverter.isUrn(componentManagerName)) {
+			String[] parts = componentManagerName.split("\\+");
+			if (parts.length > 1) {
+				sliverTypeUrl = "http://" + parts[1] + "/" + link.getClientId();
+			} else {
+				sliverTypeUrl = HOST + link.getClientId();
+			}
+		} else {
+			sliverTypeUrl = HOST + link.getClientId();
+		}
+		final Resource linkResource = outputModel.createResource(sliverTypeUrl);
 
 		linkResource.addLiteral(Omn_resource.clientId, link.getClientId()); // required
 
@@ -1604,6 +1618,25 @@ public class RequestConverter extends AbstractConverter {
 		linkResource.addProperty(Omn.isResourceOf, topology);
 		topology.addProperty(Omn.hasResource, linkResource);
 
+	}
+
+	private static String getComponentManagerName(LinkContents link)
+			throws MissingRspecElementException {
+		String componentManagerName = null;
+		for (Object o : link.getAnyOrPropertyOrLinkType()) {
+
+			if (o.getClass().equals(ComponentManager.class)) {
+				final ComponentManager componentManager = (ComponentManager) o;
+				componentManagerName = componentManager.getName();
+
+				// name required
+				if (componentManagerName == null) {
+					throw new MissingRspecElementException(
+							"component_manager > name");
+				}
+			}
+		}
+		return componentManagerName;
 	}
 
 	private static void tryExtractSharedVlan(Object rspecObject,
@@ -1669,10 +1702,7 @@ public class RequestConverter extends AbstractConverter {
 			linkResource.addProperty(RDF.type, linkResource.getModel()
 					.createResource(linkName));
 		} else {
-			// set type of node
 			String sliverTypeUrl = HOST + linkName;
-			linkResource.addProperty(RDF.type, linkResource.getModel()
-					.createResource(sliverTypeUrl));
 		}
 
 		// class optional

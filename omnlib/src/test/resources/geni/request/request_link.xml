@@ -1,0 +1,35 @@
+<!-- rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" 
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd 
+	" xmlns:ns2="http://jfed.iminds.be/proxy/1.0" type="manifest" -->
+<rspec type="request" xmlns="http://www.geni.net/resources/rspec/3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd ">
+	<node client_id="motor-2"
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1"
+		component_manager_id="urn:publicid:IDN+localhost+authority+cm"
+		component_name="MotorGarage-1">
+		<sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor" />
+		<location x="410.0" xmlns="http://jfed.iminds.be/rspec/ext/jfed/1"
+			y="185.0" />
+		<interface client_id="motor-1:if0">
+			<ip address="192.168.0.2" netmask="255.255.255.0" type="ipv4" />
+		</interface>
+	</node>
+	<node client_id="motor-1"
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1"
+		component_manager_id="urn:publicid:IDN+localhost+authority+cm"
+		component_name="MotorGarage-1">
+		<sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor" />
+		<location x="10.0" xmlns="http://jfed.iminds.be/rspec/ext/jfed/1"
+			y="185.00000000000003" />
+		<interface client_id="motor-2:if0">
+			<ip address="192.168.0.1" netmask="255.255.255.0" type="ipv4" />
+		</interface>
+	</node>
+	<link client_id="link0">
+		<component_manager name="urn:publicid:IDN+localhost+authority+cm" />
+		<interface_ref client_id="motor-2:if0" />
+		<interface_ref client_id="motor-1:if0" />
+		<link_type name="http://open-multinet.info/ontology/resource/link#lan" />
+	</link>
+</rspec>
