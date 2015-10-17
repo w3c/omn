@@ -1,0 +1,79 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-nfv: <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e>
+        a                omn:Topology , omn-lifecycle:Manifest ;
+        rdfs:label       "Manifest" ;
+        omn:hasResource  <http://localhost/link0> , <http://open-multinet.info/example#motor-1> , <http://open-multinet.info/example#motor-2> .
+
+<http://open-multinet.info/example#motor-1:if0>
+        a                          omn-resource:Interface ;
+        omn-resource:clientId      "motor-1:if0" ;
+        omn-resource:hasIPAddress  <urn:uuid:2377ff94-1013-425f-b11f-3c0aff8f4536> .
+
+<http://open-multinet.info/example#motor-2:if0>
+        a                          omn-resource:Interface ;
+        omn-resource:clientId      "motor-2:if0" ;
+        omn-resource:hasIPAddress  <urn:uuid:0989e16c-48fc-491b-a741-efb0a62df3de> .
+
+<urn:uuid:45e503b2-ee53-4308-afd9-1a72d8335b47>
+        a                            omn-resource:SliverType ;
+        omn-lifecycle:hasSliverName  "http://open-multinet.info/ontology/resource/motor#Motor" .
+
+<urn:uuid:2377ff94-1013-425f-b11f-3c0aff8f4536>
+        a                     omn-resource:IPAddress ;
+        omn-resource:address  "192.168.0.2"^^xsd:string ;
+        omn-resource:netmask  "255.255.255.0"^^xsd:string ;
+        omn-resource:type     "ipv4"^^xsd:string .
+
+<urn:uuid:2b3859ae-94e2-46ee-a8ec-390b0f5ecfc1>
+        a                            omn-resource:SliverType ;
+        omn-lifecycle:hasSliverName  "http://open-multinet.info/ontology/resource/motor#Motor" .
+
+<http://open-multinet.info/example#motor-2>
+        a                             omn-resource:Node , <http://open-multinet.info/ontology/resource/motor#Motor> ;
+        rdfs:label                    "motor-2" ;
+        omn:isResourceOf              <urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e> ;
+        omn-lifecycle:hasComponentID  "urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1" ;
+        omn-lifecycle:hasID           "motor-2" ;
+        omn-lifecycle:implementedBy   <http://localhost/resource/MotorGarage-1> ;
+        omn-lifecycle:managedBy       <urn:publicid:IDN+localhost+authority+cm> ;
+        omn-resource:hasInterface     <http://open-multinet.info/example#motor-1:if0> ;
+        omn-resource:hasSliverType    <urn:uuid:2b3859ae-94e2-46ee-a8ec-390b0f5ecfc1> .
+
+<http://localhost/resource/MotorGarage-1>
+        omn-lifecycle:hasComponentName  "MotorGarage-1" .
+
+<urn:uuid:0989e16c-48fc-491b-a741-efb0a62df3de>
+        a                     omn-resource:IPAddress ;
+        omn-resource:address  "192.168.0.1"^^xsd:string ;
+        omn-resource:netmask  "255.255.255.0"^^xsd:string ;
+        omn-resource:type     "ipv4"^^xsd:string .
+
+<http://open-multinet.info/example#motor-1>
+        a                             omn-resource:Node , <http://open-multinet.info/ontology/resource/motor#Motor> ;
+        rdfs:label                    "motor-1" ;
+        omn:isResourceOf              <urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e> ;
+        omn-lifecycle:hasComponentID  "urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1" ;
+        omn-lifecycle:hasID           "motor-1" ;
+        omn-lifecycle:implementedBy   <http://localhost/resource/MotorGarage-1> ;
+        omn-lifecycle:managedBy       <urn:publicid:IDN+localhost+authority+cm> ;
+        omn-resource:hasInterface     <http://open-multinet.info/example#motor-2:if0> ;
+        omn-resource:hasSliverType    <urn:uuid:45e503b2-ee53-4308-afd9-1a72d8335b47> .
+
+<http://localhost/link0>
+        a                          omn-resource:Link , <http://open-multinet.info/ontology/resource/link#lan> ;
+        rdfs:label                 "http://open-multinet.info/ontology/resource/link#lan" ;
+        omn:isResourceOf           <urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e> ;
+        omn-lifecycle:hasComponentManagerName
+                "urn:publicid:IDN+localhost+authority+cm" ;
+        omn-lifecycle:managedBy    <urn:publicid:IDN+localhost+authority+cm> ;
+        omn-resource:clientId      "link0"^^xsd:string ;
+        omn-resource:hasInterface  <http://open-multinet.info/example#motor-1:if0> , <http://open-multinet.info/example#motor-2:if0> .

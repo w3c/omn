@@ -1,5 +1,7 @@
 package info.openmultinet.ontology.translators;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -30,8 +32,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.jena.riot.RDFDataMgr;
 import org.jboss.vfs.VirtualFile;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
@@ -40,8 +40,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
-
-import info.openmultinet.ontology.exceptions.InvalidModelException;
 
 public abstract class AbstractConverter {
 
