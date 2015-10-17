@@ -11,6 +11,20 @@ AddType application/x-turtle .ttl
 RewriteEngine On
 RewriteBase /ontology
 
+# fix typos
+Redirect 301 /ontology/omnlc http://open-multinet.info/ontology/omn-lifecycle
+Redirect 301 /omnlc http://open-multinet.info/ontology/omn-lifecycle
+Redirect 301 /ontology/omnfed http://open-multinet.info/ontology/omn-federation
+Redirect 301 /omnfed http://open-multinet.info/ontology/omn-federation
+Redirect 301 /ontology/omndpc http://open-multinet.info/ontology/omn-domain-pc
+Redirect 301 /omndpc http://open-multinet.info/ontology/omn-domain-pc
+Redirect 301 /ontology/omnres http://open-multinet.info/ontology/omn-resource
+Redirect 301 /omnres http://open-multinet.info/ontology/omn-resource
+Redirect 301 /ontology/omnmon http://open-multinet.info/ontology/omn-monitoring
+Redirect 301 /omnmon http://open-multinet.info/ontology/omn-monitoring
+Redirect 301 /ontology/omnsrv http://open-multinet.info/ontology/omn-service
+Redirect 301 /omnsrv http://open-multinet.info/ontology/omn-service
+
 # Rewrite rule to serve HTML content from the vocabulary URI if requested
 RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
 RewriteCond %{HTTP_ACCEPT} text/html [OR]
@@ -33,4 +47,3 @@ RewriteRule ^omn/?$ http://rdf-translator.appspot.com/convert/n3/pretty-xml/http
 
 # Rewrite rule to serve TTL content by default
 RewriteRule ^(.*)$ http://rdf-translator.appspot.com/convert/n3/n3/https://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/omnlib/ontologies/omn.ttl [P]
-
