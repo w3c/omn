@@ -27,11 +27,11 @@
                                                    
                                                    rdfs:label "omn-domain-pc"@en ;
                                                    
-                                                   dcterms:modified "2015-04-27"^^xsd:date ;
+                                                   dcterms:modified "2015-10-19"^^xsd:date ;
                                                    
                                                    dc:date "2015-03-15"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-04-27"^^xsd:string ;
+                                                   owl:versionInfo "2015-10-19"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Domain PC Ontology"^^xsd:string ;
                                                    
@@ -697,7 +697,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
            rdfs:seeAlso <http://www.protogeni.net/resources/rspec/ext/emulab/1> ;
            
-           rdfs:subClassOf omn:Resource .
+           rdfs:subClassOf omn:Attribute .
 
 
 

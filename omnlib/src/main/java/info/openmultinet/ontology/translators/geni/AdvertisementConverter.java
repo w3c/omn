@@ -1133,7 +1133,7 @@ public class AdvertisementConverter extends AbstractConverter {
 						globalOperator);
 			}
 
-			omnNode.addProperty(Omn.hasResource, fdResource);
+			omnNode.addProperty(Omn.hasAttribute, fdResource);
 
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
@@ -2198,10 +2198,9 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void setFd(Statement omnResource, NodeContents geniNode) {
-		// TODO Auto-generated method stub
 
 		List<Statement> resources = omnResource.getResource()
-				.listProperties(Omn.hasResource).toList();
+				.listProperties(Omn.hasAttribute).toList();
 
 		for (final Statement resourceStatement : resources) {
 			// add emulab node slots
@@ -2254,7 +2253,7 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void setInterface(Statement resource, NodeContents nodeContents) {
-		// TODO Auto-generated method stub
+
 		List<Statement> interfaces = resource.getResource()
 				.listProperties(Omn_resource.hasInterface).toList();
 
