@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:ns0="http://open-multinet.info/ontology/omn#" xmlns:ns1="http://open-multinet.info/ontology/omn-lifecycle#" xmlns:osco="http://opensdncore.org/ontology/">
+<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/namedTopology3">
+		<rdf:type rdf:resource="http://open-multinet.info/ontology/omn-lifecycle#Request"/>
+		<rdf:type rdf:resource="http://open-multinet.info/ontology/omn#Topology"/>
+		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/fdd6567e23db74b925efeee2110847c6"/>
+		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/729884c5930460fd3521226cb3ea3695"/>
+		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/c5930460fd3521226cb3ea36915"/>
+		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/8381e904-6262-4524-966d-dcbc926eff46"/>
+</owl:NamedIndividual>
+<osco:m2m_gateway rdf:about="http://open-multinet.info/ontology/examples/fdd6567e23db74b925efeee2110847c6">
+		<ns1:hasID>m2m_gateway-23</ns1:hasID>
+		<ns0:isResourceOf rdf:resource="http://open-multinet.info/ontology/examples/namedTopology3"/>
+		<ns1:implementedBy rdf:resource="http://localhost/resource/ToscaAdapter-1"/>
+		<osco:APP_PORT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4000</osco:APP_PORT>
+		<osco:LOGGING_FILE rdf:datatype="http://www.w3.org/2001/XMLSchema#string">null</osco:LOGGING_FILE>
+		<osco:LOGGING_LEVEL rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFO</osco:LOGGING_LEVEL>
+		<osco:REQUIRE_AUTH rdf:datatype="http://www.w3.org/2001/XMLSchema#string">false</osco:REQUIRE_AUTH>
+		<osco:SERVICE_PORT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5000</osco:SERVICE_PORT>
+		<osco:MGMT_INTF rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</osco:MGMT_INTF>
+		<osco:COAP_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:COAP_DISABLED>
+		<osco:NOTIFY_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:NOTIFY_DISABLED>
+		<osco:RETARGET_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:RETARGET_DISABLED>
+		<osco:ANNC_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:ANNC_DISABLED>
+		<osco:ANNC_AUTO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:ANNC_AUTO>
+		<osco:NOTIFY_CHAN_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:NOTIFY_CHAN_DISABLED>
+		<osco:deployedOn rdf:resource="http://open-multinet.info/ontology/examples/729884c5930460fd3521226cb3ea3695"/>
+</osco:m2m_gateway>
+<osco:ServiceContainer rdf:about="http://open-multinet.info/ontology/examples/c5930460fd3521226cb3ea36915">       
+        <ns1:hasID>m2m-server</ns1:hasID>
+        <ns0:isResourceOf rdf:resource="http://open-multinet.info/ontology/examples/namedTopology3"/>
+        <ns1:implementedBy rdf:resource="http://localhost/resource/ToscaAdapter-1"/>
+        <osco:flavour rdf:datatype="http://www.w3.org/2001/XMLSchema#string">m1.small</osco:flavour>
+        <osco:image>
+			<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/image-545258056">
+				<rdf:type rdf:resource="http://opensdncore.org/ontology/Image"/>
+				<osco:datacenter rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AV-Openstack2</osco:datacenter>
+				<osco:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c837ac9e-ef0f-4176-ab4a-2f320282ac1d</osco:id>
+			</owl:NamedIndividual>
+		</osco:image>
+		<osco:location>
+			<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/location1758072802">
+				<rdf:type rdf:resource="http://opensdncore.org/ontology/Location"/>
+				<osco:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Berlin2</osco:name>
+			</owl:NamedIndividual>
+		</osco:location>
+		<osco:maxNumInst rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</osco:maxNumInst>
+		<osco:minNumInst rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</osco:minNumInst>
+		<osco:subnet>
+			<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/subnet-2071023063">
+				<rdf:type rdf:resource="http://opensdncore.org/ontology/Subnet"/>
+				<osco:datacenter rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AV-Openstack2</osco:datacenter>
+				<osco:mgmt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</osco:mgmt>
+				<osco:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vpn-subnet</osco:name>
+			</owl:NamedIndividual>
+		</osco:subnet>
+      </osco:ServiceContainer>
+<osco:ServiceContainer rdf:about="http://open-multinet.info/ontology/examples/729884c5930460fd3521226cb3ea3695">
+		<ns1:hasID>m2m-gateway</ns1:hasID>
+		<ns0:isResourceOf rdf:resource="http://open-multinet.info/ontology/examples/namedTopology3"/>
+		<ns1:implementedBy rdf:resource="http://localhost/resource/ToscaAdapter-1"/>
+		<osco:flavour rdf:datatype="http://www.w3.org/2001/XMLSchema#string">m1.small</osco:flavour>
+		<osco:image>
+			<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/image-545258057">
+				<rdf:type rdf:resource="http://opensdncore.org/ontology/Image"/>
+				<osco:datacenter rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AV-Openstack2</osco:datacenter>
+				<osco:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c837ac9e-ef0f-4176-ab4a-2f320282ac1d</osco:id>
+			</owl:NamedIndividual>
+		</osco:image>
+		<osco:location>
+			<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/location1758072803">
+				<rdf:type rdf:resource="http://opensdncore.org/ontology/Location"/>
+				<osco:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Berlin2</osco:name>
+			</owl:NamedIndividual>
+		</osco:location>
+		<osco:maxNumInst rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</osco:maxNumInst>
+		<osco:minNumInst rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</osco:minNumInst>
+		<osco:subnet>
+			<owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/subnet-2071023064">
+				<rdf:type rdf:resource="http://opensdncore.org/ontology/Subnet"/>
+				<osco:datacenter rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AV-Openstack2</osco:datacenter>
+				<osco:mgmt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</osco:mgmt>
+				<osco:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vpn-subnet</osco:name>
+			</owl:NamedIndividual>
+		</osco:subnet>
+	</osco:ServiceContainer>
+<osco:m2m_server rdf:about="http://open-multinet.info/ontology/examples/8381e904-6262-4524-966d-dcbc926eff46">
+  		<osco:deployedOn rdf:resource="http://open-multinet.info/ontology/examples/c5930460fd3521226cb3ea36915"/>
+  		<ns1:hasID>m2m_server-23</ns1:hasID>
+  		<ns0:isResourceOf rdf:resource="http://open-multinet.info/ontology/examples/namedTopology3"/>
+  		<ns1:implementedBy rdf:resource="http://localhost/resource/ToscaAdapter-1"/>
+  		<osco:LOGGING_FILE rdf:datatype="http://www.w3.org/2001/XMLSchema#string">null</osco:LOGGING_FILE>
+  		<osco:LOGGING_LEVEL rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFO</osco:LOGGING_LEVEL>
+  		<osco:REQUIRE_AUTH rdf:datatype="http://www.w3.org/2001/XMLSchema#string">false</osco:REQUIRE_AUTH>
+		<osco:SERVICE_PORT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5000</osco:SERVICE_PORT>
+        <osco:MGMT_INTF rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1</osco:MGMT_INTF>
+        <osco:COAP_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:COAP_DISABLED>
+        <osco:NOTIFY_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:NOTIFY_DISABLED>
+        <osco:RETARGET_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:RETARGET_DISABLED>
+        <osco:ANNC_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:ANNC_DISABLED>
+        <osco:ANNC_AUTO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:ANNC_AUTO>
+        <osco:NOTIFY_CHAN_DISABLED rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</osco:NOTIFY_CHAN_DISABLED>
+       	<osco:APP_PORT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4000</osco:APP_PORT> 
+    </osco:m2m_server>
+</rdf:RDF>
