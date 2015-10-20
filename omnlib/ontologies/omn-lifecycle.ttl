@@ -440,6 +440,65 @@
 #################################################################
 
 
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#creationTime
+
+:creationTime rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has creation time"@en ;
+       
+        rdfs:comment "GENI sliver info creation time"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:dateTime .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#creator
+
+:creator rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has creator URN"@en ;
+       
+        rdfs:comment "GENI sliver info creator URN"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#expirationTime
+
+:expirationTime rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has expiration time"@en ;
+       
+        rdfs:comment "GENI sliver info expiration time"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Group
+                       omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:dateTime .
+
+
+
+
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasAuthenticationInformation
 
 :hasAuthenticationInformation rdf:type owl:DatatypeProperty ;
@@ -457,25 +516,6 @@
                 ] ;
 
                 rdfs:range xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#hasID
-
-:hasID rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has ID"@en ;
-       
-        rdfs:comment "A unique identifier set by the management system"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
-                       omn:Service
-                       omn-resource:Location
-                     )
-        ] ;
-       
-        rdfs:range xsd:string .
 
 
 
@@ -499,19 +539,61 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasRole
 
-:hasRole rdf:type owl:DatatypeProperty ;
+###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerName
 
-        rdfs:label "has role"@en ;
+:hasComponentManagerName rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has component manager name"@en ;
        
-        rdfs:comment "has role"@en ;
+        rdfs:comment "has component manager name"@en ;
        
-        rdfs:seeAlso "GENI Manifest RSpec v3: role"@en ;
+        rdfs:seeAlso "GENI Manifest RSpec v3: component_manager"@en ;
        
         rdfs:domain [ rdf:type owl:Class ;
          owl:unionOf ( omn:Resource
                        omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentName
+
+:hasComponentName rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has component name"@en ;
+       
+        rdfs:comment "has component name"@en ;
+       
+        rdfs:seeAlso "GENI Manifest RSpec v3: component_name"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+:hasID rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has ID"@en ;
+       
+        rdfs:comment "A unique identifier set by the management system"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                       omn-resource:Location
                      )
         ] ;
        
@@ -539,16 +621,28 @@
         rdfs:range xsd:string .
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#project
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentName
+:project rdf:type owl:DatatypeProperty ;
 
-:hasComponentName rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has component name"@en ;
+        rdfs:label "project"@en ;
        
-        rdfs:comment "has component name"@en ;
+        rdfs:comment "topology belongs to related project"@en ;
        
-        rdfs:seeAlso "GENI Manifest RSpec v3: component_name"@en ;
+        rdfs:domain omn:Topology ;
+       
+        rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#resourceId
+
+:resourceId rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has resource ID"@en ;
+       
+        rdfs:comment "GENI sliver info resource ID"@en ;
        
         rdfs:domain [ rdf:type owl:Class ;
          owl:unionOf ( omn:Resource
@@ -560,15 +654,15 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerName
+###  http://open-multinet.info/ontology/omn-lifecycle#hasRole
 
-:hasComponentManagerName rdf:type owl:DatatypeProperty ;
+:hasRole rdf:type owl:DatatypeProperty ;
 
-        rdfs:label "has component manager name"@en ;
+        rdfs:label "has role"@en ;
        
-        rdfs:comment "has component manager name"@en ;
+        rdfs:comment "has role"@en ;
        
-        rdfs:seeAlso "GENI Manifest RSpec v3: component_manager"@en ;
+        rdfs:seeAlso "GENI Manifest RSpec v3: role"@en ;
        
         rdfs:domain [ rdf:type owl:Class ;
          owl:unionOf ( omn:Resource
@@ -617,96 +711,6 @@
         ] ;
        
         rdfs:range xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#resourceId
-
-:resourceId rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has resource ID"@en ;
-       
-        rdfs:comment "GENI sliver info resource ID"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
-                       omn:Service
-                     )
-        ] ;
-       
-        rdfs:range xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#creator
-
-:creator rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has creator URN"@en ;
-       
-        rdfs:comment "GENI sliver info creator URN"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
-                       omn:Service
-                     )
-        ] ;
-       
-        rdfs:range xsd:string .
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#startTime
-
-:startTime rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has start time"@en ;
-       
-        rdfs:comment "GENI sliver info start time"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
-                       omn:Service
-                     )
-        ] ;
-       
-        rdfs:range xsd:dateTime .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#expirationTime
-
-:expirationTime rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has expiration time"@en ;
-       
-        rdfs:comment "GENI sliver info expiration time"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Group
-                       omn:Resource
-                       omn:Service
-                     )
-        ] ;
-       
-        rdfs:range xsd:dateTime .
-
-
-
-###  http://open-multinet.info/ontology/omn-lifecycle#creationTime
-
-:creationTime rdf:type owl:DatatypeProperty ;
-
-        rdfs:label "has creation time"@en ;
-       
-        rdfs:comment "GENI sliver info creation time"@en ;
-       
-        rdfs:domain [ rdf:type owl:Class ;
-         owl:unionOf ( omn:Resource
-                       omn:Service
-                     )
-        ] ;
-       
-        rdfs:range xsd:dateTime .
         
 
 
@@ -729,6 +733,24 @@
             ] ;
           
           rdfs:range omn:Service .
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#startTime
+
+:startTime rdf:type owl:DatatypeProperty ;
+
+        rdfs:label "has start time"@en ;
+       
+        rdfs:comment "GENI sliver info start time"@en ;
+       
+        rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource
+                       omn:Service
+                     )
+        ] ;
+       
+        rdfs:range xsd:dateTime .
 
 
 
