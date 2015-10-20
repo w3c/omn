@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 public class RSpecValidationTest {
 
@@ -28,6 +29,7 @@ public class RSpecValidationTest {
 	final static int different2 = 7;
 	final static double nano = 1000000000.0;
 
+	@Test
 	public void testGetType() {
 		List<Entry<String, String>> types = new ArrayList<>();
 
@@ -51,11 +53,10 @@ public class RSpecValidationTest {
 				AbstractConverter.TOSCA, pathTosca);
 		types.add(pair4);
 
-		// String pathTtl = "./src/test/resources/omn/request.ttl";
-		// Entry<String, String> pair5 = new
-		// java.util.AbstractMap.SimpleEntry<>(
-		// AbstractConverter.TTL, pathTtl);
-		// types.add(pair5);
+		String pathToscaRdfxml = "./src/test/resources/tosca/newTubitTosca.xml";
+		Entry<String, String> pair5 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.RDFXML, pathToscaRdfxml);
+		types.add(pair5);
 
 		for (int i = 0; i < types.size(); i++) {
 
@@ -244,15 +245,14 @@ public class RSpecValidationTest {
 		totalDiffNodes.add(outNodesAds);
 		totalDiffNodes.add(outNodesManifests);
 		totalDiffNodes.add(outNodesRequests);
-		
+
 		List<Integer> attributesInAds = new ArrayList<Integer>();
 		List<Integer> attributesInManifests = new ArrayList<Integer>();
 		List<Integer> attributesInRequests = new ArrayList<Integer>();
 		totalDiffNodes.add(attributesInAds);
 		totalDiffNodes.add(attributesInManifests);
 		totalDiffNodes.add(attributesInRequests);
-		
-		
+
 		List<Integer> attributesOutAds = new ArrayList<Integer>();
 		List<Integer> attributesOutManifests = new ArrayList<Integer>();
 		List<Integer> attributesOutRequests = new ArrayList<Integer>();
@@ -328,14 +328,14 @@ public class RSpecValidationTest {
 		int sumDiffs = 0;
 		int sumAttributesIn = 0;
 		int sumAttributesOut = 0;
-		
+
 		for (int i = 0; i < 3; i++) {
 			int interimSumInNodes = 0;
 			int interimSumOutNodes = 0;
 			int interimSumDiffs = 0;
 			int interimAttributesIn = 0;
 			int interimAttributesOut = 0;
-			
+
 			for (int j = 0; j < totalDiffNodes.get(i).size(); j++) {
 				interimSumDiffs += totalDiffNodes.get(i).get(j);
 				interimSumInNodes += totalDiffNodes.get(i + 3).get(j);
@@ -401,8 +401,10 @@ public class RSpecValidationTest {
 		System.out.println("Average diffs per file: " + averageDiffs);
 		System.out.println("Average in nodes per file: " + averageInNodes);
 		System.out.println("Average out nodes per file: " + averageOutNodes);
-		System.out.println("Average attributes in per file: " + averageAttributesIn);
-		System.out.println("Average attributes out per file: " + averageAttributesOut);
+		System.out.println("Average attributes in per file: "
+				+ averageAttributesIn);
+		System.out.println("Average attributes out per file: "
+				+ averageAttributesOut);
 
 		return totalDiffNodes;
 	}
@@ -903,56 +905,53 @@ public class RSpecValidationTest {
 
 	}
 
-	public static void main(String[] args) throws MissingRspecElementException,
-			DeprecatedRspecVersionException, IOException {
-
-		// File path = new File("./src/test/resources/geni/advertisement");
-		// File path = new File("./src/test/resources/geni/ciscogeni");
-		// File path = new File("./src/test/resources/geni/exogeni");
-		// File path = new File("./src/test/resources/geni/fed4fire");
-		// File path = new File("./src/test/resources/geni/gimiv3");
-		// File path = new File("./src/test/resources/geni/gpolab");
-		// File path = new File("./src/test/resources/geni/iminds");
-		// File path = new File("./src/test/resources/geni/instageni");
-		// File path = new File("./src/test/resources/geni/manifest");
-		// File path = new File("./src/test/resources/geni/maxgeni");
-		// File path = new File("./src/test/resources/geni/oess");
-		// File path = new File("./src/test/resources/geni/openflow");
-		// File path = new File("./src/test/resources/geni/productionfoam");
-		// File path = new File("./src/test/resources/geni/protogeni");
-		//File path = new File("./src/test/resources/geni/request");
-		// File path = new File("./src/test/resources/geni/stich");
-
-		File path = new File("./src/test/resources/geni");
-		// checkVersionDirectory(path);
-		// getErrorDirectory(path);
-		getNodesDiffsDirectory(path);
-		// getTimesDirectory(path);
-		// validateDirectory(path);
-
-//		File path = new File(
-//				"./src/test/resources/geni/request/request_bound.xml");
-	
-//		File path = new File(
-//				"./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
-		// File path = new File(
-		// "./src/test/resources/geni/ciscogeni/CG-CT-5-eg-ncsu2.rspec");
-		// File path = new File(
-		// "./src/test/resources/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec");
-		// validateFile(path);
-		// File path = new File(
-		// "./src/test/resources/geni/advertisement/advertisement_vwall1.xml");
-		// getErrorFile(path);
-
-//		String rspecString = null;
-//		try {
-//			System.out.println(path.getPath().substring(20));
-//			rspecString = AbstractConverter.toString(path.getPath().substring(
-//					20));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		int[] diffNodes = RSpecValidation.getDiffsNodes(rspecString);
-
-	}
+	// public static void main(String[] args) throws
+	// MissingRspecElementException,
+	// DeprecatedRspecVersionException, IOException {
+	// File path = new File("./src/test/resources/geni/advertisement");
+	// File path = new File("./src/test/resources/geni/ciscogeni");
+	// File path = new File("./src/test/resources/geni/exogeni");
+	// File path = new File("./src/test/resources/geni/fed4fire");
+	// File path = new File("./src/test/resources/geni/gimiv3");
+	// File path = new File("./src/test/resources/geni/gpolab");
+	// File path = new File("./src/test/resources/geni/iminds");
+	// File path = new File("./src/test/resources/geni/instageni");
+	// File path = new File("./src/test/resources/geni/manifest");
+	// File path = new File("./src/test/resources/geni/maxgeni");
+	// File path = new File("./src/test/resources/geni/oess");
+	// File path = new File("./src/test/resources/geni/openflow");
+	// File path = new File("./src/test/resources/geni/productionfoam");
+	// File path = new File("./src/test/resources/geni/protogeni");
+	// File path = new File("./src/test/resources/geni/request");
+	// File path = new File("./src/test/resources/geni/stich");
+	// File path = new File("./src/test/resources/geni");
+	// checkVersionDirectory(path);
+	// getErrorDirectory(path);
+	// getNodesDiffsDirectory(path);
+	// getTimesDirectory(path);
+	// validateDirectory(path);
+	// File path = new File(
+	// "./src/test/resources/geni/request/request_bound.xml");
+	// File path = new File(
+	// "./src/test/resources/geni/exogeni/EG-EXP-5-exp1-openflow-eg-gpo.rspec");
+	// File path = new File(
+	// "./src/test/resources/geni/ciscogeni/CG-CT-5-eg-ncsu2.rspec");
+	// File path = new File(
+	// "./src/test/resources/geni/ciscogeni/CG-CT-5-openflow-eg-ncsu2.rspec");
+	// validateFile(path);
+	// File path = new File(
+	// "./src/test/resources/geni/advertisement/advertisement_vwall1.xml");
+	// getErrorFile(path);
+	//
+	// String rspecString = null;
+	// try {
+	// System.out.println(path.getPath().substring(20));
+	// rspecString = AbstractConverter.toString(path.getPath().substring(
+	// 20));
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// int[] diffNodes = RSpecValidation.getDiffsNodes(rspecString);
+	//
+	// }
 }

@@ -1,6 +1,7 @@
 package info.openmultinet.ontology;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
@@ -49,6 +50,7 @@ public class Parser {
 	protected InfModel infModel;
 	private Model data;
 	private static Reasoner reasoner;
+	public String inputType;
 
 	// @todo: add support for all serializations, not only TTL
 	public Parser(final InputStream input) throws InvalidModelException {
@@ -82,10 +84,20 @@ public class Parser {
 		this.init();
 	}
 
+	public Parser(InputStream input, String inputType)
+			throws InvalidModelException {
+		this.inputType = inputType;
+		this.read(input);
+	}
+
 	private void init() {
 		// @fixme: this is a slow/expensive operation
 		this.data = ModelFactory.createDefaultModel();
 	}
+
+//	public void setInputType(String inputType) {
+//		this.inputType = inputType;
+//	}
 
 	public void read(@NotNull final InputStream input,
 			List<String> additionalOntologies) throws InvalidModelException {
@@ -93,7 +105,13 @@ public class Parser {
 		if (null == input)
 			throw new IllegalArgumentException("input must not be null");
 
-		final RDFReader arp = data.getReader("TTL");
+		RDFReader arp;
+		if (inputType != null && inputType.equals(AbstractConverter.RDFXML)) {
+			arp = data.getReader();
+		} else {
+			arp = data.getReader("TTL");
+		}
+
 		try {
 			// @fixme: this is a slow/expensive operation
 			arp.read(data, input, null);

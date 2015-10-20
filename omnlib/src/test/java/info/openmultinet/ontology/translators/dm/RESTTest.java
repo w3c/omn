@@ -51,7 +51,7 @@ public class RESTTest {
 	}
 
 	@Test
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testConvertToRspecAd() {
 		System.out.println("*******************************************");
 		System.out.println("*******  convert model to RSpec Ad  *******");
@@ -66,7 +66,7 @@ public class RESTTest {
 	}
 
 	@Test
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testConvertFromUnknownToRspecAd() {
 		System.out.println("*******************************************");
 		System.out.println("*******  convert model to RSpec Ad  *******");
@@ -113,7 +113,7 @@ public class RESTTest {
 	}
 
 	@Test
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testConvertToRspecRequest() {
 		System.out.println("*************************************************");
 		System.out.println("*******   convert model to RSpec Request  *******");
@@ -124,7 +124,7 @@ public class RESTTest {
 		final String result = this.converter.post(AbstractConverter.TTL,
 				AbstractConverter.RSPEC_REQUEST, content);
 		System.out.println(result);
-		Assert.assertTrue("should contain an advertisement rspec",
+		Assert.assertTrue("should contain a request rspec",
 				result.contains("type=\"request\""));
 	}
 
@@ -179,7 +179,7 @@ public class RESTTest {
 	}
 
 	@Test
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testConvertToRspecManifest() {
 		System.out.println("*************************************************");
 		System.out
@@ -192,7 +192,7 @@ public class RESTTest {
 		final String result = this.converter.post(AbstractConverter.TTL,
 				AbstractConverter.RSPEC_MANIFEST, content);
 		System.out.println(result);
-		Assert.assertTrue("should contain an advertisement rspec",
+		Assert.assertTrue("should contain a manifest rspec",
 				result.contains("type=\"manifest\""));
 	}
 
@@ -252,6 +252,20 @@ public class RESTTest {
 		System.out.println(result);
 		Assert.assertTrue("should contain osco:STOPPED",
 				result.contains("osco:STOPPED"));
+	}
+
+	@Test
+	public void testRdfxmlToRequest() {
+		System.out.println("*************************************************");
+		System.out.println("******  start convert RDF/XML to request  *******");
+		System.out.println("*************************************************");
+		final String content = this.getFilecontent("/tosca/newTubitTosca.xml");
+
+		final String result = this.converter.post(AbstractConverter.RDFXML,
+				AbstractConverter.RSPEC_REQUEST, content);
+		System.out.println(result);
+		Assert.assertTrue("should contain a request rspec",
+				result.contains("type=\"request\""));
 	}
 
 	@Test(expected = WebApplicationException.class)

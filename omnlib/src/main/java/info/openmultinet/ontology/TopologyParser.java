@@ -16,6 +16,11 @@ public class TopologyParser extends Parser {
 		super(input);
 	}
 
+	public TopologyParser(InputStream input, String inputType)
+			throws InvalidModelException {
+		super(input, inputType);
+	}
+
 	public ResIterator getGroups() {
 		return this.infModel.listSubjectsWithProperty(RDF.type, Omn.Group);
 	}

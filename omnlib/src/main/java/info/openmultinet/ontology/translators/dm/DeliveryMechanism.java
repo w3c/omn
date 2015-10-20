@@ -68,6 +68,9 @@ public class DeliveryMechanism {
 			model = new AdvertisementConverter().getModel(stream);
 		} else if (AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
 			model = ManifestConverter.getModel(stream);
+		} else if (AbstractConverter.RDFXML.equalsIgnoreCase(from)) {
+			Parser parser = new Parser(stream, AbstractConverter.RDFXML);
+			model = parser.getInfModel();
 		} else if (AbstractConverter.TTL.equalsIgnoreCase(from)) {
 			model = new Parser(stream).getInfModel();
 		} else if (AbstractConverter.TOSCA.equalsIgnoreCase(from)) {
