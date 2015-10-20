@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <ns2:rspec generated="2015-10-21T01:31:41.812+02:00" generated_by="omnlib" type="request" xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns6="http://www.geni.net/resources/rspec/ext/share
+    d-vlan/1" xmlns:ns5="http://opensdncore.org/ontology/" xmlns:ns7="http://monitoring.service.tu-berlin.de/monitoring" xmlns:ns2="http://www.geni.net/resources/rspec/3" xmlns:ns4="http://www.geni.net/resources/
+    rspec/ext/stitch/2/" xmlns:ns3="http://www.geni.net/resources/rspec/ext/openflow/4">
+        <ns2:node client_id="motor-0" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1" component_manager_id="urn:publicid:IDN+localhost+authority+cm">
+            <ns2:sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor"/>
+        </ns2:node>
+    </ns2:rspec>
