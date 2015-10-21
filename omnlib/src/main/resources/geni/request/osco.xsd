@@ -12,6 +12,16 @@
 	</xs:element>
 	<xs:element name="osco">
 		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="s:image" />
+				<xs:element ref="s:osco_location" />
+				<xs:element ref="s:subnet" />
+			</xs:choice>
+			<xs:attribute name="about" type="xs:string" />
+			<xs:attribute name="type" type="xs:string" />
+			<xs:attribute name="id" type="xs:string" />
+			<xs:attribute name="implemented_by" type="xs:string" />
+			<xs:attribute name="deployed_on" type="xs:string" />
 			<xs:attribute name="app_port" type="xs:string" />
 			<xs:attribute name="logging_file" type="xs:string" />
 			<xs:attribute name="require_auth" type="xs:boolean" />
@@ -25,6 +35,27 @@
 			<xs:attribute name="annc_auto" type="xs:boolean" />
 			<xs:attribute name="mgmt_intf" type="xs:string" />
 			<xs:attribute name="annc_disabled" type="xs:boolean" />
+			<xs:attribute name="flavour" type="xs:string" />
+			<xs:attribute name="max_num_inst" type="xs:integer" />
+			<xs:attribute name="min_num_inst" type="xs:integer" />
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="image" type="s:ImageContents" />
+	<xs:complexType name="ImageContents">
+		<xs:attribute name="datacenter" type="xs:string" />
+		<xs:attribute name="id" type="xs:string" />
+		<xs:attribute name="about" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="osco_location" type="s:OscoLocationContents" />
+	<xs:complexType name="OscoLocationContents">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="about" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="subnet" type="s:SubnetContents" />
+	<xs:complexType name="SubnetContents">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="mgmt" type="xs:boolean" />
+		<xs:attribute name="datacenter" type="xs:string" />
+		<xs:attribute name="about" type="xs:string" />
+	</xs:complexType>
 </xs:schema>

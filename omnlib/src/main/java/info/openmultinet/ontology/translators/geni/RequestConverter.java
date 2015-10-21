@@ -14,6 +14,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceCo
 import info.openmultinet.ontology.translators.geni.jaxb.request.GroupContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HopContent;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
@@ -34,6 +35,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.NwDst;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NwSrc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Osco;
+import info.openmultinet.ontology.translators.geni.jaxb.request.OscoLocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.PacketContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.PathContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
@@ -42,6 +44,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContent
 import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
 import info.openmultinet.ontology.translators.geni.jaxb.request.StitchContent;
+import info.openmultinet.ontology.translators.geni.jaxb.request.SubnetContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
@@ -52,13 +55,16 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,6 +75,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.xerces.dom.ElementNSImpl;
@@ -84,6 +91,7 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.InvalidPropertyURIException;
+import com.hp.hpl.jena.util.ResourceUtils;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -132,7 +140,12 @@ public class RequestConverter extends AbstractConverter {
 		}
 		AbstractConverter.validateModel(groups);
 
+		// save uri of topology in special rspec field
 		final Resource group = groups.iterator().next();
+		String uri = group.getURI();
+		QName key = new QName("http://opensdncore.org/ontology/", "uri", "osco");
+		request.getOtherAttributes().put(key, uri);
+
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
 
@@ -149,7 +162,22 @@ public class RequestConverter extends AbstractConverter {
 					&& !resource.getResource().hasProperty(RDF.type,
 							Omn_resource.Openflow)
 					&& !resource.getResource().hasProperty(RDF.type,
-							Omn_resource.Stitching)) {
+							Omn_resource.Stitching)
+					&& !resource
+							.getResource()
+							.hasProperty(
+									RDF.type,
+									info.openmultinet.ontology.vocabulary.Osco.m2m_server)
+					&& !resource
+							.getResource()
+							.hasProperty(
+									RDF.type,
+									info.openmultinet.ontology.vocabulary.Osco.m2m_gateway)
+					&& !resource
+							.getResource()
+							.hasProperty(
+									RDF.type,
+									info.openmultinet.ontology.vocabulary.Osco.ServiceContainer)) {
 
 				final NodeContents node = new NodeContents();
 
@@ -167,7 +195,7 @@ public class RequestConverter extends AbstractConverter {
 				setServices(resource, node);
 				setHardwareTypes(resource, node);
 				setMonitoringService(resource, node);
-				setOsco(resource, node);
+				// setOsco(resource, node);
 				setEmulabExtension(resource, node);
 
 				request.getAnyOrNodeOrLink().add(
@@ -201,13 +229,24 @@ public class RequestConverter extends AbstractConverter {
 						.createStitching(stitchContent);
 
 				request.getAnyOrNodeOrLink().add(stitching);
-
+			} else if (resource.getResource().hasProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Osco.m2m_server)
+					|| resource
+							.getResource()
+							.hasProperty(
+									RDF.type,
+									info.openmultinet.ontology.vocabulary.Osco.m2m_gateway)
+					|| resource
+							.getResource()
+							.hasProperty(
+									RDF.type,
+									info.openmultinet.ontology.vocabulary.Osco.ServiceContainer)) {
+				setOsco(resource, request);
 			}
-
 		}
 	}
 
-	private static void setOsco(Statement resource, NodeContents node) {
+	private static void setOsco(Statement resource, RSpecContents request) {
 
 		Resource resourceResource = resource.getResource();
 		// check whether file has any osco properties
@@ -218,9 +257,59 @@ public class RequestConverter extends AbstractConverter {
 				|| resourceResource
 						.hasProperty(info.openmultinet.ontology.vocabulary.Osco.REQUIRE_AUTH)
 				|| resourceResource
-						.hasProperty(info.openmultinet.ontology.vocabulary.Osco.SERVICE_PORT)) {
+						.hasProperty(info.openmultinet.ontology.vocabulary.Osco.SERVICE_PORT)
+				|| resourceResource
+						.hasProperty(info.openmultinet.ontology.vocabulary.Osco.flavour)
+				|| resourceResource
+						.hasProperty(info.openmultinet.ontology.vocabulary.Osco.image)
+				|| resourceResource
+						.hasProperty(info.openmultinet.ontology.vocabulary.Osco.subnet)) {
 
 			Osco osco = new ObjectFactory().createOsco();
+
+			String aboutUri = resourceResource.getURI();
+			if (aboutUri != null && aboutUri != "") {
+				osco.setAbout(aboutUri);
+			}
+
+			if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
+				String id = resourceResource.getProperty(Omn_lifecycle.hasID)
+						.getObject().asLiteral().getString();
+				if (id != null && id != "") {
+					osco.setId(id);
+				}
+			}
+
+			if (resourceResource.hasProperty(Omn_lifecycle.implementedBy)) {
+				String implementedBy = resourceResource
+						.getProperty(Omn_lifecycle.implementedBy).getObject()
+						.asResource().getURI();
+				if (implementedBy != null && implementedBy != "") {
+					osco.setImplementedBy(implementedBy);
+				}
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.deployedOn)) {
+				String deployedOn = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.deployedOn)
+						.getObject().asResource().getURI();
+				if (deployedOn != null && deployedOn != "") {
+					osco.setDeployedOn(deployedOn);
+				}
+			}
+
+			if (resourceResource.hasProperty(RDF.type)) {
+				final List<Statement> hasTypes = resourceResource
+						.listProperties(RDF.type).toList();
+				for (final Statement hasType : hasTypes) {
+					String type = hasType.getResource().getURI();
+					if (AbstractConverter.nonGeneric(type)) {
+						osco.setType(type);
+					}
+				}
+			}
 
 			if (resourceResource
 					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.APP_PORT)) {
@@ -349,9 +438,157 @@ public class RequestConverter extends AbstractConverter {
 				osco.setAnncDisabled(anncDisabled);
 			}
 
-			node.getAnyOrRelationOrLocation().add(osco);
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.flavour)) {
+				String flavour = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.flavour)
+						.getObject().asLiteral().getString();
+				osco.setFlavour(flavour);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.image)) {
+				Resource image = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.image)
+						.getObject().asResource();
+				setOscoImage(osco, image);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.location)) {
+				Resource location = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.location)
+						.getObject().asResource();
+				setOscoLocation(osco, location);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.maxNumInst)) {
+				String maxNumInst = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.maxNumInst)
+						.getObject().asLiteral().getString();
+				int maxNumInstInt = Integer.parseInt(maxNumInst);
+				BigInteger maxNumInstBigInt = BigInteger.valueOf(maxNumInstInt);
+				osco.setMaxNumInst(maxNumInstBigInt);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.minNumInst)) {
+				String minNumInst = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.minNumInst)
+						.getObject().asLiteral().getString();
+				int minNumInstInt = Integer.parseInt(minNumInst);
+				BigInteger minNumInstBigInt = BigInteger.valueOf(minNumInstInt);
+				osco.setMinNumInst(minNumInstBigInt);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.subnet)) {
+				Resource subnet = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.subnet)
+						.getObject().asResource();
+				setOscoSubnet(osco, subnet);
+			}
+
+			request.getAnyOrNodeOrLink().add(osco);
 		}
 
+	}
+
+	private static void setOscoSubnet(Osco osco, Resource subnet) {
+		SubnetContents subnetContents = new ObjectFactory()
+				.createSubnetContents();
+
+		if (subnet
+				.hasProperty(info.openmultinet.ontology.vocabulary.Osco.datacenter)) {
+			String datacenter = subnet
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Osco.datacenter)
+					.getObject().asLiteral().getString();
+			subnetContents.setDatacenter(datacenter);
+		}
+
+		if (subnet.hasProperty(info.openmultinet.ontology.vocabulary.Osco.mgmt)) {
+			String mgmt = subnet
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Osco.mgmt)
+					.getObject().asLiteral().getString();
+			boolean mgmtBoolean = Boolean.parseBoolean(mgmt);
+			subnetContents.setMgmt(mgmtBoolean);
+		}
+
+		if (subnet.hasProperty(info.openmultinet.ontology.vocabulary.Osco.name)) {
+			String name = subnet
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Osco.name)
+					.getObject().asLiteral().getString();
+			subnetContents.setName(name);
+		}
+
+		String aboutUri = subnet.getURI();
+		if (aboutUri != null && aboutUri != "") {
+			subnetContents.setAbout(aboutUri);
+		}
+
+		osco.getImageOrOscoLocationOrSubnet().add(subnetContents);
+
+	}
+
+	private static void setOscoLocation(Osco osco, Resource location) {
+
+		OscoLocationContents locationContents = new ObjectFactory()
+				.createOscoLocationContents();
+
+		if (location
+				.hasProperty(info.openmultinet.ontology.vocabulary.Osco.name)) {
+			String name = location
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Osco.name)
+					.getObject().asLiteral().getString();
+			locationContents.setName(name);
+		}
+
+		String aboutUri = location.getURI();
+		if (aboutUri != null && aboutUri != "") {
+			locationContents.setAbout(aboutUri);
+		}
+
+		osco.getImageOrOscoLocationOrSubnet().add(locationContents);
+	}
+
+	private static void setOscoImage(Osco osco, Resource imageResource) {
+
+		ImageContents imageContents = new ObjectFactory().createImageContents();
+
+		if (imageResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Osco.datacenter)) {
+			String datacenter = imageResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Osco.datacenter)
+					.getObject().asLiteral().getString();
+			imageContents.setDatacenter(datacenter);
+		}
+
+		if (imageResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Osco.id)) {
+			String id = imageResource
+					.getProperty(info.openmultinet.ontology.vocabulary.Osco.id)
+					.getObject().asLiteral().getString();
+			imageContents.setId(id);
+		}
+
+		String aboutUri = imageResource.getURI();
+		if (aboutUri != null && aboutUri != "") {
+			imageContents.setAbout(aboutUri);
+		}
+
+		osco.getImageOrOscoLocationOrSubnet().add(imageContents);
 	}
 
 	private static void setLocation(Statement omnResource, NodeContents geniNode) {
@@ -1220,10 +1457,27 @@ public class RequestConverter extends AbstractConverter {
 
 		final Model model = ModelFactory.createDefaultModel();
 
+		Resource topology = null;
 		// final Resource topology = model
 		// .createResource(AbstractConverter.NAMESPACE + "request");
-		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-		final Resource topology = model.createResource(uuid);
+		Map<QName, String> attributes = request.getOtherAttributes();
+		for (Entry<QName, String> entry : attributes.entrySet()) {
+			QName key = entry.getKey();
+			String value = entry.getValue();
+
+			if (key.getNamespaceURI()
+					.equals("http://opensdncore.org/ontology/")) {
+
+				if (key.getLocalPart().equals("uri")) {
+					topology = model.createResource(value);
+				}
+			}
+		}
+
+		if (topology == null) {
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			topology = model.createResource(uuid);
+		}
 
 		topology.addProperty(RDF.type, Omn_lifecycle.Request);
 		topology.addProperty(RDFS.label, "Request");
@@ -1244,6 +1498,8 @@ public class RequestConverter extends AbstractConverter {
 					RequestConverter.LOG.log(Level.INFO,
 							"Found unknown ElementNSImpl extension: " + o);
 				}
+			} else if (o.getClass().equals(Osco.class)) {
+				tryExtractOsco(topology, o);
 			} else {
 				RequestConverter.LOG.log(Level.INFO,
 						"Found unknown extension: " + o);
@@ -1576,7 +1832,8 @@ public class RequestConverter extends AbstractConverter {
 
 		String componentManagerName = getComponentManagerName(link);
 		String sliverTypeUrl = null;
-		if (componentManagerName != null && AbstractConverter.isUrn(componentManagerName)) {
+		if (componentManagerName != null
+				&& AbstractConverter.isUrn(componentManagerName)) {
 			String[] parts = componentManagerName.split("\\+");
 			if (parts.length > 1) {
 				sliverTypeUrl = "http://" + parts[1] + "/" + link.getClientId();
@@ -1938,7 +2195,7 @@ public class RequestConverter extends AbstractConverter {
 				tryExtractLocation(omnResource, element);
 			} else {
 				tryExtractMonitoring(omnResource, o);
-				tryExtractOsco(omnResource, o);
+				// tryExtractOsco(omnResource, o);
 				if (o.getClass().equals(RoutableControlIp.class)) {
 					omnResource.addProperty(Omn_domain_pc.routableControlIp,
 							"true");
@@ -1947,103 +2204,280 @@ public class RequestConverter extends AbstractConverter {
 		}
 	}
 
-	private static void tryExtractOsco(Resource omnNode, Object rspecNodeObject) {
-		if (rspecNodeObject.getClass().equals(Osco.class)) {
-			Osco osco = (Osco) rspecNodeObject;
+	private static void tryExtractOsco(Resource topology, Object rspecNodeObject) {
 
-			String appPort = osco.getAppPort();
-			if (appPort != null && appPort != "") {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.APP_PORT,
-						appPort);
-			}
+		Osco osco = (Osco) rspecNodeObject;
 
-			String loggingFile = osco.getLoggingFile();
-			if (loggingFile != null && loggingFile != "") {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.LOGGING_FILE,
-						loggingFile);
-			}
+		Resource omnOsco;
+		String aboutUri = osco.getAbout();
+		if (aboutUri != null
+				&& (AbstractConverter.isUrl(aboutUri) || AbstractConverter
+						.isUrn(aboutUri))) {
+			omnOsco = topology.getModel().createResource(aboutUri);
+		} else {
+			omnOsco = topology.getModel().createResource(aboutUri);
+		}
+		topology.addProperty(Omn.hasResource, omnOsco);
+		omnOsco.addProperty(Omn.isResourceOf, topology);
 
-			String loggingLevel = osco.getLoggingLevel();
-			if (loggingLevel != null && loggingLevel != "") {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.LOGGING_LEVEL,
-						loggingLevel);
-			}
-
-			String mgmtIntf = osco.getMgmtIntf();
-			if (mgmtIntf != null && mgmtIntf != "") {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.MGMT_INTF,
-						mgmtIntf);
-			}
-
-			String requires = osco.getRequires();
-			if (requires != null && requires != "") {
-				Resource requiresResource = omnNode.getModel().createResource(
-						requires);
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.requires,
-						requiresResource);
-			}
-
-			String servicePort = osco.getServicePort();
-			if (servicePort != null && servicePort != "") {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.SERVICE_PORT,
-						servicePort);
-			}
-
-			Boolean requireAuth = osco.isRequireAuth();
-			if (requireAuth != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.REQUIRE_AUTH,
-						String.valueOf(requireAuth));
-			}
-
-			Boolean notifyDisabled = osco.isNotifyDisabled();
-			if (notifyDisabled != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.NOTIFY_DISABLED,
-						String.valueOf(notifyDisabled));
-			}
-
-			Boolean retargetDisabled = osco.isRetargetDisabled();
-			if (retargetDisabled != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.RETARGET_DISABLED,
-						String.valueOf(retargetDisabled));
-			}
-
-			Boolean notifyChanDisabled = osco.isNotifyChanDisabled();
-			if (notifyChanDisabled != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.NOTIFY_CHAN_DISABLED,
-						String.valueOf(notifyChanDisabled));
-			}
-
-			Boolean coapDisabled = osco.isCoapDisabled();
-			if (coapDisabled != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.COAP_DISABLED,
-						String.valueOf(coapDisabled));
-			}
-
-			Boolean anncAuto = osco.isAnncAuto();
-			if (anncAuto != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.ANNC_AUTO,
-						String.valueOf(anncAuto));
-			}
-
-			Boolean anncDisabled = osco.isAnncDisabled();
-			if (anncDisabled != null) {
-				omnNode.addProperty(
-						info.openmultinet.ontology.vocabulary.Osco.ANNC_DISABLED,
-						String.valueOf(anncDisabled));
+		String type = osco.getType();
+		if (type != null && type != "") {
+			if (AbstractConverter.isUrl(type) || AbstractConverter.isUrn(type)) {
+				Resource typeResource = omnOsco.getModel().createResource(type);
+				omnOsco.addProperty(RDF.type, typeResource);
 			}
 		}
+
+		String id = osco.getId();
+		if (id != null && id != "") {
+			omnOsco.addProperty(Omn_lifecycle.hasID, id);
+		}
+
+		String implementedBy = osco.getImplementedBy();
+		if (implementedBy != null && implementedBy != "") {
+			Resource implementedByResource = omnOsco.getModel().createResource(
+					implementedBy);
+			omnOsco.addProperty(Omn_lifecycle.implementedBy,
+					implementedByResource);
+		}
+
+		String deployedOn = osco.getDeployedOn();
+		if (deployedOn != null && deployedOn != "") {
+			Resource deployedOnResource = omnOsco.getModel().createResource(
+					deployedOn);
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.deployedOn,
+					deployedOnResource);
+		}
+
+		String flavour = osco.getFlavour();
+		if (flavour != null && flavour != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.flavour, flavour);
+		}
+
+		BigInteger maxNumInst = osco.getMaxNumInst();
+		if (maxNumInst != null) {
+			omnOsco.addLiteral(
+					info.openmultinet.ontology.vocabulary.Osco.maxNumInst,
+					maxNumInst);
+		}
+
+		BigInteger minNumInst = osco.getMinNumInst();
+		if (minNumInst != null) {
+			omnOsco.addLiteral(
+					info.openmultinet.ontology.vocabulary.Osco.minNumInst,
+					minNumInst);
+		}
+
+		String appPort = osco.getAppPort();
+		if (appPort != null && appPort != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.APP_PORT,
+					appPort);
+		}
+
+		String loggingFile = osco.getLoggingFile();
+		if (loggingFile != null && loggingFile != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.LOGGING_FILE,
+					loggingFile);
+		}
+
+		String loggingLevel = osco.getLoggingLevel();
+		if (loggingLevel != null && loggingLevel != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.LOGGING_LEVEL,
+					loggingLevel);
+		}
+
+		String mgmtIntf = osco.getMgmtIntf();
+		if (mgmtIntf != null && mgmtIntf != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.MGMT_INTF,
+					mgmtIntf);
+		}
+
+		String requires = osco.getRequires();
+		if (requires != null && requires != "") {
+			Resource requiresResource = omnOsco.getModel().createResource(
+					requires);
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.requires,
+					requiresResource);
+		}
+
+		String servicePort = osco.getServicePort();
+		if (servicePort != null && servicePort != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.SERVICE_PORT,
+					servicePort);
+		}
+
+		Boolean requireAuth = osco.isRequireAuth();
+		if (requireAuth != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.REQUIRE_AUTH,
+					String.valueOf(requireAuth));
+		}
+
+		Boolean notifyDisabled = osco.isNotifyDisabled();
+		if (notifyDisabled != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.NOTIFY_DISABLED,
+					String.valueOf(notifyDisabled));
+		}
+
+		Boolean retargetDisabled = osco.isRetargetDisabled();
+		if (retargetDisabled != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.RETARGET_DISABLED,
+					String.valueOf(retargetDisabled));
+		}
+
+		Boolean notifyChanDisabled = osco.isNotifyChanDisabled();
+		if (notifyChanDisabled != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.NOTIFY_CHAN_DISABLED,
+					String.valueOf(notifyChanDisabled));
+		}
+
+		Boolean coapDisabled = osco.isCoapDisabled();
+		if (coapDisabled != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.COAP_DISABLED,
+					String.valueOf(coapDisabled));
+		}
+
+		Boolean anncAuto = osco.isAnncAuto();
+		if (anncAuto != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.ANNC_AUTO,
+					String.valueOf(anncAuto));
+		}
+
+		Boolean anncDisabled = osco.isAnncDisabled();
+		if (anncDisabled != null) {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.ANNC_DISABLED,
+					String.valueOf(anncDisabled));
+		}
+
+		List<Object> objects = osco.getImageOrOscoLocationOrSubnet();
+		for (Object o : objects) {
+			if (o.getClass().equals(ImageContents.class)) {
+				ImageContents imageContents = (ImageContents) o;
+				extractOscoImage(imageContents, omnOsco);
+			} else if (o.getClass().equals(OscoLocationContents.class)) {
+				OscoLocationContents locationContents = (OscoLocationContents) o;
+				extractOscoLocation(locationContents, omnOsco);
+			} else if (o.getClass().equals(SubnetContents.class)) {
+				SubnetContents subnetContents = (SubnetContents) o;
+				extractOscoSubnet(subnetContents, omnOsco);
+			}
+		}
+	}
+
+	private static void extractOscoLocation(
+			OscoLocationContents locationContents, Resource omnOsco) {
+
+		String aboutUri = locationContents.getAbout();
+		Resource locationResource = null;
+
+		if (AbstractConverter.isUrl(aboutUri)
+				|| AbstractConverter.isUrn(aboutUri)) {
+			locationResource = omnOsco.getModel().createResource(aboutUri);
+		} else {
+			locationResource = omnOsco.getModel().createResource();
+		}
+
+		locationResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Osco.Location);
+
+		String name = locationContents.getName();
+		if (name != null && name != "") {
+			locationResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.name, name);
+		}
+
+		omnOsco.addProperty(
+				info.openmultinet.ontology.vocabulary.Osco.location,
+				locationResource);
+
+	}
+
+	private static void extractOscoSubnet(SubnetContents subnetContents,
+			Resource omnNode) {
+
+		String aboutUri = subnetContents.getAbout();
+		Resource subnetResource = null;
+
+		if (AbstractConverter.isUrl(aboutUri)
+				|| AbstractConverter.isUrn(aboutUri)) {
+			subnetResource = omnNode.getModel().createResource(aboutUri);
+		} else {
+			subnetResource = omnNode.getModel().createResource();
+		}
+
+		subnetResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Osco.Subnet);
+
+		String datacenter = subnetContents.getDatacenter();
+		if (datacenter != null && datacenter != "") {
+			subnetResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.datacenter,
+					datacenter);
+		}
+
+		String mgmt = subnetContents.isMgmt().toString();
+		Boolean mgmtBoolean = Boolean.valueOf(mgmt);
+		if (mgmt != null && mgmt != "") {
+			subnetResource.addLiteral(
+					info.openmultinet.ontology.vocabulary.Osco.mgmt,
+					mgmtBoolean);
+		}
+
+		String name = subnetContents.getName();
+		if (name != null && name != "") {
+			subnetResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.name, name);
+		}
+
+		omnNode.addProperty(info.openmultinet.ontology.vocabulary.Osco.subnet,
+				subnetResource);
+
+	}
+
+	private static void extractOscoImage(ImageContents image, Resource omnNode) {
+
+		String aboutUri = image.getAbout();
+		Resource imageResource = null;
+
+		if (AbstractConverter.isUrl(aboutUri)
+				|| AbstractConverter.isUrn(aboutUri)) {
+			imageResource = omnNode.getModel().createResource(aboutUri);
+		} else {
+			imageResource = omnNode.getModel().createResource();
+		}
+
+		imageResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Osco.Image);
+
+		String datacenter = image.getDatacenter();
+		if (datacenter != null && datacenter != "") {
+			imageResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.datacenter,
+					datacenter);
+		}
+
+		String id = image.getId();
+		if (id != null && id != "") {
+			imageResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.id, id);
+		}
+
+		omnNode.addProperty(info.openmultinet.ontology.vocabulary.Osco.image,
+				imageResource);
 
 	}
 
