@@ -54,7 +54,7 @@ public class DeliveryMechanism {
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)
 				|| AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)
 				|| AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
-			content = RSpecValidation.fixVerson(content);
+			content = RSpecValidation.fixVersion(content);
 		}
 
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -133,7 +133,7 @@ public class DeliveryMechanism {
 		if (AbstractConverter.RSPEC_REQUEST.equalsIgnoreCase(from)
 				|| AbstractConverter.RSPEC_ADVERTISEMENT.equalsIgnoreCase(from)
 				|| AbstractConverter.RSPEC_MANIFEST.equalsIgnoreCase(from)) {
-			content = RSpecValidation.fixVerson(content);
+			content = RSpecValidation.fixVersion(content);
 		}
 
 		final InputStream stream = new ByteArrayInputStream(

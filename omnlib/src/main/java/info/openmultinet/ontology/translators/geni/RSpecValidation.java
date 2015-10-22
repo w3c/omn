@@ -421,14 +421,20 @@ public class RSpecValidation {
 		}
 
 		if (xml != null) {
-			NodeList rspecNode = xml.getElementsByTagName("rspec");
+			// NodeList rspecNode = xml.getElementsByTagName("rspec");
+			NodeList rspecNode = xml.getElementsByTagNameNS(
+					"http://www.geni.net/resources/rspec/3", "rspec");
+
 			if (rspecNode != null && rspecNode.getLength() > 0) {
+
 				Node root = rspecNode.item(0);
 				Node typeNode = root.getAttributes().getNamedItem("type");
 				if (typeNode != null) {
 					return typeNode.getNodeValue();
 				}
 			} else {
+
+				System.out.println("*********** got to here");
 
 				// check for tosca namespace
 				// xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
@@ -477,8 +483,8 @@ public class RSpecValidation {
 				e.printStackTrace();
 
 			}
-
 		}
+
 		return null;
 	}
 
@@ -498,7 +504,7 @@ public class RSpecValidation {
 		String output = null;
 		Model model;
 
-		input = RSpecValidation.fixVerson(input);
+		input = RSpecValidation.fixVersion(input);
 		String type = getType(input);
 
 		InputStream inputStream = null;
@@ -931,7 +937,7 @@ public class RSpecValidation {
 	 * @return
 	 * @throws DeprecatedRspecVersionException
 	 */
-	public static String fixVerson(String input)
+	public static String fixVersion(String input)
 			throws DeprecatedRspecVersionException {
 
 		Document xml = null;
@@ -945,11 +951,18 @@ public class RSpecValidation {
 
 		if (xml != null) {
 			NodeList rspecNode = xml.getElementsByTagName("rspec");
+			// NodeList rspecNode = xml.getElementsByTagNameNS(
+			// "http://www.geni.net/resources/rspec/3", "rspec");
 			if (rspecNode != null && rspecNode.getLength() > 0) {
+
 				Node root = rspecNode.item(0);
+
 				Node typeNode = root.getAttributes().getNamedItem("xmlns");
+
 				if (typeNode != null) {
+
 					String namespace = typeNode.getNodeValue();
+
 					// System.out.println("RSpec version: " + namespace);
 					if (namespace
 							.equals("http://www.protogeni.net/resources/rspec/0.1")) {
@@ -957,10 +970,12 @@ public class RSpecValidation {
 						// .println("RSpec version 0.1 is not supported.");
 						throw new DeprecatedRspecVersionException("0.1");
 					}
+
 					if (namespace
 							.equals("http://www.geni.net/resources/rspec/3")) {
 						return input;
 					}
+
 					if (namespace
 							.equals("http://www.protogeni.net/resources/rspec/2")) {
 						// System.out
@@ -970,6 +985,22 @@ public class RSpecValidation {
 								"http://www.geni.net/resources/rspec/3");
 						return input;
 					}
+				}
+			} else {
+
+				NodeList rspecNode1 = xml.getElementsByTagNameNS(
+						"http://www.geni.net/resources/rspec/3", "rspec");
+				if (rspecNode1 != null && rspecNode1.getLength() > 0) {
+					return input;
+				}
+
+				NodeList rspecNode2 = xml.getElementsByTagNameNS(
+						"http://www.protogeni.net/resources/rspec/2", "rspec");
+				if (rspecNode2 != null && rspecNode2.getLength() > 0) {
+					input = input.replaceAll(
+							"http://www.protogeni.net/resources/rspec/2",
+							"http://www.geni.net/resources/rspec/3");
+					return input;
 				}
 			}
 		}

@@ -58,6 +58,11 @@ public class RSpecValidationTest {
 				AbstractConverter.RDFXML, pathToscaRdfxml);
 		types.add(pair5);
 
+		String pathRequestPrefix = "./src/test/resources/geni/request/request_namespace.xml";
+		Entry<String, String> pair6 = new java.util.AbstractMap.SimpleEntry<>(
+				AbstractConverter.RSPEC_REQUEST, pathRequestPrefix);
+		types.add(pair6);
+
 		for (int i = 0; i < types.size(); i++) {
 
 			System.out.println("***********************");

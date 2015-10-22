@@ -60,7 +60,7 @@ public class AdVerboseTest {
 		String output = null;
 		Model model;
 		String input;
-		input = RSpecValidation.fixVerson(inputRspec);
+		input = RSpecValidation.fixVersion(inputRspec);
 
 		InputStream inputStream = null;
 		try {
@@ -135,7 +135,7 @@ public class AdVerboseTest {
 		String output = null;
 		Model model;
 		String input;
-		input = RSpecValidation.fixVerson(inputRspec);
+		input = RSpecValidation.fixVersion(inputRspec);
 
 		InputStream inputStream = null;
 		try {

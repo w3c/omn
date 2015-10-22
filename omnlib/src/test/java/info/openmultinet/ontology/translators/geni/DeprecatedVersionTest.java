@@ -1,8 +1,6 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
-import info.openmultinet.ontology.translators.geni.CommonMethods;
-import info.openmultinet.ontology.translators.AbstractConverter;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,7 +36,7 @@ public class DeprecatedVersionTest {
 				+ "<interface component_id=\"urn:publicid:IDN+emulab.geni.emulab.net+interface+pc160:eth1\"/>"
 				+ "</node>" + "</rspec>";
 
-		RSpecValidation.fixVerson(rspec1);
+		RSpecValidation.fixVersion(rspec1);
 	}
 
 	@Test
@@ -48,8 +46,8 @@ public class DeprecatedVersionTest {
 				+ "xsi:schemaLocation=\"http://www.protogeni.net/resources/rspec/2"
 				+ " http://www.protogeni.net/resources/rspec/2/request.xsd\""
 				+ " type=\"request\" ></rspec>";
-		
-		String outputRspec = RSpecValidation.fixVerson(rspec2);
+
+		String outputRspec = RSpecValidation.fixVersion(rspec2);
 		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
 		// check that output has one rspec element
@@ -65,8 +63,8 @@ public class DeprecatedVersionTest {
 				+ "xsi:schemaLocation=\"http://www.geni.net/resources/rspec/3 "
 				+ " http://www.geni.net/resources/rspec/3/request.xsd\""
 				+ " type=\"request\" ></rspec>";
-		
-		String outputRspec = RSpecValidation.fixVerson(rspec2);
+
+		String outputRspec = RSpecValidation.fixVersion(rspec2);
 		Document xmlDoc = RSpecValidation.loadXMLFromString(outputRspec);
 
 		// check that output has one rspec element
