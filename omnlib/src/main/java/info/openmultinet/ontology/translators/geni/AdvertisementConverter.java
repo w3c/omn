@@ -2563,6 +2563,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					}
 
 					if (sliverTypeResource != null) {
+
 						setDiskImage(sliverTypeResource, sliverType);
 						JAXBElement<SliverType> sliver = new ObjectFactory()
 								.createNodeContentsSliverType(sliverType);
@@ -2576,6 +2577,7 @@ public class AdvertisementConverter extends AbstractConverter {
 				Statement omnSliver = canImplement.next();
 				sliver1 = of.createNodeContentsSliverType();
 				sliver1.setName(omnSliver.getObject().asResource().getURI());
+				setDiskImage(omnSliver.getResource(), sliver1);
 				JAXBElement<SliverType> sliverType = new ObjectFactory()
 						.createNodeContentsSliverType(sliver1);
 				geniNode.getAnyOrRelationOrLocation().add(sliverType);
@@ -2586,10 +2588,10 @@ public class AdvertisementConverter extends AbstractConverter {
 
 			final List<Statement> hasTypes = resource.getResource()
 					.listProperties(RDF.type).toList();
-
+			Resource sliverResource = null;
 			boolean sliverTypeNameExists = false;
 			for (final Statement hasType : hasTypes) {
-				Resource sliverResource = hasType.getObject().asResource();
+				sliverResource = hasType.getObject().asResource();
 				if (AbstractConverter.nonGeneric(sliverResource.getURI())) {
 					sliverType.setName(sliverResource.getURI());
 					sliverTypeNameExists = true;
@@ -2597,6 +2599,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			}
 
 			if (sliverTypeNameExists) {
+				setDiskImage(sliverResource, sliverType);
 				JAXBElement<SliverType> sliver = new ObjectFactory()
 						.createNodeContentsSliverType(sliverType);
 				geniNode.getAnyOrRelationOrLocation().add(sliver);
@@ -2620,56 +2623,8 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void setDiskImage(Resource sliverResource, SliverType sliver) {
 
-		// if (sliverResource.hasProperty(RDFS.subClassOf, Omn_domain_pc.VM)) {
-		//
-		// StmtIterator omnSliverList = sliverResource
-		// .listProperties(Omn_domain_pc.hasDiskImage);
-		//
-		// while (omnSliverList.hasNext()) {
-		// Statement omnSliver = omnSliverList.next();
-		// RDFNode diskImageNode = omnSliver.getObject();
-		// Resource diskImageResource = diskImageNode.asResource();
-		//
-		// // check if the resource is a disk image
-		// if (diskImageResource.hasProperty(RDF.type,
-		// Omn_domain_pc.DiskImage)) {
-		// DiskImage diskImage = of
-		// .createNodeContentsSliverTypeDiskImage();
-		// String diskName = "";
-		//
-		// if (diskImageResource
-		// .hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-		// diskName += diskImageResource
-		// .getProperty(Omn_domain_pc.hasDiskimageLabel)
-		// .getObject().asLiteral().getString();
-		// }
-		// diskImage.setName(diskName);
-		//
-		// if (diskImageResource
-		// .hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
-		// String description = diskImageResource
-		// .getProperty(
-		// Omn_domain_pc.hasDiskimageDescription)
-		// .getObject().asLiteral().getString();
-		// diskImage.setDescription(description);
-		// }
-		//
-		// if (diskImageResource
-		// .hasProperty(Omn_domain_pc.diskimageDefault)) {
-		// String diskimageDefault = diskImageResource
-		// .getProperty(Omn_domain_pc.diskimageDefault)
-		// .getObject().asLiteral().getString();
-		// diskImage.setDefault(diskimageDefault);
-		// }
-		//
-		// diskImage.setUrl(diskImageResource.getURI());
-		// sliver.getAnyOrDiskImage()
-		// .add(of.createNodeContentsSliverTypeDiskImage(diskImage));
-		// }
-		// }
-
-		// } else {
 		while (sliverResource.hasProperty(Omn_domain_pc.hasDiskImage)) {
+
 			Statement omnSliver = sliverResource
 					.getProperty(Omn_domain_pc.hasDiskImage);
 			omnSliver.remove();
@@ -2737,7 +2692,6 @@ public class AdvertisementConverter extends AbstractConverter {
 						of.createNodeContentsSliverTypeDiskImage(diskImage));
 			}
 		}
-		// }
 	}
 
 	private void setHardwareTypes(Statement omnResource, NodeContents geniNode) {
@@ -2746,22 +2700,6 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		StmtIterator types = omnResource.getResource().listProperties(
 				Omn_resource.hasHardwareType);
-
-		// check if the hardware type was specified as a type
-		// if (!types.hasNext()) {
-		// types = omnResource.getResource().listProperties(RDF.type);
-		// HardwareTypeContents hwType;
-		//
-		// while (types.hasNext()) {
-		// String rdfType = types.next().getResource().getURI();
-		//
-		// hwType = of.createHardwareTypeContents();
-		// hwType.setName(rdfType);
-		// if ((null != rdfType) && AbstractConverter.nonGeneric(rdfType)) {
-		// geniNodeDetails.add(of.createHardwareType(hwType));
-		// }
-		// }
-		// }
 
 		while (types.hasNext()) {
 			HardwareTypeContents hwType;
@@ -2791,7 +2729,6 @@ public class AdvertisementConverter extends AbstractConverter {
 			}
 
 			geniNodeDetails.add(of.createHardwareType(hwType));
-
 		}
 	}
 

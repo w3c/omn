@@ -62,9 +62,10 @@ public class DemoTestAdvertisement {
 		System.out.println(rspec);
 		Assert.assertTrue("should be an advertisement",
 				rspec.contains("type=\"advertisement\""));
-		//@todo @robynml should have a disk image
-		//Assert.assertTrue("should have a DiskImage",
-		//		rspec.contains("disk_image"));
+
+		Assert.assertTrue("should have a DiskImage",
+				rspec.contains("disk_image"));
+
 		System.out.println("Duration: " + (System.nanoTime() - start));
 		System.out.println("================================================");
 
