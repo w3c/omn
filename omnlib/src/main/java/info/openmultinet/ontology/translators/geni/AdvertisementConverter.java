@@ -59,6 +59,7 @@ import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -398,7 +399,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		for (int k = 0; k < datapathAttributes.getLength(); k++) {
 			if (datapathAttributes.item(k).getNodeName().equals("component_id")) {
 				String componentId = datapathAttributes.item(k).getNodeValue();
-				datapath.addProperty(Omn_lifecycle.hasComponentID, componentId);
+				URI uri = URI.create(componentId);
+				datapath.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
 			if (datapathAttributes.item(k).getNodeName()
 					.equals("component_manager_id")) {
@@ -533,8 +535,8 @@ public class AdvertisementConverter extends AbstractConverter {
 					interfaceResource);
 
 			if (content.getComponentId() != null) {
-				interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
-						content.getComponentId());
+				URI uri = URI.create(content.getComponentId());
+				interfaceResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
 
 			if (content.getRole() != null) {
@@ -647,7 +649,8 @@ public class AdvertisementConverter extends AbstractConverter {
 						"LinkContents > component_id ");
 			}
 			String componentId = link.getComponentId();
-			linkResource.addProperty(Omn_lifecycle.hasComponentID, componentId);
+			URI uri = URI.create(componentId);
+			linkResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 
 			String componentName = link.getComponentName();
 			if (componentName != null) {
@@ -702,8 +705,11 @@ public class AdvertisementConverter extends AbstractConverter {
 		final ComponentManager content = (ComponentManager) o;
 
 		if (content.getName() != null) {
-			linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
-					content.getName());
+			URI uri = URI.create(content.getName());
+			if (uri != null) {
+				linkResource.addLiteral(Omn_lifecycle.hasComponentManagerName,
+						uri);
+			}
 		}
 	}
 
@@ -758,9 +764,8 @@ public class AdvertisementConverter extends AbstractConverter {
 		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 		Resource interfaceResource = linkResource.getModel().createResource(
 				uuid);
-		interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
-				content.getComponentId());
-
+		URI uri = URI.create(content.getComponentId());
+		interfaceResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 		linkResource.addProperty(Omn_resource.hasInterface, interfaceResource);
 
 	}
@@ -2265,7 +2270,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			if (interfaceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
 				interfaceContents.setComponentId(interfaceResource
 						.getProperty(Omn_lifecycle.hasComponentID).getObject()
-						.asLiteral().toString());
+						.asLiteral().getString());
 			}
 
 			if (interfaceResource.hasProperty(Omn_lifecycle.hasRole)) {

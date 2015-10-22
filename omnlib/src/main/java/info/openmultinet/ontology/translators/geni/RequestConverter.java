@@ -58,6 +58,7 @@ import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -1133,7 +1134,7 @@ public class RequestConverter extends AbstractConverter {
 			if (interfaceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
 				interfaceContents.setComponentId(interfaceResource
 						.getProperty(Omn_lifecycle.hasComponentID).getObject()
-						.asLiteral().toString());
+						.asLiteral().getString());
 			}
 
 			setIpAddress(interfaceResource, interfaceContents);
@@ -1848,9 +1849,9 @@ public class RequestConverter extends AbstractConverter {
 									.equals("component_id")) {
 								String componentId = datapathAttributes.item(k)
 										.getNodeValue();
-								datapath.addProperty(
-										Omn_lifecycle.hasComponentID,
-										componentId);
+								URI uri = URI.create(componentId);
+								datapath.addLiteral(
+										Omn_lifecycle.hasComponentID, uri);
 							}
 							if (datapathAttributes.item(k).getNodeName()
 									.equals("component_manager_id")) {
@@ -2006,9 +2007,10 @@ public class RequestConverter extends AbstractConverter {
 			linkResource.addProperty(Omn_lifecycle.managedBy,
 					componentManagerResource);
 		}
-		linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
-				componentManagerName);
-
+		URI uri = URI.create(componentManagerName);
+		if (uri != null) {
+			linkResource.addLiteral(Omn_lifecycle.hasComponentManagerName, uri);
+		}
 	}
 
 	private static void extractLinkType(Object o, Resource linkResource)
@@ -2165,8 +2167,8 @@ public class RequestConverter extends AbstractConverter {
 			}
 
 			if (content.getComponentId() != null) {
-				interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
-						content.getComponentId());
+				URI uri = URI.create(content.getComponentId());
+				interfaceResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
 		}
 	}
@@ -2229,7 +2231,9 @@ public class RequestConverter extends AbstractConverter {
 			implementedBy = model.createResource(CommonMethods
 					.generateUrlFromUrn(componentId));
 
-			omnResource.addProperty(Omn_lifecycle.hasComponentID, componentId);
+			URI uri = URI.create(componentId);
+			omnResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
+
 			omnResource.addProperty(Omn_lifecycle.implementedBy, implementedBy);
 			if (null != node.getComponentName()
 					&& !node.getComponentName().isEmpty()) {

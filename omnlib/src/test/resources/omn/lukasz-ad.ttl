@@ -23,21 +23,21 @@
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
                 [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
                   <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                          "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga1" ;
+                          "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga1"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
                   <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                           "experimental"
                 ] ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
                 [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
                   <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                          "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:eth0" ;
+                          "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:eth0"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
                   <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                           "control"
                 ] ;
         <http://open-multinet.info/ontology/omn-resource#hasInterface>
                 [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
                   <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
-                          "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga0" ;
+                          "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga0"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
                   <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
                           "experimental"
                 ] ;

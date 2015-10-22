@@ -41,7 +41,7 @@
         a                             omn-resource:Node , <http://open-multinet.info/ontology/resource/motor#Motor> ;
         rdfs:label                    "motor-2" ;
         omn:isResourceOf              <urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e> ;
-        omn-lifecycle:hasComponentID  "urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1" ;
+        omn-lifecycle:hasComponentID  "urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
         omn-lifecycle:hasID           "motor-2" ;
         omn-lifecycle:implementedBy   <http://localhost/resource/MotorGarage-1> ;
         omn-lifecycle:managedBy       <urn:publicid:IDN+localhost+authority+cm> ;
@@ -61,7 +61,7 @@
         a                             omn-resource:Node , <http://open-multinet.info/ontology/resource/motor#Motor> ;
         rdfs:label                    "motor-1" ;
         omn:isResourceOf              <urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e> ;
-        omn-lifecycle:hasComponentID  "urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1" ;
+        omn-lifecycle:hasComponentID  "urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
         omn-lifecycle:hasID           "motor-1" ;
         omn-lifecycle:implementedBy   <http://localhost/resource/MotorGarage-1> ;
         omn-lifecycle:managedBy       <urn:publicid:IDN+localhost+authority+cm> ;
@@ -73,7 +73,7 @@
         rdfs:label                 "http://open-multinet.info/ontology/resource/link#lan" ;
         omn:isResourceOf           <urn:uuid:5b639e28-886e-4336-95a0-f3abb285e30e> ;
         omn-lifecycle:hasComponentManagerName
-                "urn:publicid:IDN+localhost+authority+cm" ;
+                "urn:publicid:IDN+localhost+authority+cm"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
         omn-lifecycle:managedBy    <urn:publicid:IDN+localhost+authority+cm> ;
         omn-resource:clientId      "link0"^^xsd:string ;
         omn-resource:hasInterface  <http://open-multinet.info/example#motor-1:if0> , <http://open-multinet.info/example#motor-2:if0> .

@@ -29,7 +29,7 @@
         rdfs:label	"motor1" ;
         omn:hasReservation 	<http://localhost/reservation/5698e772-e2f5-473c-b914-82cc0991b369> ;
         omn:isResourceOf	<http://localhost/topology/sRMV1441899365> ;
-        omn-lifecycle:hasComponentID	"http://localhost/resource/MotorGarage-1" ;
+        omn-lifecycle:hasComponentID	"http://localhost/resource/MotorGarage-1"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
         omn-lifecycle:hasID 	"motor1" ;
         omn-lifecycle:hasState 	omn-lifecycle:Uncompleted ;
         omn-lifecycle:implementedBy 	<http://localhost/resource/MotorGarage-1> ;

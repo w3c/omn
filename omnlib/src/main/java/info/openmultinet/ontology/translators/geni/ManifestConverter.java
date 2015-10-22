@@ -1598,8 +1598,10 @@ public class ManifestConverter extends AbstractConverter {
 			linkResource.addProperty(Omn_lifecycle.managedBy,
 					componentManagerResource);
 		}
-		linkResource.addProperty(Omn_lifecycle.hasComponentManagerName,
-				componentManagerName);
+		URI uri = URI.create(componentManagerName);
+		if (uri != null) {
+			linkResource.addLiteral(Omn_lifecycle.hasComponentManagerName, uri);
+		}
 	}
 
 	private static void extractIntefaceRef(JAXBElement<?> linkElement,
@@ -1624,8 +1626,10 @@ public class ManifestConverter extends AbstractConverter {
 
 			String componentId = interfaceRefContents.getComponentId();
 			if (componentId != null) {
-				interfaceResource.addProperty(Omn_lifecycle.hasComponentID,
-						componentId);
+				// Resource componentIdResource = linkResource.getModel()
+				// .createResource(componentId);
+				URI uri = URI.create(componentId);
+				interfaceResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
 
 			linkResource.addProperty(Omn_resource.hasInterface,
@@ -1880,27 +1884,31 @@ public class ManifestConverter extends AbstractConverter {
 					.getValue();
 			List<Object> interfaces = interfaceContents.getAnyOrIpOrHost();
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnInteface = model.createResource(uuid);
+			Resource omnInterface = model.createResource(uuid);
 
 			if (interfaceContents.getMacAddress() != null) {
-				omnInteface.addProperty(Omn_resource.macAddress,
+				omnInterface.addProperty(Omn_resource.macAddress,
 						interfaceContents.getMacAddress());
 			}
 
 			String clientId = interfaceContents.getClientId();
 			if (clientId != null) {
-				omnInteface.addProperty(Omn_resource.clientId, clientId);
+				omnInterface.addProperty(Omn_resource.clientId, clientId);
 			}
 
 			String sliverId = interfaceContents.getSliverId();
 			if (sliverId != null) {
-				omnInteface.addProperty(Omn_lifecycle.hasSliverID, sliverId);
+				omnInterface.addProperty(Omn_lifecycle.hasSliverID, sliverId);
 			}
 
 			String componentId = interfaceContents.getComponentId();
 			if (componentId != null) {
-				omnInteface.addProperty(Omn_lifecycle.hasComponentID,
-						componentId);
+				Resource componentIdResource = omnInterface.getModel()
+						.createResource(componentId);
+				URI uri = URI.create(componentId);
+				// omnInterface.addProperty(Omn_lifecycle.hasComponentID,
+				// componentIdResource);
+				omnInterface.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
 
 			// iterate through the interfaces and add to model
@@ -1908,13 +1916,14 @@ public class ManifestConverter extends AbstractConverter {
 				Object interfaceObject = interfaces.get(i);
 				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
 				Resource omnIpAddress = model.createResource(uuid2);
-				tryExtractIPAddress(interfaceObject, omnInteface, omnIpAddress);
+				tryExtractIPAddress(interfaceObject, omnInterface, omnIpAddress);
 
 			}
 
 			// add interface to node
-			if (omnInteface != null) {
-				omnResource.addProperty(Omn_resource.hasInterface, omnInteface);
+			if (omnInterface != null) {
+				omnResource
+						.addProperty(Omn_resource.hasInterface, omnInterface);
 			}
 		}
 	}
