@@ -19,10 +19,12 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceCo
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.IpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.JfedLocation;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkPropertyContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkType;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Location;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.MatchContents;
@@ -56,15 +58,12 @@ import info.openmultinet.ontology.vocabulary.Omn_service;
 
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -90,8 +89,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.shared.InvalidPropertyURIException;
-import com.hp.hpl.jena.util.ResourceUtils;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -592,30 +589,103 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void setLocation(Statement omnResource, NodeContents geniNode) {
-		ObjectFactory of = new ObjectFactory();
-		LocationContents location = of.createLocationContents();
-		Resource omnRes = omnResource.getResource();
+		// ObjectFactory of = new ObjectFactory();
+		// LocationContents location = of.createLocationContents();
+		// Resource omnRes = omnResource.getResource();
+		//
+		// if (omnRes.hasProperty(Geonames.countryCode)) {
+		// location.setCountry(omnRes.getProperty(Geonames.countryCode)
+		// .getString());
+		// } else {
+		// // country required
+		// location.setCountry("");
+		// }
+		//
+		// if (omnRes.hasProperty(Geo.lat)) {
+		// location.setLatitude(omnRes.getProperty(Geo.lat).getString());
+		// }
+		//
+		// if (omnRes.hasProperty(Geo.long_)) {
+		// location.setLongitude(omnRes.getProperty(Geo.long_).getString());
+		// }
+		// if (omnRes.hasProperty(Geo.lat) || omnRes.hasProperty(Geo.long_)) {
+		// geniNode.getAnyOrRelationOrLocation().add(
+		// of.createLocation(location));
+		// }
+		StmtIterator locations = omnResource.getResource().listProperties(
+				Omn_resource.hasLocation);
 
-		if (omnRes.hasProperty(Geonames.countryCode)) {
-			location.setCountry(omnRes.getProperty(Geonames.countryCode)
-					.getString());
-		} else {
-			// country required
-			location.setCountry("");
-		}
+		while (locations.hasNext()) {
 
-		if (omnRes.hasProperty(Geo.lat)) {
-			location.setLatitude(omnRes.getProperty(Geo.lat).getString());
-		}
+			Statement locationStatement = locations.next();
+			Resource omnRes = locationStatement.getResource();
+			ObjectFactory of = new ObjectFactory();
 
-		if (omnRes.hasProperty(Geo.long_)) {
-			location.setLongitude(omnRes.getProperty(Geo.long_).getString());
-		}
-		if (omnRes.hasProperty(Geo.lat) || omnRes.hasProperty(Geo.long_)) {
-			geniNode.getAnyOrRelationOrLocation().add(
-					of.createLocation(location));
-		}
+			// add jFed location
+			if (omnRes.hasProperty(Omn_resource.jfedX)
+					|| omnRes.hasProperty(Omn_resource.jfedY)) {
 
+				Location loc = of.createLocation();
+
+				if (omnRes.hasProperty(Omn_resource.jfedX)) {
+					String x = omnRes.getProperty(Omn_resource.jfedX)
+							.getString();
+					loc.setX(x);
+				}
+
+				if (omnRes.hasProperty(Omn_resource.jfedY)) {
+					String y = omnRes.getProperty(Omn_resource.jfedY)
+							.getString();
+					loc.setY(y);
+				}
+
+				geniNode.getAnyOrRelationOrLocation().add(loc);
+			}
+
+			// add normal RSpec location
+			if (omnRes.hasProperty(Geonames.countryCode)
+					|| omnRes.hasProperty(Geo.lat)
+					|| omnRes.hasProperty(Geo.long_)) {
+
+				LocationContents location = of.createLocationContents();
+
+				if (omnRes.hasProperty(Geonames.countryCode)) {
+					location.setCountry(omnRes
+							.getProperty(Geonames.countryCode).getString());
+				} else {
+					// country required
+					location.setCountry("");
+				}
+
+				if (omnRes.hasProperty(Geo.lat)) {
+					location.setLatitude(omnRes.getProperty(Geo.lat)
+							.getString());
+				}
+
+				if (omnRes.hasProperty(Geo.long_)) {
+					location.setLongitude(omnRes.getProperty(Geo.long_)
+							.getString());
+				}
+
+				if (omnRes.hasProperty(RDFS.label)) {
+					QName key = new QName("http://open-multinet.info/location",
+							"name", "omn");
+					String value = omnRes.getProperty(RDFS.label).getString();
+					location.getOtherAttributes().put(key, value);
+				}
+
+				if (omnRes.hasProperty(Omn_lifecycle.hasID)) {
+					QName key = new QName("http://open-multinet.info/location",
+							"id", "omn");
+					String value = omnRes.getProperty(Omn_lifecycle.hasID)
+							.getString();
+					location.getOtherAttributes().put(key, value);
+				}
+
+				geniNode.getAnyOrRelationOrLocation().add(
+						of.createLocation(location));
+			}
+		}
 	}
 
 	private static void setStitching(Statement resource,
@@ -2193,15 +2263,41 @@ public class RequestConverter extends AbstractConverter {
 				tryExtractInterfaces(omnResource, element);
 				tryExtractHardwareType(omnResource, element);
 				tryExtractLocation(omnResource, element);
-			} else {
+			} else if (o.getClass().equals(Monitoring.class)) {
 				tryExtractMonitoring(omnResource, o);
+				// } else if (osco) {
 				// tryExtractOsco(omnResource, o);
-				if (o.getClass().equals(RoutableControlIp.class)) {
-					omnResource.addProperty(Omn_domain_pc.routableControlIp,
-							"true");
-				}
+			} else if (o.getClass().equals(RoutableControlIp.class)) {
+				omnResource
+						.addProperty(Omn_domain_pc.routableControlIp, "true");
+			} else if (o.getClass().equals(Location.class)) {
+				extractJfedLocation(omnResource, o);
+			} else {
+				RequestConverter.LOG.log(Level.INFO,
+						"Found unknown ElementNSImpl extension: " + o);
 			}
 		}
+	}
+
+	private static void extractJfedLocation(Resource omnResource, Object o) {
+
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource locationResource = omnResource.getModel().createResource(uuid);
+		locationResource.addProperty(RDF.type, Omn_resource.Location);
+
+		Location location = (Location) o;
+
+		String x = location.getX();
+		if (x != null && x != "") {
+			locationResource.addProperty(Omn_resource.jfedX, x);
+		}
+
+		String y = location.getY();
+		if (y != null && y != "") {
+			locationResource.addProperty(Omn_resource.jfedY, y);
+		}
+
+		omnResource.addProperty(Omn_resource.hasLocation, locationResource);
 	}
 
 	private static void tryExtractOsco(Resource topology, Object rspecNodeObject) {
@@ -2489,6 +2585,12 @@ public class RequestConverter extends AbstractConverter {
 			final LocationContents location = locationJaxb.getValue();
 
 			if (location != null) {
+
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource locationResource = omnNode.getModel().createResource(
+						uuid);
+				locationResource.addProperty(RDF.type, Omn_resource.Location);
+
 				String latitude = location.getLatitude();
 				String longitude = location.getLongitude();
 				String country = location.getCountry();
@@ -2498,15 +2600,54 @@ public class RequestConverter extends AbstractConverter {
 					throw new MissingRspecElementException(
 							"LocationContents > country");
 				} else {
-					omnNode.addProperty(Geonames.countryCode, country);
+					locationResource.addProperty(Geonames.countryCode, country);
 				}
 
 				if (latitude != null) {
-					omnNode.addProperty(Geo.lat, latitude);
+					locationResource.addProperty(Geo.lat, latitude);
 				}
 				if (longitude != null) {
-					omnNode.addProperty(Geo.long_, longitude);
+					locationResource.addProperty(Geo.long_, longitude);
 				}
+
+				Map<QName, String> otherLocationAttributes = location
+						.getOtherAttributes();
+				for (Entry<QName, String> entry : otherLocationAttributes
+						.entrySet()) {
+
+					QName key = entry.getKey();
+					String value = entry.getValue();
+
+					if (key.getNamespaceURI().equals(
+							"http://open-multinet.info/location")) {
+
+						if (key.getLocalPart().equals("id")) {
+							locationResource.addProperty(Omn_lifecycle.hasID,
+									value);
+						} else if (key.getLocalPart().equals("name")) {
+							locationResource.addProperty(RDFS.label, value);
+						}
+					}
+				}
+				omnNode.addProperty(Omn_resource.hasLocation, locationResource);
+				// String latitude = location.getLatitude();
+				// String longitude = location.getLongitude();
+				// String country = location.getCountry();
+				//
+				// // country is required, when location is specified
+				// if (country == null) {
+				// throw new MissingRspecElementException(
+				// "LocationContents > country");
+				// } else {
+				// omnNode.addProperty(Geonames.countryCode, country);
+				// }
+				//
+				// if (latitude != null) {
+				// omnNode.addProperty(Geo.lat, latitude);
+				// }
+				// if (longitude != null) {
+				// omnNode.addProperty(Geo.long_, longitude);
+				// }
 			}
 		}
 	}
@@ -2542,25 +2683,24 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	private static void tryExtractMonitoring(Resource omnResource, Object o) {
-		if (o.getClass().equals(Monitoring.class)) {
+		// if (o.getClass().equals(Monitoring.class)) {
 
-			Monitoring monitor = (Monitoring) o;
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource monitoringResource = omnResource.getModel()
-					.createResource(uuid);
-			if (monitor.getUri() != null && monitor.getUri() != "") {
-				monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
-			}
-			if (monitor.getType() != null && monitor.getType() != "") {
-				Resource typeResource = monitoringResource.getModel()
-						.createResource(monitor.getType());
-				monitoringResource.addProperty(RDF.type, typeResource);
-				monitoringResource.addProperty(RDFS.label,
-						AbstractConverter.getName(monitor.getType()));
-			}
-			omnResource.addProperty(Omn_lifecycle.usesService,
-					monitoringResource);
+		Monitoring monitor = (Monitoring) o;
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource monitoringResource = omnResource.getModel().createResource(
+				uuid);
+		if (monitor.getUri() != null && monitor.getUri() != "") {
+			monitoringResource.addProperty(Omn.hasURI, monitor.getUri());
 		}
+		if (monitor.getType() != null && monitor.getType() != "") {
+			Resource typeResource = monitoringResource.getModel()
+					.createResource(monitor.getType());
+			monitoringResource.addProperty(RDF.type, typeResource);
+			monitoringResource.addProperty(RDFS.label,
+					AbstractConverter.getName(monitor.getType()));
+		}
+		omnResource.addProperty(Omn_lifecycle.usesService, monitoringResource);
+		// }
 	}
 
 	private static void tryExtractServices(Resource omnResource,
@@ -2767,133 +2907,4 @@ public class RequestConverter extends AbstractConverter {
 			omnResource.addProperty(Omn.hasService, installService);
 		}
 	}
-
-	// private static class NetworkTopologyExtractor {
-	//
-	// static void extractTopologyInformation(final RSpecContents request,
-	// final Resource topology) throws MissingRspecElementException {
-	//
-	// List<JAXBElement<NodeContents>> xmlElements;
-	// Model outputModel = topology.getModel();
-	//
-	// try {
-	// xmlElements = (List) request.getAnyOrNodeOrLink();
-	// for (JAXBElement element : xmlElements) {
-	//
-	// // If it's a node, then extract the node information and its
-	// // corresponding interfaces
-	// if (element.getDeclaredType() == NodeContents.class) {
-	// JAXBElement<NodeContents> nodeObject =
-	// (JAXBElement<NodeContents>) element;
-	//
-	// NodeContents node = nodeObject.getValue();
-	//
-	// String clientId = node.getClientId();
-	// Resource omnResource = outputModel
-	// .createResource("http://open-multinet.info/example#"
-	// + clientId);
-	//
-	// // omnResource.addProperty(RDF.type, Nml.Node);
-	// omnResource.addProperty(RDF.type, Omn_resource.Node);
-	//
-	// }
-	// // If it's a link, then extract the link information
-	// // and its corresponding interfaces
-	// else if (element.getDeclaredType() == LinkContents.class) {
-	//
-	// JAXBElement<LinkContents> linkObject = (JAXBElement<LinkContents>)
-	// element;
-	// LinkContents link = linkObject.getValue();
-	//
-	// if (link.getClientId() == null) {
-	// throw new MissingRspecElementException(
-	// "LinkContents > client_id ");
-	// }
-	// Resource linkResource = outputModel
-	// .createResource("http://open-multinet.info/example#"
-	// + link.getClientId());
-	// // linkResource.addProperty(RDF.type, Nml.Link);
-	// linkResource.addProperty(RDF.type, Omn_resource.Link);
-	//
-	// linkResource.addLiteral(Omn_resource.clientId,
-	// link.getClientId()); // required
-	//
-	// // Get source and sink interfaces
-	// @SuppressWarnings({ "unchecked", "rawtypes" })
-	// List<JAXBElement<InterfaceRefContents>> interfaces = (List) link
-	// .getAnyOrPropertyOrLinkType();
-	// for (JAXBElement<InterfaceRefContents> interfaceRefContents : interfaces)
-	// {
-	// try {
-	// InterfaceRefContents content = interfaceRefContents
-	// .getValue();
-	// Resource interfaceResource = outputModel
-	// .createResource("http://open-multinet.info/example#"
-	// + content.getClientId());
-	// // interfaceResource.addProperty(Nml.isSink,
-	// // linkResource);
-	// // interfaceResource.addProperty(Nml.isSource,
-	// // linkResource);
-	//
-	// interfaceResource.addProperty(
-	// Omn_resource.clientId,
-	// content.getClientId());
-	//
-	// // linkResource.addProperty(Nml.hasPort,
-	// // interfaceResource);
-	// linkResource.addProperty(
-	// Omn_resource.hasInterface,
-	// interfaceResource);
-	// } catch (ClassCastException exp) {
-	//
-	// }
-	// }
-	//
-	// // Get source and sink interfaces
-	// @SuppressWarnings({ "unchecked", "rawtypes" })
-	// List<JAXBElement<LinkPropertyContents>> properties = (List) link
-	// .getAnyOrPropertyOrLinkType();
-	// for (JAXBElement<LinkPropertyContents> propertyContents : properties) {
-	// try {
-	// LinkPropertyContents content = propertyContents
-	// .getValue();
-	// String sourceID = content.getSourceId();
-	// String destID = content.getDestId();
-	//
-	// if (sourceID == null || destID == null) {
-	// throw new MissingRspecElementException(
-	// "LinkPropertyContents > source_id/dest_id");
-	// }
-	//
-	// Resource linkPropertyResource = outputModel
-	// .createResource(UUID.randomUUID().toString());
-	// linkPropertyResource.addProperty(RDF.type,
-	// Omn_resource.LinkProperty);
-	// linkPropertyResource.addProperty(
-	// Omn_resource.hasSink, destID);
-	// linkPropertyResource.addProperty(
-	// Omn_resource.hasSource, sourceID);
-	//
-	// linkResource.addProperty(
-	// Omn_resource.hasProperty,
-	// linkPropertyResource);
-	// // interfaceResource.addProperty(Nml.isSink,
-	// // linkResource);
-	// // interfaceResource.addProperty(Nml.isSource,
-	// // linkResource);
-	// // linkResource.addProperty(Nml.hasPort,
-	// // interfaceResource);
-	// } catch (ClassCastException exp) {
-	//
-	// }
-	// }
-	// topology.addProperty(Omn.hasResource, linkResource);
-	// }
-	// }
-	// } catch (ClassCastException e) {
-	// LOG.warning(e.getMessage());
-	// }
-	// }
-	// }
-
 }

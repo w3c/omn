@@ -3,15 +3,14 @@
 <node client_id="node0" exclusive="true" component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" component_id="urn:publicid:IDN+pllab.pl+node+http%3A%2F%2Fpllab.pl%2Fresource%2Fsrv201.psnc">
   <sliver_type name="raw-pc"/>
   <location country="PL" latitude="52.3941716" longitude="16.9180558" />
-  <!-- weird location?? -->
-  <!--location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="97.0" y="53.5"/-->
+  <location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="97.0" y="53.5"/>
   <interface client_id="node0:if0">
     <ip address="192.168.0.1" netmask="255.255.255.0" type="ipv4"/>
   </interface>
 </node>
 <node client_id="node1" exclusive="true" component_manager_id="urn:publicid:IDN+pllab.pl+authority+cm" component_id="urn:publicid:IDN+pllab.pl+node+http%3A%2F%2Fpllab.pl%2Fresource%2Fsrv202.psnc">
   <sliver_type name="raw-pc"/>
-  <!--  location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="391.0" y="52.5"/ -->
+  <location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="391.0" y="52.5"/>
   <location country="PL" latitude="52.3941716" longitude="16.9180558" />
   <interface client_id="node1:if0">
     <ip address="192.168.0.2" netmask="255.255.255.0" type="ipv4"/>

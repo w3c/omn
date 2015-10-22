@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://jfed.iminds.be/rspec/ext/jfed/1" elementFormDefault="qualified"
+	targetNamespace="http://jfed.iminds.be/rspec/ext/jfed/1">
+	<xs:element name="jfed_location">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:location" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="location">
+		<xs:complexType>
+			<xs:attribute name="x" type="xs:string" />
+			<xs:attribute name="y" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

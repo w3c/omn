@@ -324,6 +324,37 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/omn-resource#address
+
+:address rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "address"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:address"@en ;
+                
+                rdfs:comment "IP address"@en ;
+                
+                rdfs:domain :IPAddress ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#clientId
+
+:clientId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "client ID"@en ;
+                
+                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:clientId"@en ;
+                
+                rdfs:comment "client ID"@en ;
+                
+                rdfs:domain :Interface ;
+                
+                rdfs:range xsd:string .
+
+
 ###  http://open-multinet.info/ontology/omn-resource#isAvailable
 
 :isAvailable rdf:type owl:DatatypeProperty ;
@@ -352,19 +383,51 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#address
+###  http://open-multinet.info/ontology/omn-resource#jfedX
 
-:address rdf:type owl:DatatypeProperty ;
+:jfedX rdf:type owl:DatatypeProperty ;
 
-                rdfs:label "address"@en ;
+             rdfs:label "X coordinate"@en ;
+
+             rdfs:comment "jFed X coordinate"@en ;
+
+             rdfs:seeAlso "http://jfed.iminds.be/rspec/ext/jfed/1"@en ;
+             
+             rdfs:domain :Location ;
+             
+             rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#jfedY
+
+:jfedY rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "Y coordinate"@en ;
+
+             rdfs:comment "jFed Y coordinate"@en ;
+
+             rdfs:seeAlso "http://jfed.iminds.be/rspec/ext/jfed/1"@en ;
+             
+             rdfs:domain :Location ;
+             
+             rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-resource#macAddress
+
+:macAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "MAC address"@en ;
                 
-                rdfs:seeAlso "GENI Manifest RSpec v3: IpContents:address"@en ;
+                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:mac_address"@en ;
                 
-                rdfs:comment "IP address"@en ;
+                rdfs:comment "MAC address"@en ;
                 
-                rdfs:domain :IPAddress ;
+                rdfs:domain :Interface ;
                 
                 rdfs:range xsd:string .
+
 
 
 ###  http://open-multinet.info/ontology/omn-resource#netmask
@@ -411,37 +474,6 @@
                 
                 rdfs:range xsd:string .
 
-
-
-###  http://open-multinet.info/ontology/omn-resource#macAddress
-
-:macAddress rdf:type owl:DatatypeProperty ;
-
-                rdfs:label "MAC address"@en ;
-                
-                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:mac_address"@en ;
-                
-                rdfs:comment "MAC address"@en ;
-                
-                rdfs:domain :Interface ;
-                
-                rdfs:range xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/omn-resource#clientId
-
-:clientId rdf:type owl:DatatypeProperty ;
-
-                rdfs:label "client ID"@en ;
-                
-                rdfs:seeAlso "GENI Manifest RSpec v3: InterfaceContents:clientId"@en ;
-                
-                rdfs:comment "client ID"@en ;
-                
-                rdfs:domain :Interface ;
-                
-                rdfs:range xsd:string .
 
 
 
