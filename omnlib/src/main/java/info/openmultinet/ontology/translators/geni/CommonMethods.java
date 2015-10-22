@@ -79,7 +79,6 @@ public class CommonMethods {
 
 			return url;
 		}
-
 	}
 
 	public static String urlToGeniUrn(String dirtyString) {
@@ -180,7 +179,8 @@ public class CommonMethods {
 	public static OntClass convertGeniStateToOmn(String geniState) {
 
 		OntClass omnState = Omn_lifecycle.Unknown;
-		if (null == geniState) return omnState;
+		if (null == geniState)
+			return omnState;
 		switch (geniState) {
 		case "geni_ready_busy":
 			omnState = Omn_lifecycle.Active;
@@ -377,5 +377,12 @@ public class CommonMethods {
 		}
 
 		return geniState;
+	}
+
+	public static String[] splitNumberUnit(String numberAndUnit) {
+
+		String[] parts = numberAndUnit.split("(?<=\\d)(?=\\D)");
+
+		return parts;
 	}
 }

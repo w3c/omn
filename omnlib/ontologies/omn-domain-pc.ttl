@@ -27,11 +27,11 @@
                                                    
                                                    rdfs:label "omn-domain-pc"@en ;
                                                    
-                                                   dcterms:modified "2015-10-19"^^xsd:date ;
+                                                   dcterms:modified "2015-10-22"^^xsd:date ;
                                                    
                                                    dc:date "2015-03-15"^^xsd:date ;
                                                    
-                                                   owl:versionInfo "2015-10-19"^^xsd:string ;
+                                                   owl:versionInfo "2015-10-22"^^xsd:string ;
                                                    
                                                    dc:title "Open-Multinet Domain PC Ontology"^^xsd:string ;
                                                    
@@ -80,6 +80,19 @@
                          rdfs:domain omn-resource:LinkProperty ;
                          
                          rdfs:range xsd:integer .
+
+
+###  http://open-multinet.info/ontology/omn-domain-pc#hasCapacityUnit
+
+:hasCapacityUnit rdf:type owl:DatatypeProperty ;
+
+                         rdfs:label "unit of link property capacity"@en ;
+
+                         rdfs:comment "unit of link property capacity (GENI Request > LinkPropertyContents > capacity), if specified"@en ;
+                         
+                         rdfs:domain omn-resource:LinkProperty ;
+                         
+                         rdfs:range xsd:string .
 
 
 

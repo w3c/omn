@@ -736,8 +736,16 @@ public class AdvertisementConverter extends AbstractConverter {
 
 		String capacity = content.getCapacity();
 		if (capacity != null) {
-			linkPropertyResource.addProperty(Omn_domain_pc.hasCapacity,
-					capacity);
+			String[] numberAndUnit = CommonMethods.splitNumberUnit(capacity);
+
+			int number = Integer.parseInt(numberAndUnit[0]);
+			BigInteger numberBigInt = BigInteger.valueOf(number);
+			linkPropertyResource.addLiteral(Omn_domain_pc.hasCapacity,
+					numberBigInt);
+			if (numberAndUnit.length > 1) {
+				linkPropertyResource.addProperty(Omn_domain_pc.hasCapacityUnit,
+						numberAndUnit[1]);
+			}
 		}
 
 		String latency = content.getLatency();
@@ -2117,6 +2125,14 @@ public class AdvertisementConverter extends AbstractConverter {
 				String capacity = linkResource
 						.getProperty(Omn_domain_pc.hasCapacity).getObject()
 						.asLiteral().getString();
+
+				if (linkResource.hasProperty(Omn_domain_pc.hasCapacityUnit)) {
+					String capacityUnit = linkResource
+							.getProperty(Omn_domain_pc.hasCapacityUnit)
+							.getObject().asLiteral().getString();
+					capacity = capacity + capacityUnit;
+				}
+
 				newLinkProperty.setCapacity(capacity);
 			}
 
