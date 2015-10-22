@@ -30,7 +30,7 @@ public class RequestLinkTest {
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-				
+
 		final String filename = "/geni/request/request_link.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
@@ -70,8 +70,6 @@ public class RequestLinkTest {
 	}
 
 	@Test
-	@Ignore
-	//@todo @robynml add the file link-manifest.ttl
 	public void testConvertingGraph2RSpec() throws JAXBException,
 			InvalidModelException {
 		InputStream input = ManifestConverterTest.class
@@ -83,7 +81,7 @@ public class RequestLinkTest {
 		System.out.println(rspec);
 		Assert.assertTrue("should be a manifest",
 				rspec.contains("type=\"manifest\""));
-		// Assert.assertTrue("should have a motor", rspec.contains("Motor"));
+		Assert.assertTrue("should have a motor", rspec.contains("Motor"));
 	}
-	
+
 }
