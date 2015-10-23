@@ -1,7 +1,5 @@
 package info.openmultinet.ontology.translators;
 
-import info.openmultinet.ontology.exceptions.InvalidModelException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +14,6 @@ import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
@@ -42,6 +39,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 
 public abstract class AbstractConverter {
 

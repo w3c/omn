@@ -1034,7 +1034,7 @@ public class RequestConverter extends AbstractConverter {
 		if (interfaceResource.hasProperty(Omn_resource.hasIPAddress)) {
 			Statement ipAddress = interfaceResource
 					.getProperty(Omn_resource.hasIPAddress);
-			if (ipAddress.getResource().hasProperty(Omn_resource.type)) {
+    			if (ipAddress.getResource().hasProperty(Omn_resource.type)) {
 				ipContents = new ObjectFactory().createIpContents();
 				ipContents.setType(ipAddress.getResource()
 						.getProperty(Omn_resource.type).getObject().asLiteral()
