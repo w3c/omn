@@ -1,0 +1,125 @@
+<rspec expires="2015-10-06T14:46:01Z" generated="2015-10-06T14:46:01Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd ">
+    <node
+        component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+node+n097-01a"
+        component_manager_id="urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm"
+        component_name="n097-01a" exclusive="true">
+        <hardware_type name="pcgen03-5p">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="pc">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <hardware_type name="delay">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="delay-pcgen03-5p">
+            <emulab:node_type type_slots="2"/>
+        </hardware_type>
+        <hardware_type name="pcgen03-5p-vm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvmgen03-5p">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="pcvm">
+            <emulab:node_type type_slots="20"/>
+        </hardware_type>
+        <hardware_type name="lan">
+            <emulab:node_type static="true" type_slots="unlimited"/>
+        </hardware_type>
+        <sliver_type name="raw-pc">
+            <disk_image description="Standard 64-bit Fedora 15 image"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:FEDORA15-64-STD"
+                os="Fedora"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=abbac114-0f0a-11e3-bd92-001517becdc1" version="15"/>
+            <disk_image default="true" description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=c6c07718-1077-11e3-966a-001517becdc1" version="12.04"/>
+            <disk_image description="Ubuntu 14.04 LTS 64-bit"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a2a5bc6-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image
+                description="Emulab Standard CentOS 6.3 64-bit image. 3.10.40 kernel"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:CENTOS63-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=2f96de73-7946-11e3-83eb-001143e453fe" version="6.3"/>
+            <disk_image description="Debian 7.7 wheezy (64 bit)"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:DEB77-64-STD"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=47472517-5d3c-11e4-bd9f-001517becdc1" version="7.7"/>
+            <disk_image description="CentOS 6.5"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:CENTOS65-64-STD-BIG2"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=08985be4-5e43-11e4-bd9f-001517becdc1" version="6.5"/>
+            <disk_image default="true" description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=c6c07718-1077-11e3-966a-001517becdc1" version="12.04"/>
+        </sliver_type>
+        <sliver_type name="emulab-openvz">
+            <disk_image
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="Ubuntu 12.04 LTS"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:UBUNTU12-64-STD"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=c6c07718-1077-11e3-966a-001517becdc1" version="12.04"/>
+            <disk_image description="Ubuntu 14.04 LTS 64-bit"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:UBUNTU14-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=0a2a5bc6-32b3-11e4-b30a-001143e453fe" version="14.04"/>
+            <disk_image
+                description="Emulab Standard CentOS 6.3 64-bit image. 3.10.40 kernel"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:CENTOS63-64-STD"
+                os="Linux"
+                url="https://www.emulab.net/image_metadata.php?uuid=2f96de73-7946-11e3-83eb-001143e453fe" version="6.3"/>
+            <disk_image description="Debian 7.7 wheezy (64 bit)"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:DEB77-64-STD"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=47472517-5d3c-11e4-bd9f-001517becdc1" version="7.7"/>
+            <disk_image description="CentOS 6.5"
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:CENTOS65-64-STD-BIG2"
+                os="Linux"
+                url="https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=08985be4-5e43-11e4-bd9f-001517becdc1" version="6.5"/>
+            <disk_image default="true"
+                description="Generic osid for openvz virtual nodes."
+                name="urn:publicid:IDN+wall2.ilabt.iminds.be+image+emulab-ops:OPENVZ-STD"
+                os="Fedora" version="15"/>
+        </sliver_type>
+        <available now="false"/>
+        <location country="BE" latitude="51.036145" longitude="3.734761"/>
+        <emulab:trivial_bandwidth value="400000"/>
+        <interface
+            component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+interface+n097-01a:eth3" role="experimental">
+            <emulab:interface name="eth3"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+interface+n097-01a:eth2" role="experimental">
+            <emulab:interface name="eth2"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+interface+n097-01a:eth5" role="experimental">
+            <emulab:interface name="eth5"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+interface+n097-01a:eth0" role="control">
+            <emulab:interface name="eth0"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+interface+n097-01a:eth1" role="experimental">
+            <emulab:interface name="eth1"/>
+        </interface>
+        <interface
+            component_id="urn:publicid:IDN+wall2.ilabt.iminds.be+interface+n097-01a:eth4" role="experimental">
+            <emulab:interface name="eth4"/>
+        </interface>
+    </node>
+</rspec>

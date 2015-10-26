@@ -12,7 +12,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,6 +35,8 @@ public class TestRules {
 	private static final String TEST_XML = "/geni/geni-fire-20151006/netmode.rspec.xml";
 	private static final String TEST_TTL = "geni/geni-fire-20151006/netmode.rspec.xml.ttl";
 	private static final String TEST_RULE = "/rules/ruleParserTest1.rules";
+	private static final String TEST_IMINDS_XML = "/geni/fed4fire/vwall2.rspec.small.xml";
+	private static final String TEST_IMIND_EXP = "Label for testing";
 
 	@Test
 	public void testSimpleRuleset() throws IOException {
@@ -61,8 +62,15 @@ public class TestRules {
 		final String inputRSpecString = AbstractConverter.toString(TEST_XML);
 		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString, StandardCharsets.UTF_8);
 		Model inputRSpecModel = new AdvertisementConverter().getModel(inputRSpecStream);
-		AbstractConverter.print(inputRSpecModel);
 		Assert.assertTrue(inputRSpecModel.toString().contains(TestRules.EXPECT_AMS));
+	}
+	
+	@Test
+	public void testIntegratedIMindsRules() throws IOException, URISyntaxException, JAXBException, InvalidModelException, XMLStreamException, MissingRspecElementException {
+		final String inputRSpecString = AbstractConverter.toString(TEST_IMINDS_XML);
+		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString, StandardCharsets.UTF_8);
+		Model inputRSpecModel = new AdvertisementConverter().getModel(inputRSpecStream);
+		Assert.assertTrue(inputRSpecModel.toString().contains(TestRules.TEST_IMIND_EXP));
 	}
 	
 }

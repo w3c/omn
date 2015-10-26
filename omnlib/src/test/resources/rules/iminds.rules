@@ -1,0 +1,29 @@
+@prefix omn: <http://open-multinet.info/ontology/omn#>.
+@prefix omnlc: <http://open-multinet.info/ontology/omn-lifecycle#>.
+@prefix omngeni: <http://open-multinet.info/ontology/omn-domain-geni-fire#>.
+@prefix omnmu: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
+@prefix omncomp: <http://open-multinet.info/ontology/omn-component#> .
+@prefix omnres: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omndp: <http://open-multinet.info/ontology/omn-domain#> .
+@prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
+
+
+[myRule1:
+(?hwType rdf:type omnres:HardwareType) 
+(?hwType rdfs:label ?label)
+regex(?label, "pcgen0?3.*")
+(?node omnres:hasHardwareType ?hwType)
+makeTemp(?memComp)
+makeTemp(?cpuComp)
+->
+(?memComp rdf:type owl:NamedIndividual)
+(?memComp rdfs:label "RAM")
+(?memComp rdfs:label "Label for testing")
+(?memComp rdf:type omncomp:MemoryComponent)
+(?memComp omnmonunit:hasValue 24)
+(?node omn:hasComponent ?memComp)
+(?cpuComp rdf:type owl:NamedIndividual)
+(?cpuComp rdf:type omncomp:CPU)
+(?cpuComp rdfs:label "CPU")
+(?cpuComp omnmonunit:hasValue 2)
+]
