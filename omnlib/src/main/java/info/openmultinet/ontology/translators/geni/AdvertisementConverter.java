@@ -2552,6 +2552,46 @@ public class AdvertisementConverter extends AbstractConverter {
 					of.createLocation(location));
 
 		}
+
+		if (omnResource.getResource().hasProperty(Geo.lat)
+				|| omnResource.getResource().hasProperty(Geo.long_)
+				|| omnResource.getResource().hasProperty(Geonames.countryCode)) {
+			LocationContents locationContents = null;
+
+			if (omnResource.getResource().hasProperty(Geo.lat)) {
+				locationContents = new ObjectFactory().createLocationContents();
+				locationContents.setLatitude(omnResource.getResource()
+						.getProperty(Geo.lat).getObject().toString());
+			}
+
+			if (omnResource.getResource().hasProperty(Geo.long_)) {
+				if (locationContents == null) {
+					locationContents = new ObjectFactory()
+							.createLocationContents();
+				}
+				locationContents.setLongitude(omnResource.getResource()
+						.getProperty(Geo.long_).getObject().toString());
+			}
+
+			if (omnResource.getResource().hasProperty(Geonames.countryCode)) {
+				if (locationContents == null) {
+					locationContents = new ObjectFactory()
+							.createLocationContents();
+				}
+				locationContents.setCountry(omnResource.getResource()
+						.getProperty(Geonames.countryCode).getObject()
+						.toString());
+			} else {
+				// country required
+				locationContents.setCountry("");
+			}
+
+			if (locationContents != null) {
+				JAXBElement<LocationContents> location = new ObjectFactory()
+						.createLocation(locationContents);
+				geniNode.getAnyOrRelationOrLocation().add(location);
+			}
+		}
 	}
 
 	private void setSliverTypes(Statement resource, NodeContents geniNode) {
