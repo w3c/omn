@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for TOSCA OpenSNDCore Orchestrator. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://open-multinet.info/ontology/epc/" elementFormDefault="qualified"
+	targetNamespace="http://open-multinet.info/ontology/epc/" xmlns:rspec="http://www.geni.net/resources/rspec/3">
+	<!--  xs:include schemaLocation="ad-common.xsd" /-->
+	<xs:element name="rspec_epc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:epc" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="epc">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="s:apn" />
+				<xs:element ref="s:enodeb" />
+				<xs:element ref="s:subscriber" />
+			</xs:choice>
+			<xs:attribute name="vendor" type="xs:string" />
+			<xs:attribute name="mme_address" type="xs:string" />
+			<xs:attribute name="serving_gateway" type="xs:string" />
+			<xs:attribute name="pdn_gateway" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="apn" type="s:ApnContents" />
+	<xs:complexType name="ApnContents">
+		<xs:attribute name="network_id" type="xs:string" />
+		<xs:attribute name="operator_id" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="enodeb" type="s:ENodeBContents" />
+	<xs:complexType name="ENodeBContents">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="address" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="subscriber" type="s:SubscriberContents" />
+	<xs:complexType name="SubscriberContents">
+		<xs:attribute name="imsi_number" type="xs:string" />
+	</xs:complexType>
+</xs:schema>

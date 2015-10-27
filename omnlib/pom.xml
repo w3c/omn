@@ -246,6 +246,7 @@
 						<include>import/http.ttl</include>
 						<include>import/wgs84.ttl</include>
 						<include>ontologies/osco.ttl</include>
+						<include>ontologies/epc.ttl</include>
 						<!-- include>src/test/resources/ontologies/osco.ttl</include -->
 					</includes>
 					<fileOptions>

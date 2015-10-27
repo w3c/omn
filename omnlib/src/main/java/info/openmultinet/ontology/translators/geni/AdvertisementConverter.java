@@ -4,6 +4,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ActionSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Available;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Cloud;
@@ -15,6 +16,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Datapath.P
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DlType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DlVlan;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ExternalReferenceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.GroupContents;
@@ -46,8 +49,12 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecTypeC
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Sliver;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StitchContent;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.SubscriberContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UseGroup;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.OscoLocationContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.SubnetContents;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -179,18 +186,119 @@ public class AdvertisementConverter extends AbstractConverter {
 			tryExtractSharedVlan(rspecObject, offering);
 			tryExtractRoutableAddresses(rspecObject, offering);
 			tryExtractOpstate(rspecObject, offering);
-			tryExtractStitching(rspecObject, offering);
 
-			if (rspecObject instanceof org.apache.xerces.dom.ElementNSImpl) {
-				tryExtractOpenflow(rspecObject, offering);
+			if (rspecObject.toString().contains("stitching")) {
+				extractStitching(rspecObject, offering);
+			} else if (rspecObject instanceof org.apache.xerces.dom.ElementNSImpl) {
+				extractOpenflow(rspecObject, offering);
+			} else if (rspecObject.getClass().equals(Epc.class)) {
+				extractEpc(offering, rspecObject);
 			}
-
 		}
 
 		return model;
 	}
 
-	private void tryExtractOpenflow(Object rspecObject, Resource topology) {
+	private void extractEpc(Resource offering, Object rspecObject) {
+
+		Epc epc = (Epc) rspecObject;
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource omnEpc = offering.getModel().createResource(uuid);
+
+		offering.addProperty(Omn.hasResource, omnEpc);
+		omnEpc.addProperty(Omn.isResourceOf, offering);
+
+		omnEpc.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.EPC);
+
+		String mme = epc.getMmeAddress();
+		if (mme != null && mme != "") {
+			omnEpc.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.mmeAddress, mme);
+		}
+
+		String pdn = epc.getPdnGateway();
+		if (pdn != null && pdn != "") {
+			omnEpc.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.pdnGateway, pdn);
+		}
+
+		String servingGateway = epc.getServingGateway();
+		if (servingGateway != null && servingGateway != "") {
+			omnEpc.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.servingGateway,
+					servingGateway);
+		}
+
+		List<Object> objects = epc.getApnOrEnodebOrSubscriber();
+		for (Object o : objects) {
+			if (o.getClass().equals(ApnContents.class)) {
+				ApnContents apnContents = (ApnContents) o;
+				extractApn(apnContents, omnEpc);
+			} else if (o.getClass().equals(ENodeBContents.class)) {
+				ENodeBContents eNodeBContents = (ENodeBContents) o;
+				extractENodeB(eNodeBContents, omnEpc);
+			} else if (o.getClass().equals(SubscriberContents.class)) {
+				SubscriberContents subscriberContents = (SubscriberContents) o;
+				String imsiNumber = subscriberContents.getImsiNumber();
+				omnEpc.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.subscriber,
+						imsiNumber);
+			}
+		}
+	}
+
+	private void extractENodeB(ENodeBContents eNodeBContents, Resource omnEpc) {
+		Resource enodebResource = omnEpc.getModel().createResource();
+		enodebResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.APN);
+
+		String address = eNodeBContents.getAddress();
+		if (address != null && address != "") {
+			enodebResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.eNodeBAddress,
+					address);
+		}
+
+		String name = eNodeBContents.getName();
+		if (name != null && name != "") {
+			enodebResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.eNodeBName, name);
+		}
+
+		omnEpc.addProperty(info.openmultinet.ontology.vocabulary.Epc.hasENodeB,
+				enodebResource);
+
+	}
+
+	private void extractApn(ApnContents apnContents, Resource omnEpc) {
+
+		Resource apnResource = omnEpc.getModel().createResource();
+		apnResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.APN);
+
+		String networkId = apnContents.getNetworkId();
+		if (networkId != null && networkId != "") {
+			apnResource
+					.addProperty(
+							info.openmultinet.ontology.vocabulary.Epc.networkIdentifier,
+							networkId);
+		}
+
+		String operatorId = apnContents.getOperatorId();
+		if (operatorId != null && operatorId != "") {
+			apnResource
+					.addProperty(
+							info.openmultinet.ontology.vocabulary.Epc.operatorIdentifier,
+							operatorId);
+		}
+
+		omnEpc.addProperty(info.openmultinet.ontology.vocabulary.Epc.hasAPN,
+				apnResource);
+
+	}
+
+	private void extractOpenflow(Object rspecObject, Resource topology) {
 
 		ElementNSImpl openflow = (ElementNSImpl) rspecObject;
 
@@ -466,50 +574,49 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	}
 
-	private void tryExtractStitching(Object rspecObject, Resource offering)
+	private void extractStitching(Object rspecObject, Resource offering)
 			throws MissingRspecElementException {
-		if (rspecObject.toString().contains("stitching")) {
 
-			Model model = offering.getModel();
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource stitchResource = model.createResource(uuid);
-			stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
+		Model model = offering.getModel();
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource stitchResource = model.createResource(uuid);
+		stitchResource.addProperty(RDF.type, Omn_resource.Stitching);
 
-			ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) rspecObject);
-			NamedNodeMap attributes = stitch.getAttributes();
-			for (int i = 0; i < attributes.getLength(); i++) {
-				if (attributes.item(i).getNodeName().equals("lastUpdateTime")) {
-					String lastUpdate = attributes.item(i).getNodeValue();
-					stitchResource.addProperty(Omn_domain_pc.lastUpdateTime,
-							lastUpdate);
-				}
+		ElementNSImpl stitch = ((org.apache.xerces.dom.ElementNSImpl) rspecObject);
+		NamedNodeMap attributes = stitch.getAttributes();
+		for (int i = 0; i < attributes.getLength(); i++) {
+			if (attributes.item(i).getNodeName().equals("lastUpdateTime")) {
+				String lastUpdate = attributes.item(i).getNodeValue();
+				stitchResource.addProperty(Omn_domain_pc.lastUpdateTime,
+						lastUpdate);
 			}
-
-			NodeList children = ((org.apache.xerces.dom.ElementNSImpl) rspecObject)
-					.getChildNodes();
-
-			for (int i = 0; i < children.getLength(); i++) {
-				Node child = children.item(i);
-
-				if (child.getNodeName().contains("path")) {
-					String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
-					Resource path = model.createResource(uuid2);
-					path.addProperty(RDF.type, Omn_resource.Path);
-
-					NamedNodeMap pathAttributes = child.getAttributes();
-					for (int j = 0; j < pathAttributes.getLength(); j++) {
-						if (pathAttributes.item(j).getNodeName().equals("id")) {
-							String id = pathAttributes.item(j).getNodeValue();
-							path.addProperty(Omn_lifecycle.hasID, id);
-						}
-					}
-					// extractHops(path, child);
-					stitchResource.addProperty(Omn.hasResource, path);
-				}
-			}
-
-			offering.addProperty(Omn.hasResource, stitchResource);
 		}
+
+		NodeList children = ((org.apache.xerces.dom.ElementNSImpl) rspecObject)
+				.getChildNodes();
+
+		for (int i = 0; i < children.getLength(); i++) {
+			Node child = children.item(i);
+
+			if (child.getNodeName().contains("path")) {
+				String uuid2 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource path = model.createResource(uuid2);
+				path.addProperty(RDF.type, Omn_resource.Path);
+
+				NamedNodeMap pathAttributes = child.getAttributes();
+				for (int j = 0; j < pathAttributes.getLength(); j++) {
+					if (pathAttributes.item(j).getNodeName().equals("id")) {
+						String id = pathAttributes.item(j).getNodeValue();
+						path.addProperty(Omn_lifecycle.hasID, id);
+					}
+				}
+				// extractHops(path, child);
+				stitchResource.addProperty(Omn.hasResource, path);
+			}
+		}
+
+		offering.addProperty(Omn.hasResource, stitchResource);
+
 	}
 
 	private void tryExtractInterface(Object rspecObject, Resource omnResource) {
@@ -993,10 +1100,12 @@ public class AdvertisementConverter extends AbstractConverter {
 				tryExtractCloud(rspecNodeObject, omnNode);
 				tryExtractHardwareType(rspecNodeObject, omnNode);
 				tryExtractSliverType(rspecNodeObject, omnNode);
+				
+				// location and osco must follow sliver
 				tryExtractLocation(rspecNodeObject, omnNode);
 				tryExtractAvailability(rspecNodeObject, omnNode);
 				tryExtractMonitoring(rspecNodeObject, omnNode);
-				tryExtractOsco(rspecNodeObject, omnNode);
+				// tryExtractOsco(rspecNodeObject, omnNode);
 				tryExtractInterface(rspecNodeObject, omnNode);
 				tryExtractEmulabFd(rspecNodeObject, omnNode);
 				tryExtractEmulabTrivialBandwidth(rspecNodeObject, omnNode);
@@ -1385,6 +1494,7 @@ public class AdvertisementConverter extends AbstractConverter {
 			for (Object rspecSliverObject : sliverType.getAnyOrDiskImage()) {
 				tryExtractCpus(rspecSliverObject, sliverTypeResource);
 				tryExtractDiskImage(rspecSliverObject, sliverTypeResource);
+				tryExtractOsco(rspecSliverObject, sliverTypeResource);
 			}
 		} catch (final ClassCastException e) {
 			AdvertisementConverter.LOG.finer(e.getMessage());
@@ -1530,7 +1640,9 @@ public class AdvertisementConverter extends AbstractConverter {
 					&& !omnResource.getResource().hasProperty(RDF.type,
 							Omn_domain_pc.Datapath)
 					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_resource.Openflow)) {
+							Omn_resource.Openflow)
+					&& !omnResource.getResource().hasProperty(RDF.type,
+							info.openmultinet.ontology.vocabulary.Epc.EPC)) {
 
 				if (verbose) {
 					setNodesVerbose(omnResource, advertisement);
@@ -1547,7 +1659,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					setLocation(omnResource, geniNode);
 					setAvailability(omnResource, geniNode);
 					setMonitoringService(omnResource, geniNode);
-					setOsco(omnResource, geniNode);
+					// setOsco(omnResource, geniNode);
 					setInterface(omnResource, geniNode);
 					setFd(omnResource, geniNode);
 					setTrivialBandwidth(omnResource, geniNode);
@@ -1643,11 +1755,127 @@ public class AdvertisementConverter extends AbstractConverter {
 						.createStitching(stitchContent);
 
 				advertisement.getAnyOrNodeOrLink().add(stitching);
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Epc.EPC)) {
+				setEPC(omnResource, advertisement);
 			}
 		}
 	}
 
-	private void setOsco(Statement resource, NodeContents node) {
+	private void setEPC(Statement omnResource, RSpecContents advertisement) {
+		Resource resourceResource = omnResource.getResource();
+
+		Epc epc = new ObjectFactory().createEpc();
+
+		if (resourceResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.mmeAddress)) {
+			String mmeAddress = resourceResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.mmeAddress)
+					.getObject().asLiteral().getString();
+			epc.setMmeAddress(mmeAddress);
+		}
+
+		if (resourceResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.pdnGateway)) {
+			String pdnGateway = resourceResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.pdnGateway)
+					.getObject().asLiteral().getString();
+			epc.setPdnGateway(pdnGateway);
+		}
+
+		if (resourceResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.servingGateway)) {
+			String servingGateway = resourceResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.servingGateway)
+					.getObject().asLiteral().getString();
+			epc.setServingGateway(servingGateway);
+		}
+
+		StmtIterator apns = omnResource.getResource().listProperties(
+				info.openmultinet.ontology.vocabulary.Epc.hasAPN);
+		while (apns.hasNext()) {
+			Statement apnStatement = apns.next();
+			Resource apn = apnStatement.getObject().asResource();
+			setEpcApn(epc, apn);
+		}
+
+		StmtIterator eNodeBs = omnResource.getResource().listProperties(
+				info.openmultinet.ontology.vocabulary.Epc.hasENodeB);
+		while (eNodeBs.hasNext()) {
+			Statement eNodeBStatement = eNodeBs.next();
+			Resource eNodeB = eNodeBStatement.getObject().asResource();
+			setENodeB(epc, eNodeB);
+		}
+
+		StmtIterator subscribers = omnResource.getResource().listProperties(
+				info.openmultinet.ontology.vocabulary.Epc.subscriber);
+		while (subscribers.hasNext()) {
+			Statement subscriberStatement = subscribers.next();
+			String subscriber = subscriberStatement.getObject().asLiteral()
+					.getString();
+			SubscriberContents subscriberContents = new ObjectFactory()
+					.createSubscriberContents();
+			subscriberContents.setImsiNumber(subscriber);
+			epc.getApnOrEnodebOrSubscriber().add(subscriberContents);
+		}
+
+		advertisement.getAnyOrNodeOrLink().add(epc);
+
+	}
+
+	private void setENodeB(Epc epc, Resource eNodeB) {
+		ENodeBContents eNodeBContents = new ObjectFactory()
+				.createENodeBContents();
+
+		if (eNodeB
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.eNodeBAddress)) {
+			String address = eNodeB
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.eNodeBAddress)
+					.getObject().asLiteral().getString();
+			eNodeBContents.setAddress(address);
+		}
+
+		if (eNodeB
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.eNodeBName)) {
+			String name = eNodeB
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.eNodeBName)
+					.getObject().asLiteral().getString();
+			eNodeBContents.setName(name);
+		}
+
+		epc.getApnOrEnodebOrSubscriber().add(eNodeBContents);
+
+	}
+
+	private void setEpcApn(Epc epc, Resource apn) {
+		ApnContents apnContents = new ObjectFactory().createApnContents();
+
+		if (apn.hasProperty(info.openmultinet.ontology.vocabulary.Epc.networkIdentifier)) {
+			String networkId = apn
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.networkIdentifier)
+					.getObject().asLiteral().getString();
+			apnContents.setNetworkId(networkId);
+		}
+
+		if (apn.hasProperty(info.openmultinet.ontology.vocabulary.Epc.operatorIdentifier)) {
+			String operatorId = apn
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.operatorIdentifier)
+					.getObject().asLiteral().getString();
+			apnContents.setOperatorId(operatorId);
+		}
+
+		epc.getApnOrEnodebOrSubscriber().add(apnContents);
+
+	}
+
+	private void setOsco(Statement resource, SliverType node) {
 		Resource resourceResource = resource.getResource();
 
 		// check whether file has any osco properties
@@ -1757,7 +1985,7 @@ public class AdvertisementConverter extends AbstractConverter {
 				osco.setAnncDisabled(anncDisabled);
 			}
 
-			node.getAnyOrRelationOrLocation().add(osco);
+			node.getAnyOrDiskImage().add(osco);
 		}
 
 	}
@@ -1945,9 +2173,12 @@ public class AdvertisementConverter extends AbstractConverter {
 			SliverType sliver1;
 			sliver1 = of.createNodeContentsSliverType();
 			String sliverUri = omnSliver.getObject().asResource().getURI();
+			setOsco(omnSliver, sliver1);
 			sliver1.setName(sliverUri);
+
 			JAXBElement<SliverType> sliverType = new ObjectFactory()
 					.createNodeContentsSliverType(sliver1);
+
 			geniNode.getAnyOrRelationOrLocation().add(sliverType);
 
 			String sliverName = CommonMethods.getLocalName(sliverUri);
@@ -2625,6 +2856,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 					if (sliverTypeResource != null) {
 
+						setOsco(hasSliverName, sliverType);
 						setDiskImage(sliverTypeResource, sliverType);
 						JAXBElement<SliverType> sliver = new ObjectFactory()
 								.createNodeContentsSliverType(sliverType);
@@ -2638,7 +2870,10 @@ public class AdvertisementConverter extends AbstractConverter {
 				Statement omnSliver = canImplement.next();
 				sliver1 = of.createNodeContentsSliverType();
 				sliver1.setName(omnSliver.getObject().asResource().getURI());
+
 				setDiskImage(omnSliver.getResource(), sliver1);
+				setOsco(omnSliver, sliver1);
+
 				JAXBElement<SliverType> sliverType = new ObjectFactory()
 						.createNodeContentsSliverType(sliver1);
 				geniNode.getAnyOrRelationOrLocation().add(sliverType);

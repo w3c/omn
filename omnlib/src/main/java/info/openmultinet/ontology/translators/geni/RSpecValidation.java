@@ -113,6 +113,12 @@ public class RSpecValidation {
 		return errorRate;
 	}
 
+	static public int[] getDiffsNodes(String input)
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
+		return getDiffsNodesVerbose(input, false);
+	}
+
 	/**
 	 * returns the number of non-recoverable XMLunit differences (errors) and
 	 * the number of nodes in the rspec
@@ -123,11 +129,11 @@ public class RSpecValidation {
 	 * @throws MissingRspecElementException
 	 * @throws DeprecatedRspecVersionException
 	 */
-	static public int[] getDiffsNodes(String input)
+	static public int[] getDiffsNodesVerbose(String input, boolean verbosity)
 			throws MissingRspecElementException,
 			DeprecatedRspecVersionException {
 
-		String output = completeRoundtrip(input);
+		String output = completeRoundtripVerbose(input, verbosity);
 		String inputNew = null;
 		String outputNew = null;
 
@@ -488,6 +494,12 @@ public class RSpecValidation {
 		return null;
 	}
 
+	public static String completeRoundtrip(String input)
+			throws MissingRspecElementException,
+			DeprecatedRspecVersionException {
+		return completeRoundtripVerbose(input, false);
+	}
+
 	/**
 	 * generates an Open Multinet model from an RSpec, then generates a new
 	 * RSpec from the generated model and returns the new RSpec as a string
@@ -497,8 +509,8 @@ public class RSpecValidation {
 	 * @throws MissingRspecElementException
 	 * @throws DeprecatedRspecVersionException
 	 */
-	public static String completeRoundtrip(String input)
-			throws MissingRspecElementException,
+	public static String completeRoundtripVerbose(String input,
+			boolean verbosity) throws MissingRspecElementException,
 			DeprecatedRspecVersionException {
 
 		String output = null;
@@ -518,6 +530,7 @@ public class RSpecValidation {
 			if (type.equals("advertisement")) {
 				try {
 					AdvertisementConverter converter = new AdvertisementConverter();
+					converter.setVerbose(verbosity);
 					RSpecContents rspec = converter.getRspec(inputStream);
 					model = converter.getModel(rspec);
 

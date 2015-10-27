@@ -1,0 +1,490 @@
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix : <http://open-multinet.info/ontology/epc/> .
+
+<http://open-multinet.info/ontology/omn> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
+
+                                         rdf:type owl:Ontology, 
+
+                                         voaf:Vocabulary ;
+                                         
+                                         rdfs:label "omn-domain-epc"@en ;
+                                         
+                                         vann:preferredNamespacePrefix "omn-domain-epc"^^xsd:string ;
+
+                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn#> ;
+                                        
+                                         dc:date "2015-10-26"^^xsd:date ;
+                                         
+                                         dcterms:modified "2015-10-26"^^xsd:date ;
+                                         
+                                         owl:versionInfo "2015-10-26"^^xsd:string ;
+                                         
+                                         dc:title "Open-Multinet Upper Ontology"@en ;
+                                         
+                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs.."@en ;
+
+                                         dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> ;
+                                         
+                                         dc:creator <http://alex.willner.ws/about#me> ;
+
+                                         dc:publisher <http://open-multinet.info/> ;
+
+                                         foaf:homepage <http://open-multinet.info/> ;
+                                         
+                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+###  http://open-multinet.info/ontology/omn-domain-epc#hasAPN
+
+:hasAPN rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "The APN that is used by the LTE AP or the supported APNs from the EPC or the APNs pre-set to the Android smartphone"@en ;
+              
+              rdfs:label "has APN"@en ;
+              
+              rdfs:range :APN ;
+              
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :AccessNetwork
+                                          :EPC
+                                          :UE
+                                        )
+                          ] ;
+              
+              owl:inverseOf :isInterfaceOf .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#hasENodeB
+
+:hasENodeB rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has ENodeB"@en ;
+              
+              rdfs:label "has ENodeB"@en ;
+              
+              rdfs:range :ENodeB ;
+              
+              rdfs:domain :EPC ;
+              
+              owl:inverseOf :isInterfaceOf .
+
+
+
+#################################################################
+#
+#    Datatype Properties
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#accessPointName
+
+:accessPointName rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "access point name"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The APN that is used by the LTE AP or the supported APNs from the EPC or the APNs pre-set to the Android smartphone"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#band
+
+:band rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "band"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The band that it currently operates"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#baseModel
+
+:baseModel rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "base model"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The model number of the LTE AP"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBAddress
+
+:eNodeBAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "eNodeB address"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "eNodeB address"@en ;
+                
+                rdfs:domain :ENodeB ;
+                
+                rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBName
+
+:eNodeBName rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "eNodeB name"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "eNodeB name"@en ;
+                
+                rdfs:domain :ENodeB ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#epcAddress
+
+:epcAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "EPC address"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The EPC address it is currently connected to"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#lteSupport
+
+:lteSupport rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "LTE support"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Whether the phone supports or no LTE. This parameter has to be included in order to differentiate the Android node compared to the existing ones in the testbeds which do not feature LTE connectivity."@en ;
+                
+                rdfs:domain :UE ;
+                
+                rdfs:range xsd:boolean .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#mode
+
+:mode rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "mode"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Either Time Division Duplex (TDD) or Frequency Division Duplex (FDD) used. This is band dependant as well since reserved bands exist for each mode of operation. Currently, the setup used for the testbeds only support FDD mode."@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#mmeAddress
+
+:mmeAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "MME gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the MME gateway"@en ;
+                
+                rdfs:domain :EPC ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#networkIdentifier
+
+:networkIdentifier rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "Network Identifier"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Network Identifier"@en ;
+                
+                rdfs:domain :APN ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#operatorIdentifier
+
+:operatorIdentifier rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "Operator Identifier"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Network Identifier"@en ;
+                
+                rdfs:domain :APN ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#publicLandMobileNetworkId
+
+:publicLandMobileNetworkId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "Public Land Mobile Network Identifier"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The Public Land Mobile Network Identificator that is needed by the SIM card running by the UE (the setup will use test SIM cards)"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#pdnGateway
+
+:pdnGateway rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "PDN gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the PDN gateway"@en ;
+                
+                rdfs:domain :EPC ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#servingGateway
+
+:servingGateway rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "serving gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the Serving gateway"@en ;
+                
+                rdfs:domain :EPC ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#subscriber
+
+:subscriber rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "serving gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The IMSI number of the SIM cards of the subscribers allowed to send traffic through the EPC."@en ;
+                
+                rdfs:domain :EPC ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#vendor
+
+:vendor rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "vendor"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The vendor of the LTE AP (ip.access/EURECOM) or the vendor of the EPC (SiRRAN/EURECOM)"@en ;
+                
+                rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :AccessNetwork
+                                          :EPC
+                                        )
+                          ] ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#AccessNetwork
+
+:AccessNetwork rdf:type owl:Class ;
+
+      rdfs:label "Access Network"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "The Access Network of FLEX’s building blocks are the commercial or the Open Source eNodeB’s."@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#APN
+
+:APN rdf:type owl:Class ;
+
+      rdfs:label "Access Point Name"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "Access Point Name"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#ControlAddress
+
+:ControlAddress rdf:type owl:Class ;
+
+      rdfs:label "Control Address"@en ;
+      
+      rdfs:subClassOf omn-domain-pc:IPAddress ;
+      
+      rdfs:comment "The IP address used for the control plane of managing the phone"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#ENodeB
+
+:ENodeB rdf:type owl:Class ;
+
+      rdfs:label "eNodeB"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "eNodeB"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#EPC
+
+:EPC rdf:type owl:Class ;
+
+      rdfs:label "Evolved Packet Core"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "Evolved Packet Core networks (SiRRAN’s and OpenAirInterface)"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#UE
+
+:UE rdf:type owl:Class ;
+
+      rdfs:label "User Equipment"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "User Equipment, e.g. Android phone"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#IPAddress
+
+omn-resource:IPAddress rdf:type owl:Class .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#DiskImage
+
+omn-domain-pc:IPAddress rdf:type owl:Class .
+
+
+
+
+
+
