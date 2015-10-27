@@ -242,7 +242,7 @@
 					<includes>
 						<include>ontologies/omn*.ttl</include>
 						<include>import/geo.ttl</include>
-						<include>import/geonames.rdf</include>
+						<include>import/geonames.ttl</include>
 						<include>import/http.ttl</include>
 						<include>import/wgs84.ttl</include>
 						<include>ontologies/osco.ttl</include>
