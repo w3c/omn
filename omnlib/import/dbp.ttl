@@ -1,0 +1,14 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbp:	<http://dbpedia.org/property/> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+
+dbp:fastUnit	rdf:type	rdf:Property .
+dbp:fastUnit	owl:sameAs	dbp:fastUnit .
+dbp:fastUnit	rdfs:label	"fast-unit"@en .
+dbp:arch	rdf:type	rdf:Property .
+dbp:arch	owl:sameAs	dbp:arch .
+dbp:arch	rdfs:label	"arch"@en .
+dbp:fastest	rdf:type	rdf:Property .
+dbp:fastest	owl:sameAs	dbp:fastest .
+dbp:fastest	rdfs:label	"fastest"@en .

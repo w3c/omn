@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.Assert;
 import org.junit.Test;
@@ -71,6 +72,8 @@ public class TestRules {
 		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString, StandardCharsets.UTF_8);
 		Model inputRSpecModel = new AdvertisementConverter().getModel(inputRSpecStream);
 		Assert.assertTrue(inputRSpecModel.toString().contains(TestRules.TEST_IMIND_EXP));
+		//AdvertisementConverter.print(inputRSpecModel);
+		RDFDataMgr.write(System.out, inputRSpecModel, Lang.N3);
 	}
 	
 }

@@ -6,7 +6,9 @@
 @prefix omnres: <http://open-multinet.info/ontology/omn-resource#> .
 @prefix omndp: <http://open-multinet.info/ontology/omn-domain#> .
 @prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-
+@prefix schema: <http://schema.org/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 [myRule1:
 (?hwType rdf:type omnres:HardwareType) 
@@ -24,6 +26,15 @@ makeTemp(?cpuComp)
 (?node omn:hasComponent ?memComp)
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type omncomp:CPU)
-(?cpuComp rdfs:label "CPU")
-(?cpuComp omnmonunit:hasValue 2)
+(?cpuComp rdf:type <http://dbpedia.org/page/Opteron>)
+(?cpuComp rdfs:label "AMD Opteron 2212 CPU")
+(?cpuComp omncomp:hasCores 2)
+(?cpuComp omncomp:hasModelType "AMD Opteron 2212")
+(?cpuComp schema:manufacturer <http://dbpedia.org/resource/Advanced_Micro_Devices>)
+(?cpuComp dbp:fastest "2.0"^^xsd:double)
+(?cpuComp dbp:fastUnit <http://dbpedia.org/resource/GHZ>)
+(?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
+(?cpuComp foaf:depiction <http://commons.wikimedia.org/wiki/Special:FilePath/AMD_Opteron_2212_IMGP1795.jpg>)
+(?node omn:isVirtualized "false"^^xsd:boolean)
+(?node omn:hasComponent ?cpuComp)
 ]
