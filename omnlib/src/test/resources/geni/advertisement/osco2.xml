@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rspec generated="2015-10-12T16:05:45.404+02:00" generated_by="omnlib" expires="2015-10-12T16:05:45.404+02:00" type="advertisement" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns6="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns5="http://opensdncore.org/ontology/" xmlns:ns8="http://demo.fiteagle.org/pc" xmlns:ns7="http://monitoring.service.tu-berlin.de/monitoring" xmlns:ns9="http://www.geni.net/resources/rspec/ext/openflow/4" xmlns:ns2="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:ns4="http://www.geni.net/resources/rspec/ext/stitch/2/" xmlns:ns3="http://www.geni.net/resources/rspec/ext/opstate/1">
-    <node component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1%2Fa0b43cb52d17905277d5b5d5898009" component_name="a0b43cb52d17905277d5b5d5898009" exclusive="false">
-        <sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_gateway"/>
-        <ns5:osco app_port="12345" logging_file="/var/log/openmtc/gscl.log" require_auth="false" service_port="0"/>
-    </node>
-    <node component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1%2F8381e904-6262-4524-966d-dcbc926eff46" component_name="e904-6262-4524-966d-dcbc926eff46" exclusive="false">
-        <sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_server"/>
-        <ns5:osco app_port="15001" logging_file="/var/log/openmtc/nscl.log" require_auth="false" service_port="0" requires="http://localhost/resource/ToscaAdapter-1/a0b43cb52d17905277d5b5d5898009" notify_disabled="true" retarget_disabled="true" logging_level="ERROR" notify_chan_disabled="true" coap_disabled="true" annc_auto="true" mgmt_intf="1" annc_disabled="true"/>
-    </node>
+<rspec generated="2015-10-12T16:05:45.404+02:00" generated_by="omnlib"
+	expires="2015-10-12T16:05:45.404+02:00" type="advertisement"
+	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns6="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+	xmlns:ns5="http://opensdncore.org/ontology/" xmlns:ns8="http://demo.fiteagle.org/pc"
+	xmlns:ns7="http://monitoring.service.tu-berlin.de/monitoring"
+	xmlns:ns9="http://www.geni.net/resources/rspec/ext/openflow/4"
+	xmlns:ns2="http://www.geni.net/resources/rspec/ext/shared-vlan/1"
+	xmlns:ns4="http://www.geni.net/resources/rspec/ext/stitch/2/"
+	xmlns:ns3="http://www.geni.net/resources/rspec/ext/opstate/1">
+	<node
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1"
+		exclusive="false">
+		<sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_gateway" />
+		<ns5:osco app_port="12345" logging_file="/var/log/openmtc/gscl.log"
+			require_auth="false" service_port="0" />
+
+	</node>
+	<node
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1"
+		exclusive="false">
+		<sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_server" />
+		<ns5:osco app_port="15001" logging_file="/var/log/openmtc/nscl.log"
+			require_auth="false" service_port="0"
+			requires="http://localhost/resource/ToscaAdapter-1/a0b43cb52d17905277d5b5d5898009"
+			notify_disabled="true" retarget_disabled="true" logging_level="ERROR"
+			notify_chan_disabled="true" coap_disabled="true" annc_auto="true"
+			mgmt_intf="1" annc_disabled="true" />
+	</node>
 </rspec>

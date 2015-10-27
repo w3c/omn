@@ -82,7 +82,5 @@ public class DemoTest {
 			Assert.assertTrue(sliverType.getLength() == 3);
 
 		}
-
 	}
-
 }
