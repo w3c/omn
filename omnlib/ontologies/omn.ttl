@@ -1,75 +1,72 @@
 @prefix : <http://open-multinet.info/ontology/omn#> .
-@prefix voaf: <http://purl.org/vocommons/voaf#> .
-@prefix vann: <http://purl.org/vocab/vann/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
 @prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
+@prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix color: <http://geni-orca.renci.org/owl/app-color.owl#> .
+@prefix owl-s: <http://www.daml.org/services/owl-s/1.0DL/Service.owl#> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix schema: <http://schema.org/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
-@prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
-@prefix time: <http://www.w3.org/2006/time#> .
-@prefix gr: <http://purl.org/goodrelations/v1#> .
-@prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix service: <http://purl.org/ontology/service#> .
-@prefix cc: <http://creativecommons.org/ns#> .
-@prefix owl-s: <http://www.daml.org/services/owl-s/1.0DL/Service.owl#> .
-@base <http://open-multinet.info/ontology/omn#> .
+@prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
+@base <http://open-multinet.info/ontology/omn> .
 
-<http://open-multinet.info/ontology/omn> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en ;
-
-                                         rdf:type owl:Ontology, 
-
-                                         voaf:Vocabulary ;
+<http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
                                          
                                          rdfs:label "omn"@en ;
                                          
-                                         vann:preferredNamespacePrefix "omn"^^xsd:string ;
-
-                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn#> ;
-                                        
                                          dc:date "2014-11-11"^^xsd:date ;
                                          
                                          dcterms:modified "2015-04-27"^^xsd:date ;
                                          
                                          owl:versionInfo "2015-04-27"^^xsd:string ;
                                          
+                                         vann:preferredNamespacePrefix "omn"^^xsd:string ;
+                                         
                                          dc:title "Open-Multinet Upper Ontology"@en ;
                                          
                                          dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en ;
-
-                                         dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> ;
                                          
                                          dc:creator <http://alex.willner.ws/about#me> ;
-
-                                         dc:publisher <http://open-multinet.info/> ;
-
-                                         foaf:homepage <http://open-multinet.info/> ;
+                                         
+                                         dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
                                          
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
-
+                                         
                                          cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                         
+                                         dc:publisher <http://open-multinet.info/> ;
+                                         
+                                         foaf:homepage <http://open-multinet.info/> ;
+                                         
+                                         vann:preferredNamespaceUri : ;
+                                         
+                                         dc:description <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> ;
+                                         
+                                         dc:contributor <http://users.ntua.gr/c.papagianni> ,
+                                                        <http://www.commit-nl.nl/people/morsey> ,
+                                                        <https://staff.fnwi.uva.nl/p.grosso> ,
+                                                        <https://www.linkedin.com/in/yahyaalhazmi> ,
+                                                        <mailto:brecht.vermeulen@iminds.be> ,
+                                                        <mailto:ibaldin@renci.org> ,
+                                                        <mailto:jorge.lopez_vergara@uam.es> ,
+                                                        <mailto:loughnane@campus.tu-berlin.de> ,
+                                                        <mailto:thijs.walcarius@intec.ugent.be> ,
+                                                        <mailto:yxin@renci.org> .
 
-                                         dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
-
-                                         dc:contributor <mailto:brecht.vermeulen@iminds.be> ;
-                                         dc:contributor <mailto:thijs.walcarius@intec.ugent.be> ;
-                                         dc:contributor <mailto:jorge.lopez_vergara@uam.es> ;
-                                         dc:contributor <http://users.ntua.gr/c.papagianni> ;
-                                         dc:contributor <https://www.linkedin.com/in/yahyaalhazmi> ;
-                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> ;
-                                         dc:contributor <https://staff.fnwi.uva.nl/p.grosso> ;
-                                         dc:contributor <http://www.commit-nl.nl/people/morsey> ;
-                                         dc:contributor <mailto:ibaldin@renci.org> ;
-                                         dc:contributor <mailto:yxin@renci.org> .
 
 #################################################################
 #
@@ -85,7 +82,7 @@
                rdfs:label "adaptable from"@en ;
                
                rdfs:comment "determines the resource from which this resource can be adapted from - e.g. from an Ethernet to a FDDI port."@en ;
-
+               
                rdfs:range :Layer ;
                
                rdfs:domain :Layer ;
@@ -99,12 +96,10 @@
 :adaptableTo rdf:type owl:ObjectProperty ;
              
              rdfs:label "adaptable to"@en ;
-
+             
              rdfs:comment "determines to which resource this resource can adapts to - e.g. from an Ethernet to a FDDI port."@en ;
              
              rdfs:range :Layer ;
-
-             owl:inverseOf :adaptableFrom ;
              
              rdfs:domain :Layer .
 
@@ -116,12 +111,9 @@
                      owl:ObjectProperty ;
             
             rdfs:label "adapts from"@en ;
-
-            owl:inverseOf :adaptsTo ;
-
+            
             rdfs:comment "determines from which resource this resource adapts - e.g. from an Ethernet to a FDDI port."@en ;
             
-            #todo: domain and range must not be of the same type
             rdfs:range [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
                                        :Group
@@ -175,17 +167,9 @@
            
            rdfs:label "depends on"@en ;
            
-           rdfs:subPropertyOf :relatesTo ;
-
            rdfs:comment "claims dependency"@en ;
            
-           rdfs:domain [ rdf:type owl:Class ;
-                         owl:unionOf ( :Component
-                                       :Group
-                                       :Resource
-                                       :Service
-                                     )
-                       ] ;
+           rdfs:subPropertyOf :relatesTo ;
            
            rdfs:range [ rdf:type owl:Class ;
                         owl:unionOf ( :Component
@@ -193,32 +177,15 @@
                                       :Resource
                                       :Service
                                     )
-                      ] .
-
-
-###  http://open-multinet.info/ontology/omn#relatesTo
-
-:relatesTo rdf:type owl:ObjectProperty ;
+                      ] ;
            
-           rdfs:label "relates to"@en ;
-
-           rdfs:comment "claims a general dependency"@en ;
-                      
            rdfs:domain [ rdf:type owl:Class ;
                          owl:unionOf ( :Component
                                        :Group
                                        :Resource
                                        :Service
                                      )
-                       ] ;
-           
-           rdfs:range [ rdf:type owl:Class ;
-                        owl:unionOf ( :Component
-                                      :Group
-                                      :Resource
-                                      :Service
-                                    )
-                      ] .
+                       ] .
 
 
 
@@ -227,7 +194,7 @@
 :fromDependency rdf:type owl:ObjectProperty ;
                 
                 rdfs:label "from dependency"@en ;
-
+                
                 rdfs:comment "claims dependency"@en ;
                 
                 rdfs:domain :Dependency ;
@@ -249,7 +216,7 @@
 :hasAttribute rdf:type owl:ObjectProperty ;
               
               rdfs:label "has attribute"@en ;
-
+              
               rdfs:comment "link to a general attribute of the resource - e.g. to a ReadOnly class"@en ;
               
               rdfs:range :Attribute ;
@@ -271,10 +238,8 @@
 :hasComponent rdf:type owl:ObjectProperty ;
               
               rdfs:label "has component"@en ;
-
+              
               rdfs:comment "component of the resource - e.g. a CPU"@en ;
-
-              owl:inverseOf :isComponentOf ;
               
               rdfs:seeAlso novi:hasComponent ;
               
@@ -294,7 +259,7 @@
 :hasGroup rdf:type owl:ObjectProperty ;
           
           rdfs:label "has group"@en ;
-
+          
           rdfs:comment "a group that is related to this resource - e.g. a reserved topology within an infrastructure"@en ;
           
           rdfs:domain :Group ;
@@ -305,6 +270,25 @@
 
 
 
+###  http://open-multinet.info/ontology/omn#hasReservation
+
+:hasReservation rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "has reservation"@en ;
+                
+                rdfs:comment "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en ;
+                
+                rdfs:range :Reservation ;
+                
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( :Group
+                                            :Resource
+                                            :Service
+                                          )
+                            ] .
+
+
+
 ###  http://open-multinet.info/ontology/omn#hasResource
 
 :hasResource rdf:type owl:ObjectProperty ;
@@ -312,7 +296,7 @@
              rdfs:label "has resource"@en ;
              
              rdfs:comment "a resource that this resource contains - e.g. a node within a reserved topology"@en ;
-
+             
              rdfs:seeAlso novi:contains ;
              
              rdfs:domain :Group ;
@@ -328,7 +312,7 @@
 :hasService rdf:type owl:ObjectProperty ;
             
             rdfs:label "has service"@en ;
-
+            
             rdfs:comment "a service that this resource contains - e.g. a Hadoop instance within a reserved topology"@en ;
             
             rdfs:range :Service ;
@@ -342,33 +326,15 @@
 
 
 
-:hasReservation rdf:type owl:ObjectProperty ;
-            
-            rdfs:label "has reservation"@en ;
-
-            rdfs:comment "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en ;
-            
-            rdfs:range :Reservation ;
-            
-            rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( :Group
-                                        :Resource
-                                        :Service
-                                      )
-                        ] .
-
-
 ###  http://open-multinet.info/ontology/omn#isAttributeOf
 
 :isAttributeOf rdf:type owl:ObjectProperty ;
-
-               rdfs:comment "a general attribute of a resource - e.g. to a ReadOnly class"@en ;
                
                rdfs:label "is attribute of"@en ;
                
+               rdfs:comment "a general attribute of a resource - e.g. to a ReadOnly class"@en ;
+               
                rdfs:domain :Attribute ;
-
-               owl:inverseOf :hasAttribute ;
                
                rdfs:range [ rdf:type owl:Class ;
                             owl:unionOf ( :Component
@@ -383,10 +349,10 @@
 ###  http://open-multinet.info/ontology/omn#isComponentOf
 
 :isComponentOf rdf:type owl:ObjectProperty ;
-
-               rdfs:comment "is component of a resource - e.g. a CPU in a PC"@en ;
                
                rdfs:label "is component of"@en ;
+               
+               rdfs:comment "is component of a resource - e.g. a CPU in a PC"@en ;
                
                rdfs:domain :Component ;
                
@@ -404,14 +370,35 @@
 ###  http://open-multinet.info/ontology/omn#isGroupOf
 
 :isGroupOf rdf:type owl:ObjectProperty ;
-
-           rdfs:comment "a group that is related to a resource - e.g. a reserved topology within an infrastructure"@en ;
            
            rdfs:label "is group of"@en ;
+           
+           rdfs:comment "a group that is related to a resource - e.g. a reserved topology within an infrastructure"@en ;
            
            rdfs:range :Group ;
            
            rdfs:domain :Group .
+
+
+
+###  http://open-multinet.info/ontology/omn#isReservationOf
+
+:isReservationOf rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:label "is reservation of"@en ;
+                 
+                 rdfs:comment "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en ;
+                 
+                 rdfs:domain :Reservation ;
+                 
+                 owl:inverseOf :hasReservation ;
+                 
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( :Group
+                                            :Resource
+                                            :Service
+                                          )
+                            ] .
 
 
 
@@ -420,7 +407,7 @@
 :isResourceOf rdf:type owl:ObjectProperty ;
               
               rdfs:label "is resource of"@en ;
-
+              
               rdfs:comment "a resource that another resource contains - e.g. a node within a reserved topology"@en ;
               
               rdfs:seeAlso novi:contains ;
@@ -436,32 +423,14 @@
 :isServiceOf rdf:type owl:ObjectProperty ;
              
              rdfs:label "is service of"@en ;
-
+             
              rdfs:comment "a service of a resource - e.g. a Hadoop instance within a reserved topology"@en ;
              
              rdfs:domain :Service ;
              
              owl:inverseOf :hasService ;
              
-             rdfs:range [ rdf:type owl:Class ;
-                          owl:unionOf ( :Group
-                                        :Resource
-                                        :Service
-                                      )
-                        ] ;
-            
-            rdfs:seeAlso service:providedBy .
-
-
-:isReservationOf rdf:type owl:ObjectProperty ;
-             
-             rdfs:label "is reservation of"@en ;
-
-             rdfs:comment "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en ;
-             
-             rdfs:domain :Reservation ;
-             
-             owl:inverseOf :hasReservation ;
+             rdfs:seeAlso service:providedBy ;
              
              rdfs:range [ rdf:type owl:Class ;
                           owl:unionOf ( :Group
@@ -471,12 +440,39 @@
                         ] .
 
 
+
+###  http://open-multinet.info/ontology/omn#relatesTo
+
+:relatesTo rdf:type owl:ObjectProperty ;
+           
+           rdfs:label "relates to"@en ;
+           
+           rdfs:comment "claims a general dependency"@en ;
+           
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( :Component
+                                      :Group
+                                      :Resource
+                                      :Service
+                                    )
+                      ] ;
+           
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Component
+                                       :Group
+                                       :Resource
+                                       :Service
+                                     )
+                       ] .
+
+
+
 ###  http://open-multinet.info/ontology/omn#toDependency
 
 :toDependency rdf:type owl:ObjectProperty ;
               
               rdfs:label "to dependency"@en ;
-
+              
               rdfs:comment "claims dependency"@en ;
               
               rdfs:range :Dependency ;
@@ -496,7 +492,7 @@
 :withinEnvironment rdf:type owl:ObjectProperty ;
                    
                    rdfs:label "within environment"@en ;
-
+                   
                    rdfs:comment "within environment"@en ;
                    
                    rdfs:range :Environment ;
@@ -538,19 +534,19 @@
 ###  http://open-multinet.info/ontology/omn#hasURI
 
 :hasURI rdf:type owl:DatatypeProperty ;
-          
+        
         rdfs:label "has URI"@en ;
-
+        
         rdfs:comment "Uniform Resource Identifier"@en ;
-          
+        
+        rdfs:range xsd:string ;
+        
         rdfs:domain [ rdf:type owl:Class ;
                       owl:unionOf ( :Group
                                     :Resource
                                     :Service
                                   )
-                    ] ;
-          
-        rdfs:range xsd:string .
+                    ] .
 
 
 
@@ -569,13 +565,31 @@
 
 
 
+###  http://open-multinet.info/ontology/omn#isVirtualized
+
+:isVirtualized rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               
+               rdfs:label "is virtualized"^^xsd:string ;
+               
+               rdfs:comment "indicates whether a resource has been virtualized"^^xsd:string ;
+               
+               rdfs:range xsd:boolean ;
+               
+               rdfs:domain [ rdf:type owl:Restriction ;
+                             owl:onProperty owl:topObjectProperty ;
+                             owl:someValuesFrom :Resource
+                           ] .
+
+
+
 ###  http://open-multinet.info/ontology/omn#sequenceNumber
 
 :sequenceNumber rdf:type owl:DatatypeProperty ;
-            
-            rdfs:comment "represents the sequence number"@en ;
-                                    
-            rdfs:range xsd:integer .
+                
+                rdfs:comment "represents the sequence number"@en ;
+                
+                rdfs:range xsd:integer .
 
 
 
@@ -591,7 +605,7 @@
 ###  http://open-multinet.info/ontology/omn#Attribute
 
 :Attribute rdf:type owl:Class ;
-
+           
            rdfs:label "Attribute"@en ;
            
            rdfs:comment "Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail"@en ,
@@ -605,24 +619,22 @@
 ###  http://open-multinet.info/ontology/omn#Component
 
 :Component rdf:type owl:Class ;
-
+           
            rdfs:label "Component"@en ;
            
-           rdfs:comment "Examples: CPU, Sensor, Core, Port, Image"@en ,
-                        "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en ;
+           rdfs:comment "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en ,
+                        "Examples: CPU, Sensor, Core, Port, Image"@en ;
            
-           rdfs:seeAlso dcterms:isPartOf ;
-
-           rdfs:seeAlso move:formsPartOf ;
-
-           rdfs:seeAlso schema:partOfSystem .
+           rdfs:seeAlso dcterms:isPartOf ,
+                        schema:partOfSystem ,
+                        move:formsPartOf .
 
 
 
 ###  http://open-multinet.info/ontology/omn#Dependency
 
 :Dependency rdf:type owl:Class ;
-
+            
             rdfs:label "Dependency"@en ;
             
             rdfs:comment "Examples: application coloring (in GENI context), orchestration needs dependencies"@en ,
@@ -637,7 +649,7 @@
 ###  http://open-multinet.info/ontology/omn#Environment
 
 :Environment rdf:type owl:Class ;
-
+             
              rdfs:label "Environment"@en ;
              
              rdfs:comment "Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, ..."@en ,
@@ -650,34 +662,22 @@
 ###  http://open-multinet.info/ontology/omn#Group
 
 :Group rdf:type owl:Class ;
-
+       
        rdfs:label "Group"@en ;
        
-       rdfs:comment "Examples: Bi-directional Link, ..."@en ,
-                    "A collection of omn:Resource, omn:Service or omn:Group"@en ;
+       rdfs:comment "A collection of omn:Resource, omn:Service or omn:Group"@en ,
+                    "Examples: Bi-directional Link, ..."@en ;
        
        rdfs:seeAlso novi:Group ,
                     collections:Collection ,
                     nml:Group .
 
 
-###  http://open-multinet.info/ontology/omn#Topology
-
-:Topology rdf:type owl:Class ;
-
-       rdfs:label "Topology"@en ;
-
-       rdfs:comment "Examples: Infrastructure, Reservation, Slice, ..."@en ,
-                    "A collection of omn:Resource, omn:Service or omn:Group"@en ;
-
-       rdfs:subClassOf :Group .
-
-
 
 ###  http://open-multinet.info/ontology/omn#Layer
 
 :Layer rdf:type owl:Class ;
-
+       
        rdfs:label "Layer"@en ;
        
        rdfs:comment "Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to."@en ,
@@ -688,14 +688,27 @@
 
 
 
+###  http://open-multinet.info/ontology/omn#Reservation
+
+:Reservation rdf:type owl:Class ;
+             
+             rdfs:label "Reservation"@en ;
+             
+             rdfs:comment "A specification of a guarantee"@en ,
+                          "Examples: (Earliest) Start and (lates) end time, data volume, ..."@en ;
+             
+             rdfs:seeAlso time:Interval .
+
+
+
 ###  http://open-multinet.info/ontology/omn#Resource
 
 :Resource rdf:type owl:Class ;
-
+          
           rdfs:label "Resource"@en ;
           
-          rdfs:comment "Examples: Node, Link, People, ..."@en ,
-                       "An Entity that can be provisioned/controlled/measured by APIs"@en ;
+          rdfs:comment "An Entity that can be provisioned/controlled/measured by APIs"@en ,
+                       "Examples: Node, Link, People, ..."@en ;
           
           rdfs:seeAlso novi:Node ,
                        nml:Node .
@@ -705,32 +718,98 @@
 ###  http://open-multinet.info/ontology/omn#Service
 
 :Service rdf:type owl:Class ;
-
+         
          rdfs:label "Service"@en ;
          
          rdfs:comment "An Entity that has an API/capability to use it, it may depend on an omn:Resource"@en ,
                       "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..."@en ;
          
          rdfs:seeAlso novi:Service ,
+                      dctype:Service ,
+                      gr:ProductOrService ,
+                      service:Service ,
+                      schema:Service ,
                       nml:Service ,
-                      gr:ProductOrService,
-                      dctype:Service,
-                      schema:Service,
-                      service:Service,
                       owl-s:Service .
 
 
-###  http://open-multinet.info/ontology/omn#Reservation
-:Reservation rdf:type owl:Class ;
 
-         rdfs:label "Reservation"@en ;
-         
-         rdfs:comment "A specification of a guarantee"@en ,
-                      "Examples: (Earliest) Start and (lates) end time, data volume, ..."@en ;
-         
-         rdfs:seeAlso time:Interval .
+###  http://open-multinet.info/ontology/omn#Topology
 
-time:Interval rdfs:subClassOf :Reservation .
+:Topology rdf:type owl:Class ;
+          
+          rdfs:label "Topology"@en ;
+          
+          rdfs:subClassOf :Group ;
+          
+          rdfs:comment "A collection of omn:Resource, omn:Service or omn:Group"@en ,
+                       "Examples: Infrastructure, Reservation, Slice, ..."@en .
+
+
+
+###  http://purl.org/vocommons/voaf#Vocabulary
+
+voaf:Vocabulary rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2002/07/owl#AllDisjointClasses
+
+owl:AllDisjointClasses rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2002/07/owl#IrreflexiveProperty
+
+owl:IrreflexiveProperty rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2002/07/owl#NamedIndividual
+
+owl:NamedIndividual rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2006/time#Interval
+
+time:Interval rdf:type owl:Class ;
+              
+              rdfs:subClassOf :Reservation .
+
+
+
+###  http://xmlns.com/foaf/0.1/Person
+
+foaf:Person rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://alex.willner.ws/about#me
+
+<http://alex.willner.ws/about#me> rdf:type owl:NamedIndividual ,
+                                           foaf:Person .
+
+
+
+###  http://open-multinet.info/ontology/omn
+
+<http://open-multinet.info/ontology/omn> rdf:type voaf:Vocabulary ,
+                                                  owl:NamedIndividual ;
+                                         
+                                         rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en .
+
+
+
 
 
 #################################################################
@@ -753,11 +832,7 @@ time:Interval rdfs:subClassOf :Reservation .
 ] .
 
 
-### Fixes for validation
-owl:NamedIndividual rdf:type owl:Class .
-owl:IrreflexiveProperty rdf:type owl:Class .
-owl:AllDisjointClasses rdf:type owl:Class .
-<http://alex.willner.ws/about#me> rdf:type  foaf:Person .
 
 
 ###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
+
