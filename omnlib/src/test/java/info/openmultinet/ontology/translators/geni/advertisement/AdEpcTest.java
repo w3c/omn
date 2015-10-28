@@ -61,11 +61,19 @@ public class AdEpcTest {
 
 			NodeList nodes = xmlDoc.getElementsByTagNameNS(
 					"http://www.geni.net/resources/rspec/3", "node");
-			Assert.assertTrue(nodes.getLength() == 0);
+			Assert.assertTrue(nodes.getLength() == 3);
 
-			NodeList sliverType = xmlDoc.getElementsByTagNameNS(
-					"http://open-multinet.info/ontology/epc/", "epc");
-			Assert.assertTrue(sliverType.getLength() == 1);
+			NodeList epc = xmlDoc.getElementsByTagNameNS(
+					"http://open-multinet.info/ontology/epc", "epc");
+			Assert.assertTrue(epc.getLength() == 1);
+
+			NodeList ue = xmlDoc.getElementsByTagNameNS(
+					"http://open-multinet.info/ontology/epc", "ue");
+			Assert.assertTrue(ue.getLength() == 1);
+
+			NodeList accessNetwork = xmlDoc.getElementsByTagNameNS(
+					"http://open-multinet.info/ontology/epc", "access_network");
+			Assert.assertTrue(accessNetwork.getLength() == 1);
 
 		}
 

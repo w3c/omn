@@ -13,7 +13,7 @@
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
 @prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix : <http://open-multinet.info/ontology/epc/> .
+@prefix : <http://open-multinet.info/ontology/epc#> .
 
 <http://open-multinet.info/ontology/omn> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
 
@@ -60,24 +60,54 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasAPN
 
-:hasAPN rdf:type owl:ObjectProperty ;
+###  http://open-multinet.info/ontology/omn-domain-epc#hasAccessNetwork
+
+:hasAccessNetwork rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has Access Network properties"@en ;
+              
+              rdfs:label "has Access Network"@en ;
+              
+              rdfs:range :AccessNetwork ;
+              
+              rdfs:domain omn:Resource .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#hasAccessPointName
+
+:hasAccessPointName rdf:type owl:ObjectProperty ;
 
               rdfs:comment "The APN that is used by the LTE AP or the supported APNs from the EPC or the APNs pre-set to the Android smartphone"@en ;
               
-              rdfs:label "has APN"@en ;
+              rdfs:label "has Access Point Name"@en ;
               
-              rdfs:range :APN ;
+              rdfs:range :AccessPointName ;
               
               rdfs:domain [ rdf:type owl:Class ;
                             owl:unionOf ( :AccessNetwork
-                                          :EPC
-                                          :UE
+                                          :EvolvedPacketCore
+                                          :UserEquipment
                                         )
-                          ] ;
+                          ] .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#hasControlAddress
+
+:hasControlAddress rdf:type owl:ObjectProperty ;
+
+              rdfs:subPropertyOf  omn-resource:hasIPAddress ;
+
+              rdfs:comment "has Access Network properties"@en ;
               
-              owl:inverseOf :isInterfaceOf .
+              rdfs:label "has Access Network"@en ;
+              
+              rdfs:range :AccessNetwork ;
+              
+              rdfs:domain omn:Resource .
 
 
 
@@ -91,9 +121,35 @@
               
               rdfs:range :ENodeB ;
               
-              rdfs:domain :EPC ;
+              rdfs:domain :EvolvedPacketCore .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#hasEvolvedPacketCore
+
+:hasEvolvedPacketCore rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has EPC properties"@en ;
               
-              owl:inverseOf :isInterfaceOf .
+              rdfs:label "has EPC"@en ;
+              
+              rdfs:range :EvolvedPacketCore ;
+              
+              rdfs:domain omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#hasUserEquipment
+
+:hasUserEquipment rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has UE properties"@en ;
+              
+              rdfs:label "has UE"@en ;
+              
+              rdfs:range :UserEquipment ;
+              
+              rdfs:domain omn:Resource .
 
 
 
@@ -168,6 +224,23 @@
                 rdfs:range xsd:string .
 
 
+
+###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBId
+
+:eNodeBId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "ENodeB ID"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The ID of the eNodeB as it is defined by the testbed operator"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBName
 
 :eNodeBName rdf:type owl:DatatypeProperty ;
@@ -184,9 +257,9 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#epcAddress
+###  http://open-multinet.info/ontology/omn-domain-epc#evolvedPacketCoreAddress
 
-:epcAddress rdf:type owl:DatatypeProperty ;
+:evolvedPacketCoreAddress rdf:type owl:DatatypeProperty ;
 
                 rdfs:label "EPC address"@en ;
                 
@@ -211,7 +284,7 @@
                 
                 rdfs:comment "Whether the phone supports or no LTE. This parameter has to be included in order to differentiate the Android node compared to the existing ones in the testbeds which do not feature LTE connectivity."@en ;
                 
-                rdfs:domain :UE ;
+                rdfs:domain :UserEquipment ;
                 
                 rdfs:range xsd:boolean .
 
@@ -243,7 +316,7 @@
                 
                 rdfs:comment "The address of the MME gateway"@en ;
                 
-                rdfs:domain :EPC ;
+                rdfs:domain :EvolvedPacketCore ;
                 
                 rdfs:range xsd:string .
 
@@ -259,7 +332,7 @@
                 
                 rdfs:comment "Network Identifier"@en ;
                 
-                rdfs:domain :APN ;
+                rdfs:domain :AccessPointName ;
                 
                 rdfs:range xsd:string .
 
@@ -276,7 +349,7 @@
                 
                 rdfs:comment "Network Identifier"@en ;
                 
-                rdfs:domain :APN ;
+                rdfs:domain :AccessPointName ;
                 
                 rdfs:range xsd:string .
 
@@ -308,7 +381,7 @@
                 
                 rdfs:comment "The address of the PDN gateway"@en ;
                 
-                rdfs:domain :EPC ;
+                rdfs:domain :EvolvedPacketCore ;
                 
                 rdfs:range xsd:string .
 
@@ -325,7 +398,7 @@
                 
                 rdfs:comment "The address of the Serving gateway"@en ;
                 
-                rdfs:domain :EPC ;
+                rdfs:domain :EvolvedPacketCore ;
                 
                 rdfs:range xsd:string .
 
@@ -341,7 +414,7 @@
                 
                 rdfs:comment "The IMSI number of the SIM cards of the subscribers allowed to send traffic through the EPC."@en ;
                 
-                rdfs:domain :EPC ;
+                rdfs:domain :EvolvedPacketCore ;
                 
                 rdfs:range xsd:string .
 
@@ -360,7 +433,7 @@
                 
                 rdfs:domain [ rdf:type owl:Class ;
                             owl:unionOf ( :AccessNetwork
-                                          :EPC
+                                          :EvolvedPacketCore
                                         )
                           ] ;
                 
@@ -402,7 +475,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 ###  http://open-multinet.info/ontology/omn-domain-epc#APN
 
-:APN rdf:type owl:Class ;
+:AccessPointName rdf:type owl:Class ;
 
       rdfs:label "Access Point Name"@en ;
       
@@ -420,7 +493,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
       rdfs:label "Control Address"@en ;
       
-      rdfs:subClassOf omn-domain-pc:IPAddress ;
+      rdfs:subClassOf omn-resource:IPAddress ;
       
       rdfs:comment "The IP address used for the control plane of managing the phone"@en ;
       
@@ -444,9 +517,9 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#EPC
+###  http://open-multinet.info/ontology/omn-domain-epc#EvolvedPacketCore
 
-:EPC rdf:type owl:Class ;
+:EvolvedPacketCore rdf:type owl:Class ;
 
       rdfs:label "Evolved Packet Core"@en ;
       
@@ -458,9 +531,9 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#UE
+###  http://open-multinet.info/ontology/omn-domain-epc#UserEquipment
 
-:UE rdf:type owl:Class ;
+:UserEquipment rdf:type owl:Class ;
 
       rdfs:label "User Equipment"@en ;
       
@@ -481,7 +554,7 @@ omn-resource:IPAddress rdf:type owl:Class .
 
 ###  http://open-multinet.info/ontology/omn-resource#DiskImage
 
-omn-domain-pc:IPAddress rdf:type owl:Class .
+omn-domain-pc:DiskImage rdf:type owl:Class .
 
 
 

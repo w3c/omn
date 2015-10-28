@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- An extension for TOSCA OpenSNDCore Orchestrator. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:s="http://open-multinet.info/ontology/epc/" elementFormDefault="qualified"
-	targetNamespace="http://open-multinet.info/ontology/epc/" xmlns:rspec="http://www.geni.net/resources/rspec/3">
-	<!--  xs:include schemaLocation="ad-common.xsd" /-->
+	xmlns:s="http://open-multinet.info/ontology/epc" elementFormDefault="qualified"
+	targetNamespace="http://open-multinet.info/ontology/epc" xmlns:rspec="http://www.geni.net/resources/rspec/3">
+	<!-- xs:include schemaLocation="ad-common.xsd" / -->
 	<xs:element name="rspec_epc">
 		<xs:complexType>
 			<xs:sequence>
@@ -17,11 +17,14 @@
 				<xs:element ref="s:apn" />
 				<xs:element ref="s:enodeb" />
 				<xs:element ref="s:subscriber" />
+				<xs:element ref="s:control_address" />
 			</xs:choice>
 			<xs:attribute name="vendor" type="xs:string" />
 			<xs:attribute name="mme_address" type="xs:string" />
 			<xs:attribute name="serving_gateway" type="xs:string" />
 			<xs:attribute name="pdn_gateway" type="xs:string" />
+			<xs:attribute name="lte_support" type="xs:boolean" />
+			<xs:attribute name="control_address" type="xs:string" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="apn" type="s:ApnContents" />
@@ -37,5 +40,66 @@
 	<xs:element name="subscriber" type="s:SubscriberContents" />
 	<xs:complexType name="SubscriberContents">
 		<xs:attribute name="imsi_number" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="control_address" type="s:ControlAddressContents" />
+	<xs:complexType name="ControlAddressContents">
+		<xs:attribute name="address" type="xs:string" />
+		<xs:attribute name="netmask" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="rspec_ue">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:ue" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ue">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="s:apn" />
+				<xs:element ref="s:control_address" />
+				<xs:element ref="s:ue_hardware_type" />
+				<xs:element ref="s:ue_disk_image" />
+			</xs:choice>
+			<xs:attribute name="lte_support" type="xs:boolean" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ue_hardware_type" type="s:UeHardwareTypeContents" />
+	<xs:complexType name="UeHardwareTypeContents">
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="ue_disk_image" type="s:UeDiskImageContents" />
+	<xs:complexType name="UeDiskImageContents">
+		<xs:attribute name="description" type="xs:string" />
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+	<xs:element name="rspec_access_network">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:access_network" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="access_network">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="s:apn" />
+				<xs:element ref="s:ip_address" />
+			</xs:choice>
+			<xs:attribute name="enodeb_id" type="xs:string" />
+			<xs:attribute name="plmn_id" type="xs:string" />
+			<xs:attribute name="band" type="xs:integer" />
+			<xs:attribute name="vendor" type="xs:string" />
+			<xs:attribute name="base_model" type="xs:string" />
+			<xs:attribute name="epc_address" type="xs:string" />
+			<xs:attribute name="mode" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ip_address" type="s:EpcIpContents" />
+	<xs:complexType name="EpcIpContents">
+		<xs:attribute name="address" type="xs:string" />
+		<xs:attribute name="netmask" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
 	</xs:complexType>
 </xs:schema>
