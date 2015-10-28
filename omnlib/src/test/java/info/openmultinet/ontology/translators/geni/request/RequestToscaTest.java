@@ -22,7 +22,7 @@ public class RequestToscaTest {
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-		final String filename = "/geni/request/request_tosca.xml";
+		final String filename = "/geni/request/request_tosca2.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		System.out.println("Converting this input from '" + filename + "':");
@@ -53,7 +53,7 @@ public class RequestToscaTest {
 
 		NodeList node = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "node");
-		Assert.assertTrue(node.getLength() == 0);
+		Assert.assertTrue(node.getLength() == 6);
 
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.

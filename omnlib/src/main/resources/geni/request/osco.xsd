@@ -17,27 +17,38 @@
 				<xs:element ref="s:osco_location" />
 				<xs:element ref="s:subnet" />
 			</xs:choice>
-			<xs:attribute name="about" type="xs:string" />
-			<xs:attribute name="type" type="xs:string" />
+			<xs:attribute name="about" type="xs:string" />			
+			<xs:attribute name="annc_auto" type="xs:boolean" />
+			<xs:attribute name="annc_disabled" type="xs:boolean" />
+			<xs:attribute name="app_id" type="xs:string" />
+			<xs:attribute name="app_port" type="xs:integer" />
+			<xs:attribute name="bit_bucket_db_ip" type="xs:string" />
+			<xs:attribute name="coap_disabled" type="xs:boolean" />
+			<xs:attribute name="deployed_on" type="xs:string" />
+			<xs:attribute name="ext_ip" type="xs:string" />
+			<xs:attribute name="file_server" type="xs:string" />
+			<xs:attribute name="flavour" type="xs:string" />
 			<xs:attribute name="id" type="xs:string" />
 			<xs:attribute name="implemented_by" type="xs:string" />
-			<xs:attribute name="deployed_on" type="xs:string" />
-			<xs:attribute name="app_port" type="xs:string" />
+			<xs:attribute name="local_port" type="xs:string" />
 			<xs:attribute name="logging_file" type="xs:string" />
-			<xs:attribute name="require_auth" type="xs:boolean" />
-			<xs:attribute name="service_port" type="xs:string" />
-			<xs:attribute name="requires" type="xs:anyURI" />
-			<xs:attribute name="notify_disabled" type="xs:boolean" />
-			<xs:attribute name="retarget_disabled" type="xs:boolean" />
 			<xs:attribute name="logging_level" type="xs:string" />
-			<xs:attribute name="notify_chan_disabled" type="xs:boolean" />
-			<xs:attribute name="coap_disabled" type="xs:boolean" />
-			<xs:attribute name="annc_auto" type="xs:boolean" />
-			<xs:attribute name="mgmt_intf" type="xs:string" />
-			<xs:attribute name="annc_disabled" type="xs:boolean" />
-			<xs:attribute name="flavour" type="xs:string" />
+			<xs:attribute name="m2m_conn_app_ip" type="xs:string" />
+			<xs:attribute name="m2m_conn_app_port" type="xs:integer" />
 			<xs:attribute name="max_num_inst" type="xs:integer" />
+			<xs:attribute name="mgmt_intf" type="xs:string" />
 			<xs:attribute name="min_num_inst" type="xs:integer" />
+			<xs:attribute name="notify_chan_disabled" type="xs:boolean" />
+			<xs:attribute name="notify_disabled" type="xs:boolean" />
+			<xs:attribute name="omtc_url" type="xs:anyURI" />
+			<xs:attribute name="require_auth" type="xs:boolean" />
+			<xs:attribute name="requires" type="xs:anyURI" />
+			<xs:attribute name="retarget_disabled" type="xs:boolean" />
+			<xs:attribute name="service_port" type="xs:integer" />
+			<xs:attribute name="ssl_enabled" type="xs:boolean" />
+			<xs:attribute name="ssl_port" type="xs:integer" />
+			<xs:attribute name="test_param" type="xs:string" />
+			<xs:attribute name="type" type="xs:string" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="image" type="s:ImageContents" />

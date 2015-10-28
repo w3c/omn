@@ -57,7 +57,6 @@ public class RequestDemo201504 {
 				"http://www.geni.net/resources/rspec/3", "node");
 		Assert.assertTrue(node.getLength() == 1);
 
-		
 		String componentId = node.item(0).getAttributes()
 				.getNamedItem("component_id").getNodeValue();
 		Assert.assertTrue(componentId
@@ -75,8 +74,7 @@ public class RequestDemo201504 {
 		String componentName = node.item(0).getAttributes()
 				.getNamedItem("component_name").getNodeValue();
 		Assert.assertTrue(componentName.equals("VMServer-1"));
-		
-		
+
 		NodeList sliverType = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "sliver_type");
 		Assert.assertTrue(sliverType.getLength() == 1);
@@ -87,7 +85,8 @@ public class RequestDemo201504 {
 				.equals("http://open-multinet.info/ontology/omn-domain-pc#VM"));
 
 		NodeList monitoring = xmlDoc.getElementsByTagNameNS(
-				"http://monitoring.service.tu-berlin.de/monitoring", "monitoring");
+				"http://monitoring.service.tu-berlin.de/monitoring",
+				"monitoring");
 		Assert.assertTrue(monitoring.getLength() == 1);
 
 		String monitoringUri = monitoring.item(0).getAttributes()

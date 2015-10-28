@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:rspec generated="2015-10-28T01:02:52.925+01:00" generated_by="omnlib" expires="2015-10-28T01:02:52.925+01:00" type="request" xmlns="http://www.geni.net/resources/rspec/ext/openflow/4" xmlns:ns6="http://opensdncore.org/ontology/" xmlns:ns5="http://monitoring.service.tu-berlin.de/monitoring" xmlns:ns8="http://www.geni.net/resources/rspec/ext/stitch/2/" xmlns:ns7="http://demo.fiteagle.org/pc" xmlns:ns9="http://www.geni.net/resources/rspec/ext/opstate/1" xmlns:ns10="http://www.geni.net/resources/rspec/ext/shared-vlan/1" xmlns:ns2="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:ns4="http://open-multinet.info/ontology/epc/" xmlns:ns3="http://www.geni.net/resources/rspec/3">
+    <ns3:node client_id="lan" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2Flink1+lan" component_name="lan" exclusive="false">
+        <ns3:sliver_type name="http://open-multinet.info/ontology/resource/link#lan"/>
+        <ns3:hardware_type name="http://open-multinet.info/ontology/resource/networkingAdapter#NetworkingAdapter"/>
+    </ns3:node>
+    <ns3:node client_id="motor1" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1+Motor" component_name="Motor" exclusive="false">
+        <ns3:sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor"/>
+        <ns3:hardware_type name="http://open-multinet.info/ontology/resource/motorgarage#MotorGarage"/>
+        <ns3:location country="" longitude="13.323732^^http://www.w3.org/2001/XMLSchema#string" latitude="52.516377^^http://www.w3.org/2001/XMLSchema#string"/>
+    </ns3:node>
+    <ns3:node client_id="m2m_network_app1"  component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1+m2m_network_app" component_name="m2m_network_app" exclusive="false">
+        <ns6:osco about="http://localhost/resource/ToscaAdapter-1/m2m_network_app" local_port="8090" m2m_conn_app_ip="10.147.9.3" m2m_conn_app_port="25000" mgmt_intf="1" test_param="test"/>
+        <ns3:sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_network_app"/>
+        <ns3:hardware_type name="http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/Tosca"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+    </ns3:node>
+    <ns3:node  client_id="m2m_server1" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1+m2m_server" component_name="m2m_server" exclusive="false">
+        <ns6:osco about="http://localhost/resource/ToscaAdapter-1/m2m_server" annc_auto="false" annc_disabled="true" app_port="0" coap_disabled="true" file_server="null" logging_file="null" logging_level="ERROR" mgmt_intf="1" notify_chan_disabled="true" notify_disabled="true" require_auth="true" retarget_disabled="true" service_port="0" ssl_enabled="false" ssl_port="0"/>
+        <ns3:sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_server"/>
+        <ns3:hardware_type name="http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/Tosca"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+    </ns3:node>
+    <ns3:node client_id="m2m_gateway1" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1+m2m_gateway" component_name="m2m_gateway" exclusive="false">
+        <ns6:osco about="http://localhost/resource/ToscaAdapter-1/m2m_gateway" annc_auto="false" annc_disabled="true" app_port="0" coap_disabled="true" file_server="null" logging_file="null" logging_level="ERROR" mgmt_intf="1" notify_chan_disabled="true" notify_disabled="true" require_auth="true" retarget_disabled="true" service_port="0" ssl_enabled="false" ssl_port="0"/>
+        <ns3:sliver_type name="http://localhost/resource/ToscaAdapter-1/m2m_gateway"/>
+        <ns3:hardware_type name="http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/Tosca"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+    </ns3:node>
+    <ns3:node client_id="smart_city1"   component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1+smart_city" component_name="smart_city" exclusive="false">
+        <ns6:osco about="http://localhost/resource/ToscaAdapter-1/smart_city" app_id="PoCsmartWorld" bit_bucket_db_ip="10.0.251.111" ext_ip="146.64.28.1" mgmt_intf="1" omtc_url="http://10.0.0.230:8090/onem2m"/>
+        <ns3:sliver_type name="http://localhost/resource/ToscaAdapter-1/smart_city"/>
+        <ns3:hardware_type name="http://docs.oasis-open.org/tosca/TOSCA/v1.0/ontology/Tosca"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+        <ns3:location country="xx" longitude="13.32349967956543" latitude="52.51649856567383" omn:id="2703870822" omn:name="Berlin" xmlns:omn="http://open-multinet.info/location"/>
+    </ns3:node>
+</ns3:rspec>

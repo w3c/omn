@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
+import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.net.URI;
 
@@ -384,5 +385,84 @@ public class CommonMethods {
 		String[] parts = numberAndUnit.split("(?<=\\d)(?=\\D)");
 
 		return parts;
+	}
+
+	public static boolean hasOscoProperty(Resource resource) {
+
+		boolean hasOscoProperty = false;
+		
+		if (resource.hasProperty(Osco.additionals)
+				|| resource.hasProperty(Osco.ANNC_AUTO)
+				|| resource.hasProperty(Osco.ANNC_DISABLED)
+				|| resource.hasProperty(Osco.APP_ID)
+				|| resource.hasProperty(Osco.APP_PORT)
+				|| resource.hasProperty(Osco.Bit_Bucket_DB_IP)
+				|| resource.hasProperty(Osco.COAP_DISABLED)
+				|| resource.hasProperty(Osco.CONSOLE_PORT_BIND_ONE)
+				|| resource.hasProperty(Osco.CONSOLE_PORT_BIND_TWO)
+				|| resource.hasProperty(Osco.CONSOLE_PORT_ONE)
+				|| resource.hasProperty(Osco.CONSOLE_PORT_TWO)
+				|| resource.hasProperty(Osco.datacenter)
+				|| resource.hasProperty(Osco.db_name)
+				|| resource.hasProperty(Osco.db_provi)
+				|| resource.hasProperty(Osco.db_pw)
+				|| resource.hasProperty(Osco.db_user)
+				|| resource.hasProperty(Osco.DEFAULT_ROUTE_VIA)
+				|| resource.hasProperty(Osco.deployedOn)
+				|| resource.hasProperty(Osco.DIAMETER_LISTEN_INTF)
+				|| resource.hasProperty(Osco.DIAMETER_PORT)
+				|| resource.hasProperty(Osco.DNS_INTF)
+				|| resource.hasProperty(Osco.domain_name)
+				|| resource.hasProperty(Osco.domain_ns)
+				|| resource.hasProperty(Osco.EXT_IP)
+				|| resource.hasProperty(Osco.FILE_SERVER)
+				|| resource.hasProperty(Osco.fixedIp)
+				|| resource.hasProperty(Osco.flavour)
+				|| resource.hasProperty(Osco.floatingIp)
+				|| resource.hasProperty(Osco.ICSCF_NAME)
+				|| resource.hasProperty(Osco.ICSCF_PORT)
+				|| resource.hasProperty(Osco.id)
+				|| resource.hasProperty(Osco.image)
+				|| resource.hasProperty(Osco.key)
+				|| resource.hasProperty(Osco.local_port)
+				|| resource.hasProperty(Osco.localDB)
+				|| resource.hasProperty(Osco.location)
+				|| resource.hasProperty(Osco.LOGGING_FILE)
+				|| resource.hasProperty(Osco.LOGGING_LEVEL)
+				|| resource.hasProperty(Osco.m2m_conn_app_ip)
+				|| resource.hasProperty(Osco.m2m_conn_app_port)
+				|| resource.hasProperty(Osco.maxNumInst)
+				|| resource.hasProperty(Osco.mgmt)
+				|| resource.hasProperty(Osco.MGMT_INTF)
+				|| resource.hasProperty(Osco.MIN_NUM_INTF)
+				|| resource.hasProperty(Osco.minNumInst)
+				|| resource.hasProperty(Osco.name)
+				|| resource.hasProperty(Osco.nameserver)
+				|| resource.hasProperty(Osco.NET_A_INTF)
+				|| resource.hasProperty(Osco.NOTIFY_CHAN_DISABLED)
+				|| resource.hasProperty(Osco.NOTIFY_DISABLED)
+				|| resource.hasProperty(Osco.OMTC_URL)
+				|| resource.hasProperty(Osco.parameter1)
+				|| resource.hasProperty(Osco.parameter2)
+				|| resource.hasProperty(Osco.PCSCF_NAME)
+				|| resource.hasProperty(Osco.PCSCF_PORT)
+				|| resource.hasProperty(Osco.port)
+				|| resource.hasProperty(Osco.PORT)
+				|| resource.hasProperty(Osco.REQUIRE_AUTH)
+				|| resource.hasProperty(Osco.requires)
+				|| resource.hasProperty(Osco.RETARGET_DISABLED)
+				|| resource.hasProperty(Osco.SCSCF_NAME)
+				|| resource.hasProperty(Osco.SCSCF_PORT)
+				|| resource.hasProperty(Osco.SERVICE_PORT)
+				|| resource.hasProperty(Osco.SLF_PRESENCE)
+				|| resource.hasProperty(Osco.SSL_ENABLED)
+				|| resource.hasProperty(Osco.SSL_PORT)
+				|| resource.hasProperty(Osco.subnet)
+				|| resource.hasProperty(Osco.TEST_PARAM)
+				|| resource.hasProperty(Osco.VERSION)) {
+			hasOscoProperty = true;
+		}
+
+		return hasOscoProperty;
 	}
 }

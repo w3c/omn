@@ -41,6 +41,21 @@ osco:domain-name  a  owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:hss osco:dns ) ] ;
         rdfs:range   xsd:string .
 
+osco:SSL_ENABLED  a      owl:DatatypeProperty ;
+        rdfs:domain  osco:m2m_gateway ;
+        rdfs:range   xsd:string .
+
+
+osco:SSL_PORT  a      owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_gateway osco:m2m_server ) ] ;
+        rdfs:range   xsd:string .
+
+
+osco:FILE_SERVER  a      owl:DatatypeProperty ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_gateway osco:m2m_server ) ] ;
+        rdfs:range   xsd:string .
+
+
 osco:db-user  a      owl:DatatypeProperty ;
         rdfs:domain  osco:hss ;
         rdfs:range   xsd:string .
@@ -72,7 +87,7 @@ osco:PREINIT  a  omn-lifecycle:State .
 osco:Image  a   owl:Class .
 
 osco:TEST_PARAM  a   owl:DatatypeProperty ;
-        rdfs:domain  osco:dummy ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:dummy osco:m2m_network_app ) ] ;
         rdfs:range   xsd:string .
 
 osco:localDB  a      owl:DatatypeProperty ;
@@ -93,6 +108,46 @@ osco:requires  a            owl:ObjectProperty ;
 osco:additionals  a  owl:DatatypeProperty ;
         rdfs:domain  osco:dns ;
         rdfs:range   xsd:string .
+
+
+
+osco:APP_ID  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:smart_city ;
+        rdfs:range   xsd:string .
+
+
+
+osco:Bit_Bucket_DB_IP  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:smart_city ;
+        rdfs:range   xsd:string .
+
+
+osco:EXT_IP  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:smart_city ;
+        rdfs:range   xsd:string .
+
+
+
+osco:OMTC_URL  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:smart_city ;
+        rdfs:range   xsd:string .
+
+
+
+osco:local_port  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:m2m_network_app ;
+        rdfs:range   xsd:string .
+
+
+osco:m2m_conn_app_ip  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:m2m_network_app ;
+        rdfs:range   xsd:string .
+
+
+osco:m2m_conn_app_port  a  owl:DatatypeProperty ;
+        rdfs:domain  osco:m2m_network_app ;
+        rdfs:range   xsd:string .
+
 
 osco:REQUIRE_AUTH  a  owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:m2m_gateway ) ] ;
@@ -146,7 +201,7 @@ osco:parameter1  a   owl:DatatypeProperty ;
         rdfs:range   xsd:string .
 
 osco:MGMT_INTF  a    owl:DatatypeProperty ;
-        rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:hss osco:hss osco:dns osco:hss osco:icscf osco:m2m_gateway osco:scscf osco:ssh osco:pcscf ) ] ;
+        rdfs:domain  [ owl:disjointUnionOf  ( osco:smart_city osco:m2m_network_app osco:m2m_server osco:hss osco:hss osco:dns osco:hss osco:icscf osco:m2m_gateway osco:scscf osco:ssh osco:pcscf ) ] ;
         rdfs:range   xsd:string .
 
 osco:dummy  a            owl:Class ;
@@ -227,6 +282,15 @@ osco:NOTIFY_CHAN_DISABLED
 
 osco:m2m_gateway  a      owl:Class ;
         rdfs:subClassOf  omn:Resource .
+
+
+osco:smart_city  a      owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
+
+osco:m2m_network_app  a      owl:Class ;
+        rdfs:subClassOf  omn:Resource .
+
 
 osco:SLF_PRESENCE  a  owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:m2m_server osco:hss osco:hss osco:icscf osco:scscf ) ] ;
