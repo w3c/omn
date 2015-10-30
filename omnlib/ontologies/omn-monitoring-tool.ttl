@@ -74,7 +74,7 @@
                        
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#communicationParadigm
+###  http://open-multinet.info/ontology/omn-monitoring-tool#dataAccessProvided
 
 :dataAccessProvided rdf:type owl:ObjectProperty ;
                        
