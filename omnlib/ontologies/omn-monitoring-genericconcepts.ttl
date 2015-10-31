@@ -68,7 +68,7 @@
            rdfs:domain [ rdf:type owl:Class ;
                          owl:unionOf ( omn:Service
                                        omn-monitoring:Tool
-                                       omn-monitoring-data:Measurement
+                                       omn-monitoring:Measurement
                                        :MonitoringDomain
                                      )
                        ] .
