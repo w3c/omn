@@ -593,6 +593,15 @@ public class RequestConverter extends AbstractConverter {
 				osco.setTestParam(testParam);
 			}
 
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.requirement)) {
+				String requirement = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.requirement)
+						.getObject().asLiteral().getString();
+				osco.setRequirement(requirement);
+			}
+
 			// request.getAnyOrNodeOrLink().add(osco);
 			node.getAnyOrRelationOrLocation().add(osco);
 		}
@@ -2673,6 +2682,13 @@ public class RequestConverter extends AbstractConverter {
 			omnOsco.addProperty(
 					info.openmultinet.ontology.vocabulary.Osco.TEST_PARAM,
 					testParam);
+		}
+
+		String requirement = osco.getRequirement();
+		if (requirement != null && requirement != "") {
+			omnOsco.addProperty(
+					info.openmultinet.ontology.vocabulary.Osco.requirement,
+					requirement);
 		}
 
 		List<Object> objects = osco.getImageOrOscoLocationOrSubnet();
