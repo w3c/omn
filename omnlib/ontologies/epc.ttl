@@ -613,6 +613,9 @@ omn-domain-pc:DiskImage rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn#DiskImage
+
+omn:Adapter rdf:type owl:Class .
 
 
 
