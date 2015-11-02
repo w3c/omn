@@ -3,6 +3,16 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ENodeBContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.SubscriberContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.EpcIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Epc;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Ue;
+import info.openmultinet.ontology.translators.geni.jaxb.request.UeDiskImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Controller;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControllerRole;
@@ -196,6 +206,9 @@ public class RequestConverter extends AbstractConverter {
 				setMonitoringService(resource, node);
 				setOsco(resource, node);
 				setEmulabExtension(resource, node);
+				setAccessNetwork(resource, node);
+				setEPC(resource, node);
+				setUE(resource, node);
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
@@ -244,6 +257,414 @@ public class RequestConverter extends AbstractConverter {
 				// setOsco(resource, request);
 			}
 		}
+	}
+
+	private static void setUeDiskImage(Resource diskImageResource, Ue ue) {
+
+		ObjectFactory objectFactory = new ObjectFactory();
+		UeDiskImageContents diskImageContents = objectFactory
+				.createUeDiskImageContents();
+
+		if (diskImageResource.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
+			String name = diskImageResource
+					.getProperty(Omn_domain_pc.hasDiskimageLabel).getObject()
+					.asLiteral().getString();
+			diskImageContents.setName(name);
+		}
+
+		if (diskImageResource
+				.hasProperty(Omn_domain_pc.hasDiskimageDescription)) {
+			String description = diskImageResource
+					.getProperty(Omn_domain_pc.hasDiskimageDescription)
+					.getObject().asLiteral().getString();
+			diskImageContents.setDescription(description);
+		}
+
+		ue.getApnOrControlAddressOrUeHardwareType().add(diskImageContents);
+
+	}
+
+	private static void setHardwareType(Resource hardwareTypeResource, Ue ue) {
+
+		ObjectFactory objectFactory = new ObjectFactory();
+		UeHardwareTypeContents hardwareTypeContents = objectFactory
+				.createUeHardwareTypeContents();
+
+		if (hardwareTypeResource.hasProperty(RDFS.label)) {
+			String name = hardwareTypeResource.getProperty(RDFS.label)
+					.getObject().asLiteral().getString();
+			hardwareTypeContents.setName(name);
+		}
+
+		ue.getApnOrControlAddressOrUeHardwareType().add(hardwareTypeContents);
+
+	}
+
+	private static void setControlAddress(Resource controlAddressResource, Ue ue) {
+		ObjectFactory objectFactory = new ObjectFactory();
+		ControlAddressContents controlAddressContents = objectFactory
+				.createControlAddressContents();
+
+		if (controlAddressResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.address)) {
+			String address = controlAddressResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Omn_resource.address)
+					.getObject().asLiteral().getString();
+			controlAddressContents.setAddress(address);
+		}
+
+		if (controlAddressResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.netmask)) {
+			String netmask = controlAddressResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Omn_resource.netmask)
+					.getObject().asLiteral().getString();
+			controlAddressContents.setNetmask(netmask);
+		}
+
+		if (controlAddressResource
+				.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.type)) {
+			String type = controlAddressResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Omn_resource.type)
+					.getObject().asLiteral().getString();
+			controlAddressContents.setType(type);
+		}
+
+		ue.getApnOrControlAddressOrUeHardwareType().add(controlAddressContents);
+
+	}
+
+	private static void setUE(Statement omnResource, NodeContents geniNode) {
+		if (omnResource.getResource().hasProperty(
+				info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment)) {
+
+			Resource resourceResource = omnResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment)
+					.getObject().asResource();
+
+			Ue ue = new ObjectFactory().createUe();
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.lteSupport)) {
+				String lteSuport = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.lteSupport)
+						.getObject().asLiteral().getString();
+				boolean lteSuportBool = Boolean.parseBoolean(lteSuport);
+				ue.setLteSupport(lteSuportBool);
+			}
+
+			StmtIterator apns = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.hasAccessPointName);
+			while (apns.hasNext()) {
+				Statement apnStatement = apns.next();
+				Resource apn = apnStatement.getObject().asResource();
+				ue.getApnOrControlAddressOrUeHardwareType().add(setEpcApn(apn));
+			}
+
+			StmtIterator controlAddresses = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.hasControlAddress);
+			while (controlAddresses.hasNext()) {
+				Statement controlAddressStatement = controlAddresses.next();
+				Resource controlAddressResource = controlAddressStatement
+						.getObject().asResource();
+				setControlAddress(controlAddressResource, ue);
+			}
+
+			StmtIterator hardwareTypes = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Omn_resource.hasHardwareType);
+			while (hardwareTypes.hasNext()) {
+				Statement hardwareTypeStatement = hardwareTypes.next();
+				Resource hardwareTypeResource = hardwareTypeStatement
+						.getObject().asResource();
+				setHardwareType(hardwareTypeResource, ue);
+			}
+
+			StmtIterator diskImages = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Omn_domain_pc.hasDiskImage);
+			while (diskImages.hasNext()) {
+				Statement diskImageStatement = diskImages.next();
+				Resource diskImageResource = diskImageStatement.getObject()
+						.asResource();
+				setUeDiskImage(diskImageResource, ue);
+			}
+
+			geniNode.getAnyOrRelationOrLocation().add(ue);
+		}
+
+	}
+
+	private static void setEPC(Statement omnResource, NodeContents geniNode) {
+		if (omnResource.getResource().hasProperty(
+				info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore)) {
+
+			Resource resourceResource = omnResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore)
+					.getObject().asResource();
+
+			Epc epc = new ObjectFactory().createEpc();
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.mmeAddress)) {
+				String mmeAddress = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.mmeAddress)
+						.getObject().asLiteral().getString();
+				epc.setMmeAddress(mmeAddress);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.pdnGateway)) {
+				String pdnGateway = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.pdnGateway)
+						.getObject().asLiteral().getString();
+				epc.setPdnGateway(pdnGateway);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.servingGateway)) {
+				String servingGateway = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.servingGateway)
+						.getObject().asLiteral().getString();
+				epc.setServingGateway(servingGateway);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.vendor)) {
+				String vendor = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.vendor)
+						.getObject().asLiteral().getString();
+				epc.setVendor(vendor);
+			}
+
+			StmtIterator apns = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.hasAccessPointName);
+			while (apns.hasNext()) {
+				Statement apnStatement = apns.next();
+				Resource apn = apnStatement.getObject().asResource();
+				epc.getApnOrEnodebOrSubscriber().add(setEpcApn(apn));
+			}
+
+			StmtIterator eNodeBs = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.hasENodeB);
+			while (eNodeBs.hasNext()) {
+				Statement eNodeBStatement = eNodeBs.next();
+				Resource eNodeB = eNodeBStatement.getObject().asResource();
+				setENodeB(epc, eNodeB);
+			}
+
+			StmtIterator subscribers = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.subscriber);
+			while (subscribers.hasNext()) {
+				Statement subscriberStatement = subscribers.next();
+				String subscriber = subscriberStatement.getObject().asLiteral()
+						.getString();
+				SubscriberContents subscriberContents = new ObjectFactory()
+						.createSubscriberContents();
+				subscriberContents.setImsiNumber(subscriber);
+				epc.getApnOrEnodebOrSubscriber().add(subscriberContents);
+			}
+
+			geniNode.getAnyOrRelationOrLocation().add(epc);
+		}
+
+	}
+
+	private static void setENodeB(Epc epc, Resource eNodeB) {
+		ENodeBContents eNodeBContents = new ObjectFactory()
+				.createENodeBContents();
+
+		if (eNodeB
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.eNodeBAddress)) {
+			String address = eNodeB
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.eNodeBAddress)
+					.getObject().asLiteral().getString();
+			eNodeBContents.setAddress(address);
+		}
+
+		if (eNodeB
+				.hasProperty(info.openmultinet.ontology.vocabulary.Epc.eNodeBName)) {
+			String name = eNodeB
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.eNodeBName)
+					.getObject().asLiteral().getString();
+			eNodeBContents.setName(name);
+		}
+
+		epc.getApnOrEnodebOrSubscriber().add(eNodeBContents);
+
+	}
+
+	private static void setAccessNetwork(Statement omnResource,
+			NodeContents geniNode) {
+		// Resource resourceResource = omnResource.getResource();
+		// if (resourceResource
+		// .hasProperty(RDF.type,
+		// info.openmultinet.ontology.vocabulary.Epc.AccessNetwork)) {
+		if (omnResource.getResource().hasProperty(
+				info.openmultinet.ontology.vocabulary.Epc.hasAccessNetwork)) {
+
+			Resource resourceResource = omnResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.hasAccessNetwork)
+					.getObject().asResource();
+
+			AccessNetwork accessNetwork = new ObjectFactory()
+					.createAccessNetwork();
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.eNodeBId)) {
+				String eNodeBId = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.eNodeBId)
+						.getObject().asLiteral().getString();
+				accessNetwork.setEnodebId(eNodeBId);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.publicLandMobileNetworkId)) {
+				String publicLandMobileNetworkId = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.publicLandMobileNetworkId)
+						.getObject().asLiteral().getString();
+				accessNetwork.setPlmnId(publicLandMobileNetworkId);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.band)) {
+				String band = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.band)
+						.getObject().asLiteral().getString();
+				int bandInt = Integer.parseInt(band);
+				BigInteger bandBigInt = BigInteger.valueOf(bandInt);
+				accessNetwork.setBand(bandBigInt);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.vendor)) {
+				String vendor = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.vendor)
+						.getObject().asLiteral().getString();
+				accessNetwork.setVendor(vendor);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.baseModel)) {
+				String baseModel = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.baseModel)
+						.getObject().asLiteral().getString();
+				accessNetwork.setBaseModel(baseModel);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.evolvedPacketCoreAddress)) {
+				String evolvedPacketCoreAddress = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.evolvedPacketCoreAddress)
+						.getObject().asLiteral().getString();
+				accessNetwork.setEpcAddress(evolvedPacketCoreAddress);
+			}
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.mode)) {
+				String mode = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Epc.mode)
+						.getObject().asLiteral().getString();
+				accessNetwork.setMode(mode);
+			}
+
+			StmtIterator apns = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.hasAccessPointName);
+			while (apns.hasNext()) {
+				Statement apnStatement = apns.next();
+				Resource apn = apnStatement.getObject().asResource();
+				// accessNetwork.getApn().add(setEpcApn(apn));
+				accessNetwork.getApnOrIpAddress().add(setEpcApn(apn));
+			}
+
+			StmtIterator ipAddresses = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Omn_resource.hasIPAddress);
+			while (ipAddresses.hasNext()) {
+				Statement ipAddressStatement = ipAddresses.next();
+				Resource ipAddress = ipAddressStatement.getObject()
+						.asResource();
+				setIpAddress(accessNetwork, ipAddress);
+			}
+
+			geniNode.getAnyOrRelationOrLocation().add(accessNetwork);
+		}
+
+	}
+
+	private static Object setEpcApn(Resource apn) {
+		ApnContents apnContents = new ObjectFactory().createApnContents();
+
+		if (apn.hasProperty(info.openmultinet.ontology.vocabulary.Epc.networkIdentifier)) {
+			String networkId = apn
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.networkIdentifier)
+					.getObject().asLiteral().getString();
+			apnContents.setNetworkId(networkId);
+		}
+
+		if (apn.hasProperty(info.openmultinet.ontology.vocabulary.Epc.operatorIdentifier)) {
+			String operatorId = apn
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.operatorIdentifier)
+					.getObject().asLiteral().getString();
+			apnContents.setOperatorId(operatorId);
+		}
+
+		return apnContents;
+	}
+
+	private static void setIpAddress(AccessNetwork accessNetwork,
+			Resource ipAddress) {
+		ObjectFactory objectFactory = new ObjectFactory();
+		EpcIpContents controlAddressContents = objectFactory
+				.createEpcIpContents();
+
+		if (ipAddress
+				.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.address)) {
+			String address = ipAddress
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Omn_resource.address)
+					.getObject().asLiteral().getString();
+			controlAddressContents.setAddress(address);
+		}
+
+		if (ipAddress
+				.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.netmask)) {
+			String netmask = ipAddress
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Omn_resource.netmask)
+					.getObject().asLiteral().getString();
+			controlAddressContents.setNetmask(netmask);
+		}
+
+		if (ipAddress
+				.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.type)) {
+			String type = ipAddress
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Omn_resource.type)
+					.getObject().asLiteral().getString();
+			controlAddressContents.setType(type);
+		}
+
+		accessNetwork.getApnOrIpAddress().add(controlAddressContents);
+
 	}
 
 	// private static void setOsco(Statement resource, RSpecContents request) {
@@ -2253,6 +2674,12 @@ public class RequestConverter extends AbstractConverter {
 					tryExtractInterfaces(omnResource, element);
 					tryExtractHardwareType(omnResource, element);
 					tryExtractLocation(omnResource, element);
+				} else if (o.getClass().equals(Ue.class)) {
+					tryExtractUe(omnResource, o);
+				} else if (o.getClass().equals(Epc.class)) {
+					tryExtractEpc(omnResource, o);
+				} else if (o.getClass().equals(AccessNetwork.class)) {
+					tryExtractAccessNetwork(omnResource, o);
 				} else if (o.getClass().equals(Monitoring.class)) {
 					tryExtractMonitoring(omnResource, o);
 				} else if (o.getClass().equals(Osco.class)) {
@@ -2271,6 +2698,356 @@ public class RequestConverter extends AbstractConverter {
 
 		omnResource.addProperty(Omn.isResourceOf, topology);
 		topology.addProperty(Omn.hasResource, omnResource);
+
+	}
+
+	private static void tryExtractEpc(Resource node, Object rspecObject) {
+		try {
+			@SuppressWarnings("unchecked")
+			Epc epc = (Epc) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnEpc = node.getModel().createResource(uuid);
+
+			node.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore,
+					omnEpc);
+
+			omnEpc.addProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Epc.EvolvedPacketCoreDetails);
+
+			String mme = epc.getMmeAddress();
+			if (mme != null && mme != "") {
+				omnEpc.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.mmeAddress,
+						mme);
+			}
+
+			String pdn = epc.getPdnGateway();
+			if (pdn != null && pdn != "") {
+				omnEpc.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.pdnGateway,
+						pdn);
+			}
+
+			String servingGateway = epc.getServingGateway();
+			if (servingGateway != null && servingGateway != "") {
+				omnEpc.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.servingGateway,
+						servingGateway);
+			}
+
+			String vendor = epc.getVendor();
+			if (vendor != null && vendor != "") {
+				omnEpc.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.vendor,
+						vendor);
+			}
+
+			List<Object> objects = epc.getApnOrEnodebOrSubscriber();
+			for (Object o : objects) {
+				if (o.getClass().equals(ApnContents.class)) {
+					ApnContents apnContents = (ApnContents) o;
+					extractApn(apnContents, omnEpc);
+				} else if (o.getClass().equals(ENodeBContents.class)) {
+					ENodeBContents eNodeBContents = (ENodeBContents) o;
+					extractENodeB(eNodeBContents, omnEpc);
+				} else if (o.getClass().equals(SubscriberContents.class)) {
+					SubscriberContents subscriberContents = (SubscriberContents) o;
+					String imsiNumber = subscriberContents.getImsiNumber();
+					omnEpc.addProperty(
+							info.openmultinet.ontology.vocabulary.Epc.subscriber,
+							imsiNumber);
+				}
+			}
+		} catch (final ClassCastException e) {
+			RequestConverter.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	private static void extractENodeB(ENodeBContents eNodeBContents,
+			Resource omnEpc) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource enodebResource = omnEpc.getModel().createResource(uuid);
+		enodebResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.ENodeB);
+
+		String address = eNodeBContents.getAddress();
+		if (address != null && address != "") {
+			enodebResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.eNodeBAddress,
+					address);
+		}
+
+		String name = eNodeBContents.getName();
+		if (name != null && name != "") {
+			enodebResource.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.eNodeBName, name);
+		}
+
+		omnEpc.addProperty(info.openmultinet.ontology.vocabulary.Epc.hasENodeB,
+				enodebResource);
+
+	}
+
+	private static void tryExtractUe(Resource node, Object o2) {
+		try {
+			@SuppressWarnings("unchecked")
+			Ue ue = (Ue) o2;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnUe = node.getModel().createResource(uuid);
+
+			node.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment,
+					omnUe);
+
+			omnUe.addProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Epc.UserEquipmentDetails);
+
+			Boolean lteSupport = ue.isLteSupport();
+			if (lteSupport != null) {
+				omnUe.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.lteSupport,
+						String.valueOf(lteSupport));
+			}
+
+			List<Object> objects = ue.getApnOrControlAddressOrUeHardwareType();
+			for (Object o : objects) {
+				if (o.getClass().equals(ApnContents.class)) {
+					ApnContents apnContents = (ApnContents) o;
+					extractApn(apnContents, omnUe);
+				} else if (o.getClass().equals(ControlAddressContents.class)) {
+					ControlAddressContents controlAddressContents = (ControlAddressContents) o;
+					extractControlAddress(controlAddressContents, omnUe);
+				} else if (o.getClass().equals(UeDiskImageContents.class)) {
+					UeDiskImageContents diskImageContents = (UeDiskImageContents) o;
+					extractDiskImage(diskImageContents, omnUe);
+				} else if (o.getClass().equals(UeHardwareTypeContents.class)) {
+					UeHardwareTypeContents hardwareTypeContents = (UeHardwareTypeContents) o;
+					extractHardwareType(hardwareTypeContents, omnUe);
+				}
+
+			}
+
+		} catch (final ClassCastException e) {
+			RequestConverter.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	private static void extractHardwareType(
+			UeHardwareTypeContents hardwareTypeContents, Resource omnUe) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource hardwareTypeResource = omnUe.getModel().createResource(uuid);
+		hardwareTypeResource
+				.addProperty(
+						RDF.type,
+						info.openmultinet.ontology.vocabulary.Omn_resource.HardwareType);
+
+		String name = hardwareTypeContents.getName();
+		if (name != null && name != "") {
+			hardwareTypeResource.addProperty(RDFS.label, name);
+		}
+
+		omnUe.addProperty(
+				info.openmultinet.ontology.vocabulary.Omn_resource.hasHardwareType,
+				hardwareTypeResource);
+
+	}
+
+	private static void extractDiskImage(UeDiskImageContents diskImageContents,
+			Resource omnUe) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource diskImageResource = omnUe.getModel().createResource(uuid);
+		diskImageResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Omn_domain_pc.DiskImage);
+
+		String name = diskImageContents.getName();
+		if (name != null && name != "") {
+			diskImageResource
+					.addProperty(Omn_domain_pc.hasDiskimageLabel, name);
+		}
+
+		String description = diskImageContents.getDescription();
+		if (description != null && description != "") {
+			diskImageResource.addProperty(
+					Omn_domain_pc.hasDiskimageDescription, description);
+		}
+
+		omnUe.addProperty(
+				info.openmultinet.ontology.vocabulary.Omn_domain_pc.hasDiskImage,
+				diskImageResource);
+
+	}
+
+	private static void extractControlAddress(
+			ControlAddressContents controlAddressContents, Resource omnUe) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource controlResource = omnUe.getModel().createResource(uuid);
+		controlResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.ControlAddress);
+
+		String address = controlAddressContents.getAddress();
+		if (address != null && address != "") {
+			controlResource.addProperty(Omn_resource.address, address);
+		}
+
+		String netmask = controlAddressContents.getNetmask();
+		if (netmask != null && netmask != "") {
+			controlResource.addProperty(Omn_resource.netmask, netmask);
+		}
+
+		String type = controlAddressContents.getType();
+		if (type != null && type != "") {
+			controlResource.addProperty(Omn_resource.type, type);
+		}
+
+		omnUe.addProperty(
+				info.openmultinet.ontology.vocabulary.Epc.hasControlAddress,
+				controlResource);
+
+	}
+
+	private static void tryExtractAccessNetwork(Resource node, Object o2) {
+		try {
+			@SuppressWarnings("unchecked")
+			AccessNetwork accessNetwork = (AccessNetwork) o2;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnAccessNetwork = node.getModel().createResource(uuid);
+
+			node.addProperty(
+					info.openmultinet.ontology.vocabulary.Epc.hasAccessNetwork,
+					omnAccessNetwork);
+
+			omnAccessNetwork.addProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Epc.AccessNetworkDetails);
+
+			String enodeb = accessNetwork.getEnodebId();
+			if (enodeb != null && enodeb != "") {
+				omnAccessNetwork.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.eNodeBId,
+						enodeb);
+			}
+
+			String plmnId = accessNetwork.getPlmnId();
+			if (plmnId != null && plmnId != "") {
+				omnAccessNetwork
+						.addProperty(
+								info.openmultinet.ontology.vocabulary.Epc.publicLandMobileNetworkId,
+								plmnId);
+			}
+
+			BigInteger band = accessNetwork.getBand();
+			if (band != null) {
+				omnAccessNetwork.addLiteral(
+						info.openmultinet.ontology.vocabulary.Epc.band, band);
+			}
+
+			String vendor = accessNetwork.getVendor();
+			if (vendor != null && vendor != "") {
+				omnAccessNetwork.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.vendor,
+						vendor);
+			}
+
+			String baseModel = accessNetwork.getBaseModel();
+			if (baseModel != null && baseModel != "") {
+				omnAccessNetwork.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.baseModel,
+						baseModel);
+			}
+
+			String epcAddress = accessNetwork.getEpcAddress();
+			if (epcAddress != null && epcAddress != "") {
+				omnAccessNetwork
+						.addProperty(
+								info.openmultinet.ontology.vocabulary.Epc.evolvedPacketCoreAddress,
+								epcAddress);
+			}
+
+			String mode = accessNetwork.getMode();
+			if (mode != null && mode != "") {
+				omnAccessNetwork.addProperty(
+						info.openmultinet.ontology.vocabulary.Epc.mode, mode);
+			}
+
+			// List<ApnContents> objects = accessNetwork.getApn();
+			// for (ApnContents o : objects) {
+			// extractApn(o, omnAccessNetwork);
+			// }
+
+			List<Object> objects = accessNetwork.getApnOrIpAddress();
+			for (Object o : objects) {
+				if (o.getClass().equals(ApnContents.class)) {
+					ApnContents apnContents = (ApnContents) o;
+					extractApn(apnContents, omnAccessNetwork);
+				} else if (o.getClass().equals(EpcIpContents.class)) {
+					EpcIpContents ipContents = (EpcIpContents) o;
+					extractIpContents(ipContents, omnAccessNetwork);
+				}
+			}
+
+		} catch (final ClassCastException e) {
+			RequestConverter.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	private static void extractIpContents(EpcIpContents ipContents,
+			Resource omnAccessNetwork) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource controlResource = omnAccessNetwork.getModel().createResource(
+				uuid);
+		controlResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Omn_resource.IPAddress);
+
+		String address = ipContents.getAddress();
+		if (address != null && address != "") {
+			controlResource.addProperty(Omn_resource.address, address);
+		}
+
+		String netmask = ipContents.getNetmask();
+		if (netmask != null && netmask != "") {
+			controlResource.addProperty(Omn_resource.netmask, netmask);
+		}
+
+		String type = ipContents.getType();
+		if (type != null && type != "") {
+			controlResource.addProperty(Omn_resource.type, type);
+		}
+
+		omnAccessNetwork
+				.addProperty(
+						info.openmultinet.ontology.vocabulary.Omn_resource.hasIPAddress,
+						controlResource);
+
+	}
+
+	private static void extractApn(ApnContents apnContents, Resource omnEpc) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource apnResource = omnEpc.getModel().createResource(uuid);
+		apnResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.AccessPointName);
+
+		String networkId = apnContents.getNetworkId();
+		if (networkId != null && networkId != "") {
+			apnResource
+					.addProperty(
+							info.openmultinet.ontology.vocabulary.Epc.networkIdentifier,
+							networkId);
+		}
+
+		String operatorId = apnContents.getOperatorId();
+		if (operatorId != null && operatorId != "") {
+			apnResource
+					.addProperty(
+							info.openmultinet.ontology.vocabulary.Epc.operatorIdentifier,
+							operatorId);
+		}
+
+		omnEpc.addProperty(
+				info.openmultinet.ontology.vocabulary.Epc.hasAccessPointName,
+				apnResource);
 
 	}
 

@@ -69,9 +69,9 @@
               
               rdfs:label "has Access Network"@en ;
               
-              rdfs:range :AccessNetwork ;
+              rdfs:range :AccessNetworkDetails ;
               
-              rdfs:domain omn:Resource .
+              rdfs:domain :AccessNetwork .
 
 
 
@@ -133,9 +133,9 @@
               
               rdfs:label "has EPC"@en ;
               
-              rdfs:range :EvolvedPacketCore ;
+              rdfs:range :EvolvedPacketCoreDetails ;
               
-              rdfs:domain omn:Resource .
+              rdfs:domain :EvolvedPacketCore .
 
 
 
@@ -147,9 +147,9 @@
               
               rdfs:label "has UE"@en ;
               
-              rdfs:range :UserEquipment ;
+              rdfs:range :UserEquipmentDetails ;
               
-              rdfs:domain omn:Resource .
+              rdfs:domain :UserEquipment .
 
 
 
@@ -347,7 +347,7 @@
                 
                 rdfs:seeAlso <http://www.flex-project.eu> ;
                 
-                rdfs:comment "Network Identifier"@en ;
+                rdfs:comment "Operator Identifier"@en ;
                 
                 rdfs:domain :AccessPointName ;
                 
@@ -473,6 +473,20 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-epc#AccessNetworkDetails
+
+:AccessNetworkDetails rdf:type owl:Class ;
+
+      rdfs:label "Access Network"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "The Access Network of FLEX’s building blocks are the commercial or the Open Source eNodeB’s."@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
 ###  http://open-multinet.info/ontology/omn-domain-epc#APN
 
 :AccessPointName rdf:type owl:Class ;
@@ -516,10 +530,37 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
+###  http://open-multinet.info/ontology/omn-domain-epc#EpcAdapter
+
+:EpcAdapter rdf:type owl:Class ;
+
+      rdfs:label "EPC Adapter"@en ;
+      
+      rdfs:subClassOf omn:Adapter ;
+      
+      rdfs:comment "Evolved Packet Core adapter"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
 
 ###  http://open-multinet.info/ontology/omn-domain-epc#EvolvedPacketCore
 
 :EvolvedPacketCore rdf:type owl:Class ;
+
+      rdfs:label "Evolved Packet Core"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "Evolved Packet Core networks (SiRRAN’s and OpenAirInterface)"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#EvolvedPacketCoreDetails
+
+:EvolvedPacketCoreDetails rdf:type owl:Class ;
 
       rdfs:label "Evolved Packet Core"@en ;
       
@@ -536,6 +577,20 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 :UserEquipment rdf:type owl:Class ;
 
       rdfs:label "User Equipment"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "User Equipment, e.g. Android phone"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-epc#UserEquipmentDetails
+
+:UserEquipmentDetails rdf:type owl:Class ;
+
+      rdfs:label "User Equipment details"@en ;
       
       rdfs:subClassOf omn:Resource ;
       

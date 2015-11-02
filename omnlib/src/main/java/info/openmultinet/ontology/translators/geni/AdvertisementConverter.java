@@ -29,7 +29,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HopContent
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.InterfaceRefContents;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.IpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkPropertyContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkType;
@@ -37,7 +36,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LocationCo
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.MatchContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NextHopContent;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
@@ -214,13 +212,12 @@ public class AdvertisementConverter extends AbstractConverter {
 			Epc epc = (Epc) rspecObject;
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource omnEpc = node.getModel().createResource(uuid);
-
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore,
 					omnEpc);
 
 			omnEpc.addProperty(RDF.type,
-					info.openmultinet.ontology.vocabulary.Epc.EvolvedPacketCore);
+					info.openmultinet.ontology.vocabulary.Epc.EvolvedPacketCoreDetails);
 
 			String mme = epc.getMmeAddress();
 			if (mme != null && mme != "") {
@@ -1159,7 +1156,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					omnAccessNetwork);
 
 			omnAccessNetwork.addProperty(RDF.type,
-					info.openmultinet.ontology.vocabulary.Epc.AccessNetwork);
+					info.openmultinet.ontology.vocabulary.Epc.AccessNetworkDetails);
 
 			String enodeb = accessNetwork.getEnodebId();
 			if (enodeb != null && enodeb != "") {
@@ -1270,13 +1267,12 @@ public class AdvertisementConverter extends AbstractConverter {
 			Ue ue = (Ue) rspecObject;
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource omnUe = node.getModel().createResource(uuid);
-
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment,
 					omnUe);
 
 			omnUe.addProperty(RDF.type,
-					info.openmultinet.ontology.vocabulary.Epc.UserEquipment);
+					info.openmultinet.ontology.vocabulary.Epc.UserEquipmentDetails);
 
 			Boolean lteSupport = ue.isLteSupport();
 			if (lteSupport != null) {
@@ -2014,6 +2010,8 @@ public class AdvertisementConverter extends AbstractConverter {
 						|| AbstractConverter.isUrn(sliverName)) {
 					sliverTypeResource = omnResource.getModel().createResource(
 							sliverName);
+					omnResource.addProperty(RDF.type,
+							sliverTypeResource);
 				} else {
 					String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 					sliverTypeResource = omnResource.getModel().createResource(
@@ -2182,12 +2180,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					&& !omnResource.getResource().hasProperty(RDF.type,
 							Omn_domain_pc.Datapath)
 					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_resource.Openflow)
-					&& !omnResource
-							.getResource()
-							.hasProperty(
-									RDF.type,
-									info.openmultinet.ontology.vocabulary.Epc.EvolvedPacketCore)) {
+							Omn_resource.Openflow)) {
 
 				if (verbose) {
 					setNodesVerbose(omnResource, advertisement);
@@ -2311,6 +2304,7 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void setAccessNetwork(Statement omnResource, NodeContents geniNode) {
+
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Epc.hasAccessNetwork)) {
 
@@ -2448,6 +2442,9 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void setUE(Statement omnResource, NodeContents geniNode) {
+		// Resource resourceResource = omnResource.getResource();
+		// if (resourceResource.hasProperty(RDF.type,
+		// info.openmultinet.ontology.vocabulary.Epc.UserEquipment)) {
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment)) {
 
@@ -2586,6 +2583,10 @@ public class AdvertisementConverter extends AbstractConverter {
 	}
 
 	private void setEPC(Statement omnResource, NodeContents geniNode) {
+
+		// Resource resourceResource = omnResource.getResource();
+		// if (resourceResource.hasProperty(RDF.type,
+		// info.openmultinet.ontology.vocabulary.Epc.EvolvedPacketCore)) {
 
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore)) {
