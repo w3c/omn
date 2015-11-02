@@ -48,6 +48,7 @@
 			<xs:attribute name="ssl_enabled" type="xs:boolean" />
 			<xs:attribute name="ssl_port" type="xs:integer" />
 			<xs:attribute name="test_param" type="xs:string" />
+			<xs:attribute name="requirement" type="xs:string" />
 			<xs:attribute name="type" type="xs:string" />
 		</xs:complexType>
 	</xs:element>

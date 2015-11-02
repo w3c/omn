@@ -385,3 +385,7 @@ osco:hss  a              owl:Class ;
 osco:domain-ns  a    owl:DatatypeProperty ;
         rdfs:domain  [ owl:disjointUnionOf  ( osco:hss osco:dns ) ] ;
         rdfs:range   xsd:string .
+
+osco:requirement  a      owl:DatatypeProperty ;
+        rdfs:domain  omn:Resource ;
+        rdfs:range   xsd:string .
