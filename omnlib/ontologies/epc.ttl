@@ -13,9 +13,9 @@
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
 @prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix : <http://open-multinet.info/ontology/epc#> .
+@prefix : <http://open-multinet.info/ontology/resource/epc#> .
 
-<http://open-multinet.info/ontology/omn> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
+<http://open-multinet.info/ontology/resource/epc> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
 
                                          rdf:type owl:Ontology, 
 
@@ -25,7 +25,7 @@
                                          
                                          vann:preferredNamespacePrefix "omn-domain-epc"^^xsd:string ;
 
-                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn#> ;
+                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/epc#> ;
                                         
                                          dc:date "2015-10-26"^^xsd:date ;
                                          
@@ -61,7 +61,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasAccessNetwork
+###  http://open-multinet.info/ontology/resource/epc#hasAccessNetwork
 
 :hasAccessNetwork rdf:type owl:ObjectProperty ;
 
@@ -76,7 +76,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasAccessPointName
+###  http://open-multinet.info/ontology/resource/epc#hasAccessPointName
 
 :hasAccessPointName rdf:type owl:ObjectProperty ;
 
@@ -95,7 +95,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasControlAddress
+###  http://open-multinet.info/ontology/resource/epc#hasControlAddress
 
 :hasControlAddress rdf:type owl:ObjectProperty ;
 
@@ -111,7 +111,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasENodeB
+###  http://open-multinet.info/ontology/resource/epc#hasENodeB
 
 :hasENodeB rdf:type owl:ObjectProperty ;
 
@@ -125,7 +125,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasEvolvedPacketCore
+###  http://open-multinet.info/ontology/resource/epc#hasEvolvedPacketCore
 
 :hasEvolvedPacketCore rdf:type owl:ObjectProperty ;
 
@@ -139,7 +139,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#hasUserEquipment
+###  http://open-multinet.info/ontology/resource/epc#hasUserEquipment
 
 :hasUserEquipment rdf:type owl:ObjectProperty ;
 
@@ -161,7 +161,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#accessPointName
+###  http://open-multinet.info/ontology/resource/epc#accessPointName
 
 :accessPointName rdf:type owl:DatatypeProperty ;
 
@@ -177,7 +177,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#band
+###  http://open-multinet.info/ontology/resource/epc#band
 
 :band rdf:type owl:DatatypeProperty ;
 
@@ -193,7 +193,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#baseModel
+###  http://open-multinet.info/ontology/resource/epc#baseModel
 
 :baseModel rdf:type owl:DatatypeProperty ;
 
@@ -209,7 +209,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBAddress
+###  http://open-multinet.info/ontology/resource/epc#eNodeBAddress
 
 :eNodeBAddress rdf:type owl:DatatypeProperty ;
 
@@ -225,7 +225,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBId
+###  http://open-multinet.info/ontology/resource/epc#eNodeBId
 
 :eNodeBId rdf:type owl:DatatypeProperty ;
 
@@ -241,7 +241,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#eNodeBName
+###  http://open-multinet.info/ontology/resource/epc#eNodeBName
 
 :eNodeBName rdf:type owl:DatatypeProperty ;
 
@@ -257,7 +257,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#evolvedPacketCoreAddress
+###  http://open-multinet.info/ontology/resource/epc#evolvedPacketCoreAddress
 
 :evolvedPacketCoreAddress rdf:type owl:DatatypeProperty ;
 
@@ -274,7 +274,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#lteSupport
+###  http://open-multinet.info/ontology/resource/epc#lteSupport
 
 :lteSupport rdf:type owl:DatatypeProperty ;
 
@@ -291,7 +291,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#mode
+###  http://open-multinet.info/ontology/resource/epc#mode
 
 :mode rdf:type owl:DatatypeProperty ;
 
@@ -306,7 +306,7 @@
                 rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#mmeAddress
+###  http://open-multinet.info/ontology/resource/epc#mmeAddress
 
 :mmeAddress rdf:type owl:DatatypeProperty ;
 
@@ -322,7 +322,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#networkIdentifier
+###  http://open-multinet.info/ontology/resource/epc#networkIdentifier
 
 :networkIdentifier rdf:type owl:DatatypeProperty ;
 
@@ -339,7 +339,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#operatorIdentifier
+###  http://open-multinet.info/ontology/resource/epc#operatorIdentifier
 
 :operatorIdentifier rdf:type owl:DatatypeProperty ;
 
@@ -347,7 +347,7 @@
                 
                 rdfs:seeAlso <http://www.flex-project.eu> ;
                 
-                rdfs:comment "Operator Identifier"@en ;
+                rdfs:comment "Network Identifier"@en ;
                 
                 rdfs:domain :AccessPointName ;
                 
@@ -355,7 +355,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#publicLandMobileNetworkId
+###  http://open-multinet.info/ontology/resource/epc#publicLandMobileNetworkId
 
 :publicLandMobileNetworkId rdf:type owl:DatatypeProperty ;
 
@@ -371,7 +371,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#pdnGateway
+###  http://open-multinet.info/ontology/resource/epc#pdnGateway
 
 :pdnGateway rdf:type owl:DatatypeProperty ;
 
@@ -388,7 +388,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#servingGateway
+###  http://open-multinet.info/ontology/resource/epc#servingGateway
 
 :servingGateway rdf:type owl:DatatypeProperty ;
 
@@ -404,7 +404,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#subscriber
+###  http://open-multinet.info/ontology/resource/epc#subscriber
 
 :subscriber rdf:type owl:DatatypeProperty ;
 
@@ -421,7 +421,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#vendor
+###  http://open-multinet.info/ontology/resource/epc#vendor
 
 :vendor rdf:type owl:DatatypeProperty ;
 
@@ -458,7 +458,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#AccessNetwork
+###  http://open-multinet.info/ontology/resource/epc#AccessNetwork
 
 :AccessNetwork rdf:type owl:Class ;
 
@@ -473,7 +473,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#AccessNetworkDetails
+###  http://open-multinet.info/ontology/resource/epc#AccessNetworkDetails
 
 :AccessNetworkDetails rdf:type owl:Class ;
 
@@ -487,7 +487,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#APN
+###  http://open-multinet.info/ontology/resource/epc#AccessPointName
 
 :AccessPointName rdf:type owl:Class ;
 
@@ -501,7 +501,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#ControlAddress
+###  http://open-multinet.info/ontology/resource/epc#ControlAddress
 
 :ControlAddress rdf:type owl:Class ;
 
@@ -516,7 +516,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#ENodeB
+###  http://open-multinet.info/ontology/resource/epc#ENodeB
 
 :ENodeB rdf:type owl:Class ;
 
@@ -530,7 +530,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#EpcAdapter
+###  http://open-multinet.info/ontology/resource/epc#EpcAdapter
 
 :EpcAdapter rdf:type owl:Class ;
 
@@ -544,7 +544,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#EvolvedPacketCore
+###  http://open-multinet.info/ontology/resource/epc#EvolvedPacketCore
 
 :EvolvedPacketCore rdf:type owl:Class ;
 
@@ -558,7 +558,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#EvolvedPacketCoreDetails
+###  http://open-multinet.info/ontology/resource/epc#EvolvedPacketCoreDetails
 
 :EvolvedPacketCoreDetails rdf:type owl:Class ;
 
@@ -572,7 +572,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#UserEquipment
+###  http://open-multinet.info/ontology/resource/epc#UserEquipment
 
 :UserEquipment rdf:type owl:Class ;
 
@@ -586,7 +586,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-epc#UserEquipmentDetails
+###  http://open-multinet.info/ontology/resource/epc#UserEquipmentDetails
 
 :UserEquipmentDetails rdf:type owl:Class ;
 
@@ -613,9 +613,12 @@ omn-domain-pc:DiskImage rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#DiskImage
+###  http://open-multinet.info/ontology/omn#Adapter
 
 omn:Adapter rdf:type owl:Class .
+
+
+
 
 
 

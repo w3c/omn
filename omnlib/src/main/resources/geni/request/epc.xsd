@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- An extension for TOSCA OpenSNDCore Orchestrator. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:s="http://open-multinet.info/ontology/epc" elementFormDefault="qualified"
-	targetNamespace="http://open-multinet.info/ontology/epc" xmlns:rspec="http://www.geni.net/resources/rspec/3">
+	xmlns:s="http://open-multinet.info/ontology/resource/epc" elementFormDefault="qualified"
+	targetNamespace="http://open-multinet.info/ontology/resource/epc" xmlns:rspec="http://www.geni.net/resources/rspec/3">
 	<!-- xs:include schemaLocation="ad-common.xsd" / -->
 	<xs:element name="rspec_epc">
 		<xs:complexType>

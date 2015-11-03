@@ -64,15 +64,15 @@ public class AdEpcTest {
 			Assert.assertTrue(nodes.getLength() == 3);
 
 			NodeList epc = xmlDoc.getElementsByTagNameNS(
-					"http://open-multinet.info/ontology/epc", "epc");
+					"http://open-multinet.info/ontology/resource/epc", "epc");
 			Assert.assertTrue(epc.getLength() == 1);
 
 			NodeList ue = xmlDoc.getElementsByTagNameNS(
-					"http://open-multinet.info/ontology/epc", "ue");
+					"http://open-multinet.info/ontology/resource/epc", "ue");
 			Assert.assertTrue(ue.getLength() == 1);
 
 			NodeList accessNetwork = xmlDoc.getElementsByTagNameNS(
-					"http://open-multinet.info/ontology/epc", "access_network");
+					"http://open-multinet.info/ontology/resource/epc", "access_network");
 			Assert.assertTrue(accessNetwork.getLength() == 1);
 
 		}
