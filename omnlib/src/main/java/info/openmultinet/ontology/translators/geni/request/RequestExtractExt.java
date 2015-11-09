@@ -1148,7 +1148,7 @@ public class RequestExtractExt extends AbstractConverter {
 				omnAcs.addProperty(
 						info.openmultinet.ontology.vocabulary.Acs.hasParameter,
 						param);
-				omnAcs.addProperty(RDF.type,
+				param.addProperty(RDF.type,
 						info.openmultinet.ontology.vocabulary.Acs.AcsParameter);
 
 				String name = o.getName();

@@ -22,7 +22,7 @@ public class RequestAcs {
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException {
-		final String filename = "/geni/request/acs.xml";
+		final String filename = "/geni/request/acs2.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		System.out.println("Converting this input from '" + filename + "':");

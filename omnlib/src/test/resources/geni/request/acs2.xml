@@ -1,0 +1,11 @@
+<rspec type="request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd " 
+xmlns:ns="http://open-multinet.info/ontology/resource/acs" xmlns="http://www.geni.net/resources/rspec/3">
+    <node component_manager_id="http://localhost:8443/sfa/api/am/v3" component_id="http://localhost/resource/ACSclient-1" client_id="acs1" exclusive="false">
+        <sliver_type name="http://open-multinet.info/ontology/resource/acs#ACS"/>
+        <ns:device id="id1">
+            <ns:param name="name1" value="value1" />
+            <ns:param name="name2" value="value2" />
+        </ns:device>
+    </node>
+</rspec>
