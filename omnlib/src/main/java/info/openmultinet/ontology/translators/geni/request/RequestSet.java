@@ -42,6 +42,13 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+/**
+ * Helper methods for converting from OMN model to request RSpec. For native
+ * RSpec elements.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class RequestSet extends AbstractConverter {
 
 	public static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.request";

@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni.manifest;
 
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Epc;
@@ -126,7 +127,8 @@ public class ManifestExtract extends AbstractConverter {
 			} else if (nodeDetailObject.getClass().equals(Ue.class)) {
 				ManifestExtractExt.tryExtractUserEquipment(omnResource,
 						nodeDetailObject);
-
+			} else if (nodeDetailObject.getClass().equals(Device.class)) {
+				ManifestExtractExt.tryExtractAcs(omnResource, nodeDetailObject);
 			} else if (nodeDetailObject
 					.getClass()
 					.equals(info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation.class)) {

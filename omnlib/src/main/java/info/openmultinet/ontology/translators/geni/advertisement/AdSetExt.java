@@ -10,6 +10,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Controller
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ControllerRole;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Datapath;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Datapath.Port;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DlType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.DlVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBContents;
@@ -28,6 +29,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NwSrc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.OscoLocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.PacketContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.PathContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecOpstate;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Sliver;
@@ -56,6 +58,13 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+/**
+ * Helper methods for converting from OMN model to advertisement RSpec. These methods
+ * are for non-native RSpec extensions.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class AdSetExt extends AbstractConverter {
 
 	public static void setAccessNetwork(Statement omnResource,
@@ -1340,6 +1349,65 @@ public class AdSetExt extends AbstractConverter {
 			node.getAnyOrRelationOrLocation().add(monitoring);
 		}
 
+	}
+
+	public static void setACS(Statement omnResource, NodeContents geniNode) {
+
+		if (omnResource.getResource().hasProperty(
+				info.openmultinet.ontology.vocabulary.Acs.hasDevice)) {
+
+			Resource resourceResource = omnResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Acs.hasDevice)
+					.getObject().asResource();
+
+			Device acsDevice = new ObjectFactory().createDevice();
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasAcsId)) {
+				String acsId = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Acs.hasAcsId)
+						.getObject().asLiteral().getString();
+				acsDevice.setId(acsId);
+			}
+
+			StmtIterator parameters = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Acs.hasParameter);
+			while (parameters.hasNext()) {
+				Statement parameterStatement = parameters.next();
+				Resource parameter = parameterStatement.getObject()
+						.asResource();
+
+				ParameterContents parameterContents = new ObjectFactory()
+						.createParameterContents();
+				// required
+				// if (parameter
+				// .hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamName))
+				// {
+				String name = parameter
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Acs.hasParamName)
+						.getObject().asLiteral().getString();
+				parameterContents.setName(name);
+				// }
+
+				// required
+				// if (parameter
+				// .hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamValue))
+				// {
+				String value = parameter
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Acs.hasParamValue)
+						.getObject().asLiteral().getString();
+				parameterContents.setValue(value);
+				// }
+
+				acsDevice.getParam().add(parameterContents);
+			}
+
+			geniNode.getAnyOrRelationOrLocation().add(acsDevice);
+		}
 	}
 
 }

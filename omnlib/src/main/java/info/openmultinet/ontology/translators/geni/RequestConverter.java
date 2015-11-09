@@ -44,7 +44,13 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
+/**
+ * Main methods for converting to and from between request RSpecs and OMN
+ * models.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class RequestConverter extends AbstractConverter {
 
 	public static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.request";
@@ -150,7 +156,8 @@ public class RequestConverter extends AbstractConverter {
 				RequestSetExt.setAccessNetwork(resource, node);
 				RequestSetExt.setEPC(resource, node);
 				RequestSetExt.setUE(resource, node);
-
+				RequestSetExt.setAcs(resource, node);
+				
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
 			} else if (resource.getResource().hasProperty(RDF.type,

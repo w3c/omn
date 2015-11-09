@@ -53,6 +53,13 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+/**
+ * Main methods for converting to and from between advertisement RSpecs and OMN
+ * models.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class AdvertisementConverter extends AbstractConverter {
 
 	private static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.advertisement";
@@ -236,6 +243,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					AdSetExt.setAccessNetwork(omnResource, geniNode);
 					AdSetExt.setEPC(omnResource, geniNode);
 					AdSetExt.setUE(omnResource, geniNode);
+					AdSetExt.setACS(omnResource, geniNode);
 
 					ResIterator infrastructures = omnResource.getModel()
 							.listResourcesWithProperty(Omn.isResourceOf,

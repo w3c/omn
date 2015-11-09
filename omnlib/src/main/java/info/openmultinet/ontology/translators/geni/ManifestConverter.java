@@ -153,7 +153,8 @@ public class ManifestConverter extends AbstractConverter {
 				ManifestSetExt.setEPC(resource, node);
 				ManifestSetExt.setAccessNetwork(resource, node);
 				ManifestSetExt.setUserEquipment(resource, node);
-
+				ManifestSetExt.setAcs(resource, node);
+				
 				manifest.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
 			} else {

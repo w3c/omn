@@ -5,6 +5,7 @@ import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
@@ -54,7 +55,13 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
+/**
+ * Helper methods to extract information from a request RSpec to create an OMN
+ * model. For native RSpec elements.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class RequestExtract extends AbstractConverter {
 
 	public static final String JAXB = "info.openmultinet.ontology.translators.geni.jaxb.request";
@@ -314,6 +321,8 @@ public class RequestExtract extends AbstractConverter {
 					RequestExtractExt.tryExtractEpc(omnResource, o);
 				} else if (o.getClass().equals(AccessNetwork.class)) {
 					RequestExtractExt.tryExtractAccessNetwork(omnResource, o);
+				} else if (o.getClass().equals(Device.class)) {
+					RequestExtractExt.tryExtractAcs(omnResource, o);
 				} else if (o.getClass().equals(Monitoring.class)) {
 					RequestExtractExt.tryExtractMonitoring(omnResource, o);
 				} else if (o.getClass().equals(Osco.class)) {

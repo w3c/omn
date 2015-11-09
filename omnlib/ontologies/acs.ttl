@@ -1,0 +1,156 @@
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix : <http://open-multinet.info/ontology/resource/acs#> .
+
+<http://open-multinet.info/ontology/resource/acs> rdf:type owl:Ontology, 
+
+                                         voaf:Vocabulary ;
+                                         
+                                         rdfs:label "acs"@en ;
+                                        
+                                         dc:date "2015-11-09"^^xsd:date ;
+                                         
+                                         dc:title "ACS"@en ;
+                                         
+                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/resource/acs#hasDevice
+
+:hasDevice rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has ACS device"@en ;
+              
+              rdfs:label "has ACS device"@en ;
+              
+              rdfs:range :AcsDevice ;
+              
+              rdfs:domain omn:Resource .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/acs#hasParameter
+
+:hasParameter rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has ACS parameter"@en ;
+              
+              rdfs:label "has ACS parameter"@en ;
+              
+              rdfs:range :AcsParameter ;
+              
+              rdfs:domain :AcsDevice .
+
+
+
+#################################################################
+#
+#    Datatype Properties
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/resource/acs#hasAcsId
+
+:hasAcsId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "has ACS id"@en ;
+                
+                rdfs:comment "has ACS id"@en ;
+                
+                rdfs:domain :AcsDevice ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/acs#hasParamName
+
+:hasParamName rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "has ACS parameter name"@en ;
+                
+                rdfs:comment "has ACS parameter name"@en ;
+                
+                rdfs:domain :AcsParameter ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/acs#hasParamValue
+
+:hasParamValue rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "has parameter value"@en ;
+                
+                rdfs:comment "has parameter value"@en ;
+                
+                rdfs:domain :AcsParameter ;
+                
+                rdfs:range xsd:string .
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/resource/epc#Acs
+
+:Acs rdf:type owl:Class ;
+
+      rdfs:label "ACS"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "ACS"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/acs#AcsDevice
+
+:AcsDevice rdf:type owl:Class ;
+
+      rdfs:label "ACS device"@en ;
+      
+      rdfs:comment "ACS device"@en .
+
+
+
+###  http://open-multinet.info/ontology/resource/acs#AcsParameter
+
+:AcsParameter rdf:type owl:Class ;
+
+      rdfs:label "ACS Parameter"@en ;
+      
+      rdfs:comment "ACS Parameter"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .

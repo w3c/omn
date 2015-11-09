@@ -45,6 +45,13 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+/**
+ * Helper methods to extract information from an advertisement RSpec to create
+ * an OMN model. For native RSpec elements.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class AdExtract extends AbstractConverter {
 
 	private static final String HOST = "http://open-multinet.info/example#";
@@ -314,6 +321,7 @@ public class AdExtract extends AbstractConverter {
 				AdExtractExt.tryExtractAccessNetwork(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractUe(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractEpc(omnNode, rspecNodeObject);
+				AdExtractExt.tryExtractAcs(omnNode, rspecNodeObject);
 
 			}
 

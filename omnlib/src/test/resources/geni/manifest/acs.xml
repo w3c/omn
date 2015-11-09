@@ -1,0 +1,14 @@
+<rspec expires="2015-10-12T16:05:45.404+02:00" type="manifest"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd"
+	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/acs">
+	<node component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
+		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Facs-1" client_id="acs1"
+		exclusive="false">
+		<sliver_type name="http://open-multinet.info/ontology/resource/acs#acs" />
+		<ns5:device id="id1">
+			<ns5:param name="name1" value="value1" />
+			<ns5:param name="name2" value="value2" />
+		</ns5:device>
+	</node>
+</rspec>

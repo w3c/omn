@@ -2,6 +2,8 @@ package info.openmultinet.ontology.translators.geni.manifest;
 
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ControlAddressContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.EpcIpContents;
@@ -853,5 +855,55 @@ public class ManifestSetExt extends AbstractConverter {
 
 		ue.getApnOrControlAddressOrUeHardwareType().add(controlAddressContents);
 
+	}
+
+	public static void setAcs(Statement omnResource, NodeContents geniNode) {
+		if (omnResource.getResource().hasProperty(
+				info.openmultinet.ontology.vocabulary.Acs.hasDevice)) {
+
+			Resource resourceResource = omnResource
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Acs.hasDevice)
+					.getObject().asResource();
+
+			Device acsDevice = new ObjectFactory().createDevice();
+
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasAcsId)) {
+				String acsId = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Acs.hasAcsId)
+						.getObject().asLiteral().getString();
+				acsDevice.setId(acsId);
+			}
+
+			StmtIterator parameters = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Acs.hasParameter);
+			while (parameters.hasNext()) {
+				Statement parameterStatement = parameters.next();
+				Resource parameter = parameterStatement.getObject()
+						.asResource();
+
+				ParameterContents parameterContents = new ObjectFactory()
+						.createParameterContents();
+
+				String name = parameter
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Acs.hasParamName)
+						.getObject().asLiteral().getString();
+				parameterContents.setName(name);
+
+				String value = parameter
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Acs.hasParamValue)
+						.getObject().asLiteral().getString();
+				parameterContents.setValue(value);
+
+				acsDevice.getParam().add(parameterContents);
+			}
+
+			geniNode.getAnyOrRelationOrLocation().add(acsDevice);
+
+		}
 	}
 }

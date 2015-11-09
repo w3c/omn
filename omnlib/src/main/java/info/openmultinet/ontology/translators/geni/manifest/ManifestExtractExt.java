@@ -5,12 +5,14 @@ import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ControlAddressContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ENodeBContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliverInfo;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Monitoring;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Proxy;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Reservation;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServicesPostBootScript;
@@ -659,6 +661,51 @@ public class ManifestExtractExt extends AbstractConverter {
 		omnUe.addProperty(
 				info.openmultinet.ontology.vocabulary.Epc.hasControlAddress,
 				controlResource);
+
+	}
+
+	public static void tryExtractAcs(Resource node, Object rspecObject) {
+		try {
+			Device acsDevice = (Device) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnAcs = node.getModel().createResource(uuid);
+			node.addProperty(
+					info.openmultinet.ontology.vocabulary.Acs.hasDevice, omnAcs);
+
+			omnAcs.addProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Acs.AcsDevice);
+
+			String acsId = acsDevice.getId();
+			if (acsId != null && acsId != "") {
+				omnAcs.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasAcsId,
+						acsId);
+			}
+
+			List<ParameterContents> objects = acsDevice.getParam();
+			for (ParameterContents o : objects) {
+
+				String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource param = node.getModel().createResource(uuid1);
+				omnAcs.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasParameter,
+						param);
+				omnAcs.addProperty(RDF.type,
+						info.openmultinet.ontology.vocabulary.Acs.AcsParameter);
+
+				String name = o.getName();
+				param.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasParamName,
+						name);
+
+				String value = o.getValue();
+				param.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasParamValue,
+						value);
+			}
+		} catch (final ClassCastException e) {
+			ManifestExtractExt.LOG.finer(e.getMessage());
+		}
 
 	}
 }

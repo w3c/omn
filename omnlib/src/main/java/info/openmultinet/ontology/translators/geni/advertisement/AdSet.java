@@ -42,7 +42,13 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.PropertyNotFoundException;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
+/**
+ * Helper methods for converting from OMN model to ad RSpec. For native
+ * RSpec elements.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class AdSet extends AbstractConverter {
 
 	private static final Logger LOG = Logger.getLogger(AdSet.class.getName());

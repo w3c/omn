@@ -9,6 +9,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ApnContent
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Available;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ControlAddressContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.EpcIpContents;
@@ -17,6 +18,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageConte
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.OscoLocationContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecOpstate;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StateSpec;
@@ -26,6 +28,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.vocabulary.Acs;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -50,7 +53,13 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
+/**
+ * Helper methods to extract information from an advertisement RSpec to create an OMN
+ * model. These methods are for non-native RSpec extensions.
+ * 
+ * @author robynloughnane
+ *
+ */
 public class AdExtractExt extends AbstractConverter {
 
 	private static final Logger LOG = Logger.getLogger(AdExtractExt.class
@@ -1408,6 +1417,51 @@ public class AdExtractExt extends AbstractConverter {
 			final AvailableContents availability = availablityJaxb.getValue();
 
 			omnNode.addLiteral(Omn_resource.isAvailable, availability.isNow());
+		} catch (final ClassCastException e) {
+			AdExtractExt.LOG.finer(e.getMessage());
+		}
+	}
+
+	public static void tryExtractAcs(Resource node, Object rspecObject) {
+
+		try {
+			Device acsDevice = (Device) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnAcs = node.getModel().createResource(uuid);
+			node.addProperty(
+					info.openmultinet.ontology.vocabulary.Acs.hasDevice, omnAcs);
+
+			omnAcs.addProperty(RDF.type,
+					info.openmultinet.ontology.vocabulary.Acs.AcsDevice);
+
+			String acsId = acsDevice.getId();
+			if (acsId != null && acsId != "") {
+				omnAcs.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasAcsId,
+						acsId);
+			}
+
+			List<ParameterContents> objects = acsDevice.getParam();
+			for (ParameterContents o : objects) {
+
+				String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource param = node.getModel().createResource(uuid1);
+				omnAcs.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasParameter,
+						param);
+				omnAcs.addProperty(RDF.type,
+						info.openmultinet.ontology.vocabulary.Acs.AcsParameter);
+
+				String name = o.getName();
+				param.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasParamName,
+						name);
+
+				String value = o.getValue();
+				param.addProperty(
+						info.openmultinet.ontology.vocabulary.Acs.hasParamValue,
+						value);
+			}
 		} catch (final ClassCastException e) {
 			AdExtractExt.LOG.finer(e.getMessage());
 		}

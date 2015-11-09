@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://open-multinet.info/ontology/resource/acs" elementFormDefault="qualified"
+	targetNamespace="http://open-multinet.info/ontology/resource/acs" xmlns:rspec="http://www.geni.net/resources/rspec/3">
+	<xs:element name="rspec_acs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:device" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="device">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="s:param" />
+			</xs:choice>
+			<xs:attribute name="id" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="param" type="s:ParameterContents" />
+	<xs:complexType name="ParameterContents">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="value" type="xs:string" />
+	</xs:complexType>
+</xs:schema>
