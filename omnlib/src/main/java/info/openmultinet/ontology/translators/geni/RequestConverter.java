@@ -44,6 +44,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
 /**
  * Main methods for converting to and from between request RSpecs and OMN
  * models.
@@ -109,7 +110,7 @@ public class RequestConverter extends AbstractConverter {
 
 	private static void convertStatementsToNodesAndLinks(
 			final RSpecContents request, final List<Statement> resources)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException, InvalidModelException {
 
 		for (final Statement resource : resources) {
 			if (!resource.getResource()
@@ -157,7 +158,7 @@ public class RequestConverter extends AbstractConverter {
 				RequestSetExt.setEPC(resource, node);
 				RequestSetExt.setUE(resource, node);
 				RequestSetExt.setAcs(resource, node);
-				
+
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
 			} else if (resource.getResource().hasProperty(RDF.type,

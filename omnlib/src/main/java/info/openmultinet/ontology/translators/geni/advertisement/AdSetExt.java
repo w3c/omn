@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AccessNetwork;
@@ -59,8 +60,8 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 /**
- * Helper methods for converting from OMN model to advertisement RSpec. These methods
- * are for non-native RSpec extensions.
+ * Helper methods for converting from OMN model to advertisement RSpec. These
+ * methods are for non-native RSpec extensions.
  * 
  * @author robynloughnane
  *
@@ -1351,7 +1352,8 @@ public class AdSetExt extends AbstractConverter {
 
 	}
 
-	public static void setACS(Statement omnResource, NodeContents geniNode) {
+	public static void setACS(Statement omnResource, NodeContents geniNode)
+			throws InvalidModelException {
 
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Acs.hasDevice)) {
@@ -1381,6 +1383,15 @@ public class AdSetExt extends AbstractConverter {
 
 				ParameterContents parameterContents = new ObjectFactory()
 						.createParameterContents();
+
+				if (!parameter
+						.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamName)
+						|| !parameter
+								.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamValue)) {
+					throw new InvalidModelException(
+							"Missing ACS paramter name or value.");
+				}
+
 				// required
 				// if (parameter
 				// .hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamName))

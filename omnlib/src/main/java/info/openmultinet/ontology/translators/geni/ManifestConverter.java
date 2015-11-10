@@ -131,7 +131,7 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void convertStatementsToNodesAndLinks(
 			final RSpecContents manifest, final List<Statement> resources,
-			String hostname) {
+			String hostname) throws InvalidModelException {
 
 		for (final Statement resource : resources) {
 			if (!resource.getResource()

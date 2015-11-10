@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni.manifest;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
@@ -857,7 +858,7 @@ public class ManifestSetExt extends AbstractConverter {
 
 	}
 
-	public static void setAcs(Statement omnResource, NodeContents geniNode) {
+	public static void setAcs(Statement omnResource, NodeContents geniNode) throws InvalidModelException {
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Acs.hasDevice)) {
 
@@ -886,6 +887,13 @@ public class ManifestSetExt extends AbstractConverter {
 
 				ParameterContents parameterContents = new ObjectFactory()
 						.createParameterContents();
+
+				if (!parameter
+						.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamName)
+						|| !parameter
+								.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamValue)) {
+					throw new InvalidModelException("Missing ACS paramter name or value.");
+				}
 
 				String name = parameter
 						.getProperty(

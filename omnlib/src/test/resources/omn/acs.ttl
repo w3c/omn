@@ -1,0 +1,77 @@
+<http://open-multinet.info/ontology/resource/ACSclient#ACSclient>
+        <http://open-multinet.info/ontology/omn-lifecycle#implements>
+                <http://open-multinet.info/ontology/resource/acs#ACS> .
+
+<http://localhost/reservation/89057e03-3620-45ea-a523-3ffb2199a58a>
+        a       <http://open-multinet.info/ontology/omn#Reservation> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "http://localhost/reservation/89057e03-3620-45ea-a523-3ffb2199a58a"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn#endTime>
+                "2015-11-10T13:18:30+01:00"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn#isReservationOf>
+                <http://localhost/resource/ACSclient-1/0963ca4f-25dc-4276-8e7f-d18d3b86acb9> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasReservationState>
+                <http://open-multinet.info/ontology/omn-lifecycle#Provisioned> .
+
+<http://localhost/resource/ACSclient-1/0963ca4f-25dc-4276-8e7f-d18d3b86acb9>
+        a       <http://open-multinet.info/ontology/resource/acs#ACS> , <http://open-multinet.info/ontology/omn-resource#Node> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "acs1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn#hasReservation>
+                <http://localhost/reservation/89057e03-3620-45ea-a523-3ffb2199a58a> ;
+        <http://open-multinet.info/ontology/omn#isResourceOf>
+                <http://wall2.ilabt.iminds.be/topology/acs4> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+                "http://localhost/resource/ACSclient-1"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasID>
+                "acs1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasState>
+                <http://open-multinet.info/ontology/omn-lifecycle#Uncompleted> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#implementedBy>
+                <http://localhost/resource/ACSclient-1> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#managedBy>
+                <http://localhost:8443/sfa/api/am/v3> ;
+        <http://open-multinet.info/ontology/omn-resource#hasSliverType>
+                <urn:uuid:3d14e48e-d503-450c-9e29-dc3d692864c1> ;
+        <http://open-multinet.info/ontology/omn-resource#isExclusive>
+                false ;
+        <http://open-multinet.info/ontology/resource/acs#hasDevice>
+                <urn:uuid:6a6bfa91-3284-4015-a107-ee2c77d7b523> .
+
+<http://wall2.ilabt.iminds.be/topology/acs4>
+        a       <http://open-multinet.info/ontology/omn#Topology> ;
+        <http://open-multinet.info/ontology/omn#endTime>
+                "2015-11-10T13:18:30+01:00"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/omn#hasResource>
+                <http://localhost/resource/ACSclient-1/0963ca4f-25dc-4276-8e7f-d18d3b86acb9> .
+
+<http://open-multinet.info/ontology/resource/acs#ACS>
+        a       <http://www.w3.org/2002/07/owl#Class> ;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Motor"@en ;
+        <http://www.w3.org/2000/01/rdf-schema#subClassOf>
+                <http://open-multinet.info/ontology/omn#Resource> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#implementedBy>
+                <http://open-multinet.info/ontology/resource/ACSclient#ACSclient> .
+
+<urn:uuid:3d14e48e-d503-450c-9e29-dc3d692864c1>
+        a       <http://open-multinet.info/ontology/omn-resource#SliverType> ;
+        <http://open-multinet.info/ontology/omn-lifecycle#hasSliverName>
+                "http://open-multinet.info/ontology/resource/acs#ACS"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+<http://localhost/resource/ACSclient-1/a8a5eeeb-d632-40f9-bf8c-b65ecc1b15d0>
+        a       <http://open-multinet.info/ontology/resource/acs#ACS> .
+
+<http://localhost/resource/ACSclient-1>
+        <http://open-multinet.info/ontology/omn-lifecycle#canImplement>
+                <http://open-multinet.info/ontology/resource/acs#ACS> .
+
+<urn:uuid:6a6bfa91-3284-4015-a107-ee2c77d7b523>
+        a       <http://open-multinet.info/ontology/resource/acs#AcsDevice> ;
+        <http://open-multinet.info/ontology/resource/acs#hasAcsId>
+                "id1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://open-multinet.info/ontology/resource/acs#hasParameter>
+                <urn:uuid:021b099c-21ed-46af-9787-6065b5e7b532> , <urn:uuid:091d8675-de1d-4d97-959f-a43f11701ed3> .
+
+<http://localhost/resource/ACSclient-1/5f24ab27-1fe6-47eb-8435-89b0ce9d8bfb>
+        a       <http://open-multinet.info/ontology/resource/acs#ACS> .

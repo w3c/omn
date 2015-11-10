@@ -205,7 +205,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	private void convertStatementsToNodesAndLinks(
 			final RSpecContents advertisement,
-			final List<Statement> omnResources) {
+			final List<Statement> omnResources) throws InvalidModelException {
 		for (final Statement omnResource : omnResources) {
 			// if type doesn't match anything else, then assume it's a node
 			if (!omnResource.getResource().hasProperty(RDF.type,

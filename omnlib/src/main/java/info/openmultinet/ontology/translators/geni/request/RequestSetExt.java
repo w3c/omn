@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni.request;
 
+import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
@@ -53,6 +54,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
 /**
  * Helper methods for converting from OMN model to request RSpec. These methods
  * are for non-native RSpec extensions.
@@ -1203,7 +1205,8 @@ public class RequestSetExt extends AbstractConverter {
 		}
 	}
 
-	public static void setAcs(Statement omnResource, NodeContents geniNode) {
+	public static void setAcs(Statement omnResource, NodeContents geniNode)
+			throws InvalidModelException {
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Acs.hasDevice)) {
 
@@ -1233,6 +1236,14 @@ public class RequestSetExt extends AbstractConverter {
 				ParameterContents parameterContents = new ObjectFactory()
 						.createParameterContents();
 
+				if (!parameter
+						.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamName)
+						|| !parameter
+								.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamValue)) {
+					throw new InvalidModelException(
+							"Missing ACS paramter name or value.");
+				}
+
 				String name = parameter
 						.getProperty(
 								info.openmultinet.ontology.vocabulary.Acs.hasParamName)
@@ -1251,7 +1262,7 @@ public class RequestSetExt extends AbstractConverter {
 			geniNode.getAnyOrRelationOrLocation().add(acsDevice);
 
 		}
-		
+
 	}
 
 }

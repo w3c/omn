@@ -29,6 +29,20 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class ManifestAcsTest {
 
+	@Test(expected = InvalidModelException.class)
+	public void testConvertingGraph2RSpec() throws InvalidModelException,
+			JAXBException {
+		InputStream input = ManifestConverterTest.class
+				.getResourceAsStream("/omn/acs.ttl");
+		Parser parser = new Parser(input);
+
+		final Model model = parser.getInfModel();
+		final String rspec = ManifestConverter.getRSpec(model, "localhost");
+		System.out.println(rspec);
+		Assert.assertTrue("should be a manifest",
+				rspec.contains("type=\"manifest\""));
+	}
+
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
