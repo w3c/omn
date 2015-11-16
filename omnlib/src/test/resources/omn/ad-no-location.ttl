@@ -1,0 +1,48 @@
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix omn:   <http://open-multinet.info/ontology/omn#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-nfv: <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix : <http://fiteagle.org/ontology/resource/motor#> .
+@base <http://fiteagle.org/ontology/resource/motor#> .
+
+<http://localhost/testbed>
+        a                omn-lifecycle:Offering ;
+        <http://open-multinet.info/ontology/omn#hasResource>
+                <http://localhost/resource/MotorGarage-1> .
+
+<http://open-multinet.info/ontology/resource/motor#manufacturer>
+        rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .
+
+<http://localhost/resource/MotorGarage-1>
+        a              <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> ;
+        rdfs:comment   "A motor garage adapter that can simulate different dynamic motor resources."^^xsd:string ;
+        rdfs:label     "MotorGarage-1"^^xsd:string ;
+        <http://open-multinet.info/ontology/omn#maxInstances>
+                "10"^^xsd:long ;
+        omn-lifecycle:canImplement  <http://open-multinet.info/ontology/resource/motor#Motor> .
+
+<http://open-multinet.info/ontology/resource/motorgarage#MotorGarage>
+        omn-lifecycle:implements  <http://open-multinet.info/ontology/resource/motor#Motor> .
+
+<http://open-multinet.info/ontology/resource/motor#throttle>
+        rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .
+
+<http://open-multinet.info/ontology/resource/motor#isDynamic>
+        rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .
+
+<http://open-multinet.info/ontology/resource/motor#Motor>
+        a                owl:Class ;
+        rdfs:label       "Motor"@en ;
+        rdfs:subClassOf  <http://open-multinet.info/ontology/omn#Resource> ;
+        omn-lifecycle:implementedBy   <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+
+<http://open-multinet.info/ontology/resource/motor#rpm>
+        rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .
+
+<http://open-multinet.info/ontology/resource/motor#maxRpm>
+        rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .

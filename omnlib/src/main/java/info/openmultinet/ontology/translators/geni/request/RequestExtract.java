@@ -3,12 +3,14 @@ package info.openmultinet.ontology.translators.geni.request;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.advertisement.AdExtractExt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
@@ -315,6 +317,8 @@ public class RequestExtract extends AbstractConverter {
 					tryExtractInterfaces(omnResource, element);
 					tryExtractHardwareType(omnResource, element);
 					tryExtractLocation(omnResource, element);
+				} else if (o.getClass().equals(Fd.class)) {
+					RequestExtractExt.tryExtractEmulabFd(omnResource, o);
 				} else if (o.getClass().equals(Ue.class)) {
 					RequestExtractExt.tryExtractUe(omnResource, o);
 				} else if (o.getClass().equals(Epc.class)) {
@@ -590,6 +594,9 @@ public class RequestExtract extends AbstractConverter {
 
 			omnHw.addProperty(RDFS.label, hardwareTypeName);
 			omnHw.addProperty(RDF.type, Omn_resource.HardwareType);
+			for (Object hwObject : hw.getAny()) {
+				RequestExtractExt.tryExtractEmulabNodeType(hwObject, omnHw);
+			}
 			omnNode.addProperty(Omn_resource.hasHardwareType, omnHw);
 
 		}

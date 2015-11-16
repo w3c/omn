@@ -2,20 +2,22 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
-import info.openmultinet.ontology.translators.geni.jaxb.request.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ENodeBContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.EpcIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Location;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
+import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Osco;
 import info.openmultinet.ontology.translators.geni.jaxb.request.OscoLocationContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.SubnetContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.SubscriberContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Ue;
@@ -1161,6 +1163,73 @@ public class RequestExtractExt extends AbstractConverter {
 						info.openmultinet.ontology.vocabulary.Acs.hasParamValue,
 						value);
 			}
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractEmulabFd(Resource omnNode,
+			Object rspecNodeObject) {
+
+		try {
+			Fd featureDescription = (Fd) rspecNodeObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource fdResource = omnNode.getModel().createResource(uuid);
+			fdResource.addProperty(RDF.type, Omn_domain_pc.FeatureDescription);
+
+			// name is required
+			String name = featureDescription.getName();
+			fdResource.addProperty(Omn_domain_pc.hasEmulabFdName, name);
+
+			// weight is required
+			String weight = featureDescription.getWeight();
+			fdResource.addProperty(Omn_domain_pc.hasEmulabFdWeight, weight);
+
+			// violatable is not required
+			String violatable = featureDescription.getViolatable();
+			if (violatable != null) {
+				fdResource.addProperty(Omn_domain_pc.emulabFdViolatable,
+						violatable);
+			}
+
+			// local operator is not required
+			String localOperator = featureDescription.getLocalOperator();
+			if (localOperator != null) {
+				fdResource.addProperty(Omn_domain_pc.hasEmulabFdLocalOperator,
+						localOperator);
+			}
+
+			// global operator is not required
+			String globalOperator = featureDescription.getGlobalOperator();
+			if (globalOperator != null) {
+				fdResource.addProperty(Omn_domain_pc.hasEmulabFdGlobalOperator,
+						globalOperator);
+			}
+
+			omnNode.addProperty(Omn.hasAttribute, fdResource);
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractEmulabNodeType(Object hwObject, Resource omnHw) {
+		
+		try {
+			NodeType nodeType = (NodeType) hwObject;
+
+			String nodeTypeSlots = nodeType.getTypeSlots();
+			omnHw.addProperty(Omn_domain_pc.hasEmulabNodeTypeSlots,
+					nodeTypeSlots);
+
+			String staticSlot = nodeType.getStatic();
+			if (staticSlot != null) {
+				omnHw.addProperty(Omn_domain_pc.emulabNodeTypeStatic,
+						staticSlot);
+			}
+
 		} catch (final ClassCastException e) {
 			RequestExtractExt.LOG.finer(e.getMessage());
 		}

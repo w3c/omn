@@ -71,32 +71,32 @@ public class FlavourTest {
 				.abbreviateMiddle(modStr, "\n...\n", 4096));
 	}
 
-//	@Test
-//	public void adRoundtrip() throws JAXBException, InvalidModelException,
-//			IOException, XMLStreamException, MissingRspecElementException,
-//			DeprecatedRspecVersionException {
-//
-//		final String filename = "/geni/advertisement/flavour.xml";
-//		final String inputRspec = AbstractConverter.toString(filename);
-//
-//		System.out.println("Converting this input from '" + filename + "':");
-//		System.out.println("===============================");
-//		System.out.println(inputRspec);
-//		System.out.println("===============================");
-//
-//		final String outputRspec = RSpecValidation
-//				.completeRoundtrip(inputRspec);
-//
-//		System.out.println("Generated this rspec:");
-//		System.out.println("===============================");
-//		System.out.println(outputRspec);
-//		System.out.println("===============================");
-//
-//		Assert.assertTrue("type",
-//				outputRspec.contains("type=\"advertisement\""));
-//
-//		System.out.println("===============================");
-//		System.out.println("Diffs:");
-//		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
-//	}
+	@Test
+	public void adRoundtrip() throws JAXBException, InvalidModelException,
+			IOException, XMLStreamException, MissingRspecElementException,
+			DeprecatedRspecVersionException {
+
+		final String filename = "/geni/advertisement/flavour.xml";
+		final String inputRspec = AbstractConverter.toString(filename);
+
+		System.out.println("Converting this input from '" + filename + "':");
+		System.out.println("===============================");
+		System.out.println(inputRspec);
+		System.out.println("===============================");
+
+		final String outputRspec = RSpecValidation
+				.completeRoundtrip(inputRspec);
+
+		System.out.println("Generated this rspec:");
+		System.out.println("===============================");
+		System.out.println(outputRspec);
+		System.out.println("===============================");
+
+		Assert.assertTrue("type",
+				outputRspec.contains("type=\"advertisement\""));
+
+		System.out.println("===============================");
+		System.out.println("Diffs:");
+		int[] diffsNodes = RSpecValidation.getDiffsNodes(inputRspec);
+	}
 }

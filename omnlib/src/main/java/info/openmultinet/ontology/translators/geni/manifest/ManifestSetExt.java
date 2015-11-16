@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.manifest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
@@ -858,7 +859,8 @@ public class ManifestSetExt extends AbstractConverter {
 
 	}
 
-	public static void setAcs(Statement omnResource, NodeContents geniNode) throws InvalidModelException {
+	public static void setAcs(Statement omnResource, NodeContents geniNode)
+			throws InvalidModelException {
 		if (omnResource.getResource().hasProperty(
 				info.openmultinet.ontology.vocabulary.Acs.hasDevice)) {
 
@@ -892,7 +894,8 @@ public class ManifestSetExt extends AbstractConverter {
 						.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamName)
 						|| !parameter
 								.hasProperty(info.openmultinet.ontology.vocabulary.Acs.hasParamValue)) {
-					throw new InvalidModelException("Missing ACS paramter name or value.");
+					throw new InvalidModelException(
+							"Missing ACS paramter name or value.");
 				}
 
 				String name = parameter
@@ -913,5 +916,60 @@ public class ManifestSetExt extends AbstractConverter {
 			geniNode.getAnyOrRelationOrLocation().add(acsDevice);
 
 		}
+	}
+
+	public static void setFd(Statement omnResource, NodeContents geniNode) {
+		List<Statement> resources = omnResource.getResource()
+				.listProperties(Omn.hasAttribute).toList();
+
+		for (final Statement resourceStatement : resources) {
+			// add emulab node slots
+			if (resourceStatement.getResource().hasProperty(RDF.type,
+					Omn_domain_pc.FeatureDescription)) {
+				ObjectFactory of = new ObjectFactory();
+				// name is required
+				Fd fd = of.createFd();
+				String name = resourceStatement.getResource()
+						.getProperty(Omn_domain_pc.hasEmulabFdName).getObject()
+						.asLiteral().getString();
+				fd.setName(name);
+
+				// weight is required
+				String weight = resourceStatement.getResource()
+						.getProperty(Omn_domain_pc.hasEmulabFdWeight)
+						.getObject().asLiteral().getString();
+				fd.setWeight(weight);
+
+				if (resourceStatement.getResource().hasProperty(
+						Omn_domain_pc.emulabFdViolatable)) {
+					String violatable = resourceStatement.getResource()
+							.getProperty(Omn_domain_pc.emulabFdViolatable)
+							.getObject().asLiteral().getString();
+					fd.setViolatable(violatable);
+				}
+
+				if (resourceStatement.getResource().hasProperty(
+						Omn_domain_pc.hasEmulabFdLocalOperator)) {
+					String localOperator = resourceStatement
+							.getResource()
+							.getProperty(Omn_domain_pc.hasEmulabFdLocalOperator)
+							.getObject().asLiteral().getString();
+					fd.setLocalOperator(localOperator);
+				}
+
+				if (resourceStatement.getResource().hasProperty(
+						Omn_domain_pc.hasEmulabFdGlobalOperator)) {
+					String localOperator = resourceStatement
+							.getResource()
+							.getProperty(
+									Omn_domain_pc.hasEmulabFdGlobalOperator)
+							.getObject().asLiteral().getString();
+					fd.setGlobalOperator(localOperator);
+				}
+
+				geniNode.getAnyOrRelationOrLocation().add(fd);
+			}
+		}
+
 	}
 }

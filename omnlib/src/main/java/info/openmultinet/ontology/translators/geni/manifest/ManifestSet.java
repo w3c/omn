@@ -2,6 +2,8 @@ package info.openmultinet.ontology.translators.geni.manifest;
 
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.HardwareTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ComponentManager;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
@@ -33,6 +35,7 @@ import javax.xml.bind.JAXBElement;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -644,6 +647,45 @@ public class ManifestSet extends AbstractConverter {
 		for (final Statement implementer : implementedBy) {
 			node.setComponentManagerId(implementer.getResource().getURI());
 		}
+	}
+
+	public static void setHardwareTypes(Statement omnResource,
+			NodeContents geniNode) {
+		List<Object> geniNodeDetails = geniNode.getAnyOrRelationOrLocation();
+
+		StmtIterator types = omnResource.getResource().listProperties(
+				Omn_resource.hasHardwareType);
+
+		while (types.hasNext()) {
+			HardwareTypeContents hwType;
+			Resource hwObject = types.next().getObject().asResource();
+			String hwName = hwObject.getProperty(RDFS.label).getObject()
+					.asLiteral().getString();
+			ObjectFactory of = new ObjectFactory();
+			hwType = of.createHardwareTypeContents();
+			hwType.setName(hwName);
+
+			// add emulab node slots
+			if (hwObject.hasProperty(Omn_domain_pc.hasEmulabNodeTypeSlots)) {
+				NodeType nodeType = of.createNodeType();
+				// type slots is required
+				String numSlots = hwObject
+						.getProperty(Omn_domain_pc.hasEmulabNodeTypeSlots)
+						.getObject().asLiteral().getString();
+				nodeType.setTypeSlots(numSlots);
+
+				if (hwObject.hasProperty(Omn_domain_pc.emulabNodeTypeStatic)) {
+					String staticType = hwObject
+							.getProperty(Omn_domain_pc.emulabNodeTypeStatic)
+							.getObject().asLiteral().getString();
+					nodeType.setStatic(staticType);
+				}
+				hwType.getAny().add(nodeType);
+			}
+
+			geniNodeDetails.add(of.createHardwareType(hwType));
+		}
+
 	}
 
 }

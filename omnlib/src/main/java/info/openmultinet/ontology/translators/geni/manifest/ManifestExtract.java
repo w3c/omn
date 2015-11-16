@@ -1,16 +1,17 @@
 package info.openmultinet.ontology.translators.geni.manifest;
 
-import info.openmultinet.ontology.translators.geni.CommonMethods;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.Ue;
-import info.openmultinet.ontology.translators.geni.jaxb.manifest.Epc;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ComponentManager;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.DiskImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ExecuteServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliverInfo;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.HardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.InterfaceRefContents;
@@ -21,6 +22,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.LocationContent
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Ue;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -109,13 +111,16 @@ public class ManifestExtract extends AbstractConverter {
 			if (nodeDetailObject instanceof JAXBElement) {
 				JAXBElement<?> nodeDetailElement = (JAXBElement<?>) nodeDetailObject;
 
+				tryExtractHardwareType(nodeDetailElement, omnResource);
 				extractLocation(nodeDetailElement, omnResource);
 				extractSliverType(nodeDetailElement, omnResource);
 				extractServices(nodeDetailElement, omnResource,
 						topology.getModel());
 				extractInterfaces(nodeDetailElement, omnResource,
 						topology.getModel());
-
+			} else if (nodeDetailObject.getClass().equals(Fd.class)) {
+				ManifestExtractExt.tryExtractEmulabFd(omnResource,
+						nodeDetailObject);
 			} else if (nodeDetailObject.getClass().equals(GeniSliverInfo.class)) {
 				ManifestExtractExt.extractGeniSliverInfo(nodeDetailObject,
 						omnResource);
@@ -152,6 +157,44 @@ public class ManifestExtract extends AbstractConverter {
 		}
 
 		topology.addProperty(Omn.hasResource, omnResource);
+	}
+
+	private static void tryExtractHardwareType(JAXBElement<?> rspecNodeObject,
+			Resource omnNode) throws MissingRspecElementException {
+		try {
+			@SuppressWarnings("unchecked")
+			final JAXBElement<HardwareTypeContents> hwJaxb = (JAXBElement<HardwareTypeContents>) rspecNodeObject;
+			final HardwareTypeContents hw = hwJaxb.getValue();
+
+			final Resource omnHw;
+
+			String hardwareTypeName = hw.getName();
+			// <xs:attribute name="component_id" use="required"/>
+			if (hardwareTypeName == null) {
+				throw new MissingRspecElementException(
+						"HardwareTypeContents > name");
+			}
+
+			if (AbstractConverter.isUrl(hardwareTypeName)
+					|| AbstractConverter.isUrn(hardwareTypeName)) {
+				omnHw = omnNode.getModel().createResource(hardwareTypeName);
+				omnNode.addProperty(RDF.type, omnHw);
+			} else {
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				omnHw = omnNode.getModel().createResource(uuid);
+			}
+
+			omnHw.addProperty(RDFS.label, hardwareTypeName);
+			omnHw.addProperty(RDF.type, Omn_resource.HardwareType);
+			for (Object hwObject : hw.getAny()) {
+				ManifestExtractExt.tryExtractEmulabNodeType(hwObject, omnHw);
+			}
+			omnNode.addProperty(Omn_resource.hasHardwareType, omnHw);
+
+		} catch (final ClassCastException e) {
+			ManifestExtract.LOG.finer(e.getMessage());
+		}
+
 	}
 
 	private static void extractComponentDetails(NodeContents node,

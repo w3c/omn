@@ -1,0 +1,23 @@
+<rspec expires="2015-10-06T14:36:31Z" generated="2015-10-06T14:36:31Z"
+    type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+    xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://www.protogeni.net/resources/rspec/ext/emulab/1 http://www.protogeni.net/resources/rspec/ext/emulab/1/ptop_extension.xsd http://hpn.east.isi.edu/rspec/ext/stitch/0.1/ http://hpn.east.isi.edu/rspec/ext/stitch/0.1/stitch-schema.xsd http://www.geni.net/resources/rspec/ext/shared-vlan/1 http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd http://www.geni.net/resources/rspec/ext/opstate/1 http://www.geni.net/resources/rspec/ext/opstate/1/ad.xsd ">
+    <node component_id="urn:publicid:IDN+instageni.umkc.edu+node+pc3"
+        component_manager_id="urn:publicid:IDN+instageni.umkc.edu+authority+cm"
+        component_name="pc3" exclusive="false">
+        <hardware_type name="dl360">
+            <emulab:node_type type_slots="1"/>
+        </hardware_type>
+        <sliver_type name="emulab-xen">
+            <disk_image description="FreeBSD 8.2 32-bit version"
+                name="urn:publicid:IDN+instageni.umkc.edu+image+emulab-ops:FBSD82-STD"
+                os="FreeBSD"
+                url="https://www.instageni.umkc.edu/image_metadata.php?uuid=b13a1335-c993-11e3-8962-02154fb85183" version="8.2"/>
+        </sliver_type>
+        <available now="true"/>
+        <location country="US" latitude="39.033669" longitude="-94.576278"/>
+        <emulab:fd global_operator="FirstFree" name="spreadshared-pc3" weight="0.9"/>
+        <emulab:fd local_operator="+" name="cpu" violatable="true" weight="2094"/>
+        <emulab:fd name="OS-10020-10008" weight="0"/>
+    </node>
+</rspec>

@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
@@ -151,6 +152,7 @@ public class RequestConverter extends AbstractConverter {
 				RequestSet.setSliverType(resource, node);
 				RequestSet.setServices(resource, node);
 				RequestSet.setHardwareTypes(resource, node);
+				RequestSetExt.setFd(resource, node);
 				RequestSetExt.setMonitoringService(resource, node);
 				RequestSetExt.setOsco(resource, node);
 				RequestSetExt.setEmulabExtension(resource, node);

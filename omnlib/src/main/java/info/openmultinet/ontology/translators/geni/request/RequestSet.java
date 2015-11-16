@@ -179,7 +179,15 @@ public class RequestSet extends AbstractConverter {
 						.getObject().asLiteral().getString();
 				nodeType.setTypeSlots(numSlots);
 				hwType.getAny().add(nodeType);
+
+				if (hwObject.hasProperty(Omn_domain_pc.emulabNodeTypeStatic)) {
+					String staticType = hwObject
+							.getProperty(Omn_domain_pc.emulabNodeTypeStatic)
+							.getObject().asLiteral().getString();
+					nodeType.setStatic(staticType);
+				}
 			}
+
 			geniNodeDetails.add(of.createHardwareType(hwType));
 		}
 	}
