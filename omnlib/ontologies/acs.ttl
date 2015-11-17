@@ -115,6 +115,20 @@
 
 
 
+###  http://open-multinet.info/ontology/resource/acs#power
+
+:power rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "ACS power"@en ;
+                
+                rdfs:comment "ACS power"@en ;
+                
+                rdfs:domain omn:Resource ;
+                
+                rdfs:range xsd:string .
+
+
+
 #################################################################
 #
 #    Classes
