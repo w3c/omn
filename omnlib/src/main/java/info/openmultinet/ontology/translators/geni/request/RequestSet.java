@@ -203,12 +203,27 @@ public class RequestSet extends AbstractConverter {
 
 			Resource linkResource = linkPropertyStatement.getResource();
 
-			String sinkId = linkResource.getProperty(Omn_resource.hasSink)
-					.getObject().asLiteral().getString();
+			Resource sinkResource = linkResource
+					.getProperty(Omn_resource.hasSink).getObject().asResource();
+			String sinkId;
+			if (sinkResource.hasProperty(Omn_resource.clientId)) {
+				sinkId = sinkResource.getProperty(Omn_resource.clientId)
+						.getObject().asLiteral().getString();
+			} else {
+				sinkId = sinkResource.getURI();
+			}
 			newLinkProperty.setDestId(sinkId);
 
-			String sourceId = linkResource.getProperty(Omn_resource.hasSource)
-					.getObject().asLiteral().getString();
+			Resource sourceResource = linkResource
+					.getProperty(Omn_resource.hasSource).getObject()
+					.asResource();
+			String sourceId;
+			if (sourceResource.hasProperty(Omn_resource.clientId)) {
+				sourceId = sourceResource.getProperty(Omn_resource.clientId)
+						.getObject().asLiteral().getString();
+			} else {
+				sourceId = sourceResource.getURI();
+			}
 			newLinkProperty.setSourceId(sourceId);
 
 			if (linkResource.hasProperty(Omn_domain_pc.hasLatency)) {

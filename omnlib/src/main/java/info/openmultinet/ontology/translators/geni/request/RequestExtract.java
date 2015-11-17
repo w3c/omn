@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.request;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.RSpecValidation;
 import info.openmultinet.ontology.translators.geni.advertisement.AdExtractExt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
@@ -57,6 +58,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
 /**
  * Helper methods to extract information from a request RSpec to create an OMN
  * model. For native RSpec elements.
@@ -249,8 +251,26 @@ public class RequestExtract extends AbstractConverter {
 		Resource linkPropertyResource = linkResource.getModel().createResource(
 				uuid);
 		linkPropertyResource.addProperty(RDF.type, Omn_resource.LinkProperty);
-		linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
-		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceID);
+		
+		
+		// linkPropertyResource.addProperty(Omn_resource.hasSink, destID);
+		Resource destIdResource = null;
+		if (AbstractConverter.isUrl(destID) || AbstractConverter.isUrn(destID)) {
+			destIdResource = linkResource.getModel().createResource(destID);
+		} else {
+			destIdResource = linkResource.getModel().createResource(
+					HOST + destID);
+		}
+		linkPropertyResource.addProperty(Omn_resource.hasSink, destIdResource);
+		
+		Resource sourceIDResource = null;
+		if (AbstractConverter.isUrl(destID) || AbstractConverter.isUrn(sourceID)) {
+			sourceIDResource = linkResource.getModel().createResource(sourceID);
+		} else {
+			sourceIDResource = linkResource.getModel().createResource(
+					HOST + sourceID);
+		}
+		linkPropertyResource.addProperty(Omn_resource.hasSource, sourceIDResource);
 
 		String capacity = content.getCapacity();
 		if (capacity != null) {
@@ -354,8 +374,22 @@ public class RequestExtract extends AbstractConverter {
 		if (element.getDeclaredType().equals(InterfaceContents.class)) {
 			Model outputModel = omnResource.getModel();
 			InterfaceContents content = (InterfaceContents) element.getValue();
-			Resource interfaceResource = outputModel.createResource(HOST
-					+ content.getClientId());
+
+			// client id is required
+			String clientId = content.getClientId();
+			if (clientId == null) {
+				throw new MissingRspecElementException(
+						"NodeContents > client_id");
+			}
+
+			Resource interfaceResource;
+			if (AbstractConverter.isUrl(clientId)
+					|| AbstractConverter.isUrn(clientId)) {
+				interfaceResource = outputModel.createResource(content.getClientId());
+			} else {
+				interfaceResource = outputModel.createResource(HOST
+						+ content.getClientId());
+			}
 			// interfaceResource.addProperty(RDF.type,
 			// Nml.Port);
 			// omnResource.addProperty(Nml.hasPort,

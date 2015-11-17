@@ -35,9 +35,9 @@ public class UmkcigTest {
 		final String outputRspec = RSpecValidation
 				.completeRoundtrip(inputRspec);
 
-		PrintWriter outFile = new PrintWriter("filename.txt");
-		outFile.println(outputRspec);
-		outFile.close();
+		// PrintWriter outFile = new PrintWriter("filename.txt");
+		// outFile.println(outputRspec);
+		// outFile.close();
 
 		System.out.println("Generated this rspec:");
 		System.out.println("===============================");
