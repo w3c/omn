@@ -29,11 +29,11 @@
                                         
                                          dc:date "2015-10-26"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-10-26"^^xsd:date ;
+                                         dcterms:modified "2015-11-19"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-10-26"^^xsd:string ;
+                                         owl:versionInfo "2015-11-19"^^xsd:string ;
                                          
-                                         dc:title "Open-Multinet Upper Ontology"@en ;
+                                         dc:title "EPC ontology"@en ;
                                          
                                          dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs.."@en ;
 
@@ -209,6 +209,23 @@
 
 
 
+
+###  http://open-multinet.info/ontology/resource/epc#delayCode
+
+:delayCode rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "delay code"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "delay code (0 => 0, 1 => 4, 2 => 10, 3 => 50, 4 => 200, 5 => 500)"@en ;
+                
+                rdfs:domain :EpcResource ;
+                
+                rdfs:range xsd:integer .
+
+
+
 ###  http://open-multinet.info/ontology/resource/epc#eNodeBAddress
 
 :eNodeBAddress rdf:type owl:DatatypeProperty ;
@@ -355,6 +372,22 @@
 
 
 
+###  http://open-multinet.info/ontology/resource/epc#packetlossCode
+
+:packetlossCode rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "packet loss code"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "packet loss code (0 => 0, 1 => 4, 2 => 6, 3 => 20, 4 => 40, 5 => 70)"@en ;
+                
+                rdfs:domain :EpcResource ;
+                
+                rdfs:range xsd:integer .
+
+
+
 ###  http://open-multinet.info/ontology/resource/epc#publicLandMobileNetworkId
 
 :publicLandMobileNetworkId rdf:type owl:DatatypeProperty ;
@@ -385,6 +418,21 @@
                 
                 rdfs:range xsd:string .
 
+
+
+###  http://open-multinet.info/ontology/resource/epc#rateCode
+
+:rateCode rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "rate code"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "rate code (0 => 0, 1 => 500, 2 => 1000, 3 => 10000, 4 => 100000, 5 => 1000000)"@en ;
+                
+                rdfs:domain :EpcResource ;
+                
+                rdfs:range xsd:integer .
 
 
 
@@ -464,7 +512,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
       rdfs:label "Access Network"@en ;
       
-      rdfs:subClassOf omn:Resource ;
+      rdfs:subClassOf :EpcResource ;
       
       rdfs:comment "The Access Network of FLEX’s building blocks are the commercial or the Open Source eNodeB’s."@en ;
       
@@ -543,6 +591,19 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
       rdfs:seeAlso <http://www.flex-project.eu> .
 
 
+###  http://open-multinet.info/ontology/resource/epc#EpcResource
+
+:EpcResource rdf:type owl:Class ;
+
+      rdfs:label "EPC generic resource"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "EPC generic resource, can have specific type EvolvedPacketCore, UserEquipment or AccessNetwork"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
 
 ###  http://open-multinet.info/ontology/resource/epc#EvolvedPacketCore
 
@@ -550,7 +611,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
       rdfs:label "Evolved Packet Core"@en ;
       
-      rdfs:subClassOf omn:Resource ;
+      rdfs:subClassOf :EpcResource ;
       
       rdfs:comment "Evolved Packet Core networks (SiRRAN’s and OpenAirInterface)"@en ;
       
@@ -578,7 +639,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
       rdfs:label "User Equipment"@en ;
       
-      rdfs:subClassOf omn:Resource ;
+      rdfs:subClassOf :EpcResource ;
       
       rdfs:comment "User Equipment, e.g. Android phone"@en ;
       
@@ -606,7 +667,6 @@ omn-resource:IPAddress rdf:type owl:Class .
 
 
 
-
 ###  http://open-multinet.info/ontology/omn-resource#DiskImage
 
 omn-domain-pc:DiskImage rdf:type owl:Class .
@@ -616,9 +676,3 @@ omn-domain-pc:DiskImage rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn#Adapter
 
 omn:Adapter rdf:type owl:Class .
-
-
-
-
-
-

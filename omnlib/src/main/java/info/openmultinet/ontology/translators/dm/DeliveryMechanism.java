@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.dm;
 
+
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
