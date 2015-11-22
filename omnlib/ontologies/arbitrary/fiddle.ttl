@@ -11,18 +11,19 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
 @base <urn:fiddle:ontology#> .
 
 <urn:fiddle:ontology> rdf:type owl:Ontology ;
-                                         
+
                                          dc:date "2014-12-18"^^xsd:string ;
-                                         
+
                                          owl:versionInfo "2014-12-18"^^xsd:string ;
-                                         
+
                                          dc:title "Open-Multinet Upper Ontology"^^xsd:string ;
-                                         
+
                                          dc:creator <http://alex.willner.ws/about#me> ;
-                                         
+
                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
 
 
@@ -37,13 +38,13 @@
 ###  urn:fiddle:ontology#hasFederationMember
 
 :hasFederationMember rdf:type owl:ObjectProperty ;
-                     
+
                      rdfs:label "has federation member" ;
-                     
+
                      rdfs:comment "a federation can have an organization as a member" ;
-                     
+
                      rdfs:domain :Federation ;
-                     
+
                      rdfs:range :FederationMember .
 
 
@@ -51,15 +52,15 @@
 ###  urn:fiddle:ontology#partOfFederation
 
 :partOfFederation rdf:type owl:ObjectProperty ;
-                  
+
                   rdfs:label "is part of federation" ;
-                  
+
                   rdfs:comment "an organization can be part of a federation" ;
-                  
+
                   rdfs:range :Federation ;
-                  
+
                   rdfs:domain :FederationMember ;
-                  
+
                   owl:inverseOf :hasFederationMember .
 
 
@@ -68,15 +69,15 @@
 ###  urn:fiddle:ontology#administers
 
 :administers rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "administers" ;
-             
+
              rdfs:comment "an organization (e.g. a federation member) administers its own infrastructure" ;
-             
+
              rdfs:range :Infrastructure ;
-             
+
              owl:inverseOf :isAdministeredBy ;
-             
+
              rdfs:domain foaf:Organization .
 
 
@@ -85,13 +86,13 @@
 ###  urn:fiddle:ontology#isAdministeredBy
 
 :isAdministeredBy rdf:type owl:ObjectProperty ;
-                  
+
                   rdfs:label "is administered by" ;
-                  
+
                   rdfs:comment "an infrastructure can be administered by an organization (e.g. a federation member)" ;
-                  
+
                   rdfs:domain :Infrastructure ;
-                  
+
                   rdfs:range foaf:Organization .
 
 
@@ -99,13 +100,13 @@
 ###  urn:fiddle:ontology#hasGroup
 
 :hasGroup rdf:type owl:ObjectProperty ;
-              
+
               rdfs:label "has group" ;
-              
-              rdfs:seeAlso nml:hasTypology ;
-              
+
+              rdfs:seeAlso nml:hasTopology ;
+
               rdfs:range :Group ;
-              
+
               rdfs:domain :Group .
 
 
@@ -113,13 +114,13 @@
 ###  urn:fiddle:ontology#hasComponent
 
 :hasComponent rdf:type owl:ObjectProperty ;
-              
+
               rdfs:label "has resource component" ;
-              
+
               rdfs:seeAlso novi:hasComponent ;
-              
+
               rdfs:range :Component ;
-              
+
               rdfs:domain :Resource .
 
 
@@ -127,13 +128,13 @@
 ###  urn:fiddle:ontology#componentOf
 
 :componentOf rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "is component of a resource" ;
-             
+
              rdfs:domain :Component ;
-             
+
              rdfs:range :Resource ;
-             
+
              owl:inverseOf :hasComponent .
 
 
@@ -141,26 +142,26 @@
 ###  urn:fiddle:ontology#requires
 
 :requires rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "requires an ICT object" ;
-             
+
              rdfs:range :Object ;
-             
+
              rdfs:domain :Object ;
-             
+
              owl:inverseOf :requiredBy .
 
 
 ###  urn:fiddle:ontology#requiredBy
 
 :requiredBy rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "is required by an ICT object" ;
-             
+
              rdfs:range :Object ;
-             
+
              rdfs:domain :Object ;
-             
+
              owl:inverseOf :requires .
 
 
@@ -169,11 +170,11 @@
 ###  urn:fiddle:ontology#hasAttribute
 
 :hasAttribute rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "has attribute" ;
-             
+
              rdfs:domain :Object ;
-             
+
              rdfs:range :Attribute .
 
 
@@ -182,13 +183,13 @@
 ###  urn:fiddle:ontology#isAttributef
 
 :isAttributeOf rdf:type owl:ObjectProperty ;
-              
+
               rdfs:label "is attribute of" ;
-              
+
               rdfs:range :Object ;
-              
+
               rdfs:domain :Attribute ;
-              
+
               owl:inverseOf :hasAttribute .
 
 
@@ -198,15 +199,15 @@
 ###  urn:fiddle:ontology#hasResource
 
 :hasResource rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "has resource" ;
-             
+
              rdfs:seeAlso novi:contains ;
-             
+
              rdfs:domain :Infrastructure ;
-             
+
              rdfs:range :Resource ;
-             
+
              owl:inverseOf :resourceOf .
 
 
@@ -215,11 +216,11 @@
 ###  urn:fiddle:ontology#resourceOf
 
 :resourceOf rdf:type owl:ObjectProperty ;
-            
+
             rdfs:label "is resource of an infrastructure" ;
-            
+
             rdfs:range :Infrastructure ;
-            
+
             rdfs:domain :Resource .
 
 
@@ -228,11 +229,11 @@
 ###  urn:fiddle:ontology#hasService
 
 :hasService rdf:type owl:ObjectProperty ;
-            
+
             rdfs:label "has service" ;
-            
+
             rdfs:domain :Infrastructure ;
-            
+
             rdfs:range :Service .
 
 
@@ -241,13 +242,13 @@
 ###  urn:fiddle:ontology#isServiceOf
 
 :isServiceOf rdf:type owl:ObjectProperty ;
-             
+
              rdfs:label "serves an infrastructure" ;
-             
+
              rdfs:range :Infrastructure ;
-             
+
              rdfs:domain :Service ;
-             
+
              owl:inverseOf :hasService .
 
 
@@ -256,17 +257,17 @@
 ###  urn:fiddle:ontology#implements
 
 :implements rdf:type owl:ObjectProperty ;
-            
+
             rdfs:label "implements" ;
-            
+
             rdfs:seeAlso novi:implements ;
-            
+
             rdfs:domain :Resource ;
-            
+
             owl:inverseOf :implementedBy ;
-            
+
             rdfs:seeAlso indl:implements ;
-            
+
             rdfs:range [ rdf:type owl:Class ;
                          owl:unionOf ( :Service
                                        :VirtualResource
@@ -278,13 +279,13 @@
 ###  urn:fiddle:ontology#implementedBy
 
 :implementedBy rdf:type owl:ObjectProperty ;
-               
+
                rdfs:label "is implemented by" ;
-               
+
                rdfs:seeAlso novi:implementedBy ;
-               
+
                rdfs:range :Resource ;
-               
+
                rdfs:domain [ rdf:type owl:Class ;
                              owl:unionOf ( :Service
                                            :VirtualResource
@@ -311,9 +312,9 @@
 ###  urn:fiddle:ontology#hasEndpoint
 
 :hasEndpoint rdf:type owl:DatatypeProperty ;
-             
+
              rdfs:domain novi:Service ;
-             
+
              rdfs:range xsd:anyURI .
 
 
@@ -332,7 +333,7 @@
 :Component rdf:type owl:Class ;
 
             rdfs:subClassOf :Resource ;
-           
+
            rdfs:label "Resource Component" .
 
 
@@ -340,33 +341,33 @@
 ###  urn:fiddle:ontology#Federation
 
 :Federation rdf:type owl:Class ;
-            
+
             rdfs:label "Federation" ;
-            
-            rdfs:subClassOf foaf:Organization .
+
+            rdfs:subClassOf schema:Organization .
 
 
 
 ###  urn:fiddle:ontology#FederationMember
 
 :FederationMember rdf:type owl:Class ;
-                  
+
                   rdfs:label "member of a federation" ;
-                  
-                  rdfs:subClassOf foaf:Organization .
+
+                  rdfs:subClassOf schema:Organization .
 
 
 
 ###  urn:fiddle:ontology#Group
 
 :Group rdf:type owl:Class ;
-       
+
        rdfs:label "Group" ;
 
        rdfs:subClassOf :Object ;
-       
+
        owl:equivalentClass nml:Group ;
-       
+
        rdfs:seeAlso novi:Group .
 
 
@@ -374,13 +375,13 @@
 ###  urn:fiddle:ontology#Infrastructure
 
 :Infrastructure rdf:type owl:Class ;
-                
+
                 rdfs:label "Infrastructure" ;
-                
+
                 rdfs:subClassOf :Group ;
-                
+
                 rdfs:comment "an infrastructure such as a testbed or cloud facility" ;
-                
+
                 rdfs:seeAlso novi:Platform .
 
 
@@ -388,9 +389,9 @@
 ###  urn:fiddle:ontology#Object
 
 :Object rdf:type owl:Class ;
-        
+
         rdfs:label "ICT Object" ;
-        
+
         owl:equivalentClass nml:NetworkObject .
 
 
@@ -398,7 +399,7 @@
 ###  urn:fiddle:ontology#Attribute
 
 :Attribute rdf:type owl:Class ;
-          
+
           rdfs:label "Attribute" .
 
 
@@ -408,9 +409,9 @@
 :Resource rdf:type owl:Class ;
 
           rdfs:subClassOf :Object ;
-          
+
           rdfs:label "Resource" ;
-          
+
           rdfs:seeAlso nml:NetworkObject .
 
 
@@ -420,10 +421,10 @@
 :Service rdf:type owl:Class ;
 
           rdfs:subClassOf :Object ;
-         
+
          rdfs:label "Service" ;
-         
-         rdfs:seeAlso indl:Capability .
+
+         rdfs:seeAlso novi:Service .
 
 
 
@@ -432,9 +433,9 @@
 :VirtualResource rdf:type owl:Class ;
 
                 rdfs:subClassOf :Resource ;
-                 
+
                  rdfs:label "Virtual Resource" ;
-                 
+
                  owl:equivalentClass indl:VirtualNode .
 
 
