@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.advertisement;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
@@ -21,7 +22,7 @@ public class AdEpcTest {
 	@Test
 	public void adRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 
 		final String filename = "/geni/advertisement/epc.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
@@ -72,7 +73,8 @@ public class AdEpcTest {
 			Assert.assertTrue(ue.getLength() == 1);
 
 			NodeList accessNetwork = xmlDoc.getElementsByTagNameNS(
-					"http://open-multinet.info/ontology/resource/epc", "access_network");
+					"http://open-multinet.info/ontology/resource/epc",
+					"access_network");
 			Assert.assertTrue(accessNetwork.getLength() == 1);
 
 		}

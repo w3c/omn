@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 
@@ -87,7 +88,8 @@ public class RSpecValidationTest {
 
 	private static ArrayList<List<Double>> getErrorDirectory(File path)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -206,7 +208,8 @@ public class RSpecValidationTest {
 
 	private static ArrayList<List<Integer>> getNodesDiffsDirectory(File path)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
@@ -416,7 +419,7 @@ public class RSpecValidationTest {
 
 	private static ArrayList<List<Long>> getTimesDirectory(File path)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 		if (!path.isDirectory()) {
 			System.out.println("Not a directory.");
 			return null;
@@ -727,7 +730,8 @@ public class RSpecValidationTest {
 
 	private static void getErrorFile(File path)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, IOException {
+			DeprecatedRspecVersionException, IOException,
+			InvalidRspecValueException {
 
 		System.out.println("******************************************");
 		System.out.println("******       Prelim                 ******");

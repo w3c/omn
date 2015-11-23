@@ -1,6 +1,7 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.advertisement.AdExtract;
@@ -8,9 +9,11 @@ import info.openmultinet.ontology.translators.geni.advertisement.AdExtractExt;
 import info.openmultinet.ontology.translators.geni.advertisement.AdSet;
 import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Available;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Datapath;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ExternalReferenceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.GroupContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
@@ -22,6 +25,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Sliver;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.StitchContent;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
@@ -96,7 +100,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	public Model getModel(final InputStream input) throws JAXBException,
 			InvalidModelException, XMLStreamException,
-			MissingRspecElementException {
+			MissingRspecElementException, InvalidRspecValueException {
 
 		final RSpecContents rspecAdvertisement = getRspec(input);
 
@@ -117,7 +121,7 @@ public class AdvertisementConverter extends AbstractConverter {
 
 	@SuppressWarnings("rawtypes")
 	public Model getModel(RSpecContents rspec)
-			throws MissingRspecElementException {
+			throws MissingRspecElementException, InvalidRspecValueException {
 
 		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 		final Resource offering = model.createResource(uuid);
@@ -139,6 +143,8 @@ public class AdvertisementConverter extends AbstractConverter {
 			AdExtractExt.tryExtractSharedVlan(rspecObject, offering);
 			AdExtractExt.tryExtractRoutableAddresses(rspecObject, offering);
 			AdExtractExt.tryExtractOpstate(rspecObject, offering);
+			AdExtractExt.tryExtractOlChannel(rspecObject, offering);
+			AdExtractExt.tryExtractOlLease(rspecObject, offering);
 
 			if (rspecObject.toString().contains("stitching")) {
 				AdExtractExt.extractStitching(rspecObject, offering);
@@ -197,8 +203,14 @@ public class AdvertisementConverter extends AbstractConverter {
 			ad.getAnyOrNodeOrLink().add(of.createExternalRef(exrefContents));
 		}
 
-		final List<Statement> resources = group.listProperties(Omn.hasResource)
+		List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
+		List<Statement> components = group.listProperties(Omn.hasComponent)
+				.toList();
+		resources.addAll(components);
+		List<Statement> leases = group.listProperties(Omn_lifecycle.hasLease)
+				.toList();
+		resources.addAll(leases);
 
 		convertStatementsToNodesAndLinks(ad, resources);
 	}
@@ -208,18 +220,24 @@ public class AdvertisementConverter extends AbstractConverter {
 			final List<Statement> omnResources) throws InvalidModelException {
 		for (final Statement omnResource : omnResources) {
 			// if type doesn't match anything else, then assume it's a node
-			if (!omnResource.getResource().hasProperty(RDF.type,
-					Omn_resource.Link)
-					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_lifecycle.Opstate)
-					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_domain_pc.SharedVlan)
-					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_resource.Stitching)
-					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_domain_pc.Datapath)
-					&& !omnResource.getResource().hasProperty(RDF.type,
-							Omn_resource.Openflow)) {
+			if ((omnResource.getResource().hasProperty(RDF.type,
+					Omn_resource.Node))
+					|| (!omnResource.getResource().hasProperty(RDF.type,
+							Omn_resource.Link)
+							&& !omnResource.getResource().hasProperty(RDF.type,
+									Omn_lifecycle.Opstate)
+							&& !omnResource.getResource().hasProperty(RDF.type,
+									Omn_domain_pc.SharedVlan)
+							&& !omnResource.getResource().hasProperty(RDF.type,
+									Omn_resource.Stitching)
+							&& !omnResource.getResource().hasProperty(RDF.type,
+									Omn_domain_pc.Datapath)
+							&& !omnResource.getResource().hasProperty(RDF.type,
+									Omn_resource.Openflow)
+							&& !omnResource.getResource().hasProperty(RDF.type,
+									Omn_domain_wireless.Channel) && !omnResource
+							.getResource().hasProperty(RDF.type,
+									Omn_lifecycle.Lease))) {
 
 				if (verbose) {
 					AdSet.setNodesVerbose(omnResource, advertisement);
@@ -283,6 +301,18 @@ public class AdvertisementConverter extends AbstractConverter {
 					Omn_resource.Openflow)) {
 				final Sliver of = new Sliver();
 				AdSetExt.setOpenflow(omnResource, of);
+				advertisement.getAnyOrNodeOrLink().add(of);
+
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					Omn_domain_wireless.Channel)) {
+				final Channel of = new Channel();
+				AdSetExt.setOlChannel(omnResource, of);
+				advertisement.getAnyOrNodeOrLink().add(of);
+
+			} else if (omnResource.getResource().hasProperty(RDF.type,
+					Omn_lifecycle.Lease)) {
+				final Lease of = new Lease();
+				AdSetExt.setOlLease(omnResource, of);
 				advertisement.getAnyOrNodeOrLink().add(of);
 
 			} else if (omnResource.getResource().hasProperty(RDF.type,

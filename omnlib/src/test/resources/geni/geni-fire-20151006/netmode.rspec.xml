@@ -1,3 +1,4 @@
+<!-- Have changed wrong 'type' attribute to 'type' - robynml  -->
 <rspec expires="2015-10-06T17:50:59+03:00"
     generated="2015-10-06T17:40:59+03:00" type="advertisement"
     xmlns="http://www.geni.net/resources/rspec/3"
@@ -12,7 +13,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node1:eth0"
             component_name="node1:eth0" role="control">
-            <ip address="10.0.0.1" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.1" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node2"
@@ -23,7 +24,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node2:eth0"
             component_name="node2:eth0" role="control">
-            <ip address="10.0.0.2" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.2" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node3"
@@ -34,7 +35,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node3:eth0"
             component_name="node3:eth0" role="control">
-            <ip address="10.0.0.3" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.3" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node4"
@@ -45,7 +46,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node4:eth0"
             component_name="node4:eth0" role="control">
-            <ip address="10.0.0.4" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.4" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node5"
@@ -56,7 +57,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node5:eth0"
             component_name="node5:eth0" role="control">
-            <ip address="10.0.0.5" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.5" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node6"
@@ -67,7 +68,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node6:eth0"
             component_name="node6:eth0" role="control">
-            <ip address="10.0.0.6" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.6" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node7"
@@ -78,7 +79,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node7:eth0"
             component_name="node7:eth0" role="control">
-            <ip address="10.0.0.7" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.7" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node8"
@@ -89,7 +90,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node8:eth0"
             component_name="node8:eth0" role="control">
-            <ip address="10.0.0.8" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.8" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node9"
@@ -100,7 +101,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node9:eth0"
             component_name="node9:eth0" role="control">
-            <ip address="10.0.0.9" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.9" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node10"
@@ -111,7 +112,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node10:eth0"
             component_name="node10:eth0" role="control">
-            <ip address="10.0.0.10" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.10" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node11"
@@ -122,7 +123,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node11:eth0"
             component_name="node11:eth0" role="control">
-            <ip address="10.0.0.11" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.11" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node12"
@@ -133,7 +134,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node12:eth0"
             component_name="node12:eth0" role="control">
-            <ip address="10.0.0.12" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.12" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node13"
@@ -144,7 +145,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node13:eth0"
             component_name="node13:eth0" role="control">
-            <ip address="10.0.0.13" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.13" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node14"
@@ -155,7 +156,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node14:eth0"
             component_name="node14:eth0" role="control">
-            <ip address="10.0.0.14" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.14" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node15"
@@ -166,7 +167,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node15:eth0"
             component_name="node15:eth0" role="control">
-            <ip address="10.0.0.15" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.15" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node16"
@@ -177,7 +178,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node16:eth0"
             component_name="node16:eth0" role="control">
-            <ip address="10.0.0.16" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.16" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node17"
@@ -188,7 +189,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node17:eth0"
             component_name="node17:eth0" role="control">
-            <ip address="10.0.0.17" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.17" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node18"
@@ -199,7 +200,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node18:eth0"
             component_name="node18:eth0" role="control">
-            <ip address="10.0.0.18" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.18" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node19"
@@ -210,7 +211,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node19:eth0"
             component_name="node19:eth0" role="control">
-            <ip address="10.0.0.19" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.19" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <node component_id="urn:publicid:IDN+omf:netmode+node+node20"
@@ -221,7 +222,7 @@
         <interface
             component_id="urn:publicid:IDN+omf:netmode+interface+node20:eth0"
             component_name="node20:eth0" role="control">
-            <ip address="10.0.0.20" ip_type="ipv4" netmask="255.255.255.0"/>
+            <ip address="10.0.0.20" type="ipv4" netmask="255.255.255.0"/>
         </interface>
     </node>
     <ol:channel component_id="urn:publicid:IDN+omf:netmode+channel+1"

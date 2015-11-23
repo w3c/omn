@@ -2,12 +2,12 @@ package info.openmultinet.ontology.translators.geni.genifire;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
@@ -22,7 +22,7 @@ public class UmkcigTest {
 	@Test
 	public void adRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 
 		final String filename = "/geni/geni-fire-20151006/umkc-ig-test2.xml";
 		final String inputRspec = AbstractConverter.toString(filename);

@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.advertisement;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
@@ -21,8 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
@@ -40,7 +39,7 @@ public class FlavourTest {
 	@Test
 	public void testConvertingGraph2ToRSpecPaper() throws JAXBException,
 			InvalidModelException, XMLStreamException,
-			MissingRspecElementException {
+			MissingRspecElementException, InvalidRspecValueException {
 
 		System.out.println("************************************");
 		String filename = "/omn/flavour2.ttl";
@@ -74,7 +73,7 @@ public class FlavourTest {
 	@Test
 	public void adRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 
 		final String filename = "/geni/advertisement/flavour.xml";
 		final String inputRspec = AbstractConverter.toString(filename);

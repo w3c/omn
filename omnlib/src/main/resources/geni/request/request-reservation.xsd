@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:rspec="http://nitlab.inf.uth.gr/schema/sfa/rspec/1">
+  <xs:element name="lease">
+    <xs:complexType>
+      <xs:attribute name="leaseID" type="xs:ID"/>
+      <xs:attribute name="uuid"/>
+      <xs:attribute name="slice_id"/>
+      <xs:attribute name="valid_from" type="xs:dateTime"/>
+      <xs:attribute name="valid_until" type="xs:dateTime"/>
+      <xs:attribute name="leaseREF" type="xs:IDREF"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

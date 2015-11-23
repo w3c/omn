@@ -3,10 +3,10 @@ package info.openmultinet.ontology.translators.geni.advertisement;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
-import info.openmultinet.ontology.translators.geni.AdvertisementConverterTest;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
 
 import java.io.FileInputStream;
@@ -27,7 +27,7 @@ public class LukaszTest {
 	@Test
 	public void adRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 
 		final String filename = "/geni/advertisement/lukasz-ad.xml";
 		final String inputRspec = AbstractConverter.toString(filename);

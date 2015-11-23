@@ -3,11 +3,11 @@ package info.openmultinet.ontology.translators.geni.gimiv3;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
-import info.openmultinet.ontology.translators.geni.RequestConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 
 import java.io.IOException;
@@ -29,7 +29,8 @@ public class FourNodesTest {
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+			MissingRspecElementException, DeprecatedRspecVersionException,
+			InvalidRspecValueException {
 		final String filename = "/geni/gimiv3/4nodes.manifest";
 		final InputStream inputRspec = FourNodesTest.class
 				.getResourceAsStream(filename);
@@ -119,8 +120,8 @@ public class FourNodesTest {
 				"geni_sliver_info resource_id",
 				outputRspec
 						.contains("resource_id=\"rci-w7:bdd5b251-4a63-4bd4-b77c-cad57974602d\""));
-//		Assert.assertTrue("geni_sliver_info state",
-//				outputRspec.contains("state=\"ready\""));
+		// Assert.assertTrue("geni_sliver_info state",
+		// outputRspec.contains("state=\"ready\""));
 		Assert.assertTrue("geni_sliver_info start_time",
 				outputRspec.contains("start_time=\"2013-12-03T00:57:47.000Z\""));
 		Assert.assertTrue("geni_sliver_info expiration_time", outputRspec

@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.manifest;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
@@ -31,7 +32,8 @@ public class ManifestEpcTest {
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+			MissingRspecElementException, DeprecatedRspecVersionException,
+			InvalidRspecValueException {
 
 		final String filename = "/geni/manifest/epc.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
@@ -86,7 +88,8 @@ public class ManifestEpcTest {
 		Assert.assertTrue(ue.getLength() == 1);
 
 		NodeList an = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/epc", "access_network");
+				"http://open-multinet.info/ontology/resource/epc",
+				"access_network");
 		Assert.assertTrue(an.getLength() == 1);
 		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.

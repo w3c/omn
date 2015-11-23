@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
@@ -21,7 +22,7 @@ public class RequestUnbound2Test {
 	@Test
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 		final String filename = "/geni/request/request_unbound2.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 

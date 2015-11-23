@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.protogeni;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
@@ -21,7 +22,7 @@ public class AdOpStateTest {
 	@Test
 	public void adRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 
 		final String filename = "/geni/protogeni/adopstate.xml";
 		final String inputRspec = AbstractConverter.toString(filename);

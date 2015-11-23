@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
@@ -21,7 +22,7 @@ public class RequestDemoSep2015 {
 	@Test
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 		final String filename = "/geni/request/request_demo.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
@@ -55,7 +56,7 @@ public class RequestDemoSep2015 {
 				"http://www.geni.net/resources/rspec/3", "node");
 		Assert.assertTrue(node.getLength() == 1);
 
-				// TODO: This test does not consistently return 0, only sometimes. Need
+		// TODO: This test does not consistently return 0, only sometimes. Need
 		// to debug.
 		// Assert.assertTrue("No differences between input and output files",
 		// diffsNodes[0] == 0);

@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RSpecValidation;
@@ -21,7 +22,7 @@ public class RequestBoundTest {
 	@Test
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 		final String filename = "/geni/request/request_bound.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
@@ -56,7 +57,7 @@ public class RequestBoundTest {
 		NodeList node = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "node");
 		Assert.assertTrue(node.getLength() == 1);
-		
+
 		String componentId = node.item(0).getAttributes()
 				.getNamedItem("component_id").getNodeValue();
 		Assert.assertTrue(componentId

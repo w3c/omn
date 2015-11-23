@@ -86,6 +86,12 @@ public class AdExtract extends AbstractConverter {
 				URI uri = URI.create(content.getComponentId());
 				interfaceResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
+			
+			if (content.getComponentName() != null) {
+				String componentName = content.getComponentName();
+				interfaceResource.addLiteral(Omn_lifecycle.hasComponentName, componentName);
+			}
+
 
 			if (content.getRole() != null) {
 				interfaceResource.addProperty(Omn_lifecycle.hasRole,

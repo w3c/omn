@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultiplePropertyValuesException;
@@ -22,7 +23,8 @@ public class CLITest {
 			InvalidModelException, UnsupportedException,
 			MultipleNamespacesException, RequiredResourceNotFoundException,
 			MultiplePropertyValuesException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+			MissingRspecElementException, DeprecatedRspecVersionException,
+			InvalidRspecValueException {
 		CLI.main(new String[] { "-i",
 				"src/test/resources/geni/request/request_bound.xml", "-o",
 				"ttl" });

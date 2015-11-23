@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.manifest;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.ManifestConverter;
@@ -46,7 +47,8 @@ public class ManifestAcsTest {
 	@Test
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+			MissingRspecElementException, DeprecatedRspecVersionException,
+			InvalidRspecValueException {
 
 		final String filename = "/geni/manifest/acs.xml";
 		final InputStream inputRspec = ManifestConverterTest.class

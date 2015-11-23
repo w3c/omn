@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.dm;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca.MultipleNamespacesException;
@@ -33,7 +34,8 @@ public class CLI {
 			InvalidModelException, UnsupportedException,
 			MultipleNamespacesException, RequiredResourceNotFoundException,
 			MultiplePropertyValuesException, XMLStreamException,
-			MissingRspecElementException, DeprecatedRspecVersionException {
+			MissingRspecElementException, DeprecatedRspecVersionException,
+			InvalidRspecValueException {
 
 		CommandLine lvCmd = null;
 		HelpFormatter lvFormater = new HelpFormatter();

@@ -1,11 +1,14 @@
 package info.openmultinet.ontology.translators.geni;
 
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.net.URI;
 
+import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Resource;
 
@@ -390,7 +393,7 @@ public class CommonMethods {
 	public static boolean hasOscoProperty(Resource resource) {
 
 		boolean hasOscoProperty = false;
-		
+
 		if (resource.hasProperty(Osco.additionals)
 				|| resource.hasProperty(Osco.ANNC_AUTO)
 				|| resource.hasProperty(Osco.ANNC_DISABLED)
@@ -465,4 +468,43 @@ public class CommonMethods {
 
 		return hasOscoProperty;
 	}
+
+	public static Individual getFrequency(String frequency)
+			throws InvalidRspecValueException {
+		Individual frequencyIndividual = null;
+		if (frequency.toLowerCase().trim().equals("2.412ghz")) {
+			frequencyIndividual = Omn_domain_wireless.GHZ;
+		} else if (frequency.toLowerCase().equals("2.417ghz")) {
+			frequencyIndividual = Omn_domain_wireless.GHZ_INSTANCE;
+		} else if (frequency.matches("[0-9]+.[0-9]+[gG][hH][zZ]")) {
+			frequencyIndividual = Omn_domain_wireless.Frequency.getOntModel()
+					.createIndividual(
+							"http://open-multinet.info/ontology/omn_wireless.owl#"
+									+ frequency, Omn_domain_wireless.Frequency);
+		} else {
+			throw new InvalidRspecValueException("Frequency");
+		}
+		return frequencyIndividual;
+	}
+
+	public static String getStringFromFrequency(Resource frequencyResource) {
+		String frequency = null;
+
+		String frequencyUri = frequencyResource.getURI().toString();
+		if (frequencyUri.equals(Omn_domain_wireless.GHZ.getURI().toString())) {
+			frequency = "2.412GHZ";
+		} else if (frequencyUri.equals(Omn_domain_wireless.GHZ_INSTANCE
+				.getURI().toString())) {
+			frequency = "2.417GHZ";
+		} else if (frequencyUri
+				.contains("http://open-multinet.info/ontology/omn_wireless.owl#")) {
+			String[] parts = frequencyUri.split("#");
+			if (parts.length > 1) {
+				frequency = parts[1];
+			}
+		}
+
+		return frequency;
+	}
+
 }

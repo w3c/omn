@@ -1,20 +1,21 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class MonitoringTest {
 
 	@Test
 	public void testRequest() throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		// check that RSpec is valid
 		String path = "./src/test/resources/geni/monitoring/monitoring-request.xml";
@@ -67,7 +68,8 @@ public class MonitoringTest {
 
 	@Test
 	public void testAd() throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		// check that RSpec is valid
 		String path = "./src/test/resources/geni/monitoring/monitoring-ad.xml";

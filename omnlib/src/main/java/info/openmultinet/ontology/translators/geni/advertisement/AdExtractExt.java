@@ -1,5 +1,6 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
@@ -8,6 +9,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ActionSpec
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Available;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AvailableContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ControlAddressContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBContents;
@@ -15,6 +17,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.OscoLocationContents;
@@ -28,34 +31,38 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
-import info.openmultinet.ontology.vocabulary.Acs;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.math.BigInteger;
 import java.net.URI;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.xerces.dom.ElementNSImpl;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
 /**
- * Helper methods to extract information from an advertisement RSpec to create an OMN
- * model. These methods are for non-native RSpec extensions.
+ * Helper methods to extract information from an advertisement RSpec to create
+ * an OMN model. These methods are for non-native RSpec extensions.
  * 
  * @author robynloughnane
  *
@@ -1465,6 +1472,102 @@ public class AdExtractExt extends AbstractConverter {
 		} catch (final ClassCastException e) {
 			AdExtractExt.LOG.finer(e.getMessage());
 		}
+	}
+
+	public static void tryExtractOlChannel(Object rspecObject, Resource omnNode)
+			throws InvalidRspecValueException {
+		try {
+			Channel channel = (Channel) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnChannel = omnNode.getModel().createResource(uuid);
+			omnChannel.addProperty(RDF.type, Omn_domain_wireless.Channel);
+			omnNode.addProperty(Omn.hasComponent, omnChannel);
+
+			if (channel.getFrequency() != null) {
+				String frequency = channel.getFrequency();
+				Individual frequencyIndividual = CommonMethods
+						.getFrequency(frequency);
+
+				omnChannel.addProperty(Omn_domain_wireless.usesFrequency,
+						frequencyIndividual);
+			}
+
+			if (channel.getComponentId() != null) {
+				omnChannel.addProperty(Omn_lifecycle.hasComponentID,
+						channel.getComponentId());
+			}
+
+			if (channel.getComponentManagerId() != null) {
+				omnChannel.addProperty(Omn_lifecycle.hasComponentManagerID,
+						channel.getComponentId());
+			}
+
+			if (channel.getComponentName() != null) {
+				String componentName = channel.getComponentName();
+
+				try {
+					int channelNum = Integer.parseInt(componentName);
+					BigInteger channelNumBig = BigInteger.valueOf(channelNum);
+					omnChannel.addLiteral(Omn_domain_wireless.channelNum,
+							channelNumBig);
+				} catch (NumberFormatException e) {
+					omnChannel.addProperty(Omn_lifecycle.hasComponentName,
+							componentName);
+				}
+			}
+
+		} catch (final ClassCastException e) {
+			AdExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractOlLease(Object rspecObject, Resource omnNode) {
+		try {
+			Lease lease = (Lease) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnLease = omnNode.getModel().createResource(uuid);
+			omnLease.addProperty(RDF.type, Omn_lifecycle.Lease);
+			omnNode.addProperty(Omn_lifecycle.hasLease, omnLease);
+
+			if (lease.getLeaseID() != null) {
+				String leaseId = lease.getLeaseID();
+				omnLease.addLiteral(Omn_lifecycle.hasID, leaseId);
+			}
+
+			if (lease.getUuid() != null) {
+				String uuidString = lease.getUuid();
+				omnLease.addLiteral(Omn_domain_pc.hasUUID, uuidString);
+			}
+
+			if (lease.getSliceId() != null) {
+				String sliceId = lease.getSliceId();
+				omnLease.addLiteral(Omn_lifecycle.hasSliceID, sliceId);
+			}
+
+			// TODO:
+			// <xs:attribute name="leaseREF" type="xs:IDREF" />
+			// if (lease.getLeaseREF() != null) {
+			// Object leaseIdRef = lease.getLeaseREF();
+			// omnLease.addLiteral(Omn_lifecycle.hasIdRef, leaseIdRef);
+			// }
+
+			if (lease.getValidFrom() != null) {
+				XMLGregorianCalendar from = lease.getValidFrom();
+				Calendar dateTime = from.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.startTime, dateTime);
+			}
+
+			if (lease.getValidUntil() != null) {
+				XMLGregorianCalendar until = lease.getValidUntil();
+				Calendar dateTime = until.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.expirationTime, dateTime);
+			}
+
+		} catch (final ClassCastException e) {
+			AdExtractExt.LOG.finer(e.getMessage());
+		}
+
 	}
 
 }

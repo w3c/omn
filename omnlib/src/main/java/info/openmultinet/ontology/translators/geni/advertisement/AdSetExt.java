@@ -1,11 +1,15 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
+import com.hp.hpl.jena.sparql.util.NodeFactoryExtra;
+import com.hp.hpl.jena.sparql.util.Utils;
+
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ActionSpec;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ApnContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ControlAddressContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Controller;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ControllerRole;
@@ -21,6 +25,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.GroupContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.MatchContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NextHopContent;
@@ -45,19 +50,27 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UseGroup;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.math.BigInteger;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.hp.hpl.jena.datatypes.RDFDatatype;
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
+import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 /**
  * Helper methods for converting from OMN model to advertisement RSpec. These
@@ -1421,4 +1434,95 @@ public class AdSetExt extends AbstractConverter {
 		}
 	}
 
+	public static void setOlChannel(Statement omnResource, Channel of) {
+		Resource resourceResource = omnResource.getResource();
+
+		if (resourceResource.hasProperty(Omn_domain_wireless.channelNum)) {
+			int channelNum = resourceResource
+					.getProperty(Omn_domain_wireless.channelNum).getLiteral()
+					.getInt();
+			of.setComponentName(Integer.toString(channelNum));
+		} else if (resourceResource.hasProperty(Omn_lifecycle.hasComponentName)) {
+			String componentName = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentName).getLiteral()
+					.getString();
+			of.setComponentName(componentName);
+		}
+
+		if (resourceResource.hasProperty(Omn_domain_wireless.usesFrequency)) {
+			Resource freqResource = resourceResource
+					.getProperty(Omn_domain_wireless.usesFrequency).getObject()
+					.asResource();
+
+			String frequency = CommonMethods
+					.getStringFromFrequency(freqResource);
+			of.setFrequency(frequency);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+			String componentId = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentID).getObject()
+					.asLiteral().getString();
+			of.setComponentId(componentId);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasComponentManagerID)) {
+			String componentManagerId = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentManagerID)
+					.getObject().asLiteral().getString();
+			of.setComponentManagerId(componentManagerId);
+		}
+	}
+
+	public static void setOlLease(Statement omnResource, Lease of) {
+
+		Resource resourceResource = omnResource.getResource();
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
+			String leaseId = resourceResource.getProperty(Omn_lifecycle.hasID)
+					.getObject().asLiteral().getString();
+			of.setLeaseID(leaseId);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasSliceID)) {
+			String sliceId = resourceResource
+					.getProperty(Omn_lifecycle.hasSliceID).getObject()
+					.asLiteral().getString();
+			of.setSliceId(sliceId);
+		}
+
+		if (resourceResource.hasProperty(Omn_domain_pc.hasUUID)) {
+			String uuid = resourceResource.getProperty(Omn_domain_pc.hasUUID)
+					.getObject().asLiteral().getString();
+			of.setUuid(uuid);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.startTime)) {
+
+			Object startTime = ((Object) resourceResource
+					.getProperty(Omn_lifecycle.startTime).getObject()
+					.asLiteral().getValue());
+
+			XMLGregorianCalendar start = null;
+			if (startTime instanceof XSDDateTime) {
+				XSDDateTime time = (XSDDateTime) startTime;
+				start = AbstractConverter.xsdToXmlTime(time);
+			}
+			of.setValidFrom(start);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.expirationTime)) {
+
+			Object endTime = ((Object) resourceResource
+					.getProperty(Omn_lifecycle.expirationTime).getObject()
+					.asLiteral().getValue());
+
+			XMLGregorianCalendar end = null;
+			if (endTime instanceof XSDDateTime) {
+				XSDDateTime time = (XSDDateTime) endTime;
+				end = AbstractConverter.xsdToXmlTime(time);
+			}
+			of.setValidUntil(end);
+		}
+	}
 }

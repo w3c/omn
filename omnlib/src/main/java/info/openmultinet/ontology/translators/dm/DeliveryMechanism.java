@@ -1,9 +1,9 @@
 package info.openmultinet.ontology.translators.dm;
 
-
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
@@ -40,7 +40,7 @@ public class DeliveryMechanism {
 			IOException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException,
 			XMLStreamException, MissingRspecElementException,
-			DeprecatedRspecVersionException {
+			DeprecatedRspecVersionException, InvalidRspecValueException {
 
 		if (AbstractConverter.ANYFORMAT.equalsIgnoreCase(from)) {
 			from = RSpecValidation.getType(content);
@@ -121,11 +121,13 @@ public class DeliveryMechanism {
 	 * @throws MissingRspecElementException
 	 * @throws XMLStreamException
 	 * @throws UnsupportedException
+	 * @throws InvalidRspecValueException
 	 */
 	public static Model getModelFromUnkownInput(String content)
 			throws DeprecatedRspecVersionException, JAXBException,
 			InvalidModelException, MissingRspecElementException,
-			XMLStreamException, UnsupportedException {
+			XMLStreamException, UnsupportedException,
+			InvalidRspecValueException {
 
 		String from = RSpecValidation.getType(content);
 

@@ -25,6 +25,7 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
@@ -42,10 +43,12 @@ public class TestRules {
 	@Test
 	public void testSimpleRuleset() throws IOException {
 		InputStream is = TestRules.class.getResourceAsStream(TEST_RULE);
-		BufferedReader br = new BufferedReader(new InputStreamReader(is , "UTF-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,
+				"UTF-8"));
 		Model rawModel1 = RDFDataMgr.loadModel(TEST_TTL);
-		
-		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(br)));
+
+		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule
+				.rulesParserFromReader(br)));
 		reasoner.setDerivationLogging(true);
 		InfModel infModel1 = ModelFactory.createInfModel(reasoner, rawModel1);
 		Assert.assertTrue(infModel1.toString().contains(EXPECT_MON));
@@ -57,23 +60,35 @@ public class TestRules {
 		List<Rule> rules = AbstractConverter.getAllRules();
 		Assert.assertTrue(rules.size() > 0);
 	}
-	
+
 	@Test
-	public void testIntegratedRules() throws IOException, URISyntaxException, JAXBException, InvalidModelException, XMLStreamException, MissingRspecElementException {
+	public void testIntegratedRules() throws IOException, URISyntaxException,
+			JAXBException, InvalidModelException, XMLStreamException,
+			MissingRspecElementException, InvalidRspecValueException {
 		final String inputRSpecString = AbstractConverter.toString(TEST_XML);
-		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString, StandardCharsets.UTF_8);
-		Model inputRSpecModel = new AdvertisementConverter().getModel(inputRSpecStream);
-		Assert.assertTrue(inputRSpecModel.toString().contains(TestRules.EXPECT_AMS));
+		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString,
+				StandardCharsets.UTF_8);
+		Model inputRSpecModel = new AdvertisementConverter()
+				.getModel(inputRSpecStream);
+		Assert.assertTrue(inputRSpecModel.toString().contains(
+				TestRules.EXPECT_AMS));
 	}
-	
+
 	@Test
-	public void testIntegratedIMindsRules() throws IOException, URISyntaxException, JAXBException, InvalidModelException, XMLStreamException, MissingRspecElementException {
-		final String inputRSpecString = AbstractConverter.toString(TEST_IMINDS_XML);
-		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString, StandardCharsets.UTF_8);
-		Model inputRSpecModel = new AdvertisementConverter().getModel(inputRSpecStream);
-		Assert.assertTrue(inputRSpecModel.toString().contains(TestRules.TEST_IMIND_EXP));
-		//AdvertisementConverter.print(inputRSpecModel);
+	public void testIntegratedIMindsRules() throws IOException,
+			URISyntaxException, JAXBException, InvalidModelException,
+			XMLStreamException, MissingRspecElementException,
+			InvalidRspecValueException {
+		final String inputRSpecString = AbstractConverter
+				.toString(TEST_IMINDS_XML);
+		InputStream inputRSpecStream = IOUtils.toInputStream(inputRSpecString,
+				StandardCharsets.UTF_8);
+		Model inputRSpecModel = new AdvertisementConverter()
+				.getModel(inputRSpecStream);
+		Assert.assertTrue(inputRSpecModel.toString().contains(
+				TestRules.TEST_IMIND_EXP));
+		// AdvertisementConverter.print(inputRSpecModel);
 		RDFDataMgr.write(System.out, inputRSpecModel, Lang.N3);
 	}
-	
+
 }

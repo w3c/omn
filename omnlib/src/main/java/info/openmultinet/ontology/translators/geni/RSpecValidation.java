@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.DeprecatedRspecVersionException;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
@@ -12,7 +13,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -73,10 +73,12 @@ public class RSpecValidation {
 	 * @throws MissingRspecElementException
 	 * @throws DeprecatedRspecVersionException
 	 * @throws FileNotFoundException
+	 * @throws InvalidRspecValueException
 	 */
 	static public double getProportionalError(String input)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		String output = completeRoundtrip(input);
 		String inputNew = null;
@@ -118,7 +120,8 @@ public class RSpecValidation {
 
 	static public int[] getDiffsNodes(String input)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 		return getDiffsNodesVerbose(input, false);
 	}
 
@@ -132,10 +135,12 @@ public class RSpecValidation {
 	 * @throws MissingRspecElementException
 	 * @throws DeprecatedRspecVersionException
 	 * @throws FileNotFoundException
+	 * @throws InvalidRspecValueException
 	 */
 	static public int[] getDiffsNodesVerbose(String input, boolean verbosity)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		String output = completeRoundtripVerbose(input, verbosity);
 		String inputNew = null;
@@ -500,7 +505,8 @@ public class RSpecValidation {
 
 	public static String completeRoundtrip(String input)
 			throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 		return completeRoundtripVerbose(input, false);
 	}
 
@@ -513,10 +519,12 @@ public class RSpecValidation {
 	 * @throws MissingRspecElementException
 	 * @throws DeprecatedRspecVersionException
 	 * @throws FileNotFoundException
+	 * @throws InvalidRspecValueException
 	 */
 	public static String completeRoundtripVerbose(String input,
 			boolean verbosity) throws MissingRspecElementException,
-			DeprecatedRspecVersionException, FileNotFoundException {
+			DeprecatedRspecVersionException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		String output = null;
 		Model model;

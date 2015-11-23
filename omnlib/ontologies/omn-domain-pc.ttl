@@ -507,6 +507,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
               owl:unionOf ( omn:Group
                             omn:Resource
                             omn:Service
+                            omn:Reservation
                           )
             ] ;
          

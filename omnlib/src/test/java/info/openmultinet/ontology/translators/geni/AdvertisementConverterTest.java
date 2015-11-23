@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
@@ -82,7 +83,7 @@ public class AdvertisementConverterTest {
 	@Test
 	public void testPaper2015Roundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
-			MissingRspecElementException {
+			MissingRspecElementException, InvalidRspecValueException {
 		long start;
 		String inputFile = "/geni/advertisement/advertisement_paper2015.xml";
 
@@ -129,10 +130,11 @@ public class AdvertisementConverterTest {
 
 	@Test
 	@Ignore
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testRoundtripRSpecToRSpecPerformance() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
-			InterruptedException, MissingRspecElementException {
+			InterruptedException, MissingRspecElementException,
+			InvalidRspecValueException {
 		String inputFile = "/geni/advertisement/advertisement_vwall1.xml";
 
 		InputStream input = null;
