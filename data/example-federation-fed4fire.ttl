@@ -1,29 +1,154 @@
-@prefix : <http://fed4fire.eu/resources#> .
+@prefix : <http://fed4fire.eu/about#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geni: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix wgs84:<http://www.w3.org/2003/01/geo/wgs84_pos#> .
-@prefix geni: <http://open-multinet.info/ontology/sfa#> .
-@prefix dc:<http://purl.org/dc/elements/1.1/> .
-@prefix dcterms:<http://purl.org/dc/terms/> .
-@prefix omn-domain-pc:<http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix void:<http://rdfs.org/ns/void#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
+@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
+@base <http://fed4fire.eu/about#> .
 
 <http://fed4fire.eu/about> rdf:type owl:Ontology ;
-                                         
-                                         dc:date "2014-11-06"^^xsd:string ;
-                                         
-                                         owl:versionInfo "2014-11-06"^^xsd:string ;
-                                         
-                                         dc:title "Fed4FIRE Federation Ontology"^^xsd:string ;
-                                         
-                                         dc:creator <http://alex.willner.ws/about#me> ;
-                                         
-                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+
+                           dc:date "2014-11-06"^^xsd:string ;
+
+                           owl:versionInfo "2015-11-22"^^xsd:string ;
+
+                           dc:title "Fed4FIRE Federation Ontology"^^xsd:string ;
+
+                           dc:creator <http://alex.willner.ws/about#me> ;
+
+                           dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn#hasEndpoint
+
+omn:hasEndpoint rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn#hasService
+
+omn:hasService rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#administers
+
+omn-federation:administers rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#hasFederationMember
+
+omn-federation:hasFederationMember rdf:type owl:AnnotationProperty .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+
+omn-federation:isAdministeredBy rdf:type owl:AnnotationProperty .
+
+
+
+###  http://rdfs.org/ns/void#sparqlEndpoint
+
+void:sparqlEndpoint rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+
+wgs84:lat rdf:type owl:AnnotationProperty .
+
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+
+wgs84:long rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/depiction
+
+foaf:depiction rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/homepage
+
+foaf:homepage rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/mbox
+
+foaf:mbox rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/omn-domain-geni-fire#AMService
+
+geni:AMService rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-domain-geni-fire#SAService
+
+geni:SAService rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#Federation
+
+omn-federation:Federation rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#FederationMember
+
+omn-federation:FederationMember rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn-federation#Infrastructure
+
+omn-federation:Infrastructure rdf:type owl:Class .
+
+
+
+###  http://schema.org/WebSite
+
+schema:WebSite rdf:type owl:Class .
+
+
+
 
 
 #################################################################
@@ -32,142 +157,141 @@
 #
 #################################################################
 
-###  http://fed4fire.eu/resources#federation
 
-:me rdf:type omn:Federation ,
-                     owl:NamedIndividual ;
-            
-            rdfs:label "Fed4FIRE" ;
-                        
-            rdfs:comment "The Fed4FIRE federation is a collaboration of European Future Internet Research and Experimentation (FIRE) testbeds. It was formed by a consortium of initial 17 partner organisations from 8 countries and is coordinated by iMinds, Belgium. It started in October 2012." ;
-                        
-            foaf:homepage <http://fed4fire.eu> ;
-            
-            foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
-            
-            foaf:mbox <mailto:contact@fed4fire.eu> ;
-       
-            omn:hasFederationMember 
-                <http://www.iminds.be/about#me> ,
-<http://www.southampton.ac.uk/about#me> ,
-<http://www.upmc.fr/about#me> ,
-<http://www.fokus.fraunhofer.de/about#me> ,
-<http://federation.av.tu-berlin.de/about#me> ,
-<http://av.tu-berlin.de/about#me> ,
-<http://www.ed.ac.uk/about#me> ,
-<http://www.inria.fr/about#me> ,
-<http://www.nicta.com.au/about#me> ,
-<http://atos.net/about#me> ,
-<http://www.uth.gr/en/about#me> ,
-<http://www.ntua.gr/about#me> ,
-<http://www.bris.ac.uk/about#me> ,
-<http://www.i2cat.net/about#me> ,
-<http://www.eurescom.eu/about#me> ,
-<http://www.dante.net/about#me> ,
-<http://www.unican.es/about#me> ,
-<http://eng.nia.or.kr/about#me> ,
-<http://www.uma.es/about#me> ,
-<http://www.upc.edu/about#me> ,
-<http://www.uc3m.es/about#me> ,
-<http://www.deimos-space.com/about#me> ,
-<http://www.sztaki.hu/about#me> ,
-<http://www.nuigalway.ie/about#me> ,
-<http://www.lancaster.ac.uk/about#me> ,
-<http://www.woox.com/about#me> ,
-<http://www.kent.ac.uk/about#me> ,
-<http://www.bt.com/about#me> ,
-<http://www.televes.com/about#me> ;
-    omn:administers :backoffice .
+###  http://fed4fire.eu/resources#am
 
-:backoffice rdf:type omn:Infrastructure ,
-                         owl:NamedIndividual ;
-                rdfs:label "Fed4FIRE Backoffice Infrastructure" ;
-                rdfs:comment "The infrastructure for the portal, etc..." ;
-                omn:isAdministeredBy :me ;
-                omn:hasService :portal .
-
-:portal rdf:type geni:SingleSignOnPortal ;
-        rdfs:label "Fed4FIRE Single Sign-On Portal" ;
-    omn:hasEndpoint <http://portal.fed4fire.eu> .
-                        
-
-###  http://fed4fire.eu/resources#fp
-
-<http://www.fokus.fraunhofer.de/about#me> rdf:type omn:FederationMember ,
+:am rdf:type geni:AMService ,
              owl:NamedIndividual ;
-    
-    rdfs:label "Fraunhofer FOKUS" ;
-    
-    rdfs:isDefinedBy <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
-    
-    foaf:based_near [a wgs84:Point; wgs84:lat 52.526; wgs84:long 13.314] ; 
-    
-    omn:administers <http://fuseco.fokus.fraunhofer.de/about#me> .
-
-
-
-<http://av.tu-berlin.de/about#me> rdf:type omn:FederationMember ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "TUB | AV" ;
-
-    rdfs:comment "This chair - founded in 2004 and funded by the Fraunhofer Gesellschaft - is part of the Institute for Telecommunication Systems within the Faculty of Electrical Engineering and Computer Science at the Technische Universität Berlin." ;
-                        
-    foaf:homepage <http://av.tu-berlin.de> ;
-            
-    foaf:depiction <http://www.av.tu-berlin.de/fileadmin/fg207/Logos/AV_banner-neu.jpg> ;
-            
-    foaf:mbox <mailto:office@av.tu-berlin.de> ;
-       
-    wgs84:lat 52.526 ;
-
-    wgs84:long 13.314 ;
-    
-    omn:administers <http://demo.fiteagle.org/about#me>,
-                    <http://federation.daad-unifi.org/about#me>,
-                    <http://federation.trescimo.eu/about#me> .
-
-
-<http://demo.fiteagle.org/about#me> rdf:type omn:Infrastructure ,
-             owl:NamedIndividual ;
-    
- rdfs:label "FITeagle Demo Testbed" ;
-  
-  omn:hasResource <http://openstack.av.tu-berlin.de> ;
-
-  rdfs:comment "The FITeagle Demo Testbed is..." ;
-
-  omn:hasService :am, :sa ;
-
-  void:sparqlEndpoint <http://demo.fiteagle.org/sparql> .
-
-:am rdf:type geni:AggregateManager ;
 
     rdfs:label "Aggregate Manager" ;
 
-   omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/am/v3> .
+    omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/am/v3> .
 
 
-:sa rdf:type geni:SliceAuthority ;
+
+###  http://fed4fire.eu/resources#infrastructure
+
+:infrastructure rdf:type omn-federation:Infrastructure ,
+                         owl:NamedIndividual ;
+
+                rdfs:label "Fed4FIRE Backoffice Infrastructure" ;
+
+                rdfs:comment "The infrastructure for the portal, etc..." ;
+
+                omn-federation:isAdministeredBy :me ;
+
+                omn:hasService :portal .
+
+
+
+###  http://fed4fire.eu/resources#me
+
+:me rdf:type omn-federation:Federation ,
+             owl:NamedIndividual ;
+
+    rdfs:label "Fed4FIRE" ;
+
+    rdfs:comment "The Fed4FIRE federation is a collaboration of European Future Internet Research and Experimentation (FIRE) testbeds. It was formed by a consortium of initial 17 partner organisations from 8 countries and is coordinated by iMinds, Belgium. It started in October 2012." ;
+
+    foaf:homepage <http://fed4fire.eu/> ;
+
+    foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
+
+    omn-federation:administers :infrastructure ;
+
+    omn-federation:hasFederationMember <http://www.atos.net/about#me> ,
+                                       <http://www.av.tu-berlin.de/about#me> ,
+                                       <http://www.bris.ac.uk/about#me> ,
+                                       <http://www.bt.com/about#me> ,
+                                       <http://www.dante.net/about#me> ,
+                                       <http://www.deimos-space.com/about#me> ,
+                                       <http://www.ed.ac.uk/about#me> ,
+                                       <http://www.eng.nia.or.kr/about#me> ,
+                                       <http://www.eurescom.eu/about#me> ,
+                                       <http://www.fokus.fraunhofer.de/about#me> ,
+                                       <http://www.i2cat.net/about#me> ,
+                                       <http://www.iminds.be/about#me> ,
+                                       <http://www.inria.fr/about#me> ,
+                                       <http://www.kent.ac.uk/about#me> ,
+                                       <http://www.lancaster.ac.uk/about#me> ,
+                                       <http://www.nicta.com.au/about#me> ,
+                                       <http://www.ntua.gr/about#me> ,
+                                       <http://www.nuigalway.ie/about#me> ,
+                                       <http://www.southampton.ac.uk/about#me> ,
+                                       <http://www.sztaki.hu/about#me> ,
+                                       <http://www.televes.com/about#me> ,
+                                       <http://www.uc3m.es/about#me> ,
+                                       <http://www.uma.es/about#me> ,
+                                       <http://www.unican.es/about#me> ,
+                                       <http://www.upc.edu/about#me> ,
+                                       <http://www.upmc.fr/about#me> ,
+                                       <http://www.uth.gr/en/about#me> ,
+                                       <http://www.woox.com/about#me> ;
+
+    foaf:mbox <mailto:contact@fed4fire.eu> ;
+
+    void:sparqlEndpoint <http://portal.fed4fire.eu/sparql> .
+
+###  http://fed4fire.eu/resources#portal
+
+:portal rdf:type schema:WebSite ,
+                 owl:NamedIndividual ;
+
+        rdfs:label "Fed4FIRE Single Sign-On Portal" ;
+
+        omn:hasEndpoint <http://portal.fed4fire.eu/> .
+
+###  http://fed4fire.eu/resources#sa
+
+:sa rdf:type geni:SAService ,
+             owl:NamedIndividual ;
 
     rdfs:label "Slice Authority" ;
 
-   omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/sa/v1> .
- 
-    
-<http://openstack.av.tu-berlin.de> rdf:type omn-domain-pc:PC ;
-
-    rdfs:label "OpenStack Server" ;
-    
-    omn-lifecycle:parentOf <http://demo.fiteagle.org/resource/VMServer-1> .
+    omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/sa/v1> .
 
 
-<http://federation.trescimo.eu/about#me> rdf:type omn:Infrastructure ,
-             owl:NamedIndividual ;
-    
-    rdfs:label "TRESCIMO Testbed" .
 
-<http://federation.daad-unifi.org/about#me>  rdf:type omn:Infrastructure ,
-             owl:NamedIndividual ;
-             
-    rdfs:label "DAAD UNIFI Testbed" .
+###  http://fuseco.fokus.fraunhofer.de/about#me
+
+<http://fuseco.fokus.fraunhofer.de/about#me> rdf:type omn-federation:Infrastructure ,
+                                                      owl:NamedIndividual ;
+
+                                             rdfs:label "Fraunhofer FUSECO Playground" ;
+
+                                             rdfs:comment "Advanced ICT platforms (including Cloud, M2M, SDN, NFV and Mobile Broadband), tools and cutting edge expertise for testing, monitoring, test control, remote usage and federation with external testbeds." ;
+
+                                             void:sparqlEndpoint <http://demo.fiteagle.org/sparql> ;
+
+                                             omn:hasService :am ,
+                                                            :sa .
+
+
+
+###  http://www.fokus.fraunhofer.de/about#me
+
+<http://www.fokus.fraunhofer.de/about#me> rdf:type omn-federation:FederationMember ,
+                                                   owl:NamedIndividual ;
+                                                   
+                                          rdfs:label "Fraunhofer FOKUS" ;
+
+                                          wgs84:long 13.314 ;
+
+                                          wgs84:lat 52.526 ;
+
+                                          rdfs:comment "With around 450 employees FOKUS is one of the largest Fraunhofer institutes. Scientists from 10 competence centers cover the complete chain of development of urban IT-Infrastructure right from architectural design and modelling to middleware and platforms right up to concrete applications like the warning system KATWARN." ;
+
+                                          rdfs:isDefinedBy <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
+
+                                          omn-federation:administers <http://fuseco.fokus.fraunhofer.de/about#me> ;
+
+                                          foaf:homepage <https://www.fokus.fraunhofer.de/> ;
+
+                                          foaf:depiction <https://www.fokus.fraunhofer.de/assets/logo-56550c0d3788abb69084c8017983224e.png> ;
+
+                                          foaf:mbox <mailto:info@fokus.fraunhofer.de> .
+
+
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net

@@ -145,9 +145,9 @@
 
              rdfs:label "requires an ICT object" ;
 
-             rdfs:range :Object ;
+             rdfs:range :Thing ;
 
-             rdfs:domain :Object ;
+             rdfs:domain :Thing ;
 
              owl:inverseOf :requiredBy .
 
@@ -158,9 +158,9 @@
 
              rdfs:label "is required by an ICT object" ;
 
-             rdfs:range :Object ;
+             rdfs:range :Thing ;
 
-             rdfs:domain :Object ;
+             rdfs:domain :Thing ;
 
              owl:inverseOf :requires .
 
@@ -173,7 +173,7 @@
 
              rdfs:label "has attribute" ;
 
-             rdfs:domain :Object ;
+             rdfs:domain :Thing ;
 
              rdfs:range :Attribute .
 
@@ -186,7 +186,7 @@
 
               rdfs:label "is attribute of" ;
 
-              rdfs:range :Object ;
+              rdfs:range :Thing ;
 
               rdfs:domain :Attribute ;
 
@@ -364,7 +364,7 @@
 
        rdfs:label "Group" ;
 
-       rdfs:subClassOf :Object ;
+       rdfs:subClassOf :Thing ;
 
        owl:equivalentClass nml:Group ;
 
@@ -388,7 +388,7 @@
 
 ###  urn:fiddle:ontology#Object
 
-:Object rdf:type owl:Class ;
+:Thing rdf:type owl:Class ;
 
         rdfs:label "ICT Object" ;
 
@@ -408,7 +408,7 @@
 
 :Resource rdf:type owl:Class ;
 
-          rdfs:subClassOf :Object ;
+          rdfs:subClassOf :Thing ;
 
           rdfs:label "Resource" ;
 
@@ -420,7 +420,7 @@
 
 :Service rdf:type owl:Class ;
 
-          rdfs:subClassOf :Object ;
+          rdfs:subClassOf :Thing ;
 
          rdfs:label "Service" ;
 
