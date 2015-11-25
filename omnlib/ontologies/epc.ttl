@@ -21,17 +21,17 @@
 
                                          voaf:Vocabulary ;
                                          
-                                         rdfs:label "omn-domain-epc"@en ;
+                                         rdfs:label "omn-resource/epc"@en ;
                                          
-                                         vann:preferredNamespacePrefix "omn-domain-epc"^^xsd:string ;
+                                         vann:preferredNamespacePrefix "omn-resource/epc"^^xsd:string ;
 
                                          vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/epc#> ;
                                         
                                          dc:date "2015-10-26"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-11-19"^^xsd:date ;
+                                         dcterms:modified "2015-11-25"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-11-19"^^xsd:string ;
+                                         owl:versionInfo "2015-11-25"^^xsd:string ;
                                          
                                          dc:title "EPC ontology"@en ;
                                          
@@ -153,6 +153,22 @@
 
 
 
+###  http://open-multinet.info/ontology/resource/epc#pdnGateway
+
+:pdnGateway rdf:type owl:ObjectProperty ;
+
+                rdfs:label "PDN gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the PDN gateway"@en ;
+                
+                rdfs:domain :EvolvedPacketCore ;
+                
+                rdfs:range :PDNGateway .
+                
+
+
 #################################################################
 #
 #    Datatype Properties
@@ -220,7 +236,7 @@
                 
                 rdfs:comment "delay code (0 => 0, 1 => 4, 2 => 10, 3 => 50, 4 => 200, 5 => 500)"@en ;
                 
-                rdfs:domain :EpcResource ;
+                rdfs:domain :PDNGateway ;
                 
                 rdfs:range xsd:integer .
 
@@ -382,7 +398,7 @@
                 
                 rdfs:comment "packet loss code (0 => 0, 1 => 4, 2 => 6, 3 => 20, 4 => 40, 5 => 70)"@en ;
                 
-                rdfs:domain :EpcResource ;
+                rdfs:domain :PDNGateway ;
                 
                 rdfs:range xsd:integer .
 
@@ -404,21 +420,6 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#pdnGateway
-
-:pdnGateway rdf:type owl:DatatypeProperty ;
-
-                rdfs:label "PDN gateway"@en ;
-                
-                rdfs:seeAlso <http://www.flex-project.eu> ;
-                
-                rdfs:comment "The address of the PDN gateway"@en ;
-                
-                rdfs:domain :EvolvedPacketCore ;
-                
-                rdfs:range xsd:string .
-
-
 
 ###  http://open-multinet.info/ontology/resource/epc#rateCode
 
@@ -430,7 +431,7 @@
                 
                 rdfs:comment "rate code (0 => 0, 1 => 500, 2 => 1000, 3 => 10000, 4 => 100000, 5 => 1000000)"@en ;
                 
-                rdfs:domain :EpcResource ;
+                rdfs:domain :PDNGateway ;
                 
                 rdfs:range xsd:integer .
 
@@ -632,6 +633,19 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
       rdfs:seeAlso <http://www.flex-project.eu> .
 
 
+###  http://open-multinet.info/ontology/resource/epc#PDNGateway
+
+:PDNGateway rdf:type owl:Class ;
+
+      rdfs:label "PDN Gateway"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "PDN Gateway (PGW)"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
 
 ###  http://open-multinet.info/ontology/resource/epc#UserEquipment
 
@@ -676,3 +690,9 @@ omn-domain-pc:DiskImage rdf:type owl:Class .
 ###  http://open-multinet.info/ontology/omn#Adapter
 
 omn:Adapter rdf:type owl:Class .
+
+
+
+
+
+

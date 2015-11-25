@@ -16,13 +16,14 @@
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="s:apn" />
 				<xs:element ref="s:enodeb" />
+				<xs:element ref="s:pdn_gateway" />
 				<xs:element ref="s:subscriber" />
 				<xs:element ref="s:control_address" />
 			</xs:choice>
 			<xs:attribute name="vendor" type="xs:string" />
 			<xs:attribute name="mme_address" type="xs:string" />
 			<xs:attribute name="serving_gateway" type="xs:string" />
-			<xs:attribute name="pdn_gateway" type="xs:string" />
+			<!-- xs:attribute name="pdn_gateway" type="xs:string" /-->
 			<xs:attribute name="lte_support" type="xs:boolean" />
 			<xs:attribute name="control_address" type="xs:string" />
 		</xs:complexType>
@@ -36,6 +37,13 @@
 	<xs:complexType name="ENodeBContents">
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="address" type="xs:string" />
+	</xs:complexType>
+		<xs:element name="pdn_gateway" type="s:PDNGatewayContents" />
+	<xs:complexType name="PDNGatewayContents">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="delay" type="xs:integer" />
+		<xs:attribute name="loss" type="xs:integer" />
+		<xs:attribute name="rate" type="xs:integer" />
 	</xs:complexType>
 	<xs:element name="subscriber" type="s:SubscriberContents" />
 	<xs:complexType name="SubscriberContents">

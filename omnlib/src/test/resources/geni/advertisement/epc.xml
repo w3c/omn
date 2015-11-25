@@ -8,6 +8,7 @@
 		<sliver_type name="http://open-multinet.info/ontology/resource/epc#EPC" />
 		<ns5:epc mme_address="mme1" serving_gateway="sg1" pdn_gateway="pdn1"
 			vendor="vendor1">
+			<ns5:pdn_gateway name="pdn1" rate="1" delay="2" loss="3" />
 			<ns5:apn network_id="123" operator_id="456" />
 			<ns5:enodeb name="name1" address="address1" />
 			<ns5:subscriber imsi_number="imsi1" />

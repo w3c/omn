@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.request.PDNGatewayContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
@@ -393,12 +394,12 @@ public class RequestExtractExt extends AbstractConverter {
 						mme);
 			}
 
-			String pdn = epc.getPdnGateway();
-			if (pdn != null && pdn != "") {
-				omnEpc.addProperty(
-						info.openmultinet.ontology.vocabulary.Epc.pdnGateway,
-						pdn);
-			}
+			// String pdn = epc.getPdnGateway();
+			// if (pdn != null && pdn != "") {
+			// omnEpc.addProperty(
+			// info.openmultinet.ontology.vocabulary.Epc.pdnGateway,
+			// pdn);
+			// }
 
 			String servingGateway = epc.getServingGateway();
 			if (servingGateway != null && servingGateway != "") {
@@ -414,7 +415,7 @@ public class RequestExtractExt extends AbstractConverter {
 						vendor);
 			}
 
-			List<Object> objects = epc.getApnOrEnodebOrSubscriber();
+			List<Object> objects = epc.getApnOrEnodebOrPdnGateway();
 			for (Object o : objects) {
 				if (o.getClass().equals(ApnContents.class)) {
 					ApnContents apnContents = (ApnContents) o;
@@ -422,6 +423,9 @@ public class RequestExtractExt extends AbstractConverter {
 				} else if (o.getClass().equals(ENodeBContents.class)) {
 					ENodeBContents eNodeBContents = (ENodeBContents) o;
 					extractENodeB(eNodeBContents, omnEpc);
+				} else if (o.getClass().equals(PDNGatewayContents.class)) {
+					PDNGatewayContents pgwContents = (PDNGatewayContents) o;
+					extractPDNGateway(pgwContents, omnEpc);
 				} else if (o.getClass().equals(SubscriberContents.class)) {
 					SubscriberContents subscriberContents = (SubscriberContents) o;
 					String imsiNumber = subscriberContents.getImsiNumber();
@@ -433,6 +437,44 @@ public class RequestExtractExt extends AbstractConverter {
 		} catch (final ClassCastException e) {
 			RequestExtractExt.LOG.finer(e.getMessage());
 		}
+
+	}
+
+	private static void extractPDNGateway(PDNGatewayContents pgwContents,
+			Resource omnEpc) {
+		String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+		Resource pgwResource = omnEpc.getModel().createResource(uuid);
+		pgwResource.addProperty(RDF.type,
+				info.openmultinet.ontology.vocabulary.Epc.PDNGateway);
+
+		String name = pgwContents.getName();
+		if (name != null && name != "") {
+			pgwResource.addProperty(RDFS.label, name);
+		}
+
+		BigInteger rate = pgwContents.getRate();
+		BigInteger minusOne = BigInteger.valueOf(-1);
+		if (rate != null && rate.compareTo(minusOne) != 0) {
+			pgwResource.addLiteral(
+					info.openmultinet.ontology.vocabulary.Epc.rateCode, rate);
+		}
+
+		BigInteger delay = pgwContents.getDelay();
+		if (delay != null && delay.compareTo(minusOne) != 0) {
+			pgwResource.addLiteral(
+					info.openmultinet.ontology.vocabulary.Epc.delayCode, delay);
+		}
+
+		BigInteger loss = pgwContents.getLoss();
+		if (loss != null && loss.compareTo(minusOne) != 0) {
+			pgwResource.addLiteral(
+					info.openmultinet.ontology.vocabulary.Epc.packetlossCode,
+					loss);
+		}
+
+		omnEpc.addProperty(
+				info.openmultinet.ontology.vocabulary.Epc.pdnGateway,
+				pgwResource);
 
 	}
 
@@ -1216,7 +1258,7 @@ public class RequestExtractExt extends AbstractConverter {
 	}
 
 	public static void tryExtractEmulabNodeType(Object hwObject, Resource omnHw) {
-		
+
 		try {
 			NodeType nodeType = (NodeType) hwObject;
 

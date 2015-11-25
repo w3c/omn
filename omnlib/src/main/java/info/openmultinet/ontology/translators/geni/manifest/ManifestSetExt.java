@@ -3,8 +3,10 @@ package info.openmultinet.ontology.translators.geni.manifest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.PDNGatewayContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ControlAddressContents;
@@ -471,13 +473,22 @@ public class ManifestSetExt extends AbstractConverter {
 				epc.setMmeAddress(mmeAddress);
 			}
 
-			if (resourceResource
-					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.pdnGateway)) {
-				String pdnGateway = resourceResource
-						.getProperty(
-								info.openmultinet.ontology.vocabulary.Epc.pdnGateway)
-						.getObject().asLiteral().getString();
-				epc.setPdnGateway(pdnGateway);
+			// if (resourceResource
+			// .hasProperty(info.openmultinet.ontology.vocabulary.Epc.pdnGateway))
+			// {
+			// String pdnGateway = resourceResource
+			// .getProperty(
+			// info.openmultinet.ontology.vocabulary.Epc.pdnGateway)
+			// .getObject().asLiteral().getString();
+			// epc.setPdnGateway(pdnGateway);
+			// }
+
+			StmtIterator pgws = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.pdnGateway);
+			while (pgws.hasNext()) {
+				Statement pgwStatement = pgws.next();
+				Resource pgw = pgwStatement.getObject().asResource();
+				setPGW(epc, pgw);
 			}
 
 			if (resourceResource
@@ -503,7 +514,7 @@ public class ManifestSetExt extends AbstractConverter {
 			while (apns.hasNext()) {
 				Statement apnStatement = apns.next();
 				Resource apn = apnStatement.getObject().asResource();
-				epc.getApnOrEnodebOrSubscriber().add(setEpcApn(apn));
+				epc.getApnOrEnodebOrPdnGateway().add(setEpcApn(apn));
 			}
 
 			StmtIterator eNodeBs = resourceResource
@@ -523,11 +534,54 @@ public class ManifestSetExt extends AbstractConverter {
 				info.openmultinet.ontology.translators.geni.jaxb.manifest.SubscriberContents subscriberContents = new ObjectFactory()
 						.createSubscriberContents();
 				subscriberContents.setImsiNumber(subscriber);
-				epc.getApnOrEnodebOrSubscriber().add(subscriberContents);
+				epc.getApnOrEnodebOrPdnGateway().add(subscriberContents);
 			}
 
 			geniNode.getAnyOrRelationOrLocation().add(epc);
 		}
+	}
+
+	private static void setPGW(Epc epc, Resource pgw) {
+		PDNGatewayContents pgwContents = new ObjectFactory()
+				.createPDNGatewayContents();
+
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.rateCode)) {
+			int rate = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.rateCode)
+					.getObject().asLiteral().getInt();
+			BigInteger bigRate = BigInteger.valueOf(rate);
+			pgwContents.setRate(bigRate);
+		}
+
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.delayCode)) {
+			int delay = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.delayCode)
+					.getObject().asLiteral().getInt();
+			BigInteger bigDelay = BigInteger.valueOf(delay);
+			pgwContents.setDelay(bigDelay);
+
+		}
+
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.packetlossCode)) {
+			int loss = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.packetlossCode)
+					.getObject().asLiteral().getInt();
+			BigInteger bigLoss = BigInteger.valueOf(loss);
+			pgwContents.setLoss(bigLoss);
+
+		}
+
+		if (pgw.hasProperty(RDFS.label)) {
+			String name = pgw.getProperty(RDFS.label).getObject().asLiteral()
+					.getString();
+			pgwContents.setName(name);
+		}
+
+		epc.getApnOrEnodebOrPdnGateway().add(pgwContents);
+
 	}
 
 	private static void setENodeB(
@@ -554,7 +608,7 @@ public class ManifestSetExt extends AbstractConverter {
 			eNodeBContents.setName(name);
 		}
 
-		epc.getApnOrEnodebOrSubscriber().add(eNodeBContents);
+		epc.getApnOrEnodebOrPdnGateway().add(eNodeBContents);
 
 	}
 

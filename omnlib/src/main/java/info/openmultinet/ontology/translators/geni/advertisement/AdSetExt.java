@@ -34,6 +34,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NwDst;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NwSrc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.OscoLocationContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.PDNGatewayContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.PacketContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.PathContent;
@@ -388,15 +389,6 @@ public class AdSetExt extends AbstractConverter {
 			}
 
 			if (resourceResource
-					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.pdnGateway)) {
-				String pdnGateway = resourceResource
-						.getProperty(
-								info.openmultinet.ontology.vocabulary.Epc.pdnGateway)
-						.getObject().asLiteral().getString();
-				epc.setPdnGateway(pdnGateway);
-			}
-
-			if (resourceResource
 					.hasProperty(info.openmultinet.ontology.vocabulary.Epc.servingGateway)) {
 				String servingGateway = resourceResource
 						.getProperty(
@@ -419,7 +411,7 @@ public class AdSetExt extends AbstractConverter {
 			while (apns.hasNext()) {
 				Statement apnStatement = apns.next();
 				Resource apn = apnStatement.getObject().asResource();
-				epc.getApnOrEnodebOrSubscriber().add(setEpcApn(apn));
+				epc.getApnOrEnodebOrPdnGateway().add(setEpcApn(apn));
 			}
 
 			StmtIterator eNodeBs = resourceResource
@@ -428,6 +420,14 @@ public class AdSetExt extends AbstractConverter {
 				Statement eNodeBStatement = eNodeBs.next();
 				Resource eNodeB = eNodeBStatement.getObject().asResource();
 				setENodeB(epc, eNodeB);
+			}
+
+			StmtIterator pgws = resourceResource
+					.listProperties(info.openmultinet.ontology.vocabulary.Epc.pdnGateway);
+			while (pgws.hasNext()) {
+				Statement pgwStatement = pgws.next();
+				Resource pgw = pgwStatement.getObject().asResource();
+				setPGW(epc, pgw);
 			}
 
 			StmtIterator subscribers = resourceResource
@@ -439,11 +439,54 @@ public class AdSetExt extends AbstractConverter {
 				SubscriberContents subscriberContents = new ObjectFactory()
 						.createSubscriberContents();
 				subscriberContents.setImsiNumber(subscriber);
-				epc.getApnOrEnodebOrSubscriber().add(subscriberContents);
+				epc.getApnOrEnodebOrPdnGateway().add(subscriberContents);
 			}
 
 			geniNode.getAnyOrRelationOrLocation().add(epc);
 		}
+	}
+
+	private static void setPGW(Epc epc, Resource pgw) {
+		PDNGatewayContents pgwContents = new ObjectFactory()
+				.createPDNGatewayContents();
+
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.rateCode)) {
+			int rate = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.rateCode)
+					.getObject().asLiteral().getInt();
+			BigInteger bigRate = BigInteger.valueOf(rate);
+			pgwContents.setRate(bigRate);
+		}
+
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.delayCode)) {
+			int delay = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.delayCode)
+					.getObject().asLiteral().getInt();
+			BigInteger bigDelay = BigInteger.valueOf(delay);
+			pgwContents.setDelay(bigDelay);
+
+		}
+
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.packetlossCode)) {
+			int loss = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.packetlossCode)
+					.getObject().asLiteral().getInt();
+			BigInteger bigLoss = BigInteger.valueOf(loss);
+			pgwContents.setLoss(bigLoss);
+
+		}
+
+		if (pgw.hasProperty(RDFS.label)) {
+			String name = pgw.getProperty(RDFS.label).getObject().asLiteral()
+					.getString();
+			pgwContents.setName(name);
+		}
+
+		epc.getApnOrEnodebOrPdnGateway().add(pgwContents);
+
 	}
 
 	public static void setENodeB(Epc epc, Resource eNodeB) {
@@ -468,8 +511,7 @@ public class AdSetExt extends AbstractConverter {
 			eNodeBContents.setName(name);
 		}
 
-		epc.getApnOrEnodebOrSubscriber().add(eNodeBContents);
-
+		epc.getApnOrEnodebOrPdnGateway().add(eNodeBContents);
 	}
 
 	public static ApnContents setEpcApn(Resource apn) {
