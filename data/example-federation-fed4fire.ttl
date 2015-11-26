@@ -6,8 +6,8 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix geni: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix schema: <http://schema.org/> .
@@ -16,19 +16,38 @@
 @prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@base <http://fed4fire.eu/about#> .
+@prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
+@base <http://lod.fed4fire.eu/about> .
 
-<http://fed4fire.eu/about> rdf:type owl:Ontology ;
+<http://lod.fed4fire.eu/about> rdf:type owl:Ontology ;
 
-                           dc:date "2014-11-06"^^xsd:string ;
+                               rdfs:label "GENI-FIRE"@en ;
 
-                           owl:versionInfo "2015-11-22"^^xsd:string ;
+                               dc:date "2014-11-06"^^xsd:string ;
 
-                           dc:title "Fed4FIRE Federation Ontology"^^xsd:string ;
+                               owl:versionInfo "2015-11-26"^^xsd:string ;
 
-                           dc:creator <http://alex.willner.ws/about#me> ;
+                               dc:title "Fed4FIRE and GENI Federation Ontology"^^xsd:string ;
 
-                           dcterms:license <http://creativecommons.org/licenses/by/4.0/> .
+                               vann:preferredNamespacePrefix "genifire"^^xsd:string ;
+
+                               dcterms:modified "2015-11-26" ;
+
+                               dc:description "Meta information about the GENI and Fed4FIRE federation dataset."@en ;
+
+                               rdfs:comment "Meta information about the GENI and Fed4FIRE federation dataset."@en ;
+
+                               dc:creator <http://alex.willner.ws/about#me> ;
+
+                               dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                               dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
+                               foaf:homepage <http://fed4fire.eu/> ;
+
+                               dc:publisher <http://fed4fire.eu/> ;
+
+                               vann:preferredNamespaceUri : .
 
 
 #################################################################
@@ -115,13 +134,13 @@ foaf:mbox rdf:type owl:AnnotationProperty .
 
 ###  http://open-multinet.info/ontology/omn-domain-geni-fire#AMService
 
-geni:AMService rdf:type owl:Class .
+omn-domain-geni-fire:AMService rdf:type owl:Class .
 
 
 
 ###  http://open-multinet.info/ontology/omn-domain-geni-fire#SAService
 
-geni:SAService rdf:type owl:Class .
+omn-domain-geni-fire:SAService rdf:type owl:Class .
 
 
 
@@ -158,18 +177,23 @@ schema:WebSite rdf:type owl:Class .
 #################################################################
 
 
-###  http://fed4fire.eu/resources#am
+###  http://fuseco.fokus.fraunhofer.de/about#me
 
-:am rdf:type geni:AMService ,
-             owl:NamedIndividual ;
+<http://fuseco.fokus.fraunhofer.de/about#me> rdf:type omn-federation:Infrastructure ,
+                                                      owl:NamedIndividual ;
 
-    rdfs:label "Aggregate Manager" ;
+                                             rdfs:label "Fraunhofer FUSECO Playground" ;
 
-    omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/am/v3> .
+                                             rdfs:comment "Advanced ICT platforms (including Cloud, M2M, SDN, NFV and Mobile Broadband), tools and cutting edge expertise for testing, monitoring, test control, remote usage and federation with external testbeds." ;
+
+                                             omn-federation:isAdministeredBy <http://www.fokus.fraunhofer.de/about#me> ;
+
+                                             omn:hasService <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm> ,
+                                                            <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+sa> .
 
 
 
-###  http://fed4fire.eu/resources#infrastructure
+###  http://lod.fed4fire.eu/about#infrastructure
 
 :infrastructure rdf:type omn-federation:Infrastructure ,
                          owl:NamedIndividual ;
@@ -184,7 +208,7 @@ schema:WebSite rdf:type owl:Class .
 
 
 
-###  http://fed4fire.eu/resources#me
+###  http://lod.fed4fire.eu/about#me
 
 :me rdf:type omn-federation:Federation ,
              owl:NamedIndividual ;
@@ -195,7 +219,7 @@ schema:WebSite rdf:type owl:Class .
 
     foaf:homepage <http://fed4fire.eu/> ;
 
-    foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
+    void:sparqlEndpoint <http://lod.fed4fire.eu/sparql> ;
 
     omn-federation:administers :infrastructure ;
 
@@ -207,8 +231,11 @@ schema:WebSite rdf:type owl:Class .
                                        <http://www.deimos-space.com/about#me> ,
                                        <http://www.ed.ac.uk/about#me> ,
                                        <http://www.eng.nia.or.kr/about#me> ,
-                                       <http://www.eurescom.eu/about#me> ,
-                                       <http://www.fokus.fraunhofer.de/about#me> ,
+                                       <http://www.eurescom.eu/about#me> ;
+
+    foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
+
+    omn-federation:hasFederationMember <http://www.fokus.fraunhofer.de/about#me> ,
                                        <http://www.i2cat.net/about#me> ,
                                        <http://www.iminds.be/about#me> ,
                                        <http://www.inria.fr/about#me> ,
@@ -228,11 +255,95 @@ schema:WebSite rdf:type owl:Class .
                                        <http://www.uth.gr/en/about#me> ,
                                        <http://www.woox.com/about#me> ;
 
-    foaf:mbox <mailto:contact@fed4fire.eu> ;
+    foaf:mbox <mailto:contact@fed4fire.eu> .
 
-    void:sparqlEndpoint <http://portal.fed4fire.eu/sparql> .
 
-###  http://fed4fire.eu/resources#portal
+
+###  http://lod.fed4fire.eu/about#notAssigned
+
+:notAssigned rdf:type omn-federation:Infrastructure ,
+                      owl:NamedIndividual ;
+
+             rdfs:label "AM's not assigned to an infrastructure" ;
+
+             omn:hasService <urn:publicid:IDN+HPCN.UAM+authority+am> ,
+                            <urn:publicid:IDN+apt.emulab.net+authority+cm> ,
+                            <urn:publicid:IDN+clemson.cloudlab.us+authority+cm> ,
+                            <urn:publicid:IDN+emulab.kreonet.net+authority+cm> ,
+                            <urn:publicid:IDN+emulab.net+authority+cm> ,
+                            <urn:publicid:IDN+exogeni.net:bbnNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:ben+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:cienaNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:cienavmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:gwuNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:gwuvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:ion+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:nictavmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:nlr+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:osfNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:osfvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:pscNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:pscvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:slNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:slvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:tamuNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:tamuvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:ucdNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:ucdvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:uflNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:uflvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:umassNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:umassvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:uvanlNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:uvanlvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:wsuNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:wsuvmsite+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:wvnNet+authority+am> ,
+                            <urn:publicid:IDN+exogeni.net:wvnvmsite+authority+am> ,
+                            <urn:publicid:IDN+fms:aist:serm+authority+cm> ,
+                            <urn:publicid:IDN+fms:aist:tnrm+authority+cm> ,
+                            <urn:publicid:IDN+fms:kddi:serm+authority+cm> ,
+                            <urn:publicid:IDN+fms:psnc:serm+authority+cm> ,
+                            <urn:publicid:IDN+geni.case.edu+authority+cm> ,
+                            <urn:publicid:IDN+geni.it.cornell.edu+authority+cm> ,
+                            <urn:publicid:IDN+geni.kettering.edu+authority+cm> ,
+                            <urn:publicid:IDN+geni.uchicago.edu+authority+cm> ,
+                            <urn:publicid:IDN+genirack.nyu.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.cenic.net+authority+cm> ,
+                            <urn:publicid:IDN+instageni.clemson.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.cs.princeton.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm> ,
+                            <urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.illinois.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.iu.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.maxgigapop.net+authority+cm> ,
+                            <urn:publicid:IDN+instageni.metrodatacenter.com+authority+cm> ,
+                            <urn:publicid:IDN+instageni.northwestern.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.nps.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.nysernet.org+authority+cm> ,
+                            <urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.rutgers.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.sox.net+authority+cm> ,
+                            <urn:publicid:IDN+instageni.stanford.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.umkc.edu+authority+cm> ,
+                            <urn:publicid:IDN+instageni.wisc.edu+authority+cm> ,
+                            <urn:publicid:IDN+it.uc3m.es+authority+cm> ,
+                            <urn:publicid:IDN+lan.sdn.uky.edu+authority+cm> ,
+                            <urn:publicid:IDN+ocf:aist:vtam+authority+cm> ,
+                            <urn:publicid:IDN+ocf:eict:vtam+authority+cm> ,
+                            <urn:publicid:IDN+ocf:psnc:vtam+authority+cm> ,
+                            <urn:publicid:IDN+ocf:univbris:vtam+authority+cm> ,
+                            <urn:publicid:IDN+pks2.sdn.uky.edu+authority+cm> ,
+                            <urn:publicid:IDN+ple+authority+cm> ,
+                            <urn:publicid:IDN+utah.cloudlab.us+authority+cm> ,
+                            <urn:publicid:IDN+utahddc.geniracks.net+authority+cm> ,
+                            <urn:publicid:IDN+wisc.cloudlab.us+authority+cm> .
+
+
+
+###  http://lod.fed4fire.eu/about#portal
 
 :portal rdf:type schema:WebSite ,
                  owl:NamedIndividual ;
@@ -241,38 +352,13 @@ schema:WebSite rdf:type owl:Class .
 
         omn:hasEndpoint <http://portal.fed4fire.eu/> .
 
-###  http://fed4fire.eu/resources#sa
-
-:sa rdf:type geni:SAService ,
-             owl:NamedIndividual ;
-
-    rdfs:label "Slice Authority" ;
-
-    omn:hasEndpoint <https://demo.fiteagle.org/api/sfa/sa/v1> .
-
-
-
-###  http://fuseco.fokus.fraunhofer.de/about#me
-
-<http://fuseco.fokus.fraunhofer.de/about#me> rdf:type omn-federation:Infrastructure ,
-                                                      owl:NamedIndividual ;
-
-                                             rdfs:label "Fraunhofer FUSECO Playground" ;
-
-                                             rdfs:comment "Advanced ICT platforms (including Cloud, M2M, SDN, NFV and Mobile Broadband), tools and cutting edge expertise for testing, monitoring, test control, remote usage and federation with external testbeds." ;
-
-                                             void:sparqlEndpoint <http://demo.fiteagle.org/sparql> ;
-
-                                             omn:hasService :am ,
-                                                            :sa .
-
 
 
 ###  http://www.fokus.fraunhofer.de/about#me
 
 <http://www.fokus.fraunhofer.de/about#me> rdf:type omn-federation:FederationMember ,
                                                    owl:NamedIndividual ;
-                                                   
+
                                           rdfs:label "Fraunhofer FOKUS" ;
 
                                           wgs84:long 13.314 ;
@@ -290,6 +376,28 @@ schema:WebSite rdf:type owl:Class .
                                           foaf:depiction <https://www.fokus.fraunhofer.de/assets/logo-56550c0d3788abb69084c8017983224e.png> ;
 
                                           foaf:mbox <mailto:info@fokus.fraunhofer.de> .
+
+
+
+###  urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm
+
+<urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                                    owl:NamedIndividual ;
+
+                                                           rdfs:label "GENI AM v3 API" ;
+
+                                                           omn:hasEndpoint <http://fuseco.fokus.fraunhofer.de/api/sfa/am/v3> .
+
+
+
+###  urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+sa
+
+<urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+sa> rdf:type omn-domain-geni-fire:SAService ,
+                                                                    owl:NamedIndividual ;
+
+                                                           rdfs:label "GENI SA v1 API" ;
+
+                                                           omn:hasEndpoint <http://fuseco.fokus.fraunhofer.de/api/sfa/sa/v1> .
 
 
 
