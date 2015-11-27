@@ -376,8 +376,9 @@ public class RequestExtractExt extends AbstractConverter {
 	static void tryExtractEpc(Resource node, Object rspecObject) {
 		try {
 			Epc epc = (Epc) rspecObject;
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnEpc = node.getModel().createResource(uuid);
+			String resourceUri = node.getURI().toString() + "-details";
+			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnEpc = node.getModel().createResource(resourceUri);
 
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore,
@@ -506,8 +507,9 @@ public class RequestExtractExt extends AbstractConverter {
 	static void tryExtractUe(Resource node, Object o2) {
 		try {
 			Ue ue = (Ue) o2;
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnUe = node.getModel().createResource(uuid);
+			String resourceUri = node.getURI().toString() + "-details";
+			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnUe = node.getModel().createResource(resourceUri);
 
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment,
@@ -519,9 +521,9 @@ public class RequestExtractExt extends AbstractConverter {
 
 			Boolean lteSupport = ue.isLteSupport();
 			if (lteSupport != null) {
-				omnUe.addProperty(
+				omnUe.addLiteral(
 						info.openmultinet.ontology.vocabulary.Epc.lteSupport,
-						String.valueOf(lteSupport));
+						lteSupport);
 			}
 
 			List<Object> objects = ue.getApnOrControlAddressOrUeHardwareType();
@@ -624,8 +626,9 @@ public class RequestExtractExt extends AbstractConverter {
 	static void tryExtractAccessNetwork(Resource node, Object o2) {
 		try {
 			AccessNetwork accessNetwork = (AccessNetwork) o2;
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnAccessNetwork = node.getModel().createResource(uuid);
+			String resourceUri = node.getURI().toString() + "-details";
+			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnAccessNetwork = node.getModel().createResource(resourceUri);
 
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasAccessNetwork,

@@ -72,6 +72,19 @@
 #################################################################
 
 
+###  http://open-multinet.info/ontology/resource/acs#adminState
+
+:adminState rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "ACS admin state"@en ;
+                
+                rdfs:comment "ACS admin state"@en ;
+                
+                rdfs:domain omn:Resource ;
+                
+                rdfs:range xsd:string .
+
+
 
 ###  http://open-multinet.info/ontology/resource/acs#hasAcsId
 
