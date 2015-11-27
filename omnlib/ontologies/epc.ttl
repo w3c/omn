@@ -29,9 +29,9 @@
                                         
                                          dc:date "2015-10-26"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-11-25"^^xsd:date ;
+                                         dcterms:modified "2015-11-27"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-11-25"^^xsd:string ;
+                                         owl:versionInfo "2015-11-27"^^xsd:string ;
                                          
                                          dc:title "EPC ontology"@en ;
                                          
@@ -59,6 +59,7 @@
 #    Object Properties
 #
 #################################################################
+
 
 
 ###  http://open-multinet.info/ontology/resource/epc#hasAccessNetwork
@@ -188,6 +189,22 @@
                 rdfs:comment "The APN that is used by the LTE AP or the supported APNs from the EPC or the APNs pre-set to the Android smartphone"@en ;
                 
                 rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/epc#attenuator
+
+:attenuator rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "attenuator"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "attenuator"@en ;
+                
+                rdfs:domain omn:Resource ;
                 
                 rdfs:range xsd:string .
 
