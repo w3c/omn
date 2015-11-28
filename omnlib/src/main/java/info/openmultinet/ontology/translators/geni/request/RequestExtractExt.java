@@ -376,9 +376,9 @@ public class RequestExtractExt extends AbstractConverter {
 	static void tryExtractEpc(Resource node, Object rspecObject) {
 		try {
 			Epc epc = (Epc) rspecObject;
-			String resourceUri = node.getURI().toString() + "-details";
-			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnEpc = node.getModel().createResource(resourceUri);
+			// String resourceUri = node.getURI().toString() + "-details";
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnEpc = node.getModel().createResource(uuid);
 
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasEvolvedPacketCore,
@@ -507,9 +507,9 @@ public class RequestExtractExt extends AbstractConverter {
 	static void tryExtractUe(Resource node, Object o2) {
 		try {
 			Ue ue = (Ue) o2;
-			String resourceUri = node.getURI().toString() + "-details";
-			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnUe = node.getModel().createResource(resourceUri);
+			// String resourceUri = node.getURI().toString() + "-details";
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnUe = node.getModel().createResource(uuid);
 
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasUserEquipment,
@@ -626,9 +626,9 @@ public class RequestExtractExt extends AbstractConverter {
 	static void tryExtractAccessNetwork(Resource node, Object o2) {
 		try {
 			AccessNetwork accessNetwork = (AccessNetwork) o2;
-			String resourceUri = node.getURI().toString() + "-details";
-			// String uuid = "urn:uuid:" + UUID.randomUUID().toString();
-			Resource omnAccessNetwork = node.getModel().createResource(resourceUri);
+			// String resourceUri = node.getURI().toString() + "-details";
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnAccessNetwork = node.getModel().createResource(uuid);
 
 			node.addProperty(
 					info.openmultinet.ontology.vocabulary.Epc.hasAccessNetwork,

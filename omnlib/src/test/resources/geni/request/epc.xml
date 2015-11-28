@@ -5,24 +5,29 @@
 	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/epc">
 	<node client_id="epc1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
-		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Fepc-1"
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FEpcAdapter-1"
 		exclusive="false">
-		<sliver_type name="http://open-multinet.info/ontology/resource/epc#EPC" />
+		<sliver_type
+			name="http://open-multinet.info/ontology/resource/epc#EvolvedPacketCore" />
 		<ns5:epc mme_address="mme1" serving_gateway="sg1" vendor="vendor1">
-			<ns5:pdn_gateway name="pdn1" rate="1" delay="2" loss="3" />
 			<ns5:apn network_id="123" operator_id="456" />
+			<ns5:apn network_id="1111123" operator_id="4444456" />
+			<ns5:pdn_gateway name="pdn1" rate="1" delay="2" loss="3" />
 			<ns5:enodeb name="name1" address="address1" />
 			<ns5:subscriber imsi_number="imsi1" />
+			<ns5:subscriber imsi_number="imsi2" />
 		</ns5:epc>
 	</node>
 	<node client_id="ue1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
-		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Fue1"
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FEpcAdapter-1"
 		exclusive="false">
-		<sliver_type name="http://open-multinet.info/ontology/resource/epc#UE" />
+		<sliver_type
+			name="http://open-multinet.info/ontology/resource/epc#UserEquipment" />
 		<ns5:ue lte_support="true">
 			<ns5:ue_hardware_type name="hwtype1" />
-			<ns5:ue_disk_image description="Debian 7.7 Wheezy (64 bit)"
+			<ns5:ue_disk_image description="Debian 
+				7.7 Wheezy (64 bit)"
 				name="Debian-7.7-64" />
 			<ns5:control_address address="192.168.3.1"
 				netmask="255.255.255.0" type="ipv4" />
@@ -32,13 +37,13 @@
 	</node>
 	<node client_id="an1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
-		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Fan1"
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FEpcAdapter-1"
 		exclusive="false">
 		<sliver_type
 			name="http://open-multinet.info/ontology/resource/epc#AccessNetwork" />
 		<ns5:access_network enodeb_id="enodeb1" plmn_id="plmn1"
 			band="7" vendor="vendor1" base_model="123" epc_address="epc1" mode="mode1">
-			<ns5:apn network_id="123" operator_id="456" />
+			<ns5:apn network_id="123333" operator_id="455556" />
 			<ns5:ip_address address="192.168.3.1" netmask="255.255.255.0"
 				type="ipv4" />
 		</ns5:access_network>
