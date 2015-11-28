@@ -156,7 +156,8 @@
 
 ###  http://open-multinet.info/ontology/resource/epc#pdnGateway
 
-:pdnGateway rdf:type owl:ObjectProperty ;
+:pdnGateway rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
 
                 rdfs:label "PDN gateway"@en ;
                 
@@ -245,7 +246,8 @@
 
 ###  http://open-multinet.info/ontology/resource/epc#delayCode
 
-:delayCode rdf:type owl:DatatypeProperty ;
+:delayCode rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
 
                 rdfs:label "delay code"@en ;
                 
@@ -407,7 +409,8 @@
 
 ###  http://open-multinet.info/ontology/resource/epc#packetlossCode
 
-:packetlossCode rdf:type owl:DatatypeProperty ;
+:packetlossCode rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
 
                 rdfs:label "packet loss code"@en ;
                 
@@ -440,7 +443,8 @@
 
 ###  http://open-multinet.info/ontology/resource/epc#rateCode
 
-:rateCode rdf:type owl:DatatypeProperty ;
+:rateCode rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
 
                 rdfs:label "rate code"@en ;
                 
@@ -512,7 +516,8 @@
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasID
 
-omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
+omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty .
 
 
 
