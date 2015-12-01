@@ -1,4 +1,4 @@
-@prefix : <http://fed4fire.eu/about#> .
+@prefix : <http://lod.fed4fire.eu/about#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -17,7 +17,7 @@
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
 @prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
-@base <http://lod.fed4fire.eu/about> .
+@base <http://lod.fed4fire.eu/about#> .
 
 <http://lod.fed4fire.eu/about> rdf:type owl:Ontology ;
 
