@@ -1,243 +1,167 @@
+@prefix omn: <http://open-multinet.info/ontology/omn#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix omnlc: <http://open-multinet.info/ontology/omn-lifecycle#>.
 @prefix omngeni: <http://open-multinet.info/ontology/omn-domain-geni-fire#>.
-@prefix omnmu: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@prefix omncomp: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omnres: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-
-[rulea: 
-uriConcat(omncomp:,"alix3d2_mem", ?memComp) 
-noValue(?memComp rdf:type owl:NamedIndividual)->
-(?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
-(?memComp omnmonunit:hasValue "256000000"^^xsd:integer)
-]
-[ruleb: 
-uriConcat(omncomp:,"alix3d2_cpu", ?cpuComp) 
-noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type omncomp:CPU)
-(?cpuComp omnmu:hasValue "500000000"^^xsd:integer)
-]
-[rulec: 
-uriConcat(omncomp:,"alix3d2_sto", ?stoComp) 
-noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
-(?stoComp omnmonunit:hasValue "1000000000"^^xsd:integer)
-]
+@prefix omnmu: <http://open-multinet.info/ontology/omn-monitoring-unit#>.
+@prefix omncomp: <http://open-multinet.info/ontology/omn-component#>.
+@prefix omnres: <http://open-multinet.info/ontology/omn-resource#>.
+@prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#>.
+@prefix omnmnt: <http://open-multinet.info/ontology/omn-monitoring#>.
+@prefix dbp: <http://dbpedia.org/property/>.
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 [rule1: 
 (?node omnres:hasHardwareType ?hwtype)
 (?hwtype rdfs:label "alix3d2"^^xsd:string)
-uriConcat(omncomp:,"alix3d2_mem", ?memComp) 
+makeTemp(?memComp)
+makeTemp(?cpuComp)
+makeTemp(?stoComp)
 ->
-(?node omncomp:hasComponent ?memComp)  
-]
-[rule2: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "alix3d2"^^xsd:string)
-uriConcat(omncomp:,"alix3d2_cpu", ?cpuComp) 
-->
-(?node omncomp:hasComponent ?cpuComp) 
-]
-[rule3: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "alix3d2"^^xsd:string)
-uriConcat(omncomp:,"alix3d2_sto", ?stoComp) 
-->
-(?node omncomp:hasComponent ?stoComp) 
-]
-
-
-[ruled: 
-uriConcat(omncomp:,"Icarus_mem", ?memComp) 
-noValue(?memComp rdf:type owl:NamedIndividual)-> 
 (?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
-(?memComp omnmonunit:hasValue "4000000000"^^xsd:integer)
-]
-[rulee: 
-uriConcat(omncomp:,"Icarus_cpu", ?cpuComp) 
-noValue(?cpuComp rdf:type owl:NamedIndividual)->
+(?memComp rdf:type omncomp:MemoryComponent)
+(?memComp rdfs:label "DDR DRAM"^^xsd:string)
+(?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
+(?memComp dbp:memory "256"^^xsd:integer)
+(?node omn:hasComponent ?memComp)  
 (?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
-(?cpuComp omnmonunit:hasValue "3400000000"^^xsd:integer)
-]
-[rulef: 
-uriConcat(omncomp:,"Icarus_sto", ?stoComp) 
-noValue(?stoComp rdf:type owl:NamedIndividual)->
+(?cpuComp rdf:type omncomp:CPU)
+(?cpuComp rdfs:label "AMD Geode LX CPU")
+(?cpuComp omn:hasModelType "AMD Geode LX800")
+(?cpuComp dbp:fastest "500.0"^^xsd:double)
+(?cpuComp dbp:fastUnit <http://dbpedia.org/resource/MHZ>)
+(?cpuComp omncomp:hasCores 1)
+(?cpuComp dbp:arch <http://dbpedia.org/resource/X86-32>)
+(?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
-(?stoComp omnmonunit:hasValue "111000000000"^^xsd:integer)
+(?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
+(?stoComp dbp:storage "1.0"^^xsd:double)
+(?node omn:hasComponent ?stoComp) 
+]
+
+[rule2: 
+(?node omnres:hasHardwareType ?hwtype)
+(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
+makeTemp(?memComp)
+makeTemp(?cpuComp)
+makeTemp(?stoComp)
+-> 
+(?memComp rdf:type owl:NamedIndividual)
+(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdfs:label "DIMM DDR3 Synchronous 1600 MHz")
+(?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
+(?memComp dbp:memory "4096"^^xsd:integer)
+(?node omn:hasComponent ?memComp) 
+(?cpuComp rdf:type owl:NamedIndividual)
+(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdfs:label "Intel(R) Core(TM) i7-3770 CPU")
+(?cpuComp omncomp:hasCores 4)
+(?cpuComp omncomp:hasModelType " Intel(R) Core(TM) i7")
+(?cpuComp dbp:fastest "3481.6"^^xsd:double)
+(?cpuComp dbp:fastUnit <http://dbpedia.org/resource/MHZ>)
+(?cpuComp foaf:depiction <http://nitlab.inf.uth.gr/NITlab/images/hardware/Icarus/a2.jpg>)
+(?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
+(?node omn:hasComponent ?cpuComp) 
+(?stoComp rdf:type owl:NamedIndividual)
+(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
+(?stoComp dbp:storage "111.0"^^xsd:double)
+(?node omn:hasComponent ?stoComp) 
+]
+
+
+[rule3: 
+(?node omnres:hasHardwareType ?hwtype)
+(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
+makeTemp(?memComp)
+makeTemp(?cpuComp)
+makeTemp(?stoComp)
+-> 
+(?memComp rdf:type owl:NamedIndividual)
+(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdfs:label "DDR DRAM")
+(?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
+(?memComp dbp:memory "256"^^xsd:integer)
+(?node omn:hasComponent ?memComp) 
+(?cpuComp rdf:type owl:NamedIndividual)
+(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdfs:label "AMD Geode LX800 CPU")
+(?cpuComp omncomp:hasModelType "AMD Geode LX800")
+(?cpuComp dbp:fastest "500.0"^^xsd:double)
+(?cpuComp dbp:fastUnit <http://dbpedia.org/resource/MHZ>)
+(?cpuComp omncomp:hasCores 1)
+(?cpuComp dbp:arch <http://dbpedia.org/resource/X86-32>)
+(?node omn:hasComponent ?cpuComp) 
+(?stoComp rdf:type owl:NamedIndividual)
+(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
+(?stoComp dbp:storage "59.6263"^^xsd:double)
+(?node omn:hasComponent ?stoComp) 
 ]
 
 
 [rule4: 
 (?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
-uriConcat(omncomp:,"Icarus_mem", ?memComp) 
+(?hwtype rdfs:label "PC-Grid"^^xsd:string)
+makeTemp(?memComp)
+makeTemp(?cpuComp)
+makeTemp(?stoComp)
 -> 
-(?node omncomp:hasComponent ?memComp) 
+(?memComp rdf:type owl:NamedIndividual)
+(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdfs:label "DIMM Synchronous")
+(?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
+(?memComp dbp:memory "1935.872"^^xsd:double)
+(?node omn:hasComponent ?memComp) 
+(?cpuComp rdf:type owl:NamedIndividual)
+(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdfs:label "Intel(R) Core(TM)2 Duo CPU P8400")
+(?cpuComp omncomp:hasCores 2)
+(?cpuComp omncomp:hasModelType "Intel(R) Core(TM)2 Duo CPU P8400")
+(?cpuComp dbp:fastest "2314.24"^^xsd:double)
+(?cpuComp dbp:fastUnit <http://dbpedia.org/resource/MHZ>)
+(?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
+(?node omn:hasComponent ?cpuComp) 
+(?stoComp rdf:type owl:NamedIndividual)
+(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
+(?stoComp dbp:storage "59.6263"^^xsd:double)
+(?node omn:hasComponent ?stoComp) 
 ]
+
+
 [rule5: 
 (?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
-uriConcat(omncomp:,"Icarus_cpu", ?cpuComp) 
-->
-(?node omncomp:hasComponent ?cpuComp) 
-]
-[rule6: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Icarus"^^xsd:string)
-uriConcat(omncomp:,"Icarus_sto", ?stoComp) 
-->
-(?node omncomp:hasComponent ?stoComp) 
-]
-
-
-
-[ruleg: 
-uriConcat(omncomp:,"Orbit_mem", ?memComp) 
-noValue(?memComp rdf:type owl:NamedIndividual)-> 
+(?hwtype rdfs:label "Intel Atom"^^xsd:string)
+makeTemp(?memComp)
+makeTemp(?cpuComp)
+makeTemp(?stoComp)
+-> 
 (?memComp rdf:type owl:NamedIndividual)
 (?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
-(?memComp omnmonunit:hasValue "256000000"^^xsd:integer)
-]
-[ruleh: 
-uriConcat(omncomp:,"Orbit_cpu", ?cpuComp) 
-noValue(?cpuComp rdf:type owl:NamedIndividual)->
+(?memComp rdfs:label "DDR3 SDRAM")
+(?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
+(?memComp dbp:memory "2048"^^xsd:integer)
+(?node omn:hasComponent ?memComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
 (?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
-(?cpuComp omnmonunit:hasValue "500000000"^^xsd:integer)
-]
-[rulei: 
-uriConcat(omncomp:,"Orbit_sto", ?stoComp) 
-noValue(?stoComp rdf:type owl:NamedIndividual)->
+(?cpuComp rdfs:label " Intel(R) Atom(TM) processor")
+(?cpuComp omncomp:hasCores 1)
+(?cpuComp omncomp:hasModelType " Intel(R) Atom(TM) D2700")
+(?cpuComp dbp:fastest "2181.12"^^xsd:double)
+(?cpuComp dbp:fastUnit <http://dbpedia.org/resource/MHZ>)
+(?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
+(?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
 (?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
-(?stoComp omnmonunit:hasValue "59626300000"^^xsd:integer)
-]
-
-[rule7: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
-uriConcat(omncomp:,"Orbit_mem", ?memComp) 
--> 
-(?node omncomp:hasComponent ?memComp) 
-]
-[rule8: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
-uriConcat(omncomp:,"Orbit_cpu", ?cpuComp) 
-->
-(?node omncomp:hasComponent ?cpuComp) 
-]
-[rule9: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Orbit"^^xsd:string)
-uriConcat(omncomp:,"Orbit_sto", ?stoComp) 
-->
-(?node omncomp:hasComponent ?stoComp) 
+(?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
+(?stoComp dbp:storage "250.0"^^xsd:double)
+(?node omn:hasComponent ?stoComp) 
 ]
 
 
-
-
-[rulej: 
-uriConcat(omncomp:,"Grid_mem", ?memComp) 
-noValue(?memComp rdf:type owl:NamedIndividual)-> 
-(?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
-(?memComp omnmonunit:hasValue "256000000"^^xsd:integer)
-]
-[rulek: 
-uriConcat(omncomp:,"Grid_cpu", ?cpuComp) 
-noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
-(?cpuComp omnmonunit:hasValue "2260000000"^^xsd:integer)
-]
-[rulel: 
-uriConcat(omncomp:,"Grid_sto", ?stoComp) 
-noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
-(?stoComp omnmonunit:hasValue "59626300000"^^xsd:integer)
-]
-
-
-[rule10: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Grid"^^xsd:string)
-uriConcat(omncomp:,"Grid_mem", ?memComp) 
--> 
-(?node omncomp:hasComponent ?memComp) 
-]
-[rule11: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Grid"^^xsd:string)
-uriConcat(omncomp:,"Grid_cpu", ?cpuComp) 
-->
-(?node omncomp:hasComponent ?cpuComp) 
-]
-[rule12: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "PC-Grid"^^xsd:string)
-uriConcat(omncomp:,"Grid_sto", ?stoComp) 
-->
-(?node omncomp:hasComponent ?stoComp) 
-]
-
-
-
-[rulem: 
-uriConcat(omncomp:,"Intel_Atom_mem", ?memComp) 
-noValue(?memComp rdf:type owl:NamedIndividual)-> 
-(?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
-(?memComp omnmonunit:hasValue "2000000000"^^xsd:integer)
-]
-[rulen: 
-uriConcat(omncomp:,"Intel_Atom_cpu", ?cpuComp) 
-noValue(?cpuComp rdf:type owl:NamedIndividual)->
-(?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
-(?cpuComp omnmonunit:hasValue "2128000000"^^xsd:integer)
-]
-[ruleo: 
-uriConcat(omncomp:,"Intel_Atom_sto", ?stoComp) 
-noValue(?stoComp rdf:type owl:NamedIndividual)->
-(?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
-(?stoComp omnmonunit:hasValue "250000000000"^^xsd:integer)
-]
-
-
-[rule13: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "Intel Atom"^^xsd:string)
-uriConcat(omncomp:,"Intel_Atom_mem", ?memComp) 
--> 
-(?node omncomp:hasComponent ?memComp) 
-]
-[rule14: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "Intel Atom"^^xsd:string)
-uriConcat(omncomp:,"Intel_Atom_cpu", ?cpuComp) 
-->
-(?node omncomp:hasComponent ?cpuComp) 
-]
-[rule15: 
-(?node omnres:hasHardwareType ?hwtype)
-(?hwtype rdfs:label "Intel Atom"^^xsd:string)
-uriConcat(omncomp:,"Intel_Atom_sto", ?stoComp) 
-->
-(?node omncomp:hasComponent ?stoComp) 
-]
-
-[rule17:
+[rule6:
 (?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
 (?node <http://open-multinet.info/ontology/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)
 (?node rdfs:label ?name)
@@ -246,21 +170,4 @@ uriConcat(omncomp:,"Intel_Atom_sto", ?stoComp)
 (?node <http://www.w3.org/2003/01/geo/wgs84_pos#long>  "23.7827"^^xsd:float)
 ]
 
-//paper 2015.www
-[rule1: uriConcat(omncomp:,"alix3d2_mem", ?memComp) noValue(?memComp rdf:type owl:NamedIndividual)->
- (?memComp rdf:type owl:NamedIndividual)
- (?memComp rdf:type omncomp:MemoryComponent)
- (?memComp omnmonunit:hasValue "256000000"^^xsd:integer) ]
- [rule2: uriConcat(omncomp:,"alix3d2_cpu", ?cpuComp) noValue(?cpuComp rdf:type owl:NamedIndividual)->
- (?cpuComp rdf:type owl:NamedIndividual)
- (?cpuComp rdf:type omncomp:CPU) (?cpuComp omnmonunit:hasValue "500000000"^^xsd:integer) ]
- [rule3: uriConcat(omncomp:,"alix3d2_sto", ?stoComp) noValue(?stoComp rdf:type owl:NamedIndividual)->
- (?stoComp rdf:type owl:NamedIndividual)
- (?stoComp rdf:type omncomp:StorageComponent)
- (?stoComp omnmonunit:hasValue "1000000000"^^xsd:integer) ]
- [rule4: (?node omnres:hasHardwareType ?hwtype) (?hwtype rdfs:label "alix3d2"^^xsd:string) uriConcat(omncomp:,"alix3d2_mem", ?memComp) ->
- (?node omncomp:hasComponent ?memComp) ]
- [rule5: (?node omnres:hasHardwareType ?hwtype) (?hwtype rdfs:label "alix3d2"^^xsd:string) uriConcat(omncomp:,"alix3d2_cpu", ?cpuComp) ->
- (?node omncomp:hasComponent ?cpuComp) ]
- [rule6: (?node omnres:hasHardwareType ?hwtype) (?hwtype rdfs:label "alix3d2"^^xsd:string) uriConcat(omncomp:,"alix3d2_sto", ?stoComp) ->
- (?node omncomp:hasComponent ?stoComp) ]
+
