@@ -1,8 +1,5 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
-import com.hp.hpl.jena.sparql.util.NodeFactoryExtra;
-import com.hp.hpl.jena.sparql.util.Utils;
-
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
@@ -22,6 +19,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBCont
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.GroupContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
@@ -49,8 +48,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImag
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UseGroup;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
 import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -60,21 +57,16 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.math.BigInteger;
-import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.hp.hpl.jena.datatypes.RDFDatatype;
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
-import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-import com.hp.hpl.jena.vocabulary.XSD;
 
 /**
  * Helper methods for converting from OMN model to advertisement RSpec. These

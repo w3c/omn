@@ -2,7 +2,6 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
@@ -37,13 +36,10 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.math.BigInteger;
 import java.net.URI;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.xerces.dom.ElementNSImpl;
 import org.w3c.dom.NamedNodeMap;
