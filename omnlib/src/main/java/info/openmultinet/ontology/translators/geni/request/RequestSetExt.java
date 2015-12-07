@@ -3,6 +3,11 @@ package info.openmultinet.ontology.translators.geni.request;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Lease;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Dns;
+import info.openmultinet.ontology.translators.geni.jaxb.request.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Gateway;
 import info.openmultinet.ontology.translators.geni.jaxb.request.PDNGatewayContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
@@ -39,10 +44,12 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
 import info.openmultinet.ontology.translators.geni.jaxb.request.StitchContent;
 import info.openmultinet.ontology.translators.geni.jaxb.request.SubnetContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.SubscriberContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Switch;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
+import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -51,6 +58,9 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
@@ -541,8 +551,11 @@ public class RequestSetExt extends AbstractConverter {
 				osco.setAbout(aboutUri);
 			}
 
-			if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
-				String id = resourceResource.getProperty(Omn_lifecycle.hasID)
+			if (resourceResource
+					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.id)) {
+				String id = resourceResource
+						.getProperty(
+								info.openmultinet.ontology.vocabulary.Osco.id)
 						.getObject().asLiteral().getString();
 				if (id != null && id != "") {
 					osco.setId(id);
@@ -857,12 +870,18 @@ public class RequestSetExt extends AbstractConverter {
 				osco.setSslPort(sslPortBigInt);
 			}
 
-			if (resourceResource
-					.hasProperty(info.openmultinet.ontology.vocabulary.Osco.subnet)) {
-				Resource subnet = resourceResource
-						.getProperty(
-								info.openmultinet.ontology.vocabulary.Osco.subnet)
-						.getObject().asResource();
+			StmtIterator resources = resource.getResource().listProperties(
+					info.openmultinet.ontology.vocabulary.Osco.subnet);
+
+			while (resources.hasNext()) {
+				Resource subnet = resources.next().getObject().asResource();
+				// if (resourceResource
+				// .hasProperty(info.openmultinet.ontology.vocabulary.Osco.subnet))
+				// {
+				// Resource subnet = resourceResource
+				// .getProperty(
+				// info.openmultinet.ontology.vocabulary.Osco.subnet)
+				// .getObject().asResource();
 				setOscoSubnet(osco, subnet);
 			}
 
@@ -912,11 +931,9 @@ public class RequestSetExt extends AbstractConverter {
 			subnetContents.setMgmt(mgmtBoolean);
 		}
 
-		if (subnet.hasProperty(info.openmultinet.ontology.vocabulary.Osco.name)) {
-			String name = subnet
-					.getProperty(
-							info.openmultinet.ontology.vocabulary.Osco.name)
-					.getObject().asLiteral().getString();
+		if (subnet.hasProperty(RDFS.label)) {
+			String name = subnet.getProperty(RDFS.label).getObject()
+					.asLiteral().getString();
 			subnetContents.setName(name);
 		}
 
@@ -1373,4 +1390,309 @@ public class RequestSetExt extends AbstractConverter {
 		}
 	}
 
+	public static void setFivegGateway(Statement omnResource, NodeContents node) {
+		if (omnResource.getResource().hasProperty(RDF.type, Fiveg.Gateway)) {
+
+			Resource resourceResource = omnResource.getResource();
+
+			Gateway fiveg = new ObjectFactory().createGateway();
+
+			if (resourceResource.hasProperty(Fiveg.version)) {
+				String version = resourceResource.getProperty(Fiveg.version)
+						.getObject().asLiteral().getString();
+				fiveg.setVersion(version);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.upstartOn)) {
+				String upstartOn = resourceResource
+						.getProperty(Fiveg.upstartOn).getObject().asLiteral()
+						.getString();
+				boolean upstartOnBool = Boolean.parseBoolean(upstartOn);
+				fiveg.setUpstartOn(upstartOnBool);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.managementInterface)) {
+				int mgmtIntf = resourceResource
+						.getProperty(Fiveg.managementInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMgmtIntf = BigInteger.valueOf(mgmtIntf);
+				fiveg.setMgmtIntf(bigMgmtIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.minInterfaces)) {
+				int minNumIntf = resourceResource
+						.getProperty(Fiveg.minInterfaces).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMinNumIntf = BigInteger.valueOf(minNumIntf);
+				fiveg.setMinNumIntf(bigMinNumIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ipServicesNetwork)) {
+				int netAIntf = resourceResource
+						.getProperty(Fiveg.ipServicesNetwork).getObject()
+						.asLiteral().getInt();
+				BigInteger bigNetAIntf = BigInteger.valueOf(netAIntf);
+				fiveg.setNetAIntf(bigNetAIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.cloudManagementIP)) {
+
+				Resource ipAddress = resourceResource
+						.getProperty(Fiveg.cloudManagementIP).getObject()
+						.asResource();
+				FiveGIpContents ipAddressContents = new ObjectFactory()
+						.createFiveGIpContents();
+				fiveg.setCloudMgmtGwIp(ipAddressContents);
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.address)) {
+					String address = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.address)
+							.getObject().asLiteral().getString();
+					fiveg.getCloudMgmtGwIp().setAddress(address);
+					// ipAddressContents.setAddress(address);
+				}
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.netmask)) {
+					String netmask = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.netmask)
+							.getObject().asLiteral().getString();
+					fiveg.getCloudMgmtGwIp().setNetmask(netmask);
+					// ipAddressContents.setNetmask(netmask);
+				}
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.type)) {
+					String type = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.type)
+							.getObject().asLiteral().getString();
+					// ipAddressContents.setType(type);
+					fiveg.getCloudMgmtGwIp().setType(type);
+				}
+			}
+			node.getAnyOrRelationOrLocation().add(fiveg);
+		}
+	}
+
+	public static void setFivegDns(Statement omnResource, NodeContents node) {
+		if (omnResource.getResource().hasProperty(RDF.type,
+				Fiveg.DomainNameServer)) {
+
+			Resource resourceResource = omnResource.getResource();
+
+			Dns fiveg = new ObjectFactory().createDns();
+
+			if (resourceResource.hasProperty(Fiveg.additionals)) {
+				String additionals = resourceResource
+						.getProperty(Fiveg.additionals).getObject().asLiteral()
+						.getString();
+				fiveg.setAdditionals(additionals);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.domainName)) {
+				String domainName = resourceResource
+						.getProperty(Fiveg.domainName).getObject().asLiteral()
+						.getString();
+				fiveg.setDomainName(domainName);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.domainNs)) {
+				String domainNs = resourceResource.getProperty(Fiveg.domainNs)
+						.getObject().asLiteral().getString();
+				fiveg.setDomainNs(domainNs);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.managementInterface)) {
+				int mgmtIntf = resourceResource
+						.getProperty(Fiveg.managementInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMgmtIntf = BigInteger.valueOf(mgmtIntf);
+				fiveg.setMgmtIntf(bigMgmtIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.minInterfaces)) {
+				int minNumIntf = resourceResource
+						.getProperty(Fiveg.minInterfaces).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMinNumIntf = BigInteger.valueOf(minNumIntf);
+				fiveg.setMinNumIntf(bigMinNumIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ipServicesNetwork)) {
+				int netAIntf = resourceResource
+						.getProperty(Fiveg.ipServicesNetwork).getObject()
+						.asLiteral().getInt();
+				BigInteger bigNetAIntf = BigInteger.valueOf(netAIntf);
+				fiveg.setNetAIntf(bigNetAIntf);
+			}
+
+			node.getAnyOrRelationOrLocation().add(fiveg);
+		}
+	}
+
+	public static void setFivegSwitch(Statement omnResource, NodeContents node) {
+		if (omnResource.getResource().hasProperty(RDF.type, Fiveg.Switch)) {
+
+			Resource resourceResource = omnResource.getResource();
+
+			Switch fiveg = new ObjectFactory().createSwitch();
+
+			if (resourceResource.hasProperty(Fiveg.pgwUBaseId)) {
+				String pgwUBaseId = resourceResource
+						.getProperty(Fiveg.pgwUBaseId).getObject().asLiteral()
+						.getString();
+				fiveg.setPgwUBaseId(pgwUBaseId);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.upstartOn)) {
+				String upstartOn = resourceResource
+						.getProperty(Fiveg.upstartOn).getObject().asLiteral()
+						.getString();
+				boolean upstartOnBool = Boolean.parseBoolean(upstartOn);
+				fiveg.setUpstartOn(upstartOnBool);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.managementInterface)) {
+				int mgmtIntf = resourceResource
+						.getProperty(Fiveg.managementInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMgmtIntf = BigInteger.valueOf(mgmtIntf);
+				fiveg.setMgmtIntf(bigMgmtIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ipServicesNetwork)) {
+				int netAIntf = resourceResource
+						.getProperty(Fiveg.ipServicesNetwork).getObject()
+						.asLiteral().getInt();
+				BigInteger bigNetAIntf = BigInteger.valueOf(netAIntf);
+				fiveg.setNetAIntf(bigNetAIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.pgwUDownloadInterface)) {
+				int pgwUDownloadInterface = resourceResource
+						.getProperty(Fiveg.pgwUDownloadInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger pgwUDownloadIntf = BigInteger
+						.valueOf(pgwUDownloadInterface);
+				fiveg.setPgwUDownloadInterface(pgwUDownloadIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.pgwUUploadInterface)) {
+				int pgwUUploadInterface = resourceResource
+						.getProperty(Fiveg.pgwUUploadInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger pgwUUploadIntf = BigInteger
+						.valueOf(pgwUUploadInterface);
+				fiveg.setPgwUUploadInterface(pgwUUploadIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.minInterfaces)) {
+				int minNumIntf = resourceResource
+						.getProperty(Fiveg.minInterfaces).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMinNumIntf = BigInteger.valueOf(minNumIntf);
+				fiveg.setMinNumIntf(bigMinNumIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.sgwUDownloadInterface)) {
+				int sgwUDownloadInterface = resourceResource
+						.getProperty(Fiveg.sgwUDownloadInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger sgwUDownloadIntf = BigInteger
+						.valueOf(sgwUDownloadInterface);
+				fiveg.setSgwUDownloadInterface(sgwUDownloadIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.sgwUUploadInterface)) {
+				int sgwUUploadInterface = resourceResource
+						.getProperty(Fiveg.sgwUUploadInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger sgwUUploadIntf = BigInteger
+						.valueOf(sgwUUploadInterface);
+				fiveg.setSgwUUploadInterface(sgwUUploadIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ranBackhaul)) {
+				int netDIntf = resourceResource.getProperty(Fiveg.ranBackhaul)
+						.getObject().asLiteral().getInt();
+				BigInteger bigNetDIntf = BigInteger.valueOf(netDIntf);
+				fiveg.setNetAIntf(bigNetDIntf);
+			}
+
+			node.getAnyOrRelationOrLocation().add(fiveg);
+		}
+
+	}
+
+	public static void setOlLease(Statement resource, NodeContents node) {
+		if (resource.getResource().hasProperty(RDF.type, Omn_lifecycle.Lease)) {
+			final Lease of = new Lease();
+
+			Resource resourceResource = resource.getResource();
+			if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
+				String leaseId = resourceResource
+						.getProperty(Omn_lifecycle.hasID).getObject()
+						.asLiteral().getString();
+				of.setLeaseID(leaseId);
+			}
+
+			if (resourceResource.hasProperty(Omn_lifecycle.hasIdRef)) {
+				String leaseIdRef = resourceResource
+						.getProperty(Omn_lifecycle.hasIdRef).getObject()
+						.asLiteral().getString();
+				if (leaseIdRef.equals(resourceResource.getURI())) {
+					of.setLeaseREF(of);
+				}
+			}
+
+			if (resourceResource.hasProperty(Omn_lifecycle.hasSliceID)) {
+				String sliceId = resourceResource
+						.getProperty(Omn_lifecycle.hasSliceID).getObject()
+						.asLiteral().getString();
+				of.setSliceId(sliceId);
+			}
+
+			if (resourceResource.hasProperty(Omn_domain_pc.hasUUID)) {
+				String uuid = resourceResource
+						.getProperty(Omn_domain_pc.hasUUID).getObject()
+						.asLiteral().getString();
+				of.setUuid(uuid);
+			}
+
+			if (resourceResource.hasProperty(Omn_lifecycle.startTime)) {
+
+				Object startTime = ((Object) resourceResource
+						.getProperty(Omn_lifecycle.startTime).getObject()
+						.asLiteral().getValue());
+
+				XMLGregorianCalendar start = null;
+				if (startTime instanceof XSDDateTime) {
+					XSDDateTime time = (XSDDateTime) startTime;
+					start = AbstractConverter.xsdToXmlTime(time);
+				}
+				of.setValidFrom(start);
+			}
+
+			if (resourceResource.hasProperty(Omn_lifecycle.expirationTime)) {
+
+				Object endTime = ((Object) resourceResource
+						.getProperty(Omn_lifecycle.expirationTime).getObject()
+						.asLiteral().getValue());
+
+				XMLGregorianCalendar end = null;
+				if (endTime instanceof XSDDateTime) {
+					XSDDateTime time = (XSDDateTime) endTime;
+					end = AbstractConverter.xsdToXmlTime(time);
+				}
+				of.setValidUntil(end);
+			}
+
+			node.getAnyOrRelationOrLocation().add(of);
+		}
+
+	}
 }

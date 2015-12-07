@@ -1,0 +1,866 @@
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix osco:  <http://opensdncore.org/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix : <http://open-multinet.info/ontology/resource/fiveg#> .
+
+<http://open-multinet.info/ontology/resource/fiveg> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G NFVs."@en ;
+
+                                         rdf:type owl:Ontology, 
+
+                                         voaf:Vocabulary ;
+                                         
+                                         rdfs:label "omn-resource/fiveg"@en ;
+                                         
+                                         vann:preferredNamespacePrefix "omn-resource/fiveg"^^xsd:string ;
+
+                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/fiveg#> ;
+                                        
+                                         dc:date "2015-12-01"^^xsd:date ;
+                                         
+                                         dcterms:modified "2015-12-01"^^xsd:date ;
+                                         
+                                         owl:versionInfo "2015-12-01"^^xsd:string ;
+                                         
+                                         dc:title "5G ontology"@en ;
+                                         
+                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G NFVs.."@en ;
+                                         
+                                         dc:creator "Robyn Loughnane" ;
+                                         
+                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
+                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> .
+
+
+
+
+
+
+
+
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+
+
+
+#################################################################
+#
+#    Datatype Properties
+#
+#################################################################
+
+###  http://open-multinet.info/ontology/resource/fiveg#additionals
+
+:additionals  a    owl:DatatypeProperty ;
+
+        rdfs:label "additionals"@en ;
+
+        rdfs:comment "additionals"@en ;
+
+        rdfs:domain  :DomainNameServer ;
+
+        rdfs:range   xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#domainName
+
+:domainName  a    owl:DatatypeProperty ;
+
+        rdfs:label "domain name"@en ;
+
+        rdfs:comment "domain name"@en ;
+
+        rdfs:domain  :DomainNameServer ;
+
+        rdfs:range   xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#domainNs
+
+:domainNs  a    owl:DatatypeProperty ;
+
+        rdfs:label "domain ns"@en ;
+
+        rdfs:comment "domain ns"@en ;
+
+        rdfs:domain  :DomainNameServer ;
+
+        rdfs:range   xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
+
+:cloudManagementIP  a    owl:DatatypeProperty ;
+
+        rdfs:label "cloud management IP address"@en ;
+
+        rdfs:comment "cloud management IP address"@en ;
+
+        rdfs:domain  :Gateway ;
+
+        rdfs:range   omn-resource:IPAddress .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#ipServicesNetwork
+
+:ipServicesNetwork  a    owl:DatatypeProperty ;
+
+        rdfs:seeAlso osco:NET_A_INTF ;
+
+        rdfs:label "IP services network"@en ;
+
+        rdfs:comment "IP services network (NET_A_INTF)"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:integer .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#managementInterface
+
+:managementInterface  a    owl:DatatypeProperty ;
+
+        rdfs:seeAlso osco:MGMT_INTF ;
+
+        rdfs:label "management interface"@en ;
+
+        rdfs:comment "management interface (MGMT_INTF)"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:integer .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#minInterfaces
+
+:minInterfaces  a    owl:DatatypeProperty ;
+
+        rdfs:seeAlso osco:MIN_NUM_INTF ;
+
+        rdfs:label "minimum number of interfaces"@en ;
+
+        rdfs:comment "minimum number of interfaces (MIN_NUM_INTF)"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#pgwUBaseId
+
+:pgwUBaseId  a    owl:DatatypeProperty ;
+
+        rdfs:label "PGWU Base Id"@en ;
+
+        rdfs:comment "PGWU Base Id"@en ;
+
+        rdfs:domain  :Switch ;
+
+        rdfs:range   xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#pgwUDownloadInterface
+
+:pgwUDownloadInterface  a    owl:DatatypeProperty ;
+
+        rdfs:label "PGW U Download Interface"@en ;
+
+        rdfs:comment "PGW U Download Interface (PGW_U_Download_Interface)"@en ;
+
+        rdfs:domain  :Switch ;
+
+        rdfs:range   xsd:integer .
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#pgwUUploadInterface
+
+:pgwUUploadInterface  a    owl:DatatypeProperty ;
+
+        rdfs:label "PGW U Upload Interface"@en ;
+
+        rdfs:comment "PGW U Upload Interface (PGW_U_Upload_Interface)"@en ;
+
+        rdfs:domain  :Switch ;
+
+        rdfs:range   xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#ranBackhaul
+
+:ranBackhaul  a    owl:DatatypeProperty ;
+
+        rdfs:seeAlso osco:NET_A_INTF ;
+
+        rdfs:label "RAN backhaul"@en ;
+
+        rdfs:comment "RAN backhaul (NET_D_INTF)"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#sgwUDownloadInterface
+
+:sgwUDownloadInterface  a    owl:DatatypeProperty ;
+
+        rdfs:label "SGW U Download Interface"@en ;
+
+        rdfs:comment "SGW U Download Interface (SGW_U_Download_Interface)"@en ;
+
+        rdfs:domain  :Switch ;
+
+        rdfs:range   xsd:integer .
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#sgwUUploadInterface
+
+:sgwUUploadInterface  a    owl:DatatypeProperty ;
+
+        rdfs:label "SGW U Upload Interface"@en ;
+
+        rdfs:comment "SGW U Upload Interface (SGW_U_Upload_Interface)"@en ;
+
+        rdfs:domain  :Switch ;
+
+        rdfs:range   xsd:integer .
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#upstartOn
+
+:upstartOn  a    owl:DatatypeProperty ;
+
+        rdfs:label "upstart on"@en ;
+
+        rdfs:comment "upstart on"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#version
+
+:version  a    owl:DatatypeProperty ;
+
+        rdfs:label "version"@en ;
+
+        rdfs:comment "version"@en ;
+
+        rdfs:domain  :Gateway ;
+
+        rdfs:range   xsd:string .
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#DomainNameServer
+
+:DomainNameServer rdf:type owl:Class ;
+
+      rdfs:label "Domain Name Server"@en ;
+      
+      rdfs:subClassOf :FiveGResource ;
+      
+      rdfs:comment "Domain Name Server (DNS)"@en .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#Gateway
+
+:Gateway rdf:type owl:Class ;
+
+      rdfs:label "Gateway"@en ;
+      
+      rdfs:subClassOf :FiveGResource ;
+      
+      rdfs:comment "Gateway"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#Switch
+
+:Switch rdf:type owl:Class ;
+
+      rdfs:label "Switch"@en ;
+      
+      rdfs:subClassOf :FiveGResource ;
+      
+      rdfs:comment "Switch (PGWU-SGWU-5G)"@en .
+
+
+
+
+
+
+
+######################  old stuff below this line
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#hasAccessNetwork
+
+:hasAccessNetwork rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has Access Network properties"@en ;
+              
+              rdfs:label "has Access Network"@en ;
+              
+              rdfs:range :AccessNetworkDetails ;
+              
+              rdfs:domain :AccessNetwork .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#hasAccessPointName
+
+:hasAccessPointName rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "The APN that is used by the LTE AP or the supported APNs from the EPC or the APNs pre-set to the Android smartphone"@en ;
+              
+              rdfs:label "has Access Point Name"@en ;
+              
+              rdfs:range :AccessPointName ;
+              
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :AccessNetwork
+                                          :EvolvedPacketCore
+                                          :UserEquipment
+                                        )
+                          ] .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#hasControlAddress
+
+:hasControlAddress rdf:type owl:ObjectProperty ;
+
+              rdfs:subPropertyOf  omn-resource:hasIPAddress ;
+
+              rdfs:comment "has Access Network properties"@en ;
+              
+              rdfs:label "has Access Network"@en ;
+              
+              rdfs:range :AccessNetwork ;
+              
+              rdfs:domain omn:Resource .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#hasENodeB
+
+:hasENodeB rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has ENodeB"@en ;
+              
+              rdfs:label "has ENodeB"@en ;
+              
+              rdfs:range :ENodeB ;
+              
+              rdfs:domain :EvolvedPacketCore .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#hasEvolvedPacketCore
+
+:hasEvolvedPacketCore rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has EPC properties"@en ;
+              
+              rdfs:label "has EPC"@en ;
+              
+              rdfs:range :EvolvedPacketCoreDetails ;
+              
+              rdfs:domain :EvolvedPacketCore .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#hasUserEquipment
+
+:hasUserEquipment rdf:type owl:ObjectProperty ;
+
+              rdfs:comment "has UE properties"@en ;
+              
+              rdfs:label "has UE"@en ;
+              
+              rdfs:range :UserEquipmentDetails ;
+              
+              rdfs:domain :UserEquipment .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#pdnGateway
+
+:pdnGateway rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+
+                rdfs:label "PDN gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the PDN gateway"@en ;
+                
+                rdfs:domain :EvolvedPacketCore ;
+                
+                rdfs:range :PDNGateway .
+
+
+#################################################################
+#
+#    Datatype Properties
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#accessPointName
+
+:accessPointName rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "access point name"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The APN that is used by the LTE AP or the supported APNs from the EPC or the APNs pre-set to the Android smartphone"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+                
+
+###  http://open-multinet.info/ontology/resource/fiveg#attenuator
+
+:attenuator rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "attenuator"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "attenuator"@en ;
+                
+                rdfs:domain omn:Resource ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#band
+
+:band rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "band"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The band that it currently operates"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#baseModel
+
+:baseModel rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "base model"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The model number of the LTE AP"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#delayCode
+
+:delayCode rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+
+                rdfs:label "delay code"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "delay code (0 => 0, 1 => 4, 2 => 10, 3 => 50, 4 => 200, 5 => 500)"@en ;
+                
+                rdfs:domain :PDNGateway ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#eNodeBAddress
+
+:eNodeBAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "eNodeB address"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "eNodeB address"@en ;
+                
+                rdfs:domain :ENodeB ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#eNodeBId
+
+:eNodeBId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "ENodeB ID"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The ID of the eNodeB as it is defined by the testbed operator"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#eNodeBName
+
+:eNodeBName rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "eNodeB name"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "eNodeB name"@en ;
+                
+                rdfs:domain :ENodeB ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#evolvedPacketCoreAddress
+
+:evolvedPacketCoreAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "EPC address"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The EPC address it is currently connected to"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#lteSupport
+
+:lteSupport rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "LTE support"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Whether the phone supports or no LTE. This parameter has to be included in order to differentiate the Android node compared to the existing ones in the testbeds which do not feature LTE connectivity."@en ;
+                
+                rdfs:domain :UserEquipment ;
+                
+                rdfs:range xsd:boolean .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#mode
+
+:mode rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "mode"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Either Time Division Duplex (TDD) or Frequency Division Duplex (FDD) used. This is band dependant as well since reserved bands exist for each mode of operation. Currently, the setup used for the testbeds only support FDD mode."@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#mmeAddress
+
+:mmeAddress rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "MME gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the MME gateway"@en ;
+                
+                rdfs:domain :EvolvedPacketCore ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#networkIdentifier
+
+:networkIdentifier rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "Network Identifier"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Network Identifier"@en ;
+                
+                rdfs:domain :AccessPointName ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#operatorIdentifier
+
+:operatorIdentifier rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "Operator Identifier"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "Network Identifier"@en ;
+                
+                rdfs:domain :AccessPointName ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#packetlossCode
+
+:packetlossCode rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+
+                rdfs:label "packet loss code"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "packet loss code (0 => 0, 1 => 4, 2 => 6, 3 => 20, 4 => 40, 5 => 70)"@en ;
+                
+                rdfs:domain :PDNGateway ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#publicLandMobileNetworkId
+
+:publicLandMobileNetworkId rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "Public Land Mobile Network Identifier"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The Public Land Mobile Network Identificator that is needed by the SIM card running by the UE (the setup will use test SIM cards)"@en ;
+                
+                rdfs:domain :AccessNetwork ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#rateCode
+
+:rateCode rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+
+                rdfs:label "rate code"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "rate code (0 => 0, 1 => 500, 2 => 1000, 3 => 10000, 4 => 100000, 5 => 1000000)"@en ;
+                
+                rdfs:domain :PDNGateway ;
+                
+                rdfs:range xsd:integer .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#servingGateway
+
+:servingGateway rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "serving gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The address of the Serving gateway"@en ;
+                
+                rdfs:domain :EvolvedPacketCore ;
+                
+                rdfs:range xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#subscriber
+
+:subscriber rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "serving gateway"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The IMSI number of the SIM cards of the subscribers allowed to send traffic through the EPC."@en ;
+                
+                rdfs:domain :EvolvedPacketCore ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#vendor
+
+:vendor rdf:type owl:DatatypeProperty ;
+
+                rdfs:label "vendor"@en ;
+                
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+                
+                rdfs:comment "The vendor of the LTE AP (ip.access/EURECOM) or the vendor of the EPC (SiRRAN/EURECOM)"@en ;
+                
+                rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :AccessNetwork
+                                          :EvolvedPacketCore
+                                        )
+                          ] ;
+                
+                rdfs:range xsd:string .
+
+
+
+
+
+
+###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty .
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#FiveGAdapter
+
+:FiveGAdapter rdf:type owl:Class ;
+
+      rdfs:label "EPC Adapter"@en ;
+      
+      rdfs:subClassOf omn:Adapter ;
+      
+      rdfs:comment "Evolved Packet Core adapter"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#FiveGResource
+
+:FiveGResource rdf:type owl:Class ;
+
+      rdfs:label "EPC generic resource"@en ;
+      
+      rdfs:subClassOf omn:Resource ;
+      
+      rdfs:comment "EPC generic resource, can have specific type EvolvedPacketCore, UserEquipment or AccessNetwork"@en ;
+      
+      rdfs:seeAlso <http://www.flex-project.eu> .
+
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#IPAddress
+
+omn-resource:IPAddress rdf:type owl:Class .
+
+
+
+###  http://open-multinet.info/ontology/omn#Adapter
+
+omn:Adapter rdf:type owl:Class .
+
+
+
+
+
+

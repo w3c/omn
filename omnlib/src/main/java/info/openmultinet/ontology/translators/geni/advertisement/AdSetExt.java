@@ -49,6 +49,9 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImag
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UseGroup;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
+import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
@@ -1526,6 +1529,15 @@ public class AdSetExt extends AbstractConverter {
 			of.setLeaseID(leaseId);
 		}
 
+		if (resourceResource.hasProperty(Omn_lifecycle.hasIdRef)) {
+			String leaseIdRef = resourceResource
+					.getProperty(Omn_lifecycle.hasIdRef).getObject()
+					.asLiteral().getString();
+			if (leaseIdRef.equals(resourceResource.getURI())) {
+				of.setLeaseREF(of);
+			}
+		}
+
 		if (resourceResource.hasProperty(Omn_lifecycle.hasSliceID)) {
 			String sliceId = resourceResource
 					.getProperty(Omn_lifecycle.hasSliceID).getObject()
@@ -1566,5 +1578,94 @@ public class AdSetExt extends AbstractConverter {
 			}
 			of.setValidUntil(end);
 		}
+	}
+
+	public static void setGateway(Statement omnResource, NodeContents node) {
+		if (omnResource.getResource().hasProperty(RDF.type, Fiveg.Gateway)) {
+
+			Resource resourceResource = omnResource.getResource();
+
+			Gateway gateway = new ObjectFactory().createGateway();
+
+			if (resourceResource.hasProperty(Fiveg.version)) {
+				String version = resourceResource.getProperty(Fiveg.version)
+						.getObject().asLiteral().getString();
+				gateway.setVersion(version);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.upstartOn)) {
+				String upstartOn = resourceResource
+						.getProperty(Fiveg.upstartOn).getObject().asLiteral()
+						.getString();
+				boolean upstartOnBool = Boolean.parseBoolean(upstartOn);
+				gateway.setUpstartOn(upstartOnBool);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.managementInterface)) {
+				int mgmtIntf = resourceResource
+						.getProperty(Fiveg.managementInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMgmtIntf = BigInteger.valueOf(mgmtIntf);
+				gateway.setMgmtIntf(bigMgmtIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.minInterfaces)) {
+				int minNumIntf = resourceResource
+						.getProperty(Fiveg.minInterfaces).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMinNumIntf = BigInteger.valueOf(minNumIntf);
+				gateway.setMinNumIntf(bigMinNumIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ipServicesNetwork)) {
+				int netAIntf = resourceResource
+						.getProperty(Fiveg.ipServicesNetwork).getObject()
+						.asLiteral().getInt();
+				BigInteger bigNetAIntf = BigInteger.valueOf(netAIntf);
+				gateway.setNetAIntf(bigNetAIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.cloudManagementIP)) {
+
+				Resource ipAddress = resourceResource
+						.getProperty(Fiveg.cloudManagementIP).getObject()
+						.asResource();
+				FiveGIpContents ipAddressContents = new ObjectFactory()
+						.createFiveGIpContents();
+				gateway.setCloudMgmtGwIp(ipAddressContents);
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.address)) {
+					String address = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.address)
+							.getObject().asLiteral().getString();
+					gateway.getCloudMgmtGwIp().setAddress(address);
+					// ipAddressContents.setAddress(address);
+				}
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.netmask)) {
+					String netmask = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.netmask)
+							.getObject().asLiteral().getString();
+					gateway.getCloudMgmtGwIp().setNetmask(netmask);
+					// ipAddressContents.setNetmask(netmask);
+				}
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.type)) {
+					String type = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.type)
+							.getObject().asLiteral().getString();
+					// ipAddressContents.setType(type);
+					gateway.getCloudMgmtGwIp().setType(type);
+				}
+			}
+			node.getAnyOrRelationOrLocation().add(gateway);
+		}
+
 	}
 }

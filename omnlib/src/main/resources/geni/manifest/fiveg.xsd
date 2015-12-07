@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An extension for TOSCA OpenSNDCore Orchestrator. See http://www.geni.net/resources/rspec/ext/shared-vlan/1/ad.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:s="http://open-multinet.info/ontology/resource/fiveg"
+	elementFormDefault="qualified" targetNamespace="http://open-multinet.info/ontology/resource/fiveg"
+	xmlns:rspec="http://www.geni.net/resources/rspec/3">
+	<!-- xs:include schemaLocation="ad-common.xsd" / -->
+	<xs:element name="rspec_gateway">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:gateway" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="gateway">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="1" ref="s:cloud_mgmt_gw_ip" />
+			</xs:sequence>
+			<!-- xs:choice minOccurs="0" maxOccurs="unbounded"> <xs:element ref="s:cloud_mgmt_gw_ip" 
+				/> </xs:choice -->
+			<xs:attribute name="upstart_on" type="xs:boolean" />
+			<xs:attribute name="version" type="xs:string" />
+			<xs:attribute name="mgmt_intf" type="xs:integer" />
+			<xs:attribute name="net_a_intf" type="xs:integer" />
+			<xs:attribute name="min_num_intf" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cloud_mgmt_gw_ip" type="s:FiveGIpContents" />
+	<xs:complexType name="FiveGIpContents">
+		<xs:attribute name="address" type="xs:string" />
+		<xs:attribute name="netmask" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
+	</xs:complexType>
+</xs:schema>

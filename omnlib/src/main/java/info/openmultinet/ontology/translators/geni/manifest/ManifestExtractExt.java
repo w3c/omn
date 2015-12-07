@@ -23,6 +23,10 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.SubscriberConte
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.UeHardwareTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Gateway;
+import info.openmultinet.ontology.translators.geni.request.RequestExtractExt;
+import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -817,5 +821,65 @@ public class ManifestExtractExt extends AbstractConverter {
 			ManifestExtractExt.LOG.finer(e.getMessage());
 		}
 
+	}
+
+	public static void tryExtractGateway(Resource node,
+			Object rspecObject) {
+		try {
+			Gateway gateway = (Gateway) rspecObject;
+
+			node.addProperty(RDF.type, Fiveg.Gateway);
+
+			String version = gateway.getVersion();
+			if (version != null && version != "") {
+				node.addProperty(Fiveg.version, version);
+			}
+
+			Boolean upstartOn = gateway.isUpstartOn();
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger mgmtIntf = gateway.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger minNumIntf = gateway.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netAIntf = gateway.getNetAIntf();
+			if (netAIntf != null) {
+				node.addLiteral(Fiveg.ipServicesNetwork, netAIntf);
+			}
+
+			FiveGIpContents cloudIpAddress = gateway.getCloudMgmtGwIp();
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource ipResource = node.getModel().createResource(uuid);
+			ipResource.addProperty(RDF.type, Omn_resource.IPAddress);
+
+			String address = cloudIpAddress.getAddress();
+			if (address != null && address != "") {
+				ipResource.addProperty(Omn_resource.address, address);
+			}
+
+			String netmask = cloudIpAddress.getNetmask();
+			if (netmask != null && netmask != "") {
+				ipResource.addProperty(Omn_resource.netmask, netmask);
+			}
+
+			String type = cloudIpAddress.getType();
+			if (type != null && type != "") {
+				ipResource.addProperty(Omn_resource.type, type);
+			}
+
+			node.addProperty(Fiveg.cloudManagementIP, ipResource);
+
+		} catch (final ClassCastException e) {
+			ManifestExtractExt.LOG.finer(e.getMessage());
+		}
+		
 	}
 }

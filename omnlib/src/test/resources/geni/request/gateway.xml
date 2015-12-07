@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rspec expires="2015-10-12T16:05:45.404+02:00" type="request"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
+	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/fiveg"
+	xmlns:ns6="http://opensdncore.org/ontology/">
+	<node client_id="gw1"
+		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
+		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
+		exclusive="false">
+		<sliver_type
+			name="http://open-multinet.info/ontology/resource/fiveg#Gateway" />
+		<ns5:gateway upstart_on="true" version="EPC" mgmt_intf="1"
+			net_a_intf="1" min_num_intf="1">
+			<ns5:cloud_mgmt_gw_ip address="192.168.3.1" />
+		</ns5:gateway>
+		<ns6:osco name="GW" flavour="m1.small" max_num_inst="3"
+			min_num_inst="1">
+			<ns6:image datacenter="datacenter-2"
+				id="ae08f98e-ab70-426e-b06a-dcf3fd27fff9" />
+			<ns6:subnet name="mgmt" datacenter="datacenter-2" />
+			<ns6:subnet name="net_a" datacenter="datacenter-2" />
+		</ns6:osco>
+		<location country="DE" omn:name="Berlin"
+			xmlns:omn="http://open-multinet.info/location" />
+	</node>
+</rspec>

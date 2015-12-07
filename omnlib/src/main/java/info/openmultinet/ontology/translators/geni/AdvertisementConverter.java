@@ -259,6 +259,7 @@ public class AdvertisementConverter extends AbstractConverter {
 					AdSetExt.setFd(omnResource, geniNode);
 					AdSetExt.setTrivialBandwidth(omnResource, geniNode);
 					AdSetExt.setAccessNetwork(omnResource, geniNode);
+					AdSetExt.setGateway(omnResource, geniNode);
 					AdSetExt.setEPC(omnResource, geniNode);
 					AdSetExt.setUE(omnResource, geniNode);
 					AdSetExt.setACS(omnResource, geniNode);

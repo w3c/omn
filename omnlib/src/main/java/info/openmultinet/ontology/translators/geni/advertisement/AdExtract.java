@@ -326,6 +326,7 @@ public class AdExtract extends AbstractConverter {
 						omnNode);
 				AdExtractExt.tryExtractAccessNetwork(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractUe(omnNode, rspecNodeObject);
+				AdExtractExt.tryExtractGateway(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractEpc(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractAcs(omnNode, rspecNodeObject);
 

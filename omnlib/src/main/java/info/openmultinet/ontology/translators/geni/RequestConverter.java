@@ -4,6 +4,7 @@ import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
@@ -157,9 +158,13 @@ public class RequestConverter extends AbstractConverter {
 				RequestSetExt.setOsco(resource, node);
 				RequestSetExt.setEmulabExtension(resource, node);
 				RequestSetExt.setAccessNetwork(resource, node);
+				RequestSetExt.setFivegGateway(resource, node);
+				RequestSetExt.setFivegDns(resource, node);
+				RequestSetExt.setFivegSwitch(resource, node);
 				RequestSetExt.setEPC(resource, node);
 				RequestSetExt.setUE(resource, node);
 				RequestSetExt.setAcs(resource, node);
+				RequestSetExt.setOlLease(resource, node);
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
