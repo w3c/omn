@@ -17,6 +17,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceCo
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.IpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkPropertyContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;

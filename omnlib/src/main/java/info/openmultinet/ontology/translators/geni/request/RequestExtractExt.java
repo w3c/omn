@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
@@ -36,10 +37,13 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.math.BigInteger;
 import java.net.URI;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.xerces.dom.ElementNSImpl;
 import org.w3c.dom.NamedNodeMap;
@@ -1462,6 +1466,57 @@ public class RequestExtractExt extends AbstractConverter {
 			BigInteger netDIntf = switchObject.getNetDIntf();
 			if (netDIntf != null) {
 				node.addLiteral(Fiveg.ranBackhaul, netDIntf);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void extractOlLease(Resource topology, Object rspecObject) {
+		try {
+			Lease lease = (Lease) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnLease = topology.getModel().createResource(uuid);
+			omnLease.addProperty(RDF.type, Omn_lifecycle.Lease);
+			topology.addProperty(Omn_lifecycle.hasLease, omnLease);
+
+			if (lease.getLeaseID() != null) {
+				String leaseId = lease.getLeaseID();
+				omnLease.addLiteral(Omn_lifecycle.hasID, leaseId);
+			}
+
+			if (lease.getUuid() != null) {
+				String uuidString = lease.getUuid();
+				omnLease.addLiteral(Omn_domain_pc.hasUUID, uuidString);
+			}
+
+			if (lease.getSliceId() != null) {
+				String sliceId = lease.getSliceId();
+				omnLease.addLiteral(Omn_lifecycle.hasSliceID, sliceId);
+			}
+
+			// TODO:
+			// <xs:attribute name="leaseREF" type="xs:IDREF" />
+			if (lease.getLeaseREF() != null) {
+				Object leaseIdRef = lease.getLeaseREF();
+				if (leaseIdRef.equals(lease)) {
+					omnLease.addLiteral(Omn_lifecycle.hasIdRef,
+							omnLease.getURI());
+				}
+			}
+
+			if (lease.getValidFrom() != null) {
+				XMLGregorianCalendar from = lease.getValidFrom();
+				Calendar dateTime = from.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.startTime, dateTime);
+			}
+
+			if (lease.getValidUntil() != null) {
+				XMLGregorianCalendar until = lease.getValidUntil();
+				Calendar dateTime = until.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.expirationTime, dateTime);
 			}
 
 		} catch (final ClassCastException e) {

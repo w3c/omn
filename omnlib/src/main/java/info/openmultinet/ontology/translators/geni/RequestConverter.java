@@ -3,12 +3,14 @@ package info.openmultinet.ontology.translators.geni;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RspecTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Sliver;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.StitchContent;
 import info.openmultinet.ontology.translators.geni.request.RequestExtract;
 import info.openmultinet.ontology.translators.geni.request.RequestExtractExt;
@@ -104,6 +106,9 @@ public class RequestConverter extends AbstractConverter {
 
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
+		List<Statement> leases = group.listProperties(Omn_lifecycle.hasLease)
+				.toList();
+		resources.addAll(leases);
 
 		RequestConverter.convertStatementsToNodesAndLinks(request, resources);
 	}
@@ -115,6 +120,8 @@ public class RequestConverter extends AbstractConverter {
 		for (final Statement resource : resources) {
 			if (!resource.getResource()
 					.hasProperty(RDF.type, Omn_resource.Link)
+					&& !resource.getResource().hasProperty(RDF.type,
+							Omn_lifecycle.Lease)
 					&& !resource.getResource().hasProperty(RDF.type,
 							Omn_resource.Openflow)
 					&& !resource.getResource().hasProperty(RDF.type,
@@ -179,6 +186,11 @@ public class RequestConverter extends AbstractConverter {
 
 				request.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createLink(link));
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_lifecycle.Lease)) {
+				final Lease of = new Lease();
+				RequestSetExt.setOlLease(resource, of);
+				request.getAnyOrNodeOrLink().add(of);
 			} else if (resource.getResource().hasProperty(RDF.type,
 					Omn_resource.Openflow)) {
 				final Sliver of = new Sliver();
@@ -255,6 +267,7 @@ public class RequestConverter extends AbstractConverter {
 		// RequestConverter.extractLinks(request, topology);
 
 		for (Object o : request.getAnyOrNodeOrLink()) {
+
 			if (o instanceof JAXBElement) {
 				RequestExtract.extractDetails(topology, o);
 			} else if (o instanceof org.apache.xerces.dom.ElementNSImpl) {
@@ -268,6 +281,8 @@ public class RequestConverter extends AbstractConverter {
 				}
 				// } else if (o.getClass().equals(Osco.class)) {
 				// tryExtractOsco(topology, o);
+			} else if (o instanceof Lease) {
+				RequestExtractExt.extractOlLease(topology, o);
 			} else {
 				RequestConverter.LOG.log(Level.INFO,
 						"Found unknown extension: " + o);

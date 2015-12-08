@@ -2,8 +2,8 @@
 	'monitored' in the node element -->
 <rspec expires="2015-10-06T17:50:59+03:00" generated="2015-10-06T17:40:59+03:00"
 	type="request" xmlns="http://www.geni.net/resources/rspec/3" xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
-	xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/request-reservation.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd">
 	<ol:lease slice_id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
 		valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"
 		uuid="318da82f-4553-4425-857b-3c196b47cc6d" leaseID="bar" leaseREF="bar" />
