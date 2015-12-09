@@ -153,7 +153,7 @@
 
 :FederationMember rdf:type owl:Class ;
 
-                  rdfs:label "federation member"@en ;
+                  rdfs:label "Federation Member"@en ;
 
                   rdfs:comment "member of a federation"@en ;
 
