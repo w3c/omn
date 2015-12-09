@@ -43,8 +43,6 @@
 			<xs:attribute name="min_num_intf" type="xs:integer" />
 		</xs:complexType>
 	</xs:element>
-
-
 	<xs:element name="rspec_switch">
 		<xs:complexType>
 			<xs:sequence>
@@ -64,6 +62,34 @@
 			<xs:attribute name="sgw_u_download_interface" type="xs:integer" />
 			<xs:attribute name="sgw_u_upload_interface" type="xs:integer" />
 			<xs:attribute name="net_d_intf" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rspec_bt">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:bt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bt">
+		<xs:complexType>
+			<xs:attribute name="console_port" type="xs:integer" />
+			<xs:attribute name="bt_host_name" type="xs:string" />
+			<xs:attribute name="upstart_on" type="xs:boolean" />
+			<xs:attribute name="mgmt_intf" type="xs:integer" />
+			<xs:attribute name="net_c_intf" type="xs:integer" />
+			<xs:attribute name="net_d_intf" type="xs:integer" />
+			<xs:attribute name="dns_intf" type="xs:integer" />
+			<xs:attribute name="net_ip" type="xs:string" />
+			<xs:attribute name="net_mask" type="xs:string" />
+			<xs:attribute name="ip_range_start" type="xs:string" />
+			<xs:attribute name="ip_range_end" type="xs:string" />
+			<xs:attribute name="imsi_range_start" type="xs:string" />
+			<xs:attribute name="imsi_range_end" type="xs:string" />
+			<xs:attribute name="min_num_intf" type="xs:integer" />
+			<xs:attribute name="ue_addr" type="xs:string" />
+			<xs:attribute name="cloud_public_router_ip" type="xs:string" />
+			<xs:attribute name="use_floating_ips" type="xs:boolean" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="cloud_mgmt_gw_ip" type="s:FiveGIpContents" />

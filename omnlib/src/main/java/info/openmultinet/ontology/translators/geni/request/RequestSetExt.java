@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.request;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
@@ -1619,7 +1620,7 @@ public class RequestSetExt extends AbstractConverter {
 				int netDIntf = resourceResource.getProperty(Fiveg.ranBackhaul)
 						.getObject().asLiteral().getInt();
 				BigInteger bigNetDIntf = BigInteger.valueOf(netDIntf);
-				fiveg.setNetAIntf(bigNetDIntf);
+				fiveg.setNetDIntf(bigNetDIntf);
 			}
 
 			node.getAnyOrRelationOrLocation().add(fiveg);
@@ -1754,6 +1755,142 @@ public class RequestSetExt extends AbstractConverter {
 			}
 			of.setValidUntil(end);
 		}
-		
+
+	}
+
+	public static void setFivegBt(Statement omnResource, NodeContents node) {
+
+		if (omnResource.getResource().hasProperty(RDF.type,
+				Fiveg.BenchmarkingTool)) {
+
+			Resource resourceResource = omnResource.getResource();
+
+			Bt fiveg = new ObjectFactory().createBt();
+
+			if (resourceResource.hasProperty(Fiveg.consolePort)) {
+				int consolePort = resourceResource
+						.getProperty(Fiveg.consolePort).getObject().asLiteral()
+						.getInt();
+				BigInteger bigConsolePort = BigInteger.valueOf(consolePort);
+				fiveg.setConsolePort(bigConsolePort);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.benchmarkingToolHostName)) {
+				String benchmarkingToolHostName = resourceResource
+						.getProperty(Fiveg.benchmarkingToolHostName)
+						.getObject().asLiteral().getString();
+				fiveg.setBtHostName(benchmarkingToolHostName);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.upstartOn)) {
+				String upstartOn = resourceResource
+						.getProperty(Fiveg.upstartOn).getObject().asLiteral()
+						.getString();
+				boolean upstartOnBool = Boolean.parseBoolean(upstartOn);
+				fiveg.setUpstartOn(upstartOnBool);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.managementInterface)) {
+				int mgmtIntf = resourceResource
+						.getProperty(Fiveg.managementInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMgmtIntf = BigInteger.valueOf(mgmtIntf);
+				fiveg.setMgmtIntf(bigMgmtIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.subscriberIpRange)) {
+				int netCIntf = resourceResource
+						.getProperty(Fiveg.subscriberIpRange).getObject()
+						.asLiteral().getInt();
+				BigInteger bigNetCIntf = BigInteger.valueOf(netCIntf);
+				fiveg.setNetCIntf(bigNetCIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ranBackhaul)) {
+				int netDIntf = resourceResource.getProperty(Fiveg.ranBackhaul)
+						.getObject().asLiteral().getInt();
+				BigInteger bigNetDIntf = BigInteger.valueOf(netDIntf);
+				fiveg.setNetDIntf(bigNetDIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.dnsInterface)) {
+				int dnsIntf = resourceResource.getProperty(Fiveg.dnsInterface)
+						.getObject().asLiteral().getInt();
+				BigInteger bigDnsIntf = BigInteger.valueOf(dnsIntf);
+				fiveg.setDnsIntf(bigDnsIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.netIp)) {
+				String netIp = resourceResource.getProperty(Fiveg.netIp)
+						.getObject().asLiteral().getString();
+				fiveg.setNetIp(netIp);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.netMask)) {
+				String netMask = resourceResource.getProperty(Fiveg.netMask)
+						.getObject().asLiteral().getString();
+				fiveg.setNetMask(netMask);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ipRangeStart)) {
+				String ipRangeStart = resourceResource
+						.getProperty(Fiveg.ipRangeStart).getObject()
+						.asLiteral().getString();
+				fiveg.setIpRangeStart(ipRangeStart);
+			}
+			if (resourceResource.hasProperty(Fiveg.ipRangeEnd)) {
+				String ipRangeEnd = resourceResource
+						.getProperty(Fiveg.ipRangeEnd).getObject().asLiteral()
+						.getString();
+				fiveg.setIpRangeEnd(ipRangeEnd);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.imsiRangeStart)) {
+				String imsiRangeStart = resourceResource
+						.getProperty(Fiveg.imsiRangeStart).getObject()
+						.asLiteral().getString();
+				fiveg.setImsiRangeStart(imsiRangeStart);
+			}
+			if (resourceResource.hasProperty(Fiveg.imsiRangeEnd)) {
+				String imsiRangeEnd = resourceResource
+						.getProperty(Fiveg.imsiRangeEnd).getObject()
+						.asLiteral().getString();
+				fiveg.setImsiRangeEnd(imsiRangeEnd);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.minInterfaces)) {
+				int minNumIntf = resourceResource
+						.getProperty(Fiveg.minInterfaces).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMinNumIntf = BigInteger.valueOf(minNumIntf);
+				fiveg.setMinNumIntf(bigMinNumIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.userEquipmentAddress)) {
+				String userEquipmentAddress = resourceResource
+						.getProperty(Fiveg.userEquipmentAddress).getObject()
+						.asLiteral().getString();
+				fiveg.setUeAddr(userEquipmentAddress);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.cloudPublicRouterIp)) {
+				String cloudPublicRouterIp = resourceResource
+						.getProperty(Fiveg.cloudPublicRouterIp).getObject()
+						.asLiteral().getString();
+				fiveg.setCloudPublicRouterIp(cloudPublicRouterIp);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.useFloatingIps)) {
+				String useFloatingIps = resourceResource
+						.getProperty(Fiveg.useFloatingIps).getObject()
+						.asLiteral().getString();
+				boolean useFloatingIpsBool = Boolean
+						.parseBoolean(useFloatingIps);
+				fiveg.setUseFloatingIps(useFloatingIpsBool);
+			}
+
+			node.getAnyOrRelationOrLocation().add(fiveg);
+		}
+
 	}
 }

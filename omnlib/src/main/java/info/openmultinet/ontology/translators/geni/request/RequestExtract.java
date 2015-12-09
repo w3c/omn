@@ -4,6 +4,7 @@ import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
@@ -352,6 +353,8 @@ public class RequestExtract extends AbstractConverter {
 					RequestExtractExt.tryExtractUe(omnResource, o);
 				} else if (o.getClass().equals(Epc.class)) {
 					RequestExtractExt.tryExtractEpc(omnResource, o);
+				} else if (o.getClass().equals(Bt.class)) {
+					RequestExtractExt.tryExtractFivegBt(omnResource, o);
 				} else if (o.getClass().equals(Switch.class)) {
 					RequestExtractExt.tryExtractFivegSwitch(omnResource, o);
 				} else if (o.getClass().equals(Gateway.class)) {

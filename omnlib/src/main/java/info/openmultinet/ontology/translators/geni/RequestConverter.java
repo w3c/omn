@@ -166,6 +166,7 @@ public class RequestConverter extends AbstractConverter {
 				RequestSetExt.setFivegGateway(resource, node);
 				RequestSetExt.setFivegDns(resource, node);
 				RequestSetExt.setFivegSwitch(resource, node);
+				RequestSetExt.setFivegBt(resource, node);
 				RequestSetExt.setEPC(resource, node);
 				RequestSetExt.setUE(resource, node);
 				RequestSetExt.setAcs(resource, node);

@@ -11,21 +11,21 @@
 		<sliver_type
 			name="http://open-multinet.info/ontology/resource/fiveg#DomainNameServer" />
 		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e" />
-		<ns5:dns domain_name="epc.mnc001.mcc001.3gppnetwork.org."
-			domain_ns="ns.epc.mnc001.mcc001.3gppnetwork.org." additionals="dns.epc.mnc001.mcc001.3gppnetwork.org."
-			mgmt_intf="1" net_a_intf="1" min_num_intf="1">
+		<ns5:dns domain_name="test_domain_name"
+			domain_ns="test_ns" additionals="test_additionals"
+			mgmt_intf="1" net_a_intf="2" min_num_intf="3">
 		</ns5:dns>
 	</node>
 	<node client_id="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e"
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		exclusive="false">
-		<ns6:osco id="DNS" flavour="m1.small" max_num_inst="3"
+		<ns6:osco id="id2" flavour="flavour1" max_num_inst="3"
 			min_num_inst="1">
-			<ns6:image datacenter="datacenter-2"
-				id="06256e4a-82ad-4f18-8285-5bceccde49d0" />
-			<ns6:subnet name="mgmt" datacenter="datacenter-2" />
-			<ns6:subnet name="net_a" datacenter="datacenter-2" />
+			<ns6:image datacenter="datacenter1"
+				id="id1" />
+			<ns6:subnet name="subnet1" datacenter="datacenter1" />
+			<ns6:subnet name="subnet2" datacenter="datacenter1" />
 		</ns6:osco>
 		<sliver_type name="http://opensdncore.org/ontology/ServiceContainer" />
 		<location country="DE" omn:name="Berlin"

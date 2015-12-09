@@ -4,29 +4,30 @@
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
 	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/fiveg"
 	xmlns:ns6="http://opensdncore.org/ontology/">
-	<node client_id="switch1"
+	<node client_id="bt1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		exclusive="false">
 		<sliver_type
-			name="http://open-multinet.info/ontology/resource/fiveg#Switch" />
+			name="http://open-multinet.info/ontology/resource/fiveg#BenchmarkingTool" />
 		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e" />
-		<ns5:switch pgw_u_base_id="pgwUBaseId1"
-			pgw_u_download_interface="3" pgw_u_upload_interface="4"
-			sgw_u_download_interface="5" sgw_u_upload_interface="6" mgmt_intf="1"
-			net_a_intf="1" net_d_intf="2" min_num_intf="1">
-		</ns5:switch>
+		<ns5:bt console_port="123" bt_host_name="hostname1" upstart_on="true"
+			mgmt_intf="1" net_c_intf="2" net_d_intf="3" dns_intf="4" net_ip="1.1.1.1"
+			net_mask="2.2.2.2" ip_range_start="3.3.3.3" ip_range_end="4.4.4.4"
+			imsi_range_start="start1" imsi_range_end="end1" min_num_intf="5"
+			ue_addr="5.5.5.5" cloud_public_router_ip="6.6.6.6" use_floating_ips="true">
+		</ns5:bt>
 	</node>
 	<node client_id="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e"
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		exclusive="false">
-		<ns6:osco id="id2" flavour="flavour1" max_num_inst="3"
+		<ns6:osco id="id2" flavour="flavour1" max_num_inst="2"
 			min_num_inst="1">
-			<ns6:image datacenter="datacenter1"
-				id="id1" />
+			<ns6:image datacenter="datacenter1" id="id1" />
 			<ns6:subnet name="subnet1" datacenter="datacenter1" />
 			<ns6:subnet name="subnet2" datacenter="datacenter1" />
+			<ns6:subnet name="subnet3" datacenter="datacenter1" />
 		</ns6:osco>
 		<sliver_type name="http://opensdncore.org/ontology/ServiceContainer" />
 		<location country="DE" omn:name="Berlin"

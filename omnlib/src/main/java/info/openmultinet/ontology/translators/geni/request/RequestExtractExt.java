@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.request;
 
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
@@ -1517,6 +1518,102 @@ public class RequestExtractExt extends AbstractConverter {
 				XMLGregorianCalendar until = lease.getValidUntil();
 				Calendar dateTime = until.toGregorianCalendar();
 				omnLease.addLiteral(Omn_lifecycle.expirationTime, dateTime);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractFivegBt(Resource node, Object rspecObject) {
+		try {
+			Bt btObject = (Bt) rspecObject;
+			node.addProperty(RDF.type, Fiveg.BenchmarkingTool);
+
+			Boolean upstartOn = btObject.isUpstartOn();
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger consolePort = btObject.getConsolePort();
+			if (consolePort != null) {
+				node.addLiteral(Fiveg.consolePort, consolePort);
+			}
+
+			String btHostName = btObject.getBtHostName();
+			if (btHostName != null && !btHostName.equals("")) {
+				node.addLiteral(Fiveg.benchmarkingToolHostName, btHostName);
+			}
+
+			BigInteger mgmtIntf = btObject.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger netCIntf = btObject.getNetCIntf();
+			if (netCIntf != null) {
+				node.addLiteral(Fiveg.subscriberIpRange, netCIntf);
+			}
+
+			BigInteger minNumIntf = btObject.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netDIntf = btObject.getNetDIntf();
+			if (netDIntf != null) {
+				node.addLiteral(Fiveg.ranBackhaul, netDIntf);
+			}
+
+			BigInteger dnsIntf = btObject.getDnsIntf();
+			if (dnsIntf != null) {
+				node.addLiteral(Fiveg.dnsInterface, dnsIntf);
+			}
+
+			String netIp = btObject.getNetIp();
+			if (netIp != null && !netIp.equals("")) {
+				node.addLiteral(Fiveg.netIp, netIp);
+			}
+
+			String netMask = btObject.getNetMask();
+			if (netMask != null && !netMask.equals("")) {
+				node.addLiteral(Fiveg.netMask, netMask);
+			}
+
+			String ipRangeStart = btObject.getIpRangeStart();
+			if (ipRangeStart != null && !ipRangeStart.equals("")) {
+				node.addLiteral(Fiveg.ipRangeStart, ipRangeStart);
+			}
+
+			String ipRangeEnd = btObject.getIpRangeEnd();
+			if (ipRangeEnd != null && !ipRangeEnd.equals("")) {
+				node.addLiteral(Fiveg.ipRangeEnd, ipRangeEnd);
+			}
+
+			String imsiRangeStart = btObject.getImsiRangeStart();
+			if (imsiRangeStart != null && !imsiRangeStart.equals("")) {
+				node.addLiteral(Fiveg.imsiRangeStart, imsiRangeStart);
+			}
+
+			String imsiRangeEnd = btObject.getImsiRangeEnd();
+			if (imsiRangeEnd != null && !imsiRangeEnd.equals("")) {
+				node.addLiteral(Fiveg.imsiRangeEnd, imsiRangeEnd);
+			}
+
+			String ueAddr = btObject.getUeAddr();
+			if (ueAddr != null && !ueAddr.equals("")) {
+				node.addLiteral(Fiveg.userEquipmentAddress, ueAddr);
+			}
+
+			String cloudPublicRouterIp = btObject.getCloudPublicRouterIp();
+			if (cloudPublicRouterIp != null && !cloudPublicRouterIp.equals("")) {
+				node.addLiteral(Fiveg.cloudPublicRouterIp, cloudPublicRouterIp);
+			}
+
+			Boolean useFLoatingIps = btObject.isUseFloatingIps();
+			if (useFLoatingIps != null) {
+				node.addLiteral(Fiveg.useFloatingIps, useFLoatingIps);
 			}
 
 		} catch (final ClassCastException e) {

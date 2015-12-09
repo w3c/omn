@@ -24,6 +24,7 @@ public class RequestFiveg {
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException, InvalidRspecValueException {
 		final String filename = "/geni/request/gateway2.xml";
+		// final String filename = "/geni/request/fiveg_bt.xml";
 		// final String filename = "/geni/request/fiveg_switch.xml";
 		// final String filename = "/geni/request/fiveg_dns.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
