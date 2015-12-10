@@ -23,10 +23,12 @@ public class RequestFiveg {
 	public void requestRoundtrip() throws JAXBException, InvalidModelException,
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException, InvalidRspecValueException {
-		final String filename = "/geni/request/gateway2.xml";
+		// final String filename = "/geni/request/fiveg_hss.xml";
+		// final String filename = "/geni/request/fiveg_control.xml";
+		// final String filename = "/geni/request/gateway2.xml";
 		// final String filename = "/geni/request/fiveg_bt.xml";
 		// final String filename = "/geni/request/fiveg_switch.xml";
-		// final String filename = "/geni/request/fiveg_dns.xml";
+		final String filename = "/geni/request/fiveg_dns.xml";
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		System.out.println("Converting this input from '" + filename + "':");

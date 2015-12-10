@@ -16,6 +16,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBCont
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
@@ -32,8 +34,6 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
-import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
 import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
@@ -57,7 +57,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -1537,8 +1536,8 @@ public class AdExtractExt extends AbstractConverter {
 
 			if (channel.getFrequency() != null) {
 				String frequency = channel.getFrequency();
-				Individual frequencyIndividual = CommonMethods
-						.getFrequency(frequency);
+				Resource frequencyIndividual = CommonMethods.getFrequency(
+						frequency, omnNode.getModel());
 
 				omnChannel.addProperty(Omn_domain_wireless.usesFrequency,
 						frequencyIndividual);
@@ -1550,7 +1549,7 @@ public class AdExtractExt extends AbstractConverter {
 			}
 
 			if (channel.getComponentManagerId() != null) {
-				omnChannel.addProperty(Omn_lifecycle.hasComponentManagerID,
+				omnChannel.addProperty(Omn_lifecycle.managedBy,
 						channel.getComponentManagerId());
 			}
 

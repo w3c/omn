@@ -701,6 +701,21 @@
 
 
 
+###  http://open-multinet.info/ontology/resource/fiveg#requires
+
+:requires  a    owl:DatatypeProperty ;
+
+        rdfs:seeAlso osco:requires ;
+
+        rdfs:label "requires"@en ;
+
+        rdfs:comment "requires"@en ;
+
+        rdfs:domain  omn:Resource ;
+
+        rdfs:range   xsd:string .
+
+
 
 ###  http://open-multinet.info/ontology/resource/fiveg#sgwCJsonSrvPort
 

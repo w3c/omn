@@ -6,6 +6,7 @@ import info.openmultinet.ontology.translators.geni.CommonMethods;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ComponentManager;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Control;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Dns;
@@ -14,11 +15,11 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceCo
 import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Gateway;
 import info.openmultinet.ontology.translators.geni.jaxb.request.HardwareTypeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Hss;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InstallServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.InterfaceRefContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.IpContents;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkPropertyContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
@@ -353,8 +354,12 @@ public class RequestExtract extends AbstractConverter {
 					RequestExtractExt.tryExtractUe(omnResource, o);
 				} else if (o.getClass().equals(Epc.class)) {
 					RequestExtractExt.tryExtractEpc(omnResource, o);
+				} else if (o.getClass().equals(Control.class)) {
+					RequestExtractExt.tryExtractFivegControl(omnResource, o);
 				} else if (o.getClass().equals(Bt.class)) {
 					RequestExtractExt.tryExtractFivegBt(omnResource, o);
+				} else if (o.getClass().equals(Hss.class)) {
+					RequestExtractExt.tryExtractFivegHss(omnResource, o);
 				} else if (o.getClass().equals(Switch.class)) {
 					RequestExtractExt.tryExtractFivegSwitch(omnResource, o);
 				} else if (o.getClass().equals(Gateway.class)) {

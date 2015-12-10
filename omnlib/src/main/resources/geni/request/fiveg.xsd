@@ -21,6 +21,7 @@
 				/> </xs:choice -->
 			<xs:attribute name="upstart_on" type="xs:boolean" />
 			<xs:attribute name="version" type="xs:string" />
+			<xs:attribute name="requires" type="xs:string" />
 			<xs:attribute name="mgmt_intf" type="xs:integer" />
 			<xs:attribute name="net_a_intf" type="xs:integer" />
 			<xs:attribute name="min_num_intf" type="xs:integer" />
@@ -35,6 +36,7 @@
 	</xs:element>
 	<xs:element name="dns">
 		<xs:complexType>
+			<xs:attribute name="requires" type="xs:string" />
 			<xs:attribute name="domain_ns" type="xs:string" />
 			<xs:attribute name="domain_name" type="xs:string" />
 			<xs:attribute name="additionals" type="xs:string" />
@@ -52,6 +54,7 @@
 	</xs:element>
 	<xs:element name="switch">
 		<xs:complexType>
+			<xs:attribute name="requires" type="xs:string" />
 			<xs:attribute name="pgw_u_base_id" type="xs:string" />
 			<xs:attribute name="upstart_on" type="xs:boolean" />
 			<xs:attribute name="mgmt_intf" type="xs:integer" />
@@ -73,6 +76,7 @@
 	</xs:element>
 	<xs:element name="bt">
 		<xs:complexType>
+			<xs:attribute name="requires" type="xs:string" />
 			<xs:attribute name="console_port" type="xs:integer" />
 			<xs:attribute name="bt_host_name" type="xs:string" />
 			<xs:attribute name="upstart_on" type="xs:boolean" />
@@ -90,6 +94,62 @@
 			<xs:attribute name="ue_addr" type="xs:string" />
 			<xs:attribute name="cloud_public_router_ip" type="xs:string" />
 			<xs:attribute name="use_floating_ips" type="xs:boolean" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rspec_control">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:control" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="control">
+		<xs:complexType>
+			<xs:attribute name="requires" type="xs:string" />
+			<xs:attribute name="mme_console_port" type="xs:integer" />
+			<xs:attribute name="init" type="xs:boolean" />
+			<xs:attribute name="pgw_c_ofp_ctr_transport" type="xs:string" />
+			<xs:attribute name="sgw_c_ofp_ctr_port" type="xs:integer" />
+			<xs:attribute name="sgw_c_json_srv_port" type="xs:integer" />
+			<xs:attribute name="pgw_c_console_port" type="xs:integer" />
+			<xs:attribute name="pgw_c_ofp_ctr_port" type="xs:integer" />
+			<xs:attribute name="mme_host_name" type="xs:string" />
+			<xs:attribute name="pgw_c_template_config_file" type="xs:string" />
+			<xs:attribute name="upstart_on" type="xs:boolean" />
+			<xs:attribute name="mgmt_intf" type="xs:integer" />
+			<xs:attribute name="dns_intf" type="xs:integer" />
+			<xs:attribute name="min_num_intf" type="xs:integer" />
+			<xs:attribute name="net_d_intf" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rspec_hss">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="s:hss" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hss">
+		<xs:complexType>
+			<xs:attribute name="requires" type="xs:string" />
+			<xs:attribute name="local_db" type="xs:integer" />
+			<xs:attribute name="db_provi" type="xs:integer" />
+			<xs:attribute name="db_user" type="xs:string" />
+			<xs:attribute name="db_pw" type="xs:string" />
+			<xs:attribute name="db_name" type="xs:string" />
+			<xs:attribute name="domain_name" type="xs:string" />
+			<xs:attribute name="port" type="xs:integer" />
+			<xs:attribute name="slf_presence" type="xs:boolean" />
+			<xs:attribute name="console_port_one" type="xs:integer" />
+			<xs:attribute name="console_port_two" type="xs:integer" />
+			<xs:attribute name="console_port_bind_one" type="xs:string" />
+			<xs:attribute name="console_port_bind_two" type="xs:string" />
+			<xs:attribute name="diameter_listen_intf" type="xs:integer" />
+			<xs:attribute name="mgmt_intf" type="xs:integer" />
+			<xs:attribute name="dns_intf" type="xs:integer" />
+			<xs:attribute name="default_route_via" type="xs:string" />
+			<xs:attribute name="min_num_intf" type="xs:integer" />
+			<xs:attribute name="version" type="xs:string" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="cloud_mgmt_gw_ip" type="s:FiveGIpContents" />

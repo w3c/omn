@@ -4,26 +4,27 @@
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
 	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/fiveg"
 	xmlns:ns6="http://opensdncore.org/ontology/">
-	<node client_id="dns1"
+	<node client_id="hss1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		exclusive="false">
 		<sliver_type
-			name="http://open-multinet.info/ontology/resource/fiveg#DomainNameServer" />
-		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e" />
-		<ns5:dns domain_name="test_domain_name"
-			domain_ns="test_ns" additionals="test_additionals"
-			mgmt_intf="1" net_a_intf="2" min_num_intf="3" requires="requires1, requires2" >
-		</ns5:dns>
+			name="http://open-multinet.info/ontology/resource/fiveg#HomeSubscriberService" />
+		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688b" />
+		<ns5:hss local_db="1" db_provi="2" db_user="dbUser1" db_pw="dbPw1"
+			db_name="dbName1" domain_name="domainName1" port="3" slf_presence="true"
+			console_port_one="4" console_port_two="5" console_port_bind_one="cpb1"
+			console_port_bind_two="cpb2" diameter_listen_intf="6" mgmt_intf="7"
+			dns_intf="8" default_route_via="drv1" min_num_intf="9" version="v1">
+		</ns5:hss>
 	</node>
-	<node client_id="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e"
+	<node client_id="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688b"
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		exclusive="false">
-		<ns6:osco id="id2" flavour="flavour1" max_num_inst="3"
+		<ns6:osco id="id3" flavour="flavour1" max_num_inst="3"
 			min_num_inst="1">
-			<ns6:image datacenter="datacenter1"
-				id="id1" />
+			<ns6:image datacenter="datacenter1" id="id1" />
 			<ns6:subnet name="subnet1" datacenter="datacenter1" />
 			<ns6:subnet name="subnet2" datacenter="datacenter1" />
 		</ns6:osco>
