@@ -72,15 +72,15 @@
 ]
 
 [rule_channel_connection:
-   (?node omnres:hasInterface  ?interface)
+   (?node omnres:hasInterface ?interface)
    (?interface rdf:type omnres:Interface)
    (?node omnlc:managedBy ?am)
    (?channel rdf:type omnwireless:Channel)
-   (?channel omnlc:hasComponentManagerID ?am)
+   (?channel omnlc:managedBy ?am)
    (?interface omnlc:hasRole ?role ) 
    equal(?role ,"experimental"^^xsd:string)
 ->
-   (?interface  omncomp:hasComponent ?channel)
+   (?interface  omn:hasComponent ?channel)
 ]
 
 
