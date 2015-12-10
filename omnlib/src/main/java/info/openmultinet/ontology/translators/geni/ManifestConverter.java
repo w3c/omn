@@ -1,20 +1,18 @@
 package info.openmultinet.ontology.translators.geni;
 
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestSet;
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestSetExt;
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestExtract;
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestExtractExt;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.advertisement.AdSet;
-import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestExtract;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestExtractExt;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestSet;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestSetExt;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
@@ -154,6 +152,7 @@ public class ManifestConverter extends AbstractConverter {
 				ManifestSet.setInterfaces(resource, node);
 				ManifestSetExt.setFd(resource, node);
 				ManifestSetExt.setEPC(resource, node);
+				ManifestSetExt.setGateway(resource, node);
 				ManifestSetExt.setAccessNetwork(resource, node);
 				ManifestSetExt.setUserEquipment(resource, node);
 				ManifestSetExt.setAcs(resource, node);

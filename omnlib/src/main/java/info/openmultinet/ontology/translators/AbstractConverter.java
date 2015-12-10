@@ -56,23 +56,27 @@ public abstract class AbstractConverter {
 	public static final String TOSCA = "tosca";
 	public static final String ANYFORMAT = "to";
 	protected static final String NAMESPACE = "http://open-multinet.info/example#";
-	private static final Logger LOG = Logger.getLogger(AbstractConverter.class.getName());
+	private static final Logger LOG = Logger.getLogger(AbstractConverter.class
+			.getName());
 
 	public AbstractConverter() {
 		super();
 		this.reasoner = new GenericRuleReasoner(getAllRules());
 	}
 
-	protected static void validateModel(final List<Resource> groups) throws InvalidModelException {
+	protected static void validateModel(final List<Resource> groups)
+			throws InvalidModelException {
 		if (groups.isEmpty()) {
 			throw new InvalidModelException("No group in model found");
 		}
 		if (groups.size() > 1) {
-			throw new InvalidModelException("Found '" + groups.size() + "' groups, which is more than one");
+			throw new InvalidModelException("Found '" + groups.size()
+					+ "' groups, which is more than one");
 		}
 	}
 
-	public static String toString(final Object jaxbObject, final String namespaces) throws JAXBException {
+	public static String toString(final Object jaxbObject,
+			final String namespaces) throws JAXBException {
 		final JAXBContext jaxbContext = JAXBContext.newInstance(namespaces);
 		final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -84,13 +88,15 @@ public abstract class AbstractConverter {
 
 	public static String toString(final String filename) throws IOException {
 		StringBuffer result = new StringBuffer();
-		final InputStream inputStream = AbstractConverter.class.getResourceAsStream(filename);
+		final InputStream inputStream = AbstractConverter.class
+				.getResourceAsStream(filename);
 
 		if (inputStream == null) {
 			return null;
 		}
 
-		final BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+		final BufferedReader br = new BufferedReader(new InputStreamReader(
+				inputStream));
 		String line = null;
 		while ((line = br.readLine()) != null) {
 			result.append(line).append("\n");
@@ -105,14 +111,18 @@ public abstract class AbstractConverter {
 		try {
 			listOfRuleSets = getResourceListing(AbstractConverter.FOLDER_RULES);
 			for (URI ruleSet : listOfRuleSets) {
-				//String newRuleSet = IOUtils.toString(ruleSet, Charset.defaultCharset());
-				BufferedReader br = new BufferedReader(new InputStreamReader(ruleSet.toURL().openStream(),Charset.defaultCharset()));
-				for (Rule rule : Rule.parseRules(Rule.rulesParserFromReader(br))) {
+				// String newRuleSet = IOUtils.toString(ruleSet,
+				// Charset.defaultCharset());
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						ruleSet.toURL().openStream(), Charset.defaultCharset()));
+				for (Rule rule : Rule
+						.parseRules(Rule.rulesParserFromReader(br))) {
 					rules.add(rule);
 				}
 			}
 		} catch (IOException | URISyntaxException e) {
-			LOG.info("Could not get inferencing rules: " + e.getMessage() + " - " + e.toString());
+			LOG.info("Could not get inferencing rules: " + e.getMessage()
+					+ " - " + e.toString());
 		}
 
 		return rules;
@@ -137,11 +147,14 @@ public abstract class AbstractConverter {
 			nonGeneric = false;
 		} else if (uri.equals("http://www.w3.org/2002/07/owl#NamedIndividual")) {
 			nonGeneric = false;
-		} else if (uri.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
+		} else if (uri
+				.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
 			nonGeneric = false;
-		} else if (uri.equals("http://open-multinet.info/ontology/omn#Resource")) {
+		} else if (uri
+				.equals("http://open-multinet.info/ontology/omn#Resource")) {
 			nonGeneric = false;
-		} else if (uri.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
+		} else if (uri
+				.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
 			nonGeneric = false;
 		} else if (uri.equals("http://open-multinet.info/ontology/omn#Group")) {
 			nonGeneric = false;
@@ -195,13 +208,15 @@ public abstract class AbstractConverter {
 
 		try {
 			uri = URI.create(url);
-		} catch (java.lang.IllegalArgumentException e) {
+		} catch (java.lang.IllegalArgumentException
+				| java.lang.NullPointerException e) {
 			return false;
 		}
 
 		if (uri != null) {
 			if (uri.getScheme() != null) {
-				if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
+				if (uri.getScheme().equals("http")
+						|| uri.getScheme().equals("https")) {
 					return true;
 				}
 			}
@@ -221,7 +236,8 @@ public abstract class AbstractConverter {
 
 		try {
 			uri = URI.create(urn);
-		} catch (java.lang.IllegalArgumentException e) {
+		} catch (java.lang.IllegalArgumentException
+				| java.lang.NullPointerException e) {
 			return false;
 		}
 
@@ -272,9 +288,10 @@ public abstract class AbstractConverter {
 		return xc;
 	}
 
-	public static List<URI> getResourceListing(String path) throws IOException, URISyntaxException {
-		final File fileName = new File(
-				AbstractConverter.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+	public static List<URI> getResourceListing(String path) throws IOException,
+			URISyntaxException {
+		final File fileName = new File(AbstractConverter.class
+				.getProtectionDomain().getCodeSource().getLocation().getPath());
 		final List<URI> files = new LinkedList<URI>();
 		LOG.info("Looking for files in: " + fileName);
 
@@ -290,8 +307,11 @@ public abstract class AbstractConverter {
 
 					if ("vfs".equalsIgnoreCase(protocol)) {
 						URLConnection conn = url.openConnection();
-						VirtualFile virtualFile = (VirtualFile) conn.getContent();
-						String realJarFile = virtualFile.getPhysicalFile().getParentFile().getParentFile() + File.separator + fileName.getName();
+						VirtualFile virtualFile = (VirtualFile) conn
+								.getContent();
+						String realJarFile = virtualFile.getPhysicalFile()
+								.getParentFile().getParentFile()
+								+ File.separator + fileName.getName();
 						LOG.info("Guessing real file: " + realJarFile);
 						addFilesFromJar(path, new File(realJarFile), files);
 					} else if ("file".equalsIgnoreCase(protocol)) {
@@ -302,20 +322,22 @@ public abstract class AbstractConverter {
 							files.add(file.toURI());
 						}
 					} else {
-						throw new URISyntaxException(url.toString(), "Unsupported protocol: " + protocol);
+						throw new URISyntaxException(url.toString(),
+								"Unsupported protocol: " + protocol);
 					}
 				} catch (URISyntaxException ex) {
 					LOG.log(Level.WARNING, "Should not happen", ex);
 				} catch (IllegalArgumentException ex) {
-					LOG.log(Level.WARNING, "Couldn't read file from: " + url, ex);
+					LOG.log(Level.WARNING, "Couldn't read file from: " + url,
+							ex);
 				}
 			}
 		}
 		return files;
 	}
 
-	public static void addFilesFromJar(String path, final File fileName, final List<URI> files)
-			throws IOException, URISyntaxException {
+	public static void addFilesFromJar(String path, final File fileName,
+			final List<URI> files) throws IOException, URISyntaxException {
 		LOG.info("I think we're in a jar file...");
 		final JarFile jar = new JarFile(fileName);
 		final Enumeration<JarEntry> entries = jar.entries();
