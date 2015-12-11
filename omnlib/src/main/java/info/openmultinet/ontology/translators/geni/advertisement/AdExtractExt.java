@@ -555,7 +555,7 @@ public class AdExtractExt extends AbstractConverter {
 		try {
 			if (interfaceObject.toString().contains("emulab:interface")) {
 				AdExtractExt.LOG
-						.info("emulab:interface extension not yet supported");
+						.fine("emulab:interface extension not yet supported");
 			}
 		} catch (final ClassCastException e) {
 			AdExtractExt.LOG.finer(e.getMessage());
