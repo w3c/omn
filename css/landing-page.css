@@ -34,8 +34,9 @@ h6 {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
-    background: url(../img/banner-bg3.jpg) no-repeat center center fixed;
+    /*color: #f8f8f8;*/
+    color: #111;
+    background: url(../img/banner-bg2.jpg) no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -192,7 +193,7 @@ article.row {
    -o-hyphens: auto;
    -webkit-hyphens: auto;
    -ms-hyphens: auto;
-   hyphens: auto; 
+   hyphens: auto;
 }
 
 code {
