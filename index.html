@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en"
+  prefix="foaf: http://xmlns.com/foaf/0.1/
+          dc: http://purl.org/dc/terms/
+          schema: http://schema.org/
+          og: http://ogp.me/ns#"
+  typeof="schema:SoftwareApplication"
+  resource="http://lod.fed4fire.eu/"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DBcloud is a community project that extracts structured knowledge from federated infrastructures and makes it freely available using Semantic Web and Linked Data standards.">
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <meta property="schema:operatingSystem" content="Java">
+    <meta property="schema:applicationCategory" content="Knowledge Extraction Framework">
+    <link property="schema:creator" typeof="schema:Person" href="http://alex.willner.ws/about#me">
+    <title>DBcloud | Knowledge Base Extracted from Federated Infrastructures</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#start">
+                <img alt="DBcloud Logo" src="img/dbcloud.png" style="width:100px; float:left; margin-right:.5em;"/></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#lodlive">Browse</a>
+                    </li>
+                    <li>
+                        <a href="#yasgui">Query</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Header -->
+    <header class="intro-header" id="start">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1 property="og:title schema:name">DBcloud</h1>
+                        <h3 property="schema:description">A Knowledge Base Extracted from Federated Infrastructures</h3>
+                        <hr class="intro-divider">
+                        <!--
+                        <ul class="list-inline intro-social-buttons">
+                            <li resource="http://lod.fed4fire.eu#source" typeof="schema:SoftwareSourceCode">
+                            	<span property="schema:programmingLanguage" content="Java 8"></span>
+                              <span property="og:type" content="schema:SoftwareSourceCode"></span>
+                              <span property="og:url" content="http://lod.fed4fire.eu"></span>
+                              <a rel="og:image schema:image" href="img/DBcloud.png"></a>
+								<span property="schema:runtime" content="J2EE"></span>
+								<span property="schema:sampleType" content="Full Solution"></span>
+								<a rel="schema:targetProduct" href="http://lod.fed4fire.eu/"></a>
+                                <a rel="schema:codeRepository" href="https://github.com/DBcloud/bootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                            </li>
+                            <li>
+                                <a href="https://gitter.im/DBcloud/support" class="btn btn-default btn-lg"><i class="fa fa-weixin fa-fw"></i> <span class="network-name">Gitter</span></a>
+                            </li>
+                          -->
+                            <!--<li>
+                                <a href="https://twitter.com/DBcloud" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </header>
+    <!-- /.intro-header -->
+    <!-- Page Content -->
+    <section class="intro-bootstrap" id="bootstrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message-bootstrap">
+                        <h1>SPARQL Endpoint</h1>
+                        <h3>Directly query the latest data set</h3>
+                        <hr class="intro-divider">
+                        <code>
+                        http://lod.fed4fire.eu/sparql
+<!--                        curl -fsSkL lod.fed4fire.eu/bootstrap | bash -s init deployFT2 deployFT2sfa testFT2sfa -->
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- About -->
+    <section class="content-section-a" id="about">
+      <div class="container">
+          <article class="row">
+                <div class="col-lg-5 col-sm-6">
+                  <hr class="section-heading-spacer">
+                  <div class="clearfix"></div>
+                    <h2 class="section-heading">About:<br>What is this?</h2>
+                    <p class="lead">
+                      DBcloud is a community that extracts structured knowledge from
+                      <a href="http://en.wikipedia.org/wiki/Federation_%28information_technology%29">federated</a> infrastructures,
+                      such as <a href="http://en.wikipedia.org/wiki/Testbed">testbeds</a>,
+                      and makes it freely available using <a href="http://en.wikipedia.org/wiki/Semantic_Web">Semantic Web</a> and
+                      <a href="http://en.wikipedia.org/wiki/Linked_Data">Linked Data</a> standards.
+                      Currently over 3.3 million statements about the <a href="http://fed4fire.eu">Fed4FIRE</a> and <a href="http://geni.net">GENI</a> federations
+                      and their resources are available, with the potential to grow by many times this amount.
+                      </p>
+                    <p>
+                      While the main focus in its initial developments
+                      have been set on
+                      <a href="http://en.wikipedia.org/wiki/Future_Internet">Future Internet</a>
+                      experimentation within federated testbeds,
+                      further fields of application include the management
+                      of <a href="http://en.wikipedia.org/wiki/Intercloud">Interclouds</a>,
+                      the data collection and actuation in the
+                      <a href="http://en.wikipedia.org/wiki/Internet_of_Things">Internet of Things</a>
+                      or the orchestration of
+                      <a href="http://en.wikipedia.org/wiki/Network_functions_virtualization">Virtualized Network Functions</a>
+                      within
+                      <a href="http://en.wikipedia.org/wiki/Edge_computing">Edge Computing</a>
+                      environments for <a href="http://en.wikipedia.org/wiki/5G">5th generation mobile networks</a>.
+                    </p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="img/DBcloud.png" alt="">
+                </div>
+            </article>
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content-section-b -->
+    <!-- SPARQL -->
+    <section class="content-section-b"  id="lodlive">
+        <div class="container">
+            <article class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">LodLive:<br>Graph it</h2>
+                    <p class="lead">Using <a href="http://en.lodlive.it">LodLive</a> allows to browse through the data
+                      in a wonderfully designed graph.
+                    </p>
+                    <p><b>Examples:</b></p>
+                    <p><a href="http://lod.fed4fire.eu/lodlive/?http://lod.fed4fire.eu/about%23me">Show me the Fed4FIRE Federation</a></p>
+                    <p><a href="http://lod.fed4fire.eu/lodlive/?http://lod.fed4fire.eu/about%23geni">Show me the GENI Federation</a></p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/lodlive.png" alt="">
+                </div>
+            </article>
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content-section-b -->
+    <!-- Docker -->
+    <section class="content-section-a" id="docker">
+        <div class="container">
+            <article class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">LodView:<br>IRI Dereferenciations</h2>
+                    <p class="lead">
+                      Using <a href="http://lodview.it">LodView</a>
+                      allows to offer W3C standard compliant IRI dereferenciations
+                      and to publish RDF data according to all defined standards for Linked Open Data.
+                      It furhter offers HTML based representations of RDF resources.
+                    </p>
+                    <p><b>Examples:</b></p>
+                    <p><a href="http://lod.fed4fire.eu/about%23me">Show me the Fed4FIRE Federation</a></p>
+                    <p><a href="http://lod.fed4fire.eu/about%23geni">Show me the GENI Federation</a></p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="img/lodview_black.png" alt="">
+                </div>
+            </article>
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content-section-a -->
+    <!-- Open-Multinet -->
+    <section class="content-section-b" id="omn">
+        <div class="container">
+            <article class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Open-Multinet:<br></h2>
+                    <p class="lead">
+                    	At the heart of our knowledge base is the Open-Multinet semantic information model.
+                      Built upon a solid base of earlier research in semantic descriptions,
+                      it is used to describe all resource information.
+                    <p>
+                      <a href="https://www.w3.org/community/omn/">Learn more about the W3C Federated Infrastructures Community</a>.
+                    </p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/omn.png" alt="">
+                </div>
+            </article>
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content-section-a -->
+    <!-- /.content-section-a -->
+    <!-- yasgui -->
+    <section class="content-section-a"  id="yasgui">
+        <div class="container">
+            <article class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">YASGUI:<br>Try it out</h2>
+                    <p class="lead">
+                      Below we offer a <a href="http://about.yasgui.org">YASGUI</a>
+                      based GUI for SPARQL queries,
+                      including a number of examples to get started.
+                    </p>
+                    <p><b>Examples:</b></p>
+                    <p><a href="http://localhost/~willner/eu.fed4fire.lod/?query=SELECT+%3Fname+%3Fam+%3Fendpoint+%3Fx+WHERE+%7B%0A++%3Finfra+%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn%23hasService%3E+%3Fam+%3B%0A+++++++++rdfs%3Alabel+%3Fname+.+%0A++%3Fam+rdf%3Atype+%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn-domain-geni-fire%23AMService%3E+%3B%0A++++++%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn%23hasEndpoint%3E+%3Fendpoint+.%0A+%3Fx+%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn-monitoring%23hasUnit%3E%0A++++++++++++++++++++++++++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FMegabyte%3E%0A%7D+LIMIT+100">Show me all SFA AM endpoints</a></p>
+
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="img/yasgui.png" alt="">
+                </div>
+            </article>
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- /.content-section-b -->
+    <section class="content-section-b" id="queryme">
+        <div class="container">
+            <article class="row">
+                <div class="col-lg-12   col-sm-6">
+
+                    <div class="clearfix"></div>
+                    <p class="lead">
+    <div id="yasqe"></div>
+    <div id="yasr"></div>
+                    </p>
+                </div>
+            </article>
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content-section-b -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#start">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#lodlive">Browse</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="mailto:alexander.willner@tu-berlin.de">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small" property="schema:license">Copyright &copy; Technische Universität Berlin 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet';
+        stylesheet.href = 'css/bootstrap.min.css'; document.getElementsByTagName('head')[0].appendChild(stylesheet);
+        stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet';
+        stylesheet.href = 'css/landing-page.css'; document.getElementsByTagName('head')[0].appendChild(stylesheet);
+        stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet';
+        stylesheet.href = 'font-awesome/css/font-awesome.min.css'; document.getElementsByTagName('head')[0].appendChild(stylesheet);
+        stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet';
+        stylesheet.href = 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'; document.getElementsByTagName('head')[0].appendChild(stylesheet);
+        stylesheet = document.createElement('link'); stylesheet.rel = 'stylesheet';
+        stylesheet.href = 'http://cdn.jsdelivr.net/g/yasqe@2.2(yasqe.min.css),yasr@2.4(yasr.min.css)'; document.getElementsByTagName('head')[0].appendChild(stylesheet);
+    </script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src='http://cdn.jsdelivr.net/yasqe/2.2/yasqe.bundled.min.js'></script>
+    <script src='http://cdn.jsdelivr.net/yasr/2.4/yasr.bundled.min.js'></script>
+    <script src='js/init.js'></script>
+    <script>
+    	/**
+	 * Author: Heather Corey
+	 * jQuery Simple Parallax Plugin
+	 *
+	 */
+	(function($) {
+	    $.fn.parallax = function(options) {
+	        var windowHeight = $(window).height();
+	        // Establish default settings
+	        var settings = $.extend({
+	            speed        : 0.15
+	        }, options);
+	        // Iterate over each object in collection
+	        return this.each( function() {
+	        	// Save a reference to the element
+	        	var $this = $(this);
+	        	// Set up Scroll Handler
+	        	$(document).scroll(function(){
+	    		        var scrollTop = $(window).scrollTop();
+	            	        var offset = $this.offset().top;
+	            	        var height = $this.outerHeight();
+	    		// Check if above or below viewport
+				if (offset + height <= scrollTop || offset >= scrollTop + windowHeight) {
+					return;
+				}
+				var yBgPosition = Math.round((offset - scrollTop) * settings.speed);
+	                 // Apply the Y Background Position to Set the Parallax Effect
+	    			$this.css('background-position', 'center ' + yBgPosition + 'px');
+	        	});
+	        });
+	    }
+	}(jQuery));
+	$('.intro-header').parallax({
+		speed :	0.25
+	});
+    </script>
+</body>
+</html>
