@@ -105,3 +105,11 @@ YASQE.defaults.autocompleters = ['customClassCompleter', 'customPropertyComplete
 
 //finally, initialize YASQE
 var yasqe = YASQE(document.getElementById("yasqe"));
+
+prefixes={
+"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+"omn": "http://open-multinet.info/ontology/omn#",
+"omnfed": "http://open-multinet.info/ontology/omn-federation#",
+}
+yasqe.addPrefixes(prefixes);

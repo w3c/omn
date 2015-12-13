@@ -167,7 +167,7 @@
                       in a wonderfully designed graph.
                     </p>
                     <p><b>Examples:</b></p>
-                    <p><a href="http://lod.fed4fire.eu/lodlive/?http://lod.fed4fire.eu/about%23me">Show me the Fed4FIRE Federation</a></p>
+                    <p><a href="http://lod.fed4fire.eu/lodlive/?http://lod.fed4fire.eu/id/about%23me">Show me the Fed4FIRE Federation</a></p>
                     <p><a href="http://lod.fed4fire.eu/lodlive/?http://lod.fed4fire.eu/about%23geni">Show me the GENI Federation</a></p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
@@ -193,7 +193,7 @@
                       It furhter offers HTML based representations of RDF resources.
                     </p>
                     <p><b>Examples:</b></p>
-                    <p><a href="http://lod.fed4fire.eu/about%23me">Show me the Fed4FIRE Federation</a></p>
+                    <p><a href="http://lod.fed4fire.eu/id/about%23me">Show me the Fed4FIRE Federation</a></p>
                     <p><a href="http://lod.fed4fire.eu/about%23geni">Show me the GENI Federation</a></p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -243,7 +243,8 @@
                       including a number of examples to get started.
                     </p>
                     <p><b>Examples:</b></p>
-                    <p><a href="http://lod.fed4fire.eu/?query=SELECT+%3Fname+%3Fam+%3Fendpoint+%3Fx+WHERE+%7B%0A++%3Finfra+%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn%23hasService%3E+%3Fam+%3B%0A+++++++++rdfs%3Alabel+%3Fname+.+%0A++%3Fam+rdf%3Atype+%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn-domain-geni-fire%23AMService%3E+%3B%0A++++++%3Chttp%3A%2F%2Fopen-multinet.info%2Fontology%2Fomn%23hasEndpoint%3E+%3Fendpoint+.%0A%7D+LIMIT+100">Show me all SFA AM endpoints</a></p>
+                    <p><a href="#queryme" id="findInfras">Show me all known infrastructures</a></p>
+                    <p><a href="#queryme" id="findAMs">Show me all SFA AM endpoints</a></p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <img class="img-responsive" src="img/yasgui.png" alt="">
@@ -317,6 +318,7 @@
     <script src='http://cdn.jsdelivr.net/yasqe/2.2/yasqe.bundled.min.js'></script>
     <script src='http://cdn.jsdelivr.net/yasr/2.4/yasr.bundled.min.js'></script>
     <script src='js/init.js'></script>
+    <script src='js/queries.js'></script>
     <script>
     	/**
 	 * Author: Heather Corey
