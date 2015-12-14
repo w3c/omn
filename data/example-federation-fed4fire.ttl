@@ -223,7 +223,7 @@ schema:WebSite rdf:type owl:Class .
 
     omn-federation:administers :infrastructure ;
 
-    omn-federation:hasFederationMember <http://lod.fed4fire.eu/id/atos.net> ,
+    omn-federation:hasFederationMember <http://lod.fed4fire.eu/id/atos.net>,
                                        <http://lod.fed4fire.eu/id/av.tu-berlin.de> ,
                                        <http://lod.fed4fire.eu/id/bris.ac.uk> ,
                                        <http://lod.fed4fire.eu/id/bt.com> ,
@@ -252,11 +252,41 @@ schema:WebSite rdf:type owl:Class .
                                        <http://lod.fed4fire.eu/id/unican.es> ,
                                        <http://lod.fed4fire.eu/id/upc.edu> ,
                                        <http://lod.fed4fire.eu/id/upmc.fr> ,
-                                       <http://lod.fed4fire.eu/id/uth.gr/en> ,
+                                       <http://lod.fed4fire.eu/id/uth.gr> ,
                                        <http://lod.fed4fire.eu/id/woox.com> ;
 
     foaf:mbox <mailto:contact@fed4fire.eu> .
 
+
+
+                                       <http://lod.fed4fire.eu/id/atos.net> a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "ATOS" .
+                                       <http://lod.fed4fire.eu/id/av.tu-berlin.de>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "TUB" .
+                                       <http://lod.fed4fire.eu/id/bris.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UNIVBRIS" .
+                                       <http://lod.fed4fire.eu/id/bt.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "BT" .
+                                       <http://lod.fed4fire.eu/id/dante.net>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "DANTE" .
+                                       <http://lod.fed4fire.eu/id/deimos-space.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "DEIMOS" .
+                                       <http://lod.fed4fire.eu/id/ed.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UEDIN" .
+                                       <http://lod.fed4fire.eu/id/eng.nia.or.kr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NIA" .
+                                       <http://lod.fed4fire.eu/id/eurescom.eu>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "EURESCOM" .
+                                       <http://lod.fed4fire.eu/id/fokus.fraunhofer.de>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "Fraunhofer FOKUS" .
+                                       <http://lod.fed4fire.eu/id/i2cat.net>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "i2CAT" .
+                                       <http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "iMinds" .
+                                       <http://lod.fed4fire.eu/id/inria.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "INRIA" .
+                                       <http://lod.fed4fire.eu/id/kent.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UKent" .
+                                       <http://lod.fed4fire.eu/id/lancaster.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "ULANC" .
+                                       <http://lod.fed4fire.eu/id/nicta.com.au>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NICTA" .
+                                       <http://lod.fed4fire.eu/id/ntua.gr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NTUA" .
+                                       <http://lod.fed4fire.eu/id/nuigalway.ie>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NUI Galway" .
+                                       <http://lod.fed4fire.eu/id/southampton.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "IT Innovation" .
+                                       <http://lod.fed4fire.eu/id/sztaki.hu>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "MTA SZTAKI" .
+                                       <http://lod.fed4fire.eu/id/televes.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "TELEVES" .
+                                       <http://lod.fed4fire.eu/id/uc3m.es>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UC3M" .
+                                       <http://lod.fed4fire.eu/id/uma.es>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UMA" .
+                                       <http://lod.fed4fire.eu/id/unican.es>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UC" .
+                                       <http://lod.fed4fire.eu/id/upc.edu>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UPC" .
+                                       <http://lod.fed4fire.eu/id/upmc.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UPMC" .
+                                       <http://lod.fed4fire.eu/id/uth.gr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UTH" .
+                                       <http://lod.fed4fire.eu/id/woox.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "WOOX" .
 
 
 ###  http://lod.fed4fire.eu/about#notAssigned
@@ -339,9 +369,292 @@ schema:WebSite rdf:type owl:Class .
                             <urn:publicid:IDN+ple+authority+cm> ,
                             <urn:publicid:IDN+utah.cloudlab.us+authority+cm> ,
                             <urn:publicid:IDN+utahddc.geniracks.net+authority+cm> ,
-                            <urn:publicid:IDN+wisc.cloudlab.us+authority+cm> .
+                            <urn:publicid:IDN+wisc.cloudlab.us+authority+cm>,
+                           <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+emulab.net+authority+cm>,
+                           <urn:publicid:IDN+ple:ibbtple+authority+cm>,
+                           <urn:publicid:IDN+omf:netmode+authority+cm>,
+                           <urn:publicid:IDN+omf:nitos+authority+cm>,
+                           <urn:publicid:IDN+omf+authority+sa>,
+                           <urn:publicid:IDN+smartsantander+authority+cm>,
+                           <urn:publicid:IDN+emulab.larc.usp.br+authority+cm>,
+                           <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+instageni.osu.edu+authority+cm>,
+                           <urn:publicid:IDN+ion.internet2.edu+authority+am>,
+                           <urn:publicid:IDN+203.255.254.100+authority+cm>,
+                           <urn:publicid:IDN+koren+authority+cm>,
+                           <urn:publicid:IDN+openflow:ofam:univbris+authority+cm>,
+                           <urn:publicid:IDN+vtam.univbris+authority+cm>,
+                           <urn:publicid:IDN+openflow:ocf:i2cat:ofam+authority+cm>,
+                           <urn:publicid:IDN+ocf:i2cat:vtam+authority+cm>,
+                           <urn:publicid:IDN+ch.geni.net+authority+cm>,
+                           <urn:publicid:IDN+dragon.maxgigapop.net+authority+am>,
+                           <urn:publicid:IDN+bonfire-project.eu+authority+cm>,
+                           <urn:publicid:IDN+openflow:foam:foam.atlantis.ugent.be+authority+am>,
+                           <urn:publicid:IDN+utah.geniracks.net+authority+cm>,
+                           <urn:publicid:IDN+exogeni.net+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:rcivmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:fiuvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:uhvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:dukevmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:nictavmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:uvanlvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:ncsuvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:uflvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:osfvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:slvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:ucdvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:wvnvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:tamuvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:wsuvmsite+authority+am>,
+                           <urn:publicid:IDN+exogeni.net:umassvmsite+authority+am>,
+                           <urn:publicid:IDN+instageni.northwestern.edu+authority+cm>,
+                           <urn:publicid:IDN+lan.sdn.uky.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.illinois.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.maxgigapop.net+authority+cm>,
+                           <urn:publicid:IDN+instageni.cs.princeton.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm>,
+                           <urn:publicid:IDN+instageni.nysernet.org+authority+cm>,
+                           <urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.sox.net+authority+cm>,
+                           <urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.clemson.edu+authority+cm>,
+                           <urn:publicid:IDN+utahddc.geniracks.net+authority+cm>,
+                           <urn:publicid:IDN+geni.kettering.edu+authority+cm>,
+                           <urn:publicid:IDN+genirack.nyu.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.wisc.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.stanford.edu+authority+cm>,
+                           <urn:publicid:IDN+geni.it.cornell.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.ku.gpeni.net+authority+cm>,
+                           <urn:publicid:IDN+pks2.sdn.uky.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.nps.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.rutgers.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm>,
+                           <urn:publicid:IDN+i2cat197-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+i2cat186-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+i2cat187-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+i2cat188-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+i2cat189-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+i2cat190-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+epcc-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+netmode-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+nitos-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+bristol-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+psnc1200-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+psnc1201-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+uva1025-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+towall2-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+towall1-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+clab+authority+cm>,
+                           <urn:publicid:IDN+fed4fire+authority+sa>,
+                           <urn:publicid:IDN+oingo.dragon.maxgigapop.net+authority+scs>,
+                           <urn:publicid:IDN+geni-scs.net.internet2.edu+authority+scs>,
+                           <urn:publicid:IDN+geni.maxgigapop.net+authority+scs>,
+                           <urn:publicid:IDN+scs.atlantis.ugent.be+authority+scs>,
+                           <urn:publicid:IDN+www.performlte.morse.uma.es+authority+cm>,
+                           <urn:publicid:IDN+it.uc3m.es+authority+cm>,
+                           <urn:publicid:IDN+stanford.edu+authority+cm>,
+                           <urn:publicid:IDN+trescimo+authority+root>,
+                           <urn:publicid:IDN+utah.cloudlab.us+authority+cm>,
+                           <urn:publicid:IDN+apt.emulab.net+authority+cm>,
+                           <urn:publicid:IDN+al2s.internet2.edu+authority+am>,
+                           <urn:publicid:IDN+wix.internet2.edu+authority+am>,
+                           <urn:publicid:IDN+geni.uchicago.edu+authority+cm>,
+                           <urn:publicid:IDN+bbn-cam-ctrl-1.gpolab.bbn.com+authority+am>,
+                           <urn:publicid:IDN+clemson-clemson-control-1.clemson.edu+authority+am>,
+                           <urn:publicid:IDN+instageni.metrodatacenter.com+authority+cm>,
+                           <urn:publicid:IDN+instageni.cenic.net+authority+cm>,
+                           <urn:publicid:IDN+geni.case.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.umkc.edu+authority+cm>,
+                           <urn:publicid:IDN+instageni.iu.edu+authority+cm>,
+                           <urn:publicid:IDN+emulab.kreonet.net+authority+cm>,
+                           <urn:publicid:IDN+amazon-edge.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+sfa.bonfire.eu+authority+am>,
+                           <urn:publicid:IDN+federation.trescimo.eu+authority+root>,
+                           <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm>,
+                           <urn:publicid:IDN+demo.fiteagle.org+authority+root> .
 
-
+<urn:publicid:IDN+HPCN.UAM+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+apt.emulab.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+clemson.cloudlab.us+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+emulab.kreonet.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+emulab.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:bbnNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:ben+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:cienaNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:cienavmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:gwuNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:gwuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:ion+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:nictavmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:nlr+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:osfNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:osfvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:pscNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:pscvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:slNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:slvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:tamuNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:tamuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:ucdNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:ucdvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:uflNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:uflvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:umassNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:umassvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:uvanlNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:uvanlvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:wsuNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:wsuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:wvnNet+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+exogeni.net:wvnvmsite+authority+am> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+fms:aist:serm+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+fms:aist:tnrm+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+fms:kddi:serm+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+fms:psnc:serm+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+geni.case.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+geni.it.cornell.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+geni.kettering.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+geni.uchicago.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+genirack.nyu.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.cenic.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.clemson.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.cs.princeton.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.illinois.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.iu.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.maxgigapop.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.metrodatacenter.com+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.northwestern.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.nps.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.nysernet.org+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.rutgers.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.sox.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.stanford.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.umkc.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+instageni.wisc.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+it.uc3m.es+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+lan.sdn.uky.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+ocf:aist:vtam+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+ocf:eict:vtam+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+ocf:psnc:vtam+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+ocf:univbris:vtam+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+pks2.sdn.uky.edu+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+ple+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+utah.cloudlab.us+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+utahddc.geniracks.net+authority+cm> a omn-domain-geni-fire:AMService .
+               <urn:publicid:IDN+wisc.cloudlab.us+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+emulab.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+ple:ibbtple+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+omf:netmode+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+omf:nitos+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+omf+authority+sa> a omn-domain-geni-fire:SAService .
+              <urn:publicid:IDN+smartsantander+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+emulab.larc.usp.br+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.osu.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+ion.internet2.edu+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+203.255.254.100+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+koren+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+openflow:ofam:univbris+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+vtam.univbris+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+openflow:ocf:i2cat:ofam+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+ocf:i2cat:vtam+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+ch.geni.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+dragon.maxgigapop.net+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+bonfire-project.eu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+openflow:foam:foam.atlantis.ugent.be+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+utah.geniracks.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:rcivmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:bbnvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:fiuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:uhvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:dukevmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:nictavmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:uvanlvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:ncsuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:uflvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:osfvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:slvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:ucdvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:wvnvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:tamuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:wsuvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+exogeni.net:umassvmsite+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.northwestern.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+lan.sdn.uky.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.illinois.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.maxgigapop.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.cs.princeton.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.nysernet.org+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.sox.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.clemson.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+utahddc.geniracks.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+geni.kettering.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+genirack.nyu.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.wisc.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.stanford.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+geni.it.cornell.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.ku.gpeni.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+pks2.sdn.uky.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.nps.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.rutgers.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+i2cat197-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+i2cat186-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+i2cat187-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+i2cat188-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+i2cat189-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+i2cat190-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+epcc-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+netmode-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+nitos-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+bristol-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+psnc1200-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+psnc1201-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+uva1025-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+towall2-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+towall1-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+clab+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+fed4fire+authority+sa> a omn-domain-geni-fire:SAService .
+              <urn:publicid:IDN+oingo.dragon.maxgigapop.net+authority+scs> a omn-domain-geni-fire:SCSService .
+              <urn:publicid:IDN+geni-scs.net.internet2.edu+authority+scs> a omn-domain-geni-fire:SCSService .
+              <urn:publicid:IDN+geni.maxgigapop.net+authority+scs> a omn-domain-geni-fire:SCSService .
+              <urn:publicid:IDN+scs.atlantis.ugent.be+authority+scs> a omn-domain-geni-fire:SCSService .
+              <urn:publicid:IDN+www.performlte.morse.uma.es+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+it.uc3m.es+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+stanford.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+trescimo+authority+root> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+utah.cloudlab.us+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+apt.emulab.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+al2s.internet2.edu+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+wix.internet2.edu+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+geni.uchicago.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+bbn-cam-ctrl-1.gpolab.bbn.com+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+clemson-clemson-control-1.clemson.edu+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.metrodatacenter.com+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.cenic.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+geni.case.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.umkc.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+instageni.iu.edu+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+emulab.kreonet.net+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+amazon-edge.ilabt.iminds.be+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+sfa.bonfire.eu+authority+am> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+federation.trescimo.eu+authority+root> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm> a omn-domain-geni-fire:AMService .
+              <urn:publicid:IDN+demo.fiteagle.org+authority+root> a omn-domain-geni-fire:AMService .
 
 ###  http://lod.fed4fire.eu/about#portal
 
