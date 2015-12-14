@@ -38,7 +38,6 @@ SELECT DISTINCT  ?name ?uri  WHERE {
     return false;
   });
   findOverview=prefixes+`
-`
 SELECT
   (COUNT (DISTINCT ?manager) as ?managers)
   (COUNT (DISTINCT ?node) as ?nodes)
