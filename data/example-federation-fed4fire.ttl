@@ -233,7 +233,7 @@ schema:WebSite rdf:type owl:Class .
                                        <http://lod.fed4fire.eu/id/eng.nia.or.kr> ,
                                        <http://lod.fed4fire.eu/id/eurescom.eu> ;
 
-    foaf:depiction <http://www.fed4fire.eu/wp-content/uploads/2014/11/fed4fire-logo.jpg> ;
+    foaf:depiction <http://lod.fed4fire.eu/img/fed4fire-logo.png> ;
 
     omn-federation:hasFederationMember <http://lod.fed4fire.eu/id/fokus.fraunhofer.de> ,
                                        <http://lod.fed4fire.eu/id/i2cat.net> ,
