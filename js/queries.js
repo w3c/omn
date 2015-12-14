@@ -14,11 +14,10 @@ PREFIX omnlc: <http://open-multinet.info/ontology/omn-lifecycle#>
   });
   findAMs=prefixes+`
 SELECT DISTINCT ?name ?am ?endpoint WHERE {
-  ?infra omn:hasService ?am ;
-         rdfs:label ?name .
-  ?am rdf:type <http://open-multinet.info/ontology/omn-domain-geni-fire#AMService> ;
-      omn:hasEndpoint ?endpoint .
-} LIMIT 100`
+  ?am rdf:type <http://open-multinet.info/ontology/omn-domain-geni-fire#AMService> .
+  OPTIONAL {?am omn:hasEndpoint ?endpoint }
+  OPTIONAL {?infra omn:hasService ?am ; rdfs:label ?name .}
+} ORDER BY DESC (?name) LIMIT 200`
 
   $('#findInfras').click(function(){
     yasqe.setValue(findInfras);
