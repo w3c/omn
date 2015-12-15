@@ -244,34 +244,34 @@ schema:WebSite rdf:type owl:Class .
 
                 omn:hasService :portal .
 
-                                       <http://lod.fed4fire.eu/id/atos.net> a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "ATOS" .
-                                       <http://lod.fed4fire.eu/id/av.tu-berlin.de>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "TUB" .
-                                       <http://lod.fed4fire.eu/id/bris.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UNIVBRIS" .
-                                       <http://lod.fed4fire.eu/id/bt.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "BT" .
-                                       <http://lod.fed4fire.eu/id/dante.net>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "DANTE" .
-                                       <http://lod.fed4fire.eu/id/deimos-space.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "DEIMOS" .
-                                       <http://lod.fed4fire.eu/id/ed.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UEDIN" .
-                                       <http://lod.fed4fire.eu/id/eng.nia.or.kr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NIA" .
-                                       <http://lod.fed4fire.eu/id/eurescom.eu>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "EURESCOM" .
-                                       <http://lod.fed4fire.eu/id/fokus.fraunhofer.de>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "Fraunhofer FOKUS" .
-                                       <http://lod.fed4fire.eu/id/i2cat.net>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "i2CAT" .
-                                       <http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "iMinds" .
-                                       <http://lod.fed4fire.eu/id/inria.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "INRIA" .
-                                       <http://lod.fed4fire.eu/id/kent.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UKent" .
-                                       <http://lod.fed4fire.eu/id/lancaster.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "ULANC" .
-                                       <http://lod.fed4fire.eu/id/nicta.com.au>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NICTA" .
-                                       <http://lod.fed4fire.eu/id/ntua.gr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NTUA" .
-                                       <http://lod.fed4fire.eu/id/nuigalway.ie>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "NUI Galway" .
-                                       <http://lod.fed4fire.eu/id/southampton.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "IT Innovation" .
-                                       <http://lod.fed4fire.eu/id/sztaki.hu>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "MTA SZTAKI" .
-                                       <http://lod.fed4fire.eu/id/televes.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "TELEVES" .
-                                       <http://lod.fed4fire.eu/id/uc3m.es>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UC3M" .
-                                       <http://lod.fed4fire.eu/id/uma.es>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UMA" .
-                                       <http://lod.fed4fire.eu/id/unican.es>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UC" .
-                                       <http://lod.fed4fire.eu/id/upc.edu>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UPC" .
-                                       <http://lod.fed4fire.eu/id/upmc.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UPMC" .
-                                       <http://lod.fed4fire.eu/id/uth.gr>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "UTH" .
-                                       <http://lod.fed4fire.eu/id/woox.com>  a omn-federation:FederationMember, owl:NamedIndividual ; rdfs:label "WOOX" .
+                                       <http://lod.fed4fire.eu/id/atos.net> a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "ATOS" .
+                                       <http://lod.fed4fire.eu/id/av.tu-berlin.de>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "TUB" .
+                                       <http://lod.fed4fire.eu/id/bris.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UNIVBRIS" .
+                                       <http://lod.fed4fire.eu/id/bt.com>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "BT" .
+                                       <http://lod.fed4fire.eu/id/dante.net>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "DANTE" .
+                                       <http://lod.fed4fire.eu/id/deimos-space.com>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "DEIMOS" .
+                                       <http://lod.fed4fire.eu/id/ed.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UEDIN" .
+                                       <http://lod.fed4fire.eu/id/eng.nia.or.kr>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "NIA" .
+                                       <http://lod.fed4fire.eu/id/eurescom.eu>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "EURESCOM" .
+                                       <http://lod.fed4fire.eu/id/fokus.fraunhofer.de>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "Fraunhofer FOKUS" .
+                                       <http://lod.fed4fire.eu/id/i2cat.net>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "i2CAT" .
+                                       <http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "iMinds" .
+                                       <http://lod.fed4fire.eu/id/inria.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "INRIA" .
+                                       <http://lod.fed4fire.eu/id/kent.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UKent" .
+                                       <http://lod.fed4fire.eu/id/lancaster.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "ULANC" .
+                                       <http://lod.fed4fire.eu/id/nicta.com.au>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "NICTA" .
+                                       <http://lod.fed4fire.eu/id/ntua.gr>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "NTUA" .
+                                       <http://lod.fed4fire.eu/id/nuigalway.ie>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "NUI Galway" .
+                                       <http://lod.fed4fire.eu/id/southampton.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "IT Innovation" .
+                                       <http://lod.fed4fire.eu/id/sztaki.hu>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "MTA SZTAKI" .
+                                       <http://lod.fed4fire.eu/id/televes.com>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "TELEVES" .
+                                       <http://lod.fed4fire.eu/id/uc3m.es>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UC3M" .
+                                       <http://lod.fed4fire.eu/id/uma.es>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UMA" .
+                                       <http://lod.fed4fire.eu/id/unican.es>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UC" .
+                                       <http://lod.fed4fire.eu/id/upc.edu>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UPC" .
+                                       <http://lod.fed4fire.eu/id/upmc.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UPMC" .
+                                       <http://lod.fed4fire.eu/id/uth.gr>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UTH" .
+                                       <http://lod.fed4fire.eu/id/woox.com>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "WOOX" .
 
 
 ###  http://lod.fed4fire.eu/about#notAssigned
