@@ -17,7 +17,7 @@
 @prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
 @prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
 @prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
-@base <http://lod.fed4fire.eu/about#> .
+@base <http://lod.fed4fire.eu/id/fed4fire#> .
 
 <http://lod.fed4fire.eu/id/fed4fire.eu> rdf:type owl:Ontology ;
 
@@ -177,9 +177,9 @@ schema:WebSite rdf:type owl:Class .
 #################################################################
 
 
-###  http://fuseco.fokus.fraunhofer.de/about#me
+###  http://lod.fed4fire.eu/id/fuseco.fokus.fraunhofer.de
 
-<http://lod.fed4fire.eu/fuseco.fokus.fraunhofer.de> rdf:type omn-federation:Infrastructure ,
+<http://lod.fed4fire.eu/id/fuseco.fokus.fraunhofer.de> rdf:type omn-federation:Infrastructure ,
                                                       owl:NamedIndividual ;
 
                                              rdfs:label "Fraunhofer FUSECO Playground" ;
@@ -209,10 +209,6 @@ schema:WebSite rdf:type owl:Class .
                 omn-federation:isAdministeredBy :me ;
 
                 omn:hasService :portal .
-
-
-
-###  http://lod.fed4fire.eu/about#me
 
 :me rdf:type omn-federation:Federation ,
              owl:NamedIndividual ;
@@ -685,7 +681,7 @@ schema:WebSite rdf:type owl:Class .
 
                                           rdfs:isDefinedBy <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
 
-                                          omn-federation:administers <http://fuseco.fokus.fraunhofer.de/about#me> ;
+                                          omn-federation:administers <http://lod.fed4fire.eu/id/fuseco.fokus.fraunhofer.de> ;
 
                                           foaf:homepage <https://www.fokus.fraunhofer.de/> ;
 
