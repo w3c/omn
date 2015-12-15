@@ -664,9 +664,9 @@ schema:WebSite rdf:type owl:Class .
 
                                           rdfs:comment "With around 450 employees FOKUS is one of the largest Fraunhofer institutes. Scientists from 10 competence centers cover the complete chain of development of urban IT-Infrastructure right from architectural design and modelling to middleware and platforms right up to concrete applications like the warning system KATWARN." ;
 
-                                          rdfs:isDefinedBy <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
+                                          rdfs:isDefinedBy <http://de.dbpedia.org/resource/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
 
-                                          owl:sameAs <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
+                                          owl:sameAs <http://de.dbpedia.org/resource/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
 
                                           omn-federation:administers <http://lod.fed4fire.eu/id/fuseco.fokus.fraunhofer.de> ;
 
