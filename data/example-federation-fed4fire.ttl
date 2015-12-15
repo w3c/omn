@@ -1,4 +1,4 @@
-@prefix : <http://lod.fed4fire.eu/about#> .
+@prefix : <http://lod.fed4fire.eu/id/fed4fire.eu#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix omn: <http://open-multinet.info/ontology/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -19,7 +19,7 @@
 @prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
 @base <http://lod.fed4fire.eu/about#> .
 
-<http://lod.fed4fire.eu/about> rdf:type owl:Ontology ;
+<http://lod.fed4fire.eu/id/fed4fire.eu> rdf:type owl:Ontology ;
 
                                rdfs:label "GENI-FIRE"@en ;
 
@@ -179,12 +179,16 @@ schema:WebSite rdf:type owl:Class .
 
 ###  http://fuseco.fokus.fraunhofer.de/about#me
 
-<http://fuseco.fokus.fraunhofer.de/about#me> rdf:type omn-federation:Infrastructure ,
+<http://lod.fed4fire.eu/fuseco.fokus.fraunhofer.de> rdf:type omn-federation:Infrastructure ,
                                                       owl:NamedIndividual ;
 
                                              rdfs:label "Fraunhofer FUSECO Playground" ;
 
                                              rdfs:comment "Advanced ICT platforms (including Cloud, M2M, SDN, NFV and Mobile Broadband), tools and cutting edge expertise for testing, monitoring, test control, remote usage and federation with external testbeds." ;
+
+                                             foaf:depiction <https://www.av.tu-berlin.de/fileadmin/fg207/Logos/NGNI_logo_FUSECOplayground.jpg> ;
+
+                                             foaf:mbox <mailto:fuseco@fokus.fraunhofer.de> ;
 
                                              omn-federation:isAdministeredBy <http://lod.fed4fire.eu/id/fokus.fraunhofer.de> ;
 
@@ -473,7 +477,6 @@ schema:WebSite rdf:type owl:Class .
                            <urn:publicid:IDN+amazon-edge.ilabt.iminds.be+authority+cm>,
                            <urn:publicid:IDN+sfa.bonfire.eu+authority+am>,
                            <urn:publicid:IDN+federation.trescimo.eu+authority+root>,
-                           <urn:publicid:IDN+fuseco.fokus.fraunhofer.de+authority+cm>,
                            <urn:publicid:IDN+demo.fiteagle.org+authority+root> .
 
 <urn:publicid:IDN+HPCN.UAM+authority+am> a omn-domain-geni-fire:AMService .
