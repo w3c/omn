@@ -666,6 +666,8 @@ schema:WebSite rdf:type owl:Class .
 
                                           rdfs:isDefinedBy <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
 
+                                          owl:sameAs <http://de.dbpedia.org/page/Fraunhofer-Institut_für_Offene_Kommunikationssysteme> ;
+
                                           omn-federation:administers <http://lod.fed4fire.eu/id/fuseco.fokus.fraunhofer.de> ;
 
                                           foaf:homepage <https://www.fokus.fraunhofer.de/> ;
