@@ -11,7 +11,7 @@
 		<sliver_type
 			name="http://open-multinet.info/ontology/resource/fiveg#Switch" />
 		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e" />
-		<ns5:switch pgw_u_base_id="pgwUBaseId1"
+		<ns5:switch pgw_u_base_id="pgwUBaseId1" upstart_on="true"
 			pgw_u_download_interface="3" pgw_u_upload_interface="4"
 			sgw_u_download_interface="5" sgw_u_upload_interface="6" mgmt_intf="1"
 			net_a_intf="1" net_d_intf="2" min_num_intf="1">

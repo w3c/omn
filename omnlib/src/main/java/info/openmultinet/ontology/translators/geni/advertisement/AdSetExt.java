@@ -1505,8 +1505,8 @@ public class AdSetExt extends AbstractConverter {
 
 		if (resourceResource.hasProperty(Omn_lifecycle.managedBy)) {
 			String componentManagerId = resourceResource
-					.getProperty(Omn_lifecycle.managedBy)
-					.getObject().asLiteral().getString();
+					.getProperty(Omn_lifecycle.managedBy).getObject()
+					.asResource().getURI();
 			of.setComponentManagerId(componentManagerId);
 		}
 	}

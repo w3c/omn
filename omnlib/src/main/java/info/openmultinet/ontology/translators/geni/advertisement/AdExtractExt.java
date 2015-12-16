@@ -1549,8 +1549,20 @@ public class AdExtractExt extends AbstractConverter {
 			}
 
 			if (channel.getComponentManagerId() != null) {
+
+				String managerId = channel.getComponentManagerId();
+				Resource managedByResource = null;
+				if (AbstractConverter.isUrl(managerId)
+						|| AbstractConverter.isUrn(managerId)) {
+					managedByResource = omnChannel.getModel().createResource(
+							managerId);
+				} else {
+					String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+					managedByResource = omnChannel.getModel().createResource(
+							uuid1);
+				}
 				omnChannel.addProperty(Omn_lifecycle.managedBy,
-						channel.getComponentManagerId());
+						managedByResource);
 			}
 
 			if (channel.getComponentName() != null) {

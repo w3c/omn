@@ -1363,12 +1363,12 @@ public class RequestExtractExt extends AbstractConverter {
 				}
 				node.addProperty(Fiveg.cloudManagementIP, ipResource);
 			}
-			
+
 			String requires = gateway.getRequires();
 			if (requires != null && !requires.equals("")) {
 				node.addLiteral(Fiveg.requires, requires);
 			}
-			
+
 		} catch (final ClassCastException e) {
 			RequestExtractExt.LOG.finer(e.getMessage());
 		}
@@ -1414,8 +1414,7 @@ public class RequestExtractExt extends AbstractConverter {
 			if (requires != null && !requires.equals("")) {
 				node.addLiteral(Fiveg.requires, requires);
 			}
-			
-			
+
 		} catch (final ClassCastException e) {
 			RequestExtractExt.LOG.finer(e.getMessage());
 		}
@@ -1431,6 +1430,7 @@ public class RequestExtractExt extends AbstractConverter {
 				node.addProperty(Fiveg.pgwUBaseId, pgwUBaseId);
 			}
 			Boolean upstartOn = switchObject.isUpstartOn();
+
 			if (upstartOn != null) {
 				node.addLiteral(Fiveg.upstartOn, upstartOn);
 			}
@@ -1480,7 +1480,7 @@ public class RequestExtractExt extends AbstractConverter {
 			if (netDIntf != null) {
 				node.addLiteral(Fiveg.ranBackhaul, netDIntf);
 			}
-			
+
 			String requires = switchObject.getRequires();
 			if (requires != null && !requires.equals("")) {
 				node.addLiteral(Fiveg.requires, requires);
@@ -1632,7 +1632,7 @@ public class RequestExtractExt extends AbstractConverter {
 			if (useFLoatingIps != null) {
 				node.addLiteral(Fiveg.useFloatingIps, useFLoatingIps);
 			}
-			
+
 			String requires = btObject.getRequires();
 			if (requires != null && !requires.equals("")) {
 				node.addLiteral(Fiveg.requires, requires);
@@ -1724,7 +1724,7 @@ public class RequestExtractExt extends AbstractConverter {
 			if (requires != null && !requires.equals("")) {
 				node.addLiteral(Fiveg.requires, requires);
 			}
-			
+
 		} catch (final ClassCastException e) {
 			RequestExtractExt.LOG.finer(e.getMessage());
 		}
@@ -1825,7 +1825,7 @@ public class RequestExtractExt extends AbstractConverter {
 			if (minNumIntf != null) {
 				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
 			}
-			
+
 			String requires = hss.getRequires();
 			if (requires != null && !requires.equals("")) {
 				node.addLiteral(Fiveg.requires, requires);
