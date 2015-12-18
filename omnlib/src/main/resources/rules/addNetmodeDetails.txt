@@ -10,6 +10,7 @@
 @prefix dbp: <http://dbpedia.org/property/>.
 @prefix schema: <http://schema.org/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix omndpc: <http://open-multinet.info/ontology/omn-domain-pc#>.
 
 [rule1: 
 (?node omnres:hasHardwareType ?hwtype)
@@ -169,4 +170,27 @@ makeTemp(?stoComp)
 (?node <http://www.w3.org/2003/01/geo/wgs84_pos#lat>   "37.9813"^^xsd:float)
 (?node <http://www.w3.org/2003/01/geo/wgs84_pos#long>  "23.7827"^^xsd:float)
 ]
+
+
+[rule7: 
+(?node rdf:type omnres:Node) 
+(?node omnres:hasHardwareType ?hwtype)
+(?hwtype rdfs:label "alix3d2"^^xsd:string)
+(?node omnlc:managedBy <urn:publicid:IDN+omf:netmode+authority+cm>)
+makeTemp(?stype)
+makeTemp(?dimage)
+->
+(?stype rdf:type owl:NamedIndividual)
+(?stype rdf:type omnres:SliverType)
+(?stype omnlc:hasSliverName "raw-pc"^^xsd:string)
+(?stype omndpc:hasDiskImage ?dimage)
+(?node omnres:hasSliverType ?stype)
+(?dimage rdf:type owl:NamedIndividual)
+(?dimage rdf:type omndpc:DiskImage)
+(?dimage omndpc:hasDiskimageOS "VoyageLinux"^^xsd:string)
+(?dimage omnlc:managedBy <urn:publicid:IDN+omf:netmode+authority+cm>)
+]
+
+
+
 
