@@ -82,7 +82,7 @@ SELECT DISTINCT ?model ?harware_type WHERE {
 }`
 
   $('#findwirelessAMs').click(function(){
-    yasqe.setValue(find wirelessAMs);
+    yasqe.setValue(findwirelessAMs);
     yasqe.query(yasr.setResponse);
     return false;
   });
