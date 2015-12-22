@@ -3,6 +3,7 @@ package info.openmultinet.ontology.translators.geni.request;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Control;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Hss;
@@ -54,6 +55,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.UseGroup;
 import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
@@ -1476,13 +1478,13 @@ public class RequestSetExt extends AbstractConverter {
 					fiveg.getCloudMgmtGwIp().setType(type);
 				}
 			}
-			
+
 			if (resourceResource.hasProperty(Fiveg.requires)) {
 				String requires = resourceResource.getProperty(Fiveg.requires)
 						.getObject().asLiteral().getString();
 				fiveg.setRequires(requires);
 			}
-			
+
 			node.getAnyOrRelationOrLocation().add(fiveg);
 		}
 	}
@@ -1544,7 +1546,7 @@ public class RequestSetExt extends AbstractConverter {
 						.getObject().asLiteral().getString();
 				fiveg.setRequires(requires);
 			}
-			
+
 			node.getAnyOrRelationOrLocation().add(fiveg);
 		}
 	}
@@ -1643,10 +1645,50 @@ public class RequestSetExt extends AbstractConverter {
 						.getObject().asLiteral().getString();
 				fiveg.setRequires(requires);
 			}
-			
+
 			node.getAnyOrRelationOrLocation().add(fiveg);
 		}
 
+	}
+
+	public static void setOlChannel(Statement resource, Channel of) {
+		Resource resourceResource = resource.getResource();
+
+		if (resourceResource.hasProperty(Omn_domain_wireless.channelNum)) {
+			int channelNum = resourceResource
+					.getProperty(Omn_domain_wireless.channelNum).getLiteral()
+					.getInt();
+			of.setComponentName(Integer.toString(channelNum));
+		} else if (resourceResource.hasProperty(Omn_lifecycle.hasComponentName)) {
+			String componentName = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentName).getLiteral()
+					.getString();
+			of.setComponentName(componentName);
+		}
+
+		if (resourceResource.hasProperty(Omn_domain_wireless.usesFrequency)) {
+			Resource freqResource = resourceResource
+					.getProperty(Omn_domain_wireless.usesFrequency).getObject()
+					.asResource();
+
+			String frequency = CommonMethods
+					.getStringFromFrequency(freqResource);
+			of.setFrequency(frequency);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+			String componentId = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentID).getObject()
+					.asLiteral().getString();
+			of.setComponentId(componentId);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.managedBy)) {
+			String componentManagerId = resourceResource
+					.getProperty(Omn_lifecycle.managedBy).getObject()
+					.asResource().getURI();
+			of.setComponentManagerId(componentManagerId);
+		}
 	}
 
 	public static void setOlLease(Statement resource, NodeContents node) {
@@ -1909,7 +1951,7 @@ public class RequestSetExt extends AbstractConverter {
 						.parseBoolean(useFloatingIps);
 				fiveg.setUseFloatingIps(useFloatingIpsBool);
 			}
-			
+
 			if (resourceResource.hasProperty(Fiveg.requires)) {
 				String requires = resourceResource.getProperty(Fiveg.requires)
 						.getObject().asLiteral().getString();
@@ -2045,7 +2087,7 @@ public class RequestSetExt extends AbstractConverter {
 						.getObject().asLiteral().getString();
 				fiveg.setRequires(requires);
 			}
-			
+
 			node.getAnyOrRelationOrLocation().add(fiveg);
 		}
 
@@ -2195,7 +2237,7 @@ public class RequestSetExt extends AbstractConverter {
 						.getObject().asLiteral().getString();
 				fiveg.setVersion(version);
 			}
-			
+
 			if (resourceResource.hasProperty(Fiveg.requires)) {
 				String requires = resourceResource.getProperty(Fiveg.requires)
 						.getObject().asLiteral().getString();

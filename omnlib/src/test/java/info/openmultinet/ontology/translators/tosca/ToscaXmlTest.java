@@ -1,13 +1,10 @@
 package info.openmultinet.ontology.translators.tosca;
 
 import info.openmultinet.ontology.Parser;
-import info.openmultinet.ontology.ParserTest;
-import info.openmultinet.ontology.TopologyParser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.AdvertisementConverter;
-import info.openmultinet.ontology.translators.geni.RSpecValidation;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
 
 import java.io.BufferedReader;
@@ -23,22 +20,16 @@ import javax.xml.bind.JAXBException;
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 public class ToscaXmlTest {
 
 	@Test
 	public void testConvertToscaFile() throws InvalidModelException,
-			JAXBException, MissingRspecElementException, FileNotFoundException {
+			JAXBException, MissingRspecElementException, FileNotFoundException,
+			InvalidRspecValueException {
 
 		System.out.println("******************************************");
 		System.out.println("********    loading this file    ********");

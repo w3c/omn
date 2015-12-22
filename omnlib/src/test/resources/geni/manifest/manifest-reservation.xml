@@ -1,0 +1,22 @@
+<rspec generated="2015-12-17T20:59:41+02:00" type="manifest"
+	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
+	xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/request-reservation.xsd">
+	<ol:lease slice_id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
+		leaseID="testid" valid_from="2015-12-17T19:30:00Z" valid_until="2015-12-17T20:00:00Z"
+		uuid="318da82f-4553-4425-857b-3c196b47cc6d"  leaseREF="testid" />
+	<node client_id="nodeWireless" component_id="urn:publicid:IDN+omf:netmode+node+node1"
+		component_manager_id="urn:publicid:IDN+omf:netmode+authority+cm"
+		component_name="node1" exclusive="true">
+		<!-- available now="true"/ -->
+		<hardware_type name="alix3d2" />
+		<ol:lease_ref id_ref="testid" />
+		<services>
+			<login authentication="ssh-keys" hostname="vnews.netmode.ntua.gr"
+				port="22" username="fed4fire.global.eswc1" />
+		</services>
+	</node>
+	<ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+2"
+		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+		component_name="2" frequency="25.4317GHz" />
+</rspec>

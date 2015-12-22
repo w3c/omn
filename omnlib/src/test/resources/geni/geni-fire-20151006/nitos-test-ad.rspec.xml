@@ -7,7 +7,7 @@
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/ad-reservation.xsd">
 	<ol:lease slice_id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
 		valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"
-		uuid="318da82f-4553-4425-857b-3c196b47cc6d" leaseID="bar" leaseREF="bar" />
+		uuid="318da82f-4553-4425-857b-3c196b47cc6d" leaseID="testid" leaseREF="testid" />
 	<node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node004"
 		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
 		component_name="node004" exclusive="true">

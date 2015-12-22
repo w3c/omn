@@ -1,7 +1,10 @@
 package info.openmultinet.ontology.translators.geni.manifest;
 
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Channel;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ApnContents;
@@ -25,16 +28,18 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.UeDiskImageCont
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.FiveGIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Gateway;
-import info.openmultinet.ontology.translators.geni.request.RequestExtractExt;
 import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.math.BigInteger;
+import java.net.URI;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -823,8 +828,7 @@ public class ManifestExtractExt extends AbstractConverter {
 
 	}
 
-	public static void tryExtractGateway(Resource node,
-			Object rspecObject) {
+	public static void tryExtractGateway(Resource node, Object rspecObject) {
 		try {
 			Gateway gateway = (Gateway) rspecObject;
 
@@ -880,6 +884,128 @@ public class ManifestExtractExt extends AbstractConverter {
 		} catch (final ClassCastException e) {
 			ManifestExtractExt.LOG.finer(e.getMessage());
 		}
-		
+
+	}
+
+	public static void tryExtractOlChannel(Resource topology, Object o)
+			throws InvalidRspecValueException {
+		try {
+			Channel channel = (Channel) o;
+
+			String uuid;
+			String componentId = channel.getComponentId();
+			if (componentId != null
+					&& (AbstractConverter.isUrl(componentId) || AbstractConverter
+							.isUrn(componentId))) {
+				uuid = componentId;
+			} else {
+				uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			}
+
+			Resource omnChannel = topology.getModel().createResource(uuid);
+			omnChannel.addProperty(RDF.type, Omn_domain_wireless.Channel);
+			topology.addProperty(Omn.hasComponent, omnChannel);
+
+			if (channel.getFrequency() != null) {
+				String frequency = channel.getFrequency();
+				Resource frequencyIndividual = CommonMethods.getFrequency(
+						frequency, topology.getModel());
+
+				omnChannel.addProperty(Omn_domain_wireless.usesFrequency,
+						frequencyIndividual);
+			}
+
+			// check that componentId was uri
+			if (componentId != null && uuid.equals(componentId)) {
+				omnChannel.addLiteral(Omn_lifecycle.hasComponentID,
+						URI.create(componentId));
+			}
+
+			if (channel.getComponentManagerId() != null) {
+
+				String managerId = channel.getComponentManagerId();
+				Resource managedByResource = null;
+				if (AbstractConverter.isUrl(managerId)
+						|| AbstractConverter.isUrn(managerId)) {
+					managedByResource = omnChannel.getModel().createResource(
+							managerId);
+				} else {
+					String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+					managedByResource = omnChannel.getModel().createResource(
+							uuid1);
+				}
+				omnChannel.addProperty(Omn_lifecycle.managedBy,
+						managedByResource);
+			}
+
+			if (channel.getComponentName() != null) {
+				String componentName = channel.getComponentName();
+
+				try {
+					int channelNum = Integer.parseInt(componentName);
+					BigInteger channelNumBig = BigInteger.valueOf(channelNum);
+					omnChannel.addLiteral(Omn_domain_wireless.channelNum,
+							channelNumBig);
+				} catch (NumberFormatException e) {
+					omnChannel.addProperty(Omn_lifecycle.hasComponentName,
+							componentName);
+				}
+			}
+
+		} catch (final ClassCastException e) {
+			ManifestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractOlLease(Resource omnNode, Object o) {
+		try {
+			Lease lease = (Lease) o;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnLease = omnNode.getModel().createResource(uuid);
+			omnLease.addProperty(RDF.type, Omn_lifecycle.Lease);
+			omnNode.addProperty(Omn_lifecycle.hasLease, omnLease);
+			
+			if (lease.getLeaseID() != null) {
+				String leaseId = lease.getLeaseID();
+				omnLease.addLiteral(Omn_lifecycle.hasID, leaseId);
+			}
+
+			if (lease.getUuid() != null) {
+				String uuidString = lease.getUuid();
+				omnLease.addLiteral(Omn_domain_pc.hasUUID, uuidString);
+			}
+
+			if (lease.getSliceId() != null) {
+				String sliceId = lease.getSliceId();
+				omnLease.addLiteral(Omn_lifecycle.hasSliceID, sliceId);
+			}
+
+			// TODO:
+			// <xs:attribute name="leaseREF" type="xs:IDREF" />
+			if (lease.getLeaseREF() != null) {
+				Object leaseIdRef = lease.getLeaseREF();
+				if (leaseIdRef.equals(lease)) {
+					omnLease.addLiteral(Omn_lifecycle.hasIdRef,
+							omnLease.getURI());
+				}
+			}
+
+			if (lease.getValidFrom() != null) {
+				XMLGregorianCalendar from = lease.getValidFrom();
+				Calendar dateTime = from.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.startTime, dateTime);
+			}
+
+			if (lease.getValidUntil() != null) {
+				XMLGregorianCalendar until = lease.getValidUntil();
+				Calendar dateTime = until.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.expirationTime, dateTime);
+			}
+
+		} catch (final ClassCastException e) {
+			ManifestExtractExt.LOG.finer(e.getMessage());
+		}
+
 	}
 }

@@ -568,6 +568,68 @@
 
 
 
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#oscoId
+
+:oscoId  a    owl:DatatypeProperty ;
+
+        rdfs:label "osco id"@en ;
+
+        rdfs:comment "osco-assigned id"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:string .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#oscoName
+
+:oscoName  a    owl:DatatypeProperty ;
+
+        rdfs:label "osco name"@en ;
+
+        rdfs:comment "osco-assigned id"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#oscoState
+
+:oscoState  a    owl:DatatypeProperty ;
+
+        rdfs:label "osco state"@en ;
+
+        rdfs:comment "osco-assigned state"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   omn-lifecycle:state .
+        
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#oscoVersion
+
+:oscoVersion  a    owl:DatatypeProperty ;
+
+        rdfs:label "osco version"@en ;
+
+        rdfs:comment "osco-assigned version number"@en ;
+
+        rdfs:domain  :FiveGResource ;
+
+        rdfs:range   xsd:integer .
+
+
+
+
+
 ###  http://open-multinet.info/ontology/resource/fiveg#pgwCConsolePort
 
 :pgwCConsolePort  a    owl:DatatypeProperty ;

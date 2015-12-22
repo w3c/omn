@@ -1512,8 +1512,11 @@ public class AdSetExt extends AbstractConverter {
 	}
 
 	public static void setOlLease(Statement omnResource, Lease of) {
-
 		Resource resourceResource = omnResource.getResource();
+		setOlLease(resourceResource, of);
+	}
+
+	public static void setOlLease(Resource resourceResource, Lease of) {
 
 		if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
 			String leaseId = resourceResource.getProperty(Omn_lifecycle.hasID)
@@ -1569,6 +1572,16 @@ public class AdSetExt extends AbstractConverter {
 				end = AbstractConverter.xsdToXmlTime(time);
 			}
 			of.setValidUntil(end);
+		}
+	}
+
+	public static void setOlLease(Statement omnResource, NodeContents geniNode) {
+		if (omnResource.getSubject().hasProperty(Omn_lifecycle.hasLease)) {
+			Resource leaseResource = omnResource.getSubject()
+					.getProperty(Omn_lifecycle.hasLease).getObject()
+					.asResource();
+			Lease leaseObject = new ObjectFactory().createLease();
+			setOlLease(leaseResource, leaseObject);
 		}
 	}
 
@@ -1660,4 +1673,5 @@ public class AdSetExt extends AbstractConverter {
 		}
 
 	}
+
 }

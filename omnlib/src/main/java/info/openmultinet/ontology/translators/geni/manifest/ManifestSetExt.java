@@ -3,9 +3,11 @@ package info.openmultinet.ontology.translators.geni.manifest;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Device;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.PDNGatewayContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.AccessNetwork;
@@ -30,6 +32,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.Gateway;
 import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 import info.openmultinet.ontology.vocabulary.Osco;
@@ -1116,6 +1119,108 @@ public class ManifestSetExt extends AbstractConverter {
 			}
 			node.getAnyOrRelationOrLocation().add(gateway);
 		}
-		
+
+	}
+
+	public static void setOlChannel(Statement resource, Channel of) {
+		Resource resourceResource = resource.getResource();
+
+		if (resourceResource.hasProperty(Omn_domain_wireless.channelNum)) {
+			int channelNum = resourceResource
+					.getProperty(Omn_domain_wireless.channelNum).getLiteral()
+					.getInt();
+			of.setComponentName(Integer.toString(channelNum));
+		} else if (resourceResource.hasProperty(Omn_lifecycle.hasComponentName)) {
+			String componentName = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentName).getLiteral()
+					.getString();
+			of.setComponentName(componentName);
+		}
+
+		if (resourceResource.hasProperty(Omn_domain_wireless.usesFrequency)) {
+			Resource freqResource = resourceResource
+					.getProperty(Omn_domain_wireless.usesFrequency).getObject()
+					.asResource();
+
+			String frequency = CommonMethods
+					.getStringFromFrequency(freqResource);
+			of.setFrequency(frequency);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasComponentID)) {
+			String componentId = resourceResource
+					.getProperty(Omn_lifecycle.hasComponentID).getObject()
+					.asLiteral().getString();
+			of.setComponentId(componentId);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.managedBy)) {
+			String componentManagerId = resourceResource
+					.getProperty(Omn_lifecycle.managedBy).getObject()
+					.asResource().getURI();
+			of.setComponentManagerId(componentManagerId);
+		}
+
+	}
+
+	public static void setOlLease(Statement resource, Lease of) {
+		Resource resourceResource = resource.getResource();
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
+			String leaseId = resourceResource.getProperty(Omn_lifecycle.hasID)
+					.getObject().asLiteral().getString();
+			of.setLeaseID(leaseId);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasIdRef)) {
+			String leaseIdRef = resourceResource
+					.getProperty(Omn_lifecycle.hasIdRef).getObject()
+					.asLiteral().getString();
+			if (leaseIdRef.equals(resourceResource.getURI())) {
+				of.setLeaseREF(of);
+			}
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasSliceID)) {
+			String sliceId = resourceResource
+					.getProperty(Omn_lifecycle.hasSliceID).getObject()
+					.asLiteral().getString();
+			of.setSliceId(sliceId);
+		}
+
+		if (resourceResource.hasProperty(Omn_domain_pc.hasUUID)) {
+			String uuid = resourceResource.getProperty(Omn_domain_pc.hasUUID)
+					.getObject().asLiteral().getString();
+			of.setUuid(uuid);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.startTime)) {
+
+			Object startTime = ((Object) resourceResource
+					.getProperty(Omn_lifecycle.startTime).getObject()
+					.asLiteral().getValue());
+
+			XMLGregorianCalendar start = null;
+			if (startTime instanceof XSDDateTime) {
+				XSDDateTime time = (XSDDateTime) startTime;
+				start = AbstractConverter.xsdToXmlTime(time);
+			}
+			of.setValidFrom(start);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.expirationTime)) {
+
+			Object endTime = ((Object) resourceResource
+					.getProperty(Omn_lifecycle.expirationTime).getObject()
+					.asLiteral().getValue());
+
+			XMLGregorianCalendar end = null;
+			if (endTime instanceof XSDDateTime) {
+				XSDDateTime time = (XSDDateTime) endTime;
+				end = AbstractConverter.xsdToXmlTime(time);
+			}
+			of.setValidUntil(end);
+		}
+
 	}
 }

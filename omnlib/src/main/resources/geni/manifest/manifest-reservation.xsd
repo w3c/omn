@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified" targetNamespace="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
-	xmlns:s="http://nitlab.inf.uth.gr/schema/sfa/rspec/1">
-	<xs:element name="rspec_lease">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element maxOccurs="unbounded" ref="s:lease" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	xmlns:rspec="http://nitlab.inf.uth.gr/schema/sfa/rspec/1">
 	<xs:element name="lease">
 		<xs:complexType>
 			<xs:attribute name="leaseID" type="xs:ID" />

@@ -1,8 +1,10 @@
 package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
@@ -16,6 +18,7 @@ import info.openmultinet.ontology.translators.geni.request.RequestExtractExt;
 import info.openmultinet.ontology.translators.geni.request.RequestSet;
 import info.openmultinet.ontology.translators.geni.request.RequestSetExt;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
@@ -108,6 +111,9 @@ public class RequestConverter extends AbstractConverter {
 		List<Statement> leases = group.listProperties(Omn_lifecycle.hasLease)
 				.toList();
 		resources.addAll(leases);
+		List<Statement> components = group.listProperties(Omn.hasComponent)
+				.toList();
+		resources.addAll(components);
 
 		RequestConverter.convertStatementsToNodesAndLinks(request, resources);
 	}
@@ -121,6 +127,8 @@ public class RequestConverter extends AbstractConverter {
 					.hasProperty(RDF.type, Omn_resource.Link)
 					&& !resource.getResource().hasProperty(RDF.type,
 							Omn_lifecycle.Lease)
+					&& !resource.getResource().hasProperty(RDF.type,
+							Omn_domain_wireless.Channel)
 					&& !resource.getResource().hasProperty(RDF.type,
 							Omn_resource.Openflow)
 					&& !resource.getResource().hasProperty(RDF.type,
@@ -193,6 +201,13 @@ public class RequestConverter extends AbstractConverter {
 				final Lease of = new Lease();
 				RequestSetExt.setOlLease(resource, of);
 				request.getAnyOrNodeOrLink().add(of);
+
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_domain_wireless.Channel)) {
+				final Channel of = new Channel();
+				RequestSetExt.setOlChannel(resource, of);
+				request.getAnyOrNodeOrLink().add(of);
+
 			} else if (resource.getResource().hasProperty(RDF.type,
 					Omn_resource.Openflow)) {
 				final Sliver of = new Sliver();
@@ -228,7 +243,8 @@ public class RequestConverter extends AbstractConverter {
 	}
 
 	public static Model getModel(final InputStream input) throws JAXBException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 
 		final JAXBContext context = JAXBContext
 				.newInstance(RSpecContents.class);
@@ -285,6 +301,8 @@ public class RequestConverter extends AbstractConverter {
 				// tryExtractOsco(topology, o);
 			} else if (o instanceof Lease) {
 				RequestExtractExt.extractOlLease(topology, o);
+			} else if (o instanceof Channel) {
+				RequestExtractExt.tryExtractOlChannel(topology, o);
 			} else {
 				RequestConverter.LOG.log(Level.INFO,
 						"Found unknown extension: " + o);

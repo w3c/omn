@@ -1587,7 +1587,9 @@ public class AdExtractExt extends AbstractConverter {
 
 	public static void tryExtractOlLease(Object rspecObject, Resource omnNode) {
 		try {
+
 			Lease lease = (Lease) rspecObject;
+
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource omnLease = omnNode.getModel().createResource(uuid);
 			omnLease.addProperty(RDF.type, Omn_lifecycle.Lease);

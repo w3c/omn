@@ -1,13 +1,14 @@
 package info.openmultinet.ontology.translators.geni.request;
 
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Control;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Hss;
-import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
+import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Control;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Dns;
@@ -17,7 +18,9 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
 import info.openmultinet.ontology.translators.geni.jaxb.request.FiveGIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Gateway;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Hss;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Location;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
@@ -35,6 +38,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.UeHardwareTypeCo
 import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
@@ -1492,6 +1496,77 @@ public class RequestExtractExt extends AbstractConverter {
 
 	}
 
+
+	public static void tryExtractOlChannel(Resource topology, Object o)
+			throws InvalidRspecValueException {
+		try {
+			Channel channel = (Channel) o;
+
+			String uuid;
+			String componentId = channel.getComponentId();
+			if (componentId != null
+					&& (AbstractConverter.isUrl(componentId) || AbstractConverter
+							.isUrn(componentId))) {
+				uuid = componentId;
+			} else {
+				uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			}
+
+			Resource omnChannel = topology.getModel().createResource(uuid);
+			omnChannel.addProperty(RDF.type, Omn_domain_wireless.Channel);
+			topology.addProperty(Omn.hasComponent, omnChannel);
+
+			if (channel.getFrequency() != null) {
+				String frequency = channel.getFrequency();
+				Resource frequencyIndividual = CommonMethods.getFrequency(
+						frequency, topology.getModel());
+
+				omnChannel.addProperty(Omn_domain_wireless.usesFrequency,
+						frequencyIndividual);
+			}
+
+			// check that componentId was uri
+			if (componentId != null && uuid.equals(componentId)) {
+				omnChannel.addLiteral(Omn_lifecycle.hasComponentID,
+						URI.create(componentId));
+			}
+
+			if (channel.getComponentManagerId() != null) {
+
+				String managerId = channel.getComponentManagerId();
+				Resource managedByResource = null;
+				if (AbstractConverter.isUrl(managerId)
+						|| AbstractConverter.isUrn(managerId)) {
+					managedByResource = omnChannel.getModel().createResource(
+							managerId);
+				} else {
+					String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+					managedByResource = omnChannel.getModel().createResource(
+							uuid1);
+				}
+				omnChannel.addProperty(Omn_lifecycle.managedBy,
+						managedByResource);
+			}
+
+			if (channel.getComponentName() != null) {
+				String componentName = channel.getComponentName();
+
+				try {
+					int channelNum = Integer.parseInt(componentName);
+					BigInteger channelNumBig = BigInteger.valueOf(channelNum);
+					omnChannel.addLiteral(Omn_domain_wireless.channelNum,
+							channelNumBig);
+				} catch (NumberFormatException e) {
+					omnChannel.addProperty(Omn_lifecycle.hasComponentName,
+							componentName);
+				}
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
 	public static void extractOlLease(Resource topology, Object rspecObject) {
 		try {
 			Lease lease = (Lease) rspecObject;

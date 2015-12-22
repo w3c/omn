@@ -6,11 +6,15 @@
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd">
 	<ol:lease slice_id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
 		valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"
-		uuid="318da82f-4553-4425-857b-3c196b47cc6d" leaseID="bar" leaseREF="bar" />
+		uuid="318da82f-4553-4425-857b-3c196b47cc6d" leaseID="testid" leaseREF="testid" />
 	<node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node004"
 		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
 		component_name="node004" exclusive="true" client_id="test1">
 		<interface component_id="urn:publicid:IDN+omf:nitos+interface+node004:if1"
 			client_id="test1" />
+		<ol:lease_ref id_ref="testid" />
 	</node>
+	<ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+2"
+		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+		component_name="2" frequency="25.4317GHz" />
 </rspec>
