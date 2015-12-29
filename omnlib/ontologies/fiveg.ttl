@@ -30,9 +30,9 @@
                                         
                                          dc:date "2015-12-01"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-12-09"^^xsd:date ;
+                                         dcterms:modified "2015-12-30"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-12-09"^^xsd:string ;
+                                         owl:versionInfo "2015-12-30"^^xsd:string ;
                                          
                                          dc:title "5G ontology"@en ;
                                          
@@ -1056,6 +1056,9 @@ omn:Adapter rdf:type owl:Class .
 
 
 
+###  http://open-multinet.info/ontology/omn-lifecycle#Adapter
+
+omn-lifecycle:state rdf:type owl:Class .
 
 
 

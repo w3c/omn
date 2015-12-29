@@ -13,6 +13,7 @@
 		component_name="node004" exclusive="true">
 		<interface component_id="urn:publicid:IDN+omf:nitos+interface+node004:if1"
 			component_name="node004:if1" role="experimental" />
+		<ol:lease_ref id_ref="testid" />
 	</node>
 	<ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+2"
 		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
