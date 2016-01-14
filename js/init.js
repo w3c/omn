@@ -1,14 +1,5 @@
 
-var yasr = YASR(document.getElementById("yasr"), {
-	//this way, the URLs in the results are prettified using the defined prefixes in the query
-	getUsedPrefixes: yasqe.getPrefixesFromQuery
-});
 
-YASQE.defaults.sparql.showQueryButton = true;
-YASQE.defaults.sparql.endpoint = "http://lod.fed4fire.eu/sparql";
-YASQE.defaults.sparql.callbacks.success =  function(data){console.log("success", data);};
-YASQE.defaults.sparql.callbacks.complete = yasr.setResponse;
-YASQE.defaults.value = "SELECT ?name ?am ?endpoint WHERE {\n  ?infra <http://open-multinet.info/ontology/omn#hasService> ?am ;\n         rdfs:label ?name . \n  ?am rdf:type <http://open-multinet.info/ontology/omn-domain-geni-fire#AMService> ;\n      <http://open-multinet.info/ontology/omn#hasEndpoint> ?endpoint .\n} LIMIT 100"
 
 /**
  * We use most of the default settings for the property and class autocompletion types. This includes:
@@ -105,6 +96,16 @@ YASQE.defaults.autocompleters = ['customClassCompleter', 'customPropertyComplete
 
 //finally, initialize YASQE
 var yasqe = YASQE(document.getElementById("yasqe"));
+var yasr = YASR(document.getElementById("yasr"), {
+        //this way, the URLs in the results are prettified using the defined prefixes in the query
+        getUsedPrefixes: yasqe.getPrefixesFromQuery
+});
+
+YASQE.defaults.sparql.showQueryButton = true;
+YASQE.defaults.sparql.endpoint = "http://lod.fed4fire.eu/sparql";
+YASQE.defaults.sparql.callbacks.success =  function(data){console.log("success", data);};
+YASQE.defaults.sparql.callbacks.complete = yasr.setResponse;
+YASQE.defaults.value = "SELECT ?name ?am ?endpoint WHERE {\n  ?infra <http://open-multinet.info/ontology/omn#hasService> ?am ;\n         rdfs:label ?name . \n  ?am rdf:type <http://open-multinet.info/ontology/omn-domain-geni-fire#AMService> ;\n      <http://open-multinet.info/ontology/omn#hasEndpoint> ?endpoint .\n} LIMIT 100"
 
 prefixes={
 "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
