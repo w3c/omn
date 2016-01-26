@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
@@ -23,7 +24,8 @@ public class ManifestConverterTest {
 
 	@Test
 	public void testConvertingComplexRSpecToGraph() throws JAXBException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		final InputStream rspec = ManifestConverterTest.class
 				.getResourceAsStream("/geni/manifest/exogeni5nodemanifest.xml");
 		final Model model = ManifestConverter.getModel(rspec);
@@ -39,7 +41,8 @@ public class ManifestConverterTest {
 
 	@Test
 	public void testRoundtripWithRequest() throws JAXBException, IOException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		final String filename = "/geni/request/request_bound.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
 				.getResourceAsStream(filename);
@@ -83,9 +86,10 @@ public class ManifestConverterTest {
 	}
 
 	@Test
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testPaper2015Roundtrip() throws JAXBException, IOException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		final String filename = "/geni/manifest/manifest_paper2015.xml";
 		final InputStream inputRspec = ManifestConverterTest.class
 				.getResourceAsStream(filename);

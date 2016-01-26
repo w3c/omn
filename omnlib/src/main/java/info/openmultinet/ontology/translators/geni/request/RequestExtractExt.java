@@ -1,40 +1,56 @@
 package info.openmultinet.ontology.translators.geni.request;
 
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.jaxb.request.PDNGatewayContents;
+import info.openmultinet.ontology.translators.geni.CommonMethods;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.request.AccessNetwork;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ApnContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Bt;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Control;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ControlAddressContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Dns;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ENodeBContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
+import info.openmultinet.ontology.translators.geni.jaxb.request.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Gateway;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Hss;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ImageContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.request.LinkSharedVlan;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Location;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Osco;
 import info.openmultinet.ontology.translators.geni.jaxb.request.OscoLocationContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.PDNGatewayContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ParameterContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.SubnetContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.SubscriberContents;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Switch;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.UeHardwareTypeContents;
+import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
 import java.math.BigInteger;
 import java.net.URI;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.xerces.dom.ElementNSImpl;
 import org.w3c.dom.NamedNodeMap;
@@ -815,7 +831,8 @@ public class RequestExtractExt extends AbstractConverter {
 
 		String id = osco.getId();
 		if (id != null && id != "") {
-			omnOsco.addProperty(Omn_lifecycle.hasID, id);
+			omnOsco.addProperty(info.openmultinet.ontology.vocabulary.Osco.id,
+					id);
 		}
 
 		String implementedBy = osco.getImplementedBy();
@@ -1031,6 +1048,7 @@ public class RequestExtractExt extends AbstractConverter {
 		}
 
 		List<Object> objects = osco.getImageOrOscoLocationOrSubnet();
+
 		for (Object o : objects) {
 			if (o.getClass().equals(ImageContents.class)) {
 				ImageContents imageContents = (ImageContents) o;
@@ -1055,7 +1073,8 @@ public class RequestExtractExt extends AbstractConverter {
 				|| AbstractConverter.isUrn(aboutUri)) {
 			locationResource = omnOsco.getModel().createResource(aboutUri);
 		} else {
-			locationResource = omnOsco.getModel().createResource();
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			locationResource = omnOsco.getModel().createResource(uuid);
 		}
 
 		locationResource.addProperty(RDF.type,
@@ -1079,11 +1098,13 @@ public class RequestExtractExt extends AbstractConverter {
 		String aboutUri = subnetContents.getAbout();
 		Resource subnetResource = null;
 
-		if (AbstractConverter.isUrl(aboutUri)
-				|| AbstractConverter.isUrn(aboutUri)) {
+		if (aboutUri != null
+				&& (AbstractConverter.isUrl(aboutUri) || AbstractConverter
+						.isUrn(aboutUri))) {
 			subnetResource = omnNode.getModel().createResource(aboutUri);
 		} else {
-			subnetResource = omnNode.getModel().createResource();
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			subnetResource = omnNode.getModel().createResource(uuid);
 		}
 
 		subnetResource.addProperty(RDF.type,
@@ -1096,9 +1117,11 @@ public class RequestExtractExt extends AbstractConverter {
 					datacenter);
 		}
 
-		String mgmt = subnetContents.isMgmt().toString();
-		Boolean mgmtBoolean = Boolean.valueOf(mgmt);
-		if (mgmt != null && mgmt != "") {
+		// String mgmt = subnetContents.isMgmt().toString();
+		// Boolean mgmtBoolean = Boolean.valueOf(mgmt);
+		Boolean mgmtBoolean = subnetContents.isMgmt();
+		if (mgmtBoolean != null) {
+			// if (mgmt != null && mgmt != "") {
 			subnetResource.addLiteral(
 					info.openmultinet.ontology.vocabulary.Osco.mgmt,
 					mgmtBoolean);
@@ -1106,8 +1129,7 @@ public class RequestExtractExt extends AbstractConverter {
 
 		String name = subnetContents.getName();
 		if (name != null && name != "") {
-			subnetResource.addProperty(
-					info.openmultinet.ontology.vocabulary.Osco.name, name);
+			subnetResource.addProperty(RDFS.label, name);
 		}
 
 		omnNode.addProperty(info.openmultinet.ontology.vocabulary.Osco.subnet,
@@ -1120,11 +1142,13 @@ public class RequestExtractExt extends AbstractConverter {
 		String aboutUri = image.getAbout();
 		Resource imageResource = null;
 
-		if (AbstractConverter.isUrl(aboutUri)
-				|| AbstractConverter.isUrn(aboutUri)) {
+		if (aboutUri != null
+				&& (AbstractConverter.isUrl(aboutUri) || AbstractConverter
+						.isUrn(aboutUri))) {
 			imageResource = omnNode.getModel().createResource(aboutUri);
 		} else {
-			imageResource = omnNode.getModel().createResource();
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			imageResource = omnNode.getModel().createResource(uuid);
 		}
 
 		imageResource.addProperty(RDF.type,
@@ -1281,4 +1305,610 @@ public class RequestExtractExt extends AbstractConverter {
 
 	}
 
+	public static void tryExtractFivegGateway(Resource node, Object rspecObject) {
+		try {
+			Gateway gateway = (Gateway) rspecObject;
+
+			node.addProperty(RDF.type, Fiveg.Gateway);
+
+			String version = gateway.getVersion();
+			if (version != null && version != "") {
+				node.addProperty(Fiveg.version, version);
+			}
+
+			// String deployedOn = gateway.getDeployedOn();
+			// if (deployedOn != null && deployedOn != "") {
+			// Resource deployedOnResource = node.getModel().createResource(
+			// deployedOn);
+			// node.addProperty(
+			// info.openmultinet.ontology.vocabulary.Osco.deployedOn,
+			// deployedOnResource);
+			// }
+
+			Boolean upstartOn = gateway.isUpstartOn();
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger mgmtIntf = gateway.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger minNumIntf = gateway.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netAIntf = gateway.getNetAIntf();
+			if (netAIntf != null) {
+				node.addLiteral(Fiveg.ipServicesNetwork, netAIntf);
+			}
+
+			FiveGIpContents cloudIpAddress = gateway.getCloudMgmtGwIp();
+			if (cloudIpAddress != null) {
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource ipResource = node.getModel().createResource(uuid);
+				ipResource.addProperty(RDF.type, Omn_resource.IPAddress);
+
+				String address = cloudIpAddress.getAddress();
+				if (address != null && address != "") {
+					ipResource.addProperty(Omn_resource.address, address);
+				}
+
+				String netmask = cloudIpAddress.getNetmask();
+				if (netmask != null && netmask != "") {
+					ipResource.addProperty(Omn_resource.netmask, netmask);
+				}
+
+				String type = cloudIpAddress.getType();
+				if (type != null && type != "") {
+					ipResource.addProperty(Omn_resource.type, type);
+				}
+				node.addProperty(Fiveg.cloudManagementIP, ipResource);
+			}
+
+			String requires = gateway.getRequires();
+			if (requires != null && !requires.equals("")) {
+				node.addLiteral(Fiveg.requires, requires);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+	}
+
+	public static void tryExtractFivegDns(Resource node, Object rspecObject) {
+		try {
+			Dns dns = (Dns) rspecObject;
+			node.addProperty(RDF.type, Fiveg.DomainNameServer);
+
+			String additionals = dns.getAdditionals();
+			if (additionals != null && additionals != "") {
+				node.addProperty(Fiveg.additionals, additionals);
+			}
+
+			String domainName = dns.getDomainName();
+			if (domainName != null && domainName != "") {
+				node.addProperty(Fiveg.domainName, domainName);
+			}
+
+			String domainNs = dns.getDomainNs();
+			if (domainNs != null && domainNs != "") {
+				node.addProperty(Fiveg.domainNs, domainNs);
+
+			}
+
+			BigInteger mgmtIntf = dns.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger minNumIntf = dns.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netAIntf = dns.getNetAIntf();
+			if (netAIntf != null) {
+				node.addLiteral(Fiveg.ipServicesNetwork, netAIntf);
+			}
+
+			String requires = dns.getRequires();
+			if (requires != null && !requires.equals("")) {
+				node.addLiteral(Fiveg.requires, requires);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+	}
+
+	public static void tryExtractFivegSwitch(Resource node, Object rspecObject) {
+		try {
+			Switch switchObject = (Switch) rspecObject;
+			node.addProperty(RDF.type, Fiveg.Switch);
+
+			String pgwUBaseId = switchObject.getPgwUBaseId();
+			if (pgwUBaseId != null && pgwUBaseId != "") {
+				node.addProperty(Fiveg.pgwUBaseId, pgwUBaseId);
+			}
+			Boolean upstartOn = switchObject.isUpstartOn();
+
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger mgmtIntf = switchObject.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger netAIntf = switchObject.getNetAIntf();
+			if (netAIntf != null) {
+				node.addLiteral(Fiveg.ipServicesNetwork, netAIntf);
+			}
+
+			BigInteger pgwUDownloadInterface = switchObject
+					.getPgwUDownloadInterface();
+			if (pgwUDownloadInterface != null) {
+				node.addLiteral(Fiveg.pgwUDownloadInterface,
+						pgwUDownloadInterface);
+			}
+
+			BigInteger pgwUUploadInterface = switchObject
+					.getPgwUUploadInterface();
+			if (pgwUUploadInterface != null) {
+				node.addLiteral(Fiveg.pgwUUploadInterface, pgwUUploadInterface);
+			}
+
+			BigInteger minNumIntf = switchObject.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger sgwUDownloadInterface = switchObject
+					.getSgwUDownloadInterface();
+			if (sgwUDownloadInterface != null) {
+				node.addLiteral(Fiveg.sgwUDownloadInterface,
+						sgwUDownloadInterface);
+			}
+
+			BigInteger sgwUUploadInterface = switchObject
+					.getSgwUUploadInterface();
+			if (sgwUUploadInterface != null) {
+				node.addLiteral(Fiveg.sgwUUploadInterface, sgwUUploadInterface);
+			}
+
+			BigInteger netDIntf = switchObject.getNetDIntf();
+			if (netDIntf != null) {
+				node.addLiteral(Fiveg.ranBackhaul, netDIntf);
+			}
+
+			String requires = switchObject.getRequires();
+			if (requires != null && !requires.equals("")) {
+				node.addLiteral(Fiveg.requires, requires);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+
+	public static void tryExtractOlChannel(Resource topology, Object o)
+			throws InvalidRspecValueException {
+		try {
+			Channel channel = (Channel) o;
+
+			String uuid;
+			String componentId = channel.getComponentId();
+			if (componentId != null
+					&& (AbstractConverter.isUrl(componentId) || AbstractConverter
+							.isUrn(componentId))) {
+				uuid = componentId;
+			} else {
+				uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			}
+
+			Resource omnChannel = topology.getModel().createResource(uuid);
+			omnChannel.addProperty(RDF.type, Omn_domain_wireless.Channel);
+			topology.addProperty(Omn.hasComponent, omnChannel);
+
+			if (channel.getFrequency() != null) {
+				String frequency = channel.getFrequency();
+				Resource frequencyIndividual = CommonMethods.getFrequency(
+						frequency, topology.getModel());
+
+				omnChannel.addProperty(Omn_domain_wireless.usesFrequency,
+						frequencyIndividual);
+			}
+
+			// check that componentId was uri
+			if (componentId != null && uuid.equals(componentId)) {
+				omnChannel.addLiteral(Omn_lifecycle.hasComponentID,
+						URI.create(componentId));
+			}
+
+			if (channel.getComponentManagerId() != null) {
+
+				String managerId = channel.getComponentManagerId();
+				Resource managedByResource = null;
+				if (AbstractConverter.isUrl(managerId)
+						|| AbstractConverter.isUrn(managerId)) {
+					managedByResource = omnChannel.getModel().createResource(
+							managerId);
+				} else {
+					String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+					managedByResource = omnChannel.getModel().createResource(
+							uuid1);
+				}
+				omnChannel.addProperty(Omn_lifecycle.managedBy,
+						managedByResource);
+			}
+
+			if (channel.getComponentName() != null) {
+				String componentName = channel.getComponentName();
+
+				try {
+					int channelNum = Integer.parseInt(componentName);
+					BigInteger channelNumBig = BigInteger.valueOf(channelNum);
+					omnChannel.addLiteral(Omn_domain_wireless.channelNum,
+							channelNumBig);
+				} catch (NumberFormatException e) {
+					omnChannel.addProperty(Omn_lifecycle.hasComponentName,
+							componentName);
+				}
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+	public static void extractOlLease(Resource topology, Object rspecObject) {
+		try {
+			Lease lease = (Lease) rspecObject;
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource omnLease = topology.getModel().createResource(uuid);
+			omnLease.addProperty(RDF.type, Omn_lifecycle.Lease);
+			topology.addProperty(Omn_lifecycle.hasLease, omnLease);
+
+			if (lease.getLeaseID() != null) {
+				String leaseId = lease.getLeaseID();
+				omnLease.addLiteral(Omn_lifecycle.hasID, leaseId);
+			}
+
+			if (lease.getUuid() != null) {
+				String uuidString = lease.getUuid();
+				omnLease.addLiteral(Omn_domain_pc.hasUUID, uuidString);
+			}
+
+			if (lease.getSliceId() != null) {
+				String sliceId = lease.getSliceId();
+				omnLease.addLiteral(Omn_lifecycle.hasSliceID, sliceId);
+			}
+
+			// TODO:
+			// <xs:attribute name="leaseREF" type="xs:IDREF" />
+			if (lease.getLeaseREF() != null) {
+				Object leaseIdRef = lease.getLeaseREF();
+				if (leaseIdRef.equals(lease)) {
+					omnLease.addLiteral(Omn_lifecycle.hasIdRef,
+							omnLease.getURI());
+				}
+			}
+
+			if (lease.getValidFrom() != null) {
+				XMLGregorianCalendar from = lease.getValidFrom();
+				Calendar dateTime = from.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.startTime, dateTime);
+			}
+
+			if (lease.getValidUntil() != null) {
+				XMLGregorianCalendar until = lease.getValidUntil();
+				Calendar dateTime = until.toGregorianCalendar();
+				omnLease.addLiteral(Omn_lifecycle.expirationTime, dateTime);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractFivegBt(Resource node, Object rspecObject) {
+		try {
+			Bt btObject = (Bt) rspecObject;
+			node.addProperty(RDF.type, Fiveg.BenchmarkingTool);
+
+			Boolean upstartOn = btObject.isUpstartOn();
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger consolePort = btObject.getConsolePort();
+			if (consolePort != null) {
+				node.addLiteral(Fiveg.consolePort, consolePort);
+			}
+
+			String btHostName = btObject.getBtHostName();
+			if (btHostName != null && !btHostName.equals("")) {
+				node.addLiteral(Fiveg.benchmarkingToolHostName, btHostName);
+			}
+
+			BigInteger mgmtIntf = btObject.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger netCIntf = btObject.getNetCIntf();
+			if (netCIntf != null) {
+				node.addLiteral(Fiveg.subscriberIpRange, netCIntf);
+			}
+
+			BigInteger minNumIntf = btObject.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netDIntf = btObject.getNetDIntf();
+			if (netDIntf != null) {
+				node.addLiteral(Fiveg.ranBackhaul, netDIntf);
+			}
+
+			BigInteger dnsIntf = btObject.getDnsIntf();
+			if (dnsIntf != null) {
+				node.addLiteral(Fiveg.dnsInterface, dnsIntf);
+			}
+
+			String netIp = btObject.getNetIp();
+			if (netIp != null && !netIp.equals("")) {
+				node.addLiteral(Fiveg.netIp, netIp);
+			}
+
+			String netMask = btObject.getNetMask();
+			if (netMask != null && !netMask.equals("")) {
+				node.addLiteral(Fiveg.netMask, netMask);
+			}
+
+			String ipRangeStart = btObject.getIpRangeStart();
+			if (ipRangeStart != null && !ipRangeStart.equals("")) {
+				node.addLiteral(Fiveg.ipRangeStart, ipRangeStart);
+			}
+
+			String ipRangeEnd = btObject.getIpRangeEnd();
+			if (ipRangeEnd != null && !ipRangeEnd.equals("")) {
+				node.addLiteral(Fiveg.ipRangeEnd, ipRangeEnd);
+			}
+
+			String imsiRangeStart = btObject.getImsiRangeStart();
+			if (imsiRangeStart != null && !imsiRangeStart.equals("")) {
+				node.addLiteral(Fiveg.imsiRangeStart, imsiRangeStart);
+			}
+
+			String imsiRangeEnd = btObject.getImsiRangeEnd();
+			if (imsiRangeEnd != null && !imsiRangeEnd.equals("")) {
+				node.addLiteral(Fiveg.imsiRangeEnd, imsiRangeEnd);
+			}
+
+			String ueAddr = btObject.getUeAddr();
+			if (ueAddr != null && !ueAddr.equals("")) {
+				node.addLiteral(Fiveg.userEquipmentAddress, ueAddr);
+			}
+
+			String cloudPublicRouterIp = btObject.getCloudPublicRouterIp();
+			if (cloudPublicRouterIp != null && !cloudPublicRouterIp.equals("")) {
+				node.addLiteral(Fiveg.cloudPublicRouterIp, cloudPublicRouterIp);
+			}
+
+			Boolean useFLoatingIps = btObject.isUseFloatingIps();
+			if (useFLoatingIps != null) {
+				node.addLiteral(Fiveg.useFloatingIps, useFLoatingIps);
+			}
+
+			String requires = btObject.getRequires();
+			if (requires != null && !requires.equals("")) {
+				node.addLiteral(Fiveg.requires, requires);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractFivegControl(Resource node, Object rspecObject) {
+		try {
+			Control control = (Control) rspecObject;
+			node.addProperty(RDF.type, Fiveg.Control);
+
+			BigInteger mmeConsolePort = control.getMmeConsolePort();
+			if (mmeConsolePort != null) {
+				node.addLiteral(Fiveg.mmeConsolePort, mmeConsolePort);
+			}
+
+			Boolean init = control.isInit();
+			if (init != null) {
+				node.addLiteral(Fiveg.init, init);
+			}
+
+			String pgwCOfpCtrTransport = control.getPgwCOfpCtrTransport();
+			if (pgwCOfpCtrTransport != null) {
+				node.addLiteral(Fiveg.pgwCOfpCtrTransport, pgwCOfpCtrTransport);
+			}
+
+			BigInteger sgwCOfpCtrPort = control.getSgwCOfpCtrPort();
+			if (sgwCOfpCtrPort != null) {
+				node.addLiteral(Fiveg.sgwCOfpCtrPort, sgwCOfpCtrPort);
+			}
+
+			BigInteger sgwCJsonSrvPort = control.getSgwCJsonSrvPort();
+			if (sgwCJsonSrvPort != null) {
+				node.addLiteral(Fiveg.sgwCJsonSrvPort, sgwCJsonSrvPort);
+			}
+
+			BigInteger pgwCConsolePort = control.getPgwCConsolePort();
+			if (pgwCConsolePort != null) {
+				node.addLiteral(Fiveg.pgwCConsolePort, pgwCConsolePort);
+			}
+
+			BigInteger pgwCOfpCtrPort = control.getPgwCOfpCtrPort();
+			if (pgwCOfpCtrPort != null) {
+				node.addLiteral(Fiveg.pgwCOfpCtrPort, pgwCOfpCtrPort);
+			}
+
+			String mmeHostName = control.getMmeHostName();
+			if (mmeHostName != null) {
+				node.addLiteral(Fiveg.mmeHostName, mmeHostName);
+			}
+
+			String pgwCTemplateConfigFile = control.getPgwCTemplateConfigFile();
+			if (pgwCTemplateConfigFile != null) {
+				node.addLiteral(Fiveg.pgwCTemplateConfigFile,
+						pgwCTemplateConfigFile);
+			}
+
+			Boolean upstartOn = control.isUpstartOn();
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger mgmtIntf = control.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger dnsIntf = control.getDnsIntf();
+			if (dnsIntf != null) {
+				node.addLiteral(Fiveg.dnsInterface, dnsIntf);
+			}
+
+			BigInteger minNumIntf = control.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netDIntf = control.getNetDIntf();
+			if (netDIntf != null) {
+				node.addLiteral(Fiveg.ranBackhaul, netDIntf);
+			}
+
+			String requires = control.getRequires();
+			if (requires != null && !requires.equals("")) {
+				node.addLiteral(Fiveg.requires, requires);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractFivegHss(Resource node, Object rspecObject) {
+		try {
+			Hss hss = (Hss) rspecObject;
+			node.addProperty(RDF.type, Fiveg.HomeSubscriberServer);
+
+			BigInteger localDb = hss.getLocalDb();
+			if (localDb != null) {
+				node.addLiteral(Fiveg.localDatabase, localDb);
+			}
+
+			BigInteger dbProvi = hss.getDbProvi();
+			if (dbProvi != null) {
+				node.addLiteral(Fiveg.databaseProvi, dbProvi);
+			}
+
+			String dbUser = hss.getDbUser();
+			if (dbUser != null) {
+				node.addLiteral(Fiveg.databaseUser, dbUser);
+			}
+
+			String dbName = hss.getDbName();
+			if (dbName != null) {
+				node.addLiteral(Fiveg.databaseName, dbName);
+			}
+
+			String dbPw = hss.getDbPw();
+			if (dbPw != null) {
+				node.addLiteral(Fiveg.databasePassword, dbPw);
+			}
+
+			String domainName = hss.getDomainName();
+			if (domainName != null) {
+				node.addLiteral(Fiveg.domainName, domainName);
+			}
+
+			BigInteger port = hss.getPort();
+			if (port != null) {
+				node.addLiteral(Fiveg.port, port);
+			}
+
+			Boolean slfPresence = hss.isSlfPresence();
+			if (slfPresence != null) {
+				node.addLiteral(Fiveg.slfPresence, slfPresence);
+			}
+
+			BigInteger consolePortOne = hss.getConsolePortOne();
+			if (consolePortOne != null) {
+				node.addLiteral(Fiveg.consolePortOne, consolePortOne);
+			}
+
+			BigInteger consolePortTwo = hss.getConsolePortTwo();
+			if (consolePortTwo != null) {
+				node.addLiteral(Fiveg.consolePortTwo, consolePortTwo);
+			}
+
+			String consolePortBindOne = hss.getConsolePortBindOne();
+			if (consolePortBindOne != null) {
+				node.addLiteral(Fiveg.consolePortBindOne, consolePortBindOne);
+			}
+
+			String consolePortBindTwo = hss.getConsolePortBindTwo();
+			if (consolePortBindTwo != null) {
+				node.addLiteral(Fiveg.consolePortBindTwo, consolePortBindTwo);
+			}
+
+			BigInteger diameterListenIntf = hss.getDiameterListenIntf();
+			if (diameterListenIntf != null) {
+				node.addLiteral(Fiveg.diameterListenIntf, diameterListenIntf);
+			}
+
+			String defaultRouteVia = hss.getDefaultRouteVia();
+			if (defaultRouteVia != null) {
+				node.addLiteral(Fiveg.defaultRouteVia, defaultRouteVia);
+			}
+
+			String version = hss.getVersion();
+			if (version != null) {
+				node.addLiteral(Fiveg.version, version);
+			}
+
+			BigInteger mgmtIntf = hss.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger dnsIntf = hss.getDnsIntf();
+			if (dnsIntf != null) {
+				node.addLiteral(Fiveg.dnsInterface, dnsIntf);
+			}
+
+			BigInteger minNumIntf = hss.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			String requires = hss.getRequires();
+			if (requires != null && !requires.equals("")) {
+				node.addLiteral(Fiveg.requires, requires);
+			}
+
+		} catch (final ClassCastException e) {
+			RequestExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
 }

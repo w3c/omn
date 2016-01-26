@@ -1,21 +1,24 @@
 package info.openmultinet.ontology.translators.geni;
 
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestSet;
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestSetExt;
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestExtract;
-import  info.openmultinet.ontology.translators.geni.manifest.ManifestExtractExt;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
-import info.openmultinet.ontology.translators.geni.advertisement.AdSet;
 import info.openmultinet.ontology.translators.geni.advertisement.AdSetExt;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Channel;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.GeniSliceInfo;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.RspecTypeContents;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestExtract;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestExtractExt;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestSet;
+import info.openmultinet.ontology.translators.geni.manifest.ManifestSetExt;
 import info.openmultinet.ontology.vocabulary.Omn;
+import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
@@ -121,6 +124,12 @@ public class ManifestConverter extends AbstractConverter {
 
 		final List<Statement> resources = group.listProperties(Omn.hasResource)
 				.toList();
+		List<Statement> components = group.listProperties(Omn.hasComponent)
+				.toList();
+		resources.addAll(components);
+		List<Statement> leases = group.listProperties(Omn_lifecycle.hasLease)
+				.toList();
+		resources.addAll(leases);
 
 		if (group.hasProperty(RDF.type, Omn_lifecycle.Manifest)) {
 			ManifestSetExt.setGeniSliceInfo(group, manifest);
@@ -136,7 +145,12 @@ public class ManifestConverter extends AbstractConverter {
 
 		for (final Statement resource : resources) {
 			if (!resource.getResource()
-					.hasProperty(RDF.type, Omn_resource.Link)) {
+					.hasProperty(RDF.type, Omn_resource.Link)
+					&& !resource.getResource().hasProperty(RDF.type,
+							Omn_domain_wireless.Channel)
+					&& !resource.getResource().hasProperty(RDF.type,
+							Omn_lifecycle.Lease)) {
+				
 				final NodeContents node = new NodeContents();
 
 				ManifestSet.setComponentDetails(resource, node);
@@ -154,13 +168,31 @@ public class ManifestConverter extends AbstractConverter {
 				ManifestSet.setInterfaces(resource, node);
 				ManifestSetExt.setFd(resource, node);
 				ManifestSetExt.setEPC(resource, node);
+				ManifestSetExt.setGateway(resource, node);
 				ManifestSetExt.setAccessNetwork(resource, node);
 				ManifestSetExt.setUserEquipment(resource, node);
 				ManifestSetExt.setAcs(resource, node);
-				
+
 				manifest.getAnyOrNodeOrLink().add(
 						new ObjectFactory().createNode(node));
-			} else {
+
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_domain_wireless.Channel)) {
+				
+				final Channel of = new Channel();
+				ManifestSetExt.setOlChannel(resource, of);
+				manifest.getAnyOrNodeOrLink().add(of);
+
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_lifecycle.Lease)) {
+				
+				final Lease of = new Lease();
+				ManifestSetExt.setOlLease(resource, of);
+				manifest.getAnyOrNodeOrLink().add(of);
+
+			} else if (resource.getResource().hasProperty(RDF.type,
+					Omn_resource.Link)) {
+
 				final LinkContents link = new LinkContents();
 				ManifestSetExt.setGeniSliverInfo(resource, link);
 				ManifestSet.setLinkDetails(resource, link, hostname);
@@ -174,7 +206,7 @@ public class ManifestConverter extends AbstractConverter {
 
 	public static Model getModel(final InputStream stream)
 			throws JAXBException, MissingRspecElementException,
-			InvalidModelException {
+			InvalidModelException, InvalidRspecValueException {
 		final Model model = ManifestConverter.createModelTemplate();
 		final RSpecContents manifest = ManifestConverter.getManifest(stream);
 
@@ -185,7 +217,7 @@ public class ManifestConverter extends AbstractConverter {
 
 	private static void convertManifest2Model(final RSpecContents manifest,
 			final Model model) throws MissingRspecElementException,
-			InvalidModelException {
+			InvalidModelException, InvalidRspecValueException {
 
 		// Resource topology = model.getResource(AbstractConverter.NAMESPACE
 		// + "manifest");
@@ -199,6 +231,10 @@ public class ManifestConverter extends AbstractConverter {
 				ManifestExtract.extractDetails(model, topology, o);
 			} else if (o.getClass().equals(GeniSliceInfo.class)) {
 				ManifestExtractExt.extractGeniSliceInfo(topology, o);
+			} else if (o.getClass().equals(Channel.class)) {
+				ManifestExtractExt.tryExtractOlChannel(topology, o);
+			} else if (o.getClass().equals(Lease.class)) {
+				ManifestExtractExt.tryExtractOlLease(topology, o);
 			} else {
 				ManifestConverter.LOG.log(Level.INFO,
 						"Found unknown extension: " + o);

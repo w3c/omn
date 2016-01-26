@@ -23,6 +23,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceCon
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Ue;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Gateway;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -124,6 +125,8 @@ public class ManifestExtract extends AbstractConverter {
 			} else if (nodeDetailObject.getClass().equals(GeniSliverInfo.class)) {
 				ManifestExtractExt.extractGeniSliverInfo(nodeDetailObject,
 						omnResource);
+			} else if (nodeDetailObject.getClass().equals(Gateway.class)) {
+				ManifestExtractExt.tryExtractGateway(omnResource, nodeDetailObject);
 			} else if (nodeDetailObject.getClass().equals(Epc.class)) {
 				ManifestExtractExt.tryExtractEpc(omnResource, nodeDetailObject);
 			} else if (nodeDetailObject.getClass().equals(AccessNetwork.class)) {

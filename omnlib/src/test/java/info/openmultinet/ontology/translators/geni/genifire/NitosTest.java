@@ -24,7 +24,10 @@ public class NitosTest {
 			IOException, XMLStreamException, MissingRspecElementException,
 			DeprecatedRspecVersionException, InvalidRspecValueException {
 
-		final String filename = "/geni/geni-fire-20151006/nitos-test.rspec.xml";
+		final String filename = "/geni/geni-fire-20151006/nitos-test-ad.rspec.xml";
+		// final String filename =
+		// "/geni/geni-fire-20151006/nitos-test-request.rspec.xml";
+
 		final String inputRspec = AbstractConverter.toString(filename);
 
 		System.out.println("Converting this input from '" + filename + "':");

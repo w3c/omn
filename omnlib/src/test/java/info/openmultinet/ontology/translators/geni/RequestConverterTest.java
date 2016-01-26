@@ -20,6 +20,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.tosca.OMN2Tosca;
@@ -34,12 +35,13 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingRSpecToGraph() throws JAXBException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		System.out.println("*******testConvertingRSpecToGraph()*******");
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_unbound2.xml");
 		final Model model = RequestConverter.getModel(rspec);
-		
+
 		final ResIterator topology = model.listResourcesWithProperty(RDF.type,
 				Omn_lifecycle.Request);
 		Assert.assertTrue("should have a topology", topology.hasNext());
@@ -47,7 +49,8 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingBoundRspec2Graph() throws JAXBException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		System.out.println("*******testConvertingBoundRspec2Graph()*******");
 		final InputStream rspec = RequestConverterTest.class
 				.getResourceAsStream("/geni/request/request_bound.xml");
@@ -68,7 +71,8 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingBoundMotorRspec2Graph() throws JAXBException,
-			InvalidModelException, MissingRspecElementException {
+			InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		System.out
 				.println("*******testConvertingBoundMotorRspec2Graph()*******");
 		final InputStream rspec = RequestConverterTest.class
@@ -91,7 +95,7 @@ public class RequestConverterTest {
 	@Test
 	public void testConvertingBoundRSpec4PhysicalNode2Graph()
 			throws JAXBException, InvalidModelException,
-			MissingRspecElementException {
+			MissingRspecElementException, InvalidRspecValueException {
 		System.out
 				.println("*******testConvertingBoundRSpec4PhysicalNode2Graph()*******");
 		final InputStream rspec = RequestConverterTest.class
@@ -112,7 +116,8 @@ public class RequestConverterTest {
 
 	@Test
 	public void testConvertingUnboundRspec2Graph() throws JAXBException,
-			InvalidModelException, IOException, MissingRspecElementException {
+			InvalidModelException, IOException, MissingRspecElementException,
+			InvalidRspecValueException {
 		System.out.println("*******testConvertingUnboundRspec2Graph()*******");
 		final String filename = "/geni/request/request_unbound.xml";
 		final InputStream inputRspec = RequestConverterTest.class
@@ -141,7 +146,8 @@ public class RequestConverterTest {
 
 	@Test
 	public void testSliverTypeEqualsRDFType() throws IOException,
-			JAXBException, InvalidModelException, MissingRspecElementException {
+			JAXBException, InvalidModelException, MissingRspecElementException,
+			InvalidRspecValueException {
 		System.out.println("*******testSliverTypeEqualsRDFType()*******");
 		final String filename = "/geni/request/request_unbound.xml";
 		final InputStream inputRspec = RequestConverterTest.class
@@ -166,7 +172,8 @@ public class RequestConverterTest {
 
 	@Test
 	public void testPaper2015Roundtrip() throws JAXBException,
-			InvalidModelException, IOException, MissingRspecElementException {
+			InvalidModelException, IOException, MissingRspecElementException,
+			InvalidRspecValueException {
 		System.out.println("*******testPaper2015Roundtrip()*******");
 		final String filename = "/geni/request/request_paper2015.xml";
 		final InputStream inputRspec = RequestConverterTest.class
@@ -197,11 +204,11 @@ public class RequestConverterTest {
 
 	@Test
 	@Ignore
-	//fixme: this test is slow!
+	// fixme: this test is slow!
 	public void testRSpecTOSCARoundtrip() throws JAXBException,
 			InvalidModelException, IOException, MultipleNamespacesException,
 			RequiredResourceNotFoundException, MultiplePropertyValuesException,
-			MissingRspecElementException {
+			MissingRspecElementException, InvalidRspecValueException {
 		System.out.println("*******testRSpecTOSCARoundtrip()*******");
 		final String filename = "/geni/request/request_paper2015.xml";
 		final InputStream inputRspec = RequestConverterTest.class

@@ -1,8 +1,5 @@
 package info.openmultinet.ontology.translators.geni.advertisement;
 
-import com.hp.hpl.jena.sparql.util.NodeFactoryExtra;
-import com.hp.hpl.jena.sparql.util.Utils;
-
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.CommonMethods;
@@ -22,6 +19,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBCont
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.GroupContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.HopContent;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
@@ -49,6 +48,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImag
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UseGroup;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
@@ -57,21 +57,16 @@ import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Osco;
 
 import java.math.BigInteger;
-import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.hp.hpl.jena.datatypes.RDFDatatype;
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
-import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-import com.hp.hpl.jena.vocabulary.XSD;
 
 /**
  * Helper methods for converting from OMN model to advertisement RSpec. These
@@ -1508,22 +1503,34 @@ public class AdSetExt extends AbstractConverter {
 			of.setComponentId(componentId);
 		}
 
-		if (resourceResource.hasProperty(Omn_lifecycle.hasComponentManagerID)) {
+		if (resourceResource.hasProperty(Omn_lifecycle.managedBy)) {
 			String componentManagerId = resourceResource
-					.getProperty(Omn_lifecycle.hasComponentManagerID)
-					.getObject().asLiteral().getString();
+					.getProperty(Omn_lifecycle.managedBy).getObject()
+					.asResource().getURI();
 			of.setComponentManagerId(componentManagerId);
 		}
 	}
 
 	public static void setOlLease(Statement omnResource, Lease of) {
-
 		Resource resourceResource = omnResource.getResource();
+		setOlLease(resourceResource, of);
+	}
+
+	public static void setOlLease(Resource resourceResource, Lease of) {
 
 		if (resourceResource.hasProperty(Omn_lifecycle.hasID)) {
 			String leaseId = resourceResource.getProperty(Omn_lifecycle.hasID)
 					.getObject().asLiteral().getString();
 			of.setLeaseID(leaseId);
+		}
+
+		if (resourceResource.hasProperty(Omn_lifecycle.hasIdRef)) {
+			String leaseIdRef = resourceResource
+					.getProperty(Omn_lifecycle.hasIdRef).getObject()
+					.asLiteral().getString();
+			if (leaseIdRef.equals(resourceResource.getURI())) {
+				of.setLeaseREF(of);
+			}
 		}
 
 		if (resourceResource.hasProperty(Omn_lifecycle.hasSliceID)) {
@@ -1567,4 +1574,104 @@ public class AdSetExt extends AbstractConverter {
 			of.setValidUntil(end);
 		}
 	}
+
+	public static void setOlLease(Statement omnResource, NodeContents geniNode) {
+		if (omnResource.getSubject().hasProperty(Omn_lifecycle.hasLease)) {
+			Resource leaseResource = omnResource.getSubject()
+					.getProperty(Omn_lifecycle.hasLease).getObject()
+					.asResource();
+			Lease leaseObject = new ObjectFactory().createLease();
+			setOlLease(leaseResource, leaseObject);
+		}
+	}
+
+	public static void setGateway(Statement omnResource, NodeContents node) {
+		if (omnResource.getResource().hasProperty(RDF.type, Fiveg.Gateway)) {
+
+			Resource resourceResource = omnResource.getResource();
+
+			Gateway gateway = new ObjectFactory().createGateway();
+
+			if (resourceResource.hasProperty(Fiveg.version)) {
+				String version = resourceResource.getProperty(Fiveg.version)
+						.getObject().asLiteral().getString();
+				gateway.setVersion(version);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.upstartOn)) {
+				String upstartOn = resourceResource
+						.getProperty(Fiveg.upstartOn).getObject().asLiteral()
+						.getString();
+				boolean upstartOnBool = Boolean.parseBoolean(upstartOn);
+				gateway.setUpstartOn(upstartOnBool);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.managementInterface)) {
+				int mgmtIntf = resourceResource
+						.getProperty(Fiveg.managementInterface).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMgmtIntf = BigInteger.valueOf(mgmtIntf);
+				gateway.setMgmtIntf(bigMgmtIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.minInterfaces)) {
+				int minNumIntf = resourceResource
+						.getProperty(Fiveg.minInterfaces).getObject()
+						.asLiteral().getInt();
+				BigInteger bigMinNumIntf = BigInteger.valueOf(minNumIntf);
+				gateway.setMinNumIntf(bigMinNumIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.ipServicesNetwork)) {
+				int netAIntf = resourceResource
+						.getProperty(Fiveg.ipServicesNetwork).getObject()
+						.asLiteral().getInt();
+				BigInteger bigNetAIntf = BigInteger.valueOf(netAIntf);
+				gateway.setNetAIntf(bigNetAIntf);
+			}
+
+			if (resourceResource.hasProperty(Fiveg.cloudManagementIP)) {
+
+				Resource ipAddress = resourceResource
+						.getProperty(Fiveg.cloudManagementIP).getObject()
+						.asResource();
+				FiveGIpContents ipAddressContents = new ObjectFactory()
+						.createFiveGIpContents();
+				gateway.setCloudMgmtGwIp(ipAddressContents);
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.address)) {
+					String address = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.address)
+							.getObject().asLiteral().getString();
+					gateway.getCloudMgmtGwIp().setAddress(address);
+					// ipAddressContents.setAddress(address);
+				}
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.netmask)) {
+					String netmask = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.netmask)
+							.getObject().asLiteral().getString();
+					gateway.getCloudMgmtGwIp().setNetmask(netmask);
+					// ipAddressContents.setNetmask(netmask);
+				}
+
+				if (ipAddress
+						.hasProperty(info.openmultinet.ontology.vocabulary.Omn_resource.type)) {
+					String type = ipAddress
+							.getProperty(
+									info.openmultinet.ontology.vocabulary.Omn_resource.type)
+							.getObject().asLiteral().getString();
+					// ipAddressContents.setType(type);
+					gateway.getCloudMgmtGwIp().setType(type);
+				}
+			}
+			node.getAnyOrRelationOrLocation().add(gateway);
+		}
+
+	}
+
 }

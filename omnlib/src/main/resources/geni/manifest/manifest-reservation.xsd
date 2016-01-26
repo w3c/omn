@@ -12,11 +12,6 @@
 			<xs:attribute name="leaseREF" type="xs:IDREF" />
 		</xs:complexType>
 	</xs:element>
-	   <xs:element name="lease_ref">
-        <xs:complexType>
-            <xs:attribute name="id_ref" type="xs:IDREF" />
-        </xs:complexType>
-    </xs:element>
 	<xs:element name="channel">
 		<xs:complexType>
 			<xs:attribute name="component_manager_id" />

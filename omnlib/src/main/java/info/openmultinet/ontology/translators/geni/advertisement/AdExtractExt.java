@@ -16,6 +16,8 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ENodeBCont
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.EpcIpContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Fd;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.FiveGIpContents;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Gateway;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Lease;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Monitoring;
@@ -32,6 +34,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeDiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.UeHardwareTypeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.WaitSpec;
+import info.openmultinet.ontology.vocabulary.Fiveg;
 import info.openmultinet.ontology.vocabulary.Omn;
 import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_domain_wireless;
@@ -54,7 +57,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -553,7 +555,7 @@ public class AdExtractExt extends AbstractConverter {
 		try {
 			if (interfaceObject.toString().contains("emulab:interface")) {
 				AdExtractExt.LOG
-						.info("emulab:interface extension not yet supported");
+						.fine("emulab:interface extension not yet supported");
 			}
 		} catch (final ClassCastException e) {
 			AdExtractExt.LOG.finer(e.getMessage());
@@ -1517,28 +1519,50 @@ public class AdExtractExt extends AbstractConverter {
 			throws InvalidRspecValueException {
 		try {
 			Channel channel = (Channel) rspecObject;
-			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+
+			String uuid;
+			String componentId = channel.getComponentId();
+			if (componentId != null
+					&& (AbstractConverter.isUrl(componentId) || AbstractConverter
+							.isUrn(componentId))) {
+				uuid = componentId;
+			} else {
+				uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			}
+
 			Resource omnChannel = omnNode.getModel().createResource(uuid);
 			omnChannel.addProperty(RDF.type, Omn_domain_wireless.Channel);
 			omnNode.addProperty(Omn.hasComponent, omnChannel);
 
 			if (channel.getFrequency() != null) {
 				String frequency = channel.getFrequency();
-				Individual frequencyIndividual = CommonMethods
-						.getFrequency(frequency);
+				Resource frequencyIndividual = CommonMethods.getFrequency(
+						frequency, omnNode.getModel());
 
 				omnChannel.addProperty(Omn_domain_wireless.usesFrequency,
 						frequencyIndividual);
 			}
 
-			if (channel.getComponentId() != null) {
+			if (componentId != null) {
 				omnChannel.addProperty(Omn_lifecycle.hasComponentID,
-						channel.getComponentId());
+						componentId);
 			}
 
 			if (channel.getComponentManagerId() != null) {
-				omnChannel.addProperty(Omn_lifecycle.hasComponentManagerID,
-						channel.getComponentId());
+
+				String managerId = channel.getComponentManagerId();
+				Resource managedByResource = null;
+				if (AbstractConverter.isUrl(managerId)
+						|| AbstractConverter.isUrn(managerId)) {
+					managedByResource = omnChannel.getModel().createResource(
+							managerId);
+				} else {
+					String uuid1 = "urn:uuid:" + UUID.randomUUID().toString();
+					managedByResource = omnChannel.getModel().createResource(
+							uuid1);
+				}
+				omnChannel.addProperty(Omn_lifecycle.managedBy,
+						managedByResource);
 			}
 
 			if (channel.getComponentName() != null) {
@@ -1563,7 +1587,9 @@ public class AdExtractExt extends AbstractConverter {
 
 	public static void tryExtractOlLease(Object rspecObject, Resource omnNode) {
 		try {
+
 			Lease lease = (Lease) rspecObject;
+
 			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
 			Resource omnLease = omnNode.getModel().createResource(uuid);
 			omnLease.addProperty(RDF.type, Omn_lifecycle.Lease);
@@ -1586,10 +1612,13 @@ public class AdExtractExt extends AbstractConverter {
 
 			// TODO:
 			// <xs:attribute name="leaseREF" type="xs:IDREF" />
-			// if (lease.getLeaseREF() != null) {
-			// Object leaseIdRef = lease.getLeaseREF();
-			// omnLease.addLiteral(Omn_lifecycle.hasIdRef, leaseIdRef);
-			// }
+			if (lease.getLeaseREF() != null) {
+				Object leaseIdRef = lease.getLeaseREF();
+				if (leaseIdRef.equals(lease)) {
+					omnLease.addLiteral(Omn_lifecycle.hasIdRef,
+							omnLease.getURI());
+				}
+			}
 
 			if (lease.getValidFrom() != null) {
 				XMLGregorianCalendar from = lease.getValidFrom();
@@ -1602,6 +1631,65 @@ public class AdExtractExt extends AbstractConverter {
 				Calendar dateTime = until.toGregorianCalendar();
 				omnLease.addLiteral(Omn_lifecycle.expirationTime, dateTime);
 			}
+
+		} catch (final ClassCastException e) {
+			AdExtractExt.LOG.finer(e.getMessage());
+		}
+
+	}
+
+	public static void tryExtractGateway(Resource node, Object rspecObject) {
+		try {
+			Gateway gateway = (Gateway) rspecObject;
+
+			node.addProperty(RDF.type, Fiveg.Gateway);
+
+			String version = gateway.getVersion();
+			if (version != null && version != "") {
+				node.addProperty(Fiveg.version, version);
+			}
+
+			Boolean upstartOn = gateway.isUpstartOn();
+			if (upstartOn != null) {
+				node.addLiteral(Fiveg.upstartOn, upstartOn);
+			}
+
+			BigInteger mgmtIntf = gateway.getMgmtIntf();
+			if (mgmtIntf != null) {
+				node.addLiteral(Fiveg.managementInterface, mgmtIntf);
+			}
+
+			BigInteger minNumIntf = gateway.getMinNumIntf();
+			if (minNumIntf != null) {
+				node.addLiteral(Fiveg.minInterfaces, minNumIntf);
+			}
+
+			BigInteger netAIntf = gateway.getNetAIntf();
+			if (netAIntf != null) {
+				node.addLiteral(Fiveg.ipServicesNetwork, netAIntf);
+			}
+
+			FiveGIpContents cloudIpAddress = gateway.getCloudMgmtGwIp();
+			String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+			Resource ipResource = node.getModel().createResource(uuid);
+			ipResource.addProperty(RDF.type, Omn_resource.IPAddress);
+
+			String address = cloudIpAddress.getAddress();
+			if (address != null && address != "") {
+				ipResource.addProperty(Omn_resource.address, address);
+			}
+
+			String netmask = cloudIpAddress.getNetmask();
+			if (netmask != null && netmask != "") {
+				ipResource.addProperty(Omn_resource.netmask, netmask);
+			}
+
+			String type = cloudIpAddress.getType();
+			if (type != null && type != "") {
+				ipResource.addProperty(Omn_resource.type, type);
+			}
+
+			node.addProperty(Fiveg.cloudManagementIP, ipResource);
 
 		} catch (final ClassCastException e) {
 			AdExtractExt.LOG.finer(e.getMessage());

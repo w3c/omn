@@ -10,7 +10,10 @@ import java.net.URI;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.OWL2;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class CommonMethods {
 
@@ -469,21 +472,25 @@ public class CommonMethods {
 		return hasOscoProperty;
 	}
 
-	public static Individual getFrequency(String frequency)
+	public static Resource getFrequency(String frequency, Model model)
 			throws InvalidRspecValueException {
-		Individual frequencyIndividual = null;
+		Resource frequencyIndividual = null;
 		if (frequency.toLowerCase().trim().equals("2.412ghz")) {
 			frequencyIndividual = Omn_domain_wireless.GHZ;
 		} else if (frequency.toLowerCase().equals("2.417ghz")) {
 			frequencyIndividual = Omn_domain_wireless.GHZ_INSTANCE;
 		} else if (frequency.matches("[0-9]+.[0-9]+[gG][hH][zZ]")) {
-			frequencyIndividual = Omn_domain_wireless.Frequency.getOntModel()
-					.createIndividual(
+			frequencyIndividual = model.createResource(
 							"http://open-multinet.info/ontology/omn_wireless.owl#"
-									+ frequency, Omn_domain_wireless.Frequency);
+									+ frequency);
 		} else {
 			throw new InvalidRspecValueException("Frequency");
 		}
+		
+		frequencyIndividual.addProperty(RDF.type,
+				Omn_domain_wireless.Frequency);
+		frequencyIndividual.addProperty(RDF.type, OWL2.NamedIndividual);
+		
 		return frequencyIndividual;
 	}
 

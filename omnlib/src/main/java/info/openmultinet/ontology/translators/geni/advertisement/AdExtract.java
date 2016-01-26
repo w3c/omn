@@ -86,12 +86,12 @@ public class AdExtract extends AbstractConverter {
 				URI uri = URI.create(content.getComponentId());
 				interfaceResource.addLiteral(Omn_lifecycle.hasComponentID, uri);
 			}
-			
+
 			if (content.getComponentName() != null) {
 				String componentName = content.getComponentName();
-				interfaceResource.addLiteral(Omn_lifecycle.hasComponentName, componentName);
+				interfaceResource.addLiteral(Omn_lifecycle.hasComponentName,
+						componentName);
 			}
-
 
 			if (content.getRole() != null) {
 				interfaceResource.addProperty(Omn_lifecycle.hasRole,
@@ -313,6 +313,7 @@ public class AdExtract extends AbstractConverter {
 
 			for (Object rspecNodeObject : rspecNode
 					.getAnyOrRelationOrLocation()) {
+
 				tryExtractCloud(rspecNodeObject, omnNode);
 				tryExtractHardwareType(rspecNodeObject, omnNode);
 				tryExtractSliverType(rspecNodeObject, omnNode);
@@ -326,9 +327,9 @@ public class AdExtract extends AbstractConverter {
 						omnNode);
 				AdExtractExt.tryExtractAccessNetwork(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractUe(omnNode, rspecNodeObject);
+				AdExtractExt.tryExtractGateway(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractEpc(omnNode, rspecNodeObject);
 				AdExtractExt.tryExtractAcs(omnNode, rspecNodeObject);
-
 			}
 
 			topology.addProperty(Omn.hasResource, omnNode);

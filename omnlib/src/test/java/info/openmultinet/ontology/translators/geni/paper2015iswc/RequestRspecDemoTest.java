@@ -2,6 +2,7 @@ package info.openmultinet.ontology.translators.geni.paper2015iswc;
 
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
+import info.openmultinet.ontology.exceptions.InvalidRspecValueException;
 import info.openmultinet.ontology.exceptions.MissingRspecElementException;
 import info.openmultinet.ontology.translators.AbstractConverter;
 import info.openmultinet.ontology.translators.geni.RequestConverter;
@@ -22,7 +23,8 @@ public class RequestRspecDemoTest {
 
 	@Test
 	public void testLoginRoundtrip() throws JAXBException,
-			InvalidModelException, IOException, XMLStreamException, MissingRspecElementException {
+			InvalidModelException, IOException, XMLStreamException,
+			MissingRspecElementException, InvalidRspecValueException {
 		long start;
 		String inputFile = "/omn/paper2015iswc/request.xml";
 

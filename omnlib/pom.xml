@@ -203,6 +203,7 @@
 						<include>import/wgs84.ttl</include>
 						<include>ontologies/osco.ttl</include>
 						<include>ontologies/epc.ttl</include>
+						<include>ontologies/fiveg.ttl</include>
 						<include>ontologies/acs.ttl</include>
 						<!-- include>src/test/resources/ontologies/osco.ttl</include -->
 					</includes>

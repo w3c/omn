@@ -73,3 +73,11 @@
                       rdfs:label "SFA SA"@en ;
 
                       rdfs:subClassOf omn:Service .
+
+:SCSService rdf:type owl:Class ;
+
+                      rdfs:comment "SFA Stitching Computation Service"@en ;
+
+                      rdfs:label "SFA SCS"@en ;
+
+                      rdfs:subClassOf omn:Service .

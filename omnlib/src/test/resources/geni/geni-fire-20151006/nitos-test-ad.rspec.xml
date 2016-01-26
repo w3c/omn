@@ -1,0 +1,21 @@
+<!-- Have changed ol:lease 'id' to lease_id as per XDS file, deleted attribute 
+	'monitored' in the node element -->
+<rspec expires="2015-10-06T17:50:59+03:00" generated="2015-10-06T17:40:59+03:00"
+	type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+	xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/ad-reservation.xsd">
+	<ol:lease slice_id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
+		valid_from="2015-10-07T12:00:00Z" valid_until="2015-10-07T16:00:00Z"
+		uuid="318da82f-4553-4425-857b-3c196b47cc6d" leaseID="testid" leaseREF="testid" />
+	<node component_id="urn:publicid:IDN+omf:nitos.outdoor+node+node004"
+		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+		component_name="node004" exclusive="true">
+		<interface component_id="urn:publicid:IDN+omf:nitos+interface+node004:if1"
+			component_name="node004:if1" role="experimental" />
+		<ol:lease_ref id_ref="testid" />
+	</node>
+	<ol:channel component_id="urn:publicid:IDN+omf:nitos+channel+2"
+		component_manager_id="urn:publicid:IDN+omf:nitos+authority+cm"
+		component_name="2" frequency="25.4317GHz" />
+</rspec>
