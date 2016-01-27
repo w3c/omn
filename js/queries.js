@@ -132,12 +132,12 @@ FILTER( (37.971472-xsd:float(?lat1))*( 37.971472-xsd:float(?lat1))+( 23.726633-x
     return false;
   });
   findStorage=prefixes+`
-SELECT DISTINCT ?node WHERE {
+SELECT DISTINCT ?node ?size WHERE {
 ?node rdf:type omnres:Node.
 ?node omn:hasComponent ?storage.
 ?storage rdf:type  omncomp:StorageComponent. 
-?storage dbpedia:storage ?value1. 
-} ORDER BY DESC(?value1) LIMIT 3`
+?storage dbpedia:storage ?size. 
+} ORDER BY DESC(?size) LIMIT 100`
 
 
 
