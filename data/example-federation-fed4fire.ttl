@@ -255,7 +255,16 @@ schema:WebSite rdf:type owl:Class .
                                        <http://lod.fed4fire.eu/id/eurescom.eu>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "EURESCOM" .
                                        <http://lod.fed4fire.eu/id/fokus.fraunhofer.de>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "Fraunhofer FOKUS" .
                                        <http://lod.fed4fire.eu/id/i2cat.net>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "i2CAT" .
-                                       <http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "iMinds" .
+
+<http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ; 
+           omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; 
+           rdfs:label "iMinds" ; 
+           omn:hasService
+                           <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm>,
+                           <urn:publicid:IDN+amazon-edge.ilabt.iminds.be+authority+cm> .
+
                                        <http://lod.fed4fire.eu/id/inria.fr>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "INRIA" .
                                        <http://lod.fed4fire.eu/id/kent.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "UKent" .
                                        <http://lod.fed4fire.eu/id/lancaster.ac.uk>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "ULANC" .
@@ -355,8 +364,6 @@ schema:WebSite rdf:type owl:Class .
                             <urn:publicid:IDN+utah.cloudlab.us+authority+cm> ,
                             <urn:publicid:IDN+utahddc.geniracks.net+authority+cm> ,
                             <urn:publicid:IDN+wisc.cloudlab.us+authority+cm>,
-                           <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm>,
-                           <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm>,
                            <urn:publicid:IDN+emulab.net+authority+cm>,
                            <urn:publicid:IDN+ple:ibbtple+authority+cm>,
                            <urn:publicid:IDN+omf:netmode+authority+cm>,
@@ -364,7 +371,6 @@ schema:WebSite rdf:type owl:Class .
                            <urn:publicid:IDN+omf+authority+sa>,
                            <urn:publicid:IDN+smartsantander+authority+cm>,
                            <urn:publicid:IDN+emulab.larc.usp.br+authority+cm>,
-                           <urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm>,
                            <urn:publicid:IDN+instageni.osu.edu+authority+cm>,
                            <urn:publicid:IDN+ion.internet2.edu+authority+am>,
                            <urn:publicid:IDN+203.255.254.100+authority+cm>,
@@ -455,7 +461,6 @@ schema:WebSite rdf:type owl:Class .
                            <urn:publicid:IDN+instageni.umkc.edu+authority+cm>,
                            <urn:publicid:IDN+instageni.iu.edu+authority+cm>,
                            <urn:publicid:IDN+emulab.kreonet.net+authority+cm>,
-                           <urn:publicid:IDN+amazon-edge.ilabt.iminds.be+authority+cm>,
                            <urn:publicid:IDN+sfa.bonfire.eu+authority+am>,
                            <urn:publicid:IDN+federation.trescimo.eu+authority+root>,
                            <urn:publicid:IDN+demo.fiteagle.org+authority+root> .
@@ -686,6 +691,14 @@ schema:WebSite rdf:type owl:Class .
                                                            rdfs:label "GENI AM v3 API" ;
 
                                                            omn:hasEndpoint <http://fuseco.fokus.fraunhofer.de/api/sfa/am/v3> .
+
+<urn:publicid:IDN+wall2.ilabt.iminds.be+authority+cm> rdf:type omn-domain-geni-fire:AMService ,
+                                                                    owl:NamedIndividual ;
+
+                                                           rdfs:label "GENI AM v3 API" ;
+omn:isSeriviceOf <http://lod.fed4fire.eu/id/iminds.be> ;
+
+                                                           omn:hasEndpoint <https://www.wall2.ilabt.iminds.be:12369/protogeni/xmlrpc/am/3.0> .
 
 
 
