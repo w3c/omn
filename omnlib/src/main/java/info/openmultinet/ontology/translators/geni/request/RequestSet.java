@@ -21,6 +21,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Position3D;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
@@ -30,6 +31,7 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
@@ -147,6 +149,37 @@ public class RequestSet extends AbstractConverter {
 					location.getOtherAttributes().put(key, value);
 				}
 
+
+				Position3D position3d = null;
+				if (omnRes.hasProperty(Omn_resource.x)
+						|| omnRes.hasProperty(Omn_resource.y)
+						|| omnRes.hasProperty(Omn_resource.z)) {
+					position3d = of.createPosition3D();
+
+					if (omnRes.hasProperty(Omn_resource.x)) {
+						double x = omnRes.getProperty(Omn_resource.x).getObject()
+								.asLiteral().getDouble();
+						BigDecimal xBigDecimal = BigDecimal.valueOf(x);
+						position3d.setX(xBigDecimal);
+					}
+					if (omnRes.hasProperty(Omn_resource.y)) {
+						double y = omnRes.getProperty(Omn_resource.y).getObject()
+								.asLiteral().getDouble();
+						BigDecimal yBigDecimal = BigDecimal.valueOf(y);
+						position3d.setY(yBigDecimal);
+					}
+					if (omnRes.hasProperty(Omn_resource.z)) {
+						double z = omnRes.getProperty(Omn_resource.z).getObject()
+								.asLiteral().getDouble();
+						BigDecimal zBigDecimal = BigDecimal.valueOf(z);
+						position3d.setZ(zBigDecimal);
+					}
+				}
+
+				if (position3d != null) {
+					location.getAny().add(position3d);
+				}
+				
 				geniNode.getAnyOrRelationOrLocation().add(
 						of.createLocation(location));
 			}

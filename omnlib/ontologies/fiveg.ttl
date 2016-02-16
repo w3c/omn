@@ -1,6 +1,5 @@
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix osco:  <http://opensdncore.org/ontology/> .
@@ -16,27 +15,27 @@
 @prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
 @prefix : <http://open-multinet.info/ontology/resource/fiveg#> .
 
-<http://open-multinet.info/ontology/resource/fiveg> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G NFVs."@en ;
+<http://open-multinet.info/ontology/resource/fiveg> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
 
                                          rdf:type owl:Ontology, 
 
                                          voaf:Vocabulary ;
                                          
-                                         rdfs:label "omn-resource/fiveg"@en ;
+                                         rdfs:label "omn-resource-fiveg"@en ;
                                          
-                                         vann:preferredNamespacePrefix "omn-resource/fiveg"^^xsd:string ;
+                                         vann:preferredNamespacePrefix "omn-resource-fiveg"^^xsd:string ;
 
                                          vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/fiveg#> ;
                                         
                                          dc:date "2015-12-01"^^xsd:date ;
                                          
-                                         dcterms:modified "2015-12-30"^^xsd:date ;
+                                         dcterms:modified "2016-02-07"^^xsd:date ;
                                          
-                                         owl:versionInfo "2015-12-30"^^xsd:string ;
+                                         owl:versionInfo "2016-02-07"^^xsd:string ;
                                          
                                          dc:title "5G ontology"@en ;
                                          
-                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G NFVs.."@en ;
+                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
                                          
                                          dc:creator "Robyn Loughnane" ;
                                          
@@ -47,26 +46,6 @@
                                          dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
 
                                          dc:contributor <mailto:loughnane@campus.tu-berlin.de> .
-
-
-
-
-
-
-
-
-
-
-
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
 
 
 
@@ -568,8 +547,6 @@
 
 
 
-
-
 ###  http://open-multinet.info/ontology/resource/fiveg#oscoId
 
 :oscoId  a    owl:DatatypeProperty ;
@@ -625,7 +602,6 @@
         rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:integer .
-
 
 
 
@@ -1015,7 +991,6 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-
 ###  http://open-multinet.info/ontology/resource/fiveg#FiveGAdapter
 
 :FiveGAdapter rdf:type owl:Class ;
@@ -1043,7 +1018,6 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-
 ###  http://open-multinet.info/ontology/omn-resource#IPAddress
 
 omn-resource:IPAddress rdf:type owl:Class .
@@ -1055,10 +1029,6 @@ omn-resource:IPAddress rdf:type owl:Class .
 omn:Adapter rdf:type owl:Class .
 
 
-
 ###  http://open-multinet.info/ontology/omn-lifecycle#Adapter
 
 omn-lifecycle:state rdf:type owl:Class .
-
-
-

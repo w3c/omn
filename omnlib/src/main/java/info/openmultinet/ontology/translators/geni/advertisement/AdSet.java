@@ -18,6 +18,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeConten
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.ObjectFactory;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Position3D;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RSpecContents;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.RspecOpstate;
 import info.openmultinet.ontology.vocabulary.Geo;
@@ -28,12 +29,14 @@ import info.openmultinet.ontology.vocabulary.Omn_federation;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -391,6 +394,36 @@ public class AdSet extends AbstractConverter {
 				String value = omnRes.getProperty(Omn_lifecycle.hasID)
 						.getString();
 				location.getOtherAttributes().put(key, value);
+			}
+
+			Position3D position3d = null;
+			if (omnRes.hasProperty(Omn_resource.x)
+					|| omnRes.hasProperty(Omn_resource.y)
+					|| omnRes.hasProperty(Omn_resource.z)) {
+				position3d = of.createPosition3D();
+
+				if (omnRes.hasProperty(Omn_resource.x)) {
+					double x = omnRes.getProperty(Omn_resource.x).getObject()
+							.asLiteral().getDouble();
+					BigDecimal xBigDecimal = BigDecimal.valueOf(x);
+					position3d.setX(xBigDecimal);
+				}
+				if (omnRes.hasProperty(Omn_resource.y)) {
+					double y = omnRes.getProperty(Omn_resource.y).getObject()
+							.asLiteral().getDouble();
+					BigDecimal yBigDecimal = BigDecimal.valueOf(y);
+					position3d.setY(yBigDecimal);
+				}
+				if (omnRes.hasProperty(Omn_resource.z)) {
+					double z = omnRes.getProperty(Omn_resource.z).getObject()
+							.asLiteral().getDouble();
+					BigDecimal zBigDecimal = BigDecimal.valueOf(z);
+					position3d.setZ(zBigDecimal);
+				}
+			}
+
+			if (position3d != null) {
+				location.getAny().add(position3d);
 			}
 
 			geniNode.getAnyOrRelationOrLocation().add(

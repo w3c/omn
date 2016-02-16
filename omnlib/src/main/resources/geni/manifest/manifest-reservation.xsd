@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified" targetNamespace="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
-	xmlns:rspec="http://nitlab.inf.uth.gr/schema/sfa/rspec/1">
+    elementFormDefault="qualified" targetNamespace="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
+    xmlns:rspec="http://nitlab.inf.uth.gr/schema/sfa/rspec/1">
 	<xs:element name="lease">
 		<xs:complexType>
 			<xs:attribute name="leaseID" type="xs:ID" />
@@ -18,6 +17,13 @@
 			<xs:attribute name="component_id" />
 			<xs:attribute name="component_name" />
 			<xs:attribute name="frequency" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="position_3d">
+		<xs:complexType>
+			<xs:attribute name="x" type="xs:decimal" />
+			<xs:attribute name="y" type="xs:decimal" />
+			<xs:attribute name="z" type="xs:decimal" />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

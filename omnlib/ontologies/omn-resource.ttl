@@ -414,6 +414,55 @@
              rdfs:range xsd:string .
 
 
+
+###  http://open-multinet.info/ontology/omn-resource#x
+
+:x rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "X coordinate"@en ;
+
+             rdfs:comment "X coordinate"@en ;
+
+             rdfs:seeAlso "http://nitlab.inf.uth.gr/schema/sfa/rspec/1"@en ;
+             
+             rdfs:domain :Location ;
+             
+             rdfs:range xsd:decimal .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#y
+
+:y rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "Y coordinate"@en ;
+
+             rdfs:comment "Y coordinate"@en ;
+
+             rdfs:seeAlso "http://nitlab.inf.uth.gr/schema/sfa/rspec/1"@en ;
+             
+             rdfs:domain :Location ;
+             
+             rdfs:range xsd:decimal .
+
+
+
+###  http://open-multinet.info/ontology/omn-resource#z
+
+:z rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "Z coordinate"@en ;
+
+             rdfs:comment "Z coordinate"@en ;
+
+             rdfs:seeAlso "http://nitlab.inf.uth.gr/schema/sfa/rspec/1"@en ;
+             
+             rdfs:domain :Location ;
+             
+             rdfs:range xsd:decimal .
+
+
+
 ###  http://open-multinet.info/ontology/omn-resource#macAddress
 
 :macAddress rdf:type owl:DatatypeProperty ;

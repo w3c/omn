@@ -18,6 +18,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeConten
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.NodeContents.SliverType.DiskImage;
 import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Pc;
+import info.openmultinet.ontology.translators.geni.jaxb.advertisement.Position3D;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
 import info.openmultinet.ontology.vocabulary.Omn;
@@ -25,6 +26,7 @@ import info.openmultinet.ontology.vocabulary.Omn_domain_pc;
 import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
@@ -409,6 +411,22 @@ public class AdExtract extends AbstractConverter {
 						}
 					}
 				}
+
+				List<Object> locationSubElements = location.getAny();
+				for (Object object : locationSubElements) {
+					if (object instanceof Position3D) {
+
+						Position3D position3d = (Position3D) object;
+						BigDecimal x = position3d.getX();
+						BigDecimal y = position3d.getY();
+						BigDecimal z = position3d.getZ();
+
+						locationResource.addLiteral(Omn_resource.x, x);
+						locationResource.addLiteral(Omn_resource.y, y);
+						locationResource.addLiteral(Omn_resource.z, z);
+					}
+				}
+
 				omnNode.addProperty(Omn_resource.hasLocation, locationResource);
 			}
 		} catch (final ClassCastException e) {

@@ -8,21 +8,40 @@
 			<xs:attribute name="uuid" />
 			<xs:attribute name="slice_id" />
 			<xs:attribute name="valid_from" type="xs:dateTime" />
+			<xs:attribute name="start_time" type="xs:long" />
+			<xs:attribute name="duration" type="xs:long" />
 			<xs:attribute name="valid_until" type="xs:dateTime" />
 			<xs:attribute name="leaseREF" type="xs:IDREF" />
 		</xs:complexType>
 	</xs:element>
-	   <xs:element name="lease_ref">
-        <xs:complexType>
-            <xs:attribute name="id_ref" type="xs:IDREF" />
-        </xs:complexType>
-    </xs:element>
+	<xs:element name="lease_ref">
+		<xs:complexType>
+			<xs:attribute name="id_ref" type="xs:IDREF" />
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="channel">
 		<xs:complexType>
 			<xs:attribute name="component_manager_id" />
 			<xs:attribute name="component_id" />
 			<xs:attribute name="component_name" />
 			<xs:attribute name="frequency" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="position_3d">
+		<xs:complexType>
+			<xs:attribute name="x" type="xs:decimal" />
+			<xs:attribute name="y" type="xs:decimal" />
+			<xs:attribute name="z" type="xs:decimal" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="granularity">
+		<xs:complexType>
+			<xs:attribute name="grain" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="node">
+		<xs:complexType>
+			<xs:attribute name="component_id" />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

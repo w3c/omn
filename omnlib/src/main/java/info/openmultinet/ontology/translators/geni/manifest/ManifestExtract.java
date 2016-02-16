@@ -21,6 +21,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.LinkType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LocationContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Position3D;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Ue;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.Gateway;
@@ -32,13 +33,17 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -126,7 +131,8 @@ public class ManifestExtract extends AbstractConverter {
 				ManifestExtractExt.extractGeniSliverInfo(nodeDetailObject,
 						omnResource);
 			} else if (nodeDetailObject.getClass().equals(Gateway.class)) {
-				ManifestExtractExt.tryExtractGateway(omnResource, nodeDetailObject);
+				ManifestExtractExt.tryExtractGateway(omnResource,
+						nodeDetailObject);
 			} else if (nodeDetailObject.getClass().equals(Epc.class)) {
 				ManifestExtractExt.tryExtractEpc(omnResource, nodeDetailObject);
 			} else if (nodeDetailObject.getClass().equals(AccessNetwork.class)) {
@@ -358,27 +364,79 @@ public class ManifestExtract extends AbstractConverter {
 	}
 
 	private static void extractLocation(JAXBElement<?> nodeDetailElement,
-			Resource omnResource) {
+			Resource omnResource) throws MissingRspecElementException {
 		// check if type is location
 		if (nodeDetailElement.getDeclaredType().equals(LocationContents.class)) {
 
 			// get value of the element
-			LocationContents locationContents = (LocationContents) nodeDetailElement
+			LocationContents location = (LocationContents) nodeDetailElement
 					.getValue();
-			if (locationContents.getLatitude() != null
-					&& !locationContents.getLatitude().equals("")) {
-				omnResource
-						.addProperty(Geo.lat, locationContents.getLatitude());
-			}
-			if (locationContents.getLatitude() != null
-					&& !locationContents.getLatitude().equals("")) {
-				omnResource.addProperty(Geo.long_,
-						locationContents.getLongitude());
-			}
 
-			// country is required
-			String country = locationContents.getCountry();
-			omnResource.addProperty(Geonames.countryCode, country);
+			if (location != null) {
+
+				String uuid = "urn:uuid:" + UUID.randomUUID().toString();
+				Resource locationResource = omnResource.getModel()
+						.createResource(uuid);
+				locationResource.addProperty(RDF.type, Omn_resource.Location);
+
+				String latitude = location.getLatitude();
+				String longitude = location.getLongitude();
+				String country = location.getCountry();
+
+				// country is required, when location is specified
+				if (country == null) {
+					throw new MissingRspecElementException(
+							"LocationContents > country");
+				} else {
+					locationResource.addProperty(Geonames.countryCode, country);
+				}
+
+				if (latitude != null) {
+					locationResource.addProperty(Geo.lat, latitude);
+				}
+				if (longitude != null) {
+					locationResource.addProperty(Geo.long_, longitude);
+				}
+
+				Map<QName, String> otherLocationAttributes = location
+						.getOtherAttributes();
+				for (Entry<QName, String> entry : otherLocationAttributes
+						.entrySet()) {
+
+					QName key = entry.getKey();
+					String value = entry.getValue();
+
+					if (key.getNamespaceURI().equals(
+							"http://open-multinet.info/location")) {
+
+						if (key.getLocalPart().equals("id")) {
+							locationResource.addProperty(Omn_lifecycle.hasID,
+									value);
+						} else if (key.getLocalPart().equals("name")) {
+							locationResource.addProperty(RDFS.label, value);
+						}
+					}
+				}
+
+				List<Object> locationSubElements = location.getAny();
+				for (Object object : locationSubElements) {
+					System.out.println(object.getClass());
+
+					if (object instanceof Position3D) {
+						Position3D position3d = (Position3D) object;
+						BigDecimal x = position3d.getX();
+						BigDecimal y = position3d.getY();
+						BigDecimal z = position3d.getZ();
+
+						locationResource.addLiteral(Omn_resource.x, x);
+						locationResource.addLiteral(Omn_resource.y, y);
+						locationResource.addLiteral(Omn_resource.z, z);
+					}
+				}
+
+				omnResource.addProperty(Omn_resource.hasLocation,
+						locationResource);
+			}
 		}
 	}
 
