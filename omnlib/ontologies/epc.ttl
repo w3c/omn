@@ -441,12 +441,12 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#rateCode
+###  http://open-multinet.info/ontology/resource/epc#rateCodeUp
 
-:rateCode rdf:type owl:DatatypeProperty ,
+:rateCodeUp rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
 
-                rdfs:label "rate code"@en ;
+                rdfs:label "rate code for upstream"@en ;
                 
                 rdfs:seeAlso <http://www.flex-project.eu> ;
                 
@@ -456,6 +456,22 @@
                 
                 rdfs:range xsd:integer .
 
+
+
+###  http://open-multinet.info/ontology/resource/epc#rateCodeDown
+
+:rateCodeDown rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+
+                rdfs:label "rate code for downstream"@en ;
+
+                rdfs:seeAlso <http://www.flex-project.eu> ;
+
+                rdfs:comment "rate code (0 => 0, 1 => 500, 2 => 1000, 3 => 10000, 4 => 100000, 5 => 1000000)"@en ;
+
+                rdfs:domain :PDNGateway ;
+
+                rdfs:range xsd:integer .
 
 
 ###  http://open-multinet.info/ontology/resource/epc#servingGateway
