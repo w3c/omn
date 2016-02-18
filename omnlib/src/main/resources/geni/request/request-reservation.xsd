@@ -27,4 +27,11 @@
 			<xs:attribute name="frequency" />
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="position_3d">
+        <xs:complexType>
+            <xs:attribute name="x" type="xs:decimal" />
+            <xs:attribute name="y" type="xs:decimal" />
+            <xs:attribute name="z" type="xs:decimal" />
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

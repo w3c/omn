@@ -1,0 +1,47 @@
+<!-- Have changed ol:lease 'id' to lease_id as per XDS file, deleted attribute 
+	'monitored' in the node element -->
+<rspec expires="2015-10-06T17:50:59+03:00" generated="2015-10-06T17:40:59+03:00"
+	type="advertisement" xmlns="http://www.geni.net/resources/rspec/3"
+	xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1" xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/ad-reservation.xsd">
+  <node component_manager_id="urn:publicid:IDN+iotlab+authority+sa" component_id="urn:publicid:IDN+iotlab+node+a8-3.rocquencourt.iot-lab.info" exclusive="true" component_name="a8-3.rocquencourt.iot-lab.info">
+    <hardware_type name="a8:at86rf231"/>
+    <location country="France"/>
+    <ol:granularity grain="30"/>
+    <available now="false"/>
+    <sliver_type name="plab-vserver"/>
+  </node>
+  <node component_manager_id="urn:publicid:IDN+iotlab+authority+sa" component_id="urn:publicid:IDN+iotlab+node+a8-5.rocquencourt.iot-lab.info" exclusive="true" component_name="a8-5.rocquencourt.iot-lab.info">
+    <hardware_type name="a8:at86rf231"/>
+    <location country="France"/>
+    <ol:granularity grain="30"/>
+    <available now="false"/>
+    <sliver_type name="plab-vserver"/>
+  </node>
+  <node component_manager_id="urn:publicid:IDN+iotlab+authority+sa" component_id="urn:publicid:IDN+iotlab+node+m3-366.grenoble.iot-lab.info" exclusive="true" component_name="m3-366.grenoble.iot-lab.info">
+    <hardware_type name="m3:at86rf231"/>
+    <location country="France"/>
+    <ol:granularity grain="30"/>
+    <available now="false"/>
+  </node>
+  <node component_manager_id="urn:publicid:IDN+iotlab+authority+sa" component_id="urn:publicid:IDN+iotlab+node+a8-4.rocquencourt.iot-lab.info" exclusive="true" component_name="wsn430-113.euratech.iot-lab.info">
+    <hardware_type name="wsn430:cc2420"/>
+    <location country="France"/>
+    <ol:granularity grain="30"/>
+    <available now="true"/>
+  </node>
+  <node component_manager_id="urn:publicid:IDN+iotlab+authority+sa" component_id="urn:publicid:IDN+iotlab+node+wsn430-103.rennes.iot-lab.info" exclusive="true" component_name="wsn430-103.rennes.iot-lab.info">
+    <hardware_type name="wsn430:cc2420"/>
+    <location country="France"/>
+    <ol:granularity grain="30"/>
+    <available now="false"/>
+  </node>
+  <ol:lease slice_id="urn:publicid:IDN+onelab:upmc:mobicom+slice+exper_mobicom" start_time="1454580076" duration="60">
+    <ol:node component_id="urn:publicid:IDN+iotlab+node+m3-366.grenoble.iot-lab.info"/>
+  </ol:lease>
+  <ol:lease slice_id="urn:publicid:IDN+iotlab+slice+amdouni_slice" start_time="1454491946" duration="50000">
+    <ol:node component_id="urn:publicid:IDN+iotlab+node+a8-3.rocquencourt.iot-lab.info"/>
+    <ol:node component_id="urn:publicid:IDN+iotlab+node+a8-5.rocquencourt.iot-lab.info"/>
+  </ol:lease>
+</rspec>

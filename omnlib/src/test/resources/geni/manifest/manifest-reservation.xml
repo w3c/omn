@@ -1,7 +1,7 @@
 <rspec generated="2015-12-17T20:59:41+02:00" type="manifest"
 	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ol="http://nitlab.inf.uth.gr/schema/sfa/rspec/1"
 	xmlns:omf="http://schema.mytestbed.net/sfa/rspec/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/request-reservation.xsd">
+	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd http://nitlab.inf.uth.gr/schema/sfa/rspec/1 http://nitlab.inf.uth.gr/schema/sfa/rspec/1/manifest-reservation.xsd">
 	<ol:lease slice_id="83314983-57f8-470a-84e5-b6dccb4ce9bc"
 		leaseID="testid" valid_from="2015-12-17T19:30:00Z" valid_until="2015-12-17T20:00:00Z"
 		uuid="318da82f-4553-4425-857b-3c196b47cc6d"  leaseREF="testid" />

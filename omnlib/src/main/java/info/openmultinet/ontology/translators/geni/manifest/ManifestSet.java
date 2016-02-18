@@ -18,6 +18,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.manifest.LoginServiceCon
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.NodeContents.SliverType;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ObjectFactory;
+import info.openmultinet.ontology.translators.geni.jaxb.manifest.Position3D;
 import info.openmultinet.ontology.translators.geni.jaxb.manifest.ServiceContents;
 import info.openmultinet.ontology.vocabulary.Geo;
 import info.openmultinet.ontology.vocabulary.Geonames;
@@ -27,10 +28,12 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -247,37 +250,123 @@ public class ManifestSet extends AbstractConverter {
 		}
 	}
 
-	public static void setLocation(Statement resource, NodeContents node) {
-		LocationContents locationContents = null;
+	public static void setLocation(Statement omnResource, NodeContents node) {
+		
+		StmtIterator locations = omnResource.getResource().listProperties(
+				Omn_resource.hasLocation);
 
-		if (resource.getResource().hasProperty(Geo.lat)) {
-			locationContents = new ObjectFactory().createLocationContents();
-			locationContents.setLatitude(resource.getResource()
-					.getProperty(Geo.lat).getObject().toString());
-		}
+		while (locations.hasNext()) {
 
-		if (resource.getResource().hasProperty(Geo.long_)) {
-			if (locationContents == null) {
-				locationContents = new ObjectFactory().createLocationContents();
+			Statement locationStatement = locations.next();
+			ObjectFactory of = new ObjectFactory();
+			LocationContents location = of.createLocationContents();
+			Resource omnRes = locationStatement.getResource();
+
+			if (omnRes.hasProperty(Geonames.countryCode)) {
+				location.setCountry(omnRes.getProperty(Geonames.countryCode)
+						.getString());
+			} else {
+				// country required
+				location.setCountry("");
 			}
-			locationContents.setLongitude(resource.getResource()
-					.getProperty(Geo.long_).getObject().toString());
-		}
 
-		if (resource.getResource().hasProperty(Geonames.countryCode)) {
-			if (locationContents == null) {
-				locationContents = new ObjectFactory().createLocationContents();
+			if (omnRes.hasProperty(Geo.lat)) {
+				location.setLatitude(omnRes.getProperty(Geo.lat).getString());
 			}
-			locationContents.setCountry(resource.getResource()
-					.getProperty(Geonames.countryCode).getObject().toString());
+
+			if (omnRes.hasProperty(Geo.long_)) {
+				location.setLongitude(omnRes.getProperty(Geo.long_).getString());
+			}
+
+			if (omnRes.hasProperty(RDFS.label)) {
+				QName key = new QName("http://open-multinet.info/location",
+						"name", "omn");
+				String value = omnRes.getProperty(RDFS.label).getString();
+				location.getOtherAttributes().put(key, value);
+			}
+
+			if (omnRes.hasProperty(Omn_lifecycle.hasID)) {
+				QName key = new QName("http://open-multinet.info/location",
+						"id", "omn");
+				String value = omnRes.getProperty(Omn_lifecycle.hasID)
+						.getString();
+				location.getOtherAttributes().put(key, value);
+			}
+
+			Position3D position3d = null;
+			if (omnRes.hasProperty(Omn_resource.x)
+					|| omnRes.hasProperty(Omn_resource.y)
+					|| omnRes.hasProperty(Omn_resource.z)) {
+				position3d = of.createPosition3D();
+
+				if (omnRes.hasProperty(Omn_resource.x)) {
+					double x = omnRes.getProperty(Omn_resource.x).getObject()
+							.asLiteral().getDouble();
+					BigDecimal xBigDecimal = BigDecimal.valueOf(x);
+					position3d.setX(xBigDecimal);
+				}
+				if (omnRes.hasProperty(Omn_resource.y)) {
+					double y = omnRes.getProperty(Omn_resource.y).getObject()
+							.asLiteral().getDouble();
+					BigDecimal yBigDecimal = BigDecimal.valueOf(y);
+					position3d.setY(yBigDecimal);
+				}
+				if (omnRes.hasProperty(Omn_resource.z)) {
+					double z = omnRes.getProperty(Omn_resource.z).getObject()
+							.asLiteral().getDouble();
+					BigDecimal zBigDecimal = BigDecimal.valueOf(z);
+					position3d.setZ(zBigDecimal);
+				}
+			}
+
+			if (position3d != null) {
+				location.getAny().add(position3d);
+			}
+
+			node.getAnyOrRelationOrLocation().add(
+					of.createLocation(location));
+
 		}
 
-		if (locationContents != null) {
-			JAXBElement<LocationContents> location = new ObjectFactory()
-					.createLocation(locationContents);
-			node.getAnyOrRelationOrLocation().add(location);
-		}
+		if (omnResource.getResource().hasProperty(Geo.lat)
+				|| omnResource.getResource().hasProperty(Geo.long_)
+				|| omnResource.getResource().hasProperty(Geonames.countryCode)) {
+			LocationContents locationContents = null;
 
+			if (omnResource.getResource().hasProperty(Geo.lat)) {
+				locationContents = new ObjectFactory().createLocationContents();
+				locationContents.setLatitude(omnResource.getResource()
+						.getProperty(Geo.lat).getObject().toString());
+			}
+
+			if (omnResource.getResource().hasProperty(Geo.long_)) {
+				if (locationContents == null) {
+					locationContents = new ObjectFactory()
+							.createLocationContents();
+				}
+				locationContents.setLongitude(omnResource.getResource()
+						.getProperty(Geo.long_).getObject().toString());
+			}
+
+			if (omnResource.getResource().hasProperty(Geonames.countryCode)) {
+				if (locationContents == null) {
+					locationContents = new ObjectFactory()
+							.createLocationContents();
+				}
+				locationContents.setCountry(omnResource.getResource()
+						.getProperty(Geonames.countryCode).getObject()
+						.toString());
+			} else {
+				// country required
+				locationContents.setCountry("");
+			}
+
+			if (locationContents != null) {
+				JAXBElement<LocationContents> location = new ObjectFactory()
+						.createLocation(locationContents);
+				node.getAnyOrRelationOrLocation().add(location);
+			}
+		}
 	}
 
 	public static void setServices(Statement resource, NodeContents node) {

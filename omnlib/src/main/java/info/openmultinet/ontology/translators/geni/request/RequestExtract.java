@@ -30,6 +30,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.LoginServiceCont
 import info.openmultinet.ontology.translators.geni.jaxb.request.Monitoring;
 import info.openmultinet.ontology.translators.geni.jaxb.request.NodeContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Osco;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Position3D;
 import info.openmultinet.ontology.translators.geni.jaxb.request.RoutableControlIp;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Switch;
@@ -42,6 +43,7 @@ import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
 import info.openmultinet.ontology.vocabulary.Omn_resource;
 import info.openmultinet.ontology.vocabulary.Omn_service;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
@@ -602,6 +604,21 @@ public class RequestExtract extends AbstractConverter {
 						} else if (key.getLocalPart().equals("name")) {
 							locationResource.addProperty(RDFS.label, value);
 						}
+					}
+				}
+				
+				List<Object> locationSubElements = location.getAny();
+				for (Object object : locationSubElements) {
+					if (object instanceof Position3D) {
+
+						Position3D position3d = (Position3D) object;
+						BigDecimal x = position3d.getX();
+						BigDecimal y = position3d.getY();
+						BigDecimal z = position3d.getZ();
+
+						locationResource.addLiteral(Omn_resource.x, x);
+						locationResource.addLiteral(Omn_resource.y, y);
+						locationResource.addLiteral(Omn_resource.z, z);
 					}
 				}
 				omnNode.addProperty(Omn_resource.hasLocation, locationResource);
