@@ -43,7 +43,8 @@
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="delay" type="xs:integer" />
 		<xs:attribute name="loss" type="xs:integer" />
-		<xs:attribute name="rate" type="xs:integer" />
+		<xs:attribute name="rateUp" type="xs:integer" />
+		<xs:attribute name="rateDown" type="xs:integer" />
 	</xs:complexType>
 	<xs:element name="subscriber" type="s:SubscriberContents" />
 	<xs:complexType name="SubscriberContents">

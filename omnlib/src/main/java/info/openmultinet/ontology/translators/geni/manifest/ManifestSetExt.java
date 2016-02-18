@@ -551,13 +551,21 @@ public class ManifestSetExt extends AbstractConverter {
 		PDNGatewayContents pgwContents = new ObjectFactory()
 				.createPDNGatewayContents();
 
-		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.rateCode)) {
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.rateCodeUp)) {
 			int rate = pgw
 					.getProperty(
-							info.openmultinet.ontology.vocabulary.Epc.rateCode)
+							info.openmultinet.ontology.vocabulary.Epc.rateCodeUp)
 					.getObject().asLiteral().getInt();
 			BigInteger bigRate = BigInteger.valueOf(rate);
-			pgwContents.setRate(bigRate);
+			pgwContents.setRateUp(bigRate);
+		}
+		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.rateCodeDown)) {
+			int rate = pgw
+					.getProperty(
+							info.openmultinet.ontology.vocabulary.Epc.rateCodeDown)
+					.getObject().asLiteral().getInt();
+			BigInteger bigRate = BigInteger.valueOf(rate);
+			pgwContents.setRateDown(bigRate);
 		}
 
 		if (pgw.hasProperty(info.openmultinet.ontology.vocabulary.Epc.delayCode)) {
