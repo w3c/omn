@@ -399,11 +399,16 @@ public class ManifestExtractExt extends AbstractConverter {
 			pgwResource.addProperty(RDFS.label, name);
 		}
 
-		BigInteger rate = pgwContents.getRate();
+		BigInteger rate = pgwContents.getRateUp();
 		BigInteger minusOne = BigInteger.valueOf(-1);
 		if (rate != null && rate.compareTo(minusOne) != 0) {
 			pgwResource.addLiteral(
-					info.openmultinet.ontology.vocabulary.Epc.rateCode, rate);
+					info.openmultinet.ontology.vocabulary.Epc.rateCodeUp, rate);
+		}
+		BigInteger rateDown = pgwContents.getRateDown();
+		if (rateDown != null && rateDown.compareTo(minusOne) != 0) {
+			pgwResource.addLiteral(
+					info.openmultinet.ontology.vocabulary.Epc.rateCodeDown, rateDown);
 		}
 
 		BigInteger delay = pgwContents.getDelay();

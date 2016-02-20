@@ -470,11 +470,17 @@ public class RequestExtractExt extends AbstractConverter {
 			pgwResource.addProperty(RDFS.label, name);
 		}
 
-		BigInteger rate = pgwContents.getRate();
+		BigInteger rateUp = pgwContents.getRateUp();
 		BigInteger minusOne = BigInteger.valueOf(-1);
-		if (rate != null && rate.compareTo(minusOne) != 0) {
+		if (rateUp != null && rateUp.compareTo(minusOne) != 0) {
 			pgwResource.addLiteral(
-					info.openmultinet.ontology.vocabulary.Epc.rateCode, rate);
+					info.openmultinet.ontology.vocabulary.Epc.rateCodeUp, rateUp);
+		}
+		BigInteger rateDown = pgwContents.getRateDown();
+
+		if (rateDown != null && rateDown.compareTo(minusOne) != 0) {
+			pgwResource.addLiteral(
+					info.openmultinet.ontology.vocabulary.Epc.rateCodeDown, rateDown);
 		}
 
 		BigInteger delay = pgwContents.getDelay();
