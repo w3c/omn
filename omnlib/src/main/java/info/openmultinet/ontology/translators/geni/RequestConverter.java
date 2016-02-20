@@ -171,6 +171,7 @@ public class RequestConverter extends AbstractConverter {
 				RequestSetExt.setEmulabExtension(resource, node);
 				RequestSetExt.setAccessNetwork(resource, node);
 				RequestSetExt.setFivegGateway(resource, node);
+				RequestSetExt.setFivegEnodeb(resource, node);
 				RequestSetExt.setFivegDns(resource, node);
 				RequestSetExt.setFivegSwitch(resource, node);
 				RequestSetExt.setFivegBt(resource, node);

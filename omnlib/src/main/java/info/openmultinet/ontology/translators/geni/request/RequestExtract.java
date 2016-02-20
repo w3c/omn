@@ -10,6 +10,7 @@ import info.openmultinet.ontology.translators.geni.jaxb.request.Control;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Device;
 import info.openmultinet.ontology.translators.geni.jaxb.request.DiskImageContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Dns;
+import info.openmultinet.ontology.translators.geni.jaxb.request.Enodeb;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Epc;
 import info.openmultinet.ontology.translators.geni.jaxb.request.ExecuteServiceContents;
 import info.openmultinet.ontology.translators.geni.jaxb.request.Fd;
@@ -358,6 +359,8 @@ public class RequestExtract extends AbstractConverter {
 					RequestExtractExt.tryExtractEpc(omnResource, o);
 				} else if (o.getClass().equals(Control.class)) {
 					RequestExtractExt.tryExtractFivegControl(omnResource, o);
+				} else if (o.getClass().equals(Enodeb.class)) {
+					RequestExtractExt.tryExtractFivegEnodeb(omnResource, o);
 				} else if (o.getClass().equals(Bt.class)) {
 					RequestExtractExt.tryExtractFivegBt(omnResource, o);
 				} else if (o.getClass().equals(Hss.class)) {

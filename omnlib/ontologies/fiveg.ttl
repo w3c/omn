@@ -29,9 +29,9 @@
                                         
                                          dc:date "2015-12-01"^^xsd:date ;
                                          
-                                         dcterms:modified "2016-02-07"^^xsd:date ;
+                                         dcterms:modified "2016-02-16"^^xsd:date ;
                                          
-                                         owl:versionInfo "2016-02-07"^^xsd:string ;
+                                         owl:versionInfo "2016-02-16"^^xsd:string ;
                                          
                                          dc:title "5G ontology"@en ;
                                          
@@ -78,6 +78,34 @@
         rdfs:comment "benchmarking tool host name"@en ;
 
         rdfs:domain  :BenchmarkingTool ;
+
+        rdfs:range   xsd:string .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
+
+:cloudManagementIP  a    owl:DatatypeProperty ;
+
+        rdfs:label "cloud management IP address"@en ;
+
+        rdfs:comment "cloud management IP address"@en ;
+
+        rdfs:domain  :Gateway ;
+
+        rdfs:range   omn-resource:IPAddress .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#cloudPublicRouterIp
+
+:cloudPublicRouterIp  a    owl:DatatypeProperty ;
+
+        rdfs:label "cloud public router IP"@en ;
+
+        rdfs:comment "cloud public router IP (CLOUD_PUBLIC_ROUTER_IP)"@en ;
+
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -241,36 +269,6 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
-
-:cloudManagementIP  a    owl:DatatypeProperty ;
-
-        rdfs:label "cloud management IP address"@en ;
-
-        rdfs:comment "cloud management IP address"@en ;
-
-        rdfs:domain  :Gateway ;
-
-        rdfs:range   omn-resource:IPAddress .
-
-
-
-###  http://open-multinet.info/ontology/resource/fiveg#cloudPublicRouterIp
-
-:cloudPublicRouterIp  a    owl:DatatypeProperty ;
-
-        rdfs:label "cloud public router IP"@en ;
-
-        rdfs:comment "cloud public router IP (CLOUD_PUBLIC_ROUTER_IP)"@en ;
-
-        rdfs:domain  :BenchmarkingTool ;
-
-        rdfs:range   xsd:string .
-
-
-
-
-
 ###  http://open-multinet.info/ontology/resource/fiveg#databaseProvi
 
 :databaseProvi  a    owl:DatatypeProperty ;
@@ -354,6 +352,20 @@
 
 
 
+
+###  http://open-multinet.info/ontology/resource/fiveg#enodebHostName
+
+:enodebHostName  a    owl:DatatypeProperty ;
+
+        rdfs:label "eNodeB host name"@en ;
+
+        rdfs:comment "eNodeB host name"@en ;
+
+        rdfs:domain  :ENodeB ;
+
+        rdfs:range   xsd:string .
+
+
 ###  http://open-multinet.info/ontology/resource/fiveg#imsiRangeEnd
 
 :imsiRangeEnd  a    owl:DatatypeProperty ;
@@ -362,7 +374,7 @@
 
         rdfs:comment "IMSI range end"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -376,7 +388,7 @@
 
         rdfs:comment "IMSI range start"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -404,7 +416,7 @@
 
         rdfs:comment "IP range end"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -418,7 +430,7 @@
 
         rdfs:comment "IP range start"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -498,7 +510,7 @@
 
         rdfs:comment "MME console port (MME_CONSOLE_PORT)"@en ;
 
-        rdfs:domain  :Control ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:integer .
 
@@ -526,7 +538,7 @@
 
         rdfs:comment "net IP (NET_IP)"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -541,7 +553,7 @@
 
         rdfs:comment "net mask (NET_MASK)"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -851,7 +863,7 @@
 
         rdfs:comment "user equipment address (UE_ADDR)"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:string .
 
@@ -880,7 +892,7 @@
 
         rdfs:comment "use floating IPs (USE_FLOATING_IPS)"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+        rdfs:domain  :FiveGResource ;
 
         rdfs:range   xsd:boolean .
 
@@ -952,6 +964,18 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
       rdfs:subClassOf :FiveGResource ;
       
       rdfs:comment "Domain Name Server (DNS)"@en .
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#ENodeB
+
+:ENodeB rdf:type owl:Class ;
+
+      rdfs:label "eNodeB"@en ;
+      
+      rdfs:subClassOf :FiveGResource ;
+      
+      rdfs:comment "eNodeB"@en .
 
 
 
