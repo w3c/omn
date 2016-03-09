@@ -3,7 +3,7 @@ jdk:
 - oraclejdk8
 sudo: false
 script:
-- mvn test
+- mvn -X test
 - ./bin/rdflint.sh -assume omnlib/ontologies/*.ttl omnlib/import/*.ttl -check omnlib/ontologies/*.ttl
 - ./.travis/mvn_deploy.sh
 notifications:
