@@ -66,19 +66,32 @@ public class AdSet extends AbstractConverter {
 			Statement omnSliver = canImplement.next();
 
 			final NodeContents geniNode = new NodeContents();
+			String sliverUri = omnSliver.getObject().asResource().getURI();
 
 			SliverType sliver1;
 			ObjectFactory of = new ObjectFactory();
-			sliver1 = of.createNodeContentsSliverType();
-			String sliverUri = omnSliver.getObject().asResource().getURI();
-			AdSetExt.setOsco(omnSliver, geniNode);
+
+			if (omnSliver.getObject().asResource().hasProperty(Omn_domain_pc.hasDiskImage)) {
+				StmtIterator diskImages = omnSliver.getObject().asResource()
+						.listProperties(Omn_domain_pc.hasDiskImage);
+				while (diskImages.hasNext()) {
+					String diskName = diskImages.next().getObject()
+							.asResource().getURI();
+					sliver1 = of.createNodeContentsSliverType();
+					sliver1.setName(diskName);
+					JAXBElement<SliverType> sliverType = new ObjectFactory()
+							.createNodeContentsSliverType(sliver1);
+					geniNode.getAnyOrRelationOrLocation().add(sliverType);
+				}
+			} else {
+				sliver1 = of.createNodeContentsSliverType();
+				AdSetExt.setOsco(omnSliver, geniNode);
+				sliver1.setName(sliverUri);
+				JAXBElement<SliverType> sliverType = new ObjectFactory()
+						.createNodeContentsSliverType(sliver1);
+				geniNode.getAnyOrRelationOrLocation().add(sliverType);
+			}
 			// setOsco(omnSliver, sliver1);
-			sliver1.setName(sliverUri);
-
-			JAXBElement<SliverType> sliverType = new ObjectFactory()
-					.createNodeContentsSliverType(sliver1);
-
-			geniNode.getAnyOrRelationOrLocation().add(sliverType);
 
 			String sliverName = CommonMethods.getLocalName(sliverUri);
 			String url = omnSliver.getSubject().asResource().getURI();
