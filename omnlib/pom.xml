@@ -386,6 +386,7 @@
 			<artifactId>jena-maven-tools</artifactId>
 			<version>0.7</version>
 			<type>maven-plugin</type>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-cli</groupId>
