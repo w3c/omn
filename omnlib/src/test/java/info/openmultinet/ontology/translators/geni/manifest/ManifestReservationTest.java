@@ -19,6 +19,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -31,6 +32,8 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ManifestReservationTest {
 
 	@Test
+	@Ignore
+	//todo: takes too long
 	public void manifestRoundtrip() throws JAXBException,
 			InvalidModelException, IOException, XMLStreamException,
 			MissingRspecElementException, DeprecatedRspecVersionException,
