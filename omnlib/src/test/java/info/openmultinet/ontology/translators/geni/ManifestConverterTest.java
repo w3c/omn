@@ -13,6 +13,7 @@ import java.io.InputStream;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -71,6 +72,8 @@ public class ManifestConverterTest {
 	}
 
 	@Test
+	@Ignore
+	//todo: takes too long
 	public void testConvertingGraph2RSpec() throws JAXBException,
 			InvalidModelException {
 		InputStream input = ManifestConverterTest.class
@@ -86,6 +89,8 @@ public class ManifestConverterTest {
 	}
 
 	@Test
+	@Ignore
+	//todo: takes too long
 	// fixme: this test is slow!
 	public void testPaper2015Roundtrip() throws JAXBException, IOException,
 			InvalidModelException, MissingRspecElementException,

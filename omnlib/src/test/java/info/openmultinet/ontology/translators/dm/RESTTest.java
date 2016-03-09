@@ -9,6 +9,7 @@ import javax.ws.rs.WebApplicationException;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RESTTest {
@@ -255,6 +256,8 @@ public class RESTTest {
 	}
 
 	@Test
+	@Ignore
+	//todo: takes too long
 	public void testRdfxmlToRequest() {
 		System.out.println("*************************************************");
 		System.out.println("******  start convert RDF/XML to request  *******");
