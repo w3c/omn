@@ -1500,7 +1500,7 @@ public class RequestSetExt extends AbstractConverter {
 
 	public static void setFivegDns(Statement omnResource, NodeContents node) {
 		if (omnResource.getResource().hasProperty(RDF.type,
-				Fiveg.DomainNameServer)) {
+				Fiveg.DomainNameSystem)) {
 
 			Resource resourceResource = omnResource.getResource();
 

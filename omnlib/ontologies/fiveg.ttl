@@ -17,35 +17,71 @@
 
 <http://open-multinet.info/ontology/resource/fiveg> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
 
-                                         rdf:type owl:Ontology, 
+    rdf:type owl:Ontology, 
 
-                                         voaf:Vocabulary ;
-                                         
-                                         rdfs:label "omn-resource-fiveg"@en ;
-                                         
-                                         vann:preferredNamespacePrefix "omn-resource-fiveg"^^xsd:string ;
+    voaf:Vocabulary ;
 
-                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/fiveg#> ;
-                                        
-                                         dc:date "2015-12-01"^^xsd:date ;
-                                         
-                                         dcterms:modified "2016-02-16"^^xsd:date ;
-                                         
-                                         owl:versionInfo "2016-02-16"^^xsd:string ;
-                                         
-                                         dc:title "5G ontology"@en ;
-                                         
-                                         dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
-                                         
-                                         dc:creator "Robyn Loughnane" ;
-                                         
-                                         dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:label "omn-resource-fiveg"@en ;
 
-                                         cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+    vann:preferredNamespacePrefix "omn-resource-fiveg"^^xsd:string ;
 
-                                         dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+    vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/fiveg#> ;
 
-                                         dc:contributor <mailto:loughnane@campus.tu-berlin.de> .
+    dc:date "2015-12-01"^^xsd:date ;
+
+    dcterms:modified "2016-02-29"^^xsd:date ;
+
+    owl:versionInfo "2016-02-29"^^xsd:string ;
+
+    dc:title "5G ontology"@en ;
+
+    dc:description "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
+
+    dc:creator "Robyn Loughnane" ;
+
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+    cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+
+    dc:rights <http://creativecommons.org/licenses/by/4.0/> ;
+
+    dc:contributor <mailto:loughnane@campus.tu-berlin.de> .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
+
+:cloudManagementIP  a    owl:ObjectProperty ;
+
+    rdfs:label "cloud management IP address"@en ;
+
+    rdfs:comment "cloud management IP address"@en ;
+
+    rdfs:domain  :Gateway ;
+
+    rdfs:range   omn-resource:IPAddress .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#oscoState
+
+:oscoState  a    owl:ObjectProperty ;
+
+    rdfs:label "osco state"@en ;
+
+    rdfs:comment "osco-assigned state"@en ;
+
+    rdfs:domain  :FiveGResource ;
+
+    rdfs:range   omn-lifecycle:state .
 
 
 
@@ -59,13 +95,15 @@
 
 :additionals  a    owl:DatatypeProperty ;
 
-        rdfs:label "additionals"@en ;
+    owl:equivalentProperty osco:additionals ;
 
-        rdfs:comment "additionals"@en ;
+    rdfs:label "additionals"@en ;
 
-        rdfs:domain  :DomainNameServer ;
+    rdfs:comment "additionals"@en ;
 
-        rdfs:range   xsd:string .
+    rdfs:domain  :DomainNameSystem ;
+
+    rdfs:range   xsd:string .
 
 
 
@@ -73,27 +111,13 @@
 
 :benchmarkingToolHostName  a    owl:DatatypeProperty ;
 
-        rdfs:label "benchmarking tool host name"@en ;
+    rdfs:label "benchmarking tool host name"@en ;
 
-        rdfs:comment "benchmarking tool host name"@en ;
+    rdfs:comment "benchmarking tool host name"@en ;
 
-        rdfs:domain  :BenchmarkingTool ;
+    rdfs:domain  :BenchmarkingTool ;
 
-        rdfs:range   xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
-
-:cloudManagementIP  a    owl:DatatypeProperty ;
-
-        rdfs:label "cloud management IP address"@en ;
-
-        rdfs:comment "cloud management IP address"@en ;
-
-        rdfs:domain  :Gateway ;
-
-        rdfs:range   omn-resource:IPAddress .
+    rdfs:range   xsd:string .
 
 
 
@@ -101,13 +125,14 @@
 
 :cloudPublicRouterIp  a    owl:DatatypeProperty ;
 
-        rdfs:label "cloud public router IP"@en ;
+    rdfs:label "cloud public router IP"@en ;
 
-        rdfs:comment "cloud public router IP (CLOUD_PUBLIC_ROUTER_IP)"@en ;
+    rdfs:comment "cloud public router IP (CLOUD_PUBLIC_ROUTER_IP)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
+
 
 
 
@@ -115,15 +140,13 @@
 
 :consolePort  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:CONSOLE_PORT_ONE ;
+    rdfs:label "console port"@en ;
 
-        rdfs:label "console port"@en ;
+    rdfs:comment "console port"@en ;
 
-        rdfs:comment "console port"@en ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:domain  :FiveGResource ;
-
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -131,15 +154,15 @@
 
 :consolePortBindOne  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:CONSOLE_PORT_BIND_ONE ;
+    owl:equivalentProperty osco:CONSOLE_PORT_BIND_ONE ;
 
-        rdfs:label "console port bind one"@en ;
+    rdfs:label "console port bind one"@en ;
 
-        rdfs:comment "console port bind one"@en ;
+    rdfs:comment "console port bind one"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -148,15 +171,15 @@
 
 :consolePortBindTwo  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:CONSOLE_PORT_BIND_TWO ;
+    owl:equivalentProperty osco:CONSOLE_PORT_BIND_TWO ;
 
-        rdfs:label "console port bind two"@en ;
+    rdfs:label "console port bind two"@en ;
 
-        rdfs:comment "console port bind two"@en ;
+    rdfs:comment "console port bind two"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -164,30 +187,31 @@
 
 :consolePortOne  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:CONSOLE_PORT_ONE ;
+    rdfs:seeAlso osco:CONSOLE_PORT_ONE ;
 
-        rdfs:label "console port one"@en ;
+    rdfs:label "console port one"@en ;
 
-        rdfs:comment "console port one"@en ;
+    rdfs:comment "console port one"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
+
 
 
 ###  http://open-multinet.info/ontology/resource/fiveg#consolePortTwo
 
 :consolePortTwo  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:CONSOLE_PORT_TWO ;
+    rdfs:seeAlso osco:CONSOLE_PORT_TWO ;
 
-        rdfs:label "console port two"@en ;
+    rdfs:label "console port two"@en ;
 
-        rdfs:comment "console port two"@en ;
+    rdfs:comment "console port two"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -195,15 +219,15 @@
 
 :defaultRouteVia  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:DEFAULT_ROUTE_VIA ;
+    owl:equivalentProperty osco:DEFAULT_ROUTE_VIA ;
 
-        rdfs:label "default route via"@en ;
+    rdfs:label "default route via"@en ;
 
-        rdfs:comment "default route via"@en ;
+    rdfs:comment "default route via"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -211,15 +235,15 @@
 
 :diameterListenIntf  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:DIAMETER_LISTEN_INTF ;
+    rdfs:seeAlso osco:DIAMETER_LISTEN_INTF ;
 
-        rdfs:label "diameter listen interface"@en ;
+    rdfs:label "diameter listen interface"@en ;
 
-        rdfs:comment "diameter listen interface"@en ;
+    rdfs:comment "diameter listen interface"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -228,13 +252,15 @@
 
 :dnsInterface  a    owl:DatatypeProperty ;
 
-        rdfs:label "DNS interface"@en ;
+    rdfs:seeAlso osco:DNS_INTF ;
 
-        rdfs:comment "DNS interface (DNS_INTF)"@en ;
+    rdfs:label "DNS interface"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:comment "DNS interface (DNS_INTF)"@en ;
 
-        rdfs:range   xsd:integer .
+    rdfs:domain  :FiveGResource ;
+
+    rdfs:range   xsd:integer .
 
 
 
@@ -243,62 +269,16 @@
 
 :domainName  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:domain-name ;
+    rdfs:seeAlso osco:domain-name ;
 
-        rdfs:label "domain name"@en ;
+    rdfs:label "domain name"@en ;
 
-        rdfs:comment "domain name"@en ;
+    rdfs:comment "domain name"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
-
-
-###  http://open-multinet.info/ontology/resource/fiveg#domainNs
-
-:domainNs  a    owl:DatatypeProperty ;
-
-        rdfs:label "domain ns"@en ;
-
-        rdfs:comment "domain ns"@en ;
-
-        rdfs:domain  :DomainNameServer ;
-
-        rdfs:range   xsd:string .
-
-
-
-###  http://open-multinet.info/ontology/resource/fiveg#databaseProvi
-
-:databaseProvi  a    owl:DatatypeProperty ;
-
-        rdfs:seeAlso osco:db-provi ;
-
-        rdfs:label "database provi"@en ;
-
-        rdfs:comment "database provi (db-provi)"@en ;
-
-        rdfs:domain  :HomeSubscriberServer ;
-
-        rdfs:range   xsd:integer .
-
-
-
-
-###  http://open-multinet.info/ontology/resource/fiveg#databaseUser
-
-:databaseUser  a    owl:DatatypeProperty ;
-
-        rdfs:seeAlso osco:db-user ;
-
-        rdfs:label "database user"@en ;
-
-        rdfs:comment "database user (db-user)"@en ;
-
-        rdfs:domain  :HomeSubscriberServer ;
-
-        rdfs:range   xsd:string .
 
 
 
@@ -306,16 +286,31 @@
 
 :databaseName  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:db-name ;
+    rdfs:seeAlso osco:db-name ;
 
-        rdfs:label "database name"@en ;
+    rdfs:label "database name"@en ;
 
-        rdfs:comment "database name (db-name)"@en ;
+    rdfs:comment "database name (db-name)"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#databaseProvi
+
+:databaseProvi  a    owl:DatatypeProperty ;
+
+    rdfs:seeAlso osco:db-provi ;
+
+    rdfs:label "database provi"@en ;
+
+    rdfs:comment "database provi (db-provi)"@en ;
+
+    rdfs:domain  :HomeSubscriberServer ;
+
+    rdfs:range   xsd:integer .
 
 
 
@@ -323,16 +318,15 @@
 
 :databasePassword  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:db-pw ;
+    rdfs:seeAlso osco:db-pw ;
 
-        rdfs:label "database password"@en ;
+    rdfs:label "database password"@en ;
 
-        rdfs:comment "database password (db-pw)"@en ;
+    rdfs:comment "database password (db-pw)"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:string .
-
+    rdfs:range   xsd:string .
 
 
 
@@ -340,16 +334,31 @@
 
 :databaseUser  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:db-user ;
+    rdfs:seeAlso osco:db-user ;
 
-        rdfs:label "database user"@en ;
+    rdfs:label "database user"@en ;
 
-        rdfs:comment "database user (db-user)"@en ;
+    rdfs:comment "database user (db-user)"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
+
+
+###  http://open-multinet.info/ontology/resource/fiveg#domainNs
+
+:domainNs  a    owl:DatatypeProperty ;
+
+    rdfs:seeAlso osco:domain-ns ;
+
+    rdfs:label "domain ns"@en ;
+
+    rdfs:comment "domain ns"@en ;
+
+    rdfs:domain  :DomainNameSystem ;
+
+    rdfs:range   xsd:string .
 
 
 
@@ -357,26 +366,26 @@
 
 :enodebHostName  a    owl:DatatypeProperty ;
 
-        rdfs:label "eNodeB host name"@en ;
+    rdfs:label "eNodeB host name"@en ;
 
-        rdfs:comment "eNodeB host name"@en ;
+    rdfs:comment "eNodeB host name"@en ;
 
-        rdfs:domain  :ENodeB ;
+    rdfs:domain  :ENodeB ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 ###  http://open-multinet.info/ontology/resource/fiveg#imsiRangeEnd
 
 :imsiRangeEnd  a    owl:DatatypeProperty ;
 
-        rdfs:label "IMSI range end"@en ;
+    rdfs:label "IMSI range end"@en ;
 
-        rdfs:comment "IMSI range end"@en ;
+    rdfs:comment "IMSI range end"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -384,13 +393,13 @@
 
 :imsiRangeStart  a    owl:DatatypeProperty ;
 
-        rdfs:label "IMSI range start"@en ;
+    rdfs:label "IMSI range start"@en ;
 
-        rdfs:comment "IMSI range start"@en ;
+    rdfs:comment "IMSI range start"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -398,13 +407,13 @@
 
 :init  a    owl:DatatypeProperty ;
 
-        rdfs:label "init"@en ;
+    rdfs:label "init"@en ;
 
-        rdfs:comment "init"@en ;
+    rdfs:comment "init"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:boolean .
+    rdfs:range   xsd:boolean .
 
 
 
@@ -412,13 +421,13 @@
 
 :ipRangeEnd  a    owl:DatatypeProperty ;
 
-        rdfs:label "IP range end"@en ;
+    rdfs:label "IP range end"@en ;
 
-        rdfs:comment "IP range end"@en ;
+    rdfs:comment "IP range end"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -426,13 +435,13 @@
 
 :ipRangeStart  a    owl:DatatypeProperty ;
 
-        rdfs:label "IP range start"@en ;
+    rdfs:label "IP range start"@en ;
 
-        rdfs:comment "IP range start"@en ;
+    rdfs:comment "IP range start"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -441,15 +450,15 @@
 
 :ipServicesNetwork  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:NET_A_INTF ;
+    rdfs:seeAlso osco:NET_A_INTF ;
 
-        rdfs:label "IP services network"@en ;
+    rdfs:label "IP services network"@en ;
 
-        rdfs:comment "IP services network (NET_A_INTF)"@en ;
+    rdfs:comment "IP services network (NET_A_INTF)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -457,15 +466,15 @@
 
 :localDatabase  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:localDB ;
+    rdfs:seeAlso osco:localDB ;
 
-        rdfs:label "local database"@en ;
+    rdfs:label "local database"@en ;
 
-        rdfs:comment "local database (localDB)"@en ;
+    rdfs:comment "local database (localDB)"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -473,15 +482,15 @@
 
 :managementInterface  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:MGMT_INTF ;
+    rdfs:seeAlso osco:MGMT_INTF ;
 
-        rdfs:label "management interface"@en ;
+    rdfs:label "management interface"@en ;
 
-        rdfs:comment "management interface (MGMT_INTF)"@en ;
+    rdfs:comment "management interface (MGMT_INTF)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -490,15 +499,15 @@
 
 :minInterfaces  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:MIN_NUM_INTF ;
+    rdfs:seeAlso osco:MIN_NUM_INTF ;
 
-        rdfs:label "minimum number of interfaces"@en ;
+    rdfs:label "minimum number of interfaces"@en ;
 
-        rdfs:comment "minimum number of interfaces (MIN_NUM_INTF)"@en ;
+    rdfs:comment "minimum number of interfaces (MIN_NUM_INTF)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -506,13 +515,13 @@
 
 :mmeConsolePort  a    owl:DatatypeProperty ;
 
-        rdfs:label "MME console port"@en ;
+    rdfs:label "MME console port"@en ;
 
-        rdfs:comment "MME console port (MME_CONSOLE_PORT)"@en ;
+    rdfs:comment "MME console port (MME_CONSOLE_PORT)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -520,13 +529,13 @@
 
 :mmeHostName  a    owl:DatatypeProperty ;
 
-        rdfs:label "MME host name"@en ;
+    rdfs:label "MME host name"@en ;
 
-        rdfs:comment "MME host name (MME_HOST_NAME)"@en ;
+    rdfs:comment "MME host name (MME_HOST_NAME)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -534,13 +543,13 @@
 
 :netIp  a    owl:DatatypeProperty ;
 
-        rdfs:label "net IP"@en ;
+    rdfs:label "net IP"@en ;
 
-        rdfs:comment "net IP (NET_IP)"@en ;
+    rdfs:comment "net IP (NET_IP)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -549,13 +558,13 @@
 
 :netMask  a    owl:DatatypeProperty ;
 
-        rdfs:label "net mask"@en ;
+    rdfs:label "net mask"@en ;
 
-        rdfs:comment "net mask (NET_MASK)"@en ;
+    rdfs:comment "net mask (NET_MASK)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -563,13 +572,15 @@
 
 :oscoId  a    owl:DatatypeProperty ;
 
-        rdfs:label "osco id"@en ;
+    rdfs:seeAlso osco:id ;
 
-        rdfs:comment "osco-assigned id"@en ;
+    rdfs:label "osco id"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:comment "osco-assigned id"@en ;
 
-        rdfs:range   xsd:string .
+    rdfs:domain  :FiveGResource ;
+
+    rdfs:range   xsd:string .
 
 
 
@@ -578,28 +589,16 @@
 
 :oscoName  a    owl:DatatypeProperty ;
 
-        rdfs:label "osco name"@en ;
+    rdfs:seeAlso osco:name ;
 
-        rdfs:comment "osco-assigned id"@en ;
+    rdfs:label "osco name"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:comment "osco-assigned id"@en ;
 
-        rdfs:range   xsd:string .
+    rdfs:domain  :FiveGResource ;
 
+    rdfs:range   xsd:string .
 
-
-###  http://open-multinet.info/ontology/resource/fiveg#oscoState
-
-:oscoState  a    owl:DatatypeProperty ;
-
-        rdfs:label "osco state"@en ;
-
-        rdfs:comment "osco-assigned state"@en ;
-
-        rdfs:domain  :FiveGResource ;
-
-        rdfs:range   omn-lifecycle:state .
-        
 
 
 
@@ -607,13 +606,15 @@
 
 :oscoVersion  a    owl:DatatypeProperty ;
 
-        rdfs:label "osco version"@en ;
+    rdfs:seeAlso osco:VERSION ;
 
-        rdfs:comment "osco-assigned version number"@en ;
+    rdfs:label "osco version"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:comment "osco-assigned version number"@en ;
 
-        rdfs:range   xsd:integer .
+    rdfs:domain  :FiveGResource ;
+
+    rdfs:range   xsd:integer .
 
 
 
@@ -622,13 +623,13 @@
 
 :pgwCConsolePort  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGW C Console Port"@en ;
+    rdfs:label "PGW C Console Port"@en ;
 
-        rdfs:comment "PGW C Console Port (PGW_C_CONSOLE_PORT)"@en ;
+    rdfs:comment "PGW C Console Port (PGW_C_CONSOLE_PORT)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -637,13 +638,13 @@
 
 :pgwCOfpCtrPort  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGW C OFP Control Port"@en ;
+    rdfs:label "PGW C OFP Control Port"@en ;
 
-        rdfs:comment "PGW C OFP Control Port (PGW_C_OFP_CTR_PORT)"@en ;
+    rdfs:comment "PGW C OFP Control Port (PGW_C_OFP_CTR_PORT)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -651,13 +652,13 @@
 
 :pgwCOfpCtrTransport  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGW C OFP Control Transport"@en ;
+    rdfs:label "PGW C OFP Control Transport"@en ;
 
-        rdfs:comment "PGW C OFP Control Transport (PGW_C_OFP_CTR_TRANSPORT)"@en ;
+    rdfs:comment "PGW C OFP Control Transport (PGW_C_OFP_CTR_TRANSPORT)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -666,13 +667,13 @@
 
 :pgwCTemplateConfigFile  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGW C template config file"@en ;
+    rdfs:label "PGW C template config file"@en ;
 
-        rdfs:comment "PGW C template config file (PGW_C_template_config_file)"@en ;
+    rdfs:comment "PGW C template config file (PGW_C_template_config_file)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -681,13 +682,13 @@
 
 :pgwUBaseId  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGWU Base Id"@en ;
+    rdfs:label "PGWU Base Id"@en ;
 
-        rdfs:comment "PGWU Base Id"@en ;
+    rdfs:comment "PGWU Base Id"@en ;
 
-        rdfs:domain  :Switch ;
+    rdfs:domain  :Switch ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -695,43 +696,41 @@
 
 :pgwUDownloadInterface  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGW U Download Interface"@en ;
+    rdfs:label "PGW U Download Interface"@en ;
 
-        rdfs:comment "PGW U Download Interface (PGW_U_Download_Interface)"@en ;
+    rdfs:comment "PGW U Download Interface (PGW_U_Download_Interface)"@en ;
 
-        rdfs:domain  :Switch ;
+    rdfs:domain  :Switch ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 ###  http://open-multinet.info/ontology/resource/fiveg#pgwUUploadInterface
 
 :pgwUUploadInterface  a    owl:DatatypeProperty ;
 
-        rdfs:label "PGW U Upload Interface"@en ;
+    rdfs:label "PGW U Upload Interface"@en ;
 
-        rdfs:comment "PGW U Upload Interface (PGW_U_Upload_Interface)"@en ;
+    rdfs:comment "PGW U Upload Interface (PGW_U_Upload_Interface)"@en ;
 
-        rdfs:domain  :Switch ;
+    rdfs:domain  :Switch ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 ###  http://open-multinet.info/ontology/resource/fiveg#port
 
 :port  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:PORT ;
+    rdfs:seeAlso osco:PORT ;
 
-        rdfs:label "port"@en ;
+    rdfs:label "port"@en ;
 
-        rdfs:comment "port"@en ;
+    rdfs:comment "port"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:integer .
-
-
+    rdfs:range   xsd:integer .
 
 
 
@@ -739,15 +738,13 @@
 
 :ranBackhaul  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:NET_A_INTF ;
+    rdfs:label "RAN backhaul"@en ;
 
-        rdfs:label "RAN backhaul"@en ;
+    rdfs:comment "RAN backhaul (NET_D_INTF)"@en ;
 
-        rdfs:comment "RAN backhaul (NET_D_INTF)"@en ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:domain  :FiveGResource ;
-
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -755,15 +752,15 @@
 
 :requires  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:requires ;
+    rdfs:seeAlso osco:requires ;
 
-        rdfs:label "requires"@en ;
+    rdfs:label "requires"@en ;
 
-        rdfs:comment "requires"@en ;
+    rdfs:comment "requires"@en ;
 
-        rdfs:domain  omn:Resource ;
+    rdfs:domain  omn:Resource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -771,13 +768,13 @@
 
 :sgwCJsonSrvPort  a    owl:DatatypeProperty ;
 
-        rdfs:label "SGW C Json Srv Port"@en ;
+    rdfs:label "SGW C Json Srv Port"@en ;
 
-        rdfs:comment "SGW C Json Srv Port (SGW_C_JSON_SRV_PORT)"@en ;
+    rdfs:comment "SGW C Json Srv Port (SGW_C_JSON_SRV_PORT)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -785,13 +782,13 @@
 
 :sgwCOfpCtrPort  a    owl:DatatypeProperty ;
 
-        rdfs:label "SGW C OFP Control Port"@en ;
+    rdfs:label "SGW C OFP Control Port"@en ;
 
-        rdfs:comment "SGW C OFP Control Port (SGW_C_OFP_CTR_PORT)"@en ;
+    rdfs:comment "SGW C OFP Control Port (SGW_C_OFP_CTR_PORT)"@en ;
 
-        rdfs:domain  :Control ;
+    rdfs:domain  :Control ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -799,13 +796,13 @@
 
 :sgwUDownloadInterface  a    owl:DatatypeProperty ;
 
-        rdfs:label "SGW U Download Interface"@en ;
+    rdfs:label "SGW U Download Interface"@en ;
 
-        rdfs:comment "SGW U Download Interface (SGW_U_Download_Interface)"@en ;
+    rdfs:comment "SGW U Download Interface (SGW_U_Download_Interface)"@en ;
 
-        rdfs:domain  :Switch ;
+    rdfs:domain  :Switch ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -814,15 +811,15 @@
 
 :slfPresence  a    owl:DatatypeProperty ;
 
-        rdfs:seeAlso osco:SLF_PRESENCE ;
+    rdfs:seeAlso osco:SLF_PRESENCE ;
 
-        rdfs:label "SLF presence"@en ;
+    rdfs:label "SLF presence"@en ;
 
-        rdfs:comment "SLF presence (SLF_PRESENCE)"@en ;
+    rdfs:comment "SLF presence (SLF_PRESENCE)"@en ;
 
-        rdfs:domain  :HomeSubscriberServer ;
+    rdfs:domain  :HomeSubscriberServer ;
 
-        rdfs:range   xsd:boolean .
+    rdfs:range   xsd:boolean .
 
 
 
@@ -831,13 +828,13 @@
 
 :sgwUUploadInterface  a    owl:DatatypeProperty ;
 
-        rdfs:label "SGW U Upload Interface"@en ;
+    rdfs:label "SGW U Upload Interface"@en ;
 
-        rdfs:comment "SGW U Upload Interface (SGW_U_Upload_Interface)"@en ;
+    rdfs:comment "SGW U Upload Interface (SGW_U_Upload_Interface)"@en ;
 
-        rdfs:domain  :Switch ;
+    rdfs:domain  :Switch ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -845,13 +842,13 @@
 
 :subscriberIpRange  a    owl:DatatypeProperty ;
 
-        rdfs:label "subscriber ip range"@en ;
+    rdfs:label "subscriber ip range"@en ;
 
-        rdfs:comment "subscriber ip range (NET_C_INTF)"@en ;
+    rdfs:comment "subscriber ip range (NET_C_INTF)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:integer .
+    rdfs:range   xsd:integer .
 
 
 
@@ -859,13 +856,13 @@
 
 :userEquipmentAddress  a    owl:DatatypeProperty ;
 
-        rdfs:label "user equipment address"@en ;
+    rdfs:label "user equipment address"@en ;
 
-        rdfs:comment "user equipment address (UE_ADDR)"@en ;
+    rdfs:comment "user equipment address (UE_ADDR)"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:string .
+    rdfs:range   xsd:string .
 
 
 
@@ -873,13 +870,13 @@
 
 :upstartOn  a    owl:DatatypeProperty ;
 
-        rdfs:label "upstart on"@en ;
+    rdfs:label "upstart on"@en ;
 
-        rdfs:comment "upstart on"@en ;
+    rdfs:comment "upstart on"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:domain  :FiveGResource ;
 
-        rdfs:range   xsd:boolean .
+    rdfs:range   xsd:boolean .
 
 
 
@@ -888,13 +885,15 @@
 
 :useFloatingIps  a    owl:DatatypeProperty ;
 
-        rdfs:label "use floating IPs"@en ;
+    rdfs:seeAlso osco:floatingIp ;
 
-        rdfs:comment "use floating IPs (USE_FLOATING_IPS)"@en ;
+    rdfs:label "use floating IPs"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:comment "use floating IPs (USE_FLOATING_IPS)"@en ;
 
-        rdfs:range   xsd:boolean .
+    rdfs:domain  :FiveGResource ;
+
+    rdfs:range   xsd:boolean .
 
 
 
@@ -903,20 +902,22 @@
 
 :version  a    owl:DatatypeProperty ;
 
-        rdfs:label "version"@en ;
+    rdfs:seeAlso osco:VERSION ;
 
-        rdfs:comment "version"@en ;
+    rdfs:label "version"@en ;
 
-        rdfs:domain  :FiveGResource ;
+    rdfs:comment "version"@en ;
 
-        rdfs:range   xsd:string .
+    rdfs:domain  :FiveGResource ;
+
+    rdfs:range   xsd:string .
 
 
 
 ###  http://open-multinet.info/ontology/omn-lifecycle#hasID
 
 omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
-                   owl:FunctionalProperty .
+    owl:FunctionalProperty .
 
 
 
@@ -946,24 +947,26 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 :Control rdf:type owl:Class ;
 
-      rdfs:label "Control"@en ;
+    rdfs:label "Control"@en ;
       
-      rdfs:subClassOf :FiveGResource ;
+    rdfs:subClassOf :FiveGResource ;
       
-      rdfs:comment "Control (CTRL)"@en .
+    rdfs:comment "Control (CTRL)"@en .
 
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#DomainNameServer
+###  http://open-multinet.info/ontology/resource/fiveg#DomainNameSystem
 
-:DomainNameServer rdf:type owl:Class ;
+:DomainNameSystem rdf:type owl:Class ;
 
-      rdfs:label "Domain Name Server"@en ;
+    owl:equivalentClass osco:dns ;
+
+    rdfs:label "Domain Name System"@en ;
       
-      rdfs:subClassOf :FiveGResource ;
+    rdfs:subClassOf :FiveGResource ;
       
-      rdfs:comment "Domain Name Server (DNS)"@en .
+    rdfs:comment "Domain Name System (DNS)"@en .
 
 
 
@@ -971,11 +974,11 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 :ENodeB rdf:type owl:Class ;
 
-      rdfs:label "eNodeB"@en ;
-      
-      rdfs:subClassOf :FiveGResource ;
-      
-      rdfs:comment "eNodeB"@en .
+    rdfs:label "eNodeB"@en ;
+
+    rdfs:subClassOf :FiveGResource ;
+
+    rdfs:comment "eNodeB"@en .
 
 
 
@@ -983,11 +986,11 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 :Gateway rdf:type owl:Class ;
 
-      rdfs:label "Gateway"@en ;
-      
-      rdfs:subClassOf :FiveGResource ;
-      
-      rdfs:comment "Gateway"@en .
+    rdfs:label "Gateway"@en ;
+    
+    rdfs:subClassOf :FiveGResource ;
+    
+    rdfs:comment "Gateway"@en .
 
 
 
@@ -995,11 +998,13 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 :HomeSubscriberServer rdf:type owl:Class ;
 
-      rdfs:label "Home Subscriber Server"@en ;
-      
-      rdfs:subClassOf :FiveGResource ;
-      
-      rdfs:comment "Home Subscriber Server (HSS)"@en .
+    owl:equivalentClass osco:hss ;
+
+    rdfs:label "Home Subscriber Server"@en ;
+    
+    rdfs:subClassOf :FiveGResource ;
+    
+    rdfs:comment "Home Subscriber Server (HSS)"@en .
 
 
 
@@ -1007,11 +1012,11 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 :Switch rdf:type owl:Class ;
 
-      rdfs:label "Switch"@en ;
-      
-      rdfs:subClassOf :FiveGResource ;
-      
-      rdfs:comment "Switch (PGWU-SGWU-5G)"@en .
+    rdfs:label "Switch"@en ;
+    
+    rdfs:subClassOf :FiveGResource ;
+    
+    rdfs:comment "Switch (PGWU-SGWU-5G)"@en .
 
 
 
@@ -1019,26 +1024,26 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 :FiveGAdapter rdf:type owl:Class ;
 
-      rdfs:label "EPC Adapter"@en ;
-      
-      rdfs:subClassOf omn:Adapter ;
-      
-      rdfs:comment "Evolved Packet Core adapter"@en ;
-      
-      rdfs:seeAlso <http://www.flex-project.eu> .
+    rdfs:label "EPC Adapter"@en ;
+    
+    rdfs:subClassOf omn:Adapter ;
+    
+    rdfs:comment "Evolved Packet Core adapter"@en ;
+    
+    rdfs:seeAlso <http://www.flex-project.eu> .
 
 
 ###  http://open-multinet.info/ontology/resource/fiveg#FiveGResource
 
 :FiveGResource rdf:type owl:Class ;
 
-      rdfs:label "EPC generic resource"@en ;
-      
-      rdfs:subClassOf omn:Resource ;
-      
-      rdfs:comment "EPC generic resource, can have specific type EvolvedPacketCore, UserEquipment or AccessNetwork"@en ;
-      
-      rdfs:seeAlso <http://www.flex-project.eu> .
+    rdfs:label "EPC generic resource"@en ;
+
+    rdfs:subClassOf omn:Resource ;
+
+    rdfs:comment "EPC generic resource, can have specific type EvolvedPacketCore, UserEquipment or AccessNetwork"@en ;
+
+    rdfs:seeAlso <http://www.flex-project.eu> .
 
 
 

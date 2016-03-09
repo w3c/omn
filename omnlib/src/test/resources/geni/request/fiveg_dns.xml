@@ -9,7 +9,7 @@
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		exclusive="false">
 		<sliver_type
-			name="http://open-multinet.info/ontology/resource/fiveg#DomainNameServer" />
+			name="http://open-multinet.info/ontology/resource/fiveg#DomainNameSystem" />
 		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688e" />
 		<ns5:dns domain_name="test_domain_name"
 			domain_ns="test_ns" additionals="test_additionals"

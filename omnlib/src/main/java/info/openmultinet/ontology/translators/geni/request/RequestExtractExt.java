@@ -1395,7 +1395,7 @@ public class RequestExtractExt extends AbstractConverter {
 	public static void tryExtractFivegDns(Resource node, Object rspecObject) {
 		try {
 			Dns dns = (Dns) rspecObject;
-			node.addProperty(RDF.type, Fiveg.DomainNameServer);
+			node.addProperty(RDF.type, Fiveg.DomainNameSystem);
 
 			String additionals = dns.getAdditionals();
 			if (additionals != null && additionals != "") {
