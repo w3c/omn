@@ -71,22 +71,12 @@ public class AdSet extends AbstractConverter {
 			SliverType sliver1;
 			ObjectFactory of = new ObjectFactory();
 
-			if (omnSliver.getObject().asResource()
-					.hasProperty(Omn_domain_pc.hasDiskImage)) {
+			if (omnSliver.getObject().asResource().hasProperty(Omn_domain_pc.hasDiskImage)) {
 				StmtIterator diskImages = omnSliver.getObject().asResource()
 						.listProperties(Omn_domain_pc.hasDiskImage);
-
 				while (diskImages.hasNext()) {
-					Resource diskImage1 = diskImages.next().getObject()
-							.asResource();
-					String diskName = null;
-					if (diskImage1.hasProperty(Omn_domain_pc.hasDiskimageLabel)) {
-						diskName = diskImage1
-								.getProperty(Omn_domain_pc.hasDiskimageLabel)
-								.getObject().asLiteral().getString();
-					} else {
-						diskName = diskImage1.getURI();
-					}
+					String diskName = diskImages.next().getObject()
+							.asResource().getURI();
 					sliver1 = of.createNodeContentsSliverType();
 					sliver1.setName(diskName);
 					JAXBElement<SliverType> sliverType = new ObjectFactory()
