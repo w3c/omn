@@ -72,9 +72,15 @@ public class AdSet extends AbstractConverter {
 			sliver1 = of.createNodeContentsSliverType();
 			String sliverUri = omnSliver.getObject().asResource().getURI();
 			AdSetExt.setOsco(omnSliver, geniNode);
+			
 			// setOsco(omnSliver, sliver1);
 			sliver1.setName(sliverUri);
-
+			
+			Resource sliverTypeResource = omnSliver.getObject().asResource();
+			if (sliverTypeResource != null) {
+				setDiskImage(sliverTypeResource, sliver1);
+			}
+			
 			JAXBElement<SliverType> sliverType = new ObjectFactory()
 					.createNodeContentsSliverType(sliver1);
 
