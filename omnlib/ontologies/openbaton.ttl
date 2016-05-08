@@ -55,55 +55,183 @@
 #################################################################
 
 
-
-###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
-
-#:cloudManagementIP  a    owl:ObjectProperty ;
-#
-#    rdfs:label "cloud management IP address"@en ;
-#
-#    rdfs:comment "cloud management IP address"@en ;
-#
-#    rdfs:domain  :Gateway ;
-#
-#   rdfs:range   omn-resource:IPAddress .
-
-
-
-
-###  http://open-multinet.info/ontology/resource/fiveg#oscoState
-
-#:oscoState  a    owl:ObjectProperty ;
-#
- #   rdfs:label "osco state"@en ;
-#
- #   rdfs:comment "osco-assigned state"@en ;
-#
- #   rdfs:domain  :FiveGResource ;
-#
- #   rdfs:range   omn-lifecycle:state .
-
-
-
 #################################################################
 #
 #    Datatype Properties
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/resource/fiveg#additionals
+###  http://open-multinet.info/ontology/resource/openbaton#version
 
-#:additionals  a    owl:DatatypeProperty ;
-#
- #   owl:equivalentProperty osco:additionals ;
-#
- #   rdfs:label "additionals"@en ;
-#
- #   rdfs:comment "additionals"@en ;
-#
- #   rdfs:domain  :DomainNameSystem ;
-#
- #   rdfs:range   xsd:string .
+:version  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#deploymentFlavour
+
+:deploymentFlavour  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#requires
+
+:requires  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#scaleInOut
+
+:scaleInOut  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#vmImage
+
+:vmImage  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#vimInstanceName
+
+:vimInstanceName  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#virtualLink
+
+:virtualLink  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#type
+
+:type  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#endpoint
+
+:endpoint  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#startEvent
+
+:startEvent  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#instantiateEvent
+
+:instantiateEvent  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+###  http://open-multinet.info/ontology/resource/openbaton#configureEvent
+
+:configureEvent  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+###  http://open-multinet.info/ontology/resource/openbaton#vendor
+
+:vendor  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#instanceName
+
+:instanceName  a    owl:DatatypeProperty ;
+
+    rdfs:label "cloud"@en ;
+
+    rdfs:comment "cloud"@en ;
+
+    rdfs:domain  :OpenBatonResource ;
+
+    rdfs:range   xsd:string .
 
 
 
@@ -114,6 +242,82 @@
 #
 #################################################################
 
+###  http://open-multinet.info/ontology/resource/openbaton#FiveGCore
+
+:FiveGCore rdf:type owl:Class ;
+
+      rdfs:label "FiveGCore"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "FiveGCore"@en .
+
+###  http://open-multinet.info/ontology/resource/openbaton#MME
+
+:MME rdf:type owl:Class ;
+
+      rdfs:label "MME"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "MME"@en .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#Gateway
+
+:Gateway rdf:type owl:Class ;
+
+      rdfs:label "Gateway"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "Gateway"@en .
+
+
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#SgwuPgwu
+
+:SgwuPgwu rdf:type owl:Class ;
+
+      rdfs:label "SgwuPgwu"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "SgwuPgwu"@en .
+
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#UE
+
+:UE rdf:type owl:Class ;
+
+      rdfs:label "UE"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "UE"@en .
+
+
+###  http://open-multinet.info/ontology/resource/openbaton#ENodeB
+
+:ENodeB rdf:type owl:Class ;
+
+      rdfs:label "ENodeB"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "ENodeB"@en .
+
+###  http://open-multinet.info/ontology/resource/openbaton#DomainNameSystem
+
+:DomainNameSystem rdf:type owl:Class ;
+
+      rdfs:label "DomainNameSystem"@en ;
+      
+      rdfs:subClassOf :OpenBatonResource ;
+      
+      rdfs:comment "DomainNameSystem"@en .
 
 
 ###  http://open-multinet.info/ontology/resource/openbaton#NetworkServiceDescriptor
@@ -125,7 +329,7 @@
       rdfs:subClassOf :OpenBatonResource ;
       
       rdfs:comment "Network Service Descriptor"@en .
-      
+
       
 
 ###  http://open-multinet.info/ontology/resource/openbaton#NetworkServiceRecord
