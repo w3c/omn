@@ -205,6 +205,7 @@
 						<include>ontologies/epc.ttl</include>
 						<include>ontologies/fiveg.ttl</include>
 						<include>ontologies/acs.ttl</include>
+						<include>ontologies/openbaton.ttl</include>
 						<!-- include>src/test/resources/ontologies/osco.ttl</include -->
 					</includes>
 					<fileOptions>
