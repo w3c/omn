@@ -438,6 +438,23 @@
 
 omn-resource:IPAddress rdf:type owl:Class .
 
+### http://open-multinet.info/ontology/resource/openbaton#Switch
+:Switch rdf:type owl:Class;
+
+
+### http://open-multinet.info/ontology/resource/openbaton#HomeSubscriberServer
+:HomeSubscriberServer rdf:type owl:Class;
+
+
+### http://open-multinet.info/ontology/resource/openbaton#BenchmarkingTool
+:BenchmarkingTool rdf:type owl:Class;
+
+
+
+### http://open-multinet.info/ontology/resource/openbaton#Control
+:Control rdf:type owl:Class;
+
+
 
 
 ###  http://open-multinet.info/ontology/omn#Adapter
