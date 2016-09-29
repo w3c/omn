@@ -27,6 +27,7 @@
                 foaf:homepage <http://fuseco-playground.org> ;
                 foaf:based_near :location ;
                 omn:isAdministeredBy <http://www.fokus.fraunhofer.de/about#me> ;
+                omn:describedBy :fpDataset ;
                 omn:hasService :am, :sa .
 
 :am rdf:type geni:AggregateManager ;
@@ -46,4 +47,10 @@
           geo:lat "52.5258083" ;
           
           geo:long "13.3172764" .
+          
 
+###  http://open-multinet.info/ontology/ngn-federation-playground#fpDataset
+
+:fpDataset  rdf:type void:Dataset ;
+
+            void:sparqlEndpoint <http://federation.av.tu-berlin.de:3030> .
