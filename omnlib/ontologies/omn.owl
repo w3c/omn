@@ -1,0 +1,457 @@
+<http://open-multinet.info/ontology/omn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<http://open-multinet.info/ontology/omn> <http://www.w3.org/2000/01/rdf-schema#label> "omn"@en .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/date> "2014-11-11"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/terms/modified> "2015-04-27"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://open-multinet.info/ontology/omn> <http://www.w3.org/2002/07/owl#versionInfo> "2015-04-27"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/vocab/vann/preferredNamespacePrefix> "omn"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/title> "Open-Multinet Upper Ontology"@en .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/description> "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/creator> <http://alex.willner.ws/about#me> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/rights> <http://creativecommons.org/licenses/by/4.0/> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/terms/license> <http://creativecommons.org/licenses/by/4.0/> .
+<http://open-multinet.info/ontology/omn> <http://creativecommons.org/ns#license> <http://creativecommons.org/licenses/by/4.0/> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/publisher> <http://open-multinet.info/> .
+<http://open-multinet.info/ontology/omn> <http://xmlns.com/foaf/0.1/homepage> <http://open-multinet.info/> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/vocab/vann/preferredNamespaceUri> <http://open-multinet.info/ontology/omn#> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/description> <http://raw.githubusercontent.com/open-multinet/playground-rspecs-ontology/master/ontologies/pics/omn.png> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <http://users.ntua.gr/c.papagianni> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <http://www.commit-nl.nl/people/morsey> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <https://staff.fnwi.uva.nl/p.grosso> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <https://www.linkedin.com/in/yahyaalhazmi> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <mailto:brecht.vermeulen@iminds.be> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <mailto:ibaldin@renci.org> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <mailto:jorge.lopez_vergara@uam.es> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <mailto:loughnane@campus.tu-berlin.de> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <mailto:thijs.walcarius@intec.ugent.be> .
+<http://open-multinet.info/ontology/omn> <http://purl.org/dc/elements/1.1/contributor> <mailto:yxin@renci.org> .
+<http://open-multinet.info/ontology/omn#adaptableFrom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#adaptableFrom> <http://www.w3.org/2000/01/rdf-schema#label> "adaptable from"@en .
+<http://open-multinet.info/ontology/omn#adaptableFrom> <http://www.w3.org/2000/01/rdf-schema#comment> "determines the resource from which this resource can be adapted from - e.g. from an Ethernet to a FDDI port."@en .
+<http://open-multinet.info/ontology/omn#adaptableFrom> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Layer> .
+<http://open-multinet.info/ontology/omn#adaptableFrom> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Layer> .
+<http://open-multinet.info/ontology/omn#adaptableFrom> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#adaptableTo> .
+<http://open-multinet.info/ontology/omn#adaptableTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#adaptableTo> <http://www.w3.org/2000/01/rdf-schema#label> "adaptable to"@en .
+<http://open-multinet.info/ontology/omn#adaptableTo> <http://www.w3.org/2000/01/rdf-schema#comment> "determines to which resource this resource can adapts to - e.g. from an Ethernet to a FDDI port."@en .
+<http://open-multinet.info/ontology/omn#adaptableTo> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Layer> .
+<http://open-multinet.info/ontology/omn#adaptableTo> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Layer> .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid1 .
+_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid2 .
+_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid3 .
+_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid5 <http://www.w3.org/2002/07/owl#unionOf> _:genid4 .
+_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid6 .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid7 .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid8 .
+_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid10 <http://www.w3.org/2002/07/owl#unionOf> _:genid9 .
+<http://open-multinet.info/ontology/omn#adaptsFrom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#IrreflexiveProperty> .
+<http://open-multinet.info/ontology/omn#adaptsFrom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#adaptsFrom> <http://www.w3.org/2000/01/rdf-schema#label> "adapts from"@en .
+<http://open-multinet.info/ontology/omn#adaptsFrom> <http://www.w3.org/2000/01/rdf-schema#comment> "determines from which resource this resource adapts - e.g. from an Ethernet to a FDDI port."@en .
+<http://open-multinet.info/ontology/omn#adaptsFrom> <http://www.w3.org/2000/01/rdf-schema#range> _:genid5 .
+<http://open-multinet.info/ontology/omn#adaptsFrom> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid10 .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid11 .
+_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid12 .
+_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid13 .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid15 <http://www.w3.org/2002/07/owl#unionOf> _:genid14 .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid16 .
+_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid17 .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid18 .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid20 <http://www.w3.org/2002/07/owl#unionOf> _:genid19 .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#IrreflexiveProperty> .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/2000/01/rdf-schema#label> "adapts to"@en .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/2000/01/rdf-schema#comment> "determines to which resource this resource adapts - e.g. from an Ethernet to a FDDI port."@en .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#adaptsFrom> .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid15 .
+<http://open-multinet.info/ontology/omn#adaptsTo> <http://www.w3.org/2000/01/rdf-schema#range> _:genid20 .
+_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid21 .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid22 .
+_:genid24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid23 .
+_:genid25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid25 <http://www.w3.org/2002/07/owl#unionOf> _:genid24 .
+_:genid26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid26 .
+_:genid28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid27 .
+_:genid29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid28 .
+_:genid30 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid30 <http://www.w3.org/2002/07/owl#unionOf> _:genid29 .
+<http://open-multinet.info/ontology/omn#dependsOn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#dependsOn> <http://www.w3.org/2000/01/rdf-schema#label> "depends on"@en .
+<http://open-multinet.info/ontology/omn#dependsOn> <http://www.w3.org/2000/01/rdf-schema#comment> "claims dependency"@en .
+<http://open-multinet.info/ontology/omn#dependsOn> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://open-multinet.info/ontology/omn#relatesTo> .
+<http://open-multinet.info/ontology/omn#dependsOn> <http://www.w3.org/2000/01/rdf-schema#range> _:genid25 .
+<http://open-multinet.info/ontology/omn#dependsOn> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid30 .
+_:genid31 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid31 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid32 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid32 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid31 .
+_:genid33 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid33 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid32 .
+_:genid34 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid34 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid33 .
+_:genid35 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid35 <http://www.w3.org/2002/07/owl#unionOf> _:genid34 .
+<http://open-multinet.info/ontology/omn#fromDependency> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#fromDependency> <http://www.w3.org/2000/01/rdf-schema#label> "from dependency"@en .
+<http://open-multinet.info/ontology/omn#fromDependency> <http://www.w3.org/2000/01/rdf-schema#comment> "claims dependency"@en .
+<http://open-multinet.info/ontology/omn#fromDependency> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Dependency> .
+<http://open-multinet.info/ontology/omn#fromDependency> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#toDependency> .
+<http://open-multinet.info/ontology/omn#fromDependency> <http://www.w3.org/2000/01/rdf-schema#range> _:genid35 .
+_:genid36 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid36 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid37 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid37 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid36 .
+_:genid38 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid38 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid37 .
+_:genid39 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid39 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid38 .
+_:genid40 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid40 <http://www.w3.org/2002/07/owl#unionOf> _:genid39 .
+<http://open-multinet.info/ontology/omn#hasAttribute> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#hasAttribute> <http://www.w3.org/2000/01/rdf-schema#label> "has attribute"@en .
+<http://open-multinet.info/ontology/omn#hasAttribute> <http://www.w3.org/2000/01/rdf-schema#comment> "link to a general attribute of the resource - e.g. to a ReadOnly class"@en .
+<http://open-multinet.info/ontology/omn#hasAttribute> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Attribute> .
+<http://open-multinet.info/ontology/omn#hasAttribute> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#isAttributeOf> .
+<http://open-multinet.info/ontology/omn#hasAttribute> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid40 .
+_:genid41 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid41 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid42 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid42 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid41 .
+_:genid43 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid43 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid42 .
+_:genid44 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid44 <http://www.w3.org/2002/07/owl#unionOf> _:genid43 .
+<http://open-multinet.info/ontology/omn#hasComponent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#hasComponent> <http://www.w3.org/2000/01/rdf-schema#label> "has component"@en .
+<http://open-multinet.info/ontology/omn#hasComponent> <http://www.w3.org/2000/01/rdf-schema#comment> "component of the resource - e.g. a CPU"@en .
+<http://open-multinet.info/ontology/omn#hasComponent> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#hasComponent> .
+<http://open-multinet.info/ontology/omn#hasComponent> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Component> .
+<http://open-multinet.info/ontology/omn#hasComponent> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid44 .
+<http://open-multinet.info/ontology/omn#hasGroup> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#hasGroup> <http://www.w3.org/2000/01/rdf-schema#label> "has group"@en .
+<http://open-multinet.info/ontology/omn#hasGroup> <http://www.w3.org/2000/01/rdf-schema#comment> "a group that is related to this resource - e.g. a reserved topology within an infrastructure"@en .
+<http://open-multinet.info/ontology/omn#hasGroup> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Group> .
+<http://open-multinet.info/ontology/omn#hasGroup> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Group> .
+<http://open-multinet.info/ontology/omn#hasGroup> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#isGroupOf> .
+_:genid45 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid45 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid46 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid46 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid45 .
+_:genid47 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid47 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid46 .
+_:genid48 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid48 <http://www.w3.org/2002/07/owl#unionOf> _:genid47 .
+<http://open-multinet.info/ontology/omn#hasReservation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#hasReservation> <http://www.w3.org/2000/01/rdf-schema#label> "has reservation"@en .
+<http://open-multinet.info/ontology/omn#hasReservation> <http://www.w3.org/2000/01/rdf-schema#comment> "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en .
+<http://open-multinet.info/ontology/omn#hasReservation> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Reservation> .
+<http://open-multinet.info/ontology/omn#hasReservation> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid48 .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/2000/01/rdf-schema#label> "has resource"@en .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/2000/01/rdf-schema#comment> "a resource that this resource contains - e.g. a node within a reserved topology"@en .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#contains> .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Group> .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Resource> .
+<http://open-multinet.info/ontology/omn#hasResource> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#isResourceOf> .
+_:genid49 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid49 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid50 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid50 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid49 .
+_:genid51 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid51 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid50 .
+_:genid52 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid52 <http://www.w3.org/2002/07/owl#unionOf> _:genid51 .
+<http://open-multinet.info/ontology/omn#hasService> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#hasService> <http://www.w3.org/2000/01/rdf-schema#label> "has service"@en .
+<http://open-multinet.info/ontology/omn#hasService> <http://www.w3.org/2000/01/rdf-schema#comment> "a service that this resource contains - e.g. a Hadoop instance within a reserved topology"@en .
+<http://open-multinet.info/ontology/omn#hasService> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Service> .
+<http://open-multinet.info/ontology/omn#hasService> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid52 .
+_:genid53 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid53 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid54 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid54 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid53 .
+_:genid55 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid55 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid54 .
+_:genid56 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid56 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid55 .
+_:genid57 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid57 <http://www.w3.org/2002/07/owl#unionOf> _:genid56 .
+<http://open-multinet.info/ontology/omn#isAttributeOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#isAttributeOf> <http://www.w3.org/2000/01/rdf-schema#label> "is attribute of"@en .
+<http://open-multinet.info/ontology/omn#isAttributeOf> <http://www.w3.org/2000/01/rdf-schema#comment> "a general attribute of a resource - e.g. to a ReadOnly class"@en .
+<http://open-multinet.info/ontology/omn#isAttributeOf> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Attribute> .
+<http://open-multinet.info/ontology/omn#isAttributeOf> <http://www.w3.org/2000/01/rdf-schema#range> _:genid57 .
+_:genid58 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid58 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid59 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid59 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid58 .
+_:genid60 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid60 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid59 .
+_:genid61 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid61 <http://www.w3.org/2002/07/owl#unionOf> _:genid60 .
+<http://open-multinet.info/ontology/omn#isComponentOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#isComponentOf> <http://www.w3.org/2000/01/rdf-schema#label> "is component of"@en .
+<http://open-multinet.info/ontology/omn#isComponentOf> <http://www.w3.org/2000/01/rdf-schema#comment> "is component of a resource - e.g. a CPU in a PC"@en .
+<http://open-multinet.info/ontology/omn#isComponentOf> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Component> .
+<http://open-multinet.info/ontology/omn#isComponentOf> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#hasComponent> .
+<http://open-multinet.info/ontology/omn#isComponentOf> <http://www.w3.org/2000/01/rdf-schema#range> _:genid61 .
+<http://open-multinet.info/ontology/omn#isGroupOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#isGroupOf> <http://www.w3.org/2000/01/rdf-schema#label> "is group of"@en .
+<http://open-multinet.info/ontology/omn#isGroupOf> <http://www.w3.org/2000/01/rdf-schema#comment> "a group that is related to a resource - e.g. a reserved topology within an infrastructure"@en .
+<http://open-multinet.info/ontology/omn#isGroupOf> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Group> .
+<http://open-multinet.info/ontology/omn#isGroupOf> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Group> .
+_:genid62 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid62 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid63 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid63 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid62 .
+_:genid64 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid64 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid63 .
+_:genid65 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid65 <http://www.w3.org/2002/07/owl#unionOf> _:genid64 .
+<http://open-multinet.info/ontology/omn#isReservationOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#isReservationOf> <http://www.w3.org/2000/01/rdf-schema#label> "is reservation of"@en .
+<http://open-multinet.info/ontology/omn#isReservationOf> <http://www.w3.org/2000/01/rdf-schema#comment> "the reservation details of a resource - e.g. an immediate reservation for 3 hours"@en .
+<http://open-multinet.info/ontology/omn#isReservationOf> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Reservation> .
+<http://open-multinet.info/ontology/omn#isReservationOf> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#hasReservation> .
+<http://open-multinet.info/ontology/omn#isReservationOf> <http://www.w3.org/2000/01/rdf-schema#range> _:genid65 .
+<http://open-multinet.info/ontology/omn#isResourceOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#isResourceOf> <http://www.w3.org/2000/01/rdf-schema#label> "is resource of"@en .
+<http://open-multinet.info/ontology/omn#isResourceOf> <http://www.w3.org/2000/01/rdf-schema#comment> "a resource that another resource contains - e.g. a node within a reserved topology"@en .
+<http://open-multinet.info/ontology/omn#isResourceOf> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#contains> .
+<http://open-multinet.info/ontology/omn#isResourceOf> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Group> .
+<http://open-multinet.info/ontology/omn#isResourceOf> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid66 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid66 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid67 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid67 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid66 .
+_:genid68 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid68 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid67 .
+_:genid69 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid69 <http://www.w3.org/2002/07/owl#unionOf> _:genid68 .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/2000/01/rdf-schema#label> "is service of"@en .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/2000/01/rdf-schema#comment> "a service of a resource - e.g. a Hadoop instance within a reserved topology"@en .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Service> .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/2002/07/owl#inverseOf> <http://open-multinet.info/ontology/omn#hasService> .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.org/ontology/service#providedBy> .
+<http://open-multinet.info/ontology/omn#isServiceOf> <http://www.w3.org/2000/01/rdf-schema#range> _:genid69 .
+_:genid70 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid70 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid71 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid71 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid70 .
+_:genid72 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid72 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid71 .
+_:genid73 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid73 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid72 .
+_:genid74 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid74 <http://www.w3.org/2002/07/owl#unionOf> _:genid73 .
+_:genid75 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid75 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid76 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid76 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid75 .
+_:genid77 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid77 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid76 .
+_:genid78 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid78 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid77 .
+_:genid79 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid79 <http://www.w3.org/2002/07/owl#unionOf> _:genid78 .
+<http://open-multinet.info/ontology/omn#relatesTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#relatesTo> <http://www.w3.org/2000/01/rdf-schema#label> "relates to"@en .
+<http://open-multinet.info/ontology/omn#relatesTo> <http://www.w3.org/2000/01/rdf-schema#comment> "claims a general dependency"@en .
+<http://open-multinet.info/ontology/omn#relatesTo> <http://www.w3.org/2000/01/rdf-schema#range> _:genid74 .
+<http://open-multinet.info/ontology/omn#relatesTo> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid79 .
+_:genid80 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid80 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid81 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid81 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid80 .
+_:genid82 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid82 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid81 .
+_:genid83 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid83 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid82 .
+_:genid84 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid84 <http://www.w3.org/2002/07/owl#unionOf> _:genid83 .
+<http://open-multinet.info/ontology/omn#toDependency> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#toDependency> <http://www.w3.org/2000/01/rdf-schema#label> "to dependency"@en .
+<http://open-multinet.info/ontology/omn#toDependency> <http://www.w3.org/2000/01/rdf-schema#comment> "claims dependency"@en .
+<http://open-multinet.info/ontology/omn#toDependency> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Dependency> .
+<http://open-multinet.info/ontology/omn#toDependency> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid84 .
+_:genid85 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid85 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid86 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid86 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid85 .
+_:genid87 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid87 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid86 .
+_:genid88 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid88 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid87 .
+_:genid89 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid89 <http://www.w3.org/2002/07/owl#unionOf> _:genid88 .
+<http://open-multinet.info/ontology/omn#withinEnvironment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://open-multinet.info/ontology/omn#withinEnvironment> <http://www.w3.org/2000/01/rdf-schema#label> "within environment"@en .
+<http://open-multinet.info/ontology/omn#withinEnvironment> <http://www.w3.org/2000/01/rdf-schema#comment> "within environment"@en .
+<http://open-multinet.info/ontology/omn#withinEnvironment> <http://www.w3.org/2000/01/rdf-schema#range> <http://open-multinet.info/ontology/omn#Environment> .
+<http://open-multinet.info/ontology/omn#withinEnvironment> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid89 .
+<http://open-multinet.info/ontology/omn#hasEndpoint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://open-multinet.info/ontology/omn#hasEndpoint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://open-multinet.info/ontology/omn#hasEndpoint> <http://www.w3.org/2000/01/rdf-schema#label> "has endpoint"@en .
+<http://open-multinet.info/ontology/omn#hasEndpoint> <http://www.w3.org/2000/01/rdf-schema#comment> "The URL of the API of a service"@en .
+<http://open-multinet.info/ontology/omn#hasEndpoint> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Service> .
+<http://open-multinet.info/ontology/omn#hasEndpoint> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#anyURI> .
+_:genid90 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid90 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid91 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid91 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid90 .
+_:genid92 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid92 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid91 .
+_:genid93 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid93 <http://www.w3.org/2002/07/owl#unionOf> _:genid92 .
+<http://open-multinet.info/ontology/omn#hasURI> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://open-multinet.info/ontology/omn#hasURI> <http://www.w3.org/2000/01/rdf-schema#label> "has URI"@en .
+<http://open-multinet.info/ontology/omn#hasURI> <http://www.w3.org/2000/01/rdf-schema#comment> "Uniform Resource Identifier"@en .
+<http://open-multinet.info/ontology/omn#hasURI> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://open-multinet.info/ontology/omn#hasURI> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid93 .
+<http://open-multinet.info/ontology/omn#isReadonly> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://open-multinet.info/ontology/omn#isReadonly> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://open-multinet.info/ontology/omn#isReadonly> <http://www.w3.org/2000/01/rdf-schema#label> "is read only"@en .
+<http://open-multinet.info/ontology/omn#isReadonly> <http://www.w3.org/2000/01/rdf-schema#comment> "information/attribute that is not writable"@en .
+<http://open-multinet.info/ontology/omn#isReadonly> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/omn#Attribute> .
+<http://open-multinet.info/ontology/omn#isReadonly> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+_:genid94 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:genid94 <http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2002/07/owl#topObjectProperty> .
+_:genid94 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://open-multinet.info/ontology/omn#Resource> .
+<http://open-multinet.info/ontology/omn#isVirtualized> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://open-multinet.info/ontology/omn#isVirtualized> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<http://open-multinet.info/ontology/omn#isVirtualized> <http://www.w3.org/2000/01/rdf-schema#label> "is virtualized"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://open-multinet.info/ontology/omn#isVirtualized> <http://www.w3.org/2000/01/rdf-schema#comment> "indicates whether a resource has been virtualized"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://open-multinet.info/ontology/omn#isVirtualized> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+<http://open-multinet.info/ontology/omn#isVirtualized> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid94 .
+<http://open-multinet.info/ontology/omn#sequenceNumber> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://open-multinet.info/ontology/omn#sequenceNumber> <http://www.w3.org/2000/01/rdf-schema#comment> "represents the sequence number"@en .
+<http://open-multinet.info/ontology/omn#sequenceNumber> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#integer> .
+<http://open-multinet.info/ontology/omn#Attribute> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Attribute> <http://www.w3.org/2000/01/rdf-schema#label> "Attribute"@en .
+<http://open-multinet.info/ontology/omn#Attribute> <http://www.w3.org/2000/01/rdf-schema#comment> "Describes the attributes of an omn:Group, omn:Resource, omn:Service or omn:Component in more detail"@en .
+<http://open-multinet.info/ontology/omn#Attribute> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: Monitoring information, Color attributes, Reservation information, QoS, SLAs, Location, Configuration, ..."@en .
+<http://open-multinet.info/ontology/omn#Attribute> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://geni-orca.renci.org/owl/app-color.owl#ColorAttribute> .
+<http://open-multinet.info/ontology/omn#Attribute> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schemas.ogf.org/nml/2013/05/base#Location> .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/2000/01/rdf-schema#label> "Component"@en .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/2000/01/rdf-schema#comment> "An Entity that is part of an omn:Resource or omn:Service. It does not need to be an omn:Resource or an omn:Service itself."@en .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: CPU, Sensor, Core, Port, Image"@en .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.org/dc/terms/isPartOf> .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schema.org/partOfSystem> .
+<http://open-multinet.info/ontology/omn#Component> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://www.ontologydesignpatterns.org/cp/owl/move.owl#formsPartOf> .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/2000/01/rdf-schema#label> "Dependency"@en .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: application coloring (in GENI context), orchestration needs dependencies"@en .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/2000/01/rdf-schema#comment> "Helps to defines a directional relationship between omn:Resource, omn:Group, omn:Component or omn:Service. It makes it possible to annotate the dependencies with additional properties."@en .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#implements> .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://geni-orca.renci.org/owl/app-color.owl#ColorAttribute> .
+<http://open-multinet.info/ontology/omn#Dependency> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://www.science.uva.nl/research/sne/indl#implements> .
+<http://open-multinet.info/ontology/omn#Environment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Environment> <http://www.w3.org/2000/01/rdf-schema#label> "Environment"@en .
+<http://open-multinet.info/ontology/omn#Environment> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: interference, concurrent virtual machines, concurrent traffic, temperature, heat, ..."@en .
+<http://open-multinet.info/ontology/omn#Environment> <http://www.w3.org/2000/01/rdf-schema#comment> "The operating conditions under which a omn:Resource, omn:Group, omn:Service is operating."@en .
+<http://open-multinet.info/ontology/omn#Environment> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schema.org/Place> .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/2000/01/rdf-schema#label> "Group"@en .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/2000/01/rdf-schema#comment> "A collection of omn:Resource, omn:Service or omn:Group"@en .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: Bi-directional Link, ..."@en .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#Group> .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://geni-orca.renci.org/owl/collections.owl#Collection> .
+<http://open-multinet.info/ontology/omn#Group> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schemas.ogf.org/nml/2013/05/base#Group> .
+<http://open-multinet.info/ontology/omn#Layer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Layer> <http://www.w3.org/2000/01/rdf-schema#label> "Layer"@en .
+<http://open-multinet.info/ontology/omn#Layer> <http://www.w3.org/2000/01/rdf-schema#comment> "Describes a place within a hierarchy a specific omn:Group, omn:Resource, omn:Service or omn:Component can adapt to."@en .
+<http://open-multinet.info/ontology/omn#Layer> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: In networking, an end-to-end connectivity has to be on the same layer (path finding). For resources, it can describe the capability to adapt to a virtualized version"@en .
+<http://open-multinet.info/ontology/omn#Layer> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schemas.ogf.org/nml/2013/05/base#AdaptationService> .
+<http://open-multinet.info/ontology/omn#Layer> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://www.science.uva.nl/research/sne/indl#VirtualNode> .
+<http://open-multinet.info/ontology/omn#Reservation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Reservation> <http://www.w3.org/2000/01/rdf-schema#label> "Reservation"@en .
+<http://open-multinet.info/ontology/omn#Reservation> <http://www.w3.org/2000/01/rdf-schema#comment> "A specification of a guarantee"@en .
+<http://open-multinet.info/ontology/omn#Reservation> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: (Earliest) Start and (lates) end time, data volume, ..."@en .
+<http://open-multinet.info/ontology/omn#Reservation> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://www.w3.org/2006/time#Interval> .
+<http://open-multinet.info/ontology/omn#Resource> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Resource> <http://www.w3.org/2000/01/rdf-schema#label> "Resource"@en .
+<http://open-multinet.info/ontology/omn#Resource> <http://www.w3.org/2000/01/rdf-schema#comment> "An Entity that can be provisioned/controlled/measured by APIs"@en .
+<http://open-multinet.info/ontology/omn#Resource> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: Node, Link, People, ..."@en .
+<http://open-multinet.info/ontology/omn#Resource> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#Node> .
+<http://open-multinet.info/ontology/omn#Resource> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schemas.ogf.org/nml/2013/05/base#Node> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#label> "Service"@en .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#comment> "An Entity that has an API/capability to use it, it may depend on an omn:Resource"@en .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: Aggregate Manager, Portal, Measurement Service, Hadoop, Broker, ..."@en .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://fp7-novi.eu/im.owl#Service> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.org/dc/dcmitype/Service> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.org/goodrelations/v1#ProductOrService> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://purl.org/ontology/service#Service> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schema.org/Service> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://schemas.ogf.org/nml/2013/05/base#Service> .
+<http://open-multinet.info/ontology/omn#Service> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://www.daml.org/services/owl-s/1.0DL/Service.owl#Service> .
+<http://open-multinet.info/ontology/omn#Topology> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://open-multinet.info/ontology/omn#Topology> <http://www.w3.org/2000/01/rdf-schema#label> "Topology"@en .
+<http://open-multinet.info/ontology/omn#Topology> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://open-multinet.info/ontology/omn#Group> .
+<http://open-multinet.info/ontology/omn#Topology> <http://www.w3.org/2000/01/rdf-schema#comment> "A collection of omn:Resource, omn:Service or omn:Group"@en .
+<http://open-multinet.info/ontology/omn#Topology> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples: Infrastructure, Reservation, Slice, ..."@en .
+<http://purl.org/vocommons/voaf#Vocabulary> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.w3.org/2002/07/owl#AllDisjointClasses> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.w3.org/2002/07/owl#IrreflexiveProperty> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.w3.org/2002/07/owl#NamedIndividual> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.w3.org/2006/time#Interval> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.w3.org/2006/time#Interval> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://open-multinet.info/ontology/omn#Reservation> .
+<http://xmlns.com/foaf/0.1/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://alex.willner.ws/about#me> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://alex.willner.ws/about#me> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://open-multinet.info/ontology/omn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocommons/voaf#Vocabulary> .
+<http://open-multinet.info/ontology/omn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://open-multinet.info/ontology/omn> <http://www.w3.org/2000/01/rdf-schema#comment> "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en .
+_:genid95 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Service> .
+_:genid95 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid96 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Resource> .
+_:genid96 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid95 .
+_:genid97 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Layer> .
+_:genid97 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid96 .
+_:genid98 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Group> .
+_:genid98 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid97 .
+_:genid99 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Environment> .
+_:genid99 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid98 .
+_:genid100 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Dependency> .
+_:genid100 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid99 .
+_:genid101 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Component> .
+_:genid101 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid100 .
+_:genid102 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://open-multinet.info/ontology/omn#Attribute> .
+_:genid102 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid101 .
+_:genid103 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDisjointClasses> .
+_:genid103 <http://www.w3.org/2002/07/owl#members> _:genid102 .
