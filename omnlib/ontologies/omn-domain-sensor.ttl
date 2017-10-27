@@ -1,0 +1,833 @@
+@prefix : <http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix qu: <http://purl.oclc.org/NET/ssnx/qu/qu#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-domain-uxv: <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#> .
+@prefix unit: <http://purl.oclc.org/NET/ssnx/qu/unit#> .
+@prefix dim: <http://purl.oclc.org/NET/ssnx/qu/dim#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix quantity: <http://purl.oclc.org/NET/ssnx/qu/quantity#> .
+@prefix qu-rec20: <http://purl.oclc.org/NET/ssnx/qu/qu-rec20#> .
+
+<http://www.semanticweb.org/rawfie/samant/omn-domain-sensor> a owl:Ontology;
+							     owl:imports <http://purl.oclc.org/NET/ssnx/ssn> ,
+                                                            		 <http://purl.oclc.org/NET/ssnx/qu/qu-rec20> ,
+                                                            		 <http://purl.oclc.org/NET/ssnx/qu/qu> .
+
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.oclc.org/NET/ssnx/ssn#hasSubSystem
+ssn:hasSubSystem rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain ssn:System range  ssn:SensingDevice or ssn:System" .
+
+###  http://www.loa-cnr.it/ontologies/DUL.owl#isPartOf
+dul:isPartOf rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain ssn:SensingDevice range ssn:System " .
+
+###  http://purl.oclc.org/NET/ssnx/ssn#observes
+ssn:observes rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain ssn:SensingDevice range qu:QuantityKind " .
+
+###  http://purl.oclc.org/NET/ssnx/ssn#isPropertyOf
+ssn:isPropertyOf rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain qu:QuantityKind range ssn:FeatureOfInterest " .
+
+###  http://purl.oclc.org/NET/ssnx/ssn#hasProperty
+ssn:hasProperty rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain ssn:FeatureOfInterest range qu:QuantityKind" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasSensorSystem
+:hasSensorSystem rdf:type owl:ObjectProperty ;
+	rdfs:domain omn-domain-uxv:Uxv ;
+	rdfs:range ssn:System ;	
+	owl:inverseOf :isSensorSystemOf ;
+	rdfs:comment "Relation between a UxV and the attached Sensor System" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#isSensorSystemOf
+:isSensorSystemOf rdf:type owl:ObjectProperty ;
+	rdfs:domain ssn:System ;
+	rdfs:range omn-domain-uxv:Uxv ;
+        owl:inverseOf :hasSensorSystem ;
+	rdfs:comment "Inverse property of :hasSensorSystem" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasUnit
+:hasUnit rdf:type owl:ObjectProperty ;
+	rdfs:subPropertyOf dul:isParametrizedBy ;
+	owl:inverseOf :isUnitOf ;
+	rdfs:comment "domain ssn:SensingDevice range qu:Unit " .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#isUnitOf
+:isUnitOf rdf:type owl:ObjectProperty ;
+	rdfs:subPropertyOf dul:isParametrizedBy ;
+	owl:inverseOf :hasUnit ;
+	rdfs:comment "domain qu:Unit range ssn:SensingDevice " .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasHealthStatus
+omn-domain-uxv:hasHealthStatus a owl:ObjectProperty ;
+	rdfs:comment "domain ssn:System range omn-domain-uxv:HealthStatus " .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isHealthStatusOf
+omn-domain-uxv:isHealthStatusOf a owl:ObjectProperty ;
+	rdfs:comment "domain omn-domain-uxv:HealthStatus range ssn:System " . 
+
+### http://www.loa-cnr.it/ontologies/DUL.owl#isParametrizedBy 
+dul:isParametrizedBy rdf:type owl:ObjectProperty .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#consumesPower
+
+omn-domain-uxv:consumesPower a owl:DatatypeProperty ;
+	rdfs:comment "domain omn-domain-uxv:Uxv,  ssn:SensingDevice, omn:Service omn-resource:Interface and range xsd:anyURI"@en ;
+	rdfs:label "consumesPower"@en .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasVendorName
+:hasVendorName a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( ssn:System
+                       ssn:SensingDevice
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasVendorName"@en .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasProductName
+:hasProductName a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( ssn:System
+                       ssn:SensingDevice
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasProductName"@en .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasSerial
+:hasSerial a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( ssn:System
+                       ssn:SensingDevice
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasSerial"@en .
+ 
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasID
+:hasID a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( ssn:System
+                       ssn:SensingDevice
+		       qu:QuantityKind 
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasID"@en .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasDescpiption
+:hasDescription a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( ssn:System
+                       ssn:SensingDevice
+		       qu:QuantityKind 
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasDescpiption"@en .
+
+#################################################################
+#   Classes
+#################################################################
+
+###  http://purl.oclc.org/NET/ssnx/qu/qu#QuantityKind
+qu:QuantityKind rdf:type owl:Class ;
+	rdfs:subClassOf dul:Quality .
+
+###  http://purl.oclc.org/NET/ssnx/qu/qu#Unit
+qu:Unit rdf:type owl:Class ;
+        rdfs:subClassOf dul:UnitOfMeasure .
+
+###  http://www.loa-cnr.it/ontologies/DUL.owl#UnitOfMeasure
+dul:UnitOfMeasure rdf:type owl:Class .
+
+
+###  http://purl.oclc.org/NET/ssnx/ssn#SensingDevice
+ssn:SensingDevice rdf:type owl:Class .
+
+
+###  http://purl.oclc.org/NET/ssnx/ssn#System
+ssn:System rdf:type owl:Class .
+
+
+###  http://www.loa-cnr.it/ontologies/DUL.owl#Quality
+dul:Quality rdf:type owl:Class .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#AccelerationSensor
+:AccelerationSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#AngleSensor
+:AngleSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#CapacitanceSensor
+:CapacitanceSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ConcentrationSensor
+:ConcentrationSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ConductanceSensor
+:ConductanceSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#DistanceSensor
+:DistanceSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#DurationSensor
+:DurationSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ElectricConductivitySensor
+:ElectricConductivitySensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ElectricCurrentRateSensor
+:ElectricCurrentRateSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ElectricPotentialSensor
+:ElectricPotentialSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ElectricResistanceSensor
+:ElectricResistanceSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#EnergySensor
+:EnergySensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#GeolocationSensor
+:GeolocationSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ForceSensor
+:ForceSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#FrequencySensor
+:FrequencySensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ImageSensor
+:ImageSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#InformationDataSensor
+:InformationDataSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#MagneticFluxDensitySensor
+:MagneticFluxDensitySensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#MassSensor
+:MassSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#PowerSensor
+:PowerSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#RotationalSpeedSensor
+:RotationalSpeedSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#SalinitySensor
+:SalinitySensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#StressOrPressureSensor
+:StressOrPressureSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#SoundSpeedSensor
+:SoundSpeedSensor rdf:type owl:Class ;
+        rdfs:subClassOf :VelocityOrSpeedSensor .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#TemperatureSensor
+:TemperatureSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#TurbiditySensor
+:TurbiditySensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#VelocityOrSpeedSensor
+:VelocityOrSpeedSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#VolumeSensor
+:VolumeSensor rdf:type owl:Class ;
+        rdfs:subClassOf ssn:SensingDevice .
+
+###  http://purl.oclc.org/NET/ssnx/ssn#FeatureOfInterest
+ssn:FeatureOfInterest a owl:Class .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Water
+:Water a owl:Class ;
+	rdfs:subClassOf ssn:FeatureOfInterest .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Air
+:Air a owl:Class ;
+	rdfs:subClassOf ssn:FeatureOfInterest .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Ground
+:Ground a owl:Class ;
+	rdfs:subClassOf ssn:FeatureOfInterest .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Acceleration
+dim:Acceleration rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#AccelerationUnit
+dim:AccelerationUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Angle
+dim:Angle rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#AngleUnit
+dim:AngleUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Capacitance
+dim:Capacitance rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#CapacitanceUnit
+dim:CapacitanceUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Concentration
+dim:Concentration rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ConcentrationUnit
+dim:ConcentrationUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Conductance
+dim:Conductance rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ConductanceUnit
+dim:ConductanceUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Distance
+dim:Distance rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#DistanceUnit
+dim:DistanceUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Dimensionless
+dim:Dimensionless rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#DimensionlessUnit
+dim:DimensionlessUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Duration
+dim:Duration rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#DurationUnit
+dim:DurationUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricConductivity
+dim:ElectricConductivity rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricConductivityUnit
+dim:ElectricConductivityUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricCurrentRate
+dim:ElectricCurrentRate rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricCurrentRateUnit
+dim:ElectricCurrentRateUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricPotential
+dim:ElectricPotential rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricPotentialUnit
+dim:ElectricPotentialUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricResistance
+dim:ElectricResistance rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ElectricResistanceUnit
+dim:ElectricResistanceUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Energy
+dim:Energy rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#EnergyUnit
+dim:EnergyUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Force
+dim:Force rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#ForceUnit
+dim:ForceUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Frequency
+dim:Frequency rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#FrequencyUnit
+dim:FrequencyUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Geolocation
+:Geolocation rdf:type owl:Class ;
+	rdfs:subClassOf qu:QuantityKind .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#GeolocationUnit
+:GeolocationUnit rdf:type owl:Class ;
+	rdfs:subClassOf qu:Unit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#MagneticFluxDensity
+dim:MagneticFluxDensity rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#MagneticFluxDensityUnit
+dim:MagneticFluxDensityUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Mass
+dim:Mass rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#MassUnit
+dim:MassUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#RotationalSpeed
+dim:RotationalSpeed rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#RotationalSpeedUnit
+dim:RotationalSpeedUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Image
+:Image rdf:type owl:Class ;
+	rdfs:subClassOf qu:QuantityKind .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ImageUnit
+:ImageUnit rdf:type owl:Class ;
+	rdfs:subClassOf qu:Unit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#InformationData
+:InformationData rdf:type owl:Class ;
+	rdfs:subClassOf qu:QuantityKind .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#InformationDataUnit
+:InformationDataUnit rdf:type owl:Class ;
+	rdfs:subClassOf qu:Unit .
+
+### http://purl.oclc.org/NET/ssnx/qu/dim#Power
+dim:Power rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+### http://purl.oclc.org/NET/ssnx/qu/dim#PowerUnit
+dim:PowerUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Salinity
+:Salinity rdf:type owl:Class ;
+	rdfs:subClassOf qu:QuantityKind .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#SalinityUnit
+:SalinityUnit rdf:type owl:Class ;
+	rdfs:subClassOf qu:Unit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#Turbidity
+:Turbidity rdf:type owl:Class ;
+	rdfs:subClassOf qu:QuantityKind .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#TurbidityUnit
+:TurbidityUnit rdf:type owl:Class ;
+	rdfs:subClassOf qu:Unit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#StressOrPressure
+dim:StressOrPressure rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#StressOrPressureUnit
+dim:StressOrPressureUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Temperature
+dim:Temperature rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#TemperatureUnit
+dim:TemperatureUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#VelocityOrSpeed
+dim:VelocityOrSpeed rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#VelocityOrSpeedUnit
+dim:VelocityOrSpeedUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#Volume
+dim:Volume rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:QuantityKind" .
+
+###  http://purl.oclc.org/NET/ssnx/qu/dim#VolumeUnit
+dim:VolumeUnit rdf:type owl:Class ;
+	rdfs:comment "subClassOf of qu:Unit" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Uxv
+omn-domain-uxv:Uxv rdf:type owl:Class .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#HealthStatus
+omn-domain-uxv:HealthStatus a owl:Class ;
+	rdfs:label "HealthStatus"@en .
+ 
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#OK
+omn-domain-uxv:OK a owl:Class ;
+	rdfs:subClassOf omn-domain-uxv:HealthStatus .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Critical
+omn-domain-uxv:Critical a owl:Class ;
+	rdfs:subClassOf omn-domain-uxv:HealthStatus .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Shutdown
+omn-domain-uxv:Shutdown a owl:Class ;
+	rdfs:subClassOf omn-domain-uxv:HealthStatus .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Warning
+omn-domain-uxv:Warning a owl:Class ;
+	rdfs:subClassOf omn-domain-uxv:HealthStatus .
+
+
+
+#################################################################
+#    Individuals 
+#################################################################
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Critical
+omn-domain-uxv:Critical a owl:NamedIndividual , omn-domain-uxv:HealthStatus .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#OK
+omn-domain-uxv:OK a owl:NamedIndividual , omn-domain-uxv:HealthStatus .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Warning
+omn-domain-uxv:Warning a owl:NamedIndividual , omn-domain-uxv:HealthStatus .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Shutdown
+omn-domain-uxv:Shutdown a owl:NamedIndividual , omn-domain-uxv:HealthStatus .
+
+###  h http://purl.oclc.org/NET/ssnx/qu/unit#metrePerSecondSquared
+unit:metrePerSecondSquared rdf:type dim:AccelerationUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#radian
+unit:radian rdf:type dim:AngleUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#degreeUnitOfAngle
+unit:degreeUnitOfAngle rdf:type dim:AngleUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#secondUnitOfAngle
+unit:secondUnitOfAngle rdf:type dim:AngleUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#minuteUnitOfAngle
+unit:minuteUnitOfAngle rdf:type dim:AngleUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#percent
+unit:percent rdf:type dim:DimensionlessUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#partsPerMillion
+:partsPerMillion rdf:type dim:ConcentrationUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#partsPerBillion
+:partsPerBillion rdf:type dim:ConcentrationUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#pH
+:pH rdf:type dim:ConcentrationUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#molePerLitre
+unit:molePerLitre rdf:type dim:ConcentrationUnit .
+
+### http://purl.oclc.org/NET/ssnx/qu/unit#metre
+unit:metre rdf:type dim:DistanceUnit .
+
+### http://purl.oclc.org/NET/ssnx/qu/unit#secondUnitOfTime
+unit:secondUnitOfTime rdf:type dim:DurationUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#siemensPerMetre
+unit:siemensPerMetre rdf:type dim:ElectricConductivityUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#siemens
+unit:siemens rdf:type dim:ConductanceUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#ampere
+unit:ampere rdf:type dim:ElectricCurrentRateUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#volt
+unit:volt rdf:type dim:ElectricPotentialUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#newton
+unit:newton rdf:type dim:ForceUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#hertz
+unit:hertz rdf:type dim:FrequencyUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#bit
+:bit rdf:type :InformationDataUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#byte
+:byte rdf:type :InformationDataUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#pixel
+:pixel rdf:type :ImageUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#decibel
+unit:decibel rdf:type dim:LevelOfAFieldQuantityUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#kilogram
+unit:kilogram rdf:type dim:MassUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#degreePerSecond
+unit:degreePerSecond rdf:type dim:RotationalSpeedUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#radianPerSecond
+unit:radianPerSecond rdf:type dim:RotationalSpeedUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#rotationPerMinute
+unit:rotationPerMinute rdf:type dim:RotationalSpeedUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#psu
+:psu rdf:type :SalinityUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#pascal
+unit:pascal rdf:type dim:StressOrPressureUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#millibar
+unit:millibar rdf:type dim:StressOrPressureUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#kelvin
+unit:kelvin rdf:type dim:TemperatureUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#degreeCelcius
+unit:degreeCelsius rdf:type dim:TemperatureUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#tesla
+unit:tesla rdf:type dim:MagneticFluxDensityUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#gauss
+:gauss rdf:type dim:MagneticFluxDensityUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ntu
+:ntu rdf:type :TurbidityUnit .
+
+###  http://purl.oclc.org/NET/ssnx/qu/unit#metrePerSecond
+unit:metrePerSecond rdf:type dim:VelocityOrSpeedUnit .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#ground
+:ground rdf:type :Ground ;
+       ssn:hasProperty quantity:rotationalSpeed ,
+		       quantity:acceleration ,
+		       quantity:magneticFluxDensity ,
+		       quantity:concentration ,
+		       quantity:conductance ,
+      	               quantity:temperature ,
+		       :image ,
+                       :geolocation .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#air
+:air rdf:type :Air ;
+       ssn:hasProperty quantity:atmosphericPressure ,
+		       quantity:acceleration ,
+		       quantity:magneticFluxDensity ,
+		       quantity:concentration ,
+		       quantity:conductance ,
+      	               quantity:temperature ,
+		       :image ,
+                       :geolocation .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#water
+:water rdf:type :Water ;
+       ssn:hasProperty quantity:rotationalSpeed ,
+		       quantity:acceleration ,
+		       quantity:concentration ,
+		       quantity:conductance ,
+      	               quantity:temperature ,
+		       quantity:magneticFluxDensity ,
+		       :image ,
+                       :geolocation .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#geolocation
+:geolocation rdf:type :Geolocation ;
+		   ssn:isPropertyOf :water ,
+                       	       	    :air ,
+				    :ground ;
+		   :hasDescpiption "describes the location of a point on the ground or air or sea" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#atmosphericPressure
+quantity:atmosphericPressure rdf:type dim:StressOrPressure ;
+		     ssn:isPropertyOf :air ;
+		     :hasDescpiption "describes atmospheric pressure" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#rotationalSpeed
+quantity:rotationalSpeed rdf:type dim:RotationalSpeed ;
+		     ssn:isPropertyOf :water ,
+				      :ground ;
+		     :hasDescpiption "describes rotational or angular speed" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#acceleration
+quantity:acceleration rdf:type dim:Acceleration ;
+		     ssn:isPropertyOf :water ,
+                       	       	      :air ,
+				      :ground ;
+		     :hasDescpiption "describes acceleration" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#magneticFluxDensity
+quantity:magneticFluxDensity rdf:type dim:MagneticFluxDensity ;
+		     ssn:isPropertyOf :water ,
+                       	       	      :air ,
+				      :ground ;
+		     :hasDescpiption "describes magnetism or magnetic flux density" .
+
+### http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#image
+:image rdf:type :Image ;
+		   ssn:isPropertyOf :water ,
+                       	       	    :air ,
+				    :ground ;
+		   :hasDescpiption "describes images on the ground or air or sea" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#temperature
+quantity:temperature rdf:type dim:Temperature ;
+		     ssn:isPropertyOf :water ,
+                       	       	      :air ,
+				      :ground ;
+		     :hasDescpiption "describes temperature" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#concentration
+quantity:concentration rdf:type dim:Concentration ;
+		     ssn:isPropertyOf :water ,
+                       	       	      :air ,
+				      :ground ;
+		     :hasDescpiption "describes concentration" .
+
+### http://purl.oclc.org/NET/ssnx/qu/quantity#conductance
+quantity:conductance rdf:type dim:Conductance ;
+		     ssn:isPropertyOf :water ,
+                       	       	      :air ,
+				      :ground ;
+		     :hasDescpiption "describes conductance" .
+
+
+###################################################################
+# #    General axioms
+###################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( omn-domain-uxv:Critical
+		omn-domain-uxv:OK
+		omn-domain-uxv:Shutdown
+		omn-domain-uxv:Warning
+	      )
+] .
+# 
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AccelerationSensor
+		:AngleSensor
+		:CapacitanceSensor
+		:ConcentrationSensor
+		:DistanceSensor
+		:DurationSensor
+		:ElectricConductivitySensor
+		:ElectricCurrentRateSensor
+		:ElectricPotentialSensor
+		:ElectricResistanceSensor
+		:EnergySensor
+		:ForceSensor
+		:FrequencySensor
+		:MassSensor 
+		:RotationalSpeedSensor
+		:PowerSensor  
+		:InformationDataSensor
+		:TurbiditySensor
+		:SalinitySensor
+		:StressOrPressureSensor
+		:TemperatureSensor 
+		:VelocityOrSpeedSensor
+		:VolumeSensor
+	      )
+] .
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( dim:AccelerationUnit
+		dim:AngleUnit
+		dim:CapacitanceUnit
+		dim:ConcentrationUnit
+		dim:DistanceUnit
+		dim:DurationUnit
+		dim:ElectricConductivityUnit
+		dim:ElectricCurrentRateUnit
+		dim:ElectricPotentialUnit
+		dim:ElectricResistanceUnit
+		dim:EnergyUnit
+		dim:ForceUnit
+		dim:FrequencyUnit
+		dim:MassUnit 
+		dim:RotationalSpeedUnit
+		dim:PowerUnit  
+		:InformationDataUnit
+		:TurbidityUnit
+		:SalinityUnit
+		dim:StressOrPressureUnit
+		dim:TemperatureUnit 
+		dim:VelocityOrSpeedUnit
+		dim:VolumeUnit
+	      )
+] .
+# 
