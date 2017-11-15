@@ -76,7 +76,7 @@
 										<ignore></ignore>
 									</action>
 								</pluginExecution>
-			
+
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -145,7 +145,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.5.3</version>
+				<version>3.1.0</version>
 
 				<configuration>
 					<archive>
