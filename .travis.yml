@@ -1,6 +1,6 @@
 language: java
 jdk:
-- oraclejdk8
+- openjdk7
 sudo: false
 script:
 - mvn -X test
@@ -21,7 +21,7 @@ cache:
   - $HOME/.m2
 after_success:
 - if [ "${TRAVIS_BRANCH}" = "master" ]; then curl http://demo.fiteagle.org/trigger.php?c=omn ; fi
-- mvn clean test jacoco:report coveralls:report
+- mvn -X clean test jacoco:report coveralls:report
 env:
   global:
   - secure: SKS5m4l9ykDqpu9FLesziqQqicOweTyauzNDUBi5nWyaX+KjSngnxshdzhidZQTKO7fmMS52Fa3AeNdCfjTPEvZjRpd/i7KFSiw0A56Y9+mMXNKIHDzfCw8JU7UAGvIKt1AiCMkOkWdGPj1GYL4+RPEW/iNlzBbiFDNWaxZ8s6g=
