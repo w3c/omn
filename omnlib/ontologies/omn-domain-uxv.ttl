@@ -1,0 +1,1276 @@
+@prefix : <http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn-domain-wireless: <http://open-multinet.info/ontology/omn-domain-wireless#> .
+@prefix omn-domain-sensor: <http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix geo2003: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gml: <http://www.opengis.net/gml/> .
+@prefix geo: <http://www.georss.org/georss/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+
+<http://www.semanticweb.org/rawfie/samant/omn-domain-uxv> a owl:Ontology .
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasSize
+
+:hasSize a owl:ObjectProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range :Size .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasSecurity
+
+:hasSecurity a owl:ObjectProperty ;
+	rdfs:domain omn-resource:Interface ;
+	rdfs:comment "connection Security" ;
+	rdfs:range :ConnectionSecurity .
+#  
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasCoverage
+
+:hasCoverage a owl:ObjectProperty ;
+	rdfs:domain omn-resource:Interface ;
+	rdfs:range gml:Polygon .
+#  
+#  http://open-multinet.info/ontology/omn#hasComponent
+
+omn:hasComponent a owl:ObjectProperty ;
+	rdfs:comment "domain omn-resource:Interface range omn-domain-wireless:Channel".
+#
+#  http://open-multinet.info/ontology/omn-domain-wireless#supportsStandard
+
+omn-domain-wireless:supportsStandard a owl:ObjectProperty ;
+	rdfs:comment "domain omn-domain-wireless:Channel range omn-domain-wireless:Standard" .
+#
+#  http://open-multinet.info/ontology/omn-domain-wireless#usesFrequency
+
+omn-domain-wireless:usesFrequency a owl:ObjectProperty ;
+	rdfs:comment "domain omn-domain-wireless:Channel range omn-domain-wireless:Frequency" .
+#
+#  http://open-multinet.info/ontology/omn-resource#hasInterface
+
+omn-resource:hasInterface a owl:ObjectProperty ;
+	rdfs:comment "domain :Uxv range omn-resource:Interface"@en .
+#
+#  http://open-multinet.info/ontology/omn-resource#isInterfaceOf
+
+:isInterfaceOf a owl:ObjectProperty ;
+	rdfs:comment "domain omn-resource:Interface range :Uxv"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#managedBy
+
+omn-lifecycle:managedBy rdf:type owl:ObjectProperty ;          
+        rdfs:label "managed by"@en ;
+        rdfs:comment "URI of service (e.g. AggregateManager) that manages the instantiation of childs of a resource"@en ;
+	rdfs:comment "domain omn:Group, omn:Resource, omn:Service range omn:Service".
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasChild
+
+:hasChild a owl:ObjectProperty ;
+	owl:inverseOf :hasParent ;
+	rdfs:domain omn:Resource ;
+	rdfs:range omn:Resource .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasParent
+
+:hasParent a owl:ObjectProperty ;
+	owl:inverseOf :hasChild ;
+	rdfs:domain omn:Resource ;
+	rdfs:range omn:Resource .
+# 
+#  http://open-multinet.info/ontology/omn-lifecycle#hasReservationState
+
+omn-lifecycle:hasReservationState rdf:type owl:ObjectProperty ;
+                     rdfs:label "has Reservation State"@en ;
+                     rdfs:comment "domain omn-lifecycle:Lease range omn-lifecycle:ReservationState"@en ;
+                     rdfs:comment "The state of the reservation."@en .
+#
+#  http://open-multinet.info/ontology/omn#hasReservation
+
+omn:hasReservation rdf:type owl:ObjectProperty ;              
+        rdfs:label "has reservation"@en .
+#
+# http://open-multinet.info/ontology/omn#isReservationOf
+
+omn:isReservationOf rdf:type owl:ObjectProperty ;             
+        rdfs:label "is reservation of"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasHealthStatus
+
+:hasHealthStatus a owl:ObjectProperty ;
+	owl:inverseOf :isHealthStatusOf ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       :Testbed 
+		       ssn:System
+                     )
+        ] ;
+        rdfs:range :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasResourceStatus
+
+:hasResourceStatus a owl:ObjectProperty ;
+	owl:inverseOf :isResourceStatusOf ;
+	rdfs:domain :Uxv ;
+	rdfs:range :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUserRole
+
+:hasUserRole a owl:ObjectProperty ;
+	owl:inverseOf :isUserRoleOf ;
+	rdfs:domain :UserSettings ;
+	rdfs:range :UserRole ;
+	rdfs:label "hasUserRole"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUserSettings
+
+:hasUserSettings a owl:ObjectProperty ;
+	owl:inverseOf :isUserSettingsOf ;
+	rdfs:domain foaf:Person ;
+	rdfs:range :UserSettings ;
+	rdfs:label "hasUserSettings"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isHealthStatusOf
+
+:isHealthStatusOf a owl:ObjectProperty ;
+	owl:inverseOf :hasHealthStatus ;
+	rdfs:domain :HealthStatus ;
+	rdfs:range [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       :Testbed 
+		       ssn:System
+                     )
+        ] .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isResourceStatusOf
+
+:isResourceStatusOf a owl:ObjectProperty ;
+	owl:inverseOf :hasResourceStatus ;
+	rdfs:domain :ResourceStatus ;
+	rdfs:range :Uxv  .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isTestbedOf
+
+:isTestbedOf a owl:ObjectProperty ;
+	owl:inverseOf :usesTestbed ;
+	rdfs:domain :Testbed ;
+	rdfs:range foaf:Person ;
+	rdfs:label "isTestbedOf"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isUserRoleOf
+
+:isUserRoleOf a owl:ObjectProperty ;
+	owl:inverseOf :hasUserRole ;
+	rdfs:domain :UserRole ;
+	rdfs:range :UserSettings ;
+	rdfs:label "isUserRoleOf"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isUserSettingsOf
+
+:isUserSettingsOf a owl:ObjectProperty ;
+	owl:inverseOf :hasUserSettings ;
+	rdfs:domain :UserSettings ;
+	rdfs:range foaf:Person .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#usesTestbed
+
+:usesTestbed a owl:ObjectProperty ;
+	owl:inverseOf :isTestbedOf ;
+	rdfs:domain foaf:Person ;
+	rdfs:range :Testbed ;
+	rdfs:label "usesTestbed"@en .
+#
+#  http://www.georss.org/georss/where
+
+geo:where rdf:type owl:ObjectProperty ;
+          rdfs:comment "domain :Uxv and :Testbed range gml:_Geometry" . 
+#
+#  http://www.opengis.net/gml/exterior
+
+gml:exterior rdf:type owl:ObjectProperty ;
+             rdfs:comment "domain gml:Polygon range gml:LinearRing".
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasConfigParameters
+
+:hasConfigParameters a owl:ObjectProperty ;
+	owl:inverseOf :isConfigParametersOf ;
+	rdfs:domain :Uxv ;
+	rdfs:range :ConfigParameters ;
+	rdfs:label "hasConfigParameters"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isConfigParametersOf
+
+:isConfigParametersOf a owl:ObjectProperty ;
+	owl:inverseOf :hasConfigParameters ;
+	rdfs:domain :ConfigParameters ;
+	rdfs:range :Uxv ;
+	rdfs:label "isConfigParametersOf"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasExperimentResourceConfig
+
+:hasExperimentResourceConfig a owl:ObjectProperty ;
+	owl:inverseOf :isExperimentResourceConfigOf ;
+	rdfs:domain :ConfigParameters ;
+	rdfs:range  :ExperimentResourceConfig ;
+	rdfs:label "hasExperimentResourceConfig"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isExperimentResourceConfigOf
+
+:isExperimentResourceConfigOf a owl:ObjectProperty ;
+	owl:inverseOf :hasExperimentResourceConfig ;
+	rdfs:domain :ExperimentResourceConfig ;
+	rdfs:range  :ConfigParameters ;
+	rdfs:label "isExperimentResourceConfigOf"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasHealthInformation
+
+:hasHealthInformation a owl:ObjectProperty ;
+	owl:inverseOf :isHealthInformationOf ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       :Testbed 
+		       ssn:SensingDevice
+                     )
+        ] ;
+	rdfs:range  :HealthInformation ;
+	rdfs:label "hasHealthInformation"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isHealthInformationOf
+
+:isHealthInformationOf a owl:ObjectProperty ;
+	owl:inverseOf :hasHealthInformation ;
+	rdfs:domain :HealthInformation ;
+	rdfs:range [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       :Testbed 
+		       ssn:SensingDevice
+                     )
+        ] ;
+	rdfs:label "isHealthInformationOf"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasResource
+
+:hasResource a owl:ObjectProperty ;
+	owl:inverseOf :isResourceOf ;
+	rdfs:domain :Testbed ;
+	rdfs:range  :Uxv ;
+	rdfs:label "hasResource"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isResourceOf
+
+:isResourceOf a owl:ObjectProperty ;
+	owl:inverseOf :hasResource ;
+	rdfs:domain  :Uxv ;
+	rdfs:range  :Testbed ;
+	rdfs:label "isResourceOf"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasGeneralHealthStatus
+
+:hasGeneralHealthStatus a owl:ObjectProperty ;
+	owl:inverseOf :isResourceOf ;
+	rdfs:domain :HealthInformation ;
+	rdfs:range :GeneralHealthStatus ;
+	rdfs:label "hasGeneralHealthStatus"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isGeneralHealthStatusOf
+
+:isGeneralHealthStatusOf a owl:ObjectProperty ;
+	owl:inverseOf :hasGeneralHealthStatus ;
+	rdfs:domain  :GeneralHealthStatus ;
+	rdfs:range  :HealthInformation ;
+	rdfs:label "isGeneralHealthStatusOf"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUxVType
+
+:hasUxVType a owl:ObjectProperty ;
+	owl:inverseOf :isUxVTypeOf  ;
+	rdfs:domain :Uxv ;
+	rdfs:range :UxvType ;
+	rdfs:label "hasUxVType"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isUxVTypeOf
+
+:isUxVTypeOf a owl:ObjectProperty ;
+	owl:inverseOf :hasUxVType ;
+	rdfs:domain  :UxvType ;
+	rdfs:range  :Uxv ;
+	rdfs:label "isUxVTypeOf"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasLease
+
+omn-lifecycle:hasLease rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "has lease"@en ;
+                rdfs:comment "imported from omn-lifecycle, domain :Uxv range omn-lifecycle:Lease"@en ;
+                rdfs:seeAlso <http://nitlab.inf.uth.gr/schema/sfa/rspec/1> .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#hasSensorSystem
+
+omn-domain-sensor:hasSensorSystem rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain :Uxv range ssn:System" .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#isSensorSystemOf
+
+omn-domain-sensor:isSensorSystemOf rdf:type owl:ObjectProperty ;
+	rdfs:comment "domain ssn:System range :Uxv" .
+#
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#consumesPower
+
+:consumesPower a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv 
+		       omn-resource:Interface
+		       ssn:SensingDevice
+                     )
+        ] ;
+	rdfs:range xsd:double ;
+	rdfs:label "consumesPower"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#countryCode
+
+:countryCode a owl:DatatypeProperty ;
+	rdfs:domain gml:_Geometry ;
+	rdfs:range xsd:string ;
+	rdfs:label "countryCode"@en ;
+	rdfs:seeAlso "http://www.geonames.org/ontology" .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#clientID
+
+:clientID a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( omn:Resource 
+		       omn:Reservation
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "clientID"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#weight
+
+:weight a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "Weight"@en ;
+	rdfs:comment "Weight (Kg)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#mtoWeight
+
+:mtoWeight a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "MtoWeight"@en ;
+	rdfs:comment "Maximum Take Off Weight (Kg)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#length
+
+:length a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "Length"@en ;
+	rdfs:comment "Length (mm)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#width
+
+:width a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "Width"@en ;
+	rdfs:comment "Width (mm)"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#height
+
+:height a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "Height"@en ;
+	rdfs:comment "Height (mm)"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#diameter
+
+:diameter a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "Diameter"@en ;
+	rdfs:comment "Diameter (mm)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasTopSpeed
+
+:hasTopSpeedspeed a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "hasTopSpeed"@en ;
+	rdfs:comment "top speed (m/s)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasAvgSpeed
+
+:hasAvgSpeedspeed a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:double ;
+	rdfs:label "hasAvgSpeed"@en ;
+	rdfs:comment "average speed (m/s)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#endurance
+
+:endurance a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:integer ;
+	rdfs:label "Endurance"@en ;
+	rdfs:comment "endurance (sec)"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#battery
+
+:battery a owl:DatatypeProperty ;
+	rdfs:domain :Uxv ;
+	rdfs:range xsd:integer ;
+	rdfs:label "Battery"@en ;
+	rdfs:comment "Battery (Wh)"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentID
+
+omn-lifecycle:hasComponentID rdf:type owl:DatatypeProperty ;
+        rdfs:label "has component ID"@en ;     
+        rdfs:comment "A unique identifier set by the management system"@en ;
+	rdfs:comment "domain omn:Resource, omn:Component, omn:Service omn-resource:Interface and range xsd:anyURI"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerID
+
+omn-lifecycle:hasComponentManagerID rdf:type owl:DatatypeProperty ;
+        rdfs:label "has component manager ID"@en ;       
+        rdfs:comment "A unique identifier set by the management system"@en ;
+	rdfs:comment "domain omn:Resource, omn:Component, omn:Service and range xsd:anyURI"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerName
+
+omn-lifecycle:hasComponentManagerName rdf:type owl:DatatypeProperty ;
+        rdfs:label "has component manager name"@en ;     
+        rdfs:comment "has component manager name"@en ;
+	rdfs:comment "domain omn:Resource, omn:Component, omn:Service and range xsd:anyURI"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentName
+
+omn-lifecycle:hasComponentName rdf:type owl:DatatypeProperty ;
+        rdfs:label "has component name"@en ;     
+        rdfs:comment "has component name"@en ;
+	rdfs:comment "domain omn:Resource, omn:Component, omn:Service and range string"@en .
+#
+### This is a temporary solution to test the translator, so that the orignal component ID is return when a URL, and not the URN as provided by the translator.
+# http://open-multinet.info/ontology/omn-lifecycle#hasOriginalID
+
+omn-lifecycle:hasOriginalID rdf:type owl:DatatypeProperty ;
+        rdfs:label "has original component ID"@en ;       
+        rdfs:comment "The original identifier set by the management system"@en ;       
+	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasRole
+
+omn-lifecycle:hasRole rdf:type owl:DatatypeProperty ;
+        rdfs:label "has role"@en ;       
+        rdfs:comment "has role"@en ;
+	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasSliverID
+
+omn-lifecycle:hasSliverID rdf:type owl:DatatypeProperty ;
+        rdfs:label "has sliver ID"@en ;     
+        rdfs:comment "has sliver ID"@en ;
+	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
+#      
+#  http://open-multinet.info/ontology/omn-lifecycle#hasSliceID
+
+omn-lifecycle:hasSliceID rdf:type owl:DatatypeProperty ;
+        rdfs:label "has slice ID"@en ;       
+        rdfs:comment "domain omn:Reource, omn:Reservation and range string"@en ;       
+        rdfs:seeAlso "GENI Manifest RSpec v3: node > slice_id"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#hasSliverName
+
+omn-lifecycle:hasSliverName rdf:type owl:DatatypeProperty ;
+        rdfs:label "has sliver name"@en ;       
+        rdfs:comment "has sliver name"@en ;
+	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
+#
+	
+#  http://open-multinet.info/ontology/omn-lifecycle#expirationTime
+
+omn-lifecycle:expirationTime a owl:DatatypeProperty ;
+	rdfs:comment "Imported from omn-lifecycle:expirationTime"@en ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "has expiration time"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#startTime
+
+omn-lifecycle:startTime a owl:DatatypeProperty ;
+	rdfs:comment "Imported from omn-lifecycle:startTime"@en ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "has start time"@en .
+#
+# http://open-multinet.info/ontology/omn-lifecycle#hasID
+
+omn-lifecycle:hasID a owl:DatatypeProperty ;
+	rdfs:comment "Imported from omn-lifecycle:hasID domain omn-lifecycle:Lease omn-resource:Interface"@en ;
+	rdfs:range xsd:string ;
+	rdfs:label "has ID"@en .	
+# 
+# http://open-multinet.info/ontology/omn-lifecycle#resourceId
+
+omn-lifecycle:resourceId a owl:DatatypeProperty ;
+	rdfs:comment "Imported from omn-lifecycle:resourceId domain :UxV"@en ;
+	rdfs:range xsd:string ;
+	rdfs:label "has resource ID"@en .
+# 
+#  http://open-multinet.info/ontology/omn-domain-wireless#channelNum
+
+omn-domain-wireless:channelNum a owl:DatatypeProperty ;
+	rdfs:label "Channel Number"@en ;
+        rdfs:comment "domain omn-domain-wireless:Channel range xsd:integer".
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasID
+
+:hasID a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Testbed 
+		       :ConfigParameters
+		       :ExperimentResourceConfig
+		       foaf:Person
+                     )
+        ] ;
+	rdfs:label "hasId"@en ;
+        rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasEmail
+
+:hasEmail a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasEmail"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasFirstName
+
+:hasFirstName a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasFirstName"@en .
+# 
+#  http://open-multinet.info/ontology/omn-domain-wireless#lowerBoundFrequency
+
+omn-domain-wireless:lowerBoundFrequency a owl:DatatypeProperty ;
+	rdfs:comment "domain :Frequency range xsd:integer" .
+# 
+#  http://open-multinet.info/ontology/omn-domain-wireless#upperBoundFrequency
+
+omn-domain-wireless:upperBoundFrequency a owl:DatatypeProperty ;
+	rdfs:comment "domain :Frequency range xsd:integer" .
+# 
+#  http://open-multinet.info/ontology/omn-domain-wireless#antennaCount
+
+omn-domain-wireless:antennaCount a owl:DatatypeProperty ;
+	rdfs:comment "domain omn-domain-wireless:WirelessInterface  range xsd:integer" .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasInterfaceType
+
+:hasInterfaceType a owl:DatatypeProperty ;
+	rdfs:domain omn-resource:Interface ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasInterfaceType"@en .
+#  
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasPassword
+
+:hasPassword a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasPassword"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasPreferences
+
+:hasPreferences a owl:DatatypeProperty ;
+	rdfs:domain :UserSettings ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasPreferences"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasName
+
+:hasName a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       :Testbed 
+		       :ConfigParameters
+                     )
+        ] ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasStatusMessage
+
+:hasStatusMessage a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       omn-lifecycle:Lease 
+		       :Testbed
+                     )
+        ] ;
+	rdfs:range xsd:string .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasSurname
+
+:hasSurname a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasSurname"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasDescription
+
+:hasDescription a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :Uxv
+                       :Testbed 
+		       :ConfigParameters
+                     )
+        ] ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasDescription"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUavSupport
+
+:hasUavSupport a owl:DatatypeProperty ;
+	rdfs:domain :Testbed ;
+	rdfs:range xsd:boolean ;
+	rdfs:label "hasUavSupport"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUgvSupport
+
+:hasUgvSupport a owl:DatatypeProperty ;
+	rdfs:domain :Testbed ;
+	rdfs:range xsd:boolean ;
+	rdfs:label "hasUgvSupport"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUserName
+
+:hasUserName a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:string ;
+	rdfs:label "hasUserName"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasUsvSupport
+
+:hasUsvSupport a owl:DatatypeProperty ;
+	rdfs:domain :Testbed ;
+	rdfs:range xsd:boolean ;
+	rdfs:label "hasUsvSupport"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasVendor
+
+:hasVendor a owl:DatatypeProperty ;
+	rdfs:domain omn-resource:Interface ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasNominalBitrate
+
+:hasNominalBitrate a owl:DatatypeProperty ;
+	rdfs:domain omn-resource:Interface ;
+	rdfs:range xsd:double .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isSuperUser
+
+:isSuperUser a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:boolean ;
+	rdfs:label "isSuperUser"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#isUpdated
+
+:isUpdated a owl:DatatypeProperty ;
+	rdfs:domain [ rdf:type owl:Class ;
+         owl:unionOf ( :UserSettings
+                       :HealthInformation
+                     )
+        ] ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "isUpdated"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasMessage
+
+:hasMessage a owl:DatatypeProperty ;
+	rdfs:domain :HealthInformation ;
+        rdfs:range xsd:string ;
+	rdfs:label "hasMessage"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#lastLogin
+
+:lastLogin a owl:DatatypeProperty ;
+	rdfs:domain foaf:Person ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "lastLogin"@en .
+# 
+#  http://www.opengis.net/gml/pos
+
+gml:pos rdf:type owl:DatatypeProperty ;
+        rdfs:comment "domain gml:Point range string" .
+#
+#  http://www.opengis.net/gml/posList
+
+gml:posList rdf:type owl:DatatypeProperty ;
+           rdfs:comment "domain gml:LinearRing range string" .
+#
+#  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+
+geo2003:lat rdf:type owl:DatatypeProperty ;
+            rdfs:comment "domain :Point3D range double" .
+#
+#  http://www.w3.org/2003/01/geo/wgs84_pos#alt
+
+geo2003:alt rdf:type owl:DatatypeProperty ;
+            rdfs:comment "domain :Point3D range double" .
+#
+#  http://www.w3.org/2003/01/geo/wgs84_pos#long
+
+geo2003:long rdf:type owl:DatatypeProperty ;
+             rdfs:comment "domain :Point3D range double" .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasConfigParametersMinValue
+
+:hasConfigParametersMinValue a owl:DatatypeProperty ;
+	rdfs:domain :ConfigParameters ;
+	rdfs:range xsd:float ;
+	rdfs:label "hasConfigParametersMinValue"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasConfigParametersMaxValue
+
+:hasConfigParametersMaxValue a owl:DatatypeProperty ;
+	rdfs:domain :ConfigParameters ;
+	rdfs:range xsd:float ;
+	rdfs:label "hasConfigParametersMaxValue"@en .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#hasExperimentResourceConfigParamValue
+
+:hasExperimentResourceConfigParamValue a owl:DatatypeProperty ;
+	rdfs:domain :ExperimentResourceConfig ;
+       	rdfs:range xsd:float ;
+	rdfs:label "hasExperimentResourceConfigParamValue"@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#NetworkController
+
+:NetworkController rdf:type owl:Class ;
+             rdfs:comment "Network Controller to be described soon"@en .
+#
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#ConnectionSecurity
+
+:ConnectionSecurity rdf:type owl:Class ;
+             rdfs:label "ConnectionSecurity"@en .
+#
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#None
+
+:None rdf:type owl:Class ;
+             rdfs:label "None"@en ;
+             rdfs:subClassOf :ConnectionSecurity .
+#
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Authentication
+
+:Authentication rdf:type owl:Class ;
+             rdfs:label "Authentication"@en ;
+             rdfs:subClassOf :ConnectionSecurity .
+#
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Encryption
+
+:Encryption rdf:type owl:Class ;
+             rdfs:label "Encryption"@en ;
+             rdfs:subClassOf :ConnectionSecurity .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#Lease
+
+omn-lifecycle:Lease rdf:type owl:Class ;
+             rdfs:label "Lease"@en ;
+	     rdfs:subClassOf omn:Reservation ;
+	     rdfs:comment "Imported from omn-lifecycle:Lease"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#ReservationState
+
+omn-lifecycle:ReservationState rdf:type owl:Class ;
+                  
+             rdfs:label "Reservation State"@en ;
+             rdfs:comment "Imported from omn-lifecycle:ReservationState"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
+
+omn-lifecycle:Unallocated rdf:type owl:Class ;
+             rdfs:subClassOf omn-lifecycle:ReservationState ;
+             rdfs:comment "Imported from omn-lifecycle:Unallocated"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#Allocated
+
+omn-lifecycle:Allocated rdf:type owl:Class ;
+             rdfs:subClassOf omn-lifecycle:ReservationState ;
+             rdfs:comment "Imported from omn-lifecycle:Allocated"@en .
+#
+#  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+
+omn-lifecycle:Provisioned rdf:type owl:Class ;
+             rdfs:subClassOf omn-lifecycle:ReservationState ;
+             rdfs:comment "Imported from omn-lifecycle:Provisioned"@en .
+#
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Cancelled
+
+:Cancelled rdf:type owl:Class ;
+             rdfs:label "Cancelled"@en ;
+             rdfs:subClassOf omn-lifecycle:ReservationState .
+#
+#  http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Pending
+
+:Pending rdf:type owl:Class ;
+             rdfs:label "Pending"@en ;
+             rdfs:subClassOf omn-lifecycle:ReservationState .
+#
+# http://open-multinet.info/ontology/omn#Reservation
+
+omn:Reservation a owl:Class ;
+	rdfs:comment "Imported from omn:Reservation" .
+# 
+# http://open-multinet.info/ontology/omn#Resource 
+
+omn:Resource a owl:Class ;
+	rdfs:comment "Imported from omn:Resource" .
+# 
+# http://open-multinet.info/ontology/omn-federation#Infrastructure
+
+omn-federation:Infrastructure a owl:Class ;
+	rdfs:comment "Imported by omn-federation:Infrastructure" .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#AuV
+
+:AuV a owl:Class ;
+	rdfs:subClassOf :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#AuthorityUser
+
+:AuthorityUser a owl:Class ;
+	rdfs:subClassOf :UserRole .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Booked
+
+:Booked a owl:Class ;
+	rdfs:subClassOf :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-resource#Interface
+
+omn-resource:Interface a owl:Class ;
+	rdfs:comment "Imported from omn-resource:Interface"@en .	
+# 
+#  http://open-multinet.info/ontology/omn-domain-wireless#WiredInterface
+
+omn-domain-wireless:WiredInterface a owl:Class ;
+	rdfs:comment "Imported from omn-domain-wireless:WiredInterface"@en .
+#
+#  http://open-multinet.info/ontology/omn-domain-wireless#WirelessInterface
+
+omn-domain-wireless:WirelessInterface a owl:Class ;
+	rdfs:comment "Imported from omn-domain-wireless:WirelessInterface"@en .
+#
+#  http://open-multinet.info/ontology/omn-domain-wireless#Channel
+
+omn-domain-wireless:Channel rdf:type owl:Class ;
+	rdfs:comment "Imported from omn-domain-wireless:Channel"@en .
+#
+#  http://open-multinet.info/ontology/omn-domain-wireless#Frequency
+
+omn-domain-wireless:Frequency rdf:type owl:Class ;
+	rdfs:comment "Imported from omn-domain-wireless:Frequency"@en .
+#
+#  http://open-multinet.info/ontology/omn-domain-wireless#Standard
+
+omn-domain-wireless:Standard rdf:type owl:Class ;
+	rdfs:comment "Imported from omn-domain-wireless:Standard"@en .
+#
+
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Critical
+
+:Critical a owl:Class ;
+	rdfs:subClassOf :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Experimenter
+
+:Experimenter a owl:Class ;
+	rdfs:subClassOf :UserRole .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#HealthStatus
+
+:HealthStatus a owl:Class ;
+	rdfs:label "HealthStatus"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#OK
+
+:OK a owl:Class ;
+	rdfs:subClassOf :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Released
+
+:Released a owl:Class ;
+	rdfs:subClassOf :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#ResourceStatus
+
+:ResourceStatus a owl:Class .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Shutdown
+
+:Shutdown a owl:Class ;
+	rdfs:subClassOf :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#SleepMode
+
+:SleepMode a owl:Class ;
+	rdfs:subClassOf :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Testbed
+
+:Testbed a owl:Class ;
+	rdfs:subClassOf omn-federation:Infrastructure ;
+	rdfs:label "Testbed"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#TestbedManager
+
+:TestbedManager a owl:Class ;
+	rdfs:subClassOf :UserRole .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UaV
+
+:UaV a owl:Class ;
+	rdfs:subClassOf :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UgV
+
+:UgV a owl:Class ;
+	rdfs:subClassOf :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UsV
+
+:UsV a owl:Class ;
+	rdfs:subClassOf :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UserRole
+
+:UserRole a owl:Class ;
+	rdfs:label "UserRole"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UserSettings
+
+:UserSettings a owl:Class ;
+	rdfs:label "UserSettings"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Uxv
+
+:Uxv a owl:Class ;
+	rdfs:subClassOf omn:Resource ;
+	rdfs:label "Uxv"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UxvType
+
+:UxvType a owl:Class ;
+	rdfs:label "UxvType"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Warning
+
+:Warning a owl:Class ;
+	rdfs:subClassOf :HealthStatus .
+# 
+# http://xmlns.com/foaf/0.1/Person
+
+foaf:Person a owl:Class ;
+	rdfs:comment "User" .
+# 
+# http://www.opengis.net/gml#_Geometry
+
+gml:_Geometry rdf:type owl:Class .
+#
+# http://www.opengis.net/gml/Point
+
+gml:Point rdf:type owl:Class ;
+	rdfs:subClassOf gml:_Geometry .
+#
+#  http://www.opengis.net/gml/Polygon
+
+gml:Polygon rdf:type owl:Class ;
+	rdfs:subClassOf gml:_Geometry .
+#
+#  http://www.opengis.net/gml/LinearRing
+
+gml:LinearRing rdf:type owl:Class ;
+	rdfs:subClassOf gml:_Geometry .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Point3D
+
+:Point3D rdf:type owl:Class ;
+	owl:equivalentClass [ rdf:type owl:Class ;
+                              		owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                               owl:onProperty geo2003:lat ;
+                                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onDataRange xsd:double
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty geo2003:long ;
+                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:double
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty geo2003:alt ;
+                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:double
+                                                               ]
+                                                               )
+                            ] ;
+        rdfs:subClassOf gml:_Geometry .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Size
+
+:Size a owl:Class ;
+	owl:equivalentClass [ rdf:type owl:Class ;
+                              		owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :length ;
+                                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onDataRange xsd:double
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :width ;
+                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:double
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :height ;
+                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:double
+                                                               ]
+                                                               )
+                            ] ;
+        rdfs:comment "Length x Width x Height (mm)" .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#ConfigParameters
+
+:ConfigParameters a owl:Class ;
+	rdfs:label "ConfigParameters" .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#ExperimentResourceConfig
+
+:ExperimentResourceConfig a owl:Class ;
+	rdfs:label "ExperimentResourceConfig" .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#HealthInformation 
+
+:HealthInformation  a owl:Class ;
+	rdfs:label "HealthInformation" .
+# \# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralHealthStatus
+
+:GeneralHealthStatus a owl:Class ;
+	rdfs:label "GeneralHealthStatus"@en .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralOK
+
+:GeneralOK a owl:Class ;
+	rdfs:subClassOf :GeneralHealthStatus .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralWarning
+
+:GeneralWarning a owl:Class ;
+	rdfs:subClassOf :GeneralHealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralCritical
+
+:GeneralCritical a owl:Class ;
+	rdfs:subClassOf :GeneralHealthStatus .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralUnknown
+
+:GeneralUnknown a owl:Class ;
+	rdfs:subClassOf :GeneralHealthStatus .
+#
+# http://purl.oclc.org/NET/ssnx/ssn#System
+
+ssn:System rdf:type owl:Class .
+# 
+# http://purl.oclc.org/NET/ssnx/ssn#SensingDevice
+
+ssn:SensingDevice rdf:type owl:Class .
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Allocated
+
+:Allocated a owl:NamedIndividual , omn-lifecycle:ReservationState .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Cancelled
+
+:Cancelled a owl:NamedIndividual , omn-lifecycle:ReservationState .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Provisioned
+
+:Provisioned a owl:NamedIndividual , omn-lifecycle:ReservationState .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Unallocated
+
+:Unallocated a owl:NamedIndividual , omn-lifecycle:ReservationState .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#AuV
+
+:AuV a owl:NamedIndividual , :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#AuthorityUser
+
+:AuthorityUser a owl:NamedIndividual , :UserRole .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Booked
+
+:Booked a owl:NamedIndividual , :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Critical
+
+:Critical a owl:NamedIndividual , :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Experimenter
+
+:Experimenter a owl:NamedIndividual , :UserRole .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#OK
+
+:OK a owl:NamedIndividual , :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Released
+
+:Released a owl:NamedIndividual , :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Shutdown
+
+:Shutdown a owl:NamedIndividual , :HealthStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#SleepMode
+
+:SleepMode a owl:NamedIndividual , :ResourceStatus .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#TestbedManager
+
+:TestbedManager a owl:NamedIndividual , :UserRole .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UaV
+
+:UaV a owl:NamedIndividual , :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UgV
+
+:UgV a owl:NamedIndividual , :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#UsV
+
+:UsV a owl:NamedIndividual , :UxvType .
+# 
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#Warning
+
+:Warning a owl:NamedIndividual , :HealthStatus .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralWarning
+
+:GeneralWarning a owl:NamedIndividual , :GeneralHealthStatus .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralOK
+
+:GeneralOK a owl:NamedIndividual , :GeneralHealthStatus .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralCritical
+
+:GeneralCritical a owl:NamedIndividual , :GeneralHealthStatus .
+#
+# http://www.semanticweb.org/rawfie/samant/omn-domain-uxv#GeneralUnknown
+
+:GeneralUnknown a owl:NamedIndividual , :GeneralHealthStatus .
+# 
+# 
+# #################################################################
+# #
+# #    General axioms
+# #
+# #################################################################
+# 
+# 
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :None
+		:Authentication
+		:Encryption
+	      )
+] .
+# 
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( omn-lifecycle:Allocated
+		:Cancelled
+		omn-lifecycle:Provisioned
+		omn-lifecycle:Unallocated
+	      )
+] .
+# 
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AuV
+		:UaV
+		:UgV
+ 		:UsV
+	      )
+] .
+# 
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Booked
+		:Released
+		:SleepMode
+	      )
+] .
+# 
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Critical
+		:OK
+		:Shutdown
+		:Warning
+	      )
+] .
+# 
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :GeneralCritical
+		:GeneralOK
+		:GeneralUnknown
+		:GeneralWarning
+	      )
+] .
+# 
+# Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
