@@ -5,16 +5,16 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-monitoring: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
 @base <http://example.org#> .
 
 <http://example.org> rdf:type owl:Ontology ;
                      
-                     owl:imports <http://open-multinet.info/ontology/omn> ,
-                                 <http://open-multinet.info/ontology/omn-service> .
+                     owl:imports <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn> ,
+                                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service> .
 
 
 #################################################################

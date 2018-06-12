@@ -1,21 +1,21 @@
 <?xml version='1.0'?>
 <rspec xmlns="http://www.geni.net/resources/rspec/3" type="request" generated_by="jFed RSpec Editor" generated="2015-10-28T10:56:02.697+01:00" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:jfedBonfire="http://jfed.iminds.be/rspec/ext/jfed-bonfire/1" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns:jfed-command="http://jfed.iminds.be/rspec/ext/jfed-command/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:jfed-ssh-keys="http://jfed.iminds.be/rspec/ext/jfed-ssh-keys/1" xmlns:jfed="http://jfed.iminds.be/rspec/ext/jfed/1" xmlns:sharedvlan="http://www.protogeni.net/resources/rspec/ext/shared-vlan/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd ">
   <node client_id="SCPaaS" exclusive="true" component_manager_id="urn:publicid:IDN+trescimo+authority+root" component_id="urn:publicid:IDN+federation.trescimo.eu+node+http%3A%2F%2Ffederation.trescimo.eu%2Fresource%2FToscaAdapter-1+smart_city">
-    <sliver_type name="http://open-multinet.info/ontology/omn-domain-m2m#SCP"/>
+    <sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-m2m#SCP"/>
     <location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="25.5" y="20.5"/>
     <interface client_id="SCPaaS:if0">
       <ip address="192.168.0.1" netmask="255.255.255.0" type="ipv4"/>
     </interface>
   </node>
   <node client_id="M2MDEVaaS" exclusive="true" component_manager_id="urn:publicid:IDN+trescimo+authority+root" component_id="urn:publicid:IDN+federation.trescimo.eu+node+http%3A%2F%2Flocalhost%2Fresource%2FEmulatedDevices-1+M2MDEVaas">
-    <sliver_type name="http://open-multinet.info/ontology/omn-domain-m2m#Device"/>
+    <sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-m2m#Device"/>
     <location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="6.5" y="342.5"/>
     <interface client_id="M2MDEVaaS:if1">
       <ip address="192.168.3.1" netmask="255.255.255.0" type="ipv4"/>
     </interface>
   </node>
   <node client_id="M2MSRVaaS" exclusive="true" component_manager_id="urn:publicid:IDN+trescimo+authority+root" component_id="urn:publicid:IDN+federation.trescimo.eu+node+http%3A%2F%2Flocalhost%2Fresource%2FM2MServer-1+M2MSRVaaS">
-    <sliver_type name="http://open-multinet.info/ontology/omn-domain-m2m#Server"/>
+    <sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-m2m#Server"/>
     <location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="9.5" y="123.5"/>
     <interface client_id="M2MSRVaaS:if0">
       <ip address="192.168.0.2" netmask="255.255.255.0" type="ipv4"/>
@@ -25,7 +25,7 @@
     </interface>
   </node>
   <node client_id="M2MGWaaS" exclusive="true" component_manager_id="urn:publicid:IDN+trescimo+authority+root" component_id="urn:publicid:IDN+federation.trescimo.eu+node+http%3A%2F%2Flocalhost%2Fresource%2FM2MGateway-1+M2MGWaaS">
-    <sliver_type name="http://open-multinet.info/ontology/omn-domain-m2m#Gateway"/>
+    <sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-m2m#Gateway"/>
     <location xmlns="http://jfed.iminds.be/rspec/ext/jfed/1" x="9.5" y="235.5"/>
     <interface client_id="M2MGWaaS:if0">
       <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>

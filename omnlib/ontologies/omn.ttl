@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix gr: <http://purl.org/goodrelations/v1#> .
@@ -22,9 +22,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix service: <http://purl.org/ontology/service#> .
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
-@base <http://open-multinet.info/ontology/omn> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn> .
 
-<http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn> rdf:type owl:Ontology ;
                                          
                                          rdfs:label "omn"@en ;
                                          
@@ -75,7 +75,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#adaptableFrom
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#adaptableFrom
 
 :adaptableFrom rdf:type owl:ObjectProperty ;
                
@@ -91,7 +91,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#adaptableTo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#adaptableTo
 
 :adaptableTo rdf:type owl:ObjectProperty ;
              
@@ -105,7 +105,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#adaptsFrom
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#adaptsFrom
 
 :adaptsFrom rdf:type owl:IrreflexiveProperty ,
                      owl:ObjectProperty ;
@@ -132,7 +132,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#adaptsTo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#adaptsTo
 
 :adaptsTo rdf:type owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
@@ -161,7 +161,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#dependsOn
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#dependsOn
 
 :dependsOn rdf:type owl:ObjectProperty ;
            
@@ -189,7 +189,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#fromDependency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#fromDependency
 
 :fromDependency rdf:type owl:ObjectProperty ;
                 
@@ -211,7 +211,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasAttribute
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasAttribute
 
 :hasAttribute rdf:type owl:ObjectProperty ;
               
@@ -233,7 +233,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasComponent
 
 :hasComponent rdf:type owl:ObjectProperty ;
               
@@ -254,7 +254,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasGroup
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasGroup
 
 :hasGroup rdf:type owl:ObjectProperty ;
           
@@ -270,7 +270,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasReservation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation
 
 :hasReservation rdf:type owl:ObjectProperty ;
                 
@@ -289,7 +289,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasResource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasResource
 
 :hasResource rdf:type owl:ObjectProperty ;
              
@@ -307,7 +307,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasService
 
 :hasService rdf:type owl:ObjectProperty ;
             
@@ -326,7 +326,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isAttributeOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isAttributeOf
 
 :isAttributeOf rdf:type owl:ObjectProperty ;
                
@@ -346,7 +346,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isComponentOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isComponentOf
 
 :isComponentOf rdf:type owl:ObjectProperty ;
                
@@ -367,7 +367,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isGroupOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isGroupOf
 
 :isGroupOf rdf:type owl:ObjectProperty ;
            
@@ -381,7 +381,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isReservationOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isReservationOf
 
 :isReservationOf rdf:type owl:ObjectProperty ;
                  
@@ -402,7 +402,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isResourceOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isResourceOf
 
 :isResourceOf rdf:type owl:ObjectProperty ;
               
@@ -418,7 +418,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isServiceOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isServiceOf
 
 :isServiceOf rdf:type owl:ObjectProperty ;
              
@@ -441,7 +441,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#relatesTo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#relatesTo
 
 :relatesTo rdf:type owl:ObjectProperty ;
            
@@ -467,7 +467,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#toDependency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#toDependency
 
 :toDependency rdf:type owl:ObjectProperty ;
               
@@ -487,7 +487,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#withinEnvironment
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#withinEnvironment
 
 :withinEnvironment rdf:type owl:ObjectProperty ;
                    
@@ -516,7 +516,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#hasEndpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasEndpoint
 
 :hasEndpoint rdf:type owl:DatatypeProperty ,
                       owl:FunctionalProperty ;
@@ -531,7 +531,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#hasURI
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasURI
 
 :hasURI rdf:type owl:DatatypeProperty ;
         
@@ -550,7 +550,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isReadonly
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isReadonly
 
 :isReadonly rdf:type owl:DatatypeProperty ,
                      owl:FunctionalProperty ;
@@ -565,7 +565,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#isVirtualized
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isVirtualized
 
 :isVirtualized rdf:type owl:DatatypeProperty ,
                         owl:FunctionalProperty ;
@@ -583,7 +583,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#sequenceNumber
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#sequenceNumber
 
 :sequenceNumber rdf:type owl:DatatypeProperty ;
                 
@@ -602,7 +602,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Attribute
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Attribute
 
 :Attribute rdf:type owl:Class ;
            
@@ -616,7 +616,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Component
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Component
 
 :Component rdf:type owl:Class ;
            
@@ -631,7 +631,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Dependency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Dependency
 
 :Dependency rdf:type owl:Class ;
             
@@ -646,7 +646,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Environment
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Environment
 
 :Environment rdf:type owl:Class ;
              
@@ -659,7 +659,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Group
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Group
 
 :Group rdf:type owl:Class ;
        
@@ -674,7 +674,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Layer
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Layer
 
 :Layer rdf:type owl:Class ;
        
@@ -688,7 +688,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Reservation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Reservation
 
 :Reservation rdf:type owl:Class ;
              
@@ -701,7 +701,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Resource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource
 
 :Resource rdf:type owl:Class ;
           
@@ -715,7 +715,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Service
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service
 
 :Service rdf:type owl:Class ;
          
@@ -734,7 +734,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn#Topology
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Topology
 
 :Topology rdf:type owl:Class ;
           
@@ -801,9 +801,9 @@ foaf:Person rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn
 
-<http://open-multinet.info/ontology/omn> rdf:type voaf:Vocabulary ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn> rdf:type voaf:Vocabulary ,
                                                   owl:NamedIndividual ;
                                          
                                          rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage resource within federated infrastructures."@en .

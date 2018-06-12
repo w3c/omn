@@ -9,10 +9,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
 @prefix : <http://open-multinet.info/ontology/resource/epc#> .
 
 <http://open-multinet.info/ontology/resource/epc> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
@@ -530,7 +530,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID
 
 omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty .
@@ -713,19 +713,19 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#IPAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#IPAddress
 
 omn-resource:IPAddress rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#DiskImage
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#DiskImage
 
 omn-domain-pc:DiskImage rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Adapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Adapter
 
 omn:Adapter rdf:type owl:Class .
 

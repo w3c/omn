@@ -148,17 +148,17 @@ public abstract class AbstractConverter {
 		} else if (uri.equals("http://www.w3.org/2002/07/owl#NamedIndividual")) {
 			nonGeneric = false;
 		} else if (uri
-				.equals("http://open-multinet.info/ontology/omn-resource#Node")) {
+				.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Node")) {
 			nonGeneric = false;
 		} else if (uri
-				.equals("http://open-multinet.info/ontology/omn#Resource")) {
+				.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource")) {
 			nonGeneric = false;
 		} else if (uri
-				.equals("http://open-multinet.info/ontology/omn-resource#NetworkObject")) {
+				.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#NetworkObject")) {
 			nonGeneric = false;
-		} else if (uri.equals("http://open-multinet.info/ontology/omn#Group")) {
+		} else if (uri.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Group")) {
 			nonGeneric = false;
-		} else if (uri.equals("http://open-multinet.info/ontology/omn#Service")) {
+		} else if (uri.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service")) {
 			nonGeneric = false;
 		}
 

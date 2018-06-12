@@ -1,11 +1,11 @@
-@prefix omn: <http://open-multinet.info/ontology/omn#>.
-@prefix omnlc: <http://open-multinet.info/ontology/omn-lifecycle#>.
-@prefix omngeni: <http://open-multinet.info/ontology/omn-domain-geni-fire#>.
-@prefix omnmu: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@prefix omncomp: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omnres: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omndp: <http://open-multinet.info/ontology/omn-domain#> .
-@prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#>.
+@prefix omnlc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#>.
+@prefix omngeni: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#>.
+@prefix omnmu: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
+@prefix omncomp: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
+@prefix omnres: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omndp: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain#> .
+@prefix omnmonunit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
 @prefix schema: <http://schema.org/> .
 @prefix dbp: <http://dbpedia.org/property/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .

@@ -1,5 +1,5 @@
-@prefix : <http://open-multinet.info/ontology/omn-domain-wireless#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -7,14 +7,14 @@
 @prefix geni: <http://geni.net/ontology#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix time: <http://www.w3.org/2006/time#> .
-@prefix omn_resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn_component: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omn_lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn_monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
-@prefix omn_monitoring_unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@base <http://open-multinet.info/ontology/omn_wireless.owl> .
+@prefix omn_resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn_component: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
+@prefix omn_lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn_monitoring: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#> .
+@prefix omn_monitoring_unit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl> .
 
-<http://open-multinet.info/ontology/omn_wireless.owl> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl> rdf:type owl:Ontology ;
 
                                                       rdfs:comment " \"This ontology reuses several concepts from IMINDS wireless ontology\" " .
 
@@ -26,34 +26,34 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#hasComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasComponent
 
 omn:hasComponent rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn#hasReservation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation
 
 omn:hasReservation rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring#hasUnit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#hasUnit
 
 omn_monitoring:hasUnit rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface
 
 omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
-                          rdfs:comment """same as : http://open-multinet.info/ontology/omn-resource#hasInterface
+                          rdfs:comment """same as : https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface
 """ .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#feature
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#feature
 
 :feature rdf:type owl:ObjectProperty ;
 
@@ -61,7 +61,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasAntenna
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasAntenna
 
 :hasAntenna rdf:type owl:ObjectProperty ;
 
@@ -75,7 +75,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasAntennaBandSupport
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasAntennaBandSupport
 
 :hasAntennaBandSupport rdf:type owl:ObjectProperty ;
 
@@ -87,7 +87,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasInputInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasInputInterface
 
 :hasInputInterface rdf:type owl:ObjectProperty ;
 
@@ -99,7 +99,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasMicroController
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasMicroController
 
 :hasMicroController rdf:type owl:ObjectProperty ;
 
@@ -111,7 +111,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasOutputInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasOutputInterface
 
 :hasOutputInterface rdf:type owl:ObjectProperty ;
 
@@ -121,7 +121,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasSensor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasSensor
 
 :hasSensor rdf:type owl:ObjectProperty ;
 
@@ -131,7 +131,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#hasSensorModule
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#hasSensorModule
 
 :hasSensorModule rdf:type owl:ObjectProperty ;
 
@@ -143,7 +143,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#isAntennaType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#isAntennaType
 
 :isAntennaType rdf:type owl:ObjectProperty ;
 
@@ -155,7 +155,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#supportsStandard
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#supportsStandard
 
 :supportsStandard rdf:type owl:ObjectProperty ;
 
@@ -167,7 +167,7 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#usesFrequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#usesFrequency
 
 :usesFrequency rdf:type owl:ObjectProperty ;
 
@@ -188,31 +188,31 @@ omn_resource:hasInterface rdf:type owl:ObjectProperty ;
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID
 
 omn_lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-unit#base
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#base
 
 omn_monitoring_unit:base rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-unit#exponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#exponent
 
 omn_monitoring_unit:exponent rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-unit#symbol
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#symbol
 
 omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#antennaCount
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#antennaCount
 
 :antennaCount rdf:type owl:DatatypeProperty ;
 
@@ -224,7 +224,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#antenuation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#antenuation
 
 :antenuation rdf:type owl:DatatypeProperty ;
 
@@ -234,7 +234,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#channelNum
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#channelNum
 
 :channelNum rdf:type owl:DatatypeProperty ;
 
@@ -248,7 +248,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#lowerBoundFrequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#lowerBoundFrequency
 
 :lowerBoundFrequency rdf:type owl:DatatypeProperty ;
 
@@ -258,7 +258,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#upperBoundFrequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#upperBoundFrequency
 
 :upperBoundFrequency rdf:type owl:DatatypeProperty ;
 
@@ -268,7 +268,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#x
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#x
 
 :x rdf:type owl:DatatypeProperty ;
 
@@ -278,7 +278,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#y
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#y
 
 :y rdf:type owl:DatatypeProperty ;
 
@@ -288,7 +288,7 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#z
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#z
 
 :z rdf:type owl:DatatypeProperty ;
 
@@ -307,25 +307,25 @@ omn_monitoring_unit:symbol rdf:type owl:DatatypeProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Component
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Component
 
 omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-unit#DecimalPrefix
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#DecimalPrefix
 
 omn_monitoring_unit:DecimalPrefix rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Interface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Interface
 
 omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Antenna
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Antenna
 
 :Antenna rdf:type owl:Class ;
 
@@ -335,7 +335,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#AntennaBandSupport
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#AntennaBandSupport
 
 :AntennaBandSupport rdf:type owl:Class ;
 
@@ -345,7 +345,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#AntennaType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#AntennaType
 
 :AntennaType rdf:type owl:Class ;
 
@@ -355,7 +355,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Channel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Channel
 
 :Channel rdf:type owl:Class ;
 
@@ -365,7 +365,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Feature
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Feature
 
 :Feature rdf:type owl:Class ;
 
@@ -373,7 +373,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Frequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Frequency
 
 :Frequency rdf:type owl:Class ;
 
@@ -383,13 +383,13 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Location
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Location
 
 :Location rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#MicroController
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#MicroController
 
 :MicroController rdf:type owl:Class ;
 
@@ -397,7 +397,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Sensor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Sensor
 
 :Sensor rdf:type owl:Class ;
 
@@ -407,7 +407,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#SensorModule
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#SensorModule
 
 :SensorModule rdf:type owl:Class ;
 
@@ -417,15 +417,15 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#Standard
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#Standard
 
 :Standard rdf:type owl:Class ;
 
                       owl:equivalentClass [ rdf:type owl:Class ;
-                                         owl:oneOf ( <http://open-multinet.info/ontology/omn_wireless.owl#802.11g>
-                                                  <http://open-multinet.info/ontology/omn_wireless.owl#802.11b>
-                                                  <http://open-multinet.info/ontology/omn_wireless.owl#802.11a>
-                                                  <http://open-multinet.info/ontology/omn_wireless.owl#802.11n>
+                                         owl:oneOf ( <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11g>
+                                                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11b>
+                                                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11a>
+                                                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11n>
                                                 )
                                        ] ;
 
@@ -435,7 +435,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#WiredInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#WiredInterface
 
 :WiredInterface rdf:type owl:Class ;
 
@@ -447,7 +447,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#WirelessInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#WirelessInterface
 
 :WirelessInterface rdf:type owl:Class ;
 
@@ -457,7 +457,7 @@ omn_resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#xyzCartesianCoordinate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#xyzCartesianCoordinate
 
 :xyzCartesianCoordinate rdf:type owl:Class ;
 
@@ -493,13 +493,13 @@ omn_resource:Interface rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-unit#persecond
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#persecond
 
 omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#centimetre
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#centimetre
 
 :centimetre rdf:type omn_monitoring_unit:DecimalPrefix ,
                                  owl:NamedIndividual ;
@@ -512,7 +512,7 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#lowerBoundFrequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#lowerBoundFrequency
 
 :lowerBoundFrequency rdf:type owl:NamedIndividual ;
 
@@ -520,7 +520,7 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#upperBoundFrequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#upperBoundFrequency
 
 :upperBoundFrequency rdf:type owl:NamedIndividual ;
 
@@ -528,7 +528,7 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#x
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#x
 
 :x rdf:type owl:NamedIndividual ;
 
@@ -536,7 +536,7 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#y
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#y
 
 :y rdf:type owl:NamedIndividual ;
 
@@ -544,7 +544,7 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#z
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#z
 
 :z rdf:type owl:NamedIndividual ;
 
@@ -552,9 +552,9 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#2.412GHZ
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#2.412GHZ
 
-<http://open-multinet.info/ontology/omn_wireless.owl#2.412GHZ> rdf:type :Frequency ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#2.412GHZ> rdf:type :Frequency ,
                                                                         owl:NamedIndividual ;
 
                                                                :lowerBoundFrequency 2401000 ;
@@ -563,9 +563,9 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#2.417GHZ
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#2.417GHZ
 
-<http://open-multinet.info/ontology/omn_wireless.owl#2.417GHZ> rdf:type :Frequency ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#2.417GHZ> rdf:type :Frequency ,
                                                                         owl:NamedIndividual ;
 
                                                                :lowerBoundFrequency 2406000 ;
@@ -574,9 +574,9 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#802.11a
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11a
 
-<http://open-multinet.info/ontology/omn_wireless.owl#802.11a> rdf:type :Standard ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11a> rdf:type :Standard ,
                                                                        owl:NamedIndividual ;
 
                                                               rdfs:label "802.11a" ;
@@ -585,9 +585,9 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#802.11b
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11b
 
-<http://open-multinet.info/ontology/omn_wireless.owl#802.11b> rdf:type :Standard ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11b> rdf:type :Standard ,
                                                                        owl:NamedIndividual ;
 
                                                               rdfs:label "802.11b" ;
@@ -596,9 +596,9 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#802.11g
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11g
 
-<http://open-multinet.info/ontology/omn_wireless.owl#802.11g> rdf:type :Standard ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11g> rdf:type :Standard ,
                                                                        owl:NamedIndividual ;
 
                                                               rdfs:label "802.11g" ;
@@ -607,9 +607,9 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn_wireless.owl#802.11n
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11n
 
-<http://open-multinet.info/ontology/omn_wireless.owl#802.11n> rdf:type :Standard ,
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11n> rdf:type :Standard ,
                                                                        owl:NamedIndividual ;
 
                                                               rdfs:label "802.11n" ;
@@ -663,10 +663,10 @@ omn_monitoring_unit:persecond rdf:type owl:NamedIndividual .
 
 
 [ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( <http://open-multinet.info/ontology/omn_wireless.owl#802.11a>
-                     <http://open-multinet.info/ontology/omn_wireless.owl#802.11b>
-                     <http://open-multinet.info/ontology/omn_wireless.owl#802.11g>
-                     <http://open-multinet.info/ontology/omn_wireless.owl#802.11n>
+  owl:distinctMembers ( <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11a>
+                     <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11b>
+                     <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11g>
+                     <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#802.11n>
                    )
 ] .
 

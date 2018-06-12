@@ -1,63 +1,63 @@
 <http://open-multinet.info/omnlib/converter#advertisement>
-        a       <http://open-multinet.info/ontology/omn-lifecycle#Offering> ;
-        <http://open-multinet.info/ontology/omn#hasResource>
+        a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Offering> ;
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasResource>
                 <urn:publicid:IDN+pllab.pl+node+fpga1.pp> .
 
 <urn:publicid:IDN+pllab.pl+node+fpga1.pp>
-        a       <http://open-multinet.info/ontology/omn-resource#Node> , <netfpga> ;
+        a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Node> , <netfpga> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "fpga1.pp"^^<http://www.w3.org/2001/XMLSchema#string> ;
-        <http://open-multinet.info/ontology/omn#isResourceOf>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isResourceOf>
                 <http://open-multinet.info/omnlib/converter#advertisement> ;
-        <http://open-multinet.info/ontology/omn-domain-pc#hasHardwareType>
-                [ a       <http://open-multinet.info/ontology/omn-domain-pc#HardwareType> ;
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasHardwareType>
+                [ a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#HardwareType> ;
                   <http://www.w3.org/2000/01/rdf-schema#label>
                           "netfpga"
                 ] ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasComponentName>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentName>
                 "fpga1.pp" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#parentOf>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#parentOf>
                 <urn:publicid:IDN+pllab.pl+authority+cm> ;
         <http://www.geonames.org/ontology#countryCode>
                 "PL" ;
-        <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface>
+                [ a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Interface> ;
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentID>
                           "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga1"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasRole>
                           "experimental"
                 ] ;
-        <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface>
+                [ a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Interface> ;
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentID>
                           "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:eth0"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasRole>
                           "control"
                 ] ;
-        <http://open-multinet.info/ontology/omn-resource#hasInterface>
-                [ a       <http://open-multinet.info/ontology/omn-resource#Interface> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasComponentID>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface>
+                [ a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Interface> ;
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentID>
                           "urn:publicid:IDN+pllab.pl+interface+fpga1.pp:fpga0"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasRole>
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasRole>
                           "experimental"
                 ] ;
-        <http://open-multinet.info/ontology/omn-resource#hasSliverType>
-                [ a       <http://open-multinet.info/ontology/omn-resource#SliverType> ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#canImplement>
-                          [ a       <http://open-multinet.info/ontology/omn-domain-pc#DiskImage> ;
-                            <http://open-multinet.info/ontology/omn-domain-pc#diskimageDefault>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasSliverType>
+                [ a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#SliverType> ;
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#canImplement>
+                          [ a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#DiskImage> ;
+                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#diskimageDefault>
                                     "true"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                            <http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription>
+                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageDescription>
                                     "Ubuntu 14.04 LTS (64 bit)"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                            <http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel>
+                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageLabel>
                                     "Ubuntu-14.04-64"^^<http://www.w3.org/2001/XMLSchema#string>
                           ] ;
-                  <http://open-multinet.info/ontology/omn-lifecycle#hasSliverName>
+                  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliverName>
                           "raw-pc"
                 ] ;
-        <http://open-multinet.info/ontology/omn-resource#isAvailable>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isAvailable>
                 true ;
-        <http://open-multinet.info/ontology/omn-resource#isExclusive>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isExclusive>
                 true ;
         <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
                 "52.3941716" ;

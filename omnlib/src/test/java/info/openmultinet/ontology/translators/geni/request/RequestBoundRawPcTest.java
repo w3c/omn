@@ -69,7 +69,7 @@ public class RequestBoundRawPcTest {
 		String sliverName = sliverType.item(0).getAttributes()
 				.getNamedItem("name").getNodeValue();
 		Assert.assertTrue(sliverName
-				.equals("http://open-multinet.info/ontology/omn-domain-pc#PC"));
+				.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#PC"));
 
 		NodeList node = xmlDoc.getElementsByTagNameNS(
 				"http://www.geni.net/resources/rspec/3", "node");

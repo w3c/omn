@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-monitoring-metric#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -7,20 +7,20 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-component: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
-@prefix omn-monitoring-data: <http://open-multinet.info/ontology/omn-monitoring-data#> .
-@prefix omn-monitoring-unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@prefix omn-monitoring-tool: <http://open-multinet.info/ontology/omn-monitoring-tool#> .
-@prefix omn-monitoring-genericconcepts: <http://open-multinet.info/ontology/omn-monitoring-genericconcepts#> .
-@base <http://open-multinet.info/ontology/omn-monitoring-metric> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-service: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-component: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-monitoring: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#> .
+@prefix omn-monitoring-data: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#> .
+@prefix omn-monitoring-unit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
+@prefix omn-monitoring-tool: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#> .
+@prefix omn-monitoring-genericconcepts: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric> .
 
-<http://open-multinet.info/ontology/omn-monitoring-metric> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric> rdf:type owl:Ontology ;
                                                            
                                                            rdfs:label "omn-monitoring-metric"@en ;
                                                            
@@ -28,7 +28,7 @@
                                                            
                                                            dc:description "The metric ontology describes anything that can be measured. It is defined in a generic way to cover the common measurement metrics in federated ICT infrastructures. It defines metrics whose information change dynamically such as CPU utilization, memory consumption, packet delay and loss, etc., as well as metrics whose information may change very infrequently in time (e.g. CPU core counts in a machine)."^^xsd:string ;
                                                            
-                                                           vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-metric#" ;
+                                                           vann:preferredNamespaceUri "https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#" ;
                                                            
                                                            vann:preferredNamespacePrefix "omn-monitoring-metric" ;
                                                            
@@ -59,7 +59,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#canBeCalculatedFrom
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#canBeCalculatedFrom
 
 :canBeCalculatedFrom rdf:type owl:ObjectProperty ;
                       
@@ -78,7 +78,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#hasFrequency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#hasFrequency
 
 :hasFrequency rdf:type owl:DatatypeProperty ;
               
@@ -90,7 +90,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#statusValue
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#statusValue
 
 :statusValue rdf:type owl:DatatypeProperty ;
               
@@ -117,37 +117,37 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Component
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Component
 
 omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Resource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource
 
 omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Service
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service
 
 omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring#Metric
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#Metric
 
 omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring#Tool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#Tool
 
 omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#AllocatedBandwidth
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#AllocatedBandwidth
 
 :AllocatedBandwidth rdf:type owl:Class ;
                     
@@ -155,7 +155,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#AllocatedCPU
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#AllocatedCPU
 
 :AllocatedCPU rdf:type owl:Class ;
               
@@ -163,7 +163,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#AllocatedMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#AllocatedMemory
 
 :AllocatedMemory rdf:type owl:Class ;
                  
@@ -173,7 +173,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Availability
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Availability
 
 :Availability rdf:type owl:Class ;
               
@@ -183,7 +183,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#AvailableBandwidth
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#AvailableBandwidth
 
 :AvailableBandwidth rdf:type owl:Class ;
                     
@@ -193,7 +193,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#AvailableMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#AvailableMemory
 
 :AvailableMemory rdf:type owl:Class ;
                     
@@ -203,7 +203,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#BandwidthUtilization
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#BandwidthUtilization
 
 :BandwidthUtilization rdf:type owl:Class ;
                       
@@ -211,7 +211,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#BatteryCapacity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#BatteryCapacity
 
 :BatteryCapacity rdf:type owl:Class ;
                  
@@ -221,7 +221,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#BatteryLifetime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#BatteryLifetime
 
 :BatteryLifetime rdf:type owl:Class ;
                  
@@ -231,7 +231,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#BuffersMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#BuffersMemory
 
 :BuffersMemory rdf:type owl:Class ;
                
@@ -239,7 +239,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUIOwait
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPUIOwait
 
 :CPUIOwait rdf:type owl:Class ;
            
@@ -249,7 +249,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPULoad
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPULoad
 
 :CPULoad rdf:type owl:Class ;
          
@@ -257,7 +257,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUUtilization
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPUUtilization
 
 :CPUUtilization rdf:type owl:Class ;
                 
@@ -265,7 +265,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUidle
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPUidle
 
 :CPUidle rdf:type owl:Class ;
          
@@ -275,7 +275,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUnice
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPUnice
 
 :CPUnice rdf:type owl:Class ;
          
@@ -283,7 +283,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUsystem
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPUsystem
 
 :CPUsystem rdf:type owl:Class ;
            
@@ -293,7 +293,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CPUuser
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CPUuser
 
 :CPUuser rdf:type owl:Class ;
          
@@ -303,7 +303,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#CachedMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#CachedMemory
 
 :CachedMemory rdf:type owl:Class ;
               
@@ -311,7 +311,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Capacity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Capacity
 
 :Capacity rdf:type owl:Class ;
           
@@ -319,7 +319,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Counter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Counter
 
 :Counter rdf:type owl:Class ;
          
@@ -329,7 +329,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Delay
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Delay
 
 :Delay rdf:type owl:Class ;
        
@@ -337,7 +337,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DelayVariation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DelayVariation
 
 :DelayVariation rdf:type owl:Class ;
                 
@@ -347,7 +347,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIOPs
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DiskIOPs
 
 :DiskIOPs rdf:type owl:Class ;
           
@@ -357,7 +357,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIORate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DiskIORate
 
 :DiskIORate rdf:type owl:Class ;
             
@@ -367,7 +367,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIORead
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DiskIORead
 
 :DiskIORead rdf:type owl:Class ;
             
@@ -377,7 +377,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskIOWrite
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DiskIOWrite
 
 :DiskIOWrite rdf:type owl:Class ;
              
@@ -387,7 +387,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskQueueLength
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DiskQueueLength
 
 :DiskQueueLength rdf:type owl:Class ;
                  
@@ -395,7 +395,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DiskUtilization
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DiskUtilization
 
 :DiskUtilization rdf:type owl:Class ;
                  
@@ -403,7 +403,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DistanceError
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DistanceError
 
 :DistanceError rdf:type owl:Class ;
                
@@ -413,7 +413,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#DownTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#DownTime
 
 :DownTime rdf:type owl:Class ;
           
@@ -421,7 +421,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#ErrorRate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#ErrorRate
 
 :ErrorRate rdf:type owl:Class ;
            
@@ -429,7 +429,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#FailureRate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#FailureRate
 
 :FailureRate rdf:type owl:Class ;
              
@@ -437,7 +437,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#FreeDiskSpace
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#FreeDiskSpace
 
 :FreeDiskSpace rdf:type owl:Class ;
                
@@ -445,7 +445,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#FreeMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#FreeMemory
 
 :FreeMemory rdf:type owl:Class ;
             
@@ -453,7 +453,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#FreeSwap
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#FreeSwap
 
 :FreeSwap rdf:type owl:Class ;
           
@@ -461,7 +461,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#InterferenceLevel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#InterferenceLevel
 
 :InterferenceLevel rdf:type owl:Class ;
                    
@@ -469,7 +469,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#LinkCapacity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#LinkCapacity
 
 :LinkCapacity rdf:type owl:Class ;
               
@@ -479,7 +479,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#MemoryUtilization
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#MemoryUtilization
 
 :MemoryUtilization rdf:type owl:Class ;
                    
@@ -487,7 +487,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#NoiseLevel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#NoiseLevel
 
 :NoiseLevel rdf:type owl:Class ;
             
@@ -495,7 +495,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#OneWayDelay
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#OneWayDelay
 
 :OneWayDelay rdf:type owl:Class ;
              
@@ -503,7 +503,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#PacketArrivalRate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#PacketArrivalRate
 
 :PacketArrivalRate rdf:type owl:Class ;
                    
@@ -511,7 +511,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#PacketLoss
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#PacketLoss
 
 :PacketLoss rdf:type owl:Class ;
                    
@@ -519,7 +519,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#PathCapacity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#PathCapacity
 
 :PathCapacity rdf:type owl:Class ;
               
@@ -529,7 +529,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#PowerConsumption
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#PowerConsumption
 
 :PowerConsumption rdf:type owl:Class ;
                   
@@ -539,7 +539,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#ProcessingTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#ProcessingTime
 
 :ProcessingTime rdf:type owl:Class ;
                 
@@ -547,7 +547,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#RSSILevel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#RSSILevel
 
 :RSSILevel rdf:type owl:Class ;
            
@@ -557,7 +557,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#RadioSignalQuality
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#RadioSignalQuality
 
 :RadioSignalQuality rdf:type owl:Class ;
                     
@@ -567,7 +567,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#ResourcePosition
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#ResourcePosition
 
 :ResourcePosition rdf:type owl:Class ;
                   
@@ -577,7 +577,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#ResponseTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#ResponseTime
 
 :ResponseTime rdf:type owl:Class ;
               
@@ -585,7 +585,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#RoundTripDelay
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#RoundTripDelay
 
 :RoundTripDelay rdf:type owl:Class ;
                 
@@ -593,7 +593,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#SINR
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#SINR
 
 :SINR rdf:type owl:Class ;
       
@@ -603,7 +603,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#SIR
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#SIR
 
 :SIR rdf:type owl:Class ;
      
@@ -613,7 +613,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#SNIR
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#SNIR
 
 :SNIR rdf:type owl:Class ;
       
@@ -623,7 +623,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#SNR
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#SNR
 
 :SNR rdf:type owl:Class ;
      
@@ -633,7 +633,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#SharedMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#SharedMemory
 
 :SharedMemory rdf:type owl:Class ;
               
@@ -641,7 +641,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#SpectralIntegrity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#SpectralIntegrity
 
 :SpectralIntegrity rdf:type owl:Class ;
                    
@@ -649,7 +649,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Statistics
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Statistics
 
 :Statistics rdf:type owl:Class ;
             
@@ -659,7 +659,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Status
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Status
 
 :Status rdf:type owl:Class ;
         
@@ -669,7 +669,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#StorageCapacity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#StorageCapacity
 
 :StorageCapacity rdf:type owl:Class ;
                  
@@ -677,7 +677,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Temperature
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Temperature
 
 :Temperature rdf:type owl:Class ;
              
@@ -685,7 +685,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#Throughput
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#Throughput
 
 :Throughput rdf:type owl:Class ;
             
@@ -695,7 +695,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#TimeToRepair
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#TimeToRepair
 
 :TimeToRepair rdf:type owl:Class ;
               
@@ -703,7 +703,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#TotalMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#TotalMemory
 
 :TotalMemory rdf:type owl:Class ;
              
@@ -711,7 +711,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#TotalSwap
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#TotalSwap
 
 :TotalSwap rdf:type owl:Class ;
            
@@ -719,7 +719,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedBandwidth
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#UsedBandwidth
 
 :UsedBandwidth rdf:type owl:Class ;
                
@@ -727,7 +727,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedDiskSpace
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#UsedDiskSpace
 
 :UsedDiskSpace rdf:type owl:Class ;
                
@@ -735,7 +735,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedMemory
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#UsedMemory
 
 :UsedMemory rdf:type owl:Class ;
             
@@ -745,7 +745,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-metric#UsedSwap
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#UsedSwap
 
 :UsedSwap rdf:type owl:Class ;
           

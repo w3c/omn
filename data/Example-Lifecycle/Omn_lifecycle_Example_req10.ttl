@@ -1,5 +1,5 @@
 @prefix : <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix req: <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#> .
@@ -7,8 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix time: <http://www.w3.org/2006/time#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @base <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156> .
 
 <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156> rdf:type owl:Ontology ;

@@ -102,7 +102,7 @@ public class DemoTestRequest {
 						.getProperty(RDF.type)
 						.toString()
 						.contains(
-								"http://open-multinet.info/ontology/omn-monitoring#OMSPService"));
+								"https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#OMSPService"));
 		Assert.assertTrue("label is OMSPSerivce", monitoringResource
 				.getProperty(RDFS.label).getObject().asLiteral().toString()
 				.equals("OMSPService"));

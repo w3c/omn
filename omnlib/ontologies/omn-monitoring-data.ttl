@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-monitoring-data#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -7,20 +7,20 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-component: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
-@prefix omn-monitoring-unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@prefix omn-monitoring-tool: <http://open-multinet.info/ontology/omn-monitoring-tool#> .
-@prefix omn-monitoring-metric: <http://open-multinet.info/ontology/omn-monitoring-metric#> .
-@prefix omn-monitoring-genericconcepts: <http://open-multinet.info/ontology/omn-monitoring-genericconcepts#> .
-@base <http://open-multinet.info/ontology/omn-monitoring-data> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-service: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-component: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-monitoring: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#> .
+@prefix omn-monitoring-unit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
+@prefix omn-monitoring-tool: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#> .
+@prefix omn-monitoring-metric: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#> .
+@prefix omn-monitoring-genericconcepts: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data> .
 
-<http://open-multinet.info/ontology/omn-monitoring-data> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data> rdf:type owl:Ontology ;
                                                          
                                                          rdfs:label "omn-monitoring-data"@en ;
                                                          
@@ -32,7 +32,7 @@
                                                          
                                                          dc:date "2015-05-30" ;
                                                          
-                                                         vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-data#" ;
+                                                         vann:preferredNamespaceUri "https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#" ;
 
                                                          dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
                                                          
@@ -62,7 +62,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasMeasurementData
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasMeasurementData
 
 :hasMeasurementData rdf:type owl:ObjectProperty ;
                     
@@ -74,7 +74,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#isMeasuredIn
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#isMeasuredIn
 
 :isMeasuredIn rdf:type owl:ObjectProperty ;
                     
@@ -85,7 +85,7 @@
               rdfs:range omn-monitoring:Unit .
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#isMeasurementDataOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#isMeasurementDataOf
 
 :isMeasurementDataOf rdf:type owl:ObjectProperty ;
                     
@@ -99,7 +99,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#isStatisticalMeasurementOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#isStatisticalMeasurementOf
 
 :isStatisticalMeasurementOf rdf:type owl:ObjectProperty ;
                               
@@ -111,7 +111,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#dataFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#dataFormat
 
 :dataFormat rdf:type owl:ObjectProperty ;
                               
@@ -132,7 +132,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasMeasurementDataValue
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasMeasurementDataValue
 
 :hasMeasurementDataValue rdf:type owl:DatatypeProperty ;
                          
@@ -146,7 +146,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasTimestamp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasTimestamp
 
 :hasTimestamp rdf:type owl:DatatypeProperty ;
               
@@ -154,7 +154,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#isRequired
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#isRequired
 
 :isRequired rdf:type owl:DatatypeProperty ;
                 
@@ -171,7 +171,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasMeasurementID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasMeasurementID
 
 :hasMeasurementID rdf:type owl:DatatypeProperty ;
                 
@@ -185,7 +185,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#DurationValue
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#DurationValue
 
 :DurationValue rdf:type owl:DatatypeProperty ;
                  
@@ -197,7 +197,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasDestinationIP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasDestinationIP
 
 :hasDestinationIP rdf:type owl:DatatypeProperty ;
 
@@ -209,7 +209,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasSourceIP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasSourceIP
 
 :hasSourceIP rdf:type owl:DatatypeProperty ;
 
@@ -221,7 +221,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasDestinationMACAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasDestinationMACAddress
 
 :hasDestinationMACAddress rdf:type owl:DatatypeProperty ;
 
@@ -233,7 +233,7 @@
                       
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasSourceMACAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasSourceMACAddress
 
 :hasSourceMACAddress rdf:type owl:DatatypeProperty ;
 
@@ -254,19 +254,19 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring#Data
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#Data
 
 omn-monitoring:Data rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring#Metric
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#Metric
 
 omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#ResourceInformation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#ResourceInformation
 
 :ResourceInformation rdf:type owl:Class ;
 
@@ -276,7 +276,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#GeneralInformation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#GeneralInformation
 
 :GeneralInformation rdf:type owl:Class ;
 
@@ -286,7 +286,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#MeasurementData
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#MeasurementData
 
 :MeasurementData rdf:type owl:Class ;
 
@@ -296,7 +296,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#ConfigurationParameter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#ConfigurationParameter
 
 :ConfigurationParameter rdf:type owl:Class ;
 
@@ -306,7 +306,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#SimpleMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#SimpleMeasurement
 
 :SimpleMeasurement rdf:type owl:Class ;
 
@@ -316,7 +316,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#StatisticalMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#StatisticalMeasurement
 
 :StatisticalMeasurement rdf:type owl:Class ;
                         
@@ -326,7 +326,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#MaxMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#MaxMeasurement
 
 :MaxMeasurement rdf:type owl:Class ;
                   
@@ -336,7 +336,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#MeanMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#MeanMeasurement
 
 :MeanMeasurement rdf:type owl:Class ;
                    
@@ -346,7 +346,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#MinMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#MinMeasurement
 
 :MinMeasurement rdf:type owl:Class ;
                   
@@ -356,7 +356,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#StandardDeviationMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#StandardDeviationMeasurement
 
 :StandardDeviationMeasurement rdf:type owl:Class ;
                                 
@@ -366,7 +366,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#VarMeasurement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#VarMeasurement
 
 :VarMeasurement rdf:type owl:Class ;
                   
@@ -376,7 +376,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#DataFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#DataFormat
 
 :DataFormat rdf:type owl:Class ;
                         
@@ -384,7 +384,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#FormattedFile
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#FormattedFile
 
 :FormattedFile rdf:type owl:Class ;
 
@@ -394,7 +394,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#CSVFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#CSVFormat
 
 :CSVFormat rdf:type owl:Class ;
 
@@ -404,7 +404,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#XMLFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#XMLFormat
 
 :XMLFormat rdf:type owl:Class ;
 
@@ -414,7 +414,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#JSONFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#JSONFormat
 
 :JSONFormat rdf:type owl:Class ;
 
@@ -424,7 +424,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#GraphicsFile
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#GraphicsFile
 
 :GraphicsFile rdf:type owl:Class ;
 
@@ -434,7 +434,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#UnformattedFile
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#UnformattedFile
 
 :UnformattedFile rdf:type owl:Class ;
 
@@ -444,7 +444,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#BinaryFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#BinaryFormat
 
 :BinaryFormat rdf:type owl:Class ;
 
@@ -454,7 +454,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#TextFormat
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#TextFormat
 
 :TextFormat rdf:type owl:Class ;
 
@@ -464,7 +464,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#Duration
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#Duration
 
 :Duration rdf:type owl:Class ;
             
@@ -474,7 +474,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#DestinationIP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#DestinationIP
 
 :DestinationIP rdf:type owl:Class ;
             
@@ -484,7 +484,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#SourceIP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#SourceIP
 
 :SourceIP rdf:type owl:Class ;
             
@@ -494,7 +494,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#DestinationMACAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#DestinationMACAddress
 
 :DestinationMACAddress rdf:type owl:Class ;
                         
@@ -502,7 +502,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#SourceMACAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#SourceMACAddress
 
 :SourceMACAddress rdf:type owl:Class ;
                         
@@ -519,7 +519,7 @@ omn-monitoring:Metric rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#OMLStream
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#OMLStream
 
 :OMLStream rdf:type omn-monitoring:Data ,
                     :FormattedFile ,

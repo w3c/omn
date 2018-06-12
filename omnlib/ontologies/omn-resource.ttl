@@ -1,7 +1,7 @@
-@prefix : <http://open-multinet.info/ontology/omn-resource#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -9,9 +9,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@base <http://open-multinet.info/ontology/omn-resource> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource> .
 
-<http://open-multinet.info/ontology/omn-resource> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource> rdf:type owl:Ontology ;
                                                   
                                                   rdfs:label "omn-resource"@en ;
                                                   
@@ -54,7 +54,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface
 
 :hasInterface rdf:type owl:ObjectProperty ;
 
@@ -75,7 +75,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#isInterfaceOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isInterfaceOf
 
 :isInterfaceOf rdf:type owl:ObjectProperty ;
 
@@ -94,7 +94,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasIPAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasIPAddress
 
 :hasIPAddress rdf:type owl:ObjectProperty ;
           
@@ -110,7 +110,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasLocation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasLocation
 
 :hasLocation rdf:type owl:ObjectProperty ;
 
@@ -128,7 +128,7 @@
                           ] .
 
 
-###  http://open-multinet.info/ontology/omn-resource#isIPAddressOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isIPAddressOf
 
 :isIPAddressOf rdf:type owl:ObjectProperty ;
           
@@ -144,7 +144,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#isSink
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isSink
 
 :isSink rdf:type owl:ObjectProperty ;
         
@@ -158,7 +158,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#isSource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isSource
 
 :isSource rdf:type owl:ObjectProperty ;
           
@@ -172,7 +172,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasSink
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasSink
 
 :hasSink rdf:type owl:ObjectProperty ;
         
@@ -186,7 +186,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasSource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasSource
 
 :hasSource rdf:type owl:ObjectProperty ;
           
@@ -202,7 +202,7 @@
 
 ### required to translate GENI RSpecs with multiple sliver types
 ### NOT used in standard Open Multinet descriptions
-### http://open-multinet.info/ontology/omn-resource#hasSliverType
+### https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasSliverType
 
 :hasSliverType rdf:type owl:ObjectProperty ;
           
@@ -216,7 +216,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasProperty
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasProperty
 
 :hasProperty rdf:type owl:ObjectProperty ;
         
@@ -230,7 +230,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#isPropertyOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isPropertyOf
 
 :isPropertyOf rdf:type owl:ObjectProperty ;
           
@@ -244,7 +244,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#requiredBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#requiredBy
 
 :requiredBy rdf:type owl:ObjectProperty ;
             
@@ -258,7 +258,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#requires
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#requires
 
 :requires rdf:type owl:ObjectProperty ;
 
@@ -275,7 +275,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain#hasHardwareType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain#hasHardwareType
 
 :hasHardwareType rdf:type owl:ObjectProperty ;
             
@@ -296,7 +296,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#isHardwareTypeOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#isHardwareTypeOf
 
 :isHardwareTypeOf rdf:type owl:ObjectProperty ;
             
@@ -324,7 +324,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-resource#address
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#address
 
 :address rdf:type owl:DatatypeProperty ;
 
@@ -340,7 +340,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#clientId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#clientId
 
 :clientId rdf:type owl:DatatypeProperty ;
 
@@ -355,7 +355,7 @@
                 rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-resource#isAvailable
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isAvailable
 
 :isAvailable rdf:type owl:DatatypeProperty ;
 
@@ -369,7 +369,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#isExclusive
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isExclusive
 
 :isExclusive rdf:type owl:DatatypeProperty ;
 
@@ -383,7 +383,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#jfedX
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#jfedX
 
 :jfedX rdf:type owl:DatatypeProperty ;
 
@@ -399,7 +399,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#jfedY
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#jfedY
 
 :jfedY rdf:type owl:DatatypeProperty ;
 
@@ -415,7 +415,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#x
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#x
 
 :x rdf:type owl:DatatypeProperty ;
 
@@ -431,7 +431,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#y
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#y
 
 :y rdf:type owl:DatatypeProperty ;
 
@@ -447,7 +447,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#z
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#z
 
 :z rdf:type owl:DatatypeProperty ;
 
@@ -463,7 +463,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#macAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#macAddress
 
 :macAddress rdf:type owl:DatatypeProperty ;
 
@@ -479,7 +479,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#netmask
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#netmask
 
 :netmask rdf:type owl:DatatypeProperty ;
 
@@ -495,7 +495,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#port
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#port
 
 :port rdf:type owl:DatatypeProperty ;
 
@@ -509,7 +509,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#type
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#type
 
 :type rdf:type owl:DatatypeProperty ;
 
@@ -533,12 +533,12 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Resource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource
 
 omn:Resource rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology/omn-resource#Cloud
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Cloud
 
 :Cloud rdf:type owl:Class ;
 
@@ -550,7 +550,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#HardwareType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#HardwareType
 
 :HardwareType rdf:type owl:Class ;
 
@@ -562,7 +562,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Hop
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Hop
 
 :Hop rdf:type owl:Class ;
 
@@ -573,7 +573,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Interface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Interface
 
 :Interface rdf:type owl:Class ;
 
@@ -588,7 +588,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#IPAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#IPAddress
 
 :IPAddress rdf:type owl:Class ;
       
@@ -599,7 +599,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Link
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Link
 
 :Link rdf:type owl:Class ;
 
@@ -613,7 +613,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#LinkProperty
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#LinkProperty
 
 :LinkProperty rdf:type owl:Class ;
 
@@ -623,7 +623,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Location
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Location
 
 :Location rdf:type owl:Class ;
 
@@ -631,7 +631,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#NetworkObject
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#NetworkObject
 
 :NetworkObject rdf:type owl:Class ;
                
@@ -645,7 +645,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Node
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Node
 
 :Node rdf:type owl:Class ;
 
@@ -660,7 +660,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Openflow
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Openflow
 
 :Openflow rdf:type owl:Class ;
 
@@ -670,7 +670,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Path
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Path
 
 :Path rdf:type owl:Class ;
 
@@ -682,7 +682,7 @@ omn:Resource rdf:type owl:Class .
 
 ### required to translate GENI RSpecs with multiple sliver types
 ### NOT used in standard Open Multinet descriptions 
-### http://open-multinet.info/ontology/omn-resource#SliverType
+### https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#SliverType
 
 :SliverType rdf:type owl:Class ;
 
@@ -694,7 +694,7 @@ omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Stitching
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Stitching
 
 :Stitching rdf:type owl:Class ;
 

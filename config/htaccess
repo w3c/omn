@@ -12,18 +12,18 @@ RewriteEngine On
 RewriteBase /ontology
 
 # fix typos
-Redirect 301 /ontology/omnlc http://open-multinet.info/ontology/omn-lifecycle
-Redirect 301 /omnlc http://open-multinet.info/ontology/omn-lifecycle
-Redirect 301 /ontology/omnfed http://open-multinet.info/ontology/omn-federation
-Redirect 301 /omnfed http://open-multinet.info/ontology/omn-federation
-Redirect 301 /ontology/omndpc http://open-multinet.info/ontology/omn-domain-pc
-Redirect 301 /omndpc http://open-multinet.info/ontology/omn-domain-pc
-Redirect 301 /ontology/omnres http://open-multinet.info/ontology/omn-resource
-Redirect 301 /omnres http://open-multinet.info/ontology/omn-resource
-Redirect 301 /ontology/omnmon http://open-multinet.info/ontology/omn-monitoring
-Redirect 301 /omnmon http://open-multinet.info/ontology/omn-monitoring
-Redirect 301 /ontology/omnsrv http://open-multinet.info/ontology/omn-service
-Redirect 301 /omnsrv http://open-multinet.info/ontology/omn-service
+Redirect 301 /ontology/omnlc https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle
+Redirect 301 /omnlc https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle
+Redirect 301 /ontology/omnfed https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation
+Redirect 301 /omnfed https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation
+Redirect 301 /ontology/omndpc https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc
+Redirect 301 /omndpc https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc
+Redirect 301 /ontology/omnres https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource
+Redirect 301 /omnres https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource
+Redirect 301 /ontology/omnmon https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring
+Redirect 301 /omnmon https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring
+Redirect 301 /ontology/omnsrv https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service
+Redirect 301 /omnsrv https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service
 
 # Rewrite rule to serve HTML content from the vocabulary URI if requested
 RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)

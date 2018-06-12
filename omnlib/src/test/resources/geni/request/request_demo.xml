@@ -3,6 +3,6 @@
       component_manager_id="urn:publicid:IDN+localhost+authority+cm"
       component_name="VM-Server-1" exclusive="false">
       <sliver_type name="http://localhost/resource/Ubuntu-64bit"/>
-      <ns2:monitoring type="http://open-multinet.info/ontology/omn-monitoring#MonitoringService" uri="http://federation.av.tu-berlin.de:3003"/>
+      <ns2:monitoring type="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#MonitoringService" uri="http://federation.av.tu-berlin.de:3003"/>
   </node>
 </rspec>

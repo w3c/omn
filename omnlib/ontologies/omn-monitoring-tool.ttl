@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-monitoring-tool#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -7,20 +7,20 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-component: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
-@prefix omn-monitoring-data: <http://open-multinet.info/ontology/omn-monitoring-data#> .
-@prefix omn-monitoring-unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@prefix omn-monitoring-metric: <http://open-multinet.info/ontology/omn-monitoring-metric#> .
-@prefix omn-monitoring-genericconcepts: <http://open-multinet.info/ontology/omn-monitoring-genericconcepts#> .
-@base <http://open-multinet.info/ontology/omn-monitoring-tool> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-service: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-component: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-monitoring: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#> .
+@prefix omn-monitoring-data: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#> .
+@prefix omn-monitoring-unit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
+@prefix omn-monitoring-metric: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#> .
+@prefix omn-monitoring-genericconcepts: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool> .
 
-<http://open-multinet.info/ontology/omn-monitoring-tool> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool> rdf:type owl:Ontology ;
                                                          
                                                          rdfs:label "omn-monitoring-tool"@en ;
                                                          
@@ -28,7 +28,7 @@
                                                          
                                                          dc:description "The tool ontology describes generic concepts such as measurement location, timestamp, transport protocols, etc.."^^xsd:string ;
                                                          
-                                                         vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-tool#" ;
+                                                         vann:preferredNamespaceUri "https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#" ;
                                                          
                                                          dc:date "2015-05-30" ;
                                                          
@@ -62,7 +62,7 @@
 #################################################################
 
     
-###  http://open-multinet.info/ontology/omn-monitoring-tool#communicationParadigm
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#communicationParadigm
 
 :communicationParadigm rdf:type owl:ObjectProperty ;
                        
@@ -74,7 +74,7 @@
                        
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#communicationParadigm
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#communicationParadigm
 
 :dataAccessProvided rdf:type owl:ObjectProperty ;
                        
@@ -86,7 +86,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#usesDataBroker
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#usesDataBroker
 
 :usesDataBroker rdf:type owl:ObjectProperty ;
                        
@@ -102,7 +102,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#reportesDataAbout
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#reportesDataAbout
 
 :reportesDataAbout rdf:type owl:ObjectProperty ;
                        
@@ -120,7 +120,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#convertsDataFrom
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#convertsDataFrom
 
 :convertsDataFrom rdf:type owl:ObjectProperty ;
                        
@@ -132,7 +132,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#convertsDataTo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#convertsDataTo
 
 :convertsDataTo rdf:type owl:ObjectProperty ;
                        
@@ -162,19 +162,19 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Metric
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Metric
 
 omn-monitoring:Metric rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Tool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Tool
 
 omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#MonitoringTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#MonitoringTool
 
 :MonitoringTool rdf:type owl:Class ;
 
@@ -183,7 +183,7 @@ omn-monitoring:Tool rdf:type owl:Class .
                 rdfs:comment "Represents any tool used for performing monitoring service."^^xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#CaptureTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#CaptureTool
 
 :CaptureTool rdf:type owl:Class ;
 
@@ -193,7 +193,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Collector
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Collector
 
 :Collector rdf:type owl:Class ;
 
@@ -203,7 +203,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Converter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Converter
 
 :Adapter rdf:type owl:Class ;
 
@@ -213,7 +213,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Exporter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Exporter
 
 :Exporter rdf:type owl:Class ;
 
@@ -223,7 +223,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#AnalysisTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#AnalysisTool
 
 :AnalysisTool rdf:type owl:Class ;
 
@@ -233,7 +233,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#VisualizationTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#VisualizationTool
 
 :VisualizationTool rdf:type owl:Class ;
 
@@ -243,7 +243,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#TopologicalVisualizationTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#TopologicalVisualizationTool
 
 :TopologicalVisualizationTool rdf:type owl:Class ;
                                       
@@ -253,7 +253,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#GraphicalVisualizationTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#GraphicalVisualizationTool
 
 :GraphicalVisualizationTool rdf:type owl:Class ;
                                       
@@ -263,7 +263,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#GeographicalVisualizationTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#GeographicalVisualizationTool
 
 :GeographicalVisualizationTool rdf:type owl:Class ;
                                       
@@ -273,7 +273,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Filter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Filter
 
 :Filter rdf:type owl:Class ;
         
@@ -283,7 +283,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#MonitoringDashboard
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#MonitoringDashboard
 
 :MonitoringDashboard rdf:type owl:Class ;
         
@@ -293,7 +293,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#MeasurementTool
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#MeasurementTool
 
 :MeasurementTool rdf:type owl:Class ;
                    
@@ -303,7 +303,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#ActiveMeasurementTool
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#ActiveMeasurementTool
 
 :ActiveMeasurementTool rdf:type owl:Class ;
                    
@@ -313,7 +313,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#PassiveMeasurementTool
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#PassiveMeasurementTool
 
 :PassiveMeasurementTool rdf:type owl:Class ;
                    
@@ -323,7 +323,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#DataBroker
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#DataBroker
 
 :DataBroker rdf:type owl:Class ;
                    
@@ -333,7 +333,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#CommunicationParadigm
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#CommunicationParadigm
 
 :CommunicationParadigm rdf:type owl:Class ;
                        
@@ -341,7 +341,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#Centralized
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Centralized
 
 :Centralized rdf:type owl:Class ;
              
@@ -351,7 +351,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#Distributed
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Distributed
 
 :Distributed rdf:type owl:Class ;
              
@@ -361,7 +361,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#ClientServer
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#ClientServer
 
 :ClientServer rdf:type owl:Class ;
               
@@ -369,7 +369,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#P2P
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#P2P
 
 :P2P rdf:type owl:Class ;
      
@@ -377,7 +377,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#DataAccess
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#DataAccess
 
 :DataAccess rdf:type owl:Class ;
                                       
@@ -387,7 +387,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#GUI
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#GUI
 
 :GUI rdf:type owl:Class ;
                    
@@ -397,7 +397,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#API
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#API
 
 :API rdf:type owl:Class ;
                    
@@ -407,7 +407,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-tool#CollectionEndpoint
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#CollectionEndpoint
 
 :CollectionEndpoint rdf:type owl:Class ;
                    
@@ -417,7 +417,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Database
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Database
 
 :Database rdf:type owl:Class ;
 
@@ -427,7 +427,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#SQL
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#SQL
 
 :SQL rdf:type owl:Class ;
                    
@@ -446,7 +446,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Ping
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Ping
 
 :Ping rdf:type :CaptureTool ,
                :MonitoringTool ,
@@ -457,7 +457,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Iperf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Iperf
 
 :Iperf rdf:type :CaptureTool ,
                 :MonitoringTool ,
@@ -468,7 +468,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Traceroute
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Traceroute
 
 :Traceroute rdf:type :TopologicalVisualizationTool ,
                      :MonitoringTool ,
@@ -479,7 +479,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Wireshark
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Wireshark
 
 :Wireshark rdf:type  :CaptureTool ,
                      :MonitoringTool ,
@@ -490,7 +490,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Tcpdump
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Tcpdump
 
 :Tcpdump rdf:type :CaptureTool ,
                   :MonitoringTool ,
@@ -501,7 +501,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Nagios
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Nagios
 
 :Nagios rdf:type :TopologicalVisualizationTool ,
                  :AnalysisTool ,
@@ -515,7 +515,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Zabbix
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Zabbix
 
 :Zabbix rdf:type :AnalysisTool ,
                  :MonitoringTool ,
@@ -528,7 +528,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#collectd
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#collectd
 
 :collectd rdf:type :AnalysisTool ,
                    :MonitoringTool ,
@@ -541,7 +541,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#OMLWrapper
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#OMLWrapper
 
 :OMLWrapper rdf:type :Adapter ,
                      owl:NamedIndividual ;
@@ -550,7 +550,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#OMLServer
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#OMLServer
 
 :OMLServer rdf:type omn:Service ,
                     owl:NamedIndividual ;
@@ -559,7 +559,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#PostgreSQL
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#PostgreSQL
 
 :PostgreSQL rdf:type :Collector ,
                      :SQL ,
@@ -569,7 +569,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#SQLite
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#SQLite
 
 :SQLite rdf:type :Collector ,
                  :SQL ,
@@ -579,7 +579,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#JenaFuseki
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#JenaFuseki
 
 :JenaFuseki rdf:type :Collector ,
                      owl:NamedIndividual ;
@@ -591,7 +591,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#OMSPEndpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#OMSPEndpoint
 
 :OMSPEndpoint rdf:type :CollectionEndpoint ,
                        owl:NamedIndividual ;
@@ -600,7 +600,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#SPARQLEndpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#SPARQLEndpoint
 
 :SPARQLEndpoint rdf:type :CollectionEndpoint ,
                          owl:NamedIndividual ;
@@ -609,7 +609,7 @@ omn-monitoring:Tool rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-tool#Manifold
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#Manifold
 
 :Manifold rdf:type :DataBroker ,
                    owl:NamedIndividual ;

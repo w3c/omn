@@ -1,16 +1,16 @@
-@prefix omn: <http://open-multinet.info/ontology/omn#>.
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix omnlc: <http://open-multinet.info/ontology/omn-lifecycle#>.
-@prefix omngeni: <http://open-multinet.info/ontology/omn-domain-geni-fire#>.
-@prefix omnmu: <http://open-multinet.info/ontology/omn-monitoring-unit#>.
-@prefix omncomp: <http://open-multinet.info/ontology/omn-component#>.
-@prefix omnres: <http://open-multinet.info/ontology/omn-resource#>.
-@prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#>.
-@prefix omnmnt: <http://open-multinet.info/ontology/omn-monitoring#>.
+@prefix omnlc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#>.
+@prefix omngeni: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#>.
+@prefix omnmu: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#>.
+@prefix omncomp: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#>.
+@prefix omnres: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#>.
+@prefix omnmonunit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#>.
+@prefix omnmnt: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#>.
 @prefix dbp: <http://dbpedia.org/property/>.
 @prefix schema: <http://schema.org/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix omndpc: <http://open-multinet.info/ontology/omn-domain-pc#>.
+@prefix omndpc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#>.
 
 [rule1: 
 (?node omnres:hasHardwareType ?hwtype)
@@ -48,7 +48,7 @@ makeTemp(?stoComp)
 (?cpuComp2 dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp2) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "320.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -90,7 +90,7 @@ makeTemp(?stoComp)
 (?cpuComp2 dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp2) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "160.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -131,7 +131,7 @@ makeTemp(?stoComp)
 (?cpuComp2 dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp2) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "250.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -172,7 +172,7 @@ makeTemp(?stoComp)
 (?cpuComp2 dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp2) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "250.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -202,7 +202,7 @@ makeTemp(?stoComp)
 (?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "250.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -243,7 +243,7 @@ makeTemp(?stoComp)
 (?cpuComp2 dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp2) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
  (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "4096.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 

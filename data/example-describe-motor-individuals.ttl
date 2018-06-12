@@ -1,6 +1,6 @@
 @prefix : <http://open-multinet.info/ontology/resource/motor-individuals#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
-@prefix omn: <http://open-multinet.info/ontology/omn-federation#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -17,7 +17,7 @@
                                                            
                                                            rdfs:comment "Sample description of a resource, in this case a motorgarage, which can create motors." ;
                                                            
-                                                           owl:imports  <http://open-multinet.info/ontology/omn-federation> ,
+                                                           owl:imports  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation> ,
                                                                         <http://fp7-novi.eu/im.owl> ,
                                                                         <http://open-multinet.info/ontology/ngn-federation-playground> ,
                                                                         <http://open-multinet.info/ontology/resource/motorgarage> .

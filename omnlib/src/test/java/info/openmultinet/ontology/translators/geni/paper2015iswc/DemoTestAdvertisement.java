@@ -114,7 +114,7 @@ public class DemoTestAdvertisement {
 								.equals("http://demo.fiteagle.org/resource/vm-server/123/myLargeVM")
 						|| anyVm.getURI()
 								.toString()
-								.equals("http://open-multinet.info/ontology/omn-domain-pc#VM"));
+								.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#VM"));
 
 	}
 

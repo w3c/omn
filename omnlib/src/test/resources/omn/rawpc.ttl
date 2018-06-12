@@ -9,8 +9,8 @@
 
 <http://example.org> rdf:type owl:Ontology ;
                      
-                     owl:imports <http://open-multinet.info/ontology/omn> ,
-                                 <http://open-multinet.info/ontology/omn-service> .
+                     owl:imports <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn> ,
+                                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service> .
 
 
 #################################################################
@@ -22,61 +22,61 @@
 
 ###  http://example.org#mydiskimage1
 
-:mydiskimage1 rdf:type <http://open-multinet.info/ontology/omn-domain-pc#DiskImage> ,
+:mydiskimage1 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#DiskImage> ,
                        owl:NamedIndividual ;
               
               
 dc:description "Debian 7.7 Wheezy (64 bit)"^^xsd:string ;
 rdfs:label "urn:publicid:IDN+wall1.ilabt.iminds.be+image+emulab-ops:DEB77-64-STD"^^xsd:string ;
-<http://open-multinet.info/ontology/omn-domain-pc#os> "Linux"^^xsd:string ;
-<http://open-multinet.info/ontology/omn-domain-pc#url> "https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=47472517-5d3c-11e4-bd9f-001517becdc1"^^xsd:anyURI ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#os> "Linux"^^xsd:string ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#url> "https://www.wall2.ilabt.iminds.be/image_metadata.php?uuid=47472517-5d3c-11e4-bd9f-001517becdc1"^^xsd:anyURI ;
 owl:versionInfo "7.7"^^xsd:string .
 
 ###  http://example.org#myinstallcommand1
 
-:myinstallcommand1 rdf:type <http://open-multinet.info/ontology/omn-service#InstallService> ,
+:myinstallcommand1 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#InstallService> ,
                             owl:NamedIndividual ;
                    
-                   <http://open-multinet.info/ontology/omn-service#installPath> "/local"^^xsd:string ;
+                   <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#installPath> "/local"^^xsd:string ;
                    
-                   <http://open-multinet.info/ontology/omn-service#url> "http://example.net/path/tarball.tgz"^^xsd:anyURI .
+                   <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#url> "http://example.net/path/tarball.tgz"^^xsd:anyURI .
 
 
 
 ###  http://example.org#myinstallcommand2
 
-:myinstallcommand2 rdf:type <http://open-multinet.info/ontology/omn-service#InstallService> ,
+:myinstallcommand2 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#InstallService> ,
                             owl:NamedIndividual ;
                    
-                   <http://open-multinet.info/ontology/omn-service#installPath> "/usr/local"^^xsd:string ;
+                   <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#installPath> "/usr/local"^^xsd:string ;
                    
-                   <http://open-multinet.info/ontology/omn-service#url> "http://example.net/path/other.tgz"^^xsd:anyURI .
+                   <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#url> "http://example.net/path/other.tgz"^^xsd:anyURI .
 
 
 
 ###  http://example.org#myloginservice1
 
-:myloginservice1 rdf:type <http://open-multinet.info/ontology/omn-service#LoginService> ,
+:myloginservice1 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#LoginService> ,
                           owl:NamedIndividual ;
                  
-                 <http://open-multinet.info/ontology/omn-service#port> "8889"^^xsd:int ;
+                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#port> "8889"^^xsd:int ;
                  
-                 <http://open-multinet.info/ontology/omn-service#hostname> "gw.example.org"^^xsd:string ;
+                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#hostname> "gw.example.org"^^xsd:string ;
                  
-                 <http://open-multinet.info/ontology/omn-service#authentication> "ssh-keys"^^xsd:string ;
+                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#authentication> "ssh-keys"^^xsd:string ;
                  
-                 <http://open-multinet.info/ontology/omn-service#username> "willner"^^xsd:string .
+                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#username> "willner"^^xsd:string .
 
 
 
 ###  http://example.org#myrawpc1
 
-:myrawpc1 rdf:type <http://open-multinet.info/ontology/omn-domain-pc#PC> ,
+:myrawpc1 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#PC> ,
                    owl:NamedIndividual ;
           
-          <http://open-multinet.info/ontology/omn#hasResource> :mydiskimage1 ;
+          <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasResource> :mydiskimage1 ;
           
-          <http://open-multinet.info/ontology/omn#hasService> :myinstallcommand1 ,
+          <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasService> :myinstallcommand1 ,
                                                               :myinstallcommand2 ,
                                                               :myloginservice1 ,
                                                               :myshellcommand1 .
@@ -85,12 +85,12 @@ owl:versionInfo "7.7"^^xsd:string .
 
 ###  http://example.org#myshellcommand1
 
-:myshellcommand1 rdf:type <http://open-multinet.info/ontology/omn-service#ExecuteService> ,
+:myshellcommand1 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#ExecuteService> ,
                           owl:NamedIndividual ;
                  
-                 <http://open-multinet.info/ontology/omn-service#shell> "sh"^^xsd:string ;
+                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#shell> "sh"^^xsd:string ;
                  
-                 <http://open-multinet.info/ontology/omn-service#command> "sudo /local/myserver.sh"^^xsd:string .
+                 <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#command> "sudo /local/myserver.sh"^^xsd:string .
 
 
 

@@ -1,7 +1,7 @@
 @prefix : <http://open-multinet.info/ontology/sfa#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -176,7 +176,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#ServiceRegistry
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#ServiceRegistry
 
 :ServiceRegistry rdf:type owl:Class ;
                  
@@ -188,7 +188,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#SliceAuthority
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#SliceAuthority
 
 :SliceAuthority rdf:type owl:Class ;
                 
@@ -201,7 +201,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#SingleSignOnPortal
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#SingleSignOnPortal
 
 :SingleSignOnPortal rdf:type owl:Class ;
                     

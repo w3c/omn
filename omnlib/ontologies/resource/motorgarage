@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:motortype="http://open-multinet.info/ontology/resource/motortype#" xmlns:omn="http://open-multinet.info/ontology/omn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:wgs="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<rdf:RDF xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:motortype="http://open-multinet.info/ontology/resource/motortype#" xmlns:omn="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:wgs="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
   <rdf:Description rdf:about="http://open-multinet.info/ontology/resource/motortype#MotorGarage">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -7,7 +7,7 @@
     <rdfs:label xml:lang="en">MotorGarageResource </rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://open-multinet.info/ontology/resource/motortype#MotorGarage">
-    <rdfs:subClassOf rdf:resource="http://open-multinet.info/ontology/omn#Resource"/>
+    <rdfs:subClassOf rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://open-multinet.info/ontology/resource/motortype#MotorGarage">
     <omn:implements rdf:resource="http://open-multinet.info/ontology/resource/motortype#Motor"/>
@@ -19,7 +19,7 @@
     <rdfs:label xml:lang="en">MotorResource</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://open-multinet.info/ontology/resource/motortype#Motor">
-    <rdfs:subClassOf rdf:resource="http://open-multinet.info/ontology/omn#Resource"/>
+    <rdfs:subClassOf rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://open-multinet.info/ontology/resource/motortype#Motor">
     <omn:implementedBy rdf:resource="http://open-multinet.info/ontology/resource/motortype#MotorGarage"/>
