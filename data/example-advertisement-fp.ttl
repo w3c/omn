@@ -2,7 +2,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
-@prefix omn: <http://open-multinet.info/ontology#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -81,49 +81,49 @@ geni:type rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#certificate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#certificate
 
 omn:certificate rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#endpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#endpoint
 
 omn:endpoint rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#exclusive
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#exclusive
 
 omn:exclusive rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#monitoringsupport
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#monitoringsupport
 
 omn:monitoringsupport rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#partOfGroup
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#partOfGroup
 
 omn:partOfGroup rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#related
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#related
 
 omn:related rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#up
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#up
 
 omn:up rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#version
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#version
 
 omn:version rdf:type owl:AnnotationProperty .
 
@@ -323,13 +323,13 @@ geni:Message rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology#SoftwareComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#SoftwareComponent
 
 omn:SoftwareComponent rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology#Testbed
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Testbed
 
 omn:Testbed rdf:type owl:Class .
 

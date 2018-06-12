@@ -2,7 +2,7 @@
 <rspec:rspec
 xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
 xmlns:xhtml="http://www.w3.org/1999/xhtml"
-xmlns:omn="http://open-multinet.info/ontology#"
+xmlns:omn="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#"
 xmlns:owl="http://www.w3.org/2002/07/owl#"
 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -26,11 +26,11 @@ generated="2014-02-23T20:01:56.848+01:00">
   
   
 <rdf:RDF
-    xmlns:omn="http://open-multinet.info/ontology#"
+    xmlns:omn="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns="http://example.org/myexperiment#">
   <rdf:Description rdf:about="http://example.org/myexperiment#message">
-    <rdf:type rdf:resource="http://open-multinet.info/ontology#ProvisionRequest"/>
+    <rdf:type rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#ProvisionRequest"/>
   </rdf:Description>
 </rdf:RDF>
 

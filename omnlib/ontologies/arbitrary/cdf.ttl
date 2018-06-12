@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/cdf.ttl#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -9,7 +9,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterm:<http://purl.org/dc/terms/> .
 
-<http://open-multinet.info/ontology/cdf.ttl> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl> rdf:type owl:Ontology ;
                                              
                                              dc:date "2014-10-31"^^xsd:date ;
                                              
@@ -31,7 +31,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#ApplicationAndServiceDelivery
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#ApplicationAndServiceDelivery
 
 :ApplicationAndServiceDelivery rdf:type owl:Class ;
                                
@@ -41,7 +41,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#BackboneNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#BackboneNetwork
 
 :BackboneNetwork rdf:type owl:Class ;
                  
@@ -51,7 +51,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#CloudComputing
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#CloudComputing
 
 :CloudComputing rdf:type owl:Class ;
                 
@@ -61,7 +61,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#CustomerDevice
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#CustomerDevice
 
 :CustomerDevice rdf:type owl:Class ;
                 
@@ -71,7 +71,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#DataAndContentManagement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#DataAndContentManagement
 
 :DataAndContentManagement rdf:type owl:Class ;
                           
@@ -81,7 +81,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#IaaS
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#IaaS
 
 :IaaS rdf:type owl:Class ;
       
@@ -93,7 +93,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#PaaS
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#PaaS
 
 :PaaS rdf:type owl:Class ;
       
@@ -105,7 +105,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#SaaS
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#SaaS
 
 :SaaS rdf:type owl:Class ;
       
@@ -117,7 +117,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#SatelliteNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#SatelliteNetwork
 
 :SatelliteNetwork rdf:type owl:Class ;
                   
@@ -127,7 +127,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#SensorNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#SensorNetwork
 
 :SensorNetwork rdf:type owl:Class ;
                
@@ -137,7 +137,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#ThreeGFourGNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#ThreeGFourGNetwork
 
 :ThreeGFourGNetwork rdf:type owl:Class ;
                     
@@ -147,7 +147,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#WIFINetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#WIFINetwork
 
 :WIFINetwork rdf:type owl:Class ;
              
@@ -157,7 +157,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#WiredAccessNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#WiredAccessNetwork
 
 :WiredAccessNetwork rdf:type owl:Class ;
                     
@@ -167,7 +167,7 @@
 
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#WirelessAccessNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#WirelessAccessNetwork
 
 :WirelessAccessNetwork rdf:type owl:Class ;
                        
@@ -184,7 +184,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/cdf.ttl#RobynLoughnane
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/cdf.ttl#RobynLoughnane
 
 :RobynLoughnane rdf:type owl:NamedIndividual ;
                 

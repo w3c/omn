@@ -13,9 +13,9 @@
 @prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
 @prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
-@prefix : <http://open-multinet.info/ontology/resource/fiveg#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#> .
 
-<http://open-multinet.info/ontology/resource/fiveg> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 5G VNFs."@en ;
 
     rdf:type owl:Ontology, 
 
@@ -25,7 +25,7 @@
 
     vann:preferredNamespacePrefix "omn-resource-fiveg"^^xsd:string ;
 
-    vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/fiveg#> ;
+    vann:preferredNamespaceUri <https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#> ;
 
     dc:date "2015-12-01"^^xsd:date ;
 
@@ -56,7 +56,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#cloudManagementIP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#cloudManagementIP
 
 :cloudManagementIP  a    owl:ObjectProperty ;
 
@@ -71,7 +71,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#oscoState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#oscoState
 
 :oscoState  a    owl:ObjectProperty ;
 
@@ -91,7 +91,7 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/resource/fiveg#additionals
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#additionals
 
 :additionals  a    owl:DatatypeProperty ;
 
@@ -107,7 +107,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#benchmarkingToolHostName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#benchmarkingToolHostName
 
 :benchmarkingToolHostName  a    owl:DatatypeProperty ;
 
@@ -121,7 +121,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#cloudPublicRouterIp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#cloudPublicRouterIp
 
 :cloudPublicRouterIp  a    owl:DatatypeProperty ;
 
@@ -136,7 +136,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#consolePort
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#consolePort
 
 :consolePort  a    owl:DatatypeProperty ;
 
@@ -150,7 +150,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#consolePortBindOne
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#consolePortBindOne
 
 :consolePortBindOne  a    owl:DatatypeProperty ;
 
@@ -167,7 +167,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#consolePortBindTwo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#consolePortBindTwo
 
 :consolePortBindTwo  a    owl:DatatypeProperty ;
 
@@ -183,7 +183,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#consolePortOne
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#consolePortOne
 
 :consolePortOne  a    owl:DatatypeProperty ;
 
@@ -199,7 +199,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#consolePortTwo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#consolePortTwo
 
 :consolePortTwo  a    owl:DatatypeProperty ;
 
@@ -215,7 +215,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#defaultRouteVia
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#defaultRouteVia
 
 :defaultRouteVia  a    owl:DatatypeProperty ;
 
@@ -231,7 +231,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#diameterListenIntf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#diameterListenIntf
 
 :diameterListenIntf  a    owl:DatatypeProperty ;
 
@@ -248,7 +248,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#dnsInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#dnsInterface
 
 :dnsInterface  a    owl:DatatypeProperty ;
 
@@ -265,7 +265,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#domainName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#domainName
 
 :domainName  a    owl:DatatypeProperty ;
 
@@ -282,7 +282,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#databaseName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#databaseName
 
 :databaseName  a    owl:DatatypeProperty ;
 
@@ -298,7 +298,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#databaseProvi
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#databaseProvi
 
 :databaseProvi  a    owl:DatatypeProperty ;
 
@@ -314,7 +314,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#databasePassword
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#databasePassword
 
 :databasePassword  a    owl:DatatypeProperty ;
 
@@ -330,7 +330,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#databaseUser
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#databaseUser
 
 :databaseUser  a    owl:DatatypeProperty ;
 
@@ -346,7 +346,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#domainNs
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#domainNs
 
 :domainNs  a    owl:DatatypeProperty ;
 
@@ -362,7 +362,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#enodebHostName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#enodebHostName
 
 :enodebHostName  a    owl:DatatypeProperty ;
 
@@ -375,7 +375,7 @@
     rdfs:range   xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#imsiRangeEnd
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#imsiRangeEnd
 
 :imsiRangeEnd  a    owl:DatatypeProperty ;
 
@@ -389,7 +389,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#imsiRangeStart
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#imsiRangeStart
 
 :imsiRangeStart  a    owl:DatatypeProperty ;
 
@@ -403,7 +403,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#init
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#init
 
 :init  a    owl:DatatypeProperty ;
 
@@ -417,7 +417,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#ipRangeEnd
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#ipRangeEnd
 
 :ipRangeEnd  a    owl:DatatypeProperty ;
 
@@ -431,7 +431,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#ipRangeStart
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#ipRangeStart
 
 :ipRangeStart  a    owl:DatatypeProperty ;
 
@@ -446,7 +446,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#ipServicesNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#ipServicesNetwork
 
 :ipServicesNetwork  a    owl:DatatypeProperty ;
 
@@ -462,7 +462,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#localDatabase
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#localDatabase
 
 :localDatabase  a    owl:DatatypeProperty ;
 
@@ -478,7 +478,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#managementInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#managementInterface
 
 :managementInterface  a    owl:DatatypeProperty ;
 
@@ -495,7 +495,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#minInterfaces
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#minInterfaces
 
 :minInterfaces  a    owl:DatatypeProperty ;
 
@@ -511,7 +511,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#mmeConsolePort
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#mmeConsolePort
 
 :mmeConsolePort  a    owl:DatatypeProperty ;
 
@@ -525,7 +525,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#mmeHostName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#mmeHostName
 
 :mmeHostName  a    owl:DatatypeProperty ;
 
@@ -539,7 +539,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#netIp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#netIp
 
 :netIp  a    owl:DatatypeProperty ;
 
@@ -554,7 +554,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#netMask
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#netMask
 
 :netMask  a    owl:DatatypeProperty ;
 
@@ -568,7 +568,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#oscoId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#oscoId
 
 :oscoId  a    owl:DatatypeProperty ;
 
@@ -585,7 +585,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#oscoName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#oscoName
 
 :oscoName  a    owl:DatatypeProperty ;
 
@@ -602,7 +602,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#oscoVersion
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#oscoVersion
 
 :oscoVersion  a    owl:DatatypeProperty ;
 
@@ -619,7 +619,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwCConsolePort
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwCConsolePort
 
 :pgwCConsolePort  a    owl:DatatypeProperty ;
 
@@ -634,7 +634,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwCOfpCtrPort
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwCOfpCtrPort
 
 :pgwCOfpCtrPort  a    owl:DatatypeProperty ;
 
@@ -648,7 +648,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwCOfpCtrTransport
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwCOfpCtrTransport
 
 :pgwCOfpCtrTransport  a    owl:DatatypeProperty ;
 
@@ -663,7 +663,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwCTemplateConfigFile
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwCTemplateConfigFile
 
 :pgwCTemplateConfigFile  a    owl:DatatypeProperty ;
 
@@ -678,7 +678,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwUBaseId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwUBaseId
 
 :pgwUBaseId  a    owl:DatatypeProperty ;
 
@@ -692,7 +692,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwUDownloadInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwUDownloadInterface
 
 :pgwUDownloadInterface  a    owl:DatatypeProperty ;
 
@@ -705,7 +705,7 @@
     rdfs:range   xsd:integer .
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#pgwUUploadInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#pgwUUploadInterface
 
 :pgwUUploadInterface  a    owl:DatatypeProperty ;
 
@@ -718,7 +718,7 @@
     rdfs:range   xsd:integer .
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#port
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#port
 
 :port  a    owl:DatatypeProperty ;
 
@@ -734,7 +734,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#ranBackhaul
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#ranBackhaul
 
 :ranBackhaul  a    owl:DatatypeProperty ;
 
@@ -748,7 +748,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#requires
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#requires
 
 :requires  a    owl:DatatypeProperty ;
 
@@ -764,7 +764,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#sgwCJsonSrvPort
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#sgwCJsonSrvPort
 
 :sgwCJsonSrvPort  a    owl:DatatypeProperty ;
 
@@ -778,7 +778,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#sgwCOfpCtrPort
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#sgwCOfpCtrPort
 
 :sgwCOfpCtrPort  a    owl:DatatypeProperty ;
 
@@ -792,7 +792,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#sgwUDownloadInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#sgwUDownloadInterface
 
 :sgwUDownloadInterface  a    owl:DatatypeProperty ;
 
@@ -807,7 +807,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#slfPresence
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#slfPresence
 
 :slfPresence  a    owl:DatatypeProperty ;
 
@@ -824,7 +824,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#sgwUUploadInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#sgwUUploadInterface
 
 :sgwUUploadInterface  a    owl:DatatypeProperty ;
 
@@ -838,7 +838,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#subscriberIpRange
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#subscriberIpRange
 
 :subscriberIpRange  a    owl:DatatypeProperty ;
 
@@ -852,7 +852,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#userEquipmentAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#userEquipmentAddress
 
 :userEquipmentAddress  a    owl:DatatypeProperty ;
 
@@ -866,7 +866,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#upstartOn
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#upstartOn
 
 :upstartOn  a    owl:DatatypeProperty ;
 
@@ -881,7 +881,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#useFloatingIps
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#useFloatingIps
 
 :useFloatingIps  a    owl:DatatypeProperty ;
 
@@ -898,7 +898,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#version
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#version
 
 :version  a    owl:DatatypeProperty ;
 
@@ -931,7 +931,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#BenchmarkingTool
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#BenchmarkingTool
 
 :BenchmarkingTool rdf:type owl:Class ;
 
@@ -943,7 +943,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#Control
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#Control
 
 :Control rdf:type owl:Class ;
 
@@ -956,7 +956,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#DomainNameSystem
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#DomainNameSystem
 
 :DomainNameSystem rdf:type owl:Class ;
 
@@ -970,7 +970,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#ENodeB
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#ENodeB
 
 :ENodeB rdf:type owl:Class ;
 
@@ -982,7 +982,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#Gateway
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#Gateway
 
 :Gateway rdf:type owl:Class ;
 
@@ -994,7 +994,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#HomeSubscriberServer
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#HomeSubscriberServer
 
 :HomeSubscriberServer rdf:type owl:Class ;
 
@@ -1008,7 +1008,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#Switch
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#Switch
 
 :Switch rdf:type owl:Class ;
 
@@ -1020,7 +1020,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#FiveGAdapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#FiveGAdapter
 
 :FiveGAdapter rdf:type owl:Class ;
 
@@ -1033,7 +1033,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
     rdfs:seeAlso <http://www.flex-project.eu> .
 
 
-###  http://open-multinet.info/ontology/resource/fiveg#FiveGResource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#FiveGResource
 
 :FiveGResource rdf:type owl:Class ;
 

@@ -3,7 +3,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix novi: <http://fp7-novi.eu/im.owl#>
-prefix omn: <http://open-multinet.info/ontology#> 
+prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> 
 
 SELECT ?resource ?start ?stop WHERE{
     ?resource omn:partOfGroup ?reservation .

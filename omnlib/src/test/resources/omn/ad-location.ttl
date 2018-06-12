@@ -19,7 +19,7 @@
         rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .
 
 <http://localhost/resource/MotorGarage-1>
-        a              <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> ;
+        a              <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> ;
         rdfs:comment   "A motor garage adapter that can simulate different dynamic motor resources."^^xsd:string ;
         rdfs:label     "MotorGarage-1"^^xsd:string ;
         <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#maxInstances>
@@ -30,7 +30,7 @@
         <http://www.w3.org/2003/01/geo/wgs84_pos#long>
                 "13.323732"^^xsd:string .
 
-<http://open-multinet.info/ontology/resource/motorgarage#MotorGarage>
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage>
         :implements  <http://open-multinet.info/ontology/resource/motor#Motor> .
 
 <http://open-multinet.info/ontology/resource/motor#throttle>
@@ -43,7 +43,7 @@
         a                owl:Class ;
         rdfs:label       "Motor"@en ;
         rdfs:subClassOf  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource> ;
-        :implementedBy   <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+        :implementedBy   <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> .
 
 <http://open-multinet.info/ontology/resource/motor#rpm>
         rdfs:domain  <http://open-multinet.info/ontology/resource/motor#Motor> .

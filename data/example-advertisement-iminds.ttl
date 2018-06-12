@@ -10,7 +10,7 @@
 @prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
 @prefix storage: <http://jfed.iminds.be/owl/storage.owl#> .
 @prefix collections: <http://jfed.iminds.be/owl/collections.owl#> .
-@prefix omn: <http://open-multinet.info/ontology#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @base <http://jfed.iminds.be/owl/compute.owl#> .
 
 <http://jfed.iminds.be/owl/compute.owl> rdf:type owl:Ontology ;

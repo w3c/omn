@@ -25,7 +25,7 @@
 <http://localhost/resource/OpenStackAdapter> omn-lifecycle:parentOf <urn:publicid:IDN+localhost+authority+cm> .
 
 <http://localhost/resource/MotorGarage-1> omn-lifecycle:parentOf <urn:publicid:IDN+localhost+authority+cm> .
-<http://localhost/resource/MotorGarage-1> rdf:type <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+<http://localhost/resource/MotorGarage-1> rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> .
 <http://localhost/resource/MotorGarage-1> rdfs:comment "A motor garage adapter that can simulate different dynamic motor resources." .
 <http://localhost/resource/MotorGarage-1> rdfs:label "MotorGarage-1" .
 <http://localhost/resource/MotorGarage-1> omn:maxInstances "10"^^xsd:long .
@@ -42,7 +42,7 @@
 
 <http://localhost/resource/MotorGarage-2> omn-lifecycle:parentOf <urn:publicid:IDN+localhost+authority+cm> .
 <http://localhost/resource/MotorGarage-2> omn:isResourceOf <http://open-multinet.info/advertisement> .
-<http://localhost/resource/MotorGarage-2> rdf:type <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+<http://localhost/resource/MotorGarage-2> rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> .
 <http://localhost/resource/MotorGarage-2> rdfs:comment "A motor garage adapter that can simulate different dynamic motor resources." .
 <http://localhost/resource/MotorGarage-2> rdfs:label "MotorGarage-2" .
 <http://localhost/resource/MotorGarage-2> omn:maxInstances "10"^^xsd:long .

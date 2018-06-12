@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/sfa#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
@@ -7,9 +7,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://open-multinet.info/ontology/sfa#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#> .
 
-<http://open-multinet.info/ontology/sfa> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa> rdf:type owl:Ontology ;
                            
                             rdfs:comment "Ontology to support GENI SFA related terminologies in the Open Multinet Ontology."@en .
 
@@ -24,7 +24,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/sfa#expires
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#expires
 
 
 
@@ -35,7 +35,7 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/sfa#Slice
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Slice
 
 :Slice rdf:type owl:Class ;
                
@@ -43,7 +43,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#Sliver
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Sliver
 
 :Sliver rdf:type owl:Class ;
                
@@ -51,13 +51,13 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#Ticket
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Ticket
 
 :Ticket rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/sfa#Advertisement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Advertisement
 
 :Advertisement rdf:type owl:Class ;
                
@@ -66,7 +66,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#Manifest
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Manifest
 
 :Manifest rdf:type owl:Class ;
           
@@ -75,21 +75,21 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#Message
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Message
 
 :Message rdf:type owl:Class .
 
 
 
 
-###  http://open-multinet.info/ontology/sfa#MessageType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#MessageType
 
 :MessageType rdf:type owl:Class .
 
 
 
 
-###  http://open-multinet.info/ontology/sfa#Request
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#Request
 
 :Request rdf:type owl:Class ;
          
@@ -98,7 +98,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#ProjectAuthority
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#ProjectAuthority
 
 :ProjectAuthority rdf:type owl:Class ;
                   
@@ -111,7 +111,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#IdentityProvider
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#IdentityProvider
 
 :IdentityProvider rdf:type owl:Class ;
                   
@@ -124,7 +124,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#LoggingService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#LoggingService
 
 :LoggingService rdf:type owl:Class ;
                 
@@ -138,7 +138,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#AuthorizationService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#AuthorizationService
 
 :AuthorizationService rdf:type owl:Class ;
                       
@@ -151,7 +151,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#AccountabilityService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#AccountabilityService
 
 :AccountabilityService rdf:type owl:Class ;
                        
@@ -163,7 +163,7 @@
 
 
 
-###  http://open-multinet.info/ontology/sfa#AggregateManager
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#AggregateManager
 
 :AggregateManager   rdf:type owl:Class ;
                                             

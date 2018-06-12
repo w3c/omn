@@ -26,7 +26,7 @@
 <http://localhost/resource/MotorGarage-1> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#maxInstances> "10"^^<http://www.w3.org/2001/XMLSchema#long> .
 <http://localhost/resource/MotorGarage-1> <http://www.w3.org/2000/01/rdf-schema#label> "MotorGarage-1"^^<http://www.w3.org/2001/XMLSchema#string> .
 <http://localhost/resource/MotorGarage-1> <http://www.w3.org/2000/01/rdf-schema#comment> "A motor garage adapter that can simulate different dynamic motor resources."^^<http://www.w3.org/2001/XMLSchema#string> .
-<http://localhost/resource/MotorGarage-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+<http://localhost/resource/MotorGarage-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> .
 <http://open-multinet.info/ontology/resource/motor#maxRpm> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/resource/motor#Motor> .
 <http://open-multinet.info/ontology/resource/motor#throttle> <http://www.w3.org/2000/01/rdf-schema#domain> <http://open-multinet.info/ontology/resource/motor#Motor> .
 <http://localhost/resource/ToscaAdapter-1/smart_city> <http://opensdncore.org/ontology/OMTC_URL> "http://10.0.0.230:8090/onem2m"^^<http://www.w3.org/2001/XMLSchema#string> .
@@ -45,7 +45,7 @@
 <http://localhost/resource/ToscaAdapter-1/m2m_network_app> <http://opensdncore.org/ontology/TEST_PARAM> "test"^^<http://www.w3.org/2001/XMLSchema#string> .
 <http://localhost/resource/ToscaAdapter-1/m2m_network_app> <http://opensdncore.org/ontology/MGMT_INTF> "1"^^<http://www.w3.org/2001/XMLSchema#string> .
 <http://localhost/resource/ToscaAdapter-1/m2m_network_app> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource> .
-<http://open-multinet.info/ontology/resource/motor#Motor> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implementedBy> <http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> .
+<http://open-multinet.info/ontology/resource/motor#Motor> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implementedBy> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> .
 <http://open-multinet.info/ontology/resource/motor#Motor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource> .
 <http://open-multinet.info/ontology/resource/motor#Motor> <http://www.w3.org/2000/01/rdf-schema#label> "Motor"@en .
 <http://open-multinet.info/ontology/resource/motor#Motor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
@@ -81,7 +81,7 @@
 <http://localhost/resource/link1> <http://www.w3.org/2000/01/rdf-schema#label> "link1"^^<http://www.w3.org/2001/XMLSchema#string> .
 <http://localhost/resource/link1> <http://www.w3.org/2000/01/rdf-schema#comment> "A networking adapter that can create virtual link among resources."^^<http://www.w3.org/2001/XMLSchema#string> .
 <http://localhost/resource/link1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://open-multinet.info/ontology/resource/networkingAdapter#NetworkingAdapter> .
-<http://open-multinet.info/ontology/resource/motorgarage#MotorGarage> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implements> <http://open-multinet.info/ontology/resource/motor#Motor> .
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implements> <http://open-multinet.info/ontology/resource/motor#Motor> .
 <http://open-multinet.info/ontology/resource/networkingAdapter#NetworkingAdapter> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implements> <http://open-multinet.info/ontology/resource/link#lan> .
 <http://localhost/resource/ToscaAdapter-1/Berlin> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "13.32349967956543"^^<http://www.w3.org/2001/XMLSchema#string> .
 <http://localhost/resource/ToscaAdapter-1/Berlin> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "52.51649856567383"^^<http://www.w3.org/2001/XMLSchema#string> .

@@ -8,7 +8,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix motor: <http://open-multinet.info/ontology/resource/motorgarage#> .
+@prefix motor: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <http://open-multinet.info/ontology/resource/motor-individuals#> .
@@ -20,7 +20,7 @@
                                                            owl:imports  <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation> ,
                                                                         <http://fp7-novi.eu/im.owl> ,
                                                                         <http://open-multinet.info/ontology/ngn-federation-playground> ,
-                                                                        <http://open-multinet.info/ontology/resource/motorgarage> .
+                                                                        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage> .
 
 
 #################################################################
@@ -30,7 +30,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/resource/motorgarage#Motor1
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#Motor1
 
 :Motor1   rdf:type    motor:Motor ,
                       owl:NamedIndividual ;
@@ -45,7 +45,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/motorgarage#Motor2
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#Motor2
 
 :Motor2   rdf:type  motor:Motor ,
                     owl:NamedIndividual ;
@@ -60,7 +60,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/motorgarage#MotorGarage1
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage1
 
 :MotorGarage1   rdf:type  motor:MotorGarage ,
                           owl:NamedIndividual ;

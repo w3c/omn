@@ -2,7 +2,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix geni: <http://geni.net/ontology#>
 prefix nml: <http://schemas.ogf.org/nml/base/2013/02#>
-prefix omn: <http://open-multinet.info/ontology#>
+prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#>
 
 SELECT ?node ?testbed ?manager
 	WHERE { 

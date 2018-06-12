@@ -50,7 +50,7 @@
         component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1+Motor"
         component_name="Motor" exclusive="false">
         <ns5:sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor"/>
-        <ns5:hardware_type name="http://open-multinet.info/ontology/resource/motorgarage#MotorGarage"/>
+        <ns5:hardware_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage"/>
         <ns5:location country=""
             latitude="52.516377^^http://www.w3.org/2001/XMLSchema#string" longitude="13.323732^^http://www.w3.org/2001/XMLSchema#string"/>
     </ns5:node>
