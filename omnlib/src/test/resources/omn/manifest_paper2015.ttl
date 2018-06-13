@@ -1,21 +1,21 @@
 <http://open-multinet.info/example#manifest>
-        a       <http://open-multinet.info/ontology/omn-lifecycle#Manifest> ;
+        a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Manifest> ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Manifest" ;
-        <http://open-multinet.info/ontology/omn#hasResource>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasResource>
                 <http://testbed.example.org/motorgarage-1/motor-1> .
 
 <http://testbed.example.org/motorgarage-1/motor-1>
-        a       <http://open-multinet.info/ontology/omn#Resource> ;
+        a       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource> ;
         a       [ a       "http://open-multinet.info/ontology/resources/motor#Motor" ;
                   <http://www.w3.org/2000/01/rdf-schema#label>
                           "Motor"
                 ] ;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "myMotor" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#hasID>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID>
                 "myMotor" ;
-        <http://open-multinet.info/ontology/omn-lifecycle#implementedBy>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implementedBy>
                 <http://testbed.example.org/resources/motorgarage-1> ;
-        <http://open-multinet.info/ontology/omn-lifecycle#managedBy>
+        <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#managedBy>
                 <urn:publicid:IDN+testbed.example.org+authority+cm> .

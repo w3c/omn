@@ -22,102 +22,102 @@
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1> <http://open-multinet.info/ontology/omn-lifecycle#hasReservationState> :allocated .
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasReservationState> :allocated .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2> <http://open-multinet.info/ontology/omn-lifecycle#hasReservationState> :allocated .
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasReservationState> :allocated .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node1_if1" ;
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node1_if1" ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1> ;
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1> ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1> ;
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1> ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn-lifecycle#hasState> :pending .
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasState> :pending .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node2_if2" ;
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node2_if2" ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2> ;
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2> ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2> ;
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2> ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn-lifecycle#hasState> :pending .
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasState> :pending .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode1
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode1> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node1" ;
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode1> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node1" ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1> ;
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation1> ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1> ;
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1> ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1> ;
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1> ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn-lifecycle#hasState> :pending .
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasState> :pending .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode2
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode2> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node2" ;
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode2> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node2" ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2> ;
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#reservation2> ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2> ;
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2> ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2> ;
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#parentOf> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2> ;
                                                                                        
-                                                                                       <http://open-multinet.info/ontology/omn-lifecycle#hasState> :pending .
+                                                                                       <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasState> :pending .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node1" ;
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node1" ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1> .
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1> .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node1_if1" .
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node1_if1> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node1_if1" .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node2" ;
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+node+omf.netmode.node2" ;
                                                                                             
-                                                                                            <http://open-multinet.info/ontology/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2> .
+                                                                                            <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2> .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2
 
-<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2> <http://open-multinet.info/ontology/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node2_if2" .
+<http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-157#omf.netmode.node2_if2> <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID> "urn:publicid:IDN+omf:netmode+interface+omf.netmode.node2_if2" .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-163#Request1
 
-:Request1 rdf:type <http://open-multinet.info/ontology/omn-lifecycle#Confirmation> ,
+:Request1 rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Confirmation> ,
                    owl:NamedIndividual ;
           
-          <http://open-multinet.info/ontology/omn#hasResource> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1> ,
+          <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasResource> <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface1> ,
                                                                <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundInterface2> ,
                                                                <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode1> ,
                                                                <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-156#unboundNode2> .
@@ -126,21 +126,21 @@
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-163#allocated
 
-:allocated rdf:type <http://open-multinet.info/ontology/omn-lifecycle#Allocated> ,
+:allocated rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Allocated> ,
                     owl:NamedIndividual .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-163#pending
 
-:pending rdf:type <http://open-multinet.info/ontology/omn-lifecycle#Pending> ,
+:pending rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Pending> ,
                   owl:NamedIndividual .
 
 
 
 ###  http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-163#ready
 
-:ready rdf:type <http://open-multinet.info/ontology/omn-lifecycle#Ready> ,
+:ready rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Ready> ,
                 owl:NamedIndividual .
 
 

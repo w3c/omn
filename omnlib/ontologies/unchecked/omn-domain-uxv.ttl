@@ -5,11 +5,11 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-domain-wireless: <http://open-multinet.info/ontology/omn-domain-wireless#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-domain-wireless: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#> .
 @prefix omn-domain-sensor: <http://www.semanticweb.org/rawfie/samant/omn-domain-sensor#> .
 @prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#> .
 @prefix geo2003: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -46,32 +46,32 @@
 	rdfs:domain omn-resource:Interface ;
 	rdfs:range gml:Polygon .
 #  
-#  http://open-multinet.info/ontology/omn#hasComponent
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasComponent
 
 omn:hasComponent a owl:ObjectProperty ;
 	rdfs:comment "domain omn-resource:Interface range omn-domain-wireless:Channel".
 #
-#  http://open-multinet.info/ontology/omn-domain-wireless#supportsStandard
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#supportsStandard
 
 omn-domain-wireless:supportsStandard a owl:ObjectProperty ;
 	rdfs:comment "domain omn-domain-wireless:Channel range omn-domain-wireless:Standard" .
 #
-#  http://open-multinet.info/ontology/omn-domain-wireless#usesFrequency
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#usesFrequency
 
 omn-domain-wireless:usesFrequency a owl:ObjectProperty ;
 	rdfs:comment "domain omn-domain-wireless:Channel range omn-domain-wireless:Frequency" .
 #
-#  http://open-multinet.info/ontology/omn-resource#hasInterface
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface
 
 omn-resource:hasInterface a owl:ObjectProperty ;
 	rdfs:comment "domain :Uxv range omn-resource:Interface"@en .
 #
-#  http://open-multinet.info/ontology/omn-resource#isInterfaceOf
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#isInterfaceOf
 
 :isInterfaceOf a owl:ObjectProperty ;
 	rdfs:comment "domain omn-resource:Interface range :Uxv"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#managedBy
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#managedBy
 
 omn-lifecycle:managedBy rdf:type owl:ObjectProperty ;          
         rdfs:label "managed by"@en ;
@@ -92,19 +92,19 @@ omn-lifecycle:managedBy rdf:type owl:ObjectProperty ;
 	rdfs:domain omn:Resource ;
 	rdfs:range omn:Resource .
 # 
-#  http://open-multinet.info/ontology/omn-lifecycle#hasReservationState
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasReservationState
 
 omn-lifecycle:hasReservationState rdf:type owl:ObjectProperty ;
                      rdfs:label "has Reservation State"@en ;
                      rdfs:comment "domain omn-lifecycle:Lease range omn-lifecycle:ReservationState"@en ;
                      rdfs:comment "The state of the reservation."@en .
 #
-#  http://open-multinet.info/ontology/omn#hasReservation
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation
 
 omn:hasReservation rdf:type owl:ObjectProperty ;              
         rdfs:label "has reservation"@en .
 #
-# http://open-multinet.info/ontology/omn#isReservationOf
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#isReservationOf
 
 omn:isReservationOf rdf:type owl:ObjectProperty ;             
         rdfs:label "is reservation of"@en .
@@ -310,7 +310,7 @@ gml:exterior rdf:type owl:ObjectProperty ;
 	rdfs:range  :Uxv ;
 	rdfs:label "isUxVTypeOf"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasLease
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasLease
 
 omn-lifecycle:hasLease rdf:type owl:ObjectProperty ;
                 
@@ -448,28 +448,28 @@ omn-domain-sensor:isSensorSystemOf rdf:type owl:ObjectProperty ;
 	rdfs:label "Battery"@en ;
 	rdfs:comment "Battery (Wh)"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentID
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentID
 
 omn-lifecycle:hasComponentID rdf:type owl:DatatypeProperty ;
         rdfs:label "has component ID"@en ;     
         rdfs:comment "A unique identifier set by the management system"@en ;
 	rdfs:comment "domain omn:Resource, omn:Component, omn:Service omn-resource:Interface and range xsd:anyURI"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerID
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentManagerID
 
 omn-lifecycle:hasComponentManagerID rdf:type owl:DatatypeProperty ;
         rdfs:label "has component manager ID"@en ;       
         rdfs:comment "A unique identifier set by the management system"@en ;
 	rdfs:comment "domain omn:Resource, omn:Component, omn:Service and range xsd:anyURI"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerName
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentManagerName
 
 omn-lifecycle:hasComponentManagerName rdf:type owl:DatatypeProperty ;
         rdfs:label "has component manager name"@en ;     
         rdfs:comment "has component manager name"@en ;
 	rdfs:comment "domain omn:Resource, omn:Component, omn:Service and range xsd:anyURI"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasComponentName
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentName
 
 omn-lifecycle:hasComponentName rdf:type owl:DatatypeProperty ;
         rdfs:label "has component name"@en ;     
@@ -477,35 +477,35 @@ omn-lifecycle:hasComponentName rdf:type owl:DatatypeProperty ;
 	rdfs:comment "domain omn:Resource, omn:Component, omn:Service and range string"@en .
 #
 ### This is a temporary solution to test the translator, so that the orignal component ID is return when a URL, and not the URN as provided by the translator.
-# http://open-multinet.info/ontology/omn-lifecycle#hasOriginalID
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasOriginalID
 
 omn-lifecycle:hasOriginalID rdf:type owl:DatatypeProperty ;
         rdfs:label "has original component ID"@en ;       
         rdfs:comment "The original identifier set by the management system"@en ;       
 	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasRole
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasRole
 
 omn-lifecycle:hasRole rdf:type owl:DatatypeProperty ;
         rdfs:label "has role"@en ;       
         rdfs:comment "has role"@en ;
 	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasSliverID
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliverID
 
 omn-lifecycle:hasSliverID rdf:type owl:DatatypeProperty ;
         rdfs:label "has sliver ID"@en ;     
         rdfs:comment "has sliver ID"@en ;
 	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
 #      
-#  http://open-multinet.info/ontology/omn-lifecycle#hasSliceID
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliceID
 
 omn-lifecycle:hasSliceID rdf:type owl:DatatypeProperty ;
         rdfs:label "has slice ID"@en ;       
         rdfs:comment "domain omn:Reource, omn:Reservation and range string"@en ;       
         rdfs:seeAlso "GENI Manifest RSpec v3: node > slice_id"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#hasSliverName
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliverName
 
 omn-lifecycle:hasSliverName rdf:type owl:DatatypeProperty ;
         rdfs:label "has sliver name"@en ;       
@@ -513,35 +513,35 @@ omn-lifecycle:hasSliverName rdf:type owl:DatatypeProperty ;
 	rdfs:comment "domain omn:Resource, omn:Service and range string"@en .
 #
 	
-#  http://open-multinet.info/ontology/omn-lifecycle#expirationTime
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#expirationTime
 
 omn-lifecycle:expirationTime a owl:DatatypeProperty ;
 	rdfs:comment "Imported from omn-lifecycle:expirationTime"@en ;
 	rdfs:range xsd:dateTime ;
 	rdfs:label "has expiration time"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#startTime
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#startTime
 
 omn-lifecycle:startTime a owl:DatatypeProperty ;
 	rdfs:comment "Imported from omn-lifecycle:startTime"@en ;
 	rdfs:range xsd:dateTime ;
 	rdfs:label "has start time"@en .
 #
-# http://open-multinet.info/ontology/omn-lifecycle#hasID
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID
 
 omn-lifecycle:hasID a owl:DatatypeProperty ;
 	rdfs:comment "Imported from omn-lifecycle:hasID domain omn-lifecycle:Lease omn-resource:Interface"@en ;
 	rdfs:range xsd:string ;
 	rdfs:label "has ID"@en .	
 # 
-# http://open-multinet.info/ontology/omn-lifecycle#resourceId
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#resourceId
 
 omn-lifecycle:resourceId a owl:DatatypeProperty ;
 	rdfs:comment "Imported from omn-lifecycle:resourceId domain :UxV"@en ;
 	rdfs:range xsd:string ;
 	rdfs:label "has resource ID"@en .
 # 
-#  http://open-multinet.info/ontology/omn-domain-wireless#channelNum
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#channelNum
 
 omn-domain-wireless:channelNum a owl:DatatypeProperty ;
 	rdfs:label "Channel Number"@en ;
@@ -574,17 +574,17 @@ omn-domain-wireless:channelNum a owl:DatatypeProperty ;
 	rdfs:range xsd:string ;
 	rdfs:label "hasFirstName"@en .
 # 
-#  http://open-multinet.info/ontology/omn-domain-wireless#lowerBoundFrequency
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#lowerBoundFrequency
 
 omn-domain-wireless:lowerBoundFrequency a owl:DatatypeProperty ;
 	rdfs:comment "domain :Frequency range xsd:integer" .
 # 
-#  http://open-multinet.info/ontology/omn-domain-wireless#upperBoundFrequency
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#upperBoundFrequency
 
 omn-domain-wireless:upperBoundFrequency a owl:DatatypeProperty ;
 	rdfs:comment "domain :Frequency range xsd:integer" .
 # 
-#  http://open-multinet.info/ontology/omn-domain-wireless#antennaCount
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#antennaCount
 
 omn-domain-wireless:antennaCount a owl:DatatypeProperty ;
 	rdfs:comment "domain omn-domain-wireless:WirelessInterface  range xsd:integer" .
@@ -806,33 +806,33 @@ geo2003:long rdf:type owl:DatatypeProperty ;
              rdfs:label "Encryption"@en ;
              rdfs:subClassOf :ConnectionSecurity .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#Lease
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Lease
 
 omn-lifecycle:Lease rdf:type owl:Class ;
              rdfs:label "Lease"@en ;
 	     rdfs:subClassOf omn:Reservation ;
 	     rdfs:comment "Imported from omn-lifecycle:Lease"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#ReservationState
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#ReservationState
 
 omn-lifecycle:ReservationState rdf:type owl:Class ;
                   
              rdfs:label "Reservation State"@en ;
              rdfs:comment "Imported from omn-lifecycle:ReservationState"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Unallocated
 
 omn-lifecycle:Unallocated rdf:type owl:Class ;
              rdfs:subClassOf omn-lifecycle:ReservationState ;
              rdfs:comment "Imported from omn-lifecycle:Unallocated"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#Allocated
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Allocated
 
 omn-lifecycle:Allocated rdf:type owl:Class ;
              rdfs:subClassOf omn-lifecycle:ReservationState ;
              rdfs:comment "Imported from omn-lifecycle:Allocated"@en .
 #
-#  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Provisioned
 
 omn-lifecycle:Provisioned rdf:type owl:Class ;
              rdfs:subClassOf omn-lifecycle:ReservationState ;
@@ -850,17 +850,17 @@ omn-lifecycle:Provisioned rdf:type owl:Class ;
              rdfs:label "Pending"@en ;
              rdfs:subClassOf omn-lifecycle:ReservationState .
 #
-# http://open-multinet.info/ontology/omn#Reservation
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Reservation
 
 omn:Reservation a owl:Class ;
 	rdfs:comment "Imported from omn:Reservation" .
 # 
-# http://open-multinet.info/ontology/omn#Resource 
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource 
 
 omn:Resource a owl:Class ;
 	rdfs:comment "Imported from omn:Resource" .
 # 
-# http://open-multinet.info/ontology/omn-federation#Infrastructure
+# https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Infrastructure
 
 omn-federation:Infrastructure a owl:Class ;
 	rdfs:comment "Imported by omn-federation:Infrastructure" .
@@ -885,27 +885,27 @@ omn-federation:Infrastructure a owl:Class ;
 omn-resource:Interface a owl:Class ;
 	rdfs:comment "Imported from omn-resource:Interface"@en .	
 # 
-#  http://open-multinet.info/ontology/omn-domain-wireless#WiredInterface
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#WiredInterface
 
 omn-domain-wireless:WiredInterface a owl:Class ;
 	rdfs:comment "Imported from omn-domain-wireless:WiredInterface"@en .
 #
-#  http://open-multinet.info/ontology/omn-domain-wireless#WirelessInterface
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#WirelessInterface
 
 omn-domain-wireless:WirelessInterface a owl:Class ;
 	rdfs:comment "Imported from omn-domain-wireless:WirelessInterface"@en .
 #
-#  http://open-multinet.info/ontology/omn-domain-wireless#Channel
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#Channel
 
 omn-domain-wireless:Channel rdf:type owl:Class ;
 	rdfs:comment "Imported from omn-domain-wireless:Channel"@en .
 #
-#  http://open-multinet.info/ontology/omn-domain-wireless#Frequency
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#Frequency
 
 omn-domain-wireless:Frequency rdf:type owl:Class ;
 	rdfs:comment "Imported from omn-domain-wireless:Frequency"@en .
 #
-#  http://open-multinet.info/ontology/omn-domain-wireless#Standard
+#  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-wireless#Standard
 
 omn-domain-wireless:Standard rdf:type owl:Class ;
 	rdfs:comment "Imported from omn-domain-wireless:Standard"@en .

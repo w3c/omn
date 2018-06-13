@@ -2,14 +2,14 @@
 <rspec expires="2015-10-12T16:05:45.404+02:00" type="request"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd"
-	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/fiveg"
+	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg"
 	xmlns:ns6="http://opensdncore.org/ontology/">
 	<node client_id="control1"
 		component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FFiveGAdapter-1"
 		exclusive="false">
 		<sliver_type
-			name="http://open-multinet.info/ontology/resource/fiveg#Control" />
+			name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg#Control" />
 		<ns6:osco deployed_on="urn:uuid:f3f32cf4-bdf7-46c3-ae3b-c609b176688a" />
 		<ns5:control mme_console_port="1" init="true"
 			pgw_c_ofp_ctr_transport="pgwCOfpCtrTransport1" sgw_c_ofp_ctr_port="2"

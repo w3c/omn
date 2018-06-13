@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:geni="http://geni.net/ontology#" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:nml="http://schemas.ogf.org/nml/base/2013/02#" xmlns:novi="http://fp7-novi.eu/im.owl#" xmlns:omn="http://open-multinet.info/ontology#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns="http://fuseco.fokus.fraunhofer.de/ontology#">
+<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:geni="http://geni.net/ontology#" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:nml="http://schemas.ogf.org/nml/base/2013/02#" xmlns:novi="http://fp7-novi.eu/im.owl#" xmlns:omn="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns="http://fuseco.fokus.fraunhofer.de/ontology#">
   <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
@@ -112,7 +112,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#MmeComponent">
-    <rdfs:subClassOf rdf:resource="http://open-multinet.info/ontology#SoftwareComponent"/>
+    <rdfs:subClassOf rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#SoftwareComponent"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#MmeHandoverService">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -157,7 +157,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
-    <rdf:type rdf:resource="http://open-multinet.info/ontology#Testbed"/>
+    <rdf:type rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Testbed"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://fuseco.fokus.fraunhofer.de/ontology#FusecoPlayground">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>

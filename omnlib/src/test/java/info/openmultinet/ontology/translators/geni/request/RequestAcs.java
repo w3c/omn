@@ -57,11 +57,11 @@ public class RequestAcs {
 		Assert.assertTrue(node.getLength() == 1);
 
 		NodeList params = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/acs", "param");
+				"https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs", "param");
 		Assert.assertTrue(params.getLength() == 2);
 
 		NodeList devices = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/acs", "device");
+				"https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs", "device");
 		Assert.assertTrue(devices.getLength() == 1);
 
 		String id = devices.item(0).getAttributes().getNamedItem("id")

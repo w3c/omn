@@ -1,8 +1,8 @@
-@prefix : <http://open-multinet.info/ontology/omn-federation#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -13,9 +13,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix schema: <http://schema.org/> .
-@base <http://open-multinet.info/ontology/omn-federation#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
 
-<http://open-multinet.info/ontology/omn-federation> rdfs:comment "describes a federation and its members"@en ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation> rdfs:comment "describes a federation and its members"@en ;
 
                                                     rdf:type owl:Ontology ,
                                                     voaf:Vocabulary ;
@@ -24,7 +24,7 @@
 
                                                     vann:preferredNamespacePrefix "omn-federation" ;
 
-                                                    vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-federation#> ;
+                                                    vann:preferredNamespaceUri <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> ;
 
                                                     dc:date "2014-11-11"^^xsd:date ;
 
@@ -67,7 +67,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-federation#administers
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#administers
 
 :administers rdf:type owl:ObjectProperty ;
 
@@ -83,7 +83,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#hasFederationMember
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#hasFederationMember
 
 :hasFederationMember rdf:type owl:ObjectProperty ;
 
@@ -97,7 +97,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#isAdministeredBy
 
 :isAdministeredBy rdf:type owl:ObjectProperty ;
 
@@ -111,7 +111,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#partOfFederation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#partOfFederation
 
 :partOfFederation rdf:type owl:ObjectProperty ;
 
@@ -137,7 +137,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#Federation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Federation
 
 :Federation rdf:type owl:Class ;
 
@@ -149,7 +149,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#FederationMember
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#FederationMember
 
 :FederationMember rdf:type owl:Class ;
 
@@ -161,7 +161,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#Infrastructure
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Infrastructure
 
 :Infrastructure rdf:type owl:Class ;
 

@@ -1,10 +1,10 @@
 @prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
-@prefix omn:   <http://open-multinet.info/ontology/omn#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-domain-nfv: <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix omn:   <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-domain-nfv: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 

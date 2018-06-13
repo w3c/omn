@@ -1,13 +1,13 @@
 @prefix : <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-172#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix time: <http://www.w3.org/2006/time#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @base <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-172> .
 
 <http://www.semanticweb.org/mary/ontologies/2015/0/untitled-ontology-172> rdf:type owl:Ontology .
@@ -20,37 +20,37 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#hasReservation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasReservation
 
 omn:hasReservation rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn#hasResource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasResource
 
 omn:hasResource rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasReservationState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasReservationState
 
 omn-lifecycle:hasReservationState rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasState
 
 omn-lifecycle:hasState rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implementedBy
 
 omn-lifecycle:implementedBy rdf:type owl:ObjectProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasInterface
 
 omn-resource:hasInterface rdf:type owl:ObjectProperty .
 
@@ -77,7 +77,7 @@ time:hasEnd rdf:type owl:ObjectProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-resource#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#hasID
 
 omn-resource:hasID rdf:type owl:DatatypeProperty .
 
@@ -92,19 +92,19 @@ omn-resource:hasID rdf:type owl:DatatypeProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Reservation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Reservation
 
 omn:Reservation rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Topology
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Topology
 
 omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Manifest
 
 omn-lifecycle:Manifest rdf:type owl:Class ;
                        
@@ -112,13 +112,13 @@ omn-lifecycle:Manifest rdf:type owl:Class ;
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Provisioned
 
 omn-lifecycle:Provisioned rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Ready
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Ready
 
 omn-lifecycle:Ready rdf:type owl:Class ;
                     
@@ -126,19 +126,19 @@ omn-lifecycle:Ready rdf:type owl:Class ;
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#State
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#State
 
 omn-lifecycle:State rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Interface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Interface
 
 omn-resource:Interface rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Node
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Node
 
 omn-resource:Node rdf:type owl:Class .
 

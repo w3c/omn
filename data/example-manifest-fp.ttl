@@ -8,7 +8,7 @@
 @prefix geni: <http://geni.net/ontology#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix omn: <http://open-multinet.info/ontology#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 
 :message rdf:type geni:Message ;
         geni:type geni:Manifest .

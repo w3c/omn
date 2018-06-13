@@ -127,7 +127,7 @@
         </InstanceStates>
     </NodeType>
     <RelationshipType name="deployedOn" targetNamespace="http://opensdncore.org/ontology/">
-        <ValidSource typeRef="omn:Resource" xmlns:omn="http://open-multinet.info/ontology/omn"/>
+        <ValidSource typeRef="omn:Resource" xmlns:omn="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn"/>
         <ValidTarget typeRef="osco:ServiceContainer" xmlns:osco="http://opensdncore.org/ontology/"/>
     </RelationshipType>
 </Definitions>

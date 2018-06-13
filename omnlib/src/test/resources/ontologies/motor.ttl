@@ -1,7 +1,7 @@
 @prefix rdfs:          <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:           <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:           <http://www.w3.org/2001/XMLSchema#> .
-@prefix omn:           <http://open-multinet.info/ontology/omn#> .
+@prefix omn:           <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix motor:         <http://open-multinet.info/ontology/resources/motor#> .
 
 motor:Motor

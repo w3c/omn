@@ -1,6 +1,6 @@
-@prefix : <http://open-multinet.info/ontology/omn-domain-nfv#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -8,11 +8,11 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn-component: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-monitoring-data: <http://open-multinet.info/ontology/omn-monitoring-data#> .
-@base <http://open-multinet.info/ontology/omn-domain-nfv> .
+@prefix omn-component: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-monitoring-data: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv> .
 
-<http://open-multinet.info/ontology/omn-domain-nfv> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv> rdf:type owl:Ontology ;
                                                     
                                                     rdfs:label "omn-domain-nfv"@en ;
                                                     
@@ -51,7 +51,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasAction
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasAction
 
 :hasAction rdf:type owl:ObjectProperty ;
            
@@ -63,7 +63,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasDeployInfo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasDeployInfo
 
 :hasDeployInfo rdf:type owl:ObjectProperty ;
                
@@ -73,7 +73,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasDescriptor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasDescriptor
 
 :hasDescriptor rdf:type owl:ObjectProperty ;
                
@@ -83,7 +83,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasExternalInterfaces
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasExternalInterfaces
 
 :hasExternalInterfaces rdf:type owl:ObjectProperty ;
                        
@@ -93,7 +93,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasGeneralInfo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasGeneralInfo
 
 :hasGeneralInfo rdf:type owl:ObjectProperty ;
                 
@@ -103,7 +103,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasInstance
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasInstance
 
 :hasInstance rdf:type owl:ObjectProperty ;
              
@@ -113,7 +113,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasOperation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasOperation
 
 :hasOperation rdf:type owl:ObjectProperty ;
               
@@ -123,7 +123,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasParameter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasParameter
 
 :hasParameter rdf:type owl:ObjectProperty ;
               
@@ -133,7 +133,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasRequiredResources
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasRequiredResources
 
 :hasRequiredResources rdf:type owl:ObjectProperty ;
                       
@@ -143,7 +143,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasScale
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasScale
 
 :hasScale rdf:type owl:ObjectProperty ;
           
@@ -155,7 +155,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasVDU
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasVDU
 
 :hasVDU rdf:type owl:ObjectProperty ;
         
@@ -165,7 +165,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#isMappedTo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#isMappedTo
 
 :isMappedTo rdf:type owl:ObjectProperty ;
             
@@ -175,7 +175,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#migratesTo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#migratesTo
 
 :migratesTo rdf:type owl:ObjectProperty ;
             
@@ -196,7 +196,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#destIp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#destIp
 
 :destIp rdf:type owl:DatatypeProperty ;
         
@@ -208,7 +208,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasCPUunit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasCPUunit
 
 :hasCPUunit rdf:type owl:DatatypeProperty ;
             
@@ -223,7 +223,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasDescription
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasDescription
 
 :hasDescription rdf:type owl:DatatypeProperty ;
                 
@@ -235,7 +235,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasDiskSize
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasDiskSize
 
 :hasDiskSize rdf:type owl:DatatypeProperty ;
              
@@ -250,7 +250,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasID
 
 :hasID rdf:type owl:DatatypeProperty ;
        
@@ -260,7 +260,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasImageRef
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasImageRef
 
 :hasImageRef rdf:type owl:DatatypeProperty ;
              
@@ -270,7 +270,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasIndex
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasIndex
 
 :hasIndex rdf:type owl:DatatypeProperty ;
           
@@ -280,7 +280,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasMemorySize
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasMemorySize
 
 :hasMemorySize rdf:type owl:DatatypeProperty ;
                
@@ -295,7 +295,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasName
 
 :hasName rdf:type owl:DatatypeProperty ;
          
@@ -303,7 +303,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasVendor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasVendor
 
 :hasVendor rdf:type owl:DatatypeProperty ;
            
@@ -315,7 +315,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasVersion
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasVersion
 
 :hasVersion rdf:type owl:DatatypeProperty ;
             
@@ -325,7 +325,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#hasVnfdName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#hasVnfdName
 
 :hasVnfdName rdf:type owl:DatatypeProperty ;
              
@@ -343,7 +343,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#isSharing
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#isSharing
 
 :isSharing rdf:type owl:DatatypeProperty ;
            
@@ -355,7 +355,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-data#hasDestinationIP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#hasDestinationIP
 
 omn-monitoring-data:hasDestinationIP rdf:type owl:DatatypeProperty .
 
@@ -370,19 +370,19 @@ omn-monitoring-data:hasDestinationIP rdf:type owl:DatatypeProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Resource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource
 
 omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Service
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service
 
 omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Action
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Action
 
 :Action rdf:type owl:Class ;
         
@@ -390,7 +390,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#DeployInfo
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#DeployInfo
 
 :DeployInfo rdf:type owl:Class ;
             
@@ -398,7 +398,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Disk
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Disk
 
 :Disk rdf:type owl:Class ;
       
@@ -406,7 +406,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#ExternalInterface
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#ExternalInterface
 
 :ExternalInterface rdf:type owl:Class ;
                    
@@ -414,7 +414,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#GeneralInformation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#GeneralInformation
 
 :GeneralInformation rdf:type owl:Class ;
                     
@@ -422,7 +422,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#MigrationParam
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#MigrationParam
 
 :MigrationParam rdf:type owl:Class ;
                 
@@ -432,13 +432,13 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Operation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Operation
 
 :Operation rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Parameter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Parameter
 
 :Parameter rdf:type owl:Class ;
            
@@ -446,7 +446,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#RequiredResources
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#RequiredResources
 
 :RequiredResources rdf:type owl:Class ;
                    
@@ -454,7 +454,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#ScaleParam
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#ScaleParam
 
 :ScaleParam rdf:type owl:Class ;
             
@@ -462,7 +462,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#VM
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#VM
 
 :VM rdf:type owl:Class ;
     
@@ -470,7 +470,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#VirtualNetworkFunction
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#VirtualNetworkFunction
 
 :VirtualNetworkFunction rdf:type owl:Class ;
                         
@@ -480,7 +480,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#VirtualizationDeploymentUnit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#VirtualizationDeploymentUnit
 
 :VirtualizationDeploymentUnit rdf:type owl:Class ;
                               
@@ -488,7 +488,7 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#VnfDescriptor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#VnfDescriptor
 
 :VnfDescriptor rdf:type owl:Class ;
                
@@ -496,25 +496,25 @@ omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#VnfInstance
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#VnfInstance
 
 :VnfInstance rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-service#CPU
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#CPU
 
 omn-component:CPU rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-service#MemoryComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#MemoryComponent
 
 omn-component:MemoryComponent rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-service#StorageComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#StorageComponent
 
 omn-component:StorageComponent rdf:type owl:Class .
 
@@ -529,42 +529,42 @@ omn-component:StorageComponent rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Migrate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Migrate
 
 :Migrate rdf:type :Action ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Pause
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Pause
 
 :Pause rdf:type :Action ,
                 owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#ScaleDown
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#ScaleDown
 
 :ScaleDown rdf:type :Action ,
                     owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#ScaleUp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#ScaleUp
 
 :ScaleUp rdf:type :Action ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Start
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Start
 
 :Start rdf:type :Action ,
                 owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-nfv#Stop
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-nfv#Stop
 
 :Stop rdf:type :Action ,
                owl:NamedIndividual .

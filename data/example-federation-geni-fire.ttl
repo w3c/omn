@@ -3,13 +3,13 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix gr: <http://purl.org/goodrelations/v1#> .
 @prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix geni: <http://open-multinet.info/ontology/sfa#> .
+@prefix geni: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/arbitrary/sfa#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix move: <http://www.ontologydesignpatterns.org/cp/owl/move.owl#> .
 @prefix novi: <http://fp7-novi.eu/im.owl#> .
@@ -26,10 +26,10 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix service: <http://purl.org/ontology/service#> .
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
-@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
+@prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-domain-geni-fire: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#> .
 @base <http://w3.org/ns/omn/examples/geni-fire> .
 
 <http://w3.org/ns/omn/examples/geni-fire> rdf:type owl:Ontology ;
@@ -72,31 +72,31 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#hasEndpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasEndpoint
 
 omn:hasEndpoint rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn#hasService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasService
 
 omn:hasService rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#administers
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#administers
 
 omn-federation:administers rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#hasFederationMember
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#hasFederationMember
 
 omn-federation:hasFederationMember rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#isAdministeredBy
 
 omn-federation:isAdministeredBy rdf:type owl:AnnotationProperty .
 
@@ -153,37 +153,37 @@ foaf:mbox rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Service
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service
 
 omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-geni-fire#AMService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#AMService
 
 omn-domain-geni-fire:AMService rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-geni-fire#SAService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#SAService
 
 omn-domain-geni-fire:SAService rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#Federation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Federation
 
 omn-federation:Federation rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#FederationMember
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#FederationMember
 
 omn-federation:FederationMember rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#Infrastructure
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Infrastructure
 
 omn-federation:Infrastructure rdf:type owl:Class .
 

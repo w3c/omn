@@ -19,7 +19,7 @@ models.
 ## Further information
 
 * [W3C OMN Community Group](https://www.w3.org/community/omn/)
-* [Upper Ontology Description](http://open-multinet.info/ontology/omn)
+* [Upper Ontology Description](https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn)
 * [GENI RSpec Description](http://groups.geni.net/geni/wiki/GENIExperimenter/RSpecs)
 * [GENI RSpec Examples](http://groups.geni.net/geni/browser/trunk)
 

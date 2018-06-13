@@ -1,7 +1,7 @@
-@prefix : <http://open-multinet.info/ontology/omn-domain-pc#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix nml: <http://schemas.ogf.org/nml/2013/05/base#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -17,13 +17,13 @@
 @prefix schema: <http://schema.org/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix collections: <http://geni-orca.renci.org/owl/collections.owl#> .
-@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix omn-service: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@base <http://open-multinet.info/ontology/omn-domain-pc> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc> .
 
-<http://open-multinet.info/ontology/omn-domain-pc> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc> rdf:type owl:Ontology ;
                                                    
                                                    rdfs:label "omn-domain-pc"@en ;
                                                    
@@ -39,7 +39,7 @@
                                                    
                                                    vann:preferredNamespacePrefix "omn-domain-pc" ;
                                                    
-                                                   vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-domain-pc#" ;
+                                                   vann:preferredNamespaceUri "https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#" ;
                                                    
                                                    dc:publisher <http://open-multinet.info/> ;
                                                    
@@ -69,7 +69,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasCapacity
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasCapacity
 
 :hasCapacity rdf:type owl:DatatypeProperty ;
 
@@ -82,7 +82,7 @@
                          rdfs:range xsd:integer .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasCapacityUnit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasCapacityUnit
 
 :hasCapacityUnit rdf:type owl:DatatypeProperty ;
 
@@ -96,7 +96,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasControllerType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasControllerType
 
 :hasControllerType rdf:type owl:DatatypeProperty ;
 
@@ -110,7 +110,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasControllerUrl
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasControllerUrl
 
 :hasControllerUrl rdf:type owl:DatatypeProperty ;
 
@@ -124,7 +124,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageDescription
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageDescription
 
 :hasDiskimageDescription rdf:type owl:DatatypeProperty ,
                                   owl:FunctionalProperty ;
@@ -139,7 +139,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#diskimageDefault
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#diskimageDefault
 
 :diskimageDefault rdf:type owl:DatatypeProperty ,
                                   owl:FunctionalProperty ;
@@ -154,7 +154,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageLabel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageLabel
 
 :hasDiskimageLabel rdf:type owl:DatatypeProperty ,
                             owl:FunctionalProperty ;
@@ -173,7 +173,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageOS
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageOS
 
 :hasDiskimageOS rdf:type owl:DatatypeProperty ,
                          owl:FunctionalProperty ;
@@ -197,7 +197,7 @@ owl:Axiom rdf:type owl:Class .
 owl:AllDisjointProperties rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDlVlan
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDlVlan
 
 :hasDlVlan rdf:type owl:DatatypeProperty ;
 
@@ -210,7 +210,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
                          rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDlType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDlType
 
 :hasDlType rdf:type owl:DatatypeProperty ;
 
@@ -224,7 +224,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageURI
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageURI
 
 :hasDiskimageURI rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
@@ -239,7 +239,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskimageVersion
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskimageVersion
 
 :hasDiskimageVersion rdf:type owl:DatatypeProperty ,
                               owl:FunctionalProperty ;
@@ -254,7 +254,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabNodeTypeSlots
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasEmulabNodeTypeSlots
 
 :hasEmulabNodeTypeSlots rdf:type owl:DatatypeProperty ,
                           owl:FunctionalProperty ;
@@ -269,7 +269,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#emulabNodeTypeStatic
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#emulabNodeTypeStatic
 
 :emulabNodeTypeStatic rdf:type owl:DatatypeProperty ;
 
@@ -283,7 +283,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#emulabFdViolatable
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#emulabFdViolatable
 
 :emulabFdViolatable rdf:type owl:DatatypeProperty ;
 
@@ -298,7 +298,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasEmulabFdName
 
 :hasEmulabFdName rdf:type owl:DatatypeProperty ;
 
@@ -313,7 +313,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdLocalOperator
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasEmulabFdLocalOperator
 
 :hasEmulabFdLocalOperator rdf:type owl:DatatypeProperty ;
 
@@ -328,7 +328,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdGlobalOperator
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasEmulabFdGlobalOperator
 
 :hasEmulabFdGlobalOperator rdf:type owl:DatatypeProperty ;
 
@@ -342,7 +342,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabFdWeight
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasEmulabFdWeight
 
 :hasEmulabFdWeight rdf:type owl:DatatypeProperty ;
 
@@ -356,7 +356,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasEmulabTrivialBandwidth
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasEmulabTrivialBandwidth
 
 :hasEmulabTrivialBandwidth rdf:type owl:DatatypeProperty ;
 
@@ -370,7 +370,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasLatency
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasLatency
 
 :hasLatency rdf:type owl:DatatypeProperty ;
 
@@ -385,7 +385,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasPacketLoss
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasPacketLoss
 
 :hasPacketLoss rdf:type owl:DatatypeProperty ;
 
@@ -399,7 +399,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#lastUpdateTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#lastUpdateTime
 
 :lastUpdateTime rdf:type owl:DatatypeProperty ;
 
@@ -411,7 +411,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasHopType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasHopType
 
 :hasHopType rdf:type owl:DatatypeProperty ;
 
@@ -423,7 +423,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasNextHop
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasNextHop
 
 :hasNextHop rdf:type owl:DatatypeProperty ;
 
@@ -436,7 +436,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasNwDst
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasNwDst
 
 :hasNwDst rdf:type owl:DatatypeProperty ;
 
@@ -450,7 +450,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasNwSrc
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasNwSrc
 
 :hasNwSrc rdf:type owl:DatatypeProperty ;
 
@@ -464,7 +464,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasVMID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasVMID
 
 :hasVMID rdf:type owl:DatatypeProperty ;
 
@@ -479,7 +479,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
          rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasUseGroupName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasUseGroupName
 
 :hasUseGroupName rdf:type owl:DatatypeProperty ;
 
@@ -495,7 +495,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasUUID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasUUID
 
 :hasUUID rdf:type owl:DatatypeProperty ;
 
@@ -516,7 +516,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
          rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#vlanTag
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#vlanTag
 
 :vlanTag rdf:type owl:DatatypeProperty ;
 
@@ -530,7 +530,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#routableControlIp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#routableControlIp
 
 :routableControlIp rdf:type owl:DatatypeProperty ;
 
@@ -546,7 +546,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#restricted
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#restricted
 
 :restricted rdf:type owl:DatatypeProperty ;
 
@@ -562,7 +562,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasCPU
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasCPU
 
 :hasCPU rdf:type owl:DatatypeProperty ;
 
@@ -577,7 +577,7 @@ owl:AllDisjointProperties rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID
 
 omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
@@ -589,7 +589,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasDiskImage
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasDiskImage
 
 :hasDiskImage rdf:type owl:ObjectProperty ;
             
@@ -609,7 +609,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
             owl:inverseOf :isDiskImageOf .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#hasAvailable
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#hasAvailable
 
 :hasAvailable rdf:type owl:ObjectProperty ;
             
@@ -623,7 +623,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#isDiskImageOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#isDiskImageOf
 
 :isDiskImageOf rdf:type owl:ObjectProperty ;
             
@@ -651,7 +651,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#Available
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#Available
 
 :Available rdf:type owl:Class ;
 
@@ -665,7 +665,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#Controller
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#Controller
 
 :Controller rdf:type owl:Class ;
 
@@ -677,7 +677,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#Datapath
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#Datapath
 
 :Datapath rdf:type owl:Class ;
 
@@ -689,7 +689,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#DiskImage
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#DiskImage
 
 :DiskImage rdf:type owl:Class ;
 
@@ -701,7 +701,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#FeatureDescription
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#FeatureDescription
 
 :FeatureDescription rdf:type owl:Class ;
 
@@ -715,7 +715,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#OpenStack
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#OpenStack
 
 :OpenStack rdf:type owl:Class ;
            
@@ -726,7 +726,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
            rdfs:subClassOf :VM .
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#Packet
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#Packet
 
 :Packet rdf:type owl:Class ;
 
@@ -738,7 +738,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#PC
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#PC
 
 :PC rdf:type owl:Class ;
 
@@ -750,7 +750,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#SharedVlan
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#SharedVlan
 
 :SharedVlan rdf:type owl:Class ;
 
@@ -762,7 +762,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#VM
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#VM
 
 :VM rdf:type owl:Class ;
 
@@ -775,7 +775,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-pc#VMServer
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#VMServer
 
 :VMServer rdf:type owl:Class ;
 
@@ -788,31 +788,31 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Link
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Link
 
 omn-resource:Link rdf:type owl:Class .
 
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#Node
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Node
 
 omn-resource:Node rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Resource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource
 
 omn:Resource rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology/omn#Group
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Group
 
 omn:Group rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Service
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service
 
 omn:Service rdf:type owl:Class .
 

@@ -1,16 +1,16 @@
-@prefix omn: <http://open-multinet.info/ontology/omn#>.
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix omnlc: <http://open-multinet.info/ontology/omn-lifecycle#>.
-@prefix omngeni: <http://open-multinet.info/ontology/omn-domain-geni-fire#>.
-@prefix omnmu: <http://open-multinet.info/ontology/omn-monitoring-unit#>.
-@prefix omncomp: <http://open-multinet.info/ontology/omn-component#>.
-@prefix omnres: <http://open-multinet.info/ontology/omn-resource#>.
-@prefix omnmonunit: <http://open-multinet.info/ontology/omn-monitoring-unit#>.
-@prefix omnmnt: <http://open-multinet.info/ontology/omn-monitoring#>.
+@prefix omnlc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#>.
+@prefix omngeni: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#>.
+@prefix omnmu: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#>.
+@prefix omncomp: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#>.
+@prefix omnres: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#>.
+@prefix omnmonunit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#>.
+@prefix omnmnt: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#>.
 @prefix dbp: <http://dbpedia.org/property/>.
 @prefix schema: <http://schema.org/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix omndpc: <http://open-multinet.info/ontology/omn-domain-pc#>.
+@prefix omndpc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#>.
 
 [rule1: 
 (?node omnres:hasHardwareType ?hwtype)
@@ -35,7 +35,7 @@ makeTemp(?stoComp)
 (?cpuComp dbp:arch <http://dbpedia.org/resource/X86-32>)
 (?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "1.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -49,13 +49,13 @@ makeTemp(?cpuComp)
 makeTemp(?stoComp)
 -> 
 (?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#MemoryComponent>)
 (?memComp rdfs:label "DIMM DDR3 Synchronous 1600 MHz")
 (?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
 (?memComp dbp:memory "4096"^^xsd:integer)
 (?node omn:hasComponent ?memComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#CPU>)
 (?cpuComp rdfs:label "Intel(R) Core(TM) i7-3770 CPU")
 (?cpuComp omncomp:hasCores 4)
 (?cpuComp omncomp:hasModelType " Intel(R) Core(TM) i7")
@@ -65,7 +65,7 @@ makeTemp(?stoComp)
 (?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "111.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -80,13 +80,13 @@ makeTemp(?cpuComp)
 makeTemp(?stoComp)
 -> 
 (?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#MemoryComponent>)
 (?memComp rdfs:label "DDR DRAM")
 (?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
 (?memComp dbp:memory "256"^^xsd:integer)
 (?node omn:hasComponent ?memComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#CPU>)
 (?cpuComp rdfs:label "AMD Geode LX800 CPU")
 (?cpuComp omncomp:hasModelType "AMD Geode LX800")
 (?cpuComp dbp:fastest "500.0"^^xsd:double)
@@ -95,7 +95,7 @@ makeTemp(?stoComp)
 (?cpuComp dbp:arch <http://dbpedia.org/resource/X86-32>)
 (?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "59.6263"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -110,13 +110,13 @@ makeTemp(?cpuComp)
 makeTemp(?stoComp)
 -> 
 (?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#MemoryComponent>)
 (?memComp rdfs:label "DIMM Synchronous")
 (?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
 (?memComp dbp:memory "1935.872"^^xsd:double)
 (?node omn:hasComponent ?memComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#CPU>)
 (?cpuComp rdfs:label "Intel(R) Core(TM)2 Duo CPU P8400")
 (?cpuComp omncomp:hasCores 2)
 (?cpuComp omncomp:hasModelType "Intel(R) Core(TM)2 Duo CPU P8400")
@@ -125,7 +125,7 @@ makeTemp(?stoComp)
 (?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "59.6263"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -140,13 +140,13 @@ makeTemp(?cpuComp)
 makeTemp(?stoComp)
 -> 
 (?memComp rdf:type owl:NamedIndividual)
-(?memComp rdf:type <http://open-multinet.info/ontology/omn-component#MemoryComponent>)
+(?memComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#MemoryComponent>)
 (?memComp rdfs:label "DDR3 SDRAM")
 (?memComp omnmnt:hasUnit <http://dbpedia.org/resource/Megabyte>)
 (?memComp dbp:memory "2048"^^xsd:integer)
 (?node omn:hasComponent ?memComp) 
 (?cpuComp rdf:type owl:NamedIndividual)
-(?cpuComp rdf:type <http://open-multinet.info/ontology/omn-component#CPU>)
+(?cpuComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#CPU>)
 (?cpuComp rdfs:label " Intel(R) Atom(TM) processor")
 (?cpuComp omncomp:hasCores 1)
 (?cpuComp omncomp:hasModelType " Intel(R) Atom(TM) D2700")
@@ -155,7 +155,7 @@ makeTemp(?stoComp)
 (?cpuComp dbp:arch <http://dbpedia.org/resource/X86-64>)
 (?node omn:hasComponent ?cpuComp) 
 (?stoComp rdf:type owl:NamedIndividual)
-(?stoComp rdf:type <http://open-multinet.info/ontology/omn-component#StorageComponent>)
+(?stoComp rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent>)
 (?stoComp omnmnt:hasUnit <http://dbpedia.org/resource/Gigabyte>)
 (?stoComp dbp:storage "250.0"^^xsd:double)
 (?node omn:hasComponent ?stoComp) 
@@ -163,8 +163,8 @@ makeTemp(?stoComp)
 
 
 [rule6:
-(?node rdf:type <http://open-multinet.info/ontology/omn-resource#Node>) 
-(?node <http://open-multinet.info/ontology/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)
+(?node rdf:type <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#Node>) 
+(?node <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#managedBy>  <urn:publicid:IDN+omf:netmode+authority+cm>)
 (?node rdfs:label ?name)
 ->
 (?node <http://www.w3.org/2003/01/geo/wgs84_pos#lat>   "37.9813"^^xsd:float)

@@ -1,6 +1,6 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix f4f: <http://open-multinet.info/ontology#>
+prefix f4f: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#>
 SELECT ?label ?certificate WHERE {
 ?testbed f4f:certificate ?certificate .
 ?testbed rdfs:label ?label

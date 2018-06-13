@@ -8,7 +8,7 @@
       client_id="myVM"
       component_name="VMServer-1"
       exclusive="false">
-      <sliver_type name="http://open-multinet.info/ontology/omn-domain-pc#VM"/>
-      <ns2:monitoring uri="http://federation.av.tu-berlin.de:3003" type="http://open-multinet.info/ontology/omn-monitoring-tool#OMSPEndpoint"/>
+      <sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#VM"/>
+      <ns2:monitoring uri="http://federation.av.tu-berlin.de:3003" type="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#OMSPEndpoint"/>
   </node>
 </rspec>

@@ -1,7 +1,7 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX nml: <http://schemas.ogf.org/nml/base/2013/02#> 
-PREFIX omn: <http://open-multinet.info/ontology#>
+PREFIX omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?sliver ?omlserver WHERE {

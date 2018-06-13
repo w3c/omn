@@ -1,6 +1,6 @@
 @prefix : <http://lod.fed4fire.eu/id/fed4fire.eu#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -12,11 +12,11 @@
 @prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix schema: <http://schema.org/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-domain-geni-fire: <http://open-multinet.info/ontology/omn-domain-geni-fire#> .
+@prefix omn-service: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-domain-geni-fire: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#> .
 @base <http://lod.fed4fire.eu/id/fed4fire#> .
 
 <http://lod.fed4fire.eu/id/fed4fire.eu> rdf:type omn-federation:Federation , owl:NamedIndividual ;
@@ -91,31 +91,31 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#hasEndpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasEndpoint
 
 omn:hasEndpoint rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn#hasService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasService
 
 omn:hasService rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#administers
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#administers
 
 omn-federation:administers rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#hasFederationMember
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#hasFederationMember
 
 omn-federation:hasFederationMember rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#isAdministeredBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#isAdministeredBy
 
 omn-federation:isAdministeredBy rdf:type owl:AnnotationProperty .
 
@@ -166,31 +166,31 @@ foaf:mbox rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-domain-geni-fire#AMService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#AMService
 
 omn-domain-geni-fire:AMService rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-domain-geni-fire#SAService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-geni-fire#SAService
 
 omn-domain-geni-fire:SAService rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#Federation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Federation
 
 omn-federation:Federation rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#FederationMember
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#FederationMember
 
 omn-federation:FederationMember rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-federation#Infrastructure
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#Infrastructure
 
 omn-federation:Infrastructure rdf:type owl:Class .
 
@@ -256,9 +256,9 @@ schema:WebSite rdf:type owl:Class .
                                        <http://lod.fed4fire.eu/id/fokus.fraunhofer.de>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "Fraunhofer FOKUS" .
                                        <http://lod.fed4fire.eu/id/i2cat.net>  a omn-federation:FederationMember, owl:NamedIndividual ; omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; rdfs:label "i2CAT" .
 
-<http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ; 
-           omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ; 
-           rdfs:label "iMinds" ; 
+<http://lod.fed4fire.eu/id/iminds.be>  a omn-federation:FederationMember, owl:NamedIndividual ;
+           omn-federation:partOfFederation <http://lod.fed4fire.eu/id/fed4fire.eu> ;
+           rdfs:label "iMinds" ;
            omn:hasService
                            <urn:publicid:IDN+wall1.ilabt.iminds.be+authority+cm>,
                            <urn:publicid:IDN+wilab2.ilabt.iminds.be+authority+cm>,

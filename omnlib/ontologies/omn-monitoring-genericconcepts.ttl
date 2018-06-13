@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-monitoring-genericconcepts#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -7,20 +7,20 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-service: <http://open-multinet.info/ontology/omn-service#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-component: <http://open-multinet.info/ontology/omn-component#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-federation: <http://open-multinet.info/ontology/omn-federation#> .
-@prefix omn-monitoring: <http://open-multinet.info/ontology/omn-monitoring#> .
-@prefix omn-monitoring-data: <http://open-multinet.info/ontology/omn-monitoring-data#> .
-@prefix omn-monitoring-unit: <http://open-multinet.info/ontology/omn-monitoring-unit#> .
-@prefix omn-monitoring-tool: <http://open-multinet.info/ontology/omn-monitoring-tool#> .
-@prefix omn-monitoring-metric: <http://open-multinet.info/ontology/omn-monitoring-metric#> .
-@base <http://open-multinet.info/ontology/omn-monitoring-genericconcepts> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-service: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-service#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-component: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-federation: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#> .
+@prefix omn-monitoring: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#> .
+@prefix omn-monitoring-data: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-data#> .
+@prefix omn-monitoring-unit: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-unit#> .
+@prefix omn-monitoring-tool: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-tool#> .
+@prefix omn-monitoring-metric: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-metric#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts> .
 
-<http://open-multinet.info/ontology/omn-monitoring-genericconcepts> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts> rdf:type owl:Ontology ;
                                                                     
                                                                     rdfs:label "omn-monitoring-genericconcepts"@en ;
                                                                     
@@ -30,7 +30,7 @@
                                                                     
                                                                     vann:preferredNamespacePrefix "omn-monitoring-genericconcepts" ;
                                                                     
-                                                                    vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-monitoring-genericconcepts#" ;
+                                                                    vann:preferredNamespaceUri "https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#" ;
                                                                     
                                                                     dc:date "2015-05-30" ;
                                                                                                                                         
@@ -59,7 +59,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#locatedAt
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#locatedAt
 
 :locatedAt rdf:type owl:ObjectProperty ;
                       
@@ -75,7 +75,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#usesProtocol
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#usesProtocol
 
 :usesProtocol rdf:type owl:ObjectProperty ;
                       
@@ -88,7 +88,7 @@
                           ] .
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#query
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#query
 
 :query rdf:type owl:ObjectProperty ;
                       
@@ -108,7 +108,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#latitude
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#latitude
 
 :latitude rdf:type owl:DatatypeProperty ;
               
@@ -120,7 +120,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#longitude
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#longitude
 
 :longitude rdf:type owl:DatatypeProperty ;
               
@@ -141,7 +141,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#Protocol
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#Protocol
 
 :Protocol rdf:type owl:Class ;
           
@@ -149,7 +149,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#ApplicationProtocol
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#ApplicationProtocol
 
 :ApplicationProtocol rdf:type owl:Class ;
                      
@@ -159,7 +159,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#TransportProtocol
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#TransportProtocol
 
 :TransportProtocol rdf:type owl:Class ;
                    
@@ -169,7 +169,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#AuthenticationMethod
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#AuthenticationMethod
 
 :AuthenticationMethod rdf:type owl:Class ;
                       
@@ -177,7 +177,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#Event
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#Event
 
 :Event rdf:type owl:Class ;
        
@@ -185,7 +185,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#Location
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#Location
 
 :Location rdf:type owl:Class ;
           
@@ -193,7 +193,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#LogicalLocation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#LogicalLocation
 
 :LogicalLocation rdf:type owl:Class ;
                  
@@ -203,7 +203,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#PhysicalLocation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#PhysicalLocation
 
 :PhysicalLocation rdf:type owl:Class ;
                   
@@ -213,7 +213,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#MonitoringDomain
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#MonitoringDomain
 
 :MonitoringDomain rdf:type owl:Class ;
                   
@@ -223,7 +223,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#Query
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#Query
 
 :Query rdf:type owl:Class ;
 
@@ -233,7 +233,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#SingleQuery
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#SingleQuery
 
 :SingleQuery rdf:type owl:Class ;
 
@@ -243,7 +243,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#BatchQuery
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#BatchQuery
 
 :BatchQuery rdf:type owl:Class ;
        
@@ -251,7 +251,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#ConditionalNotSatisfiedEvent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#ConditionalNotSatisfiedEvent
 
 :ConditionalNotSatisfiedEvent rdf:type owl:Class ;
                                               
@@ -261,7 +261,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#EventAtMeasurementPhase
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#EventAtMeasurementPhase
 
 :EventAtMeasurementPhase rdf:type owl:Class ;
                                               
@@ -271,7 +271,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#ToolUnavailableEvent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#ToolUnavailableEvent
 
 :ToolUnavailableEvent rdf:type owl:Class ;
                                               
@@ -281,7 +281,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#NoToolConfiguredToMeasureMetric
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#NoToolConfiguredToMeasureMetric
 
 :NoToolConfiguredToMeasureMetric rdf:type owl:Class ;
                                               
@@ -301,7 +301,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#OMSP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#OMSP
 
 :OMSP rdf:type :ApplicationProtocol ,
                owl:NamedIndividual ;
@@ -310,7 +310,7 @@
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#SNMP
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#SNMP
 
 :SNMP rdf:type :ApplicationProtocol ,
                owl:NamedIndividual ;
@@ -319,7 +319,7 @@
 
 
 
-##  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#IPFIX
+##  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#IPFIX
 
 :IPFIX rdf:type :ApplicationProtocol ,
                 owl:NamedIndividual ;
@@ -328,7 +328,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#TCP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#TCP
 
 :TCP rdf:type :TransportProtocol ,
                owl:NamedIndividual ;
@@ -337,7 +337,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#UDP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#UDP
 
 :UDP rdf:type :TransportProtocol ,
                owl:NamedIndividual ;
@@ -346,7 +346,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-monitoring-genericconcepts#SCTP
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring-genericconcepts#SCTP
 
 :SCTP rdf:type :TransportProtocol ,
                owl:NamedIndividual ;

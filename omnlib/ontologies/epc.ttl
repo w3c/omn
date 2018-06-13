@@ -9,13 +9,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix : <http://open-multinet.info/ontology/resource/epc#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#> .
 
-<http://open-multinet.info/ontology/resource/epc> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage 4G/LTE NFVs."@en ;
 
                                          rdf:type owl:Ontology, 
 
@@ -25,7 +25,7 @@
                                          
                                          vann:preferredNamespacePrefix "omn-resource/epc"^^xsd:string ;
 
-                                         vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/epc#> ;
+                                         vann:preferredNamespaceUri <https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#> ;
                                         
                                          dc:date "2015-10-26"^^xsd:date ;
                                          
@@ -62,7 +62,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#hasAccessNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#hasAccessNetwork
 
 :hasAccessNetwork rdf:type owl:ObjectProperty ;
 
@@ -77,7 +77,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#hasAccessPointName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#hasAccessPointName
 
 :hasAccessPointName rdf:type owl:ObjectProperty ;
 
@@ -96,7 +96,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#hasControlAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#hasControlAddress
 
 :hasControlAddress rdf:type owl:ObjectProperty ;
 
@@ -112,7 +112,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#hasENodeB
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#hasENodeB
 
 :hasENodeB rdf:type owl:ObjectProperty ;
 
@@ -126,7 +126,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#hasEvolvedPacketCore
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#hasEvolvedPacketCore
 
 :hasEvolvedPacketCore rdf:type owl:ObjectProperty ;
 
@@ -140,7 +140,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#hasUserEquipment
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#hasUserEquipment
 
 :hasUserEquipment rdf:type owl:ObjectProperty ;
 
@@ -154,7 +154,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#pdnGateway
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#pdnGateway
 
 :pdnGateway rdf:type owl:ObjectProperty ,
                    owl:FunctionalProperty ;
@@ -179,7 +179,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#accessPointName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#accessPointName
 
 :accessPointName rdf:type owl:DatatypeProperty ;
 
@@ -195,7 +195,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#attenuator
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#attenuator
 
 :attenuator rdf:type owl:DatatypeProperty ;
 
@@ -211,7 +211,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#band
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#band
 
 :band rdf:type owl:DatatypeProperty ;
 
@@ -227,7 +227,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#baseModel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#baseModel
 
 :baseModel rdf:type owl:DatatypeProperty ;
 
@@ -244,7 +244,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#delayCode
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#delayCode
 
 :delayCode rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
@@ -261,7 +261,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#eNodeBAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#eNodeBAddress
 
 :eNodeBAddress rdf:type owl:DatatypeProperty ;
 
@@ -277,7 +277,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#eNodeBId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#eNodeBId
 
 :eNodeBId rdf:type owl:DatatypeProperty ;
 
@@ -293,7 +293,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#eNodeBName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#eNodeBName
 
 :eNodeBName rdf:type owl:DatatypeProperty ;
 
@@ -309,7 +309,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#evolvedPacketCoreAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#evolvedPacketCoreAddress
 
 :evolvedPacketCoreAddress rdf:type owl:DatatypeProperty ;
 
@@ -326,7 +326,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#lteSupport
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#lteSupport
 
 :lteSupport rdf:type owl:DatatypeProperty ;
 
@@ -343,7 +343,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#mode
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#mode
 
 :mode rdf:type owl:DatatypeProperty ;
 
@@ -358,7 +358,7 @@
                 rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/epc#mmeAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#mmeAddress
 
 :mmeAddress rdf:type owl:DatatypeProperty ;
 
@@ -374,7 +374,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#networkIdentifier
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#networkIdentifier
 
 :networkIdentifier rdf:type owl:DatatypeProperty ;
 
@@ -391,7 +391,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#operatorIdentifier
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#operatorIdentifier
 
 :operatorIdentifier rdf:type owl:DatatypeProperty ;
 
@@ -407,7 +407,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#packetlossCode
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#packetlossCode
 
 :packetlossCode rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
@@ -424,7 +424,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#publicLandMobileNetworkId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#publicLandMobileNetworkId
 
 :publicLandMobileNetworkId rdf:type owl:DatatypeProperty ;
 
@@ -441,7 +441,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#rateCodeUp
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#rateCodeUp
 
 :rateCodeUp rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
@@ -458,7 +458,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#rateCodeDown
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#rateCodeDown
 
 :rateCodeDown rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
@@ -474,7 +474,7 @@
                 rdfs:range xsd:integer .
 
 
-###  http://open-multinet.info/ontology/resource/epc#servingGateway
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#servingGateway
 
 :servingGateway rdf:type owl:DatatypeProperty ;
 
@@ -490,7 +490,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#subscriber
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#subscriber
 
 :subscriber rdf:type owl:DatatypeProperty ;
 
@@ -507,7 +507,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#vendor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#vendor
 
 :vendor rdf:type owl:DatatypeProperty ;
 
@@ -530,7 +530,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID
 
 omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty .
@@ -545,7 +545,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#AccessNetwork
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#AccessNetwork
 
 :AccessNetwork rdf:type owl:Class ;
 
@@ -560,7 +560,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#AccessNetworkDetails
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#AccessNetworkDetails
 
 :AccessNetworkDetails rdf:type owl:Class ;
 
@@ -574,7 +574,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#AccessPointName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#AccessPointName
 
 :AccessPointName rdf:type owl:Class ;
 
@@ -588,7 +588,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#ControlAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#ControlAddress
 
 :ControlAddress rdf:type owl:Class ;
 
@@ -603,7 +603,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#ENodeB
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#ENodeB
 
 :ENodeB rdf:type owl:Class ;
 
@@ -617,7 +617,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#EpcAdapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#EpcAdapter
 
 :EpcAdapter rdf:type owl:Class ;
 
@@ -630,7 +630,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
       rdfs:seeAlso <http://www.flex-project.eu> .
 
 
-###  http://open-multinet.info/ontology/resource/epc#EpcResource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#EpcResource
 
 :EpcResource rdf:type owl:Class ;
 
@@ -644,7 +644,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#EvolvedPacketCore
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#EvolvedPacketCore
 
 :EvolvedPacketCore rdf:type owl:Class ;
 
@@ -658,7 +658,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#EvolvedPacketCoreDetails
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#EvolvedPacketCoreDetails
 
 :EvolvedPacketCoreDetails rdf:type owl:Class ;
 
@@ -671,7 +671,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
       rdfs:seeAlso <http://www.flex-project.eu> .
 
 
-###  http://open-multinet.info/ontology/resource/epc#PDNGateway
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#PDNGateway
 
 :PDNGateway rdf:type owl:Class ;
 
@@ -685,7 +685,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#UserEquipment
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#UserEquipment
 
 :UserEquipment rdf:type owl:Class ;
 
@@ -699,7 +699,7 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/resource/epc#UserEquipmentDetails
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#UserEquipmentDetails
 
 :UserEquipmentDetails rdf:type owl:Class ;
 
@@ -713,19 +713,19 @@ omn-lifecycle:hasID rdf:type owl:DatatypeProperty ,
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#IPAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#IPAddress
 
 omn-resource:IPAddress rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#DiskImage
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#DiskImage
 
 omn-domain-pc:DiskImage rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Adapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Adapter
 
 omn:Adapter rdf:type owl:Class .
 

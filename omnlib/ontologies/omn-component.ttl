@@ -1,6 +1,6 @@
-@prefix : <http://open-multinet.info/ontology/omn-component#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace#> .
@@ -8,9 +8,9 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://open-multinet.info/ontology/omn-component> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component> .
 
-<http://open-multinet.info/ontology/omn-component> rdf:type owl:Ontology ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component> rdf:type owl:Ontology ;
                                                    
                                                    rdfs:label "omn"@en ;
                                                    
@@ -52,7 +52,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-component#hasCores
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#hasCores
 
 :hasCores rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
@@ -70,7 +70,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-component#hasModelType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#hasModelType
 
 :hasModelType rdf:type owl:DatatypeProperty ,
                        owl:FunctionalProperty ;
@@ -97,13 +97,13 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Component
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Component
 
 omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-component#CPU
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#CPU
 
 :CPU rdf:type owl:Class ;
      
@@ -115,7 +115,7 @@ omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-component#MemoryComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#MemoryComponent
 
 :MemoryComponent rdf:type owl:Class ;
                  
@@ -127,7 +127,7 @@ omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-component#ProcessingComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#ProcessingComponent
 
 :ProcessingComponent rdf:type owl:Class ;
                      
@@ -139,7 +139,7 @@ omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-component#StorageComponent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-component#StorageComponent
 
 :StorageComponent rdf:type owl:Class ;
                   

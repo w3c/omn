@@ -80,15 +80,15 @@ public class ManifestEpcTest {
 		Assert.assertTrue(nodes.getLength() == 3);
 
 		NodeList epc = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/epc", "epc");
+				"https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc", "epc");
 		Assert.assertTrue(epc.getLength() == 1);
 
 		NodeList ue = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/epc", "ue");
+				"https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc", "ue");
 		Assert.assertTrue(ue.getLength() == 1);
 
 		NodeList an = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/epc",
+				"https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc",
 				"access_network");
 		Assert.assertTrue(an.getLength() == 1);
 		// TODO: This test does not consistently return 0, only sometimes. Need

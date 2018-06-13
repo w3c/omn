@@ -6,7 +6,7 @@
     </ns3:node>
     <ns3:node client_id="motor1" component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FMotorGarage-1+Motor" component_name="Motor" exclusive="false">
         <ns3:sliver_type name="http://open-multinet.info/ontology/resource/motor#Motor"/>
-        <ns3:hardware_type name="http://open-multinet.info/ontology/resource/motorgarage#MotorGarage"/>
+        <ns3:hardware_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/resource/motorgarage#MotorGarage"/>
         <ns3:location country="" longitude="13.323732^^http://www.w3.org/2001/XMLSchema#string" latitude="52.516377^^http://www.w3.org/2001/XMLSchema#string"/>
     </ns3:node>
     <ns3:node client_id="m2m_network_app1"  component_id="urn:publicid:IDN+localhost+node+http%3A%2F%2Flocalhost%2Fresource%2FToscaAdapter-1+m2m_network_app" component_name="m2m_network_app" exclusive="false">

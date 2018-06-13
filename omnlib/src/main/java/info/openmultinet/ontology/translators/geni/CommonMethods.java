@@ -481,7 +481,7 @@ public class CommonMethods {
 			frequencyIndividual = Omn_domain_wireless.GHZ_INSTANCE;
 		} else if (frequency.matches("[0-9]+.[0-9]+[gG][hH][zZ]")) {
 			frequencyIndividual = model.createResource(
-							"http://open-multinet.info/ontology/omn_wireless.owl#"
+							"https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#"
 									+ frequency);
 		} else {
 			throw new InvalidRspecValueException("Frequency");
@@ -504,7 +504,7 @@ public class CommonMethods {
 				.getURI().toString())) {
 			frequency = "2.417GHZ";
 		} else if (frequencyUri
-				.contains("http://open-multinet.info/ontology/omn_wireless.owl#")) {
+				.contains("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn_wireless.owl#")) {
 			String[] parts = frequencyUri.split("#");
 			if (parts.length > 1) {
 				frequency = parts[1];

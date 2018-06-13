@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:ns0="http://open-multinet.info/ontology/omn#" xmlns:ns1="http://open-multinet.info/ontology/omn-lifecycle#" xmlns:osco="http://opensdncore.org/ontology/">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:ns0="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#" xmlns:ns1="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#" xmlns:osco="http://opensdncore.org/ontology/">
 <owl:NamedIndividual rdf:about="http://open-multinet.info/ontology/examples/namedTopology3">
-		<rdf:type rdf:resource="http://open-multinet.info/ontology/omn-lifecycle#Request"/>
-		<rdf:type rdf:resource="http://open-multinet.info/ontology/omn#Topology"/>
+		<rdf:type rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Request"/>
+		<rdf:type rdf:resource="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Topology"/>
 		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/fdd6567e23db74b925efeee2110847c6"/>
 		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/729884c5930460fd3521226cb3ea3695"/>
 		<ns0:hasResource rdf:resource="http://open-multinet.info/ontology/examples/c5930460fd3521226cb3ea36915"/>

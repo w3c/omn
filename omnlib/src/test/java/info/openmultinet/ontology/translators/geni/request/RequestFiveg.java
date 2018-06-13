@@ -66,7 +66,7 @@ public class RequestFiveg {
 		Assert.assertTrue(osco.getLength() == 2);
 
 		NodeList gateway = xmlDoc.getElementsByTagNameNS(
-				"http://open-multinet.info/ontology/resource/fiveg", "gateway");
+				"https://github.com/w3c/omn/blob/master/omnlib/ontologies/fiveg", "gateway");
 		// TODO: fixme
 		// Assert.assertTrue(gateway.getLength() == 1);
 

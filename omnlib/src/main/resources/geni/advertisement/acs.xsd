@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:s="http://open-multinet.info/ontology/resource/acs" elementFormDefault="qualified"
-	targetNamespace="http://open-multinet.info/ontology/resource/acs" xmlns:rspec="http://www.geni.net/resources/rspec/3">
+	xmlns:s="https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs" elementFormDefault="qualified"
+	targetNamespace="https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs" xmlns:rspec="http://www.geni.net/resources/rspec/3">
 	<xs:element name="rspec_acs">
 		<xs:complexType>
 			<xs:sequence>

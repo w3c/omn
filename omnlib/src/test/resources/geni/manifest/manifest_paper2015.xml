@@ -10,6 +10,6 @@
 		client_id="myMotor"
 		sliver_id="urn:publicid:IDN+testbed.example.org+sliver+http%3A%2F%2Ftestbed.example.org%2Fmotorgarage-1%2Fmotor-1">
 		<sliver_type name="http://open-multinet.info/ontology/resources/motor#Motor" />
-		<ns4:monitoring uri="http://federation.av.tu-berlin.de:3003" type="http://open-multinet.info/ontology/omn-monitoring#MonitoringService"/>
+		<ns4:monitoring uri="http://federation.av.tu-berlin.de:3003" type="https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-monitoring#MonitoringService"/>
 	</node>
 </rspec>

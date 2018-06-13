@@ -7,10 +7,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix : <http://open-multinet.info/ontology/resource/acs#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#> .
 
-<http://open-multinet.info/ontology/resource/acs> rdf:type owl:Ontology, 
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs> rdf:type owl:Ontology, 
 
                                          voaf:Vocabulary ;
                                          
@@ -36,7 +36,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/resource/acs#hasDevice
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#hasDevice
 
 :hasDevice rdf:type owl:ObjectProperty ;
 
@@ -51,7 +51,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#hasParameter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#hasParameter
 
 :hasParameter rdf:type owl:ObjectProperty ;
 
@@ -72,7 +72,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/resource/acs#adminState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#adminState
 
 :adminState rdf:type owl:DatatypeProperty ;
 
@@ -86,7 +86,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#hasAcsId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#hasAcsId
 
 :hasAcsId rdf:type owl:DatatypeProperty ;
 
@@ -100,7 +100,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#hasParamName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#hasParamName
 
 :hasParamName rdf:type owl:DatatypeProperty ;
 
@@ -114,7 +114,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#hasParamValue
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#hasParamValue
 
 :hasParamValue rdf:type owl:DatatypeProperty ;
 
@@ -128,7 +128,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#power
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#power
 
 :power rdf:type owl:DatatypeProperty ;
 
@@ -149,7 +149,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/resource/epc#Acs
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#Acs
 
 :Acs rdf:type owl:Class ;
 
@@ -162,7 +162,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#AcsDevice
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#AcsDevice
 
 :AcsDevice rdf:type owl:Class ;
 
@@ -172,7 +172,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/acs#AcsParameter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/acs#AcsParameter
 
 :AcsParameter rdf:type owl:Class ;
 

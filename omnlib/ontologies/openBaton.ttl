@@ -9,13 +9,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-lifecycle: <http://open-multinet.info/ontology/omn-lifecycle#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
-@prefix omn-domain-pc: <http://open-multinet.info/ontology/omn-domain-pc#> .
-@prefix : <http://open-multinet.info/ontology/resource/openbaton#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-lifecycle: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
+@prefix omn-domain-pc: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#> .
 
-<http://open-multinet.info/ontology/resource/openbaton> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage OpenBaton VNFs."@en ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton> rdfs:comment "This ontology defines the most abstract concepts and properties that are needed to semantically manage OpenBaton VNFs."@en ;
 
     rdf:type owl:Ontology, 
 
@@ -25,7 +25,7 @@
 
     vann:preferredNamespacePrefix "omn-resource-openbaton"^^xsd:string ;
 
-    vann:preferredNamespaceUri <http://open-multinet.info/ontology/resource/openbaton#> ;
+    vann:preferredNamespaceUri <https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#> ;
 
     dc:date "2016-03-01"^^xsd:date ;
 
@@ -61,7 +61,7 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/resource/openbaton#version
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#version
 
 :version  a    owl:DatatypeProperty ;
 
@@ -73,7 +73,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#deploymentFlavour
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#deploymentFlavour
 
 :deploymentFlavour  a    owl:DatatypeProperty ;
 
@@ -85,7 +85,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#requires
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#requires
 
 :requires  a    owl:DatatypeProperty ;
 
@@ -97,7 +97,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#scaleInOut
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#scaleInOut
 
 :scaleInOut  a    owl:DatatypeProperty ;
 
@@ -109,7 +109,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#vmImage
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#vmImage
 
 :vmImage  a    owl:DatatypeProperty ;
 
@@ -122,7 +122,7 @@
     rdfs:range   xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#vimInstanceName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#vimInstanceName
 
 :vimInstanceName  a    owl:DatatypeProperty ;
 
@@ -135,7 +135,7 @@
     rdfs:range   xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#virtualLink
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#virtualLink
 
 :virtualLink  a    owl:DatatypeProperty ;
 
@@ -148,7 +148,7 @@
     rdfs:range   xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#type
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#type
 
 :type  a    owl:DatatypeProperty ;
 
@@ -161,7 +161,7 @@
     rdfs:range   xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#endpoint
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#endpoint
 
 :endpoint  a    owl:DatatypeProperty ;
 
@@ -173,7 +173,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#startEvent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#startEvent
 
 :startEvent  a    owl:DatatypeProperty ;
 
@@ -185,7 +185,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#instantiateEvent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#instantiateEvent
 
 :instantiateEvent  a    owl:DatatypeProperty ;
 
@@ -197,7 +197,7 @@
 
     rdfs:range   xsd:string .
 
-###  http://open-multinet.info/ontology/resource/openbaton#configureEvent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#configureEvent
 
 :configureEvent  a    owl:DatatypeProperty ;
 
@@ -208,7 +208,7 @@
     rdfs:domain  :OpenBatonResource ;
 
     rdfs:range   xsd:string .
-###  http://open-multinet.info/ontology/resource/openbaton#vendor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#vendor
 
 :vendor  a    owl:DatatypeProperty ;
 
@@ -221,7 +221,7 @@
     rdfs:range   xsd:string .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#instanceName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#instanceName
 
 :instanceName  a    owl:DatatypeProperty ;
 
@@ -242,7 +242,7 @@
 #
 #################################################################
 
-###  http://open-multinet.info/ontology/resource/openbaton#FiveGCore
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#FiveGCore
 
 :FiveGCore rdf:type owl:Class ;
 
@@ -252,7 +252,7 @@
       
       rdfs:comment "FiveGCore"@en .
 
-###  http://open-multinet.info/ontology/resource/openbaton#MME
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#MME
 
 :MME rdf:type owl:Class ;
 
@@ -263,7 +263,7 @@
       rdfs:comment "MME"@en .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#Gateway
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#Gateway
 
 :Gateway rdf:type owl:Class ;
 
@@ -276,7 +276,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#SgwuPgwu
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#SgwuPgwu
 
 :SgwuPgwu rdf:type owl:Class ;
 
@@ -288,7 +288,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#UE
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#UE
 
 :UE rdf:type owl:Class ;
 
@@ -299,7 +299,7 @@
       rdfs:comment "UE"@en .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#ENodeB
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#ENodeB
 
 :ENodeB rdf:type owl:Class ;
 
@@ -309,7 +309,7 @@
       
       rdfs:comment "ENodeB"@en .
 
-###  http://open-multinet.info/ontology/resource/openbaton#DomainNameSystem
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#DomainNameSystem
 
 :DomainNameSystem rdf:type owl:Class ;
 
@@ -320,7 +320,7 @@
       rdfs:comment "DomainNameSystem"@en .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#NetworkServiceDescriptor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#NetworkServiceDescriptor
 
 :NetworkServiceDescriptor rdf:type owl:Class ;
 
@@ -332,7 +332,7 @@
 
       
 
-###  http://open-multinet.info/ontology/resource/openbaton#NetworkServiceRecord
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#NetworkServiceRecord
 
 :NetworkServiceRecord rdf:type owl:Class ;
 
@@ -344,7 +344,7 @@
       
       
 
-###  http://open-multinet.info/ontology/resource/openbaton#VirtualNetworkFunctionManager
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#VirtualNetworkFunctionManager
 
 :VirtualNetworkFunctionManager rdf:type owl:Class ;
 
@@ -356,7 +356,7 @@
       
       
 
-###  http://open-multinet.info/ontology/resource/openbaton#VirtualNetworkFunctionDescriptor
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#VirtualNetworkFunctionDescriptor
 
 :VirtualNetworkFunctionDescriptor rdf:type owl:Class ;
 
@@ -369,7 +369,7 @@
       
       
 
-###  http://open-multinet.info/ontology/resource/openbaton#VirtualNetworkFunctionPackage
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#VirtualNetworkFunctionPackage
 
 :VirtualNetworkFunctionPackage rdf:type owl:Class ;
 
@@ -382,7 +382,7 @@
       
       
 
-###  http://open-multinet.info/ontology/resource/openbaton#VirtualDeploymentUnit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#VirtualDeploymentUnit
 
 :VirtualDeploymentUnit rdf:type owl:Class ;
 
@@ -395,7 +395,7 @@
       
       
 
-###  http://open-multinet.info/ontology/resource/openbaton#VimInstance
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#VimInstance
 
 :VimInstance rdf:type owl:Class ;
 
@@ -407,7 +407,7 @@
 
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#OpenBatonAdapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#OpenBatonAdapter
 
 :OpenBatonAdapter rdf:type owl:Class ;
 
@@ -420,7 +420,7 @@
     rdfs:seeAlso <http://www.flex-project.eu> .
 
 
-###  http://open-multinet.info/ontology/resource/openbaton#OpenBatonResource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#OpenBatonResource
 
 :OpenBatonResource rdf:type owl:Class ;
 
@@ -434,11 +434,11 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-resource#IPAddress
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#IPAddress
 
 omn-resource:IPAddress rdf:type owl:Class .
 
-### http://open-multinet.info/ontology/resource/openbaton#Switch
+### https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#Switch
 :Switch rdf:type owl:Class;
  rdfs:label "Switch"@en ;
       
@@ -447,7 +447,7 @@ omn-resource:IPAddress rdf:type owl:Class .
       rdfs:comment "Switch"@en .
 
 
-### http://open-multinet.info/ontology/resource/openbaton#HomeSubscriberServer
+### https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#HomeSubscriberServer
 :HomeSubscriberServer rdf:type owl:Class;
  rdfs:label "HomeSubscriberServer"@en ;
       
@@ -456,7 +456,7 @@ omn-resource:IPAddress rdf:type owl:Class .
       rdfs:comment "HomeSubscriberServer"@en .
 
 
-### http://open-multinet.info/ontology/resource/openbaton#BenchmarkingTool
+### https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#BenchmarkingTool
 :BenchmarkingTool rdf:type owl:Class;
  rdfs:label "BenchmarkingTool"@en ;
       
@@ -465,7 +465,7 @@ omn-resource:IPAddress rdf:type owl:Class .
       rdfs:comment "BenchmarkingTool"@en .
 
 
-### http://open-multinet.info/ontology/resource/openbaton#Control
+### https://github.com/w3c/omn/blob/master/omnlib/ontologies/openBaton#Control
 :Control rdf:type owl:Class;
  rdfs:label "Control"@en ;
       
@@ -476,11 +476,11 @@ omn-resource:IPAddress rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Adapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Adapter
 
 omn:Adapter rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Adapter
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Adapter
 
 omn-lifecycle:state rdf:type owl:Class .

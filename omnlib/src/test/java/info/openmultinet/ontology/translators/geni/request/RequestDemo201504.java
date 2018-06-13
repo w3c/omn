@@ -83,7 +83,7 @@ public class RequestDemo201504 {
 		String sliverName = sliverType.item(0).getAttributes()
 				.getNamedItem("name").getNodeValue();
 		Assert.assertTrue(sliverName
-				.equals("http://open-multinet.info/ontology/omn-domain-pc#VM"));
+				.equals("https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-domain-pc#VM"));
 
 		NodeList monitoring = xmlDoc.getElementsByTagNameNS(
 				"http://monitoring.service.tu-berlin.de/monitoring",

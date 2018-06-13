@@ -1,11 +1,11 @@
 <rspec expires="2015-10-12T16:05:45.404+02:00" type="advertisement"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/ad.xsd"
-	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="http://open-multinet.info/ontology/resource/epc">
+	xmlns="http://www.geni.net/resources/rspec/3" xmlns:ns5="https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc">
 	<node component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Fepc-1"
 		exclusive="false">
-		<sliver_type name="http://open-multinet.info/ontology/resource/epc#EPC" />
+		<sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#EPC" />
 		<ns5:epc mme_address="mme1" serving_gateway="sg1" pdn_gateway="pdn1"
 			vendor="vendor1">
 			<ns5:pdn_gateway name="pdn1" rate="1" delay="2" loss="3" />
@@ -17,7 +17,7 @@
 	<node component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Fue1"
 		exclusive="false">
-		<sliver_type name="http://open-multinet.info/ontology/resource/epc#UE" />
+		<sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#UE" />
 		<ns5:ue lte_support="true">
 			<ns5:ue_hardware_type name="hwtype1" />
 			<ns5:ue_disk_image description="Debian 7.7 Wheezy (64 bit)"
@@ -31,7 +31,7 @@
 	<node component_manager_id="urn:publicid:IDN+testbed.example.org+authority+cm"
 		component_id="urn:publicid:IDN+testbed.example.org+node+http%3A%2F%2Ftestbed.example.org%2Fresources%2Fan1"
 		exclusive="false">
-		<sliver_type name="http://open-multinet.info/ontology/resource/epc#AccessNetwork" />
+		<sliver_type name="https://github.com/w3c/omn/blob/master/omnlib/ontologies/epc#AccessNetwork" />
 		<ns5:access_network enodeb_id="enodeb1" plmn_id="plmn1"
 			band="7" vendor="vendor1" base_model="123" epc_address="epc1" mode="mode1">
 			<ns5:apn network_id="123" operator_id="456" />

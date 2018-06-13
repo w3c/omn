@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology/omn-lifecycle#> .
+@prefix : <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -9,13 +9,13 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix omn: <http://open-multinet.info/ontology/omn#> .
-@prefix omn-resource: <http://open-multinet.info/ontology/omn-resource#> .
+@prefix omn: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#> .
+@prefix omn-resource: <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-resource#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix gr: <http://purl.org/goodrelations/v1#> .
-@base <http://open-multinet.info/ontology/omn-lifecycle#> .
+@base <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> .
 
-<http://open-multinet.info/ontology/omn-lifecycle> rdfs:comment "This ontology addresses parts of the resource lifecycle, to do with offering, provisioning and allocating resources."@en ;
+<https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle> rdfs:comment "This ontology addresses parts of the resource lifecycle, to do with offering, provisioning and allocating resources."@en ;
 
                                                    rdf:type owl:Ontology, voaf:Vocabulary ;
                                                    
@@ -31,7 +31,7 @@
                                                    
                                                    dcterms:modified "2015-10-22"^^xsd:date ;
                                                    
-                                                   vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
+                                                   vann:preferredNamespaceUri <https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#> ;
                                                     
                                                    vann:preferredNamespacePrefix "omn-lifecycle"^^xsd:string ;
                                                     
@@ -65,7 +65,7 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#canBeImplementedBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#canBeImplementedBy
 
 :canBeImplementedBy rdf:type owl:ObjectProperty ;
 
@@ -91,7 +91,7 @@
 
                       
                       
-###  http://open-multinet.info/ontology/omn-lifecycle#canImplement
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#canImplement
 
 :canImplement rdf:type owl:ObjectProperty ;
 
@@ -120,7 +120,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#childOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#childOf
 
 :childOf rdf:type owl:ObjectProperty ;
 
@@ -148,7 +148,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasAction
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasAction
 
 :hasAction rdf:type owl:ObjectProperty ;
 
@@ -161,7 +161,7 @@
           rdfs:domain :State .
 
 
-###  http://open-multinet.info/ontology/omn#hasLease
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#hasLease
 
 :hasLease rdf:type owl:ObjectProperty ;
                 
@@ -184,7 +184,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasNext
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasNext
 
 :hasNext rdf:type owl:ObjectProperty ;
 
@@ -198,7 +198,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasReservationState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasReservationState
 
 :hasReservationState rdf:type owl:FunctionalProperty ,
                               owl:IrreflexiveProperty ,
@@ -217,7 +217,7 @@
                      rdfs:subPropertyOf :hasState .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasStartState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasStartState
 
 :hasStartState rdf:type owl:ObjectProperty ;
 
@@ -231,7 +231,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasState
 
 :hasState rdf:type owl:FunctionalProperty ,
                    owl:IrreflexiveProperty ,
@@ -252,7 +252,7 @@
                       ] .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasStateName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasStateName
 
 :hasStateName rdf:type owl:ObjectProperty ;
 
@@ -265,7 +265,7 @@
           rdfs:domain :State .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasType
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasType
 
 :hasType rdf:type owl:ObjectProperty ;
 
@@ -279,7 +279,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasWait
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasWait
 
 :hasWait rdf:type owl:ObjectProperty ;
 
@@ -293,7 +293,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#implementedBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implementedBy
 
 :implementedBy rdf:type owl:ObjectProperty ;
 
@@ -319,7 +319,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#implements
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#implements
 
 :implements rdf:type owl:ObjectProperty ;
 
@@ -347,7 +347,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#isReservationStateOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#isReservationStateOf
 
 :isReservationStateOf rdf:type owl:ObjectProperty ;
 
@@ -365,7 +365,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#isStateOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#isStateOf
 
 :isStateOf rdf:type owl:ObjectProperty ;
 
@@ -388,7 +388,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#parentOf
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#parentOf
 
 :parentOf rdf:type owl:ObjectProperty ;
 
@@ -413,7 +413,7 @@
                       ] .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#serviceIsUsedBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#serviceIsUsedBy
 :serviceIsUsedBy rdf:type 
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
@@ -435,7 +435,7 @@
                       ] .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#usesService
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#usesService
 :usesService rdf:type 
                    owl:IrreflexiveProperty ,
                    owl:ObjectProperty ;
@@ -468,7 +468,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#creationTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#creationTime
 
 :creationTime rdf:type owl:DatatypeProperty ;
 
@@ -487,7 +487,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#creator
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#creator
 
 :creator rdf:type owl:DatatypeProperty ;
 
@@ -505,7 +505,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#expirationTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#expirationTime
 
 :expirationTime rdf:type owl:DatatypeProperty ;
 
@@ -525,7 +525,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasAuthenticationInformation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasAuthenticationInformation
 
 :hasAuthenticationInformation rdf:type owl:DatatypeProperty ;
 
@@ -545,7 +545,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentID
 
 :hasComponentID rdf:type owl:DatatypeProperty ;
 
@@ -566,7 +566,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentManagerID
 
 :hasComponentManagerID rdf:type owl:DatatypeProperty ;
 
@@ -587,7 +587,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentManagerName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentManagerName
 
 :hasComponentManagerName rdf:type owl:DatatypeProperty ;
 
@@ -609,7 +609,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasComponentName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasComponentName
 
 :hasComponentName rdf:type owl:DatatypeProperty ;
 
@@ -631,7 +631,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasID
 
 :hasID rdf:type owl:DatatypeProperty ;
 
@@ -651,7 +651,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasIdRef
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasIdRef
 
 :hasIdRef rdf:type owl:DatatypeProperty ;
 
@@ -672,7 +672,7 @@
 
 
 ### This is a temporary solution to test the translator, so that the orignal component ID is return when a URL, and not the URN as provided by the translator.
-###  http://open-multinet.info/ontology/omn-lifecycle#hasOriginalID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasOriginalID
 
 :hasOriginalID rdf:type owl:DatatypeProperty ;
 
@@ -691,7 +691,7 @@
         rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#project
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#project
 
 :project rdf:type owl:DatatypeProperty ;
 
@@ -706,7 +706,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#resourceId
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#resourceId
 
 :resourceId rdf:type owl:DatatypeProperty ;
 
@@ -724,7 +724,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasRole
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasRole
 
 :hasRole rdf:type owl:DatatypeProperty ;
 
@@ -744,7 +744,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasSliverID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliverID
 
 :hasSliverID rdf:type owl:DatatypeProperty ;
 
@@ -763,7 +763,7 @@
         rdfs:range xsd:string .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasSliceID
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliceID
 
 :hasSliceID rdf:type owl:DatatypeProperty ;
 
@@ -784,7 +784,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#hasSliverName
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#hasSliverName
 
 :hasSliverName rdf:type owl:DatatypeProperty ;
 
@@ -805,7 +805,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#managedBy
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#managedBy
 
 :managedBy rdf:type owl:ObjectProperty ;
           
@@ -826,7 +826,7 @@
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#startTime
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#startTime
 
 :startTime rdf:type owl:DatatypeProperty ;
 
@@ -852,50 +852,50 @@
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Attribute
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Attribute
 
 omn:Attribute rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Component
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Component
 
 omn:Component rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Group
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Group
 
 omn:Group rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Reservation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Reservation
 
 omn:Reservation rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Resource
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Resource
 
 omn:Resource rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Service
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Service
 
 omn:Service rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn#Topology
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn#Topology
 
 omn:Topology rdf:type owl:Class .
 
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Action
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Action
 
 :Action rdf:type owl:Class ;
 
@@ -908,7 +908,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Active
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Active
 
 :Active rdf:type owl:Class ;
 
@@ -922,7 +922,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Allocated
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Allocated
 
 :Allocated rdf:type owl:Class ;
 
@@ -936,7 +936,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Cleaned
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Cleaned
 
 :Cleaned rdf:type owl:Class ;
 
@@ -948,7 +948,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Confirmation
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Confirmation
 
 :Confirmation rdf:type owl:Class ;
 
@@ -960,7 +960,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Error
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Error
 
 :Error rdf:type owl:Class ;
 
@@ -973,7 +973,7 @@ omn:Topology rdf:type owl:Class .
        rdfs:comment "The related resource/service is in an error state"@en .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Failure
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Failure
 
 :Failure rdf:type owl:Class ;
 
@@ -986,7 +986,7 @@ omn:Topology rdf:type owl:Class .
        rdfs:comment "geni_failure"@en .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Initialized
 
 :Initialized rdf:type owl:Class ;
 
@@ -998,7 +998,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Installed
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Installed
 
 :Installed rdf:type owl:Class ;
 
@@ -1010,7 +1010,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Lease
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Lease
 
 :Lease rdf:type owl:Class ;
 
@@ -1024,7 +1024,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Manifest
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Manifest
 
 :Manifest rdf:type owl:Class ;
 
@@ -1036,7 +1036,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Nascent
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Nascent
 
 :Nascent rdf:type owl:Class ;
                    
@@ -1047,7 +1047,7 @@ omn:Topology rdf:type owl:Class .
                    rdfs:seeAlso "GENI Nascent operational state"@en .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#NotReady
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#NotReady
 
 :NotReady rdf:type owl:Class ;
                    
@@ -1059,7 +1059,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#NotYetInitialized
 
 :NotYetInitialized rdf:type owl:Class ;
                    
@@ -1073,7 +1073,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Offering
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Offering
 
 :Offering rdf:type owl:Class ;
 
@@ -1087,7 +1087,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Opstate
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Opstate
 
 :Opstate rdf:type owl:Class ;
 
@@ -1098,7 +1098,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Pending
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Pending
 
 :Pending rdf:type owl:Class ;
 
@@ -1112,7 +1112,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Preinit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Preinit
 
 :Preinit rdf:type owl:Class ;
 
@@ -1124,7 +1124,7 @@ omn:Topology rdf:type owl:Class .
          
          rdfs:comment "The related resource/service is currently configuring"@en .
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Unknown
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Unknown
 
 :Unknown rdf:type owl:Class ;
 
@@ -1138,7 +1138,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Provisioned
 
 :Provisioned rdf:type owl:Class ;
 
@@ -1152,7 +1152,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Ready
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Ready
 
 :Ready rdf:type owl:Class ;
 
@@ -1166,7 +1166,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Removing
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Removing
 
 :Removing rdf:type owl:Class ;
 
@@ -1178,7 +1178,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Request
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Request
 
 :Request rdf:type owl:Class ;
 
@@ -1190,7 +1190,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#ReservationState
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#ReservationState
 
 :ReservationState rdf:type owl:Class ;
                   
@@ -1202,7 +1202,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Success
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Success
 
 :Success rdf:type owl:Class ;
 
@@ -1214,7 +1214,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Restart
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Restart
 
 :Restart rdf:type owl:Class ;
 
@@ -1225,7 +1225,7 @@ omn:Topology rdf:type owl:Class .
          rdfs:comment "geni_restart"@en .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Start
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Start
 
 :Start rdf:type owl:Class ;
 
@@ -1237,7 +1237,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Started
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Started
 
 :Started rdf:type owl:Class ;
 
@@ -1249,7 +1249,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#State
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#State
 
 :State rdf:type owl:Class ;
 
@@ -1260,7 +1260,7 @@ omn:Topology rdf:type owl:Class .
        rdfs:comment "The current state of the resource, service or group"@en .
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Stop
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Stop
 
 :Stop rdf:type owl:Class ;
 
@@ -1272,7 +1272,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Stopped
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Stopped
 
 :Stopped rdf:type owl:Class ;
 
@@ -1284,7 +1284,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Stopping
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Stopping
 
 :Stopping rdf:type owl:Class ;
 
@@ -1298,7 +1298,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Unallocated
 
 :Unallocated rdf:type owl:Class ;
 
@@ -1313,7 +1313,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Reload
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Reload
 
 :Reload rdf:type owl:Class ;
 
@@ -1326,7 +1326,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#UpdatingUsers
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#UpdatingUsers
 
 :UpdatingUsers rdf:type owl:Class ;
 
@@ -1338,7 +1338,7 @@ omn:Topology rdf:type owl:Class .
 
 
              
-###  http://open-multinet.info/ontology/omn-lifecycle#UpdateUsersCancel
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#UpdateUsersCancel
 
 :UpdateUsersCancel rdf:type owl:Class ;
 
@@ -1350,7 +1350,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#UpdateUsers
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#UpdateUsers
 
 :UpdateUsers rdf:type owl:Class ;
 
@@ -1362,7 +1362,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Uncompleted
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Uncompleted
 
 :Uncompleted rdf:type owl:Class ;
 
@@ -1374,7 +1374,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Updating
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Updating
 
 :Updating rdf:type owl:Class ;
 
@@ -1386,7 +1386,7 @@ omn:Topology rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Wait
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Wait
 
 :Wait rdf:type owl:Class ;
 
@@ -1404,126 +1404,126 @@ omn:Topology rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Active
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Active
 
 :Active rdf:type :State ,
                  owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Allocated
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Allocated
 
 :Allocated rdf:type :ReservationState ,
                     owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Cleaned
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Cleaned
 
 :Cleaned rdf:type :State ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Error
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Error
 
 :Error rdf:type :State ,
                 owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Initialized
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Initialized
 
 :Initialized rdf:type :State ,
                       owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Installed
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Installed
 
 :Installed rdf:type :State ,
                     owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#NotYetInitialized
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#NotYetInitialized
 
 :NotYetInitialized rdf:type :State ,
                             owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Pending
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Pending
 
 :Pending rdf:type :State ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Preinit
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Preinit
 
 :Preinit rdf:type :State ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Provisioned
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Provisioned
 
 :Provisioned rdf:type :ReservationState ,
                       owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Ready
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Ready
 
 :Ready rdf:type :State ,
                 owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Removing
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Removing
 
 :Removing rdf:type :State ,
                    owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Started
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Started
 
 :Started rdf:type :State ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Stopped
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Stopped
 
 :Stopped rdf:type :State ,
                   owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Stopping
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Stopping
 
 :Stopping rdf:type :State ,
                    owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Unallocated
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Unallocated
 
 :Unallocated rdf:type :ReservationState ,
                       owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Uncompleted
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Uncompleted
 
 :Uncompleted rdf:type :State ,
                       owl:NamedIndividual .
 
 
 
-###  http://open-multinet.info/ontology/omn-lifecycle#Updating
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-lifecycle#Updating
 
 :Updating rdf:type :State ,
                    owl:NamedIndividual .
