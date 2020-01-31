@@ -158,6 +158,19 @@
              rdfs:domain omn:Group ;
              
              rdfs:range xsd:integer .
+             
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#hasSize
+
+:hasSize rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "number of nodes it contains"@en ;
+
+             rdfs:comment "number of nodes it contains"@en ;
+             
+             rdfs:domain omn:Group ;
+             
+             rdfs:range xsd:integer .
+
 
 #################################################################
 #
