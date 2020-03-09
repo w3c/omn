@@ -127,6 +127,49 @@
 
 
 
+:isComposedBy rdf:type owl:ObjectProperty ;
+
+                  rdfs:label "is composed by resources"@en ;
+
+                  rdfs:comment "example of resources can be Nodes, Interfaces, HardwareType"@en ;
+
+                  rdfs:range omn:Resource ;
+                  
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#isAvailable
+
+:isAvailable rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "is available"@en ;
+
+             rdfs:comment "is available"@en ;
+             
+             rdfs:domain omn:Group ;
+             
+             rdfs:range xsd:boolean .
+             
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#hasReliability
+
+:hasReliability rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "has reliability from 1 to 100"@en ;
+
+             rdfs:comment "has reliability from 1 to 100"@en ;
+             
+             rdfs:domain omn:Group ;
+             
+             rdfs:range xsd:integer .
+             
+###  https://github.com/w3c/omn/blob/master/omnlib/ontologies/omn-federation#hasSize
+
+:hasSize rdf:type owl:DatatypeProperty ;
+
+             rdfs:label "number of nodes it contains"@en ;
+
+             rdfs:comment "number of nodes it contains"@en ;
+             
+             rdfs:domain omn:Group ;
+             
+             rdfs:range xsd:integer .
 
 
 #################################################################
