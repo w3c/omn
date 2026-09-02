@@ -1,3 +1,6 @@
+> [!CAUTION]
+> The Federated Infrastructures Community Group has closed on 2023-04-07.
+
 # Federated Infrastructures Ontology
 
 [![Build Status](https://travis-ci.org/w3c/omn.svg)](https://travis-ci.org/w3c/omn)
